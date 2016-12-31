@@ -6,8 +6,14 @@ Scraping and providing *insights* for your business using NLP
 Author: **Ambareesh Revanur**  ([more](https://in.linkedin.com/in/ambareeshr))
 Originally written for Innovation hack! :)
 
-## STAGE 1: 
-Design Document available at /STAGE 1 documents/
+## STAGE 1: Design Document 
+available@   /STAGE 1 documents/Forex Insights.pdf
+
+## STAGE 2: 
+- Download this project, set up all the required files
+- from command line run,
+	python main.py
+Click on 'HELP' button to open information about using the tool
 
 ## Idea Description
 
@@ -22,6 +28,7 @@ Python 2.7
 * Google-Search API for Python(with custom keys)
 * Scikit
 * PyQt4
+* RAKE
 
 Some of the tools considered for this project includes [Pattern](http://www.clips.ua.ac.be/pattern).
 This link https://github.com/lorien/awesome-web-scraping/blob/master/python.md desbribes different web scraping techniques.
@@ -44,7 +51,7 @@ https://in.mathworks.com/help/stats/naivebayes-class.html
 - After 10 websites, if the incremented value is above 6, normalise it to 0. Otherwise, make it 1. (or go ahead with multinomial naive bayes)
 
 **Generate Model**
-- Using the data from Forex and Non-Forex site, Create a Naive Bayes Model.
+- Using the data from Forex and Non-Forex site, Create a **Naive Bayes** Model.
 
 **Testing**
 - During test time, use the model and test it accordingly. Use the probablity generated as propensity score.
@@ -78,6 +85,27 @@ Go to -> scraper/rake/keywordExtraction.py
 
 ## UI
 Built in QtDesigner and saved as *.ui file
+https://www.youtube.com/watch?v=ivcxZSHL7jM   ---PyQt Progress bar with Thread: YouTube video
 
 PATH to UI file >> Path..\Anaconda2\Lib\site-packages\PyQt4\pyuic4.bat -x FXfrontend.ui -o FXfront.py
 
+### Changing Paths
+os.chdir("/path/to/change/to") #relative-- "/name" OR ".."
+os.getcwd() #to get the current path
+
+### Calling functions from other folders
+Changing directory (os.chdir) doesn't alter you import paths, it just changes the directory for opening files and whatnot.
+
+from file import function
+OR import *
+
+then call file.function()
+
+
+#### Extras
+Restarting a Twisted reactor: http://www.blog.pythonlibrary.org/2016/09/14/restarting-a-twisted-reactor/
+
+Spider probs:
+http://stackoverflow.com/questions/31806246/scrapy-crawling-200-different-urls-from-200-different-domains-with-one-spider?noredirect=1&lq=1
+
+http://stackoverflow.com/questions/23868784/separate-output-file-for-every-url-given-in-start-urls-list-of-spider-in-scrapy?noredirect=1&lq=1

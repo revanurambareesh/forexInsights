@@ -1,0 +1,1 @@
+This folder contains the definition created using data collected from the internet.
