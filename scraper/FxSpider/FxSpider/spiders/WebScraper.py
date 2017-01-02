@@ -70,7 +70,7 @@ def startReactor(UrlL, FileL):
 #if __name__ == '__main__':
 j=0
 for urlLink in UrlL:
-	FileL.append('misc_data_try\\'+str(j)+'.txt')
+	FileL.append('..\..\data\sample.info.old\\'+str(j)+'.txt')
 	j=j+1
 startReactor(UrlL, FileL)
 
