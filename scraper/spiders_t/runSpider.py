@@ -32,7 +32,7 @@ class MySpider(scrapy.Spider):
         start_urls = self.url
         #print response.xpath('//body/descendant-or-self::*/text()').extract()
         try:
-            file = open(self.Filename, "w")  # or "a+", whatever you need
+            #file = open(self.Filename, "w")  # or "a+", whatever you need
         except IOError:
             print "Already opened!!"
 
@@ -42,15 +42,15 @@ class MySpider(scrapy.Spider):
         next_page_url = response.xpath('//li[@class="next"]/a/@href').extract()
         if next_page_url is not None:
             print 'PLAYING REQUESTS: ', scrapy.Request(response.urljoin(next_page_url))
-            yield scrapy.Request(response.urljoin(next_page_url))
+            yield scrapy.Request(response.urljoin(next_page_url), callback=self.parse)
 
         #literal_eval("'%s'" % self.ans)
 
         ansi_escape = re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
 
         #file.write(ansi_escape.sub('', self.ans))
-        file.write(self.ans.decode('string_escape').replace('u\'',''))
-        file.close()
+        #file.write(self.ans.decode('string_escape').replace('u\'',''))
+        #file.close()
         print 'Written to File ', self.Filename
 
 #TO_CRAWL = [MySpider]
@@ -138,14 +138,16 @@ if __name__ == '__main__':
             'http://www.microchip.com/samples/',
             'http://www.sephora.com/free-beauty-samples',]
 
-    ix=1
-    for urlLink in UrlList:
-        parent_dir_name = os.getcwd()
-        import runSpider as r
-        fileName = parent_dir_name + '\data\\train_data\\' + str(label) + ',' + Name + '\\' + str(ix)+'.txt'
-        r.startProcess(urlLink, fileName)
-        #del sys.modules['r']
-        ix=ix+1
+    urlLink='https://en.wikipedia.org/wiki/Sample_(statistics)'
+    startProcess(urlLink, fileName)
+    #ix=1
+    #for urlLink in UrlList:
+    #    parent_dir_name = os.getcwd()
+    #    import runSpider as r
+    #    fileName = parent_dir_name + '\data\\train_data\\' + str(label) + ',' + Name + '\\' + str(ix)+'.txt'
+    #    r.startProcess(urlLink, fileName)
+    #    #del sys.modules['r']
+    #    ix=ix+1
 
 
 #def spider_closing(spider):
