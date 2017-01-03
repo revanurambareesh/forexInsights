@@ -1,0 +1,1799 @@
+[
+
+        ', 
+        
+        ', 
+', 
+', 
+
+        ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+//<![CDATA[
+var MSOWebPartPageFormName = 'aspnetForm';
+var g_presenceEnabled = true;
+var g_wsaEnabled = false;
+var g_wsaQoSEnabled = false;
+var g_wsaQoSDataPoints = [];
+var g_wsaLCID = 1033;
+var g_wsaListTemplateId = 850;
+var g_wsaSiteTemplateId = 'CMSPUBLISHING#0';
+var _fV4UI=true;var _spPageContextInfo = {webServerRelativeUrl: "\u002fen-us", webAbsoluteUrl: "http:\u002f\u002fwww.essarprojects.com\u002fen-us", siteAbsoluteUrl: "http:\u002f\u002fwww.essarprojects.com", serverRequestPath: "\u002fen-us\u002fPages\u002fdefault.aspx", layoutsUrl: "_layouts\u002f15", webTitle: "English \u0028United States\u0029", webTemplate: "39", tenantAppVersion: "0", isAppWeb: false, webLogoUrl: "\u002fSiteCollectionImages\u002fImages\u002fessar_logo.png", webLanguage: 1033, currentLanguage: 1033, currentUICultureName: "en-US", currentCultureName: "en-US", clientServerTimeDelta: new Date("2017-01-03T13:06:27.8067307Z") - new Date(), siteClientTag: "97$$15.0.4641.1000", crossDomainPhotosEnabled:false, webUIVersion:15, webPermMasks:{High:16,Low:196705},pageListId:"{5452de2d-c1bf-43d9-8681-132d4227926a}",pageItemId:1, pagePersonalizationScope:1, alertsEnabled:true, siteServerRelativeUrl: "\u002f", allowSilverlightPrompt:'True'};
+                            function DoCallBack(filterText)
+                            {WebForm_DoCallback('ctl00$SPWebPartManager1$g_0f3bac73_d5d9_41de_8407_210f59d3e298',filterText,UpdateFilterCallback,0,CallBackError,true)
+                            }
+                            function CallBackError(result, clientsideString)
+                            {                
+                            }
+                        document.onreadystatechange=fnRemoveAllStatus; function fnRemoveAllStatus(){removeAllStatus(true)};var _spWebPartComponents = new Object();//]]>
+', 
+
+', 
+', u"
+//<![CDATA[
+(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() 
+        {
+          ExecuteOrDelayUntilScriptLoaded(
+            function()
+            {
+              var pairs = SP.ScriptHelpers.getDocumentQueryPairs();
+              var followDoc, itemId, listId, docName;
+              for (var key in pairs)
+              {
+                if(key.toLowerCase() == 'followdocument') 
+                  followDoc = pairs[key];
+                else if(key.toLowerCase() == 'itemid') 
+                  itemId = pairs[key];
+                else if(key.toLowerCase() == 'listid') 
+                  listId = pairs[key];
+                else if(key.toLowerCase() == 'docname') 
+                  docName = decodeURI(pairs[key]);
+              } 
+
+              if(followDoc != null && followDoc == '1' && listId!=null && itemId != null && docName != null)
+              {
+                SP.SOD.executeFunc('followingcommon.js', 'FollowDocumentFromEmail', function() 
+                { 
+                  FollowDocumentFromEmail(itemId, listId, docName);
+                });
+              }
+
+            }, 'SP.init.js');
+
+        });
+    })();(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() {
+
+            if (typeof(SPClientTemplates) === 'undefined' || SPClientTemplates === null || (typeof(APD_InAssetPicker) === 'function' && APD_InAssetPicker())) {
+                return;
+            }
+
+            var renderFollowFooter = function(renderCtx,  calloutActionMenu)
+            {
+                if (renderCtx.ListTemplateType == 700) 
+                    myDocsActionsMenuPopulator(renderCtx, calloutActionMenu);
+                else
+                    CalloutOnPostRenderTemplate(renderCtx, calloutActionMenu);
+
+                var listItem = renderCtx.CurrentItem;
+                if (typeof(listItem) === 'undefined' || listItem === null) {
+                    return;
+                }
+                if (listItem.FSObjType == 0) {
+                    calloutActionMenu.addAction(new CalloutAction({
+                        text: Strings.STS.L_CalloutFollowAction,
+                        tooltip: Strings.STS.L_CalloutFollowAction_Tooltip,
+                        onClickCallback: function (calloutActionClickEvent, calloutAction) {
+                            var callout = GetCalloutFromRenderCtx(renderCtx);
+                            if (!(typeof(callout) === 'undefined' || callout === null))
+                                callout.close();
+                            SP.SOD.executeFunc('followingcommon.js', 'FollowSelectedDocument', function() { FollowSelectedDocument(renderCtx); });
+                        }
+                    }));
+                }
+            };
+
+            var registerOverride = function(id) {
+                var followingOverridePostRenderCtx = {};
+                followingOverridePostRenderCtx.BaseViewID = 'Callout';
+                followingOverridePostRenderCtx.ListTemplateType = id;
+                followingOverridePostRenderCtx.Templates = {};
+                followingOverridePostRenderCtx.Templates.Footer = function(renderCtx) {
+                    var  renderECB;
+                    if (typeof(isSharedWithMeView) === 'undefined' || isSharedWithMeView === null) {
+                        renderECB = true;
+                    } else {
+                        var viewCtx = getViewCtxFromCalloutCtx(renderCtx);
+                        renderECB = !isSharedWithMeView(viewCtx);
+                    }
+                    return CalloutRenderFooterTemplate(renderCtx, renderFollowFooter, renderECB);
+                };
+                SPClientTemplates.TemplateManager.RegisterTemplateOverrides(followingOverridePostRenderCtx);
+            }
+            registerOverride(101);
+            registerOverride(700);
+        });
+    })();if (typeof(DeferWebFormInitCallback) == 'function') DeferWebFormInitCallback();//]]>
+", 
+
+', 
+', 
+
+            ', 
+            ',  var submitHook = function () { return false; }; theForm._spOldSubmit = theForm.submit; theForm.submit = function () { if (!submitHook()) { this._spOldSubmit(); } }; ', 
+
+            ', 
+            
+
+
+            ', 
+            
+
+            ', 
+      
+            
+            ', 
+                ', 
+                ', 
+                     
+            
+          
+             ', 
+             
+                
+                    ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                   
+                                    ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                    ',                                 
+                                    ', 
+                                        
+                                        ', 
+                                            
+
+
+    ', 
+              ', 
+    ', 
+        CALL US: Dubai: +971 26281930; Mumbai: +91 22 66601100
+
+    ', 
+
+
+
+                                            ', 
+										     
+
+', 
+    $(document).ready(function () {
+        $(".ddlGroup").change(function () {
+            if (($(".ddlGroup").val()) != "") {
+                window.open($(".ddlGroup").val());
+                $(".ddlGroup").val() = "";
+               
+            }
+           
+        });
+        //alert("inside document ready");
+    });
+
+
+', 
+
+ ', 
+
+
+', 
+	', --Essar WebSites--', 
+	', Essar Group', 
+	', Essar Steel India', 
+	', Essar Steel Minnesota', 
+	', Essar Steel Algoma', 
+	', Essar Steel Indonesia', 
+	', Essar Hypermart', 
+	', Essar Oil India', 
+	', Essar Oil UK', 
+	', Essar Energy', 
+	', Essar Ports', 
+	', Essar Port of Algoma', 
+	', Essar Projects', 
+	', Essar Mauritius', 
+	', Aegis', 
+	', AGC Networks', 
+	', The MobileStore', 
+	', AVID Learning', 
+	', Not Just Flowers', 
+
+', 
+
+
+', 
+
+	
+
+  
+                                            
+
+', 
+    
+            ', 
+                ', 
+                   ', 
+                ', 
+            ', 
+        
+            ', 
+                ', 
+                   ', 
+                ', 
+            ', 
+        
+            ', 
+                ', 
+                   ', 
+                ', 
+            ', 
+        
+            ', 
+                ', 
+                   ', 
+                ', 
+            ', 
+        
+            ', 
+                ', 
+                   ', 
+                ', 
+            ', 
+        
+', 
+ 
+									    ', 
+                                        ', 
+                                    ', 
+                                   
+                                ', 
+                            ', 
+                        ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', Toggle navigation', 
+                                ', 
+                                ', 
+                                ', 
+                            ', 
+                            ', 
+                                
+                                
+', 
+   
+', 
+
+', 
+
+
+
+                        ', 
+                             
+                                         
+                                        ', Home', 
+                                            
+                                            ', 
+                                      
+                                    
+
+                                    
+                                      ', 
+                                 
+                                         
+                                        ', About Us', 
+                                            
+                                            ', 
+                                      
+                                    
+
+                                    
+                                      ', 
+                                 
+                                         
+                                        ', Business Sectors', 
+                                            
+                                                    ', 
+                                                        ', Refineries', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Tankages & Terminals', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Petrochemicals & Fertilizers', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Offshore & Subsea', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Pipelines', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Minerals & Metals', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Infrastructure', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Power', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                            ', 
+                                      
+                                    
+
+                                    
+                                      ', 
+                                 
+                                         
+                                        ', Capabilities', 
+                                            
+                                                    ', 
+                                                        ', Heavy Engineering & Fabrication', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Engineering', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Procurement', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Construction', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Project Management', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Operations', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                            ', 
+                                      
+                                    
+
+                                    
+                                      ', 
+                                 
+                                         
+                                        ', Careers', 
+                                            
+                                            ', 
+                                      
+                                    
+
+                                    
+                                      ', 
+                                 
+                                         
+                                        ', Media', 
+                                            
+                                            ', 
+                                      
+                                    
+
+                                    
+                                      ', 
+                                 
+                                         
+                                        ', Contact Us', 
+                                            
+                                            ', 
+                                      
+                                    
+
+                                    
+               
+                        ', 
+                     
+                      
+
+
+                                                                
+                               
+                                                                          
+                                ', 
+	', It looks like your browser does not have JavaScript enabled. Please turn on JavaScript and try again.', 
+
+	', 
+', 
+                                      
+
+
+                            ', 
+                          
+                        ', 
+                    ', 
+                                     
+               
+
+                ', 
+                ', 
+                      
+               
+       
+            ', 
+
+
+
+            ', 
+
+
+
+            ', 
+            ', 
+                ', 
+
+                    ', 
+                    ', 
+
+                        ', 
+                        ', 
+
+                            ', 
+                            ', 
+                               
+                            ', 
+                            
+                            
+
+                            ', 
+                            ', 
+                            
+ 
+
+       
+    ', 
+     ', 
+       ',  
+                    ', 
+                ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                ', 
+                ', 
+              ', 
+
+                    ', 
+	', 
+		', 
+			', Over 4 decades experience of executing projects of scale & complexity', Over 4 decades experience of executing projects of scale & complexity', EPC of 35 MMTPA of Refining Capacity', Delivered 3.7 MMCM Capacity of Storage Tanks', 2,200 MTPD Ammonia and 3,850 MTPD Urea Plant for Matix Fertilizers & Chemicals, Durgapur', PE Color Grade Compounding Facilities Project in Abu Dhabi', Installation of SPMs', Laying Subsea -Pipelines', Design, Fabrication, Transportation and Installation of Offshore Platforms', 10 MMTPA Integrated Steel Plant at Hazira', 27 MMTPA Capacity of Beneficiation Plants', 27 MMTPA Capacity of Pelletization Plants', Over 3900 MW of Power Generation Capacity', 100,000 DWT Liquid Cargo Handling Berths', 150,000 DWT Bulk Cargo Handling Berths', Townships with 2000 world class residential units', Airport Project in Papua New Guinea', EPC of 35 MMTPA of Refining Capacity', Delivered 3.7 MMCM Capacity of Storage Tanks', 2,200 MTPD Ammonia and 3,850 MTPD Urea Plant for Matix Fertilizers & Chemicals, Durgapur', PE Color Grade Compounding Facilities Project in Abu Dhabi', Installation of SPMs', Laying Subsea -Pipelines', Design, Fabrication, Transportation and Installation of Offshore Platforms', 10 MMTPA Integrated Steel Plant at Hazira', 27 MMTPA Capacity of Beneficiation Plants', 27 MMTPA Capacity of Pelletization Plants', Over 3900 MW of Power Generation Capacity', 100,000 DWT Liquid Cargo Handling Berths', 150,000 DWT Bulk Cargo Handling Berths', Townships with 2000 world class residential units', Airport Project in Papua New Guinea', 
+		', 
+	', 
+',    
+
+  ', 
+              ', 
+ 
+', 
+
+   
+', 
+     ', 
+            ', 
+                ',        
+  ', 
+                        ', Business Sectors', 					                        
+                            ', http://www.essarprojects.com/en-us/Business-Sectors/Refineries, Refineries', first', Refineries', Tankages & Terminals', Petrochemicals & Fertilizers', Offshore & Subsea', http://www.essarprojects.com/en-us/Business-Sectors/tankages-terminals, tankages-terminals', first', http://www.essarprojects.com/en-us/Business-Sectors/petrochemicals-fertilizers/, PetrochemicalsFertilizers', first', http://www.essarprojects.com/en-us/Business-Sectors/offshore-subsea/, offshore-and-subsea', first', http://www.essarprojects.com/en-us/Business-Sectors/Pipelines/, Pipelines', second', Pipelines', Minerals & Metals', Infrastructure', Power', http://www.essarprojects.com/en-us/Business-Sectors/minerals-metals/, MineralsMetals', second', http://www.essarprojects.com/en-us/Business-Sectors/Infrastructure, Infrastructure', second', http://www.essarprojects.com/en-us/Business-Sectors/power/, Power', second', 
+    
+      ', 
+                    
+                    ', 
+                         ', Capabilities', 
+                           ', http://www.essarprojects.com/en-us/essar-capabilities/heavy-engineering-fabrication/, Heavy Engineering Fabrication', first', Heavy Engineering &  Fabrication', Engineering', Procurement', http://www.essarprojects.com/en-us/essar-capabilities/Engineering/, Engineering', first', http://www.essarprojects.com/en-us/essar-capabilities/Procurement/, Procurement', first', http://www.essarprojects.com/en-us/essar-capabilities/construction/, construction', second', Construction', Project Management', Operations', http://www.essarprojects.com/en-us/essar-capabilities/project-management/, ProjectManagement', second', http://www.essarprojects.com/en-us/essar-capabilities/Operations/, Operations', second', 
+
+                        ',         
+                   
+                  ', 
+              
+         ', 
+         ', 
+', 
+
+
+ 
+', 
+      ', 
+        ', 
+            ', 
+                
+                
+                ', 
+
+', 
+    ', 
+        ', 
+        ', 
+            News & Press Releases', 
+        ', 
+
+    ', 
+    ', 
+        ', 
+        ', 
+        ', More Media...', 
+    ', 
+', 
+', 
+  
+                
+              
+                      ', Essar Projects', Yes', http://www.essarprojects.com/en-us/PublishingImages/brochure1.png, http://www.essarprojects.com/en-us/PublishingImages/brochure1.png',  ', 
+                  Brochures 
+                  ',  ', Essar Projects Brochure', Essar Group', Essar Heavy Engineering Services', Group Companies', Yes', http://www.essarprojects.com/en-us/PublishingImages/brochure2.png, http://www.essarprojects.com/en-us/PublishingImages/brochure2.png', Group Companies', No', http://www.essarprojects.com/en-us/PublishingImages/brochure3.png, http://www.essarprojects.com/en-us/PublishingImages/brochure3.png', 
+              
+
+
+              
+                      ', 
+                    ',  ', 
+                        ', HSE & Quality', 
+                    ', 
+
+                    ', 
+
+                    ', 
+                ', 
+
+                	     
+               
+                
+            ', 
+        ', 
+    ', 
+
+         
+', 
+
+', 
+	', 
+
+	', 
+', 
+
+
+                        ', 
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            © 2016 ESSAR PROJECTS',  Developed by Prosares Solutions', 
+                        
+
+
+
+
+
+', 
+    ',   Email for: 
+    
+
+              ', Business Development', 
+           
+            
+           
+        |
+
+              ', Ethics & Compliance Issues', 
+           
+            
+           
+        |
+
+              ', Human Resources', 
+           
+            
+           
+        |
+
+              ', Procurement & Supply', 
+           
+            
+           
+        
+', 
+', 
+
+
+
+
+
+
+                    ', 
+                ', 
+            ', 
+
+            ', 
+
+            ', 
+
+            ', 
+            
+                ', u"//<![CDATA[
+        var formDigestElement = document.getElementsByName('__REQUESTDIGEST')[0];
+        if (!((formDigestElement == null) || (formDigestElement.tagName.toLowerCase() != 'input') || (formDigestElement.type.toLowerCase() != 'hidden') ||
+            (formDigestElement.value == null) || (formDigestElement.value.length <= 0)))
+        {
+            formDigestElement.value = '0x93902337669F7BA218E6FD791BA4413D43079A599AE405461813DF3953CBCA7D017CA3CFCA5E6582DF237ACE26F6B88C405CE45507BC845DF03485322AA73C58,03 Jan 2017 13:06:28 -0000';
+            g_updateFormDigestPageLoaded = new Date();
+        }
+        //]]>
+        ", 
+            
+
+            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+        
+
+', 
+//<![CDATA[
+var _spFormDigestRefreshInterval = 1440000;window.g_updateFormDigestPageLoaded = new Date(); window.g_updateFormDigestPageLoaded.setDate(window.g_updateFormDigestPageLoaded.getDate() -5);var _fV4UI = true;
+function _RegisterWebPartPageCUI()
+{
+    var initInfo = {editable: false,isEditMode: false,allowWebPartAdder: false,listId: "{5452de2d-c1bf-43d9-8681-132d4227926a}",itemId: 1,recycleBinEnabled: true,enableMinorVersioning: true,enableModeration: false,forceCheckout: true,rootFolderUrl: "\u002fen-us\u002fPages",itemPermissions:{High:16,Low:196705}};
+    SP.Ribbon.WebPartComponent.registerWithPageManager(initInfo);
+    var wpcomp = SP.Ribbon.WebPartComponent.get_instance();
+    var hid;
+    hid = document.getElementById("_wpSelected");
+    if (hid != null)
+    {
+        var wpid = hid.value;
+        if (wpid.length > 0)
+        {
+            var zc = document.getElementById(wpid);
+            if (zc != null)
+                wpcomp.selectWebPart(zc, false);
+        }
+    }
+    hid = document.getElementById("_wzSelected");
+    if (hid != null)
+    {
+        var wzid = hid.value;
+        if (wzid.length > 0)
+        {
+            wpcomp.selectWebPartZone(null, wzid);
+        }
+    }
+};
+function __RegisterWebPartPageCUI() {
+ExecuteOrDelayUntilScriptLoaded(_RegisterWebPartPageCUI, "sp.ribbon.js");}
+_spBodyOnLoadFunctionNames.push("__RegisterWebPartPageCUI");var __wpmExportWarning='This Web Part Page has been personalized. As a result, one or more Web Part properties may contain confidential information. Make sure the properties contain information that is safe for others to read. After exporting this Web Part, view properties in the Web Part description file (.WebPart) by using a text editor such as Microsoft Notepad.';var __wpmCloseProviderWarning='You are about to close this Web Part.  It is currently providing data to other Web Parts, and these connections will be deleted if this Web Part is closed.  To close this Web Part, click OK.  To keep this Web Part, click Cancel.';var __wpmDeleteWarning='You are about to permanently delete this Web Part.  Are you sure you want to do this?  To delete this Web Part, click OK.  To keep this Web Part, click Cancel.';function ctl00_SPWebPartManager1_g_0f3bac73_d5d9_41de_8407_210f59d3e298_init() {
+    EnsureScript('mediaplayer.js', 
+        typeof(mediaPlayer) != 'undefined' ? typeof(mediaPlayer.attachToMediaLinks) : 'undefined');
+    ExecuteOrDelayUntilScriptLoaded(
+        function() {
+            if (Silverlight.isInstalled('2.0')) {
+                mediaPlayer.createOverlayPlayer();
+                mediaPlayer.attachToMediaLinks(document.getElementById('cbqwpctl00_SPWebPartManager1_g_0f3bac73_d5d9_41de_8407_210f59d3e298'), ["wmv","wma","avi","mpg","mp3","mp4","asf","ogg","ogv","oga","webm"],'');
+            }
+        }, 'mediaplayer.js');
+}
+if (_spBodyOnLoadFunctionNames != null) { _spBodyOnLoadFunctionNames.push('ctl00_SPWebPartManager1_g_0f3bac73_d5d9_41de_8407_210f59d3e298_init'); }
+function ctl00_SPWebPartManager1_g_e57ceabd_1fea_4791_a16a_2be637e13ba8_init() {
+    EnsureScript('mediaplayer.js', 
+        typeof(mediaPlayer) != 'undefined' ? typeof(mediaPlayer.attachToMediaLinks) : 'undefined');
+    ExecuteOrDelayUntilScriptLoaded(
+        function() {
+            if (Silverlight.isInstalled('2.0')) {
+                mediaPlayer.createOverlayPlayer();
+                mediaPlayer.attachToMediaLinks(document.getElementById('cbqwpctl00_SPWebPartManager1_g_e57ceabd_1fea_4791_a16a_2be637e13ba8'), ["wmv","wma","avi","mpg","mp3","mp4","asf","ogg","ogv","oga","webm"],'');
+            }
+        }, 'mediaplayer.js');
+}
+if (_spBodyOnLoadFunctionNames != null) { _spBodyOnLoadFunctionNames.push('ctl00_SPWebPartManager1_g_e57ceabd_1fea_4791_a16a_2be637e13ba8_init'); }
+function ctl00_SPWebPartManager1_g_73f27155_296b_4bc2_bba1_f26b7c6ffa3b_init() {
+    EnsureScript('mediaplayer.js', 
+        typeof(mediaPlayer) != 'undefined' ? typeof(mediaPlayer.attachToMediaLinks) : 'undefined');
+    ExecuteOrDelayUntilScriptLoaded(
+        function() {
+            if (Silverlight.isInstalled('2.0')) {
+                mediaPlayer.createOverlayPlayer();
+                mediaPlayer.attachToMediaLinks(document.getElementById('cbqwpctl00_SPWebPartManager1_g_73f27155_296b_4bc2_bba1_f26b7c6ffa3b'), ["wmv","wma","avi","mpg","mp3","mp4","asf","ogg","ogv","oga","webm"],'');
+            }
+        }, 'mediaplayer.js');
+}
+if (_spBodyOnLoadFunctionNames != null) { _spBodyOnLoadFunctionNames.push('ctl00_SPWebPartManager1_g_73f27155_296b_4bc2_bba1_f26b7c6ffa3b_init'); }
+function ctl00_SPWebPartManager1_g_0c89f4c9_200b_425b_984a_6a530940620d_init() {
+    EnsureScript('mediaplayer.js', 
+        typeof(mediaPlayer) != 'undefined' ? typeof(mediaPlayer.attachToMediaLinks) : 'undefined');
+    ExecuteOrDelayUntilScriptLoaded(
+        function() {
+            if (Silverlight.isInstalled('2.0')) {
+                mediaPlayer.createOverlayPlayer();
+                mediaPlayer.attachToMediaLinks(document.getElementById('cbqwpctl00_SPWebPartManager1_g_0c89f4c9_200b_425b_984a_6a530940620d'), ["wmv","wma","avi","mpg","mp3","mp4","asf","ogg","ogv","oga","webm"],'');
+            }
+        }, 'mediaplayer.js');
+}
+if (_spBodyOnLoadFunctionNames != null) { _spBodyOnLoadFunctionNames.push('ctl00_SPWebPartManager1_g_0c89f4c9_200b_425b_984a_6a530940620d_init'); }
+function ctl00_SPWebPartManager1_g_1c49805e_0294_4e5c_acdb_50565f73886b_init() {
+    EnsureScript('mediaplayer.js', 
+        typeof(mediaPlayer) != 'undefined' ? typeof(mediaPlayer.attachToMediaLinks) : 'undefined');
+    ExecuteOrDelayUntilScriptLoaded(
+        function() {
+            if (Silverlight.isInstalled('2.0')) {
+                mediaPlayer.createOverlayPlayer();
+                mediaPlayer.attachToMediaLinks(document.getElementById('cbqwpctl00_SPWebPartManager1_g_1c49805e_0294_4e5c_acdb_50565f73886b'), ["wmv","wma","avi","mpg","mp3","mp4","asf","ogg","ogv","oga","webm"],'');
+            }
+        }, 'mediaplayer.js');
+}
+if (_spBodyOnLoadFunctionNames != null) { _spBodyOnLoadFunctionNames.push('ctl00_SPWebPartManager1_g_1c49805e_0294_4e5c_acdb_50565f73886b_init'); }
+function ctl00_SPWebPartManager1_g_7b83e133_dc58_4071_a4d5_7f702c33eebd_init() {
+    EnsureScript('mediaplayer.js', 
+        typeof(mediaPlayer) != 'undefined' ? typeof(mediaPlayer.attachToMediaLinks) : 'undefined');
+    ExecuteOrDelayUntilScriptLoaded(
+        function() {
+            if (Silverlight.isInstalled('2.0')) {
+                mediaPlayer.createOverlayPlayer();
+                mediaPlayer.attachToMediaLinks(document.getElementById('cbqwpctl00_SPWebPartManager1_g_7b83e133_dc58_4071_a4d5_7f702c33eebd'), ["wmv","wma","avi","mpg","mp3","mp4","asf","ogg","ogv","oga","webm"],'');
+            }
+        }, 'mediaplayer.js');
+}
+if (_spBodyOnLoadFunctionNames != null) { _spBodyOnLoadFunctionNames.push('ctl00_SPWebPartManager1_g_7b83e133_dc58_4071_a4d5_7f702c33eebd_init'); }
+
+            ExecuteOrDelayUntilScriptLoaded(
+                function() 
+                {                    
+                    Srch.ScriptApplicationManager.get_current().states = {"browserLanguage":9,"webUILanguageName":"en-US","webDefaultLanguageName":"en-US","contextUrl":"http://www.essarprojects.com/en-us","contextTitle":"English (United States)","supportedLanguages":[{"id":1025,"label":"Arabic"},{"id":1093,"label":"Bengali"},{"id":1026,"label":"Bulgarian"},{"id":1027,"label":"Catalan"},{"id":2052,"label":"Chinese (Simplified)"},{"id":1028,"label":"Chinese (Traditional)"},{"id":1050,"label":"Croatian"},{"id":1029,"label":"Czech"},{"id":1030,"label":"Danish"},{"id":1043,"label":"Dutch"},{"id":1033,"label":"English"},{"id":1035,"label":"Finnish"},{"id":1036,"label":"French"},{"id":1031,"label":"German"},{"id":1032,"label":"Greek"},{"id":1095,"label":"Gujarati"},{"id":1037,"label":"Hebrew"},{"id":1081,"label":"Hindi"},{"id":1038,"label":"Hungarian"},{"id":1039,"label":"Icelandic"},{"id":1057,"label":"Indonesian"},{"id":1040,"label":"Italian"},{"id":1041,"label":"Japanese"},{"id":1099,"label":"Kannada"},{"id":1042,"label":"Korean"},{"id":1062,"label":"Latvian"},{"id":1063,"label":"Lithuanian"},{"id":1086,"label":"Malay"},{"id":1100,"label":"Malayalam"},{"id":1102,"label":"Marathi"},{"id":1044,"label":"Norwegian"},{"id":1045,"label":"Polish"},{"id":1046,"label":"Portuguese (Brazil)"},{"id":2070,"label":"Portuguese (Portugal)"},{"id":1094,"label":"Punjabi"},{"id":1048,"label":"Romanian"},{"id":1049,"label":"Russian"},{"id":3098,"label":"Serbian (Cyrillic)"},{"id":2074,"label":"Serbian (Latin)"},{"id":1051,"label":"Slovak"},{"id":1060,"label":"Slovenian"},{"id":3082,"label":"Spanish (Spain)"},{"id":2058,"label":"Spanish (Mexico)"},{"id":1053,"label":"Swedish"},{"id":1097,"label":"Tamil"},{"id":1098,"label":"Telugu"},{"id":1054,"label":"Thai"},{"id":1055,"label":"Turkish"},{"id":1058,"label":"Ukrainian"},{"id":1056,"label":"Urdu"},{"id":1066,"label":"Vietnamese"}],"navigationNodes":[{"id":1001,"name":"Everything","url":"{searchcenterurl}/results.aspx","promptString":"Search everything"},{"id":1002,"name":"People","url":"{searchcenterurl}/peopleresults.aspx","promptString":"Search people"},{"id":1003,"name":"Conversations","url":"{searchcenterurl}/conversationresults.aspx","promptString":"Search conversations"},{"id":0,"name":"This Site","url":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","promptString":"Search this site"}],"searchCenterUrl":"http://essprjhazsrv009/sites/Search/Pages","showAdminDetails":false,"defaultPagesListName":"Pages","isSPFSKU":false,"userAdvancedLanguageSettingsUrl":"http://projectsmysite.essar.com:80/_layouts/15/EditProfile.aspx?Section=LanguageAndRegion\u0026UserSettingsProvider=234bf0ed%2D70db%2D4158%2Da332%2D4dfd683b4148\u0026ReturnUrl=http%3A%2F%2Fwww%2Eessarprojects%2Ecom%2Fen%2Dus%2FPages%2Fdefault%2Easpx\u0026ShowAdvLang=1","defaultQueryProperties":{"culture":1033,"uiLanguage":1033,"summaryLength":180,"desiredSnippetLength":90,"enableStemming":true,"enablePhonetic":false,"enableNicknames":false,"trimDuplicates":true,"bypassResultTypes":false,"enableInterleaving":true,"enableQueryRules":true,"processBestBets":true,"enableOrderingHitHighlightedProperty":false,"hitHighlightedMultivaluePropertyLimit":-1,"processPersonalFavorites":true},"showSuggestions":true,"showPersonalResults":true,"openDocumentsInClient":false};
+                    Srch.U.trace(null, 'SerializeToClient', 'ScriptApplicationManager state initialized.');
+                }, 'Search.ClientControls.js');var g_clientIdDeltaPlaceHolderMain = "ctl00_DeltaPlaceHolderMain";
+
+                    ExecuteOrDelayUntilScriptLoaded(
+                        function() 
+                        {
+                            if ($isNull($find('ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr')))
+                            {
+                                var sb = $create(Srch.SearchBox, {"delayLoadTemplateScripts":true,"initialPrompt":"Search this site","messages":[],"queryGroupNames":["Default"],"renderTemplateId":"~sitecollection/_catalogs/masterpage/Display Templates/Search/Custom_SearchBox_Compact.js","resultsPageAddress":"/en-us/Pages/Search.aspx","serverInitialRender":true,"showDataErrors":true,"states":{},"updatePageTitle":false}, null, null, $get("ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr"));
+                                sb.activate('Search this site', 'ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr_sbox', 'ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr_sboxdiv', 'ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr_NavButton', 'ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr_AutoCompList', 'ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr_NavDropdownList', 'ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr_SearchLink', 'ms-srch-sbprogress', 'ms-srch-sb-prompt ms-helperText');
+                            }
+                        }, 'Search.ClientControls.js');//]]>
+', 
+', 
+
+        ', 
+        
+    '][
+
+        ', 
+        
+        ', 
+', 
+', 
+
+        ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+//<![CDATA[
+var MSOWebPartPageFormName = 'aspnetForm';
+var g_presenceEnabled = true;
+var g_wsaEnabled = false;
+var g_wsaQoSEnabled = false;
+var g_wsaQoSDataPoints = [];
+var g_wsaLCID = 1033;
+var g_wsaListTemplateId = 850;
+var g_wsaSiteTemplateId = 'CMSPUBLISHING#0';
+var _fV4UI=true;var _spPageContextInfo = {webServerRelativeUrl: "\u002fen-us", webAbsoluteUrl: "http:\u002f\u002fwww.essarprojects.com\u002fen-us", siteAbsoluteUrl: "http:\u002f\u002fwww.essarprojects.com", serverRequestPath: "\u002fen-us\u002fPages\u002fdefault.aspx", layoutsUrl: "_layouts\u002f15", webTitle: "English \u0028United States\u0029", webTemplate: "39", tenantAppVersion: "0", isAppWeb: false, webLogoUrl: "\u002fSiteCollectionImages\u002fImages\u002fessar_logo.png", webLanguage: 1033, currentLanguage: 1033, currentUICultureName: "en-US", currentCultureName: "en-US", clientServerTimeDelta: new Date("2017-01-03T13:06:28.6040857Z") - new Date(), siteClientTag: "97$$15.0.4641.1000", crossDomainPhotosEnabled:false, webUIVersion:15, webPermMasks:{High:16,Low:196705},pageListId:"{5452de2d-c1bf-43d9-8681-132d4227926a}",pageItemId:1, pagePersonalizationScope:1, alertsEnabled:true, siteServerRelativeUrl: "\u002f", allowSilverlightPrompt:'True'};
+                            function DoCallBack(filterText)
+                            {WebForm_DoCallback('ctl00$SPWebPartManager1$g_0f3bac73_d5d9_41de_8407_210f59d3e298',filterText,UpdateFilterCallback,0,CallBackError,true)
+                            }
+                            function CallBackError(result, clientsideString)
+                            {                
+                            }
+                        document.onreadystatechange=fnRemoveAllStatus; function fnRemoveAllStatus(){removeAllStatus(true)};var _spWebPartComponents = new Object();//]]>
+', 
+
+', 
+', u"
+//<![CDATA[
+(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() 
+        {
+          ExecuteOrDelayUntilScriptLoaded(
+            function()
+            {
+              var pairs = SP.ScriptHelpers.getDocumentQueryPairs();
+              var followDoc, itemId, listId, docName;
+              for (var key in pairs)
+              {
+                if(key.toLowerCase() == 'followdocument') 
+                  followDoc = pairs[key];
+                else if(key.toLowerCase() == 'itemid') 
+                  itemId = pairs[key];
+                else if(key.toLowerCase() == 'listid') 
+                  listId = pairs[key];
+                else if(key.toLowerCase() == 'docname') 
+                  docName = decodeURI(pairs[key]);
+              } 
+
+              if(followDoc != null && followDoc == '1' && listId!=null && itemId != null && docName != null)
+              {
+                SP.SOD.executeFunc('followingcommon.js', 'FollowDocumentFromEmail', function() 
+                { 
+                  FollowDocumentFromEmail(itemId, listId, docName);
+                });
+              }
+
+            }, 'SP.init.js');
+
+        });
+    })();(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() {
+
+            if (typeof(SPClientTemplates) === 'undefined' || SPClientTemplates === null || (typeof(APD_InAssetPicker) === 'function' && APD_InAssetPicker())) {
+                return;
+            }
+
+            var renderFollowFooter = function(renderCtx,  calloutActionMenu)
+            {
+                if (renderCtx.ListTemplateType == 700) 
+                    myDocsActionsMenuPopulator(renderCtx, calloutActionMenu);
+                else
+                    CalloutOnPostRenderTemplate(renderCtx, calloutActionMenu);
+
+                var listItem = renderCtx.CurrentItem;
+                if (typeof(listItem) === 'undefined' || listItem === null) {
+                    return;
+                }
+                if (listItem.FSObjType == 0) {
+                    calloutActionMenu.addAction(new CalloutAction({
+                        text: Strings.STS.L_CalloutFollowAction,
+                        tooltip: Strings.STS.L_CalloutFollowAction_Tooltip,
+                        onClickCallback: function (calloutActionClickEvent, calloutAction) {
+                            var callout = GetCalloutFromRenderCtx(renderCtx);
+                            if (!(typeof(callout) === 'undefined' || callout === null))
+                                callout.close();
+                            SP.SOD.executeFunc('followingcommon.js', 'FollowSelectedDocument', function() { FollowSelectedDocument(renderCtx); });
+                        }
+                    }));
+                }
+            };
+
+            var registerOverride = function(id) {
+                var followingOverridePostRenderCtx = {};
+                followingOverridePostRenderCtx.BaseViewID = 'Callout';
+                followingOverridePostRenderCtx.ListTemplateType = id;
+                followingOverridePostRenderCtx.Templates = {};
+                followingOverridePostRenderCtx.Templates.Footer = function(renderCtx) {
+                    var  renderECB;
+                    if (typeof(isSharedWithMeView) === 'undefined' || isSharedWithMeView === null) {
+                        renderECB = true;
+                    } else {
+                        var viewCtx = getViewCtxFromCalloutCtx(renderCtx);
+                        renderECB = !isSharedWithMeView(viewCtx);
+                    }
+                    return CalloutRenderFooterTemplate(renderCtx, renderFollowFooter, renderECB);
+                };
+                SPClientTemplates.TemplateManager.RegisterTemplateOverrides(followingOverridePostRenderCtx);
+            }
+            registerOverride(101);
+            registerOverride(700);
+        });
+    })();if (typeof(DeferWebFormInitCallback) == 'function') DeferWebFormInitCallback();//]]>
+", 
+
+', 
+', 
+
+            ', 
+            ',  var submitHook = function () { return false; }; theForm._spOldSubmit = theForm.submit; theForm.submit = function () { if (!submitHook()) { this._spOldSubmit(); } }; ', 
+
+            ', 
+            
+
+
+            ', 
+            
+
+            ', 
+      
+            
+            ', 
+                ', 
+                ', 
+                     
+            
+          
+             ', 
+             
+                
+                    ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                   
+                                    ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                    ',                                 
+                                    ', 
+                                        
+                                        ', 
+                                            
+
+
+    ', 
+              ', 
+    ', 
+        CALL US: Dubai: +971 26281930; Mumbai: +91 22 66601100
+
+    ', 
+
+
+
+                                            ', 
+										     
+
+', 
+    $(document).ready(function () {
+        $(".ddlGroup").change(function () {
+            if (($(".ddlGroup").val()) != "") {
+                window.open($(".ddlGroup").val());
+                $(".ddlGroup").val() = "";
+               
+            }
+           
+        });
+        //alert("inside document ready");
+    });
+
+
+', 
+
+ ', 
+
+
+', 
+	', --Essar WebSites--', 
+	', Essar Group', 
+	', Essar Steel India', 
+	', Essar Steel Minnesota', 
+	', Essar Steel Algoma', 
+	', Essar Steel Indonesia', 
+	', Essar Hypermart', 
+	', Essar Oil India', 
+	', Essar Oil UK', 
+	', Essar Energy', 
+	', Essar Ports', 
+	', Essar Port of Algoma', 
+	', Essar Projects', 
+	', Essar Mauritius', 
+	', Aegis', 
+	', AGC Networks', 
+	', The MobileStore', 
+	', AVID Learning', 
+	', Not Just Flowers', 
+
+', 
+
+
+', 
+
+	
+
+  
+                                            
+
+', 
+    
+            ', 
+                ', 
+                   ', 
+                ', 
+            ', 
+        
+            ', 
+                ', 
+                   ', 
+                ', 
+            ', 
+        
+            ', 
+                ', 
+                   ', 
+                ', 
+            ', 
+        
+            ', 
+                ', 
+                   ', 
+                ', 
+            ', 
+        
+            ', 
+                ', 
+                   ', 
+                ', 
+            ', 
+        
+', 
+ 
+									    ', 
+                                        ', 
+                                    ', 
+                                   
+                                ', 
+                            ', 
+                        ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', Toggle navigation', 
+                                ', 
+                                ', 
+                                ', 
+                            ', 
+                            ', 
+                                
+                                
+', 
+   
+', 
+
+', 
+
+
+
+                        ', 
+                             
+                                         
+                                        ', Home', 
+                                            
+                                            ', 
+                                      
+                                    
+
+                                    
+                                      ', 
+                                 
+                                         
+                                        ', About Us', 
+                                            
+                                            ', 
+                                      
+                                    
+
+                                    
+                                      ', 
+                                 
+                                         
+                                        ', Business Sectors', 
+                                            
+                                                    ', 
+                                                        ', Refineries', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Tankages & Terminals', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Petrochemicals & Fertilizers', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Offshore & Subsea', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Pipelines', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Minerals & Metals', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Infrastructure', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Power', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                            ', 
+                                      
+                                    
+
+                                    
+                                      ', 
+                                 
+                                         
+                                        ', Capabilities', 
+                                            
+                                                    ', 
+                                                        ', Heavy Engineering & Fabrication', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Engineering', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Procurement', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Construction', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Project Management', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                                    ', 
+                                                        ', Operations', 
+                                                        
+                                                        
+                                                        
+                                                    ', 
+                                                    
+                                                
+                                            ', 
+                                      
+                                    
+
+                                    
+                                      ', 
+                                 
+                                         
+                                        ', Careers', 
+                                            
+                                            ', 
+                                      
+                                    
+
+                                    
+                                      ', 
+                                 
+                                         
+                                        ', Media', 
+                                            
+                                            ', 
+                                      
+                                    
+
+                                    
+                                      ', 
+                                 
+                                         
+                                        ', Contact Us', 
+                                            
+                                            ', 
+                                      
+                                    
+
+                                    
+               
+                        ', 
+                     
+                      
+
+
+                                                                
+                               
+                                                                          
+                                ', 
+	', It looks like your browser does not have JavaScript enabled. Please turn on JavaScript and try again.', 
+
+	', 
+', 
+                                      
+
+
+                            ', 
+                          
+                        ', 
+                    ', 
+                                     
+               
+
+                ', 
+                ', 
+                      
+               
+       
+            ', 
+
+
+
+            ', 
+
+
+
+            ', 
+            ', 
+                ', 
+
+                    ', 
+                    ', 
+
+                        ', 
+                        ', 
+
+                            ', 
+                            ', 
+                               
+                            ', 
+                            
+                            
+
+                            ', 
+                            ', 
+                            
+ 
+
+       
+    ', 
+     ', 
+       ',  
+                    ', 
+                ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                ', 
+                ', 
+              ', 
+
+                    ', 
+	', 
+		', 
+			', Over 4 decades experience of executing projects of scale & complexity', Over 4 decades experience of executing projects of scale & complexity', EPC of 35 MMTPA of Refining Capacity', Delivered 3.7 MMCM Capacity of Storage Tanks', 2,200 MTPD Ammonia and 3,850 MTPD Urea Plant for Matix Fertilizers & Chemicals, Durgapur', PE Color Grade Compounding Facilities Project in Abu Dhabi', Installation of SPMs', Laying Subsea -Pipelines', Design, Fabrication, Transportation and Installation of Offshore Platforms', 10 MMTPA Integrated Steel Plant at Hazira', 27 MMTPA Capacity of Beneficiation Plants', 27 MMTPA Capacity of Pelletization Plants', Over 3900 MW of Power Generation Capacity', 100,000 DWT Liquid Cargo Handling Berths', 150,000 DWT Bulk Cargo Handling Berths', Townships with 2000 world class residential units', Airport Project in Papua New Guinea', EPC of 35 MMTPA of Refining Capacity', Delivered 3.7 MMCM Capacity of Storage Tanks', 2,200 MTPD Ammonia and 3,850 MTPD Urea Plant for Matix Fertilizers & Chemicals, Durgapur', PE Color Grade Compounding Facilities Project in Abu Dhabi', Installation of SPMs', Laying Subsea -Pipelines', Design, Fabrication, Transportation and Installation of Offshore Platforms', 10 MMTPA Integrated Steel Plant at Hazira', 27 MMTPA Capacity of Beneficiation Plants', 27 MMTPA Capacity of Pelletization Plants', Over 3900 MW of Power Generation Capacity', 100,000 DWT Liquid Cargo Handling Berths', 150,000 DWT Bulk Cargo Handling Berths', Townships with 2000 world class residential units', Airport Project in Papua New Guinea', 
+		', 
+	', 
+',    
+
+  ', 
+              ', 
+ 
+', 
+
+   
+', 
+     ', 
+            ', 
+                ',        
+  ', 
+                        ', Business Sectors', 					                        
+                            ', http://www.essarprojects.com/en-us/Business-Sectors/Refineries, Refineries', first', Refineries', Tankages & Terminals', Petrochemicals & Fertilizers', Offshore & Subsea', http://www.essarprojects.com/en-us/Business-Sectors/tankages-terminals, tankages-terminals', first', http://www.essarprojects.com/en-us/Business-Sectors/petrochemicals-fertilizers/, PetrochemicalsFertilizers', first', http://www.essarprojects.com/en-us/Business-Sectors/offshore-subsea/, offshore-and-subsea', first', http://www.essarprojects.com/en-us/Business-Sectors/Pipelines/, Pipelines', second', Pipelines', Minerals & Metals', Infrastructure', Power', http://www.essarprojects.com/en-us/Business-Sectors/minerals-metals/, MineralsMetals', second', http://www.essarprojects.com/en-us/Business-Sectors/Infrastructure, Infrastructure', second', http://www.essarprojects.com/en-us/Business-Sectors/power/, Power', second', 
+    
+      ', 
+                    
+                    ', 
+                         ', Capabilities', 
+                           ', http://www.essarprojects.com/en-us/essar-capabilities/heavy-engineering-fabrication/, Heavy Engineering Fabrication', first', Heavy Engineering &  Fabrication', Engineering', Procurement', http://www.essarprojects.com/en-us/essar-capabilities/Engineering/, Engineering', first', http://www.essarprojects.com/en-us/essar-capabilities/Procurement/, Procurement', first', http://www.essarprojects.com/en-us/essar-capabilities/construction/, construction', second', Construction', Project Management', Operations', http://www.essarprojects.com/en-us/essar-capabilities/project-management/, ProjectManagement', second', http://www.essarprojects.com/en-us/essar-capabilities/Operations/, Operations', second', 
+
+                        ',         
+                   
+                  ', 
+              
+         ', 
+         ', 
+', 
+
+
+ 
+', 
+      ', 
+        ', 
+            ', 
+                
+                
+                ', 
+
+', 
+    ', 
+        ', 
+        ', 
+            News & Press Releases', 
+        ', 
+
+    ', 
+    ', 
+        ', 
+        ', 
+        ', More Media...', 
+    ', 
+', 
+', 
+  
+                
+              
+                      ', Essar Projects', Yes', http://www.essarprojects.com/en-us/PublishingImages/brochure1.png, http://www.essarprojects.com/en-us/PublishingImages/brochure1.png',  ', 
+                  Brochures 
+                  ',  ', Essar Projects Brochure', Essar Group', Essar Heavy Engineering Services', Group Companies', Yes', http://www.essarprojects.com/en-us/PublishingImages/brochure2.png, http://www.essarprojects.com/en-us/PublishingImages/brochure2.png', Group Companies', No', http://www.essarprojects.com/en-us/PublishingImages/brochure3.png, http://www.essarprojects.com/en-us/PublishingImages/brochure3.png', 
+              
+
+
+              
+                      ', 
+                    ',  ', 
+                        ', HSE & Quality', 
+                    ', 
+
+                    ', 
+
+                    ', 
+                ', 
+
+                	     
+               
+                
+            ', 
+        ', 
+    ', 
+
+         
+', 
+
+', 
+	', 
+
+	', 
+', 
+
+
+                        ', 
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            © 2016 ESSAR PROJECTS',  Developed by Prosares Solutions', 
+                        
+
+
+
+
+
+', 
+    ',   Email for: 
+    
+
+              ', Business Development', 
+           
+            
+           
+        |
+
+              ', Ethics & Compliance Issues', 
+           
+            
+           
+        |
+
+              ', Human Resources', 
+           
+            
+           
+        |
+
+              ', Procurement & Supply', 
+           
+            
+           
+        
+', 
+', 
+
+
+
+
+
+
+                    ', 
+                ', 
+            ', 
+
+            ', 
+
+            ', 
+
+            ', 
+            
+                ', u"//<![CDATA[
+        var formDigestElement = document.getElementsByName('__REQUESTDIGEST')[0];
+        if (!((formDigestElement == null) || (formDigestElement.tagName.toLowerCase() != 'input') || (formDigestElement.type.toLowerCase() != 'hidden') ||
+            (formDigestElement.value == null) || (formDigestElement.value.length <= 0)))
+        {
+            formDigestElement.value = '0x93902337669F7BA218E6FD791BA4413D43079A599AE405461813DF3953CBCA7D017CA3CFCA5E6582DF237ACE26F6B88C405CE45507BC845DF03485322AA73C58,03 Jan 2017 13:06:28 -0000';
+            g_updateFormDigestPageLoaded = new Date();
+        }
+        //]]>
+        ", 
+            
+
+            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+        
+
+', 
+//<![CDATA[
+var _spFormDigestRefreshInterval = 1440000;window.g_updateFormDigestPageLoaded = new Date(); window.g_updateFormDigestPageLoaded.setDate(window.g_updateFormDigestPageLoaded.getDate() -5);var _fV4UI = true;
+function _RegisterWebPartPageCUI()
+{
+    var initInfo = {editable: false,isEditMode: false,allowWebPartAdder: false,listId: "{5452de2d-c1bf-43d9-8681-132d4227926a}",itemId: 1,recycleBinEnabled: true,enableMinorVersioning: true,enableModeration: false,forceCheckout: true,rootFolderUrl: "\u002fen-us\u002fPages",itemPermissions:{High:16,Low:196705}};
+    SP.Ribbon.WebPartComponent.registerWithPageManager(initInfo);
+    var wpcomp = SP.Ribbon.WebPartComponent.get_instance();
+    var hid;
+    hid = document.getElementById("_wpSelected");
+    if (hid != null)
+    {
+        var wpid = hid.value;
+        if (wpid.length > 0)
+        {
+            var zc = document.getElementById(wpid);
+            if (zc != null)
+                wpcomp.selectWebPart(zc, false);
+        }
+    }
+    hid = document.getElementById("_wzSelected");
+    if (hid != null)
+    {
+        var wzid = hid.value;
+        if (wzid.length > 0)
+        {
+            wpcomp.selectWebPartZone(null, wzid);
+        }
+    }
+};
+function __RegisterWebPartPageCUI() {
+ExecuteOrDelayUntilScriptLoaded(_RegisterWebPartPageCUI, "sp.ribbon.js");}
+_spBodyOnLoadFunctionNames.push("__RegisterWebPartPageCUI");var __wpmExportWarning='This Web Part Page has been personalized. As a result, one or more Web Part properties may contain confidential information. Make sure the properties contain information that is safe for others to read. After exporting this Web Part, view properties in the Web Part description file (.WebPart) by using a text editor such as Microsoft Notepad.';var __wpmCloseProviderWarning='You are about to close this Web Part.  It is currently providing data to other Web Parts, and these connections will be deleted if this Web Part is closed.  To close this Web Part, click OK.  To keep this Web Part, click Cancel.';var __wpmDeleteWarning='You are about to permanently delete this Web Part.  Are you sure you want to do this?  To delete this Web Part, click OK.  To keep this Web Part, click Cancel.';function ctl00_SPWebPartManager1_g_0f3bac73_d5d9_41de_8407_210f59d3e298_init() {
+    EnsureScript('mediaplayer.js', 
+        typeof(mediaPlayer) != 'undefined' ? typeof(mediaPlayer.attachToMediaLinks) : 'undefined');
+    ExecuteOrDelayUntilScriptLoaded(
+        function() {
+            if (Silverlight.isInstalled('2.0')) {
+                mediaPlayer.createOverlayPlayer();
+                mediaPlayer.attachToMediaLinks(document.getElementById('cbqwpctl00_SPWebPartManager1_g_0f3bac73_d5d9_41de_8407_210f59d3e298'), ["wmv","wma","avi","mpg","mp3","mp4","asf","ogg","ogv","oga","webm"],'');
+            }
+        }, 'mediaplayer.js');
+}
+if (_spBodyOnLoadFunctionNames != null) { _spBodyOnLoadFunctionNames.push('ctl00_SPWebPartManager1_g_0f3bac73_d5d9_41de_8407_210f59d3e298_init'); }
+function ctl00_SPWebPartManager1_g_e57ceabd_1fea_4791_a16a_2be637e13ba8_init() {
+    EnsureScript('mediaplayer.js', 
+        typeof(mediaPlayer) != 'undefined' ? typeof(mediaPlayer.attachToMediaLinks) : 'undefined');
+    ExecuteOrDelayUntilScriptLoaded(
+        function() {
+            if (Silverlight.isInstalled('2.0')) {
+                mediaPlayer.createOverlayPlayer();
+                mediaPlayer.attachToMediaLinks(document.getElementById('cbqwpctl00_SPWebPartManager1_g_e57ceabd_1fea_4791_a16a_2be637e13ba8'), ["wmv","wma","avi","mpg","mp3","mp4","asf","ogg","ogv","oga","webm"],'');
+            }
+        }, 'mediaplayer.js');
+}
+if (_spBodyOnLoadFunctionNames != null) { _spBodyOnLoadFunctionNames.push('ctl00_SPWebPartManager1_g_e57ceabd_1fea_4791_a16a_2be637e13ba8_init'); }
+function ctl00_SPWebPartManager1_g_73f27155_296b_4bc2_bba1_f26b7c6ffa3b_init() {
+    EnsureScript('mediaplayer.js', 
+        typeof(mediaPlayer) != 'undefined' ? typeof(mediaPlayer.attachToMediaLinks) : 'undefined');
+    ExecuteOrDelayUntilScriptLoaded(
+        function() {
+            if (Silverlight.isInstalled('2.0')) {
+                mediaPlayer.createOverlayPlayer();
+                mediaPlayer.attachToMediaLinks(document.getElementById('cbqwpctl00_SPWebPartManager1_g_73f27155_296b_4bc2_bba1_f26b7c6ffa3b'), ["wmv","wma","avi","mpg","mp3","mp4","asf","ogg","ogv","oga","webm"],'');
+            }
+        }, 'mediaplayer.js');
+}
+if (_spBodyOnLoadFunctionNames != null) { _spBodyOnLoadFunctionNames.push('ctl00_SPWebPartManager1_g_73f27155_296b_4bc2_bba1_f26b7c6ffa3b_init'); }
+function ctl00_SPWebPartManager1_g_0c89f4c9_200b_425b_984a_6a530940620d_init() {
+    EnsureScript('mediaplayer.js', 
+        typeof(mediaPlayer) != 'undefined' ? typeof(mediaPlayer.attachToMediaLinks) : 'undefined');
+    ExecuteOrDelayUntilScriptLoaded(
+        function() {
+            if (Silverlight.isInstalled('2.0')) {
+                mediaPlayer.createOverlayPlayer();
+                mediaPlayer.attachToMediaLinks(document.getElementById('cbqwpctl00_SPWebPartManager1_g_0c89f4c9_200b_425b_984a_6a530940620d'), ["wmv","wma","avi","mpg","mp3","mp4","asf","ogg","ogv","oga","webm"],'');
+            }
+        }, 'mediaplayer.js');
+}
+if (_spBodyOnLoadFunctionNames != null) { _spBodyOnLoadFunctionNames.push('ctl00_SPWebPartManager1_g_0c89f4c9_200b_425b_984a_6a530940620d_init'); }
+function ctl00_SPWebPartManager1_g_1c49805e_0294_4e5c_acdb_50565f73886b_init() {
+    EnsureScript('mediaplayer.js', 
+        typeof(mediaPlayer) != 'undefined' ? typeof(mediaPlayer.attachToMediaLinks) : 'undefined');
+    ExecuteOrDelayUntilScriptLoaded(
+        function() {
+            if (Silverlight.isInstalled('2.0')) {
+                mediaPlayer.createOverlayPlayer();
+                mediaPlayer.attachToMediaLinks(document.getElementById('cbqwpctl00_SPWebPartManager1_g_1c49805e_0294_4e5c_acdb_50565f73886b'), ["wmv","wma","avi","mpg","mp3","mp4","asf","ogg","ogv","oga","webm"],'');
+            }
+        }, 'mediaplayer.js');
+}
+if (_spBodyOnLoadFunctionNames != null) { _spBodyOnLoadFunctionNames.push('ctl00_SPWebPartManager1_g_1c49805e_0294_4e5c_acdb_50565f73886b_init'); }
+function ctl00_SPWebPartManager1_g_7b83e133_dc58_4071_a4d5_7f702c33eebd_init() {
+    EnsureScript('mediaplayer.js', 
+        typeof(mediaPlayer) != 'undefined' ? typeof(mediaPlayer.attachToMediaLinks) : 'undefined');
+    ExecuteOrDelayUntilScriptLoaded(
+        function() {
+            if (Silverlight.isInstalled('2.0')) {
+                mediaPlayer.createOverlayPlayer();
+                mediaPlayer.attachToMediaLinks(document.getElementById('cbqwpctl00_SPWebPartManager1_g_7b83e133_dc58_4071_a4d5_7f702c33eebd'), ["wmv","wma","avi","mpg","mp3","mp4","asf","ogg","ogv","oga","webm"],'');
+            }
+        }, 'mediaplayer.js');
+}
+if (_spBodyOnLoadFunctionNames != null) { _spBodyOnLoadFunctionNames.push('ctl00_SPWebPartManager1_g_7b83e133_dc58_4071_a4d5_7f702c33eebd_init'); }
+
+            ExecuteOrDelayUntilScriptLoaded(
+                function() 
+                {                    
+                    Srch.ScriptApplicationManager.get_current().states = {"browserLanguage":9,"webUILanguageName":"en-US","webDefaultLanguageName":"en-US","contextUrl":"http://www.essarprojects.com/en-us","contextTitle":"English (United States)","supportedLanguages":[{"id":1025,"label":"Arabic"},{"id":1093,"label":"Bengali"},{"id":1026,"label":"Bulgarian"},{"id":1027,"label":"Catalan"},{"id":2052,"label":"Chinese (Simplified)"},{"id":1028,"label":"Chinese (Traditional)"},{"id":1050,"label":"Croatian"},{"id":1029,"label":"Czech"},{"id":1030,"label":"Danish"},{"id":1043,"label":"Dutch"},{"id":1033,"label":"English"},{"id":1035,"label":"Finnish"},{"id":1036,"label":"French"},{"id":1031,"label":"German"},{"id":1032,"label":"Greek"},{"id":1095,"label":"Gujarati"},{"id":1037,"label":"Hebrew"},{"id":1081,"label":"Hindi"},{"id":1038,"label":"Hungarian"},{"id":1039,"label":"Icelandic"},{"id":1057,"label":"Indonesian"},{"id":1040,"label":"Italian"},{"id":1041,"label":"Japanese"},{"id":1099,"label":"Kannada"},{"id":1042,"label":"Korean"},{"id":1062,"label":"Latvian"},{"id":1063,"label":"Lithuanian"},{"id":1086,"label":"Malay"},{"id":1100,"label":"Malayalam"},{"id":1102,"label":"Marathi"},{"id":1044,"label":"Norwegian"},{"id":1045,"label":"Polish"},{"id":1046,"label":"Portuguese (Brazil)"},{"id":2070,"label":"Portuguese (Portugal)"},{"id":1094,"label":"Punjabi"},{"id":1048,"label":"Romanian"},{"id":1049,"label":"Russian"},{"id":3098,"label":"Serbian (Cyrillic)"},{"id":2074,"label":"Serbian (Latin)"},{"id":1051,"label":"Slovak"},{"id":1060,"label":"Slovenian"},{"id":3082,"label":"Spanish (Spain)"},{"id":2058,"label":"Spanish (Mexico)"},{"id":1053,"label":"Swedish"},{"id":1097,"label":"Tamil"},{"id":1098,"label":"Telugu"},{"id":1054,"label":"Thai"},{"id":1055,"label":"Turkish"},{"id":1058,"label":"Ukrainian"},{"id":1056,"label":"Urdu"},{"id":1066,"label":"Vietnamese"}],"navigationNodes":[{"id":1001,"name":"Everything","url":"{searchcenterurl}/results.aspx","promptString":"Search everything"},{"id":1002,"name":"People","url":"{searchcenterurl}/peopleresults.aspx","promptString":"Search people"},{"id":1003,"name":"Conversations","url":"{searchcenterurl}/conversationresults.aspx","promptString":"Search conversations"},{"id":0,"name":"This Site","url":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","promptString":"Search this site"}],"searchCenterUrl":"http://essprjhazsrv009/sites/Search/Pages","showAdminDetails":false,"defaultPagesListName":"Pages","isSPFSKU":false,"userAdvancedLanguageSettingsUrl":"http://projectsmysite.essar.com:80/_layouts/15/EditProfile.aspx?Section=LanguageAndRegion\u0026UserSettingsProvider=234bf0ed%2D70db%2D4158%2Da332%2D4dfd683b4148\u0026ReturnUrl=http%3A%2F%2Fwww%2Eessarprojects%2Ecom%2Fen%2Dus%2FPages%2Fdefault%2Easpx\u0026ShowAdvLang=1","defaultQueryProperties":{"culture":1033,"uiLanguage":1033,"summaryLength":180,"desiredSnippetLength":90,"enableStemming":true,"enablePhonetic":false,"enableNicknames":false,"trimDuplicates":true,"bypassResultTypes":false,"enableInterleaving":true,"enableQueryRules":true,"processBestBets":true,"enableOrderingHitHighlightedProperty":false,"hitHighlightedMultivaluePropertyLimit":-1,"processPersonalFavorites":true},"showSuggestions":true,"showPersonalResults":true,"openDocumentsInClient":false};
+                    Srch.U.trace(null, 'SerializeToClient', 'ScriptApplicationManager state initialized.');
+                }, 'Search.ClientControls.js');var g_clientIdDeltaPlaceHolderMain = "ctl00_DeltaPlaceHolderMain";
+
+                    ExecuteOrDelayUntilScriptLoaded(
+                        function() 
+                        {
+                            if ($isNull($find('ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr')))
+                            {
+                                var sb = $create(Srch.SearchBox, {"delayLoadTemplateScripts":true,"initialPrompt":"Search this site","messages":[],"queryGroupNames":["Default"],"renderTemplateId":"~sitecollection/_catalogs/masterpage/Display Templates/Search/Custom_SearchBox_Compact.js","resultsPageAddress":"/en-us/Pages/Search.aspx","serverInitialRender":true,"showDataErrors":true,"states":{},"updatePageTitle":false}, null, null, $get("ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr"));
+                                sb.activate('Search this site', 'ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr_sbox', 'ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr_sboxdiv', 'ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr_NavButton', 'ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr_AutoCompList', 'ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr_NavDropdownList', 'ctl00_PlaceHolderSearchArea_g_bd3a4fc2_b917_4b92_8fd9_90ac071c70cf_csr_SearchLink', 'ms-srch-sbprogress', 'ms-srch-sb-prompt ms-helperText');
+                            }
+                        }, 'Search.ClientControls.js');//]]>
+', 
+', 
+
+        ', 
+        
+    ']

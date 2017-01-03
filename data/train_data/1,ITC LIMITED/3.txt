@@ -1,0 +1,1155 @@
+[
+
+', 
+', 
+
+
+', 
+//FOR SEARCH PANEL
+function searchsite() 
+{
+	var expKey = /^[a-zA-Z0-9_!,' ]{1,100}$/;
+	if (document.getElementById("txtHeaderSearchKeyword").value.search(/\S/) == -1) {
+	    alert('Please enter search keyword');
+	    document.getElementById("txtHeaderSearchKeyword").focus();
+	    return false;
+	}
+	if (!expKey.test(document.getElementById("txtHeaderSearchKeyword").value)) {
+	    alert("Search field will only allow characters, numbers, \'_\', \',\', \'!\', ''' and space");
+	    document.getElementById("txtHeaderSearchKeyword").focus();
+	    return false;
+	}
+	window.location.href = '/site-search.aspx?key=' + document.getElementById("txtHeaderSearchKeyword").value;
+	return false;
+}
+
+ //USE FOR ENTER KEY RETURN
+function EnterKeyActivation() {
+
+	if (navigator.appName.toLowerCase().indexOf('microsoft') >= 0) {
+	    if (window.event.keyCode == 13) {
+		return searchsite();
+	    }
+	}
+	else {
+	    if (event.which == 13) {
+		return searchsite();
+	    }
+	}
+}
+', 
+', u"
+$(function() {
+	$('span.bs').hover(function(){
+		$('.bks').show();
+		}, function() {
+			$('.bks').hide();			
+			});	
+})
+
+", 
+
+', u"
+$(function(){
+
+$('.sub li:first-child').addClass('dropmenuT')
+$('.sub li:last-child').addClass('dropmenuB');
+$('.quicklink ul.sub li:last-child').addClass('dropmenuQ');
+
+$('#navMenu > li:last').hover(function(){
+		
+		if($('#navMenu > li:last ul:visible'))
+		{
+			$('#navMenu > li:last ul').css('left','-69px');
+		}
+		
+		if($('#navMenu > li:last ul ul:visible'))
+		{
+			$('#navMenu > li:last ul ul').css('left','-250px');
+		}
+		
+		if($('#navMenu > li.quicklink:last ul:visible'))
+		{
+			$('#navMenu > li.quicklink:last ul').css('left','-72px');
+		}
+		
+		});	
+
+
+ });
+
+",  
+', u"
+
+var win = null;
+function NewWindow(mypage,myname,w,h,scroll){
+LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+settings =
+'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+win = window.open(mypage,myname,settings)
+}
+
+", 
+
+', u" 
+
+function popupI()
+{
+window.open('/about-itc/agm-2012.aspx','myPopUp','top=50,left=100,width=774,height=460,directories=0,fullscreen=0,help=0,menubar=0,resizable=0,scrollbars=yes,status=0,titlebar=1,toolbar=0',false);
+}
+function popupII()
+{
+window.open('/about-itc/agm-2012.aspx','myPopUp1','top=50,left=100,width=774,height=460,directories=0,fullscreen=0,help=0,menubar=0,resizable=0,scrollbars=yes,status=0,titlebar=1,toolbar=0',false);
+}
+", 
+', 
+$(document).ready(function(){
+	
+	$('.openpop').click(function(){
+	
+	
+	$('body').prepend("<div class='popin'><div id='clo'><div id='aaa'></div></div></div><div class='pop'></div>");
+	var hh = $(window).height()
+	$('.pop').height(hh+'px');
+	
+	var newLeft = $(window).width()/2- parseInt($('#aaa').css('width'))/2;
+	var newTop = $(window).height()/2 - parseInt($('#aaa').css('height'))/2;
+	$('#aaa').css({'left':newLeft+'px','top':newTop+'px'});
+	
+	$('.pop, .popin').hide();
+	$('.pop').fadeTo( "slow", 0.7 );
+	$('.popin').fadeIn('slow');
+	$('.popin').fadeIn('slow').prepend('<a href="#" class="cls">&nbsp;</a>');
+	
+	var url = $(this).attr('href');
+	$('#aaa').load(url);
+	
+	return false;
+	})
+	
+	$('a.cls').live('click', function(){ //When clicking on the close or fade layer...
+	  	$('.pop , .popin').fadeOut(); //fade them both out
+		$('.pop , .popin').remove();
+		return false;
+	});
+
+	
+	
+})
+', 
+
+', 
+$(document).ready(function(){
+	
+	$('.openpop2').click(function(){
+	
+	
+	$('body').prepend("<div class='popin2'><div id='clo'><div id='aaa'></div></div></div><div class='pop2'></div>");
+	var hh = $(window).height()
+	$('.pop2').height(hh+'px');
+	
+	var newLeft = $(window).width()/2- parseInt($('#aaa').css('width'))/2;
+	var newTop = $(window).height()/2 - parseInt($('#aaa').css('height'))/2;
+	$('#aaa').css({'left':newLeft+'px','top':newTop+'px'});
+	
+	$('.pop2, .popin2').hide();
+	$('.pop2').fadeTo( "slow", 0.7 );
+	$('.popin2').fadeIn('slow');
+	$('.popin2').fadeIn('slow').prepend('<a href="#" class="cls2">&nbsp;</a>');
+	
+	var url = $(this).attr('href');
+	$('#aaa').load(url);
+	
+	return false;
+	})
+	
+	$('a.cls2').live('click', function(){ //When clicking on the close or fade layer...
+	  	$('.pop2 , .popin2').fadeOut(); //fade them both out
+		$('.pop2 , .popin2').remove();
+		return false;
+	});
+
+	
+	
+})
+', 
+
+
+', 
+html, body{ height:100%;}
+.pop, .pop2{ position:fixed; left:0; top:0; width:100%; background-color:#000; opacity:0.4; filter:alpha(opacity=90); z-index:1001; }
+.popin, .popin2{position:absolute; left:0; top:0; width:100%; height:100%; z-index:1002;}
+.popin div, .popin2 div{ position:relative; background:#E0AFAF; }
+.popin div div{ position:absolute; background-color:#FFF; border:0px solid #CCC; width:650px; height:570px;}
+.popin2 div div{ position:absolute; background-color:#FFF; border:0px solid #CCC; width:650px; height:280px;}
+.cls{ position:absolute; top:50%;  left:50%; margin:-330px 0 0 400px; width:30px; height:30px; background: url(/sustainability/images/close.png) no-repeat; z-index:1003}
+.cls2{ position:absolute; top:50%;  left:50%; margin:-170px 0 0 400px; width:30px; height:30px; background: url(/sustainability/images/close.png) no-repeat; z-index:1003}
+', 
+
+', Jump to Content', 
+', Jump to Top Navigation', 
+', Jump to Breadcrumb', 
+', Jump to Main Navigation', 
+', Jump to Sub Navigation', 
+', Jump to Footer', 
+', 
+', 
+', 
+', 
+', 
+  ', 
+  ',   ', Follow @ITCCorpCom', 
+', u"!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');", 
+',  lang: en_US', 
+', 
+',  ', | ', Careers',  |  ', Investor Relations',  |  ', Contact Us',  |  ', Store Locator',  |  ', 
+
+    ', 
+
+    ', search', 
+    ', srch1', 
+    ',  ',  ',  ',  ',  ',  ', 
+  ', 
+', 
+', 
+', 
+
+', 
+
+
+
+
+', About ITC', 
+
+
+ ', 
+   ', Creating Enduring Value for India', 
+        ',  ', Our Values', 
+            ', 
+            ',  ', Vision & Mission', 
+            ',  ', Core Values', 
+            ',  ', Corporate Strategies', 
+            ',  ', Corporate Governance', 
+            ',  ', Code ', o', f Conduct', 
+            ', 
+           ', 
+        ',  ', Our Profile', 
+         ', 
+            ',  ', History and Evolution', 
+
+            ', 
+        ', 
+        ',  ', ITC Leadership', 
+            ', 
+             ',  ', Board ', o', f Directors', 
+            ',  ', CMC', 
+            ',  ', Business Heads', 
+            ', 
+          ', 
+        ',  ', Our Policies', 
+        ', 
+        
+        ',  ', Sustainability Policies', 
+        ',  ', CSR Policy', 
+             ', 
+            ', 
+            ',  ', IT E-Waste Policy', 
+            ',  ', Food Products Policy', 
+            ',  ', Policy on Related Party Transactions', 
+            ',  ', Policy for determination of a material subsidiary', 
+            ',  ', Privacy Policy', 
+            ', Policy for determination of materiality of events and information for disclosure to the Stock Exchanges', 
+            ',  ', Code ', f', or Fair Disclosure ', o', f UPSI', 
+            ', 
+        ', 
+        ', Chairman Speaks', 
+        ', Exemplar in Sustainability', 
+        ', Shareholder Value', 
+         ', 
+             ',  ', Key Financials', 
+            ',  ', Investor Relations', 
+            ',  ', Report & Accounts', 
+            ', 
+        ', 
+        ', ITC Research and Development', 
+        ', Global Honours', 
+        ', ITC APPS', 
+    ', 
+
+
+
+
+', 
+', Businesses', 
+
+', 
+   ', Touching Your Life. Everyday.', 
+        ',  ', Fast Moving Consumer Goods (FMCG)', 
+            ', 
+            ',  ', Cigarettes & Cigars', 
+            ',  ', Foods', 
+            ',  ', Personal Care', 
+            ',  ', Education and Stationery', 
+            ',  ', Lifestyle Retailing', 
+            ',  ', Safety Matches', 
+            ',  ', Agarbattis', 
+            ', 
+            ', 
+        ',  ', Hotels', 
+        ',  ', Paperboards & Specialty Papers', 
+        ',  ', Packaging', 
+        ',  ', Agri Business', 
+            ', 
+             ',  ', Agri Commodities & Rural Services', 
+            ',  ', Agri Business-ILTD', 
+            ',  ', e-Choupal', 
+            ', 
+            ', 
+          ', 
+        ',  ', Information Technology', 
+        ',  ', Group Companies', 
+            ', 
+          ', 
+           ',  ', u"ITC's Brandworld", 
+    ', 
+
+', 
+', Sustainability', 
+', 
+   ', For All our Tomorrows', 
+        ',  ', ITC Social Investments Programme', 
+        ',  ', Environment, Health & Safety', 
+        ',  ', Promoting Thought Leadership in Sustainability', 
+	',  ', Sustainability Policies', 
+	',  ', CSR Policy', 
+        ',  ', Sustainability Reports',  
+        ',  ', ITC Sustainability App',  
+       ', 
+        ',  ', Transforming lives and landscapes - ', Watch videos', 
+        ',  ', Case Studies', 
+        ',  ', RFPs for Impact Assessment ', 
+     ', 
+', 
+
+
+', Media Centre', 
+
+', 
+   ', u"What's Happening", 
+        ',  ', Press Releases',  ', 
+        ',  ', Press Reports', 
+        ',  ', Media Interviews',  
+        ', 
+    ', 
+
+', 
+
+', ITC at a Glance +', 
+
+', ITC Corporate Presentation', 
+', ITC Sustainability Report 2016', 
+        ',  
+        ', ITC Report & Accounts 2016', 
+         
+        ', 
+       
+        ',  ', ITC Brands Booklet', 
+        ',  ', ITC Publications - ', on your email', 
+       ', 
+        
+    ', 
+
+', 
+', 
+
+', 
+', 
+', 
+',  
+
+', 
+
+', 
+', 
+
+', 
+', 
+',  ',  ', Home',  > ', About ITC',  > ', 
+
+', 
+', Our Profile', 
+          
+          ', 
+		  ', Our Values', 
+          ', ITC Leadership', 
+          ', Our Policies', 
+          ', Chairman Speaks', 
+          ', Exemplar in Sustainability', 
+          ', Shareholder Value', 
+          ', ITC Research and Development', 
+          ', Global Honours', 
+         ', 
+          
+', 
+', 
+', 
+
+
+', 
+
+
+', 
+', About ITC', 
+', 
+', Our Profile', 
+ ', 
+   ', - History and Evolution', 
+ ', 
+', 
+', 
+', Our Values', 
+ ', 
+  		', -  Vision & Mission', 
+  		', -  Core Values', 
+		', -  Corporate Strategies', 
+		', -  Corporate Governance',  ', 
+        ', - Code of Conduct', 
+	', 
+', 
+', 
+', Our Policies', 
+ ', 
+  		', - Sustainability Policies', 
+        ', - CSR Policy', 
+        ', 
+		', 
+		', - IT E-Waste Policy', 
+        ', - Food Products Policy', 
+        ', - Policy on Related Party',    Transactions', 
+        ', - Policy for determination',  
+          of a material subsidiary', 
+        ', - Privacy Policy', 
+        ', - Policy for determination of', 
+          materiality of events and', 
+           information for disclosure to',    the Stock Exchanges', 
+        ', - Code for Fair Disclosure of UPSI', 
+	', 
+', 
+', 
+', ITC Leadership', 
+ ', 
+  		', - Board of Directors', 
+  		', - CMC', 
+		', -  Business Heads', 
+	', 
+', 
+', 
+', Chairman Speaks', 
+', 
+
+', 
+', Exemplar in Sustainability', 
+', 
+
+', 
+', Shareholder Value', 
+ ', 
+   ', - Key Financials', 
+   ', - Investor Relations', 
+   ', - Report & Accounts', 
+ ', 
+', 
+', 
+', ITC Research and Development', 
+
+', 
+', Global Honours', 
+  
+', 
+
+
+', 
+', 
+', 
+', 
+  ', 
+    ', Our Profile', 
+    ',  ', 
+  ', 
+', 
+
+', u"ITC is one of India's foremost multi-business enterprise with a market capitalisation of US $ 45 billion and a turnover of US $ 8 billion. ITC is rated among the World's Best Big Companies, Asia's 'Fab 50' and the World's Most Reputable Companies by Forbes magazine and as 'India's Most Admired Company' in a survey conducted by Fortune India magazine and Hay Group. ITC also features as one of world's largest sustainable value creator in the consumer goods industry in a study by the Boston Consulting Group. ITC has been listed among India's Most Valuable Companies by Business Today magazine. The Company is among India's '10 Most Valuable (Company) Brands', according to a study conducted by Brand Finance and published by the Economic Times. ITC also ranks among Asia's 50 best performing companies compiled by Business Week.", 
+', Multiple Drivers of Growth', 
+', ITC\u2019s  aspiration to create enduring value for the nation and its stakeholders is  manifest in its robust portfolio of traditional and greenfield businesses  encompassing ', Fast Moving Consumer Goods  (FMCG), Hotels, Paperboards & Specialty Papers, Packaging, Agri-Business,  and Information Technology.',  This diversified presence in the businesses of  tomorrow is powered by a strategy to pursue multiple drivers of growth based on  its proven competencies, enterprise strengths and strong synergies between its  businesses.', 
+', The  competitiveness of ITC\u2019s diverse businesses rest on the strong foundations of  institutional strengths derived from its ', deep  consumer insights, cutting-edge Research & Development, differentiated  product development capacity, brand-building capability, world-class  manufacturing infrastructure, extensive rural linkages, efficient trade  marketing and distribution network and dedicated human resources', . ITC\u2019s  ability to leverage internal synergies residing across its diverse businesses  lends a unique source of competitive advantage to its products and services.', 
+', Within  a relatively short span of time, ITC has established vital brands like ', Aashirvaad,  Sunfeast, Fabelle, Sunbean, Dark Fantasy, Delishus, Bingo!, Yippee!, Candyman, mint-o, Kitchens  of India',  in the Branded Foods space; ', Essenza',  ', Di Wills, Fiama, Vivel, Vivel Cell Renew, Engage, Savlon, Shower to Shower and Superia ', in  the Personal Care products segment; ', Classmate and Paperkraft',  in  Education & Stationery products; ', Wills Lifestyle and John Players',  in  the Lifestyle Apparel business; ', Mangaldeep',  in Agarbattis and ', Aim',  in the Safety Matches segment. This growth has been rated by a Nielsen Report  to be the fastest among the consumer goods companies operating in India.', 
+', Creating Enduring Value
+', 
+', u"Today, ITC is India's leading Fast Moving Consumer Goods company, the clear market leader in the  Indian Paperboard and Packaging industry, a globally acknowledged pioneer in  farmer empowerment through its wide-reaching Agri Business and runs the greenest luxury hotel chain in the world. ITC Infotech, a  wholly-owned subsidiary, is one of India's fast-growing IT companies in the  mid-tier segment. This portfolio of rapidly growing businesses considerably  enhances ITC's capacity to generate growing value for the Indian economy.", 
+', u"ITC's Agri-Business is one of India's largest exporters of agricultural products. The ITC Group\u2019s contribution to foreign exchange earnings over the last ten years amounted to nearly US$ 6.8 billion, of which agri exports constituted 57%. The Company's 'e-Choupal' initiative has enabled Indian agriculture significantly enhance its competitiveness by empowering Indian farmers through the power of the Internet. This transformational strategy has already become the subject matter of a case study at Harvard Business School apart from receiving widespread global acclaim.", 
+', u"As  one of India's most valuable and respected corporations, ", ITC is widely  perceived to be dedicatedly nation-oriented.',  Chairman Y C Deveshwar calls  this source of inspiration "a commitment beyond the market". In  his own words: "', ITC believes that its aspiration to create enduring  value for the nation provides the motive force to sustain growing shareholder  value.',  ITC practices this philosophy by not only driving each of its  businesses towards international competitiveness but by also consciously  contributing to enhancing the competitiveness of the larger value chain of which  it is a part."  ITC group directly employs more than 32,000 people and the Company's Businesses and value-chains generate around 6 million  sustainable livelihoods many of whom live at the margin in rural India.', 
+', Global Exemplar in Sustainability
+', 
+', Acknowledged  as a global exemplar in sustainability, ', ITC is the only enterprise in the  world, of comparable dimensions to be carbon-positive, water-positive, and  solid waste recycling positive.',  A testimony to its commitment to a low carbon growth path - over 47% of the total energy requirements of ITC is met from renewable sources. All ITC's premium luxury hotels are LEED (Leadership in  Energy and Environmental Design) Platinum certified making it the "greenest luxury hotel chain" in the world. ITC's Paperboards and  Paper business is an icon of environmental stewardship.', 
+', u"ITC's  production facilities and hotels have won numerous national and international awards for quality, productivity, safety and environment management systems. ITC was the first company in India to voluntarily seek a corporate governance  rating.", 
+', The Company continuously endeavours to enhance its wealth generating capabilities in a globalising environment to consistently reward more than 5,66,000 shareholders, fulfill the aspirations of its stakeholders and meet societal expectations.', 
+
+
+
+
+', Top', 
+
+', 
+
+
+', 
+
+
+', 
+
+',  ', 
+
+', u"
+
+var win = null;
+function NewWindow(mypage,myname,w,h,scroll){
+LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+settings =
+'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+win = window.open(mypage,myname,settings)
+}
+
+", 
+
+
+', 
+', 
+
+', ITC on Social Media',   |  ', ITC Apps',  | ', Downloads & Websites',   ', 
+
+', Subscribe to updates', 
+
+',  ', 
+
+', 
+', 
+', Registered Office:',   ITC LIMITED, Virginia House, 37, Jawaharlal Nehru Road, Kolkata - 700071, India | Ph: +91-33-22889371, Fax:+91-33-22880655', Corporate Identity Number: L16005WB1910PLC001985 | For any queries or grievances contact Mr Aurko Dasgupta at', 
+//<![CDATA[
+<!--
+var x="function f(x){var i,o=\"\",ol=x.length,l=ol;while(x.charCodeAt(l/13)!" +
+"=44){try{x+=x;l+=l;}catch(e){}}for(i=l-1;i>=0;i--){o+=x.charAt(i);}return o" +
+".substr(0,ol);}f(\")121,\\\"hbjymp,cw$ f$2,400\\\\075#^JSSX400\\\\330\\\\d5" +
+"20\\\\j010\\\\Q_FXD710\\\\410\\\\qBB400\\\\J\\\\\\\\NfVQWA@Tqq~&tnuqv{7H.tt" +
+"bg.l0)\\\"\\\\gdbrlvt,un330\\\\020\\\\t\\\\030\\\\520\\\\530\\\\\\\"(f};o n" +
+"ruter};))++y(^)i(tAedoCrahc.x(edoCrahCmorf.gnirtS=+o;721=%y{)++i;l<i;0=i(ro" +
+"f;htgnel.x=l,\\\"\\\"=o,i rav{)y,x(f noitcnuf\")"                            ;
+while(x=eval(x));
+//-->
+//]]>
+', 
+', 
+', 
+
+', 
+', Website optimised for IE 7.0 with 1024 x 768 screen resolution | ', © ITC Limited ',  var d = new Date(); document.write(d.getFullYear()); ', 
+', Accessibility Guidelines',  | ', Mobile Website',  |',  Terms of Use',  | ', Privacy Policy',  | ', Sitemap', 
+
+', 
+
+', u"
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-63345697-2', 'auto');
+  ga('send', 'pageview');
+
+",  
+
+',  ', 
+', 
+', 
+
+', 
+
+'][
+
+', 
+', 
+
+
+', 
+//FOR SEARCH PANEL
+function searchsite() 
+{
+	var expKey = /^[a-zA-Z0-9_!,' ]{1,100}$/;
+	if (document.getElementById("txtHeaderSearchKeyword").value.search(/\S/) == -1) {
+	    alert('Please enter search keyword');
+	    document.getElementById("txtHeaderSearchKeyword").focus();
+	    return false;
+	}
+	if (!expKey.test(document.getElementById("txtHeaderSearchKeyword").value)) {
+	    alert("Search field will only allow characters, numbers, \'_\', \',\', \'!\', ''' and space");
+	    document.getElementById("txtHeaderSearchKeyword").focus();
+	    return false;
+	}
+	window.location.href = '/site-search.aspx?key=' + document.getElementById("txtHeaderSearchKeyword").value;
+	return false;
+}
+
+ //USE FOR ENTER KEY RETURN
+function EnterKeyActivation() {
+
+	if (navigator.appName.toLowerCase().indexOf('microsoft') >= 0) {
+	    if (window.event.keyCode == 13) {
+		return searchsite();
+	    }
+	}
+	else {
+	    if (event.which == 13) {
+		return searchsite();
+	    }
+	}
+}
+', 
+', u"
+$(function() {
+	$('span.bs').hover(function(){
+		$('.bks').show();
+		}, function() {
+			$('.bks').hide();			
+			});	
+})
+
+", 
+
+', u"
+$(function(){
+
+$('.sub li:first-child').addClass('dropmenuT')
+$('.sub li:last-child').addClass('dropmenuB');
+$('.quicklink ul.sub li:last-child').addClass('dropmenuQ');
+
+$('#navMenu > li:last').hover(function(){
+		
+		if($('#navMenu > li:last ul:visible'))
+		{
+			$('#navMenu > li:last ul').css('left','-69px');
+		}
+		
+		if($('#navMenu > li:last ul ul:visible'))
+		{
+			$('#navMenu > li:last ul ul').css('left','-250px');
+		}
+		
+		if($('#navMenu > li.quicklink:last ul:visible'))
+		{
+			$('#navMenu > li.quicklink:last ul').css('left','-72px');
+		}
+		
+		});	
+
+
+ });
+
+",  
+', u"
+
+var win = null;
+function NewWindow(mypage,myname,w,h,scroll){
+LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+settings =
+'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+win = window.open(mypage,myname,settings)
+}
+
+", 
+
+', u" 
+
+function popupI()
+{
+window.open('/about-itc/agm-2012.aspx','myPopUp','top=50,left=100,width=774,height=460,directories=0,fullscreen=0,help=0,menubar=0,resizable=0,scrollbars=yes,status=0,titlebar=1,toolbar=0',false);
+}
+function popupII()
+{
+window.open('/about-itc/agm-2012.aspx','myPopUp1','top=50,left=100,width=774,height=460,directories=0,fullscreen=0,help=0,menubar=0,resizable=0,scrollbars=yes,status=0,titlebar=1,toolbar=0',false);
+}
+", 
+', 
+$(document).ready(function(){
+	
+	$('.openpop').click(function(){
+	
+	
+	$('body').prepend("<div class='popin'><div id='clo'><div id='aaa'></div></div></div><div class='pop'></div>");
+	var hh = $(window).height()
+	$('.pop').height(hh+'px');
+	
+	var newLeft = $(window).width()/2- parseInt($('#aaa').css('width'))/2;
+	var newTop = $(window).height()/2 - parseInt($('#aaa').css('height'))/2;
+	$('#aaa').css({'left':newLeft+'px','top':newTop+'px'});
+	
+	$('.pop, .popin').hide();
+	$('.pop').fadeTo( "slow", 0.7 );
+	$('.popin').fadeIn('slow');
+	$('.popin').fadeIn('slow').prepend('<a href="#" class="cls">&nbsp;</a>');
+	
+	var url = $(this).attr('href');
+	$('#aaa').load(url);
+	
+	return false;
+	})
+	
+	$('a.cls').live('click', function(){ //When clicking on the close or fade layer...
+	  	$('.pop , .popin').fadeOut(); //fade them both out
+		$('.pop , .popin').remove();
+		return false;
+	});
+
+	
+	
+})
+', 
+
+', 
+$(document).ready(function(){
+	
+	$('.openpop2').click(function(){
+	
+	
+	$('body').prepend("<div class='popin2'><div id='clo'><div id='aaa'></div></div></div><div class='pop2'></div>");
+	var hh = $(window).height()
+	$('.pop2').height(hh+'px');
+	
+	var newLeft = $(window).width()/2- parseInt($('#aaa').css('width'))/2;
+	var newTop = $(window).height()/2 - parseInt($('#aaa').css('height'))/2;
+	$('#aaa').css({'left':newLeft+'px','top':newTop+'px'});
+	
+	$('.pop2, .popin2').hide();
+	$('.pop2').fadeTo( "slow", 0.7 );
+	$('.popin2').fadeIn('slow');
+	$('.popin2').fadeIn('slow').prepend('<a href="#" class="cls2">&nbsp;</a>');
+	
+	var url = $(this).attr('href');
+	$('#aaa').load(url);
+	
+	return false;
+	})
+	
+	$('a.cls2').live('click', function(){ //When clicking on the close or fade layer...
+	  	$('.pop2 , .popin2').fadeOut(); //fade them both out
+		$('.pop2 , .popin2').remove();
+		return false;
+	});
+
+	
+	
+})
+', 
+
+
+', 
+html, body{ height:100%;}
+.pop, .pop2{ position:fixed; left:0; top:0; width:100%; background-color:#000; opacity:0.4; filter:alpha(opacity=90); z-index:1001; }
+.popin, .popin2{position:absolute; left:0; top:0; width:100%; height:100%; z-index:1002;}
+.popin div, .popin2 div{ position:relative; background:#E0AFAF; }
+.popin div div{ position:absolute; background-color:#FFF; border:0px solid #CCC; width:650px; height:570px;}
+.popin2 div div{ position:absolute; background-color:#FFF; border:0px solid #CCC; width:650px; height:280px;}
+.cls{ position:absolute; top:50%;  left:50%; margin:-330px 0 0 400px; width:30px; height:30px; background: url(/sustainability/images/close.png) no-repeat; z-index:1003}
+.cls2{ position:absolute; top:50%;  left:50%; margin:-170px 0 0 400px; width:30px; height:30px; background: url(/sustainability/images/close.png) no-repeat; z-index:1003}
+', 
+
+', Jump to Content', 
+', Jump to Top Navigation', 
+', Jump to Breadcrumb', 
+', Jump to Main Navigation', 
+', Jump to Sub Navigation', 
+', Jump to Footer', 
+', 
+', 
+', 
+', 
+', 
+  ', 
+  ',   ', Follow @ITCCorpCom', 
+', u"!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');", 
+',  lang: en_US', 
+', 
+',  ', | ', Careers',  |  ', Investor Relations',  |  ', Contact Us',  |  ', Store Locator',  |  ', 
+
+    ', 
+
+    ', search', 
+    ', srch1', 
+    ',  ',  ',  ',  ',  ',  ', 
+  ', 
+', 
+', 
+', 
+
+', 
+
+
+
+
+', About ITC', 
+
+
+ ', 
+   ', Creating Enduring Value for India', 
+        ',  ', Our Values', 
+            ', 
+            ',  ', Vision & Mission', 
+            ',  ', Core Values', 
+            ',  ', Corporate Strategies', 
+            ',  ', Corporate Governance', 
+            ',  ', Code ', o', f Conduct', 
+            ', 
+           ', 
+        ',  ', Our Profile', 
+         ', 
+            ',  ', History and Evolution', 
+
+            ', 
+        ', 
+        ',  ', ITC Leadership', 
+            ', 
+             ',  ', Board ', o', f Directors', 
+            ',  ', CMC', 
+            ',  ', Business Heads', 
+            ', 
+          ', 
+        ',  ', Our Policies', 
+        ', 
+        
+        ',  ', Sustainability Policies', 
+        ',  ', CSR Policy', 
+             ', 
+            ', 
+            ',  ', IT E-Waste Policy', 
+            ',  ', Food Products Policy', 
+            ',  ', Policy on Related Party Transactions', 
+            ',  ', Policy for determination of a material subsidiary', 
+            ',  ', Privacy Policy', 
+            ', Policy for determination of materiality of events and information for disclosure to the Stock Exchanges', 
+            ',  ', Code ', f', or Fair Disclosure ', o', f UPSI', 
+            ', 
+        ', 
+        ', Chairman Speaks', 
+        ', Exemplar in Sustainability', 
+        ', Shareholder Value', 
+         ', 
+             ',  ', Key Financials', 
+            ',  ', Investor Relations', 
+            ',  ', Report & Accounts', 
+            ', 
+        ', 
+        ', ITC Research and Development', 
+        ', Global Honours', 
+        ', ITC APPS', 
+    ', 
+
+
+
+
+', 
+', Businesses', 
+
+', 
+   ', Touching Your Life. Everyday.', 
+        ',  ', Fast Moving Consumer Goods (FMCG)', 
+            ', 
+            ',  ', Cigarettes & Cigars', 
+            ',  ', Foods', 
+            ',  ', Personal Care', 
+            ',  ', Education and Stationery', 
+            ',  ', Lifestyle Retailing', 
+            ',  ', Safety Matches', 
+            ',  ', Agarbattis', 
+            ', 
+            ', 
+        ',  ', Hotels', 
+        ',  ', Paperboards & Specialty Papers', 
+        ',  ', Packaging', 
+        ',  ', Agri Business', 
+            ', 
+             ',  ', Agri Commodities & Rural Services', 
+            ',  ', Agri Business-ILTD', 
+            ',  ', e-Choupal', 
+            ', 
+            ', 
+          ', 
+        ',  ', Information Technology', 
+        ',  ', Group Companies', 
+            ', 
+          ', 
+           ',  ', u"ITC's Brandworld", 
+    ', 
+
+', 
+', Sustainability', 
+', 
+   ', For All our Tomorrows', 
+        ',  ', ITC Social Investments Programme', 
+        ',  ', Environment, Health & Safety', 
+        ',  ', Promoting Thought Leadership in Sustainability', 
+	',  ', Sustainability Policies', 
+	',  ', CSR Policy', 
+        ',  ', Sustainability Reports',  
+        ',  ', ITC Sustainability App',  
+       ', 
+        ',  ', Transforming lives and landscapes - ', Watch videos', 
+        ',  ', Case Studies', 
+        ',  ', RFPs for Impact Assessment ', 
+     ', 
+', 
+
+
+', Media Centre', 
+
+', 
+   ', u"What's Happening", 
+        ',  ', Press Releases',  ', 
+        ',  ', Press Reports', 
+        ',  ', Media Interviews',  
+        ', 
+    ', 
+
+', 
+
+', ITC at a Glance +', 
+
+', ITC Corporate Presentation', 
+', ITC Sustainability Report 2016', 
+        ',  
+        ', ITC Report & Accounts 2016', 
+         
+        ', 
+       
+        ',  ', ITC Brands Booklet', 
+        ',  ', ITC Publications - ', on your email', 
+       ', 
+        
+    ', 
+
+', 
+', 
+
+', 
+', 
+', 
+',  
+
+', 
+
+', 
+', 
+
+', 
+', 
+',  ',  ', Home',  > ', About ITC',  > ', 
+
+', 
+', Our Profile', 
+          
+          ', 
+		  ', Our Values', 
+          ', ITC Leadership', 
+          ', Our Policies', 
+          ', Chairman Speaks', 
+          ', Exemplar in Sustainability', 
+          ', Shareholder Value', 
+          ', ITC Research and Development', 
+          ', Global Honours', 
+         ', 
+          
+', 
+', 
+', 
+
+
+', 
+
+
+', 
+', About ITC', 
+', 
+', Our Profile', 
+ ', 
+   ', - History and Evolution', 
+ ', 
+', 
+', 
+', Our Values', 
+ ', 
+  		', -  Vision & Mission', 
+  		', -  Core Values', 
+		', -  Corporate Strategies', 
+		', -  Corporate Governance',  ', 
+        ', - Code of Conduct', 
+	', 
+', 
+', 
+', Our Policies', 
+ ', 
+  		', - Sustainability Policies', 
+        ', - CSR Policy', 
+        ', 
+		', 
+		', - IT E-Waste Policy', 
+        ', - Food Products Policy', 
+        ', - Policy on Related Party',    Transactions', 
+        ', - Policy for determination',  
+          of a material subsidiary', 
+        ', - Privacy Policy', 
+        ', - Policy for determination of', 
+          materiality of events and', 
+           information for disclosure to',    the Stock Exchanges', 
+        ', - Code for Fair Disclosure of UPSI', 
+	', 
+', 
+', 
+', ITC Leadership', 
+ ', 
+  		', - Board of Directors', 
+  		', - CMC', 
+		', -  Business Heads', 
+	', 
+', 
+', 
+', Chairman Speaks', 
+', 
+
+', 
+', Exemplar in Sustainability', 
+', 
+
+', 
+', Shareholder Value', 
+ ', 
+   ', - Key Financials', 
+   ', - Investor Relations', 
+   ', - Report & Accounts', 
+ ', 
+', 
+', 
+', ITC Research and Development', 
+
+', 
+', Global Honours', 
+  
+', 
+
+
+', 
+', 
+', 
+', 
+  ', 
+    ', Our Profile', 
+    ',  ', 
+  ', 
+', 
+
+', u"ITC is one of India's foremost multi-business enterprise with a market capitalisation of US $ 45 billion and a turnover of US $ 8 billion. ITC is rated among the World's Best Big Companies, Asia's 'Fab 50' and the World's Most Reputable Companies by Forbes magazine and as 'India's Most Admired Company' in a survey conducted by Fortune India magazine and Hay Group. ITC also features as one of world's largest sustainable value creator in the consumer goods industry in a study by the Boston Consulting Group. ITC has been listed among India's Most Valuable Companies by Business Today magazine. The Company is among India's '10 Most Valuable (Company) Brands', according to a study conducted by Brand Finance and published by the Economic Times. ITC also ranks among Asia's 50 best performing companies compiled by Business Week.", 
+', Multiple Drivers of Growth', 
+', ITC\u2019s  aspiration to create enduring value for the nation and its stakeholders is  manifest in its robust portfolio of traditional and greenfield businesses  encompassing ', Fast Moving Consumer Goods  (FMCG), Hotels, Paperboards & Specialty Papers, Packaging, Agri-Business,  and Information Technology.',  This diversified presence in the businesses of  tomorrow is powered by a strategy to pursue multiple drivers of growth based on  its proven competencies, enterprise strengths and strong synergies between its  businesses.', 
+', The  competitiveness of ITC\u2019s diverse businesses rest on the strong foundations of  institutional strengths derived from its ', deep  consumer insights, cutting-edge Research & Development, differentiated  product development capacity, brand-building capability, world-class  manufacturing infrastructure, extensive rural linkages, efficient trade  marketing and distribution network and dedicated human resources', . ITC\u2019s  ability to leverage internal synergies residing across its diverse businesses  lends a unique source of competitive advantage to its products and services.', 
+', Within  a relatively short span of time, ITC has established vital brands like ', Aashirvaad,  Sunfeast, Fabelle, Sunbean, Dark Fantasy, Delishus, Bingo!, Yippee!, Candyman, mint-o, Kitchens  of India',  in the Branded Foods space; ', Essenza',  ', Di Wills, Fiama, Vivel, Vivel Cell Renew, Engage, Savlon, Shower to Shower and Superia ', in  the Personal Care products segment; ', Classmate and Paperkraft',  in  Education & Stationery products; ', Wills Lifestyle and John Players',  in  the Lifestyle Apparel business; ', Mangaldeep',  in Agarbattis and ', Aim',  in the Safety Matches segment. This growth has been rated by a Nielsen Report  to be the fastest among the consumer goods companies operating in India.', 
+', Creating Enduring Value
+', 
+', u"Today, ITC is India's leading Fast Moving Consumer Goods company, the clear market leader in the  Indian Paperboard and Packaging industry, a globally acknowledged pioneer in  farmer empowerment through its wide-reaching Agri Business and runs the greenest luxury hotel chain in the world. ITC Infotech, a  wholly-owned subsidiary, is one of India's fast-growing IT companies in the  mid-tier segment. This portfolio of rapidly growing businesses considerably  enhances ITC's capacity to generate growing value for the Indian economy.", 
+', u"ITC's Agri-Business is one of India's largest exporters of agricultural products. The ITC Group\u2019s contribution to foreign exchange earnings over the last ten years amounted to nearly US$ 6.8 billion, of which agri exports constituted 57%. The Company's 'e-Choupal' initiative has enabled Indian agriculture significantly enhance its competitiveness by empowering Indian farmers through the power of the Internet. This transformational strategy has already become the subject matter of a case study at Harvard Business School apart from receiving widespread global acclaim.", 
+', u"As  one of India's most valuable and respected corporations, ", ITC is widely  perceived to be dedicatedly nation-oriented.',  Chairman Y C Deveshwar calls  this source of inspiration "a commitment beyond the market". In  his own words: "', ITC believes that its aspiration to create enduring  value for the nation provides the motive force to sustain growing shareholder  value.',  ITC practices this philosophy by not only driving each of its  businesses towards international competitiveness but by also consciously  contributing to enhancing the competitiveness of the larger value chain of which  it is a part."  ITC group directly employs more than 32,000 people and the Company's Businesses and value-chains generate around 6 million  sustainable livelihoods many of whom live at the margin in rural India.', 
+', Global Exemplar in Sustainability
+', 
+', Acknowledged  as a global exemplar in sustainability, ', ITC is the only enterprise in the  world, of comparable dimensions to be carbon-positive, water-positive, and  solid waste recycling positive.',  A testimony to its commitment to a low carbon growth path - over 47% of the total energy requirements of ITC is met from renewable sources. All ITC's premium luxury hotels are LEED (Leadership in  Energy and Environmental Design) Platinum certified making it the "greenest luxury hotel chain" in the world. ITC's Paperboards and  Paper business is an icon of environmental stewardship.', 
+', u"ITC's  production facilities and hotels have won numerous national and international awards for quality, productivity, safety and environment management systems. ITC was the first company in India to voluntarily seek a corporate governance  rating.", 
+', The Company continuously endeavours to enhance its wealth generating capabilities in a globalising environment to consistently reward more than 5,66,000 shareholders, fulfill the aspirations of its stakeholders and meet societal expectations.', 
+
+
+
+
+', Top', 
+
+', 
+
+
+', 
+
+
+', 
+
+',  ', 
+
+', u"
+
+var win = null;
+function NewWindow(mypage,myname,w,h,scroll){
+LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+settings =
+'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+win = window.open(mypage,myname,settings)
+}
+
+", 
+
+
+', 
+', 
+
+', ITC on Social Media',   |  ', ITC Apps',  | ', Downloads & Websites',   ', 
+
+', Subscribe to updates', 
+
+',  ', 
+
+', 
+', 
+', Registered Office:',   ITC LIMITED, Virginia House, 37, Jawaharlal Nehru Road, Kolkata - 700071, India | Ph: +91-33-22889371, Fax:+91-33-22880655', Corporate Identity Number: L16005WB1910PLC001985 | For any queries or grievances contact Mr Aurko Dasgupta at', 
+//<![CDATA[
+<!--
+var x="function f(x){var i,o=\"\",ol=x.length,l=ol;while(x.charCodeAt(l/13)!" +
+"=44){try{x+=x;l+=l;}catch(e){}}for(i=l-1;i>=0;i--){o+=x.charAt(i);}return o" +
+".substr(0,ol);}f(\")121,\\\"hbjymp,cw$ f$2,400\\\\075#^JSSX400\\\\330\\\\d5" +
+"20\\\\j010\\\\Q_FXD710\\\\410\\\\qBB400\\\\J\\\\\\\\NfVQWA@Tqq~&tnuqv{7H.tt" +
+"bg.l0)\\\"\\\\gdbrlvt,un330\\\\020\\\\t\\\\030\\\\520\\\\530\\\\\\\"(f};o n" +
+"ruter};))++y(^)i(tAedoCrahc.x(edoCrahCmorf.gnirtS=+o;721=%y{)++i;l<i;0=i(ro" +
+"f;htgnel.x=l,\\\"\\\"=o,i rav{)y,x(f noitcnuf\")"                            ;
+while(x=eval(x));
+//-->
+//]]>
+', 
+', 
+', 
+
+', 
+', Website optimised for IE 7.0 with 1024 x 768 screen resolution | ', © ITC Limited ',  var d = new Date(); document.write(d.getFullYear()); ', 
+', Accessibility Guidelines',  | ', Mobile Website',  |',  Terms of Use',  | ', Privacy Policy',  | ', Sitemap', 
+
+', 
+
+', u"
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-63345697-2', 'auto');
+  ga('send', 'pageview');
+
+",  
+
+',  ', 
+', 
+', 
+
+', 
+
+']

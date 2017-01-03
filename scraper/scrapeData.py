@@ -1,6 +1,7 @@
 import os
 import sys
 
+
 def storeResTxt(query, label):
 
 	parent_dir_name = os.getcwd()
@@ -24,28 +25,28 @@ def storeResTxt(query, label):
 
 	return listRes
 
-def getDataToTXT(Name, label, UrlList=None):
-	parent_dir_name = os.getcwd()
-	sys.path.append(parent_dir_name+'\scraper\spider')
-	import runSpider
-
-	#file = open(fileName, "w")
-	#file.close()
-
-	i=1
-
-	for urlLink in UrlList:
-		import runSpider as r
-		fileName = parent_dir_name + '\data\\train_data\\' + str(label) + ',' + Name + '\\' + str(i)+'.txt'
-		r.startProcess(urlLink, fileName)
-		del sys.modules['r']
-		i=i+1
-	#file.close()
-
-	#for txtLine in UrlList:
-	#	file = open(parent_dir_name+'\data\\train_data\\'+str(label)+','+query+'\\'+i+'.txt', "w")
-	#	i=i+1
+#def getDataToTXT(Name, label, UrlList=None):
+#	parent_dir_name = os.getcwd()
+#	#sys.path.append(parent_dir_name+'\scraper\spider')
+#	from FxSpider.FxSpider.spiders import WebScraper
+#
+#	#file = open(fileName, "w")
+#	#file.close()
+#
+#	i=1
+#
+#	for urlLink in UrlList:
+#		import runSpider as r
+#		fileName = parent_dir_name + '\data\\train_data\\' + str(label) + ',' + Name + '\\' + str(i)+'.txt'
+#		r.startProcess(urlLink, fileName)
+#		del sys.modules['r']
+#		i=i+1
+#	#file.close()
+#
+#	#for txtLine in UrlList:
+#	#	file = open(parent_dir_name+'\data\\train_data\\'+str(label)+','+query+'\\'+i+'.txt', "w")
+#	#	i=i+1
 
 if __name__ == '__main__':
   	urlList = storeResTxt('sample', -99)
-  	getDataToTXT('sample', -99, urlList)
+  	#getDataToTXT('sample', -99, urlList)

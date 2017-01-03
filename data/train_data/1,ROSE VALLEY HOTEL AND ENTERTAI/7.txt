@@ -1,0 +1,933 @@
+[Indiatimes', |', The Times of India', |', The Economic Times', : ', HI, ', My Times', LOGOUT', Sign In', City', More ', Beauty Pageants', Photos', Videos', More ', Fashion', Specials', Debate', Photos', Videos', Platinum', Times of India', body{display: block !important;}', More', #navigation ul.level-one li.nav-home.hover .dropdown {display: block  !important;}
+		    .mob_subNav_val{display:none;}', Home', Home', Videos', City', India', World', Business', Tech', Cricket', Sports', Entertainment', TV', Life & Style', Blogs', Photos', TIMES NEWS - RADIO', Brandwire', Good Governance', City', METRO CITIES', Mumbai', Delhi', Bangalore', Hyderabad', Kolkata', Chennai', OTHER CITIES', Agartala', Agra', Imphal', Ahmedabad', Allahabad', Amritsar', Aurangabad', Bareilly', Bhopal', Bhubaneswar', Chandigarh', Coimbatore', Cuttack', Dehradun', Erode', Faridabad', Goa', Gurgaon', Guwahati', Hubli', Indore', Jaipur', Jamm, Jamshedpur', Jind', Kanpur', Kochi', Kolhapur', Kozhikode', Lucknow', Ludhiana', Madurai', Mangalore', Meerut', Mysore', Nagpur', Nashik', Navi Mumbai', Noida', Patna', Puducherry', Pune', Raipur', Rajahmundry', Rajkot', Ranchi', Srinagar', Salem', Shillong', Shimla', Surat', Thane', Trichy', Thiruvananthapuram', Vadodara', Varanasi', Visakhapatnam', Cuttack', Crime', Civic Issues', Politics', Schools & Colleges', Events', ALL', News',  » ', City News',  » ', Cuttack News',  » ', Rose Valley investors to get money back', 
+                            var uhj="/homeajax_nav.cms?config.key=7503091,48264818,36768551,48264804,48264319,3012535,6547154,4118215,3942695,9644624,3012544,48264118,48264388,48264530,3947067,9710057,22778873,9710567,-2128819658,3947051,9632514,3942690,36768500,3942693,442002,11459502,22126655,8021716,-2128817995,22777916,-2128821991,17388717,48264522,3942663,4118245,48264138,48263967,48264067,48264012,3942660,3831863,22778270,878156304,3942666,3947071,17388704&type=-2128932452&nav=-2128932452&config.perpage=10";
+                            var uhj1="/homeajax_nav.cms?config.key=17584223&config.hostid=34&look=i_gallery&config.perpage=6&type=L1";
+                            var uhj2="/homeajax_nav.cms?config.key=3817074&tag=videopllist&look=i_gallery&secid=3817074&config.perpage=6&nav=videos&type=L1";
+                            var uhj3="/toicommon_allsection_v1.cms?version=92";
+                            var d = '7503091,48264818,36768551,48264804,48264319,3012535,6547154,4118215,3942695,9644624,3012544,48264118,48264388,48264530,3947067,9710057,22778873,9710567,-2128819658,3947051,9632514,3942690,36768500,3942693,442002,11459502,22126655,8021716,-2128817995,22777916,-2128821991,17388717,48264522,3942663,4118245,48264138,48263967,48264067,48264012,3942660,3831863,22778270,878156304,3942666,3947071,17388704';
+                            var lsValidator = function(key){
+                                var d = new Date().getTime();
+                                try{
+                                    var ls = JSON.parse(localStorage.getItem(key));
+                                    var ed = ls.timestamp + (ls.expires * 24 * 60 * 60 * 1000);
+                                    if (ed > d){return ls.value;}
+                                    return false;
+                                }catch(err){
+                                    LSflush();
+                                }
+                            };
+                            var LSflush = function(){
+                                var dt = new Date().getTime();
+                                for(_x in localStorage){
+                                    try{
+                                        var lsg = JSON.parse(localStorage[_x]);
+                                        if(!lsg.timestamp) continue;
+                                        ed  = (lsg.expires)?lsg.expires:1;
+                                        ed = lsg.timestamp + (ed * 24 * 60 * 60 * 1000);
+            		                    if(dt > ed){
+            		                        localStorage.removeItem(_x);
+            		                    }
+        		                    }catch(e){}
+        		                }
+                            };
+            		        $( document ).ready(function() {
+            		            
+                                        
+                		            if(lsValidator(d)){
+                		                $(lsValidator(d)).appendTo("body");
+                		            }else{
+                		                LSflush();
+                                        $.when( $.ajax( uhj ), $.ajax( uhj1 ), $.ajax( uhj2 ) ).done(function( a1, a2, a3 ) {
+                                            $(a1[0]).appendTo("body");
+                                            $(a2[0]).appendTo("body");
+                                            $(a3[0]).appendTo("body");
+                                            var r = {value: a1[0]+a2[0]+a3[0], timestamp: new Date().getTime(), expires: 1};
+                                            localStorage.setItem(d, JSON.stringify(r));
+                                        });
+                                    }
+                		            if(lsValidator(uhj3)){
+                		                $(lsValidator(uhj3)).appendTo("body");
+                		            }else{
+                		                LSflush();
+                		                $.ajax({url: uhj3, success: function(result){
+                                            $(result).appendTo("body");
+                                            var r = {value: result, timestamp: new Date().getTime(), expires: 7};
+                                            localStorage.setItem(uhj3, JSON.stringify(r));
+                                        }});
+                                    }
+                                
+                            });
+        		        ', 
+	        
+	        try {
+                if(typeof pageName!=='undefined'){
+                    $('[pg]').not($("[pg^="+pageName+"]")).each(function(){
+                        var nPg = pageName+'_'+$(this).attr('pg');
+                        $(this).attr('pg', nPg);
+                    });
+                }
+            }
+            catch(err) {}
+	        
+	    ', 
+				var miniTV = Object();
+				miniTV.ajax = function(url,callback){
+					$.get( url, function( data ) {
+						callback( data );
+					});
+				};
+				miniTV.isOn = function(){
+				    var url='http://timesofindia.indiatimes.com/breakingnews/home_topcontent_banner.htm';
+				    if(window.location.host.match(/toidev|jcmsdev/)){url='/home_topcontent_banner.cms?pagetype=isEnabled';}
+					miniTV.ajax(url,function(data){
+						data = $.trim(data);
+						if(times.cookie.get('playvd') && data!=''){
+	                        
+							$('#minitv').html(data);
+							
+							if($('#streaming_box').is(":visible") && $('.livetv_box_label').is(":visible") || $('.livetv_box').is(":visible"))
+	                        {
+	                            $('.livetv_box_label').hide();
+	                            $('.livetv_box').hide();
+	                       }
+	                       
+						    if (typeof miniTV.clickLoad == "function") miniTV.clickLoad();
+						} else if (data!=''){
+						
+							$('#minitv').html(data);
+							
+						    if($('#streaming_box').is(":visible") && $('.livetv_box_label').is(":visible") || $('.livetv_box').is(":visible"))
+	                        {
+	                            $('.livetv_box_label').hide();
+	                            $('.livetv_box').hide();
+	                       }
+						}
+					});
+				};
+			
+			$(window).load(function(){miniTV.isOn();});', Rose Valley investors to get money back', Binita Jaiswal', The state government has started the process of identifying investors allegedly duped by Ponzi firm Rose Valley Group of Companies to make way for refund of their money. On Tuesday, the additional district magistrate (ADM), Cuttack, Bibhuti Bhusan Das, issued a notification in different newspapers for identification of duped investors under the provision of Odisha Protection of Interests of Depositors (in Financial Establishments) Act, 2011.',  | ', TNN',  | ', Updated: May 25, 2016, 07.41 AM IST', Cuttack: The state government has started the process of identifying investors allegedly duped by Ponzi firm Rose Valley Group of Companies to make way for refund of their money. ', On Tuesday, the additional district magistrate (ADM), Cuttack, Bibhuti Bhusan Das, issued a notification in different newspapers for identification of duped investors under the provision of Odisha Protection of Interests of Depositors (in Financial Establishments) Act, 2011. He is the competent authority to sell the properties of chit fund companies by public auction and release the sale proceeds for equitable distribution among the depositors.', The notification clearly states that persons, who have invested in any of the seven companies of the group like Rose Valley Hotels and Entertainments Ltd, Rose Valley Real Estates and Constructions Ltd, Rose Valley Realcon Ltd, Rose Valley Chain Marketing System, Rose Valley Industries Ltd, Rose Valley Fashions Private Limited and Rose Valley Travels Private Limited can apply in the specific format with details of their investment and address details before their respective tehsildars. ', The duped investors can submit their applications between June 1 to June 21.', u"Officials said to ensure hassle-free refund of money, the format requires depositors to provide information on legal heir in case of depositor's death, permanent and present address, income and PAN card details. ", It has been clearly mentioned in the notification that criminal proceedings will be initiated against any person found submitting wrong or false information in the application. "Ensuring refund of money to genuine investors is our top priority," said finance minister Pradeep Amat to mediapersons. Official sources said nodal officers will be appointed in each tehsil to oversee the process. ', u"The government had initially planned to seek the applications online from duped investors but as many panchayats don't have access to internet, it was decided to receive applications from the depositors. Officials claimed that the format will be used to identify investors in other Ponzi firms also. So far, the ADM has managed to transfer Rs 48 crore from the bank accounts of the Rose Valley to government's account. ", Meanwhile, the process of public auction of immovable properties of the Ponzi firm has also been initiated. Though no bidder turned up during the first e-auction on May 4, but officials are hopeful that the second online auction scheduled for May 31 will definitely attract bidders.', However, the duped investors are sceptical about the government's move. "The government should expedite the process of identifying the duped investors and refund our money soon," said Benudhar Das, a duped investor.', Stay updated on the go with Times of India ', News',  App. Click ', here',  to download it for your device.', RELATED', 
+                
+                    
+                            ', .gKVWifpip h1,h3,p {margin:0;padding:0;}.gKVWifpip:hover{background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/rbc-red.png); }.gKVWifpip {width: 100%;height: auto;float: left;padding-bottom: 12px;background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/rbc-gray.png); background-repeat: no-repeat;background-position: 98% 100%;background-size: auto auto;margin-bottom: 15px;}.gKVWifpip > div a img {width:100%;height: 118.94px;float:left;min-height: 118.94px;}.gKVWifpip > div a {width:31.8%;float: left;margin-left:2.3%; text-decoration: none;margin-bottom: 14px;cursor: pointer;}.gKVWifpip > div a:first-child { margin-left: 0;}.gKVWifpip > div h3 {width: 100%; height: auto; float: left; max-height: 66px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4;   -webkit-box-orient: vertical; font-family: 'Roboto',sans-serif; color: #333; padding: 6px 0 0; text-align: left; line-height: 1.25; font-size: 13px !important;}.gKVWifpip > div p {width: 100%; height: auto; float: left; font-family: inherit; color: #999; padding: 2px 0 0;text-align: left; display: block; font: normal 13px/14px proxima-semibold,roboto,arial,sans-serif;}.gKVWifpip h1 {height: auto;display: block;width: 100%; float: left; padding: 5px 0;color: #000000; margin-bottom: 7px; font-family: 'Roboto',sans-serif;    text-transform: uppercase;font-weight: bold;line-height: 1.2em;font-size: 18px !important;}.gKVWifpip h1::before { content: "";}.gKVWifpip > div > a > div {float: left;width: 100%;height:75px;}.gKVWifpip > div {float: left;`}@media (max-width:1920px) {.gKVWifpip > div h3{max-height: 71px;}.gKVWifpip h1{font-size:28px;}.gKVWifpip > div > a > div {height: Auto; }}@media (max-width:1366px) {.gKVWifpip > div h3{font-size:14px;}.gKVWifpip h1{font-size:24px;}}@media (max-width:1280px) {.gKVWifpip > div h3{font-size:14px;}.gKVWifpip h1{font-size:20px;}}@media (max-width:840px) {.gKVWifpip > div h3{font-size:14px;}.gKVWifpip h1{font-size:18px;}}@media (max-width:640px) {.gKVWifpip > div h3{font-size:14px;}.gKVWifpip h1{font-size:16px;}}@media (max-width:320px) {.gKVWifpip > div h3{font-size:13px;}.gKVWifpip h1{font-size:16px;}}',     ', From around the web',     ', Secret method to treat hair loss is revealed!', Hair & Beauty Care', u"Apartment vs independent house:What's better?", makaan.com', NMIMS Distance Learning Management Programs', NMIMS Distance Education', More from The Times of India ', Maruti Suzuki all set to launch Ignis on January 13, 2017', Anushka ups the hotness quotient in a short black dress', Not getting engaged with Anushka: Virat Kohli', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="iSOlqgrVD('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow" ><div><h3>{{title}}</h3><p>{{brand}}</p></div></a>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<a onclick="iSOlqgrVD('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow"><div><h3>{{title}}</h3></div></a>#og#';*/function iSOlqgrVD(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_self');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){try{if (window.frameElement !== null){window.canRun = true;document.body.style.margin="0px";  parent.top.document.getElementById(window.frameElement.parentNode.getAttribute('id')).style.height='540px';; }}catch(e){}};try{trev('http://timesofindia.indiatimes.com/toiyfn/notify.htm?imprId=0899fd23-cd70-42eb-9413-8e1073d8a9e4-10onw&id=129783&fpc=9858644d-801d-4141-94c8-8dacd1ce1d84-10onw~1','gKVWifpip');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+                        
+                
+                ', 
+                
+                    
+                            ', .gtduKVn h1,h3,p {margin:0;padding:0;}.gtduKVn:hover{background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/rbc-red.png);}.gtduKVn {width: 100%;height: auto;float: left;padding-bottom: 22px;background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/rbc-gray.png); background-repeat: no-repeat;background-position: 98% 98.5%;background-size: auto auto;border-bottom: 1px solid #eaeaea;}.gtduKVn li span{font: 300 16px/20px proxima-regular1,roboto,arial,sans-serif; margin-right: 10px; overflow: hidden; -webkit-line-clamp: 2;   -webkit-box-orient: vertical; font-size: 13px !important; height: auto; color: #CCC; display: -webkit-box;  max-height: 48px; vertical-align: top;line-height: 15px;}.gtduKVn li span:nth-child(2):hover{text-decoration:underline;}.gtduKVn li span:nth-child(2) {margin: 0; max-height: 18px !important; overflow: hidden;-webkit-line-clamp: 1;-webkit-box-orient: vertical;font-size: 16px !important; color: #353535;font-weight: 300;height: 18px;line-height: 16px;vertical-align:top; width: auto;font:300 16px/20px proxima-regular1,roboto,arial,sans-serif;display:table;}.gtduKVn h1 {width: 49%; float: left; padding: 9px 0;background-color: #444444; margin-bottom: 10px !important;background: #eaeaea;color: #000; font: normal 17px/20px proxima-semibold,'roboto slab',roboto,arial,sans-serif; text-transform: uppercase; font-size: 17px !important;}.gtduKVn h1::before { content: ""; margin-left: 10px;}.gtduKVn > div{width: 48%; margin: 0 1%; float: left;}.gtduKVn ul {margin:0; padding: 0;}.gtduKVn ul li{margin-bottom: 10px;font-size: 24px;height: 60px;}.gtduKVn ul li a img {float:left;margin-right:10px;width:85px;}.gtduKVn ul li a {width: 100%;text-decoration: none;cursor: pointer;float:left;margin-bottom:15px;}.gtduKVn h1:nth-child(2) { margin-left: 2% !important;}@media (max-width:1920px) {.gtduKVn > div h3{font-size:26px;}.gtduKVn h1{font-size:28px;}.gtduKVn > div > a > div {height: Auto;max-height: 61px;    min-height: 61px;}}@media (max-width:1366px) {.gtduKVn > div h3{font-size:14px;}.gtduKVn h1{font-size:24px;}}@media (max-width:1280px) {.gtduKVn > div h3{font-size:14px;}.gtduKVn h1{font-size:20px;}}@media (max-width:840px) {.gtduKVn > div h3{font-size:14px;}.gtduKVn h1{font-size:18px;}}@media (max-width:640px) {.gtduKVn > div h3{font-size:13px;}.gtduKVn h1{font-size:16px;}}@media (max-width:320px) {.gtduKVn > div h3{font-size:13px;}.gtduKVn h1{font-size:16px;}}',     ', From the Web', More From The Times of India',     ', A-Grade offices @Bangalore, starts @32 lakh', Puravankara', Eat better. Eat new. Everyday!', FreshMen, Discover stocks which no one is even talking about, yet!', Equitymaster', Looking for an expert home tutor?', HelloClass', Get rewarded with the American Express Gold Card', American Express', u"Ranveer Singh's yet another unusual party avatar", Hrithik Roshan, Lisa Haydon sizzle on magazine cover', Malaika shares hot bikini pictures!', Katrina Kaif sizzles in sensuous bridal shoot', Hrithik Roshan ranks third Most Handsome Man in the world', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<li><a onclick="xpdmBqO('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow"><span>{{title}}</span><span>{{brand}}</span></a></li>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<li><a onclick="xpdmBqO('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow"><span>{{title}}</span></a></li>#og#';*/function xpdmBqO(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_self');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){         try{if (window.frameElement !== null){window.canRun = true;document.body.style.margin="0px";  parent.top.document.getElementById(window.frameElement.parentNode.getAttribute('id')).style.height='540px';; }}catch(e){}};try{trev('http://timesofindia.indiatimes.com/toiyfn/notify.htm?imprId=9975098d-6d67-48ca-b2a6-e74171b09bd8-10onw&id=129147&fpc=9858644d-801d-4141-94c8-8dacd1ce1d84-10onw~1','gtduKVn');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+                        
+                
+                ',  Comments', Characters Remaining: ', 3000', OR PROCEED WITHOUT REGISTRATION', Share on Facebook', Share on Twitter', SIGN IN WITH', Facebook', Google', Email', Refrain from posting comments that are obscene, defamatory or inflammatory, and do not indulge in personal attacks, name calling or inciting hatred against any community. ', Help us delete comments',  that do not follow these guidelines ', by marking them offensive', u". Let's work together to keep the conversation civil.", X', Sort By:', Up Voted', Newest', Oldest', Discussed', Down Voted', Be the first one to review.', We have sent you a verification email. To verify, just follow the link in the message', 
+		<div class="comment-box level{{:level}} {{if id==-1}}highlight{{/if}}" id="cmt{{:id}}" data-plugin="comment" data-index="{{:index}}" data-id="{{:id}}" data-level="{{:level}}" data-user="{{:user.name}}" data-email="{{:user.email}}" data-userid="{{:user.id}}" data-childcount="{{:childcount}}">
+            <div class="user-thumbnail">
+                {{if user.image}}
+                <img class="userimg flL" data-src="{{:user.image}}" src="/photo/11350517.cms"/>
+                {{else}}
+                <img class="userimg flL" data-src="/photo/29251859.cms" src="/photo/11350517.cms"/>
+                {{/if}}
+            </div>
+            <div class="info-bar clearfix">
+                {{if user.username || user.id}}
+                    <a href="http://mytimes.indiatimes.com/profile/{{:user.username || user.id}}" class="name" target="_blank">{{:user.name}}</a>
+                {{else}}
+                    <span class="name">{{:user.name}}</span>
+                {{/if}}
+                <div class="points_wrap">
+                    {{if user.points}}
+                    <span class="psR flL tooltip_wrap">
+                    <span class="point {{:user.pointslevel.toLowerCase()}}" title="{{:user.points}} Points">{{:user.points}}</span>
+                    <span class="tootipbox">
+                    	<strong class="rem_point">{{:user.pointsNeeded}}</strong> more points needed to reach next level.
+                       <a href="http://timesofindia.indiatimes.com/abouttimesrewards.cms" class="more" target="_blank">Know more about Times Points</a>
+                    </span>
+                    </span>
+                    {{/if}}
+                    {{if user.badge}}
+                        <div class="badges clearfix">
+
+                            {{for user.badge}}
+                               {{if #index < 3}}
+                                    <div class="badge" data-plugin="comment-user-badge" data-name="{{:name}}">
+                                        <img data-src="{{:image}}" title="{{:name}}"  src="/photo/49258704.cms">
+                                        <div class="popup_badge">
+                                           <div class="heading-block"><span class="level">Level {{:count}}</span><h4>{{:name}}</h4></div>
+                                           <div class="content clearfix">
+                                                    <div class="cont_left" >
+                                                        <img data-src="{{:image}}" title="{{:name}}"  src="/photo/49258704.cms">
+                                                    </div>
+                                                    <div class="cont_right" >
+                                                        <p><b>{{:#parent.parent.parent.data.user.name}}</b> {{:levelDesc}}</p>
+                                                    </div>
+                                               <div class="more-info">
+                                               <a href="http://timesofindia.indiatimes.com/abouttimesrewards.cms" class="more" target="_blank">Know more about Times Points</a>
+                                               </div>
+                                           </div>
+                                        </div>
+                                    </div>
+                               {{/if}}
+                            {{/for}}
+                            {{if user.badge.length > 3}}
+                                <div class="more-btn">
+                                    <div class="popup_badge">
+                                       <div class="heading-block"><h4>Badges Earned</h4></div>
+                                       <div class="content clearfix">
+                                           {{for user.badge}}
+                                                <div class="section" data-plugin="comment-user-badge" data-name="{{:name}}">
+                                                    <img data-src="{{:image}}" title="{{:name}}"  src="/photo/49258704.cms">
+                                                    <span class="name">{{:name}}</span>
+                                                    <span class="badgepoint">{{:count}}</span>
+                                                </div>
+                                            {{/for}}
+
+                                           <div class="more-info">
+                                           <a href="http://timesofindia.indiatimes.com/abouttimesrewards.cms" class="more" target="_blank">Know more about Times Points</a>
+                                           </div>
+                                       </div>
+                                    </div>
+                                </div>
+                             {{/if}}
+                        </div>
+                    {{/if}}
+                </div>
+                {{if parentusername}}
+                <span class="metadata"><i class="icon-reply"></i> {{:parentusername}}</span>
+                <span class="divider">-</span>
+                {{/if}}
+                {{if user.location}}
+                <span class="metadata">{{:user.location}}</span>
+                <span class="divider">-</span>
+                {{/if}}
+                <span title="{{:abstime}}" class="metadata" data-plugin="dynamic-uptime" data-time="{{:time}}">Just Now</span>
+                {{if user.username || user.id}}
+                <span data-plugin="comment-user-follow_wrapper" class="dont_show" >
+                <span class="metadata follow" title="Follow {{:user.name}} {{:user.follower_text}}" data-plugin="comment-user-follow" ><span class="divider">-</span>Follow</span>
+                </span>
+
+                {{/if}}
+            </div>
+            <p class="short_comment">{{if trimcom}}{{:trimcom}}{{else}}{{:comment.substr(0,500)}}{{/if}}
+            {{if comment.length > 500}}
+                ...<span class="detail_comment_link" data-action="more-response-length"> Read More</span>
+            {{/if}}</p>
+            {{if comment.length > 500}}
+                <p class="detail_comment" style="display:none;">{{:comment}}</p>
+            {{/if}}
+            {{if id!=-1}}
+            <span data-action="toggle_replies" data-togglereplies="show" title="Toggle Replies"></span>
+            <div class="footbar clearfix">
+				{{if opinion && opinion[0] && opinion[1]}}
+                    <span class="up cpointer" data-action="comment-agree" title="Up Vote"><span data-plugin="comment-agree-count">{{:opinion[0].count}}</span> <i class="icon-uparrow"></i></span>
+                    <span class="down cpointer" data-action="comment-disagree" title="Down Vote"><span data-plugin="comment-disagree-count">{{:opinion[1].count}}</span> <i class="icon-downarrow"></i></span>
+                    <span class="divider">\u2022</span>
+                {{/if}}
+                <span data-action="comment-reply" class="cpointer">Reply</span>
+				<span class="divider">\u2022</span>
+				<span class="divider">\u2022</span>
+                <span class="cpointer flag_comment">
+                    <span data-action="comment-offensive" title="Mark as offensive" >Flag</span>
+                    <div class="popup_badge" data-plugin="offensive_popup">
+                        <div class="heading-block"><h4>Find this comment offensive?</h4></div>
+                        <div class="content clearfix">
+                            <span class="success-message">Your reason has been submitted to the Admin.</span>
+                            <span class="info-txt">Choose your reason below and click on the Submit button. This will alert our moderators to take action</span>
+                            <h6>Reason for reporting:</h6>
+                            <ul class="reasons">
+                               <li><label><input type="radio" name="radio1" value="Foul language"/>Foul language</label></li>
+                               <li><label><input type="radio" name="radio1" value="Defamatory" />Defamatory</label></li>
+                               <li><label><input type="radio" name="radio1" value="Inciting hatred against a certain community"/>Inciting hatred against a certain community</label></li>
+                               <li><label><input type="radio" name="radio1" value="Out of context/Spam"/>Out of context/Spam</label></li>
+                               <li><label><input type="radio" name="radio1" value="Others" />Others</label></li>
+                               <li><textarea class="offensive_popup_reason" data-plugin="offensive_popup_reason" style="display:none" ></textarea></li>
+                            </ul>
+                            <div class="error" data-plugin="comment-offensive-error"></div>
+                            <div class="buttons"><span class="button submit" data-action="offensive_popup_submit">Report this !</span> <span class="button close_popup" data-action="offensive_popup_close">Close</span></div>
+                        </div>
+                    </div>   
+                </span>
+                <span data-action="comment-offensive-already" title="Already marked as offensive" class="hide">Flagged</span>
+            </div>
+            <div class="error clearfix" data-plugin="comment-error-outer"></div>
+            {{/if}}
+        </div>
+        
+		', 
+        <div class="badge_new" style="position:absolute;left:-148px;background-color:#FFF;z-index:2;">
+            <div style="background:url(/photo/12353738.cms) top center no-repeat; width:320px; height:54px;">
+                <div class="full_cont"><div class="left_badge">
+                    <div class="textone_badge">Wordsmith</div>
+                </div>
+                    <div class="right_badge">
+                        <div class="texttwo_badge">Level 1</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hoverblock_new">
+                <div class="cont_pad">
+                    <div class="full_cont">
+                        <div class="cont_left">
+                            <img style="cursor:auto" border="0" height="50" width="65" data-src="http://static.rewards.indiatimes.com/images/wordsmith.png" title="Wordsmith" src="/photo/11350517.cms"></div>
+                        <div class="cont_right"><div class="badgesyn_two">
+                            <p><b>monil shah</b>&nbsp;has posted 10 comments on Timesofindia.com to earn the <b>Wordsmith Level 1</b> badge.</p></div>
+                            <div class="badgesyn"></div></div><div></div></div><div class="divclear"></div>
+                    <div class="full_cont_one cont_mar"><div class="bordertop"><div class="leftthree_logged">
+                        <div onclick="moretimespoint();" class="linkone_badge">Know more about Times Points</div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background:url(/photo/12353749.cms) no-repeat; width:320px; height:14px;"></div>
+        </div>
+        
+		', 
+                Follow / Like us at 
+                ', @timesofindia', Buy From ',  Gadgets Now', Most',  Popular', Anna Hazare to Arvind Kejriwal: You have shattered my dream', BJP reels out documents to accuse UPA of favouring big corporates', Libyan plane hijack updates: All passengers released', 
+                
+                    
+                            ', .UluSpmH h1,h3,p {margin:0;padding:0;}.UluSpmH {width: 300px; height: auto;padding-bottom: 7px;margin-bottom: 16px;border-bottom: 1px solid #d6d6d6;}.UluSpmH > div a img {width: 100%; height: 100px;margin-bottom: 5px;}.UluSpmH > div a {display: block; color: #5c5c5c;text-decoration: none;cursor: pointer; width: 100%;margin: 0;}.UluSpmH > div h3 {text-decoration: none;width: 100%; height: 21px;color: #000000; max-height: 28px; overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 24px;font-family: proxima-semibold,roboto,arial,sans-serif;font-size: 13px !important; margin-bottom: 7px;}.UluSpmH > div p {display: -webkit-box;-webkit-line-clamp: 1; -webkit-box-orient: vertical; margin-top: 2px; padding: 4px 0 0; height: auto;max-height: 17px; overflow: hidden;font-weight: 500;font-family: Roboto, regular; font-size: 10px; color: #767574; width: 204px;}.UluSpmH > div > div a > div {height:61px;width: 100%;}.UluSpmH > div > div {background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/colombia-icon-gray.png);background-repeat: no-repeat; background-position: bottom right; background-size: 14px;position:relative;}.UluSpmH:hover > div > div {background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/colombia_red_small.png);}.UluSpmH > div > div > div {display:none;}.UluSpmH:hover > div > div > div {position: absolute; right: 0; top: 28px;display: block !important; width: 20px; height: 20px;}.UluSpmH > div > div > div a img { height: 16px;}',     ', Birla Sunlife Dynamic Bond Fund', Ad: Birla Sunlife Mutual Fund', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<div><a onclick="VeiaQit('{{href}}')"  rel="nofollow,noindex"><h3>{{title}}</h3><img src="{{imgsrc}}" rel="nofollow" ><p>Ad: {{brand}}</p></a><div><span name="adchoicehtml"/></div></div>#pd#';*/function VeiaQit(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_self');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){         if (window.frameElement !== null){document.body.style.margin="0px"; }};try{trev('http://timesofindia.indiatimes.com/toiyfn/notify.htm?imprId=901bcdb2-02bb-4969-85e5-4d821304b8a1-10onw&id=129140&fpc=9858644d-801d-4141-94c8-8dacd1ce1d84-10onw~1','UluSpmH');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+                        
+                
+                ', 
+                
+                    
+                            ', .QKaAugqyG h1,h3,p {margin:0;padding:0;}.QKaAugqyG {width: 300px; height: auto;padding-bottom: 7px;margin-bottom: 16px;border-bottom: 1px solid #d6d6d6;}.QKaAugqyG > div a img {width: 100%; height: 100px;margin-bottom: 5px;}.QKaAugqyG > div a {display: block; color: #5c5c5c;text-decoration: none;cursor: pointer; width: 100%;margin: 0;}.QKaAugqyG > div h3 {text-decoration: none;width: 100%; height: 21px;color: #000000; max-height: 28px; overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 24px;font-family: proxima-semibold,roboto,arial,sans-serif;font-size: 13px !important; margin-bottom: 7px;}.QKaAugqyG > div p {display: -webkit-box;-webkit-line-clamp: 1; -webkit-box-orient: vertical; margin-top: 2px; padding: 4px 0 0; height: auto;max-height: 17px; overflow: hidden;font-weight: 500;font-family: Roboto, regular; font-size: 10px; color: #767574; width: 204px;}.QKaAugqyG > div > div a > div {height:61px;width: 100%;}.QKaAugqyG > div > div {background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/colombia-icon-gray.png);background-repeat: no-repeat; background-position: bottom right; background-size: 14px;position:relative;}.QKaAugqyG:hover > div > div {background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/colombia_red_small.png);}.QKaAugqyG > div > div > div {display:none;}.QKaAugqyG:hover > div > div > div {position: absolute; right: 0; top: 28px;display: block !important; width: 20px; height: 20px;}.QKaAugqyG > div > div > div a img { height: 16px;}',     ', u"What's behind the paralysing Manipur blockade", Ad: Huff Post', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<div><a onclick="DtUuUpZB('{{href}}')"  rel="nofollow,noindex"><h3>{{title}}</h3><img src="{{imgsrc}}" rel="nofollow" ><p>Ad: {{brand}}</p></a><div><span name="adchoicehtml"/></div></div>#pd#';*/function DtUuUpZB(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_self');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){         if (window.frameElement !== null){document.body.style.margin="0px"; }};try{trev('http://timesofindia.indiatimes.com/toiyfn/notify.htm?imprId=c4fad235-4f7b-4103-977f-e7fbc9ca82f6-10onw&id=129141&fpc=9858644d-801d-4141-94c8-8dacd1ce1d84-10onw~1','QKaAugqyG');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+                        
+                
+                ', No intention of govt to impose long-term capital gains tax: Arun Jaitley', Trying to calm the jangled nerves, finance minister Arun Jaitley went to great lengths clarifying that there is no intention of the government to impose tax on long-term capital gains from share transactions.', u"Modi govt adopting double standards with respect to monuments dedicated to nation's leaders: Mayawati", BSP supremo Mayawati said that Prime Minister Narendra Modi-led central government, is adopting double standards when it comes to building monuments in memory of saints and leaders of the country.', 
+                
+                    
+                            ', u".jRnurOWSL h1,h3,p {margin:0;padding:0;}.jRnurOWSL {width: 300px; height: auto;}.jRnurOWSL > div a img {width: 100%; height: 100px;}.jRnurOWSL > div a {display: block; color: #5c5c5c;text-decoration: none;cursor: pointer; width: 100%;margin-bottom: 15px; border-bottom: 1px solid #e5e5e5;}.jRnurOWSL > div h3 {text-decoration: none;width: 100%; height: auto;color: #000000; max-height: 30px; overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 14px;font-family: 'Roboto',sans-serif;font-size: 13px !important;}.jRnurOWSL > div p {display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; margin-top: 2px; font-size: 13px;padding: 4px 0 0;width: 100%; height: auto;max-height: 17px; overflow: hidden; font-family: proxima-semibold,roboto,arial,sans-serif; font-weight: bold; color: #999;  margin-bottom: 8px;line-height:14px;}.jRnurOWSL h1 {width: 100%; height: auto;font-family: 'Roboto',sans-serif; font: bold 21px/28px proxima-semibold,roboto,arial,sans-serif;color: #000; margin-bottom: 15px; font-size: 20px !important;}.jRnurOWSL h1 span { font-weight: 300; color: #666;}.jRnurOWSL > div > a > div {height:61px;width: 100%;}@media (max-width:1920px){.jRnurOWSL > div > a > div {height: Auto;}}", From',  around the Web',     ', Buy homes with assured rent for 7 yrs @ 45L', Provident Housing', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="jAXmNx('{{href}}')"  rel="nofollow,noindex"><div><h3>{{title}}</h3><p>{{brand}}</p></div><img src="{{imgsrc}}" rel="nofollow" ></a>#pd#';*/function jAXmNx(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_self');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){         if (window.frameElement !== null){document.body.style.margin="0px"; }};try{trev('http://timesofindia.indiatimes.com/toiyfn/notify.htm?imprId=3586cacb-50bb-43eb-b032-f9b063847d87-10onw&id=195796&fpc=9858644d-801d-4141-94c8-8dacd1ce1d84-10onw~1','jRnurOWSL');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+                        
+                
+                ', 
+                
+                    
+                            ', u".wSDuidAeFxm h1,h3,p {margin:0;padding:0;}.wSDuidAeFxm:hover{background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/rbc-red.png);}.wSDuidAeFxm {width: 320px;height: auto;padding-bottom: 10px;background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/rbc-gray.png); background-repeat: no-repeat;background-position: 86% 100%;background-size: auto auto;padding-top:20px;margin-bottom: 10px;}.wSDuidAeFxm > div a img {width: 80px; height: 60px; float: right;}.wSDuidAeFxm > div a {display: block; color: #5c5c5c;text-decoration: none;cursor: pointer; width: 100%;margin-bottom: 15px; padding: 0 0 15px; border-bottom: 1px solid #e5e5e5;}.wSDuidAeFxm > div h3 {text-decoration: none;padding: 5px 0 0; width: 100%; height: auto;color: #000000; max-height: 30px; overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 14px;font-family: proxima-semibold,roboto,arial,sans-serif;font-size: 13px !important;}.wSDuidAeFxm > div p {display: -webkit-box;-webkit-line-clamp: 1; -webkit-box-orient: vertical; margin-top: 2px; font-size: 13px; padding: 2px 0 0; width: 100%; height: 14px;color: #999;max-height: 14px; overflow: hidden;font-family: proxima-semibold,roboto,arial,sans-serif; font-weight: bold;line-height: 13px;}.wSDuidAeFxm h1 {width: 280px; height: auto;margin-top: 10px; font-family:'Roboto',sans-serif;;font: bold 21px/28px proxima-semibold,roboto,arial,sans-serif; color: #000; margin-bottom: 15px;border-top: 5px solid #363636; padding: 10px 10px 0;font-size: 20px !important;}.wSDuidAeFxm h1 span {font-weight: 300; color: #666;}.wSDuidAeFxm > div > a > div {padding-right:87px;height:61px;padding-left: 3px;}.wSDuidAeFxm > div {padding: 0px 10px 0;}.wSDuidAeFxm > div a:last-child {border: 0;}@media (max-width:1920px) {.wSDuidAeFxm > div > a > div {height: Auto;max-height: 61px;min-height: 61px;}}",     ', u"Enjoy life's precious moments- ICICI Lombard", ICICI Lombard Bike Insurance', The last chance for little Arisha to survive', Milaap', Wear your attitude on your wrist', Fastrack', More From',  The Times of India', Sushant Singh Rajput rejects endorsing a condom brand', Times of India', Kangana Ranaut to get married in 2017!', Times of India', Bairavaa: Official trailer', Times of India', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="BNermgmq('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow" ><div><h3>{{title}}</h3><p>{{brand}}</p></div></a>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<a onclick="BNermgmq('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow"><div><h3>{{title}}</h3><p>{{brand}}</p></div></a>#og#';*/function BNermgmq(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_self');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){         if (window.frameElement !== null){document.body.style.margin="0px"; }};try{trev('http://timesofindia.indiatimes.com/toiyfn/notify.htm?imprId=6dccd507-e518-4d45-80f0-ae04b69f0a5c-10onw&id=129145&fpc=9858644d-801d-4141-94c8-8dacd1ce1d84-10onw~1','wSDuidAeFxm');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+                        
+                
+                ', Navbharat',  Times', Featured Today In',  Travel', Weather in Cuttack', From',  our Global Partners',   
+        
+        var _page_config, _ibeat_config ={};
+        
+        function setPageConfig(config){
+            _page_config = {
+              host: 'timesofindia.indiatimes.com', 
+              key: 'ae9d3286a3123c65177df0aa6088b6e7',
+              domain: 'timesofindia.indiatimes.com',
+              channel: config._iBeat_channel,
+              action : config._iBeat_action,
+              articleId: config._iBeat_articleid,
+              contentType: 1,
+              location : 1,
+              url : config._iBeat_url,
+              cat : config._iBeat_cat,
+              subcat: config._iBeat_subcat,
+              contenttag: config._iBeat_tag,
+              catIds   : config._iBeat_catIds,
+              articledt: config._iBeat_articledt,
+              author: config._iBeat_author,
+              position: config._iBeat_position
+            };
+        }
+        function trim(str){return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');}
+        
+        
+             _ibeat_articleid = "52426758";
+             _ibeat_config[_ibeat_articleid] = {};
+             _ibeat_config[_ibeat_articleid]['_iBeat_articleid']=_ibeat_articleid;
+             _ibeat_config[_ibeat_articleid]['_iBeat_tag']='';
+             _ibeat_config[_ibeat_articleid]['_iBeat_catIds']='-2128958273,-2128932452,48264818';
+             _ibeat_config[_ibeat_articleid]['_iBeat_url'] = location.protocol+'//'+location.host +'/city/cuttack/Rose-Valley-investors-to-get-money-back/articleshow/52426758.cms';
+             _ibeat_config[_ibeat_articleid]['_iBeat_type']=1;
+             _ibeat_config[_ibeat_articleid]['_iBeat_action']=1;
+             _ibeat_config[_ibeat_articleid]['_iBeat_cat']= trim('City');
+             _ibeat_config[_ibeat_articleid]['_iBeat_subcat']=trim('Cuttack');
+             _ibeat_config[_ibeat_articleid]['_iBeat_articledt']="May 25, 2016, 07.29 AM IST";
+             _ibeat_config[_ibeat_articleid]['_iBeat_author']="Binita Jaiswal";
+             _ibeat_config[_ibeat_articleid]['_iBeat_channel'] ="TNN";
+             _ibeat_config[_ibeat_articleid]['_iBeat_position'] = " ";
+        
+          
+        
+            setPageConfig(_ibeat_config[_ibeat_articleid]);
+            _page_config['position'] = Get_Ckie('PlRef') ? Get_Ckie('PlRef') : '';
+            var iBeatTimer = setTimeout(function(){loadIbeatJS();},20000);
+            $(window).load(function(){loadIbeatJS();clearTimeout(iBeatTimer);});
+            
+            function loadIbeatJS(){
+                try{
+                    if(typeof iBeatPgTrend == 'undefined'){
+                        var ele = document.createElement('script');
+                        ele.setAttribute('language', 'javascript');
+                        ele.setAttribute('type', 'text/javascript');
+                        ele.setAttribute('src',"http://ibeat.indiatimes.com/js/pgtrackingV8.js");
+                        document.body.appendChild(ele);
+                    }
+                }catch(e){}
+            }
+            
+        ', 
+                var times_trend_subsec_info='cms-sec0=48264818&cms-sec1=-2128932452&cms-sec2=-2128958273';
+                function timeslog(msid){
+                    var rndtno = Math.random();
+            		 
+            		var img = new Image();
+            		img.src = "http://timeslog.indiatimes.com/timeslog.dll/topcnt?CHUR=timesofindia.indiatimes.com&randomno="+ rndtno;
+                    	
+                    var img1 = new Image();
+                    img1.src = 'http://cmstrendslog.indiatimes.com/cmslog.dll?cms-msid='+msid+'&'+times_trend_subsec_info+'&cmsurtype=viewed&randomno='+ rndtno;
+                }
+                timeslog(52426758);
+	        ', Chit fund scam: Panel to present interim report today', Villagers protest against poor quality road in Malkangiri', AP tourist bus overturns on NH-5, woman dies', Petitioners move High court over Sun Temple waterlogging', Odisha govt to auction assets of three Ponzi firms', Barabati likely to host test match', Foot overbridge at Link Rd hangs fire', New bone marrow tech at SCB soon', u"Puri temple's structural damage tops Facebook trending", 1', Rose Valley investors to get money back', 2', Chit fund scam: Panel to present interim report today', 3', Villagers protest against poor quality road in Malkangiri', 4', AP tourist bus overturns on NH-5, woman dies', 5', Petitioners move High court over Sun Temple waterlogging', 6', Odisha govt to auction assets of three Ponzi firms', 7', Barabati likely to host test match', 8', Foot overbridge at Link Rd hangs fire', 9', New bone marrow tech at SCB soon', 10', u"Puri temple's structural damage tops Facebook trending", About us', Privacy policy', Newsletter', Sitemap', Create Your Own Ad', Advertise with us', Feedback', TOI Mobile', Terms of Use and Grievance Redressal Policy', RSS', ePaper', Archives', Other Times Group news sites', The Economic Times',  | ', \u0907\u0915\u0928\u0949\u092e\u093f\u0915 \u091f\u093e\u0907\u092e\u094d\u0938',  | ', \u0a88\u0a95\u0acb\u0aa8\u0acb\u0aae\u0abf\u0a95 \u0a9f\u0abe\u0a88\u0aae\u0acd\u0ab8',  | ', Pune Mirror',  | ', Bangalore Mirror',  | ', Ahmedabad Mirror',  | ', ItsMyAscent',  | ', Education Times',  | ', Brand Capital',  | ', Mumbai Mirror',  | ', Times Now',  | ', Indiatimes',  | ', \u0928\u0935\u092d\u093e\u0930\u0924 \u091f\u093e\u0907\u092e\u094d\u0938',  | ', \u092e\u0939\u093e\u0930\u093e\u0937\u094d\u091f\u094d\u0930 \u091f\u093e\u0907\u092e\u094d\u0938',  | ', \u0cb5\u0cbf\u0c9c\u0caf \u0c95\u0cb0\u0ccd\u0ca8\u0cbe\u0c9f\u0c95',  | ', Go Green',  | ', Lifehacker India',  | ', Gizmodo India',  | ', Eisamay',  | ', IGN India',  | ', NavGujarat Samay',  | ', Tamil News',  | ', Telugu News',  | ', Miss Kyra',  | ', Hindi News',  | ', FILMIPOP Hindi', Living and entertainment', iDiva',  | ', Entertainment',  | ', Zoom',  | ', Luxpresso',  | ', Mobile Phones ',  | ', Online Songs',  | ', MensXP.com',  | ', Hotels',  | ', Travel Destinations',  | ', smartapp',  | ', Cricbuzz.com',  | ', Filmfare',  | ', Femina',  | ', Grazia',  | ', Filmipop',  | ', Bombay Times', Interest Network', itimes', Hot on the Web', Cricket News',  | ', Sunny Leone Bikini Pics',  | ', How to Get Pregnant',  | ', Latest News', Services', Book print ads',  | ', Online shopping',  | ', Matrimonial',  | ', Astrology',  | ', Jobs',  | ', Tech Community',  | ', Property',  | ', Buy car',  | ', Bikes in India',  | ', Deals',  | ', Free Classifieds',  | ', Used Cars',  | ', Restaurants in Delhi',  | ', Movie Show Timings',  | ', Remit to India',  | ', Listen Songs',  | ', TimesMobile',  | ', Real Estate Developers',  | ', Restaurant Deals in Delhi',  | ', Mobile Recharge',  | ', Bollywood News',  | ', Bank Exam App',  | ', iTimes Entertainment App',  | ', ETMoney Finance App', Trending Topics', Beauty Care',  | ', Recipes',  | ', Movie Reviews',  | ', Weather Today',  | ', Google Pixel Price in India',  | ', iPhone 7 Plus Review',  | ', Diwali Pooja 2016',  | ', Bigg Boss 10', FOLLOW US ON', Top Trends', Live: Modi Mann ki Baat', Currency Demonetisation', Fog in Delhi', Russian military aircraft missing', Christmas 2016', Bigg Boss 10', Narendra Modi', Dangal Review', Kareena Kapoor Baby', Copyright © 2016 Bennett, Coleman & Co. Ltd. All rights reserved. For reprint rights:', Times Syndication Service', <span class="temp_h">~district~</span><span style="background-position:~icon~;" class="icon"></span><span class="temp"><span class="wdC">~temp~&deg;C</span><span class="wdF">~tempF~&deg;F</span></span><span class="optionshome"><a id="wdCid" style="cursor: pointer; display: none;" onclick="$('.wdF').hide();$('.wdC').show();$('#wdCid').hide();$('#wdFid').show();">&deg;C</a><a id="wdFid" style="cursor: pointer;" onclick="$('.wdC').hide();$('.wdF').show();$('#wdFid').hide();$('#wdCid').show();">&deg;F</a></span><a class="arrow" target="_blank" href="weather.cms">&raquo;</a>', 
+                    var forecastObj = new Object();
+                    forecastObj.type = "weather";
+                    forecastObj.cityname = "";
+                ', `', u"
+    					require(['jquery','rodate','tiljs/cookie','pgtrack','navigation','breakingnews', 'tiljs/plugin/lazy','tiljs/load'],
+	                    function($,rodate,cookie, pgtrack, navigation,breakingnews,lazy,load) {
+                    	    window.isLoggedSso=cookie.get('MSCSAuth');
+                         	window.homeObj = new Object();
+                        	homeObj.breakingNewsPause=0;
+                        	
+                        	
+                    	   
+	                    });
+	                    ", 
+                    // Disabling canada pages link for Indian Geo
+                    try {
+				        function hideCanadaNavLinks(){
+                            $('#nav-world #48281453').hide();
+                            $('#mainnav li[secid="48281453"]').hide();
+                        }
+                        function disableWhenIndianGeo(){
+            	            if(typeof geolocation!=='undefined' && geolocation==1){hideCanadaNavLinks();}
+            	            else if (window.location.hostname.indexOf('toidev.indiatimes.com') < 0){ // to prevent error on dev env
+            	                $.ajax({url: "http://timesofindia.indiatimes.com/videos/geocode.cms", success: function(result){
+                                    if(result==1){hideCanadaNavLinks();}
+                                }});
+            	            }
+            	        }
+                        $(document).ready(function() {
+                	        disableWhenIndianGeo();
+                	    });
+                    }
+                    catch(e){}
+            	    // Ends - Disabling canada pages link for Indian Geo
+                ', 
+                var secname="";
+                var agename="";
+                secname='City';
+                agename='Binita Jaiswal';
+        		var _sf_async_config={uid:10538,domain:"timesofindia.indiatimes.com"};
+        		_sf_async_config.sections = secname;
+        		_sf_async_config.authors = agename;
+			       
+                //-- BEGIN Chartbeat CODE --
+                (function(){
+        		  function loadChartbeat() {
+        		    window._sf_endpt=(new Date()).getTime();
+        		    var e = document.createElement('script');
+        		    e.setAttribute('language', 'javascript');
+        		    e.setAttribute('type', 'text/javascript');
+        		    e.setAttribute('src',
+        		       (("https:" == document.location.protocol) ? "https://s3.amazonaws.com/" : "http://") +
+        		       "static.chartbeat.com/js/chartbeat.js");
+        		       try{document.body.appendChild(e);}catch(e){}
+        		  }
+        		  var oldonload = window.onload;
+        		  window.onload = (typeof window.onload != 'function') ?
+        		     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+        		})();
+        		//--END Chartbeat CODE --
+        		try{
+            		$( window ).load(function() {
+                      $.getScript( "http://dc8xl0ndzn2cb.cloudfront.net/js/indiatimescom/v0/keywee.min.js");
+                    });
+                }catch(e){}
+        	    ', <h4 class="ad_title"><a pg="RHS#AcrossWebVid#~pg-tag~" href="~url~" target="_blank">~name~</a></h4><div class="ad_brand">~brandtext~</div><a target="_blank" href="~url~" class="hid-vid-play ad_img_vid"><img class="lazy" data-src="~wideImg~" src="~wideImg~" pg="RHS#AcrossWebVid#~pg-tag~">
+            	~icon-ctn-vid~
+            </a>
+            ~ctn-vid-ad-container~
+        ', <div style="height:1px;"></div>
+        	
+        	
+            ~ctn-vid-ad-container~
+        ', <h4 class="ad_title"><a target="_blank" pg="new_mostPopular_native#~pos~" href="~url~" title="~name~">~name~</a></h4><a target="_blank" pg="new_mostPopular_native#~pos~" href="~url~" class="w_img"><img src="~sImg~" pg="new_mostPopular_native#~pos~"></a><span style="font-family: Roboto, regular; font-size: 10px; color: #767574; width: 204px;" class="metadata">
+        		Sponsored by ~brandtext~<i class="clmcup"></i></span>', <li><a target="_blank" pg="ctn_belowarticle_paid#~pos~" href="~url~">~name~</a><span class="columbia_meta">~brandtext~</span></li>', <li><a target="_blank" pg="ctn_belowarticle_organic#~pos~" href="~url~">~name~</a></li>', <li class="clearfix"><a class="w_img" title="~name~" href="~url~" pg="RHS#AcrossWeb#~pg-tag~"><img src="~sImg~" pg="RHS#AcrossWeb#~pg-tag~"><span pg="RHS#AcrossWeb#~pg-tag~" class="desc">~name~</span><span class="ad_brand">~brandtext~</span></a></li>', <li class="clearfix"><a class="w_img" title="~name~" href="~url~" pg="RHS#AcrossTOI#~pg-tag~"><img src="~sImg~" pg="RHS#AcrossTOI#~pg-tag~"><span pg="RHS#AcrossTOI#~pg-tag~" class="desc">~name~</span></a></li>', <li><a href="~url~"><img src="~sImg~"><span>~name~</span><i class="sponsor">~brandtext~</i></a></li>', <li class="clearfix"><a pg="ctn_belowarticle_2_paid#~pg-tag~" href="~url~" target="_blank" title="~name~" class="ad_img"><img pg="ctn_belowarticle_2_paid#~pg-tag~" data-src="~sImg~" src="~sImg~"><span class="ad_heading">~name~</span><span class="ad_brand">~brandtext~</span></a></li>', <li class="clearfix"><a pg="ctn_belowarticle_2_organic#~pg-tag~" href="~url~" target="_blank" title="~name~" class="ad_img"><img pg="ctn_belowarticle_2_organic#~pg-tag~" data-src="~sImg~" src="~sImg~"><span class="ad_heading">~name~</span></a></li>', 
+                    
+                        
+                                ', u"
+                                    var e_x = '129140-1 = 1, 129140-2 = 1, 129141-1 = 1, 129141-2 = 1, 195796-1 = 1, 129145-1 = 1, 129783-1 = 1, 129147-1 = 1';
+                                    if(window.canRun === undefined || window.canRun === false){
+                                        ga('send', 'event', 'e_srv', 'yes', 'e_srv', 1);
+                                    }
+                                ", 
+                            
+                    
+                '][Indiatimes', |', The Times of India', |', The Economic Times', : ', HI, ', My Times', LOGOUT', Sign In', City', More ', Beauty Pageants', Photos', Videos', More ', Fashion', Specials', Debate', Photos', Videos', Platinum', Times of India', body{display: block !important;}', More', #navigation ul.level-one li.nav-home.hover .dropdown {display: block  !important;}
+		    .mob_subNav_val{display:none;}', Home', Home', Videos', City', India', World', Business', Tech', Cricket', Sports', Entertainment', TV', Life & Style', Blogs', Photos', TIMES NEWS - RADIO', Brandwire', Good Governance', City', METRO CITIES', Mumbai', Delhi', Bangalore', Hyderabad', Kolkata', Chennai', OTHER CITIES', Agartala', Agra', Imphal', Ahmedabad', Allahabad', Amritsar', Aurangabad', Bareilly', Bhopal', Bhubaneswar', Chandigarh', Coimbatore', Cuttack', Dehradun', Erode', Faridabad', Goa', Gurgaon', Guwahati', Hubli', Indore', Jaipur', Jamm, Jamshedpur', Jind', Kanpur', Kochi', Kolhapur', Kozhikode', Lucknow', Ludhiana', Madurai', Mangalore', Meerut', Mysore', Nagpur', Nashik', Navi Mumbai', Noida', Patna', Puducherry', Pune', Raipur', Rajahmundry', Rajkot', Ranchi', Srinagar', Salem', Shillong', Shimla', Surat', Thane', Trichy', Thiruvananthapuram', Vadodara', Varanasi', Visakhapatnam', Cuttack', Crime', Civic Issues', Politics', Schools & Colleges', Events', ALL', News',  » ', City News',  » ', Cuttack News',  » ', Rose Valley investors to get money back', 
+                            var uhj="/homeajax_nav.cms?config.key=7503091,48264818,36768551,48264804,48264319,3012535,6547154,4118215,3942695,9644624,3012544,48264118,48264388,48264530,3947067,9710057,22778873,9710567,-2128819658,3947051,9632514,3942690,36768500,3942693,442002,11459502,22126655,8021716,-2128817995,22777916,-2128821991,17388717,48264522,3942663,4118245,48264138,48263967,48264067,48264012,3942660,3831863,22778270,878156304,3942666,3947071,17388704&type=-2128932452&nav=-2128932452&config.perpage=10";
+                            var uhj1="/homeajax_nav.cms?config.key=17584223&config.hostid=34&look=i_gallery&config.perpage=6&type=L1";
+                            var uhj2="/homeajax_nav.cms?config.key=3817074&tag=videopllist&look=i_gallery&secid=3817074&config.perpage=6&nav=videos&type=L1";
+                            var uhj3="/toicommon_allsection_v1.cms?version=92";
+                            var d = '7503091,48264818,36768551,48264804,48264319,3012535,6547154,4118215,3942695,9644624,3012544,48264118,48264388,48264530,3947067,9710057,22778873,9710567,-2128819658,3947051,9632514,3942690,36768500,3942693,442002,11459502,22126655,8021716,-2128817995,22777916,-2128821991,17388717,48264522,3942663,4118245,48264138,48263967,48264067,48264012,3942660,3831863,22778270,878156304,3942666,3947071,17388704';
+                            var lsValidator = function(key){
+                                var d = new Date().getTime();
+                                try{
+                                    var ls = JSON.parse(localStorage.getItem(key));
+                                    var ed = ls.timestamp + (ls.expires * 24 * 60 * 60 * 1000);
+                                    if (ed > d){return ls.value;}
+                                    return false;
+                                }catch(err){
+                                    LSflush();
+                                }
+                            };
+                            var LSflush = function(){
+                                var dt = new Date().getTime();
+                                for(_x in localStorage){
+                                    try{
+                                        var lsg = JSON.parse(localStorage[_x]);
+                                        if(!lsg.timestamp) continue;
+                                        ed  = (lsg.expires)?lsg.expires:1;
+                                        ed = lsg.timestamp + (ed * 24 * 60 * 60 * 1000);
+            		                    if(dt > ed){
+            		                        localStorage.removeItem(_x);
+            		                    }
+        		                    }catch(e){}
+        		                }
+                            };
+            		        $( document ).ready(function() {
+            		            
+                                        
+                		            if(lsValidator(d)){
+                		                $(lsValidator(d)).appendTo("body");
+                		            }else{
+                		                LSflush();
+                                        $.when( $.ajax( uhj ), $.ajax( uhj1 ), $.ajax( uhj2 ) ).done(function( a1, a2, a3 ) {
+                                            $(a1[0]).appendTo("body");
+                                            $(a2[0]).appendTo("body");
+                                            $(a3[0]).appendTo("body");
+                                            var r = {value: a1[0]+a2[0]+a3[0], timestamp: new Date().getTime(), expires: 1};
+                                            localStorage.setItem(d, JSON.stringify(r));
+                                        });
+                                    }
+                		            if(lsValidator(uhj3)){
+                		                $(lsValidator(uhj3)).appendTo("body");
+                		            }else{
+                		                LSflush();
+                		                $.ajax({url: uhj3, success: function(result){
+                                            $(result).appendTo("body");
+                                            var r = {value: result, timestamp: new Date().getTime(), expires: 7};
+                                            localStorage.setItem(uhj3, JSON.stringify(r));
+                                        }});
+                                    }
+                                
+                            });
+        		        ', 
+	        
+	        try {
+                if(typeof pageName!=='undefined'){
+                    $('[pg]').not($("[pg^="+pageName+"]")).each(function(){
+                        var nPg = pageName+'_'+$(this).attr('pg');
+                        $(this).attr('pg', nPg);
+                    });
+                }
+            }
+            catch(err) {}
+	        
+	    ', 
+				var miniTV = Object();
+				miniTV.ajax = function(url,callback){
+					$.get( url, function( data ) {
+						callback( data );
+					});
+				};
+				miniTV.isOn = function(){
+				    var url='http://timesofindia.indiatimes.com/breakingnews/home_topcontent_banner.htm';
+				    if(window.location.host.match(/toidev|jcmsdev/)){url='/home_topcontent_banner.cms?pagetype=isEnabled';}
+					miniTV.ajax(url,function(data){
+						data = $.trim(data);
+						if(times.cookie.get('playvd') && data!=''){
+	                        
+							$('#minitv').html(data);
+							
+							if($('#streaming_box').is(":visible") && $('.livetv_box_label').is(":visible") || $('.livetv_box').is(":visible"))
+	                        {
+	                            $('.livetv_box_label').hide();
+	                            $('.livetv_box').hide();
+	                       }
+	                       
+						    if (typeof miniTV.clickLoad == "function") miniTV.clickLoad();
+						} else if (data!=''){
+						
+							$('#minitv').html(data);
+							
+						    if($('#streaming_box').is(":visible") && $('.livetv_box_label').is(":visible") || $('.livetv_box').is(":visible"))
+	                        {
+	                            $('.livetv_box_label').hide();
+	                            $('.livetv_box').hide();
+	                       }
+						}
+					});
+				};
+			
+			$(window).load(function(){miniTV.isOn();});', Rose Valley investors to get money back', Binita Jaiswal', The state government has started the process of identifying investors allegedly duped by Ponzi firm Rose Valley Group of Companies to make way for refund of their money. On Tuesday, the additional district magistrate (ADM), Cuttack, Bibhuti Bhusan Das, issued a notification in different newspapers for identification of duped investors under the provision of Odisha Protection of Interests of Depositors (in Financial Establishments) Act, 2011.',  | ', TNN',  | ', Updated: May 25, 2016, 07.41 AM IST', Cuttack: The state government has started the process of identifying investors allegedly duped by Ponzi firm Rose Valley Group of Companies to make way for refund of their money. ', On Tuesday, the additional district magistrate (ADM), Cuttack, Bibhuti Bhusan Das, issued a notification in different newspapers for identification of duped investors under the provision of Odisha Protection of Interests of Depositors (in Financial Establishments) Act, 2011. He is the competent authority to sell the properties of chit fund companies by public auction and release the sale proceeds for equitable distribution among the depositors.', The notification clearly states that persons, who have invested in any of the seven companies of the group like Rose Valley Hotels and Entertainments Ltd, Rose Valley Real Estates and Constructions Ltd, Rose Valley Realcon Ltd, Rose Valley Chain Marketing System, Rose Valley Industries Ltd, Rose Valley Fashions Private Limited and Rose Valley Travels Private Limited can apply in the specific format with details of their investment and address details before their respective tehsildars. ', The duped investors can submit their applications between June 1 to June 21.', u"Officials said to ensure hassle-free refund of money, the format requires depositors to provide information on legal heir in case of depositor's death, permanent and present address, income and PAN card details. ", It has been clearly mentioned in the notification that criminal proceedings will be initiated against any person found submitting wrong or false information in the application. "Ensuring refund of money to genuine investors is our top priority," said finance minister Pradeep Amat to mediapersons. Official sources said nodal officers will be appointed in each tehsil to oversee the process. ', u"The government had initially planned to seek the applications online from duped investors but as many panchayats don't have access to internet, it was decided to receive applications from the depositors. Officials claimed that the format will be used to identify investors in other Ponzi firms also. So far, the ADM has managed to transfer Rs 48 crore from the bank accounts of the Rose Valley to government's account. ", Meanwhile, the process of public auction of immovable properties of the Ponzi firm has also been initiated. Though no bidder turned up during the first e-auction on May 4, but officials are hopeful that the second online auction scheduled for May 31 will definitely attract bidders.', However, the duped investors are sceptical about the government's move. "The government should expedite the process of identifying the duped investors and refund our money soon," said Benudhar Das, a duped investor.', Stay updated on the go with Times of India ', News',  App. Click ', here',  to download it for your device.', RELATED', 
+                
+                    
+                            ', .RmgtHSi h1,h3,p {margin:0;padding:0;}.RmgtHSi:hover{background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/rbc-red.png); }.RmgtHSi {width: 100%;height: auto;float: left;padding-bottom: 12px;background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/rbc-gray.png); background-repeat: no-repeat;background-position: 98% 100%;background-size: auto auto;margin-bottom: 15px;}.RmgtHSi > div a img {width:100%;height: 118.94px;float:left;min-height: 118.94px;}.RmgtHSi > div a {width:31.8%;float: left;margin-left:2.3%; text-decoration: none;margin-bottom: 14px;cursor: pointer;}.RmgtHSi > div a:first-child { margin-left: 0;}.RmgtHSi > div h3 {width: 100%; height: auto; float: left; max-height: 66px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4;   -webkit-box-orient: vertical; font-family: 'Roboto',sans-serif; color: #333; padding: 6px 0 0; text-align: left; line-height: 1.25; font-size: 13px !important;}.RmgtHSi > div p {width: 100%; height: auto; float: left; font-family: inherit; color: #999; padding: 2px 0 0;text-align: left; display: block; font: normal 13px/14px proxima-semibold,roboto,arial,sans-serif;}.RmgtHSi h1 {height: auto;display: block;width: 100%; float: left; padding: 5px 0;color: #000000; margin-bottom: 7px; font-family: 'Roboto',sans-serif;    text-transform: uppercase;font-weight: bold;line-height: 1.2em;font-size: 18px !important;}.RmgtHSi h1::before { content: "";}.RmgtHSi > div > a > div {float: left;width: 100%;height:75px;}.RmgtHSi > div {float: left;`}@media (max-width:1920px) {.RmgtHSi > div h3{max-height: 71px;}.RmgtHSi h1{font-size:28px;}.RmgtHSi > div > a > div {height: Auto; }}@media (max-width:1366px) {.RmgtHSi > div h3{font-size:14px;}.RmgtHSi h1{font-size:24px;}}@media (max-width:1280px) {.RmgtHSi > div h3{font-size:14px;}.RmgtHSi h1{font-size:20px;}}@media (max-width:840px) {.RmgtHSi > div h3{font-size:14px;}.RmgtHSi h1{font-size:18px;}}@media (max-width:640px) {.RmgtHSi > div h3{font-size:14px;}.RmgtHSi h1{font-size:16px;}}@media (max-width:320px) {.RmgtHSi > div h3{font-size:13px;}.RmgtHSi h1{font-size:16px;}}',     ', From around the web',     ', Never pay full price & save up to 80% off', Desidime.com', Rare small caps with immense growth potential!', Equitymaster', Titan Xylys Watches - Up to 40% off', Titan', More from The Times of India ', More than 200 startups shut shop in 2016', Watch: Deepika Padukone\u2019s alluring photoshoot', Priyanka replaces Anushka as the face of a shampoo brand', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="tSwyxSaUtj('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow" ><div><h3>{{title}}</h3><p>{{brand}}</p></div></a>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<a onclick="tSwyxSaUtj('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow"><div><h3>{{title}}</h3></div></a>#og#';*/function tSwyxSaUtj(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_self');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){try{if (window.frameElement !== null){window.canRun = true;document.body.style.margin="0px";  parent.top.document.getElementById(window.frameElement.parentNode.getAttribute('id')).style.height='540px';; }}catch(e){}};try{trev('http://timesofindia.indiatimes.com/toiyfn/notify.htm?imprId=cabbbf6c-ec58-4164-902d-f0692e923991-10ocs&id=129783&fpc=9858644d-801d-4141-94c8-8dacd1ce1d84-10onw~1','RmgtHSi');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+                        
+                
+                ', 
+                
+                    
+                            ', .DwcVItwpy h1,h3,p {margin:0;padding:0;}.DwcVItwpy:hover{background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/rbc-red.png);}.DwcVItwpy {width: 100%;height: auto;float: left;padding-bottom: 22px;background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/rbc-gray.png); background-repeat: no-repeat;background-position: 98% 98.5%;background-size: auto auto;border-bottom: 1px solid #eaeaea;}.DwcVItwpy li span{font: 300 16px/20px proxima-regular1,roboto,arial,sans-serif; margin-right: 10px; overflow: hidden; -webkit-line-clamp: 2;   -webkit-box-orient: vertical; font-size: 13px !important; height: auto; color: #CCC; display: -webkit-box;  max-height: 48px; vertical-align: top;line-height: 15px;}.DwcVItwpy li span:nth-child(2):hover{text-decoration:underline;}.DwcVItwpy li span:nth-child(2) {margin: 0; max-height: 18px !important; overflow: hidden;-webkit-line-clamp: 1;-webkit-box-orient: vertical;font-size: 16px !important; color: #353535;font-weight: 300;height: 18px;line-height: 16px;vertical-align:top; width: auto;font:300 16px/20px proxima-regular1,roboto,arial,sans-serif;display:table;}.DwcVItwpy h1 {width: 49%; float: left; padding: 9px 0;background-color: #444444; margin-bottom: 10px !important;background: #eaeaea;color: #000; font: normal 17px/20px proxima-semibold,'roboto slab',roboto,arial,sans-serif; text-transform: uppercase; font-size: 17px !important;}.DwcVItwpy h1::before { content: ""; margin-left: 10px;}.DwcVItwpy > div{width: 48%; margin: 0 1%; float: left;}.DwcVItwpy ul {margin:0; padding: 0;}.DwcVItwpy ul li{margin-bottom: 10px;font-size: 24px;height: 60px;}.DwcVItwpy ul li a img {float:left;margin-right:10px;width:85px;}.DwcVItwpy ul li a {width: 100%;text-decoration: none;cursor: pointer;float:left;margin-bottom:15px;}.DwcVItwpy h1:nth-child(2) { margin-left: 2% !important;}@media (max-width:1920px) {.DwcVItwpy > div h3{font-size:26px;}.DwcVItwpy h1{font-size:28px;}.DwcVItwpy > div > a > div {height: Auto;max-height: 61px;    min-height: 61px;}}@media (max-width:1366px) {.DwcVItwpy > div h3{font-size:14px;}.DwcVItwpy h1{font-size:24px;}}@media (max-width:1280px) {.DwcVItwpy > div h3{font-size:14px;}.DwcVItwpy h1{font-size:20px;}}@media (max-width:840px) {.DwcVItwpy > div h3{font-size:14px;}.DwcVItwpy h1{font-size:18px;}}@media (max-width:640px) {.DwcVItwpy > div h3{font-size:13px;}.DwcVItwpy h1{font-size:16px;}}@media (max-width:320px) {.DwcVItwpy > div h3{font-size:13px;}.DwcVItwpy h1{font-size:16px;}}',     ', From the Web', More From The Times of India',     ', u"PaneerMania at Dunkin' Donuts! Starting at \u20b985*", u"Dunkin' Donuts & More", Experience the best of Dubai with great deals', SOTC', All natural whiteness serum (try it now!)', Fit Mom Daily', Now you can manage your finances like an expert', ArthaYantra', Play this game for free and win awesome cash giveaways!', Junglee Rummy', Hyundai i10 to be discontinued', u"BCCI v Lodha: Let's wait till January 3, says Anurag Thakur", Priyanka, Sidharth to come together for an ad film', First drive: 2017 Skoda Kodiaq', B-town divas spotted at store launch event in Mumbai', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<li><a onclick="DaciRLOgK('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow"><span>{{title}}</span><span>{{brand}}</span></a></li>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<li><a onclick="DaciRLOgK('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow"><span>{{title}}</span></a></li>#og#';*/function DaciRLOgK(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_self');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){         try{if (window.frameElement !== null){window.canRun = true;document.body.style.margin="0px";  parent.top.document.getElementById(window.frameElement.parentNode.getAttribute('id')).style.height='540px';; }}catch(e){}};try{trev('http://timesofindia.indiatimes.com/toiyfn/notify.htm?imprId=d17bd6b2-6800-4131-831a-d825a967444a-10ocs&id=129147&fpc=9858644d-801d-4141-94c8-8dacd1ce1d84-10onw~1','DwcVItwpy');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+                        
+                
+                ',  Comments', Characters Remaining: ', 3000', OR PROCEED WITHOUT REGISTRATION', Share on Facebook', Share on Twitter', SIGN IN WITH', Facebook', Google', Email', Refrain from posting comments that are obscene, defamatory or inflammatory, and do not indulge in personal attacks, name calling or inciting hatred against any community. ', Help us delete comments',  that do not follow these guidelines ', by marking them offensive', u". Let's work together to keep the conversation civil.", X', Sort By:', Up Voted', Newest', Oldest', Discussed', Down Voted', Be the first one to review.', We have sent you a verification email. To verify, just follow the link in the message', 
+		<div class="comment-box level{{:level}} {{if id==-1}}highlight{{/if}}" id="cmt{{:id}}" data-plugin="comment" data-index="{{:index}}" data-id="{{:id}}" data-level="{{:level}}" data-user="{{:user.name}}" data-email="{{:user.email}}" data-userid="{{:user.id}}" data-childcount="{{:childcount}}">
+            <div class="user-thumbnail">
+                {{if user.image}}
+                <img class="userimg flL" data-src="{{:user.image}}" src="/photo/11350517.cms"/>
+                {{else}}
+                <img class="userimg flL" data-src="/photo/29251859.cms" src="/photo/11350517.cms"/>
+                {{/if}}
+            </div>
+            <div class="info-bar clearfix">
+                {{if user.username || user.id}}
+                    <a href="http://mytimes.indiatimes.com/profile/{{:user.username || user.id}}" class="name" target="_blank">{{:user.name}}</a>
+                {{else}}
+                    <span class="name">{{:user.name}}</span>
+                {{/if}}
+                <div class="points_wrap">
+                    {{if user.points}}
+                    <span class="psR flL tooltip_wrap">
+                    <span class="point {{:user.pointslevel.toLowerCase()}}" title="{{:user.points}} Points">{{:user.points}}</span>
+                    <span class="tootipbox">
+                    	<strong class="rem_point">{{:user.pointsNeeded}}</strong> more points needed to reach next level.
+                       <a href="http://timesofindia.indiatimes.com/abouttimesrewards.cms" class="more" target="_blank">Know more about Times Points</a>
+                    </span>
+                    </span>
+                    {{/if}}
+                    {{if user.badge}}
+                        <div class="badges clearfix">
+
+                            {{for user.badge}}
+                               {{if #index < 3}}
+                                    <div class="badge" data-plugin="comment-user-badge" data-name="{{:name}}">
+                                        <img data-src="{{:image}}" title="{{:name}}"  src="/photo/49258704.cms">
+                                        <div class="popup_badge">
+                                           <div class="heading-block"><span class="level">Level {{:count}}</span><h4>{{:name}}</h4></div>
+                                           <div class="content clearfix">
+                                                    <div class="cont_left" >
+                                                        <img data-src="{{:image}}" title="{{:name}}"  src="/photo/49258704.cms">
+                                                    </div>
+                                                    <div class="cont_right" >
+                                                        <p><b>{{:#parent.parent.parent.data.user.name}}</b> {{:levelDesc}}</p>
+                                                    </div>
+                                               <div class="more-info">
+                                               <a href="http://timesofindia.indiatimes.com/abouttimesrewards.cms" class="more" target="_blank">Know more about Times Points</a>
+                                               </div>
+                                           </div>
+                                        </div>
+                                    </div>
+                               {{/if}}
+                            {{/for}}
+                            {{if user.badge.length > 3}}
+                                <div class="more-btn">
+                                    <div class="popup_badge">
+                                       <div class="heading-block"><h4>Badges Earned</h4></div>
+                                       <div class="content clearfix">
+                                           {{for user.badge}}
+                                                <div class="section" data-plugin="comment-user-badge" data-name="{{:name}}">
+                                                    <img data-src="{{:image}}" title="{{:name}}"  src="/photo/49258704.cms">
+                                                    <span class="name">{{:name}}</span>
+                                                    <span class="badgepoint">{{:count}}</span>
+                                                </div>
+                                            {{/for}}
+
+                                           <div class="more-info">
+                                           <a href="http://timesofindia.indiatimes.com/abouttimesrewards.cms" class="more" target="_blank">Know more about Times Points</a>
+                                           </div>
+                                       </div>
+                                    </div>
+                                </div>
+                             {{/if}}
+                        </div>
+                    {{/if}}
+                </div>
+                {{if parentusername}}
+                <span class="metadata"><i class="icon-reply"></i> {{:parentusername}}</span>
+                <span class="divider">-</span>
+                {{/if}}
+                {{if user.location}}
+                <span class="metadata">{{:user.location}}</span>
+                <span class="divider">-</span>
+                {{/if}}
+                <span title="{{:abstime}}" class="metadata" data-plugin="dynamic-uptime" data-time="{{:time}}">Just Now</span>
+                {{if user.username || user.id}}
+                <span data-plugin="comment-user-follow_wrapper" class="dont_show" >
+                <span class="metadata follow" title="Follow {{:user.name}} {{:user.follower_text}}" data-plugin="comment-user-follow" ><span class="divider">-</span>Follow</span>
+                </span>
+
+                {{/if}}
+            </div>
+            <p class="short_comment">{{if trimcom}}{{:trimcom}}{{else}}{{:comment.substr(0,500)}}{{/if}}
+            {{if comment.length > 500}}
+                ...<span class="detail_comment_link" data-action="more-response-length"> Read More</span>
+            {{/if}}</p>
+            {{if comment.length > 500}}
+                <p class="detail_comment" style="display:none;">{{:comment}}</p>
+            {{/if}}
+            {{if id!=-1}}
+            <span data-action="toggle_replies" data-togglereplies="show" title="Toggle Replies"></span>
+            <div class="footbar clearfix">
+				{{if opinion && opinion[0] && opinion[1]}}
+                    <span class="up cpointer" data-action="comment-agree" title="Up Vote"><span data-plugin="comment-agree-count">{{:opinion[0].count}}</span> <i class="icon-uparrow"></i></span>
+                    <span class="down cpointer" data-action="comment-disagree" title="Down Vote"><span data-plugin="comment-disagree-count">{{:opinion[1].count}}</span> <i class="icon-downarrow"></i></span>
+                    <span class="divider">\u2022</span>
+                {{/if}}
+                <span data-action="comment-reply" class="cpointer">Reply</span>
+				<span class="divider">\u2022</span>
+				<span class="divider">\u2022</span>
+                <span class="cpointer flag_comment">
+                    <span data-action="comment-offensive" title="Mark as offensive" >Flag</span>
+                    <div class="popup_badge" data-plugin="offensive_popup">
+                        <div class="heading-block"><h4>Find this comment offensive?</h4></div>
+                        <div class="content clearfix">
+                            <span class="success-message">Your reason has been submitted to the Admin.</span>
+                            <span class="info-txt">Choose your reason below and click on the Submit button. This will alert our moderators to take action</span>
+                            <h6>Reason for reporting:</h6>
+                            <ul class="reasons">
+                               <li><label><input type="radio" name="radio1" value="Foul language"/>Foul language</label></li>
+                               <li><label><input type="radio" name="radio1" value="Defamatory" />Defamatory</label></li>
+                               <li><label><input type="radio" name="radio1" value="Inciting hatred against a certain community"/>Inciting hatred against a certain community</label></li>
+                               <li><label><input type="radio" name="radio1" value="Out of context/Spam"/>Out of context/Spam</label></li>
+                               <li><label><input type="radio" name="radio1" value="Others" />Others</label></li>
+                               <li><textarea class="offensive_popup_reason" data-plugin="offensive_popup_reason" style="display:none" ></textarea></li>
+                            </ul>
+                            <div class="error" data-plugin="comment-offensive-error"></div>
+                            <div class="buttons"><span class="button submit" data-action="offensive_popup_submit">Report this !</span> <span class="button close_popup" data-action="offensive_popup_close">Close</span></div>
+                        </div>
+                    </div>   
+                </span>
+                <span data-action="comment-offensive-already" title="Already marked as offensive" class="hide">Flagged</span>
+            </div>
+            <div class="error clearfix" data-plugin="comment-error-outer"></div>
+            {{/if}}
+        </div>
+        
+		', 
+        <div class="badge_new" style="position:absolute;left:-148px;background-color:#FFF;z-index:2;">
+            <div style="background:url(/photo/12353738.cms) top center no-repeat; width:320px; height:54px;">
+                <div class="full_cont"><div class="left_badge">
+                    <div class="textone_badge">Wordsmith</div>
+                </div>
+                    <div class="right_badge">
+                        <div class="texttwo_badge">Level 1</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hoverblock_new">
+                <div class="cont_pad">
+                    <div class="full_cont">
+                        <div class="cont_left">
+                            <img style="cursor:auto" border="0" height="50" width="65" data-src="http://static.rewards.indiatimes.com/images/wordsmith.png" title="Wordsmith" src="/photo/11350517.cms"></div>
+                        <div class="cont_right"><div class="badgesyn_two">
+                            <p><b>monil shah</b>&nbsp;has posted 10 comments on Timesofindia.com to earn the <b>Wordsmith Level 1</b> badge.</p></div>
+                            <div class="badgesyn"></div></div><div></div></div><div class="divclear"></div>
+                    <div class="full_cont_one cont_mar"><div class="bordertop"><div class="leftthree_logged">
+                        <div onclick="moretimespoint();" class="linkone_badge">Know more about Times Points</div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background:url(/photo/12353749.cms) no-repeat; width:320px; height:14px;"></div>
+        </div>
+        
+		', 
+                Follow / Like us at 
+                ', @timesofindia', Buy From ',  Gadgets Now', Most',  Popular', Anna Hazare to Arvind Kejriwal: You have shattered my dream', BJP reels out documents to accuse UPA of favouring big corporates', Libyan plane hijack updates: All passengers released', 
+                
+                    
+                            ', .LAwtyy h1,h3,p {margin:0;padding:0;}.LAwtyy {width: 300px; height: auto;padding-bottom: 7px;margin-bottom: 16px;border-bottom: 1px solid #d6d6d6;}.LAwtyy > div a img {width: 100%; height: 100px;margin-bottom: 5px;}.LAwtyy > div a {display: block; color: #5c5c5c;text-decoration: none;cursor: pointer; width: 100%;margin: 0;}.LAwtyy > div h3 {text-decoration: none;width: 100%; height: 21px;color: #000000; max-height: 28px; overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 24px;font-family: proxima-semibold,roboto,arial,sans-serif;font-size: 13px !important; margin-bottom: 7px;}.LAwtyy > div p {display: -webkit-box;-webkit-line-clamp: 1; -webkit-box-orient: vertical; margin-top: 2px; padding: 4px 0 0; height: auto;max-height: 17px; overflow: hidden;font-weight: 500;font-family: Roboto, regular; font-size: 10px; color: #767574; width: 204px;}.LAwtyy > div > div a > div {height:61px;width: 100%;}.LAwtyy > div > div {background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/colombia-icon-gray.png);background-repeat: no-repeat; background-position: bottom right; background-size: 14px;position:relative;}.LAwtyy:hover > div > div {background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/colombia_red_small.png);}.LAwtyy > div > div > div {display:none;}.LAwtyy:hover > div > div > div {position: absolute; right: 0; top: 28px;display: block !important; width: 20px; height: 20px;}.LAwtyy > div > div > div a img { height: 16px;}',     ', Say bye to TV addiction, here\u2019s how', Ad: Magic Crate', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<div><a onclick="uNFuGKOg('{{href}}')"  rel="nofollow,noindex"><h3>{{title}}</h3><img src="{{imgsrc}}" rel="nofollow" ><p>Ad: {{brand}}</p></a><div><span name="adchoicehtml"/></div></div>#pd#';*/function uNFuGKOg(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_self');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){         if (window.frameElement !== null){document.body.style.margin="0px"; }};try{trev('http://timesofindia.indiatimes.com/toiyfn/notify.htm?imprId=32d521f7-6549-4bc6-9ac8-32b6c8535fd0-10ocs&id=129140&fpc=9858644d-801d-4141-94c8-8dacd1ce1d84-10onw~1','LAwtyy');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+                        
+                
+                ', 
+                
+                    
+                            ', .cFcXWcN h1,h3,p {margin:0;padding:0;}.cFcXWcN {width: 300px; height: auto;padding-bottom: 7px;margin-bottom: 16px;border-bottom: 1px solid #d6d6d6;}.cFcXWcN > div a img {width: 100%; height: 100px;margin-bottom: 5px;}.cFcXWcN > div a {display: block; color: #5c5c5c;text-decoration: none;cursor: pointer; width: 100%;margin: 0;}.cFcXWcN > div h3 {text-decoration: none;width: 100%; height: 21px;color: #000000; max-height: 28px; overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 24px;font-family: proxima-semibold,roboto,arial,sans-serif;font-size: 13px !important; margin-bottom: 7px;}.cFcXWcN > div p {display: -webkit-box;-webkit-line-clamp: 1; -webkit-box-orient: vertical; margin-top: 2px; padding: 4px 0 0; height: auto;max-height: 17px; overflow: hidden;font-weight: 500;font-family: Roboto, regular; font-size: 10px; color: #767574; width: 204px;}.cFcXWcN > div > div a > div {height:61px;width: 100%;}.cFcXWcN > div > div {background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/colombia-icon-gray.png);background-repeat: no-repeat; background-position: bottom right; background-size: 14px;position:relative;}.cFcXWcN:hover > div > div {background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/colombia_red_small.png);}.cFcXWcN > div > div > div {display:none;}.cFcXWcN:hover > div > div > div {position: absolute; right: 0; top: 28px;display: block !important; width: 20px; height: 20px;}.cFcXWcN > div > div > div a img { height: 16px;}',     ', Ratan Tata meets RSS Chief Mohan Bhagwat', Ad: Huff Post', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<div><a onclick="pnjZtFQA('{{href}}')"  rel="nofollow,noindex"><h3>{{title}}</h3><img src="{{imgsrc}}" rel="nofollow" ><p>Ad: {{brand}}</p></a><div><span name="adchoicehtml"/></div></div>#pd#';*/function pnjZtFQA(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_self');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){         if (window.frameElement !== null){document.body.style.margin="0px"; }};try{trev('http://timesofindia.indiatimes.com/toiyfn/notify.htm?imprId=0093616a-cac8-47a9-bb37-41c731dfd03a-10ocs&id=129141&fpc=9858644d-801d-4141-94c8-8dacd1ce1d84-10onw~1','cFcXWcN');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+                        
+                
+                ', No intention of govt to impose long-term capital gains tax: Arun Jaitley', Trying to calm the jangled nerves, finance minister Arun Jaitley went to great lengths clarifying that there is no intention of the government to impose tax on long-term capital gains from share transactions.', u"Modi govt adopting double standards with respect to monuments dedicated to nation's leaders: Mayawati", BSP supremo Mayawati said that Prime Minister Narendra Modi-led central government, is adopting double standards when it comes to building monuments in memory of saints and leaders of the country.', 
+                
+                    
+                            ', u".laODVpZredH h1,h3,p {margin:0;padding:0;}.laODVpZredH {width: 300px; height: auto;}.laODVpZredH > div a img {width: 100%; height: 100px;}.laODVpZredH > div a {display: block; color: #5c5c5c;text-decoration: none;cursor: pointer; width: 100%;margin-bottom: 15px; border-bottom: 1px solid #e5e5e5;}.laODVpZredH > div h3 {text-decoration: none;width: 100%; height: auto;color: #000000; max-height: 30px; overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 14px;font-family: 'Roboto',sans-serif;font-size: 13px !important;}.laODVpZredH > div p {display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; margin-top: 2px; font-size: 13px;padding: 4px 0 0;width: 100%; height: auto;max-height: 17px; overflow: hidden; font-family: proxima-semibold,roboto,arial,sans-serif; font-weight: bold; color: #999;  margin-bottom: 8px;line-height:14px;}.laODVpZredH h1 {width: 100%; height: auto;font-family: 'Roboto',sans-serif; font: bold 21px/28px proxima-semibold,roboto,arial,sans-serif;color: #000; margin-bottom: 15px; font-size: 20px !important;}.laODVpZredH h1 span { font-weight: 300; color: #666;}.laODVpZredH > div > a > div {height:61px;width: 100%;}@media (max-width:1920px){.laODVpZredH > div > a > div {height: Auto;}}", From',  around the Web',     ', Test Drive the all-new Mahindra e2oPlus!', Mahindra Electric', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="jrUdRAXU('{{href}}')"  rel="nofollow,noindex"><div><h3>{{title}}</h3><p>{{brand}}</p></div><img src="{{imgsrc}}" rel="nofollow" ></a>#pd#';*/function jrUdRAXU(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_self');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){         if (window.frameElement !== null){document.body.style.margin="0px"; }};try{trev('http://timesofindia.indiatimes.com/toiyfn/notify.htm?imprId=1ab8abce-e092-4739-9783-8d1ff83cf9bf-10ocs&id=195796&fpc=9858644d-801d-4141-94c8-8dacd1ce1d84-10onw~1','laODVpZredH');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+                        
+                
+                ', 
+                
+                    
+                            ', u".tdynDN h1,h3,p {margin:0;padding:0;}.tdynDN:hover{background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/rbc-red.png);}.tdynDN {width: 320px;height: auto;padding-bottom: 10px;background-image:url(http://timesofindia.indiatimes.com/toiitpic/commons/images/rbc-gray.png); background-repeat: no-repeat;background-position: 86% 100%;background-size: auto auto;padding-top:20px;margin-bottom: 10px;}.tdynDN > div a img {width: 80px; height: 60px; float: right;}.tdynDN > div a {display: block; color: #5c5c5c;text-decoration: none;cursor: pointer; width: 100%;margin-bottom: 15px; padding: 0 0 15px; border-bottom: 1px solid #e5e5e5;}.tdynDN > div h3 {text-decoration: none;padding: 5px 0 0; width: 100%; height: auto;color: #000000; max-height: 30px; overflow: hidden;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 14px;font-family: proxima-semibold,roboto,arial,sans-serif;font-size: 13px !important;}.tdynDN > div p {display: -webkit-box;-webkit-line-clamp: 1; -webkit-box-orient: vertical; margin-top: 2px; font-size: 13px; padding: 2px 0 0; width: 100%; height: 14px;color: #999;max-height: 14px; overflow: hidden;font-family: proxima-semibold,roboto,arial,sans-serif; font-weight: bold;line-height: 13px;}.tdynDN h1 {width: 280px; height: auto;margin-top: 10px; font-family:'Roboto',sans-serif;;font: bold 21px/28px proxima-semibold,roboto,arial,sans-serif; color: #000; margin-bottom: 15px;border-top: 5px solid #363636; padding: 10px 10px 0;font-size: 20px !important;}.tdynDN h1 span {font-weight: 300; color: #666;}.tdynDN > div > a > div {padding-right:87px;height:61px;padding-left: 3px;}.tdynDN > div {padding: 0px 10px 0;}.tdynDN > div a:last-child {border: 0;}@media (max-width:1920px) {.tdynDN > div > a > div {height: Auto;max-height: 61px;min-height: 61px;}}",     ', Get the all-new electric car in India', Mahindra Electric', Help save this student from blood disorder', Milaap', Get guaranteed academic success: HelloClass', HelloClass', More From',  The Times of India', Shahid Kapoor believes arranged marriages more successful', Times of India', Mira would like to debut in Bollywood with \u2018Padmavati\u2019', Times of India', A Monster Calls: Official international teaser trailer 1', Times of India', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="aqqxHxBX('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow" ><div><h3>{{title}}</h3><p>{{brand}}</p></div></a>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<a onclick="aqqxHxBX('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow"><div><h3>{{title}}</h3><p>{{brand}}</p></div></a>#og#';*/function aqqxHxBX(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_self');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){         if (window.frameElement !== null){document.body.style.margin="0px"; }};try{trev('http://timesofindia.indiatimes.com/toiyfn/notify.htm?imprId=e4522bdb-5d1e-4587-aa1b-fd6b4254a436-10ocs&id=129145&fpc=9858644d-801d-4141-94c8-8dacd1ce1d84-10onw~1','tdynDN');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+                        
+                
+                ', Navbharat',  Times', Featured Today In',  Travel', Weather in Cuttack', From',  our Global Partners',   
+        
+        var _page_config, _ibeat_config ={};
+        
+        function setPageConfig(config){
+            _page_config = {
+              host: 'timesofindia.indiatimes.com', 
+              key: 'ae9d3286a3123c65177df0aa6088b6e7',
+              domain: 'timesofindia.indiatimes.com',
+              channel: config._iBeat_channel,
+              action : config._iBeat_action,
+              articleId: config._iBeat_articleid,
+              contentType: 1,
+              location : 1,
+              url : config._iBeat_url,
+              cat : config._iBeat_cat,
+              subcat: config._iBeat_subcat,
+              contenttag: config._iBeat_tag,
+              catIds   : config._iBeat_catIds,
+              articledt: config._iBeat_articledt,
+              author: config._iBeat_author,
+              position: config._iBeat_position
+            };
+        }
+        function trim(str){return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');}
+        
+        
+             _ibeat_articleid = "52426758";
+             _ibeat_config[_ibeat_articleid] = {};
+             _ibeat_config[_ibeat_articleid]['_iBeat_articleid']=_ibeat_articleid;
+             _ibeat_config[_ibeat_articleid]['_iBeat_tag']='';
+             _ibeat_config[_ibeat_articleid]['_iBeat_catIds']='-2128958273,-2128932452,48264818';
+             _ibeat_config[_ibeat_articleid]['_iBeat_url'] = location.protocol+'//'+location.host +'/city/cuttack/Rose-Valley-investors-to-get-money-back/articleshow/52426758.cms';
+             _ibeat_config[_ibeat_articleid]['_iBeat_type']=1;
+             _ibeat_config[_ibeat_articleid]['_iBeat_action']=1;
+             _ibeat_config[_ibeat_articleid]['_iBeat_cat']= trim('City');
+             _ibeat_config[_ibeat_articleid]['_iBeat_subcat']=trim('Cuttack');
+             _ibeat_config[_ibeat_articleid]['_iBeat_articledt']="May 25, 2016, 07.29 AM IST";
+             _ibeat_config[_ibeat_articleid]['_iBeat_author']="Binita Jaiswal";
+             _ibeat_config[_ibeat_articleid]['_iBeat_channel'] ="TNN";
+             _ibeat_config[_ibeat_articleid]['_iBeat_position'] = " ";
+        
+          
+        
+            setPageConfig(_ibeat_config[_ibeat_articleid]);
+            _page_config['position'] = Get_Ckie('PlRef') ? Get_Ckie('PlRef') : '';
+            var iBeatTimer = setTimeout(function(){loadIbeatJS();},20000);
+            $(window).load(function(){loadIbeatJS();clearTimeout(iBeatTimer);});
+            
+            function loadIbeatJS(){
+                try{
+                    if(typeof iBeatPgTrend == 'undefined'){
+                        var ele = document.createElement('script');
+                        ele.setAttribute('language', 'javascript');
+                        ele.setAttribute('type', 'text/javascript');
+                        ele.setAttribute('src',"http://ibeat.indiatimes.com/js/pgtrackingV8.js");
+                        document.body.appendChild(ele);
+                    }
+                }catch(e){}
+            }
+            
+        ', 
+                var times_trend_subsec_info='cms-sec0=48264818&cms-sec1=-2128932452&cms-sec2=-2128958273';
+                function timeslog(msid){
+                    var rndtno = Math.random();
+            		 
+            		var img = new Image();
+            		img.src = "http://timeslog.indiatimes.com/timeslog.dll/topcnt?CHUR=timesofindia.indiatimes.com&randomno="+ rndtno;
+                    	
+                    var img1 = new Image();
+                    img1.src = 'http://cmstrendslog.indiatimes.com/cmslog.dll?cms-msid='+msid+'&'+times_trend_subsec_info+'&cmsurtype=viewed&randomno='+ rndtno;
+                }
+                timeslog(52426758);
+	        ', Chit fund scam: Panel to present interim report today', Villagers protest against poor quality road in Malkangiri', AP tourist bus overturns on NH-5, woman dies', Petitioners move High court over Sun Temple waterlogging', Odisha govt to auction assets of three Ponzi firms', Barabati likely to host test match', Foot overbridge at Link Rd hangs fire', New bone marrow tech at SCB soon', u"Puri temple's structural damage tops Facebook trending", 1', Rose Valley investors to get money back', 2', Chit fund scam: Panel to present interim report today', 3', Villagers protest against poor quality road in Malkangiri', 4', AP tourist bus overturns on NH-5, woman dies', 5', Petitioners move High court over Sun Temple waterlogging', 6', Odisha govt to auction assets of three Ponzi firms', 7', Barabati likely to host test match', 8', Foot overbridge at Link Rd hangs fire', 9', New bone marrow tech at SCB soon', 10', u"Puri temple's structural damage tops Facebook trending", About us', Privacy policy', Newsletter', Sitemap', Create Your Own Ad', Advertise with us', Feedback', TOI Mobile', Terms of Use and Grievance Redressal Policy', RSS', ePaper', Archives', Other Times Group news sites', The Economic Times',  | ', \u0907\u0915\u0928\u0949\u092e\u093f\u0915 \u091f\u093e\u0907\u092e\u094d\u0938',  | ', \u0a88\u0a95\u0acb\u0aa8\u0acb\u0aae\u0abf\u0a95 \u0a9f\u0abe\u0a88\u0aae\u0acd\u0ab8',  | ', Pune Mirror',  | ', Bangalore Mirror',  | ', Ahmedabad Mirror',  | ', ItsMyAscent',  | ', Education Times',  | ', Brand Capital',  | ', Mumbai Mirror',  | ', Times Now',  | ', Indiatimes',  | ', \u0928\u0935\u092d\u093e\u0930\u0924 \u091f\u093e\u0907\u092e\u094d\u0938',  | ', \u092e\u0939\u093e\u0930\u093e\u0937\u094d\u091f\u094d\u0930 \u091f\u093e\u0907\u092e\u094d\u0938',  | ', \u0cb5\u0cbf\u0c9c\u0caf \u0c95\u0cb0\u0ccd\u0ca8\u0cbe\u0c9f\u0c95',  | ', Go Green',  | ', Lifehacker India',  | ', Gizmodo India',  | ', Eisamay',  | ', IGN India',  | ', NavGujarat Samay',  | ', Tamil News',  | ', Telugu News',  | ', Miss Kyra',  | ', Hindi News',  | ', FILMIPOP Hindi', Living and entertainment', iDiva',  | ', Entertainment',  | ', Zoom',  | ', Luxpresso',  | ', Mobile Phones ',  | ', Online Songs',  | ', MensXP.com',  | ', Hotels',  | ', Travel Destinations',  | ', smartapp',  | ', Cricbuzz.com',  | ', Filmfare',  | ', Femina',  | ', Grazia',  | ', Filmipop',  | ', Bombay Times', Interest Network', itimes', Hot on the Web', Cricket News',  | ', Sunny Leone Bikini Pics',  | ', How to Get Pregnant',  | ', Latest News', Services', Book print ads',  | ', Online shopping',  | ', Matrimonial',  | ', Astrology',  | ', Jobs',  | ', Tech Community',  | ', Property',  | ', Buy car',  | ', Bikes in India',  | ', Deals',  | ', Free Classifieds',  | ', Used Cars',  | ', Restaurants in Delhi',  | ', Movie Show Timings',  | ', Remit to India',  | ', Listen Songs',  | ', TimesMobile',  | ', Real Estate Developers',  | ', Restaurant Deals in Delhi',  | ', Mobile Recharge',  | ', Bollywood News',  | ', Bank Exam App',  | ', iTimes Entertainment App',  | ', ETMoney Finance App', Trending Topics', Beauty Care',  | ', Recipes',  | ', Movie Reviews',  | ', Weather Today',  | ', Google Pixel Price in India',  | ', iPhone 7 Plus Review',  | ', Diwali Pooja 2016',  | ', Bigg Boss 10', FOLLOW US ON', Top Trends', Live: Modi Mann ki Baat', Currency Demonetisation', Fog in Delhi', Russian military aircraft missing', Christmas 2016', Bigg Boss 10', Narendra Modi', Dangal Review', Kareena Kapoor Baby', Copyright © 2016 Bennett, Coleman & Co. Ltd. All rights reserved. For reprint rights:', Times Syndication Service', <span class="temp_h">~district~</span><span style="background-position:~icon~;" class="icon"></span><span class="temp"><span class="wdC">~temp~&deg;C</span><span class="wdF">~tempF~&deg;F</span></span><span class="optionshome"><a id="wdCid" style="cursor: pointer; display: none;" onclick="$('.wdF').hide();$('.wdC').show();$('#wdCid').hide();$('#wdFid').show();">&deg;C</a><a id="wdFid" style="cursor: pointer;" onclick="$('.wdC').hide();$('.wdF').show();$('#wdFid').hide();$('#wdCid').show();">&deg;F</a></span><a class="arrow" target="_blank" href="weather.cms">&raquo;</a>', 
+                    var forecastObj = new Object();
+                    forecastObj.type = "weather";
+                    forecastObj.cityname = "";
+                ', `', u"
+    					require(['jquery','rodate','tiljs/cookie','pgtrack','navigation','breakingnews', 'tiljs/plugin/lazy','tiljs/load'],
+	                    function($,rodate,cookie, pgtrack, navigation,breakingnews,lazy,load) {
+                    	    window.isLoggedSso=cookie.get('MSCSAuth');
+                         	window.homeObj = new Object();
+                        	homeObj.breakingNewsPause=0;
+                        	
+                        	
+                    	   
+	                    });
+	                    ", 
+                    // Disabling canada pages link for Indian Geo
+                    try {
+				        function hideCanadaNavLinks(){
+                            $('#nav-world #48281453').hide();
+                            $('#mainnav li[secid="48281453"]').hide();
+                        }
+                        function disableWhenIndianGeo(){
+            	            if(typeof geolocation!=='undefined' && geolocation==1){hideCanadaNavLinks();}
+            	            else if (window.location.hostname.indexOf('toidev.indiatimes.com') < 0){ // to prevent error on dev env
+            	                $.ajax({url: "http://timesofindia.indiatimes.com/videos/geocode.cms", success: function(result){
+                                    if(result==1){hideCanadaNavLinks();}
+                                }});
+            	            }
+            	        }
+                        $(document).ready(function() {
+                	        disableWhenIndianGeo();
+                	    });
+                    }
+                    catch(e){}
+            	    // Ends - Disabling canada pages link for Indian Geo
+                ', 
+                var secname="";
+                var agename="";
+                secname='City';
+                agename='Binita Jaiswal';
+        		var _sf_async_config={uid:10538,domain:"timesofindia.indiatimes.com"};
+        		_sf_async_config.sections = secname;
+        		_sf_async_config.authors = agename;
+			       
+                //-- BEGIN Chartbeat CODE --
+                (function(){
+        		  function loadChartbeat() {
+        		    window._sf_endpt=(new Date()).getTime();
+        		    var e = document.createElement('script');
+        		    e.setAttribute('language', 'javascript');
+        		    e.setAttribute('type', 'text/javascript');
+        		    e.setAttribute('src',
+        		       (("https:" == document.location.protocol) ? "https://s3.amazonaws.com/" : "http://") +
+        		       "static.chartbeat.com/js/chartbeat.js");
+        		       try{document.body.appendChild(e);}catch(e){}
+        		  }
+        		  var oldonload = window.onload;
+        		  window.onload = (typeof window.onload != 'function') ?
+        		     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+        		})();
+        		//--END Chartbeat CODE --
+        		try{
+            		$( window ).load(function() {
+                      $.getScript( "http://dc8xl0ndzn2cb.cloudfront.net/js/indiatimescom/v0/keywee.min.js");
+                    });
+                }catch(e){}
+        	    ', <h4 class="ad_title"><a pg="RHS#AcrossWebVid#~pg-tag~" href="~url~" target="_blank">~name~</a></h4><div class="ad_brand">~brandtext~</div><a target="_blank" href="~url~" class="hid-vid-play ad_img_vid"><img class="lazy" data-src="~wideImg~" src="~wideImg~" pg="RHS#AcrossWebVid#~pg-tag~">
+            	~icon-ctn-vid~
+            </a>
+            ~ctn-vid-ad-container~
+        ', <div style="height:1px;"></div>
+        	
+        	
+            ~ctn-vid-ad-container~
+        ', <h4 class="ad_title"><a target="_blank" pg="new_mostPopular_native#~pos~" href="~url~" title="~name~">~name~</a></h4><a target="_blank" pg="new_mostPopular_native#~pos~" href="~url~" class="w_img"><img src="~sImg~" pg="new_mostPopular_native#~pos~"></a><span style="font-family: Roboto, regular; font-size: 10px; color: #767574; width: 204px;" class="metadata">
+        		Sponsored by ~brandtext~<i class="clmcup"></i></span>', <li><a target="_blank" pg="ctn_belowarticle_paid#~pos~" href="~url~">~name~</a><span class="columbia_meta">~brandtext~</span></li>', <li><a target="_blank" pg="ctn_belowarticle_organic#~pos~" href="~url~">~name~</a></li>', <li class="clearfix"><a class="w_img" title="~name~" href="~url~" pg="RHS#AcrossWeb#~pg-tag~"><img src="~sImg~" pg="RHS#AcrossWeb#~pg-tag~"><span pg="RHS#AcrossWeb#~pg-tag~" class="desc">~name~</span><span class="ad_brand">~brandtext~</span></a></li>', <li class="clearfix"><a class="w_img" title="~name~" href="~url~" pg="RHS#AcrossTOI#~pg-tag~"><img src="~sImg~" pg="RHS#AcrossTOI#~pg-tag~"><span pg="RHS#AcrossTOI#~pg-tag~" class="desc">~name~</span></a></li>', <li><a href="~url~"><img src="~sImg~"><span>~name~</span><i class="sponsor">~brandtext~</i></a></li>', <li class="clearfix"><a pg="ctn_belowarticle_2_paid#~pg-tag~" href="~url~" target="_blank" title="~name~" class="ad_img"><img pg="ctn_belowarticle_2_paid#~pg-tag~" data-src="~sImg~" src="~sImg~"><span class="ad_heading">~name~</span><span class="ad_brand">~brandtext~</span></a></li>', <li class="clearfix"><a pg="ctn_belowarticle_2_organic#~pg-tag~" href="~url~" target="_blank" title="~name~" class="ad_img"><img pg="ctn_belowarticle_2_organic#~pg-tag~" data-src="~sImg~" src="~sImg~"><span class="ad_heading">~name~</span></a></li>', 
+                    
+                        
+                                ', u"
+                                    var e_x = '129140-1 = 1, 129140-2 = 1, 129141-1 = 1, 129141-2 = 1, 195796-1 = 1, 129145-1 = 1, 129783-1 = 1, 129147-1 = 1';
+                                    if(window.canRun === undefined || window.canRun === false){
+                                        ga('send', 'event', 'e_srv', 'yes', 'e_srv', 1);
+                                    }
+                                ", 
+                            
+                    
+                ']

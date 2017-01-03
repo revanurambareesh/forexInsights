@@ -1,0 +1,1333 @@
+[
+', 
+
+', 
+', 
+
+    ', 
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1673640802960615',
+                xfbml: true,
+                version: 'v2.7'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+', 
+', 
+
+    function clearText(textboxid, msg) {
+
+        if (textboxid.value == msg) {
+            textboxid.value = "";
+            // textboxid.style.color ='#a4003f';
+
+        }
+    }
+
+    function resetText(textboxid, msg) {
+        var strtxtvalue = textboxid.value;
+        if (strtxtvalue == "" || strtxtvalue == null) {
+            textboxid.value = msg;
+            textboxid.style.color = '#9bc4de';
+        }
+
+    }
+
+    function clickBtn(e) {
+
+
+        if (window.event) // IE
+        {
+            if (e.keyCode == 13) {
+                if (validateSearch()) {
+                    window.location.href = '/search/index?cx=011746586142509549138:21qqdagopx0&q=' + document.getElementById('txtSearch').value ;
+                    document.getElementById('txtSearch').blur();
+                    return false;
+                }
+            }
+        }
+        else if (e.which) // Netscape/Firefox/Opera
+        {
+
+            if (e.which == 13) {
+                if (validateSearch()) {
+                    window.location.href = '/search/index?cx=011746586142509549138:21qqdagopx0&q=' + document.getElementById('txtSearch').value ;
+                    document.getElementById('txtSearch').blur();
+                    return false;
+                }
+            }
+        }
+    }
+
+
+    function key() {
+        if (validateSearch()) {
+            window.location.href = '/search/index?cx=011746586142509549138:21qqdagopx0&q=' + document.getElementById('txtSearch').value ;
+            return true;
+        }
+    }
+
+
+
+
+    function clickBtn1(e) {
+
+
+        if (window.event) // IE
+        {
+            if (e.keyCode == 13) {
+                if (validateSearch1()) {
+                    window.location.href = '/search/index?cx=011746586142509549138:21qqdagopx0&q=' + document.getElementById('txtSearch1').value ;
+                    document.getElementById('txtSearch1').blur();
+                    return false;
+                }
+            }
+        }
+        else if (e.which) // Netscape/Firefox/Opera
+        {
+
+            if (e.which == 13) {
+                if (validateSearch1()) {
+                    window.location.href = '/search/index?cx=011746586142509549138:21qqdagopx0&q=' + document.getElementById('txtSearch1').value ;
+                    document.getElementById('txtSearch1').blur();
+                    return false;
+                }
+            }
+        }
+    }
+
+
+    function key1() {
+        if (validateSearch1()) {
+            window.location.href = '/search/index?cx=011746586142509549138:21qqdagopx0&q=' + document.getElementById('txtSearch1').value;
+            return true;
+        }
+    }
+
+
+
+    function LTrim(value) {
+
+        var re = /\s*((\S+\s*)*)/;
+        return value.replace(re, "$1");
+
+    }
+    function RTrim(value) {
+
+        var re = /((\s*\S+)*)\s*/;
+        return value.replace(re, "$1");
+
+    }
+    function trim(value) {
+
+        return LTrim(RTrim(value));
+
+
+    }
+
+    function validateSearch() {
+        if (trim(document.getElementById('txtSearch').value) == "Search" || trim(document.getElementById('txtSearch').value) == "") {
+            alert("Please enter search keywords");
+            return false;
+        }
+        else {
+            var Is_validExp = "^(?=.*[~`^<>;:.])";
+            if (trim(document.getElementById('txtSearch').value).match(Is_validExp)) {
+                alert("Please enter valid characters. The following characters are not accepted ` ~ ^ < >");
+                return false;
+            }
+
+        }
+
+        return true;
+
+    }
+
+
+    function validateSearch1() {
+        if (trim(document.getElementById('txtSearch1').value) == "Search" || trim(document.getElementById('txtSearch1').value) == "") {
+            alert("Please enter search keywords");
+            return false;
+        }
+        else {
+            var Is_validExp = "^(?=.*[~`^<>;:.])";
+            if (trim(document.getElementById('txtSearch1').value).match(Is_validExp)) {
+                alert("Please enter valid characters. The following characters are not accepted ` ~ ^ < >");
+                return false;
+            }
+
+        }
+
+        return true;
+
+    }
+
+    function MM_swapImgRestore() { //v3.0
+        var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+    function MM_preloadImages() { //v3.0
+        var d = document; if (d.images) {
+            if (!d.MM_p) d.MM_p = new Array();
+            var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+                if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+        }
+    }
+
+    function MM_findObj(n, d) { //v4.01
+        var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+            d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+        }
+        if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+        for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document);
+        if (!x && d.getElementById) x = d.getElementById(n); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+        var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2) ; i += 3)
+            if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+
+    function restore(type) {
+        document.getElementById(type).style.visibility = "hidden";
+    }
+
+    function showSubMenu(type) {
+
+        document.getElementById(type).style.visibility = "visible";
+    }
+
+
+
+    function restoreli(type, li_id, spn_id) {
+        if (type != "") {
+            document.getElementById(type).style.visibility = "hidden";
+
+        }
+        document.getElementById(li_id).style.background = "none";
+        document.getElementById(spn_id).className = "";
+    }
+    function showSubMenuli(type, li_id, spn_id) {
+        if (type != "") {
+            document.getElementById(type).style.visibility = "visible";
+        }
+        document.getElementById(li_id).style.background = "url(/images/fotter_back_arrow.jpg) no-repeat scroll center top transparent";
+        document.getElementById(spn_id).className = "menu_active";
+    }
+
+
+    function ShowDivForOthers(objDIV, button) {
+        // alert(button.value);       
+        document.getElementById('sometextDiv').style.display = 'none';
+
+
+        if (button.value == 'FadeIn') {
+
+            document.getElementById('sometextDiv').style.display = 'block';
+            //$('#sometextDiv').fadeIn('slow');
+            button.value = 'FadeOut';
+
+        } else {
+            document.getElementById('sometextDiv').style.display = 'none';
+            button.value = 'FadeIn';
+        }
+
+
+
+    }
+', 
+
+', 
+    ', 
+        
+
+        ', 
+
+                ', 
+                    ', 
+            ', \u0939\u093f\u0928\u094d\u0926\u0940', 
+        ', 
+
+        ', 
+            ', 
+                ', 
+
+                    ', 
+                            ',  
+                    ', 
+                        ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                                    ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ',  ', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', The Tata group operates in more than      100 countries and markets across:', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Africa', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Asia', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Australia', 
+                                                        ', 
+                                                           ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Europe', 
+                                                        ', 
+                                                           ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Middle East & North Africa', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  North America', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  South America', 
+                                                        ', 
+                                                     
+                                                        ', 
+                                                            ',  ', 
+                                                            ',  ', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', WEBSITES', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Tata in Africa', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Tata           in China', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Tata in Europe', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Tata in North America', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ',  ', 
+                                                        ', 
+                                                    ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                        ', 
+                    ', 
+                    ', 
+                            ', 
+                    ', 
+                    ', 
+                         ', 
+                            ',  ', 
+                        ', 
+                            ',  ', 
+                        ', 
+                            ',  ', 
+                                             ', 
+                        ', 
+
+                            ', 
+                              ',           
+                              ', 
+                            ', 
+                        ', 
+                    ', 
+
+                    
+                    ', \u0939\u093f\u0928\u094d\u0926\u0940',  ', 
+                ', 
+            ', 
+
+                ', 
+
+            ', 
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                           
+                            
+                              
+
+',               ', 
+         ', 
+             var $tab;
+             jQuery(function ($) {
+                 //$("#pop").hide()
+                 //$("#carrer_popupbox").hide()
+                 $(document).delegate("a.close02", "click", function () {
+                     // $(this).parent().parent().removeClass('popup_open');
+                     $(this).parent().parent().removeClass('popup_open minimize_popup maximize_popup');
+
+                 });
+
+
+
+
+                 $.ajax({
+                     type: "POST",
+                     url: "/article/Add_Popup",
+                    //data: "{'title': '" + Tata Power Solar successfully commissions Phase II of solar power project for The Chennai Silks group; takes their total capacity to 7.2MW + "'}",
+                    data: "{'title': 'Tata Power Solar successfully commissions Phase II of solar power project for The Chennai Silks group; takes their total capacity to 7.2MW'}",
+                    //url: '/article/Add_writeus',
+                    //data: JSON.stringify(Personalmodel),
+                    contentType: "application/json;charset=utf-8",
+                    processData: true,
+                    success: function (data) {
+                        if (data.result != "false") {
+                            $(window).load(function () {
+
+                                var d = data.result;
+                                //alert(d);
+
+                                $tab = '<div id="carrer_popupbox"><a class="minimize01"></a><a class="maximize01"></a><h2>Read this yet?</h2>' + data.result + '</div>';
+                                $("#pop").html($tab);
+
+
+                                $("#pop").delay(100).addClass("popup_open");
+                                // $("#carrer_popupbox").delay(200).addClass("popup_open");
+
+
+
+                                $(".minimize01").click(function () {
+                                    $(this).parent().parent().removeClass("maximize_popup").addClass("minimize_popup");
+                                    $(".minimize01").hide();
+                                    $(".maximize01").show();
+                                });
+
+                                $(".maximize01").click(function () {
+                                    $(this).parent().parent().removeClass("minimize_popup").addClass("maximize_popup");
+                                    $(".minimize01").show();
+                                    $(".maximize01").hide();
+                                });
+                            });
+
+
+                        }
+                        else {
+                            $("#last, #pop").hide()
+                            $("#carrer_popupbox").hide()
+                            $("#pop").html('');
+
+                        }
+                    },
+                    error: function (data) {
+                        alert(data.result);
+
+                    }
+                });
+
+
+
+            })
+
+
+
+
+
+        ', 
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+
+
+', 
+', 
+', 
+', 
+', 
+
+',  Our businesses',  ',   ', /',  ',  Tata companies',  ',   ', /',  ',  Tata Power Solar Systems',  ',   ', /',  ',   ', Media releases', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+', 
+', 
+', 
+', 
+    ', 
+    ', September 25, 2014',  
+    ',   Tata Power Solar successfully commissions Phase II of solar power project for The Chennai Silks group; takes their total capacity to 7.2MW ', 
+     
+', Phase II adds 5.2 MW of capacity for The Chennai Silks  group', 
+', Bangalore, India: ', Tata Power Solar, India\u2019s largest integrated solar player, has  successfully executed five different solar power projects for The Chennai Silks  group, constituting a total of 5.2 MW solar power plant. Coupled with the 2 MW  solar plant commissioned last year by Tata Power Solar, the total installed  solar power capacity of the group comes to 7.2 MW.', 
+', These five different solar projects,  executed for different group companies of The Chennai Silks group, are located  in Kangeyam of Tirupur district in Tamil Nadu and achieved power generation in  12 weeks. The five group companies include: Naachas Wind Energy Pvt. Ltd. (1  MW), Space Textiles Pvt. Ltd. (1 MW), KTM Jewellery (P) Ltd. (1 MW), SCM,  International Impex (1.1 MW) and Sathy Silks Pvt. Ltd. (1.1 MW).', 
+', u"Power shortage is a major issue in Tamil  Nadu, with several manufacturing facilities in the region suffering from power  shortage and relying on expensive diesel generators. For The Chennai Silk's  group, venturing into solar power is a step towards making solar a mainstream source  of power generation.", 
+', \u201cWe installed these  solar plants for captive consumption of power, as well as to avail of the  accelerated depreciation benefits. The use of solar power in our retail  showrooms has helped us reduce our energy costs while also enabling us to  reduce our carbon emissions by 890 grams/kWh. Tata Power Solar\u2019s experience and  capability in swiftly executing solar power plants have been the primary  reasons to choose them, time and again.\u201d says Mr. N. K. Nandhagopal, MD, The  Chennai Silks group.', 
+', Tata Power Solar had engaged local  contractors for 45 days of field work, creating a range of job opportunities  for the region. Tata Power Solar continues to extend job opportunities for the  operations and maintenance of these captive power plants.', 
+', \u201cThis project exemplifies our ability to  execute complex and simultaneous solar projects, backed by our strong lineage  of quality performance and resource optimization. We take pride in our  association with The Chennai Silks group to execute seven solar power projects  for them in a period of two years.\u201d said Dr. Arul Shanmugasundram, EVP Projects  and CTO, Tata Power Solar.', 
+', These ground-mounted solar power plants  were commissioned in an area of 25 acres of land. In addition, small tracker  systems were installed at some of the plants. The plant is continually managed,  with a centralized monitoring system and an onsite operations team.', 
+
+
+
+', 
+
+', 
+
+
+
+', 
+ ', 
+
+', 
+
+', 
+
+', 
+
+', 
+
+', 
+   
+', 
+
+', 
+
+', var addthis_config = { "data_track_addressbar": false };', 
+
+', 
+
+', 
+    ', 
+    ',    ', About the company >',  ', 
+    ', 
+    ', Profile, operations, contact information, related links.', 
+    ', 
+    ', 
+
+ ', Media releases > ', Tata Power Solar rated tier I module manufacturer by BNEF', u"Tata Power Solar wins DnB - Everest Industries Infra Awards 2016 for commissioning the world's largest solar rooftop", 
+
+ ', Media reports > ', Tata Power Solar commissions 100 mw project in Andhra', Tata Power Solar bags MNRE award', 
+       
+ ', Interviews and stories > ', Power to the people', After 27 years of transforming the lives of millions of people in India, Tata Power Solar is aiming to give solar power an extra push in Europe', 
+
+ 
+
+ 
+
+
+    
+
+
+
+
+', contact', Tata Power Solar Systems', 
+78, Electronic City ', 
+Hosur Road ', 
+Bengaluru 560 100 ', 
+India', 
+', Phone:',  +91 (80) 6777 2000 ', 
+', Fax:',  +91 (80) 6777 2257 ', 
+', Email:',  ', Info.solar@tatapower.com', 
+', Website:',  ', www.tatapowersolar.com', 
+
+
+
+
+', 
+
+
+', 
+
+', 
+', 
+
+
+                ', 
+
+
+ 
+   
+ ', 
+   
+    ', 
+
+
+    ', 
+                ', 
+                    //jQuery(window).load(function () { jQuery("img").sti({ selector: "img", style: "box", fb_app: "551436438326481", sharer: "http://dbnetlogistics.com/dark_site/index.html", is_mobile: false, primary_menu: ["facebook", "twitter", "google", "linkedin", "pinterest"] }) })
+
+                    // jQuery(window).load(function () { jQuery("img").sti({ selector: ".max", style: "box", fb_app: "623399464505410", sharer: "http://49.248.149.195:8140/", is_mobile: false, primary_menu: ["facebook", "twitter", "google", "linkedin", "pinterest"] }) })
+
+                    $(document).ready(function () {
+
+                        // executes when HTML-Document is loaded and DOM is ready
+                        var imgSrc = $("img.shareimage").attr('src'); // image stored as variable
+
+                        if (imgSrc != null) {
+
+                            var source = "http://www.tata.com/" + imgSrc;
+                            $("meta[property='og\\:image']").attr('content', source); // assigns meta property
+
+                            $("meta[name='twitter\\:image']").attr("content", source);
+                        }
+                    });
+
+
+                        jQuery(window).load(function () {
+                     
+                            var href = jQuery(location).attr('href');
+                       
+                            var imgSrc = $("img.shareimage").attr('src'); // image stored as variable
+
+                            if (imgSrc != null) {
+
+                                var source = "http://www.tata.com/" + imgSrc;
+                                $('meta[property="og\\:image"]').attr('content', source); // assigns meta property
+
+                                $("meta[name='twitter\\:image']").attr("content", source);
+
+                                $("meta[itemprop='image']").attr("content", source);
+                                
+                            }
+
+                            jQuery("img").sti({ selector: ".shareimage ", fb_app: "1673640802960615", sharer: href, is_mobile: false, primary_menu: ["facebook", "twitter", "google","linkedin", "pinterest"] });// "linkedin"
+
+                        })
+
+                ', 
+
+
+     ', u"
+         animatedcollapse.addDiv('para1', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para2', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para3', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para4', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para5', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para6', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para7', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para8', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para9', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para10', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para11', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para12', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para13', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para14', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para15', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para16', 'fade=1,speed=300, hide=1')
+    ", 
+
+
+    
+    
+
+'][
+', 
+
+', 
+', 
+
+    ', 
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1673640802960615',
+                xfbml: true,
+                version: 'v2.7'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+', 
+', 
+
+    function clearText(textboxid, msg) {
+
+        if (textboxid.value == msg) {
+            textboxid.value = "";
+            // textboxid.style.color ='#a4003f';
+
+        }
+    }
+
+    function resetText(textboxid, msg) {
+        var strtxtvalue = textboxid.value;
+        if (strtxtvalue == "" || strtxtvalue == null) {
+            textboxid.value = msg;
+            textboxid.style.color = '#9bc4de';
+        }
+
+    }
+
+    function clickBtn(e) {
+
+
+        if (window.event) // IE
+        {
+            if (e.keyCode == 13) {
+                if (validateSearch()) {
+                    window.location.href = '/search/index?cx=011746586142509549138:21qqdagopx0&q=' + document.getElementById('txtSearch').value ;
+                    document.getElementById('txtSearch').blur();
+                    return false;
+                }
+            }
+        }
+        else if (e.which) // Netscape/Firefox/Opera
+        {
+
+            if (e.which == 13) {
+                if (validateSearch()) {
+                    window.location.href = '/search/index?cx=011746586142509549138:21qqdagopx0&q=' + document.getElementById('txtSearch').value ;
+                    document.getElementById('txtSearch').blur();
+                    return false;
+                }
+            }
+        }
+    }
+
+
+    function key() {
+        if (validateSearch()) {
+            window.location.href = '/search/index?cx=011746586142509549138:21qqdagopx0&q=' + document.getElementById('txtSearch').value ;
+            return true;
+        }
+    }
+
+
+
+
+    function clickBtn1(e) {
+
+
+        if (window.event) // IE
+        {
+            if (e.keyCode == 13) {
+                if (validateSearch1()) {
+                    window.location.href = '/search/index?cx=011746586142509549138:21qqdagopx0&q=' + document.getElementById('txtSearch1').value ;
+                    document.getElementById('txtSearch1').blur();
+                    return false;
+                }
+            }
+        }
+        else if (e.which) // Netscape/Firefox/Opera
+        {
+
+            if (e.which == 13) {
+                if (validateSearch1()) {
+                    window.location.href = '/search/index?cx=011746586142509549138:21qqdagopx0&q=' + document.getElementById('txtSearch1').value ;
+                    document.getElementById('txtSearch1').blur();
+                    return false;
+                }
+            }
+        }
+    }
+
+
+    function key1() {
+        if (validateSearch1()) {
+            window.location.href = '/search/index?cx=011746586142509549138:21qqdagopx0&q=' + document.getElementById('txtSearch1').value;
+            return true;
+        }
+    }
+
+
+
+    function LTrim(value) {
+
+        var re = /\s*((\S+\s*)*)/;
+        return value.replace(re, "$1");
+
+    }
+    function RTrim(value) {
+
+        var re = /((\s*\S+)*)\s*/;
+        return value.replace(re, "$1");
+
+    }
+    function trim(value) {
+
+        return LTrim(RTrim(value));
+
+
+    }
+
+    function validateSearch() {
+        if (trim(document.getElementById('txtSearch').value) == "Search" || trim(document.getElementById('txtSearch').value) == "") {
+            alert("Please enter search keywords");
+            return false;
+        }
+        else {
+            var Is_validExp = "^(?=.*[~`^<>;:.])";
+            if (trim(document.getElementById('txtSearch').value).match(Is_validExp)) {
+                alert("Please enter valid characters. The following characters are not accepted ` ~ ^ < >");
+                return false;
+            }
+
+        }
+
+        return true;
+
+    }
+
+
+    function validateSearch1() {
+        if (trim(document.getElementById('txtSearch1').value) == "Search" || trim(document.getElementById('txtSearch1').value) == "") {
+            alert("Please enter search keywords");
+            return false;
+        }
+        else {
+            var Is_validExp = "^(?=.*[~`^<>;:.])";
+            if (trim(document.getElementById('txtSearch1').value).match(Is_validExp)) {
+                alert("Please enter valid characters. The following characters are not accepted ` ~ ^ < >");
+                return false;
+            }
+
+        }
+
+        return true;
+
+    }
+
+    function MM_swapImgRestore() { //v3.0
+        var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+    function MM_preloadImages() { //v3.0
+        var d = document; if (d.images) {
+            if (!d.MM_p) d.MM_p = new Array();
+            var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+                if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+        }
+    }
+
+    function MM_findObj(n, d) { //v4.01
+        var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+            d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+        }
+        if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+        for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document);
+        if (!x && d.getElementById) x = d.getElementById(n); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+        var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2) ; i += 3)
+            if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+
+    function restore(type) {
+        document.getElementById(type).style.visibility = "hidden";
+    }
+
+    function showSubMenu(type) {
+
+        document.getElementById(type).style.visibility = "visible";
+    }
+
+
+
+    function restoreli(type, li_id, spn_id) {
+        if (type != "") {
+            document.getElementById(type).style.visibility = "hidden";
+
+        }
+        document.getElementById(li_id).style.background = "none";
+        document.getElementById(spn_id).className = "";
+    }
+    function showSubMenuli(type, li_id, spn_id) {
+        if (type != "") {
+            document.getElementById(type).style.visibility = "visible";
+        }
+        document.getElementById(li_id).style.background = "url(/images/fotter_back_arrow.jpg) no-repeat scroll center top transparent";
+        document.getElementById(spn_id).className = "menu_active";
+    }
+
+
+    function ShowDivForOthers(objDIV, button) {
+        // alert(button.value);       
+        document.getElementById('sometextDiv').style.display = 'none';
+
+
+        if (button.value == 'FadeIn') {
+
+            document.getElementById('sometextDiv').style.display = 'block';
+            //$('#sometextDiv').fadeIn('slow');
+            button.value = 'FadeOut';
+
+        } else {
+            document.getElementById('sometextDiv').style.display = 'none';
+            button.value = 'FadeIn';
+        }
+
+
+
+    }
+', 
+
+', 
+    ', 
+        
+
+        ', 
+
+                ', 
+                    ', 
+            ', \u0939\u093f\u0928\u094d\u0926\u0940', 
+        ', 
+
+        ', 
+            ', 
+                ', 
+
+                    ', 
+                            ',  
+                    ', 
+                        ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                                    ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ',  ', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', The Tata group operates in more than      100 countries and markets across:', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Africa', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Asia', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Australia', 
+                                                        ', 
+                                                           ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Europe', 
+                                                        ', 
+                                                           ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Middle East & North Africa', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  North America', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  South America', 
+                                                        ', 
+                                                     
+                                                        ', 
+                                                            ',  ', 
+                                                            ',  ', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', WEBSITES', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Tata in Africa', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Tata           in China', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Tata in Europe', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ', 
+                                                                ',  Tata in North America', 
+                                                        ', 
+                                                        ', 
+                                                            ',  ', 
+                                                            ',  ', 
+                                                        ', 
+                                                    ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                        ', 
+                    ', 
+                    ', 
+                            ', 
+                    ', 
+                    ', 
+                         ', 
+                            ',  ', 
+                        ', 
+                            ',  ', 
+                        ', 
+                            ',  ', 
+                                             ', 
+                        ', 
+
+                            ', 
+                              ',           
+                              ', 
+                            ', 
+                        ', 
+                    ', 
+
+                    
+                    ', \u0939\u093f\u0928\u094d\u0926\u0940',  ', 
+                ', 
+            ', 
+
+                ', 
+
+            ', 
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                           
+                            
+                              
+
+',               ', 
+         ', 
+             var $tab;
+             jQuery(function ($) {
+                 //$("#pop").hide()
+                 //$("#carrer_popupbox").hide()
+                 $(document).delegate("a.close02", "click", function () {
+                     // $(this).parent().parent().removeClass('popup_open');
+                     $(this).parent().parent().removeClass('popup_open minimize_popup maximize_popup');
+
+                 });
+
+
+
+
+                 $.ajax({
+                     type: "POST",
+                     url: "/article/Add_Popup",
+                    //data: "{'title': '" + Tata Power Solar successfully commissions Phase II of solar power project for The Chennai Silks group; takes their total capacity to 7.2MW + "'}",
+                    data: "{'title': 'Tata Power Solar successfully commissions Phase II of solar power project for The Chennai Silks group; takes their total capacity to 7.2MW'}",
+                    //url: '/article/Add_writeus',
+                    //data: JSON.stringify(Personalmodel),
+                    contentType: "application/json;charset=utf-8",
+                    processData: true,
+                    success: function (data) {
+                        if (data.result != "false") {
+                            $(window).load(function () {
+
+                                var d = data.result;
+                                //alert(d);
+
+                                $tab = '<div id="carrer_popupbox"><a class="minimize01"></a><a class="maximize01"></a><h2>Read this yet?</h2>' + data.result + '</div>';
+                                $("#pop").html($tab);
+
+
+                                $("#pop").delay(100).addClass("popup_open");
+                                // $("#carrer_popupbox").delay(200).addClass("popup_open");
+
+
+
+                                $(".minimize01").click(function () {
+                                    $(this).parent().parent().removeClass("maximize_popup").addClass("minimize_popup");
+                                    $(".minimize01").hide();
+                                    $(".maximize01").show();
+                                });
+
+                                $(".maximize01").click(function () {
+                                    $(this).parent().parent().removeClass("minimize_popup").addClass("maximize_popup");
+                                    $(".minimize01").show();
+                                    $(".maximize01").hide();
+                                });
+                            });
+
+
+                        }
+                        else {
+                            $("#last, #pop").hide()
+                            $("#carrer_popupbox").hide()
+                            $("#pop").html('');
+
+                        }
+                    },
+                    error: function (data) {
+                        alert(data.result);
+
+                    }
+                });
+
+
+
+            })
+
+
+
+
+
+        ', 
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+
+
+', 
+', 
+', 
+', 
+', 
+
+',  Our businesses',  ',   ', /',  ',  Tata companies',  ',   ', /',  ',  Tata Power Solar Systems',  ',   ', /',  ',   ', Media releases', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+', 
+', 
+', 
+', 
+    ', 
+    ', September 25, 2014',  
+    ',   Tata Power Solar successfully commissions Phase II of solar power project for The Chennai Silks group; takes their total capacity to 7.2MW ', 
+     
+', Phase II adds 5.2 MW of capacity for The Chennai Silks  group', 
+', Bangalore, India: ', Tata Power Solar, India\u2019s largest integrated solar player, has  successfully executed five different solar power projects for The Chennai Silks  group, constituting a total of 5.2 MW solar power plant. Coupled with the 2 MW  solar plant commissioned last year by Tata Power Solar, the total installed  solar power capacity of the group comes to 7.2 MW.', 
+', These five different solar projects,  executed for different group companies of The Chennai Silks group, are located  in Kangeyam of Tirupur district in Tamil Nadu and achieved power generation in  12 weeks. The five group companies include: Naachas Wind Energy Pvt. Ltd. (1  MW), Space Textiles Pvt. Ltd. (1 MW), KTM Jewellery (P) Ltd. (1 MW), SCM,  International Impex (1.1 MW) and Sathy Silks Pvt. Ltd. (1.1 MW).', 
+', u"Power shortage is a major issue in Tamil  Nadu, with several manufacturing facilities in the region suffering from power  shortage and relying on expensive diesel generators. For The Chennai Silk's  group, venturing into solar power is a step towards making solar a mainstream source  of power generation.", 
+', \u201cWe installed these  solar plants for captive consumption of power, as well as to avail of the  accelerated depreciation benefits. The use of solar power in our retail  showrooms has helped us reduce our energy costs while also enabling us to  reduce our carbon emissions by 890 grams/kWh. Tata Power Solar\u2019s experience and  capability in swiftly executing solar power plants have been the primary  reasons to choose them, time and again.\u201d says Mr. N. K. Nandhagopal, MD, The  Chennai Silks group.', 
+', Tata Power Solar had engaged local  contractors for 45 days of field work, creating a range of job opportunities  for the region. Tata Power Solar continues to extend job opportunities for the  operations and maintenance of these captive power plants.', 
+', \u201cThis project exemplifies our ability to  execute complex and simultaneous solar projects, backed by our strong lineage  of quality performance and resource optimization. We take pride in our  association with The Chennai Silks group to execute seven solar power projects  for them in a period of two years.\u201d said Dr. Arul Shanmugasundram, EVP Projects  and CTO, Tata Power Solar.', 
+', These ground-mounted solar power plants  were commissioned in an area of 25 acres of land. In addition, small tracker  systems were installed at some of the plants. The plant is continually managed,  with a centralized monitoring system and an onsite operations team.', 
+
+
+
+', 
+
+', 
+
+
+
+', 
+ ', 
+
+', 
+
+', 
+
+', 
+
+', 
+
+', 
+   
+', 
+
+', 
+
+', var addthis_config = { "data_track_addressbar": false };', 
+
+', 
+
+', 
+    ', 
+    ',    ', About the company >',  ', 
+    ', 
+    ', Profile, operations, contact information, related links.', 
+    ', 
+    ', 
+
+ ', Media releases > ', Tata Power Solar rated tier I module manufacturer by BNEF', u"Tata Power Solar wins DnB - Everest Industries Infra Awards 2016 for commissioning the world's largest solar rooftop", 
+
+ ', Media reports > ', Tata Power Solar commissions 100 mw project in Andhra', Tata Power Solar bags MNRE award', 
+       
+ ', Interviews and stories > ', Power to the people', After 27 years of transforming the lives of millions of people in India, Tata Power Solar is aiming to give solar power an extra push in Europe', 
+
+ 
+
+ 
+
+
+    
+
+
+
+
+', contact', Tata Power Solar Systems', 
+78, Electronic City ', 
+Hosur Road ', 
+Bengaluru 560 100 ', 
+India', 
+', Phone:',  +91 (80) 6777 2000 ', 
+', Fax:',  +91 (80) 6777 2257 ', 
+', Email:',  ', Info.solar@tatapower.com', 
+', Website:',  ', www.tatapowersolar.com', 
+
+
+
+
+', 
+
+
+', 
+
+', 
+', 
+
+
+                ', 
+
+
+ 
+   
+ ', 
+   
+    ', 
+
+
+    ', 
+                ', 
+                    //jQuery(window).load(function () { jQuery("img").sti({ selector: "img", style: "box", fb_app: "551436438326481", sharer: "http://dbnetlogistics.com/dark_site/index.html", is_mobile: false, primary_menu: ["facebook", "twitter", "google", "linkedin", "pinterest"] }) })
+
+                    // jQuery(window).load(function () { jQuery("img").sti({ selector: ".max", style: "box", fb_app: "623399464505410", sharer: "http://49.248.149.195:8140/", is_mobile: false, primary_menu: ["facebook", "twitter", "google", "linkedin", "pinterest"] }) })
+
+                    $(document).ready(function () {
+
+                        // executes when HTML-Document is loaded and DOM is ready
+                        var imgSrc = $("img.shareimage").attr('src'); // image stored as variable
+
+                        if (imgSrc != null) {
+
+                            var source = "http://www.tata.com/" + imgSrc;
+                            $("meta[property='og\\:image']").attr('content', source); // assigns meta property
+
+                            $("meta[name='twitter\\:image']").attr("content", source);
+                        }
+                    });
+
+
+                        jQuery(window).load(function () {
+                     
+                            var href = jQuery(location).attr('href');
+                       
+                            var imgSrc = $("img.shareimage").attr('src'); // image stored as variable
+
+                            if (imgSrc != null) {
+
+                                var source = "http://www.tata.com/" + imgSrc;
+                                $('meta[property="og\\:image"]').attr('content', source); // assigns meta property
+
+                                $("meta[name='twitter\\:image']").attr("content", source);
+
+                                $("meta[itemprop='image']").attr("content", source);
+                                
+                            }
+
+                            jQuery("img").sti({ selector: ".shareimage ", fb_app: "1673640802960615", sharer: href, is_mobile: false, primary_menu: ["facebook", "twitter", "google","linkedin", "pinterest"] });// "linkedin"
+
+                        })
+
+                ', 
+
+
+     ', u"
+         animatedcollapse.addDiv('para1', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para2', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para3', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para4', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para5', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para6', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para7', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para8', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para9', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para10', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para11', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para12', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para13', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para14', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para15', 'fade=1,speed=300, hide=1')
+         animatedcollapse.addDiv('para16', 'fade=1,speed=300, hide=1')
+    ", 
+
+
+    
+    
+
+']

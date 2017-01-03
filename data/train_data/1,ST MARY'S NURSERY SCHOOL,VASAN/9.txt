@@ -1,0 +1,8477 @@
+[
+
+    
+
+    ', 
+         
+    ', 
+
+    
+            ', 
+                 
+            ', 
+    
+            ', 
+                 
+            ', 
+    
+
+
+    
+
+    
+
+    
+    ', Skip to Content', 
+
+    
+    ', 
+
+        
+
+
+        ', 
+            ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+
+                         
+
+                        ', 
+
+                         
+
+                        ', 
+
+                    ', 
+                ', 
+
+                    
+                    ', 
+                        ', 
+                              
+                            ', 
+                            ', All locations', 
+                             
+                            ', 
+                        ', 
+                    ', 
+
+                    
+                    ', 
+                        ', 
+                        ', 
+                    ', 
+
+
+            ', 
+        ', 
+
+
+        ', 
+            ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                          
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                        ', 
+                              
+                            ', 
+                            ', Change in all locations', 
+                             
+                            ', 
+                        ', 
+                ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+
+
+    ', 
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+
+', 
+
+', 
+', 
+
+
+
+/* MOVED FUNCTION TO BOTTOM */
+function addHtmlAttribute(element, attributeName, attributeValue)
+{
+    var tempVar = "";
+    if (element.hasAttribute(attributeName) == true)
+    {
+       tempVar = element.getAttribute(attributeName);
+    }
+    element.setAttribute(attributeName, attributeValue + tempVar);
+}
+
+    var menuWidth = 200;
+    var menuBarWidth = 600;
+    var ajaxRequestEntid = "";
+    var globalMenuItem;
+    var itemDescrArray = new Array();
+    var itemNameArray = new Array();
+    var itemTypeArray = new Array();
+    var itemUrlArray = new Array();
+    var itemTargetArray = new Array();
+    var itemIconClassArray = new Array();
+    var itemHasItemsArray = new Array();
+    var urlsPerEntidArray = new Array();
+    var descrsPerEntidArray = new Array();
+    var overflowAdjustedDivsArray = new Array();
+    var menuNamesArray = new Array();
+    var navLinkClicked = false;
+    var ua = navigator.userAgent;
+    var isMSIE = ua.indexOf ('MSIE') != -1;
+    var nbIsIE9 = ua.indexOf ('MSIE 9') != -1;
+    var isFirefox = ua.indexOf ('Firefox') != -1;
+    var isMacFirefox = (ua.indexOf ('Macintosh') != -1) && (isFirefox);
+    var nbIsChrome = ua.indexOf ('Chrome') != -1;
+    var previousEntid = "";
+    var previousTime = new Date();
+    var timeOfPageLoad = new Date();
+    var overrideMenuHiding = false;
+    var nbGlobalTopBorderStyle = "";
+    var nbIsWorldUser = false;
+    var nbShowAjaxErrorsToWorldUsers = false;
+    var nbFolderGroupTypeString = "Folder";
+    var nbWebPageGroupTypeString = "Web Page";
+    var nbHomeLinkId = "root-x977006562666226850--sep--St__Mary_of_the_Assumption_ElementaryhomeLink";
+    var nbBreadcrumbStripDropDownMenuFetchDelayMs = 450;
+    var nbHomeAndBreadcrumbDropDownSubmenuFetchDelayMs = 50;
+    var homeLinkElem = document.getElementById('edlHomeLink');
+    if (  (homeLinkElem != null) && (homeLinkElem != undefined)  )
+    {
+        homeLinkElem.id = "root-x977006562666226850--sep--St__Mary_of_the_Assumption_ElementaryhomeLink";
+        homeLinkElem.className = "breadcrumbLink";
+    }
+    
+    var onloadFnName = "nbnNavigationBarOnload";
+    
+    var pageBody = document.body;
+    var func = onloadFnName + "('false')";
+    
+    if (pageBody.attachEvent!=undefined) // attachEvent is a deprecated IE method
+    {
+        pageBody.onload = appendToFunction(pageBody.onload, func);
+    } else {
+        addHtmlAttribute(pageBody, "onload", func +";");
+    }
+
+function appendToFunction(func, str)
+{
+    var nfs = "";
+    if (func != null){
+        var ofs = func.toString();
+        var fcb = ofs.indexOf("{");
+        var lcb = ofs.indexOf("}",fcb+1);
+        var oss = ofs.substring(fcb + 1, lcb);
+        //alert('h3=' + ofs + '||||\n' + oss);
+        nfs = nbStripLeadingSemicolons(oss);
+    }
+	var s = nbStripLeadingSemicolons(nfs + ";" + str);
+    var f = new Function(s);
+    return f;
+}
+function nbStripLeadingSemicolons(s){
+	while (s.substr(0,1) == ';' && s.length>1) {
+    	s = s.substr(1);
+    }
+	return s;
+}
+', 
+
+
+        ', 
+
+    ', 
+
+
+        ', 
+            ', 
+                
+
+                ', 
+
+                    ', 
+
+                    
+                    
+
+
+
+
+
+
+
+
+', 
+', 
+<!--
+
+    var CLICK_OK_BUTTON_DURATION = 60;
+    var CONFIRM_MSG_SECS = 1200 - CLICK_OK_BUTTON_DURATION - 30;
+    var secsTilMsg = CONFIRM_MSG_SECS;
+    function openInfoPopupWindowIfNeeded()
+    {
+        
+
+        return false;
+    }
+  
+    var HAS_DEFAULT_ENTER_KEY  =  false;
+    var DEFAULT_ENTER_KEY_NAME = "";
+    var HAS_PAGE_VALIDATION    =  false;
+    var PAGE_VALIDATION        = "()";
+
+
+
+    function adjustIFrameSize (iframeWindow) {
+
+      if (iframeWindow.document.height) {
+        var iframeElement = parent.document.getElementById (iframeWindow.name);
+        iframeElement.style.height = iframeWindow.document.height + 'px';
+
+        iframeElement.style.width = iframeWindow.document.width + 'px';
+      }
+      else if (document.all) {
+        var iframeElement = parent.document.all[iframeWindow.name];
+        if (iframeWindow.document.compatMode &&
+            iframeWindow.document.compatMode != 'BackCompat')
+        {
+          iframeElement.style.height =
+            iframeWindow.document.documentElement.scrollHeight + 5 + 'px';
+
+          iframeElement.style.width =
+            iframeWindow.document.documentElement.scrollWidth + 5 + 'px';
+        }
+        else {
+          iframeElement.style.height =
+            iframeWindow.document.body.scrollHeight + 5 + 'px';
+          iframeElement.style.width =
+            iframeWindow.document.body.scrollWidth + 5 + 'px';
+        }
+      }
+    }
+
+    
+    function checkStale()
+    {
+        
+        if (document.cookie.search(/pgt=c1483450817263t/i) == null)
+        {
+            document.location.reload();
+        }
+    }
+//-->
+', 
+', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+
+
+
+', 
+
+', 
+ ', 
+', 
+
+', 
+ ', 
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', 
+
+
+', 
+
+
+    $(function(){
+
+    
+
+        hcOnDocumentReady();
+        
+    });//document ready
+
+
+
+
+
+function hcLogin()
+{
+    aefhLogin(false);
+}
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+    ', 
+    ', 
+    ', 
+  ', 
+', 
+
+
+
+', 
+
+', 
+    hcMyEdlineXmlDataJQueryObj = $("#edlMenuXmlData");
+
+    
+        hcMyEdlineBackCompatXmlDataJQueryObj = hcMyEdlineXmlDataJQueryObj;
+    
+
+', 
+
+
+
+
+
+
+
+
+', 
+
+
+    function translateMenuOver(pEvent)
+    {
+        overrideMenuHiding = true;
+        showTranslateMenu(pEvent);
+    }
+
+
+    function translateMenuOut(pEvent)
+    {
+    }
+
+
+    function showTranslateMenu(pEvent)
+    {
+      // Hide the navbar menus if they are open:
+      hdrHideAllDropDownMenus();
+
+      var linkElem = document.getElementById("edlLangLink");
+      var linkElemOffset = $("#edlLangLink").offset();
+      var linkLeftEdge = linkElemOffset.left;
+      var linkBottomEdge = linkElemOffset.top + linkElem.offsetHeight;
+
+      translateMenu.moveTo(linkLeftEdge, linkBottomEdge + 1);
+      translateMenu.show();
+    }
+
+    function switchLang(lang)
+    {
+        if (translationDisabledMessage())
+        {
+            return;
+        }
+
+        submitEvent('language', 'TCNK=headerComponent;language='+lang);
+    }
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Choose How To View This Page', 
+                      ', 
+                        ', 
+                          ', Standard View', 
+                          ', List View', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Want to translate this page?', 
+                      ', 
+                        ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Share This Page', 
+                      ', 
+                        ', 
+                          ', 
+                          ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', 
+                        ', Search', 
+                        ', 
+                          ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                              ', 
+                              ', 
+                                ', 
+                                  ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                              ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', HELP', 
+                  ', 
+                  ', 
+                  ', 
+                    ',  ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', SIGN IN', 
+                  ', 
+                  ', 
+                ', 
+                ', 
+              ', 
+            ', 
+
+
+
+
+
+
+
+
+
+
+  ', 
+    ', 
+    ', 
+  ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+function initForms()
+{
+	var frm = window.document.authenticationEntryFormForHeader;
+	frm.kclq.value = "";
+	frm.ajaxSupported.value = isAjaxSupported();
+}
+
+
+
+function debounceEnterKey(frm, eventNm)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function debounceEnterKeyToEntid(frm, eventNm, entid)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.targetEntid.value = entid;
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function handleSubmitOnEnter(e)
+{
+    
+    if (window.ghKeyPressHandler != null)
+    {
+        if ( typeof(ghKeyPressHandler == "function") )
+        {
+            ghKeyPressHandler(e);
+        }
+    }
+    
+    var keyPressed = '';
+
+    var isMSIE = navigator.userAgent.indexOf('MSIE') != -1;
+
+    if (isMSIE)
+        keyPressed = String.fromCharCode(window.event.keyCode);
+    else
+        keyPressed = String.fromCharCode(e.which);
+
+    if (keyPressed == "\r" || keyPressed == "\n")
+    {
+        
+        var authenticationFormToUse = null;
+
+        if (document.authenticationEntryFormForHeader && !document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryFormForHeader;
+        }
+        else if (!document.authenticationEntryFormForHeader && document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryForm;
+        }
+
+        if (authenticationFormToUse == null)
+        {
+            var headerFieldsFilledIn = 0;
+            if (document.authenticationEntryFormForHeader)
+            {
+                if (typeof(document.authenticationEntryFormForHeader.screenName) != "undefined"
+                    && document.authenticationEntryFormForHeader.screenName.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryFormForHeader.kclq) != "undefined"
+                    && document.authenticationEntryFormForHeader.kclq.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+            }
+
+            var bodyFieldsFilledIn = 0;
+            if (document.authenticationEntryForm)
+            {
+                if (typeof(document.authenticationEntryForm.screenName) != "undefined"
+                    && document.authenticationEntryForm.screenName.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryForm.kclq) != "undefined"
+                    && document.authenticationEntryForm.kclq.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+            }
+
+            if (headerFieldsFilledIn > bodyFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryFormForHeader;
+            }
+
+            if (bodyFieldsFilledIn > headerFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryForm;
+            }
+        }
+
+        // If no form or a search is being performed
+        if ( authenticationFormToUse == null || (typeof searchCtlr !== "undefined" && searchCtlr && document.forms["hcSearchForm"].token.value != '') )
+        {
+            window.document.onkeypress = doNothing;
+        }
+        else
+        {
+            if (authenticationFormToUse.kclq.value == "")
+            {   
+                authenticationFormToUse.kclq.focus();
+            }
+            else
+            {
+                authenticationFormToUse.submitButton.click();
+    
+                window.document.onkeypress = doNothing;
+            }
+        }
+
+
+        return false;
+    }
+
+    return true;
+}
+
+
+    if (window.document.captureEvents != null){
+        window.document.captureEvents(Event.KEYPRESS);
+    }
+    window.document.onkeypress = handleSubmitOnEnter;
+
+
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+
+function aefhCancelLogin()
+{
+    var elem = document.getElementById('edlHeaderControlsLoginPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        aefhRestoreBreadcrumbBorder();
+        elem.style.display = "none";
+    }
+}
+
+
+function aefhSaveAndClearBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        nbGlobalTopBorderStyle = elem.style.borderTop;
+        elem.style.borderTop = "";
+    }
+}
+
+
+function aefhRestoreBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        elem.style.borderTop = nbGlobalTopBorderStyle;
+    }
+}
+
+
+<!--
+function checkBrowserTime()
+{
+    var edlineDateString       = "Tuesday, January 3, 2017 7:40AM CST";
+    var edlineTimeInMillis     = 1483450817411;
+    var browserTimeInMillis    = (new Date()).getTime();
+    var timeDifferenceInMillis = (edlineTimeInMillis  - browserTimeInMillis);
+    var timeDifferenceInDays   = timeDifferenceInMillis / 86400000;
+
+    if ((timeDifferenceInDays < -2) || (timeDifferenceInDays > 2))
+    {
+        alert("Your computer clock reads " + (new Date()).toLocaleString() + " \r\nwhich is off by more than 24 hours. Please correct your computer clock.");
+
+    }
+}
+
+
+checkBrowserTime();
+
+//-->
+', 
+
+
+', 
+        ',    
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+
+    ', 
+
+        ', 
+            ', 
+                ', 
+                  ', Screen Name:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                  
+            ', 
+            ', 
+                ', 
+                    ', Click here if you forgot your screen name or password', 
+                ', 
+            ', 
+        ', 
+        
+        ', 
+            ', 
+                ', 
+                  ', Password:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+
+            ', 
+                ',     
+            ', 
+
+            ', 
+                  
+            ', 
+
+            ', 
+                ', 
+                    ', Click here to Sign Up', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+        ', 
+
+        
+', 
+
+
+
+', 
+window.document.cookie="bpcc=tu";
+
+  var frm = window.document.authenticationEntryFormForHeader;
+  frm.bscv.value = window.document.cookie;
+  frm.bscf.value = (window.document.cookie.indexOf("bpcc=tu") >= 0)
+    ? "1" : "0";
+
+
+
+
+try
+{
+  
+  if (frm.screenName.offsetWidth > 0)
+  {
+	  frm.screenName.focus();
+      frm.screenName.select();
+  }
+}
+catch(e)
+{
+
+}                                             
+', 
+
+
+', 
+
+
+
+
+
+', 
+
+
+    
+        
+            
+        
+
+        
+
+', 
+
+', 
+
+    
+
+    if (typeof suTrimLeadingTrailingSpace != "undefined")
+    {
+        var headerAreaQuery = $("#edlHeaderArea");
+
+        if (suTrimLeadingTrailingSpace(headerAreaQuery.html() ).length == 0)
+        {
+            headerAreaQuery.hide();//css("display","none");
+        }
+    }
+
+', 
+
+
+
+
+
+
+
+', 
+    function translationDisabledMessage()
+    {
+
+        return false;
+
+    }
+
+
+
+', 
+
+
+                    
+
+                        ', 
+                            ', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x0D8F064C289A5AB4/4":{"renderer":"image","mimeType":"image/png"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Top Name', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc977006568331172532";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "977006568331172532",
+            "977006568331172532",
+            "iFrame_edlElement_977006568331172532_document",
+            'iFrame_edlElement_977006568331172532_document',
+            '*',
+            'edlThemeHeaderZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            0,
+            'transparent',
+            false,
+            true,
+            false,
+            false,
+            '932',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    $(document).ready(function() {
+        ghPrepNavMenu("globalTopNavMenu", false,
+                "/images/icons/sets/None/");
+    });
+
+
+    
+
+', 
+
+
+
+
+', 
+
+    
+
+
+
+
+    ', Global Main Navigation', 
+    
+    
+
+    
+
+    ', 
+
+        ', 
+        ', 
+          ', 
+              ', 
+', Home', 
+', |', 
+', About Us', 
+', |', 
+', Admissions', 
+', |', 
+', School Info', 
+', |', 
+', Activities', 
+', |', 
+', Classes', 
+', |', 
+', Calendar', 
+', |', 
+', News', 
+', |', 
+', Pictures', 
+', 
+
+          ', 
+        ', 
+        ', 
+
+    ', 
+
+
+', 
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("977006568308597154.folder", "");
+    ghPinnedSlideShows["977006568308597154"] = true;
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+', 
+
+
+
+    
+    ', Home Top Slideshow', 
+    
+
+            
+
+            
+
+
+
+
+
+
+
+', 
+
+
+
+
+', 
+    
+
+        
+
+        ', 
+
+    
+', 
+
+
+
+  ', 
+
+  
+
+  
+
+
+
+
+
+    ', 
+
+    
+        #slideShowOverlay_edlElement_977006568308597154_folder {
+            
+            background-color: transparent;background-image: url(/files/_sRKW4_/de897d8a333fbde83745a49013852ec4/middleGraphicSlideshow.png?lastMod=1379431376907&isPlacedWithSiteDesigner=true); background-repeat: no-repeat;
+            
+            position: absolute;
+            
+            top: 0px;
+            left: 0px;
+            width: 634px;
+            height: 347px;
+            z-index: 7;
+        }
+
+    
+
+    #edlElement_977006568308597154_folder {
+        overflow: hidden;
+    }
+
+    
+
+        .ed-slider-controlbar a {
+            display: block;
+            position: absolute;
+            text-decoration: none;
+            text-indent: -999em;
+            overflow: hidden;
+            background: transparent url('/images/SlideShowControlButtonsSprite16x16.png') no-repeat 0 0;
+            height: 16px;
+            width: 16px;
+        /*	left: 0;*/
+            left: 50%;
+            top: 50%;
+            margin: -8px 0 0 -8px;
+        }
+        /*sprites begin*/
+        /*a.ed-slider-prev {
+            background-position:-10px -10px;
+        }
+
+        a.ed-slider-prev:hover {
+            background-position:-40px -10px;
+        }
+
+        a.ed-slider-prev:active {
+            background-position:-70px -10px;
+        }*/
+
+        a.ed-slider-play {
+            background-position:-10px -100px;
+        }
+
+        a.ed-slider-play.selected {
+            display: none;
+        }
+
+        a.ed-slider-play:hover {
+            background-position:-40px -100px;
+        }
+
+        a.ed-slider-play:active {
+            background-position:-70px -100px;
+        }
+
+        a.ed-slider-pause {
+            background-position:-10px -70px;
+        }
+
+        a.ed-slider-pause.selected {
+            display: none;
+        }
+
+        a.ed-slider-pause:hover {
+            background-position:-40px -70px;
+        }
+
+        a.ed-slider-pause:active {
+            background-position:-70px -70px;
+        }
+
+        /*a.ed-slider-next {
+            background-position:-10px -40px;
+            left: 32px;
+        }
+
+        a.ed-slider-next:hover {
+            background-position:-40px -40px;
+        }
+
+        a.ed-slider-next:active {
+            background-position:-70px -40px;
+        }*/
+
+        a.ed-slider-fullscreen {
+            background-position:-10px -130px;
+        }
+
+        a.ed-slider-fullscreen:hover {
+            background-position:-40px -130px;
+        }
+
+        a.ed-slider-fullscreen:active {
+            background-position:-70px -130px;
+        }
+        /*sprites end*/
+        .ed-slider-prevNext {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat -100% -100%;
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .ed-slider-prevNext a {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 100%;
+            text-indent: -999em;
+            overflow: hidden;
+            outline: none;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next {
+            left: auto;
+            right: 0;
+            width: 80%;
+        }
+
+        .ed-slider-prevNext div {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext span {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat 0 0;
+            display: block;
+            width: 25px;
+            height: 47px;
+            text-indent: -999em;
+            overflow: hidden;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            margin: -23px 0 0;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext a.ed-slider-prev:hover span,
+        a.ed-slider-prev div.hover span {
+            background-position: 0 -60px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next span {
+            background-position: right 0;
+            left: auto;
+            right: 10px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next:hover span,
+        a.ed-slider-next div.hover span {
+            background-position: right -60px;
+        }
+
+        /*caption-controlbar container begin*/
+        ul .ed-slider-image-caption-controlbar-container {
+            display: none;
+        }
+
+        .ed-slider-image-caption-controlbar-container.ext {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 85px;
+            color: #fff;
+            z-index: 10;
+            vertical-align:bottom;
+        }
+
+        .ed-slider-image-caption,
+        .ed-slider-image-caption-summary,
+        .ed-slider-image-caption-title-has-summary,
+        .ed-slider-image-caption-title-no-summary
+        {
+            color: #fff;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption .ed-slider-countinfo,
+        .ed-slider-image-caption-controlbar-container.hasCaption .prevNext,
+        .ed-slider-image-caption-controlbar-container.hasCaption .fullscreen {
+            background-image: none;
+        }
+
+        /*caption-controlbar container end*/
+        /*caption begin*/
+        .ed-slider-image-caption-controlbar-container.hasCaption {
+            width: 100%;
+            min-height: 30px;
+            height: auto;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption  .captionHolder {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+            float: left;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        
+        /*caption end*/
+        
+        /*controlbar begin*/
+        .ed-slider-controlbar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            min-height:31px;
+            width:105px;
+        }
+
+
+        /*.ed-slider-controlbar div{*/
+             /*padding-top:4px;*/
+             /*padding-right:2px;*/
+             /*padding-left:2px;*/
+        /*}*/
+
+        .ed-slider-controlbar .fullscreen, .ed-slider-controlbar .playPause {
+            float: right;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+        }
+
+        .ed-slider-controlbar.hasNoCaption, .ed-slider-controlbar.captionHidden {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+        }
+        
+        .ed-slider-controlbar .ed-slider-countinfo {
+        	float: right;
+            padding: 8px 10px 0 6px;
+            height: 20px;
+            font-weight: bold;
+            font-size: 12px;  
+        }
+
+        /*.ed-slider-controlbar .prevNext {*/
+            /*position: absolute;*/
+            /*right: 20px;*/
+            /*width: 48px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .playPause {*/
+            /*position: absolute;*/
+            /*right: 30px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 11;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .fullscreen {*/
+            /*position: absolute;*/
+            /*right: 4px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+        /*controlbar end*/    
+         .ed-slider-cached-image
+        {
+            display:none;
+        }
+
+        /**********************/
+        /* thumbnail controls */
+        /**********************/
+        .ncWrap {
+            float: left;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        /* round button look */
+        .ncWrap a.prev, .ncWrap a.next {
+            background: transparent url("/images/thumbnailControls.png") no-repeat 0 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -18px;
+            width: 32px;
+            height: 36px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prev { left: 0; margin-left: 5px;}
+        .ncWrap a.prev:hover { background-position: 0 -40px; }
+        .ncWrap a.prev:active { background-position: 0 -80px; }
+
+        .ncWrap a.next { background-position: -40px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.next:hover { background-position: -40px -40px; }
+        .ncWrap a.next:active { background-position: -40px -80px; }
+        /* end round button look */
+
+        /* small round button look */
+        .ncWrap a.prevSmall, .ncWrap a.nextSmall {
+            background: transparent url("/images/thumbnailControls.png") no-repeat -160px 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prevSmall { left: 0; margin-left: 5px;}
+        .ncWrap a.prevSmall:hover { background-position: -160px -40px; }
+        .ncWrap a.prevSmall:active { background-position: -160px -80px; }
+
+        .ncWrap a.nextSmall { background-position: -200px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.nextSmall:hover { background-position: -200px -40px; }
+        .ncWrap a.nextSmall:active { background-position: -200px -80px; }
+        /* end small round button look */
+
+        .carouselContainer {
+            position: relative;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            margin: 0 0 0 30px;
+        }
+
+        .carousel {
+            width: 99999px;/* huge width prior to js set width */
+        }
+
+        .carousel li {
+            float: left;
+            margin: 0 5px;
+            background-color: #fff;
+            border: 1px solid #e3e3e3;
+            opacity: .4;
+            width: auto !important;
+            height: auto !important;
+            position: relative;
+            filter: alpha(opacity = 40);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+            -webkit-transition: all .4s linear;
+            -moz-transition: all .4s linear;
+            -o-transition: all .4s linear;
+            -ms-transition: all .4s linear;
+            transition: all .4s linear;
+        }
+
+        /* ie8 */
+        .ie8 .carousel li img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        }
+
+        .carousel li a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+
+        .carousel li.selected, .carousel li:hover {
+            opacity: 1;
+            filter: alpha(opacity = 100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        /* ie8 */
+        .ie8 .carousel li.selected img, .ie8 .carousel li:hover img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        .carousel li img {
+            position: relative;
+        }
+        /**************************/
+        /* end thumbnail controls */
+        /**************************/
+    ', 
+    ', 
+        .ed-slider-image-caption-title-no-summary-610a1cc3c5 {
+            font-weight:bold;
+            font-size:16px;
+        }
+
+        .ed-slider-image-caption-title-has-summary-610a1cc3c5 {
+            font-weight:bold;
+            font-size:16px;
+            padding-bottom: 2px;
+        }
+
+        .ed-slider-image-caption-summary-610a1cc3c5 {
+            font-weight:bold;
+            font-size:10px;
+        }
+        .ed-slider-image-caption-610a1cc3c5,
+        .ed-slider-image-caption-summary-610a1cc3c5,
+        .ed-slider-image-caption-title-has-summary-610a1cc3c5 ,
+        .ed-slider-image-caption-title-no-summary-610a1cc3c5
+        {
+            color: #fff;
+        }
+
+       #ed-slider-gallery-loading-610a1cc3c5
+       {
+           width:634px;
+           height:634px;
+           position: absolute;
+           z-index: 5;
+       }
+
+       #ed-slider-wrap-610a1cc3c5
+       {
+           overflow:hidden;
+
+           
+           width:634px;
+           height:634px;
+            position:absolute;top:0px;left:0px;
+           
+
+           font-family:mavenpro-regular-webfont, sans-serif;
+
+
+
+
+       }
+
+        #ed-slider-wrap-610a1cc3c5 .galleryWrap {
+            width: 634px;
+            height: 634px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+
+       #ed-slider-wrap-610a1cc3c5 ul {
+           float: left;
+           width: 634px;
+           height: 634px;
+           overflow: hidden;
+       }
+
+
+       #ed-slider-wrap-610a1cc3c5 ul li
+       {
+           list-style-type:none;
+           overflow: hidden;
+           width: 634px;
+           height: 634px;
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-610a1cc3c5 .group .block {
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-610a1cc3c5 .group .block.imgTransition {
+           background-color: transparent;
+       }
+
+       .ed-slider-image-caption-controlbar-container .captionHolder .ed-slider-image-caption-610a1cc3c5 {
+            float: left;
+            min-height: 15px;
+            padding: 8px 8px 8px 10px;
+            position: relative;
+            width: 518px;
+        }
+
+        #ed-slider-wrap-610a1cc3c5 .ed-slider-prevNext {
+            height: 634px;
+        }
+   ', 
+
+    ', 
+        ', 
+
+    
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                        ', 
+                            
+                            ', 
+                                St. Mary of the Assumption
+                            ', 
+                            
+                           
+                        ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_WWLAf_/941586d8286fa9213745a49013852ec4/Giving_Tree.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_WIIWY_/7ed420d64168c72d3745a49013852ec4/Pumpkin_project.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_VaI0x_/38c9023b97f267463745a49013852ec4/maggie.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_UOIii_/8f48f3a8a03b7ff93745a49013852ec4/First_full_Day_of_K2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_VfLMU_/c2974da4b68fb70c3745a49013852ec4/Halloween_Party_2016-1.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_VfLM5_/a11d759be58d80733745a49013852ec4/Halloween_2016-_2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_ROKmP_/3e31ee51c4276da83745a49013852ec4/K2_graduation.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_UeJZW_/489e4667062eb08a3745a49013852ec4/Walk_a_thon_Gr_I.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_UeJYg_/089f9b6b8f5b92e53745a49013852ec4/Middle_School_on_the_move.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_DUH0n_/6c015964a6f86d5c3745a49013852ec4/Office.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_VMICa_/be3b88fdabd5a10f3745a49013852ec4/Student_of_the_Week-_1.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_MTJ4c_/10853d7598d387423745a49013852ec4/basketball_2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_IKKNC_/5357accb8446490f3745a49013852ec4/daffin_girls.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JNJJh_/e7358219d09cf49f3745a49013852ec4/GRADE_I_pizza.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JNJKi_/96efa98a9afdca6d3745a49013852ec4/GRade_I_second_pizza.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_RKLYL_/46607d45040621343745a49013852ec4/Graduation.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_CbLFC_/00ebf3001fcdd5db3745a49013852ec4/Honor_band.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_NXINj_/6135b0d76c980b443745a49013852ec4/100_Days.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_IOHww_/df48f84db43377893745a49013852ec4/2015_picture_PRE_K.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_IOHxH_/e1172739e12464a23745a49013852ec4/2015_second_picE_K.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_NXJDX_/d028d807921333763745a49013852ec4/2016_PreK.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_NXJCR_/29fdce4f36e38cb03745a49013852ec4/Basketball_2016.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JCJGd_/404c0107ab50480f3745a49013852ec4/black_lab.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_WHAT5_/d1c05144b6c1b6123745a49013852ec4/book_fair.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OEI0z_/532a4d58bc0d96ff3745a49013852ec4/Brookline_Food.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_LRA66_/3974f95f0913fb773745a49013852ec4/Christmas_2015-_01.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_LRA7S_/577ba828ea06ab5b3745a49013852ec4/Christmas_2015-_02.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_5UJ3M_/ac10b33f2005bfe63745a49013852ec4/Creamer_pic.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JCJGz_/5a239566132028833745a49013852ec4/Dan_at_blessing.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OEHyy_/8bfc8065d0d171173745a49013852ec4/Fassill.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JCJHW_/93422101255063413745a49013852ec4/Fr_B_2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_LOLYG_/4ef4b020546fa0be3745a49013852ec4/FullSizeRender.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_KNALG_/bf03c701b10372c53745a49013852ec4/Giving_Tree.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OSH5R_/05f3cfdb45b3c8c43745a49013852ec4/Gr_2_science.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OEHz2_/4e3ace189a9644f33745a49013852ec4/Gr_4.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OEHyA_/7c7f8c215c6be5073745a49013852ec4/Gr_4_more_projects.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OEHyX_/549ec4bc2b007ab43745a49013852ec4/Gr_4_projects.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_NXIOh_/797256a9d019f81a3745a49013852ec4/Grade_3_project.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_RKLZP_/753041b11e92f9a83745a49013852ec4/IMG_8030.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JCJHr_/d810f6ab0bf674183745a49013852ec4/leah.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_LcB7y_/db4ba56e75ab928a3745a49013852ec4/lila.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_DcKMX_/bfa91678a60bdcf53745a49013852ec4/Lila_4.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JCJIV_/d1cc9fb9e555d2f63745a49013852ec4/Maggie_at_blessing.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_WHAY2_/d7203ed5a24bdfc13745a49013852ec4/middle_school_2016.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_4FH5I_/2f44025c1d7a5b013745a49013852ec4/photo_1.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_5BJ2L_/c12ab85c257d64703745a49013852ec4/Plant_Animal_Cell_Lab_2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_LOLbq_/d9cb7df8ad5c04833745a49013852ec4/Pops.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_IOKNa_/ba0dfed446dcbeee3745a49013852ec4/PRE_K_3_pic.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_4FH63_/f27c8ca956362f3c3745a49013852ec4/PreK.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_4FH5y_/fe799a35842bd0ad3745a49013852ec4/PreK_2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_4FH6M_/984c416ed525668d3745a49013852ec4/PreK_6.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_xOKEq_/f85076f69e507e623745a49013852ec4/Prek_Field_trip.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OLJq3_/bf0be1db2865b53b3745a49013852ec4/Reading_Buddies.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OLJqH_/c9184b0e4fb5ee8f3745a49013852ec4/Reading_buddies_2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JCJJa_/00ff882018aadfa03745a49013852ec4/Roses_dog.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_NDKHD_/14498fdc742499753745a49013852ec4/Spirit_Week.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_CQJym_/4096dd10f76d64203745a49013852ec4/St_Marys_group_1_of_1_2.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_VaI2x_/fe207ce31fd57b223745a49013852ec4/Student_of_the_week-_Oct_14.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_KMKNg_/6ab017de71dc19ba3745a49013852ec4/The_Giving_Tree.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_4FIJI_/dec56502ade8a27d3745a49013852ec4/Yangs_class.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_FOHhD_/52a8a44d5fe792803745a49013852ec4/zoo.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_FbDvJ_/16cb8a400d34e17a3745a49013852ec4/Zoo.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                        ', 
+                            
+                            ', 
+                                Zoo New England comes to St Marys!
+                            ', 
+                            
+                           
+                            ', 
+                                Second and Third Grade enjoying the Zoo New England visit
+                            ', 
+                            
+                        ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+
+        ', 
+        ', 
+            
+            ', 
+               ', 
+            ', 
+            
+        ', 
+    ', 
+', 
+	', 
+    ', 
+
+	', u"
+
+        $(document).ready(function()
+        {
+            fssbOnload('610a1cc3c5',
+                    5000,
+                    'never',
+                    true,
+                    'fade',
+                    'None',
+                    'small',
+                    false,
+                    'hover',
+                    '977006568308597154',
+                    'edlElement_977006568308597154_folderContents',
+                    'edlElement_977006568308597154_folder',
+                    false
+            );
+		});
+
+	", 
+
+
+
+
+  
+
+  
+
+    ', 
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("977006568319236754.folder", "");
+    ghPinnedSlideShows["977006568319236754"] = true;
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+', 
+
+
+
+    
+    ', Home Bottom Slideshow', 
+    
+
+            
+
+            
+
+
+
+
+
+
+
+', 
+
+
+
+
+', 
+    
+
+        
+
+        ', Mission', 
+', St. Mary of the Assumption school is a richly diverse Catholic community serving students in grades pre-k through eight. We are dedicated to providing each child with a strong foundation intellectually, spiritually, and socially in a learning environment of reverence, respect, and responsibility.', 
+
+    
+', 
+
+
+
+  ', 
+
+  
+
+  
+
+
+
+
+
+    ', 
+
+    
+        #slideShowOverlay_edlElement_977006568319236754_folder {
+            
+            background-color: transparent;background-image: url(/files/_sRKci_/f8ecc4c0dca8b9ef3745a49013852ec4/bottomGraphicSlideshow.png?lastMod=1379431714210&isPlacedWithSiteDesigner=true); background-repeat: no-repeat;
+            
+            position: absolute;
+            
+            top: 0px;
+            left: 0px;
+            width: 634px;
+            height: 245px;
+            z-index: 7;
+        }
+
+    
+
+    #edlElement_977006568319236754_folder {
+        overflow: hidden;
+    }
+
+    
+
+        .ed-slider-controlbar a {
+            display: block;
+            position: absolute;
+            text-decoration: none;
+            text-indent: -999em;
+            overflow: hidden;
+            background: transparent url('/images/SlideShowControlButtonsSprite16x16.png') no-repeat 0 0;
+            height: 16px;
+            width: 16px;
+        /*	left: 0;*/
+            left: 50%;
+            top: 50%;
+            margin: -8px 0 0 -8px;
+        }
+        /*sprites begin*/
+        /*a.ed-slider-prev {
+            background-position:-10px -10px;
+        }
+
+        a.ed-slider-prev:hover {
+            background-position:-40px -10px;
+        }
+
+        a.ed-slider-prev:active {
+            background-position:-70px -10px;
+        }*/
+
+        a.ed-slider-play {
+            background-position:-10px -100px;
+        }
+
+        a.ed-slider-play.selected {
+            display: none;
+        }
+
+        a.ed-slider-play:hover {
+            background-position:-40px -100px;
+        }
+
+        a.ed-slider-play:active {
+            background-position:-70px -100px;
+        }
+
+        a.ed-slider-pause {
+            background-position:-10px -70px;
+        }
+
+        a.ed-slider-pause.selected {
+            display: none;
+        }
+
+        a.ed-slider-pause:hover {
+            background-position:-40px -70px;
+        }
+
+        a.ed-slider-pause:active {
+            background-position:-70px -70px;
+        }
+
+        /*a.ed-slider-next {
+            background-position:-10px -40px;
+            left: 32px;
+        }
+
+        a.ed-slider-next:hover {
+            background-position:-40px -40px;
+        }
+
+        a.ed-slider-next:active {
+            background-position:-70px -40px;
+        }*/
+
+        a.ed-slider-fullscreen {
+            background-position:-10px -130px;
+        }
+
+        a.ed-slider-fullscreen:hover {
+            background-position:-40px -130px;
+        }
+
+        a.ed-slider-fullscreen:active {
+            background-position:-70px -130px;
+        }
+        /*sprites end*/
+        .ed-slider-prevNext {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat -100% -100%;
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .ed-slider-prevNext a {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 100%;
+            text-indent: -999em;
+            overflow: hidden;
+            outline: none;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next {
+            left: auto;
+            right: 0;
+            width: 80%;
+        }
+
+        .ed-slider-prevNext div {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext span {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat 0 0;
+            display: block;
+            width: 25px;
+            height: 47px;
+            text-indent: -999em;
+            overflow: hidden;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            margin: -23px 0 0;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext a.ed-slider-prev:hover span,
+        a.ed-slider-prev div.hover span {
+            background-position: 0 -60px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next span {
+            background-position: right 0;
+            left: auto;
+            right: 10px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next:hover span,
+        a.ed-slider-next div.hover span {
+            background-position: right -60px;
+        }
+
+        /*caption-controlbar container begin*/
+        ul .ed-slider-image-caption-controlbar-container {
+            display: none;
+        }
+
+        .ed-slider-image-caption-controlbar-container.ext {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 85px;
+            color: #fff;
+            z-index: 10;
+            vertical-align:bottom;
+        }
+
+        .ed-slider-image-caption,
+        .ed-slider-image-caption-summary,
+        .ed-slider-image-caption-title-has-summary,
+        .ed-slider-image-caption-title-no-summary
+        {
+            color: #fff;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption .ed-slider-countinfo,
+        .ed-slider-image-caption-controlbar-container.hasCaption .prevNext,
+        .ed-slider-image-caption-controlbar-container.hasCaption .fullscreen {
+            background-image: none;
+        }
+
+        /*caption-controlbar container end*/
+        /*caption begin*/
+        .ed-slider-image-caption-controlbar-container.hasCaption {
+            width: 100%;
+            min-height: 30px;
+            height: auto;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption  .captionHolder {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+            float: left;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        
+        /*caption end*/
+        
+        /*controlbar begin*/
+        .ed-slider-controlbar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            min-height:31px;
+            width:105px;
+        }
+
+
+        /*.ed-slider-controlbar div{*/
+             /*padding-top:4px;*/
+             /*padding-right:2px;*/
+             /*padding-left:2px;*/
+        /*}*/
+
+        .ed-slider-controlbar .fullscreen, .ed-slider-controlbar .playPause {
+            float: right;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+        }
+
+        .ed-slider-controlbar.hasNoCaption, .ed-slider-controlbar.captionHidden {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+        }
+        
+        .ed-slider-controlbar .ed-slider-countinfo {
+        	float: right;
+            padding: 8px 10px 0 6px;
+            height: 20px;
+            font-weight: bold;
+            font-size: 12px;  
+        }
+
+        /*.ed-slider-controlbar .prevNext {*/
+            /*position: absolute;*/
+            /*right: 20px;*/
+            /*width: 48px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .playPause {*/
+            /*position: absolute;*/
+            /*right: 30px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 11;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .fullscreen {*/
+            /*position: absolute;*/
+            /*right: 4px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+        /*controlbar end*/    
+         .ed-slider-cached-image
+        {
+            display:none;
+        }
+
+        /**********************/
+        /* thumbnail controls */
+        /**********************/
+        .ncWrap {
+            float: left;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        /* round button look */
+        .ncWrap a.prev, .ncWrap a.next {
+            background: transparent url("/images/thumbnailControls.png") no-repeat 0 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -18px;
+            width: 32px;
+            height: 36px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prev { left: 0; margin-left: 5px;}
+        .ncWrap a.prev:hover { background-position: 0 -40px; }
+        .ncWrap a.prev:active { background-position: 0 -80px; }
+
+        .ncWrap a.next { background-position: -40px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.next:hover { background-position: -40px -40px; }
+        .ncWrap a.next:active { background-position: -40px -80px; }
+        /* end round button look */
+
+        /* small round button look */
+        .ncWrap a.prevSmall, .ncWrap a.nextSmall {
+            background: transparent url("/images/thumbnailControls.png") no-repeat -160px 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prevSmall { left: 0; margin-left: 5px;}
+        .ncWrap a.prevSmall:hover { background-position: -160px -40px; }
+        .ncWrap a.prevSmall:active { background-position: -160px -80px; }
+
+        .ncWrap a.nextSmall { background-position: -200px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.nextSmall:hover { background-position: -200px -40px; }
+        .ncWrap a.nextSmall:active { background-position: -200px -80px; }
+        /* end small round button look */
+
+        .carouselContainer {
+            position: relative;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            margin: 0 0 0 30px;
+        }
+
+        .carousel {
+            width: 99999px;/* huge width prior to js set width */
+        }
+
+        .carousel li {
+            float: left;
+            margin: 0 5px;
+            background-color: #fff;
+            border: 1px solid #e3e3e3;
+            opacity: .4;
+            width: auto !important;
+            height: auto !important;
+            position: relative;
+            filter: alpha(opacity = 40);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+            -webkit-transition: all .4s linear;
+            -moz-transition: all .4s linear;
+            -o-transition: all .4s linear;
+            -ms-transition: all .4s linear;
+            transition: all .4s linear;
+        }
+
+        /* ie8 */
+        .ie8 .carousel li img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        }
+
+        .carousel li a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+
+        .carousel li.selected, .carousel li:hover {
+            opacity: 1;
+            filter: alpha(opacity = 100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        /* ie8 */
+        .ie8 .carousel li.selected img, .ie8 .carousel li:hover img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        .carousel li img {
+            position: relative;
+        }
+        /**************************/
+        /* end thumbnail controls */
+        /**************************/
+    ', 
+    ', 
+        .ed-slider-image-caption-title-no-summary-d80898d34e {
+            font-weight:bold;
+            font-size:16px;
+        }
+
+        .ed-slider-image-caption-title-has-summary-d80898d34e {
+            font-weight:bold;
+            font-size:16px;
+            padding-bottom: 2px;
+        }
+
+        .ed-slider-image-caption-summary-d80898d34e {
+            font-weight:bold;
+            font-size:10px;
+        }
+        .ed-slider-image-caption-d80898d34e,
+        .ed-slider-image-caption-summary-d80898d34e,
+        .ed-slider-image-caption-title-has-summary-d80898d34e ,
+        .ed-slider-image-caption-title-no-summary-d80898d34e
+        {
+            color: #fff;
+        }
+
+       #ed-slider-gallery-loading-d80898d34e
+       {
+           width:634px;
+           height:250px;
+           position: absolute;
+           z-index: 5;
+       }
+
+       #ed-slider-wrap-d80898d34e
+       {
+           overflow:hidden;
+
+           
+           width:634px;
+           height:247px;
+            position:absolute;top:3px;left:-160px;
+           
+
+           font-family:mavenpro-regular-webfont, sans-serif;
+
+
+
+
+       }
+
+        #ed-slider-wrap-d80898d34e .galleryWrap {
+            width: 634px;
+            height: 250px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+
+       #ed-slider-wrap-d80898d34e ul {
+           float: left;
+           width: 634px;
+           height: 250px;
+           overflow: hidden;
+       }
+
+
+       #ed-slider-wrap-d80898d34e ul li
+       {
+           list-style-type:none;
+           overflow: hidden;
+           width: 634px;
+           height: 250px;
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-d80898d34e .group .block {
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-d80898d34e .group .block.imgTransition {
+           background-color: transparent;
+       }
+
+       .ed-slider-image-caption-controlbar-container .captionHolder .ed-slider-image-caption-d80898d34e {
+            float: left;
+            min-height: 15px;
+            padding: 8px 8px 8px 10px;
+            position: relative;
+            width: 518px;
+        }
+
+        #ed-slider-wrap-d80898d34e .ed-slider-prevNext {
+            height: 250px;
+        }
+   ', 
+
+    ', 
+        ', 
+
+    
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JNJTJ_/ce6ebf7b2a2ccf643745a49013852ec4/leah.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+
+        ', 
+        ', 
+            
+            ', 
+               ', 
+            ', 
+            
+        ', 
+    ', 
+', 
+	', 
+    ', 
+
+	', u"
+
+        $(document).ready(function()
+        {
+            fssbOnload('d80898d34e',
+                    5000,
+                    'never',
+                    true,
+                    'fade',
+                    'None',
+                    'small',
+                    false,
+                    'hover',
+                    '977006568319236754',
+                    'edlElement_977006568319236754_folderContents',
+                    'edlElement_977006568319236754_folder',
+                    false
+            );
+		});
+
+	", 
+
+
+
+
+  
+
+  
+
+    ', 
+
+    
+
+', 
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("news.box", "");
+
+    
+
+', 
+
+
+', 
+
+
+
+    
+
+            ', News', 
+            
+            ', 
+', 
+', 
+', News', 
+', 
+
+
+            
+
+
+    
+
+  ', 
+      
+      
+      
+
+      
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Weekly update', 
+        ', 
+
+        
+             ', u"School Dear St Mary's Families: On the eve of our final day before Christmas vacation I am reminded of so many events and day to day activities at... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Some popular websites for vacation fun', 
+        ', 
+
+        
+             ', u"Enjoy some fun websites while on vacation and beyond! starfall.com www.abcya.com www.readingrockets.org... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Weekly Update', 
+        ', 
+
+        
+             ', u"St Mary's School Hello Everyone, Since we all felt the Arctic blast today and heard about impending snow, I thought I would send along a reminder... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Christmas Faire thanks.......', 
+        ', 
+
+        
+             ', u"Dear Families and Friends: Several months of planning resulted in a wonderful party at our school today. I have been a part of this for four years... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Friday Folder- November 18', 
+        ', 
+
+        
+             ', u"It's beginning to look a lot like .......Christmas? As you know, we are all about celebrating the season as well as our biggest fund raiser, the... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+      ', 
+          
+              ', 
+          
+              ', More News...', 
+          ', 
+      ', 
+    
+    ', 
+    
+    
+    
+', 
+
+    
+
+
+       
+
+       ', 
+
+           .edlNewsItemThumbDiv {
+               
+               
+               display: none;
+               
+               width: 80.0px;
+               float: left;
+               margin-right: 8px;
+           }
+
+           .edlEmptyThumb {
+               height: 45.0px;
+           }
+
+           .edlNewsItemThumbImg {
+               width: 80.0px;
+               
+               
+               display: inline;
+           }
+
+           .edlNewsItemNonThumbDiv {
+               float: left;
+               max-width: 148px;
+           }
+
+           .edlNewsItemClearer {
+               clear: both;
+           }
+
+       ', 
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("calendar.box", "");
+
+    
+
+', 
+
+
+', 
+
+
+
+    
+        ', Calendar', 
+        
+        ', 
+', 
+', 
+', Calendar', 
+', 
+
+
+        
+
+    
+
+  ', 
+  
+      
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+', 
+
+    ', 
+
+        
+        
+
+        ', 
+            ', previous month', 
+            ', next month', 
+            ',  ', 
+        ', 
+
+        ', 
+       		', 
+        ', 
+        
+    ', 
+
+    ', 
+        ', 
+            ', November 26, 2012', 
+            ', 0 Events', 
+            ', x', 
+        ', 
+
+        ', 
+        	', 
+            ', 
+            ', 
+        ', 
+        ', View Full Calendar', 
+    ', 
+
+', 
+', 
+', 
+
+  
+        
+      
+      
+  ', 
+    
+    
+    
+', 
+    ', 
+  ', 
+', 
+',   ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x0D8F064C2708DFC4/4":{"renderer":"image","mimeType":"image/png"},"0x0D8F064C2708DFC4/3":{"renderer":"image","mimeType":"image/png"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Footer Address', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc977006568304861124";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "977006568304861124",
+            "977006568304861124",
+            "iFrame_edlElement_977006568304861124_document",
+            'iFrame_edlElement_977006568304861124_document',
+            '*',
+            'edlThemeBottomsectionZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            0,
+            'transparent',
+            false,
+            true,
+            false,
+            false,
+            '928',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+
+                        ', 
+
+                    
+
+
+    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+    ', 
+
+    ', 
+
+    
+    ', translate monitor', 
+
+    '][
+
+    
+
+    ', 
+         
+    ', 
+
+    
+            ', 
+                 
+            ', 
+    
+            ', 
+                 
+            ', 
+    
+
+
+    
+
+    
+
+    
+    ', Skip to Content', 
+
+    
+    ', 
+
+        
+
+
+        ', 
+            ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+
+                         
+
+                        ', 
+
+                         
+
+                        ', 
+
+                    ', 
+                ', 
+
+                    
+                    ', 
+                        ', 
+                              
+                            ', 
+                            ', All locations', 
+                             
+                            ', 
+                        ', 
+                    ', 
+
+                    
+                    ', 
+                        ', 
+                        ', 
+                    ', 
+
+
+            ', 
+        ', 
+
+
+        ', 
+            ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                          
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                        ', 
+                              
+                            ', 
+                            ', Change in all locations', 
+                             
+                            ', 
+                        ', 
+                ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+
+
+    ', 
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+
+', 
+
+', 
+', 
+
+
+
+/* MOVED FUNCTION TO BOTTOM */
+function addHtmlAttribute(element, attributeName, attributeValue)
+{
+    var tempVar = "";
+    if (element.hasAttribute(attributeName) == true)
+    {
+       tempVar = element.getAttribute(attributeName);
+    }
+    element.setAttribute(attributeName, attributeValue + tempVar);
+}
+
+    var menuWidth = 200;
+    var menuBarWidth = 600;
+    var ajaxRequestEntid = "";
+    var globalMenuItem;
+    var itemDescrArray = new Array();
+    var itemNameArray = new Array();
+    var itemTypeArray = new Array();
+    var itemUrlArray = new Array();
+    var itemTargetArray = new Array();
+    var itemIconClassArray = new Array();
+    var itemHasItemsArray = new Array();
+    var urlsPerEntidArray = new Array();
+    var descrsPerEntidArray = new Array();
+    var overflowAdjustedDivsArray = new Array();
+    var menuNamesArray = new Array();
+    var navLinkClicked = false;
+    var ua = navigator.userAgent;
+    var isMSIE = ua.indexOf ('MSIE') != -1;
+    var nbIsIE9 = ua.indexOf ('MSIE 9') != -1;
+    var isFirefox = ua.indexOf ('Firefox') != -1;
+    var isMacFirefox = (ua.indexOf ('Macintosh') != -1) && (isFirefox);
+    var nbIsChrome = ua.indexOf ('Chrome') != -1;
+    var previousEntid = "";
+    var previousTime = new Date();
+    var timeOfPageLoad = new Date();
+    var overrideMenuHiding = false;
+    var nbGlobalTopBorderStyle = "";
+    var nbIsWorldUser = false;
+    var nbShowAjaxErrorsToWorldUsers = false;
+    var nbFolderGroupTypeString = "Folder";
+    var nbWebPageGroupTypeString = "Web Page";
+    var nbHomeLinkId = "root-x977006562666226850--sep--St__Mary_of_the_Assumption_ElementaryhomeLink";
+    var nbBreadcrumbStripDropDownMenuFetchDelayMs = 450;
+    var nbHomeAndBreadcrumbDropDownSubmenuFetchDelayMs = 50;
+    var homeLinkElem = document.getElementById('edlHomeLink');
+    if (  (homeLinkElem != null) && (homeLinkElem != undefined)  )
+    {
+        homeLinkElem.id = "root-x977006562666226850--sep--St__Mary_of_the_Assumption_ElementaryhomeLink";
+        homeLinkElem.className = "breadcrumbLink";
+    }
+    
+    var onloadFnName = "nbnNavigationBarOnload";
+    
+    var pageBody = document.body;
+    var func = onloadFnName + "('false')";
+    
+    if (pageBody.attachEvent!=undefined) // attachEvent is a deprecated IE method
+    {
+        pageBody.onload = appendToFunction(pageBody.onload, func);
+    } else {
+        addHtmlAttribute(pageBody, "onload", func +";");
+    }
+
+function appendToFunction(func, str)
+{
+    var nfs = "";
+    if (func != null){
+        var ofs = func.toString();
+        var fcb = ofs.indexOf("{");
+        var lcb = ofs.indexOf("}",fcb+1);
+        var oss = ofs.substring(fcb + 1, lcb);
+        //alert('h3=' + ofs + '||||\n' + oss);
+        nfs = nbStripLeadingSemicolons(oss);
+    }
+	var s = nbStripLeadingSemicolons(nfs + ";" + str);
+    var f = new Function(s);
+    return f;
+}
+function nbStripLeadingSemicolons(s){
+	while (s.substr(0,1) == ';' && s.length>1) {
+    	s = s.substr(1);
+    }
+	return s;
+}
+', 
+
+
+        ', 
+
+    ', 
+
+
+        ', 
+            ', 
+                
+
+                ', 
+
+                    ', 
+
+                    
+                    
+
+
+
+
+
+
+
+
+', 
+', 
+<!--
+
+    var CLICK_OK_BUTTON_DURATION = 60;
+    var CONFIRM_MSG_SECS = 1200 - CLICK_OK_BUTTON_DURATION - 30;
+    var secsTilMsg = CONFIRM_MSG_SECS;
+    function openInfoPopupWindowIfNeeded()
+    {
+        
+
+        return false;
+    }
+  
+    var HAS_DEFAULT_ENTER_KEY  =  false;
+    var DEFAULT_ENTER_KEY_NAME = "";
+    var HAS_PAGE_VALIDATION    =  false;
+    var PAGE_VALIDATION        = "()";
+
+
+
+    function adjustIFrameSize (iframeWindow) {
+
+      if (iframeWindow.document.height) {
+        var iframeElement = parent.document.getElementById (iframeWindow.name);
+        iframeElement.style.height = iframeWindow.document.height + 'px';
+
+        iframeElement.style.width = iframeWindow.document.width + 'px';
+      }
+      else if (document.all) {
+        var iframeElement = parent.document.all[iframeWindow.name];
+        if (iframeWindow.document.compatMode &&
+            iframeWindow.document.compatMode != 'BackCompat')
+        {
+          iframeElement.style.height =
+            iframeWindow.document.documentElement.scrollHeight + 5 + 'px';
+
+          iframeElement.style.width =
+            iframeWindow.document.documentElement.scrollWidth + 5 + 'px';
+        }
+        else {
+          iframeElement.style.height =
+            iframeWindow.document.body.scrollHeight + 5 + 'px';
+          iframeElement.style.width =
+            iframeWindow.document.body.scrollWidth + 5 + 'px';
+        }
+      }
+    }
+
+    
+    function checkStale()
+    {
+        
+        if (document.cookie.search(/pgt=c1483450819013t/i) == null)
+        {
+            document.location.reload();
+        }
+    }
+//-->
+', 
+', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+
+
+
+', 
+
+', 
+ ', 
+', 
+
+', 
+ ', 
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', 
+
+
+', 
+
+
+    $(function(){
+
+    
+
+        hcOnDocumentReady();
+        
+    });//document ready
+
+
+
+
+
+function hcLogin()
+{
+    aefhLogin(false);
+}
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+    ', 
+    ', 
+    ', 
+  ', 
+', 
+
+
+
+', 
+
+', 
+    hcMyEdlineXmlDataJQueryObj = $("#edlMenuXmlData");
+
+    
+        hcMyEdlineBackCompatXmlDataJQueryObj = hcMyEdlineXmlDataJQueryObj;
+    
+
+', 
+
+
+
+
+
+
+
+
+', 
+
+
+    function translateMenuOver(pEvent)
+    {
+        overrideMenuHiding = true;
+        showTranslateMenu(pEvent);
+    }
+
+
+    function translateMenuOut(pEvent)
+    {
+    }
+
+
+    function showTranslateMenu(pEvent)
+    {
+      // Hide the navbar menus if they are open:
+      hdrHideAllDropDownMenus();
+
+      var linkElem = document.getElementById("edlLangLink");
+      var linkElemOffset = $("#edlLangLink").offset();
+      var linkLeftEdge = linkElemOffset.left;
+      var linkBottomEdge = linkElemOffset.top + linkElem.offsetHeight;
+
+      translateMenu.moveTo(linkLeftEdge, linkBottomEdge + 1);
+      translateMenu.show();
+    }
+
+    function switchLang(lang)
+    {
+        if (translationDisabledMessage())
+        {
+            return;
+        }
+
+        submitEvent('language', 'TCNK=headerComponent;language='+lang);
+    }
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Choose How To View This Page', 
+                      ', 
+                        ', 
+                          ', Standard View', 
+                          ', List View', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Want to translate this page?', 
+                      ', 
+                        ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Share This Page', 
+                      ', 
+                        ', 
+                          ', 
+                          ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', 
+                        ', Search', 
+                        ', 
+                          ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                              ', 
+                              ', 
+                                ', 
+                                  ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                              ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', HELP', 
+                  ', 
+                  ', 
+                  ', 
+                    ',  ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', SIGN IN', 
+                  ', 
+                  ', 
+                ', 
+                ', 
+              ', 
+            ', 
+
+
+
+
+
+
+
+
+
+
+  ', 
+    ', 
+    ', 
+  ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+function initForms()
+{
+	var frm = window.document.authenticationEntryFormForHeader;
+	frm.kclq.value = "";
+	frm.ajaxSupported.value = isAjaxSupported();
+}
+
+
+
+function debounceEnterKey(frm, eventNm)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function debounceEnterKeyToEntid(frm, eventNm, entid)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.targetEntid.value = entid;
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function handleSubmitOnEnter(e)
+{
+    
+    if (window.ghKeyPressHandler != null)
+    {
+        if ( typeof(ghKeyPressHandler == "function") )
+        {
+            ghKeyPressHandler(e);
+        }
+    }
+    
+    var keyPressed = '';
+
+    var isMSIE = navigator.userAgent.indexOf('MSIE') != -1;
+
+    if (isMSIE)
+        keyPressed = String.fromCharCode(window.event.keyCode);
+    else
+        keyPressed = String.fromCharCode(e.which);
+
+    if (keyPressed == "\r" || keyPressed == "\n")
+    {
+        
+        var authenticationFormToUse = null;
+
+        if (document.authenticationEntryFormForHeader && !document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryFormForHeader;
+        }
+        else if (!document.authenticationEntryFormForHeader && document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryForm;
+        }
+
+        if (authenticationFormToUse == null)
+        {
+            var headerFieldsFilledIn = 0;
+            if (document.authenticationEntryFormForHeader)
+            {
+                if (typeof(document.authenticationEntryFormForHeader.screenName) != "undefined"
+                    && document.authenticationEntryFormForHeader.screenName.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryFormForHeader.kclq) != "undefined"
+                    && document.authenticationEntryFormForHeader.kclq.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+            }
+
+            var bodyFieldsFilledIn = 0;
+            if (document.authenticationEntryForm)
+            {
+                if (typeof(document.authenticationEntryForm.screenName) != "undefined"
+                    && document.authenticationEntryForm.screenName.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryForm.kclq) != "undefined"
+                    && document.authenticationEntryForm.kclq.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+            }
+
+            if (headerFieldsFilledIn > bodyFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryFormForHeader;
+            }
+
+            if (bodyFieldsFilledIn > headerFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryForm;
+            }
+        }
+
+        // If no form or a search is being performed
+        if ( authenticationFormToUse == null || (typeof searchCtlr !== "undefined" && searchCtlr && document.forms["hcSearchForm"].token.value != '') )
+        {
+            window.document.onkeypress = doNothing;
+        }
+        else
+        {
+            if (authenticationFormToUse.kclq.value == "")
+            {   
+                authenticationFormToUse.kclq.focus();
+            }
+            else
+            {
+                authenticationFormToUse.submitButton.click();
+    
+                window.document.onkeypress = doNothing;
+            }
+        }
+
+
+        return false;
+    }
+
+    return true;
+}
+
+
+    if (window.document.captureEvents != null){
+        window.document.captureEvents(Event.KEYPRESS);
+    }
+    window.document.onkeypress = handleSubmitOnEnter;
+
+
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+
+function aefhCancelLogin()
+{
+    var elem = document.getElementById('edlHeaderControlsLoginPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        aefhRestoreBreadcrumbBorder();
+        elem.style.display = "none";
+    }
+}
+
+
+function aefhSaveAndClearBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        nbGlobalTopBorderStyle = elem.style.borderTop;
+        elem.style.borderTop = "";
+    }
+}
+
+
+function aefhRestoreBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        elem.style.borderTop = nbGlobalTopBorderStyle;
+    }
+}
+
+
+<!--
+function checkBrowserTime()
+{
+    var edlineDateString       = "Tuesday, January 3, 2017 7:40AM CST";
+    var edlineTimeInMillis     = 1483450819036;
+    var browserTimeInMillis    = (new Date()).getTime();
+    var timeDifferenceInMillis = (edlineTimeInMillis  - browserTimeInMillis);
+    var timeDifferenceInDays   = timeDifferenceInMillis / 86400000;
+
+    if ((timeDifferenceInDays < -2) || (timeDifferenceInDays > 2))
+    {
+        alert("Your computer clock reads " + (new Date()).toLocaleString() + " \r\nwhich is off by more than 24 hours. Please correct your computer clock.");
+
+    }
+}
+
+
+checkBrowserTime();
+
+//-->
+', 
+
+
+', 
+        ',    
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+
+    ', 
+
+        ', 
+            ', 
+                ', 
+                  ', Screen Name:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                  
+            ', 
+            ', 
+                ', 
+                    ', Click here if you forgot your screen name or password', 
+                ', 
+            ', 
+        ', 
+        
+        ', 
+            ', 
+                ', 
+                  ', Password:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+
+            ', 
+                ',     
+            ', 
+
+            ', 
+                  
+            ', 
+
+            ', 
+                ', 
+                    ', Click here to Sign Up', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+        ', 
+
+        
+', 
+
+
+
+', 
+window.document.cookie="bpcc=tu";
+
+  var frm = window.document.authenticationEntryFormForHeader;
+  frm.bscv.value = window.document.cookie;
+  frm.bscf.value = (window.document.cookie.indexOf("bpcc=tu") >= 0)
+    ? "1" : "0";
+
+
+
+
+try
+{
+  
+  if (frm.screenName.offsetWidth > 0)
+  {
+	  frm.screenName.focus();
+      frm.screenName.select();
+  }
+}
+catch(e)
+{
+
+}                                             
+', 
+
+
+', 
+
+
+
+
+
+', 
+
+
+    
+        
+            
+        
+
+        
+
+', 
+
+', 
+
+    
+
+    if (typeof suTrimLeadingTrailingSpace != "undefined")
+    {
+        var headerAreaQuery = $("#edlHeaderArea");
+
+        if (suTrimLeadingTrailingSpace(headerAreaQuery.html() ).length == 0)
+        {
+            headerAreaQuery.hide();//css("display","none");
+        }
+    }
+
+', 
+
+
+
+
+
+
+
+', 
+    function translationDisabledMessage()
+    {
+
+        return false;
+
+    }
+
+
+
+', 
+
+
+                    
+
+                        ', 
+                            ', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x0D8F064C289A5AB4/4":{"renderer":"image","mimeType":"image/png"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Top Name', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc977006568331172532";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "977006568331172532",
+            "977006568331172532",
+            "iFrame_edlElement_977006568331172532_document",
+            'iFrame_edlElement_977006568331172532_document',
+            '*',
+            'edlThemeHeaderZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            0,
+            'transparent',
+            false,
+            true,
+            false,
+            false,
+            '932',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    $(document).ready(function() {
+        ghPrepNavMenu("globalTopNavMenu", false,
+                "/images/icons/sets/None/");
+    });
+
+
+    
+
+', 
+
+
+
+
+', 
+
+    
+
+
+
+
+    ', Global Main Navigation', 
+    
+    
+
+    
+
+    ', 
+
+        ', 
+        ', 
+          ', 
+              ', 
+', Home', 
+', |', 
+', About Us', 
+', |', 
+', Admissions', 
+', |', 
+', School Info', 
+', |', 
+', Activities', 
+', |', 
+', Classes', 
+', |', 
+', Calendar', 
+', |', 
+', News', 
+', |', 
+', Pictures', 
+', 
+
+          ', 
+        ', 
+        ', 
+
+    ', 
+
+
+', 
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("977006568308597154.folder", "");
+    ghPinnedSlideShows["977006568308597154"] = true;
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+', 
+
+
+
+    
+    ', Home Top Slideshow', 
+    
+
+            
+
+            
+
+
+
+
+
+
+
+', 
+
+
+
+
+', 
+    
+
+        
+
+        ', 
+
+    
+', 
+
+
+
+  ', 
+
+  
+
+  
+
+
+
+
+
+    ', 
+
+    
+        #slideShowOverlay_edlElement_977006568308597154_folder {
+            
+            background-color: transparent;background-image: url(/files/_sRKW4_/de897d8a333fbde83745a49013852ec4/middleGraphicSlideshow.png?lastMod=1379431376907&isPlacedWithSiteDesigner=true); background-repeat: no-repeat;
+            
+            position: absolute;
+            
+            top: 0px;
+            left: 0px;
+            width: 634px;
+            height: 347px;
+            z-index: 7;
+        }
+
+    
+
+    #edlElement_977006568308597154_folder {
+        overflow: hidden;
+    }
+
+    
+
+        .ed-slider-controlbar a {
+            display: block;
+            position: absolute;
+            text-decoration: none;
+            text-indent: -999em;
+            overflow: hidden;
+            background: transparent url('/images/SlideShowControlButtonsSprite16x16.png') no-repeat 0 0;
+            height: 16px;
+            width: 16px;
+        /*	left: 0;*/
+            left: 50%;
+            top: 50%;
+            margin: -8px 0 0 -8px;
+        }
+        /*sprites begin*/
+        /*a.ed-slider-prev {
+            background-position:-10px -10px;
+        }
+
+        a.ed-slider-prev:hover {
+            background-position:-40px -10px;
+        }
+
+        a.ed-slider-prev:active {
+            background-position:-70px -10px;
+        }*/
+
+        a.ed-slider-play {
+            background-position:-10px -100px;
+        }
+
+        a.ed-slider-play.selected {
+            display: none;
+        }
+
+        a.ed-slider-play:hover {
+            background-position:-40px -100px;
+        }
+
+        a.ed-slider-play:active {
+            background-position:-70px -100px;
+        }
+
+        a.ed-slider-pause {
+            background-position:-10px -70px;
+        }
+
+        a.ed-slider-pause.selected {
+            display: none;
+        }
+
+        a.ed-slider-pause:hover {
+            background-position:-40px -70px;
+        }
+
+        a.ed-slider-pause:active {
+            background-position:-70px -70px;
+        }
+
+        /*a.ed-slider-next {
+            background-position:-10px -40px;
+            left: 32px;
+        }
+
+        a.ed-slider-next:hover {
+            background-position:-40px -40px;
+        }
+
+        a.ed-slider-next:active {
+            background-position:-70px -40px;
+        }*/
+
+        a.ed-slider-fullscreen {
+            background-position:-10px -130px;
+        }
+
+        a.ed-slider-fullscreen:hover {
+            background-position:-40px -130px;
+        }
+
+        a.ed-slider-fullscreen:active {
+            background-position:-70px -130px;
+        }
+        /*sprites end*/
+        .ed-slider-prevNext {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat -100% -100%;
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .ed-slider-prevNext a {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 100%;
+            text-indent: -999em;
+            overflow: hidden;
+            outline: none;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next {
+            left: auto;
+            right: 0;
+            width: 80%;
+        }
+
+        .ed-slider-prevNext div {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext span {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat 0 0;
+            display: block;
+            width: 25px;
+            height: 47px;
+            text-indent: -999em;
+            overflow: hidden;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            margin: -23px 0 0;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext a.ed-slider-prev:hover span,
+        a.ed-slider-prev div.hover span {
+            background-position: 0 -60px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next span {
+            background-position: right 0;
+            left: auto;
+            right: 10px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next:hover span,
+        a.ed-slider-next div.hover span {
+            background-position: right -60px;
+        }
+
+        /*caption-controlbar container begin*/
+        ul .ed-slider-image-caption-controlbar-container {
+            display: none;
+        }
+
+        .ed-slider-image-caption-controlbar-container.ext {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 85px;
+            color: #fff;
+            z-index: 10;
+            vertical-align:bottom;
+        }
+
+        .ed-slider-image-caption,
+        .ed-slider-image-caption-summary,
+        .ed-slider-image-caption-title-has-summary,
+        .ed-slider-image-caption-title-no-summary
+        {
+            color: #fff;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption .ed-slider-countinfo,
+        .ed-slider-image-caption-controlbar-container.hasCaption .prevNext,
+        .ed-slider-image-caption-controlbar-container.hasCaption .fullscreen {
+            background-image: none;
+        }
+
+        /*caption-controlbar container end*/
+        /*caption begin*/
+        .ed-slider-image-caption-controlbar-container.hasCaption {
+            width: 100%;
+            min-height: 30px;
+            height: auto;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption  .captionHolder {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+            float: left;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        
+        /*caption end*/
+        
+        /*controlbar begin*/
+        .ed-slider-controlbar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            min-height:31px;
+            width:105px;
+        }
+
+
+        /*.ed-slider-controlbar div{*/
+             /*padding-top:4px;*/
+             /*padding-right:2px;*/
+             /*padding-left:2px;*/
+        /*}*/
+
+        .ed-slider-controlbar .fullscreen, .ed-slider-controlbar .playPause {
+            float: right;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+        }
+
+        .ed-slider-controlbar.hasNoCaption, .ed-slider-controlbar.captionHidden {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+        }
+        
+        .ed-slider-controlbar .ed-slider-countinfo {
+        	float: right;
+            padding: 8px 10px 0 6px;
+            height: 20px;
+            font-weight: bold;
+            font-size: 12px;  
+        }
+
+        /*.ed-slider-controlbar .prevNext {*/
+            /*position: absolute;*/
+            /*right: 20px;*/
+            /*width: 48px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .playPause {*/
+            /*position: absolute;*/
+            /*right: 30px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 11;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .fullscreen {*/
+            /*position: absolute;*/
+            /*right: 4px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+        /*controlbar end*/    
+         .ed-slider-cached-image
+        {
+            display:none;
+        }
+
+        /**********************/
+        /* thumbnail controls */
+        /**********************/
+        .ncWrap {
+            float: left;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        /* round button look */
+        .ncWrap a.prev, .ncWrap a.next {
+            background: transparent url("/images/thumbnailControls.png") no-repeat 0 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -18px;
+            width: 32px;
+            height: 36px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prev { left: 0; margin-left: 5px;}
+        .ncWrap a.prev:hover { background-position: 0 -40px; }
+        .ncWrap a.prev:active { background-position: 0 -80px; }
+
+        .ncWrap a.next { background-position: -40px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.next:hover { background-position: -40px -40px; }
+        .ncWrap a.next:active { background-position: -40px -80px; }
+        /* end round button look */
+
+        /* small round button look */
+        .ncWrap a.prevSmall, .ncWrap a.nextSmall {
+            background: transparent url("/images/thumbnailControls.png") no-repeat -160px 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prevSmall { left: 0; margin-left: 5px;}
+        .ncWrap a.prevSmall:hover { background-position: -160px -40px; }
+        .ncWrap a.prevSmall:active { background-position: -160px -80px; }
+
+        .ncWrap a.nextSmall { background-position: -200px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.nextSmall:hover { background-position: -200px -40px; }
+        .ncWrap a.nextSmall:active { background-position: -200px -80px; }
+        /* end small round button look */
+
+        .carouselContainer {
+            position: relative;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            margin: 0 0 0 30px;
+        }
+
+        .carousel {
+            width: 99999px;/* huge width prior to js set width */
+        }
+
+        .carousel li {
+            float: left;
+            margin: 0 5px;
+            background-color: #fff;
+            border: 1px solid #e3e3e3;
+            opacity: .4;
+            width: auto !important;
+            height: auto !important;
+            position: relative;
+            filter: alpha(opacity = 40);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+            -webkit-transition: all .4s linear;
+            -moz-transition: all .4s linear;
+            -o-transition: all .4s linear;
+            -ms-transition: all .4s linear;
+            transition: all .4s linear;
+        }
+
+        /* ie8 */
+        .ie8 .carousel li img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        }
+
+        .carousel li a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+
+        .carousel li.selected, .carousel li:hover {
+            opacity: 1;
+            filter: alpha(opacity = 100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        /* ie8 */
+        .ie8 .carousel li.selected img, .ie8 .carousel li:hover img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        .carousel li img {
+            position: relative;
+        }
+        /**************************/
+        /* end thumbnail controls */
+        /**************************/
+    ', 
+    ', 
+        .ed-slider-image-caption-title-no-summary-9b85dd0f8a {
+            font-weight:bold;
+            font-size:16px;
+        }
+
+        .ed-slider-image-caption-title-has-summary-9b85dd0f8a {
+            font-weight:bold;
+            font-size:16px;
+            padding-bottom: 2px;
+        }
+
+        .ed-slider-image-caption-summary-9b85dd0f8a {
+            font-weight:bold;
+            font-size:10px;
+        }
+        .ed-slider-image-caption-9b85dd0f8a,
+        .ed-slider-image-caption-summary-9b85dd0f8a,
+        .ed-slider-image-caption-title-has-summary-9b85dd0f8a ,
+        .ed-slider-image-caption-title-no-summary-9b85dd0f8a
+        {
+            color: #fff;
+        }
+
+       #ed-slider-gallery-loading-9b85dd0f8a
+       {
+           width:634px;
+           height:634px;
+           position: absolute;
+           z-index: 5;
+       }
+
+       #ed-slider-wrap-9b85dd0f8a
+       {
+           overflow:hidden;
+
+           
+           width:634px;
+           height:634px;
+            position:absolute;top:0px;left:0px;
+           
+
+           font-family:mavenpro-regular-webfont, sans-serif;
+
+
+
+
+       }
+
+        #ed-slider-wrap-9b85dd0f8a .galleryWrap {
+            width: 634px;
+            height: 634px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+
+       #ed-slider-wrap-9b85dd0f8a ul {
+           float: left;
+           width: 634px;
+           height: 634px;
+           overflow: hidden;
+       }
+
+
+       #ed-slider-wrap-9b85dd0f8a ul li
+       {
+           list-style-type:none;
+           overflow: hidden;
+           width: 634px;
+           height: 634px;
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-9b85dd0f8a .group .block {
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-9b85dd0f8a .group .block.imgTransition {
+           background-color: transparent;
+       }
+
+       .ed-slider-image-caption-controlbar-container .captionHolder .ed-slider-image-caption-9b85dd0f8a {
+            float: left;
+            min-height: 15px;
+            padding: 8px 8px 8px 10px;
+            position: relative;
+            width: 518px;
+        }
+
+        #ed-slider-wrap-9b85dd0f8a .ed-slider-prevNext {
+            height: 634px;
+        }
+   ', 
+
+    ', 
+        ', 
+
+    
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                        ', 
+                            
+                            ', 
+                                St. Mary of the Assumption
+                            ', 
+                            
+                           
+                        ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_WWLAf_/941586d8286fa9213745a49013852ec4/Giving_Tree.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_WIIWY_/7ed420d64168c72d3745a49013852ec4/Pumpkin_project.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_VaI0x_/38c9023b97f267463745a49013852ec4/maggie.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_UOIii_/8f48f3a8a03b7ff93745a49013852ec4/First_full_Day_of_K2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_VfLMU_/c2974da4b68fb70c3745a49013852ec4/Halloween_Party_2016-1.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_VfLM5_/a11d759be58d80733745a49013852ec4/Halloween_2016-_2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_ROKmP_/3e31ee51c4276da83745a49013852ec4/K2_graduation.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_UeJZW_/489e4667062eb08a3745a49013852ec4/Walk_a_thon_Gr_I.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_UeJYg_/089f9b6b8f5b92e53745a49013852ec4/Middle_School_on_the_move.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_DUH0n_/6c015964a6f86d5c3745a49013852ec4/Office.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_VMICa_/be3b88fdabd5a10f3745a49013852ec4/Student_of_the_Week-_1.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_MTJ4c_/10853d7598d387423745a49013852ec4/basketball_2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_IKKNC_/5357accb8446490f3745a49013852ec4/daffin_girls.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JNJJh_/e7358219d09cf49f3745a49013852ec4/GRADE_I_pizza.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JNJKi_/96efa98a9afdca6d3745a49013852ec4/GRade_I_second_pizza.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_RKLYL_/46607d45040621343745a49013852ec4/Graduation.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_CbLFC_/00ebf3001fcdd5db3745a49013852ec4/Honor_band.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_NXINj_/6135b0d76c980b443745a49013852ec4/100_Days.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_IOHww_/df48f84db43377893745a49013852ec4/2015_picture_PRE_K.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_IOHxH_/e1172739e12464a23745a49013852ec4/2015_second_picE_K.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_NXJDX_/d028d807921333763745a49013852ec4/2016_PreK.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_NXJCR_/29fdce4f36e38cb03745a49013852ec4/Basketball_2016.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JCJGd_/404c0107ab50480f3745a49013852ec4/black_lab.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_WHAT5_/d1c05144b6c1b6123745a49013852ec4/book_fair.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OEI0z_/532a4d58bc0d96ff3745a49013852ec4/Brookline_Food.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_LRA66_/3974f95f0913fb773745a49013852ec4/Christmas_2015-_01.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_LRA7S_/577ba828ea06ab5b3745a49013852ec4/Christmas_2015-_02.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_5UJ3M_/ac10b33f2005bfe63745a49013852ec4/Creamer_pic.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JCJGz_/5a239566132028833745a49013852ec4/Dan_at_blessing.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OEHyy_/8bfc8065d0d171173745a49013852ec4/Fassill.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JCJHW_/93422101255063413745a49013852ec4/Fr_B_2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_LOLYG_/4ef4b020546fa0be3745a49013852ec4/FullSizeRender.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_KNALG_/bf03c701b10372c53745a49013852ec4/Giving_Tree.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OSH5R_/05f3cfdb45b3c8c43745a49013852ec4/Gr_2_science.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OEHz2_/4e3ace189a9644f33745a49013852ec4/Gr_4.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OEHyA_/7c7f8c215c6be5073745a49013852ec4/Gr_4_more_projects.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OEHyX_/549ec4bc2b007ab43745a49013852ec4/Gr_4_projects.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_NXIOh_/797256a9d019f81a3745a49013852ec4/Grade_3_project.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_RKLZP_/753041b11e92f9a83745a49013852ec4/IMG_8030.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JCJHr_/d810f6ab0bf674183745a49013852ec4/leah.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_LcB7y_/db4ba56e75ab928a3745a49013852ec4/lila.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_DcKMX_/bfa91678a60bdcf53745a49013852ec4/Lila_4.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JCJIV_/d1cc9fb9e555d2f63745a49013852ec4/Maggie_at_blessing.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_WHAY2_/d7203ed5a24bdfc13745a49013852ec4/middle_school_2016.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_4FH5I_/2f44025c1d7a5b013745a49013852ec4/photo_1.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_5BJ2L_/c12ab85c257d64703745a49013852ec4/Plant_Animal_Cell_Lab_2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_LOLbq_/d9cb7df8ad5c04833745a49013852ec4/Pops.jpg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_IOKNa_/ba0dfed446dcbeee3745a49013852ec4/PRE_K_3_pic.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_4FH63_/f27c8ca956362f3c3745a49013852ec4/PreK.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_4FH5y_/fe799a35842bd0ad3745a49013852ec4/PreK_2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_4FH6M_/984c416ed525668d3745a49013852ec4/PreK_6.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_xOKEq_/f85076f69e507e623745a49013852ec4/Prek_Field_trip.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OLJq3_/bf0be1db2865b53b3745a49013852ec4/Reading_Buddies.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_OLJqH_/c9184b0e4fb5ee8f3745a49013852ec4/Reading_buddies_2.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JCJJa_/00ff882018aadfa03745a49013852ec4/Roses_dog.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_NDKHD_/14498fdc742499753745a49013852ec4/Spirit_Week.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_CQJym_/4096dd10f76d64203745a49013852ec4/St_Marys_group_1_of_1_2.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_VaI2x_/fe207ce31fd57b223745a49013852ec4/Student_of_the_week-_Oct_14.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_KMKNg_/6ab017de71dc19ba3745a49013852ec4/The_Giving_Tree.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_4FIJI_/dec56502ade8a27d3745a49013852ec4/Yangs_class.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_FOHhD_/52a8a44d5fe792803745a49013852ec4/zoo.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_FbDvJ_/16cb8a400d34e17a3745a49013852ec4/Zoo.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                        ', 
+                            
+                            ', 
+                                Zoo New England comes to St Marys!
+                            ', 
+                            
+                           
+                            ', 
+                                Second and Third Grade enjoying the Zoo New England visit
+                            ', 
+                            
+                        ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+
+        ', 
+        ', 
+            
+            ', 
+               ', 
+            ', 
+            
+        ', 
+    ', 
+', 
+	', 
+    ', 
+
+	', u"
+
+        $(document).ready(function()
+        {
+            fssbOnload('9b85dd0f8a',
+                    5000,
+                    'never',
+                    true,
+                    'fade',
+                    'None',
+                    'small',
+                    false,
+                    'hover',
+                    '977006568308597154',
+                    'edlElement_977006568308597154_folderContents',
+                    'edlElement_977006568308597154_folder',
+                    false
+            );
+		});
+
+	", 
+
+
+
+
+  
+
+  
+
+    ', 
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("977006568319236754.folder", "");
+    ghPinnedSlideShows["977006568319236754"] = true;
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+', 
+
+
+
+    
+    ', Home Bottom Slideshow', 
+    
+
+            
+
+            
+
+
+
+
+
+
+
+', 
+
+
+
+
+', 
+    
+
+        
+
+        ', Mission', 
+', St. Mary of the Assumption school is a richly diverse Catholic community serving students in grades pre-k through eight. We are dedicated to providing each child with a strong foundation intellectually, spiritually, and socially in a learning environment of reverence, respect, and responsibility.', 
+
+    
+', 
+
+
+
+  ', 
+
+  
+
+  
+
+
+
+
+
+    ', 
+
+    
+        #slideShowOverlay_edlElement_977006568319236754_folder {
+            
+            background-color: transparent;background-image: url(/files/_sRKci_/f8ecc4c0dca8b9ef3745a49013852ec4/bottomGraphicSlideshow.png?lastMod=1379431714210&isPlacedWithSiteDesigner=true); background-repeat: no-repeat;
+            
+            position: absolute;
+            
+            top: 0px;
+            left: 0px;
+            width: 634px;
+            height: 245px;
+            z-index: 7;
+        }
+
+    
+
+    #edlElement_977006568319236754_folder {
+        overflow: hidden;
+    }
+
+    
+
+        .ed-slider-controlbar a {
+            display: block;
+            position: absolute;
+            text-decoration: none;
+            text-indent: -999em;
+            overflow: hidden;
+            background: transparent url('/images/SlideShowControlButtonsSprite16x16.png') no-repeat 0 0;
+            height: 16px;
+            width: 16px;
+        /*	left: 0;*/
+            left: 50%;
+            top: 50%;
+            margin: -8px 0 0 -8px;
+        }
+        /*sprites begin*/
+        /*a.ed-slider-prev {
+            background-position:-10px -10px;
+        }
+
+        a.ed-slider-prev:hover {
+            background-position:-40px -10px;
+        }
+
+        a.ed-slider-prev:active {
+            background-position:-70px -10px;
+        }*/
+
+        a.ed-slider-play {
+            background-position:-10px -100px;
+        }
+
+        a.ed-slider-play.selected {
+            display: none;
+        }
+
+        a.ed-slider-play:hover {
+            background-position:-40px -100px;
+        }
+
+        a.ed-slider-play:active {
+            background-position:-70px -100px;
+        }
+
+        a.ed-slider-pause {
+            background-position:-10px -70px;
+        }
+
+        a.ed-slider-pause.selected {
+            display: none;
+        }
+
+        a.ed-slider-pause:hover {
+            background-position:-40px -70px;
+        }
+
+        a.ed-slider-pause:active {
+            background-position:-70px -70px;
+        }
+
+        /*a.ed-slider-next {
+            background-position:-10px -40px;
+            left: 32px;
+        }
+
+        a.ed-slider-next:hover {
+            background-position:-40px -40px;
+        }
+
+        a.ed-slider-next:active {
+            background-position:-70px -40px;
+        }*/
+
+        a.ed-slider-fullscreen {
+            background-position:-10px -130px;
+        }
+
+        a.ed-slider-fullscreen:hover {
+            background-position:-40px -130px;
+        }
+
+        a.ed-slider-fullscreen:active {
+            background-position:-70px -130px;
+        }
+        /*sprites end*/
+        .ed-slider-prevNext {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat -100% -100%;
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .ed-slider-prevNext a {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 100%;
+            text-indent: -999em;
+            overflow: hidden;
+            outline: none;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next {
+            left: auto;
+            right: 0;
+            width: 80%;
+        }
+
+        .ed-slider-prevNext div {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext span {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat 0 0;
+            display: block;
+            width: 25px;
+            height: 47px;
+            text-indent: -999em;
+            overflow: hidden;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            margin: -23px 0 0;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext a.ed-slider-prev:hover span,
+        a.ed-slider-prev div.hover span {
+            background-position: 0 -60px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next span {
+            background-position: right 0;
+            left: auto;
+            right: 10px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next:hover span,
+        a.ed-slider-next div.hover span {
+            background-position: right -60px;
+        }
+
+        /*caption-controlbar container begin*/
+        ul .ed-slider-image-caption-controlbar-container {
+            display: none;
+        }
+
+        .ed-slider-image-caption-controlbar-container.ext {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 85px;
+            color: #fff;
+            z-index: 10;
+            vertical-align:bottom;
+        }
+
+        .ed-slider-image-caption,
+        .ed-slider-image-caption-summary,
+        .ed-slider-image-caption-title-has-summary,
+        .ed-slider-image-caption-title-no-summary
+        {
+            color: #fff;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption .ed-slider-countinfo,
+        .ed-slider-image-caption-controlbar-container.hasCaption .prevNext,
+        .ed-slider-image-caption-controlbar-container.hasCaption .fullscreen {
+            background-image: none;
+        }
+
+        /*caption-controlbar container end*/
+        /*caption begin*/
+        .ed-slider-image-caption-controlbar-container.hasCaption {
+            width: 100%;
+            min-height: 30px;
+            height: auto;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption  .captionHolder {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+            float: left;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        
+        /*caption end*/
+        
+        /*controlbar begin*/
+        .ed-slider-controlbar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            min-height:31px;
+            width:105px;
+        }
+
+
+        /*.ed-slider-controlbar div{*/
+             /*padding-top:4px;*/
+             /*padding-right:2px;*/
+             /*padding-left:2px;*/
+        /*}*/
+
+        .ed-slider-controlbar .fullscreen, .ed-slider-controlbar .playPause {
+            float: right;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+        }
+
+        .ed-slider-controlbar.hasNoCaption, .ed-slider-controlbar.captionHidden {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+        }
+        
+        .ed-slider-controlbar .ed-slider-countinfo {
+        	float: right;
+            padding: 8px 10px 0 6px;
+            height: 20px;
+            font-weight: bold;
+            font-size: 12px;  
+        }
+
+        /*.ed-slider-controlbar .prevNext {*/
+            /*position: absolute;*/
+            /*right: 20px;*/
+            /*width: 48px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .playPause {*/
+            /*position: absolute;*/
+            /*right: 30px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 11;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .fullscreen {*/
+            /*position: absolute;*/
+            /*right: 4px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+        /*controlbar end*/    
+         .ed-slider-cached-image
+        {
+            display:none;
+        }
+
+        /**********************/
+        /* thumbnail controls */
+        /**********************/
+        .ncWrap {
+            float: left;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        /* round button look */
+        .ncWrap a.prev, .ncWrap a.next {
+            background: transparent url("/images/thumbnailControls.png") no-repeat 0 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -18px;
+            width: 32px;
+            height: 36px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prev { left: 0; margin-left: 5px;}
+        .ncWrap a.prev:hover { background-position: 0 -40px; }
+        .ncWrap a.prev:active { background-position: 0 -80px; }
+
+        .ncWrap a.next { background-position: -40px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.next:hover { background-position: -40px -40px; }
+        .ncWrap a.next:active { background-position: -40px -80px; }
+        /* end round button look */
+
+        /* small round button look */
+        .ncWrap a.prevSmall, .ncWrap a.nextSmall {
+            background: transparent url("/images/thumbnailControls.png") no-repeat -160px 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prevSmall { left: 0; margin-left: 5px;}
+        .ncWrap a.prevSmall:hover { background-position: -160px -40px; }
+        .ncWrap a.prevSmall:active { background-position: -160px -80px; }
+
+        .ncWrap a.nextSmall { background-position: -200px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.nextSmall:hover { background-position: -200px -40px; }
+        .ncWrap a.nextSmall:active { background-position: -200px -80px; }
+        /* end small round button look */
+
+        .carouselContainer {
+            position: relative;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            margin: 0 0 0 30px;
+        }
+
+        .carousel {
+            width: 99999px;/* huge width prior to js set width */
+        }
+
+        .carousel li {
+            float: left;
+            margin: 0 5px;
+            background-color: #fff;
+            border: 1px solid #e3e3e3;
+            opacity: .4;
+            width: auto !important;
+            height: auto !important;
+            position: relative;
+            filter: alpha(opacity = 40);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+            -webkit-transition: all .4s linear;
+            -moz-transition: all .4s linear;
+            -o-transition: all .4s linear;
+            -ms-transition: all .4s linear;
+            transition: all .4s linear;
+        }
+
+        /* ie8 */
+        .ie8 .carousel li img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        }
+
+        .carousel li a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+
+        .carousel li.selected, .carousel li:hover {
+            opacity: 1;
+            filter: alpha(opacity = 100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        /* ie8 */
+        .ie8 .carousel li.selected img, .ie8 .carousel li:hover img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        .carousel li img {
+            position: relative;
+        }
+        /**************************/
+        /* end thumbnail controls */
+        /**************************/
+    ', 
+    ', 
+        .ed-slider-image-caption-title-no-summary-19367cc1c8 {
+            font-weight:bold;
+            font-size:16px;
+        }
+
+        .ed-slider-image-caption-title-has-summary-19367cc1c8 {
+            font-weight:bold;
+            font-size:16px;
+            padding-bottom: 2px;
+        }
+
+        .ed-slider-image-caption-summary-19367cc1c8 {
+            font-weight:bold;
+            font-size:10px;
+        }
+        .ed-slider-image-caption-19367cc1c8,
+        .ed-slider-image-caption-summary-19367cc1c8,
+        .ed-slider-image-caption-title-has-summary-19367cc1c8 ,
+        .ed-slider-image-caption-title-no-summary-19367cc1c8
+        {
+            color: #fff;
+        }
+
+       #ed-slider-gallery-loading-19367cc1c8
+       {
+           width:634px;
+           height:250px;
+           position: absolute;
+           z-index: 5;
+       }
+
+       #ed-slider-wrap-19367cc1c8
+       {
+           overflow:hidden;
+
+           
+           width:634px;
+           height:247px;
+            position:absolute;top:3px;left:-160px;
+           
+
+           font-family:mavenpro-regular-webfont, sans-serif;
+
+
+
+
+       }
+
+        #ed-slider-wrap-19367cc1c8 .galleryWrap {
+            width: 634px;
+            height: 250px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+
+       #ed-slider-wrap-19367cc1c8 ul {
+           float: left;
+           width: 634px;
+           height: 250px;
+           overflow: hidden;
+       }
+
+
+       #ed-slider-wrap-19367cc1c8 ul li
+       {
+           list-style-type:none;
+           overflow: hidden;
+           width: 634px;
+           height: 250px;
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-19367cc1c8 .group .block {
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-19367cc1c8 .group .block.imgTransition {
+           background-color: transparent;
+       }
+
+       .ed-slider-image-caption-controlbar-container .captionHolder .ed-slider-image-caption-19367cc1c8 {
+            float: left;
+            min-height: 15px;
+            padding: 8px 8px 8px 10px;
+            position: relative;
+            width: 518px;
+        }
+
+        #ed-slider-wrap-19367cc1c8 .ed-slider-prevNext {
+            height: 250px;
+        }
+   ', 
+
+    ', 
+        ', 
+
+    
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_JNJTJ_/ce6ebf7b2a2ccf643745a49013852ec4/leah.JPG?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+
+        ', 
+        ', 
+            
+            ', 
+               ', 
+            ', 
+            
+        ', 
+    ', 
+', 
+	', 
+    ', 
+
+	', u"
+
+        $(document).ready(function()
+        {
+            fssbOnload('19367cc1c8',
+                    5000,
+                    'never',
+                    true,
+                    'fade',
+                    'None',
+                    'small',
+                    false,
+                    'hover',
+                    '977006568319236754',
+                    'edlElement_977006568319236754_folderContents',
+                    'edlElement_977006568319236754_folder',
+                    false
+            );
+		});
+
+	", 
+
+
+
+
+  
+
+  
+
+    ', 
+
+    
+
+', 
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("news.box", "");
+
+    
+
+', 
+
+
+', 
+
+
+
+    
+
+            ', News', 
+            
+            ', 
+', 
+', 
+', News', 
+', 
+
+
+            
+
+
+    
+
+  ', 
+      
+      
+      
+
+      
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Weekly update', 
+        ', 
+
+        
+             ', u"School Dear St Mary's Families: On the eve of our final day before Christmas vacation I am reminded of so many events and day to day activities at... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Some popular websites for vacation fun', 
+        ', 
+
+        
+             ', u"Enjoy some fun websites while on vacation and beyond! starfall.com www.abcya.com www.readingrockets.org... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Weekly Update', 
+        ', 
+
+        
+             ', u"St Mary's School Hello Everyone, Since we all felt the Arctic blast today and heard about impending snow, I thought I would send along a reminder... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Christmas Faire thanks.......', 
+        ', 
+
+        
+             ', u"Dear Families and Friends: Several months of planning resulted in a wonderful party at our school today. I have been a part of this for four years... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Friday Folder- November 18', 
+        ', 
+
+        
+             ', u"It's beginning to look a lot like .......Christmas? As you know, we are all about celebrating the season as well as our biggest fund raiser, the... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+      ', 
+          
+              ', 
+          
+              ', More News...', 
+          ', 
+      ', 
+    
+    ', 
+    
+    
+    
+', 
+
+    
+
+
+       
+
+       ', 
+
+           .edlNewsItemThumbDiv {
+               
+               
+               display: none;
+               
+               width: 80.0px;
+               float: left;
+               margin-right: 8px;
+           }
+
+           .edlEmptyThumb {
+               height: 45.0px;
+           }
+
+           .edlNewsItemThumbImg {
+               width: 80.0px;
+               
+               
+               display: inline;
+           }
+
+           .edlNewsItemNonThumbDiv {
+               float: left;
+               max-width: 148px;
+           }
+
+           .edlNewsItemClearer {
+               clear: both;
+           }
+
+       ', 
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("calendar.box", "");
+
+    
+
+', 
+
+
+', 
+
+
+
+    
+        ', Calendar', 
+        
+        ', 
+', 
+', 
+', Calendar', 
+', 
+
+
+        
+
+    
+
+  ', 
+  
+      
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+', 
+
+    ', 
+
+        
+        
+
+        ', 
+            ', previous month', 
+            ', next month', 
+            ',  ', 
+        ', 
+
+        ', 
+       		', 
+        ', 
+        
+    ', 
+
+    ', 
+        ', 
+            ', November 26, 2012', 
+            ', 0 Events', 
+            ', x', 
+        ', 
+
+        ', 
+        	', 
+            ', 
+            ', 
+        ', 
+        ', View Full Calendar', 
+    ', 
+
+', 
+', 
+', 
+
+  
+        
+      
+      
+  ', 
+    
+    
+    
+', 
+    ', 
+  ', 
+', 
+',   ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x0D8F064C2708DFC4/4":{"renderer":"image","mimeType":"image/png"},"0x0D8F064C2708DFC4/3":{"renderer":"image","mimeType":"image/png"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Footer Address', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc977006568304861124";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "977006568304861124",
+            "977006568304861124",
+            "iFrame_edlElement_977006568304861124_document",
+            'iFrame_edlElement_977006568304861124_document',
+            '*',
+            'edlThemeBottomsectionZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            0,
+            'transparent',
+            false,
+            true,
+            false,
+            false,
+            '928',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+
+                        ', 
+
+                    
+
+
+    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+    ', 
+
+    ', 
+
+    
+    ', translate monitor', 
+
+    ']

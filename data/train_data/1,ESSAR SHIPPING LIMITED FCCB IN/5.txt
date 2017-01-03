@@ -1,0 +1,1601 @@
+[
+    ', 
+', 
+
+', 
+', 
+    ', 
+    
+', 
+', 
+
+', 
+', 
+', 
+', 
+', 
+', 
+//Redirect to mobile site start
+    function detectmob() {
+        if (screen.width <= 599 || screen.Height <= 975) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    if (detectmob()) {
+       window.location.href = "https://m.rbi.org.in" + window.location.pathname;
+		
+       
+    }
+	//Redirect to mobile site End
+    $(document).ready(function () {
+        Search();
+    });
+
+    function Search() {
+        highlightTextAutocomplete();
+        $(".autoSuggest").autocomplete({
+
+
+            source: function (request, response) {
+                var param = { keyWord: document.getElementById('txtSearch').value };
+
+                $.ajax({
+                    url: "../Home.aspx/GetKeywords",
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+
+                        if (data.d.length > 0) {
+                            response($.map(data.d, function (item) {
+                                return {
+                                    value: RemoveSpecialChars(item)
+
+                                }
+                            }))
+                        }
+                        else {
+                            response([{ label: "No results found", value: ""}]);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+            },
+
+            //            select: function (event, ui) {
+            //                if (ui.item.value != "") {
+            //                    window.open("/scripts/SearchResults.aspx?search=" + ui.item.value, '_blank');
+            //                }
+            //            },
+            minLength: 3
+
+        });
+    }
+
+    function highlightTextAutocomplete() {
+
+        var oldFn = $.ui.autocomplete.prototype._renderItem;
+
+        $.ui.autocomplete.prototype._renderItem = function (ul, item) {
+
+            var t = String(item.value).replace(
+                new RegExp(this.term, "gi"),
+                "<span class='ui-state-highlight'>$&</span>");
+            if (item.value != "") {
+                return $("<li class='borderAutocomplete'></li>")
+                  .data("item.autocomplete", item)
+                  .append("<a>" + t + "</a>")
+                  .appendTo(ul);
+            }
+
+            else {
+                return $("<li></li>")
+                  .data("item.autocomplete", item)
+                  .append("")
+                  .appendTo(ul);
+            }
+        };
+    }
+
+
+    function RemoveSpecialChars(inputText) {
+        var filteredString = inputText.replace(/[\*\^\'\!\@\$\.\#\(\)\-\?\<\>\;\"\&\+\{\}\:]/g, '');
+        //alert(filteredString);
+        return filteredString;
+    }
+    //    jQuery(document).ready(function () {
+    //        var xmlhttp;
+    //        jQuery("#txtSearch").autocomplete(
+    //                    {
+    //                        minLength: 3,
+    //                        delay: 0,
+    //                        source: function (request, response) {
+    //                            if (!xmlhttp) {
+    //                                if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+    //                                    xmlhttp = new XMLHttpRequest();
+    //                                }
+    //                                else {// code for IE6, IE5
+    //                                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    //                                }
+    //                            }
+    //                            else if (xmlhttp.readyState != 0) {
+    //                                xmlhttp.abort();
+    //                            }
+    //                            xmlhttp.onreadystatechange = function () {
+    //                                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    //                                    fetchedKeywords = xmlhttp.responseText.split("'");
+    //                                    
+    //                                    if (fetchedKeywords.length > 10) {
+    //                                        fetchedKeywords.splice(10, fetchedKeywords.length - 10);
+    //                                    }
+    //                                    if (fetchedKeywords != "") response(fetchedKeywords);
+    //                                    else response(null);
+    //                                }
+    //                            }
+    //                            var input = document.getElementById("txtSearch").value;
+    //                            xmlhttp.open("POST", "/Webservice/KeywordSearch.ashx?q=" + input, true);
+    //                            xmlhttp.send();
+    //                        }
+    //                    });
+    //    });
+
+    function LoadSearchData(id, key) {
+        if (id == "txtSearch") {
+            if (key == 13) {
+                validateSearchText();
+                return false;
+            }
+        }
+        else validateSearchText();
+        return true;
+    }
+    function validateSearchText() {
+        if (validation()) {
+            var strloc = new String(document.location.href.toString());
+            if (strloc.indexOf("SearchResults.aspx") == -1) {//             
+                window.open("/scripts/SearchResults.aspx?search=" + document.getElementById("txtSearch").value);
+            }
+            else window.open("/scripts/SearchResults.aspx?search=" + document.getElementById("txtSearch").value, '_parent');
+        }
+    }
+    function validation() {
+        strSearch = trim(document.getElementById('txtSearch').value);
+        if (strSearch == "") { alert('Please enter the search text'); return false; }
+        else {
+            //var strFilterChars = new RegExp("[~`!@#$%^&*()_+-={}\\[\\]:/\\\\\";|'<>,.?]");
+            var strFilterChars = new RegExp("^[0-9a-zA-Z ]*$");
+            if (!strFilterChars.test(strSearch)) { alert("Please remove special characters from search text"); return false; }
+        }
+        return true;
+    }
+    function trim(value) {
+        value = value.replace(/^\s+/, '');
+        value = value.replace(/\s+$/, '');
+        return value;
+    }
+', 
+', 
+    ', 
+        ', 
+            ', Skip to main content ', 
+        ', 
+        ', 
+            ', 
+                ', 
+            ', 
+                ', 
+            ', 
+                ', 
+            ', 
+                ', 
+            ', 
+                ', 
+            ', 
+                ', 
+            ', 
+                ', 
+                    Language', \u0939\u093f\u0902\u0926\u0940', 
+                    
+        ', 
+        ', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+    ', 
+    ', 
+        ', 
+            Search the Website', 
+        ', 
+        ', 
+            Search', 
+    ', 
+    ', 
+    ', 
+', 
+', 
+', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', 
+              ', Home', 
+              ', About Us', 
+              ', Notifications', 
+              
+              ', Press Releases', 
+              ', Speeches', 
+              ', Publications', 
+                ', 
+                  ', Annual', 
+                  ', Half-Yearly', 
+                  ', Quarterly', 
+				  ', Bi-monthly', 
+                  ', Monthly', 
+                  ', Weekly', 
+                  ', Occasional', 
+                   ', Reports', 
+                  ', Lectures', 
+                ', 
+              ', 
+              ', Statistics', 
+                ', 
+                  ', Data Releases', 
+                  
+                  ', Database on Indian Economy', 
+                ', 
+              ', 
+             ', 
+          ', 
+        ', 
+      ', 
+    ', 
+', 
+', 
+', 
+', 
+
+
+    ', 
+        ', 
+            ', 
+            ', 
+                ', 
+                    ', Home', 
+                    ', Data Releases', 
+                    ', 
+                         ', External Commercial Borrowings', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            ', 
+            ', 
+                ', 
+                    
+                    ', 
+                        External Commercial Borrowings
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                                ',  (85 kb) or ',  (55 kb)',   ',     ', Data on ECB/FCCB for the month of October 2016',   ',   ',     ', I AUTOMATIC ROUTE*',   ',   ',     ',  ',     ', ECB/ FCCB',     ', Borrower',     ', Equivalent Amount in USD',     ', Purpose',     ', Maturity Period',       (Appx)',   ',   ',     ', 1',     ', ECB',     ', Essar Shipping Limited',     ', 44,917,399',     ', Import of Capital Goods',     ', 10 Years',   ',   ',     ', 2',     ', ECB',     ', Jotun India Private Limited',     ', 2,951,413',     ', New Project',     ', 10 Years',   ',   ',     ', 3',     ', ECB',     ', Medreich Limited',     ', 3,500,000',     ', Refinancing of Earlier ECB',     ', 3 Years 4 Months',   ',   ',     ', 4',     ', ECB',     ', Medreich Limited',     ', 4,812,500',     ', Refinancing of Earlier ECB',     ', 2 Years 5 Months',   ',   ',     ', 5',     ', ECB',     ', Rhine Engineering Private Ltd',     ', 500,000',     ', General Corporate Purpose',     ', 5 Years 2 Months',   ',   ',     ', 6',     ', ECB',     ', JFE Shoji Steel India Private Limited',     ', 404,508',     ', Import of Capital Goods',     ', 3 Years',   ',   ',     ', 7',     ', ECB',     ', Denyo Manufacturing India Private Limited',     ', 1,500,000',     ', New Project',     ', 9 Years',   ',   ',     ', 8',     ', ECB',     ', JSW MI Steel Service Center Private Limited',     ', 6,107,900',     ', New Project',     ', 11 Years 5 Months',   ',   ',     ', 9',     ', ECB',     ', URB India Bearing Factory & Trade Private Limited',     ', 3,500,000',     ', New Project',     ', 3 Years 3 Months',   ',   ',     ', 10',     ', ECB',     ', CRI Pumps Private Limited',     ', 8,000,000',     ', Rupee Expenditure Loc.CG',     ', 6 Years',   ',   ',     ', 11',     ', ECB',     ', Minda TG Rubber Private Limited',     ', 609,570',     ', Rupee Expenditure Loc.CG',     ', 5 Years 3 Months',   ',   ',     ', 12',     ', ECB',     ', Thermal Powertech Corporation India Limited',     ', 246,000,000',     ', Other',     ', 5 Years 5 Months',   ',   ',     ', 13',     ', ECB',     ', Bellsonica Auto Component India Private Limited',     ', 3,857,811',     ', Modernisation',     ', 9 Years 9 Months',   ',   ',     ', 14',     ', ECB',     ', Huaheng Automation Private Limited',     ', 500,000',     ', Working Capital',     ', 5 Years 7 Months',   ',   ',     ', 15',     ', ECB',     ', Daiichi N Horizon Autocomp Private Limited',     ', 964,453',     ', Import of Capital Goods',     ', 9 Years 7 Months',   ',   ',     ', 16',     ', ECB',     ', KHM Drive Systems Private Limited',     ', 275,790',     ', Import of Capital Goods',     ', 5 Years 6 Months',   ',   ',     ', 17',     ', ECB',     ', Click & Buy Services India Private Limited',     ', 209,525',     ', Working Capital',     ', 7 Years',   ',   ',     ', 18',     ', ECB',     ', Schiffer and Menezes India Private Limited',     ', 2,756,911',     ', Modernisation',     ', 4 Years 3 Months',   ',   ',     ', 19',     ', ECB',     ', Pigeon India Pvt Ltd',     ', 449,454',     ', Import of Capital Goods',     ', 3 Years',   ',   ',     ', 20',     ', ECB',     ', Varun Gas Logistics Private Limited',     ', 36,000,000',     ', Import of Capital Goods',     ', 9 Years 9 Months',   ',   ',     ', 21',     ', ECB',     ', K. V. Arochem Private Limited',     ', 2,756,911',     ', Refinancing of Earlier ECB',     ', 1 Year 6 Months',   ',   ',     ', 22',     ', ECB',     ', Exedy Clutch India Private Limited',     ', 3,857,811',     ', Modernisation',     ', 6 Years 5 Months',   ',   ',     ', 23',     ', ECB',     ', Tae Hwa Enterprises India Private Limited',     ', 2,800,000',     ', Import of Capital Goods',     ', 5 Years 2 Months',   ',   ',     ', 24',     ', ECB',     ', Worldwide Diamond Manufacturers Private Limited',     ', 150,000',     ', General Corporate Purpose',     ', 7 Years 11 Months',   ',   ',     ', 25',     ', ECB',     ', Polmor Steel Private Limited',     ', 661,659',     ', Modernisation',     ', 7 Years 9 Months',   ',   ',     ', 26',     ', ECB',     ', Timken Engineering and Research India Private Limited',     ', 18,000,000',     ', Modernisation',     ', 3 Years 4 Months',   ',   ',     ', 27',     ', ECB',     ', Roki R & D India Private Limited',     ', 3,895,265',     ', Import of Capital Goods',     ', 9 Years 5 Months',   ',   ',     ', 28',     ', ECB',     ', Bullock-Cart Workers Development Association',     ', 937,860',     ', On-lending/Sub-lending.',     ', 3 Years',   ',   ',     ', 29',     ', ECB',     ', Koide India Private Limited',     ', 1,157,343',     ', General Corporate Purpose',     ', 10 Years',   ',   ',     ', 30',     ', ECB',     ', Scholle IPN India Packaging Private Limited',     ', 1,020,057',     ', Import of Capital Goods',     ', 5 Years 5 Months',   ',   ',     ', 31',     ', ECB',     ', Robertshaw Controls Private Limited',     ', 1,500,000',     ', General Corporate Purpose',     ', 5 Years',   ',   ',     ', 32',     ', ECB',     ', u"Dr. Reddy's Laboratories Limited",     ', 150,000,000',     ', Refinancing of Earlier ECB',     ', 3 Years 10 Months',   ',   ',     ', 33',     ', ECB',     ', Aisin Automotive Karnataka Private Limited',     ', 2,996,358',     ', Modernisation',     ', 5 Years',   ',   ',     ', 34',     ', ECB',     ', Compact India Private Limited',     ', 1,036,633',     ', Modernisation',     ', 8 Years 5 Months',   ',   ',     ', 35',     ', ECB',     ', Prafful Overseas Pvt.Ltd.',     ', 5,565,829',     ', Import of Capital Goods',     ', 7 Years 3 Months',   ',   ',     ', 36',     ', ECB',     ', TBEA Energy (India) Private Limited',     ', 15,000,000',     ', General Corporate Purpose',     ', 5 Years',   ',   ',     ', 37',     ', ECB',     ', Athenahealth Technology Pvt Ltd.',     ', 2,450,000',     ', Modernisation',     ', 10 Years 2 Months',   ',   ',     ', 38',     ', ECB',     ', Delhi International Airport Pvt Ltd.',     ', 522,600,000',     ', Refinancing of rupee loans/ Refinancing of Earlier ECB',     ', 10 Years',   ',   ',     ', 39',     ', ECB',     ', Infini Precision Private Limited',     ', 496,244',     ', General Corporate Purpose',     ', 5 Years 11 Months',   ',   ',     ', 40',     ', ECB',     ', Bharat Aluminium Company Ltd.',     ', 30,000,000',     ', New Project',     ', 6 Years',   ',   ',     ', 41',     ', ECB',     ', IL&FS Transportation Networks Limited',     ', 50,021,199',     ', General Corporate Purpose',     ', 3 Years',   ',   ',     ', 42',     ', ECB',     ', HNV Castings Pvt. Ltd.',     ', 3,745,447',     ', General Corporate Purpose',     ', 5 Years 5 Months',   ',   ',     ', 43',     ', ECB',     ', Sapa Precision Tubing Pune Pvt. Ltd.',     ',    1,295,748',     ', Rupee Expenditure Loc.CG',     ', 5 Years',   ',   ',     ', 44',     ', ECB',     ', Greenply Industries Limited',     ', 47,199,427',     ', Import of Capital Goods',     ', 12 Years',   ',   ',     ', 45',     ', ECB',     ', Rivipac Polymers Private Limited',     ', 650,000',     ', Working Capital',     ', 6 Years 4 Months',   ',   ',     ', 46',     ', ECB',     ', IPCA Laboratories Limited',     ', 10,000,000',     ', Modernisation',     ', 5 Years',   ',   ',     ', 47',     ', ECB',     ', Shinwa India Private Limited',     ', 144,668',     ', General Corporate Purpose',     ', 7 Years',   ',   ',     ', 48',     ', ECB',     ', Hirotec India Private Limited',     ', 6,700,000',     ', Modernisation',     ', 11 Years 1 Month',   ',   ',     ', 49',     ', ECB',     ', Pup Exports Private Ltd',     ', 24,725',     ', New Project',     ', 9 Years',   ',   ',     ', 50',     ', ECB',     ', NYK Auto Logistics (India) Private Limited',     ', 3,940,211',     ', New Project',     ', 6 Years 11 Months',   ',   ',     ', 51',     ', ECB',     ', Unique Hydrographic Systems Pvt Ltd.',     ', 2,037,523',     ', General Corporate Purpose',     ', 7 Years 7 Months',   ',   ',     ', 52',     ', ECB',     ', Sarat Chatterjee & CO (Visakhapatnam) Pvt Ltd.',     ', 6,490,000',     ', Import of Capital Goods',     ', 9 Years',   ',   ',     ', 53',     ', ECB',     ', Maithan Alloys Limited',     ', 7,575,000',     ', Refinancing of Earlier ECB',     ', 2 Years 5 Months',   ',   ',     ', 54',     ', ECB',     ', Reliance Industries Limited',     ', 184,284,000',     ', Refinancing of Earlier ECB',     ', 9 Years 2 Months',   ',   ',     ',  ',     ',  ',     ', Total Automatic Route',     ', 1,458,807,156',     ',  ',     ',  ',   ',   ',     ',  ',     ',  ',     ',  ',     ',  ',     ',  ',     ',  ',   ',   ',     ',  ',     ', II APPROVAL ROUTE*',   ',   ',     ', 1',     ', ECB',     ', Tulshyan Shipping & Offshore Services Private Limited',     ', 12,200,000',     ', Import of Capital Goods',     ', 4 Years',   ',   ',     ',  ',     ',  ',     ', Total Approval Route',     ', 12,200,000',     ',  ',     ',  ',   ',   ',     ',  ',     ',  ',     ', Total',     ', 1,471,007,156',     ',  ',     ',  ',   ',   ',     ', * Based on applications for ECB/Foreign Currency Convertible Bonds (FCCBs) which have been allotted loan registration number during the period.',   ',   ',     ', Data on RDB for the month of October 2016',   ',   ',     ',  ',     ', I AUTOMATIC ROUTE*',   ',   ',     ',  ',     ', RDB',     ', Borrower',     ', Loan Amount in INR',     ', Equivalent Amount in USD',     ', Purpose',     ', Maturity Period',       (Appx)',   ',   ',     ', 1',     ', RDB',     ', Fullerton India Credit Co. Ltd',     ', 5000000000',     ', 74,908,948',     ', On-lending/Sub-lending.',     ', 3 Years 1 Month',   ',   ',     ', 2',     ', RDB',     ', Housing Development Finance Corporation Limited',     ', 5000000000',     ', 74,908,948',     ', On-lending/Sub-lending.',     ', 3 Years 3 Months',   ',   ',     ', 3',     ', RDB',     ', ECL Finance Limited',     ', 10000000000',     ', 149,817,896',     ', General Corporate Purpose',     ', 3 Years 2 Months',   ',   ',     ',  ',     ',  ',     ', Total Automatic Route',     ', 20,000,000,000',     ', 299,635,793',     ',  ',     ',  ',   ',   ',     ',  ',     ', II APPROVAL ROUTE*',   ',   ',     ',  ',     ',  ',     ',  ',     ',  ',     ',  ',     ',  ',     ',  ',   ',   ',     ',  ',     ',  ',     ', Total Approval Route',     ', 0',     ', 0',     ',  ',     ',  ',   ',   ',     ',  ',     ',  ',     ', Total',     ', 20,000,000,000',     ', 299,635,793',     ',  ',     ',  ',   ',   ',     ', * Based on applications for Rupee Denominated Bond which have been allotted loan registration number during the period.',   ', 
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                            ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 2017', 2016', 2015', 2014', 2013', 2012', 2011', 2010', 2009', 2008', Archives', 2007', 2006', 2005', 2004', 2003', 2002', 2001', 2000', 1999', 1998', 1997', 1996', 1995', 1994', 1993', 1992', 1991', 1990', 
+
+
+
+
+            ', 
+        ', 
+    ', 
+    ', 
+    ', 
+    ', Server 214', 
+', Top', 
+', 
+', 
+  ', 
+    ', 
+      ', More',  Links ', 
+      ', 
+        ', 
+          ', 
+          ', Financial Education', 
+          ', Paisa Bolta Hai', 
+          ', RBI Cautions', 
+          ', FAQs', 
+          ', 
+          ', IFSC/MICR Codes', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', Tenders', 
+          ', Opportunities', @', RBI', 
+          ', 
+          ', Bank Holidays', 
+          ', Forms', 
+          ', Application Tracking System', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', Events', 
+          ', Public Speaking Engagements', 
+          ', RBI Clarifications', 
+		  ', Right to Information Act', 
+          ', Related Links', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', u"RBI's Core Purpose, Values and Vision", 
+          ', u"Citizens' Charter", 
+          ', Timelines for Regulatory Approvals', 
+          ', Complaints', 
+          ', Contact Us', 
+        ', 
+      ', 
+    ', 
+    ', 
+      ', Follow',  RBI ', 
+      ', 
+        ', RSS', 
+        ', Twitter', 
+        ', Videos', 
+      ', 
+    ', 
+    ', 
+  ', 
+  ', 
+    ', 
+      ', © Reserve Bank of India. All Rights Reserved.', 
+      ', Sitemap',  | ', Disclaimer', 
+      ', 
+    ', 
+  ', 
+  
+
+', 
+
+  ', 
+  ', 
+  ',  ',  ', 
+   ', 
+   ', 
+   ', 
+
+   April 14, 2015
+   ', 
+   ', 
+    ', 
+  
+    ', 
+    
+   Dear All
+    ', 
+    ', 
+     ', 
+     ', 
+     
+  Welcome to the refurbished site of the Reserve Bank of India. 
+    ', 
+   
+    ', 
+    ', 
+    ', 
+    
+  The two most important features of the site are: One, in addition to the default site, the refurbished site also has all the information bifurcated functionwise; two, a much improved search \u2013 well, at least we think so but you be the judge. 
+    ', 
+   
+    ', 
+
+      ', 
+    ', 
+   With this makeover, we also take a small step into social media. We will now use Twitter (albeit one way) to send out alerts on the announcements we make and YouTube to place in public domain our press conferences, interviews of our top management, events, such as, town halls and of course, some films aimed at consumer literacy.  
+    ', 
+   
+    ', 
+    ', 
+    ', 
+    The site can be accessed through most browsers and devices; it also meets accessibility standards. 
+    ', 
+    ', 
+    ', 
+    ', 
+    Please save the url of the refurbished site in your favourites as we will give up the existing site shortly and register or re-register yourselves for receiving RSS feeds for uninterrupted alerts from the Reserve Bank. 
+    ', 
+    ', 
+    ', 
+    ', 
+    Do feel free to give us your feedback by clicking on the feedback button on the right hand corner of the refurbished site. 
+    ', 
+    ', 
+    ', 
+    ', 
+    Thank you for your continued support.', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    Department of Communication ', 
+Reserve Bank of India', 
+
+    ', 
+    ', 
+	', Next', 
+    ', 
+   ', 
+  ', 
+  ', 
+
+', 
+
+', 
+', 
+', 
+', 
+', 
+
+', 
+', 
+', 
+
+
+    //this is for floating TOP link
+    
+    $(document).ready(function () {
+
+        var offset = 230;
+        var duration = 500;
+
+
+        jQuery(window).scroll(function () {
+            if (jQuery(this).scrollTop() > offset) {
+                jQuery('.scrollToTop').fadeIn(duration);
+                // $('#backToTop').css('right', (diffWidth / 2) - 6);
+            } else {
+                jQuery('.scrollToTop').fadeOut(duration);
+                //  $('#backToTop').css('right', (diffWidth / 2) - 6);
+            }
+        });
+
+        //        $('a[href*=#]:not([href=#])').click(function () {
+
+        //            if (location.pathname.replace(/^\//, '') == window.location.pathname.replace(/^\//, '') && location.hostname == window.location.hostname) {
+
+        //                var target = $(this.hash);
+        //                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        //                if (target.length) {
+        //                    $('html,body').animate({
+        //                        scrollTop: target.offset().top
+        //                    }, 800);
+        //                    return false;
+        //                }
+        //            }
+        //        });
+
+        $('.scrollToTop').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+    });
+
+
+    //Below code is for floating left panel and floating tree structure
+    //first if condition is for functionwise pages and 2nd one for rest all
+    $(window).scroll(function () {
+
+        if ($('div.banner2').length) {
+
+            if ($(window).scrollTop() >= 265) {
+                $('#menubar').css("position", "fixed");
+                $('#menubar').css("width", "240px");
+                $('#menubar').css("margin-top", "-281px");
+                $('.content_area').css("margin-left", "252px");
+
+                $('.sidebar_nav').css("position", "fixed");
+                $('.sidebar_nav').css("margin-top", "-200px");
+                $('.sidebar_nav').css("width", "236px");
+
+
+                $('#DateSettree_lbltree').css('position', 'fixed');
+                $('#DateSettree_lbltree').css('margin-top', '-281px');
+
+            }
+
+            else {
+                $('#menubar').css("position", "");
+                $('#menubar').css("width", "");
+                $('#menubar').css("margin-top", "");
+                $('.content_area').css("margin-left", "");
+
+                $('.sidebar_nav').css("position", "");
+                $('.sidebar_nav').css("margin-top", "");
+                $('.sidebar_nav').css("width", "");
+
+
+
+                $('#DateSettree_lbltree').css('position', '');
+                $('#DateSettree_lbltree').css('margin-top', '');
+            }
+
+        }
+
+        else if ($(window).scrollTop() >= 185) {
+            $('#menubar').css("position", "fixed");
+            $('#menubar').css("width", "240px");
+            $('#menubar').css("margin-top", "-200px");
+            $('.content_area').css("margin-left", "252px");
+
+            $('.sidebar_nav').css("position", "fixed");
+            $('.sidebar_nav').css("margin-top", "-200px");
+            $('.sidebar_nav').css("width", "236px");
+
+
+            $('#DateSettree_lbltree').css('position', 'fixed');
+            $('#DateSettree_lbltree').css('margin-top', '-200px');
+
+        }
+
+        else {
+            $('#menubar').css("position", "");
+            $('#menubar').css("width", "");
+            $('#menubar').css("margin-top", "");
+            $('.content_area').css("margin-left", "");
+
+            $('.sidebar_nav').css("position", "");
+            $('.sidebar_nav').css("margin-top", "");
+            $('.sidebar_nav').css("width", "");
+
+
+            $('#DateSettree_lbltree').css('position', '');
+            $('#DateSettree_lbltree').css('margin-top', '');
+        }
+//        if ($(window).scrollTop() >= 235) {
+
+//            $('#DateSettree_lbltree').css('height', '183px');
+//            $('#DateSettree_lbltree').css('overflow-y', 'scroll');
+//            $('#DateSettree_lbltree').css('width', '100px');
+
+//        }
+//        else {
+//            $('#DateSettree_lbltree').css('height', '');
+//            $('#DateSettree_lbltree').css('overflow-y', '');
+//            $('#DateSettree_lbltree').css('width', '');
+
+//        }
+
+       
+    });
+	
+       // $(window).unload(function () {
+       //     $.cookies.del('feedback_Cookie'); 
+       // });
+    $(document).ready(function () {
+	
+	
+		  $('.window .close').click(function (e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            $.cookie('feedback_Cookie', 'Yes', { expires: 365, path: '/' });
+            $('#maskWN').hide();
+            $('.window').hide();
+            var scroll = $(window).scrollTop();
+            $("html").scrollTop(scroll);
+        });
+		
+		 $('#maskWN').click(function () {
+            $(this).hide();
+            $.cookie('feedback_Cookie', 'Yes', { expires: 365, path: '/' });
+            $('.window').hide();
+
+        });
+
+        //        if ($.cookie('feedback_Cookie') == null) {
+        //            var id = '#dialog';
+
+        //            //Get the screen height and width
+        //            var maskHeight = $(document).height();
+        //            var maskWidth = $(window).width();
+        //           
+
+        //            //Set heigth and width to mask to fill up the whole screen
+        //            $('#mask').css({ 'width': '100%', 'height': '100%','position':'fixed' });
+
+        //            //transition effect
+        //            $('#mask').fadeIn(500);
+        //            $('#mask').fadeTo("slow", 0.9);
+
+        //            //Get the window height and width
+        //            var winH = $(window).height();
+        //            var winW = $(window).width();
+
+        //            //Set the popup window to center
+        //            $(id).css('top', winH / 2 - $(id).height() / 2);
+        //            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+        //            //transition effect
+        //            $(id).fadeIn(2000);
+
+
+
+        //        }
+//        $('blockquote p').css('margin','auto');
+//        $('blockquote blockquote blockquote p').contents().contents().unwrap();
+//        $('blockquote blockquote blockquote').contents().unwrap();
+//        $('blockquote blockquote').contents().unwrap();
+//        $('blockquote').contents().unwrap();
+        
+
+        //if close button is clicked
+        $('.window .close').click(function (e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            $.cookie('feedback_Cookie', 'Yes', { expires: 365, path: '/' });
+            $('#mask').hide();
+            $('.window').hide();
+            var scroll = $(window).scrollTop();
+            $("html").scrollTop(scroll);
+        });
+
+        //if mask is clicked
+        $('#mask').click(function () {
+            $(this).hide();
+            $('.window').hide();
+        });
+        $('#feedbackbtn').click(function () {
+            var id = '#dialog';
+
+            //Get the screen height and width
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //Set heigth and width to mask to fill up the whole screen
+            //$('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+            $('#mask').css({ 'width': '100%', 'height': '100%', 'position': 'fixed' });
+
+            //transition effect
+            $('#mask').fadeIn(500);
+            $('#mask').fadeTo("slow", 0.9);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $(id).css('top', winH / 2 - $(id).height() / 2);
+            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+            //transition effect
+            $(id).fadeIn(2000);
+        });
+
+        $('.submit').click(function () {
+            var Name = $("[id*=txtFeedbackName]").val();
+            var Email = $("[id*=txtFeedbackEmail]").val();
+            var Comments = $("[id*=txtFeedbackComments]").val();
+            if (Name == "") {
+
+                alert("Please enter your name");
+                $("[id*=txtFeedbackName]").focus();
+                return false;
+            }
+            else if (Email == "") {
+                alert("Please enter your email");
+                $("[id*=txtFeedbackEmail]").focus();
+                return false;
+            }
+            else if (Email != "" && !ValidateEmail(Email)) {
+                alert("Please enter a valid email address");
+                $("[id*=txtFeedbackEmail]").focus();
+                return false;
+            }
+
+            else if (Comments == "") {
+
+                alert("Please enter some comments");
+                $("[id*=txtFeedbackComments]").focus();
+                return false;
+            }
+
+            else {
+                $('[id*=Button1]').attr('disabled', 'disabled');
+
+                var param = { Name: Name, EmailID: Email, Comments: Comments };
+                $.ajax({
+                    type: "POST",
+                    url: "../Home.aspx/SaveFeedback",
+                    data: JSON.stringify(param),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+
+                    success: function (response) {
+
+                        if (response.d == "0") {
+                            alert("Thank you for your feedback");
+                            $.cookie('feedback_Cookie', 'Yes', { expires: 365, path: '/' });
+                            $('#mask').hide();
+                            $('.window').hide();
+                            $('[id*=Button1]').removeAttr('disabled');
+                            $("[id*=txtFeedbackName]").val("");
+                            $("[id*=txtFeedbackEmail]").val("");
+                            $("[id*=txtFeedbackComments]").val("");
+                        }
+                        else {
+                            alert("Please try again");
+                            $('[id*=Button1]').removeAttr('disabled');
+
+
+                        }
+
+                    }
+                });
+            }
+
+        });
+
+        function ValidateEmail(email) {
+            var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            return expr.test(email);
+        };
+
+        //        $('#divArchiveMain').click(function () {
+        //            
+        //            if ($(window).scrollTop() >= 235) {
+
+        //                $('#DateSettree_lbltree').css('height', '181px');
+        //                $('#DateSettree_lbltree').css('overflow-y', 'scroll');
+        //                $('#DateSettree_lbltree').css('width', '100px');
+
+        //            }
+        //            else {
+        //                $('#DateSettree_lbltree').css('height', '');
+        //                $('#DateSettree_lbltree').css('overflow-y', '');
+        //                $('#DateSettree_lbltree').css('width', '');
+
+        //            }
+        //        });
+
+        $('a.style1').each(function () {
+
+            var $this = $(this);
+            var aHref = $this.attr('class');
+            $this.attr('class', aHref.replace('style1', 'links'));
+        });
+    });
+
+', 
+', u"
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61369961-1', 'auto');
+  ga('send', 'pageview');
+
+", 
+'][
+    ', 
+', 
+
+', 
+', 
+    ', 
+    
+', 
+', 
+
+', 
+', 
+', 
+', 
+', 
+', 
+//Redirect to mobile site start
+    function detectmob() {
+        if (screen.width <= 599 || screen.Height <= 975) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    if (detectmob()) {
+       window.location.href = "https://m.rbi.org.in" + window.location.pathname;
+		
+       
+    }
+	//Redirect to mobile site End
+    $(document).ready(function () {
+        Search();
+    });
+
+    function Search() {
+        highlightTextAutocomplete();
+        $(".autoSuggest").autocomplete({
+
+
+            source: function (request, response) {
+                var param = { keyWord: document.getElementById('txtSearch').value };
+
+                $.ajax({
+                    url: "../Home.aspx/GetKeywords",
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+
+                        if (data.d.length > 0) {
+                            response($.map(data.d, function (item) {
+                                return {
+                                    value: RemoveSpecialChars(item)
+
+                                }
+                            }))
+                        }
+                        else {
+                            response([{ label: "No results found", value: ""}]);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                    }
+                });
+            },
+
+            //            select: function (event, ui) {
+            //                if (ui.item.value != "") {
+            //                    window.open("/scripts/SearchResults.aspx?search=" + ui.item.value, '_blank');
+            //                }
+            //            },
+            minLength: 3
+
+        });
+    }
+
+    function highlightTextAutocomplete() {
+
+        var oldFn = $.ui.autocomplete.prototype._renderItem;
+
+        $.ui.autocomplete.prototype._renderItem = function (ul, item) {
+
+            var t = String(item.value).replace(
+                new RegExp(this.term, "gi"),
+                "<span class='ui-state-highlight'>$&</span>");
+            if (item.value != "") {
+                return $("<li class='borderAutocomplete'></li>")
+                  .data("item.autocomplete", item)
+                  .append("<a>" + t + "</a>")
+                  .appendTo(ul);
+            }
+
+            else {
+                return $("<li></li>")
+                  .data("item.autocomplete", item)
+                  .append("")
+                  .appendTo(ul);
+            }
+        };
+    }
+
+
+    function RemoveSpecialChars(inputText) {
+        var filteredString = inputText.replace(/[\*\^\'\!\@\$\.\#\(\)\-\?\<\>\;\"\&\+\{\}\:]/g, '');
+        //alert(filteredString);
+        return filteredString;
+    }
+    //    jQuery(document).ready(function () {
+    //        var xmlhttp;
+    //        jQuery("#txtSearch").autocomplete(
+    //                    {
+    //                        minLength: 3,
+    //                        delay: 0,
+    //                        source: function (request, response) {
+    //                            if (!xmlhttp) {
+    //                                if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+    //                                    xmlhttp = new XMLHttpRequest();
+    //                                }
+    //                                else {// code for IE6, IE5
+    //                                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    //                                }
+    //                            }
+    //                            else if (xmlhttp.readyState != 0) {
+    //                                xmlhttp.abort();
+    //                            }
+    //                            xmlhttp.onreadystatechange = function () {
+    //                                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    //                                    fetchedKeywords = xmlhttp.responseText.split("'");
+    //                                    
+    //                                    if (fetchedKeywords.length > 10) {
+    //                                        fetchedKeywords.splice(10, fetchedKeywords.length - 10);
+    //                                    }
+    //                                    if (fetchedKeywords != "") response(fetchedKeywords);
+    //                                    else response(null);
+    //                                }
+    //                            }
+    //                            var input = document.getElementById("txtSearch").value;
+    //                            xmlhttp.open("POST", "/Webservice/KeywordSearch.ashx?q=" + input, true);
+    //                            xmlhttp.send();
+    //                        }
+    //                    });
+    //    });
+
+    function LoadSearchData(id, key) {
+        if (id == "txtSearch") {
+            if (key == 13) {
+                validateSearchText();
+                return false;
+            }
+        }
+        else validateSearchText();
+        return true;
+    }
+    function validateSearchText() {
+        if (validation()) {
+            var strloc = new String(document.location.href.toString());
+            if (strloc.indexOf("SearchResults.aspx") == -1) {//             
+                window.open("/scripts/SearchResults.aspx?search=" + document.getElementById("txtSearch").value);
+            }
+            else window.open("/scripts/SearchResults.aspx?search=" + document.getElementById("txtSearch").value, '_parent');
+        }
+    }
+    function validation() {
+        strSearch = trim(document.getElementById('txtSearch').value);
+        if (strSearch == "") { alert('Please enter the search text'); return false; }
+        else {
+            //var strFilterChars = new RegExp("[~`!@#$%^&*()_+-={}\\[\\]:/\\\\\";|'<>,.?]");
+            var strFilterChars = new RegExp("^[0-9a-zA-Z ]*$");
+            if (!strFilterChars.test(strSearch)) { alert("Please remove special characters from search text"); return false; }
+        }
+        return true;
+    }
+    function trim(value) {
+        value = value.replace(/^\s+/, '');
+        value = value.replace(/\s+$/, '');
+        return value;
+    }
+', 
+', 
+    ', 
+        ', 
+            ', Skip to main content ', 
+        ', 
+        ', 
+            ', 
+                ', 
+            ', 
+                ', 
+            ', 
+                ', 
+            ', 
+                ', 
+            ', 
+                ', 
+            ', 
+                ', 
+            ', 
+                ', 
+                    Language', \u0939\u093f\u0902\u0926\u0940', 
+                    
+        ', 
+        ', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+    ', 
+    ', 
+        ', 
+            Search the Website', 
+        ', 
+        ', 
+            Search', 
+    ', 
+    ', 
+    ', 
+', 
+', 
+', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', 
+              ', Home', 
+              ', About Us', 
+              ', Notifications', 
+              
+              ', Press Releases', 
+              ', Speeches', 
+              ', Publications', 
+                ', 
+                  ', Annual', 
+                  ', Half-Yearly', 
+                  ', Quarterly', 
+				  ', Bi-monthly', 
+                  ', Monthly', 
+                  ', Weekly', 
+                  ', Occasional', 
+                   ', Reports', 
+                  ', Lectures', 
+                ', 
+              ', 
+              ', Statistics', 
+                ', 
+                  ', Data Releases', 
+                  
+                  ', Database on Indian Economy', 
+                ', 
+              ', 
+             ', 
+          ', 
+        ', 
+      ', 
+    ', 
+', 
+', 
+', 
+', 
+
+
+    ', 
+        ', 
+            ', 
+            ', 
+                ', 
+                    ', Home', 
+                    ', Data Releases', 
+                    ', 
+                         ', External Commercial Borrowings', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            ', 
+            ', 
+                ', 
+                    
+                    ', 
+                        External Commercial Borrowings
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                                ',  (85 kb) or ',  (55 kb)',   ',     ', Data on ECB/FCCB for the month of October 2016',   ',   ',     ', I AUTOMATIC ROUTE*',   ',   ',     ',  ',     ', ECB/ FCCB',     ', Borrower',     ', Equivalent Amount in USD',     ', Purpose',     ', Maturity Period',       (Appx)',   ',   ',     ', 1',     ', ECB',     ', Essar Shipping Limited',     ', 44,917,399',     ', Import of Capital Goods',     ', 10 Years',   ',   ',     ', 2',     ', ECB',     ', Jotun India Private Limited',     ', 2,951,413',     ', New Project',     ', 10 Years',   ',   ',     ', 3',     ', ECB',     ', Medreich Limited',     ', 3,500,000',     ', Refinancing of Earlier ECB',     ', 3 Years 4 Months',   ',   ',     ', 4',     ', ECB',     ', Medreich Limited',     ', 4,812,500',     ', Refinancing of Earlier ECB',     ', 2 Years 5 Months',   ',   ',     ', 5',     ', ECB',     ', Rhine Engineering Private Ltd',     ', 500,000',     ', General Corporate Purpose',     ', 5 Years 2 Months',   ',   ',     ', 6',     ', ECB',     ', JFE Shoji Steel India Private Limited',     ', 404,508',     ', Import of Capital Goods',     ', 3 Years',   ',   ',     ', 7',     ', ECB',     ', Denyo Manufacturing India Private Limited',     ', 1,500,000',     ', New Project',     ', 9 Years',   ',   ',     ', 8',     ', ECB',     ', JSW MI Steel Service Center Private Limited',     ', 6,107,900',     ', New Project',     ', 11 Years 5 Months',   ',   ',     ', 9',     ', ECB',     ', URB India Bearing Factory & Trade Private Limited',     ', 3,500,000',     ', New Project',     ', 3 Years 3 Months',   ',   ',     ', 10',     ', ECB',     ', CRI Pumps Private Limited',     ', 8,000,000',     ', Rupee Expenditure Loc.CG',     ', 6 Years',   ',   ',     ', 11',     ', ECB',     ', Minda TG Rubber Private Limited',     ', 609,570',     ', Rupee Expenditure Loc.CG',     ', 5 Years 3 Months',   ',   ',     ', 12',     ', ECB',     ', Thermal Powertech Corporation India Limited',     ', 246,000,000',     ', Other',     ', 5 Years 5 Months',   ',   ',     ', 13',     ', ECB',     ', Bellsonica Auto Component India Private Limited',     ', 3,857,811',     ', Modernisation',     ', 9 Years 9 Months',   ',   ',     ', 14',     ', ECB',     ', Huaheng Automation Private Limited',     ', 500,000',     ', Working Capital',     ', 5 Years 7 Months',   ',   ',     ', 15',     ', ECB',     ', Daiichi N Horizon Autocomp Private Limited',     ', 964,453',     ', Import of Capital Goods',     ', 9 Years 7 Months',   ',   ',     ', 16',     ', ECB',     ', KHM Drive Systems Private Limited',     ', 275,790',     ', Import of Capital Goods',     ', 5 Years 6 Months',   ',   ',     ', 17',     ', ECB',     ', Click & Buy Services India Private Limited',     ', 209,525',     ', Working Capital',     ', 7 Years',   ',   ',     ', 18',     ', ECB',     ', Schiffer and Menezes India Private Limited',     ', 2,756,911',     ', Modernisation',     ', 4 Years 3 Months',   ',   ',     ', 19',     ', ECB',     ', Pigeon India Pvt Ltd',     ', 449,454',     ', Import of Capital Goods',     ', 3 Years',   ',   ',     ', 20',     ', ECB',     ', Varun Gas Logistics Private Limited',     ', 36,000,000',     ', Import of Capital Goods',     ', 9 Years 9 Months',   ',   ',     ', 21',     ', ECB',     ', K. V. Arochem Private Limited',     ', 2,756,911',     ', Refinancing of Earlier ECB',     ', 1 Year 6 Months',   ',   ',     ', 22',     ', ECB',     ', Exedy Clutch India Private Limited',     ', 3,857,811',     ', Modernisation',     ', 6 Years 5 Months',   ',   ',     ', 23',     ', ECB',     ', Tae Hwa Enterprises India Private Limited',     ', 2,800,000',     ', Import of Capital Goods',     ', 5 Years 2 Months',   ',   ',     ', 24',     ', ECB',     ', Worldwide Diamond Manufacturers Private Limited',     ', 150,000',     ', General Corporate Purpose',     ', 7 Years 11 Months',   ',   ',     ', 25',     ', ECB',     ', Polmor Steel Private Limited',     ', 661,659',     ', Modernisation',     ', 7 Years 9 Months',   ',   ',     ', 26',     ', ECB',     ', Timken Engineering and Research India Private Limited',     ', 18,000,000',     ', Modernisation',     ', 3 Years 4 Months',   ',   ',     ', 27',     ', ECB',     ', Roki R & D India Private Limited',     ', 3,895,265',     ', Import of Capital Goods',     ', 9 Years 5 Months',   ',   ',     ', 28',     ', ECB',     ', Bullock-Cart Workers Development Association',     ', 937,860',     ', On-lending/Sub-lending.',     ', 3 Years',   ',   ',     ', 29',     ', ECB',     ', Koide India Private Limited',     ', 1,157,343',     ', General Corporate Purpose',     ', 10 Years',   ',   ',     ', 30',     ', ECB',     ', Scholle IPN India Packaging Private Limited',     ', 1,020,057',     ', Import of Capital Goods',     ', 5 Years 5 Months',   ',   ',     ', 31',     ', ECB',     ', Robertshaw Controls Private Limited',     ', 1,500,000',     ', General Corporate Purpose',     ', 5 Years',   ',   ',     ', 32',     ', ECB',     ', u"Dr. Reddy's Laboratories Limited",     ', 150,000,000',     ', Refinancing of Earlier ECB',     ', 3 Years 10 Months',   ',   ',     ', 33',     ', ECB',     ', Aisin Automotive Karnataka Private Limited',     ', 2,996,358',     ', Modernisation',     ', 5 Years',   ',   ',     ', 34',     ', ECB',     ', Compact India Private Limited',     ', 1,036,633',     ', Modernisation',     ', 8 Years 5 Months',   ',   ',     ', 35',     ', ECB',     ', Prafful Overseas Pvt.Ltd.',     ', 5,565,829',     ', Import of Capital Goods',     ', 7 Years 3 Months',   ',   ',     ', 36',     ', ECB',     ', TBEA Energy (India) Private Limited',     ', 15,000,000',     ', General Corporate Purpose',     ', 5 Years',   ',   ',     ', 37',     ', ECB',     ', Athenahealth Technology Pvt Ltd.',     ', 2,450,000',     ', Modernisation',     ', 10 Years 2 Months',   ',   ',     ', 38',     ', ECB',     ', Delhi International Airport Pvt Ltd.',     ', 522,600,000',     ', Refinancing of rupee loans/ Refinancing of Earlier ECB',     ', 10 Years',   ',   ',     ', 39',     ', ECB',     ', Infini Precision Private Limited',     ', 496,244',     ', General Corporate Purpose',     ', 5 Years 11 Months',   ',   ',     ', 40',     ', ECB',     ', Bharat Aluminium Company Ltd.',     ', 30,000,000',     ', New Project',     ', 6 Years',   ',   ',     ', 41',     ', ECB',     ', IL&FS Transportation Networks Limited',     ', 50,021,199',     ', General Corporate Purpose',     ', 3 Years',   ',   ',     ', 42',     ', ECB',     ', HNV Castings Pvt. Ltd.',     ', 3,745,447',     ', General Corporate Purpose',     ', 5 Years 5 Months',   ',   ',     ', 43',     ', ECB',     ', Sapa Precision Tubing Pune Pvt. Ltd.',     ',    1,295,748',     ', Rupee Expenditure Loc.CG',     ', 5 Years',   ',   ',     ', 44',     ', ECB',     ', Greenply Industries Limited',     ', 47,199,427',     ', Import of Capital Goods',     ', 12 Years',   ',   ',     ', 45',     ', ECB',     ', Rivipac Polymers Private Limited',     ', 650,000',     ', Working Capital',     ', 6 Years 4 Months',   ',   ',     ', 46',     ', ECB',     ', IPCA Laboratories Limited',     ', 10,000,000',     ', Modernisation',     ', 5 Years',   ',   ',     ', 47',     ', ECB',     ', Shinwa India Private Limited',     ', 144,668',     ', General Corporate Purpose',     ', 7 Years',   ',   ',     ', 48',     ', ECB',     ', Hirotec India Private Limited',     ', 6,700,000',     ', Modernisation',     ', 11 Years 1 Month',   ',   ',     ', 49',     ', ECB',     ', Pup Exports Private Ltd',     ', 24,725',     ', New Project',     ', 9 Years',   ',   ',     ', 50',     ', ECB',     ', NYK Auto Logistics (India) Private Limited',     ', 3,940,211',     ', New Project',     ', 6 Years 11 Months',   ',   ',     ', 51',     ', ECB',     ', Unique Hydrographic Systems Pvt Ltd.',     ', 2,037,523',     ', General Corporate Purpose',     ', 7 Years 7 Months',   ',   ',     ', 52',     ', ECB',     ', Sarat Chatterjee & CO (Visakhapatnam) Pvt Ltd.',     ', 6,490,000',     ', Import of Capital Goods',     ', 9 Years',   ',   ',     ', 53',     ', ECB',     ', Maithan Alloys Limited',     ', 7,575,000',     ', Refinancing of Earlier ECB',     ', 2 Years 5 Months',   ',   ',     ', 54',     ', ECB',     ', Reliance Industries Limited',     ', 184,284,000',     ', Refinancing of Earlier ECB',     ', 9 Years 2 Months',   ',   ',     ',  ',     ',  ',     ', Total Automatic Route',     ', 1,458,807,156',     ',  ',     ',  ',   ',   ',     ',  ',     ',  ',     ',  ',     ',  ',     ',  ',     ',  ',   ',   ',     ',  ',     ', II APPROVAL ROUTE*',   ',   ',     ', 1',     ', ECB',     ', Tulshyan Shipping & Offshore Services Private Limited',     ', 12,200,000',     ', Import of Capital Goods',     ', 4 Years',   ',   ',     ',  ',     ',  ',     ', Total Approval Route',     ', 12,200,000',     ',  ',     ',  ',   ',   ',     ',  ',     ',  ',     ', Total',     ', 1,471,007,156',     ',  ',     ',  ',   ',   ',     ', * Based on applications for ECB/Foreign Currency Convertible Bonds (FCCBs) which have been allotted loan registration number during the period.',   ',   ',     ', Data on RDB for the month of October 2016',   ',   ',     ',  ',     ', I AUTOMATIC ROUTE*',   ',   ',     ',  ',     ', RDB',     ', Borrower',     ', Loan Amount in INR',     ', Equivalent Amount in USD',     ', Purpose',     ', Maturity Period',       (Appx)',   ',   ',     ', 1',     ', RDB',     ', Fullerton India Credit Co. Ltd',     ', 5000000000',     ', 74,908,948',     ', On-lending/Sub-lending.',     ', 3 Years 1 Month',   ',   ',     ', 2',     ', RDB',     ', Housing Development Finance Corporation Limited',     ', 5000000000',     ', 74,908,948',     ', On-lending/Sub-lending.',     ', 3 Years 3 Months',   ',   ',     ', 3',     ', RDB',     ', ECL Finance Limited',     ', 10000000000',     ', 149,817,896',     ', General Corporate Purpose',     ', 3 Years 2 Months',   ',   ',     ',  ',     ',  ',     ', Total Automatic Route',     ', 20,000,000,000',     ', 299,635,793',     ',  ',     ',  ',   ',   ',     ',  ',     ', II APPROVAL ROUTE*',   ',   ',     ',  ',     ',  ',     ',  ',     ',  ',     ',  ',     ',  ',     ',  ',   ',   ',     ',  ',     ',  ',     ', Total Approval Route',     ', 0',     ', 0',     ',  ',     ',  ',   ',   ',     ',  ',     ',  ',     ', Total',     ', 20,000,000,000',     ', 299,635,793',     ',  ',     ',  ',   ',   ',     ', * Based on applications for Rupee Denominated Bond which have been allotted loan registration number during the period.',   ', 
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                            ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 2017', 2016', 2015', 2014', 2013', 2012', 2011', 2010', 2009', 2008', Archives', 2007', 2006', 2005', 2004', 2003', 2002', 2001', 2000', 1999', 1998', 1997', 1996', 1995', 1994', 1993', 1992', 1991', 1990', 
+
+
+
+
+            ', 
+        ', 
+    ', 
+    ', 
+    ', 
+    ', Server 214', 
+', Top', 
+', 
+', 
+  ', 
+    ', 
+      ', More',  Links ', 
+      ', 
+        ', 
+          ', 
+          ', Financial Education', 
+          ', Paisa Bolta Hai', 
+          ', RBI Cautions', 
+          ', FAQs', 
+          ', 
+          ', IFSC/MICR Codes', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', Tenders', 
+          ', Opportunities', @', RBI', 
+          ', 
+          ', Bank Holidays', 
+          ', Forms', 
+          ', Application Tracking System', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', Events', 
+          ', Public Speaking Engagements', 
+          ', RBI Clarifications', 
+		  ', Right to Information Act', 
+          ', Related Links', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', u"RBI's Core Purpose, Values and Vision", 
+          ', u"Citizens' Charter", 
+          ', Timelines for Regulatory Approvals', 
+          ', Complaints', 
+          ', Contact Us', 
+        ', 
+      ', 
+    ', 
+    ', 
+      ', Follow',  RBI ', 
+      ', 
+        ', RSS', 
+        ', Twitter', 
+        ', Videos', 
+      ', 
+    ', 
+    ', 
+  ', 
+  ', 
+    ', 
+      ', © Reserve Bank of India. All Rights Reserved.', 
+      ', Sitemap',  | ', Disclaimer', 
+      ', 
+    ', 
+  ', 
+  
+
+', 
+
+  ', 
+  ', 
+  ',  ',  ', 
+   ', 
+   ', 
+   ', 
+
+   April 14, 2015
+   ', 
+   ', 
+    ', 
+  
+    ', 
+    
+   Dear All
+    ', 
+    ', 
+     ', 
+     ', 
+     
+  Welcome to the refurbished site of the Reserve Bank of India. 
+    ', 
+   
+    ', 
+    ', 
+    ', 
+    
+  The two most important features of the site are: One, in addition to the default site, the refurbished site also has all the information bifurcated functionwise; two, a much improved search \u2013 well, at least we think so but you be the judge. 
+    ', 
+   
+    ', 
+
+      ', 
+    ', 
+   With this makeover, we also take a small step into social media. We will now use Twitter (albeit one way) to send out alerts on the announcements we make and YouTube to place in public domain our press conferences, interviews of our top management, events, such as, town halls and of course, some films aimed at consumer literacy.  
+    ', 
+   
+    ', 
+    ', 
+    ', 
+    The site can be accessed through most browsers and devices; it also meets accessibility standards. 
+    ', 
+    ', 
+    ', 
+    ', 
+    Please save the url of the refurbished site in your favourites as we will give up the existing site shortly and register or re-register yourselves for receiving RSS feeds for uninterrupted alerts from the Reserve Bank. 
+    ', 
+    ', 
+    ', 
+    ', 
+    Do feel free to give us your feedback by clicking on the feedback button on the right hand corner of the refurbished site. 
+    ', 
+    ', 
+    ', 
+    ', 
+    Thank you for your continued support.', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    Department of Communication ', 
+Reserve Bank of India', 
+
+    ', 
+    ', 
+	', Next', 
+    ', 
+   ', 
+  ', 
+  ', 
+
+', 
+
+', 
+', 
+', 
+', 
+', 
+
+', 
+', 
+', 
+
+
+    //this is for floating TOP link
+    
+    $(document).ready(function () {
+
+        var offset = 230;
+        var duration = 500;
+
+
+        jQuery(window).scroll(function () {
+            if (jQuery(this).scrollTop() > offset) {
+                jQuery('.scrollToTop').fadeIn(duration);
+                // $('#backToTop').css('right', (diffWidth / 2) - 6);
+            } else {
+                jQuery('.scrollToTop').fadeOut(duration);
+                //  $('#backToTop').css('right', (diffWidth / 2) - 6);
+            }
+        });
+
+        //        $('a[href*=#]:not([href=#])').click(function () {
+
+        //            if (location.pathname.replace(/^\//, '') == window.location.pathname.replace(/^\//, '') && location.hostname == window.location.hostname) {
+
+        //                var target = $(this.hash);
+        //                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        //                if (target.length) {
+        //                    $('html,body').animate({
+        //                        scrollTop: target.offset().top
+        //                    }, 800);
+        //                    return false;
+        //                }
+        //            }
+        //        });
+
+        $('.scrollToTop').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+    });
+
+
+    //Below code is for floating left panel and floating tree structure
+    //first if condition is for functionwise pages and 2nd one for rest all
+    $(window).scroll(function () {
+
+        if ($('div.banner2').length) {
+
+            if ($(window).scrollTop() >= 265) {
+                $('#menubar').css("position", "fixed");
+                $('#menubar').css("width", "240px");
+                $('#menubar').css("margin-top", "-281px");
+                $('.content_area').css("margin-left", "252px");
+
+                $('.sidebar_nav').css("position", "fixed");
+                $('.sidebar_nav').css("margin-top", "-200px");
+                $('.sidebar_nav').css("width", "236px");
+
+
+                $('#DateSettree_lbltree').css('position', 'fixed');
+                $('#DateSettree_lbltree').css('margin-top', '-281px');
+
+            }
+
+            else {
+                $('#menubar').css("position", "");
+                $('#menubar').css("width", "");
+                $('#menubar').css("margin-top", "");
+                $('.content_area').css("margin-left", "");
+
+                $('.sidebar_nav').css("position", "");
+                $('.sidebar_nav').css("margin-top", "");
+                $('.sidebar_nav').css("width", "");
+
+
+
+                $('#DateSettree_lbltree').css('position', '');
+                $('#DateSettree_lbltree').css('margin-top', '');
+            }
+
+        }
+
+        else if ($(window).scrollTop() >= 185) {
+            $('#menubar').css("position", "fixed");
+            $('#menubar').css("width", "240px");
+            $('#menubar').css("margin-top", "-200px");
+            $('.content_area').css("margin-left", "252px");
+
+            $('.sidebar_nav').css("position", "fixed");
+            $('.sidebar_nav').css("margin-top", "-200px");
+            $('.sidebar_nav').css("width", "236px");
+
+
+            $('#DateSettree_lbltree').css('position', 'fixed');
+            $('#DateSettree_lbltree').css('margin-top', '-200px');
+
+        }
+
+        else {
+            $('#menubar').css("position", "");
+            $('#menubar').css("width", "");
+            $('#menubar').css("margin-top", "");
+            $('.content_area').css("margin-left", "");
+
+            $('.sidebar_nav').css("position", "");
+            $('.sidebar_nav').css("margin-top", "");
+            $('.sidebar_nav').css("width", "");
+
+
+            $('#DateSettree_lbltree').css('position', '');
+            $('#DateSettree_lbltree').css('margin-top', '');
+        }
+//        if ($(window).scrollTop() >= 235) {
+
+//            $('#DateSettree_lbltree').css('height', '183px');
+//            $('#DateSettree_lbltree').css('overflow-y', 'scroll');
+//            $('#DateSettree_lbltree').css('width', '100px');
+
+//        }
+//        else {
+//            $('#DateSettree_lbltree').css('height', '');
+//            $('#DateSettree_lbltree').css('overflow-y', '');
+//            $('#DateSettree_lbltree').css('width', '');
+
+//        }
+
+       
+    });
+	
+       // $(window).unload(function () {
+       //     $.cookies.del('feedback_Cookie'); 
+       // });
+    $(document).ready(function () {
+	
+	
+		  $('.window .close').click(function (e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            $.cookie('feedback_Cookie', 'Yes', { expires: 365, path: '/' });
+            $('#maskWN').hide();
+            $('.window').hide();
+            var scroll = $(window).scrollTop();
+            $("html").scrollTop(scroll);
+        });
+		
+		 $('#maskWN').click(function () {
+            $(this).hide();
+            $.cookie('feedback_Cookie', 'Yes', { expires: 365, path: '/' });
+            $('.window').hide();
+
+        });
+
+        //        if ($.cookie('feedback_Cookie') == null) {
+        //            var id = '#dialog';
+
+        //            //Get the screen height and width
+        //            var maskHeight = $(document).height();
+        //            var maskWidth = $(window).width();
+        //           
+
+        //            //Set heigth and width to mask to fill up the whole screen
+        //            $('#mask').css({ 'width': '100%', 'height': '100%','position':'fixed' });
+
+        //            //transition effect
+        //            $('#mask').fadeIn(500);
+        //            $('#mask').fadeTo("slow", 0.9);
+
+        //            //Get the window height and width
+        //            var winH = $(window).height();
+        //            var winW = $(window).width();
+
+        //            //Set the popup window to center
+        //            $(id).css('top', winH / 2 - $(id).height() / 2);
+        //            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+        //            //transition effect
+        //            $(id).fadeIn(2000);
+
+
+
+        //        }
+//        $('blockquote p').css('margin','auto');
+//        $('blockquote blockquote blockquote p').contents().contents().unwrap();
+//        $('blockquote blockquote blockquote').contents().unwrap();
+//        $('blockquote blockquote').contents().unwrap();
+//        $('blockquote').contents().unwrap();
+        
+
+        //if close button is clicked
+        $('.window .close').click(function (e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            $.cookie('feedback_Cookie', 'Yes', { expires: 365, path: '/' });
+            $('#mask').hide();
+            $('.window').hide();
+            var scroll = $(window).scrollTop();
+            $("html").scrollTop(scroll);
+        });
+
+        //if mask is clicked
+        $('#mask').click(function () {
+            $(this).hide();
+            $('.window').hide();
+        });
+        $('#feedbackbtn').click(function () {
+            var id = '#dialog';
+
+            //Get the screen height and width
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //Set heigth and width to mask to fill up the whole screen
+            //$('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+            $('#mask').css({ 'width': '100%', 'height': '100%', 'position': 'fixed' });
+
+            //transition effect
+            $('#mask').fadeIn(500);
+            $('#mask').fadeTo("slow", 0.9);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $(id).css('top', winH / 2 - $(id).height() / 2);
+            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+            //transition effect
+            $(id).fadeIn(2000);
+        });
+
+        $('.submit').click(function () {
+            var Name = $("[id*=txtFeedbackName]").val();
+            var Email = $("[id*=txtFeedbackEmail]").val();
+            var Comments = $("[id*=txtFeedbackComments]").val();
+            if (Name == "") {
+
+                alert("Please enter your name");
+                $("[id*=txtFeedbackName]").focus();
+                return false;
+            }
+            else if (Email == "") {
+                alert("Please enter your email");
+                $("[id*=txtFeedbackEmail]").focus();
+                return false;
+            }
+            else if (Email != "" && !ValidateEmail(Email)) {
+                alert("Please enter a valid email address");
+                $("[id*=txtFeedbackEmail]").focus();
+                return false;
+            }
+
+            else if (Comments == "") {
+
+                alert("Please enter some comments");
+                $("[id*=txtFeedbackComments]").focus();
+                return false;
+            }
+
+            else {
+                $('[id*=Button1]').attr('disabled', 'disabled');
+
+                var param = { Name: Name, EmailID: Email, Comments: Comments };
+                $.ajax({
+                    type: "POST",
+                    url: "../Home.aspx/SaveFeedback",
+                    data: JSON.stringify(param),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+
+                    success: function (response) {
+
+                        if (response.d == "0") {
+                            alert("Thank you for your feedback");
+                            $.cookie('feedback_Cookie', 'Yes', { expires: 365, path: '/' });
+                            $('#mask').hide();
+                            $('.window').hide();
+                            $('[id*=Button1]').removeAttr('disabled');
+                            $("[id*=txtFeedbackName]").val("");
+                            $("[id*=txtFeedbackEmail]").val("");
+                            $("[id*=txtFeedbackComments]").val("");
+                        }
+                        else {
+                            alert("Please try again");
+                            $('[id*=Button1]').removeAttr('disabled');
+
+
+                        }
+
+                    }
+                });
+            }
+
+        });
+
+        function ValidateEmail(email) {
+            var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            return expr.test(email);
+        };
+
+        //        $('#divArchiveMain').click(function () {
+        //            
+        //            if ($(window).scrollTop() >= 235) {
+
+        //                $('#DateSettree_lbltree').css('height', '181px');
+        //                $('#DateSettree_lbltree').css('overflow-y', 'scroll');
+        //                $('#DateSettree_lbltree').css('width', '100px');
+
+        //            }
+        //            else {
+        //                $('#DateSettree_lbltree').css('height', '');
+        //                $('#DateSettree_lbltree').css('overflow-y', '');
+        //                $('#DateSettree_lbltree').css('width', '');
+
+        //            }
+        //        });
+
+        $('a.style1').each(function () {
+
+            var $this = $(this);
+            var aHref = $this.attr('class');
+            $this.attr('class', aHref.replace('style1', 'links'));
+        });
+    });
+
+', 
+', u"
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61369961-1', 'auto');
+  ga('send', 'pageview');
+
+", 
+']

@@ -3,8 +3,10 @@ Scraping and providing *insights* for your business using NLP
 
 **(WORK IN PROGRESS!! This project is by no means complete or error free just as yet.)**
 
+*Data collected is about 100MB. Since Data is uploaded here, the repository is large*
+
 Author: **Ambareesh Revanur**  ([more](https://in.linkedin.com/in/ambareeshr))
-Originally written for Innovation hack! :)
+*Innovation hack!*
 
 ## STAGE 1: Design Document 
 available@   /STAGE 1 documents/Forex Insights.pdf
@@ -23,12 +25,17 @@ Click on 'HELP' button to open information about using the tool
 #### NLP and web-scraping
 #### 
 
+## Requirements
 Python 2.7
 * Scrapy
 * Google-Search API for Python(with custom keys)
 * Scikit
 * PyQt4
 * RAKE
+
+#### Tested on
+* Windows 10 (x64), v1607
+* 
 
 Some of the tools considered for this project includes [Pattern](http://www.clips.ua.ac.be/pattern).
 This link https://github.com/lorien/awesome-web-scraping/blob/master/python.md desbribes different web scraping techniques.

@@ -1,0 +1,2999 @@
+[
+', 
+', u"var _w18WNSITE='WAP';", 
+', 
+', 
+
+', 
+', 
+', 
+var default_font=readCookie('mc_font');
+if(default_font)
+	change_font(default_font);
+else 
+	change_font("m");
+', 
+', 
+.mc_header_english{top:0px;}
+.mc_header_english .menutable td{display:block}
+.PT26{padding-top:26px;}
+
+', 
+			
+			', u"
+				  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+				  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+				  ga('create', 'UA-11747743-1', 'auto');
+				  				  ga('send', 'pageview');
+				function urchinTracker(pa_str) {ga(['_trackPageview', ''+pa_str+'']);}
+				function GAEventTracker(category,action,opt_label) {ga('send', 'event', ''+category+'', ''+action+'', ''+opt_label+'');}
+			", 
+
+						
+		
+			', 
+				', 
+					', 
+						', 
+						', money', control', 
+						', 
+						', 
+						', 
+						', 
+								', 									
+									', 
+										', Hi  ', 
+										', My Portfolio', 
+										', My Watchlist', 
+										', My Messages', 
+										', Saved Videos ', 
+										
+										', Sign out', 
+									', 									
+									', 
+									', Sign in', 
+									', Register', 
+									',  
+								', 
+						', 
+						
+						', 
+					', 
+					', 
+						', 
+						', 
+						document.getElementById('jsmenu1').style.display="block";
+						document.getElementById('useric').style.display="block";
+						', 
+		', 
+		', 
+			', 
+				', 
+					', Select Language', 
+					', 
+							', 
+								',  ', English', 
+							', 
+							', 
+								',  ', \u0939\u093f\u0902\u0926\u0940', 
+							', 
+							', 
+								',  ', \u0917\u0941\u091c\u0930\u093e\u0924\u0940', 
+							', 
+					', 
+				', 
+							',  
+							', Home',  
+							', News', 
+							', Markets', 
+							', Portfolio', 
+							', Watchlist', 
+							', Messages', 
+							', Live TV & Shows', 
+							', Videos', 
+							', Saved Videos ', 
+							', Commodities', 
+							', Currencies', 
+							', Mutual Funds', 
+							', 
+							', Personal Finance', 
+							', Property', 
+							', Jio at Doorstep', 
+							', 
+								', 
+								', 
+									', Specials', 
+									', 
+											', 2016 Year end special', 
+											', Master Your Money', 
+											', SME Special', 
+											', Real Assets', 
+											', Travel Cafe', 
+											', Tech Control', 
+										
+									', 
+								', 
+							', 
+							', 
+								', 
+										', Subscriptions', 
+										', 
+											', 
+												', 
+													', 
+														', Game Changers', 
+													', 
+												', 
+													', Sudarshan Sukhani', 
+													', C. K. Narayan', 
+													', T Gnanasekar', 
+													', Ambareesh Baliga', 
+													', Mecklai Financial', 
+													
+													', 
+												', 
+												
+												', 
+												', Investment Watch', 
+												', Power Your Trade',  ', 
+											', 
+										', 
+								', 
+							', 
+						', 
+					', 
+				', 
+', set_default_class();get_saved_vdo_count();', 
+', 
+		
+
+', 
+ ', 
+	
+', 
+function get_search_type_id(){
+		var disp=document.getElementById('type').value;
+		var return_value="1";
+		switch(disp) {
+			case "Stocks": return_value=1; break;
+			case "mf": return_value=2; break;
+			case "fno": return_value=4; break;
+			case "commodity": return_value=3; break;
+			case "Video": return_value=0; break; // dont run autocomplete
+			case "News": return_value=0; break; // dont run autocomplete
+		}
+		return return_value;
+}
+function autoSuggest_search(){
+	//var srctxt = $.trim($('#skeyword').val());
+	var skeyword=document.getElementById('skeyword').value;
+skeyword=skeyword.trim();
+skeyword=skeyword.replace(/[^a-z0-9 \&]/gi, '');
+	var type=get_search_type_id();
+	if(skeyword.length>2 && type>0)	{
+		var htmlStr ='<table cellpadding="0" cellspacing="0" border="0" width="90%" class="mm-table">';
+		var url = 'http://m.moneycontrol.com/autosuggest.php?type='+type+'&qs='+encodeURIComponent(skeyword);
+		$.ajax({
+		url:url,
+		type:"GET",
+		dataType:"json",
+		timeout:1000,
+		error: function (xhr, ajaxOptions, thrownError) {
+				//document.suggestfrm.submit();
+		},
+		success:function(d){
+			if(d.data.length >0){
+				if(d.ss_c ==1){
+					htmlStr+='<tr><td colspan= 2 class="brdb_gry"><b style="font-size:70%">No Matches - Search Suggestions</b></td></tr>';
+				}
+				$.each(d.data,function(i,v){
+				var sval=v.pdt_dis_nm;
+				var tmp=document.createElement("DIV");
+				tmp.innerHTML=sval;
+				if(tmp.textContent) sval=tmp.textContent;
+				if(tmp.innerText) sval=tmp.innerText;
+				
+				htmlStr+='<tr><td width="70%" class="brdb_gry"><div class="listing"><a onclick=\'call_ajax_url("'+v.click_url+'","'+v.detail_url+'");\'   class="gry_l_2" style="cursor:pointer"><span class="clr_333">'+v.pdt_dis_nm+'</span></a></div></td></tr>';
+				});
+			}
+			else{
+				htmlStr+='<tr><td>No results!!</td></tr>';
+			}
+			htmlStr+='</table>';
+			$('.srch_auto').html(htmlStr);$('.srch_auto').show();
+		}
+		})
+	}
+}
+function call_ajax_url(url,url1){
+	$.ajax({
+		url:url,
+		type:"GET",
+		dataType:"jsonp",
+		crossDomain:true,
+		timeout:3000,
+		success:function(x,t,m){
+			eraseCookie('stk_tb');
+			window.location=url1;
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			eraseCookie('stk_tb');
+			window.location=url1;
+		},
+	});
+}
+function UPDATED (){}
+function set_srch_value(value){
+	document.getElementById('skeyword').value=value;
+	$('.srch_auto').html('').hide();
+}
+function validate_search(){
+var skeyword=document.getElementById('skeyword').value;
+skeyword=skeyword.trim();
+skeyword=skeyword.replace(/[^a-z0-9 \&]/gi, '');
+document.getElementById('skeyword').value=skeyword;
+if(skeyword.length<3){
+ alert('Please enter minimum three characters to search'); return false;
+}
+return true;
+
+
+}
+function hide_suggest_box(){
+$('#srch_auto').hide();
+}
+', 
+', 
+.srch_auto {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #C1C1C1;
+    padding: 5px 10px;
+   z-index:10;
+	position:absolute;
+}
+.listing{padding:3px;}
+.clr_333 > strong{color:#005b78;font-size:110%;font-weight:bold}
+.clr_333{color:#000}
+', 
+', 
+		', 
+			', 
+				', 
+					', 
+				', 
+				', 
+								', 
+								', 
+								', 
+								
+								', Stocks', 
+										', 
+											', 
+											', Stocks', 
+											', Funds', 
+											', Commodity', 
+											', Futures', 
+											', News', 
+											', Videos', 
+											
+												
+											', 
+										', 
+								', 
+								', 
+								', 
+									', Stocks', 
+									', Funds', 
+									', Futures', 
+									', Commodity', 
+									', Videos', 
+								', 
+								', 
+								', 
+									document.getElementById('userdd1').style.display="block";
+								', 
+								', 
+								', 
+				
+				
+				', 
+			', 
+		', 
+		
+		
+', 	
+', 
+function showHideQt(id) {
+   var e = document.getElementById(id);
+   document.getElementById('userbx').style.visibility='hidden';
+   var default_class=document.getElementById('default_class').value;
+   if(default_class!="") {
+  document.getElementById('useric').className="active_useric1";
+	document.getElementById('useric').style.height="17px";
+	}
+   document.getElementById('men).style.visibility='hidden';
+	document.getElementById('menubx').className="";
+    var default_class=document.getElementById('default_class').value;
+	   
+   if(e.style.visibility == 'visible'){
+	  e.style.visibility = 'hidden';
+	  e.style.position = 'absolute';
+	 document.getElementById('useric').className=default_class;
+	  }
+   else{
+	 e.style.position = 'absolute';
+	  e.style.visibility = 'visible';
+	  document.getElementById('useric').className=default_class;
+   }
+}
+function get_display_value(value){
+	var return_value="";
+	switch(value) {
+		case "Stocks": return_value="Stocks"; break;
+		case "mf": return_value="Funds"; break;
+		case "fno": return_value="Futures"; break;
+		case "commodity": return_value="Commodity"; break;
+		case "Video": return_value="Videos"; break;
+		case "News": return_value="News"; break;
+	}
+	return return_value;
+}
+function set_search_value(value,action){
+
+document.topsearch.action=action;
+var disp_value=get_display_value(value);
+	document.getElementById('type').value=value;
+
+document.getElementById('drop_ic').innerHTML=disp_value;
+
+document.getElementById('quoteBx').style.visibility='hidden';
+}
+', 
+
+	 ', 
+ 
+', 
+	', 
+
+		', 
+', 
+	',  
+	 	', 
+		', 
+				', 
+								 
+			', 
+	', 
+		', 
+	', 
+	 
+
+				', 
+			 
+			 ', 
+		
+		 ', 
+get_header_ad_details();
+', 
+', 
+', 
+
+', 
+
+
+
+
+', 
+', 
+
+', 
+', 
+		', 
+			', S&P BSE SENSEX', 
+			', 25835.95',  ',  ', -314.29',  (', -1.20', %)', 
+			', 
+		', 
+		', 
+			', NIFTY 50', 
+			', 7962.50',  ',  ', -111.60',  (', -1.38', %)', 
+			', 
+		', 
+		
+	', 
+
+
+
+', 
+', 
+	
+	', 
+		', 
+			', 
+				', u"
+					googletag.cmd.push(function() { googletag.display('Moneycontrol_Mobile_WAP/MC_WAP_Markets/MC_WAP_Markets_StockPrice_320x50_1'); });
+				", 
+			', 
+		', 
+	', 
+', 
+
+
+', 
+', 
+    // add another call for first update
+    update_sensex_nifty('http://indices.moneycontrol.co.in/sensex_nifty/indtick.json','http://img-d02.moneycontrol.co.in');
+//var tid = setInterval("update_sensex_nifty('http://indices.moneycontrol.co.in/sensex_nifty/indtick.json','http://img-d02.moneycontrol.co.in')", 11000);
+var tid = setInterval("update_sensex_nifty('http://indices.moneycontrol.co.in/sensex_nifty/indtick.json','http://img-d02.moneycontrol.co.in')", 20000);
+', 
+', 
+.gd14_h{font-size:115% !important}
+', 
+ 
+	
+
+   
+ ', 
+ function showHide_menu(id) {
+       var e = document.getElementById(id);
+	   document.getElementsByClassName('top_header')[0].style.top=0;
+	   if(document.getElementById('userbx')){
+	   document.getElementById('userbx').style.visibility='hidden';
+	   }
+	   if(document.getElementById('menudrop')){
+	   document.getElementById('menudrop').style.visibility='hidden';
+	   }
+		if(document.getElementById('quoteBx')){		
+			  document.getElementById('quoteBx').style.visibility='hidden';
+		}
+	   var default_class=document.getElementById('default_class').value;
+	   if(default_class!=="") {
+	   
+		document.getElementById('useric').style.height="17px";
+		document.getElementById('useric').className="active_useric1";
+		}
+	   default_class=document.getElementById('default_class').value;
+	   document.getElementById('useric').className=default_class;
+	   
+       if(e.style.visibility == 'visible'){
+           e.style.visibility = 'hidden';
+		   document.getElementById('menubx').className="";
+		  }
+       else{
+		e.style.visibility = 'visible';
+		   document.getElementById('menubx').className="active";
+	   }
+    }
+	 
+	function showHideic_menu(id) {
+	var e = document.getElementById(id);
+	document.getElementsByClassName('top_header')[0].style.top=0;
+	var default_class=document.getElementById('default_class').value;
+	if(document.getElementById('men)){
+	document.getElementById('men).style.visibility='hidden';
+	}
+	if(document.getElementById('menudrop')){
+	document.getElementById('menudrop').style.visibility='hidden';
+	}
+	if(document.getElementById('menubx')){
+	document.getElementById('menubx').className="";
+	}
+	if(document.getElementById('quoteBx')!==null){				
+		document.getElementById('quoteBx').style.visibility='hidden';
+	}
+	if(default_class!==""){
+	document.getElementById('useric').style.height="17px";
+	document.getElementById('useric').className="active_useric1";
+	
+	}
+	
+	if(e.style.visibility == 'visible'){
+		e.style.visibility = 'hidden';
+		e.style.position = 'absolute';
+		document.getElementById('useric').className=default_class;
+	}
+	else{
+		e.style.position = 'absolute';
+		e.style.visibility = 'visible';
+		document.getElementById('useric').className="active_useric1";
+		document.getElementById('useric').style.borderBottom="0px";
+		document.getElementById('useric').style.height="19px";
+	}
+}
+', 
+', 
+', 
+
+', 
+', 
+
+', 
+
+/*function set_count(scid,action){
+	if(scid!="" && action!=""){
+		var sent_act;
+		if((readCookie(scid+'mc_stk_cnt'))!=1){
+			$.ajax({
+				type:"POST",
+				url:"/set_stock_count_ajax.php",
+				data:{"action":action,"scid":scid},
+				success:function(data){
+					$(".wuc-pollq").hide();
+					$('.wuc-thanxbox').show();
+				}
+			});
+		}else{
+			$(".wuc-pollq").hide();
+			$('.wuc-thanxbox').show().html('<p class="thanx_box MT5">You are already voted!</p>');
+		}
+	}
+}*/
+function load_ajax_url(url,div){
+	var divcontent=$('#'+div).html().trim();
+	// console.log(divcontent);
+	// console.log(url);
+	if(divcontent==""){
+			$('#'+div).html('<div class="TAC" style="padding-top:5px"><img src="http://img-d01.moneycontrol.co.in/images/messageboard/mmb_loader.gif" ></div>');
+				$.ajax({
+				url:url,
+				type:"GET",
+				dataType:"text",
+				timeout:30000,
+				success:function(datas){
+				$('#'+div).html(datas);
+				}
+			});
+	}
+}
+function insert_msg(){
+	var username=getCookieNNMC('nnmc');
+	$('#f_username').val(username);
+	var message=$.trim($('#f_message').val());
+	if(!message){ alert('Please enter message'); return false;}
+	$.ajax({
+				type:"POST",
+				url:"http://m.moneycontrol.com/india/stockpricequote/infrastructuregeneral/adaniportsspecialeconomiczone/MPS",
+				data:$('#senti_form').serialize(),
+				success:function(data){
+					// $('#senti_form').hide();
+					$('.thanx_box').show().html(data);
+					$('#f_message').val("");
+					$('.whts-ur-call').hide();
+				}
+			});
+}
+function load_chart(div,url,id){
+	var pdata=$('#'+div).html();
+	$('#intr_'+id+'_btn').removeClass("active");
+	$('#ser_'+id+'_btn').removeClass("active");
+	$('#'+div+'_btn').addClass("active");
+	$('#intr_'+id).hide();
+	$('#ser_'+id).hide();
+	$('#'+div).show();
+	if(pdata==""){
+	
+	
+	$('#'+div).html('<div class="TAC" style="padding-top:5px"><img src="http://img-d01.moneycontrol.co.in/images/messageboard/mmb_loader.gif" ></div>');
+				$.ajax({
+				url:url,
+				type:"GET",
+				dataType:"text",
+				timeout:30000,
+				success:function(datas){
+				$('#'+div).html(datas);
+				}
+			});
+}}
+', 
+
+', 
+	.overdropbox {
+    background: none repeat scroll 0 0 #fff;
+}
+',  ', 
+', 
+	',  ', 
+', 
+     	', 
+          	', Adani Ports and Special Economic Zone', 
+               ', NSE',  ', BSE', 
+          ', 
+          ', 
+		  		  		     	', 
+					', 
+					', 274.05',  
+				',  
+				',  
+				', 
+					', 
+							', 0.30', 
+					', 
+					', 
+						', 
+						(', 0.11', %)
+						', 
+					', 
+				', 
+				          ', 
+		             ', 
+          	Volume: ', 112,078',  ', Jan 03, 2017  4:00 PM', 
+          ', 
+		  		     
+				', Add to 
+					   
+				',  Portfolio',   
+		  		    
+				',  Watchlist', 
+				
+		   		     
+				', 
+		         ', 
+     ', 
+     	', 
+          	', Adani Ports and Special Economic Zone', 
+               ', NSE',  ', BSE', 
+          ', 
+          ', 
+		  		   						', 
+						', 
+							', 
+								273.95							', 
+						', 
+						',  
+						', 
+							', 
+							', 
+								0.15							', 
+							', 
+							', 
+								', 
+									(', 0.05', %)
+								', 
+							', 
+						', 
+				          ', 
+		             ', 
+          	Volume: ', 2,064,823',  ', Jan 03, 2017  3:57 PM', 
+          ', 
+		            
+				', Add to 
+									    
+					  ',  Portfolio',   
+										 
+					  ',  Watchlist', 
+							   
+				', 
+		         ', 
+	 
+	
+	 ', 
+		', 
+			', 
+				',  Stock added to your watchlist.. 
+				', X', 
+			', 
+			', 
+				',  Stock already exists in your watchlist.. 
+				', X', 
+			', 
+		', 
+	', 
+	
+	 ', 
+		', Overview ', 
+	', 
+	',  
+			', Overview', 
+			', Futures', 
+			', Options', 
+			', News and Views', 
+			', Announcements', 
+			', Messages', 
+			', Corporate Action', 
+			', Financials', 
+			', Balance Sheet', 
+			', Profit & Loss', 
+			', Financial Ratios', 
+			', Peer Comparison', 
+			', Shareholding', 
+			', Info & Mgmt', 
+		', 
+	', 
+	', 
+	
+.fixed {
+    position: fixed !important;
+    top: 41px;
+    width: 100%;
+    z-index: 9;
+	left:0px;
+	
+}
+	', 	 ', 
+	 function showBseNse(mrktNm){
+		if(mrktNm=='bse'){
+			$('#stocks_nse').hide();
+			$('#stocks_bse').fadeIn();
+		}
+		else{
+			$('#stocks_bse').hide();
+			$('#stocks_nse').fadeIn();
+		}
+		createCookie("stk_tb",mrktNm,"1");
+	}
+	function add_watchlist(){
+		var watchlist_url=$('#watchlist_url').val();
+		if(watchlist_url) window.location=watchlist_url;
+	}
+	
+	var wtchlist=readCookie('add_to_watchlist');
+	if(wtchlist=="exist"){
+		$('#exist').show();
+	}
+	else if(wtchlist=="added"){
+		$('#added').show();
+	}
+	else {
+		$('#watchlist_msg').hide();
+	}
+	
+		
+	eraseCookie('add_to_watchlist');
+	var stk_tab=readCookie("stk_tb");
+	if(stk_tab){
+		showBseNse(stk_tab);
+	}
+	 ',      
+    ', 
+            	', 
+                  ', 
+				                      ', 
+					                      ', Parameters  ', 
+                      ', NSE', 
+                      ',  BSE', 
+					                    ', 
+				                      ', 
+										
+					
+					', Bid Price  
+                      ', 0.00', 
+                      ',  ', 274.05', 
+					                    ', 
+				                      ', 
+										
+					
+					', Bid Qty  
+                      ', 0', 
+                      ',  ', 168', 
+					                    ', 
+				                      ', 
+										
+					
+					', Offer Price  
+                      ', 273.95', 
+                      ',  ', 274.05', 
+					                    ', 
+				                      ', 
+										
+					
+					', Offer Qty  
+                      ', 2398', 
+                      ',  ', 200', 
+					                    ', 
+				                      ', 
+										
+					
+					', Today\u2019s Low  
+                      ', 272.05', 
+                      ',  ', 272.20', 
+					                    ', 
+				                      ', 
+										
+					
+					', Today\u2019s High  
+                      ', 277.70', 
+                      ',  ', 277.55', 
+					                    ', 
+				                      ', 
+										
+					
+					', 52 Wk Low  
+                      ', 169.15', 
+                      ',  ', 169.65', 
+					                    ', 
+				                      ', 
+										
+					
+					', 52 Wk High  
+                      ', 317.00', 
+                      ',  ', 317.00', 
+					                    ', 
+				                      ', 
+										
+					
+					', Open Price  
+                      ', 275.20', 
+                      ',  ', 274.10', 
+					                    ', 
+				                      ', 
+										
+					
+					', Prev. Close  
+                      ', 273.80', 
+                      ',  ', 273.75', 
+					                    ', 
+				                      
+                    
+                    
+                  ', 
+                ', 
+            ',             
+            ', 
+				', 1d', 
+				', 5d', 
+				', 1m', 
+				', 3m', 
+				', 6m', 
+				', 1y', 
+				', 2y', 
+				', 5y', 
+			',  
+			',  
+						', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			
+			
+            ',     		
+            ', 
+            	', stock alerts', 	
+													', 
+						', Moving Average (SMA)',  | Jan 02, 08:00 PM', 
+						', Adani Ports closes above 30-Day Moving Average of 272.47 today.', 
+					', 
+									', 
+						', Block Deals',  | Jan 02, 01:00 PM', 
+						', Adani Ports Block Deal on NSE, Qty: 230,969, Deal Price: 268.35, Value (cr): 6.20, Time: 11:21am', 
+					', 
+									', 
+						', Block Deals',  | Dec 30, 11:45 AM', 
+						', Adani Ports Block Deal on NSE, Qty: 259,584, Deal Price: 268.00, Value (cr): 6.96, Time: 11:45am', 
+					', 
+								 
+            ', 
+			', 
+							', STATISTICS', 	
+				', 
+					', 
+						', Market Cap (Rs Cr)', 
+						', 56,733.72', 
+					', 
+					', 
+						', EPS (TTM)', *', 
+						', 13.06', 
+					', 
+					', 
+				', 
+				', 
+					', 
+						', Book Value (Rs)', *', 
+						', 65.79', 
+					', 
+					', 
+						', Price / Book', *', 
+						', 4.16', 
+					', 
+					', 
+				', 
+				', 
+					', 
+						', Deliverables (%)', 
+						', 51.77', 
+					', 
+					', 
+						', Industry P/E', 
+						', 23.92', 
+					', 
+					', 
+				', 
+				', 
+					', 
+						', Dividend (%)', 
+						', 55.00', 
+					', 
+					', 
+						', Div. Yield (%)', 
+						', 0.4', 
+					', 
+					', 
+				', 
+				', 
+					', 
+						', Market Lot', 
+						', 1.00', 
+					', 
+					', 
+						', Face Value (Rs)', 
+						', 2.00', 
+					', 
+					', 
+				', 
+				', *',  Based on standalone numbers', 
+			', 
+			', 
+			', news on Adani Ports', 
+								', 
+							', 
+									', 
+																	', 
+					', 
+				', 
+								', 
+					', 
+											', Buy, sell, hold: 5 stocks to watch out', 
+										', 
+					', 8.29 AM Dec 30th', 
+				', 
+				', 
+				', 
+			', 
+					', 
+							', 
+									', 
+																	', 
+					', 
+				', 
+								', 
+					', 
+											', Six in Sixty: Stocks you should keep on your radar', 
+										', 
+					', 3.28 PM Dec 29th', 
+				', 
+				', 
+				', 
+			', 
+					', 
+							', 
+									', 
+																	', 
+					', 
+				', 
+								', 
+					', 
+											', Buy MRPL, Dabur India; sell Adani Ports: Sandeep Wagle', 
+										', 
+					', 1.33 PM Dec 29th', 
+				', 
+				', 
+				', 
+			', 
+			', More News »', 
+			', 
+			 
+			
+', messages', 
+	', 
+	 
+	', 
+		', Adani Ports sentimeter', 
+		', 
+			', 
+				', Buy', 
+				', 
+				',  71%', 
+			', 
+			', 
+				', 
+				', 
+				', 
+			', 
+			', 
+				', Sell', 
+				', 
+				',    ', 29%', 
+				', 
+			', 
+			', 
+				', 
+				', 
+				', 
+			', 
+			', 
+				', Hold', 
+				',  ', 
+				',   ', 0%', 
+				', 
+			', 			
+		', 
+	', 
+	', 
+	', 
+		', 
+			', Post Your Views', 
+			', 40823',  views »', 
+		', 
+		', 
+		', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+				', 
+				', 
+			', 
+		', 
+			', 
+		', 
+	', 
+	', 
+		', 
+          ', 
+               ', u"What's your call on Adani Ports today?", 
+               ', 
+                    ', BUY', 
+                    ', SELL', 
+                    ', HOLD', 
+               ', 
+			   
+				
+          ', 
+          ', 
+	          ', Thank you for voting', 
+          ', 
+	', 
+	', 
+	', 
+				', 
+			', 
+				', 
+				', 
+					', 
+						', ZEWCS', 
+						',  Silver', 
+					', 
+					', 27 min 44 sec ago', 
+					', 
+				', 
+			', 
+			', 
+				', Stocks', 
+				', 
+								All boarders saying target achieved. So now on down...down.', 
+			', 
+		', 
+				', 
+			', 
+				', 
+				', 
+					', 
+						', ZEWCS', 
+						',  Silver', 
+					', 
+					', 29 min 56 sec ago', 
+					', 
+				', 
+			', 
+			', 
+				', Stocks', 
+				', 
+								Seems to go down soon. Be careful.', 
+			', 
+		', 
+				', 
+			', 
+				', 
+				', 
+					', 
+						', Elniapadop', 
+						',  New Member', 
+					', 
+					', 5 hrs 19 min 41 sec ago', 
+					', 
+				', 
+			', 
+			', 
+				', Stocks', 
+				', 
+								book profit buy near 271-2', 
+			', 
+		', 
+				
+	', 	', 
+	', More Messages »', 
+	
+	', 
+		function set_count(sc_name,scid,action){
+								
+								if(scid!="" && action!=""){
+									if((readCookie(scid+'mc_stk_cnt'))!=1){
+										$.ajax({
+											"url":"http://m.moneycontrol.com/set_stock_count_ajax.php",
+											"type":"post",
+											"data":{"action":action,"scid":scid},
+											success:function(result){
+												//alert('ha ha ha');
+											}
+										});
+									}else{
+										$(".thanx_box").html("You have already voted!");
+									}
+									$("#views_sec").hide();	
+									$("#view_thnk").show();	
+									/*$('#pl_thankbx').show();
+									if(action=='b')
+										sent_act = 'buy';
+									if(action=='s')
+										sent_act = 'sell';
+									if(action=='h')
+										sent_act = 'hold';
+									
+									var sent_inner_txt = "Why do you think "+sc_name+" is a "+sent_act+"?";
+									$("#f_message").val(sent_inner_txt);
+									$("#f_message_text").val(sent_inner_txt);*/
+								}
+								
+							}
+	', 			 
+		', 
+		
+		', 
+			function load_latest_messages(url,div){
+				setTimeout(function(){
+					$.ajax({
+					url:url,
+					type:"GET",
+					cache:false,
+					dataType:"text",
+					timeout:10000,
+					success:function(datas){
+						$('#'+div).html(datas);
+					}
+				});
+				}, 4000);
+				
+			}
+			function get_stock_graph(range,ex,sc_id,resp_div){
+			var loader = '<p class="CTR"><img src="http://img.moneycontrol.co.in/images/messageboard/mmb_loader.gif" alt="Loading"></p>';
+				var resp_html = $("#"+resp_div).html().trim();
+				$('#1d').removeClass('active');
+				$('#5d').removeClass('active');
+				$('#1m').removeClass('active');
+				$('#3m').removeClass('active');
+				$('#6m').removeClass('active');
+				$('#1yr').removeClass('active');
+				$('#2yr').removeClass('active');
+				$('#5yr').removeClass('active');
+				$('#'+range).addClass('active');
+				
+				if(resp_html=='' || resp_html== loader ){
+						var url ="http://m.moneycontrol.com/charts/get_stock_chart.php?t_version=11&range="+range+"&ex="+ex+"&sc_id="+sc_id+"&div="+resp_div
+						$( "#"+resp_div ).load(url);
+						$(".stock_graphs").hide();
+						$( "#"+resp_div ).show();
+					}else{
+						$(".stock_graphs").hide();
+						$( "#"+resp_div ).show();
+					}
+			}
+			
+			
+			$( document ).ready(function() {
+				get_stock_graph('1d','B','MPS','1dnse');
+			});
+			
+		', 
+		
+		
+', 
+function showHidemainmenu(id) {
+var e = document.getElementById(id);
+if(e.style.display == 'block'){
+e.style.display = 'none';
+e.style.position = 'absolute';
+
+
+}
+else{
+e.style.position = 'absolute';
+e.style.display = 'block';
+$('#menudrop').css('visibility','visible');
+
+
+document.getElementById('menubx').className="";
+}
+}
+
+function open_notices_url(url,div){
+	$('#'+div).show();
+		$('#'+div).html('Loading..');
+		$.ajax({
+				url:url,
+				type:"GET",
+				dataType:"text",
+				timeout:9000,
+				success:function(datas){
+				$('#'+div).html(datas);
+				}
+			});
+}
+$(document).ready(function() {	
+		$('.tab_ddlarrow').click(function(){
+			$(this).next().toggle();
+		});
+		var rs_flag = 2;
+		$('.tog_cont').hide();
+		if($("#default_open_tab")){
+			var divid1 = $("#default_open_tab").val(); 
+		}else{
+			divid1 = 0; 
+		}
+		$('h2:eq('+divid1+')').addClass('act').next().show();		 
+		 
+		rs_flag = $.trim($("#recent_flag").val());
+		if(rs_flag == '') {
+			rs_flag = 2;
+		}		
+		/*if( rs_flag == 0 ||  rs_flag == 2 ){
+			$('h2:eq(0)').addClass('act').next().show();
+		}*/ 
+				
+		$('h2').click( function(){
+			if($(this).next().is(':hidden')){
+				$('h2').removeClass('act').next().slideUp('slow');
+				$(this).addClass('act').next().slideDown('slow');				
+			}
+			else{
+				$(this).removeClass('act').next().slideUp('slow');		
+			}
+			
+			var divid=$(this).attr("id");
+			var watchlist_url=$('#watchlist_url_'+divid).val();
+			$('#watchlist_url').val(watchlist_url);
+	 
+			
+		})
+		$('.optionData .optnTblhead .optionData_handle').live("click",function(){
+		if($(this).parents('.optnTblhead').next('.optnTblContent').is(':visible')){
+			$(this).removeClass('act');
+			$(this).parents('.optnTblhead').next('.optnTblContent').slideUp();
+		}
+		else
+		{
+			$(this).addClass('act');
+			$('.optionData .optnTblContent').hide();
+			$(this).parents('.optnTblhead').next('.optnTblContent').slideDown();
+		}
+	});
+	});
+var heightit= $('#stocks_bse').outerHeight();
+var headtit= $('#hrdFtrWp').outerHeight();
+var sentit= $('#sen_band').outerHeight();
+$(window).bind('scroll', function() {
+	 if ($(window).scrollTop() > (heightit + headtit + sentit)) {
+		 $('#overst').addClass('fixed');
+	 }
+	 else {
+		 $('#overst').removeClass('fixed');
+	 }
+});
+
+
+', 
+', 
+p {
+    line-height: 19px;
+}
+', 
+
+
+', 
+update_stock_detail("http://m.moneycontrol.com/get_stock_price_mem.php?a=SIpvadb3gPJHrmSZxFKegPCVZ7SpmczgE0UsMCj3NBw");
+', 
+', 
+// update_stock_detail("http://m.moneycontrol.com/get_stock_price_mem.php?a=SIpvadb3gPJHrmSZxFKegPCVZ7SpmczgE0UsMCj3NBw");
+//var udid=setInterval("update_stock_detail('http://m.moneycontrol.com/get_stock_price_mem.php?a=SIpvadb3gPJHrmSZxFKegPCVZ7SpmczgE0UsMCj3NBw')",10000);
+
+var udid=setInterval("update_stock_detail('http://m.moneycontrol.com/get_stock_price_mem.php?a=SIpvadb3gPJHrmSZxFKegPCVZ7SpmczgE0UsMCj3NBw')",20000);
+
+', 
+', 
+	insert_recent_visited("mc_w_stk",'MPS','Adani+Ports');
+', 
+
+	', 
+	', u"
+	var ajax_flg=false;
+	var bottom_option='1';
+	
+	var ck_stk=readCookie('mc_w_stk');
+	var ck_mf=readCookie('mc_w_mf');
+	var ck_cm=readCookie('mc_w_comm');
+	var ck_ft=readCookie('mc_w_fo');
+	
+	if(bottom_option==1 && ck_stk) ajax_flg=true;
+	if(bottom_option==2 && ck_mf) ajax_flg=true;
+	if(bottom_option==3 && ck_cm) ajax_flg=true;
+	if(bottom_option==4 && ck_ft) ajax_flg=true;
+	if(ajax_flg)
+	$('#lastvisited_btm').load('http://m.moneycontrol.com/includes/lastvisited_bottom.php?getlvr=1&im_id=&sc_id=MPS&t='+Math.floor((Math.random() * 1000) + 1));
+	", 
+	', 
+ 
+', 
+', 
+			', 
+							', 
+					', u"
+					googletag.cmd.push(function() { googletag.display('Moneycontrol_Mobile_WAP/MC_WAP_Markets/MC_WAP_Markets_StockPrice_300x250_2'); });
+					", 
+				', 
+			
+			', 
+		', 
+', 
+', 
+	 
+		
+		
+						
+				', 
+					.fot_blubg{ background:#354d5c; padding:15px 10px 15px 10px;}
+					.fot_links a{ color:#fff !important; }
+					.fot_links span{ color:#fff; font:Arial, Helvetica, sans-serif;}
+				', 
+				
+			 ', 
+					', 
+						', 
+							', SECTIONS : ',  ', 
+							', Home',  | 
+							', News',  | 
+							', Markets',  | 
+							', Portfolio',  | 
+							', Watchlist',  | 
+							', Messages',  | 
+							', Live TV & Shows',  | 
+							', Videos',  | 
+							', Commodities',  | 
+							', Currency',  | 
+							', Mutual Funds',  | 
+							', IPO',  | 
+							
+							', Personal Finance',  | 
+							', Guess The Sensex',  | 
+							', Property',  | 
+							', RBI Monetary Policy',  | 
+							', Budget 2016',  | 
+							', Budget 2017',  | 
+							', Tech Control',  | 
+							', 2016 Year end special',  | 
+							', Game Changers',  | 
+							', Investment Watch',  | 
+							', Power Your Trade',  | 
+							', Disclaimer',  | 
+							', Privacy Statement',  | 
+							', Terms of Use', 
+						', 
+					', 
+							 
+				', 
+									', 
+										', 
+					.ft_sizr{ padding:10px 0; text-align:center; color:#738792;}
+					.gdf13{ color:#333333; font:bold 95% Arial, Helvetica, sans-serif}
+					.bl_sm10{ color:#2e5891; font:bold 100% Arial, Helvetica, sans-serif !important;}
+					.bl_sm13{ color:#2e5891; font:bold 130% Arial, Helvetica, sans-serif !important;}
+					.bl_sm16{ color:#2e5891; font:bold 160% Arial, Helvetica, sans-serif !important;}
+					.bl_sml{ color:#2e5891; font:100% Arial, Helvetica, sans-serif;}
+					', 
+					
+					
+					', Font Size:',    
+					', 
+					
+					 ', 
+					 ', generate_font_change_text();
+					 ', 
+				', Feedback', 
+					', 
+', Desktop site »', 
+					  ', 
+					  ', Language: English',   ',   ', \u0939\u093f\u0902\u0926\u0940',   ',   ', \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0', 
+				', © 2017. a Web18 Venture', 
+				', 
+				', 
+
+							
+			
+						', 
+					
+					', 
+						', 
+						', 
+					', 
+				   ', 
+					', 
+						 
+						', 
+						', 
+													
+						
+						', 
+						', 
+						
+
+					 ', 
+					', 
+			', 
+					
+			
+  
+
+ ', 
+	(function() {
+		window._w18hn = "MCWAP";
+		        var w18 = document.createElement('script'); w18.type = 'text/javascript'; w18.async = true;
+        w18.src = 'http://s.in.com/common/script_catch.js?v=20160308';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(w18, s);
+	})();
+	
+	$(document).ready(function() {	
+	$('.tab_ddlarrow').click(function(){
+		$(this).next().toggle();
+	})
+});
+', 
+
+
+ 
+', 
+', u"
+$(document).ready(function(e) {
+    if ( navigator.userAgent.indexOf('Presto/') > -1 &&  
+     navigator.userAgent.indexOf('Opera Mini/') > -1 ) {
+	  // Extreme Savings Mode
+	  $('#sticky-footer').hide()
+	} else {
+	// High/Normal Savings Mode
+	$('#sticky-footer').show()
+	}
+});
+", 
+
+', 
+', 
+var cookie_mcanvas = getCookie('mcanvas');
+if(cookie_mcanvas!='displayed'){	
+	(function(){
+		var param = {
+			"pk": "rpb53",
+			"aduid": 224
+		};
+		var d=top.document,s=d.createElement("script"),u=[],p;param.u=d.location.href;param.ref=d.referrer;param.phR=Math.random()+"_"+(new Date).getTime();for(p in param)if(param.hasOwnProperty(p))u.push(p+"="+encodeURIComponent(param[p]));s.src="//ic.ph.affinity.com/init.js?"+u.join("&");s.type="text/javascript";d.getElementsByTagName("head")[0].appendChild(s);
+	})();
+	console.log('executed');
+	 createCookie('mcanvas','displayed','1');
+	}
+', 
+', 
+ '][
+', 
+', u"var _w18WNSITE='WAP';", 
+', 
+', 
+
+', 
+', 
+', 
+var default_font=readCookie('mc_font');
+if(default_font)
+	change_font(default_font);
+else 
+	change_font("m");
+', 
+', 
+.mc_header_english{top:0px;}
+.mc_header_english .menutable td{display:block}
+.PT26{padding-top:26px;}
+
+', 
+			
+			', u"
+				  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+				  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+				  ga('create', 'UA-11747743-1', 'auto');
+				  				  ga('send', 'pageview');
+				function urchinTracker(pa_str) {ga(['_trackPageview', ''+pa_str+'']);}
+				function GAEventTracker(category,action,opt_label) {ga('send', 'event', ''+category+'', ''+action+'', ''+opt_label+'');}
+			", 
+
+						
+		
+			', 
+				', 
+					', 
+						', 
+						', money', control', 
+						', 
+						', 
+						', 
+						', 
+								', 									
+									', 
+										', Hi  ', 
+										', My Portfolio', 
+										', My Watchlist', 
+										', My Messages', 
+										', Saved Videos ', 
+										
+										', Sign out', 
+									', 									
+									', 
+									', Sign in', 
+									', Register', 
+									',  
+								', 
+						', 
+						
+						', 
+					', 
+					', 
+						', 
+						', 
+						document.getElementById('jsmenu1').style.display="block";
+						document.getElementById('useric').style.display="block";
+						', 
+		', 
+		', 
+			', 
+				', 
+					', Select Language', 
+					', 
+							', 
+								',  ', English', 
+							', 
+							', 
+								',  ', \u0939\u093f\u0902\u0926\u0940', 
+							', 
+							', 
+								',  ', \u0917\u0941\u091c\u0930\u093e\u0924\u0940', 
+							', 
+					', 
+				', 
+							',  
+							', Home',  
+							', News', 
+							', Markets', 
+							', Portfolio', 
+							', Watchlist', 
+							', Messages', 
+							', Live TV & Shows', 
+							', Videos', 
+							', Saved Videos ', 
+							', Commodities', 
+							', Currencies', 
+							', Mutual Funds', 
+							', 
+							', Personal Finance', 
+							', Property', 
+							', Jio at Doorstep', 
+							', 
+								', 
+								', 
+									', Specials', 
+									', 
+											', 2016 Year end special', 
+											', Master Your Money', 
+											', SME Special', 
+											', Real Assets', 
+											', Travel Cafe', 
+											', Tech Control', 
+										
+									', 
+								', 
+							', 
+							', 
+								', 
+										', Subscriptions', 
+										', 
+											', 
+												', 
+													', 
+														', Game Changers', 
+													', 
+												', 
+													', Sudarshan Sukhani', 
+													', C. K. Narayan', 
+													', T Gnanasekar', 
+													', Ambareesh Baliga', 
+													', Mecklai Financial', 
+													
+													', 
+												', 
+												
+												', 
+												', Investment Watch', 
+												', Power Your Trade',  ', 
+											', 
+										', 
+								', 
+							', 
+						', 
+					', 
+				', 
+', set_default_class();get_saved_vdo_count();', 
+', 
+		
+
+', 
+ ', 
+	
+', 
+function get_search_type_id(){
+		var disp=document.getElementById('type').value;
+		var return_value="1";
+		switch(disp) {
+			case "Stocks": return_value=1; break;
+			case "mf": return_value=2; break;
+			case "fno": return_value=4; break;
+			case "commodity": return_value=3; break;
+			case "Video": return_value=0; break; // dont run autocomplete
+			case "News": return_value=0; break; // dont run autocomplete
+		}
+		return return_value;
+}
+function autoSuggest_search(){
+	//var srctxt = $.trim($('#skeyword').val());
+	var skeyword=document.getElementById('skeyword').value;
+skeyword=skeyword.trim();
+skeyword=skeyword.replace(/[^a-z0-9 \&]/gi, '');
+	var type=get_search_type_id();
+	if(skeyword.length>2 && type>0)	{
+		var htmlStr ='<table cellpadding="0" cellspacing="0" border="0" width="90%" class="mm-table">';
+		var url = 'http://m.moneycontrol.com/autosuggest.php?type='+type+'&qs='+encodeURIComponent(skeyword);
+		$.ajax({
+		url:url,
+		type:"GET",
+		dataType:"json",
+		timeout:1000,
+		error: function (xhr, ajaxOptions, thrownError) {
+				//document.suggestfrm.submit();
+		},
+		success:function(d){
+			if(d.data.length >0){
+				if(d.ss_c ==1){
+					htmlStr+='<tr><td colspan= 2 class="brdb_gry"><b style="font-size:70%">No Matches - Search Suggestions</b></td></tr>';
+				}
+				$.each(d.data,function(i,v){
+				var sval=v.pdt_dis_nm;
+				var tmp=document.createElement("DIV");
+				tmp.innerHTML=sval;
+				if(tmp.textContent) sval=tmp.textContent;
+				if(tmp.innerText) sval=tmp.innerText;
+				
+				htmlStr+='<tr><td width="70%" class="brdb_gry"><div class="listing"><a onclick=\'call_ajax_url("'+v.click_url+'","'+v.detail_url+'");\'   class="gry_l_2" style="cursor:pointer"><span class="clr_333">'+v.pdt_dis_nm+'</span></a></div></td></tr>';
+				});
+			}
+			else{
+				htmlStr+='<tr><td>No results!!</td></tr>';
+			}
+			htmlStr+='</table>';
+			$('.srch_auto').html(htmlStr);$('.srch_auto').show();
+		}
+		})
+	}
+}
+function call_ajax_url(url,url1){
+	$.ajax({
+		url:url,
+		type:"GET",
+		dataType:"jsonp",
+		crossDomain:true,
+		timeout:3000,
+		success:function(x,t,m){
+			eraseCookie('stk_tb');
+			window.location=url1;
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			eraseCookie('stk_tb');
+			window.location=url1;
+		},
+	});
+}
+function UPDATED (){}
+function set_srch_value(value){
+	document.getElementById('skeyword').value=value;
+	$('.srch_auto').html('').hide();
+}
+function validate_search(){
+var skeyword=document.getElementById('skeyword').value;
+skeyword=skeyword.trim();
+skeyword=skeyword.replace(/[^a-z0-9 \&]/gi, '');
+document.getElementById('skeyword').value=skeyword;
+if(skeyword.length<3){
+ alert('Please enter minimum three characters to search'); return false;
+}
+return true;
+
+
+}
+function hide_suggest_box(){
+$('#srch_auto').hide();
+}
+', 
+', 
+.srch_auto {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #C1C1C1;
+    padding: 5px 10px;
+   z-index:10;
+	position:absolute;
+}
+.listing{padding:3px;}
+.clr_333 > strong{color:#005b78;font-size:110%;font-weight:bold}
+.clr_333{color:#000}
+', 
+', 
+		', 
+			', 
+				', 
+					', 
+				', 
+				', 
+								', 
+								', 
+								', 
+								
+								', Stocks', 
+										', 
+											', 
+											', Stocks', 
+											', Funds', 
+											', Commodity', 
+											', Futures', 
+											', News', 
+											', Videos', 
+											
+												
+											', 
+										', 
+								', 
+								', 
+								', 
+									', Stocks', 
+									', Funds', 
+									', Futures', 
+									', Commodity', 
+									', Videos', 
+								', 
+								', 
+								', 
+									document.getElementById('userdd1').style.display="block";
+								', 
+								', 
+								', 
+				
+				
+				', 
+			', 
+		', 
+		
+		
+', 	
+', 
+function showHideQt(id) {
+   var e = document.getElementById(id);
+   document.getElementById('userbx').style.visibility='hidden';
+   var default_class=document.getElementById('default_class').value;
+   if(default_class!="") {
+  document.getElementById('useric').className="active_useric1";
+	document.getElementById('useric').style.height="17px";
+	}
+   document.getElementById('men).style.visibility='hidden';
+	document.getElementById('menubx').className="";
+    var default_class=document.getElementById('default_class').value;
+	   
+   if(e.style.visibility == 'visible'){
+	  e.style.visibility = 'hidden';
+	  e.style.position = 'absolute';
+	 document.getElementById('useric').className=default_class;
+	  }
+   else{
+	 e.style.position = 'absolute';
+	  e.style.visibility = 'visible';
+	  document.getElementById('useric').className=default_class;
+   }
+}
+function get_display_value(value){
+	var return_value="";
+	switch(value) {
+		case "Stocks": return_value="Stocks"; break;
+		case "mf": return_value="Funds"; break;
+		case "fno": return_value="Futures"; break;
+		case "commodity": return_value="Commodity"; break;
+		case "Video": return_value="Videos"; break;
+		case "News": return_value="News"; break;
+	}
+	return return_value;
+}
+function set_search_value(value,action){
+
+document.topsearch.action=action;
+var disp_value=get_display_value(value);
+	document.getElementById('type').value=value;
+
+document.getElementById('drop_ic').innerHTML=disp_value;
+
+document.getElementById('quoteBx').style.visibility='hidden';
+}
+', 
+
+	 ', 
+ 
+', 
+	', 
+
+		', 
+', 
+	',  
+	 	', 
+		', 
+				', 
+								 
+			', 
+	', 
+		', 
+	', 
+	 
+
+				', 
+			 
+			 ', 
+		
+		 ', 
+get_header_ad_details();
+', 
+', 
+', 
+
+', 
+
+
+
+
+', 
+', 
+
+', 
+', 
+		', 
+			', S&P BSE SENSEX', 
+			', 25835.95',  ',  ', -314.29',  (', -1.20', %)', 
+			', 
+		', 
+		', 
+			', NIFTY 50', 
+			', 7962.50',  ',  ', -111.60',  (', -1.38', %)', 
+			', 
+		', 
+		
+	', 
+
+
+
+', 
+', 
+	
+	', 
+		', 
+			', 
+				', u"
+					googletag.cmd.push(function() { googletag.display('Moneycontrol_Mobile_WAP/MC_WAP_Markets/MC_WAP_Markets_StockPrice_320x50_1'); });
+				", 
+			', 
+		', 
+	', 
+', 
+
+
+', 
+', 
+    // add another call for first update
+    update_sensex_nifty('http://indices.moneycontrol.co.in/sensex_nifty/indtick.json','http://img-d02.moneycontrol.co.in');
+//var tid = setInterval("update_sensex_nifty('http://indices.moneycontrol.co.in/sensex_nifty/indtick.json','http://img-d02.moneycontrol.co.in')", 11000);
+var tid = setInterval("update_sensex_nifty('http://indices.moneycontrol.co.in/sensex_nifty/indtick.json','http://img-d02.moneycontrol.co.in')", 20000);
+', 
+', 
+.gd14_h{font-size:115% !important}
+', 
+ 
+	
+
+   
+ ', 
+ function showHide_menu(id) {
+       var e = document.getElementById(id);
+	   document.getElementsByClassName('top_header')[0].style.top=0;
+	   if(document.getElementById('userbx')){
+	   document.getElementById('userbx').style.visibility='hidden';
+	   }
+	   if(document.getElementById('menudrop')){
+	   document.getElementById('menudrop').style.visibility='hidden';
+	   }
+		if(document.getElementById('quoteBx')){		
+			  document.getElementById('quoteBx').style.visibility='hidden';
+		}
+	   var default_class=document.getElementById('default_class').value;
+	   if(default_class!=="") {
+	   
+		document.getElementById('useric').style.height="17px";
+		document.getElementById('useric').className="active_useric1";
+		}
+	   default_class=document.getElementById('default_class').value;
+	   document.getElementById('useric').className=default_class;
+	   
+       if(e.style.visibility == 'visible'){
+           e.style.visibility = 'hidden';
+		   document.getElementById('menubx').className="";
+		  }
+       else{
+		e.style.visibility = 'visible';
+		   document.getElementById('menubx').className="active";
+	   }
+    }
+	 
+	function showHideic_menu(id) {
+	var e = document.getElementById(id);
+	document.getElementsByClassName('top_header')[0].style.top=0;
+	var default_class=document.getElementById('default_class').value;
+	if(document.getElementById('men)){
+	document.getElementById('men).style.visibility='hidden';
+	}
+	if(document.getElementById('menudrop')){
+	document.getElementById('menudrop').style.visibility='hidden';
+	}
+	if(document.getElementById('menubx')){
+	document.getElementById('menubx').className="";
+	}
+	if(document.getElementById('quoteBx')!==null){				
+		document.getElementById('quoteBx').style.visibility='hidden';
+	}
+	if(default_class!==""){
+	document.getElementById('useric').style.height="17px";
+	document.getElementById('useric').className="active_useric1";
+	
+	}
+	
+	if(e.style.visibility == 'visible'){
+		e.style.visibility = 'hidden';
+		e.style.position = 'absolute';
+		document.getElementById('useric').className=default_class;
+	}
+	else{
+		e.style.position = 'absolute';
+		e.style.visibility = 'visible';
+		document.getElementById('useric').className="active_useric1";
+		document.getElementById('useric').style.borderBottom="0px";
+		document.getElementById('useric').style.height="19px";
+	}
+}
+', 
+', 
+', 
+
+', 
+', 
+
+', 
+
+/*function set_count(scid,action){
+	if(scid!="" && action!=""){
+		var sent_act;
+		if((readCookie(scid+'mc_stk_cnt'))!=1){
+			$.ajax({
+				type:"POST",
+				url:"/set_stock_count_ajax.php",
+				data:{"action":action,"scid":scid},
+				success:function(data){
+					$(".wuc-pollq").hide();
+					$('.wuc-thanxbox').show();
+				}
+			});
+		}else{
+			$(".wuc-pollq").hide();
+			$('.wuc-thanxbox').show().html('<p class="thanx_box MT5">You are already voted!</p>');
+		}
+	}
+}*/
+function load_ajax_url(url,div){
+	var divcontent=$('#'+div).html().trim();
+	// console.log(divcontent);
+	// console.log(url);
+	if(divcontent==""){
+			$('#'+div).html('<div class="TAC" style="padding-top:5px"><img src="http://img-d01.moneycontrol.co.in/images/messageboard/mmb_loader.gif" ></div>');
+				$.ajax({
+				url:url,
+				type:"GET",
+				dataType:"text",
+				timeout:30000,
+				success:function(datas){
+				$('#'+div).html(datas);
+				}
+			});
+	}
+}
+function insert_msg(){
+	var username=getCookieNNMC('nnmc');
+	$('#f_username').val(username);
+	var message=$.trim($('#f_message').val());
+	if(!message){ alert('Please enter message'); return false;}
+	$.ajax({
+				type:"POST",
+				url:"http://m.moneycontrol.com/india/stockpricequote/infrastructuregeneral/adaniportsspecialeconomiczone/MPS",
+				data:$('#senti_form').serialize(),
+				success:function(data){
+					// $('#senti_form').hide();
+					$('.thanx_box').show().html(data);
+					$('#f_message').val("");
+					$('.whts-ur-call').hide();
+				}
+			});
+}
+function load_chart(div,url,id){
+	var pdata=$('#'+div).html();
+	$('#intr_'+id+'_btn').removeClass("active");
+	$('#ser_'+id+'_btn').removeClass("active");
+	$('#'+div+'_btn').addClass("active");
+	$('#intr_'+id).hide();
+	$('#ser_'+id).hide();
+	$('#'+div).show();
+	if(pdata==""){
+	
+	
+	$('#'+div).html('<div class="TAC" style="padding-top:5px"><img src="http://img-d01.moneycontrol.co.in/images/messageboard/mmb_loader.gif" ></div>');
+				$.ajax({
+				url:url,
+				type:"GET",
+				dataType:"text",
+				timeout:30000,
+				success:function(datas){
+				$('#'+div).html(datas);
+				}
+			});
+}}
+', 
+
+', 
+	.overdropbox {
+    background: none repeat scroll 0 0 #fff;
+}
+',  ', 
+', 
+	',  ', 
+', 
+     	', 
+          	', Adani Ports and Special Economic Zone', 
+               ', NSE',  ', BSE', 
+          ', 
+          ', 
+		  		  		     	', 
+					', 
+					', 274.05',  
+				',  
+				',  
+				', 
+					', 
+							', 0.30', 
+					', 
+					', 
+						', 
+						(', 0.11', %)
+						', 
+					', 
+				', 
+				          ', 
+		             ', 
+          	Volume: ', 112,078',  ', Jan 03, 2017  4:00 PM', 
+          ', 
+		  		     
+				', Add to 
+					   
+				',  Portfolio',   
+		  		    
+				',  Watchlist', 
+				
+		   		     
+				', 
+		         ', 
+     ', 
+     	', 
+          	', Adani Ports and Special Economic Zone', 
+               ', NSE',  ', BSE', 
+          ', 
+          ', 
+		  		   						', 
+						', 
+							', 
+								273.95							', 
+						', 
+						',  
+						', 
+							', 
+							', 
+								0.15							', 
+							', 
+							', 
+								', 
+									(', 0.05', %)
+								', 
+							', 
+						', 
+				          ', 
+		             ', 
+          	Volume: ', 2,064,823',  ', Jan 03, 2017  3:57 PM', 
+          ', 
+		            
+				', Add to 
+									    
+					  ',  Portfolio',   
+										 
+					  ',  Watchlist', 
+							   
+				', 
+		         ', 
+	 
+	
+	 ', 
+		', 
+			', 
+				',  Stock added to your watchlist.. 
+				', X', 
+			', 
+			', 
+				',  Stock already exists in your watchlist.. 
+				', X', 
+			', 
+		', 
+	', 
+	
+	 ', 
+		', Overview ', 
+	', 
+	',  
+			', Overview', 
+			', Futures', 
+			', Options', 
+			', News and Views', 
+			', Announcements', 
+			', Messages', 
+			', Corporate Action', 
+			', Financials', 
+			', Balance Sheet', 
+			', Profit & Loss', 
+			', Financial Ratios', 
+			', Peer Comparison', 
+			', Shareholding', 
+			', Info & Mgmt', 
+		', 
+	', 
+	', 
+	
+.fixed {
+    position: fixed !important;
+    top: 41px;
+    width: 100%;
+    z-index: 9;
+	left:0px;
+	
+}
+	', 	 ', 
+	 function showBseNse(mrktNm){
+		if(mrktNm=='bse'){
+			$('#stocks_nse').hide();
+			$('#stocks_bse').fadeIn();
+		}
+		else{
+			$('#stocks_bse').hide();
+			$('#stocks_nse').fadeIn();
+		}
+		createCookie("stk_tb",mrktNm,"1");
+	}
+	function add_watchlist(){
+		var watchlist_url=$('#watchlist_url').val();
+		if(watchlist_url) window.location=watchlist_url;
+	}
+	
+	var wtchlist=readCookie('add_to_watchlist');
+	if(wtchlist=="exist"){
+		$('#exist').show();
+	}
+	else if(wtchlist=="added"){
+		$('#added').show();
+	}
+	else {
+		$('#watchlist_msg').hide();
+	}
+	
+		
+	eraseCookie('add_to_watchlist');
+	var stk_tab=readCookie("stk_tb");
+	if(stk_tab){
+		showBseNse(stk_tab);
+	}
+	 ',      
+    ', 
+            	', 
+                  ', 
+				                      ', 
+					                      ', Parameters  ', 
+                      ', NSE', 
+                      ',  BSE', 
+					                    ', 
+				                      ', 
+										
+					
+					', Bid Price  
+                      ', 0.00', 
+                      ',  ', 274.05', 
+					                    ', 
+				                      ', 
+										
+					
+					', Bid Qty  
+                      ', 0', 
+                      ',  ', 168', 
+					                    ', 
+				                      ', 
+										
+					
+					', Offer Price  
+                      ', 273.95', 
+                      ',  ', 274.05', 
+					                    ', 
+				                      ', 
+										
+					
+					', Offer Qty  
+                      ', 2398', 
+                      ',  ', 200', 
+					                    ', 
+				                      ', 
+										
+					
+					', Today\u2019s Low  
+                      ', 272.05', 
+                      ',  ', 272.20', 
+					                    ', 
+				                      ', 
+										
+					
+					', Today\u2019s High  
+                      ', 277.70', 
+                      ',  ', 277.55', 
+					                    ', 
+				                      ', 
+										
+					
+					', 52 Wk Low  
+                      ', 169.15', 
+                      ',  ', 169.65', 
+					                    ', 
+				                      ', 
+										
+					
+					', 52 Wk High  
+                      ', 317.00', 
+                      ',  ', 317.00', 
+					                    ', 
+				                      ', 
+										
+					
+					', Open Price  
+                      ', 275.20', 
+                      ',  ', 274.10', 
+					                    ', 
+				                      ', 
+										
+					
+					', Prev. Close  
+                      ', 273.80', 
+                      ',  ', 273.75', 
+					                    ', 
+				                      
+                    
+                    
+                  ', 
+                ', 
+            ',             
+            ', 
+				', 1d', 
+				', 5d', 
+				', 1m', 
+				', 3m', 
+				', 6m', 
+				', 1y', 
+				', 2y', 
+				', 5y', 
+			',  
+			',  
+						', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			
+			
+            ',     		
+            ', 
+            	', stock alerts', 	
+													', 
+						', Moving Average (SMA)',  | Jan 02, 08:00 PM', 
+						', Adani Ports closes above 30-Day Moving Average of 272.47 today.', 
+					', 
+									', 
+						', Block Deals',  | Jan 02, 01:00 PM', 
+						', Adani Ports Block Deal on NSE, Qty: 230,969, Deal Price: 268.35, Value (cr): 6.20, Time: 11:21am', 
+					', 
+									', 
+						', Block Deals',  | Dec 30, 11:45 AM', 
+						', Adani Ports Block Deal on NSE, Qty: 259,584, Deal Price: 268.00, Value (cr): 6.96, Time: 11:45am', 
+					', 
+								 
+            ', 
+			', 
+							', STATISTICS', 	
+				', 
+					', 
+						', Market Cap (Rs Cr)', 
+						', 56,733.72', 
+					', 
+					', 
+						', EPS (TTM)', *', 
+						', 13.06', 
+					', 
+					', 
+				', 
+				', 
+					', 
+						', Book Value (Rs)', *', 
+						', 65.79', 
+					', 
+					', 
+						', Price / Book', *', 
+						', 4.16', 
+					', 
+					', 
+				', 
+				', 
+					', 
+						', Deliverables (%)', 
+						', 51.77', 
+					', 
+					', 
+						', Industry P/E', 
+						', 23.92', 
+					', 
+					', 
+				', 
+				', 
+					', 
+						', Dividend (%)', 
+						', 55.00', 
+					', 
+					', 
+						', Div. Yield (%)', 
+						', 0.4', 
+					', 
+					', 
+				', 
+				', 
+					', 
+						', Market Lot', 
+						', 1.00', 
+					', 
+					', 
+						', Face Value (Rs)', 
+						', 2.00', 
+					', 
+					', 
+				', 
+				', *',  Based on standalone numbers', 
+			', 
+			', 
+			', news on Adani Ports', 
+								', 
+							', 
+									', 
+																	', 
+					', 
+				', 
+								', 
+					', 
+											', Buy, sell, hold: 5 stocks to watch out', 
+										', 
+					', 8.29 AM Dec 30th', 
+				', 
+				', 
+				', 
+			', 
+					', 
+							', 
+									', 
+																	', 
+					', 
+				', 
+								', 
+					', 
+											', Six in Sixty: Stocks you should keep on your radar', 
+										', 
+					', 3.28 PM Dec 29th', 
+				', 
+				', 
+				', 
+			', 
+					', 
+							', 
+									', 
+																	', 
+					', 
+				', 
+								', 
+					', 
+											', Buy MRPL, Dabur India; sell Adani Ports: Sandeep Wagle', 
+										', 
+					', 1.33 PM Dec 29th', 
+				', 
+				', 
+				', 
+			', 
+			', More News »', 
+			', 
+			 
+			
+', messages', 
+	', 
+	 
+	', 
+		', Adani Ports sentimeter', 
+		', 
+			', 
+				', Buy', 
+				', 
+				',  71%', 
+			', 
+			', 
+				', 
+				', 
+				', 
+			', 
+			', 
+				', Sell', 
+				', 
+				',    ', 29%', 
+				', 
+			', 
+			', 
+				', 
+				', 
+				', 
+			', 
+			', 
+				', Hold', 
+				',  ', 
+				',   ', 0%', 
+				', 
+			', 			
+		', 
+	', 
+	', 
+	', 
+		', 
+			', Post Your Views', 
+			', 40823',  views »', 
+		', 
+		', 
+		', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+			', 
+				', 
+				', 
+			', 
+		', 
+			', 
+		', 
+	', 
+	', 
+		', 
+          ', 
+               ', u"What's your call on Adani Ports today?", 
+               ', 
+                    ', BUY', 
+                    ', SELL', 
+                    ', HOLD', 
+               ', 
+			   
+				
+          ', 
+          ', 
+	          ', Thank you for voting', 
+          ', 
+	', 
+	', 
+	', 
+				', 
+			', 
+				', 
+				', 
+					', 
+						', ZEWCS', 
+						',  Silver', 
+					', 
+					', 27 min 44 sec ago', 
+					', 
+				', 
+			', 
+			', 
+				', Stocks', 
+				', 
+								All boarders saying target achieved. So now on down...down.', 
+			', 
+		', 
+				', 
+			', 
+				', 
+				', 
+					', 
+						', ZEWCS', 
+						',  Silver', 
+					', 
+					', 29 min 56 sec ago', 
+					', 
+				', 
+			', 
+			', 
+				', Stocks', 
+				', 
+								Seems to go down soon. Be careful.', 
+			', 
+		', 
+				', 
+			', 
+				', 
+				', 
+					', 
+						', Elniapadop', 
+						',  New Member', 
+					', 
+					', 5 hrs 19 min 41 sec ago', 
+					', 
+				', 
+			', 
+			', 
+				', Stocks', 
+				', 
+								book profit buy near 271-2', 
+			', 
+		', 
+				
+	', 	', 
+	', More Messages »', 
+	
+	', 
+		function set_count(sc_name,scid,action){
+								
+								if(scid!="" && action!=""){
+									if((readCookie(scid+'mc_stk_cnt'))!=1){
+										$.ajax({
+											"url":"http://m.moneycontrol.com/set_stock_count_ajax.php",
+											"type":"post",
+											"data":{"action":action,"scid":scid},
+											success:function(result){
+												//alert('ha ha ha');
+											}
+										});
+									}else{
+										$(".thanx_box").html("You have already voted!");
+									}
+									$("#views_sec").hide();	
+									$("#view_thnk").show();	
+									/*$('#pl_thankbx').show();
+									if(action=='b')
+										sent_act = 'buy';
+									if(action=='s')
+										sent_act = 'sell';
+									if(action=='h')
+										sent_act = 'hold';
+									
+									var sent_inner_txt = "Why do you think "+sc_name+" is a "+sent_act+"?";
+									$("#f_message").val(sent_inner_txt);
+									$("#f_message_text").val(sent_inner_txt);*/
+								}
+								
+							}
+	', 			 
+		', 
+		
+		', 
+			function load_latest_messages(url,div){
+				setTimeout(function(){
+					$.ajax({
+					url:url,
+					type:"GET",
+					cache:false,
+					dataType:"text",
+					timeout:10000,
+					success:function(datas){
+						$('#'+div).html(datas);
+					}
+				});
+				}, 4000);
+				
+			}
+			function get_stock_graph(range,ex,sc_id,resp_div){
+			var loader = '<p class="CTR"><img src="http://img.moneycontrol.co.in/images/messageboard/mmb_loader.gif" alt="Loading"></p>';
+				var resp_html = $("#"+resp_div).html().trim();
+				$('#1d').removeClass('active');
+				$('#5d').removeClass('active');
+				$('#1m').removeClass('active');
+				$('#3m').removeClass('active');
+				$('#6m').removeClass('active');
+				$('#1yr').removeClass('active');
+				$('#2yr').removeClass('active');
+				$('#5yr').removeClass('active');
+				$('#'+range).addClass('active');
+				
+				if(resp_html=='' || resp_html== loader ){
+						var url ="http://m.moneycontrol.com/charts/get_stock_chart.php?t_version=11&range="+range+"&ex="+ex+"&sc_id="+sc_id+"&div="+resp_div
+						$( "#"+resp_div ).load(url);
+						$(".stock_graphs").hide();
+						$( "#"+resp_div ).show();
+					}else{
+						$(".stock_graphs").hide();
+						$( "#"+resp_div ).show();
+					}
+			}
+			
+			
+			$( document ).ready(function() {
+				get_stock_graph('1d','B','MPS','1dnse');
+			});
+			
+		', 
+		
+		
+', 
+function showHidemainmenu(id) {
+var e = document.getElementById(id);
+if(e.style.display == 'block'){
+e.style.display = 'none';
+e.style.position = 'absolute';
+
+
+}
+else{
+e.style.position = 'absolute';
+e.style.display = 'block';
+$('#menudrop').css('visibility','visible');
+
+
+document.getElementById('menubx').className="";
+}
+}
+
+function open_notices_url(url,div){
+	$('#'+div).show();
+		$('#'+div).html('Loading..');
+		$.ajax({
+				url:url,
+				type:"GET",
+				dataType:"text",
+				timeout:9000,
+				success:function(datas){
+				$('#'+div).html(datas);
+				}
+			});
+}
+$(document).ready(function() {	
+		$('.tab_ddlarrow').click(function(){
+			$(this).next().toggle();
+		});
+		var rs_flag = 2;
+		$('.tog_cont').hide();
+		if($("#default_open_tab")){
+			var divid1 = $("#default_open_tab").val(); 
+		}else{
+			divid1 = 0; 
+		}
+		$('h2:eq('+divid1+')').addClass('act').next().show();		 
+		 
+		rs_flag = $.trim($("#recent_flag").val());
+		if(rs_flag == '') {
+			rs_flag = 2;
+		}		
+		/*if( rs_flag == 0 ||  rs_flag == 2 ){
+			$('h2:eq(0)').addClass('act').next().show();
+		}*/ 
+				
+		$('h2').click( function(){
+			if($(this).next().is(':hidden')){
+				$('h2').removeClass('act').next().slideUp('slow');
+				$(this).addClass('act').next().slideDown('slow');				
+			}
+			else{
+				$(this).removeClass('act').next().slideUp('slow');		
+			}
+			
+			var divid=$(this).attr("id");
+			var watchlist_url=$('#watchlist_url_'+divid).val();
+			$('#watchlist_url').val(watchlist_url);
+	 
+			
+		})
+		$('.optionData .optnTblhead .optionData_handle').live("click",function(){
+		if($(this).parents('.optnTblhead').next('.optnTblContent').is(':visible')){
+			$(this).removeClass('act');
+			$(this).parents('.optnTblhead').next('.optnTblContent').slideUp();
+		}
+		else
+		{
+			$(this).addClass('act');
+			$('.optionData .optnTblContent').hide();
+			$(this).parents('.optnTblhead').next('.optnTblContent').slideDown();
+		}
+	});
+	});
+var heightit= $('#stocks_bse').outerHeight();
+var headtit= $('#hrdFtrWp').outerHeight();
+var sentit= $('#sen_band').outerHeight();
+$(window).bind('scroll', function() {
+	 if ($(window).scrollTop() > (heightit + headtit + sentit)) {
+		 $('#overst').addClass('fixed');
+	 }
+	 else {
+		 $('#overst').removeClass('fixed');
+	 }
+});
+
+
+', 
+', 
+p {
+    line-height: 19px;
+}
+', 
+
+
+', 
+update_stock_detail("http://m.moneycontrol.com/get_stock_price_mem.php?a=SIpvadb3gPJHrmSZxFKegPCVZ7SpmczgE0UsMCj3NBw");
+', 
+', 
+// update_stock_detail("http://m.moneycontrol.com/get_stock_price_mem.php?a=SIpvadb3gPJHrmSZxFKegPCVZ7SpmczgE0UsMCj3NBw");
+//var udid=setInterval("update_stock_detail('http://m.moneycontrol.com/get_stock_price_mem.php?a=SIpvadb3gPJHrmSZxFKegPCVZ7SpmczgE0UsMCj3NBw')",10000);
+
+var udid=setInterval("update_stock_detail('http://m.moneycontrol.com/get_stock_price_mem.php?a=SIpvadb3gPJHrmSZxFKegPCVZ7SpmczgE0UsMCj3NBw')",20000);
+
+', 
+', 
+	insert_recent_visited("mc_w_stk",'MPS','Adani+Ports');
+', 
+
+	', 
+	', u"
+	var ajax_flg=false;
+	var bottom_option='1';
+	
+	var ck_stk=readCookie('mc_w_stk');
+	var ck_mf=readCookie('mc_w_mf');
+	var ck_cm=readCookie('mc_w_comm');
+	var ck_ft=readCookie('mc_w_fo');
+	
+	if(bottom_option==1 && ck_stk) ajax_flg=true;
+	if(bottom_option==2 && ck_mf) ajax_flg=true;
+	if(bottom_option==3 && ck_cm) ajax_flg=true;
+	if(bottom_option==4 && ck_ft) ajax_flg=true;
+	if(ajax_flg)
+	$('#lastvisited_btm').load('http://m.moneycontrol.com/includes/lastvisited_bottom.php?getlvr=1&im_id=&sc_id=MPS&t='+Math.floor((Math.random() * 1000) + 1));
+	", 
+	', 
+ 
+', 
+', 
+			', 
+							', 
+					', u"
+					googletag.cmd.push(function() { googletag.display('Moneycontrol_Mobile_WAP/MC_WAP_Markets/MC_WAP_Markets_StockPrice_300x250_2'); });
+					", 
+				', 
+			
+			', 
+		', 
+', 
+', 
+	 
+		
+		
+						
+				', 
+					.fot_blubg{ background:#354d5c; padding:15px 10px 15px 10px;}
+					.fot_links a{ color:#fff !important; }
+					.fot_links span{ color:#fff; font:Arial, Helvetica, sans-serif;}
+				', 
+				
+			 ', 
+					', 
+						', 
+							', SECTIONS : ',  ', 
+							', Home',  | 
+							', News',  | 
+							', Markets',  | 
+							', Portfolio',  | 
+							', Watchlist',  | 
+							', Messages',  | 
+							', Live TV & Shows',  | 
+							', Videos',  | 
+							', Commodities',  | 
+							', Currency',  | 
+							', Mutual Funds',  | 
+							', IPO',  | 
+							
+							', Personal Finance',  | 
+							', Guess The Sensex',  | 
+							', Property',  | 
+							', RBI Monetary Policy',  | 
+							', Budget 2016',  | 
+							', Budget 2017',  | 
+							', Tech Control',  | 
+							', 2016 Year end special',  | 
+							', Game Changers',  | 
+							', Investment Watch',  | 
+							', Power Your Trade',  | 
+							', Disclaimer',  | 
+							', Privacy Statement',  | 
+							', Terms of Use', 
+						', 
+					', 
+							 
+				', 
+									', 
+										', 
+					.ft_sizr{ padding:10px 0; text-align:center; color:#738792;}
+					.gdf13{ color:#333333; font:bold 95% Arial, Helvetica, sans-serif}
+					.bl_sm10{ color:#2e5891; font:bold 100% Arial, Helvetica, sans-serif !important;}
+					.bl_sm13{ color:#2e5891; font:bold 130% Arial, Helvetica, sans-serif !important;}
+					.bl_sm16{ color:#2e5891; font:bold 160% Arial, Helvetica, sans-serif !important;}
+					.bl_sml{ color:#2e5891; font:100% Arial, Helvetica, sans-serif;}
+					', 
+					
+					
+					', Font Size:',    
+					', 
+					
+					 ', 
+					 ', generate_font_change_text();
+					 ', 
+				', Feedback', 
+					', 
+', Desktop site »', 
+					  ', 
+					  ', Language: English',   ',   ', \u0939\u093f\u0902\u0926\u0940',   ',   ', \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0', 
+				', © 2017. a Web18 Venture', 
+				', 
+				', 
+
+							
+			
+						', 
+					
+					', 
+						', 
+						', 
+					', 
+				   ', 
+					', 
+						 
+						', 
+						', 
+													
+						
+						', 
+						', 
+						
+
+					 ', 
+					', 
+			', 
+					
+			
+  
+
+ ', 
+	(function() {
+		window._w18hn = "MCWAP";
+		        var w18 = document.createElement('script'); w18.type = 'text/javascript'; w18.async = true;
+        w18.src = 'http://s.in.com/common/script_catch.js?v=20160308';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(w18, s);
+	})();
+	
+	$(document).ready(function() {	
+	$('.tab_ddlarrow').click(function(){
+		$(this).next().toggle();
+	})
+});
+', 
+
+
+ 
+', 
+', u"
+$(document).ready(function(e) {
+    if ( navigator.userAgent.indexOf('Presto/') > -1 &&  
+     navigator.userAgent.indexOf('Opera Mini/') > -1 ) {
+	  // Extreme Savings Mode
+	  $('#sticky-footer').hide()
+	} else {
+	// High/Normal Savings Mode
+	$('#sticky-footer').show()
+	}
+});
+", 
+
+', 
+', 
+var cookie_mcanvas = getCookie('mcanvas');
+if(cookie_mcanvas!='displayed'){	
+	(function(){
+		var param = {
+			"pk": "rpb53",
+			"aduid": 224
+		};
+		var d=top.document,s=d.createElement("script"),u=[],p;param.u=d.location.href;param.ref=d.referrer;param.phR=Math.random()+"_"+(new Date).getTime();for(p in param)if(param.hasOwnProperty(p))u.push(p+"="+encodeURIComponent(param[p]));s.src="//ic.ph.affinity.com/init.js?"+u.join("&");s.type="text/javascript";d.getElementsByTagName("head")[0].appendChild(s);
+	})();
+	console.log('executed');
+	 createCookie('mcanvas','displayed','1');
+	}
+', 
+', 
+ ']

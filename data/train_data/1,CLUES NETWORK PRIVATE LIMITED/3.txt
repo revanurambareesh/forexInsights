@@ -1,0 +1,2675 @@
+[
+', Scroll To Top', 
+', 
+
+', 
+  ', 
+    ', 
+        ', 
+
+        ', 
+        ', 
+            ', Terms & Condition', 
+            ', 
+        ', 
+        ', 
+
+        ', 
+        ', 
+        ', 
+        ', 
+
+        ', 
+        ', 
+            ', 
+              ', 
+            ', 
+            ', 
+                ', 
+                ', 
+            ', 
+        ', 
+        ', 
+    ', 
+
+    ', 
+        ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                    ', Hi, Select Your Zone', 
+                    ', Share pincode for faster delivery by local sellers.', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+    ', 
+', 
+    ', 
+    ', 
+      ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', Sell With Us', 
+                    ', Call Us', 
+                    ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                 ', 
+                ', 
+                ', 
+                  ', 
+                ', 
+            ', 
+        ', 
+        ', 
+          ', 
+              ', 
+              ', 
+                ', 
+              ', 
+              ', 
+              ', 
+                  ', 
+                    ', 
+                  ', 
+                  ', 
+                    ', My Orders', 
+                    ', My Returns', 
+                    ', 
+                    ', Wishlist', 
+                    ', My Profile', 
+                    ', My Chat', 
+                    ', My CluesBucks', 
+                    ', My Feedback', 
+                    ', My Favorite Stores', 
+                    ', Sign Out', 
+                  ', 
+                ', 
+              ', 
+              ', Sign In', 
+                ', 
+                  ', 
+                  ', 
+                    ', Login/Register', 
+                  ', 
+                  ', 
+                    ', My Orders', 
+                    ', My Returns', 
+                    ', 
+                    ', Wishlist', 
+                    ', My Profile', 
+                    ', My Chat', 
+                    ', My CluesBucks', 
+                    ', My Feedback', 
+                    ', My Favorite Stores',                     
+                  ', 
+                ', 
+                ', 
+              ', 
+          ', 
+          ', 
+          ', 
+        ', 
+        ',  
+    ', 
+', 
+    ', 
+    ', 
+        ', 
+        ', 
+            ', 
+                            ', Mobiles', 
+                            ', Computers', 
+                            ', Electronics', 
+                            ', Women', 
+                            ', Men', 
+                            ', Home & Kitchen', 
+                            ', Baby & Kids', 
+                            ', Sports & Daily Needs', 
+                            ', Auto', 
+                        ', 
+        ', 
+        ', 
+    ', 
+', 
+    var allGids = ["1","6","2","5","4","3","7","8","9"];
+', 
+', 
+    ', 
+        ', 
+         
+            ', Bulk Factory', 
+         
+            ', Wedding Store', 
+         
+            ', Gift Store', 
+         
+            ', Made in India', 
+         
+            ', Offers', 
+                ', 
+    ', 
+', 
+ ', 
+      var base_url="http://www.shopclues.com/";
+      var secure_base_url="https://secure.shopclues.com/";
+      var search_url = "http://search.shopclues.com";
+      var cookieExpire = "7200";
+      var cookieDomain = ".shopclues.com";
+      var zettata_threshold = 5;
+      var abDays = "4";
+      var HomepageConfig = "1";
+      var ConfigRowCount = "13";
+      var ConfigColumnCount = "5";
+      var ConfigColumnWidth = "180";
+      var ConfigLoadAll = "1";
+      var product_perpage_limit = "36";
+      var campaignWrapperApi = "http://api.shopclues.com/home_campaigns.php";
+  ', 
+    ', 
+      var log_ajax_http = 0;
+    ', 
+  ', 
+', u"
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-27831792-1', 'auto');
+", 
+
+',   
+       
+      
+                 
+              
+        
+          
+      
+             ',     
+                dfpTagPositioning = function() {
+     ////////////////-Re-arrange product list in case of ad products -- ///////////////
+                var NOP = $('.row .column').length;
+                   if(NOP > product_perpage_limit){
+                                extraProducts = NOP % c1x.tileCount;
+                                totalShiftCount = 4 - extraProducts
+                                var allProductsOnPage = $('#product_list > .row').children();
+                                $('.row').remove();
+                                var googleAd = $('#google_pl_ad');
+                                $('#google_pl_ad').remove();
+                                var cnt = 0;
+                                $('.product_found').after('<div id="new_list">');
+                                var totalRows = product_perpage_limit / c1x.tileCount;
+                                for(var j=0; j<totalRows; j++){                                    
+                                        $('#new_list').append('<div class="row" id="row_'+j+'">');                                          
+                                        for(var i=1; i<=c1x.tileCount; i++){
+                                            if(j>0){
+                                                cnt = parseInt(c1x.tileCount * j)+i;
+                                            }else{
+                                                cnt = i-1;
+                                            }     
+                                            if(typeof allProductsOnPage[cnt] == 'undefined' || allProductsOnPage[cnt]=='' || allProductsOnPage[cnt]=='undefined'){
+                                                break;
+                                            }else{
+                                                $('#row_'+j).append(allProductsOnPage[cnt]);
+                                                if(i==c1x.tileCount){                                                    
+                                                    $('#row_'+j).append('</div>'); 
+                                                }
+                                            }                                                                                          
+                                        }
+                                         if(j==0){
+                                             $('#row_'+j).after(googleAd);
+                                         }                                      
+                                }
+                                $('#new_list > div:last-child').append('</div>'); 
+                            }                            
+                };
+            ', 
+      
+
+
+
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+            ', 
+            ', 
+            ', 
+        ', 
+', 
+', 
+    ', 
+    ', 
+', 
+', 
+    ', 
+        
+    ', 
+', 
+', 
+', 
+', 
+    ', 
+', 
+    ', Jaw Dropping Deals            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', Shopclues Flea Market            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+	', End of Season Sale', 
+		', 
+			', 
+	    	', 
+                ', 
+	    			', 
+	    			', 
+	    		', 
+	    	', 
+		', 
+', 
+            ', 
+', 
+                ', Deal of the day', 
+                ', 
+', 
+                    ', 
+                        ', Exciting', 
+                        ', Deals Everyday', 
+                        ', 00h : 00m', 
+                    ', 
+                                        ', 
+                ', 
+            ', 
+            ', 
+', 
+	', Super Deals', 
+		', 
+			', 
+	    	', 
+                ', 
+	    			', 
+	    			', 
+	    		', 
+	    	', 
+		', 
+', 
+', 
+', 
+    ', Shop By Price', 
+    ', 
+    ', 
+', 
+', 
+    ', Mobiles & Accessories            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', Lifestyle            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', Home & Kitchen            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', TV & Appliances            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', General Utilities            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', Computers,Cameras & Audio Devices            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+  ', 
+    ', Offers You Can\u2019t Resist', 
+    ', 
+      ', 
+        ', 
+        ', 
+      ', 
+    ', 
+', 
+					
+', 
+
+', 
+
+            
+            ', 
+', 
+  if (window.coreJSLoaded) fireGoogleAdsHome();
+  else document.addEventListener("coreJSLoaded", fireGoogleAdsHome);
+  function fireGoogleAdsHome(){
+    googletag.cmd.push(function() {
+    googletag.defineSlot('/124148007/home_bottom', [[970, 90], [728, 90]], 'div-gpt-ad-1450768388229-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().setTargeting('LLC', ['Home']).setTargeting('LMC', ['Home']).setTargeting('LPID', []).setTargeting('LSC', ['Home']);
+    googletag.enableServices();
+  });
+    googleDisplayHome();
+  }
+', 
+', 
+', 
+', 
+', u"
+function googleDisplayHome(){
+  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1450768388229-0'); });
+}
+", 
+', 
+', 
+            
+ ', 
+  ', 
+  ', Band Of Trust', 
+  ', 
+      ', Great Selection', 
+      ', Low Price', 
+      ', Speedy Delivery', 
+  ', 
+  ', 
+', 
+  
+            ', 
+            ', 
+                var login_url = "https://secure.shopclues.com/index.php?dispatch=auth.login_form&return_url=";
+            ', 
+', 
+', 
+        ', 
+            ', 
+                ', 
+                    ', Buyer Central', 
+                    ', 
+                        ', Sign In', 
+                        ', Register', 
+                        ', Terms & Conditions', 
+                        ', Buyer Protection', 
+                        ', Payment Options', 
+                        ', EMI Payment', 
+                        ', Shipping Policy', 
+                        ', Return Policy', 
+                        ', Cancellation Policy', 
+                        ', Clues Bucks', 
+                        ', Wishlist', 
+                        ', Buyer Guides', 
+                        ', Gift Certificate', 
+                        ', What\u2019s New', 
+                        ', Help', 
+                    ', 
+                ', 
+                ', 
+                    ', Merchant Central', 
+                    ', 
+                        ', Merchant Sign In', 
+                        ', Merchant Registration', 
+                        ', How Does It Work', 
+                        ', Pricing', 
+                        ', Fulfillment by ShopClues', 
+                        ', Merchant Tools', 
+                        ', Best Practice', 
+                        ', Policies & Rules', 
+                        ', User Agreement', 
+                        ', Testimonials', 
+                        ', Merchant Ratings', 
+                    ', 
+                ', 
+                ', 
+                    ', About Us', 
+                    ', 
+                        ', Band of Trust', 
+                        ', ShopClues History', 
+                        ', Brand Guidelines', 
+                        ', TV Commercials', 
+                        ', News', 
+                        ', In the Press', 
+                        ', Awards', 
+                        ', Careers', 
+                        ', Seller Summit', 
+                    ', 
+                ', 
+                ', 
+                    ', Contact Us', 
+                    ', 
+                        ', Customer Support', 
+                        ', Merchant Support', 
+                        ', Merchant Inquiries', 
+                        ', Product Reviews', 
+                        ', Bulk Orders', 
+                        ', Press', 
+                    ', 
+                ', 
+                ', 
+                    ', Advertise With Us', 
+                    ', 
+
+                        ', Ad Unit', 
+                        ', Inserts', 
+                        ', Advertising Contact', 
+                        ', Become an Affiliate >', 
+
+                    ', 
+                ', 
+                ', 
+                    ', Special Offers', 
+                    ', Sign Up To Access Our Special Offers', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', Keep In Touch ', (Social Connect)', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 100% Secure and Trusted Payment', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', Our Leading Categories', 
+                ', 
+                    ',  ', Mobile & Tablets:',  ', 
+                    ',  ', Android Phones',  ', 
+                    ',  | ', Smartphones',  ', 
+                    ',  | ', Feature Phones',  ', 
+                    ',  | ', Unboxed Phones', 
+                    ',  | ', Refurbished Phones', 
+                    ',  | ', Tablets ', 
+                    ',  | ', CDMA Phones', 
+                    ',  | ', Value Added Services', 
+                ', 
+                ', 
+                    ',  ', Computers: ',  ', 
+                    ',  ', Laptops ',  ', 
+                    ',  | ', Printers ',  ', 
+                    ',  | ', Routers ',  ', 
+                    ',  | ', Ink & Toner Cartridges', 
+                    ',  | ', Monitors ', 
+                    ',  | ', Gaming ', 
+                    ',  | ', Unboxed & Refurbished Laptops', 
+                    ',  | ', Assembled Desktops', 
+                    ',  | ', Data Cards', 
+                ', 
+                ', 
+                    ',  ', TV, Audio & Large Appliances: ',  ', 
+                    ', TVs & DTH',  ', 
+                    ',  | ', Home Theatre Systems ',  ', 
+                    ',  | ', Hidden Cameras & CCTVs ', 
+                    ',  | ', Refrigerators ', 
+                    ',  | ', Washing Machines ', 
+                    ',  | ', Air Conditioners ', 
+                    ',  | ', Cameras ', 
+                    ',  | ', Speakers ', 
+                ', 
+                ', 
+                    ',  ', Mobile & Laptop Accessories:',  ', 
+                    ',  ', Headphones ',  ', 
+                    ',  | ', Power Banks ',  ', 
+                    ',  | ', Backpacks ', 
+                    ',  | ', Cases & Covers ', 
+                    ',  | ', Pen Drives ', 
+                    ',  | ', External Hard Disks ', 
+                    ',  | ', Mouse ', 
+                    ',  | ', Smart Watches ', 
+                    ',  | ', MicroSD Cards ', 
+                ', 
+                ', 
+                    ',  ', Appliances:',  ', 
+                    ',  ', Trimmers ',  ', 
+                    ',  | ', Hair Dryers ',  ', 
+                    ',  | ', Emergency Lights ', 
+                    ',  | ', Water Purifiers ', 
+                    ',  | ', Electric Kettles ', 
+                    ',  | ', Hair Straighteners ', 
+                    ',  | ', Induction Cooktops ', 
+                    ',  | ', Sewing Machines ', 
+                    ',  | ',  Geysers ', 
+                ', 
+                ', 
+                    ',  ', Home & Kitchen:',  ', 
+                    ',  ', Bedsheets ',  ', 
+                    ',  | ', Hardware & Sanitaryware ',  ', 
+                    ',  | ', Towels ',  ', 
+                    ',  | ', Furniture ',  ', 
+                    ',  | ', Cookware ', 
+                    ',  | ', Kitchen Tools ', 
+                    ',  | ', Home Utilities ', 
+                    ',  | ', Doormats ', 
+                    ',  | ', Curtains | ', Gardening Essentials ',  ', 
+                ', 
+                ', 
+                    ',  ', Fashion: ',  ', 
+                    ',  ', u"Women's Ethnic Wear ",  ', 
+                    ',  | ', Fashion Accessories ',  ', 
+                    ',  | ', Sports Wear ',  ', 
+                    ',  | ', Western Wear ', 
+                    ',  | ', Bags & Wallets ', 
+                    ',  | ', Handbags ', 
+                    ',  | ', Sarees ', 
+                    ',  | ', T-Shirts ', 
+                    ',  | ', Lingerie & Sleep Wear ', 
+                ', 
+                ', 
+                    ',  ', Footwear: ',  ', 
+                    ',  ', Sports Shoes ',  ', 
+                    ',  | ', u"Men's Slippers ",  ', 
+                    ',  | ', Casual Shoes ',  ', 
+                    ',  | ', Sandals & Floaters ', 
+                    ',  | ', Formal Shoes ', 
+                    ',  | ', Women Flats ', 
+                    ',  | ', Ballerinas ', 
+                    ',  | ', Loafers ', 
+                    ',  | ', Boots ', 
+                    ',  | ', Shoe Care & Accessories ', 
+                ', 
+                ', 
+                    ',  ', Travel & Luggage:',  ', 
+                    ',  ', Duffle Bags ',  ', 
+                    ',  | ', Laptop Bags ',  ', 
+                    ',  | ', Travel Pouches ',  ', 
+                    ',  | ', Backpacks ', 
+                    ',  | ', Suitcases & Trolleys ', 
+                    ',  | ', Travel Accessories ', 
+                    ',  | ', Gym Bags ', 
+                    ',  | ', Messenger Bags ',  ', 
+                    ',  | ', School Bags ',  ', 
+                    ',  | ', Safety Locks ',  ', 
+                ', 
+                ', 
+                    ',  ', Jewelry & Watches:',  ', 
+                    ',  ', Coins & Bars ',  ', 
+                    ',  | ', u"Men's Watches ",  ', 
+                    ',  | ', u"Women's Watches ",  ', 
+                    ',  | ', Necklaces ', 
+                    ',  | ', Fashion Jewelry ', 
+                    ',  | ', Pendants ', 
+                    ',  | ', Earrings ', 
+                    ',  | ', Rings ', 
+                    ',  | ', Jewelry Boxes ', 
+                    ',  | ', u"Kid's Watches ", 
+                ', 
+                ', 
+                    ',  ', Automotive:',  ', 
+                    ',  ', Bike Tools ',  ', 
+                    ',  | ', Car Cleaning Aids ',  ', 
+                    ',  | ', Helmets ',  ', 
+                    ',  | ', Bike Body Covers ', 
+                    ',  | ', Car Tools ', 
+                    ',  | ', Riding Gloves ', 
+                    ',  | ', Car Perfumes ', 
+                    ',  | ', Scratch Removers ', 
+                    ',  | ', Car Audio | Video ', 
+                    ',  | ', Bike Alarms ', 
+                ', 
+                ', 
+                    ',  ', Toys, Baby & Kids :',  ', 
+                    ',  ', Diapers ',  ', 
+                    ',  | ', Educational Toys ',  ', 
+                    ',  | ', u"Kid's Footwear ",  ', 
+                    ',  | ', Remote Controlled Toys ', 
+                    ',  | ', Soft Toys', 
+                    ',  | ', Party Supplies ', 
+                    ',  | ', Cubes ', 
+                    ',  | ', Maternity Care ', 
+                    ',  | ', u"Kid's Apparel ", 
+                ', 
+                ', 
+                    ',  ', Gourmet & Daily Needs :',  ', 
+                    ',  ', Office Supplies ',  ', 
+                    ',  | ', Pet Supplies ',  ', 
+                    ',  | ', Books ', 
+                    ',  | ', Namkeen ', 
+                    ',  | ', Stationery ', 
+                    ',  | ', Pens & Markers ', 
+                    ',  | ', Tea & Coffee ', 
+                    ',  | ', Chocolates & Candies ', 
+                    ',  | ', Indian Sweets ', 
+                    ',  | ', Gifts ', 
+                ', 
+                ', 
+                    ', Sports and Health', 
+                    ', Home Gym Equipment', 
+                    ',  | ', Exercise Bikes', 
+                    ',  | ', Gym Accessories', 
+                    ',  | ', Massagers', 
+                    ',  | ', Diabetic Care', 
+                    ',  | ', Cricket', 
+                    ',  | ', Table Tennis', 
+                ', 
+                ', 
+                    ',  ', Beauty & Perfumes:',  ', 
+                    ',  ', Grooming Essentials ',  ', 
+                    ',  | ', Deodorants ',  ', 
+                    ',  | ', u"Men's Perfumes ", 
+                    ',  | ', Hair Care ', 
+                    ',  | ', u"Women's Perfumes ", 
+                    ',  | ', Face Packs ', 
+                    ',  | ', Oral Care ', 
+                    ',  | ', Herbal Care ', 
+                    ',  | ', Value Combo ', 
+                    ',  | ', u"Women's Hygiene ", 
+                ', 
+                ', Popular on ShopClues', 
+                ', 
+                    ',  ', Offers & Coupons',  
+                    ',  | ', Watches for Men',  
+                    ',  | ', Power Banks',  
+                    ',  | ', Memory Cards',  
+                    ',  | ', Pen Drives',  
+                    ',  | ', Headphones',  
+                    ',  | ', Induction Cooktops',  
+                    ',  | ', Trimmers',  
+                    ',  | ', Irons',  
+                    ',  | ', LED TV', 
+                    ',  | ', Mens Jacket',  
+                    ',  | ', Educational Toys ',  
+                    ',  | ', Geysers',  
+                    ',  | ', Heaters',  
+                    ',  | ', Car Audio Video',  
+                    ',  | ', Furniture',  
+                    ',  | ', u"Men's Shoes",  
+                    ',  | ', Lights',  
+                    ',  | ', Slipper & Flip Flops ',  
+                    ',  | ', Bedsheets',  
+                    ',  | ', Unboxed Phones', 
+                ', 
+            ', 
+        ', 
+                ', 
+            ', 
+                ', Online Shopping in India @Shopclues.com', 
+                ', India\u2019s Asli Online Shopping Hub \u2013 ShopClues.com',  Back in 2011, when people were hopping from one Store to another for best bargains on an overall household\u2019s monthly bill, Sandeep Aggarwal (the Founder & Mastermind of ShopClues) was realizing his vision of a budget-friendly online bazaar in India. ShopClues.com was then given a shape and strategy in 2012 as the India\u2019s First & Largest Fully Managed Marketplace.
+                ', Ting se Leke Tong \u2013 with Aflatooni Products!',  \u2018What you Think is What you Get\u2019 isn\u2019t just a saying at ShopClues. With over 8.5 million products, you can get just about everything that you can imagine at ShopClues. From usual products in Electronics, Fashion, Home & Kitchen, to unusual products like cow dung cakes, Knife Sharpeners, etc. ShopClues tops in everything. So, you see what we mean when we say Aflatooni Products? ShopClues has revolutionized the conceptual Online Shopping in India with initiatives such as Ghar Wapsi Sale, Bigger than the Biggest Thank You Sale, #EkZeroKum Sale, etc. Amongst many other shopping sites, ShopClues is the leader in unstructured categories like Daily Utilities, Garden Needs, Hardware, Kitchen Storage, and others.
+                ', Believable Shopping @ Unbelievable Prices',  Every day, ShopClues delights millions of discount-hunters with Paisa-Vasool Shopping Experience with prices as low as Re.1. We are the first ones to introduce the idea of \u2018Sab Kuch Wholesale Ke Rate Par\u2019 on an online platform with shopping options to both wholesale as well as retail seekers.
+                ', Experiencing the neighbourhood Local Bazaar',  ShopClues brings the experience of India\u2019s Flea Markets online, in the form of its two weekly properties - Sunday Flea Market, and Wednesday Super Saver Bazaar. Another property capturing the essence of regional Indian shopping is called NRH (National Regional Heritage), which gives a sneak-peek into India\u2019s Cultural Gullies at very reasonable prices. These online markets showcase products with range so wide, and prices so low, that they beat the real neighbourhood markets of India. The concept especially works incredibly well with the middle class population habituated in tier 2 & 3 cities.
+                ', An Online Selling Space for SME Merchants',  Working as a marketplace, ShopClues has been well-supported by a bourgeoning community of certified merchants in India. Unlike various other online shopping sites, ShopClues has achieved the largest merchant base of over 3.5 Lakhs. This online shopping website is creating history by empowering local and regional merchants, primarily from Tier 2 & 3 cities and making them a national enterprise at ShopClues.
+            ', 
+        ', 
+                ', 
+            ', 
+                ', 
+                    ', Privacy Policy', 
+                    ', User Agreement', 
+                    ', Notes to Security Practices', 
+                    ', Labor Compliance', 
+                ', 
+                ', 
+                    ', Copyright © 2011-2016 Clues Network Pvt. Ltd.', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+  ', 
+    ', 
+  ', 
+', 
+
+', Some text some message..', 
+', 
+  function toastMessage(message) {
+    $('#snackbar').html(message);
+    $('#snackbar').addClass('show');
+    setTimeout(function(){ $('#snackbar').removeClass("show"); }, 3000);
+  }
+', 
+
+
+
+', 
+  ', 
+  ', 
+  ', 
+  ', 
+', 
+
+', 
+', 
+  function imageError(imageurl,position,name){
+  if(typeof imageLogger != 'undefined' && imageLogger == '1'){
+    try {
+    var url = soa_url;
+    var error_name ;
+    if(name == 'Ajax_Error'){
+      name = 'name:'+name;
+      error_name = 'Ajax request error';
+      imageurl = "url:"+imageurl;
+      position = "status_code:"+position;
+    }else{
+      name = "name:"+name;
+      imageurl = "imageurl:"+imageurl;
+      position = "position:"+position;
+      error_name = 'image not found';
+    }
+    var data = {"domain":"desktop_buyer_experience","module":pageRoute,
+                "data":{
+                        "field1":name,
+                        "field2":imageurl,
+                        "field3":document.URL,
+                        "field4":position,
+                        "error_name":error_name,
+                        },
+                "level":"INFO"};
+    data = JSON.stringify(data);
+    microAjax(url,function(res){
+      if(res !== ''){
+        //var data = JSON.parse(res);
+      }
+    },data,'isJson');
+    }catch(e){
+      //console.log(e);
+      return;
+    }
+  }
+}
+  function microAjax(url, callbackFunction) {
+  if (!url) {
+    return;
+  }
+  var postParam = (arguments[2] || "");
+  var isJson = (arguments[3] || "");
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function(obj) {
+    if (req.readyState == 4 && req.status == 200) {
+      if (callbackFunction) {
+        callbackFunction(req.responseText);
+      }
+    }else{
+        if ((req.status == 500 || req.status == 503) && log_ajax_http) {
+            imageError(req.responseURL,req.status,'Ajax_Error');
+        }
+    }
+  };
+  if (postParam !== "") {
+    if(isJson !== ""){
+      var token = 'Bearer '+soa_bearer;
+      req.open("POST", url, true);
+      req.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+      req.setRequestHeader("Content-type", "application/json");
+      req.setRequestHeader('Authorization', token);
+    }else{
+      req.open("POST", url, true);
+      req.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+      req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    }
+  } else {
+    req.open("GET", url, true);
+  }
+  req.send(postParam);
+}
+function fn_get_atom_cart(atom_cart_data) {
+    var secureUrl = "https://secure.shopclues.com/";
+    var products = atom_cart_data.products;
+    var htm = "<div class='quickCart'><div class='nItem'><p>Your Shopping Cart ( "+atom_cart_data.count+" Item )</p></div>";
+    if(atom_cart_data.count < 2){
+      htm += "<div class='listingItems'><ul>";
+    }else{
+      htm += "<div class='listingItems' style='height:275px'><ul>";
+    }
+    for (var product in products){
+        if (products.hasOwnProperty(product)) {
+         if(typeof products[product]['product_in_cart_promotion_detail'] !== 'undefined') {
+          var promo = "<div class='discount_validity'><span class='seller_discount'>Seller Discount</span><span> Expires on "+products[product]['product_in_cart_promotion_detail']['valid_till']+"</span></div>";
+         } else {
+          var promo = '';
+         }
+         if(typeof products[product]['details'] !== 'undefined' && typeof products[product]['details']['selected_options'] !== 'undefined') {
+           var options = products[product]['details']['selected_options'];
+           var str = '<div class="p_variations">';
+           for(var option in options){
+              str += '<span>'+option +" : "+options[option]+'</span>';
+           }
+           str += '</div>';
+            str.trim();
+         }else{
+          var str ='';
+         }
+         htm+="<li><a href='"+base_url+products[product].seo_name+".html'><img src='"+products[product]['icon_images'][0]['icon_image_path']+"'><div class='contDetails'><span class='itemName'>"+products[product].name+"</span>"+str+"<span class='price'>Rs. "+products[product]['price'][0]['price']+"</span>"+promo+"</div></a></li>"; 
+        }
+    }                        
+    htm += "</ul></div><div class='buttonContainer'><a class='btn orange-white btn_effect' href='"+secureUrl+"atom/acart/getcart'>View Cart</a><a class='btn orange btn_effect' href='"+secureUrl+"atom/summary'>Place Order</a></div></div></div>";   
+        $('.qCart .hoverContent').html(htm);
+        $('.cart_icon_count').html(atom_cart_data.count);
+
+}
+', 
+', 
+      // Cookie type
+    var s_lgnctype = null;
+    // Cookie Value
+    var s_lgncvalue = null;
+
+    // For Login
+    if (ReadCookie('s_lgnc') !== undefined && ReadCookie('s_lgnc') !== "") {
+        s_lgnctype = 'Login';
+        s_lgncvalue = decodeURIComponent(ReadCookie('s_lgnc'));
+    }
+
+    // For Registration
+    if (ReadCookie('s_rgnc') !== undefined && ReadCookie('s_rgnc') !== "") {
+        s_lgnctype = 'Registration';
+        s_lgncvalue = decodeURIComponent(ReadCookie('s_rgnc'));
+    }
+
+    // For Forgot Password
+    if (ReadCookie('s_frgtc') !== undefined && ReadCookie('s_frgtc') !== "") {
+        s_lgnctype = 'FrgtPass';
+        s_lgncvalue = decodeURIComponent(ReadCookie('s_frgtc'));
+    }
+    try {
+            var login_via= (ReadCookie("logged_in_via")) ? ReadCookie("logged_in_via"): 'guest';
+        }
+        catch (e){
+            var login_via = 'guest';
+        }
+        
+        try{
+            var userID = atob(ReadCookie("user_id")) || atob(ReadCookie('scumd'));
+        }catch(e){
+            var userID = '';
+        }
+        try{
+            var usertype = (ReadCookie("token"))?'loggedin':'guest';
+        }catch(e){
+            var usertype ='guest';
+        }
+        try{
+            if(ReadCookie("email") !== null){
+              var email = atob(ReadCookie("email"));
+            }else{
+              var email = '';
+            }
+        }
+        catch(e){
+            var email = '';
+        }
+        
+        try{
+            var fname = atob(ReadCookie("scun"));
+        }catch(e){
+            var fname = '';
+        }
+        try{
+            var lname = atob(ReadCookie("lname"));
+        }
+        catch(e){
+            var lname = '';
+        }
+', 
+  ', 
+', u"
+  document.getElementById('sc_loc_variable').value = ReadCookie('sc_loc_variable');
+", 
+', 
+', 
+ 
+', 
+
+', 
+  var sc_loc = '';
+  var timeoutId;
+  var pincodePattern=/^\d{6}$/;
+  var pincode = '';
+  sc_loc = ReadCookie('sc_loc');
+  var show_pincode=ReadCookie('show_pincode');
+  //var sc_loc_pincode=ReadCookie('sc_loc_pincode');
+  //var sc_loc_zone=ReadCookie('sc_loc_name');
+  var loc_cookie_lifetime = 60;
+  var loc_fail_timeout = 5 * 1000;
+  var loc_hide_timeout = 30 * 1000;
+    var zone_message= 'You are in {pincode}';
+    function ajax_request(url,method,func,extra,post_params,is_json,post_header_params){
+    if (typeof(extra)==='undefined')
+        {     extra='';
+        }
+        method=method.toLowerCase();
+        if(method=='get'){
+          $.ajax({
+            type: 'get',
+            url: url,
+            success: function (resp) {  
+                if(typeof(func)!=='undefined')
+                    func(resp,extra);
+            }
+          });
+        }   
+        if(method=='post'){
+            if(is_json==true && post_params!=null){
+                post_params=JSON.stringify(post_params);
+                consol.log(post_params);
+            }
+             $.ajax({
+                    type: 'post',
+                    url: url,
+                    headers: post_header_params,
+                    data:post_params,
+                    success: function (resp) {  
+                       if(typeof(func)!=='undefined')
+                            func(resp,extra);
+                    }
+                });
+        }
+    }
+function save_loc_cookie(resp,extra){ 
+if(resp != ''){
+  var resp = JSON.parse(resp);   
+  if(resp.status == 1 && resp.zone_name !== null) {
+    var last_zone = ReadCookie('sc_loc_variable');
+    try{
+      if(last_zone == ''){
+        last_zone = 'default';
+      }else{
+        last_zone = last_zone.split('|')[1];
+      }
+    }catch(e){
+      last_zone = 'default';
+    }
+    sc_loc = resp.zone;
+    //SetCookie('sc_loc',resp.zone,loc_cookie_lifetime,cookieDomain);
+    _satellite.track('LocationTracking');
+    zone_msg=zone_message.replace("{zone}",resp.zone_name);
+    //SetCookie('sc_loc_source',extra,loc_cookie_lifetime, cookieDomain);
+    var sc_loc_variable = resp.zone+'|'+resp.zone_name+'|'+extra;
+    //SetCookie('sc_loc_variable',sc_loc_variable,loc_cookie_lifetime, cookieDomain);
+    if (resp.pincode) {
+        if (typeof (window.pId) != 'undefined' && $('#check_shipping').length > 0 && ReadCookie('pincode') != resp.pincode) {
+            //SetCookie('pincode',pincode,loc_cookie_lifetime,cookieDomain);
+            $('#check_shipping').click();
+        } else {
+            //SetCookie('pincode',resp.pincode,loc_cookie_lifetime,cookieDomain);
+        }
+      
+    } else {
+       zone_msg=zone_msg.replace("{pincode}",resp.zone_name);
+        //$('.pincode_section>h2>span').html(zone_msg);
+        //$(".pincode_section").hide();
+    }
+    $('#sc_loc_variable').val(sc_loc_variable);
+    if(extra=='MANUAL')
+    {
+         if (last_zone != '') {
+             var last_location = last_zone + '|' + resp.zone_name;
+             //SetCookie('sc_loc_last_loc',last_location,loc_cookie_lifetime, cookieDomain);
+             _satellite.track('ChangeOfLocation');
+         }
+         $('#cPin').html(pincode);
+    }
+    $('#common_overlay').hide();
+    $('.pincode_section').hide();
+    //SetCookie('show_pincode',1,-1,cookieDomain);// this cookie is removed to avaoid further
+       if (window.location.href.indexOf('search?') != -1) { //if the page is search then retain the search params.
+           var uri = window.location.pathname;
+           var params = window.location.search.split('&');
+           for (var i = 0; i < params.length; i++) {
+               if (params[i].indexOf('pincode') != -1) {
+                   uri += 'pincode=' + ReadCookie('pincode');
+               } else if (params[i].indexOf('sc_z') != -1) {
+                 uri += 'sc_z=' + ReadCookie('sc_loc');
+               } else if (params[i].indexOf('sort') != -1) {
+                  if (uri.indexOf('?') == -1) {
+                    uri += '?';
+                  }
+                  continue;
+               } else {
+                 uri += params[i];
+               }
+               if (params[i+1] && (params[i+1].indexOf('fsrc') != -1 || params[i+1].indexOf('page') != -1)) {
+                   break;
+               } else if (params[i+1]) {
+                   uri += '&';
+               }
+           }
+           window.location.href=uri;
+       } else {
+          if (typeof clp_public !== 'undefined' && typeof clp_public.toggle !== 'undefined') {
+              if(extra=='MANUAL'){
+                window.location.href = document.URL;
+              }
+            }// for reloading the page
+        }            
+    } else {
+      //console.log(extra);      
+      if(extra=='ISP'){
+        if($('#walmart-store').length == 0 && $('#walmart_button').length == 0){
+          $('#common_overlay').fadeIn( 1000 );
+          $('.pincodeModel').show();
+          $('.pincode_section').show();
+        }
+     }
+      if(extra=='LAST_ORDER')
+        {
+            getLocation();
+        }
+      }
+      if(extra == 'MANUAL'){
+        var bRed = document.getElementById('pin_code_popup');
+        bRed.style.color = "red";
+        bRed.value = "Invalid pincode!";
+        setTimeout(function () {
+            bRed.style.border = "";
+            bRed.style.color = "";
+            bRed.value = "";
+        }, 2000);
+        return false;
+      }                    
+}
+}
+function getLocation() {
+  var location_timeout = setTimeout("geolocFail()", loc_fail_timeout);
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } 
+}
+function geolocFail() {
+  sc_loc = ReadCookie('sc_loc');
+  if (!sc_loc || sc_loc == '') {
+    var url = base_url+'localization.php';
+    var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'sc_loc', 'email':email, 'loginId':userID};
+    ajax_request(url,'post',save_loc_cookie,'ISP',postdata,false,null);           
+  }
+}
+var zone = '';      
+function showPosition(position) {
+  if (!sc_loc || sc_loc == '') {
+    var url = base_url+'localization.php';
+    var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'sc_loc', 'email':email, 'loginId':userID};
+    ajax_request(url,'post',save_loc_cookie,'GPS', postdata);  
+  }
+}
+if (!sc_loc || sc_loc == '') {
+if (email != '') {
+     var url = base_url+'localization.php';
+     var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'sc_loc', 'email':email, 'loginId':userID};
+     ajax_request(url,'post',save_loc_cookie,'LAST_ORDER', postdata); 
+} else {
+    geolocFail();
+  }
+}
+function userZoneFromPincode(e) {
+  if(e.currentTarget.id == 'check_shipping'){
+    pincode = $('#zip').val();
+  }else{
+     pincode = $('.pincode_input>input').val();
+  }
+  if(pincodePattern.test(pincode)) {
+      var url = base_url + 'localization.php';
+      var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'pincode'};
+      ajax_request(url,'post',save_loc_cookie,'MANUAL', postdata); 
+  } 
+  try{
+    e.preventDefault();
+  }catch(e){}
+  return false;
+}
+$('#get_pincode_popup').on('click',function(e){
+    pincode = $('.pincode_input>input').val();
+  if(pincodePattern.test(pincode)) {
+       $(".pincode_input").before($('.loading'));
+       //$('.loading').show();
+      var url = base_url + 'localization.php';
+      var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'pincode'};
+      ajax_request(url,'post',save_loc_cookie,'MANUAL', postdata); 
+      //$('#cPin').html(pincode);
+  }
+  try{
+    e.preventDefault();
+  }catch(e){} 
+});
+$('#common_overlay').on('click',function(e){
+  try{
+    if(e.target.className == 'b_overlay'){
+      $('#common_overlay').children().hide();
+      $('#common_overlay, .popupInner').fadeOut(1000);
+      $('#common_overlay').hide();
+      $('body').css('position', 'relative');
+      $('.popupModel > div').hide();
+      $('.srch_sugg_lst').hide();
+      $('#common_overlay').css('z-index', 1005);
+    }else{
+      e.stopPropagation();
+    }
+  }catch(e){
+  }
+});
+$('.pincodeModel').on('click',function(e){
+  e.stopPropagation();
+});
+$('.pincodeModel').on('click','a.close',function(){
+  $('.popupModel > div').hide();
+  $('#common_overlay').fadeOut(1000);
+});
+', 
+
+
+', 
+    ', 
+
+        var digitalData = {
+              'pUrl':document.URL,
+            //'loginReg': s_lgnctype + ":" + s_lgncvalue, // omniture login tracking
+              page:{
+                      'pageName':'Home',
+                      'channel':'Home',
+                      'subSection1':'Home',
+                      'subSection2':'Home',
+                      'subSection3':'Home'
+               },
+          'pageType':'Home',
+           'profile_data':{
+            'customer_id':(atob(ReadCookie("user_id")) || atob(ReadCookie('scumd'))),
+            'email':atob(ReadCookie("email")).replace (/"/g,''),
+            'first_name':atob(ReadCookie("scun")).replace (/"/g,''),
+            'last_name': atob(ReadCookie("lname")).replace (/"/g,''),
+            'phone':atob(ReadCookie("phone")).replace (/"/g,''),
+            'birthday':atob(ReadCookie("birthday")).replace (/"/g,''),
+            },
+            'new_profile_data':{
+                'billing_state':'NA',
+                'shipping_state':'NA',
+                'source':ReadCookie("utm_source"),
+                'gender':'NA',
+                'cb_used':"",
+                'gc_used':""     
+            },
+            'Site_Version' : 'New'
+        };
+    ', 
+
+
+', u"
+if(typeof _satellite !== 'undefined'){
+  _satellite.pageBottom();
+}
+", 
+', u"
+function srch_sugg_panel(){
+    $('.srch_sugg_lst').fadeIn( 1000 );
+    $('#common_overlay').fadeIn( 1000 );
+    $('#common_overlay').css('z-index', 1004);
+    return true;
+  }
+
+          function hide_srch_sugg_panel(){
+            $(document).bind('focusin.srch_sugg_lst click.srch_sugg_lst',function(e) {
+                  if ($(e.target).closest('.srch_sugg_lst, #autocomplete').length) return;
+                  $(document).unbind('.srch_sugg_lst');
+                  $('div.srch_sugg_lst').fadeOut('medium');
+                  //$('#common_overlay').fadeOut('medium');
+                  $('#autocomplete').removeClass('focused');;
+            });
+            return true;
+          }
+
+            $(document).click(hide_srch_sugg_panel);
+            //$('#autocomplete').keyup(srch_sugg_panel);
+            $('#autocomplete').focus(srch_sugg_panel, function(){
+              $(this).addClass('focused');
+            });
+
+", 
+
+', 
+
+', u"
+var utm_source = '';
+var source = ''; 
+var utm_campaign = '';
+var utm_medium = '';
+var cookie_duration=1 ;
+if(utm_source !== 'undefined' && utm_source !== ''){
+    SetCookie('utm_source',utm_source,cookie_duration,cookieDomain);  
+}
+if(utm_campaign !== 'undefined' && utm_campaign !== ''){
+    SetCookie('utm_campaign',utm_campaign,cookie_duration,cookieDomain);   
+}
+if(utm_medium !== 'undefined' && utm_medium !== ''){
+    SetCookie('utm_medium',utm_medium,cookie_duration,cookieDomain);  
+}
+if(source !== 'undefined' && source=='cuelinks'){
+    SetCookie('utm_source','desidime',cookie_duration,cookieDomain); 
+}
+", 
+', 
+', 
+  /*$(window).scroll(function() {
+    if ($(window).scrollTop() >= 129) {
+            $('.ffix_header').attr('style', "box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.12);");
+            }
+        else {
+            $('.ffix_header').removeAttr("style");
+        }
+  });*/
+', 
+'][
+', Scroll To Top', 
+', 
+
+', 
+  ', 
+    ', 
+        ', 
+
+        ', 
+        ', 
+            ', Terms & Condition', 
+            ', 
+        ', 
+        ', 
+
+        ', 
+        ', 
+        ', 
+        ', 
+
+        ', 
+        ', 
+            ', 
+              ', 
+            ', 
+            ', 
+                ', 
+                ', 
+            ', 
+        ', 
+        ', 
+    ', 
+
+    ', 
+        ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                    ', Hi, Select Your Zone', 
+                    ', Share pincode for faster delivery by local sellers.', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+    ', 
+', 
+    ', 
+    ', 
+      ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', Sell With Us', 
+                    ', Call Us', 
+                    ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                 ', 
+                ', 
+                ', 
+                  ', 
+                ', 
+            ', 
+        ', 
+        ', 
+          ', 
+              ', 
+              ', 
+                ', 
+              ', 
+              ', 
+              ', 
+                  ', 
+                    ', 
+                  ', 
+                  ', 
+                    ', My Orders', 
+                    ', My Returns', 
+                    ', 
+                    ', Wishlist', 
+                    ', My Profile', 
+                    ', My Chat', 
+                    ', My CluesBucks', 
+                    ', My Feedback', 
+                    ', My Favorite Stores', 
+                    ', Sign Out', 
+                  ', 
+                ', 
+              ', 
+              ', Sign In', 
+                ', 
+                  ', 
+                  ', 
+                    ', Login/Register', 
+                  ', 
+                  ', 
+                    ', My Orders', 
+                    ', My Returns', 
+                    ', 
+                    ', Wishlist', 
+                    ', My Profile', 
+                    ', My Chat', 
+                    ', My CluesBucks', 
+                    ', My Feedback', 
+                    ', My Favorite Stores',                     
+                  ', 
+                ', 
+                ', 
+              ', 
+          ', 
+          ', 
+          ', 
+        ', 
+        ',  
+    ', 
+', 
+    ', 
+    ', 
+        ', 
+        ', 
+            ', 
+                            ', Mobiles', 
+                            ', Computers', 
+                            ', Electronics', 
+                            ', Women', 
+                            ', Men', 
+                            ', Home & Kitchen', 
+                            ', Baby & Kids', 
+                            ', Sports & Daily Needs', 
+                            ', Auto', 
+                        ', 
+        ', 
+        ', 
+    ', 
+', 
+    var allGids = ["1","6","2","5","4","3","7","8","9"];
+', 
+', 
+    ', 
+        ', 
+         
+            ', Bulk Factory', 
+         
+            ', Wedding Store', 
+         
+            ', Gift Store', 
+         
+            ', Made in India', 
+         
+            ', Offers', 
+                ', 
+    ', 
+', 
+ ', 
+      var base_url="http://www.shopclues.com/";
+      var secure_base_url="https://secure.shopclues.com/";
+      var search_url = "http://search.shopclues.com";
+      var cookieExpire = "7200";
+      var cookieDomain = ".shopclues.com";
+      var zettata_threshold = 5;
+      var abDays = "4";
+      var HomepageConfig = "1";
+      var ConfigRowCount = "13";
+      var ConfigColumnCount = "5";
+      var ConfigColumnWidth = "180";
+      var ConfigLoadAll = "1";
+      var product_perpage_limit = "36";
+      var campaignWrapperApi = "http://api.shopclues.com/home_campaigns.php";
+  ', 
+    ', 
+      var log_ajax_http = 0;
+    ', 
+  ', 
+', u"
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-27831792-1', 'auto');
+", 
+
+',   
+       
+      
+                 
+              
+        
+          
+      
+             ',     
+                dfpTagPositioning = function() {
+     ////////////////-Re-arrange product list in case of ad products -- ///////////////
+                var NOP = $('.row .column').length;
+                   if(NOP > product_perpage_limit){
+                                extraProducts = NOP % c1x.tileCount;
+                                totalShiftCount = 4 - extraProducts
+                                var allProductsOnPage = $('#product_list > .row').children();
+                                $('.row').remove();
+                                var googleAd = $('#google_pl_ad');
+                                $('#google_pl_ad').remove();
+                                var cnt = 0;
+                                $('.product_found').after('<div id="new_list">');
+                                var totalRows = product_perpage_limit / c1x.tileCount;
+                                for(var j=0; j<totalRows; j++){                                    
+                                        $('#new_list').append('<div class="row" id="row_'+j+'">');                                          
+                                        for(var i=1; i<=c1x.tileCount; i++){
+                                            if(j>0){
+                                                cnt = parseInt(c1x.tileCount * j)+i;
+                                            }else{
+                                                cnt = i-1;
+                                            }     
+                                            if(typeof allProductsOnPage[cnt] == 'undefined' || allProductsOnPage[cnt]=='' || allProductsOnPage[cnt]=='undefined'){
+                                                break;
+                                            }else{
+                                                $('#row_'+j).append(allProductsOnPage[cnt]);
+                                                if(i==c1x.tileCount){                                                    
+                                                    $('#row_'+j).append('</div>'); 
+                                                }
+                                            }                                                                                          
+                                        }
+                                         if(j==0){
+                                             $('#row_'+j).after(googleAd);
+                                         }                                      
+                                }
+                                $('#new_list > div:last-child').append('</div>'); 
+                            }                            
+                };
+            ', 
+      
+
+
+
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+            ', 
+            ', 
+            ', 
+        ', 
+', 
+', 
+    ', 
+    ', 
+', 
+', 
+    ', 
+        
+    ', 
+', 
+', 
+', 
+', 
+    ', 
+', 
+    ', Jaw Dropping Deals            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', Shopclues Flea Market            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+	', End of Season Sale', 
+		', 
+			', 
+	    	', 
+                ', 
+	    			', 
+	    			', 
+	    		', 
+	    	', 
+		', 
+', 
+            ', 
+', 
+                ', Deal of the day', 
+                ', 
+', 
+                    ', 
+                        ', Exciting', 
+                        ', Deals Everyday', 
+                        ', 00h : 00m', 
+                    ', 
+                                        ', 
+                ', 
+            ', 
+            ', 
+', 
+	', Super Deals', 
+		', 
+			', 
+	    	', 
+                ', 
+	    			', 
+	    			', 
+	    		', 
+	    	', 
+		', 
+', 
+', 
+', 
+    ', Shop By Price', 
+    ', 
+    ', 
+', 
+', 
+    ', Mobiles & Accessories            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', Lifestyle            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', Home & Kitchen            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', TV & Appliances            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', General Utilities            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', Computers,Cameras & Audio Devices            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+  ', 
+    ', Offers You Can\u2019t Resist', 
+    ', 
+      ', 
+        ', 
+        ', 
+      ', 
+    ', 
+', 
+					
+', 
+
+', 
+
+            
+            ', 
+', 
+  if (window.coreJSLoaded) fireGoogleAdsHome();
+  else document.addEventListener("coreJSLoaded", fireGoogleAdsHome);
+  function fireGoogleAdsHome(){
+    googletag.cmd.push(function() {
+    googletag.defineSlot('/124148007/home_bottom', [[970, 90], [728, 90]], 'div-gpt-ad-1450768388229-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().setTargeting('LLC', ['Home']).setTargeting('LMC', ['Home']).setTargeting('LPID', []).setTargeting('LSC', ['Home']);
+    googletag.enableServices();
+  });
+    googleDisplayHome();
+  }
+', 
+', 
+', 
+', 
+', u"
+function googleDisplayHome(){
+  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1450768388229-0'); });
+}
+", 
+', 
+', 
+            
+ ', 
+  ', 
+  ', Band Of Trust', 
+  ', 
+      ', Great Selection', 
+      ', Low Price', 
+      ', Speedy Delivery', 
+  ', 
+  ', 
+', 
+  
+            ', 
+            ', 
+                var login_url = "https://secure.shopclues.com/index.php?dispatch=auth.login_form&return_url=";
+            ', 
+', 
+', 
+        ', 
+            ', 
+                ', 
+                    ', Buyer Central', 
+                    ', 
+                        ', Sign In', 
+                        ', Register', 
+                        ', Terms & Conditions', 
+                        ', Buyer Protection', 
+                        ', Payment Options', 
+                        ', EMI Payment', 
+                        ', Shipping Policy', 
+                        ', Return Policy', 
+                        ', Cancellation Policy', 
+                        ', Clues Bucks', 
+                        ', Wishlist', 
+                        ', Buyer Guides', 
+                        ', Gift Certificate', 
+                        ', What\u2019s New', 
+                        ', Help', 
+                    ', 
+                ', 
+                ', 
+                    ', Merchant Central', 
+                    ', 
+                        ', Merchant Sign In', 
+                        ', Merchant Registration', 
+                        ', How Does It Work', 
+                        ', Pricing', 
+                        ', Fulfillment by ShopClues', 
+                        ', Merchant Tools', 
+                        ', Best Practice', 
+                        ', Policies & Rules', 
+                        ', User Agreement', 
+                        ', Testimonials', 
+                        ', Merchant Ratings', 
+                    ', 
+                ', 
+                ', 
+                    ', About Us', 
+                    ', 
+                        ', Band of Trust', 
+                        ', ShopClues History', 
+                        ', Brand Guidelines', 
+                        ', TV Commercials', 
+                        ', News', 
+                        ', In the Press', 
+                        ', Awards', 
+                        ', Careers', 
+                        ', Seller Summit', 
+                    ', 
+                ', 
+                ', 
+                    ', Contact Us', 
+                    ', 
+                        ', Customer Support', 
+                        ', Merchant Support', 
+                        ', Merchant Inquiries', 
+                        ', Product Reviews', 
+                        ', Bulk Orders', 
+                        ', Press', 
+                    ', 
+                ', 
+                ', 
+                    ', Advertise With Us', 
+                    ', 
+
+                        ', Ad Unit', 
+                        ', Inserts', 
+                        ', Advertising Contact', 
+                        ', Become an Affiliate >', 
+
+                    ', 
+                ', 
+                ', 
+                    ', Special Offers', 
+                    ', Sign Up To Access Our Special Offers', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', Keep In Touch ', (Social Connect)', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 100% Secure and Trusted Payment', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', Our Leading Categories', 
+                ', 
+                    ',  ', Mobile & Tablets:',  ', 
+                    ',  ', Android Phones',  ', 
+                    ',  | ', Smartphones',  ', 
+                    ',  | ', Feature Phones',  ', 
+                    ',  | ', Unboxed Phones', 
+                    ',  | ', Refurbished Phones', 
+                    ',  | ', Tablets ', 
+                    ',  | ', CDMA Phones', 
+                    ',  | ', Value Added Services', 
+                ', 
+                ', 
+                    ',  ', Computers: ',  ', 
+                    ',  ', Laptops ',  ', 
+                    ',  | ', Printers ',  ', 
+                    ',  | ', Routers ',  ', 
+                    ',  | ', Ink & Toner Cartridges', 
+                    ',  | ', Monitors ', 
+                    ',  | ', Gaming ', 
+                    ',  | ', Unboxed & Refurbished Laptops', 
+                    ',  | ', Assembled Desktops', 
+                    ',  | ', Data Cards', 
+                ', 
+                ', 
+                    ',  ', TV, Audio & Large Appliances: ',  ', 
+                    ', TVs & DTH',  ', 
+                    ',  | ', Home Theatre Systems ',  ', 
+                    ',  | ', Hidden Cameras & CCTVs ', 
+                    ',  | ', Refrigerators ', 
+                    ',  | ', Washing Machines ', 
+                    ',  | ', Air Conditioners ', 
+                    ',  | ', Cameras ', 
+                    ',  | ', Speakers ', 
+                ', 
+                ', 
+                    ',  ', Mobile & Laptop Accessories:',  ', 
+                    ',  ', Headphones ',  ', 
+                    ',  | ', Power Banks ',  ', 
+                    ',  | ', Backpacks ', 
+                    ',  | ', Cases & Covers ', 
+                    ',  | ', Pen Drives ', 
+                    ',  | ', External Hard Disks ', 
+                    ',  | ', Mouse ', 
+                    ',  | ', Smart Watches ', 
+                    ',  | ', MicroSD Cards ', 
+                ', 
+                ', 
+                    ',  ', Appliances:',  ', 
+                    ',  ', Trimmers ',  ', 
+                    ',  | ', Hair Dryers ',  ', 
+                    ',  | ', Emergency Lights ', 
+                    ',  | ', Water Purifiers ', 
+                    ',  | ', Electric Kettles ', 
+                    ',  | ', Hair Straighteners ', 
+                    ',  | ', Induction Cooktops ', 
+                    ',  | ', Sewing Machines ', 
+                    ',  | ',  Geysers ', 
+                ', 
+                ', 
+                    ',  ', Home & Kitchen:',  ', 
+                    ',  ', Bedsheets ',  ', 
+                    ',  | ', Hardware & Sanitaryware ',  ', 
+                    ',  | ', Towels ',  ', 
+                    ',  | ', Furniture ',  ', 
+                    ',  | ', Cookware ', 
+                    ',  | ', Kitchen Tools ', 
+                    ',  | ', Home Utilities ', 
+                    ',  | ', Doormats ', 
+                    ',  | ', Curtains | ', Gardening Essentials ',  ', 
+                ', 
+                ', 
+                    ',  ', Fashion: ',  ', 
+                    ',  ', u"Women's Ethnic Wear ",  ', 
+                    ',  | ', Fashion Accessories ',  ', 
+                    ',  | ', Sports Wear ',  ', 
+                    ',  | ', Western Wear ', 
+                    ',  | ', Bags & Wallets ', 
+                    ',  | ', Handbags ', 
+                    ',  | ', Sarees ', 
+                    ',  | ', T-Shirts ', 
+                    ',  | ', Lingerie & Sleep Wear ', 
+                ', 
+                ', 
+                    ',  ', Footwear: ',  ', 
+                    ',  ', Sports Shoes ',  ', 
+                    ',  | ', u"Men's Slippers ",  ', 
+                    ',  | ', Casual Shoes ',  ', 
+                    ',  | ', Sandals & Floaters ', 
+                    ',  | ', Formal Shoes ', 
+                    ',  | ', Women Flats ', 
+                    ',  | ', Ballerinas ', 
+                    ',  | ', Loafers ', 
+                    ',  | ', Boots ', 
+                    ',  | ', Shoe Care & Accessories ', 
+                ', 
+                ', 
+                    ',  ', Travel & Luggage:',  ', 
+                    ',  ', Duffle Bags ',  ', 
+                    ',  | ', Laptop Bags ',  ', 
+                    ',  | ', Travel Pouches ',  ', 
+                    ',  | ', Backpacks ', 
+                    ',  | ', Suitcases & Trolleys ', 
+                    ',  | ', Travel Accessories ', 
+                    ',  | ', Gym Bags ', 
+                    ',  | ', Messenger Bags ',  ', 
+                    ',  | ', School Bags ',  ', 
+                    ',  | ', Safety Locks ',  ', 
+                ', 
+                ', 
+                    ',  ', Jewelry & Watches:',  ', 
+                    ',  ', Coins & Bars ',  ', 
+                    ',  | ', u"Men's Watches ",  ', 
+                    ',  | ', u"Women's Watches ",  ', 
+                    ',  | ', Necklaces ', 
+                    ',  | ', Fashion Jewelry ', 
+                    ',  | ', Pendants ', 
+                    ',  | ', Earrings ', 
+                    ',  | ', Rings ', 
+                    ',  | ', Jewelry Boxes ', 
+                    ',  | ', u"Kid's Watches ", 
+                ', 
+                ', 
+                    ',  ', Automotive:',  ', 
+                    ',  ', Bike Tools ',  ', 
+                    ',  | ', Car Cleaning Aids ',  ', 
+                    ',  | ', Helmets ',  ', 
+                    ',  | ', Bike Body Covers ', 
+                    ',  | ', Car Tools ', 
+                    ',  | ', Riding Gloves ', 
+                    ',  | ', Car Perfumes ', 
+                    ',  | ', Scratch Removers ', 
+                    ',  | ', Car Audio | Video ', 
+                    ',  | ', Bike Alarms ', 
+                ', 
+                ', 
+                    ',  ', Toys, Baby & Kids :',  ', 
+                    ',  ', Diapers ',  ', 
+                    ',  | ', Educational Toys ',  ', 
+                    ',  | ', u"Kid's Footwear ",  ', 
+                    ',  | ', Remote Controlled Toys ', 
+                    ',  | ', Soft Toys', 
+                    ',  | ', Party Supplies ', 
+                    ',  | ', Cubes ', 
+                    ',  | ', Maternity Care ', 
+                    ',  | ', u"Kid's Apparel ", 
+                ', 
+                ', 
+                    ',  ', Gourmet & Daily Needs :',  ', 
+                    ',  ', Office Supplies ',  ', 
+                    ',  | ', Pet Supplies ',  ', 
+                    ',  | ', Books ', 
+                    ',  | ', Namkeen ', 
+                    ',  | ', Stationery ', 
+                    ',  | ', Pens & Markers ', 
+                    ',  | ', Tea & Coffee ', 
+                    ',  | ', Chocolates & Candies ', 
+                    ',  | ', Indian Sweets ', 
+                    ',  | ', Gifts ', 
+                ', 
+                ', 
+                    ', Sports and Health', 
+                    ', Home Gym Equipment', 
+                    ',  | ', Exercise Bikes', 
+                    ',  | ', Gym Accessories', 
+                    ',  | ', Massagers', 
+                    ',  | ', Diabetic Care', 
+                    ',  | ', Cricket', 
+                    ',  | ', Table Tennis', 
+                ', 
+                ', 
+                    ',  ', Beauty & Perfumes:',  ', 
+                    ',  ', Grooming Essentials ',  ', 
+                    ',  | ', Deodorants ',  ', 
+                    ',  | ', u"Men's Perfumes ", 
+                    ',  | ', Hair Care ', 
+                    ',  | ', u"Women's Perfumes ", 
+                    ',  | ', Face Packs ', 
+                    ',  | ', Oral Care ', 
+                    ',  | ', Herbal Care ', 
+                    ',  | ', Value Combo ', 
+                    ',  | ', u"Women's Hygiene ", 
+                ', 
+                ', Popular on ShopClues', 
+                ', 
+                    ',  ', Offers & Coupons',  
+                    ',  | ', Watches for Men',  
+                    ',  | ', Power Banks',  
+                    ',  | ', Memory Cards',  
+                    ',  | ', Pen Drives',  
+                    ',  | ', Headphones',  
+                    ',  | ', Induction Cooktops',  
+                    ',  | ', Trimmers',  
+                    ',  | ', Irons',  
+                    ',  | ', LED TV', 
+                    ',  | ', Mens Jacket',  
+                    ',  | ', Educational Toys ',  
+                    ',  | ', Geysers',  
+                    ',  | ', Heaters',  
+                    ',  | ', Car Audio Video',  
+                    ',  | ', Furniture',  
+                    ',  | ', u"Men's Shoes",  
+                    ',  | ', Lights',  
+                    ',  | ', Slipper & Flip Flops ',  
+                    ',  | ', Bedsheets',  
+                    ',  | ', Unboxed Phones', 
+                ', 
+            ', 
+        ', 
+                ', 
+            ', 
+                ', Online Shopping in India @Shopclues.com', 
+                ', India\u2019s Asli Online Shopping Hub \u2013 ShopClues.com',  Back in 2011, when people were hopping from one Store to another for best bargains on an overall household\u2019s monthly bill, Sandeep Aggarwal (the Founder & Mastermind of ShopClues) was realizing his vision of a budget-friendly online bazaar in India. ShopClues.com was then given a shape and strategy in 2012 as the India\u2019s First & Largest Fully Managed Marketplace.
+                ', Ting se Leke Tong \u2013 with Aflatooni Products!',  \u2018What you Think is What you Get\u2019 isn\u2019t just a saying at ShopClues. With over 8.5 million products, you can get just about everything that you can imagine at ShopClues. From usual products in Electronics, Fashion, Home & Kitchen, to unusual products like cow dung cakes, Knife Sharpeners, etc. ShopClues tops in everything. So, you see what we mean when we say Aflatooni Products? ShopClues has revolutionized the conceptual Online Shopping in India with initiatives such as Ghar Wapsi Sale, Bigger than the Biggest Thank You Sale, #EkZeroKum Sale, etc. Amongst many other shopping sites, ShopClues is the leader in unstructured categories like Daily Utilities, Garden Needs, Hardware, Kitchen Storage, and others.
+                ', Believable Shopping @ Unbelievable Prices',  Every day, ShopClues delights millions of discount-hunters with Paisa-Vasool Shopping Experience with prices as low as Re.1. We are the first ones to introduce the idea of \u2018Sab Kuch Wholesale Ke Rate Par\u2019 on an online platform with shopping options to both wholesale as well as retail seekers.
+                ', Experiencing the neighbourhood Local Bazaar',  ShopClues brings the experience of India\u2019s Flea Markets online, in the form of its two weekly properties - Sunday Flea Market, and Wednesday Super Saver Bazaar. Another property capturing the essence of regional Indian shopping is called NRH (National Regional Heritage), which gives a sneak-peek into India\u2019s Cultural Gullies at very reasonable prices. These online markets showcase products with range so wide, and prices so low, that they beat the real neighbourhood markets of India. The concept especially works incredibly well with the middle class population habituated in tier 2 & 3 cities.
+                ', An Online Selling Space for SME Merchants',  Working as a marketplace, ShopClues has been well-supported by a bourgeoning community of certified merchants in India. Unlike various other online shopping sites, ShopClues has achieved the largest merchant base of over 3.5 Lakhs. This online shopping website is creating history by empowering local and regional merchants, primarily from Tier 2 & 3 cities and making them a national enterprise at ShopClues.
+            ', 
+        ', 
+                ', 
+            ', 
+                ', 
+                    ', Privacy Policy', 
+                    ', User Agreement', 
+                    ', Notes to Security Practices', 
+                    ', Labor Compliance', 
+                ', 
+                ', 
+                    ', Copyright © 2011-2016 Clues Network Pvt. Ltd.', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+  ', 
+    ', 
+  ', 
+', 
+
+', Some text some message..', 
+', 
+  function toastMessage(message) {
+    $('#snackbar').html(message);
+    $('#snackbar').addClass('show');
+    setTimeout(function(){ $('#snackbar').removeClass("show"); }, 3000);
+  }
+', 
+
+
+
+', 
+  ', 
+  ', 
+  ', 
+  ', 
+', 
+
+', 
+', 
+  function imageError(imageurl,position,name){
+  if(typeof imageLogger != 'undefined' && imageLogger == '1'){
+    try {
+    var url = soa_url;
+    var error_name ;
+    if(name == 'Ajax_Error'){
+      name = 'name:'+name;
+      error_name = 'Ajax request error';
+      imageurl = "url:"+imageurl;
+      position = "status_code:"+position;
+    }else{
+      name = "name:"+name;
+      imageurl = "imageurl:"+imageurl;
+      position = "position:"+position;
+      error_name = 'image not found';
+    }
+    var data = {"domain":"desktop_buyer_experience","module":pageRoute,
+                "data":{
+                        "field1":name,
+                        "field2":imageurl,
+                        "field3":document.URL,
+                        "field4":position,
+                        "error_name":error_name,
+                        },
+                "level":"INFO"};
+    data = JSON.stringify(data);
+    microAjax(url,function(res){
+      if(res !== ''){
+        //var data = JSON.parse(res);
+      }
+    },data,'isJson');
+    }catch(e){
+      //console.log(e);
+      return;
+    }
+  }
+}
+  function microAjax(url, callbackFunction) {
+  if (!url) {
+    return;
+  }
+  var postParam = (arguments[2] || "");
+  var isJson = (arguments[3] || "");
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function(obj) {
+    if (req.readyState == 4 && req.status == 200) {
+      if (callbackFunction) {
+        callbackFunction(req.responseText);
+      }
+    }else{
+        if ((req.status == 500 || req.status == 503) && log_ajax_http) {
+            imageError(req.responseURL,req.status,'Ajax_Error');
+        }
+    }
+  };
+  if (postParam !== "") {
+    if(isJson !== ""){
+      var token = 'Bearer '+soa_bearer;
+      req.open("POST", url, true);
+      req.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+      req.setRequestHeader("Content-type", "application/json");
+      req.setRequestHeader('Authorization', token);
+    }else{
+      req.open("POST", url, true);
+      req.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+      req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    }
+  } else {
+    req.open("GET", url, true);
+  }
+  req.send(postParam);
+}
+function fn_get_atom_cart(atom_cart_data) {
+    var secureUrl = "https://secure.shopclues.com/";
+    var products = atom_cart_data.products;
+    var htm = "<div class='quickCart'><div class='nItem'><p>Your Shopping Cart ( "+atom_cart_data.count+" Item )</p></div>";
+    if(atom_cart_data.count < 2){
+      htm += "<div class='listingItems'><ul>";
+    }else{
+      htm += "<div class='listingItems' style='height:275px'><ul>";
+    }
+    for (var product in products){
+        if (products.hasOwnProperty(product)) {
+         if(typeof products[product]['product_in_cart_promotion_detail'] !== 'undefined') {
+          var promo = "<div class='discount_validity'><span class='seller_discount'>Seller Discount</span><span> Expires on "+products[product]['product_in_cart_promotion_detail']['valid_till']+"</span></div>";
+         } else {
+          var promo = '';
+         }
+         if(typeof products[product]['details'] !== 'undefined' && typeof products[product]['details']['selected_options'] !== 'undefined') {
+           var options = products[product]['details']['selected_options'];
+           var str = '<div class="p_variations">';
+           for(var option in options){
+              str += '<span>'+option +" : "+options[option]+'</span>';
+           }
+           str += '</div>';
+            str.trim();
+         }else{
+          var str ='';
+         }
+         htm+="<li><a href='"+base_url+products[product].seo_name+".html'><img src='"+products[product]['icon_images'][0]['icon_image_path']+"'><div class='contDetails'><span class='itemName'>"+products[product].name+"</span>"+str+"<span class='price'>Rs. "+products[product]['price'][0]['price']+"</span>"+promo+"</div></a></li>"; 
+        }
+    }                        
+    htm += "</ul></div><div class='buttonContainer'><a class='btn orange-white btn_effect' href='"+secureUrl+"atom/acart/getcart'>View Cart</a><a class='btn orange btn_effect' href='"+secureUrl+"atom/summary'>Place Order</a></div></div></div>";   
+        $('.qCart .hoverContent').html(htm);
+        $('.cart_icon_count').html(atom_cart_data.count);
+
+}
+', 
+', 
+      // Cookie type
+    var s_lgnctype = null;
+    // Cookie Value
+    var s_lgncvalue = null;
+
+    // For Login
+    if (ReadCookie('s_lgnc') !== undefined && ReadCookie('s_lgnc') !== "") {
+        s_lgnctype = 'Login';
+        s_lgncvalue = decodeURIComponent(ReadCookie('s_lgnc'));
+    }
+
+    // For Registration
+    if (ReadCookie('s_rgnc') !== undefined && ReadCookie('s_rgnc') !== "") {
+        s_lgnctype = 'Registration';
+        s_lgncvalue = decodeURIComponent(ReadCookie('s_rgnc'));
+    }
+
+    // For Forgot Password
+    if (ReadCookie('s_frgtc') !== undefined && ReadCookie('s_frgtc') !== "") {
+        s_lgnctype = 'FrgtPass';
+        s_lgncvalue = decodeURIComponent(ReadCookie('s_frgtc'));
+    }
+    try {
+            var login_via= (ReadCookie("logged_in_via")) ? ReadCookie("logged_in_via"): 'guest';
+        }
+        catch (e){
+            var login_via = 'guest';
+        }
+        
+        try{
+            var userID = atob(ReadCookie("user_id")) || atob(ReadCookie('scumd'));
+        }catch(e){
+            var userID = '';
+        }
+        try{
+            var usertype = (ReadCookie("token"))?'loggedin':'guest';
+        }catch(e){
+            var usertype ='guest';
+        }
+        try{
+            if(ReadCookie("email") !== null){
+              var email = atob(ReadCookie("email"));
+            }else{
+              var email = '';
+            }
+        }
+        catch(e){
+            var email = '';
+        }
+        
+        try{
+            var fname = atob(ReadCookie("scun"));
+        }catch(e){
+            var fname = '';
+        }
+        try{
+            var lname = atob(ReadCookie("lname"));
+        }
+        catch(e){
+            var lname = '';
+        }
+', 
+  ', 
+', u"
+  document.getElementById('sc_loc_variable').value = ReadCookie('sc_loc_variable');
+", 
+', 
+', 
+ 
+', 
+
+', 
+  var sc_loc = '';
+  var timeoutId;
+  var pincodePattern=/^\d{6}$/;
+  var pincode = '';
+  sc_loc = ReadCookie('sc_loc');
+  var show_pincode=ReadCookie('show_pincode');
+  //var sc_loc_pincode=ReadCookie('sc_loc_pincode');
+  //var sc_loc_zone=ReadCookie('sc_loc_name');
+  var loc_cookie_lifetime = 60;
+  var loc_fail_timeout = 5 * 1000;
+  var loc_hide_timeout = 30 * 1000;
+    var zone_message= 'You are in {pincode}';
+    function ajax_request(url,method,func,extra,post_params,is_json,post_header_params){
+    if (typeof(extra)==='undefined')
+        {     extra='';
+        }
+        method=method.toLowerCase();
+        if(method=='get'){
+          $.ajax({
+            type: 'get',
+            url: url,
+            success: function (resp) {  
+                if(typeof(func)!=='undefined')
+                    func(resp,extra);
+            }
+          });
+        }   
+        if(method=='post'){
+            if(is_json==true && post_params!=null){
+                post_params=JSON.stringify(post_params);
+                consol.log(post_params);
+            }
+             $.ajax({
+                    type: 'post',
+                    url: url,
+                    headers: post_header_params,
+                    data:post_params,
+                    success: function (resp) {  
+                       if(typeof(func)!=='undefined')
+                            func(resp,extra);
+                    }
+                });
+        }
+    }
+function save_loc_cookie(resp,extra){ 
+if(resp != ''){
+  var resp = JSON.parse(resp);   
+  if(resp.status == 1 && resp.zone_name !== null) {
+    var last_zone = ReadCookie('sc_loc_variable');
+    try{
+      if(last_zone == ''){
+        last_zone = 'default';
+      }else{
+        last_zone = last_zone.split('|')[1];
+      }
+    }catch(e){
+      last_zone = 'default';
+    }
+    sc_loc = resp.zone;
+    //SetCookie('sc_loc',resp.zone,loc_cookie_lifetime,cookieDomain);
+    _satellite.track('LocationTracking');
+    zone_msg=zone_message.replace("{zone}",resp.zone_name);
+    //SetCookie('sc_loc_source',extra,loc_cookie_lifetime, cookieDomain);
+    var sc_loc_variable = resp.zone+'|'+resp.zone_name+'|'+extra;
+    //SetCookie('sc_loc_variable',sc_loc_variable,loc_cookie_lifetime, cookieDomain);
+    if (resp.pincode) {
+        if (typeof (window.pId) != 'undefined' && $('#check_shipping').length > 0 && ReadCookie('pincode') != resp.pincode) {
+            //SetCookie('pincode',pincode,loc_cookie_lifetime,cookieDomain);
+            $('#check_shipping').click();
+        } else {
+            //SetCookie('pincode',resp.pincode,loc_cookie_lifetime,cookieDomain);
+        }
+      
+    } else {
+       zone_msg=zone_msg.replace("{pincode}",resp.zone_name);
+        //$('.pincode_section>h2>span').html(zone_msg);
+        //$(".pincode_section").hide();
+    }
+    $('#sc_loc_variable').val(sc_loc_variable);
+    if(extra=='MANUAL')
+    {
+         if (last_zone != '') {
+             var last_location = last_zone + '|' + resp.zone_name;
+             //SetCookie('sc_loc_last_loc',last_location,loc_cookie_lifetime, cookieDomain);
+             _satellite.track('ChangeOfLocation');
+         }
+         $('#cPin').html(pincode);
+    }
+    $('#common_overlay').hide();
+    $('.pincode_section').hide();
+    //SetCookie('show_pincode',1,-1,cookieDomain);// this cookie is removed to avaoid further
+       if (window.location.href.indexOf('search?') != -1) { //if the page is search then retain the search params.
+           var uri = window.location.pathname;
+           var params = window.location.search.split('&');
+           for (var i = 0; i < params.length; i++) {
+               if (params[i].indexOf('pincode') != -1) {
+                   uri += 'pincode=' + ReadCookie('pincode');
+               } else if (params[i].indexOf('sc_z') != -1) {
+                 uri += 'sc_z=' + ReadCookie('sc_loc');
+               } else if (params[i].indexOf('sort') != -1) {
+                  if (uri.indexOf('?') == -1) {
+                    uri += '?';
+                  }
+                  continue;
+               } else {
+                 uri += params[i];
+               }
+               if (params[i+1] && (params[i+1].indexOf('fsrc') != -1 || params[i+1].indexOf('page') != -1)) {
+                   break;
+               } else if (params[i+1]) {
+                   uri += '&';
+               }
+           }
+           window.location.href=uri;
+       } else {
+          if (typeof clp_public !== 'undefined' && typeof clp_public.toggle !== 'undefined') {
+              if(extra=='MANUAL'){
+                window.location.href = document.URL;
+              }
+            }// for reloading the page
+        }            
+    } else {
+      //console.log(extra);      
+      if(extra=='ISP'){
+        if($('#walmart-store').length == 0 && $('#walmart_button').length == 0){
+          $('#common_overlay').fadeIn( 1000 );
+          $('.pincodeModel').show();
+          $('.pincode_section').show();
+        }
+     }
+      if(extra=='LAST_ORDER')
+        {
+            getLocation();
+        }
+      }
+      if(extra == 'MANUAL'){
+        var bRed = document.getElementById('pin_code_popup');
+        bRed.style.color = "red";
+        bRed.value = "Invalid pincode!";
+        setTimeout(function () {
+            bRed.style.border = "";
+            bRed.style.color = "";
+            bRed.value = "";
+        }, 2000);
+        return false;
+      }                    
+}
+}
+function getLocation() {
+  var location_timeout = setTimeout("geolocFail()", loc_fail_timeout);
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } 
+}
+function geolocFail() {
+  sc_loc = ReadCookie('sc_loc');
+  if (!sc_loc || sc_loc == '') {
+    var url = base_url+'localization.php';
+    var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'sc_loc', 'email':email, 'loginId':userID};
+    ajax_request(url,'post',save_loc_cookie,'ISP',postdata,false,null);           
+  }
+}
+var zone = '';      
+function showPosition(position) {
+  if (!sc_loc || sc_loc == '') {
+    var url = base_url+'localization.php';
+    var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'sc_loc', 'email':email, 'loginId':userID};
+    ajax_request(url,'post',save_loc_cookie,'GPS', postdata);  
+  }
+}
+if (!sc_loc || sc_loc == '') {
+if (email != '') {
+     var url = base_url+'localization.php';
+     var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'sc_loc', 'email':email, 'loginId':userID};
+     ajax_request(url,'post',save_loc_cookie,'LAST_ORDER', postdata); 
+} else {
+    geolocFail();
+  }
+}
+function userZoneFromPincode(e) {
+  if(e.currentTarget.id == 'check_shipping'){
+    pincode = $('#zip').val();
+  }else{
+     pincode = $('.pincode_input>input').val();
+  }
+  if(pincodePattern.test(pincode)) {
+      var url = base_url + 'localization.php';
+      var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'pincode'};
+      ajax_request(url,'post',save_loc_cookie,'MANUAL', postdata); 
+  } 
+  try{
+    e.preventDefault();
+  }catch(e){}
+  return false;
+}
+$('#get_pincode_popup').on('click',function(e){
+    pincode = $('.pincode_input>input').val();
+  if(pincodePattern.test(pincode)) {
+       $(".pincode_input").before($('.loading'));
+       //$('.loading').show();
+      var url = base_url + 'localization.php';
+      var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'pincode'};
+      ajax_request(url,'post',save_loc_cookie,'MANUAL', postdata); 
+      //$('#cPin').html(pincode);
+  }
+  try{
+    e.preventDefault();
+  }catch(e){} 
+});
+$('#common_overlay').on('click',function(e){
+  try{
+    if(e.target.className == 'b_overlay'){
+      $('#common_overlay').children().hide();
+      $('#common_overlay, .popupInner').fadeOut(1000);
+      $('#common_overlay').hide();
+      $('body').css('position', 'relative');
+      $('.popupModel > div').hide();
+      $('.srch_sugg_lst').hide();
+      $('#common_overlay').css('z-index', 1005);
+    }else{
+      e.stopPropagation();
+    }
+  }catch(e){
+  }
+});
+$('.pincodeModel').on('click',function(e){
+  e.stopPropagation();
+});
+$('.pincodeModel').on('click','a.close',function(){
+  $('.popupModel > div').hide();
+  $('#common_overlay').fadeOut(1000);
+});
+', 
+
+
+', 
+    ', 
+
+        var digitalData = {
+              'pUrl':document.URL,
+            //'loginReg': s_lgnctype + ":" + s_lgncvalue, // omniture login tracking
+              page:{
+                      'pageName':'Home',
+                      'channel':'Home',
+                      'subSection1':'Home',
+                      'subSection2':'Home',
+                      'subSection3':'Home'
+               },
+          'pageType':'Home',
+           'profile_data':{
+            'customer_id':(atob(ReadCookie("user_id")) || atob(ReadCookie('scumd'))),
+            'email':atob(ReadCookie("email")).replace (/"/g,''),
+            'first_name':atob(ReadCookie("scun")).replace (/"/g,''),
+            'last_name': atob(ReadCookie("lname")).replace (/"/g,''),
+            'phone':atob(ReadCookie("phone")).replace (/"/g,''),
+            'birthday':atob(ReadCookie("birthday")).replace (/"/g,''),
+            },
+            'new_profile_data':{
+                'billing_state':'NA',
+                'shipping_state':'NA',
+                'source':ReadCookie("utm_source"),
+                'gender':'NA',
+                'cb_used':"",
+                'gc_used':""     
+            },
+            'Site_Version' : 'New'
+        };
+    ', 
+
+
+', u"
+if(typeof _satellite !== 'undefined'){
+  _satellite.pageBottom();
+}
+", 
+', u"
+function srch_sugg_panel(){
+    $('.srch_sugg_lst').fadeIn( 1000 );
+    $('#common_overlay').fadeIn( 1000 );
+    $('#common_overlay').css('z-index', 1004);
+    return true;
+  }
+
+          function hide_srch_sugg_panel(){
+            $(document).bind('focusin.srch_sugg_lst click.srch_sugg_lst',function(e) {
+                  if ($(e.target).closest('.srch_sugg_lst, #autocomplete').length) return;
+                  $(document).unbind('.srch_sugg_lst');
+                  $('div.srch_sugg_lst').fadeOut('medium');
+                  //$('#common_overlay').fadeOut('medium');
+                  $('#autocomplete').removeClass('focused');;
+            });
+            return true;
+          }
+
+            $(document).click(hide_srch_sugg_panel);
+            //$('#autocomplete').keyup(srch_sugg_panel);
+            $('#autocomplete').focus(srch_sugg_panel, function(){
+              $(this).addClass('focused');
+            });
+
+", 
+
+', 
+
+', u"
+var utm_source = '';
+var source = ''; 
+var utm_campaign = '';
+var utm_medium = '';
+var cookie_duration=1 ;
+if(utm_source !== 'undefined' && utm_source !== ''){
+    SetCookie('utm_source',utm_source,cookie_duration,cookieDomain);  
+}
+if(utm_campaign !== 'undefined' && utm_campaign !== ''){
+    SetCookie('utm_campaign',utm_campaign,cookie_duration,cookieDomain);   
+}
+if(utm_medium !== 'undefined' && utm_medium !== ''){
+    SetCookie('utm_medium',utm_medium,cookie_duration,cookieDomain);  
+}
+if(source !== 'undefined' && source=='cuelinks'){
+    SetCookie('utm_source','desidime',cookie_duration,cookieDomain); 
+}
+", 
+', 
+', 
+  /*$(window).scroll(function() {
+    if ($(window).scrollTop() >= 129) {
+            $('.ffix_header').attr('style', "box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.12);");
+            }
+        else {
+            $('.ffix_header').removeAttr("style");
+        }
+  });*/
+', 
+']

@@ -6,6 +6,7 @@ from scrapy.crawler import CrawlerRunner
 '''
 SAMPLE data for __main__
 '''
+# following were the results obtained as per Google Custom Search
 
 UrlL=[
 		 'https://en.wikipedia.org/wiki/Sample_(statistics)','https://www.merriam-webster.com/dictionary/sample',
@@ -52,7 +53,21 @@ class MySpider(scrapy.Spider):
             yield scrapy.Request(response.urljoin(next_page_url), self.parse)
 
 @defer.inlineCallbacks
-def crawl(urlList, FileList, runner):
+def crawl(univList, runner):
+    for link2D in univList: 
+        print 'link getting scraped is: ', link2D[0][0]
+        print 'Filename is: ', link2D[1]
+        yield runner.crawl(MySpider, link2D[0][0], link2D[1])
+    reactor.stop()
+
+def startReactor(univList):
+    configure_logging()
+    runner = CrawlerRunner()
+    crawl(univList, runner)
+    reactor.run()
+
+@defer.inlineCallbacks
+def crawl_dep(urlList, FileList, runner):
 	i=0
 	for urlLink in urlList:
 		print 'VALUE OF i IS: ', str(i)		
@@ -61,16 +76,16 @@ def crawl(urlList, FileList, runner):
 		i=i+1
 	reactor.stop()
 
-def startReactor(UrlL, FileL):
+def startReactor_dep(UrlL, FileL):
 	configure_logging()
 	runner = CrawlerRunner()
-	crawl(UrlL, FileL, runner)
+	crawl_dep(UrlL, FileL, runner)
 	reactor.run()
 
-#if __name__ == '__main__':
-j=0
-for urlLink in UrlL:
-	FileL.append('..\..\data\sample.info.old\\'+str(j)+'.txt')
-	j=j+1
-startReactor(UrlL, FileL)
+if __name__ == '__main__':
+	j=0
+	for urlLink in UrlL:
+		FileL.append('data\sample.info.old\\'+str(j)+'.txt')
+		j=j+1
+	startReactor_dep(UrlL, FileL)
 

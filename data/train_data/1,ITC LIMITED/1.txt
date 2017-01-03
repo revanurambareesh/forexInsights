@@ -1,0 +1,1103 @@
+[
+', 
+', 
+
+
+', 
+//FOR SEARCH PANEL
+function searchsite() 
+{
+	var expKey = /^[a-zA-Z0-9_!,' ]{1,100}$/;
+	if (document.getElementById("txtHeaderSearchKeyword").value.search(/\S/) == -1) {
+	    alert('Please enter search keyword');
+	    document.getElementById("txtHeaderSearchKeyword").focus();
+	    return false;
+	}
+	if (!expKey.test(document.getElementById("txtHeaderSearchKeyword").value)) {
+	    alert("Search field will only allow characters, numbers, \'_\', \',\', \'!\', ''' and space");
+	    document.getElementById("txtHeaderSearchKeyword").focus();
+	    return false;
+	}
+	window.location.href = '/site-search.aspx?key=' + document.getElementById("txtHeaderSearchKeyword").value;
+	return false;
+}
+
+ //USE FOR ENTER KEY RETURN
+function EnterKeyActivation() {
+
+	if (navigator.appName.toLowerCase().indexOf('microsoft') >= 0) {
+	    if (window.event.keyCode == 13) {
+		return searchsite();
+	    }
+	}
+	else {
+	    if (event.which == 13) {
+		return searchsite();
+	    }
+	}
+}
+', 
+', u"
+$(function() {
+	$('span.bs').hover(function(){
+		$('.bks').show();
+		}, function() {
+			$('.bks').hide();			
+			});	
+})
+
+", 
+
+', u"
+$(function(){
+
+$('.sub li:first-child').addClass('dropmenuT')
+$('.sub li:last-child').addClass('dropmenuB');
+$('.quicklink ul.sub li:last-child').addClass('dropmenuQ');
+
+$('#navMenu > li:last').hover(function(){
+		
+		if($('#navMenu > li:last ul:visible'))
+		{
+			$('#navMenu > li:last ul').css('left','-69px');
+		}
+		
+		if($('#navMenu > li:last ul ul:visible'))
+		{
+			$('#navMenu > li:last ul ul').css('left','-250px');
+		}
+		
+		if($('#navMenu > li.quicklink:last ul:visible'))
+		{
+			$('#navMenu > li.quicklink:last ul').css('left','-72px');
+		}
+		
+		});	
+
+
+ });
+
+",  
+', u"
+
+var win = null;
+function NewWindow(mypage,myname,w,h,scroll){
+LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+settings =
+'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+win = window.open(mypage,myname,settings)
+}
+
+", 
+
+', u" 
+
+function popupI()
+{
+window.open('/about-itc/agm-2012.aspx','myPopUp','top=50,left=100,width=774,height=460,directories=0,fullscreen=0,help=0,menubar=0,resizable=0,scrollbars=yes,status=0,titlebar=1,toolbar=0',false);
+}
+function popupII()
+{
+window.open('/about-itc/agm-2012.aspx','myPopUp1','top=50,left=100,width=774,height=460,directories=0,fullscreen=0,help=0,menubar=0,resizable=0,scrollbars=yes,status=0,titlebar=1,toolbar=0',false);
+}
+", 
+', 
+$(document).ready(function(){
+	
+	$('.openpop').click(function(){
+	
+	
+	$('body').prepend("<div class='popin'><div id='clo'><div id='aaa'></div></div></div><div class='pop'></div>");
+	var hh = $(window).height()
+	$('.pop').height(hh+'px');
+	
+	var newLeft = $(window).width()/2- parseInt($('#aaa').css('width'))/2;
+	var newTop = $(window).height()/2 - parseInt($('#aaa').css('height'))/2;
+	$('#aaa').css({'left':newLeft+'px','top':newTop+'px'});
+	
+	$('.pop, .popin').hide();
+	$('.pop').fadeTo( "slow", 0.7 );
+	$('.popin').fadeIn('slow');
+	$('.popin').fadeIn('slow').prepend('<a href="#" class="cls">&nbsp;</a>');
+	
+	var url = $(this).attr('href');
+	$('#aaa').load(url);
+	
+	return false;
+	})
+	
+	$('a.cls').live('click', function(){ //When clicking on the close or fade layer...
+	  	$('.pop , .popin').fadeOut(); //fade them both out
+		$('.pop , .popin').remove();
+		return false;
+	});
+
+	
+	
+})
+', 
+
+', 
+$(document).ready(function(){
+	
+	$('.openpop2').click(function(){
+	
+	
+	$('body').prepend("<div class='popin2'><div id='clo'><div id='aaa'></div></div></div><div class='pop2'></div>");
+	var hh = $(window).height()
+	$('.pop2').height(hh+'px');
+	
+	var newLeft = $(window).width()/2- parseInt($('#aaa').css('width'))/2;
+	var newTop = $(window).height()/2 - parseInt($('#aaa').css('height'))/2;
+	$('#aaa').css({'left':newLeft+'px','top':newTop+'px'});
+	
+	$('.pop2, .popin2').hide();
+	$('.pop2').fadeTo( "slow", 0.7 );
+	$('.popin2').fadeIn('slow');
+	$('.popin2').fadeIn('slow').prepend('<a href="#" class="cls2">&nbsp;</a>');
+	
+	var url = $(this).attr('href');
+	$('#aaa').load(url);
+	
+	return false;
+	})
+	
+	$('a.cls2').live('click', function(){ //When clicking on the close or fade layer...
+	  	$('.pop2 , .popin2').fadeOut(); //fade them both out
+		$('.pop2 , .popin2').remove();
+		return false;
+	});
+
+	
+	
+})
+', 
+
+
+', 
+html, body{ height:100%;}
+.pop, .pop2{ position:fixed; left:0; top:0; width:100%; background-color:#000; opacity:0.4; filter:alpha(opacity=90); z-index:1001; }
+.popin, .popin2{position:absolute; left:0; top:0; width:100%; height:100%; z-index:1002;}
+.popin div, .popin2 div{ position:relative; background:#E0AFAF; }
+.popin div div{ position:absolute; background-color:#FFF; border:0px solid #CCC; width:650px; height:570px;}
+.popin2 div div{ position:absolute; background-color:#FFF; border:0px solid #CCC; width:650px; height:280px;}
+.cls{ position:absolute; top:50%;  left:50%; margin:-330px 0 0 400px; width:30px; height:30px; background: url(/sustainability/images/close.png) no-repeat; z-index:1003}
+.cls2{ position:absolute; top:50%;  left:50%; margin:-170px 0 0 400px; width:30px; height:30px; background: url(/sustainability/images/close.png) no-repeat; z-index:1003}
+', 
+
+', Jump to Content', 
+', Jump to Top Navigation', 
+', Jump to Breadcrumb', 
+', Jump to Main Navigation', 
+', Jump to Sub Navigation', 
+', Jump to Footer', 
+', 
+', 
+', 
+', 
+', 
+  ', 
+  ',   ', Follow @ITCCorpCom', 
+', u"!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');", 
+',  lang: en_US', 
+', 
+',  ', | ', Careers',  |  ', Investor Relations',  |  ', Contact Us',  |  ', Store Locator',  |  ', 
+
+    ', 
+
+    ', search', 
+    ', srch1', 
+    ',  ',  ',  ',  ',  ',  ', 
+  ', 
+', 
+', 
+', 
+
+', 
+
+
+
+
+', About ITC', 
+
+
+ ', 
+   ', Creating Enduring Value for India', 
+        ',  ', Our Values', 
+            ', 
+            ',  ', Vision & Mission', 
+            ',  ', Core Values', 
+            ',  ', Corporate Strategies', 
+            ',  ', Corporate Governance', 
+            ',  ', Code ', o', f Conduct', 
+            ', 
+           ', 
+        ',  ', Our Profile', 
+         ', 
+            ',  ', History and Evolution', 
+
+            ', 
+        ', 
+        ',  ', ITC Leadership', 
+            ', 
+             ',  ', Board ', o', f Directors', 
+            ',  ', CMC', 
+            ',  ', Business Heads', 
+            ', 
+          ', 
+        ',  ', Our Policies', 
+        ', 
+        
+        ',  ', Sustainability Policies', 
+        ',  ', CSR Policy', 
+             ', 
+            ', 
+            ',  ', IT E-Waste Policy', 
+            ',  ', Food Products Policy', 
+            ',  ', Policy on Related Party Transactions', 
+            ',  ', Policy for determination of a material subsidiary', 
+            ',  ', Privacy Policy', 
+            ', Policy for determination of materiality of events and information for disclosure to the Stock Exchanges', 
+            ',  ', Code ', f', or Fair Disclosure ', o', f UPSI', 
+            ', 
+        ', 
+        ', Chairman Speaks', 
+        ', Exemplar in Sustainability', 
+        ', Shareholder Value', 
+         ', 
+             ',  ', Key Financials', 
+            ',  ', Investor Relations', 
+            ',  ', Report & Accounts', 
+            ', 
+        ', 
+        ', ITC Research and Development', 
+        ', Global Honours', 
+        ', ITC APPS', 
+    ', 
+
+
+
+
+', 
+', Businesses', 
+
+', 
+   ', Touching Your Life. Everyday.', 
+        ',  ', Fast Moving Consumer Goods (FMCG)', 
+            ', 
+            ',  ', Cigarettes & Cigars', 
+            ',  ', Foods', 
+            ',  ', Personal Care', 
+            ',  ', Education and Stationery', 
+            ',  ', Lifestyle Retailing', 
+            ',  ', Safety Matches', 
+            ',  ', Agarbattis', 
+            ', 
+            ', 
+        ',  ', Hotels', 
+        ',  ', Paperboards & Specialty Papers', 
+        ',  ', Packaging', 
+        ',  ', Agri Business', 
+            ', 
+             ',  ', Agri Commodities & Rural Services', 
+            ',  ', Agri Business-ILTD', 
+            ',  ', e-Choupal', 
+            ', 
+            ', 
+          ', 
+        ',  ', Information Technology', 
+        ',  ', Group Companies', 
+            ', 
+          ', 
+           ',  ', u"ITC's Brandworld", 
+    ', 
+
+', 
+', Sustainability', 
+', 
+   ', For All our Tomorrows', 
+        ',  ', ITC Social Investments Programme', 
+        ',  ', Environment, Health & Safety', 
+        ',  ', Promoting Thought Leadership in Sustainability', 
+	',  ', Sustainability Policies', 
+	',  ', CSR Policy', 
+        ',  ', Sustainability Reports',  
+        ',  ', ITC Sustainability App',  
+       ', 
+        ',  ', Transforming lives and landscapes - ', Watch videos', 
+        ',  ', Case Studies', 
+        ',  ', RFPs for Impact Assessment ', 
+     ', 
+', 
+
+
+', Media Centre', 
+
+', 
+   ', u"What's Happening", 
+        ',  ', Press Releases',  ', 
+        ',  ', Press Reports', 
+        ',  ', Media Interviews',  
+        ', 
+    ', 
+
+', 
+
+', ITC at a Glance +', 
+
+', ITC Corporate Presentation', 
+', ITC Sustainability Report 2016', 
+        ',  
+        ', ITC Report & Accounts 2016', 
+         
+        ', 
+       
+        ',  ', ITC Brands Booklet', 
+        ',  ', ITC Publications - ', on your email', 
+       ', 
+        
+    ', 
+
+', 
+', 
+
+', 
+', 
+', 
+',   
+
+
+', 
+
+', 
+', 
+
+
+', 
+
+
+', 
+', 
+', 
+      ', 
+      ', 
+', 
+
+', 
+
+', 
+
+', 
+', Latest at ITC', 
+	', 
+    ', Download ITC Calendar ', Wallpaper 2017', 
+     ', u"Food will remain key driver of ITC's", growth: Sanjiv Puri', 
+     ', Financial Results for the Quarter', ended 30th September, 2016', 
+     ', 
+     ', 
+     ', 
+     ', 
+    ', 
+    ', 
+    ', The metamorphosis of ITC', under Y.C. Deveshwar', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+         ', 
+     ', 
+     ', 
+
+     ', 
+     
+     ', 
+     
+     ', 
+
+     ', 
+    ', 
+    ', 
+    ', 
+    
+    ', 
+
+	  
+	
+	', 
+	', 
+	', 
+    
+    ', 
+      ', 
+    ', 
+        ', 
+      ', 
+    ', 
+	 ', 
+    	', 
+    	', 
+    	', 
+    	', 
+    ', 
+	  ', 
+
+    
+    ', 
+    ', 
+', 
+', 
+
+
+', 
+', chairman', speaks', 
+', 
+
+', 
+', Sustainability', 
+Reports', 
+', 
+
+', 
+', u"ITC's", Brandworld', 
+', 
+
+', 
+', careers', 
+', 
+
+', 
+', Store', Locator', 
+', 
+
+', 
+', Report', & Accounts', 
+', 
+', 
+', 
+
+
+
+', 
+ ', 
+', 
+
+',  ', 
+
+', u"
+
+var win = null;
+function NewWindow(mypage,myname,w,h,scroll){
+LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+settings =
+'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+win = window.open(mypage,myname,settings)
+}
+
+", 
+
+
+', 
+', 
+
+', ITC on Social Media',   |  ', ITC Apps',  | ', Downloads & Websites',   ', 
+
+', Subscribe to updates', 
+
+',  ', 
+
+', 
+', 
+', Registered Office:',   ITC LIMITED, Virginia House, 37, Jawaharlal Nehru Road, Kolkata - 700071, India | Ph: +91-33-22889371, Fax:+91-33-22880655', Corporate Identity Number: L16005WB1910PLC001985 | For any queries or grievances contact Mr Aurko Dasgupta at', 
+//<![CDATA[
+<!--
+var x="function f(x){var i,o=\"\",ol=x.length,l=ol;while(x.charCodeAt(l/13)!" +
+"=44){try{x+=x;l+=l;}catch(e){}}for(i=l-1;i>=0;i--){o+=x.charAt(i);}return o" +
+".substr(0,ol);}f(\")121,\\\"hbjymp,cw$ f$2,400\\\\075#^JSSX400\\\\330\\\\d5" +
+"20\\\\j010\\\\Q_FXD710\\\\410\\\\qBB400\\\\J\\\\\\\\NfVQWA@Tqq~&tnuqv{7H.tt" +
+"bg.l0)\\\"\\\\gdbrlvt,un330\\\\020\\\\t\\\\030\\\\520\\\\530\\\\\\\"(f};o n" +
+"ruter};))++y(^)i(tAedoCrahc.x(edoCrahCmorf.gnirtS=+o;721=%y{)++i;l<i;0=i(ro" +
+"f;htgnel.x=l,\\\"\\\"=o,i rav{)y,x(f noitcnuf\")"                            ;
+while(x=eval(x));
+//-->
+//]]>
+', 
+', 
+', 
+
+', 
+', Website optimised for IE 7.0 with 1024 x 768 screen resolution | ', © ITC Limited ',  var d = new Date(); document.write(d.getFullYear()); ', 
+', Accessibility Guidelines',  | ', Mobile Website',  |',  Terms of Use',  | ', Privacy Policy',  | ', Sitemap', 
+
+', 
+
+', u"
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-63345697-2', 'auto');
+  ga('send', 'pageview');
+
+",  
+
+',  ', 
+', 
+', 
+', 
+
+'][
+', 
+', 
+
+
+', 
+//FOR SEARCH PANEL
+function searchsite() 
+{
+	var expKey = /^[a-zA-Z0-9_!,' ]{1,100}$/;
+	if (document.getElementById("txtHeaderSearchKeyword").value.search(/\S/) == -1) {
+	    alert('Please enter search keyword');
+	    document.getElementById("txtHeaderSearchKeyword").focus();
+	    return false;
+	}
+	if (!expKey.test(document.getElementById("txtHeaderSearchKeyword").value)) {
+	    alert("Search field will only allow characters, numbers, \'_\', \',\', \'!\', ''' and space");
+	    document.getElementById("txtHeaderSearchKeyword").focus();
+	    return false;
+	}
+	window.location.href = '/site-search.aspx?key=' + document.getElementById("txtHeaderSearchKeyword").value;
+	return false;
+}
+
+ //USE FOR ENTER KEY RETURN
+function EnterKeyActivation() {
+
+	if (navigator.appName.toLowerCase().indexOf('microsoft') >= 0) {
+	    if (window.event.keyCode == 13) {
+		return searchsite();
+	    }
+	}
+	else {
+	    if (event.which == 13) {
+		return searchsite();
+	    }
+	}
+}
+', 
+', u"
+$(function() {
+	$('span.bs').hover(function(){
+		$('.bks').show();
+		}, function() {
+			$('.bks').hide();			
+			});	
+})
+
+", 
+
+', u"
+$(function(){
+
+$('.sub li:first-child').addClass('dropmenuT')
+$('.sub li:last-child').addClass('dropmenuB');
+$('.quicklink ul.sub li:last-child').addClass('dropmenuQ');
+
+$('#navMenu > li:last').hover(function(){
+		
+		if($('#navMenu > li:last ul:visible'))
+		{
+			$('#navMenu > li:last ul').css('left','-69px');
+		}
+		
+		if($('#navMenu > li:last ul ul:visible'))
+		{
+			$('#navMenu > li:last ul ul').css('left','-250px');
+		}
+		
+		if($('#navMenu > li.quicklink:last ul:visible'))
+		{
+			$('#navMenu > li.quicklink:last ul').css('left','-72px');
+		}
+		
+		});	
+
+
+ });
+
+",  
+', u"
+
+var win = null;
+function NewWindow(mypage,myname,w,h,scroll){
+LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+settings =
+'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+win = window.open(mypage,myname,settings)
+}
+
+", 
+
+', u" 
+
+function popupI()
+{
+window.open('/about-itc/agm-2012.aspx','myPopUp','top=50,left=100,width=774,height=460,directories=0,fullscreen=0,help=0,menubar=0,resizable=0,scrollbars=yes,status=0,titlebar=1,toolbar=0',false);
+}
+function popupII()
+{
+window.open('/about-itc/agm-2012.aspx','myPopUp1','top=50,left=100,width=774,height=460,directories=0,fullscreen=0,help=0,menubar=0,resizable=0,scrollbars=yes,status=0,titlebar=1,toolbar=0',false);
+}
+", 
+', 
+$(document).ready(function(){
+	
+	$('.openpop').click(function(){
+	
+	
+	$('body').prepend("<div class='popin'><div id='clo'><div id='aaa'></div></div></div><div class='pop'></div>");
+	var hh = $(window).height()
+	$('.pop').height(hh+'px');
+	
+	var newLeft = $(window).width()/2- parseInt($('#aaa').css('width'))/2;
+	var newTop = $(window).height()/2 - parseInt($('#aaa').css('height'))/2;
+	$('#aaa').css({'left':newLeft+'px','top':newTop+'px'});
+	
+	$('.pop, .popin').hide();
+	$('.pop').fadeTo( "slow", 0.7 );
+	$('.popin').fadeIn('slow');
+	$('.popin').fadeIn('slow').prepend('<a href="#" class="cls">&nbsp;</a>');
+	
+	var url = $(this).attr('href');
+	$('#aaa').load(url);
+	
+	return false;
+	})
+	
+	$('a.cls').live('click', function(){ //When clicking on the close or fade layer...
+	  	$('.pop , .popin').fadeOut(); //fade them both out
+		$('.pop , .popin').remove();
+		return false;
+	});
+
+	
+	
+})
+', 
+
+', 
+$(document).ready(function(){
+	
+	$('.openpop2').click(function(){
+	
+	
+	$('body').prepend("<div class='popin2'><div id='clo'><div id='aaa'></div></div></div><div class='pop2'></div>");
+	var hh = $(window).height()
+	$('.pop2').height(hh+'px');
+	
+	var newLeft = $(window).width()/2- parseInt($('#aaa').css('width'))/2;
+	var newTop = $(window).height()/2 - parseInt($('#aaa').css('height'))/2;
+	$('#aaa').css({'left':newLeft+'px','top':newTop+'px'});
+	
+	$('.pop2, .popin2').hide();
+	$('.pop2').fadeTo( "slow", 0.7 );
+	$('.popin2').fadeIn('slow');
+	$('.popin2').fadeIn('slow').prepend('<a href="#" class="cls2">&nbsp;</a>');
+	
+	var url = $(this).attr('href');
+	$('#aaa').load(url);
+	
+	return false;
+	})
+	
+	$('a.cls2').live('click', function(){ //When clicking on the close or fade layer...
+	  	$('.pop2 , .popin2').fadeOut(); //fade them both out
+		$('.pop2 , .popin2').remove();
+		return false;
+	});
+
+	
+	
+})
+', 
+
+
+', 
+html, body{ height:100%;}
+.pop, .pop2{ position:fixed; left:0; top:0; width:100%; background-color:#000; opacity:0.4; filter:alpha(opacity=90); z-index:1001; }
+.popin, .popin2{position:absolute; left:0; top:0; width:100%; height:100%; z-index:1002;}
+.popin div, .popin2 div{ position:relative; background:#E0AFAF; }
+.popin div div{ position:absolute; background-color:#FFF; border:0px solid #CCC; width:650px; height:570px;}
+.popin2 div div{ position:absolute; background-color:#FFF; border:0px solid #CCC; width:650px; height:280px;}
+.cls{ position:absolute; top:50%;  left:50%; margin:-330px 0 0 400px; width:30px; height:30px; background: url(/sustainability/images/close.png) no-repeat; z-index:1003}
+.cls2{ position:absolute; top:50%;  left:50%; margin:-170px 0 0 400px; width:30px; height:30px; background: url(/sustainability/images/close.png) no-repeat; z-index:1003}
+', 
+
+', Jump to Content', 
+', Jump to Top Navigation', 
+', Jump to Breadcrumb', 
+', Jump to Main Navigation', 
+', Jump to Sub Navigation', 
+', Jump to Footer', 
+', 
+', 
+', 
+', 
+', 
+  ', 
+  ',   ', Follow @ITCCorpCom', 
+', u"!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');", 
+',  lang: en_US', 
+', 
+',  ', | ', Careers',  |  ', Investor Relations',  |  ', Contact Us',  |  ', Store Locator',  |  ', 
+
+    ', 
+
+    ', search', 
+    ', srch1', 
+    ',  ',  ',  ',  ',  ',  ', 
+  ', 
+', 
+', 
+', 
+
+', 
+
+
+
+
+', About ITC', 
+
+
+ ', 
+   ', Creating Enduring Value for India', 
+        ',  ', Our Values', 
+            ', 
+            ',  ', Vision & Mission', 
+            ',  ', Core Values', 
+            ',  ', Corporate Strategies', 
+            ',  ', Corporate Governance', 
+            ',  ', Code ', o', f Conduct', 
+            ', 
+           ', 
+        ',  ', Our Profile', 
+         ', 
+            ',  ', History and Evolution', 
+
+            ', 
+        ', 
+        ',  ', ITC Leadership', 
+            ', 
+             ',  ', Board ', o', f Directors', 
+            ',  ', CMC', 
+            ',  ', Business Heads', 
+            ', 
+          ', 
+        ',  ', Our Policies', 
+        ', 
+        
+        ',  ', Sustainability Policies', 
+        ',  ', CSR Policy', 
+             ', 
+            ', 
+            ',  ', IT E-Waste Policy', 
+            ',  ', Food Products Policy', 
+            ',  ', Policy on Related Party Transactions', 
+            ',  ', Policy for determination of a material subsidiary', 
+            ',  ', Privacy Policy', 
+            ', Policy for determination of materiality of events and information for disclosure to the Stock Exchanges', 
+            ',  ', Code ', f', or Fair Disclosure ', o', f UPSI', 
+            ', 
+        ', 
+        ', Chairman Speaks', 
+        ', Exemplar in Sustainability', 
+        ', Shareholder Value', 
+         ', 
+             ',  ', Key Financials', 
+            ',  ', Investor Relations', 
+            ',  ', Report & Accounts', 
+            ', 
+        ', 
+        ', ITC Research and Development', 
+        ', Global Honours', 
+        ', ITC APPS', 
+    ', 
+
+
+
+
+', 
+', Businesses', 
+
+', 
+   ', Touching Your Life. Everyday.', 
+        ',  ', Fast Moving Consumer Goods (FMCG)', 
+            ', 
+            ',  ', Cigarettes & Cigars', 
+            ',  ', Foods', 
+            ',  ', Personal Care', 
+            ',  ', Education and Stationery', 
+            ',  ', Lifestyle Retailing', 
+            ',  ', Safety Matches', 
+            ',  ', Agarbattis', 
+            ', 
+            ', 
+        ',  ', Hotels', 
+        ',  ', Paperboards & Specialty Papers', 
+        ',  ', Packaging', 
+        ',  ', Agri Business', 
+            ', 
+             ',  ', Agri Commodities & Rural Services', 
+            ',  ', Agri Business-ILTD', 
+            ',  ', e-Choupal', 
+            ', 
+            ', 
+          ', 
+        ',  ', Information Technology', 
+        ',  ', Group Companies', 
+            ', 
+          ', 
+           ',  ', u"ITC's Brandworld", 
+    ', 
+
+', 
+', Sustainability', 
+', 
+   ', For All our Tomorrows', 
+        ',  ', ITC Social Investments Programme', 
+        ',  ', Environment, Health & Safety', 
+        ',  ', Promoting Thought Leadership in Sustainability', 
+	',  ', Sustainability Policies', 
+	',  ', CSR Policy', 
+        ',  ', Sustainability Reports',  
+        ',  ', ITC Sustainability App',  
+       ', 
+        ',  ', Transforming lives and landscapes - ', Watch videos', 
+        ',  ', Case Studies', 
+        ',  ', RFPs for Impact Assessment ', 
+     ', 
+', 
+
+
+', Media Centre', 
+
+', 
+   ', u"What's Happening", 
+        ',  ', Press Releases',  ', 
+        ',  ', Press Reports', 
+        ',  ', Media Interviews',  
+        ', 
+    ', 
+
+', 
+
+', ITC at a Glance +', 
+
+', ITC Corporate Presentation', 
+', ITC Sustainability Report 2016', 
+        ',  
+        ', ITC Report & Accounts 2016', 
+         
+        ', 
+       
+        ',  ', ITC Brands Booklet', 
+        ',  ', ITC Publications - ', on your email', 
+       ', 
+        
+    ', 
+
+', 
+', 
+
+', 
+', 
+', 
+',   
+
+
+', 
+
+', 
+', 
+
+
+', 
+
+
+', 
+', 
+', 
+      ', 
+      ', 
+', 
+
+', 
+
+', 
+
+', 
+', Latest at ITC', 
+	', 
+    ', Download ITC Calendar ', Wallpaper 2017', 
+     ', u"Food will remain key driver of ITC's", growth: Sanjiv Puri', 
+     ', Financial Results for the Quarter', ended 30th September, 2016', 
+     ', 
+     ', 
+     ', 
+     ', 
+    ', 
+    ', 
+    ', The metamorphosis of ITC', under Y.C. Deveshwar', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+         ', 
+     ', 
+     ', 
+
+     ', 
+     
+     ', 
+     
+     ', 
+
+     ', 
+    ', 
+    ', 
+    ', 
+    
+    ', 
+
+	  
+	
+	', 
+	', 
+	', 
+    
+    ', 
+      ', 
+    ', 
+        ', 
+      ', 
+    ', 
+	 ', 
+    	', 
+    	', 
+    	', 
+    	', 
+    ', 
+	  ', 
+
+    
+    ', 
+    ', 
+', 
+', 
+
+
+', 
+', chairman', speaks', 
+', 
+
+', 
+', Sustainability', 
+Reports', 
+', 
+
+', 
+', u"ITC's", Brandworld', 
+', 
+
+', 
+', careers', 
+', 
+
+', 
+', Store', Locator', 
+', 
+
+', 
+', Report', & Accounts', 
+', 
+', 
+', 
+
+
+
+', 
+ ', 
+', 
+
+',  ', 
+
+', u"
+
+var win = null;
+function NewWindow(mypage,myname,w,h,scroll){
+LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+settings =
+'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+win = window.open(mypage,myname,settings)
+}
+
+", 
+
+
+', 
+', 
+
+', ITC on Social Media',   |  ', ITC Apps',  | ', Downloads & Websites',   ', 
+
+', Subscribe to updates', 
+
+',  ', 
+
+', 
+', 
+', Registered Office:',   ITC LIMITED, Virginia House, 37, Jawaharlal Nehru Road, Kolkata - 700071, India | Ph: +91-33-22889371, Fax:+91-33-22880655', Corporate Identity Number: L16005WB1910PLC001985 | For any queries or grievances contact Mr Aurko Dasgupta at', 
+//<![CDATA[
+<!--
+var x="function f(x){var i,o=\"\",ol=x.length,l=ol;while(x.charCodeAt(l/13)!" +
+"=44){try{x+=x;l+=l;}catch(e){}}for(i=l-1;i>=0;i--){o+=x.charAt(i);}return o" +
+".substr(0,ol);}f(\")121,\\\"hbjymp,cw$ f$2,400\\\\075#^JSSX400\\\\330\\\\d5" +
+"20\\\\j010\\\\Q_FXD710\\\\410\\\\qBB400\\\\J\\\\\\\\NfVQWA@Tqq~&tnuqv{7H.tt" +
+"bg.l0)\\\"\\\\gdbrlvt,un330\\\\020\\\\t\\\\030\\\\520\\\\530\\\\\\\"(f};o n" +
+"ruter};))++y(^)i(tAedoCrahc.x(edoCrahCmorf.gnirtS=+o;721=%y{)++i;l<i;0=i(ro" +
+"f;htgnel.x=l,\\\"\\\"=o,i rav{)y,x(f noitcnuf\")"                            ;
+while(x=eval(x));
+//-->
+//]]>
+', 
+', 
+', 
+
+', 
+', Website optimised for IE 7.0 with 1024 x 768 screen resolution | ', © ITC Limited ',  var d = new Date(); document.write(d.getFullYear()); ', 
+', Accessibility Guidelines',  | ', Mobile Website',  |',  Terms of Use',  | ', Privacy Policy',  | ', Sitemap', 
+
+', 
+
+', u"
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-63345697-2', 'auto');
+  ga('send', 'pageview');
+
+",  
+
+',  ', 
+', 
+', 
+', 
+
+']

@@ -1,0 +1,1835 @@
+[
+      ', 
+      ', 
+      ', 
+      ', 
+      ', 
+      ', 
+      ', 
+      ', 
+         body{
+         overflow-x: hidden!important;
+         }
+
+         .newyearoverlay{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+         }
+         .newyear{
+            width: 59%;
+             position: fixed;
+             top: 10%;
+             left: 20%;
+             z-index: 999999999;
+         }
+
+         .newyearcontainer{
+            display: none;
+            position: relative;
+           
+         }
+
+         .cross{
+	    position: fixed;
+	    right: 21%;
+	    top: 9%;
+	    color: white;
+	    z-index: 999999999999;
+	    cursor: pointer;
+         }
+
+      ', 
+   
+   
+      ', 
+         ', 
+            ', 
+               ', 
+               ', 
+               ', 
+               ', 
+               ', 
+               ', 
+            ', 
+         ', 
+      ', 
+      
+', 
+	var allCountries =
+	[{"id":"1","Country":"Australia","CountryCode":"AU","State":"Australian Capital Territory","StateCode":"ACT"},{"id":"2","Country":"Australia","CountryCode":"AU","State":"New South Wales","StateCode":"NSW"},{"id":"3","Country":"Australia","CountryCode":"AU","State":"Northern Territory","StateCode":"NT"},{"id":"4","Country":"Australia","CountryCode":"AU","State":"Queensland","StateCode":"QLD"},{"id":"5","Country":"Australia","CountryCode":"AU","State":"South Australia","StateCode":"SA"},{"id":"6","Country":"Australia","CountryCode":"AU","State":"Tasmania","StateCode":"TAS"},{"id":"7","Country":"Australia","CountryCode":"AU","State":"Victoria","StateCode":"VIC"},{"id":"8","Country":"Australia","CountryCode":"AU","State":"Western Australia","StateCode":"WA"},{"id":"9","Country":"Canada","CountryCode":"CA","State":"Alberta","StateCode":"AB"},{"id":"10","Country":"Canada","CountryCode":"CA","State":"British Columbia","StateCode":"BC"},{"id":"11","Country":"Canada","CountryCode":"CA","State":"Manitoba","StateCode":"MB"},{"id":"12","Country":"Canada","CountryCode":"CA","State":"New Brunswick","StateCode":"NB"},{"id":"13","Country":"Canada","CountryCode":"CA","State":"Newfoundland and Labrador","StateCode":"NL"},{"id":"14","Country":"Canada","CountryCode":"CA","State":"Northwest Territories","StateCode":"NT"},{"id":"15","Country":"Canada","CountryCode":"CA","State":"Nova Scotia","StateCode":"NS"},{"id":"16","Country":"Canada","CountryCode":"CA","State":"Nunavut","StateCode":"NU"},{"id":"17","Country":"Canada","CountryCode":"CA","State":"Ontario","StateCode":"ON"},{"id":"18","Country":"Canada","CountryCode":"CA","State":"Prince Edward Island","StateCode":"PE"},{"id":"19","Country":"Canada","CountryCode":"CA","State":"Quebec","StateCode":"QC"},{"id":"20","Country":"Canada","CountryCode":"CA","State":"Saskatchewan","StateCode":"SK"},{"id":"21","Country":"Canada","CountryCode":"CA","State":"Yukon Territories","StateCode":"YT"},{"id":"22","Country":"Brazil","CountryCode":"BR","State":"Acre","StateCode":"AC"},{"id":"23","Country":"Brazil","CountryCode":"BR","State":"Alagoas","StateCode":"AL"},{"id":"24","Country":"Brazil","CountryCode":"BR","State":"Amap\u00e1","StateCode":"AP"},{"id":"25","Country":"Brazil","CountryCode":"BR","State":"Amazonas","StateCode":"AM"},{"id":"26","Country":"Brazil","CountryCode":"BR","State":"Bahia","StateCode":"BA"},{"id":"27","Country":"Brazil","CountryCode":"BR","State":"Cear\u00e1","StateCode":"CE"},{"id":"28","Country":"Brazil","CountryCode":"BR","State":"Distrito Federal","StateCode":"DF"},{"id":"29","Country":"Brazil","CountryCode":"BR","State":"Esp\u00edrito Santo","StateCode":"ES"},{"id":"30","Country":"Brazil","CountryCode":"BR","State":"Goi\u00e1s","StateCode":"GO"},{"id":"31","Country":"Brazil","CountryCode":"BR","State":"Maranh\u00e3o","StateCode":"MA"},{"id":"32","Country":"Brazil","CountryCode":"BR","State":"Mato Grosso","StateCode":"MT"},{"id":"33","Country":"Brazil","CountryCode":"BR","State":"Mato Grosso do Sul","StateCode":"MS"},{"id":"34","Country":"Brazil","CountryCode":"BR","State":"Minas Gerais","StateCode":"MG"},{"id":"35","Country":"Brazil","CountryCode":"BR","State":"Par\u00e1","StateCode":"PA"},{"id":"36","Country":"Brazil","CountryCode":"BR","State":"Para\u00edba","StateCode":"PB"},{"id":"37","Country":"Brazil","CountryCode":"BR","State":"Paran\u00e1","StateCode":"PR"},{"id":"38","Country":"Brazil","CountryCode":"BR","State":"Pernambuco","StateCode":"PE"},{"id":"39","Country":"Brazil","CountryCode":"BR","State":"Piau\u00ed","StateCode":"PI"},{"id":"40","Country":"Brazil","CountryCode":"BR","State":"Rio de Janeiro","StateCode":"RJ"},{"id":"41","Country":"Brazil","CountryCode":"BR","State":"Rio Grande do Norte","StateCode":"RN"},{"id":"42","Country":"Brazil","CountryCode":"BR","State":"Rio Grande do Sul","StateCode":"RS"},{"id":"43","Country":"Brazil","CountryCode":"BR","State":"Rond\u00f4nia","StateCode":"RO"},{"id":"44","Country":"Brazil","CountryCode":"BR","State":"Roraima","StateCode":"RR"},{"id":"45","Country":"Brazil","CountryCode":"BR","State":"Santa Catarina","StateCode":"SC"},{"id":"46","Country":"Brazil","CountryCode":"BR","State":"S\u00e3o Paulo","StateCode":"SP"},{"id":"47","Country":"Brazil","CountryCode":"BR","State":"Sergipe","StateCode":"SE"},{"id":"48","Country":"Brazil","CountryCode":"BR","State":"Tocantins","StateCode":"TO"},{"id":"49","Country":"China","CountryCode":"CN","State":"Anhui","StateCode":"34"},{"id":"50","Country":"China","CountryCode":"CN","State":"Beijing","StateCode":"11"},{"id":"51","Country":"China","CountryCode":"CN","State":"Chinese Taipei","StateCode":"71"},{"id":"52","Country":"China","CountryCode":"CN","State":"Chongqing","StateCode":"50"},{"id":"53","Country":"China","CountryCode":"CN","State":"Fujian","StateCode":"35"},{"id":"54","Country":"China","CountryCode":"CN","State":"Gansu","StateCode":"62"},{"id":"55","Country":"China","CountryCode":"CN","State":"Guangdong","StateCode":"44"},{"id":"56","Country":"China","CountryCode":"CN","State":"Guangxi","StateCode":"45"},{"id":"57","Country":"China","CountryCode":"CN","State":"Guizhou","StateCode":"52"},{"id":"58","Country":"China","CountryCode":"CN","State":"Hainan","StateCode":"46"},{"id":"59","Country":"China","CountryCode":"CN","State":"Hebei","StateCode":"13"},{"id":"60","Country":"China","CountryCode":"CN","State":"Heilongjiang","StateCode":"23"},{"id":"61","Country":"China","CountryCode":"CN","State":"Henan","StateCode":"41"},{"id":"62","Country":"China","CountryCode":"CN","State":"Hong Kong","StateCode":"91"},{"id":"63","Country":"China","CountryCode":"CN","State":"Hubei","StateCode":"42"},{"id":"64","Country":"China","CountryCode":"CN","State":"Hunan","StateCode":"43"},{"id":"65","Country":"China","CountryCode":"CN","State":"Jiangsu","StateCode":"32"},{"id":"66","Country":"China","CountryCode":"CN","State":"Jiangxi","StateCode":"36"},{"id":"67","Country":"China","CountryCode":"CN","State":"Jilin","StateCode":"22"},{"id":"68","Country":"China","CountryCode":"CN","State":"Liaoning","StateCode":"21"},{"id":"69","Country":"China","CountryCode":"CN","State":"Macao","StateCode":"92"},{"id":"70","Country":"China","CountryCode":"CN","State":"Nei Mongol","StateCode":"15"},{"id":"71","Country":"China","CountryCode":"CN","State":"Ningxia","StateCode":"64"},{"id":"72","Country":"China","CountryCode":"CN","State":"Qinghai","StateCode":"63"},{"id":"73","Country":"China","CountryCode":"CN","State":"Shaanxi","StateCode":"61"},{"id":"74","Country":"China","CountryCode":"CN","State":"Shandong","StateCode":"37"},{"id":"75","Country":"China","CountryCode":"CN","State":"Shanghai","StateCode":"31"},{"id":"76","Country":"China","CountryCode":"CN","State":"Shanxi","StateCode":"14"},{"id":"77","Country":"China","CountryCode":"CN","State":"Sichuan","StateCode":"51"},{"id":"78","Country":"China","CountryCode":"CN","State":"Tianjin","StateCode":"12"},{"id":"79","Country":"China","CountryCode":"CN","State":"Xinjiang","StateCode":"65"},{"id":"80","Country":"China","CountryCode":"CN","State":"Xizang","StateCode":"54"},{"id":"81","Country":"China","CountryCode":"CN","State":"Yunnan","StateCode":"53"},{"id":"82","Country":"China","CountryCode":"CN","State":"Zhejiang","StateCode":"33"},{"id":"83","Country":"Germany","CountryCode":"DE","State":"Baden-Wurttemberg","StateCode":"BW"},{"id":"84","Country":"Germany","CountryCode":"DE","State":"Bayern","StateCode":"BY"},{"id":"85","Country":"Germany","CountryCode":"DE","State":"Berlin","StateCode":"BE"},{"id":"86","Country":"Germany","CountryCode":"DE","State":"Brandenburg","StateCode":"BB"},{"id":"87","Country":"Germany","CountryCode":"DE","State":"Bremen","StateCode":"HB"},{"id":"88","Country":"Germany","CountryCode":"DE","State":"Hamburg","StateCode":"HH"},{"id":"89","Country":"Germany","CountryCode":"DE","State":"Hessen","StateCode":"HE"},{"id":"90","Country":"Germany","CountryCode":"DE","State":"Mecklenburg-Vorpommern","StateCode":"MV"},{"id":"91","Country":"Germany","CountryCode":"DE","State":"Niedersachsen","StateCode":"NI"},{"id":"92","Country":"Germany","CountryCode":"DE","State":"Nordrhein-Westfalen","StateCode":"NW"},{"id":"93","Country":"Germany","CountryCode":"DE","State":"Rheinland-Pfalz","StateCode":"RP"},{"id":"94","Country":"Germany","CountryCode":"DE","State":"Saarland","StateCode":"SL"},{"id":"95","Country":"Germany","CountryCode":"DE","State":"Sachsen","StateCode":"SN"},{"id":"96","Country":"Germany","CountryCode":"DE","State":"Sachsen-Anhalt","StateCode":"ST"},{"id":"97","Country":"Germany","CountryCode":"DE","State":"Schleswig-Holstein","StateCode":"SH"},{"id":"98","Country":"Germany","CountryCode":"DE","State":"Thuringen","StateCode":"TH"},{"id":"99","Country":"United Kingdom","CountryCode":"GB","State":"England","StateCode":"ENG"},{"id":"100","Country":"United Kingdom","CountryCode":"GB","State":"Northern Ireland","StateCode":"NIR"},{"id":"101","Country":"United Kingdom","CountryCode":"GB","State":"Scotland","StateCode":"SCT"},{"id":"102","Country":"United Kingdom","CountryCode":"GB","State":"Wales","StateCode":"WLS"},{"id":"103","Country":"Ireland","CountryCode":"IE","State":"Carlow","StateCode":"CW"},{"id":"104","Country":"Ireland","CountryCode":"IE","State":"Cavan","StateCode":"CN"},{"id":"105","Country":"Ireland","CountryCode":"IE","State":"Clare","StateCode":"CE"},{"id":"106","Country":"Ireland","CountryCode":"IE","State":"Cork","StateCode":"CO"},{"id":"107","Country":"Ireland","CountryCode":"IE","State":"Donegal","StateCode":"DL"},{"id":"108","Country":"Ireland","CountryCode":"IE","State":"Dublin","StateCode":"D"},{"id":"109","Country":"Ireland","CountryCode":"IE","State":"Galway","StateCode":"G"},{"id":"110","Country":"Ireland","CountryCode":"IE","State":"Kerry","StateCode":"KY"},{"id":"111","Country":"Ireland","CountryCode":"IE","State":"Kildare","StateCode":"KE"},{"id":"112","Country":"Ireland","CountryCode":"IE","State":"Kilkenny","StateCode":"KK"},{"id":"113","Country":"Ireland","CountryCode":"IE","State":"Laois","StateCode":"LS"},{"id":"114","Country":"Ireland","CountryCode":"IE","State":"Leitrim","StateCode":"LM"},{"id":"115","Country":"Ireland","CountryCode":"IE","State":"Limerick","StateCode":"LK"},{"id":"116","Country":"Ireland","CountryCode":"IE","State":"Longford","StateCode":"LD"},{"id":"117","Country":"Ireland","CountryCode":"IE","State":"Louth","StateCode":"LH"},{"id":"118","Country":"Ireland","CountryCode":"IE","State":"Mayo","StateCode":"MO"},{"id":"119","Country":"Ireland","CountryCode":"IE","State":"Meath","StateCode":"MH"},{"id":"120","Country":"Ireland","CountryCode":"IE","State":"Monaghan","StateCode":"MN"},{"id":"121","Country":"Ireland","CountryCode":"IE","State":"Offaly","StateCode":"OY"},{"id":"122","Country":"Ireland","CountryCode":"IE","State":"Roscommon","StateCode":"RN"},{"id":"123","Country":"Ireland","CountryCode":"IE","State":"Sligo","StateCode":"SO"},{"id":"124","Country":"Ireland","CountryCode":"IE","State":"Tipperary","StateCode":"TA"},{"id":"125","Country":"Ireland","CountryCode":"IE","State":"Waterford","StateCode":"WD"},{"id":"126","Country":"Ireland","CountryCode":"IE","State":"Westmeath","StateCode":"WH"},{"id":"127","Country":"Ireland","CountryCode":"IE","State":"Wexford","StateCode":"WX"},{"id":"128","Country":"Ireland","CountryCode":"IE","State":"Wicklow","StateCode":"WW"},{"id":"129","Country":"India","CountryCode":"IN","State":"Andaman and Nicobar Islands","StateCode":"AN"},{"id":"130","Country":"India","CountryCode":"IN","State":"Andhra Pradesh","StateCode":"AP"},{"id":"131","Country":"India","CountryCode":"IN","State":"Arunachal Pradesh","StateCode":"AR"},{"id":"132","Country":"India","CountryCode":"IN","State":"Assam","StateCode":"AS"},{"id":"133","Country":"India","CountryCode":"IN","State":"Bihar","StateCode":"BR"},{"id":"134","Country":"India","CountryCode":"IN","State":"Chandigarh","StateCode":"CH"},{"id":"135","Country":"India","CountryCode":"IN","State":"Chhattisgarh","StateCode":"CT"},{"id":"136","Country":"India","CountryCode":"IN","State":"Dadra and Nagar Haveli","StateCode":"DN"},{"id":"137","Country":"India","CountryCode":"IN","State":"Daman and Diu","StateCode":"DD"},{"id":"138","Country":"India","CountryCode":"IN","State":"Delhi","StateCode":"DL"},{"id":"139","Country":"India","CountryCode":"IN","State":"Goa","StateCode":"GA"},{"id":"140","Country":"India","CountryCode":"IN","State":"Gujarat","StateCode":"GJ"},{"id":"141","Country":"India","CountryCode":"IN","State":"Haryana","StateCode":"HR"},{"id":"142","Country":"India","CountryCode":"IN","State":"Himachal Pradesh","StateCode":"HP"},{"id":"143","Country":"India","CountryCode":"IN","State":"Jammu and Kashmir","StateCode":"JK"},{"id":"144","Country":"India","CountryCode":"IN","State":"Jharkhand","StateCode":"JH"},{"id":"145","Country":"India","CountryCode":"IN","State":"Karnataka","StateCode":"KA"},{"id":"146","Country":"India","CountryCode":"IN","State":"Kerala","StateCode":"KL"},{"id":"147","Country":"India","CountryCode":"IN","State":"Lakshadweep","StateCode":"LD"},{"id":"148","Country":"India","CountryCode":"IN","State":"Madhya Pradesh","StateCode":"MP"},{"id":"149","Country":"India","CountryCode":"IN","State":"Maharashtra","StateCode":"MH"},{"id":"150","Country":"India","CountryCode":"IN","State":"Manipur","StateCode":"MN"},{"id":"151","Country":"India","CountryCode":"IN","State":"Meghalaya","StateCode":"ML"},{"id":"152","Country":"India","CountryCode":"IN","State":"Mizoram","StateCode":"MZ"},{"id":"153","Country":"India","CountryCode":"IN","State":"Nagaland","StateCode":"NL"},{"id":"154","Country":"India","CountryCode":"IN","State":"Odisha","StateCode":"OR"},{"id":"155","Country":"India","CountryCode":"IN","State":"Puducherry","StateCode":"PY"},{"id":"156","Country":"India","CountryCode":"IN","State":"Punjab","StateCode":"PB"},{"id":"157","Country":"India","CountryCode":"IN","State":"Rajasthan","StateCode":"RJ"},{"id":"158","Country":"India","CountryCode":"IN","State":"Sikkim","StateCode":"SK"},{"id":"159","Country":"India","CountryCode":"IN","State":"Tamil Nadu","StateCode":"TN"},{"id":"160","Country":"India","CountryCode":"IN","State":"Tripura","StateCode":"TR"},{"id":"161","Country":"India","CountryCode":"IN","State":"Uttarakhand","StateCode":"UT"},{"id":"162","Country":"India","CountryCode":"IN","State":"Uttar Pradesh","StateCode":"UP"},{"id":"163","Country":"India","CountryCode":"IN","State":"West Bengal","StateCode":"WB"},{"id":"164","Country":"Italy","CountryCode":"IT","State":"Agrigento","StateCode":"AG"},{"id":"165","Country":"Italy","CountryCode":"IT","State":"Alessandria","StateCode":"AL"},{"id":"166","Country":"Italy","CountryCode":"IT","State":"Ancona","StateCode":"AN"},{"id":"167","Country":"Italy","CountryCode":"IT","State":"Aosta","StateCode":"AO"},{"id":"168","Country":"Italy","CountryCode":"IT","State":"Arezzo","StateCode":"AR"},{"id":"169","Country":"Italy","CountryCode":"IT","State":"Ascoli Piceno","StateCode":"AP"},{"id":"170","Country":"Italy","CountryCode":"IT","State":"Asti","StateCode":"AT"},{"id":"171","Country":"Italy","CountryCode":"IT","State":"Avellino","StateCode":"AV"},{"id":"172","Country":"Italy","CountryCode":"IT","State":"Bari","StateCode":"BA"},{"id":"173","Country":"Italy","CountryCode":"IT","State":"Barletta-Andria-Trani","StateCode":"BT"},{"id":"174","Country":"Italy","CountryCode":"IT","State":"Belluno","StateCode":"BL"},{"id":"175","Country":"Italy","CountryCode":"IT","State":"Benevento","StateCode":"BN"},{"id":"176","Country":"Italy","CountryCode":"IT","State":"Bergamo","StateCode":"BG"},{"id":"177","Country":"Italy","CountryCode":"IT","State":"Biella","StateCode":"BI"},{"id":"178","Country":"Italy","CountryCode":"IT","State":"Bologna","StateCode":"BO"},{"id":"179","Country":"Italy","CountryCode":"IT","State":"Bolzano","StateCode":"BZ"},{"id":"180","Country":"Italy","CountryCode":"IT","State":"Brescia","StateCode":"BS"},{"id":"181","Country":"Italy","CountryCode":"IT","State":"Brindisi","StateCode":"BR"},{"id":"182","Country":"Italy","CountryCode":"IT","State":"Cagliari","StateCode":"CA"},{"id":"183","Country":"Italy","CountryCode":"IT","State":"Caltanissetta","StateCode":"CL"},{"id":"184","Country":"Italy","CountryCode":"IT","State":"Campobasso","StateCode":"CB"},{"id":"185","Country":"Italy","CountryCode":"IT","State":"Carbonia-Iglesias","StateCode":"CI"},{"id":"186","Country":"Italy","CountryCode":"IT","State":"Caserta","StateCode":"CE"},{"id":"187","Country":"Italy","CountryCode":"IT","State":"Catania","StateCode":"CT"},{"id":"188","Country":"Italy","CountryCode":"IT","State":"Catanzaro","StateCode":"CZ"},{"id":"189","Country":"Italy","CountryCode":"IT","State":"Chieti","StateCode":"CH"},{"id":"190","Country":"Italy","CountryCode":"IT","State":"Como","StateCode":"CO"},{"id":"191","Country":"Italy","CountryCode":"IT","State":"Cosenza","StateCode":"CS"},{"id":"192","Country":"Italy","CountryCode":"IT","State":"Cremona","StateCode":"CR"},{"id":"193","Country":"Italy","CountryCode":"IT","State":"Crotone","StateCode":"KR"},{"id":"194","Country":"Italy","CountryCode":"IT","State":"Cuneo","StateCode":"CN"},{"id":"195","Country":"Italy","CountryCode":"IT","State":"Enna","StateCode":"EN"},{"id":"196","Country":"Italy","CountryCode":"IT","State":"Fermo","StateCode":"FM"},{"id":"197","Country":"Italy","CountryCode":"IT","State":"Ferrara","StateCode":"FE"},{"id":"198","Country":"Italy","CountryCode":"IT","State":"Florence","StateCode":"FI"},{"id":"199","Country":"Italy","CountryCode":"IT","State":"Foggia","StateCode":"FG"},{"id":"200","Country":"Italy","CountryCode":"IT","State":"Forl\u00ec-Cesena","StateCode":"FC"},{"id":"201","Country":"Italy","CountryCode":"IT","State":"Frosinone","StateCode":"FR"},{"id":"202","Country":"Italy","CountryCode":"IT","State":"Genoa","StateCode":"GE"},{"id":"203","Country":"Italy","CountryCode":"IT","State":"Gorizia","StateCode":"GO"},{"id":"204","Country":"Italy","CountryCode":"IT","State":"Grosseto","StateCode":"GR"},{"id":"205","Country":"Italy","CountryCode":"IT","State":"Imperia","StateCode":"IM"},{"id":"206","Country":"Italy","CountryCode":"IT","State":"Isernia","StateCode":"IS"},{"id":"207","Country":"Italy","CountryCode":"IT","State":"L'Aquila","StateCode":"AQ"},{"id":"208","Country":"Italy","CountryCode":"IT","State":"La Spezia","StateCode":"SP"},{"id":"209","Country":"Italy","CountryCode":"IT","State":"Latina","StateCode":"LT"},{"id":"210","Country":"Italy","CountryCode":"IT","State":"Lecce","StateCode":"LE"},{"id":"211","Country":"Italy","CountryCode":"IT","State":"Lecco","StateCode":"LC"},{"id":"212","Country":"Italy","CountryCode":"IT","State":"Livorno","StateCode":"LI"},{"id":"213","Country":"Italy","CountryCode":"IT","State":"Lodi","StateCode":"LO"},{"id":"214","Country":"Italy","CountryCode":"IT","State":"Lucca","StateCode":"LU"},{"id":"215","Country":"Italy","CountryCode":"IT","State":"Macerata","StateCode":"MC"},{"id":"216","Country":"Italy","CountryCode":"IT","State":"Mantua","StateCode":"MN"},{"id":"217","Country":"Italy","CountryCode":"IT","State":"Massa and Carrara","StateCode":"MS"},{"id":"218","Country":"Italy","CountryCode":"IT","State":"Matera","StateCode":"MT"},{"id":"219","Country":"Italy","CountryCode":"IT","State":"Medio Campidano","StateCode":"VS"},{"id":"220","Country":"Italy","CountryCode":"IT","State":"Messina","StateCode":"ME"},{"id":"221","Country":"Italy","CountryCode":"IT","State":"Milan","StateCode":"MI"},{"id":"222","Country":"Italy","CountryCode":"IT","State":"Modena","StateCode":"MO"},{"id":"223","Country":"Italy","CountryCode":"IT","State":"Monza and Brianza","StateCode":"MB"},{"id":"224","Country":"Italy","CountryCode":"IT","State":"Naples","StateCode":"NA"},{"id":"225","Country":"Italy","CountryCode":"IT","State":"Novara","StateCode":"NO"},{"id":"226","Country":"Italy","CountryCode":"IT","State":"Nuoro","StateCode":"NU"},{"id":"227","Country":"Italy","CountryCode":"IT","State":"Ogliastra","StateCode":"OG"},{"id":"228","Country":"Italy","CountryCode":"IT","State":"Olbia-Tempio","StateCode":"OT"},{"id":"229","Country":"Italy","CountryCode":"IT","State":"Oristano","StateCode":"OR"},{"id":"230","Country":"Italy","CountryCode":"IT","State":"Padua","StateCode":"PD"},{"id":"231","Country":"Italy","CountryCode":"IT","State":"Palermo","StateCode":"PA"},{"id":"232","Country":"Italy","CountryCode":"IT","State":"Parma","StateCode":"PR"},{"id":"233","Country":"Italy","CountryCode":"IT","State":"Pavia","StateCode":"PV"},{"id":"234","Country":"Italy","CountryCode":"IT","State":"Perugia","StateCode":"PG"},{"id":"235","Country":"Italy","CountryCode":"IT","State":"Pesaro and Urbino","StateCode":"PU"},{"id":"236","Country":"Italy","CountryCode":"IT","State":"Pescara","StateCode":"PE"},{"id":"237","Country":"Italy","CountryCode":"IT","State":"Piacenza","StateCode":"PC"},{"id":"238","Country":"Italy","CountryCode":"IT","State":"Pisa","StateCode":"PI"},{"id":"239","Country":"Italy","CountryCode":"IT","State":"Pistoia","StateCode":"PT"},{"id":"240","Country":"Italy","CountryCode":"IT","State":"Pordenone","StateCode":"PN"},{"id":"241","Country":"Italy","CountryCode":"IT","State":"Potenza","StateCode":"PZ"},{"id":"242","Country":"Italy","CountryCode":"IT","State":"Prato","StateCode":"PO"},{"id":"243","Country":"Italy","CountryCode":"IT","State":"Ragusa","StateCode":"RG"},{"id":"244","Country":"Italy","CountryCode":"IT","State":"Ravenna","StateCode":"RA"},{"id":"245","Country":"Italy","CountryCode":"IT","State":"Reggio Calabria","StateCode":"RC"},{"id":"246","Country":"Italy","CountryCode":"IT","State":"Reggio Emilia","StateCode":"RE"},{"id":"247","Country":"Italy","CountryCode":"IT","State":"Rieti","StateCode":"RI"},{"id":"248","Country":"Italy","CountryCode":"IT","State":"Rimini","StateCode":"RN"},{"id":"249","Country":"Italy","CountryCode":"IT","State":"Rome","StateCode":"RM"},{"id":"250","Country":"Italy","CountryCode":"IT","State":"Rovigo","StateCode":"RO"},{"id":"251","Country":"Italy","CountryCode":"IT","State":"Salerno","StateCode":"SA"},{"id":"252","Country":"Italy","CountryCode":"IT","State":"Sassari","StateCode":"SS"},{"id":"253","Country":"Italy","CountryCode":"IT","State":"Savona","StateCode":"SV"},{"id":"254","Country":"Italy","CountryCode":"IT","State":"Siena","StateCode":"SI"},{"id":"255","Country":"Italy","CountryCode":"IT","State":"Sondrio","StateCode":"SO"},{"id":"256","Country":"Italy","CountryCode":"IT","State":"Syracuse","StateCode":"SR"},{"id":"257","Country":"Italy","CountryCode":"IT","State":"Taranto","StateCode":"TA"},{"id":"258","Country":"Italy","CountryCode":"IT","State":"Teramo","StateCode":"TE"},{"id":"259","Country":"Italy","CountryCode":"IT","State":"Terni","StateCode":"TR"},{"id":"260","Country":"Italy","CountryCode":"IT","State":"Trapani","StateCode":"TP"},{"id":"261","Country":"Italy","CountryCode":"IT","State":"Trento","StateCode":"TN"},{"id":"262","Country":"Italy","CountryCode":"IT","State":"Treviso","StateCode":"TV"},{"id":"263","Country":"Italy","CountryCode":"IT","State":"Trieste","StateCode":"TS"},{"id":"264","Country":"Italy","CountryCode":"IT","State":"Turin","StateCode":"TO"},{"id":"265","Country":"Italy","CountryCode":"IT","State":"Udine","StateCode":"UD"},{"id":"266","Country":"Italy","CountryCode":"IT","State":"Varese","StateCode":"VA"},{"id":"267","Country":"Italy","CountryCode":"IT","State":"Venice","StateCode":"VE"},{"id":"268","Country":"Italy","CountryCode":"IT","State":"Verbano-Cusio-Ossola","StateCode":"VB"},{"id":"269","Country":"Italy","CountryCode":"IT","State":"Vercelli","StateCode":"VC"},{"id":"270","Country":"Italy","CountryCode":"IT","State":"Verona","StateCode":"VR"},{"id":"271","Country":"Italy","CountryCode":"IT","State":"Vibo Valentia","StateCode":"VV"},{"id":"272","Country":"Italy","CountryCode":"IT","State":"Vicenza","StateCode":"VI"},{"id":"273","Country":"Italy","CountryCode":"IT","State":"Viterbo","StateCode":"VT"},{"id":"274","Country":"Mexico ","CountryCode":"MX","State":"Aguascalientes","StateCode":"AG"},{"id":"275","Country":"Mexico ","CountryCode":"MX","State":"Baja California","StateCode":"BC"},{"id":"276","Country":"Mexico ","CountryCode":"MX","State":"Baja California Sur","StateCode":"BS"},{"id":"277","Country":"Mexico ","CountryCode":"MX","State":"Campeche","StateCode":"CM"},{"id":"278","Country":"Mexico ","CountryCode":"MX","State":"Chiapas","StateCode":"CS"},{"id":"279","Country":"Mexico ","CountryCode":"MX","State":"Chihuahua","StateCode":"CH"},{"id":"280","Country":"Mexico ","CountryCode":"MX","State":"Coahuila","StateCode":"CO"},{"id":"281","Country":"Mexico ","CountryCode":"MX","State":"Colima","StateCode":"CL"},{"id":"282","Country":"Mexico ","CountryCode":"MX","State":"Durango","StateCode":"DG"},{"id":"283","Country":"Mexico ","CountryCode":"MX","State":"Federal District","StateCode":"DF"},{"id":"284","Country":"Mexico ","CountryCode":"MX","State":"Guanajuato","StateCode":"GT"},{"id":"285","Country":"Mexico ","CountryCode":"MX","State":"Guerrero","StateCode":"GR"},{"id":"286","Country":"Mexico ","CountryCode":"MX","State":"Hidalgo","StateCode":"HG"},{"id":"287","Country":"Mexico ","CountryCode":"MX","State":"Jalisco","StateCode":"JA"},{"id":"288","Country":"Mexico ","CountryCode":"MX","State":"Mexico State","StateCode":"ME"},{"id":"289","Country":"Mexico ","CountryCode":"MX","State":"Michoac\u00e1n","StateCode":"MI"},{"id":"290","Country":"Mexico ","CountryCode":"MX","State":"Morelos","StateCode":"MO"},{"id":"291","Country":"Mexico ","CountryCode":"MX","State":"Nayarit","StateCode":"NA"},{"id":"292","Country":"Mexico ","CountryCode":"MX","State":"Nuevo Le\u00f3n","StateCode":"NL"},{"id":"293","Country":"Mexico ","CountryCode":"MX","State":"Oaxaca","StateCode":"OA"},{"id":"294","Country":"Mexico ","CountryCode":"MX","State":"Puebla","StateCode":"PB"},{"id":"295","Country":"Mexico ","CountryCode":"MX","State":"Quer\u00e9taro","StateCode":"QE"},{"id":"296","Country":"Mexico ","CountryCode":"MX","State":"Quintana Roo","StateCode":"QR"},{"id":"297","Country":"Mexico ","CountryCode":"MX","State":"San Luis Potos\u00ed","StateCode":"SL"},{"id":"298","Country":"Mexico ","CountryCode":"MX","State":"Sinaloa","StateCode":"SI"},{"id":"299","Country":"Mexico ","CountryCode":"MX","State":"Sonora","StateCode":"SO"},{"id":"300","Country":"Mexico ","CountryCode":"MX","State":"Tabasco","StateCode":"TB"},{"id":"301","Country":"Mexico ","CountryCode":"MX","State":"Tamaulipas","StateCode":"TM"},{"id":"302","Country":"Mexico ","CountryCode":"MX","State":"Tlaxcala","StateCode":"TL"},{"id":"303","Country":"Mexico ","CountryCode":"MX","State":"Veracruz","StateCode":"VE"},{"id":"304","Country":"Mexico ","CountryCode":"MX","State":"Yucat\u00e1n","StateCode":"YU"},{"id":"305","Country":"Mexico ","CountryCode":"MX","State":"Zacatecas","StateCode":"ZA"},{"id":"306","Country":"United States","CountryCode":"US","State":"Alabama","StateCode":"AL"},{"id":"307","Country":"United States","CountryCode":"US","State":"Alaska","StateCode":"AK"},{"id":"308","Country":"United States","CountryCode":"US","State":"Arizona","StateCode":"AZ"},{"id":"309","Country":"United States","CountryCode":"US","State":"Arkansas","StateCode":"AR"},{"id":"310","Country":"United States","CountryCode":"US","State":"California","StateCode":"CA"},{"id":"311","Country":"United States","CountryCode":"US","State":"Colorado","StateCode":"CO"},{"id":"312","Country":"United States","CountryCode":"US","State":"Connecticut","StateCode":"CT"},{"id":"313","Country":"United States","CountryCode":"US","State":"Delaware","StateCode":"DE"},{"id":"314","Country":"United States","CountryCode":"US","State":"District of Columbia","StateCode":"DC"},{"id":"315","Country":"United States","CountryCode":"US","State":"Florida","StateCode":"FL"},{"id":"316","Country":"United States","CountryCode":"US","State":"Georgia","StateCode":"GA"},{"id":"317","Country":"United States","CountryCode":"US","State":"Hawaii","StateCode":"HI"},{"id":"318","Country":"United States","CountryCode":"US","State":"Idaho","StateCode":"ID"},{"id":"319","Country":"United States","CountryCode":"US","State":"Illinois","StateCode":"IL"},{"id":"320","Country":"United States","CountryCode":"US","State":"Indiana","StateCode":"IN"},{"id":"321","Country":"United States","CountryCode":"US","State":"Iowa","StateCode":"IA"},{"id":"322","Country":"United States","CountryCode":"US","State":"Kansas","StateCode":"KS"},{"id":"323","Country":"United States","CountryCode":"US","State":"Kentucky","StateCode":"KY"},{"id":"324","Country":"United States","CountryCode":"US","State":"Louisiana","StateCode":"LA"},{"id":"325","Country":"United States","CountryCode":"US","State":"Maine","StateCode":"ME"},{"id":"326","Country":"United States","CountryCode":"US","State":"Maryland","StateCode":"MD"},{"id":"327","Country":"United States","CountryCode":"US","State":"Massachusetts","StateCode":"MA"},{"id":"328","Country":"United States","CountryCode":"US","State":"Michigan","StateCode":"MI"},{"id":"329","Country":"United States","CountryCode":"US","State":"Minnesota","StateCode":"MN"},{"id":"330","Country":"United States","CountryCode":"US","State":"Mississippi","StateCode":"MS"},{"id":"331","Country":"United States","CountryCode":"US","State":"Missouri","StateCode":"MO"},{"id":"332","Country":"United States","CountryCode":"US","State":"Montana","StateCode":"MT"},{"id":"333","Country":"United States","CountryCode":"US","State":"Nebraska","StateCode":"NE"},{"id":"334","Country":"United States","CountryCode":"US","State":"Nevada","StateCode":"NV"},{"id":"335","Country":"United States","CountryCode":"US","State":"New Hampshire","StateCode":"NH"},{"id":"336","Country":"United States","CountryCode":"US","State":"New Jersey","StateCode":"NJ"},{"id":"337","Country":"United States","CountryCode":"US","State":"New Mexico","StateCode":"NM"},{"id":"338","Country":"United States","CountryCode":"US","State":"New York","StateCode":"NY"},{"id":"339","Country":"United States","CountryCode":"US","State":"North Carolina","StateCode":"NC"},{"id":"340","Country":"United States","CountryCode":"US","State":"North Dakota","StateCode":"ND"},{"id":"341","Country":"United States","CountryCode":"US","State":"Ohio","StateCode":"OH"},{"id":"342","Country":"United States","CountryCode":"US","State":"Oklahoma","StateCode":"OK"},{"id":"343","Country":"United States","CountryCode":"US","State":"Oregon","StateCode":"OR"},{"id":"344","Country":"United States","CountryCode":"US","State":"Pennsylvania","StateCode":"PA"},{"id":"345","Country":"United States","CountryCode":"US","State":"Rhode Island","StateCode":"RI"},{"id":"346","Country":"United States","CountryCode":"US","State":"South Carolina","StateCode":"SC"},{"id":"347","Country":"United States","CountryCode":"US","State":"South Dakota","StateCode":"SD"},{"id":"348","Country":"United States","CountryCode":"US","State":"Tennessee","StateCode":"TN"},{"id":"349","Country":"United States","CountryCode":"US","State":"Texas","StateCode":"TX"},{"id":"350","Country":"United States","CountryCode":"US","State":"Utah","StateCode":"UT"},{"id":"351","Country":"United States","CountryCode":"US","State":"Vermont","StateCode":"VT"},{"id":"352","Country":"United States","CountryCode":"US","State":"Virginia","StateCode":"VA"},{"id":"353","Country":"United States","CountryCode":"US","State":"Washington","StateCode":"WA"},{"id":"354","Country":"United States","CountryCode":"US","State":"West Virginia","StateCode":"WV"},{"id":"355","Country":"United States","CountryCode":"US","State":"Wisconsin","StateCode":"WI"},{"id":"356","Country":"United States","CountryCode":"US","State":"Wyoming","StateCode":"WY"}]', 
+	', 
+		',  ×', 
+		', ENQUIRE NOW', 
+
+		', 
+
+		', 
+			', 
+				', First Name:', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+		', 
+			', 
+				', Last Name:', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+		', 
+			', 
+				', Email:', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+			', 
+				', Mobile:', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+			', 
+				', Budget(In Rs.):', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+			', 
+				', Country:', 
+			', 
+			', 
+				', 
+					', -- None --', 
+					', Australia', Canada', Brazil', China', Germany', United Kingdom', Ireland', India', Italy', Mexico ', United States', 				', 
+			', 
+		', 
+		', 
+			', 
+				', State / Provinence:', 
+			', 
+			', 
+				', 
+				', 
+			', 
+		', 
+		', 
+			', 
+				', Remarks:', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+			', 
+				', Projects Interesetd:', 
+			', 
+			', 
+				', 
+					', 
+						', 
+							',  RESIDENTIAL ', 
+						', 
+					', 
+					', 
+						', 
+							  ',  COMERCIAL', 
+						', 
+					', 
+					', 
+						', 
+							',  CLUB', 
+						', 
+					', 
+				', 
+				 ', 
+				    ', Aangan', 
+				    ', Elysium', 
+				    ', La Marina', 
+				    ', Oyster Grande', 
+				    ', Pratham', 
+				    ', The Meadows', 
+				    ', Western Heights', 
+				    ', Water Lily', 
+				    ', The Evergreen', 
+				    ', The North Park', 
+				    ', Shoppers Plaza', 
+				 ', 
+			', 
+		', 
+		', 
+		', 
+			', 
+				', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+
+		', 
+		', 
+		', 
+		  ', 
+		', 
+      ', 
+         ', 
+         ', 
+      ', 
+      ', 
+         ', 
+            ', 
+', 
+	', 
+		', 
+			', 
+		', 
+	', 
+	', 
+		', 
+			', HOME ', 
+			', ABOUT US ', 
+			', 
+				', PROJECTS ', 
+				', 
+					', 
+						', Residential', 
+						', Commercial', 
+						', Social Club', 
+					', 
+				', 
+			', 
+			', THE GOOD LIFE', 
+			', MEDIA CENTER', 
+			', NRI CORNER', 
+			', CAREERS', 
+			', CONTACT US', 
+		', 
+	', 
+', 
+            ', 
+	', 
+		', 
+	', 
+	', 
+
+		', 
+
+		', 
+			 Menu 
+		', 
+
+		', 
+			', 
+				', HOME ', 
+				', ABOUT US ', 
+				', 
+					', PROJECTS ', 
+					', 
+						', 
+							', Residential', 
+							', Commercial', 
+							', Social Club', 
+						', 
+					', 
+				', 
+				', THE GOOD LIFE', 
+				', 
+				', MEDIA CENTER', 
+				', NRI CORNER', 
+				', CAREERS', 
+				', CONTACT US', 
+			', 
+		', 
+	', 
+', 
+            ', 
+               ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', ABOUT US', 
+               ', 
+                  ', Adani Realty, the youngest arm of the Adani Group, is developing close to 69 million square foot of real estate space including residential, commercial and social club projects across Ahmedabad, Mumbai, Gurgaon, Kochi & Mundra.', 
+                  ', 
+                     ', 
+                     ', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+                  ', 
+                     ', 
+                     ', 
+                        ', Ahmedabad', 
+                           ', 
+                           ', The North Park-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', LA Marina-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Water Lily-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', The Meadows-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', The Evergreen-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Aangan-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Elysium-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Pratham', 
+                        ', 
+                        ', 
+                           ', Inspire Shantigram', 
+                        
+                        ', 
+                           ', 
+                           ', The Belvedere Golf and Country Club - Shantigram', 
+                        
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                     ', 
+                        ', Mumbai', 
+                       
+                        ', 
+                           ', Western Heights', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Monte South', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Inspire BKC', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Inspire HUB', 
+                        ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                     ', 
+                        ', Gurgaon', 
+                      
+                        ', 
+                           ', Oyster Grande', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Angan', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Samsara', 
+                        ', 
+                     ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', 
+                  ', 
+                     ', 
+                        ', 
+                           ', 
+                        ', 
+                        ', 
+                        ', 
+                           ', 6', 
+                        ', 
+                        ', 
+                           ', Years', 
+                              Young
+                           ', 
+                        ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                        ', 
+                           ', 
+                           ', 
+                        ', 
+                        ', 
+                        ', 
+                           ', 6 ', 
+                        ', 
+                        ', 
+                           ', 
+                              ', Million Square foot', 
+                                 Delivered
+                              ', 
+                           ', 
+                        ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                        ', 
+                           ', 
+                           ', 
+                        ', 
+                        ', 
+                        ', 
+                           ', 69 ', 
+                        ', 
+                        ', 
+                           ', 
+                              ',  Million Square foot', 
+                                 Under Development
+                              ', 
+                           ', 
+                        ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                        ', 
+                           ', 
+                        ', 
+                        ', 
+                        ', 
+                           ', 6', 
+                        ', 
+                        ', 
+                           ', Awards', 
+                              Won
+                           ', 
+                        ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                        ', 
+                           ', 
+                           ', 
+                        ', 
+                        ', 
+                        ', 
+                           ', 4000', 
+                        ', 
+                        ', 
+                           ', Happy', 
+                              Families
+                           ', 
+                        ', 
+                     ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', RESIDENTIAL', 
+               ', 
+                  ', The growing economy has witnessed a surge in the expectations of people. Catering to an audience that is diverse in terms of its needs, residential projects by Adani Realty are unmatchable..', 
+                  ', 
+                     ', 
+                        ', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', COMMERCIAL', 
+               ', 
+                   ', 
+               ', 
+               ', 
+                  ', In the wake of rising entrepreneurs and increasing new ventures, Adani Realty has also manoeuvred in the commercial space, renting and selling office spaces...', 
+                  ', 
+                     ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', SOCIAL CLUB', 
+               ', 
+                  ', Resting over a 100-acres of land, The Belvedere Golf and Country Club is a 9-hole golf course and one of India\u2019s largest private social clubs. Equipped with world-class amenities...', 
+                  ', 
+                     ', 
+                     ', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                   ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', 
+                  ', 
+                     ', Media Center', 
+                  ', 
+                  ', 
+                     ', 
+                     ', 
+                        ', Learn More', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+                     ', Careers', 
+                  ', 
+                  ', 
+                     ', 
+                     ', 
+                        ', Learn More', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+                     ', NRI Corner', 
+                  ', 
+                  ', 
+                     ', 
+                     ', 
+                        ', Learn More', 
+                     ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', 
+                  ', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+	', 
+			', 
+				', 
+					', 
+						', 
+							', Terms & Conditions', 
+						', 
+						', 
+						', 
+							', Privacy policy', 
+						', 
+						', 
+							', Contact Us', 
+						', 
+						', 
+							', Disclaimer', 
+						', 
+					', 
+				', 
+			', 
+			', 
+				', 
+					', 
+						', 
+							', 
+								', 
+							', 
+						', 
+					', 
+					', 
+						', 
+							', 
+								', 
+							', 
+						', 
+					', 
+					', 
+						', 
+							', 
+								', 
+							', 	
+						', 
+					', 
+					', 
+						', 
+							', 
+								', 
+							', 	
+						', 
+					', 
+				', 
+			', 
+			', 
+				', Designed by',  spotlights.co.in', 
+			', 
+			', 
+				', &copy 2016 All Rights Reserved', 
+			', 
+	', 
+', 
+      ', 
+      ', 
+      ', 
+       ', 
+      ', 
+      ', 
+      ', 
+      ', 
+         $(".familypqr").mouseover(function(){
+         	$(".familyimage").attr('src', 'https://www.adanirealty.com//assets/sites/images/family.png');
+         })
+         
+         $(".familypqr").mouseout(function(){
+         	$(".familyimage").attr('src', 'https://www.adanirealty.com//assets/sites/images/family3.png');
+         })
+         
+         $(".familypqr1").mouseover(function(){
+         	$(".familyimage1").attr('src', 'https://www.adanirealty.com//assets/sites/images/Under Development Icon-03.png');
+         })
+         
+         $(".familypqr1").mouseout(function(){
+         	$(".familyimage1").attr('src', 'https://www.adanirealty.com//assets/sites/images/Under Development Icon-01.png');
+         })
+         
+           
+      ', 
+      ', 
+         function openRightMenu() {
+             document.getElementById("rightMenu").style.display = "block";
+         }
+         function closeRightMenu() {
+             document.getElementById("rightMenu").style.display = "none";
+         }
+
+
+         
+         	$(window).load(function() {
+         		/* Act on the event */
+         		hideloader();
+
+            	window.sr = ScrollReveal({ reset: true });
+            	sr.reveal('.animate2',{ origin:'right',distance:'50px',easing:'ease-in',duration: 800 });
+            	sr.reveal('.animate1',{ origin:'bottom',distance:'10px',easing:'ease-in',duration: 800,delay:1200 });
+            	sr.reveal('.animate5',{ origin : 'bottom',	distance : '10px', duration: 3000 ,delay:1700});
+            	sr.reveal('.animate10',{ origin : 'left',easing:'ease-in',	distance : '400px', duration: 2000,delay:1800 });
+            	sr.reveal('.animate3',{ origin : 'bottom',	distance : '5px', duration: 3500, delay:2200 });
+            	sr.reveal('.animate4',{ origin : 'bottom',	distance : 'px', duration: 3500 ,delay:2600});
+            	sr.reveal('.animate6',{ origin : 'left',easing:'ease-in',distance : '300px', duration: 2000,delay:2400 });
+            	sr.reveal('.animate6A',{ origin : 'left',easing:'ease-in',distance : '200px', duration: 2000,delay:2800 });
+            	sr.reveal('.animateA',{ origin : 'bottom',	distance : '10px', duration: 3000 ,delay:3400});
+            	sr.reveal('.animate8',{ origin : 'left',easing:'ease-in',	distance : '400px', duration: 1800,delay:3700  });
+            	sr.reveal('.animate9',{ origin : 'right',easing:'ease-in',	distance : '200px', duration: 1800,delay:3900  });
+            	sr.reveal('.animate11',{ origin : 'right',easing:'ease-in',	distance : '400px', duration: 1800,delay:4100  });
+            	sr.reveal('.animate7',{ origin : 'bottom',	distance : '70px', duration: 7500 ,delay: 4400 });
+         
+         		/* Building Images animation */
+         		$('#deletesuccess26').delay(4000).fadeIn(3000);
+         		$('#deletesuccess27').delay(4000).fadeIn(3000);
+         		$('#deletesuccess31').delay(4000).fadeIn(3000);
+         		$('#deletesuccess28').delay(4000).fadeIn(3000);
+         
+         		/* First Slide Animation Disable */
+         		// $('#deletesuccess').delay(6500).fadeOut(2000);
+         		// $('#deletesuccess').animate({opacity: 1}, 0);
+         		// $('#deletesuccessB').delay(6500).fadeOut(2000);
+         
+         		$('.animate2, .animate1, .animate5, .animate10, .animate3, .animate4, .animate6, .animate6A, .animateA, .animate8, .animate9, .animate11, .animate7').delay(8300).animate({opacity : 0}, 50);
+         
+         		// $('.animate2, .animate1, .animate5, .animate10, .animate3, .animate4, .animate6, .animate6A, .animateA, .animate8, .animate9, .animate11, .animate7').delay(8600).fadeOut(8600);
+         
+         		$('#deletesuccess').delay(8500).fadeOut(1000);
+         
+         		/* Second Slide Animation Enable */
+         		$('#deletesuccess1').delay(8400).fadeIn(1000);
+         		$('#deletesuccess2').delay(9000).fadeIn(1000);
+         		$('#deletesuccess3').delay(9400).fadeIn(1000);
+         		$('#deletesuccess4').delay(9200).fadeIn(1000);
+         		$('#deletesuccess5').delay(9250).fadeIn(1000);
+         		$('#deletesuccess6').delay(9400).fadeIn(1000);
+         		$('#deletesuccess7').delay(9450).fadeIn(1000);
+         		$('#deletesuccess8').delay(9510).fadeIn(1000);
+         		$('#deletesuccess9').delay(9700).fadeIn(1000);
+         		$('#deletesuccess10').delay(9400).fadeIn(1000);
+         		$('#deletesuccess11').delay(9600).fadeIn(1000);
+         		$('#deletesuccess12').delay(9790).fadeIn(1000);
+         		$('#deletesuccess13').delay(9200).fadeIn(1000);
+         		$('#deletesuccess14').delay(9000).fadeIn(1000);
+         		$('#deletesuccess15').delay(9350).fadeIn(1000);
+         		$('#deletesuccess16').delay(9600).fadeIn(1000);
+         		$('#deletesuccess17').delay(9900).fadeIn(1000);
+         		$('#deletesuccess18').delay(9800).fadeIn(1000);
+         		$('#deletesuccess19').delay(10000).fadeIn(1000);
+         		$('#deletesuccess20').delay(9900).fadeIn(1000);
+         		$('#deletesuccess21').delay(9950).fadeIn(1000);
+         		$('#deletesuccess22').delay(9900).fadeIn(1000);
+         		$('#deletesuccess23').delay(10000).fadeIn(1000);
+         		$('#deletesuccess24').delay(11000).fadeIn(1000);
+         		$('#deletesuccess25').delay(11200).fadeIn(1000);
+
+               // place this within dom ready function
+                function showpanel() { 
+
+                     $('.newyearcontainer').fadeIn();
+
+
+
+                }
+
+                // use setTimeout() to execute
+                setTimeout(showpanel, 11200)
+
+
+         	});
+
+
+
+            $('.cross').click(function(){
+
+
+               // alert('hello');
+               $('.newyear').fadeOut();
+               $('.cross').fadeOut();
+
+
+
+            })
+
+         
+         	function hideloader(){
+         
+         		window.setTimeout(myfunction(), 50000);
+         	}
+         
+         	function myfunction(){
+         
+          		$('.load-complete').css('display','none');
+         	}
+      ', 
+      ', u"
+         jQuery(document).ready(function( $ ) {
+             $('.counter').counterUp({
+                 delay: 10,
+                 time: 4000
+             });
+         });
+         
+         $('.preload').css('display','none');
+      ", 
+      ', 
+         $(document).ready( function() {
+         
+         	$("button").click(function(){
+           $(".m").slideToggle();
+         })
+         
+         
+         });
+      ', 
+   
+'][
+      ', 
+      ', 
+      ', 
+      ', 
+      ', 
+      ', 
+      ', 
+      ', 
+         body{
+         overflow-x: hidden!important;
+         }
+
+         .newyearoverlay{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+         }
+         .newyear{
+            width: 59%;
+             position: fixed;
+             top: 10%;
+             left: 20%;
+             z-index: 999999999;
+         }
+
+         .newyearcontainer{
+            display: none;
+            position: relative;
+           
+         }
+
+         .cross{
+	    position: fixed;
+	    right: 21%;
+	    top: 9%;
+	    color: white;
+	    z-index: 999999999999;
+	    cursor: pointer;
+         }
+
+      ', 
+   
+   
+      ', 
+         ', 
+            ', 
+               ', 
+               ', 
+               ', 
+               ', 
+               ', 
+               ', 
+            ', 
+         ', 
+      ', 
+      
+', 
+	var allCountries =
+	[{"id":"1","Country":"Australia","CountryCode":"AU","State":"Australian Capital Territory","StateCode":"ACT"},{"id":"2","Country":"Australia","CountryCode":"AU","State":"New South Wales","StateCode":"NSW"},{"id":"3","Country":"Australia","CountryCode":"AU","State":"Northern Territory","StateCode":"NT"},{"id":"4","Country":"Australia","CountryCode":"AU","State":"Queensland","StateCode":"QLD"},{"id":"5","Country":"Australia","CountryCode":"AU","State":"South Australia","StateCode":"SA"},{"id":"6","Country":"Australia","CountryCode":"AU","State":"Tasmania","StateCode":"TAS"},{"id":"7","Country":"Australia","CountryCode":"AU","State":"Victoria","StateCode":"VIC"},{"id":"8","Country":"Australia","CountryCode":"AU","State":"Western Australia","StateCode":"WA"},{"id":"9","Country":"Canada","CountryCode":"CA","State":"Alberta","StateCode":"AB"},{"id":"10","Country":"Canada","CountryCode":"CA","State":"British Columbia","StateCode":"BC"},{"id":"11","Country":"Canada","CountryCode":"CA","State":"Manitoba","StateCode":"MB"},{"id":"12","Country":"Canada","CountryCode":"CA","State":"New Brunswick","StateCode":"NB"},{"id":"13","Country":"Canada","CountryCode":"CA","State":"Newfoundland and Labrador","StateCode":"NL"},{"id":"14","Country":"Canada","CountryCode":"CA","State":"Northwest Territories","StateCode":"NT"},{"id":"15","Country":"Canada","CountryCode":"CA","State":"Nova Scotia","StateCode":"NS"},{"id":"16","Country":"Canada","CountryCode":"CA","State":"Nunavut","StateCode":"NU"},{"id":"17","Country":"Canada","CountryCode":"CA","State":"Ontario","StateCode":"ON"},{"id":"18","Country":"Canada","CountryCode":"CA","State":"Prince Edward Island","StateCode":"PE"},{"id":"19","Country":"Canada","CountryCode":"CA","State":"Quebec","StateCode":"QC"},{"id":"20","Country":"Canada","CountryCode":"CA","State":"Saskatchewan","StateCode":"SK"},{"id":"21","Country":"Canada","CountryCode":"CA","State":"Yukon Territories","StateCode":"YT"},{"id":"22","Country":"Brazil","CountryCode":"BR","State":"Acre","StateCode":"AC"},{"id":"23","Country":"Brazil","CountryCode":"BR","State":"Alagoas","StateCode":"AL"},{"id":"24","Country":"Brazil","CountryCode":"BR","State":"Amap\u00e1","StateCode":"AP"},{"id":"25","Country":"Brazil","CountryCode":"BR","State":"Amazonas","StateCode":"AM"},{"id":"26","Country":"Brazil","CountryCode":"BR","State":"Bahia","StateCode":"BA"},{"id":"27","Country":"Brazil","CountryCode":"BR","State":"Cear\u00e1","StateCode":"CE"},{"id":"28","Country":"Brazil","CountryCode":"BR","State":"Distrito Federal","StateCode":"DF"},{"id":"29","Country":"Brazil","CountryCode":"BR","State":"Esp\u00edrito Santo","StateCode":"ES"},{"id":"30","Country":"Brazil","CountryCode":"BR","State":"Goi\u00e1s","StateCode":"GO"},{"id":"31","Country":"Brazil","CountryCode":"BR","State":"Maranh\u00e3o","StateCode":"MA"},{"id":"32","Country":"Brazil","CountryCode":"BR","State":"Mato Grosso","StateCode":"MT"},{"id":"33","Country":"Brazil","CountryCode":"BR","State":"Mato Grosso do Sul","StateCode":"MS"},{"id":"34","Country":"Brazil","CountryCode":"BR","State":"Minas Gerais","StateCode":"MG"},{"id":"35","Country":"Brazil","CountryCode":"BR","State":"Par\u00e1","StateCode":"PA"},{"id":"36","Country":"Brazil","CountryCode":"BR","State":"Para\u00edba","StateCode":"PB"},{"id":"37","Country":"Brazil","CountryCode":"BR","State":"Paran\u00e1","StateCode":"PR"},{"id":"38","Country":"Brazil","CountryCode":"BR","State":"Pernambuco","StateCode":"PE"},{"id":"39","Country":"Brazil","CountryCode":"BR","State":"Piau\u00ed","StateCode":"PI"},{"id":"40","Country":"Brazil","CountryCode":"BR","State":"Rio de Janeiro","StateCode":"RJ"},{"id":"41","Country":"Brazil","CountryCode":"BR","State":"Rio Grande do Norte","StateCode":"RN"},{"id":"42","Country":"Brazil","CountryCode":"BR","State":"Rio Grande do Sul","StateCode":"RS"},{"id":"43","Country":"Brazil","CountryCode":"BR","State":"Rond\u00f4nia","StateCode":"RO"},{"id":"44","Country":"Brazil","CountryCode":"BR","State":"Roraima","StateCode":"RR"},{"id":"45","Country":"Brazil","CountryCode":"BR","State":"Santa Catarina","StateCode":"SC"},{"id":"46","Country":"Brazil","CountryCode":"BR","State":"S\u00e3o Paulo","StateCode":"SP"},{"id":"47","Country":"Brazil","CountryCode":"BR","State":"Sergipe","StateCode":"SE"},{"id":"48","Country":"Brazil","CountryCode":"BR","State":"Tocantins","StateCode":"TO"},{"id":"49","Country":"China","CountryCode":"CN","State":"Anhui","StateCode":"34"},{"id":"50","Country":"China","CountryCode":"CN","State":"Beijing","StateCode":"11"},{"id":"51","Country":"China","CountryCode":"CN","State":"Chinese Taipei","StateCode":"71"},{"id":"52","Country":"China","CountryCode":"CN","State":"Chongqing","StateCode":"50"},{"id":"53","Country":"China","CountryCode":"CN","State":"Fujian","StateCode":"35"},{"id":"54","Country":"China","CountryCode":"CN","State":"Gansu","StateCode":"62"},{"id":"55","Country":"China","CountryCode":"CN","State":"Guangdong","StateCode":"44"},{"id":"56","Country":"China","CountryCode":"CN","State":"Guangxi","StateCode":"45"},{"id":"57","Country":"China","CountryCode":"CN","State":"Guizhou","StateCode":"52"},{"id":"58","Country":"China","CountryCode":"CN","State":"Hainan","StateCode":"46"},{"id":"59","Country":"China","CountryCode":"CN","State":"Hebei","StateCode":"13"},{"id":"60","Country":"China","CountryCode":"CN","State":"Heilongjiang","StateCode":"23"},{"id":"61","Country":"China","CountryCode":"CN","State":"Henan","StateCode":"41"},{"id":"62","Country":"China","CountryCode":"CN","State":"Hong Kong","StateCode":"91"},{"id":"63","Country":"China","CountryCode":"CN","State":"Hubei","StateCode":"42"},{"id":"64","Country":"China","CountryCode":"CN","State":"Hunan","StateCode":"43"},{"id":"65","Country":"China","CountryCode":"CN","State":"Jiangsu","StateCode":"32"},{"id":"66","Country":"China","CountryCode":"CN","State":"Jiangxi","StateCode":"36"},{"id":"67","Country":"China","CountryCode":"CN","State":"Jilin","StateCode":"22"},{"id":"68","Country":"China","CountryCode":"CN","State":"Liaoning","StateCode":"21"},{"id":"69","Country":"China","CountryCode":"CN","State":"Macao","StateCode":"92"},{"id":"70","Country":"China","CountryCode":"CN","State":"Nei Mongol","StateCode":"15"},{"id":"71","Country":"China","CountryCode":"CN","State":"Ningxia","StateCode":"64"},{"id":"72","Country":"China","CountryCode":"CN","State":"Qinghai","StateCode":"63"},{"id":"73","Country":"China","CountryCode":"CN","State":"Shaanxi","StateCode":"61"},{"id":"74","Country":"China","CountryCode":"CN","State":"Shandong","StateCode":"37"},{"id":"75","Country":"China","CountryCode":"CN","State":"Shanghai","StateCode":"31"},{"id":"76","Country":"China","CountryCode":"CN","State":"Shanxi","StateCode":"14"},{"id":"77","Country":"China","CountryCode":"CN","State":"Sichuan","StateCode":"51"},{"id":"78","Country":"China","CountryCode":"CN","State":"Tianjin","StateCode":"12"},{"id":"79","Country":"China","CountryCode":"CN","State":"Xinjiang","StateCode":"65"},{"id":"80","Country":"China","CountryCode":"CN","State":"Xizang","StateCode":"54"},{"id":"81","Country":"China","CountryCode":"CN","State":"Yunnan","StateCode":"53"},{"id":"82","Country":"China","CountryCode":"CN","State":"Zhejiang","StateCode":"33"},{"id":"83","Country":"Germany","CountryCode":"DE","State":"Baden-Wurttemberg","StateCode":"BW"},{"id":"84","Country":"Germany","CountryCode":"DE","State":"Bayern","StateCode":"BY"},{"id":"85","Country":"Germany","CountryCode":"DE","State":"Berlin","StateCode":"BE"},{"id":"86","Country":"Germany","CountryCode":"DE","State":"Brandenburg","StateCode":"BB"},{"id":"87","Country":"Germany","CountryCode":"DE","State":"Bremen","StateCode":"HB"},{"id":"88","Country":"Germany","CountryCode":"DE","State":"Hamburg","StateCode":"HH"},{"id":"89","Country":"Germany","CountryCode":"DE","State":"Hessen","StateCode":"HE"},{"id":"90","Country":"Germany","CountryCode":"DE","State":"Mecklenburg-Vorpommern","StateCode":"MV"},{"id":"91","Country":"Germany","CountryCode":"DE","State":"Niedersachsen","StateCode":"NI"},{"id":"92","Country":"Germany","CountryCode":"DE","State":"Nordrhein-Westfalen","StateCode":"NW"},{"id":"93","Country":"Germany","CountryCode":"DE","State":"Rheinland-Pfalz","StateCode":"RP"},{"id":"94","Country":"Germany","CountryCode":"DE","State":"Saarland","StateCode":"SL"},{"id":"95","Country":"Germany","CountryCode":"DE","State":"Sachsen","StateCode":"SN"},{"id":"96","Country":"Germany","CountryCode":"DE","State":"Sachsen-Anhalt","StateCode":"ST"},{"id":"97","Country":"Germany","CountryCode":"DE","State":"Schleswig-Holstein","StateCode":"SH"},{"id":"98","Country":"Germany","CountryCode":"DE","State":"Thuringen","StateCode":"TH"},{"id":"99","Country":"United Kingdom","CountryCode":"GB","State":"England","StateCode":"ENG"},{"id":"100","Country":"United Kingdom","CountryCode":"GB","State":"Northern Ireland","StateCode":"NIR"},{"id":"101","Country":"United Kingdom","CountryCode":"GB","State":"Scotland","StateCode":"SCT"},{"id":"102","Country":"United Kingdom","CountryCode":"GB","State":"Wales","StateCode":"WLS"},{"id":"103","Country":"Ireland","CountryCode":"IE","State":"Carlow","StateCode":"CW"},{"id":"104","Country":"Ireland","CountryCode":"IE","State":"Cavan","StateCode":"CN"},{"id":"105","Country":"Ireland","CountryCode":"IE","State":"Clare","StateCode":"CE"},{"id":"106","Country":"Ireland","CountryCode":"IE","State":"Cork","StateCode":"CO"},{"id":"107","Country":"Ireland","CountryCode":"IE","State":"Donegal","StateCode":"DL"},{"id":"108","Country":"Ireland","CountryCode":"IE","State":"Dublin","StateCode":"D"},{"id":"109","Country":"Ireland","CountryCode":"IE","State":"Galway","StateCode":"G"},{"id":"110","Country":"Ireland","CountryCode":"IE","State":"Kerry","StateCode":"KY"},{"id":"111","Country":"Ireland","CountryCode":"IE","State":"Kildare","StateCode":"KE"},{"id":"112","Country":"Ireland","CountryCode":"IE","State":"Kilkenny","StateCode":"KK"},{"id":"113","Country":"Ireland","CountryCode":"IE","State":"Laois","StateCode":"LS"},{"id":"114","Country":"Ireland","CountryCode":"IE","State":"Leitrim","StateCode":"LM"},{"id":"115","Country":"Ireland","CountryCode":"IE","State":"Limerick","StateCode":"LK"},{"id":"116","Country":"Ireland","CountryCode":"IE","State":"Longford","StateCode":"LD"},{"id":"117","Country":"Ireland","CountryCode":"IE","State":"Louth","StateCode":"LH"},{"id":"118","Country":"Ireland","CountryCode":"IE","State":"Mayo","StateCode":"MO"},{"id":"119","Country":"Ireland","CountryCode":"IE","State":"Meath","StateCode":"MH"},{"id":"120","Country":"Ireland","CountryCode":"IE","State":"Monaghan","StateCode":"MN"},{"id":"121","Country":"Ireland","CountryCode":"IE","State":"Offaly","StateCode":"OY"},{"id":"122","Country":"Ireland","CountryCode":"IE","State":"Roscommon","StateCode":"RN"},{"id":"123","Country":"Ireland","CountryCode":"IE","State":"Sligo","StateCode":"SO"},{"id":"124","Country":"Ireland","CountryCode":"IE","State":"Tipperary","StateCode":"TA"},{"id":"125","Country":"Ireland","CountryCode":"IE","State":"Waterford","StateCode":"WD"},{"id":"126","Country":"Ireland","CountryCode":"IE","State":"Westmeath","StateCode":"WH"},{"id":"127","Country":"Ireland","CountryCode":"IE","State":"Wexford","StateCode":"WX"},{"id":"128","Country":"Ireland","CountryCode":"IE","State":"Wicklow","StateCode":"WW"},{"id":"129","Country":"India","CountryCode":"IN","State":"Andaman and Nicobar Islands","StateCode":"AN"},{"id":"130","Country":"India","CountryCode":"IN","State":"Andhra Pradesh","StateCode":"AP"},{"id":"131","Country":"India","CountryCode":"IN","State":"Arunachal Pradesh","StateCode":"AR"},{"id":"132","Country":"India","CountryCode":"IN","State":"Assam","StateCode":"AS"},{"id":"133","Country":"India","CountryCode":"IN","State":"Bihar","StateCode":"BR"},{"id":"134","Country":"India","CountryCode":"IN","State":"Chandigarh","StateCode":"CH"},{"id":"135","Country":"India","CountryCode":"IN","State":"Chhattisgarh","StateCode":"CT"},{"id":"136","Country":"India","CountryCode":"IN","State":"Dadra and Nagar Haveli","StateCode":"DN"},{"id":"137","Country":"India","CountryCode":"IN","State":"Daman and Diu","StateCode":"DD"},{"id":"138","Country":"India","CountryCode":"IN","State":"Delhi","StateCode":"DL"},{"id":"139","Country":"India","CountryCode":"IN","State":"Goa","StateCode":"GA"},{"id":"140","Country":"India","CountryCode":"IN","State":"Gujarat","StateCode":"GJ"},{"id":"141","Country":"India","CountryCode":"IN","State":"Haryana","StateCode":"HR"},{"id":"142","Country":"India","CountryCode":"IN","State":"Himachal Pradesh","StateCode":"HP"},{"id":"143","Country":"India","CountryCode":"IN","State":"Jammu and Kashmir","StateCode":"JK"},{"id":"144","Country":"India","CountryCode":"IN","State":"Jharkhand","StateCode":"JH"},{"id":"145","Country":"India","CountryCode":"IN","State":"Karnataka","StateCode":"KA"},{"id":"146","Country":"India","CountryCode":"IN","State":"Kerala","StateCode":"KL"},{"id":"147","Country":"India","CountryCode":"IN","State":"Lakshadweep","StateCode":"LD"},{"id":"148","Country":"India","CountryCode":"IN","State":"Madhya Pradesh","StateCode":"MP"},{"id":"149","Country":"India","CountryCode":"IN","State":"Maharashtra","StateCode":"MH"},{"id":"150","Country":"India","CountryCode":"IN","State":"Manipur","StateCode":"MN"},{"id":"151","Country":"India","CountryCode":"IN","State":"Meghalaya","StateCode":"ML"},{"id":"152","Country":"India","CountryCode":"IN","State":"Mizoram","StateCode":"MZ"},{"id":"153","Country":"India","CountryCode":"IN","State":"Nagaland","StateCode":"NL"},{"id":"154","Country":"India","CountryCode":"IN","State":"Odisha","StateCode":"OR"},{"id":"155","Country":"India","CountryCode":"IN","State":"Puducherry","StateCode":"PY"},{"id":"156","Country":"India","CountryCode":"IN","State":"Punjab","StateCode":"PB"},{"id":"157","Country":"India","CountryCode":"IN","State":"Rajasthan","StateCode":"RJ"},{"id":"158","Country":"India","CountryCode":"IN","State":"Sikkim","StateCode":"SK"},{"id":"159","Country":"India","CountryCode":"IN","State":"Tamil Nadu","StateCode":"TN"},{"id":"160","Country":"India","CountryCode":"IN","State":"Tripura","StateCode":"TR"},{"id":"161","Country":"India","CountryCode":"IN","State":"Uttarakhand","StateCode":"UT"},{"id":"162","Country":"India","CountryCode":"IN","State":"Uttar Pradesh","StateCode":"UP"},{"id":"163","Country":"India","CountryCode":"IN","State":"West Bengal","StateCode":"WB"},{"id":"164","Country":"Italy","CountryCode":"IT","State":"Agrigento","StateCode":"AG"},{"id":"165","Country":"Italy","CountryCode":"IT","State":"Alessandria","StateCode":"AL"},{"id":"166","Country":"Italy","CountryCode":"IT","State":"Ancona","StateCode":"AN"},{"id":"167","Country":"Italy","CountryCode":"IT","State":"Aosta","StateCode":"AO"},{"id":"168","Country":"Italy","CountryCode":"IT","State":"Arezzo","StateCode":"AR"},{"id":"169","Country":"Italy","CountryCode":"IT","State":"Ascoli Piceno","StateCode":"AP"},{"id":"170","Country":"Italy","CountryCode":"IT","State":"Asti","StateCode":"AT"},{"id":"171","Country":"Italy","CountryCode":"IT","State":"Avellino","StateCode":"AV"},{"id":"172","Country":"Italy","CountryCode":"IT","State":"Bari","StateCode":"BA"},{"id":"173","Country":"Italy","CountryCode":"IT","State":"Barletta-Andria-Trani","StateCode":"BT"},{"id":"174","Country":"Italy","CountryCode":"IT","State":"Belluno","StateCode":"BL"},{"id":"175","Country":"Italy","CountryCode":"IT","State":"Benevento","StateCode":"BN"},{"id":"176","Country":"Italy","CountryCode":"IT","State":"Bergamo","StateCode":"BG"},{"id":"177","Country":"Italy","CountryCode":"IT","State":"Biella","StateCode":"BI"},{"id":"178","Country":"Italy","CountryCode":"IT","State":"Bologna","StateCode":"BO"},{"id":"179","Country":"Italy","CountryCode":"IT","State":"Bolzano","StateCode":"BZ"},{"id":"180","Country":"Italy","CountryCode":"IT","State":"Brescia","StateCode":"BS"},{"id":"181","Country":"Italy","CountryCode":"IT","State":"Brindisi","StateCode":"BR"},{"id":"182","Country":"Italy","CountryCode":"IT","State":"Cagliari","StateCode":"CA"},{"id":"183","Country":"Italy","CountryCode":"IT","State":"Caltanissetta","StateCode":"CL"},{"id":"184","Country":"Italy","CountryCode":"IT","State":"Campobasso","StateCode":"CB"},{"id":"185","Country":"Italy","CountryCode":"IT","State":"Carbonia-Iglesias","StateCode":"CI"},{"id":"186","Country":"Italy","CountryCode":"IT","State":"Caserta","StateCode":"CE"},{"id":"187","Country":"Italy","CountryCode":"IT","State":"Catania","StateCode":"CT"},{"id":"188","Country":"Italy","CountryCode":"IT","State":"Catanzaro","StateCode":"CZ"},{"id":"189","Country":"Italy","CountryCode":"IT","State":"Chieti","StateCode":"CH"},{"id":"190","Country":"Italy","CountryCode":"IT","State":"Como","StateCode":"CO"},{"id":"191","Country":"Italy","CountryCode":"IT","State":"Cosenza","StateCode":"CS"},{"id":"192","Country":"Italy","CountryCode":"IT","State":"Cremona","StateCode":"CR"},{"id":"193","Country":"Italy","CountryCode":"IT","State":"Crotone","StateCode":"KR"},{"id":"194","Country":"Italy","CountryCode":"IT","State":"Cuneo","StateCode":"CN"},{"id":"195","Country":"Italy","CountryCode":"IT","State":"Enna","StateCode":"EN"},{"id":"196","Country":"Italy","CountryCode":"IT","State":"Fermo","StateCode":"FM"},{"id":"197","Country":"Italy","CountryCode":"IT","State":"Ferrara","StateCode":"FE"},{"id":"198","Country":"Italy","CountryCode":"IT","State":"Florence","StateCode":"FI"},{"id":"199","Country":"Italy","CountryCode":"IT","State":"Foggia","StateCode":"FG"},{"id":"200","Country":"Italy","CountryCode":"IT","State":"Forl\u00ec-Cesena","StateCode":"FC"},{"id":"201","Country":"Italy","CountryCode":"IT","State":"Frosinone","StateCode":"FR"},{"id":"202","Country":"Italy","CountryCode":"IT","State":"Genoa","StateCode":"GE"},{"id":"203","Country":"Italy","CountryCode":"IT","State":"Gorizia","StateCode":"GO"},{"id":"204","Country":"Italy","CountryCode":"IT","State":"Grosseto","StateCode":"GR"},{"id":"205","Country":"Italy","CountryCode":"IT","State":"Imperia","StateCode":"IM"},{"id":"206","Country":"Italy","CountryCode":"IT","State":"Isernia","StateCode":"IS"},{"id":"207","Country":"Italy","CountryCode":"IT","State":"L'Aquila","StateCode":"AQ"},{"id":"208","Country":"Italy","CountryCode":"IT","State":"La Spezia","StateCode":"SP"},{"id":"209","Country":"Italy","CountryCode":"IT","State":"Latina","StateCode":"LT"},{"id":"210","Country":"Italy","CountryCode":"IT","State":"Lecce","StateCode":"LE"},{"id":"211","Country":"Italy","CountryCode":"IT","State":"Lecco","StateCode":"LC"},{"id":"212","Country":"Italy","CountryCode":"IT","State":"Livorno","StateCode":"LI"},{"id":"213","Country":"Italy","CountryCode":"IT","State":"Lodi","StateCode":"LO"},{"id":"214","Country":"Italy","CountryCode":"IT","State":"Lucca","StateCode":"LU"},{"id":"215","Country":"Italy","CountryCode":"IT","State":"Macerata","StateCode":"MC"},{"id":"216","Country":"Italy","CountryCode":"IT","State":"Mantua","StateCode":"MN"},{"id":"217","Country":"Italy","CountryCode":"IT","State":"Massa and Carrara","StateCode":"MS"},{"id":"218","Country":"Italy","CountryCode":"IT","State":"Matera","StateCode":"MT"},{"id":"219","Country":"Italy","CountryCode":"IT","State":"Medio Campidano","StateCode":"VS"},{"id":"220","Country":"Italy","CountryCode":"IT","State":"Messina","StateCode":"ME"},{"id":"221","Country":"Italy","CountryCode":"IT","State":"Milan","StateCode":"MI"},{"id":"222","Country":"Italy","CountryCode":"IT","State":"Modena","StateCode":"MO"},{"id":"223","Country":"Italy","CountryCode":"IT","State":"Monza and Brianza","StateCode":"MB"},{"id":"224","Country":"Italy","CountryCode":"IT","State":"Naples","StateCode":"NA"},{"id":"225","Country":"Italy","CountryCode":"IT","State":"Novara","StateCode":"NO"},{"id":"226","Country":"Italy","CountryCode":"IT","State":"Nuoro","StateCode":"NU"},{"id":"227","Country":"Italy","CountryCode":"IT","State":"Ogliastra","StateCode":"OG"},{"id":"228","Country":"Italy","CountryCode":"IT","State":"Olbia-Tempio","StateCode":"OT"},{"id":"229","Country":"Italy","CountryCode":"IT","State":"Oristano","StateCode":"OR"},{"id":"230","Country":"Italy","CountryCode":"IT","State":"Padua","StateCode":"PD"},{"id":"231","Country":"Italy","CountryCode":"IT","State":"Palermo","StateCode":"PA"},{"id":"232","Country":"Italy","CountryCode":"IT","State":"Parma","StateCode":"PR"},{"id":"233","Country":"Italy","CountryCode":"IT","State":"Pavia","StateCode":"PV"},{"id":"234","Country":"Italy","CountryCode":"IT","State":"Perugia","StateCode":"PG"},{"id":"235","Country":"Italy","CountryCode":"IT","State":"Pesaro and Urbino","StateCode":"PU"},{"id":"236","Country":"Italy","CountryCode":"IT","State":"Pescara","StateCode":"PE"},{"id":"237","Country":"Italy","CountryCode":"IT","State":"Piacenza","StateCode":"PC"},{"id":"238","Country":"Italy","CountryCode":"IT","State":"Pisa","StateCode":"PI"},{"id":"239","Country":"Italy","CountryCode":"IT","State":"Pistoia","StateCode":"PT"},{"id":"240","Country":"Italy","CountryCode":"IT","State":"Pordenone","StateCode":"PN"},{"id":"241","Country":"Italy","CountryCode":"IT","State":"Potenza","StateCode":"PZ"},{"id":"242","Country":"Italy","CountryCode":"IT","State":"Prato","StateCode":"PO"},{"id":"243","Country":"Italy","CountryCode":"IT","State":"Ragusa","StateCode":"RG"},{"id":"244","Country":"Italy","CountryCode":"IT","State":"Ravenna","StateCode":"RA"},{"id":"245","Country":"Italy","CountryCode":"IT","State":"Reggio Calabria","StateCode":"RC"},{"id":"246","Country":"Italy","CountryCode":"IT","State":"Reggio Emilia","StateCode":"RE"},{"id":"247","Country":"Italy","CountryCode":"IT","State":"Rieti","StateCode":"RI"},{"id":"248","Country":"Italy","CountryCode":"IT","State":"Rimini","StateCode":"RN"},{"id":"249","Country":"Italy","CountryCode":"IT","State":"Rome","StateCode":"RM"},{"id":"250","Country":"Italy","CountryCode":"IT","State":"Rovigo","StateCode":"RO"},{"id":"251","Country":"Italy","CountryCode":"IT","State":"Salerno","StateCode":"SA"},{"id":"252","Country":"Italy","CountryCode":"IT","State":"Sassari","StateCode":"SS"},{"id":"253","Country":"Italy","CountryCode":"IT","State":"Savona","StateCode":"SV"},{"id":"254","Country":"Italy","CountryCode":"IT","State":"Siena","StateCode":"SI"},{"id":"255","Country":"Italy","CountryCode":"IT","State":"Sondrio","StateCode":"SO"},{"id":"256","Country":"Italy","CountryCode":"IT","State":"Syracuse","StateCode":"SR"},{"id":"257","Country":"Italy","CountryCode":"IT","State":"Taranto","StateCode":"TA"},{"id":"258","Country":"Italy","CountryCode":"IT","State":"Teramo","StateCode":"TE"},{"id":"259","Country":"Italy","CountryCode":"IT","State":"Terni","StateCode":"TR"},{"id":"260","Country":"Italy","CountryCode":"IT","State":"Trapani","StateCode":"TP"},{"id":"261","Country":"Italy","CountryCode":"IT","State":"Trento","StateCode":"TN"},{"id":"262","Country":"Italy","CountryCode":"IT","State":"Treviso","StateCode":"TV"},{"id":"263","Country":"Italy","CountryCode":"IT","State":"Trieste","StateCode":"TS"},{"id":"264","Country":"Italy","CountryCode":"IT","State":"Turin","StateCode":"TO"},{"id":"265","Country":"Italy","CountryCode":"IT","State":"Udine","StateCode":"UD"},{"id":"266","Country":"Italy","CountryCode":"IT","State":"Varese","StateCode":"VA"},{"id":"267","Country":"Italy","CountryCode":"IT","State":"Venice","StateCode":"VE"},{"id":"268","Country":"Italy","CountryCode":"IT","State":"Verbano-Cusio-Ossola","StateCode":"VB"},{"id":"269","Country":"Italy","CountryCode":"IT","State":"Vercelli","StateCode":"VC"},{"id":"270","Country":"Italy","CountryCode":"IT","State":"Verona","StateCode":"VR"},{"id":"271","Country":"Italy","CountryCode":"IT","State":"Vibo Valentia","StateCode":"VV"},{"id":"272","Country":"Italy","CountryCode":"IT","State":"Vicenza","StateCode":"VI"},{"id":"273","Country":"Italy","CountryCode":"IT","State":"Viterbo","StateCode":"VT"},{"id":"274","Country":"Mexico ","CountryCode":"MX","State":"Aguascalientes","StateCode":"AG"},{"id":"275","Country":"Mexico ","CountryCode":"MX","State":"Baja California","StateCode":"BC"},{"id":"276","Country":"Mexico ","CountryCode":"MX","State":"Baja California Sur","StateCode":"BS"},{"id":"277","Country":"Mexico ","CountryCode":"MX","State":"Campeche","StateCode":"CM"},{"id":"278","Country":"Mexico ","CountryCode":"MX","State":"Chiapas","StateCode":"CS"},{"id":"279","Country":"Mexico ","CountryCode":"MX","State":"Chihuahua","StateCode":"CH"},{"id":"280","Country":"Mexico ","CountryCode":"MX","State":"Coahuila","StateCode":"CO"},{"id":"281","Country":"Mexico ","CountryCode":"MX","State":"Colima","StateCode":"CL"},{"id":"282","Country":"Mexico ","CountryCode":"MX","State":"Durango","StateCode":"DG"},{"id":"283","Country":"Mexico ","CountryCode":"MX","State":"Federal District","StateCode":"DF"},{"id":"284","Country":"Mexico ","CountryCode":"MX","State":"Guanajuato","StateCode":"GT"},{"id":"285","Country":"Mexico ","CountryCode":"MX","State":"Guerrero","StateCode":"GR"},{"id":"286","Country":"Mexico ","CountryCode":"MX","State":"Hidalgo","StateCode":"HG"},{"id":"287","Country":"Mexico ","CountryCode":"MX","State":"Jalisco","StateCode":"JA"},{"id":"288","Country":"Mexico ","CountryCode":"MX","State":"Mexico State","StateCode":"ME"},{"id":"289","Country":"Mexico ","CountryCode":"MX","State":"Michoac\u00e1n","StateCode":"MI"},{"id":"290","Country":"Mexico ","CountryCode":"MX","State":"Morelos","StateCode":"MO"},{"id":"291","Country":"Mexico ","CountryCode":"MX","State":"Nayarit","StateCode":"NA"},{"id":"292","Country":"Mexico ","CountryCode":"MX","State":"Nuevo Le\u00f3n","StateCode":"NL"},{"id":"293","Country":"Mexico ","CountryCode":"MX","State":"Oaxaca","StateCode":"OA"},{"id":"294","Country":"Mexico ","CountryCode":"MX","State":"Puebla","StateCode":"PB"},{"id":"295","Country":"Mexico ","CountryCode":"MX","State":"Quer\u00e9taro","StateCode":"QE"},{"id":"296","Country":"Mexico ","CountryCode":"MX","State":"Quintana Roo","StateCode":"QR"},{"id":"297","Country":"Mexico ","CountryCode":"MX","State":"San Luis Potos\u00ed","StateCode":"SL"},{"id":"298","Country":"Mexico ","CountryCode":"MX","State":"Sinaloa","StateCode":"SI"},{"id":"299","Country":"Mexico ","CountryCode":"MX","State":"Sonora","StateCode":"SO"},{"id":"300","Country":"Mexico ","CountryCode":"MX","State":"Tabasco","StateCode":"TB"},{"id":"301","Country":"Mexico ","CountryCode":"MX","State":"Tamaulipas","StateCode":"TM"},{"id":"302","Country":"Mexico ","CountryCode":"MX","State":"Tlaxcala","StateCode":"TL"},{"id":"303","Country":"Mexico ","CountryCode":"MX","State":"Veracruz","StateCode":"VE"},{"id":"304","Country":"Mexico ","CountryCode":"MX","State":"Yucat\u00e1n","StateCode":"YU"},{"id":"305","Country":"Mexico ","CountryCode":"MX","State":"Zacatecas","StateCode":"ZA"},{"id":"306","Country":"United States","CountryCode":"US","State":"Alabama","StateCode":"AL"},{"id":"307","Country":"United States","CountryCode":"US","State":"Alaska","StateCode":"AK"},{"id":"308","Country":"United States","CountryCode":"US","State":"Arizona","StateCode":"AZ"},{"id":"309","Country":"United States","CountryCode":"US","State":"Arkansas","StateCode":"AR"},{"id":"310","Country":"United States","CountryCode":"US","State":"California","StateCode":"CA"},{"id":"311","Country":"United States","CountryCode":"US","State":"Colorado","StateCode":"CO"},{"id":"312","Country":"United States","CountryCode":"US","State":"Connecticut","StateCode":"CT"},{"id":"313","Country":"United States","CountryCode":"US","State":"Delaware","StateCode":"DE"},{"id":"314","Country":"United States","CountryCode":"US","State":"District of Columbia","StateCode":"DC"},{"id":"315","Country":"United States","CountryCode":"US","State":"Florida","StateCode":"FL"},{"id":"316","Country":"United States","CountryCode":"US","State":"Georgia","StateCode":"GA"},{"id":"317","Country":"United States","CountryCode":"US","State":"Hawaii","StateCode":"HI"},{"id":"318","Country":"United States","CountryCode":"US","State":"Idaho","StateCode":"ID"},{"id":"319","Country":"United States","CountryCode":"US","State":"Illinois","StateCode":"IL"},{"id":"320","Country":"United States","CountryCode":"US","State":"Indiana","StateCode":"IN"},{"id":"321","Country":"United States","CountryCode":"US","State":"Iowa","StateCode":"IA"},{"id":"322","Country":"United States","CountryCode":"US","State":"Kansas","StateCode":"KS"},{"id":"323","Country":"United States","CountryCode":"US","State":"Kentucky","StateCode":"KY"},{"id":"324","Country":"United States","CountryCode":"US","State":"Louisiana","StateCode":"LA"},{"id":"325","Country":"United States","CountryCode":"US","State":"Maine","StateCode":"ME"},{"id":"326","Country":"United States","CountryCode":"US","State":"Maryland","StateCode":"MD"},{"id":"327","Country":"United States","CountryCode":"US","State":"Massachusetts","StateCode":"MA"},{"id":"328","Country":"United States","CountryCode":"US","State":"Michigan","StateCode":"MI"},{"id":"329","Country":"United States","CountryCode":"US","State":"Minnesota","StateCode":"MN"},{"id":"330","Country":"United States","CountryCode":"US","State":"Mississippi","StateCode":"MS"},{"id":"331","Country":"United States","CountryCode":"US","State":"Missouri","StateCode":"MO"},{"id":"332","Country":"United States","CountryCode":"US","State":"Montana","StateCode":"MT"},{"id":"333","Country":"United States","CountryCode":"US","State":"Nebraska","StateCode":"NE"},{"id":"334","Country":"United States","CountryCode":"US","State":"Nevada","StateCode":"NV"},{"id":"335","Country":"United States","CountryCode":"US","State":"New Hampshire","StateCode":"NH"},{"id":"336","Country":"United States","CountryCode":"US","State":"New Jersey","StateCode":"NJ"},{"id":"337","Country":"United States","CountryCode":"US","State":"New Mexico","StateCode":"NM"},{"id":"338","Country":"United States","CountryCode":"US","State":"New York","StateCode":"NY"},{"id":"339","Country":"United States","CountryCode":"US","State":"North Carolina","StateCode":"NC"},{"id":"340","Country":"United States","CountryCode":"US","State":"North Dakota","StateCode":"ND"},{"id":"341","Country":"United States","CountryCode":"US","State":"Ohio","StateCode":"OH"},{"id":"342","Country":"United States","CountryCode":"US","State":"Oklahoma","StateCode":"OK"},{"id":"343","Country":"United States","CountryCode":"US","State":"Oregon","StateCode":"OR"},{"id":"344","Country":"United States","CountryCode":"US","State":"Pennsylvania","StateCode":"PA"},{"id":"345","Country":"United States","CountryCode":"US","State":"Rhode Island","StateCode":"RI"},{"id":"346","Country":"United States","CountryCode":"US","State":"South Carolina","StateCode":"SC"},{"id":"347","Country":"United States","CountryCode":"US","State":"South Dakota","StateCode":"SD"},{"id":"348","Country":"United States","CountryCode":"US","State":"Tennessee","StateCode":"TN"},{"id":"349","Country":"United States","CountryCode":"US","State":"Texas","StateCode":"TX"},{"id":"350","Country":"United States","CountryCode":"US","State":"Utah","StateCode":"UT"},{"id":"351","Country":"United States","CountryCode":"US","State":"Vermont","StateCode":"VT"},{"id":"352","Country":"United States","CountryCode":"US","State":"Virginia","StateCode":"VA"},{"id":"353","Country":"United States","CountryCode":"US","State":"Washington","StateCode":"WA"},{"id":"354","Country":"United States","CountryCode":"US","State":"West Virginia","StateCode":"WV"},{"id":"355","Country":"United States","CountryCode":"US","State":"Wisconsin","StateCode":"WI"},{"id":"356","Country":"United States","CountryCode":"US","State":"Wyoming","StateCode":"WY"}]', 
+	', 
+		',  ×', 
+		', ENQUIRE NOW', 
+
+		', 
+
+		', 
+			', 
+				', First Name:', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+		', 
+			', 
+				', Last Name:', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+		', 
+			', 
+				', Email:', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+			', 
+				', Mobile:', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+			', 
+				', Budget(In Rs.):', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+			', 
+				', Country:', 
+			', 
+			', 
+				', 
+					', -- None --', 
+					', Australia', Canada', Brazil', China', Germany', United Kingdom', Ireland', India', Italy', Mexico ', United States', 				', 
+			', 
+		', 
+		', 
+			', 
+				', State / Provinence:', 
+			', 
+			', 
+				', 
+				', 
+			', 
+		', 
+		', 
+			', 
+				', Remarks:', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+			', 
+				', Projects Interesetd:', 
+			', 
+			', 
+				', 
+					', 
+						', 
+							',  RESIDENTIAL ', 
+						', 
+					', 
+					', 
+						', 
+							  ',  COMERCIAL', 
+						', 
+					', 
+					', 
+						', 
+							',  CLUB', 
+						', 
+					', 
+				', 
+				 ', 
+				    ', Aangan', 
+				    ', Elysium', 
+				    ', La Marina', 
+				    ', Oyster Grande', 
+				    ', Pratham', 
+				    ', The Meadows', 
+				    ', Western Heights', 
+				    ', Water Lily', 
+				    ', The Evergreen', 
+				    ', The North Park', 
+				    ', Shoppers Plaza', 
+				 ', 
+			', 
+		', 
+		', 
+		', 
+			', 
+				', 
+			', 
+			', 
+				', 
+			', 
+		', 
+		', 
+
+		', 
+		', 
+		', 
+		  ', 
+		', 
+      ', 
+         ', 
+         ', 
+      ', 
+      ', 
+         ', 
+            ', 
+', 
+	', 
+		', 
+			', 
+		', 
+	', 
+	', 
+		', 
+			', HOME ', 
+			', ABOUT US ', 
+			', 
+				', PROJECTS ', 
+				', 
+					', 
+						', Residential', 
+						', Commercial', 
+						', Social Club', 
+					', 
+				', 
+			', 
+			', THE GOOD LIFE', 
+			', MEDIA CENTER', 
+			', NRI CORNER', 
+			', CAREERS', 
+			', CONTACT US', 
+		', 
+	', 
+', 
+            ', 
+	', 
+		', 
+	', 
+	', 
+
+		', 
+
+		', 
+			 Menu 
+		', 
+
+		', 
+			', 
+				', HOME ', 
+				', ABOUT US ', 
+				', 
+					', PROJECTS ', 
+					', 
+						', 
+							', Residential', 
+							', Commercial', 
+							', Social Club', 
+						', 
+					', 
+				', 
+				', THE GOOD LIFE', 
+				', 
+				', MEDIA CENTER', 
+				', NRI CORNER', 
+				', CAREERS', 
+				', CONTACT US', 
+			', 
+		', 
+	', 
+', 
+            ', 
+               ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', ABOUT US', 
+               ', 
+                  ', Adani Realty, the youngest arm of the Adani Group, is developing close to 69 million square foot of real estate space including residential, commercial and social club projects across Ahmedabad, Mumbai, Gurgaon, Kochi & Mundra.', 
+                  ', 
+                     ', 
+                     ', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+                  ', 
+                     ', 
+                     ', 
+                        ', Ahmedabad', 
+                           ', 
+                           ', The North Park-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', LA Marina-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Water Lily-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', The Meadows-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', The Evergreen-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Aangan-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Elysium-Shantigram', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Pratham', 
+                        ', 
+                        ', 
+                           ', Inspire Shantigram', 
+                        
+                        ', 
+                           ', 
+                           ', The Belvedere Golf and Country Club - Shantigram', 
+                        
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                     ', 
+                        ', Mumbai', 
+                       
+                        ', 
+                           ', Western Heights', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Monte South', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Inspire BKC', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Inspire HUB', 
+                        ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                     ', 
+                        ', Gurgaon', 
+                      
+                        ', 
+                           ', Oyster Grande', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Angan', 
+                        ', 
+                        ', 
+                        ', 
+                           ', Samsara', 
+                        ', 
+                     ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', 
+                  ', 
+                     ', 
+                        ', 
+                           ', 
+                        ', 
+                        ', 
+                        ', 
+                           ', 6', 
+                        ', 
+                        ', 
+                           ', Years', 
+                              Young
+                           ', 
+                        ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                        ', 
+                           ', 
+                           ', 
+                        ', 
+                        ', 
+                        ', 
+                           ', 6 ', 
+                        ', 
+                        ', 
+                           ', 
+                              ', Million Square foot', 
+                                 Delivered
+                              ', 
+                           ', 
+                        ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                        ', 
+                           ', 
+                           ', 
+                        ', 
+                        ', 
+                        ', 
+                           ', 69 ', 
+                        ', 
+                        ', 
+                           ', 
+                              ',  Million Square foot', 
+                                 Under Development
+                              ', 
+                           ', 
+                        ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                        ', 
+                           ', 
+                        ', 
+                        ', 
+                        ', 
+                           ', 6', 
+                        ', 
+                        ', 
+                           ', Awards', 
+                              Won
+                           ', 
+                        ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                  ', 
+                  ', 
+                     ', 
+                        ', 
+                           ', 
+                           ', 
+                        ', 
+                        ', 
+                        ', 
+                           ', 4000', 
+                        ', 
+                        ', 
+                           ', Happy', 
+                              Families
+                           ', 
+                        ', 
+                     ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', RESIDENTIAL', 
+               ', 
+                  ', The growing economy has witnessed a surge in the expectations of people. Catering to an audience that is diverse in terms of its needs, residential projects by Adani Realty are unmatchable..', 
+                  ', 
+                     ', 
+                        ', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', COMMERCIAL', 
+               ', 
+                   ', 
+               ', 
+               ', 
+                  ', In the wake of rising entrepreneurs and increasing new ventures, Adani Realty has also manoeuvred in the commercial space, renting and selling office spaces...', 
+                  ', 
+                     ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', SOCIAL CLUB', 
+               ', 
+                  ', Resting over a 100-acres of land, The Belvedere Golf and Country Club is a 9-hole golf course and one of India\u2019s largest private social clubs. Equipped with world-class amenities...', 
+                  ', 
+                     ', 
+                     ', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                   ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', 
+                  ', 
+                     ', Media Center', 
+                  ', 
+                  ', 
+                     ', 
+                     ', 
+                        ', Learn More', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+                     ', Careers', 
+                  ', 
+                  ', 
+                     ', 
+                     ', 
+                        ', Learn More', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+                     ', NRI Corner', 
+                  ', 
+                  ', 
+                     ', 
+                     ', 
+                        ', Learn More', 
+                     ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', 
+                  ', 
+                     ', 
+                  ', 
+               ', 
+               ', 
+                  ', 
+               ', 
+            ', 
+         ', 
+         ', 
+	', 
+			', 
+				', 
+					', 
+						', 
+							', Terms & Conditions', 
+						', 
+						', 
+						', 
+							', Privacy policy', 
+						', 
+						', 
+							', Contact Us', 
+						', 
+						', 
+							', Disclaimer', 
+						', 
+					', 
+				', 
+			', 
+			', 
+				', 
+					', 
+						', 
+							', 
+								', 
+							', 
+						', 
+					', 
+					', 
+						', 
+							', 
+								', 
+							', 
+						', 
+					', 
+					', 
+						', 
+							', 
+								', 
+							', 	
+						', 
+					', 
+					', 
+						', 
+							', 
+								', 
+							', 	
+						', 
+					', 
+				', 
+			', 
+			', 
+				', Designed by',  spotlights.co.in', 
+			', 
+			', 
+				', &copy 2016 All Rights Reserved', 
+			', 
+	', 
+', 
+      ', 
+      ', 
+      ', 
+       ', 
+      ', 
+      ', 
+      ', 
+      ', 
+         $(".familypqr").mouseover(function(){
+         	$(".familyimage").attr('src', 'https://www.adanirealty.com//assets/sites/images/family.png');
+         })
+         
+         $(".familypqr").mouseout(function(){
+         	$(".familyimage").attr('src', 'https://www.adanirealty.com//assets/sites/images/family3.png');
+         })
+         
+         $(".familypqr1").mouseover(function(){
+         	$(".familyimage1").attr('src', 'https://www.adanirealty.com//assets/sites/images/Under Development Icon-03.png');
+         })
+         
+         $(".familypqr1").mouseout(function(){
+         	$(".familyimage1").attr('src', 'https://www.adanirealty.com//assets/sites/images/Under Development Icon-01.png');
+         })
+         
+           
+      ', 
+      ', 
+         function openRightMenu() {
+             document.getElementById("rightMenu").style.display = "block";
+         }
+         function closeRightMenu() {
+             document.getElementById("rightMenu").style.display = "none";
+         }
+
+
+         
+         	$(window).load(function() {
+         		/* Act on the event */
+         		hideloader();
+
+            	window.sr = ScrollReveal({ reset: true });
+            	sr.reveal('.animate2',{ origin:'right',distance:'50px',easing:'ease-in',duration: 800 });
+            	sr.reveal('.animate1',{ origin:'bottom',distance:'10px',easing:'ease-in',duration: 800,delay:1200 });
+            	sr.reveal('.animate5',{ origin : 'bottom',	distance : '10px', duration: 3000 ,delay:1700});
+            	sr.reveal('.animate10',{ origin : 'left',easing:'ease-in',	distance : '400px', duration: 2000,delay:1800 });
+            	sr.reveal('.animate3',{ origin : 'bottom',	distance : '5px', duration: 3500, delay:2200 });
+            	sr.reveal('.animate4',{ origin : 'bottom',	distance : 'px', duration: 3500 ,delay:2600});
+            	sr.reveal('.animate6',{ origin : 'left',easing:'ease-in',distance : '300px', duration: 2000,delay:2400 });
+            	sr.reveal('.animate6A',{ origin : 'left',easing:'ease-in',distance : '200px', duration: 2000,delay:2800 });
+            	sr.reveal('.animateA',{ origin : 'bottom',	distance : '10px', duration: 3000 ,delay:3400});
+            	sr.reveal('.animate8',{ origin : 'left',easing:'ease-in',	distance : '400px', duration: 1800,delay:3700  });
+            	sr.reveal('.animate9',{ origin : 'right',easing:'ease-in',	distance : '200px', duration: 1800,delay:3900  });
+            	sr.reveal('.animate11',{ origin : 'right',easing:'ease-in',	distance : '400px', duration: 1800,delay:4100  });
+            	sr.reveal('.animate7',{ origin : 'bottom',	distance : '70px', duration: 7500 ,delay: 4400 });
+         
+         		/* Building Images animation */
+         		$('#deletesuccess26').delay(4000).fadeIn(3000);
+         		$('#deletesuccess27').delay(4000).fadeIn(3000);
+         		$('#deletesuccess31').delay(4000).fadeIn(3000);
+         		$('#deletesuccess28').delay(4000).fadeIn(3000);
+         
+         		/* First Slide Animation Disable */
+         		// $('#deletesuccess').delay(6500).fadeOut(2000);
+         		// $('#deletesuccess').animate({opacity: 1}, 0);
+         		// $('#deletesuccessB').delay(6500).fadeOut(2000);
+         
+         		$('.animate2, .animate1, .animate5, .animate10, .animate3, .animate4, .animate6, .animate6A, .animateA, .animate8, .animate9, .animate11, .animate7').delay(8300).animate({opacity : 0}, 50);
+         
+         		// $('.animate2, .animate1, .animate5, .animate10, .animate3, .animate4, .animate6, .animate6A, .animateA, .animate8, .animate9, .animate11, .animate7').delay(8600).fadeOut(8600);
+         
+         		$('#deletesuccess').delay(8500).fadeOut(1000);
+         
+         		/* Second Slide Animation Enable */
+         		$('#deletesuccess1').delay(8400).fadeIn(1000);
+         		$('#deletesuccess2').delay(9000).fadeIn(1000);
+         		$('#deletesuccess3').delay(9400).fadeIn(1000);
+         		$('#deletesuccess4').delay(9200).fadeIn(1000);
+         		$('#deletesuccess5').delay(9250).fadeIn(1000);
+         		$('#deletesuccess6').delay(9400).fadeIn(1000);
+         		$('#deletesuccess7').delay(9450).fadeIn(1000);
+         		$('#deletesuccess8').delay(9510).fadeIn(1000);
+         		$('#deletesuccess9').delay(9700).fadeIn(1000);
+         		$('#deletesuccess10').delay(9400).fadeIn(1000);
+         		$('#deletesuccess11').delay(9600).fadeIn(1000);
+         		$('#deletesuccess12').delay(9790).fadeIn(1000);
+         		$('#deletesuccess13').delay(9200).fadeIn(1000);
+         		$('#deletesuccess14').delay(9000).fadeIn(1000);
+         		$('#deletesuccess15').delay(9350).fadeIn(1000);
+         		$('#deletesuccess16').delay(9600).fadeIn(1000);
+         		$('#deletesuccess17').delay(9900).fadeIn(1000);
+         		$('#deletesuccess18').delay(9800).fadeIn(1000);
+         		$('#deletesuccess19').delay(10000).fadeIn(1000);
+         		$('#deletesuccess20').delay(9900).fadeIn(1000);
+         		$('#deletesuccess21').delay(9950).fadeIn(1000);
+         		$('#deletesuccess22').delay(9900).fadeIn(1000);
+         		$('#deletesuccess23').delay(10000).fadeIn(1000);
+         		$('#deletesuccess24').delay(11000).fadeIn(1000);
+         		$('#deletesuccess25').delay(11200).fadeIn(1000);
+
+               // place this within dom ready function
+                function showpanel() { 
+
+                     $('.newyearcontainer').fadeIn();
+
+
+
+                }
+
+                // use setTimeout() to execute
+                setTimeout(showpanel, 11200)
+
+
+         	});
+
+
+
+            $('.cross').click(function(){
+
+
+               // alert('hello');
+               $('.newyear').fadeOut();
+               $('.cross').fadeOut();
+
+
+
+            })
+
+         
+         	function hideloader(){
+         
+         		window.setTimeout(myfunction(), 50000);
+         	}
+         
+         	function myfunction(){
+         
+          		$('.load-complete').css('display','none');
+         	}
+      ', 
+      ', u"
+         jQuery(document).ready(function( $ ) {
+             $('.counter').counterUp({
+                 delay: 10,
+                 time: 4000
+             });
+         });
+         
+         $('.preload').css('display','none');
+      ", 
+      ', 
+         $(document).ready( function() {
+         
+         	$("button").click(function(){
+           $(".m").slideToggle();
+         })
+         
+         
+         });
+      ', 
+   
+']

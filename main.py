@@ -1,14 +1,16 @@
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 
+import csv
 import os
 import sys
 from UI import FXfrontend
 from scraper import scrapeData
-#from
-#from spyder.plugins.configdialog import MainConfigPage
+from scraper import getUniversalList
+from scraper.FxSpider.FxSpider.spiders import WebScraper
 
-
+dataset = 'data\dataset_axis.csv' #X, y
+n = 500 #500 rows of X, y
 
 class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
     def __init__(self, parent = None):
@@ -35,16 +37,33 @@ class ThreadClassSample(QtCore.QThread):
         Query = 'SAMPLE'
         label = -99
 
-        from scraper import scrapeData
-        listRes = scrapeData.storeResTxt(Query, label)
-        print listRes
+        with open(dataset, 'rb') as f:
+            reader = csv.reader(f)
+            Data_list = list(reader)
 
-        scrapeData.getDataToTXT(Query, label, listRes)
-        #i=0
-        #while 1:
-        #    self.sleep(2)
-        #    self.emit(QtCore.SIGNAL('PROGRESS_BAR'), i)
-        #    i=i+1
+        for i in range(100, 101):   #range(1,n+2)
+            Query = Data_list[i][0]
+            if Data_list[i][1] == 'Forex':
+                label = 1
+            else:
+                label = 0
+
+            #listRes = scrapeData.storeResTxt(Query, label)
+
+        univList = getUniversalList.makeListScrape()
+
+        WebScraper.startReactor(univList)
+
+
+
+        #print your_list[1][1]
+
+        #listRes = scrapeData.storeResTxt(Query, label)
+        #print listRes
+
+        #scrapeData.getDataToTXT(Query, label, listRes)
+
+
 
 
 if __name__ == "__main__":
@@ -52,3 +71,10 @@ if __name__ == "__main__":
     app = MainUiClass()
     app.show()
     a.exec_()
+
+
+    # i=0
+    # while 1:
+    #    self.sleep(2)
+    #    self.emit(QtCore.SIGNAL('PROGRESS_BAR'), i)
+    #    i=i+1

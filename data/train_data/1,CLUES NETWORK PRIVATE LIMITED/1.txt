@@ -1,0 +1,4881 @@
+[
+', 
+    ', 
+    
+', Loading...', 
+
+    ', 
+  
+
+    
+    
+    
+
+
+
+', 
+    ',      ', 
+    ', 
+                 
+        ', 61338447', 
+                                                            
+                
+                                    
+        ', 
+            ', 
+                ', 
+                                            ', 
+                            ', 
+                                ', 
+                            ', 
+                        ', 
+                    
+                                            ', 
+                            ', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+  ', 
+
+
+ 
+
+', All Categories', All Categories', Home & Kitchen', Mobiles & Tablets', Mobile & Laptop Accessories', Computers', Appliances', TV, Audio & Large Appliances', Fashion', Footwear', Jewelry & Watches', Travel & Luggage', Beauty & Perfumes', Toys, Baby & Kids', Automotive', Books & Daily Needs', Sports & Health', WholeSale', Christmas Store', Best Price', Cameras & Accessories', Clearance Sale', Value Combo test', Value Combo test2', Wholesale', Factory Outlet', 
+
+', 
+
+', 
+
+var use_zettata=1;
+
+var search_redirect =  1;
+  function check_blank()
+  {
+  	
+         var qitem = document.getElementById('q').value;
+         var qitem=qitem.replace("'","");
+    	  if(qitem=='Search for Item' || jQuery.trim(qitem)==''){
+    		  
+          	  $('#q').focus();
+    		      return false;
+
+        }else if($('#z').val()==''){
+
+                if(use_zettata==1){
+
+                    var zet=search_source();    
+                }else{
+                  
+                    var zet=0;
+                }
+                
+                $('#z').val(zet);
+                $('#q').val(qitem);
+                if(search_redirect == 1){
+                      $.ajax({
+                                  url: "search_redirect.php",
+                                  type: 'get',
+                                  data: {'term':qitem},
+                                  timeout: 3000,
+                                  success: function(output) {
+                                      if(output !=''){
+                                       // alert(output);
+                                       var res=output.split("?");
+                                       var len=res.length;
+                                       var outputstr="";
+                                       if(len>1)
+                                       {
+                                        res[1]=res[1]+"&search=1&q1="+qitem;
+                                        outputstr=res[0]+"?"+res[1];
+                                       }
+                                       else
+                                       {
+                                        res[0]=res[0]+"?search=1&q1="+qitem;
+                                        outputstr=res[0];
+                                       }
+                                        window.location.href=outputstr;
+
+                                      }else{
+                                        
+                                            document.getElementById("search_form").submit();
+                                
+                                          }  
+
+                                  },
+                                  error: function(){
+
+                                        document.getElementById("search_form").submit();
+                                    }
+                            });
+                    }else{
+
+                          document.getElementById("search_form").submit();
+                        }    
+                  return false;
+
+                 
+          }else{
+              if(search_redirect == 1){
+                  $.ajax({
+                            url: "search_redirect.php",
+                            type: 'get',
+                            data: {'term':qitem},
+                            timeout: 3000,
+                            success: function(output) {
+                                if(output !=''){
+                                  //alert(ouput);
+                                   var res=output.split("?");
+                                   var len=res.length;
+                                   var outputstr="";
+                                   if(len>1)
+                                   {
+                                    res[1]=res[1]+"&search=1&q1="+qitem;
+                                    outputstr=res[0]+"?"+res[1];
+                                   }
+                                   else
+                                   {
+                                    res[0]=res[0]+"?search=1&q1="+qitem;
+                                    outputstr=res[0];
+                                   }
+                                  window.location.href=outputstr;
+
+                                }else{
+
+                                  $('#q').val(qitem);
+                                  document.getElementById("search_form").submit();
+                      
+                                }  
+
+                            },
+                            error: function(){
+                                    
+                                        document.getElementById("search_form").submit();
+                                    }
+                      });
+                  }else{
+                             $('#q').val(qitem);
+                             document.getElementById("search_form").submit();
+                      }
+                  return false;
+
+               }                   
+   }
+  
+
+if(use_zettata==1){
+
+  jQuery(document).ready(function($){
+  var suggestion=new Array();
+
+  $("#q").autocomplete({
+    source:function(request,response){
+        
+        var field=$('#q').val();
+      if( field in suggestion ) {
+          
+            response(suggestion[field]);
+
+      }else{
+         if($('#z').val()=='')
+         {
+          if(use_zettata==1){
+
+                    var zet=search_source();    
+                }else{
+                  
+                    var zet=0;
+                }
+                $('#z').val(zet);
+          }else{
+            var zet=$('#z').val();
+          }
+          $.ajax({
+              url: "autosuggest.php?z="+zet,
+              type: 'get',
+              dataType: 'json',
+              data: {'term':field},
+              success: function(output) {
+                  //alert(JSON.stringify(output));
+                   suggestion[field] = output;
+                   response(output);
+              }
+          });
+      }  
+    },
+    
+    extraParams:{"cid":$("#cid").val()},
+    minLength: 1,
+    select: function(event, ui) {
+      if(ui.item){
+       
+         var par=ui.item.value;
+         $('#q').val(par);
+         $('#auto_suggest').val('1');
+          
+          if(ui.item.id){
+              var cid=ui.item.id;
+              $('#cid').val(cid);
+           }
+       }
+        check_blank();
+    }
+  });
+  
+  $["ui"]["autocomplete"].prototype["_renderItem"] = function( ul, item) {
+            return $( "<li></li>" )
+            .data( "item.autocomplete", item )
+            .append( $( "<a></a>" ).html( item.label ) )
+            .appendTo( ul );
+        };
+
+  });
+}else{
+
+ jQuery(document).ready(function($){
+  
+  var suggestion=new Array();
+
+  $("#q").autocomplete({
+
+    source: function(request,response){
+        
+        var field=$('#q').val();
+       
+      if( field in suggestion ) {
+          
+            response(suggestion[field]);
+
+      }else{
+        
+          $.ajax({
+              url: "autosuggest.php",
+              type: 'get',
+              dataType: 'json',
+              data: {'term':field},
+              success: function(output) {
+                  //alert(JSON.stringify(output));
+                   suggestion[field] = output;
+                   response(output);
+              }
+          });
+      }  
+    },
+     
+    extraParams:{"cid":$("#cid").val()},
+    minLength: 1,
+    select: function(event, ui) {
+      
+      if(ui.item){
+          $('#q').val(ui.item.value);
+          $('#cid').val($('#cid').val()); 
+          $('#auto_suggest').val('1');
+      }
+        check_blank();
+    }
+  });
+  
+  $["ui"]["autocomplete"].prototype["_renderItem"] = function( ul, item) {
+            return $( "<li></li>" )
+            .data( "item.autocomplete", item )
+            .append( $( "<a></a>" ).html( item.label ) )
+            .appendTo( ul );
+        };
+
+  });
+
+}
+
+function search_source(){
+
+            var z='';
+            var d = new Date();
+            var cur_time=d.getTime();
+            var val=cur_time%9;
+            var zettata_threshold =  5;
+            if(val < zettata_threshold){
+                 
+                    z=1;
+
+                }else{
+
+                    z=0;
+                }
+    return z;
+}
+  
+
+', 
+
+                        ', 
+                    
+                    ', 
+                        
+                    ', 
+                        
+                ', 
+                                            ', 
+                            ', 
+                                Cart
+                                ', 0', 
+                            ', 
+                            ', 
+                            ',                         ', 
+                                    ', 
+                        
+                    ', 
+                        ', 
+                                                                                                                                                               ', change location', 
+                                                                ', Sell With Us', 
+                                ', Call Us', 
+                                                            ', 
+                                ', 
+                                                                         
+                                                                            ', 
+                                            Sign In
+                                        ', 
+                                                                          
+                                                            ', 
+                        ', 
+                    ', 
+                ', 
+
+            ', 
+
+
+
+        ', 
+    ', 
+', 
+
+', 
+
+', 
+    
+    ', 
+    ', 
+    ', 
+    ', 
+    
+        ',   
+            $(window).load(function()
+            {
+                var original_url_http = document.getElementById("myaccount_condition_original_http").value;
+                var original_url_https = document.getElementById("myaccount_condition_original_https").value;                    
+                var myaccount_pages_url = document.getElementById("myaccount_pages_url").value;                                 
+                $('a').each(function() 
+                {
+                    if(typeof $(this).attr("href") !== "undefined") 
+                    {
+                        $(this).attr("href", $.trim($(this).attr("href")));                        
+                        if($(this).attr("href").indexOf('http://') !== 0 && $(this).attr("href").indexOf('https://') !== 0 && $(this).attr("href") !== null && $(this).attr("href").indexOf("javascript:") !== 0 && $(this).attr("href") !== "")
+                        {
+                            var final_url = "";
+                            if(window.location.href.indexOf('https://') === 0)
+                            {
+                                final_url = original_url_https;
+                            } 
+                            else
+                            {
+                                final_url = original_url_http;
+                            }
+                            if($(this).attr("href").indexOf('/') === 0)
+                            {
+                                $(this).attr('href', final_url + $(this).attr("href"));
+                            }
+                            else
+                            {
+                                $(this).attr('href', final_url + "/" + $(this).attr("href"));        
+                            }
+                        }                        
+                        if(checkForMyAccount($(this).attr("href")))
+                        {
+                            var modified_url = $(this).attr("href");                            
+                            modified_url = modified_url.replace(original_url_http, myaccount_pages_url);
+                            modified_url = modified_url.replace(original_url_https, myaccount_pages_url);                            
+                            $(this).attr("href", modified_url);
+                        }  
+                        else
+                        {
+                            var modified_url = $(this).attr("href");                            
+                            modified_url = modified_url.replace(myaccount_pages_url, original_url_https);                            
+                            $(this).attr("href", modified_url);
+                        } 
+                    }
+                });
+            });
+            $(document).ready(function () 
+            { 
+		if($.isFunction($(document).on))
+		{ 	             
+                    $(document).on("click", "a", function () 
+                    {    			         
+                        var original_url_http = document.getElementById("myaccount_condition_original_http").value;
+                        var original_url_https = document.getElementById("myaccount_condition_original_https").value;                    
+                        var myaccount_pages_url = document.getElementById("myaccount_pages_url").value;                    
+                        if(typeof $(this).attr("href") !== "undefined") 
+                        {
+                            $(this).attr("href", $.trim($(this).attr("href")));                        
+                            if($(this).attr("href").indexOf('http://') !== 0 && $(this).attr("href").indexOf('https://') !== 0 && $(this).attr("href") !== null && $(this).attr("href").indexOf("javascript:") !== 0 && $(this).attr("href") !== "")
+                            {
+                                var final_url = "";
+                                if(window.location.href.indexOf('https://') === 0)
+                                {
+                                    final_url = original_url_https;
+                                } 
+                                else
+                                {
+                                    final_url = original_url_http;
+                                }
+                                if($(this).attr("href").indexOf('/') === 0)
+                                {
+                                    $(this).attr('href', final_url + $(this).attr("href"));
+                                }
+                                else
+                                {
+                                    $(this).attr('href', final_url + "/" + $(this).attr("href"));        
+                                }
+                            }                        
+                            if(checkForMyAccount($(this).attr("href")))
+                            {
+                                var modified_url = $(this).attr("href");                            
+                                modified_url = modified_url.replace(original_url_http, myaccount_pages_url);
+                                modified_url = modified_url.replace(original_url_https, myaccount_pages_url);                            
+                                $(this).attr("href", modified_url);
+                            }  
+                            else
+                            {
+                                var modified_url = $(this).attr("href");                            
+                                modified_url = modified_url.replace(myaccount_pages_url, original_url_https);                            
+                                $(this).attr("href", modified_url);
+                            } 
+                        }
+                    });
+		}
+		else
+		{
+                    $("a").live("click", function () 
+                    {                                      
+                        var original_url_http = document.getElementById("myaccount_condition_original_http").value;
+                        var original_url_https = document.getElementById("myaccount_condition_original_https").value;                    
+                        var myaccount_pages_url = document.getElementById("myaccount_pages_url").value;                    
+                        if(typeof $(this).attr("href") !== "undefined") 
+                        {
+                            $(this).attr("href", $.trim($(this).attr("href")));                        
+                            if($(this).attr("href").indexOf('http://') !== 0 && $(this).attr("href").indexOf('https://') !== 0 && $(this).attr("href") !== null && $(this).attr("href").indexOf("javascript:") !== 0 && $(this).attr("href") !== "")
+                            {
+                                var final_url = "";
+                                if(window.location.href.indexOf('https://') === 0)
+                                {
+                                    final_url = original_url_https;
+                                } 
+                                else
+                                {
+                                    final_url = original_url_http;
+                                }
+                                if($(this).attr("href").indexOf('/') === 0)
+                                {
+                                    $(this).attr('href', final_url + $(this).attr("href"));
+                                }
+                                else
+                                {
+                                    $(this).attr('href', final_url + "/" + $(this).attr("href"));        
+                                }
+                            }                        
+                            if(checkForMyAccount($(this).attr("href")))
+                            {
+                                var modified_url = $(this).attr("href");                            
+                                modified_url = modified_url.replace(original_url_http, myaccount_pages_url);
+                                modified_url = modified_url.replace(original_url_https, myaccount_pages_url);                            
+                                $(this).attr("href", modified_url);
+                            }  
+                            else
+                            {
+                                var modified_url = $(this).attr("href");                            
+                                modified_url = modified_url.replace(myaccount_pages_url, original_url_https);                            
+                                $(this).attr("href", modified_url);
+                            } 
+                        }                    
+                    });
+		}                     
+            });       
+            
+            function checkForMyAccount(url)
+            {
+                var myaccount_pages = document.getElementById("myaccount_pages").value;
+                var myaccount_array = myaccount_pages.split(",");
+                for(i = 0; i < myaccount_array.length; i++)
+                {
+                    if(url.indexOf(myaccount_array[i]) > -1 && url.indexOf("auth.logout") === -1 && url.indexOf("tools/fb_apps") === -1 && url.indexOf("auth.login_form") === -1)
+                        return true;
+                }
+                return false;
+            }
+        ', 
+    
+', 
+', 
+', 
+ ', 
+
+
+', 
+', 
+', 
+
+', 
+', 
+    ',      ', 
+    ', 
+    ', 
+    	    	    		    ', SHOP BY CATEGORIES', 
+	    			
+    	    	    		    ', Wedding Store', 
+	    			
+    	    	    		    ', Gift Store', 
+	    			
+    	    	    		    ', Made in India', 	
+	    			
+    	    	    		    ', 
+	    			
+    	    	    		    ', 
+	    			
+    	    	    		    ', 
+	    			
+    	    	    		    ', 
+	    			
+        ', 
+    ', 
+ ', 
+    ', 
+   
+', 
+
+
+    ', 
+    ', 
+        
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ', 
+    
+    ', 
+
+    ', 
+    
+    ', 
+
+    ', 
+    
+    ', 
+    ', 
+        ', 
+
+    ', 
+    
+    
+    
+    
+        
+
+', u"
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  (function() {
+    var gads = document.createElement('script');
+    gads.async = true;
+    gads.type = 'text/javascript';
+    var useSSL = 'https:' == document.location.protocol;
+    gads.src = (useSSL ? 'https:' : 'http:') +
+      '//www.googletagservices.com/tag/js/gpt.js';
+    var node = document.getElementsByTagName('script')[0];
+    node.parentNode.insertBefore(gads, node);
+  })();
+", 
+ 
+                                
+
+        ', 
+    ', 
+    ', 
+                                                                                        
+    ', 
+    
+
+	    
+', 
+    		
+
+    ', 
+        ', 
+                            ', All Brands', 
+            ', 
+         
+    ', 
+    ', 
+    ', 
+    ', 
+', 
+', 
+
+
+', 
+  .filter-category .sub-heading span .clear_all {
+    color: #000;
+    cursor: pointer;
+    font: 65% arial;
+    padding: 0;
+    position: absolute;
+    right: 63px;
+    top: 14px;
+    margin-left: 7px;
+}
+.filter-category > li > div > a {
+    background: url("http://cdn.shopclues.com/images/ui/sprite-icons.png") no-repeat scroll -252px -8px rgba(0, 0, 0, 0);
+    color: #333;
+    display: block;
+    font: 105% arial;
+    padding: 3px 10px 3px 35px;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+.filter-category > li > div > a:hover {
+    background: url("http://cdn.shopclues.com/images/ui/sprite-icons.png") no-repeat scroll -252px -46px rgba(0, 0, 0, 0);
+    color: #333;
+    display: block;
+    font: 105% arial;
+    padding: 3px 10px 3px 35px;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+', 
+    ', 
+    ', 
+    ', var $j=$.noConflict(true);', 
+   ', 
+       
+ $j(document).ready(function(){
+    
+    var sel_val=$j("#sp").val().split(",");
+    var base_val=$j("#bp").val().split(",");
+    
+    if($j("#sp").val() ==''){
+       var sel_min=base_val[0];
+       var sel_max=base_val[1];
+    }else{ 
+        var sel_min=sel_val[0];
+        var sel_max=sel_val[1];
+    }
+    $j( "#slider-range" ).slider({
+      range: true,
+      min: parseInt(base_val[0]),
+      max: parseInt(base_val[1]),
+      values: [sel_min,sel_max],
+      slide: function( event, ui ) {
+        $j( "#amount" ).val( " Rs." + ui.values[0] + " -  Rs." + ui.values[1] );
+        $j( "#sprice" ).val(ui.values[0]);
+        $j( "#eprice" ).val(ui.values[1]);
+        $j("#sp").val(ui.values[0]+","+ui.values[1]);
+      },
+      stop: function(event, ui) {
+
+          if((sel_min!=ui.values[0]) || (sel_max!=ui.values[1])){
+                $('#fsrc').val("price:"+ui.values[ 0 ]+","+ui.values[ 1 ])
+                document.getElementById('newsearch_filter').click();
+          }
+      }
+    });
+    $j( "#amount" ).val( " Rs." + sel_min + " - Rs." + sel_max );
+    $j( "#sprice" ).val(sel_min);
+    $j( "#eprice" ).val(sel_max);
+  }); 
+  
+    $j('.clear-slider').click(function(event){
+      event.stopPropagation();
+        $j('#sp').val("");
+        document.getElementById('newsearch_filter').click();
+      });
+      
+      
+    $j('.cm-process-items').click(function(){
+ 
+// Disable the default behaviour when a user clicks an empty anchor link.
+ // (The page jumps to the top instead of // animating)
+ //event.preventDefault();
+ 
+// Animate the scrolling motion.
+ $("html, body").animate({
+ scrollTop:0
+ },"slow");
+ 
+});
+      
+', 
+', 
+  .filter-category .sub-heading span .clear_all {
+    color: #000;
+    cursor: pointer;
+    font: 65% arial;
+    padding: 0;
+    position: absolute;
+    right: 63px;
+    top: 14px;
+    margin-left: 7px;
+}
+
+.cm-process-items{ 
+   border-radius: 16px;
+float: right;
+margin-top: 2px;
+/* font-weight: normal; */
+/* font-family: arial; */
+font: 65% arial;
+}
+
+', 
+
+', 
+
+$(document).ready(function(){
+    
+$('.filter-category').find('li').each(function() {
+       if($(this).hasClass('filters')) {
+           if($(this).find("div").length == 0){
+
+           		if($(this).parent().attr('class') == 'overview filter-category'){
+
+           			$(this).parent().parent().parent().parent().hide();
+           		}else{
+
+           			$(this).parent().hide();
+           		}
+
+           		
+           }
+        }
+
+ });
+    
+$('.clear_filter').click(function(event){
+	event.stopPropagation();
+		$(this).parent().parent().find('li').find('input:checkbox').removeAttr('checked');
+		document.getElementById('newsearch_filter').click();
+	});
+$('.clear').click(function(event){
+  event.stopPropagation();
+    $(this).parents('.filter-category').find('li div').find('input:checkbox').removeAttr('checked');
+    document.getElementById('newsearch_filter').click();
+  });
+
+$('.clear-radio').click(function(event){
+  event.stopPropagation();
+    $(this).parents('.filter-category').find('li div').find('input:radio').removeAttr('checked');
+    document.getElementById('newsearch_filter').click();
+  });
+
+$('.clear_type').click(function(event){
+	
+		
+	event.stopPropagation();
+	var temp = $(".child-two").children("a").attr("href");
+	$(this).attr("href",temp);
+	
+	
+});       
+
+});
+$('input[name="brand_search"]').keyup(function (element) {
+    var wordToSearch = $(element.target).val();
+    $("#brands_fct div label").each(function(index, obj) {
+        var s = new RegExp("^"+wordToSearch, "gi");
+        
+        if($(obj).html().match(s)){
+            $(obj).parent().show();
+        }
+        else{
+            $(obj).parent().hide();
+        }
+    });
+});
+$('input[name="promotion_search"]').keyup(function (element) {
+    var wordToSearch = $(element.target).val();
+    $("#promotion_fct div label").each(function(index, obj) {
+        var s = new RegExp("^"+wordToSearch, "gi");
+        if($(obj).html().match(s)){
+            $(obj).parent().show();
+        }
+        else{
+            $(obj).parent().hide();
+        }
+    });
+});
+$('input[name="market_search"]').keyup(function (element) {
+    var wordToSearch = $(element.target).val();
+    $("#market_fct div label").each(function(index, obj) {
+        var s = new RegExp("^"+wordToSearch, "gi");
+        
+        if($(obj).html().match(s)){
+            $(obj).parent().show();
+        }
+        else{
+            $(obj).parent().hide();
+        }
+    });
+});
+function new_search(obj){
+    var fsrc = $(obj).attr('rev');
+    $('#fsrc').val(fsrc+':'+$(obj).val());
+    //$('#features_hash').val(fsrc+':'+$(obj).val());
+    document.getElementById('newsearch_filter').click();
+}
+
+function deselect_all(obj){
+	$('#option_unchk').attr('checked','checked');
+	$('input:checkbox').removeAttr('checked');
+	document.getElementById('newsearch_filter').click();
+}
+$('.clear_all').click(function(event){
+	if($('input:checkbox[name="show_outlet_brand[]"]').val()!=""){
+      var obj = $('input:checkbox[name="show_outlet_brand[]"]').val();
+	} else {
+		var obj = $('input:checkbox[name="show_market[]"]').val();
+	}
+	var fsrc = $('#sh_option'+obj).attr('rev');
+	if(fsrc == "show_outlet_brand")
+	{
+		document.location.href = "index.php?dispatch=categories.view&category_id=7068&brand=2";
+	}
+	else if(fsrc == "show_market")
+	{
+		document.location.href = "nrh-2.html";
+	}
+   
+  });
+$('input[name="outlet_brand_search"]').keyup(function (element) {
+    var wordToSearch = $(element.target).val();
+    $("#outlet_fct div a").each(function(index, obj) {
+        var s = new RegExp("^"+wordToSearch, "gi");
+        
+        if($(obj).html().match(s)){
+            $(obj).parent().show();
+        }
+        else{
+            $(obj).parent().hide();
+        }
+    });
+});
+function chk_shh_option(obj){
+	var fsrc = $('#sh_option'+obj).attr('rev');
+	if(fsrc=="show_outlet_brand"){
+		if($('#sh_option'+obj+':checkbox:checked').length == "1"){
+          document.location.href = "index.php?dispatch=categories.view&category_id=7068&brand=2";
+        }
+	}
+	else if(fsrc=="show_market"){
+		if($('#sh_option'+obj+':checkbox:checked').length == "1"){
+           document.location.href = "nrh-2.html";
+        }
+	}
+  
+}
+function chk_sh_option(obj){
+	
+        var fsrc = $('#sh_option'+obj).attr('rev');
+        $('#fsrc').val(fsrc+':'+$('#sh_option'+obj).val());
+
+	if($('#sh_option'+obj+':checkbox:checked').length == "1"){
+		$('#sh_option'+obj).removeAttr("checked");
+                $('#sh_option'+obj).parent().removeClass("checked");
+        } else {
+                $('#sh_option'+obj).attr('checked','checked');
+                $('#sh_option'+obj).parent().addClass("checked");
+        }
+        var type_ids = $('.checkBoxType:checked').map(function() {
+	    return this.value;
+	}).get().join();
+       
+    
+    	
+
+	document.getElementById('newsearch_filter').click();
+}
+
+function price_clear(){
+    
+  // event.stopPropagation();
+
+        $j('#sp').val("");
+        document.getElementById('newsearch_filter').click();
+      }
+      
+function rating_clear(ratingid){
+
+$("#"+ratingid).find('input:radio').removeAttr('checked');
+    document.getElementById('newsearch_filter').click();
+ 
+}
+
+function clear_tab()
+{
+        $("li").each(function(){
+                $(this).find('input:checkbox').removeAttr('checked');
+                $(this).find('input:radio').removeAttr('checked');        
+    });
+     $j('#sp').val("");
+    document.getElementById('newsearch_filter').click();
+}
+      
+ 
+function single_chk_sh_option(obj){
+        var new_href=$('#sh_option'+obj).siblings('label').children('a').attr('href');
+        var key = 'marketplace_type';
+        var data = unescape(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+	if (data == 'nrh') {
+            var search = new_href.indexOf("?");
+            if(parseInt(search) == -1){
+                new_href = new_href + "?marketplace_type=nrh";
+            }else{
+                var data1 = unescape(new_href.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+                if(data1 == '' || data1 === null){
+                    new_href = new_href + "&marketplace_type=nrh";
+                }
+            }
+        }
+	window.location.href=new_href;
+     }    
+ 
+    $('.slide_toggle_fct').click(function(){
+        if($(this).next().hasClass('clearboth') && $(this).next().attr('id') == "" && $(this).next().next().is("ul")){
+            var target_id = $(this).next().next().attr('id');
+        }else{
+            var target_id = $(this).next().attr('id');
+        }
+        $('#'+target_id).slideToggle();
+        if($('#'+this.id).attr('id')=="brands_fct_1") { $('#brands_fct').slideToggle(); }
+
+        if($('#'+this.id).hasClass('box_expand')){
+           $('#'+this.id).removeClass('box_expand'); 
+           $('#'+this.id).addClass('box_collapse');
+        }else{
+           $('#'+this.id).removeClass('box_collapse');
+           $('#'+this.id).addClass('box_expand');        
+        }
+    });
+        
+
+	var controller = "pages";
+	if(controller != 'index') {
+		$("ul[id^='content_product_more_filters_20_']").each(function() {
+		  var id = this.id.replace("content_product_more_filters_20_", "");
+		  
+		  if(id!='') {
+			  var ulHeight = $("#content_product_more_filters_20_" + id).height();
+			  if(ulHeight < 660) {
+			  	$("#content_product_more_filters_20_" + id).removeAttr( 'style' );
+			  }
+
+			  // hide ul if li is empty
+			  if($("#content_product_more_filters_20_" + id).find("li").length == 0) {
+			    var relid = $("#content_product_more_filters_20_" + id).attr( 'rel' );
+			    if(relid!='') $('#'+relid).hide();
+			  }			  
+		  }
+		});
+	}
+$(document).ready(function(){
+$('.filter-category .arrow').click(function(){
+    if($(this).parents('.filter-category').hasClass('solr-categories-filters')){
+        $(this).parents('.filter-category').next().slideToggle("slow");
+    }
+    else if($(this).parents('.filter-category').hasClass('main-category')){
+        $(this).parents('.filter-category').next().slideToggle("slow");
+    }
+    else if($(this).parents('.sub-heading').next().hasClass('search-text')){
+        $(this).parents('.sub-heading').next().slideToggle("slow");
+        $(this).parents('.sub-heading').next().next().slideToggle("slow");
+    }
+    else{
+        $(this).parents('.sub-heading').next().slideToggle("slow");
+    }
+    if($(this).hasClass('up')){
+        $(this).removeClass('up');
+    }else{
+        $(this).addClass('up');
+    }
+});
+});
+$('.meta_clear_filter').click(function(event){
+
+		event.stopPropagation();
+		remove_from_url('mcat_id');
+	});
+
+function remove_from_url(key){
+
+	var sourceURL=location.href;
+	var rtn = sourceURL.split("?")[0],
+        param,
+        params_arr = [],
+        queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+    if (queryString !== "") {
+        params_arr = queryString.split("&");
+        for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+            param = params_arr[i].split("=")[0];
+            if (param === key) {
+                params_arr.splice(i, 1);
+            }
+        }
+        rtn = rtn + "?" + params_arr.join("&");
+    }
+    window.location.href=rtn;
+}
+
+function price_submit(){
+        var regex=/^[0-9]+$/;
+        var sprice=$("#sprice").val();
+        var eprice=$("#eprice").val();
+        
+        if (!(sprice.match(regex)) || !(eprice.match(regex)))
+        {
+            alert("Please enter valid price");
+            return false;
+        }
+        
+        $("#sp").val(sprice+","+eprice);
+        $('#fsrc').val("price:"+sprice+","+eprice);
+        document.getElementById('newsearch_filter').click();
+        
+    }
+    
+  function callselect(intvalue)
+  {
+//       $("#selecttab").val(intvalue);
+       var sprice=$("#sprice").val();
+        var eprice=$("#eprice").val();
+        $("#sprice1").val(sprice);
+        $("#eprice1").val(eprice);
+       $("#fsrc").val(intvalue);
+        $(".tab_content").hide();
+        $("ul.tabs li").removeClass("active");
+        $("#"+intvalue+"-l").addClass("active");
+        $("#wait").css("display","block");
+
+            $.ajax({
+                type: "POST",
+               // url: "index.php?dispatch=categories.view1",
+               url: "single_filter.php",
+                data: $("#newsearch").serialize(),
+                cache: false,
+                //dataType: "json",
+            }).done(function(msg) {
+                 $("#"+intvalue+"-s").html(msg);
+               $("#wait").css("display","none");
+                 $("#"+intvalue+"-s").fadeIn();
+                   $("#see_all_id1 .viewport").height(395);
+                 $('#see_all_id1').tinyscrollbar();
+                 if($( "#see_all_id1 .scrollbar" ).hasClass( "disable" )){
+                        $("#see_all_id1 .viewport").height($("#see_all_id1 .overview").height());
+                }
+       //alert(intvalue);
+  });
+  
+} 
+', 
+
+
+', 
+   
+   
+      ', 
+    ', 
+
+    
+                                           ', 
+        ', 
+         ', 
+    ', 
+    
+  ', 
+      ', 
+        ', 
+         ', 
+      ', 
+      ', 
+      ', 
+          ', 
+      ', 
+                      
+          
+
+                        
+                                          
+              
+                                        
+                                                                
+                                                                ', 1', 
+
+                    
+                      
+                                          
+              
+                                        
+                                                           
+                      
+                                          
+              
+                                        
+                                                           
+                      
+                                          
+              
+                                        
+                                                           
+                      
+                                          
+              
+                                        
+                                                           
+                      
+                            
+        
+              ', 
+              ', 
+    ', 
+      ', 
+
+    ', 
+        ', 
+      ', 
+      ', 
+        ', 
+', 
+      
+                                          
+   
+                                                      
+                                                ', 
+        ', 
+
+                ', 
+                                                                                                     ', 
+                                    ', 
+                                        ', 
+                                    ', 
+                                    ', 1 (1)', 
+                                                                                                                                                         ', 
+                                    ', 
+                                        ', 
+                                    ', 
+                                    ', 1 (1)', 
+                                                                                                                                                                                                                                                 ', 
+                                    ', 
+                                        ', 
+                                    ', 
+                                    ', 3 (3)', 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ', 
+               
+                            ', 
+
+            
+   
+                                          
+   
+                                          
+   
+                                          
+   
+                                          
+    
+
+', 
+ ', 
+ ', 
+     ', 
+         ', 
+  
+
+                      
+         ', 
+            ', 
+', 
+         
+          ', 
+ ', 
+     ', 
+         ', 
+
+                      
+         ', 
+            ', 
+', 
+', 
+', 
+     ', 
+             ', 
+', 
+            
+            
+', 
+
+
+', 
+     ', 
+              ', 
+', 
+    ', 
+', 
+        ', 
+                   
+                         
+            ', 
+', 
+', 
+  ', 
+        ', 
+        ', 
+  ', 
+', 
+ ', 
+ ', 
+     ', 
+                     ', 
+', 
+         
+          ', 
+ ', 
+     ', 
+                     ', 
+', 
+
+', 
+  ', 
+  ', 
+     ', 
+  ', 
+', 
+
+', 
+', 
+  ', 
+          
+        ',     
+                   ', 
+    ', 
+  ', 
+
+
+', 
+', 
+      
+    ', 
+    
+        ', 
+            ', 
+   
+    ', 
+', 
+', 
+
+', 
+
+', 
+', 
+        ', 
+       
+              
+                        
+    ', 
+  ', 
+', 
+
+
+', 
+', 
+    ', 
+    ', 
+    ', 
+    
+   
+ ', 
+              ', 
+              ', 
+    ', 
+    ', 
+      ', Cancel', 
+      ', 
+    ', 
+  ', 
+
+    ', 
+
+
+', 
+
+
+',  
+    .black_overlay{
+      background:rgba(113, 128, 130, 0.9); position:fixed; width:100%; height:100%; left:0; top:0; display:none; opacity: 0.8;}
+	.popup{width:360px; border-radius:5px; border:#000 1px solid; height:180px; background:#fff; position:absolute; left:0; right:0; top:0; bottom:0; margin:auto; display:none;
+    }
+    .white_content {
+        display: none;
+        position: absolute;
+        top: 3%;
+        left: 115%;
+        border: 5px solid slategray;
+        background-color: white;
+        z-index:1002;
+        overflow: auto;
+    }
+    
+    ',  
+    ', 
+var $arr = [];
+var tags = (".filter_popup .total_filter_selected .tags a");
+
+$(document).ready(function() {
+  $(".tab_content").hide();
+ // $(".tab_content:first").show();
+  
+  $("ul.tabs li").click(function() {
+      var regex=/^[0-9]+$/;
+        var sprice=$("#sprice1").val();
+        var eprice=$("#eprice1").val();
+        
+        if (!(sprice.match(regex)) || !(eprice.match(regex)))
+        {
+            alert("Please enter valid price");
+             $("#price-s").fadeIn();
+            return false;
+        }
+    $("ul.tabs li").removeClass("active");
+    $(this).addClass("active");
+    $(".tab_content").hide();
+  });
+
+  /*CLOSE POPUP*/
+  $('.close_button').click(function(){
+   // $('.filter_popup').hide().fadeOut();
+  });
+
+  $(tags).click(function(){
+    $(this).hide();
+  });
+  
+});
+
+
+ function calldiv(intvalue){
+
+ $("#selecttab").val(intvalue);
+    $(".tab_content").hide();
+$("#fsrc1").val(null);
+$("#fsrc").val(null);        
+var regex=/^[0-9]+$/;
+        var sprice=$("#sprice1").val();
+        var eprice=$("#eprice1").val();
+        if (!(sprice.match(regex)) || !(eprice.match(regex)))
+        {
+             $("#price-s").fadeIn();
+            return false;
+        }
+         if( ($("#sprice1").val() != $("#sprice").val()) || ($("#eprice1").val() != $("#eprice").val())){
+
+            $("#sp1").val(sprice+","+eprice);
+          }
+$("#wait").css("display","block");
+
+            $.ajax({
+                type: "POST",
+               url: "single_filter.php",
+                data: $("#this_form").serialize(),
+                cache: false,
+            }).done(function(msg) {
+                 //console.log(msg);
+                  $("#wait").css("display","none");
+                
+                 $("#"+intvalue+"-s").html(msg);
+             
+                 $("#"+intvalue+"-s").fadeIn();
+                 $("#see_all_id1 .viewport").height(395);
+                 $('#see_all_id1').tinyscrollbar();
+                 if($( "#see_all_id1 .scrollbar" ).hasClass( "disable" )){
+                        $("#see_all_id1 .viewport").height($("#see_all_id1 .overview").height());
+                }
+               
+                
+            });
+}
+
+function validate()
+{
+    if (($("#fsrc").val()))
+    {
+         var a = $("#fsrc").val();
+    }else
+    {
+        var a = $("#selecttab").val();
+    }
+   // var a = $("#selecttab").val();
+    $("#fsrc1").val(a);
+            var regex=/^[0-9]+$/;
+        var sprice=$("#sprice1").val();
+        var eprice=$("#eprice1").val();
+        
+        if (!(sprice.match(regex)) || !(eprice.match(regex)))
+        {
+            alert("Please enter valid price");
+            return false;
+        }
+        
+        if( ($("#sprice1").val() != $("#sprice").val()) || ($("#eprice1").val() != $("#eprice").val())){
+
+            $("#sp1").val(sprice+","+eprice);
+          }
+     //   $('#fsrc').val("price:"+sprice+","+eprice);
+        //document.getElementById('newsearch_filter').click();
+}
+',  
+    
+
+    
+
+
+                                                          ', 
+    ', 
+
+      ', 
+      var HomepageConfig = "1";
+      var ConfigRowCount = "13";
+      var ConfigColumnCount = "5";
+      var ConfigColumnWidth = "180";
+      var ConfigLoadAll = "1";
+      var websiteUrl = "http://www.shopclues.com";
+      ', 
+    ',      
+                    	', 
+		', 
+		', 
+		', 
+            ', 
+
+ 
+                        
+            ', 
+
+
+    ', 
+        ', 
+        ', 
+                                    ', 
+        
+                 ',  
+        ', 
+                                  
+', u"
+$(function() {
+	$('.pincode_mid .full-localization a').click(function(){
+		$(this).parent().siblings().fadeIn();
+		$(this).parent().hide();
+	});
+
+	$('.cross_pinmid').click(function(){
+       $('.pincode_bar').hide();
+    });
+});
+$(document).ready(function(){
+if($('.filter-category').length > 0){
+$('.pincode_bar').css({'border-left':'6px solid #fff','margin-bottom':'10px'});    
+}
+});
+", 
+', 
+
+	.pincode_mid{width:600px; margin:0 auto; overflow:hidden;}
+    .pincode_mid .full-localization{width:100%; float:left; text-align:center;}
+    .pincode_mid .full-localization a {
+    display: inline-block;
+    font: 400 16px 'Roboto';
+    color: #116ec9;
+    margin: 0 0 0 5px;
+    position: relative;
+  }
+    .pincode_mid .left-localization-pro{float:left; width:50%;}
+    .pincode_mid .right-localization-pro{float:right; width:240px; margin-top:8px;}
+    .pincode_mid .loc_zone_msg {
+    display: inline-block;
+    font: 500 16px 'Roboto';
+    color: #737373;
+    margin: 0;
+  }
+    .pincode_mid p {
+    display: inline-block;
+    width: 100%;
+    font: 400 12px 'Roboto';
+    color: #737373;
+    margin: 0;
+  }
+    .pincode_mid input[type="number"] {
+    float: left;
+    width: 167px;
+    border: none;
+    height: 32px;
+    background: #FFFFFF;
+    border: none;
+    padding: 0 0px 0 26px;
+    box-sizing: border-box;
+    font: 500 14px 'Roboto';
+    color: #000000;
+    position: relative;
+    border: 1px solid #f0f0f0;
+  }
+    .pincode_mid input[type="button"]{float:left; width:73px; height:32px; font:500 14px 'Roboto'; color:#ffffff; text-align:center; background-color:#18b8c5; border:1px solid #18b8c5;}
+    .pincode_input_top{position:relative; float:left;}
+    .cross_pinmid{position:absolute; right:15px; top:15px; height:17px; width:16px; background:url('http://cdn.shopclues.com/images/ui/pincode-sprite.png') left top no-repeat;}
+    .pincode_input_top::after{position:absolute; width:14px; height:18px; background:url(http://cdn.shopclues.com/images/ui/pincode-sprite.png) -1px -22px no-repeat; content:""; left:7px; top:7px;}
+        .android-app-icon, .ios-app-icon, .windows-app-icon  {display: none;}
+         a.cross_pinmid {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 10px;
+}
+ .pincode_mid .full-localization a:after {
+    position: absolute;
+    left: -5px;
+    top: 4px;
+    width: 1px;
+    background: #737373;
+    content: "";
+    height: 14px;
+}
+
+ .pincode_bar {
+    width: 100%;
+    background: #fbfbfb;
+    margin-bottom: 0px;
+    padding: 10px 0;
+    height: auto;
+    position: relative;
+    z-index: 15;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border: 1px solid #f0f0f0;
+    top: -2px;
+}
+
+@media screen and (max-width:1100px){.header-offer{height:73px}.pincode_bar{top:28px}}
+', 
+
+', 
+	', 
+		', 
+    	', 
+        	',  ', Change', 
+        ', 
+    	', 
+        	', 
+            ', Share pincode for faster delivery by local sellers.', 
+        ', 
+        ', 
+        	', 
+                ', 
+                    ', 
+                ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+                ', 
+        
+    ', 
+        ', Home', Contact Us', 
+    ', 
+        
+
+
+
+', 
+            
+                        	                    
+            
+', 
+		', 
+', 
+', 
+', 
+', 
+', 
+$(function() {
+	$(window).scroll(function() {
+
+		if ($(window).scrollTop() <= 400) {
+			$('.FooterLeft').attr("class","FooterLeft LeftFixed");
+		}
+		if ($(window).scrollTop() > 400) {
+			$('.FooterLeft').attr("class","FooterLeft");
+		}	
+	});
+	});
+', 
+', 
+', 
+', 
+', 
+', 
+
+', 
+', Contact us', 
+', 
+    ', Become an Affiliate', 
+    ', Advertise with Us', 
+    ', Careers', 
+    ', Customer Support', 
+    ', Merchant Support', 
+    ', Get In Touch', 
+    ', Brand Inquiries', 
+    ', Bulk Orders', 
+
+    ', 
+', 
+', Shopper Central', 
+', 
+', Login', 
+', Our Policies', 
+', Terms & Conditions', 
+', Payment Options', 
+', CluesBucks', 
+', Gift Cards', 
+', Buyer Guides', 
+', FAQs', 
+', 	
+', 
+
+', Merchant Central', 
+	', 
+    ', Login', 
+    ', How To Sell', 
+    ', Commission Structure ', 
+    ', Fulfillment Policy', 
+    ', Policies and Rules ', 
+    ', User Agreement', 
+    ', Testimonials', 
+    ', Seller Summit', 
+    ', 
+', 
+', About us ', 
+	', 
+    ', Band of Trust', 
+    ', Brand Guidelines', 
+    ', TV Commercials', 
+    ', News', 
+    ', In the Press', 
+    ', Awards', 
+    ', Seller Summit', 
+    ', Press', 
+    ', 
+', 
+
+
+
+
+', 
+', 
+', 
+
+', 
+', 
+
+', 
+', 
+', 
+
+', 
+', 
+
+', 
+', 
+', 
+', Contact Us', 
+', 
+	', 
+    ', 
+    ', Headquarters & Registered Office', 
+    ', Clues Network Pvt. Ltd.', 
+	', Building No. 112,', 
+	', Sector \u2013 44,', 
+	', Gurgaon, 122001, Haryana, India ', 
+    ', How to Reach', 
+    ', Get Directions Using Google Maps ', 
+    ', 
+    ', 
+    ', USA Office', 
+    ', Clues Network Inc.', 
+	', 530 Lytton Avenue', 
+	', Palo Alto, CA 94301 USA ', 
+    ', 
+    ', 
+    
+    
+', 
+', 
+
+', 
+', E-mail Us ', (Expect a reply in 24-48 Hrs)', 
+', 
+	', 
+    ', 
+    ', Customer Support', 
+    ', Merchant Support', 
+    ', Corporate Contact', 
+    ', 
+    ', 
+', 
+', 
+', 
+	function mailButton()
+{
+	document.location.href = "mailto:info@shopclues.com";
+}
+', 
+
+
+', 
+', 
+
+
+', 
+', 
+
+
+', 
+
+
+', 
+', 
+', 
+', 
+', u"
+.ContactList{
+	list-style-type:none;
+	padding:0;
+	margin:0;
+	width:100%;	
+}
+.ContactList > li{
+	float:left;
+	width:75%;
+	margin:0 0 95px 0;	
+}
+.ContactList > li:last-child{
+	margin-right:0;	
+}
+.ContactList > li > div:first-child{
+	display:inline-block;
+	padding:4px 19px;
+	text-align:left;
+	background-color:#00a2b5;
+	color:#fff;	
+	font-size:16px;
+	/*margin:0 0 10px 0;*/
+	font-family: 'montserratregular';
+}
+.ContactList > li > div:first-child > span{
+	display:inline-block;
+	color:#fff;	
+	font-size:14px;
+}
+.textDiv{
+	display:block;
+	padding:20px 0 20px 33px;	
+	border: 1px solid rgba(51, 133, 189, 0.11);
+}
+.textDiv > ul{
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.textDiv > ul > li{
+    float: left;
+    margin: 0 80px 0 0;
+    width: 44%;
+}
+
+.textDiv > ul > li:last-child{
+	margin-right:0;
+}
+.textDiv > ul > li > span{
+	display:block;
+	color:#222222;
+	font-size:14px;
+	font-family: 'montserratlight';
+}
+.textDiv > ul > li > span:first-child{
+	font-weight:bold;
+}
+.textDiv > ul > li > a{
+	display:block;
+	color:#00a2b5;
+	font-size:14px;
+	font-family: 'montserratlight';
+}
+.RightContent span{
+	color:#3d3d3c;
+	
+}
+.numberedList > li{
+	color: #3d3d3c !important;
+    font-size: 13px !important;
+}
+.numberedList > li > span {
+    color: #3d3d3c;
+    font-size: 13px;
+ }
+ @font-face {
+    font-family: 'montserratlight';
+    src: url('http://cdn.shopclues.com/images/banners/Work/ui/montserrat-light.woff2') format('woff2'),
+         url('http://cdn.shopclues.com/images/banners/Work/ui/montserrat-light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'montserratregular';
+    src: url('http://cdn.shopclues.com/images/banners/Work/ui/montserrat-regular.woff2') format('woff2'),
+         url('http://cdn.shopclues.com/images/banners/Work/ui/montserrat-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'montserratsemi_bold';
+    src: url('http://cdn.shopclues.com/images/banners/Work/ui/montserrat-semibold.woff2') format('woff2'),
+         url('http://cdn.shopclues.com/images/banners/Work/ui/montserrat-semibold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+a{
+	outline:none;
+}
+a:hover, a:focus, a:active{
+	outline:none;
+}
+
+.site-content.margin{
+	margin:0px;
+}
+
+.shadow-flat-top{
+display:none;
+}
+
+", 
+
+', 
+
+
+		', 
+	
+
+
+
+
+
+', 
+function useful_count(id,call_type,controller,obj_id)
+{
+   $('#but_'+id).hide();
+  $('#wait_'+id).show();
+  if(controller=='products')
+  {
+	  dispatch='products.useful_count';
+	  obj_type='P';
+  }
+  else
+  {
+	  dispatch='companies.useful_count';
+	  obj_type='M';
+  }
+  $.ajax({
+	  type: "GET",
+	  url: "index.php",
+	  data: { dispatch:dispatch,id:id,call_type:call_type,obj_type:obj_type,obj_id:obj_id}
+	  }).done(function( msg ) {
+		 if(msg==1)
+		 {
+			 $('#wait_'+id).hide();
+			 $('#useful_bar_'+id).hide();
+			 $('#useful_bar_msg_'+id).show();
+		 }
+		 else
+		 {
+			 $('#but_'+id).show();
+			 $('#wait_'+id).hide();
+			 alert('Error,Please Try Again');
+		 }
+		  });
+}
+
+
+function show_numbers(field_arr){
+	var captcha_number = Math.floor((Math.random()*1000000)+1);
+	var captcha_text = '<p>Enter the text you see in the box : </p>';
+	var captcha_text = captcha_text + '<label for="verification_code" class="cm-required captcha_lbl" style="float:left; background:#CCC; cursor:pointer; height:26px; text-align:center; color:#000; display:block; padding:0 5px; width:63px; margin-right:10px; font:bold 13px/26px trebuchet ms; border:1px solid #666; margin-left:0px;" onclick="show_numbers(\''+field_arr+'\')">' + captcha_number + '</label>';
+	var captcha_text = captcha_text + '<input type="hidden" id="captcha_number" name="'+field_arr+'[captcha_number]" value="'+captcha_number+'" />';
+	var captcha_text = captcha_text + '<input type="text" class="form_onecolumnsmall_field_textbox round_five profile_detail_field" style="width:70px;" id="verification_code" name="'+field_arr+'[verification_code]" value="" />';
+	$('#captcha_value').html(captcha_text);
+}
+
+function check_captcha(){
+	var captcha_number = $('#captcha_number').val();
+	var verification_code = $('#verification_code').val();	
+	if(captcha_number != verification_code){
+		show_numbers('post_data');
+		$('#captcha_error').html('<span style="color:red;">Verification Code is not same.</span>');
+		return false;
+	}else{
+		return true;
+	}
+}
+
+$('#add_post_form').submit(function(){
+	var ip=$('#sc_uses').val();
+	var name = $('#dsc_name').val();
+	if (name == "") {
+      $("#dsc_name").focus();
+      return false;
+    }
+	var rating 	= $('#dsc_rating').val();
+	if (rating == "") {
+      $("#dsc_rating").focus();
+      return false;
+    }
+	var message = $('#dsc_message').val();
+	if (message == "") {
+      $("#dsc_message").focus();
+      return false;
+    }
+	var verification_code 	= $('#verification_code').val();
+	if (verification_code == "") {
+      $("#verification_code").focus();
+      return false;
+    }else{
+		if(check_captcha()){			
+		}else{
+			return false;	
+		}
+	}
+	
+	var thread_id = $('#thread_id').val();
+	$('#review_result').html('Please wait....');
+	$('#review_result').css('display','block');
+	$('#captcha_error').html('');
+	$.ajax({
+      type: "POST",
+      url: "index.php",
+      data: { dispatch: 'discussion.add_cpost', name:name, message:message, rating_value:rating, thread_id:thread_id, captcha_number:$('#captcha_number').val(), verification_code:$('#verification_code').val(),ip:ip},
+      success: function(msg) {
+       	if(msg == 'done'){
+			var success_message = '<span style="color:green;">Thanks for your review.</span>';
+			$('#review_result').html(success_message);
+			$('#review_result').fadeIn(5000);	
+			$('#review_result').fadeOut(5000);	
+			$('#dsc_name').val('');
+			$('#dsc_rating').val('');
+			$('#dsc_message').val('');
+			$('#verification_code').val('');
+			show_numbers('post_data');			
+		}else if(msg == 'failed'){
+			var fail_message = '<span style="color:red;">_some_error_occured</span>';
+			$('#review_result').html(fail_message);
+			$('#review_result').fadeIn(5000);	
+			$('#review_result').fadeOut(5000);
+		}else if(msg == 'captcha_error'){
+			var fail_message = '<span style="color:red;">Verification code is not same.</span>';
+			$('#review_result').html(fail_message);
+			$('#review_result').fadeIn(5000);	
+			$('#review_result').fadeOut(5000);
+		}else if(msg == 'captcha_code_missing'){
+			var fail_message = '<span style="color:red;">Captcha code is not correct.</span>';
+			$('#review_result').html(fail_message);
+			$('#review_result').fadeIn(5000);	
+			$('#review_result').fadeOut(5000);
+		}else if(msg == 'character_error'){
+                    var fail_message = '<span style="color:red;">Please make sure your review contains at least 200 characters.</span>';
+			$('#review_result').html(fail_message);
+			$('#review_result').fadeIn(5000);	
+			$('#review_result').fadeOut(5000);
+                    
+                 }
+      }
+     });
+    return false;
+});
+
+', 
+
+            
+            
+                
+                        ', 
+                 ',  
+                                                                     ', 
+        
+                    ', 
+       
+', 
+
+
+
+    ', 
+', 
+    ', 
+$.cookie={get:function(name){var arg=name+"=";var alen=arg.length;var clen=document.cookie.length;var i=0;while(i<clen){var j=i+alen;if(document.cookie.substring(i,j)==arg){var endstr=document.cookie.indexOf(";",j);if(endstr==-1){endstr=document.cookie.length}return unescape(document.cookie.substring(j,endstr))}i=document.cookie.indexOf(" ",i)+1;if(i==0){break}}return null},set:function (name,value,expires,path,domain,secure){document.cookie=name+"="+escape(value)+((expires)?"; expires="+expires.toGMTString():"")+((path)?"; path="+path:"")+((domain)?"; domain="+domain:"")+((secure)?"; secure":"")},remove:function (name,path,domain){if(jQuery.cookie.get(name)){document.cookie=name+"="+((path)?"; path="+path:"")+((domain)?"; domain="+domain:"")+"; expires=Thu, 01-Jan-70 00:00:01 GMT"}}}
+', 
+    ', 
+', 
+', 
+
+
+', 
+', 
+        ',  
+        	', 
+', 
+', 
+ ', 
+', 
+
+', 
+.nl_new_category .jcarousel-skin-tango .jcarousel-prev-horizontal{top: -45px!important;left: -15px!important;}
+.nl_new_category .jcarousel-skin-tango .jcarousel-next-horizontal{top: -45px!important;right: -20px!important;}
+', 
+', 	        	', 
+', 
+', 
+
+
+', 
+    ', 
+        ', 
+', 
+', 
+        ', 
+', 
+', u"What's New", 
+', Your Wishlist', 
+', Buyer Guides', 
+', 
+', 
+        ', 
+    ', 
+
+    ', 
+        ', 
+            ', shopper central', 
+            ', Login', 
+            ', Our Policies', 
+            ', Terms and Conditions', 
+            ', Payment Options', 
+            ', Clues Bucks', 
+            ', Gift Cards', 
+            ', Buyer Guides', 
+            ', Frequently Asked Questions', 
+                        ', Service Centre', 
+            ', 
+        ', 
+        ', 
+            ', Merchant Central', 
+            ', 
+            ', Login', 
+            ', How to Sell', 
+            ', Commission Structure', 
+            ', Fulfillment Policy', 
+            ', 
+            ', Policies &AMP; Rules', 
+            ', User Agreement', 
+            ', Testimonials', 
+            ', Seller Summit', 
+            ', 
+        ', 
+        ', 
+            ', About Us', 
+            ', Band of Trust', 
+            ', 
+            ', Brand Guidelines', 
+            ', TV Commercials', 
+                ', 
+            ', News', 
+            ', In the Press', 
+            ', Awards', 
+                ', 
+            ', 
+            ', 
+            ', 
+            ', Press', 
+            ', 
+        ', 
+        ', 
+            ', Contact Us', 
+            ', Become an Affiliate ', 
+            ', Advertise with Us
+                                       ', 
+                                    ', 
+            ', Careers', 
+            ', Customer Support', 
+            ', Merchant Support', 
+            ', Get in Touch', 
+            ', 
+            ', 
+            ', Brand Inquiries', 
+            ', Bulk Orders', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+    ', 
+    ', 
+    ', 
+        ', 
+            ', 
+', Special Offers', 
+            ', Sign up to access our special offers', 
+            ', 
+        ', 
+        ', 
+            ', 
+', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+', 
+        ', 
+        ', 
+            ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+        ', 
+        ', 
+            ', 
+', Keep in Touch', 
+            ', Social Connect', 
+            ', 
+        ', 
+    ', 
+    ', 
+        ', Our Leading Categories', 
+        ', 
+            ', 
+                ', Mobile & Tablets:', 
+            ', 
+            ', 
+                ', Android Phones', 
+            ', 
+            ',  /
+                ', Smartphones', 
+            ', 
+            ',  /
+                ', Feature Phones', 
+            ', 
+            ',  / ', Unboxed Phones', 
+            ',  / ', Refurbished Phones', 
+            ',  / ', Tablets ', 
+            ',  / ', CDMA Phones', 
+            ',  / ', Value Added Services', 
+            ',  / ', Seller Certified Mobiles', 
+        ', 
+        ', 
+            ', 
+                ', Computers:
+', 
+            ', 
+            ', 
+                ', Laptops ', 
+            ', 
+            ',  /
+                ', Printers  ', 
+            ', 
+            ',  /
+                ', Routers ', 
+            ', 
+            ',  / ', Ink & Toner Cartridges', 
+            ',  / ', Monitors ', 
+            ',  / ', Gaming
+', 
+            ',  / ', Unboxed & Refurbished Laptops', 
+            ',  / ', Assembled Desktops', 
+            ',  / ', Data Cards', 
+        ', 
+        ', 
+            ', 
+                ', TV, Audio & Large Appliances:
+', 
+            ', 
+            ', 
+                ', TVs & DTH', 
+            ', 
+            ',  /
+                ', Home Theatre Systems 
+', 
+            ', 
+            ',  / ', Hidden Cameras & CCTVs
+', 
+            ',  / ', Refrigerators 
+', 
+            ',  / ', Washing Machines
+', 
+            ',  / ', Air Conditioners
+
+', 
+            ',  / ', Cameras
+
+', 
+            ',  / ', Speakers 
+', 
+        ', 
+        ', 
+            ', 
+                ', Mobile & Laptop Accessories:', 
+            ', 
+            ', 
+                ', Headphones
+
+', 
+            ', 
+            ',  /
+                ', Power Banks
+
+', 
+            ', 
+            ',  / ', Backpacks
+', 
+            ',  / ', Cases & Covers
+', 
+            ',  / ', Pen Drives
+', 
+            ',  / ', External Hard Disks
+
+', 
+            ',  / ', Mouse
+
+', 
+            ',  / ', Smart Watches
+
+', 
+            ',  / ', MicroSD Cards 
+
+', 
+        ', 
+        ', 
+            ', 
+                ', Appliances:', 
+            ', 
+            ', 
+                ', Trimmers
+
+', 
+            ', 
+            ',  /
+                ', Hair Dryers 
+
+', 
+            ', 
+            ',  / ', Emergency Lights 
+', 
+            ',  / ', Water Purifiers
+', 
+            ',  / ', Gas Cooktops
+', 
+            ',  / ', Electric Kettles
+
+', 
+            ',  / ', Hair Straighteners
+
+', 
+            ',  / ', Induction Cooktops
+
+', 
+            ',  / ', Sewing Machines
+
+', 
+            ',  / ', 
+Geysers
+
+', 
+        ', 
+        ', 
+            ', 
+                ', Home & Kitchen:', 
+            ', 
+            ', 
+                ', Bedsheets 
+', 
+            ', 
+            ',  /
+                ', Hardware & Sanitaryware
+                                    
+', 
+            ', 
+            ',  /
+                ', Towels
+', 
+            ', 
+            ',  /
+                ', Furniture 
+', 
+            ', 
+            ',  / ', Cookware
+', 
+            ',  / ', Kitchen Tools 
+', 
+            ',  / ', Home Utilities
+', 
+            ',  / ', Doormats 
+', 
+            ',  /
+                ', Curtains | ', Gardening Essentials
+
+', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', Fashion: ',  ', 
+            ', 
+                ', u"Women's Ethnic Wear
+", 
+            ', 
+            ',  /
+                ', Fashion Accessories
+
+', 
+            ', 
+            ',  /
+                ', Sports Wear
+
+', 
+            ', 
+            ',  / ', Western Wear
+
+', 
+            ',  / ', Bags & Wallets 
+
+
+', 
+            ',  / ', Handbags
+
+', 
+            ',  / ', Sarees
+
+
+', 
+            ',  / ', T-Shirts
+
+', 
+            ',  / ', Lingerie & Sleep Wear
+
+', 
+            ',  / ', Casual Trousers
+
+
+', 
+        ', 
+        ', 
+            ', 
+                ', Footwear:
+
+
+', 
+            ', 
+            ', 
+                ', Sports Shoes
+
+', 
+            ', 
+            ',  /
+                ', u"Men's Slippers
+
+
+                                  ", 
+            ', 
+            ',  /
+                ', Casual Shoes
+
+
+', 
+            ', 
+            ',  / ', Sandals & Floaters 
+
+
+', 
+            ',  / ', Formal Shoes
+
+
+', 
+            ',  / ', Women Flats
+
+
+
+', 
+            ',  / ', Ballerinas
+
+
+', 
+            ',  / ', Loafers
+
+
+', 
+            ',  / ', Boots
+
+
+
+', 
+            ',  / ', Shoe Care & Accessories
+
+
+
+
+', 
+        ', 
+        ', 
+            ', 
+                ', Travel & Luggage:', 
+            ', 
+            ', 
+                ', Duffle Bags
+', 
+            ', 
+            ',  /
+                ', Laptop Bags
+', 
+            ', 
+            ',  /
+                ', Travel Pouches
+', 
+            ', 
+            ',  / ', Backpacks
+', 
+            ',  / ', Suitcases & Trolleys
+', 
+            ',  / ', Travel Accessories
+', 
+            ',  / ', Gym Bags
+', 
+            ',  / ', Messenger Bags
+
+', 
+            ', 
+            ',  /
+                ', School Bags
+
+', 
+            ', 
+            ',  /
+                ', Safety Locks
+
+', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', Jewelry & Watches:', 
+            ', 
+            ', 
+                ', Coins & Bars
+
+', 
+            ', 
+            ',  /
+                ', u"Men's Watches
+
+", 
+            ', 
+            ',  /
+                ', u"Women's Watches
+
+", 
+            ', 
+            ',  / ', Necklaces
+', 
+            ',  / ', Fashion Jewelry
+', 
+            ',  / ', Pendants
+', 
+            ',  / ', Earrings
+
+', 
+            ',  / ', Rings
+
+', 
+            ',  / ', Jewelry Boxes
+
+', 
+            ',  / ', u"Kid's Watches
+
+", 
+        ', 
+        ', 
+            ', 
+                ', Automotive:', 
+            ', 
+            ', 
+                ', Bike Tools
+
+', 
+            ', 
+            ',  /
+                ', Car Cleaning Aids
+
+', 
+            ', 
+            ',  /
+                ', Helmets
+
+', 
+            ', 
+            ',  / ', Bike Body Covers
+', 
+            ',  / ', Car Tools
+', 
+            ',  / ', Riding Gloves
+
+', 
+            ',  / ', Car Perfumes
+
+', 
+            ',  / ', Scratch Removers
+
+', 
+            ',  / ', Car Audio / Video
+
+', 
+            ',  / ', Bike Alarms
+
+', 
+        ', 
+        ', 
+            ', 
+                ', Toys, Baby & Kids :', 
+            ', 
+            ', 
+                ', Diapers
+', 
+            ', 
+            ',  /
+                ', Educational Toys
+
+', 
+            ', 
+            ',  /
+                ', u"Kid's Footwear
+", 
+            ', 
+            ',  / ', Remote Controlled Toys
+', 
+            ',  / ', Soft Toys', 
+            ',  / ', Party Supplies
+', 
+            ',  / ', Cubes
+
+', 
+            ',  / ', Maternity Care
+
+', 
+            ',  / ', u"Kid's Apparel
+
+", 
+        ', 
+        ', 
+            ', 
+                ', Gourmet & Daily Needs :', 
+            ', 
+            ', 
+                ', Office Supplies
+', 
+            ', 
+            ',  /
+                ', Pet Supplies
+', 
+            ', 
+            ',  / ', Books
+', 
+            ',  / ', Namkeen
+
+', 
+            ',  / ', Stationery
+
+', 
+            ',  / ', Pens & Markers
+
+', 
+            ',  / ', Tea & Coffee
+
+
+
+
+', 
+            ',  / ', Chocolates & Candies
+
+', 
+            ',  / ', Indian Sweets
+
+
+', 
+            ',  / ', Gifts
+
+
+', 
+        ', 
+        ', 
+            ', Sports and Health', 
+            ', Home Gym Equipment', 
+            ',  / ', Exercise Bikes', 
+            ',  / ', Gym Accessories', 
+            ',  / ', Weight Management', 
+            ',  / ', Health Care Devices', 
+            ',  / ', Vitamins & Supplements', 
+            ',  / ', Massagers', 
+            ',  / ', Diabetic Care', 
+            ',  / ', Cricket', 
+            ',  / ', Table Tennis', 
+        ', 
+        ', 
+            ', 
+                ', Beauty & Perfumes:', 
+            ', 
+            ', 
+                ', Grooming Essentials
+', 
+            ', 
+            ',  /
+                ', Deodorants
+', 
+            ', 
+            ',  / ', u"Men's Perfumes
+", 
+            ',  / ', Hair Care
+
+', 
+            ',  / ', u"Women's Perfumes
+
+", 
+            ',  / ', Face Packs
+
+', 
+            ',  / ', Oral Care
+
+', 
+            ',  / ', Herbal Care
+
+', 
+            ',  / ', Value Combo
+
+
+', 
+            ',  / ', u"Women's Hygiene
+
+
+", 
+        ', 
+        ', 
+    ', 
+    ', 
+        ', Popular on ShopClues', 
+        ', 
+            ', Offers & Coupons',  /
+            ',  ', Watches for Men', 
+            /
+            ',  ', Power Banks',  /
+            ',  ', Memory Cards',  /
+            ',  ', Pen Drives',  /
+            ',  ', Headphones',  /
+            ',  ', Induction Cooktops',  /
+            ',  ', Trimmers', 
+            /
+            ',  ', Irons', 
+            /
+            ',  ', LED TV',  /
+            ', Mens Jacket',  /
+            ', Educational Toys ',  /
+            ', Geysers',  /
+            ', Heaters',  /
+            ', Car Audio Video',  /
+            ', Furniture',  /
+            ', u"Men's Shoes",  /
+            ', Lights',  /
+            ', Slipper & Flip Flops ',  /
+            ', Bedsheets',  /
+            ', Unboxed Phones',  /
+            ', Diwali Offers', 
+        ', 
+    ', 
+    ', 
+        ', 
+            ', 
+', 100% Secure and Trusted Payment', 
+            ', u"We accept Net Banking, all major Credit cards, Debit cards, and Cash Cards.
+We also offer Cash on Delivery and India's largest selection of EMI options. ", 
+            ', 
+        ', 
+        ', 
+            ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+        ', 
+    ', 
+    ', 
+        ', Privacy Policy',  / ', User Agreement',  / ', Notes to Security Practices',  / ', Labor Compliance', 
+        ',                             Copyright © 2011-2016 Clues Network Pvt. Ltd.', 
+        ', 
+    ', 
+', 
+', 
+', 
+			     ', 
+        ', 
+    ', 
+                    
+                
+        
+
+', 
+            var product_array=[];
+             var delta_array=[];
+', 
+
+    
+        ', 
+                var plp="";
+        ', 
+    
+    
+                        
+   
+        
+            
+            ', 
+                var digitalData = {
+                 
+                  'pUrl':document.URL,
+                                                                           
+                          page:{
+                            'pageName':'Home:Contact Us'+plp,
+                            'channel':'Contact Us'
+                            ,'subSection1':'Contact Us'
+                            ,'subSection2':'Contact Us'
+                            ,'subSection3':'Contact Us'
+                                
+                                                              
+              
+                   }
+                   
+     
+            
+             
+
+             
+    
+        
+
+    
+
+        
+        
+    
+                          
+          
+      ,'pageType':'Others'
+      
+    
+    
+       
+      
+      ,'profile_data':{
+                  'customer_id':atob(ReadCookie("user_id")).replace (/"/g,''),
+                  'email':atob(ReadCookie("email")).replace (/"/g,''),
+                  'firstname':atob(ReadCookie("scun")).replace (/"/g,''),
+                  'lastname':atob(ReadCookie("lname")).replace (/"/g,''),
+                  'phone':atob(ReadCookie("phone")).replace (/"/g,''),
+                  'birthday':atob(ReadCookie("birthday")).replace (/"/g,'')
+                }
+      
+      
+       
+       ,'new_profile_data':{'billing_state':"NA",
+         'shipping_state':"NA" ,
+         'source':$.cookie.get("utm_source"),
+         'gender':"NA",
+         'cb_used':"",
+         'gc_used':""
+       }
+            
+          }
+            
+    ', 
+    
+            
+        ', 
+        		             ', 
+', _satellite.pageBottom();', 
+', 
+                          
+       ', 
+                
+    ', 
+             ', 
+    ', 
+
+', u"(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '820922647926751']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+", 
+', 
+
+
+
+
+
+', 
+                                                        
+                                                                ', 
+', 
+', 
+                                                                                            
+                                                    ', 
+    
+    ',  
+
+
+', 
+    
+        Moengage = moe({
+            app_id: 'ZJ56N4HWQ6IYU9XD17LSC086'
+            
+        });
+        if((ReadCookie('scun_m')!=null) && (ReadCookie('scun_m')!=""))
+        {
+            var em_id = ReadCookie('scun_m');
+            var e_id = ReadCookie('scumd_m');
+            Moengage.add_email(atob(em_id));             
+            Moengage.add_unique_user_id(atob(e_id)); 
+            
+        }
+        
+               function call_web_push_of_moengage(){
+            if(window.location.pathname!="/"){
+             Moengage.call_web_push();
+            }
+          }
+               
+', 
+', 
+var ifrmHtm = '<iframe id="moengage_iframe" src="https://smo.shopclues.com/moe/" style="display: none;"  onload="call_web_push_of_moengage()" />';
+$('body').append(ifrmHtm);
+', 
+
+
+
+', 
+
+', 
+
+
+
+', 
+    
+        
+    $(document).ready(function(){
+        $(".ml_footer_linktop").click(function(){
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            return false;
+        });
+    });
+', 
+', 
+', 
+    
+/*read and set user pincode and gender to search input hidden from cookie : Kumar Gaurav */
+var zettata_user_cookie = ReadCookie('zettata_user_cookie');
+
+var gender = zettata_user_cookie.split('|')[0];//read cookie value from gender
+var pincode = zettata_user_cookie.split('|')[1];//read cookie value from pincode
+
+if(typeof pincode !='undefined'){
+    $('.user_pincode').val(pincode);
+}
+if(typeof gender != 'undefined'){
+    $('.user_gender').val(gender);//set hidden value of gender for  search form
+}
+/*****************************************************************************************/
+/******************************set user zone in cookie*******************************/
+var userzone="";
+if (userzone) {
+    var zone = ReadCookie('sc_loc');
+    if (!zone) {
+        $.post( "index.php?dispatch=search.userzone", function( data ) {
+          $('#sc_z').val(data);
+        });
+    }else{
+        $('#sc_z').val(zone);
+    }  
+};
+/*****************************************************************************************/
+
+var piwik_switch="";
+var dispatch = "pages.view";
+var piwik_url="track.shopclues.com/";
+var user_id="0";
+    if(piwik_switch){
+       var _paq = _paq || [];
+      _paq.push(["setCookieDomain", "*.shopclues.com"]);
+      if(dispatch !="products.search"){
+          _paq.push(["trackPageView"]);
+       }
+      _paq.push(["enableLinkTracking"]);
+       if(user_id ==0){
+       var user_id="logged out";
+       }
+       _paq.push(['setCustomVariable',1,"user id",user_id,scope="page"]); 
+      (function() {
+        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://" + piwik_url;
+        _paq.push(["setTrackerUrl", u+"piwik.php"]);
+        _paq.push(["setSiteId", "1"]);
+        var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+        g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+      })();
+ }  
+', 
+', 
+
+
+
+', 
+    var hrsForDsktpSiteView = 4;
+    $(".foot-bluebot-mobile .site-url").click(function(){
+        //check cookie if not set then set
+        var dsktp_site_view = ReadCookie("dsktp_site_view");
+        if(dsktp_site_view == ""){
+            SetCookie("dsktp_site_view", true, hrsForDsktpSiteView, ".shopclues.com");
+        }
+    });
+
+    // click event for mobile filters category starts
+    if($(window).width() <630){
+        $("#mob_filters_cat_heading span").css("float", "left");
+        $("#mob_filters_cat_heading").append('<span class="mob_plus_minus box_collapse_mob"></span>');
+        $(".nav_mainmenu.new_menu_link_nl").hide();
+
+        $("#mob_filters_cat_heading").click(function(){
+            $(".nav_mainmenu.new_menu_link_nl").slideToggle();
+            if($(this).find(".mob_plus_minus").hasClass('box_expand_mob')){
+                $(this).find(".mob_plus_minus").removeClass('box_expand_mob');
+                $(this).find(".mob_plus_minus").addClass('box_collapse_mob');
+            }else{
+                $(this).find(".mob_plus_minus").removeClass('box_collapse_mob');
+                $(this).find(".mob_plus_minus").addClass('box_expand_mob');
+            }
+        });
+    }
+    // click event for mobile filters category ends
+
+	
+
+', 
+ 
+', 
+', 
+', 
+
+
+', 
+
+
+
+', 
+
+', 
+//<![CDATA[
+	var _gaq = _gaq || [];
+	_gaq.push(["_setAccount", "{$addons.google_analytics.tracking_code}"]);
+	_gaq.push(["_trackPageview"]);
+	
+	(function() {
+		var ga = document.createElement("script");
+                var google_analytics_new_code = "{$config.google_analytics_new_code}";
+		if (google_analytics_new_code == 1) {
+                    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + "stats.g.doubleclick.net/dc.js";
+                }
+                else {
+                    ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+                }
+		ga.setAttribute("async", "true");
+		document.documentElement.firstChild.appendChild(ga);
+            })();
+//]]>
+', 
+
+
+
+
+
+
+
+', u"
+
+  ga('require', 'displayfeatures');
+  ga('set', 'dimension1', ' ');
+  ga('set', 'dimension2', ' ');
+  ga('set', 'dimension3','others');
+  ga('send', 'pageview');
+
+", 
+
+', 
+
+
+
+', 
+
+$(document).ready(function(){
+var image = 0;
+
+if(image == 1){
+    $(".grid-product special category_grid_4 img, .product_homepagedealblock img, .grid-product special img, .grid-product img, .grid-product special category_grid_3  img").each(function(i,obj){
+
+        $(this).error(function(){
+
+            var imgValue = $(this).attr('src');
+
+            $(this).attr('src', 'http://cdn.shopclues.com/images/no_image.gif');
+
+            var productId = $(this).prev().attr('id');
+
+            var detailedPath = $(this).prev().val();
+            
+             if(detailedPath !==' '){
+
+            
+                //imagePath = $('#' + productId).val();
+                urlPath = 'http://igen.shopclues.com/';
+
+             $.ajax({
+
+                  type:'POST',
+                  cache:false,
+                  url: urlPath + 'tools/image_generate.php',
+                  dataType : 'jsonP',
+                  crossDomain : true,
+                 // data: {product_id:productId,image_path:imagePath},
+          data:  {product_id:productId},
+                  success:function(msg){
+
+                      }
+
+                 });
+                 }
+            });
+
+        }); 
+
+
+
+
+  $('img').bind('error', function(){
+      if($(this).parents('.product-main-info').length >= 1){
+
+           //$(this).css("display","none");
+          $(this).attr('src', 'http://cdn.shopclues.com/images/no_image.gif');
+      }
+
+    });
+}
+  });
+', 
+
+
+', 
+', u"
+
+  
+	var utm_source = '';
+	var source ='';
+	var utm_campaign = '';
+	var utm_medium = '';
+  var cookie_duration='720'; 
+	
+	if(utm_source != ''){
+		SetCookie('utm_source',utm_source,cookie_duration,'.shopclues.com');  
+	}
+        if(utm_campaign != ''){
+            SetCookie('utm_campaign',utm_campaign,cookie_duration,'.shopclues.com');   
+            }
+        if(utm_medium != ''){
+            SetCookie('utm_medium',utm_medium,cookie_duration,'.shopclues.com');  
+        }
+	if(source != '' && source=='cuelinks'){
+		SetCookie('utm_source','desidime',cookie_duration,'.shopclues.com'); 
+	}
+", 
+
+ 
+
+', 
+', 
+
+',  
+
+
+
+
+
+
+
+
+
+    
+    ', 
+        var arr="";
+        var google_tag_params="";
+        var   google_conversion_id = "";
+        var   google_custom_params = "";
+        var   google_remarketing_only = "";
+        var   google_tag_params="";
+    function google_conversion(){
+        google_tag_params = {
+        ecomm_prodid: "", 
+        ecomm_pagetype: "other",
+        ecomm_totalvalue: "",
+        ecomm_category:"",
+        ecomm_rec_prodid:arr
+        };
+        google_conversion_id = 1008677249;
+        google_custom_params = window.google_tag_params;
+        google_remarketing_only = true;
+        
+    /* ]]> */
+    }
+    ', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+    
+',  
+',  
+
+ 
+', 
+ (function(a){
+    if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))){
+        if(window.screen.availWidth > 630 && window.location.host == "m.shopclues.com"){
+            
+        }else if(window.screen.availWidth < 630 && window.location.host == "www.shopclues.com" && ReadCookie("dsktp_site_view") == ""){
+            
+        }
+    }
+    else{
+        
+    }
+})(navigator.userAgent||navigator.vendor||window.opera);   
+', 
+', 
+
+			
+		
+        var main_category=$('ul[class="breadcrumb-pages"] li a')[1];
+	window._atm_client_id = "6320";
+	window._atm_params = new Object;
+	_atm_params.t = "r";
+	_atm_params.f ="";
+	_atm_params.cn = "";
+	_atm_params.id =""; 
+	_atm_params.scn = ""; 
+	_atm_params.c = "";
+	_atm_params.r=""; 
+	_atm_params.custom_prop1="Desktop";
+        _atm_params.price="";
+        _atm_params.custom_prop2=""; // --INSERT custom parameters for different pages in the cart/ address funnel(1/2/3/4)
+        _atm_params.custom_prop3=""; // --Space for any other parameters passed in future
+	var ast=document.createElement('script'); ast.type="text/javascript";
+	ast.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//cdn.atomex.net/static/js/pxs/" + _atm_client_id + "/ast.js";
+        
+                
+', 
+
+
+
+',  
+
+
+
+
+
+  ', 
+', 
+', 
+  ', 
+    ', Hi,Select Your Zone', 
+    ', Share pincode for faster delivery by local sellers.', 
+    ', 
+      ', 
+        ', 
+    ', 
+', 
+', 
+
+
+
+', 
+  function pincode_popup() {
+    setTimeout(function() {
+      $(".pincode_section, .pin_locate .overlay, .pin_locate").fadeOut()
+    }, 5000);
+  }
+
+  function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) return false; return true;
+  } 
+  //$(window).load(pincode_popup);
+  $('.cross-pincode_popup').click(function(){
+    $(".pincode_section, .pin_locate .overlay, .pin_locate").fadeOut();
+  });
+  
+  $('#pin_code_cat, #pin_code_popup, #pin_code').keypress(function(event){
+    if(event.keyCode == 13){
+      event.preventDefault();
+      $(this).parent('span').siblings('input[type=button]').trigger('click');
+    }
+  });
+
+
+  $('.chng-log').click(function(){
+      $('.pincode_section, .pin_locate .overlay, .pin_locate').fadeIn();
+      $(this).parent().find('input[type=number]').val('');
+      $('.pincode_input>input[type="number"]').attr('placeholder', 'enter your pincode');
+       var sc_old_new=ReadCookie('sc_loc_variable');
+       var zone_pincode=ReadCookie('pincode');
+       var sc_name_temp=sc_old_new.split("|");
+       var sc_name=sc_name_temp[1];
+       var zone_message_popup_default="Hi,Select Your Zone";
+       var zone_msg_popup='';
+       if(zone_pincode){
+          var zone_message_popup="Your pincode is {pincode}";
+          zone_msg_popup=zone_message_popup.replace("{pincode}",zone_pincode);
+          $(".loc_zone_msg_popup").text(zone_msg_popup); 
+       }else if(sc_name){
+          var zone_message_popup="You are in {zone} zone";
+          zone_msg_popup=zone_message_popup.replace("{zone}",sc_name);
+          $(".loc_zone_msg_popup").text(zone_msg_popup);
+       }else{
+          $(".loc_zone_msg_popup").text(zone_message_popup_default);
+       }
+  });
+', 
+
+', 
+$(document).ready(function(){
+               $('#get_pincode, #get_pincode_popup, #get_pincode_cat').click(function(){
+                    var pincode = $(this).parent().find('input[type=number]').val(); 
+                    var pincodePattern=/^\d{6}$/;
+                    //alert(pincode);
+                    if(pincodePattern.test(pincode)) {
+                        // ajax hit to send pincode to controllers and mode pincode
+                        if ($('input').hasClass('loc_pro_zone')){
+                           localization_pincode_ajax(pincode, 1);
+                        }else{
+                           localization_pincode_ajax(pincode, 1); 
+                        }
+                                  $(this).parent().find('input[type=number]').val('');
+                                  $(this).parent().find('input[type=number]').attr('placeholder', 'enter your pincode');
+                                  $(".pincode_section, .pin_locate .overlay, .pin_locate").fadeOut();
+                                  $('.pincode_section_right form, .pincode_section_right p').fadeOut();
+                                  $('.left-localization-pro, .right-localization-pro').fadeOut();
+                                  $('.full-localization').show();
+                                  
+                                 
+                    }else{
+                        $(this).parent().find('input[type=number]').val('');
+                        $(this).parent().find('input[type=number]').attr('placeholder', 'invalid pincode');
+                    }
+                    
+                     
+               });
+ });
+
+        
+function localization_pincode_ajax(pincode, pload){
+  $.ajax({
+                            type: "post", 
+                            url: "localization.php", 
+                            data:{pincode:pincode,local:'pincode'},   
+                            success: function(zoneData) {
+                                var json=JSON.parse(zoneData);   
+                                if(json["status"]){
+                                     $(".pincode_section_right").show();
+                                     // use to hide pincode bar when showPincodeBarVal=0
+                                     var showPincodeBar = $("input").is("#showpincodebar");
+                                      if(showPincodeBar){
+                                        var showPincodeBarVal = $('#showpincodebar').val();
+                                        if(showPincodeBarVal == 0){
+                                            $(".pincode_bar").hide();
+                                            $(".chng-log").hide();
+                                        }else{
+                                           $(".pincode_bar").show();
+                                           $(".chng-log").show();
+                                        }
+                                      }else{
+                                        $(".pincode_bar").show();
+                                        $(".chng-log").show();
+                                      }
+                                      // end
+                                     var zone_message="Your pincode is {pincode}";
+                                     zone_msg=zone_message.replace("{pincode}",json["zone_pincode"]);
+                                     $(".loc_zone_msg").text(zone_msg);
+                                     zone_message="change pincode";
+                                     $(".top-change-localization").text(zone_message);
+                                     zone_message="change {pincode}"
+                                      zone_mesg=zone_message.replace("{pincode}",json["zone_pincode"]);
+                                      $(".top-change-localization").text(zone_mesg);
+                                     if(pload){
+                                         location.reload(true);
+                                     }
+                                     // omniture tracking code
+                                     _satellite.track('ChangeOfLocation');
+
+                                }
+                            } 
+  });
+}
+', 
+', 
+ $(document).ready(function(){
+    var verfiyLogin=ReadCookie('scumd');
+    var sc_loc=ReadCookie('sc_loc');
+    var email=ReadCookie('email');
+    var sc_old_new=ReadCookie('sc_loc_variable');
+    var zone_pincode=ReadCookie('pincode');
+    var sc_name_temp=sc_old_new.split("|");
+    var sc_name=sc_name_temp[1];
+    var zone_message="You are in {zone} zone";
+    var zone_msg='';
+   
+    if(sc_loc && sc_name){
+        $(".pincode_section_right").show();
+        // use to hide pincode bar when showPincodeBarVal=0
+        var showPincodeBar = $("input").is("#showpincodebar");
+        if(showPincodeBar){
+          var showPincodeBarVal = $('#showpincodebar').val();
+          if(showPincodeBarVal == 0){
+              $(".pincode_bar").hide();
+              $(".chng-log").hide();
+          }else{
+             $(".pincode_bar").show();
+             $(".chng-log").show();
+          }
+        }else{
+          $(".pincode_bar").show();
+           $(".chng-log").show();
+        }
+        // end
+        if(zone_pincode){
+          zone_message="Your pincode is {pincode}";
+          zone_msg=zone_message.replace("{pincode}",zone_pincode);
+          $(".loc_zone_msg").text(zone_msg);
+          zone_message="change {pincode}";
+          
+          
+          zone_mesg=zone_message.replace("{pincode}","<span style='font-size:10px;'>"+zone_pincode+"</span>");
+          
+          $(".top-change-localization").html(zone_mesg);
+          
+          $(".top-change-localization").html(zone_mesg).css('color', '#1da1b5');
+          
+        }else if(sc_name){
+          zone_msg=zone_message.replace("{zone}",sc_name);
+          $(".loc_zone_msg").text(zone_msg);
+          zone_message="change location";
+          $(".top-change-localization").text(zone_message);
+        }
+        //omniture tracking sc_loc_cookie
+        _satellite.track('LocationTracking');
+    }else{
+       $.ajax({
+        type: "post", 
+        url: "localization.php", 
+        data:{loginId:verfiyLogin,sc_loc:sc_loc,email:email,local:'sc_loc'},   
+        success: function(zoneData) {
+                var json=JSON.parse(zoneData);
+                if(json["status"]){
+                    $(".pincode_section_right").show();
+                    // use to hide pincode bar when showPincodeBarVal=0
+                    var showPincodeBar = $("input").is("#showpincodebar");
+                    if(showPincodeBar){
+                      var showPincodeBarVal = $('#showpincodebar').val();
+                      if(showPincodeBarVal == 0){
+                          $(".pincode_bar").hide();
+                          $(".chng-log").hide();
+
+                      }else{
+                         $(".pincode_bar").show();
+                         $(".chng-log").show();
+
+                      }
+                    }else{
+                      $(".pincode_bar").show();
+                      $(".chng-log").show();
+
+                    }
+                     // end
+                     if(json["zone_pincode"]){
+                       zone_message="change pincode";
+                       $(".top-change-localization").text(zone_message);
+                       zone_message="Your pincode is {pincode}";
+                       zone_msg=zone_message_popup.replace("{pincode}",json["zone_pincode"]);
+                       $(".loc_zone_msg").text(zone_msg);
+                     }else{
+                       zone_message="change location";
+                       $(".top-change-localization").text(zone_message);
+                       zone_message="You are in {zone} zone";
+                       zone_msg=zone_message.replace("{zone}",json["zone_name"]);
+                       $(".loc_zone_msg").text(zone_msg);
+                     }
+                     //omniture tracking sc_loc_cookie
+                     _satellite.track('LocationTracking');
+                }else{
+                    var stop_popup_walmart="";                    
+                    if(stop_popup_walmart == 'N'|| stop_popup_walmart == ''){                        
+                        var zone_message_popup_default="Hi,Select Your Zone";
+                        $(".pin_locate").show();
+                        $(".loc_zone_msg_popup").text(zone_message_popup_default);
+                        zone_message="change location";
+                        $(".top-change-localization").text(zone_message);
+                     }
+                }
+        } 
+      });
+    }
+      
+ });
+', 
+
+
+
+'][
+', Scroll To Top', 
+', 
+
+', 
+  ', 
+    ', 
+        ', 
+
+        ', 
+        ', 
+            ', Terms & Condition', 
+            ', 
+        ', 
+        ', 
+
+        ', 
+        ', 
+        ', 
+        ', 
+
+        ', 
+        ', 
+            ', 
+              ', 
+            ', 
+            ', 
+                ', 
+                ', 
+            ', 
+        ', 
+        ', 
+    ', 
+
+    ', 
+        ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                    ', Hi, Select Your Zone', 
+                    ', Share pincode for faster delivery by local sellers.', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+    ', 
+', 
+    ', 
+    ', 
+      ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', Sell With Us', 
+                    ', Call Us', 
+                    ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                 ', 
+                ', 
+                ', 
+                  ', 
+                ', 
+            ', 
+        ', 
+        ', 
+          ', 
+              ', 
+              ', 
+                ', 
+              ', 
+              ', 
+              ', 
+                  ', 
+                    ', 
+                  ', 
+                  ', 
+                    ', My Orders', 
+                    ', My Returns', 
+                    ', 
+                    ', Wishlist', 
+                    ', My Profile', 
+                    ', My Chat', 
+                    ', My CluesBucks', 
+                    ', My Feedback', 
+                    ', My Favorite Stores', 
+                    ', Sign Out', 
+                  ', 
+                ', 
+              ', 
+              ', Sign In', 
+                ', 
+                  ', 
+                  ', 
+                    ', Login/Register', 
+                  ', 
+                  ', 
+                    ', My Orders', 
+                    ', My Returns', 
+                    ', 
+                    ', Wishlist', 
+                    ', My Profile', 
+                    ', My Chat', 
+                    ', My CluesBucks', 
+                    ', My Feedback', 
+                    ', My Favorite Stores',                     
+                  ', 
+                ', 
+                ', 
+              ', 
+          ', 
+          ', 
+          ', 
+        ', 
+        ',  
+    ', 
+', 
+    ', 
+    ', 
+        ', 
+        ', 
+            ', 
+                            ', Mobiles', 
+                            ', Computers', 
+                            ', Electronics', 
+                            ', Women', 
+                            ', Men', 
+                            ', Home & Kitchen', 
+                            ', Baby & Kids', 
+                            ', Sports & Daily Needs', 
+                            ', Auto', 
+                        ', 
+        ', 
+        ', 
+    ', 
+', 
+    var allGids = ["1","6","2","5","4","3","7","8","9"];
+', 
+', 
+    ', 
+        ', 
+         
+            ', Bulk Factory', 
+         
+            ', Wedding Store', 
+         
+            ', Gift Store', 
+         
+            ', Made in India', 
+         
+            ', Offers', 
+                ', 
+    ', 
+', 
+ ', 
+      var base_url="http://www.shopclues.com/";
+      var secure_base_url="https://secure.shopclues.com/";
+      var search_url = "http://search.shopclues.com";
+      var cookieExpire = "7200";
+      var cookieDomain = ".shopclues.com";
+      var zettata_threshold = 5;
+      var abDays = "4";
+      var HomepageConfig = "1";
+      var ConfigRowCount = "13";
+      var ConfigColumnCount = "5";
+      var ConfigColumnWidth = "180";
+      var ConfigLoadAll = "1";
+      var product_perpage_limit = "36";
+      var campaignWrapperApi = "http://api.shopclues.com/home_campaigns.php";
+  ', 
+    ', 
+      var log_ajax_http = 0;
+    ', 
+  ', 
+', u"
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-27831792-1', 'auto');
+", 
+
+',   
+       
+      
+                 
+              
+        
+          
+      
+             ',     
+                dfpTagPositioning = function() {
+     ////////////////-Re-arrange product list in case of ad products -- ///////////////
+                var NOP = $('.row .column').length;
+                   if(NOP > product_perpage_limit){
+                                extraProducts = NOP % c1x.tileCount;
+                                totalShiftCount = 4 - extraProducts
+                                var allProductsOnPage = $('#product_list > .row').children();
+                                $('.row').remove();
+                                var googleAd = $('#google_pl_ad');
+                                $('#google_pl_ad').remove();
+                                var cnt = 0;
+                                $('.product_found').after('<div id="new_list">');
+                                var totalRows = product_perpage_limit / c1x.tileCount;
+                                for(var j=0; j<totalRows; j++){                                    
+                                        $('#new_list').append('<div class="row" id="row_'+j+'">');                                          
+                                        for(var i=1; i<=c1x.tileCount; i++){
+                                            if(j>0){
+                                                cnt = parseInt(c1x.tileCount * j)+i;
+                                            }else{
+                                                cnt = i-1;
+                                            }     
+                                            if(typeof allProductsOnPage[cnt] == 'undefined' || allProductsOnPage[cnt]=='' || allProductsOnPage[cnt]=='undefined'){
+                                                break;
+                                            }else{
+                                                $('#row_'+j).append(allProductsOnPage[cnt]);
+                                                if(i==c1x.tileCount){                                                    
+                                                    $('#row_'+j).append('</div>'); 
+                                                }
+                                            }                                                                                          
+                                        }
+                                         if(j==0){
+                                             $('#row_'+j).after(googleAd);
+                                         }                                      
+                                }
+                                $('#new_list > div:last-child').append('</div>'); 
+                            }                            
+                };
+            ', 
+      
+
+
+
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+            ', 
+            ', 
+            ', 
+        ', 
+', 
+', 
+    ', 
+    ', 
+', 
+', 
+    ', 
+        
+    ', 
+', 
+', 
+', 
+', 
+    ', 
+', 
+    ', Jaw Dropping Deals            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', Shopclues Flea Market            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+	', End of Season Sale', 
+		', 
+			', 
+	    	', 
+                ', 
+	    			', 
+	    			', 
+	    		', 
+	    	', 
+		', 
+', 
+            ', 
+', 
+                ', Deal of the day', 
+                ', 
+', 
+                    ', 
+                        ', Exciting', 
+                        ', Deals Everyday', 
+                        ', 00h : 00m', 
+                    ', 
+                                        ', 
+                ', 
+            ', 
+            ', 
+', 
+	', Super Deals', 
+		', 
+			', 
+	    	', 
+                ', 
+	    			', 
+	    			', 
+	    		', 
+	    	', 
+		', 
+', 
+', 
+', 
+    ', Shop By Price', 
+    ', 
+    ', 
+', 
+', 
+    ', Mobiles & Accessories            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', Lifestyle            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', Home & Kitchen            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', TV & Appliances            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', General Utilities            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+    ', Computers,Cameras & Audio Devices            ', 
+    ', 
+    ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+', 
+  ', 
+    ', Offers You Can\u2019t Resist', 
+    ', 
+      ', 
+        ', 
+        ', 
+      ', 
+    ', 
+', 
+					
+', 
+
+', 
+
+            
+            ', 
+', 
+  if (window.coreJSLoaded) fireGoogleAdsHome();
+  else document.addEventListener("coreJSLoaded", fireGoogleAdsHome);
+  function fireGoogleAdsHome(){
+    googletag.cmd.push(function() {
+    googletag.defineSlot('/124148007/home_bottom', [[970, 90], [728, 90]], 'div-gpt-ad-1450768388229-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().setTargeting('LLC', ['Home']).setTargeting('LMC', ['Home']).setTargeting('LPID', []).setTargeting('LSC', ['Home']);
+    googletag.enableServices();
+  });
+    googleDisplayHome();
+  }
+', 
+', 
+', 
+', 
+', u"
+function googleDisplayHome(){
+  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1450768388229-0'); });
+}
+", 
+', 
+', 
+            
+ ', 
+  ', 
+  ', Band Of Trust', 
+  ', 
+      ', Great Selection', 
+      ', Low Price', 
+      ', Speedy Delivery', 
+  ', 
+  ', 
+', 
+  
+            ', 
+            ', 
+                var login_url = "https://secure.shopclues.com/index.php?dispatch=auth.login_form&return_url=";
+            ', 
+', 
+', 
+        ', 
+            ', 
+                ', 
+                    ', Buyer Central', 
+                    ', 
+                        ', Sign In', 
+                        ', Register', 
+                        ', Terms & Conditions', 
+                        ', Buyer Protection', 
+                        ', Payment Options', 
+                        ', EMI Payment', 
+                        ', Shipping Policy', 
+                        ', Return Policy', 
+                        ', Cancellation Policy', 
+                        ', Clues Bucks', 
+                        ', Wishlist', 
+                        ', Buyer Guides', 
+                        ', Gift Certificate', 
+                        ', What\u2019s New', 
+                        ', Help', 
+                    ', 
+                ', 
+                ', 
+                    ', Merchant Central', 
+                    ', 
+                        ', Merchant Sign In', 
+                        ', Merchant Registration', 
+                        ', How Does It Work', 
+                        ', Pricing', 
+                        ', Fulfillment by ShopClues', 
+                        ', Merchant Tools', 
+                        ', Best Practice', 
+                        ', Policies & Rules', 
+                        ', User Agreement', 
+                        ', Testimonials', 
+                        ', Merchant Ratings', 
+                    ', 
+                ', 
+                ', 
+                    ', About Us', 
+                    ', 
+                        ', Band of Trust', 
+                        ', ShopClues History', 
+                        ', Brand Guidelines', 
+                        ', TV Commercials', 
+                        ', News', 
+                        ', In the Press', 
+                        ', Awards', 
+                        ', Careers', 
+                        ', Seller Summit', 
+                    ', 
+                ', 
+                ', 
+                    ', Contact Us', 
+                    ', 
+                        ', Customer Support', 
+                        ', Merchant Support', 
+                        ', Merchant Inquiries', 
+                        ', Product Reviews', 
+                        ', Bulk Orders', 
+                        ', Press', 
+                    ', 
+                ', 
+                ', 
+                    ', Advertise With Us', 
+                    ', 
+
+                        ', Ad Unit', 
+                        ', Inserts', 
+                        ', Advertising Contact', 
+                        ', Become an Affiliate >', 
+
+                    ', 
+                ', 
+                ', 
+                    ', Special Offers', 
+                    ', Sign Up To Access Our Special Offers', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', Keep In Touch ', (Social Connect)', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 100% Secure and Trusted Payment', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', Our Leading Categories', 
+                ', 
+                    ',  ', Mobile & Tablets:',  ', 
+                    ',  ', Android Phones',  ', 
+                    ',  | ', Smartphones',  ', 
+                    ',  | ', Feature Phones',  ', 
+                    ',  | ', Unboxed Phones', 
+                    ',  | ', Refurbished Phones', 
+                    ',  | ', Tablets ', 
+                    ',  | ', CDMA Phones', 
+                    ',  | ', Value Added Services', 
+                ', 
+                ', 
+                    ',  ', Computers: ',  ', 
+                    ',  ', Laptops ',  ', 
+                    ',  | ', Printers ',  ', 
+                    ',  | ', Routers ',  ', 
+                    ',  | ', Ink & Toner Cartridges', 
+                    ',  | ', Monitors ', 
+                    ',  | ', Gaming ', 
+                    ',  | ', Unboxed & Refurbished Laptops', 
+                    ',  | ', Assembled Desktops', 
+                    ',  | ', Data Cards', 
+                ', 
+                ', 
+                    ',  ', TV, Audio & Large Appliances: ',  ', 
+                    ', TVs & DTH',  ', 
+                    ',  | ', Home Theatre Systems ',  ', 
+                    ',  | ', Hidden Cameras & CCTVs ', 
+                    ',  | ', Refrigerators ', 
+                    ',  | ', Washing Machines ', 
+                    ',  | ', Air Conditioners ', 
+                    ',  | ', Cameras ', 
+                    ',  | ', Speakers ', 
+                ', 
+                ', 
+                    ',  ', Mobile & Laptop Accessories:',  ', 
+                    ',  ', Headphones ',  ', 
+                    ',  | ', Power Banks ',  ', 
+                    ',  | ', Backpacks ', 
+                    ',  | ', Cases & Covers ', 
+                    ',  | ', Pen Drives ', 
+                    ',  | ', External Hard Disks ', 
+                    ',  | ', Mouse ', 
+                    ',  | ', Smart Watches ', 
+                    ',  | ', MicroSD Cards ', 
+                ', 
+                ', 
+                    ',  ', Appliances:',  ', 
+                    ',  ', Trimmers ',  ', 
+                    ',  | ', Hair Dryers ',  ', 
+                    ',  | ', Emergency Lights ', 
+                    ',  | ', Water Purifiers ', 
+                    ',  | ', Electric Kettles ', 
+                    ',  | ', Hair Straighteners ', 
+                    ',  | ', Induction Cooktops ', 
+                    ',  | ', Sewing Machines ', 
+                    ',  | ',  Geysers ', 
+                ', 
+                ', 
+                    ',  ', Home & Kitchen:',  ', 
+                    ',  ', Bedsheets ',  ', 
+                    ',  | ', Hardware & Sanitaryware ',  ', 
+                    ',  | ', Towels ',  ', 
+                    ',  | ', Furniture ',  ', 
+                    ',  | ', Cookware ', 
+                    ',  | ', Kitchen Tools ', 
+                    ',  | ', Home Utilities ', 
+                    ',  | ', Doormats ', 
+                    ',  | ', Curtains | ', Gardening Essentials ',  ', 
+                ', 
+                ', 
+                    ',  ', Fashion: ',  ', 
+                    ',  ', u"Women's Ethnic Wear ",  ', 
+                    ',  | ', Fashion Accessories ',  ', 
+                    ',  | ', Sports Wear ',  ', 
+                    ',  | ', Western Wear ', 
+                    ',  | ', Bags & Wallets ', 
+                    ',  | ', Handbags ', 
+                    ',  | ', Sarees ', 
+                    ',  | ', T-Shirts ', 
+                    ',  | ', Lingerie & Sleep Wear ', 
+                ', 
+                ', 
+                    ',  ', Footwear: ',  ', 
+                    ',  ', Sports Shoes ',  ', 
+                    ',  | ', u"Men's Slippers ",  ', 
+                    ',  | ', Casual Shoes ',  ', 
+                    ',  | ', Sandals & Floaters ', 
+                    ',  | ', Formal Shoes ', 
+                    ',  | ', Women Flats ', 
+                    ',  | ', Ballerinas ', 
+                    ',  | ', Loafers ', 
+                    ',  | ', Boots ', 
+                    ',  | ', Shoe Care & Accessories ', 
+                ', 
+                ', 
+                    ',  ', Travel & Luggage:',  ', 
+                    ',  ', Duffle Bags ',  ', 
+                    ',  | ', Laptop Bags ',  ', 
+                    ',  | ', Travel Pouches ',  ', 
+                    ',  | ', Backpacks ', 
+                    ',  | ', Suitcases & Trolleys ', 
+                    ',  | ', Travel Accessories ', 
+                    ',  | ', Gym Bags ', 
+                    ',  | ', Messenger Bags ',  ', 
+                    ',  | ', School Bags ',  ', 
+                    ',  | ', Safety Locks ',  ', 
+                ', 
+                ', 
+                    ',  ', Jewelry & Watches:',  ', 
+                    ',  ', Coins & Bars ',  ', 
+                    ',  | ', u"Men's Watches ",  ', 
+                    ',  | ', u"Women's Watches ",  ', 
+                    ',  | ', Necklaces ', 
+                    ',  | ', Fashion Jewelry ', 
+                    ',  | ', Pendants ', 
+                    ',  | ', Earrings ', 
+                    ',  | ', Rings ', 
+                    ',  | ', Jewelry Boxes ', 
+                    ',  | ', u"Kid's Watches ", 
+                ', 
+                ', 
+                    ',  ', Automotive:',  ', 
+                    ',  ', Bike Tools ',  ', 
+                    ',  | ', Car Cleaning Aids ',  ', 
+                    ',  | ', Helmets ',  ', 
+                    ',  | ', Bike Body Covers ', 
+                    ',  | ', Car Tools ', 
+                    ',  | ', Riding Gloves ', 
+                    ',  | ', Car Perfumes ', 
+                    ',  | ', Scratch Removers ', 
+                    ',  | ', Car Audio | Video ', 
+                    ',  | ', Bike Alarms ', 
+                ', 
+                ', 
+                    ',  ', Toys, Baby & Kids :',  ', 
+                    ',  ', Diapers ',  ', 
+                    ',  | ', Educational Toys ',  ', 
+                    ',  | ', u"Kid's Footwear ",  ', 
+                    ',  | ', Remote Controlled Toys ', 
+                    ',  | ', Soft Toys', 
+                    ',  | ', Party Supplies ', 
+                    ',  | ', Cubes ', 
+                    ',  | ', Maternity Care ', 
+                    ',  | ', u"Kid's Apparel ", 
+                ', 
+                ', 
+                    ',  ', Gourmet & Daily Needs :',  ', 
+                    ',  ', Office Supplies ',  ', 
+                    ',  | ', Pet Supplies ',  ', 
+                    ',  | ', Books ', 
+                    ',  | ', Namkeen ', 
+                    ',  | ', Stationery ', 
+                    ',  | ', Pens & Markers ', 
+                    ',  | ', Tea & Coffee ', 
+                    ',  | ', Chocolates & Candies ', 
+                    ',  | ', Indian Sweets ', 
+                    ',  | ', Gifts ', 
+                ', 
+                ', 
+                    ', Sports and Health', 
+                    ', Home Gym Equipment', 
+                    ',  | ', Exercise Bikes', 
+                    ',  | ', Gym Accessories', 
+                    ',  | ', Massagers', 
+                    ',  | ', Diabetic Care', 
+                    ',  | ', Cricket', 
+                    ',  | ', Table Tennis', 
+                ', 
+                ', 
+                    ',  ', Beauty & Perfumes:',  ', 
+                    ',  ', Grooming Essentials ',  ', 
+                    ',  | ', Deodorants ',  ', 
+                    ',  | ', u"Men's Perfumes ", 
+                    ',  | ', Hair Care ', 
+                    ',  | ', u"Women's Perfumes ", 
+                    ',  | ', Face Packs ', 
+                    ',  | ', Oral Care ', 
+                    ',  | ', Herbal Care ', 
+                    ',  | ', Value Combo ', 
+                    ',  | ', u"Women's Hygiene ", 
+                ', 
+                ', Popular on ShopClues', 
+                ', 
+                    ',  ', Offers & Coupons',  
+                    ',  | ', Watches for Men',  
+                    ',  | ', Power Banks',  
+                    ',  | ', Memory Cards',  
+                    ',  | ', Pen Drives',  
+                    ',  | ', Headphones',  
+                    ',  | ', Induction Cooktops',  
+                    ',  | ', Trimmers',  
+                    ',  | ', Irons',  
+                    ',  | ', LED TV', 
+                    ',  | ', Mens Jacket',  
+                    ',  | ', Educational Toys ',  
+                    ',  | ', Geysers',  
+                    ',  | ', Heaters',  
+                    ',  | ', Car Audio Video',  
+                    ',  | ', Furniture',  
+                    ',  | ', u"Men's Shoes",  
+                    ',  | ', Lights',  
+                    ',  | ', Slipper & Flip Flops ',  
+                    ',  | ', Bedsheets',  
+                    ',  | ', Unboxed Phones', 
+                ', 
+            ', 
+        ', 
+                ', 
+            ', 
+                ', Online Shopping in India @Shopclues.com', 
+                ', India\u2019s Asli Online Shopping Hub \u2013 ShopClues.com',  Back in 2011, when people were hopping from one Store to another for best bargains on an overall household\u2019s monthly bill, Sandeep Aggarwal (the Founder & Mastermind of ShopClues) was realizing his vision of a budget-friendly online bazaar in India. ShopClues.com was then given a shape and strategy in 2012 as the India\u2019s First & Largest Fully Managed Marketplace.
+                ', Ting se Leke Tong \u2013 with Aflatooni Products!',  \u2018What you Think is What you Get\u2019 isn\u2019t just a saying at ShopClues. With over 8.5 million products, you can get just about everything that you can imagine at ShopClues. From usual products in Electronics, Fashion, Home & Kitchen, to unusual products like cow dung cakes, Knife Sharpeners, etc. ShopClues tops in everything. So, you see what we mean when we say Aflatooni Products? ShopClues has revolutionized the conceptual Online Shopping in India with initiatives such as Ghar Wapsi Sale, Bigger than the Biggest Thank You Sale, #EkZeroKum Sale, etc. Amongst many other shopping sites, ShopClues is the leader in unstructured categories like Daily Utilities, Garden Needs, Hardware, Kitchen Storage, and others.
+                ', Believable Shopping @ Unbelievable Prices',  Every day, ShopClues delights millions of discount-hunters with Paisa-Vasool Shopping Experience with prices as low as Re.1. We are the first ones to introduce the idea of \u2018Sab Kuch Wholesale Ke Rate Par\u2019 on an online platform with shopping options to both wholesale as well as retail seekers.
+                ', Experiencing the neighbourhood Local Bazaar',  ShopClues brings the experience of India\u2019s Flea Markets online, in the form of its two weekly properties - Sunday Flea Market, and Wednesday Super Saver Bazaar. Another property capturing the essence of regional Indian shopping is called NRH (National Regional Heritage), which gives a sneak-peek into India\u2019s Cultural Gullies at very reasonable prices. These online markets showcase products with range so wide, and prices so low, that they beat the real neighbourhood markets of India. The concept especially works incredibly well with the middle class population habituated in tier 2 & 3 cities.
+                ', An Online Selling Space for SME Merchants',  Working as a marketplace, ShopClues has been well-supported by a bourgeoning community of certified merchants in India. Unlike various other online shopping sites, ShopClues has achieved the largest merchant base of over 3.5 Lakhs. This online shopping website is creating history by empowering local and regional merchants, primarily from Tier 2 & 3 cities and making them a national enterprise at ShopClues.
+            ', 
+        ', 
+                ', 
+            ', 
+                ', 
+                    ', Privacy Policy', 
+                    ', User Agreement', 
+                    ', Notes to Security Practices', 
+                    ', Labor Compliance', 
+                ', 
+                ', 
+                    ', Copyright © 2011-2016 Clues Network Pvt. Ltd.', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+  ', 
+    ', 
+  ', 
+', 
+
+', Some text some message..', 
+', 
+  function toastMessage(message) {
+    $('#snackbar').html(message);
+    $('#snackbar').addClass('show');
+    setTimeout(function(){ $('#snackbar').removeClass("show"); }, 3000);
+  }
+', 
+
+
+
+', 
+  ', 
+  ', 
+  ', 
+  ', 
+', 
+
+', 
+', 
+  function imageError(imageurl,position,name){
+  if(typeof imageLogger != 'undefined' && imageLogger == '1'){
+    try {
+    var url = soa_url;
+    var error_name ;
+    if(name == 'Ajax_Error'){
+      name = 'name:'+name;
+      error_name = 'Ajax request error';
+      imageurl = "url:"+imageurl;
+      position = "status_code:"+position;
+    }else{
+      name = "name:"+name;
+      imageurl = "imageurl:"+imageurl;
+      position = "position:"+position;
+      error_name = 'image not found';
+    }
+    var data = {"domain":"desktop_buyer_experience","module":pageRoute,
+                "data":{
+                        "field1":name,
+                        "field2":imageurl,
+                        "field3":document.URL,
+                        "field4":position,
+                        "error_name":error_name,
+                        },
+                "level":"INFO"};
+    data = JSON.stringify(data);
+    microAjax(url,function(res){
+      if(res !== ''){
+        //var data = JSON.parse(res);
+      }
+    },data,'isJson');
+    }catch(e){
+      //console.log(e);
+      return;
+    }
+  }
+}
+  function microAjax(url, callbackFunction) {
+  if (!url) {
+    return;
+  }
+  var postParam = (arguments[2] || "");
+  var isJson = (arguments[3] || "");
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function(obj) {
+    if (req.readyState == 4 && req.status == 200) {
+      if (callbackFunction) {
+        callbackFunction(req.responseText);
+      }
+    }else{
+        if ((req.status == 500 || req.status == 503) && log_ajax_http) {
+            imageError(req.responseURL,req.status,'Ajax_Error');
+        }
+    }
+  };
+  if (postParam !== "") {
+    if(isJson !== ""){
+      var token = 'Bearer '+soa_bearer;
+      req.open("POST", url, true);
+      req.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+      req.setRequestHeader("Content-type", "application/json");
+      req.setRequestHeader('Authorization', token);
+    }else{
+      req.open("POST", url, true);
+      req.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+      req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    }
+  } else {
+    req.open("GET", url, true);
+  }
+  req.send(postParam);
+}
+function fn_get_atom_cart(atom_cart_data) {
+    var secureUrl = "https://secure.shopclues.com/";
+    var products = atom_cart_data.products;
+    var htm = "<div class='quickCart'><div class='nItem'><p>Your Shopping Cart ( "+atom_cart_data.count+" Item )</p></div>";
+    if(atom_cart_data.count < 2){
+      htm += "<div class='listingItems'><ul>";
+    }else{
+      htm += "<div class='listingItems' style='height:275px'><ul>";
+    }
+    for (var product in products){
+        if (products.hasOwnProperty(product)) {
+         if(typeof products[product]['product_in_cart_promotion_detail'] !== 'undefined') {
+          var promo = "<div class='discount_validity'><span class='seller_discount'>Seller Discount</span><span> Expires on "+products[product]['product_in_cart_promotion_detail']['valid_till']+"</span></div>";
+         } else {
+          var promo = '';
+         }
+         if(typeof products[product]['details'] !== 'undefined' && typeof products[product]['details']['selected_options'] !== 'undefined') {
+           var options = products[product]['details']['selected_options'];
+           var str = '<div class="p_variations">';
+           for(var option in options){
+              str += '<span>'+option +" : "+options[option]+'</span>';
+           }
+           str += '</div>';
+            str.trim();
+         }else{
+          var str ='';
+         }
+         htm+="<li><a href='"+base_url+products[product].seo_name+".html'><img src='"+products[product]['icon_images'][0]['icon_image_path']+"'><div class='contDetails'><span class='itemName'>"+products[product].name+"</span>"+str+"<span class='price'>Rs. "+products[product]['price'][0]['price']+"</span>"+promo+"</div></a></li>"; 
+        }
+    }                        
+    htm += "</ul></div><div class='buttonContainer'><a class='btn orange-white btn_effect' href='"+secureUrl+"atom/acart/getcart'>View Cart</a><a class='btn orange btn_effect' href='"+secureUrl+"atom/summary'>Place Order</a></div></div></div>";   
+        $('.qCart .hoverContent').html(htm);
+        $('.cart_icon_count').html(atom_cart_data.count);
+
+}
+', 
+', 
+      // Cookie type
+    var s_lgnctype = null;
+    // Cookie Value
+    var s_lgncvalue = null;
+
+    // For Login
+    if (ReadCookie('s_lgnc') !== undefined && ReadCookie('s_lgnc') !== "") {
+        s_lgnctype = 'Login';
+        s_lgncvalue = decodeURIComponent(ReadCookie('s_lgnc'));
+    }
+
+    // For Registration
+    if (ReadCookie('s_rgnc') !== undefined && ReadCookie('s_rgnc') !== "") {
+        s_lgnctype = 'Registration';
+        s_lgncvalue = decodeURIComponent(ReadCookie('s_rgnc'));
+    }
+
+    // For Forgot Password
+    if (ReadCookie('s_frgtc') !== undefined && ReadCookie('s_frgtc') !== "") {
+        s_lgnctype = 'FrgtPass';
+        s_lgncvalue = decodeURIComponent(ReadCookie('s_frgtc'));
+    }
+    try {
+            var login_via= (ReadCookie("logged_in_via")) ? ReadCookie("logged_in_via"): 'guest';
+        }
+        catch (e){
+            var login_via = 'guest';
+        }
+        
+        try{
+            var userID = atob(ReadCookie("user_id")) || atob(ReadCookie('scumd'));
+        }catch(e){
+            var userID = '';
+        }
+        try{
+            var usertype = (ReadCookie("token"))?'loggedin':'guest';
+        }catch(e){
+            var usertype ='guest';
+        }
+        try{
+            if(ReadCookie("email") !== null){
+              var email = atob(ReadCookie("email"));
+            }else{
+              var email = '';
+            }
+        }
+        catch(e){
+            var email = '';
+        }
+        
+        try{
+            var fname = atob(ReadCookie("scun"));
+        }catch(e){
+            var fname = '';
+        }
+        try{
+            var lname = atob(ReadCookie("lname"));
+        }
+        catch(e){
+            var lname = '';
+        }
+', 
+  ', 
+', u"
+  document.getElementById('sc_loc_variable').value = ReadCookie('sc_loc_variable');
+", 
+', 
+', 
+ 
+', 
+
+', 
+  var sc_loc = '';
+  var timeoutId;
+  var pincodePattern=/^\d{6}$/;
+  var pincode = '';
+  sc_loc = ReadCookie('sc_loc');
+  var show_pincode=ReadCookie('show_pincode');
+  //var sc_loc_pincode=ReadCookie('sc_loc_pincode');
+  //var sc_loc_zone=ReadCookie('sc_loc_name');
+  var loc_cookie_lifetime = 60;
+  var loc_fail_timeout = 5 * 1000;
+  var loc_hide_timeout = 30 * 1000;
+    var zone_message= 'You are in {pincode}';
+    function ajax_request(url,method,func,extra,post_params,is_json,post_header_params){
+    if (typeof(extra)==='undefined')
+        {     extra='';
+        }
+        method=method.toLowerCase();
+        if(method=='get'){
+          $.ajax({
+            type: 'get',
+            url: url,
+            success: function (resp) {  
+                if(typeof(func)!=='undefined')
+                    func(resp,extra);
+            }
+          });
+        }   
+        if(method=='post'){
+            if(is_json==true && post_params!=null){
+                post_params=JSON.stringify(post_params);
+                consol.log(post_params);
+            }
+             $.ajax({
+                    type: 'post',
+                    url: url,
+                    headers: post_header_params,
+                    data:post_params,
+                    success: function (resp) {  
+                       if(typeof(func)!=='undefined')
+                            func(resp,extra);
+                    }
+                });
+        }
+    }
+function save_loc_cookie(resp,extra){ 
+if(resp != ''){
+  var resp = JSON.parse(resp);   
+  if(resp.status == 1 && resp.zone_name !== null) {
+    var last_zone = ReadCookie('sc_loc_variable');
+    try{
+      if(last_zone == ''){
+        last_zone = 'default';
+      }else{
+        last_zone = last_zone.split('|')[1];
+      }
+    }catch(e){
+      last_zone = 'default';
+    }
+    sc_loc = resp.zone;
+    //SetCookie('sc_loc',resp.zone,loc_cookie_lifetime,cookieDomain);
+    _satellite.track('LocationTracking');
+    zone_msg=zone_message.replace("{zone}",resp.zone_name);
+    //SetCookie('sc_loc_source',extra,loc_cookie_lifetime, cookieDomain);
+    var sc_loc_variable = resp.zone+'|'+resp.zone_name+'|'+extra;
+    //SetCookie('sc_loc_variable',sc_loc_variable,loc_cookie_lifetime, cookieDomain);
+    if (resp.pincode) {
+        if (typeof (window.pId) != 'undefined' && $('#check_shipping').length > 0 && ReadCookie('pincode') != resp.pincode) {
+            //SetCookie('pincode',pincode,loc_cookie_lifetime,cookieDomain);
+            $('#check_shipping').click();
+        } else {
+            //SetCookie('pincode',resp.pincode,loc_cookie_lifetime,cookieDomain);
+        }
+      
+    } else {
+       zone_msg=zone_msg.replace("{pincode}",resp.zone_name);
+        //$('.pincode_section>h2>span').html(zone_msg);
+        //$(".pincode_section").hide();
+    }
+    $('#sc_loc_variable').val(sc_loc_variable);
+    if(extra=='MANUAL')
+    {
+         if (last_zone != '') {
+             var last_location = last_zone + '|' + resp.zone_name;
+             //SetCookie('sc_loc_last_loc',last_location,loc_cookie_lifetime, cookieDomain);
+             _satellite.track('ChangeOfLocation');
+         }
+         $('#cPin').html(pincode);
+    }
+    $('#common_overlay').hide();
+    $('.pincode_section').hide();
+    //SetCookie('show_pincode',1,-1,cookieDomain);// this cookie is removed to avaoid further
+       if (window.location.href.indexOf('search?') != -1) { //if the page is search then retain the search params.
+           var uri = window.location.pathname;
+           var params = window.location.search.split('&');
+           for (var i = 0; i < params.length; i++) {
+               if (params[i].indexOf('pincode') != -1) {
+                   uri += 'pincode=' + ReadCookie('pincode');
+               } else if (params[i].indexOf('sc_z') != -1) {
+                 uri += 'sc_z=' + ReadCookie('sc_loc');
+               } else if (params[i].indexOf('sort') != -1) {
+                  if (uri.indexOf('?') == -1) {
+                    uri += '?';
+                  }
+                  continue;
+               } else {
+                 uri += params[i];
+               }
+               if (params[i+1] && (params[i+1].indexOf('fsrc') != -1 || params[i+1].indexOf('page') != -1)) {
+                   break;
+               } else if (params[i+1]) {
+                   uri += '&';
+               }
+           }
+           window.location.href=uri;
+       } else {
+          if (typeof clp_public !== 'undefined' && typeof clp_public.toggle !== 'undefined') {
+              if(extra=='MANUAL'){
+                window.location.href = document.URL;
+              }
+            }// for reloading the page
+        }            
+    } else {
+      //console.log(extra);      
+      if(extra=='ISP'){
+        if($('#walmart-store').length == 0 && $('#walmart_button').length == 0){
+          $('#common_overlay').fadeIn( 1000 );
+          $('.pincodeModel').show();
+          $('.pincode_section').show();
+        }
+     }
+      if(extra=='LAST_ORDER')
+        {
+            getLocation();
+        }
+      }
+      if(extra == 'MANUAL'){
+        var bRed = document.getElementById('pin_code_popup');
+        bRed.style.color = "red";
+        bRed.value = "Invalid pincode!";
+        setTimeout(function () {
+            bRed.style.border = "";
+            bRed.style.color = "";
+            bRed.value = "";
+        }, 2000);
+        return false;
+      }                    
+}
+}
+function getLocation() {
+  var location_timeout = setTimeout("geolocFail()", loc_fail_timeout);
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } 
+}
+function geolocFail() {
+  sc_loc = ReadCookie('sc_loc');
+  if (!sc_loc || sc_loc == '') {
+    var url = base_url+'localization.php';
+    var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'sc_loc', 'email':email, 'loginId':userID};
+    ajax_request(url,'post',save_loc_cookie,'ISP',postdata,false,null);           
+  }
+}
+var zone = '';      
+function showPosition(position) {
+  if (!sc_loc || sc_loc == '') {
+    var url = base_url+'localization.php';
+    var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'sc_loc', 'email':email, 'loginId':userID};
+    ajax_request(url,'post',save_loc_cookie,'GPS', postdata);  
+  }
+}
+if (!sc_loc || sc_loc == '') {
+if (email != '') {
+     var url = base_url+'localization.php';
+     var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'sc_loc', 'email':email, 'loginId':userID};
+     ajax_request(url,'post',save_loc_cookie,'LAST_ORDER', postdata); 
+} else {
+    geolocFail();
+  }
+}
+function userZoneFromPincode(e) {
+  if(e.currentTarget.id == 'check_shipping'){
+    pincode = $('#zip').val();
+  }else{
+     pincode = $('.pincode_input>input').val();
+  }
+  if(pincodePattern.test(pincode)) {
+      var url = base_url + 'localization.php';
+      var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'pincode'};
+      ajax_request(url,'post',save_loc_cookie,'MANUAL', postdata); 
+  } 
+  try{
+    e.preventDefault();
+  }catch(e){}
+  return false;
+}
+$('#get_pincode_popup').on('click',function(e){
+    pincode = $('.pincode_input>input').val();
+  if(pincodePattern.test(pincode)) {
+       $(".pincode_input").before($('.loading'));
+       //$('.loading').show();
+      var url = base_url + 'localization.php';
+      var postdata = {'pincode':pincode, 'target':'pincode_form', 'local':'pincode'};
+      ajax_request(url,'post',save_loc_cookie,'MANUAL', postdata); 
+      //$('#cPin').html(pincode);
+  }
+  try{
+    e.preventDefault();
+  }catch(e){} 
+});
+$('#common_overlay').on('click',function(e){
+  try{
+    if(e.target.className == 'b_overlay'){
+      $('#common_overlay').children().hide();
+      $('#common_overlay, .popupInner').fadeOut(1000);
+      $('#common_overlay').hide();
+      $('body').css('position', 'relative');
+      $('.popupModel > div').hide();
+      $('.srch_sugg_lst').hide();
+      $('#common_overlay').css('z-index', 1005);
+    }else{
+      e.stopPropagation();
+    }
+  }catch(e){
+  }
+});
+$('.pincodeModel').on('click',function(e){
+  e.stopPropagation();
+});
+$('.pincodeModel').on('click','a.close',function(){
+  $('.popupModel > div').hide();
+  $('#common_overlay').fadeOut(1000);
+});
+', 
+
+
+', 
+    ', 
+
+        var digitalData = {
+              'pUrl':document.URL,
+            //'loginReg': s_lgnctype + ":" + s_lgncvalue, // omniture login tracking
+              page:{
+                      'pageName':'Home',
+                      'channel':'Home',
+                      'subSection1':'Home',
+                      'subSection2':'Home',
+                      'subSection3':'Home'
+               },
+          'pageType':'Home',
+           'profile_data':{
+            'customer_id':(atob(ReadCookie("user_id")) || atob(ReadCookie('scumd'))),
+            'email':atob(ReadCookie("email")).replace (/"/g,''),
+            'first_name':atob(ReadCookie("scun")).replace (/"/g,''),
+            'last_name': atob(ReadCookie("lname")).replace (/"/g,''),
+            'phone':atob(ReadCookie("phone")).replace (/"/g,''),
+            'birthday':atob(ReadCookie("birthday")).replace (/"/g,''),
+            },
+            'new_profile_data':{
+                'billing_state':'NA',
+                'shipping_state':'NA',
+                'source':ReadCookie("utm_source"),
+                'gender':'NA',
+                'cb_used':"",
+                'gc_used':""     
+            },
+            'Site_Version' : 'New'
+        };
+    ', 
+
+
+', u"
+if(typeof _satellite !== 'undefined'){
+  _satellite.pageBottom();
+}
+", 
+', u"
+function srch_sugg_panel(){
+    $('.srch_sugg_lst').fadeIn( 1000 );
+    $('#common_overlay').fadeIn( 1000 );
+    $('#common_overlay').css('z-index', 1004);
+    return true;
+  }
+
+          function hide_srch_sugg_panel(){
+            $(document).bind('focusin.srch_sugg_lst click.srch_sugg_lst',function(e) {
+                  if ($(e.target).closest('.srch_sugg_lst, #autocomplete').length) return;
+                  $(document).unbind('.srch_sugg_lst');
+                  $('div.srch_sugg_lst').fadeOut('medium');
+                  //$('#common_overlay').fadeOut('medium');
+                  $('#autocomplete').removeClass('focused');;
+            });
+            return true;
+          }
+
+            $(document).click(hide_srch_sugg_panel);
+            //$('#autocomplete').keyup(srch_sugg_panel);
+            $('#autocomplete').focus(srch_sugg_panel, function(){
+              $(this).addClass('focused');
+            });
+
+", 
+
+', 
+
+', u"
+var utm_source = '';
+var source = ''; 
+var utm_campaign = '';
+var utm_medium = '';
+var cookie_duration=1 ;
+if(utm_source !== 'undefined' && utm_source !== ''){
+    SetCookie('utm_source',utm_source,cookie_duration,cookieDomain);  
+}
+if(utm_campaign !== 'undefined' && utm_campaign !== ''){
+    SetCookie('utm_campaign',utm_campaign,cookie_duration,cookieDomain);   
+}
+if(utm_medium !== 'undefined' && utm_medium !== ''){
+    SetCookie('utm_medium',utm_medium,cookie_duration,cookieDomain);  
+}
+if(source !== 'undefined' && source=='cuelinks'){
+    SetCookie('utm_source','desidime',cookie_duration,cookieDomain); 
+}
+", 
+', 
+', 
+  /*$(window).scroll(function() {
+    if ($(window).scrollTop() >= 129) {
+            $('.ffix_header').attr('style', "box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.12);");
+            }
+        else {
+            $('.ffix_header').removeAttr("style");
+        }
+  });*/
+', 
+']

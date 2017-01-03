@@ -1,0 +1,3885 @@
+[
+    ', 
+<!--
+
+        //Disable right mouse click Script        
+        var message = "Function Disabled!";
+
+        ///////////////////////////////////
+        function clickIE4() {
+            if (event.button == 2) {
+                alert(message);
+                return false;
+            }
+        }
+
+        function clickNS4(e) {
+            if (document.layers || document.getElementById && !document.all) {
+                if (e.which == 2 || e.which == 3) {
+                    alert(message);
+                    return false;
+                }
+            }
+        }
+
+        if (document.layers) {
+            document.captureEvents(Event.MOUSEDOWN);
+            document.onmousedown = clickNS4;
+        }
+        else if (document.all && !document.getElementById) {
+            document.onmousedown = clickIE4;
+        }
+
+        document.oncontextmenu = new Function("alert(message);return false")
+
+// --> 
+    ', 
+  
+      ', 
+
+
+          function DoAjaxCallUserStats(parameter, datatype, data) {
+              jQuery.ajax({
+                  type: 'POST',
+                  url: 'http://www.adarshcredit.in/Backoffice/Handler/Home/State/UserStatistics.ashx' + parameter,
+                  data: data,
+                  dataType: datatype,
+                  success: function (data, textStatus) {
+                      try {
+                          var jsonData = eval(data);
+                          if (jsonData.IsSucess) {
+                              eval(jsonData.CallBack + '(jsonData.ResponseData, jsonData.Message)');
+                          }
+                          else {
+                          }
+                      }
+                      catch (err) {
+                      }
+                  },
+                  error: function (jqXHR, textStatus, errorThrown) {
+                  }
+              });
+          }
+          //IPInfoDB javascript JSON query example
+          //Tested with FF 3.5, Opera 10, Chome 5 and IE 8
+          //Geolocation data is stored as serialized JSON in a cookie
+          //Bug reports : http://forum.ipinfodb.com/viewforum.php?f=7
+          function geolocate(timezone, cityPrecision, objectVar) {
+              var api = (cityPrecision) ? "ip-city" : "ip-country";
+              var domain = 'api.ipinfodb.com';
+              var url = "http://" + domain + "/v3/" + api + "/?key=54552ef104f993a1b9cbb76ee4d9262d957dee6560b1f8189f0fb196eaba465a&format=json" + "&callback=" + objectVar + ".setGeoCookie";
+              var geodata;
+              var callbackFunc;
+              var JSON = JSON || {};
+
+              // implement JSON.stringify serialization
+              JSON.stringify = JSON.stringify || function (obj) {
+                  var t = typeof (obj);
+                  if (t != "object" || obj === null) {
+                      // simple data type
+                      if (t == "string") obj = '"' + obj + '"';
+                      return String(obj);
+                  } else {
+                      // recurse array or object
+                      var n, v, json = [], arr = (obj && obj.constructor == Array);
+                      for (n in obj) {
+                          v = obj[n]; t = typeof (v);
+                          if (t == "string") v = '"' + v + '"';
+                          else if (t == "object" && v !== null) v = JSON.stringify(v);
+                          json.push((arr ? "" : '"' + n + '":') + String(v));
+                      }
+                      return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
+                  }
+              };
+
+              // implement JSON.parse de-serialization
+              JSON.parse = JSON.parse || function (str) {
+                  if (str === "") str = '""';
+                  eval("var p=" + str + ";");
+                  return p;
+              };
+
+              //Check if cookie already exist. If not, query IPInfoDB
+              this.checkcookie = function (callback) {
+                  geolocationCookie = getCookie('geolocation');
+                  callbackFunc = callback;
+                  if (!geolocationCookie) {
+                      getGeolocation();
+
+                  } else {
+                      geodata = JSON.parse(geolocationCookie);
+                      callbackFunc();
+                  }
+              }
+
+              //API callback function that sets the cookie with the serialized JSON answer
+              this.setGeoCookie = function (answer) {
+                  if (answer['statusCode'] == 'OK') {
+
+                      JSONString = JSON.stringify(answer);
+                      setCookie('geolocation', JSONString, 365);
+
+                      geodata = answer;
+                      callbackFunc();
+                  }
+              }
+
+              //Return a geolocation field
+              this.getField = function (field) {
+                  try {
+                      return geodata[field];
+                  } catch (err) { }
+              }
+
+              //Request to IPInfoDB
+              function getGeolocation() {
+                  try {
+                      script = document.createElement('script');
+                      script.src = url;
+                      document.body.appendChild(script);
+                  } catch (err) { }
+              }
+
+              //Set the cookie
+              function setCookie(c_name, value, expire) {
+                  var date = new Date();
+                  date.setTime(date.getTime() + (60 * 60 * 1000));
+                  document.cookie = c_name + "=" + escape(value) + ((expire == null) ? "" : ";expires=" + date.toGMTString());
+              }
+
+              //Get the cookie content
+              function getCookie(c_name) {
+                  if (document.cookie.length > 0) {
+                      c_start = document.cookie.indexOf(c_name + "=");
+                      if (c_start != -1) {
+                          c_start = c_start + c_name.length + 1;
+                          c_end = document.cookie.indexOf(";", c_start);
+                          if (c_end == -1) {
+                              c_end = document.cookie.length;
+                          }
+                          return unescape(document.cookie.substring(c_start, c_end));
+                      }
+                  }
+                  return '';
+              }
+          }
+    ', 
+    ', 
+        //function geolocate(timezone, cityPrecision, objectVar).
+        //If you rename your object name, you must rename 'visitorGeolocation' in the function
+        var visitorGeolocation = new geolocate(false, true, 'visitorGeolocation');
+        //Check for cookie and run a callback function to execute after geolocation is read either from cookie or IPInfoDB API
+        var callback = function () {
+            var data = {
+                statusCode: visitorGeolocation.getField('statusCode'),
+                statusMessage: visitorGeolocation.getField('statusMessage'),
+                ipAddress: visitorGeolocation.getField('ipAddress'),
+                countryCode: visitorGeolocation.getField('countryCode'),
+                countryName: visitorGeolocation.getField('countryName'),
+                regionName: visitorGeolocation.getField('regionName'),
+                cityName: visitorGeolocation.getField('cityName'),
+                zipCode: visitorGeolocation.getField('zipCode'),
+                latitude: visitorGeolocation.getField('latitude'),
+                longitude: visitorGeolocation.getField('longitude'),
+                timeZone: visitorGeolocation.getField('timeZone')
+            };
+            DoAjaxCallUserStats("?method=userlocation&callbackmethod=userlocationSucess", "json", data);
+        };
+        visitorGeolocation.checkcookie(callback);
+        function userlocationSucess(data, message) {
+
+        }
+    ', 
+
+    ', u"
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-83434519-1', 'auto');
+        ga('send', 'pageview');
+    ", 
+
+
+
+
+    ', 
+', 
+
+', 
+    ', 
+    ', 
+    ', 
+        ', 
+        
+', 
+    $(document).ready(function () {
+        $("#hdid").val('');
+        $("#hdaction").val('');
+        $('#hdsiteurl').val('http://www.adarshcredit.in/');       
+         if ($("#hdaction").val() == "") {
+                $("#limenuhome").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "home") {
+                $("#limenuhome").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "schemes") {
+                $("#limenuscheme").addClass("current");                
+            }            
+            else if ($("#hdaction").val().toLowerCase() == "investorrelation") {                
+                $("#liinvestorrelation").addClass("current");                
+            }            
+            /*SCHEMES***************/
+            else if ($("#hdaction").val().toLowerCase() == "fixeddeposite") {
+                $("#limenuscheme").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "recurringdeposit") {
+                $("#limenuscheme").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "dailydeposit") {
+                $("#limenuscheme").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "monthlyincomescheme") {
+                $("#limenuscheme").addClass("current");                
+            }           
+            else  if ($("#hdaction").val().toLowerCase() == "adarshchouguna") {
+                $("#limenuscheme").addClass("current");                
+            }
+             else if ($("#hdaction").val().toLowerCase() == "adarshtriple") {
+                $("#limenuscheme").addClass("current");                
+            }
+              else if ($("#hdaction").val().toLowerCase() == "adarshbachatpatra") {
+                $("#limenuscheme").addClass("current");                
+            }
+              else if ($("#hdaction").val().toLowerCase() == "adarshsamrudhi") {
+                $("#limenuscheme").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "adarshfifteen") {
+                $("#limenuscheme").addClass("current");                
+            }
+              else if ($("#hdaction").val().toLowerCase() == "adarsheighteen") {
+                $("#limenuscheme").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "adarshsevenfifty") {
+                $("#limenuscheme").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "adarshseniorcitizen") {
+                $("#limenuscheme").addClass("current");                
+            }
+            /*SCHEMES***************/
+            else if ($("#hdaction").val().toLowerCase() == "gold") {
+                $("#limenugold").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "membership") {
+                $("#limenumembership").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "advisors") {
+                $("#limenuadvisor").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "insurance") {
+                $("#limenuinsurance").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "feedback") {
+                $("#limenufeedback").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "contact") {
+                $("#limenucontactus").addClass("current");                
+            }
+              else if ($("#hdaction").val().toLowerCase() == "financial") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "futureplan") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "loanandadvance") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "workingcapital") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "netprofit") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "sharecapital") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "member") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "advisor") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "operationalspread") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "productsegment") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "adarsh36") {
+                $("#liadarsh36").addClass("sel")                
+            }   
+                else if ($("#hdaction").val().toLowerCase() == "mobilitysolution") {
+                $("#limobilitysolution").addClass("current")                
+            }       
+
+    });
+    function GoToHome() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Home";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Home";
+            }
+        }
+
+        function GoToBranchFinder()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Branch";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/BranchFinder/Branch";
+            }
+        }
+    function GoToAboutUs() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/CorporatePartner";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/CorporatePartner";
+            }
+        }
+        function GoToCareers() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Careers";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Careers";
+            }
+        }        
+        function GoToScheme() {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Schemes";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Schemes";
+            }
+        }
+        function GoToFAQS() {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/FAQS";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/FAQS";
+            }
+        }  
+        function GoToContactUS()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Contact";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Contact";
+            }
+        }         
+        function GoToCustomerCenter()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/membercare";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/membercare";
+            }
+        }     
+        function GoToFinancial()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Financial";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Financial";
+            }
+        }
+        function GoToMembership()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Membership";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Membership";
+            }
+        }
+        function GoToInvestment()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Investment";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Investment";
+            }
+        }
+        function GoToOffers()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Offers";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Offers";
+            }
+        }
+        function GoToAdvisor()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/advisors";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/advisors";
+            }
+        }
+        function GoToLearningCenter()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/LearningCenter";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/LearningCenter";
+            }
+        }
+        function GoToPayOnline()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/PayOnline";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/PayOnline";
+            }
+        }
+        function GoToFeedback()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Feedback";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Feedback";
+            }
+        }   
+        function GoToInsurance(){
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Insurance";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Insurance";
+            }
+        } 
+        function GoToGold()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Gold";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Gold";
+            }
+        }
+
+         function ShowFixedDeposite()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/FixedDeposite";
+            }
+            else
+            {
+            location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/FixedDeposite";
+           
+            }
+        }
+
+        function ShowRecurringDeposit()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/RecurringDeposit";
+            }
+            else
+            {
+             location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/RecurringDeposit";
+           
+            }
+        }
+ 
+ 
+         function ShowDailyDeposit()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/DailyDeposit";
+            }
+            else
+            {
+            location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/DailyDeposit";           
+            }
+        }
+          function ShowRegularIncome()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/RegularIncomeScheme";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/RegularIncomeScheme";            
+            }
+        }
+          function ShowMonthlyIncome()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/MonthlyIncomeScheme";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/MonthlyIncomeScheme";             
+            }
+        }
+          function ShowAdarshChouguna()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/adarshchouguna";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/" + $("#hdid").val() + "/adarshchouguna";              
+            }
+        }
+          function ShowAdarshTriple()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshTriple";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshTriple";               
+            }
+        }
+        function ShowAdarshBitiya()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshBitiyaSamridhi";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshBitiyaSamridhi";               
+            } 
+        }
+
+
+          function ShowAdarshBachatPatra()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshBachatpatra";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshBachatpatra"; 
+            }
+        }
+         function ShowAdarshSamrudhi()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshSamrudhi";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshSamrudhi";              
+            }
+        }
+        function ShowAdarsh15()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Adarshfifteen";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Adarshfifteen";    
+            }
+        }
+         function ShowAdarsh18()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshEighteen";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshEighteen";    
+            }
+        }
+         function ShowAdarsh750()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshSevenFifty";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshSevenFifty";              
+            }
+        }
+        function ShowAdarshA999()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshA999";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshA999";              
+            }
+        }
+        function ShowSenorCitizen()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshSeniorCitizen";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshSeniorCitizen";               
+            }
+        }
+           function ShowFinancialReport()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Financial";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Financial";               
+            }
+        }    
+        function ShowLoanandAdvance()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/LoanAndAdvance";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/LoanAndAdvance";               
+            }
+        }     
+        function ShowWorkingCapital()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/WorkingCapital";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/WorkingCapital";               
+            }
+        }    
+        function ShowNetProfit()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/NetProfit";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/NetProfit";               
+            }
+        } 
+   function ShowShareCapital()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/ShareCapital";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/ShareCapital";               
+            }
+        }  
+        function ShowMember()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Member";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Member";               
+            }
+        }   
+        function ShowAdvisor()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Advisor";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Advisor";               
+            }
+        }  
+            function ShowBranch()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/NoOfBranches";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid1").val()+"/NoOfBranches";               
+            }
+        } 
+        function ShowFuturePlan()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/FuturePlan";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/FuturePlan";               
+            }
+        }
+        function ShowOperationalSpread()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/OperationalSpread";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/OperationalSpread";               
+            }
+        }       
+        function ShowProduct()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/ProductSegment";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/ProductSegment";               
+            }
+        }     
+    
+        function ShowDeposit()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Deposit";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Deposit";               
+            }
+        }    
+        function GoToMedia()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/PressReleases";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/PressReleases";               
+            }
+        }       
+        function GoToMobileBanking()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/mobileservices";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/mobileservices";
+            }
+        }               
+        function ShowShareCampaign(){
+        //location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/MonthlyIncomeScheme";    
+        if($("#hdid").val()=="")
+            {
+              location.href = "http://www.adarshcredit.in/English/ShareCapitalCampaign";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/ShareCapitalCampaign";
+            }
+    }
+
+     function ShowAdarshA3(){
+        //location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/MonthlyIncomeScheme";    
+        if($("#hdid").val()=="")
+            {
+              location.href = "http://www.adarshcredit.in/English/adarsha3";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/adarsha3";
+            }
+    }
+        function ShowAdarshA36(){
+        //location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/MonthlyIncomeScheme";    
+        if($("#hdid").val()=="")
+            {
+              location.href = "http://www.adarshcredit.in/English/adarsh36";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/adarsh36";
+            }
+    }
+     function GoToMobiliySolution() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/mobilitysolution";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/mobilitysolution";
+            }
+        }
+', 
+', 
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', About Us |', 
+                        ', Media |', 
+                        ', Member Care |', 
+                        ', Careers |', 
+                        
+                        
+                        ', Branch Locator ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                ', 
+                    
+                    ', 
+                        ', 
+                ', 
+                
+            ', 
+            ', 
+            ', 
+                ', 
+                ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                    
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', Home', 
+                
+                ', Products', 
+                    ', 
+                        ', Fixed Deposit', 
+                        ', Recurring Deposit
+                            (RD)', 
+                        ', Daily Deposit (DD)', 
+                        ', Monthly Income ', 
+                        ', 
+                        ', A-15 ', 
+                        ', Adarsh 18 ', 
+                         ', A-36', 
+                        ', Adarsh Bachat
+                            Patra', 
+                          ', Adarsh Bitiya Samridhi', 
+                        ', Adarsh Triple', 
+                       
+                        
+                          
+                        
+                      
+                         
+                        
+                        ', Adarsh Chouguna', 
+                        
+                        
+                        
+                    ', 
+                ', 
+             
+                ', Investor
+                    Relation', 
+                    ', 
+                        
+                        ', Future Plan', 
+                        
+                        
+                        ', Net Profit', 
+                        ', Share Capital & Reservers', 
+                        ', Number Of Members', 
+                        
+                        ', Number of Branches', 
+                        
+                        
+                    ', 
+                ', 
+                ', Gold',  ', 
+                ', Membership', 
+                ', 
+                ', Advisor', 
+                ', 
+                
+                ', FeedBack', 
+                ', 
+                ', Contact Us', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+        ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                ', @accs', 
+                            ', 
+                                ', 
+                                ', @accs', 
+                            ', 
+                                ', 
+                                ', @accs', 
+                            ', 
+                                ', 
+                                ', @accs', 
+                            ', 
+                                ', 
+                                ', @accs', 
+                            ', 
+                                ', 
+                                ', Advisor',  Booklet', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                        
+', 
+    $(document).ready(function () {                    
+            $("#hdid1").val('');             
+            $('#hdsiteurl').val('http://www.adarshcredit.in/');
+            $("#hdaction").val('');                        
+     });
+    function ShowBranchFinder() {
+        if($("#hdid1").val()=="")
+            {                
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Branch";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid1").val()+"/BranchFinder/Branch";
+            }        
+    }    
+    function ShowAdvisorFinder() {
+        if($("#hdid1").val()=="")
+            {                
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Advisor";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid1").val()+"/BranchFinder/Advisor";
+            }        
+    }  
+     function ShowSchemeFinder() {
+        if($("#hdid1").val()=="")
+            {                
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Scheme";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid1").val()+"/BranchFinder/Scheme";
+            }   
+      }
+     function OpenAccount() {
+    
+
+        if($("#hdid1").val()=="")
+        
+            {                
+                location.href = "http://www.adarshcredit.in/English/openaccount";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid1").val()+"/openaccount/";
+            }             
+    }   
+    function ApplyOnlineLogin() {
+    
+
+        if($("#hdid1").val()=="")
+        
+            {                
+                location.href = "http://www.adarshcredit.in/English/ApplyOnline";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid1").val()+"/ApplyOnline/";
+            }             
+    }   
+    function submitlogindata()
+    {
+        var lgnusersname = $("#txtusername").val();        
+        var lgnpassword = $("#txtpassword").val();
+        if(lgnusersname=="")
+        {
+        alert("Please Enter UserName");
+        return false;
+        }
+        if(lgnpassword=="")
+        {
+        alert("Please Enter Password");
+        return false;
+        }
+        if(lgnusersname!="" && lgnpassword!="")
+        {
+            alert("Invalid UserName or Password");
+            return false;
+        }
+    }
+', 
+', 
+    ', 
+        ', 
+            
+            
+            ', 
+               
+            ', 
+        ', 
+     
+    
+        ', 
+            ', Search Branches', 
+        ', 
+        ', 
+            
+            ', Inquiry Online', 
+        ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+    $(document).ready(function () {
+
+        $("#hdsiteurl").val('http://www.adarshcredit.in/');
+      //  CallImage();
+    });
+    $(function () {
+        $("#slideshow > div:gt(0)").hide();
+        setInterval(function () {
+            $('#slideshow > div:first')
+			    .fadeOut(2000)
+			    .next()
+			    .fadeIn(2000)
+			    .end()
+			    .appendTo('#slideshow');
+        }, 6000);
+
+    });
+
+    function CallImage() {
+        $.fancybox.open({
+            content: $('#divimage').show(),
+            autoSize: false,
+            width: "900px",
+            height: "500px"
+        });
+    }
+
+', 
+', 
+    ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+', 
+', 
+                    ', 
+                    ', 
+                    
+', 
+    $(document).ready(function () {
+        $("#hdsiteurl").val('http://www.adarshcredit.in/');
+        GetBusinessOverviewPageContent();
+    });
+
+    function GetBusinessOverviewPageContent() {
+        DoAjaxCallBusinessOverview("?method=getbyid1&callbackmethod=getbypageurlsuccess", "json", "");
+    }
+    function getbypageurlsuccess(data, message) {
+
+        if (data.Message != null) {
+            $("#divmessage").html(data.Message);
+            $.fancybox.open({
+                content: $('#divmessage').show(),
+                autoSize: true,
+                // width: '700px',
+                // height: '200px',
+                closeEffect: 'none'
+            });
+        }
+    }
+    function DoAjaxCallBusinessOverview(parameter, datatype, data) {
+        var siteurl = $("#hdsiteurl").val();
+        jQuery.ajax({
+            type: 'POST',
+            url: siteurl + "Backoffice/Handler/Message.ashx" + parameter,
+            data: data,
+            dataType: datatype,
+            success: function (data, textStatus) {
+                try {
+                    var jsonData = eval(data);
+                    if (jsonData.IsSucess) {
+                        eval(jsonData.CallBack + '(jsonData.ResponseData, jsonData.Message)');
+                    }
+                    else {
+                        showwarning(jsonData.Message);
+                        ErrorNotification();
+                    }
+                }
+                catch (err) {
+                    showwarning(err);
+                    ErrorNotification();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                showwarning("Error:" + errorThrown + " and " + jqXHR + " and " + textStatus);
+                ErrorNotification();
+            }
+        });
+    }    
+', 
+', 
+   
+//      $(document).ready(function () {
+//       Popupcontrol('welcomemessage', '200px', '200px', true);  
+//     });
+
+    $(document).ready(function () {
+        $("#hdid").val('');
+        $("#hdaction").val('');
+        $('#hdsiteurl').val('http://www.adarshcredit.in/');
+    });    
+        function GoToBranchFinder()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Branch";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/BranchFinder/Branch";
+            }
+        }
+        function GoToContactUs()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Contact";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Contact";
+            }
+        }
+        function GoToLostStolenCard()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Epaper";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Epaper";
+            }
+        }
+        function GoToChangeDetails()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/ChangeDetail";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/ChangeDetail";
+            }
+        }    
+        function GoToScheme()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Schemes";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Schemes";
+            }
+        }     
+        function GoToAdvisor()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Advisors";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Advisors";
+            }
+        }       
+        function GoToMembership()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Membership";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Membership";
+            }
+        }      
+          function GoToMobileBanking()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/mobilebanking";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/mobilebanking";
+            }
+        }              
+        function SubmitNewsletter()
+        {
+            if($("#txtnewsletteremail").val()=="")
+            {
+                alert("Please Enter Email Address");
+            }
+             else if(!validateEmail($("#txtnewsletteremail").val()))
+            {
+                alert("Please Enter Valid Email Address");
+            }
+            else
+            {
+                var data={newsletteremail:$("#txtnewsletteremail").val()};
+                DoAjaxCallNewsletter("?method=newslettersubscribe&callbackmethod=newslettersubscribeSucsess", "json", data);                
+            }
+        }
+        function newslettersubscribeSucsess(data,message)
+        {
+                $("#txtnewsletteremail").val("");
+                alert(message);
+        }
+//        function checkemail()
+//        {
+//          
+//        }  
+        function DoAjaxCallNewsletter(parameter, datatype, data) {
+        jQuery.ajax({
+            type: 'POST',
+            url: 'http://www.adarshcredit.in/English/Handler/DoNotCallRegistration.ashx' + parameter,
+            data: data,
+            dataType: datatype,
+            success: function (data, textStatus) {
+                try {
+                    var jsonData = eval(data);
+                    if (jsonData.IsSucess) {
+                        eval(jsonData.CallBack + '(jsonData.ResponseData, jsonData.Message)');
+                    }
+                    else {
+                        
+                    }
+                }
+                catch (err) {
+                    
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                
+            }
+        });
+    }
+', 
+', 
+    $(document).ready(function () {
+        $('#hdsiteurl').val('http://www.adarshcredit.in/');
+        getall();
+    });
+    function getall() {
+        DoAjaxCall("?method=getall&callbackmethod=GetDataSuccess", "json", "");
+    }
+    function GetDataSuccess(data, message) {
+        $("#latestNews").html(data);
+    }
+    function DoAjaxCall(parameter, datatype, data) {
+        var siteurl = $('#hdsiteurl').val();
+        jQuery.ajax({
+            type: 'POST',
+            url: siteurl + "English/Handler/LatestNews.ashx" + parameter,
+            data: data,
+            dataType: datatype,
+            success: function (data, textStatus) {
+                try {
+                    var jsonData = eval(data);
+                    if (jsonData.IsSucess) {
+                        eval(jsonData.CallBack + '(jsonData.ResponseData, jsonData.Message)');
+                    }
+                    else {
+
+                    }
+                }
+                catch (err) {
+
+                }
+            },
+            error: function (jqXHR, message, errorThrown) {
+
+            }
+        });
+    }
+', 
+', 
+    $(document).ready(function () {
+        $("#hdsiteurl").val('http://www.adarshcredit.in/');
+
+        GetFinancialStatusPageContent();
+    });
+    function GetFinancialStatusPageContent() {
+        var data = { linkurl: "homefinancialstatus" };
+        DoAjaxCallFinancialStatus("?method=getbypageurl&callbackmethod=getbypageurlsuccess1", "json", data);
+    }
+    function getbypageurlsuccess1(data, message) {
+        $("#divfinancialstatus").html(data);
+
+    }
+    function DoAjaxCallFinancialStatus(parameter, datatype, data) {
+        var siteurl = $("#hdsiteurl").val();
+        jQuery.ajax({
+            type: 'POST',
+            url: siteurl + "Backoffice/Handler/Links/Links.ashx" + parameter,
+            data: data,
+            dataType: datatype,
+            success: function (data, textStatus) {
+                try {
+                    var jsonData = eval(data);
+                    if (jsonData.IsSucess) {
+                        eval(jsonData.CallBack + '(jsonData.ResponseData, jsonData.Message)');
+                    }
+                    else {
+                        showwarning(jsonData.Message);
+                        ErrorNotification();
+                    }
+                }
+                catch (err) {
+                    showwarning(err);
+                    ErrorNotification();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                showwarning("Error:" + errorThrown + " and " + jqXHR + " and " + textStatus);
+                ErrorNotification();
+            }
+        });
+    }    
+', 
+', 
+    ', 
+        ', 
+            ', 
+        ', 
+            ', 
+                Benefit from all our experience and schemes. Generate revenues through attractive
+                commission structures.Incentive, Life time career opportunity and
+                much more...
+            ', 
+        ', 
+        ', Find out more', 
+    ', 
+    ', 
+     
+        ', 
+            ', 
+        ', 
+            ', 
+                We offer different periodicities for deposits with undoubtedly attractive rate of
+                Interest.', 
+            ', 
+        ', 
+      
+    ', 
+    ', 
+        ', 
+            ', 
+        ', 
+            ', 
+                Become a part of "Adarsh Pariwar", become a member and attain the financial support
+                & Improve the standard of Living by achieving all possible technology driven financial
+                services under one roof.', 
+            ', 
+        ', 
+        ', Find out more', 
+    ', 
+', 
+', 
+ 
+   
+    ', 
+        ', 
+            Newsletter Subscribe', 
+        ', 
+            ', 
+                ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', Branch Finder', 
+                    ', 
+                        Bye-Laws', 
+                    ', Contact Us', 
+                    ', EPaper', 
+               
+                    
+                    
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+                    ', 
+                       
+                      
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+        ', 
+        
+', 
+    $(document).ready(function () {
+        $("#hdid").val('');            
+        $("#hdaction").val('');
+         if($("#hdaction").val()!="")
+        {
+            $("#spanyouarehere").text($("#hdaction").val().toString().toUpperCase());
+        }   
+        $('#hdsiteurl').val('http://www.adarshcredit.in/');
+    });    
+       function GoToAboutCoporateProfile()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/CorporateProfile";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/CorporateProfile";
+            }
+        }
+        function GoToAboutBusiness()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/BusinessOverview";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/BusinessOverview";
+            }
+        }
+        function GoTopressrelease()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/PressReleases";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/PressReleases";
+            }
+        }
+         function GoToGallery()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Gallery";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Gallery";
+            }
+        }
+        
+       function GoToCSR() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/CSR";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/CSR";
+            }
+        }
+        function GoToTVCommercials() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/TvCommercial";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/TvCommercial";
+            }
+        }        
+
+       function GoToFinancical() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Financial";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Financial";
+            }
+        }        
+
+       function GoTofutureplan() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/FuturePlan";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/FuturePlan";
+            }
+        }        
+       
+       function GoToCareers() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Careers";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Careers";
+            }
+        }   
+       
+      function GoToOurCommitement() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Commitment";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Commitment";
+            }
+        }                
+      
+      function GoToCurrOpen() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/CurrentOpenings";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/CurrentOpenings";
+            }
+        }   
+      
+      function GoToFAQ() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/FAQS";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/FAQS";
+            }
+        }     
+      
+      function GoToFeedback() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Feedback";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Feedback";
+            }
+        }   
+      
+      function GoToSearchBranch() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Branch";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/BranchFinder/Branch";
+            }
+        }   
+      
+      function GoToSearchAdvisors() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Advisor";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/BranchFinder/Advisor";
+            }
+        }   
+       function GoToOnlineForm()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/formscenter";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/formscenter";
+            }
+        }
+        function GoToSubmitQueryForm()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/SubmitQuery";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/SubmitQuery";
+            }
+        }        
+      function GoToSugg() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Feedback";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Feedback";
+            }
+        }   
+      function GoToCookiePolicy() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/CookiePolicy";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/CookiePolicy";
+            }
+        }  
+
+      function GoToTermsconditions() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/termsandconditions";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/termsandconditions";
+            }
+        }   
+      
+      function GoToPrivacyPolicy() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/LegalPrivacy";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/LegalPrivacy";
+            }
+        }  
+         function GoToApplyOnline()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/ApplyOnline";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/ApplyOnline";
+            }
+        }
+        function GoToCalculator()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Calculator";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Calculator";
+            }
+        }
+        function GoToInterestRates()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshChouguna";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshChouguna";
+            }
+        }
+         function GoToLatestNews()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Newslist";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Newslist";
+            }
+        }
+        function GoToApplyOnlineFooter()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/ApplyOnline";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/ApplyOnline";
+            }
+        }        
+', 
+', 
+    ', 
+        ', 
+            You are here : ', HOME', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+    ', 
+        ', 
+            ', 
+                Inquiry Online', 
+        ', 
+        ', 
+            ', Calculators', 
+            ', 
+        ', 
+        ', 
+        
+        
+        
+        ', 
+            
+            ', Support ', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+        ', 
+            
+            
+            ', CSR', 
+            ', Careers', 
+            ', Feedback', 
+            
+            
+            ', TV Commercials', 
+            ', Our Commitment', 
+            ', Search Branches', 
+            ', Cookie Policy', 
+            ', Press Releases', 
+            
+            ', Current Openings', 
+            ', Inquiry Online', 
+            
+            ', Terms & Conditions', 
+            ', Gallery', 
+            ', Future Plans', 
+            
+            ', Suggestions', 
+            ', 
+                Privacy Policy', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+        Copyright © 2010 Adarsh Credit Co-operative Society Ltd. | All Rights Reserved
+              ', 
+         Developed by ', Xmx Solutions', 
+         ', 
+   
+', 
+', 
+', 
+', 
+    ', 
+    ', 
+        ', 
+            ', 
+                ', 
+                ', 
+                Please Wait...', 
+        ', 
+    ', 
+    
+'][
+    ', 
+<!--
+
+        //Disable right mouse click Script        
+        var message = "Function Disabled!";
+
+        ///////////////////////////////////
+        function clickIE4() {
+            if (event.button == 2) {
+                alert(message);
+                return false;
+            }
+        }
+
+        function clickNS4(e) {
+            if (document.layers || document.getElementById && !document.all) {
+                if (e.which == 2 || e.which == 3) {
+                    alert(message);
+                    return false;
+                }
+            }
+        }
+
+        if (document.layers) {
+            document.captureEvents(Event.MOUSEDOWN);
+            document.onmousedown = clickNS4;
+        }
+        else if (document.all && !document.getElementById) {
+            document.onmousedown = clickIE4;
+        }
+
+        document.oncontextmenu = new Function("alert(message);return false")
+
+// --> 
+    ', 
+  
+      ', 
+
+
+          function DoAjaxCallUserStats(parameter, datatype, data) {
+              jQuery.ajax({
+                  type: 'POST',
+                  url: 'http://www.adarshcredit.in/Backoffice/Handler/Home/State/UserStatistics.ashx' + parameter,
+                  data: data,
+                  dataType: datatype,
+                  success: function (data, textStatus) {
+                      try {
+                          var jsonData = eval(data);
+                          if (jsonData.IsSucess) {
+                              eval(jsonData.CallBack + '(jsonData.ResponseData, jsonData.Message)');
+                          }
+                          else {
+                          }
+                      }
+                      catch (err) {
+                      }
+                  },
+                  error: function (jqXHR, textStatus, errorThrown) {
+                  }
+              });
+          }
+          //IPInfoDB javascript JSON query example
+          //Tested with FF 3.5, Opera 10, Chome 5 and IE 8
+          //Geolocation data is stored as serialized JSON in a cookie
+          //Bug reports : http://forum.ipinfodb.com/viewforum.php?f=7
+          function geolocate(timezone, cityPrecision, objectVar) {
+              var api = (cityPrecision) ? "ip-city" : "ip-country";
+              var domain = 'api.ipinfodb.com';
+              var url = "http://" + domain + "/v3/" + api + "/?key=54552ef104f993a1b9cbb76ee4d9262d957dee6560b1f8189f0fb196eaba465a&format=json" + "&callback=" + objectVar + ".setGeoCookie";
+              var geodata;
+              var callbackFunc;
+              var JSON = JSON || {};
+
+              // implement JSON.stringify serialization
+              JSON.stringify = JSON.stringify || function (obj) {
+                  var t = typeof (obj);
+                  if (t != "object" || obj === null) {
+                      // simple data type
+                      if (t == "string") obj = '"' + obj + '"';
+                      return String(obj);
+                  } else {
+                      // recurse array or object
+                      var n, v, json = [], arr = (obj && obj.constructor == Array);
+                      for (n in obj) {
+                          v = obj[n]; t = typeof (v);
+                          if (t == "string") v = '"' + v + '"';
+                          else if (t == "object" && v !== null) v = JSON.stringify(v);
+                          json.push((arr ? "" : '"' + n + '":') + String(v));
+                      }
+                      return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
+                  }
+              };
+
+              // implement JSON.parse de-serialization
+              JSON.parse = JSON.parse || function (str) {
+                  if (str === "") str = '""';
+                  eval("var p=" + str + ";");
+                  return p;
+              };
+
+              //Check if cookie already exist. If not, query IPInfoDB
+              this.checkcookie = function (callback) {
+                  geolocationCookie = getCookie('geolocation');
+                  callbackFunc = callback;
+                  if (!geolocationCookie) {
+                      getGeolocation();
+
+                  } else {
+                      geodata = JSON.parse(geolocationCookie);
+                      callbackFunc();
+                  }
+              }
+
+              //API callback function that sets the cookie with the serialized JSON answer
+              this.setGeoCookie = function (answer) {
+                  if (answer['statusCode'] == 'OK') {
+
+                      JSONString = JSON.stringify(answer);
+                      setCookie('geolocation', JSONString, 365);
+
+                      geodata = answer;
+                      callbackFunc();
+                  }
+              }
+
+              //Return a geolocation field
+              this.getField = function (field) {
+                  try {
+                      return geodata[field];
+                  } catch (err) { }
+              }
+
+              //Request to IPInfoDB
+              function getGeolocation() {
+                  try {
+                      script = document.createElement('script');
+                      script.src = url;
+                      document.body.appendChild(script);
+                  } catch (err) { }
+              }
+
+              //Set the cookie
+              function setCookie(c_name, value, expire) {
+                  var date = new Date();
+                  date.setTime(date.getTime() + (60 * 60 * 1000));
+                  document.cookie = c_name + "=" + escape(value) + ((expire == null) ? "" : ";expires=" + date.toGMTString());
+              }
+
+              //Get the cookie content
+              function getCookie(c_name) {
+                  if (document.cookie.length > 0) {
+                      c_start = document.cookie.indexOf(c_name + "=");
+                      if (c_start != -1) {
+                          c_start = c_start + c_name.length + 1;
+                          c_end = document.cookie.indexOf(";", c_start);
+                          if (c_end == -1) {
+                              c_end = document.cookie.length;
+                          }
+                          return unescape(document.cookie.substring(c_start, c_end));
+                      }
+                  }
+                  return '';
+              }
+          }
+    ', 
+    ', 
+        //function geolocate(timezone, cityPrecision, objectVar).
+        //If you rename your object name, you must rename 'visitorGeolocation' in the function
+        var visitorGeolocation = new geolocate(false, true, 'visitorGeolocation');
+        //Check for cookie and run a callback function to execute after geolocation is read either from cookie or IPInfoDB API
+        var callback = function () {
+            var data = {
+                statusCode: visitorGeolocation.getField('statusCode'),
+                statusMessage: visitorGeolocation.getField('statusMessage'),
+                ipAddress: visitorGeolocation.getField('ipAddress'),
+                countryCode: visitorGeolocation.getField('countryCode'),
+                countryName: visitorGeolocation.getField('countryName'),
+                regionName: visitorGeolocation.getField('regionName'),
+                cityName: visitorGeolocation.getField('cityName'),
+                zipCode: visitorGeolocation.getField('zipCode'),
+                latitude: visitorGeolocation.getField('latitude'),
+                longitude: visitorGeolocation.getField('longitude'),
+                timeZone: visitorGeolocation.getField('timeZone')
+            };
+            DoAjaxCallUserStats("?method=userlocation&callbackmethod=userlocationSucess", "json", data);
+        };
+        visitorGeolocation.checkcookie(callback);
+        function userlocationSucess(data, message) {
+
+        }
+    ', 
+
+    ', u"
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-83434519-1', 'auto');
+        ga('send', 'pageview');
+    ", 
+
+
+
+
+    ', 
+', 
+
+', 
+    ', 
+    ', 
+    ', 
+        ', 
+        
+', 
+    $(document).ready(function () {
+        $("#hdid").val('');
+        $("#hdaction").val('');
+        $('#hdsiteurl').val('http://www.adarshcredit.in/');       
+         if ($("#hdaction").val() == "") {
+                $("#limenuhome").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "home") {
+                $("#limenuhome").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "schemes") {
+                $("#limenuscheme").addClass("current");                
+            }            
+            else if ($("#hdaction").val().toLowerCase() == "investorrelation") {                
+                $("#liinvestorrelation").addClass("current");                
+            }            
+            /*SCHEMES***************/
+            else if ($("#hdaction").val().toLowerCase() == "fixeddeposite") {
+                $("#limenuscheme").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "recurringdeposit") {
+                $("#limenuscheme").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "dailydeposit") {
+                $("#limenuscheme").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "monthlyincomescheme") {
+                $("#limenuscheme").addClass("current");                
+            }           
+            else  if ($("#hdaction").val().toLowerCase() == "adarshchouguna") {
+                $("#limenuscheme").addClass("current");                
+            }
+             else if ($("#hdaction").val().toLowerCase() == "adarshtriple") {
+                $("#limenuscheme").addClass("current");                
+            }
+              else if ($("#hdaction").val().toLowerCase() == "adarshbachatpatra") {
+                $("#limenuscheme").addClass("current");                
+            }
+              else if ($("#hdaction").val().toLowerCase() == "adarshsamrudhi") {
+                $("#limenuscheme").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "adarshfifteen") {
+                $("#limenuscheme").addClass("current");                
+            }
+              else if ($("#hdaction").val().toLowerCase() == "adarsheighteen") {
+                $("#limenuscheme").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "adarshsevenfifty") {
+                $("#limenuscheme").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "adarshseniorcitizen") {
+                $("#limenuscheme").addClass("current");                
+            }
+            /*SCHEMES***************/
+            else if ($("#hdaction").val().toLowerCase() == "gold") {
+                $("#limenugold").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "membership") {
+                $("#limenumembership").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "advisors") {
+                $("#limenuadvisor").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "insurance") {
+                $("#limenuinsurance").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "feedback") {
+                $("#limenufeedback").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "contact") {
+                $("#limenucontactus").addClass("current");                
+            }
+              else if ($("#hdaction").val().toLowerCase() == "financial") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "futureplan") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "loanandadvance") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "workingcapital") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "netprofit") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "sharecapital") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "member") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "advisor") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "operationalspread") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+               else if ($("#hdaction").val().toLowerCase() == "productsegment") {
+                $("#liinvestorrelation").addClass("current");                
+            }
+            else if ($("#hdaction").val().toLowerCase() == "adarsh36") {
+                $("#liadarsh36").addClass("sel")                
+            }   
+                else if ($("#hdaction").val().toLowerCase() == "mobilitysolution") {
+                $("#limobilitysolution").addClass("current")                
+            }       
+
+    });
+    function GoToHome() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Home";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Home";
+            }
+        }
+
+        function GoToBranchFinder()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Branch";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/BranchFinder/Branch";
+            }
+        }
+    function GoToAboutUs() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/CorporatePartner";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/CorporatePartner";
+            }
+        }
+        function GoToCareers() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Careers";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Careers";
+            }
+        }        
+        function GoToScheme() {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Schemes";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Schemes";
+            }
+        }
+        function GoToFAQS() {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/FAQS";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/FAQS";
+            }
+        }  
+        function GoToContactUS()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Contact";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Contact";
+            }
+        }         
+        function GoToCustomerCenter()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/membercare";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/membercare";
+            }
+        }     
+        function GoToFinancial()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Financial";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Financial";
+            }
+        }
+        function GoToMembership()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Membership";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Membership";
+            }
+        }
+        function GoToInvestment()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Investment";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Investment";
+            }
+        }
+        function GoToOffers()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Offers";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Offers";
+            }
+        }
+        function GoToAdvisor()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/advisors";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/advisors";
+            }
+        }
+        function GoToLearningCenter()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/LearningCenter";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/LearningCenter";
+            }
+        }
+        function GoToPayOnline()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/PayOnline";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/PayOnline";
+            }
+        }
+        function GoToFeedback()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Feedback";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Feedback";
+            }
+        }   
+        function GoToInsurance(){
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Insurance";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Insurance";
+            }
+        } 
+        function GoToGold()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Gold";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Gold";
+            }
+        }
+
+         function ShowFixedDeposite()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/FixedDeposite";
+            }
+            else
+            {
+            location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/FixedDeposite";
+           
+            }
+        }
+
+        function ShowRecurringDeposit()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/RecurringDeposit";
+            }
+            else
+            {
+             location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/RecurringDeposit";
+           
+            }
+        }
+ 
+ 
+         function ShowDailyDeposit()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/DailyDeposit";
+            }
+            else
+            {
+            location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/DailyDeposit";           
+            }
+        }
+          function ShowRegularIncome()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/RegularIncomeScheme";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/RegularIncomeScheme";            
+            }
+        }
+          function ShowMonthlyIncome()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/MonthlyIncomeScheme";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/MonthlyIncomeScheme";             
+            }
+        }
+          function ShowAdarshChouguna()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/adarshchouguna";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/" + $("#hdid").val() + "/adarshchouguna";              
+            }
+        }
+          function ShowAdarshTriple()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshTriple";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshTriple";               
+            }
+        }
+        function ShowAdarshBitiya()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshBitiyaSamridhi";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshBitiyaSamridhi";               
+            } 
+        }
+
+
+          function ShowAdarshBachatPatra()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshBachatpatra";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshBachatpatra"; 
+            }
+        }
+         function ShowAdarshSamrudhi()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshSamrudhi";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshSamrudhi";              
+            }
+        }
+        function ShowAdarsh15()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Adarshfifteen";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Adarshfifteen";    
+            }
+        }
+         function ShowAdarsh18()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshEighteen";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshEighteen";    
+            }
+        }
+         function ShowAdarsh750()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshSevenFifty";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshSevenFifty";              
+            }
+        }
+        function ShowAdarshA999()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshA999";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshA999";              
+            }
+        }
+        function ShowSenorCitizen()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshSeniorCitizen";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshSeniorCitizen";               
+            }
+        }
+           function ShowFinancialReport()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Financial";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Financial";               
+            }
+        }    
+        function ShowLoanandAdvance()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/LoanAndAdvance";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/LoanAndAdvance";               
+            }
+        }     
+        function ShowWorkingCapital()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/WorkingCapital";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/WorkingCapital";               
+            }
+        }    
+        function ShowNetProfit()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/NetProfit";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/NetProfit";               
+            }
+        } 
+   function ShowShareCapital()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/ShareCapital";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/ShareCapital";               
+            }
+        }  
+        function ShowMember()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Member";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Member";               
+            }
+        }   
+        function ShowAdvisor()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Advisor";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Advisor";               
+            }
+        }  
+            function ShowBranch()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/NoOfBranches";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid1").val()+"/NoOfBranches";               
+            }
+        } 
+        function ShowFuturePlan()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/FuturePlan";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/FuturePlan";               
+            }
+        }
+        function ShowOperationalSpread()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/OperationalSpread";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/OperationalSpread";               
+            }
+        }       
+        function ShowProduct()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/ProductSegment";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/ProductSegment";               
+            }
+        }     
+    
+        function ShowDeposit()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Deposit";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Deposit";               
+            }
+        }    
+        function GoToMedia()
+        {
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/PressReleases";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/PressReleases";               
+            }
+        }       
+        function GoToMobileBanking()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/mobileservices";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/mobileservices";
+            }
+        }               
+        function ShowShareCampaign(){
+        //location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/MonthlyIncomeScheme";    
+        if($("#hdid").val()=="")
+            {
+              location.href = "http://www.adarshcredit.in/English/ShareCapitalCampaign";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/ShareCapitalCampaign";
+            }
+    }
+
+     function ShowAdarshA3(){
+        //location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/MonthlyIncomeScheme";    
+        if($("#hdid").val()=="")
+            {
+              location.href = "http://www.adarshcredit.in/English/adarsha3";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/adarsha3";
+            }
+    }
+        function ShowAdarshA36(){
+        //location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/MonthlyIncomeScheme";    
+        if($("#hdid").val()=="")
+            {
+              location.href = "http://www.adarshcredit.in/English/adarsh36";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/adarsh36";
+            }
+    }
+     function GoToMobiliySolution() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/mobilitysolution";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/mobilitysolution";
+            }
+        }
+', 
+', 
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', About Us |', 
+                        ', Media |', 
+                        ', Member Care |', 
+                        ', Careers |', 
+                        
+                        
+                        ', Branch Locator ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                ', 
+                    
+                    ', 
+                        ', 
+                ', 
+                
+            ', 
+            ', 
+            ', 
+                ', 
+                ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                    
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', Home', 
+                
+                ', Products', 
+                    ', 
+                        ', Fixed Deposit', 
+                        ', Recurring Deposit
+                            (RD)', 
+                        ', Daily Deposit (DD)', 
+                        ', Monthly Income ', 
+                        ', 
+                        ', A-15 ', 
+                        ', Adarsh 18 ', 
+                         ', A-36', 
+                        ', Adarsh Bachat
+                            Patra', 
+                          ', Adarsh Bitiya Samridhi', 
+                        ', Adarsh Triple', 
+                       
+                        
+                          
+                        
+                      
+                         
+                        
+                        ', Adarsh Chouguna', 
+                        
+                        
+                        
+                    ', 
+                ', 
+             
+                ', Investor
+                    Relation', 
+                    ', 
+                        
+                        ', Future Plan', 
+                        
+                        
+                        ', Net Profit', 
+                        ', Share Capital & Reservers', 
+                        ', Number Of Members', 
+                        
+                        ', Number of Branches', 
+                        
+                        
+                    ', 
+                ', 
+                ', Gold',  ', 
+                ', Membership', 
+                ', 
+                ', Advisor', 
+                ', 
+                
+                ', FeedBack', 
+                ', 
+                ', Contact Us', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+        ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                ', @accs', 
+                            ', 
+                                ', 
+                                ', @accs', 
+                            ', 
+                                ', 
+                                ', @accs', 
+                            ', 
+                                ', 
+                                ', @accs', 
+                            ', 
+                                ', 
+                                ', @accs', 
+                            ', 
+                                ', 
+                                ', Advisor',  Booklet', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                        
+', 
+    $(document).ready(function () {                    
+            $("#hdid1").val('');             
+            $('#hdsiteurl').val('http://www.adarshcredit.in/');
+            $("#hdaction").val('');                        
+     });
+    function ShowBranchFinder() {
+        if($("#hdid1").val()=="")
+            {                
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Branch";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid1").val()+"/BranchFinder/Branch";
+            }        
+    }    
+    function ShowAdvisorFinder() {
+        if($("#hdid1").val()=="")
+            {                
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Advisor";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid1").val()+"/BranchFinder/Advisor";
+            }        
+    }  
+     function ShowSchemeFinder() {
+        if($("#hdid1").val()=="")
+            {                
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Scheme";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid1").val()+"/BranchFinder/Scheme";
+            }   
+      }
+     function OpenAccount() {
+    
+
+        if($("#hdid1").val()=="")
+        
+            {                
+                location.href = "http://www.adarshcredit.in/English/openaccount";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid1").val()+"/openaccount/";
+            }             
+    }   
+    function ApplyOnlineLogin() {
+    
+
+        if($("#hdid1").val()=="")
+        
+            {                
+                location.href = "http://www.adarshcredit.in/English/ApplyOnline";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid1").val()+"/ApplyOnline/";
+            }             
+    }   
+    function submitlogindata()
+    {
+        var lgnusersname = $("#txtusername").val();        
+        var lgnpassword = $("#txtpassword").val();
+        if(lgnusersname=="")
+        {
+        alert("Please Enter UserName");
+        return false;
+        }
+        if(lgnpassword=="")
+        {
+        alert("Please Enter Password");
+        return false;
+        }
+        if(lgnusersname!="" && lgnpassword!="")
+        {
+            alert("Invalid UserName or Password");
+            return false;
+        }
+    }
+', 
+', 
+    ', 
+        ', 
+            
+            
+            ', 
+               
+            ', 
+        ', 
+     
+    
+        ', 
+            ', Search Branches', 
+        ', 
+        ', 
+            
+            ', Inquiry Online', 
+        ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+    $(document).ready(function () {
+
+        $("#hdsiteurl").val('http://www.adarshcredit.in/');
+      //  CallImage();
+    });
+    $(function () {
+        $("#slideshow > div:gt(0)").hide();
+        setInterval(function () {
+            $('#slideshow > div:first')
+			    .fadeOut(2000)
+			    .next()
+			    .fadeIn(2000)
+			    .end()
+			    .appendTo('#slideshow');
+        }, 6000);
+
+    });
+
+    function CallImage() {
+        $.fancybox.open({
+            content: $('#divimage').show(),
+            autoSize: false,
+            width: "900px",
+            height: "500px"
+        });
+    }
+
+', 
+', 
+    ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+', 
+', 
+                    ', 
+                    ', 
+                    
+', 
+    $(document).ready(function () {
+        $("#hdsiteurl").val('http://www.adarshcredit.in/');
+        GetBusinessOverviewPageContent();
+    });
+
+    function GetBusinessOverviewPageContent() {
+        DoAjaxCallBusinessOverview("?method=getbyid1&callbackmethod=getbypageurlsuccess", "json", "");
+    }
+    function getbypageurlsuccess(data, message) {
+
+        if (data.Message != null) {
+            $("#divmessage").html(data.Message);
+            $.fancybox.open({
+                content: $('#divmessage').show(),
+                autoSize: true,
+                // width: '700px',
+                // height: '200px',
+                closeEffect: 'none'
+            });
+        }
+    }
+    function DoAjaxCallBusinessOverview(parameter, datatype, data) {
+        var siteurl = $("#hdsiteurl").val();
+        jQuery.ajax({
+            type: 'POST',
+            url: siteurl + "Backoffice/Handler/Message.ashx" + parameter,
+            data: data,
+            dataType: datatype,
+            success: function (data, textStatus) {
+                try {
+                    var jsonData = eval(data);
+                    if (jsonData.IsSucess) {
+                        eval(jsonData.CallBack + '(jsonData.ResponseData, jsonData.Message)');
+                    }
+                    else {
+                        showwarning(jsonData.Message);
+                        ErrorNotification();
+                    }
+                }
+                catch (err) {
+                    showwarning(err);
+                    ErrorNotification();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                showwarning("Error:" + errorThrown + " and " + jqXHR + " and " + textStatus);
+                ErrorNotification();
+            }
+        });
+    }    
+', 
+', 
+   
+//      $(document).ready(function () {
+//       Popupcontrol('welcomemessage', '200px', '200px', true);  
+//     });
+
+    $(document).ready(function () {
+        $("#hdid").val('');
+        $("#hdaction").val('');
+        $('#hdsiteurl').val('http://www.adarshcredit.in/');
+    });    
+        function GoToBranchFinder()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Branch";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/BranchFinder/Branch";
+            }
+        }
+        function GoToContactUs()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Contact";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Contact";
+            }
+        }
+        function GoToLostStolenCard()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Epaper";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Epaper";
+            }
+        }
+        function GoToChangeDetails()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/ChangeDetail";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/ChangeDetail";
+            }
+        }    
+        function GoToScheme()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Schemes";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Schemes";
+            }
+        }     
+        function GoToAdvisor()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Advisors";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Advisors";
+            }
+        }       
+        function GoToMembership()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Membership";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Membership";
+            }
+        }      
+          function GoToMobileBanking()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/mobilebanking";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/mobilebanking";
+            }
+        }              
+        function SubmitNewsletter()
+        {
+            if($("#txtnewsletteremail").val()=="")
+            {
+                alert("Please Enter Email Address");
+            }
+             else if(!validateEmail($("#txtnewsletteremail").val()))
+            {
+                alert("Please Enter Valid Email Address");
+            }
+            else
+            {
+                var data={newsletteremail:$("#txtnewsletteremail").val()};
+                DoAjaxCallNewsletter("?method=newslettersubscribe&callbackmethod=newslettersubscribeSucsess", "json", data);                
+            }
+        }
+        function newslettersubscribeSucsess(data,message)
+        {
+                $("#txtnewsletteremail").val("");
+                alert(message);
+        }
+//        function checkemail()
+//        {
+//          
+//        }  
+        function DoAjaxCallNewsletter(parameter, datatype, data) {
+        jQuery.ajax({
+            type: 'POST',
+            url: 'http://www.adarshcredit.in/English/Handler/DoNotCallRegistration.ashx' + parameter,
+            data: data,
+            dataType: datatype,
+            success: function (data, textStatus) {
+                try {
+                    var jsonData = eval(data);
+                    if (jsonData.IsSucess) {
+                        eval(jsonData.CallBack + '(jsonData.ResponseData, jsonData.Message)');
+                    }
+                    else {
+                        
+                    }
+                }
+                catch (err) {
+                    
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                
+            }
+        });
+    }
+', 
+', 
+    $(document).ready(function () {
+        $('#hdsiteurl').val('http://www.adarshcredit.in/');
+        getall();
+    });
+    function getall() {
+        DoAjaxCall("?method=getall&callbackmethod=GetDataSuccess", "json", "");
+    }
+    function GetDataSuccess(data, message) {
+        $("#latestNews").html(data);
+    }
+    function DoAjaxCall(parameter, datatype, data) {
+        var siteurl = $('#hdsiteurl').val();
+        jQuery.ajax({
+            type: 'POST',
+            url: siteurl + "English/Handler/LatestNews.ashx" + parameter,
+            data: data,
+            dataType: datatype,
+            success: function (data, textStatus) {
+                try {
+                    var jsonData = eval(data);
+                    if (jsonData.IsSucess) {
+                        eval(jsonData.CallBack + '(jsonData.ResponseData, jsonData.Message)');
+                    }
+                    else {
+
+                    }
+                }
+                catch (err) {
+
+                }
+            },
+            error: function (jqXHR, message, errorThrown) {
+
+            }
+        });
+    }
+', 
+', 
+    $(document).ready(function () {
+        $("#hdsiteurl").val('http://www.adarshcredit.in/');
+
+        GetFinancialStatusPageContent();
+    });
+    function GetFinancialStatusPageContent() {
+        var data = { linkurl: "homefinancialstatus" };
+        DoAjaxCallFinancialStatus("?method=getbypageurl&callbackmethod=getbypageurlsuccess1", "json", data);
+    }
+    function getbypageurlsuccess1(data, message) {
+        $("#divfinancialstatus").html(data);
+
+    }
+    function DoAjaxCallFinancialStatus(parameter, datatype, data) {
+        var siteurl = $("#hdsiteurl").val();
+        jQuery.ajax({
+            type: 'POST',
+            url: siteurl + "Backoffice/Handler/Links/Links.ashx" + parameter,
+            data: data,
+            dataType: datatype,
+            success: function (data, textStatus) {
+                try {
+                    var jsonData = eval(data);
+                    if (jsonData.IsSucess) {
+                        eval(jsonData.CallBack + '(jsonData.ResponseData, jsonData.Message)');
+                    }
+                    else {
+                        showwarning(jsonData.Message);
+                        ErrorNotification();
+                    }
+                }
+                catch (err) {
+                    showwarning(err);
+                    ErrorNotification();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                showwarning("Error:" + errorThrown + " and " + jqXHR + " and " + textStatus);
+                ErrorNotification();
+            }
+        });
+    }    
+', 
+', 
+    ', 
+        ', 
+            ', 
+        ', 
+            ', 
+                Benefit from all our experience and schemes. Generate revenues through attractive
+                commission structures.Incentive, Life time career opportunity and
+                much more...
+            ', 
+        ', 
+        ', Find out more', 
+    ', 
+    ', 
+     
+        ', 
+            ', 
+        ', 
+            ', 
+                We offer different periodicities for deposits with undoubtedly attractive rate of
+                Interest.', 
+            ', 
+        ', 
+      
+    ', 
+    ', 
+        ', 
+            ', 
+        ', 
+            ', 
+                Become a part of "Adarsh Pariwar", become a member and attain the financial support
+                & Improve the standard of Living by achieving all possible technology driven financial
+                services under one roof.', 
+            ', 
+        ', 
+        ', Find out more', 
+    ', 
+', 
+', 
+ 
+   
+    ', 
+        ', 
+            Newsletter Subscribe', 
+        ', 
+            ', 
+                ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', Branch Finder', 
+                    ', 
+                        Bye-Laws', 
+                    ', Contact Us', 
+                    ', EPaper', 
+               
+                    
+                    
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+                    ', 
+                       
+                      
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+        ', 
+        
+', 
+    $(document).ready(function () {
+        $("#hdid").val('');            
+        $("#hdaction").val('');
+         if($("#hdaction").val()!="")
+        {
+            $("#spanyouarehere").text($("#hdaction").val().toString().toUpperCase());
+        }   
+        $('#hdsiteurl').val('http://www.adarshcredit.in/');
+    });    
+       function GoToAboutCoporateProfile()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/CorporateProfile";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/CorporateProfile";
+            }
+        }
+        function GoToAboutBusiness()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/BusinessOverview";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/BusinessOverview";
+            }
+        }
+        function GoTopressrelease()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/PressReleases";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/PressReleases";
+            }
+        }
+         function GoToGallery()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Gallery";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Gallery";
+            }
+        }
+        
+       function GoToCSR() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/CSR";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/CSR";
+            }
+        }
+        function GoToTVCommercials() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/TvCommercial";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/TvCommercial";
+            }
+        }        
+
+       function GoToFinancical() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Financial";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Financial";
+            }
+        }        
+
+       function GoTofutureplan() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/FuturePlan";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/FuturePlan";
+            }
+        }        
+       
+       function GoToCareers() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Careers";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Careers";
+            }
+        }   
+       
+      function GoToOurCommitement() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Commitment";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Commitment";
+            }
+        }                
+      
+      function GoToCurrOpen() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/CurrentOpenings";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/CurrentOpenings";
+            }
+        }   
+      
+      function GoToFAQ() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/FAQS";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/FAQS";
+            }
+        }     
+      
+      function GoToFeedback() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Feedback";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Feedback";
+            }
+        }   
+      
+      function GoToSearchBranch() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Branch";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/BranchFinder/Branch";
+            }
+        }   
+      
+      function GoToSearchAdvisors() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/BranchFinder/Advisor";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/BranchFinder/Advisor";
+            }
+        }   
+       function GoToOnlineForm()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/formscenter";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/formscenter";
+            }
+        }
+        function GoToSubmitQueryForm()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/SubmitQuery";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/SubmitQuery";
+            }
+        }        
+      function GoToSugg() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Feedback";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Feedback";
+            }
+        }   
+      function GoToCookiePolicy() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/CookiePolicy";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/CookiePolicy";
+            }
+        }  
+
+      function GoToTermsconditions() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/termsandconditions";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/termsandconditions";
+            }
+        }   
+      
+      function GoToPrivacyPolicy() {                 
+            if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/LegalPrivacy";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/LegalPrivacy";
+            }
+        }  
+         function GoToApplyOnline()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/ApplyOnline";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/ApplyOnline";
+            }
+        }
+        function GoToCalculator()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Calculator";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Calculator";
+            }
+        }
+        function GoToInterestRates()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/AdarshChouguna";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/AdarshChouguna";
+            }
+        }
+         function GoToLatestNews()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/Newslist";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/Newslist";
+            }
+        }
+        function GoToApplyOnlineFooter()
+        {
+             if($("#hdid").val()=="")
+            {
+                location.href = "http://www.adarshcredit.in/English/ApplyOnline";
+            }
+            else
+            {
+                location.href = "http://www.adarshcredit.in/"+$("#hdid").val()+"/ApplyOnline";
+            }
+        }        
+', 
+', 
+    ', 
+        ', 
+            You are here : ', HOME', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+    ', 
+        ', 
+            ', 
+                Inquiry Online', 
+        ', 
+        ', 
+            ', Calculators', 
+            ', 
+        ', 
+        ', 
+        
+        
+        
+        ', 
+            
+            ', Support ', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+        ', 
+            
+            
+            ', CSR', 
+            ', Careers', 
+            ', Feedback', 
+            
+            
+            ', TV Commercials', 
+            ', Our Commitment', 
+            ', Search Branches', 
+            ', Cookie Policy', 
+            ', Press Releases', 
+            
+            ', Current Openings', 
+            ', Inquiry Online', 
+            
+            ', Terms & Conditions', 
+            ', Gallery', 
+            ', Future Plans', 
+            
+            ', Suggestions', 
+            ', 
+                Privacy Policy', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+        Copyright © 2010 Adarsh Credit Co-operative Society Ltd. | All Rights Reserved
+              ', 
+         Developed by ', Xmx Solutions', 
+         ', 
+   
+', 
+', 
+', 
+', 
+    ', 
+    ', 
+        ', 
+            ', 
+                ', 
+                ', 
+                Please Wait...', 
+        ', 
+    ', 
+    
+']
