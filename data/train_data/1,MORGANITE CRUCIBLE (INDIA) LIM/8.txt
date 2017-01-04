@@ -1,0 +1,3745 @@
+[
+			', 
+				', 
+			', 
+			
+			', 
+						', 
+			
+						
+', 
+    var mktautoreftime = "100000";
+    $(document).ready(function () {
+        $("#searchhp").validationEngine();
+        createDropDown();
+        $(".dropdown dt a").click(function () {
+            $(".dropdown dd ul").toggle();
+        });
+        $(document).bind('click', function (e) {
+            var $clicked = $(e.target);
+            if (!$clicked.parents().hasClass("dropdown"))
+                $(".dropdown dd ul").hide();
+        });
+        $(".dropdown dd ul li a").click(function () {
+            var text = $(this).html();
+            $(".dropdown dt a").html(text);
+            $(".dropdown dd ul").hide();
+            //$("#result").html("Selected value is: " + getSelectedValue("target"));
+            var source = $("#searchcategory");
+            source.val($(this).find("span.value").html());
+        });
+        $(".searchdropdown li a").click(function () {
+            var a = $(this).attr('data-input');
+            if ($(this).attr('value') == 'news') {
+                $("#" + a).autocomplete({
+                    disabled: true
+                });
+            }
+            else {
+                $("#" + a).autocomplete({
+                    disabled: false
+                });
+            }
+        });
+        $('.searchsubmit').click(function () {
+            var keyword2 = $('#' + $(this).attr('data-input')).val();
+            var keyword2 = keyword2.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '+');
+            var keyword2 = keyword2.replace(/[^A-Z0-9]/ig, "_");
+            var keyword2 = keyword2.replace(/[^A-Z0-9]+/ig, "+");
+            var keyword3 = $('#' + $(this).attr('data-keyword')).val();
+            if (keyword2 != "") {
+                if (keyword3 == 'News') {
+                    window.location.href = "/search/news/" + keyword2;
+                    //window.location.href = "/search/news/" + encodeURIComponent(keyword2);
+                    return false;
+                } else {
+                    window.location.href = "/search/quotes/" + keyword2;
+                    return false;
+                }
+            }
+            else
+            {
+                alert('Please provide your search input !!');
+                return false;
+            }
+        });
+
+        $('.yt-videos').click(function () {
+            var ytVideoLink = $(this).attr('data-url');
+            $("#tvVideo").attr("src", ytVideoLink);
+        });
+
+		$('.utubevideo1').click(function(){
+			var videoId = $(this).attr('data-id');
+			$("#tvVideo").attr("src", videoId);
+        });
+		
+		$('#myModal').click(function () {
+            $("#tvVideo").attr("src", '');
+        });
+    });
+    /*		
+     function getSelectedValue(el) {
+     var a = $("#"+el).val();
+     a = a.toLowerCase();
+     a = a.replace(' ','');
+     return a;
+     }
+     */
+    function getSelectedValue() {
+
+        var a = $("#searchcategory").val();
+        a = a.toLowerCase();
+        a = a.replace(' ', '');
+        return a;
+    }
+
+    function getSelectedValueSticky() {
+
+        var a = $("#searchcategorySticky").val();
+        a = a.toLowerCase();
+        a = a.replace(' ', '');
+        return a;
+    }
+
+    function getSelectedValueMobile() {
+
+        var a = $("#searchcategoryMobile").val();
+        a = a.toLowerCase();
+        a = a.replace(' ', '');
+        return a;
+    }
+
+    function createDropDown() {
+        var source = $("#searchcategory");
+        var selected = source.find("option[selected]");
+        var options = $("option", source);
+        $("#searchcategorydl").append('<dl id="target" class="dropdown"></dl>')
+        $("#target").append('<dt><a href="javascript:void(0);">' + selected.text() +
+                '<span class="value">' + selected.val() +
+                '</span></a></dt>')
+        $("#target").append('<dd><ul></ul></dd>')
+        options.each(function () {
+            $("#target dd ul").append('<li><a href="javascript:void(0);">' +
+                    $(this).text() + '<span class="value">' +
+                    $(this).val() + '</span></a></li>');
+        });
+    }
+', 
+', 
+    {
+    "@context" : "http://schema.org",
+    "@type" : "Organization",
+    "name" : "Indiainfoline",
+    "url" : "http://www.indiainfoline.com",
+    "sameAs" : [
+    "https://www.facebook.com/IIFLMarkets/",
+    "https://twitter.com/iiflmarkets",
+    "https://www.youtube.com/user/IndiaInfolineGroup/",
+    "https://www.linkedin.com/company/india-infoline-ltd",
+	"https://www.instagram.com/iifl_markets/"
+    ]
+    }
+', 
+', 
+    {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name" : "Indiainfoline",
+    "alternateName" : "indiainfoline.com",
+    "url": "http://www.indiainfoline.com/",
+    "potentialAction": {
+    "@type": "SearchAction",
+    "target": "http://www.indiainfoline.com/search/news/{search_term_string}",
+    "query-input": {
+    "@type": "PropertyValueSpecification",
+    "valueRequired": true,
+    "valueMaxlength": 100,
+    "valueName": "search_term_string"
+    }
+    }
+    }
+', 
+', 
+', (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+            return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.6";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));', 
+', 
+    /* Autocomplete Header */
+    .ui-widget, .ui-widget_2{position:relative;}
+    .ui-widget #auto_com_drop{position:absolute;top:27px;}
+    .ui-widget_2 #auto_com_drop{position:absolute;top:27px;left:91px;}
+    .ui-autocomplete{background: #FFFFFF;	z-index: 999;border: 1px solid #dadada;}
+
+    #auto_drop_hp{position:absolute;left:0px;width:100% !important;top:31px;z-index: 9999999;}
+    #auto_drop_hp .ui-autocomplete{max-height:376px;-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);}
+    #auto_drop_hp .ui-autocomplete{position:absolute;left:0px;}
+
+    /* Autocomplete Header Sticky*/
+    .ui-widget, .ui-widget_2{position:relative;}
+    .ui-widget #auto_drop_hp_sticky{position:absolute;top:27px;}
+    .ui-widget_2 #auto_drop_hp_sticky{position:absolute;top:27px;left:91px;}
+    .ui-autocomplete{background: #FFFFFF;	z-index: 999;border: 1px solid #dadada;}
+
+    #auto_drop_hp_sticky{position:absolute;left:0px;width:100% !important;top:31px}
+    #auto_drop_hp_sticky .ui-autocomplete{max-height:376px;-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);}
+    #auto_drop_hp_sticky .ui-autocomplete{position:absolute;left:0px;}
+
+    /* Autocomplete Mobile Header*/
+    .ui-widget, .ui-widget_2{position:relative;}
+    .ui-widget #auto_drop_hp_mobile{position:absolute;}/*top:27px;*/
+    .ui-widget_2 #auto_drop_hp_mobile{position:absolute;left:91px;}/*top:27px;*/
+    .ui-autocomplete{background: #FFFFFF;	z-index: 999;border: 1px solid #dadada;}
+
+    #auto_drop_hp_mobile{position:absolute;left:0px;width:100% !important;}/*top:31px*/
+    #auto_drop_hp_mobile .ui-autocomplete{max-height:376px;overflow: auto;-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);}
+    #auto_drop_hp_mobile .ui-autocomplete{position:absolute;left:0px}
+', 
+
+
+', 
+', 
+', 
+', 
+
+', 
+', 
+', 
+', 
+ 
+', 
+    $(function () {
+        var pgurl = window.location.href;
+        var indexval = pgurl.indexOf("/", 10);
+        var realhref = pgurl.substr(indexval, (pgurl.length) + 1);
+        $(".navbar-nav >li> a").each(function () {
+            if ($(this).attr("href") == realhref || $(this).attr("href") == '') {
+                $(".navbar-nav >li> a").removeClass('active');
+                $(this).addClass("active");
+            }
+        })
+        $(".navbar-nav >li>ul.mega-dropdown-menu li a").each(function () {
+            if ($(this).attr("href") == realhref || $(this).attr("href") == '') {
+                $(".navbar-nav >li> a").removeClass('active');
+                $(this).addClass("active");
+                $(this).parents('.mega-dropdown').find('.dropdown-toggle').addClass("active");
+            }
+        })
+    });
+', 
+
+', 
+    ', 
+        ', 
+                ', 
+                    ', X', 
+                ', 
+                ', 
+                                    ', 
+                ', 
+                ', 
+            ', 
+        
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', Login To Trade',   | 
+                        ', Open a Trading Account', 
+                        ',  | ', 
+                        ', About IIFL', 
+                        ',   ', 
+                        ', Contact Us', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+					', 
+						', 
+							', 
+						', 
+						', 
+							', FOLLOW IIFL: ', 
+						', 
+					', 
+                ', 
+                ', 
+            ', 
+        ', 
+        ', 
+        ', 
+
+            ', 
+            ', 
+
+                ', 
+                ', 
+                    ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+
+                ', 
+                ', 
+                    ', 
+                    ', 
+                        ', 
+                        ', 
+
+                            ', 
+                                ', 
+                                ', 
+                                    ',  ',  
+                                ', 
+                                ', 
+
+                                ', 
+                                ', 
+                                    ', 
+                                ', 
+                                ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+
+                        ', 
+                            ', 
+                                ', 
+                                ', 
+                                    ', 
+                                    ', 
+                                        ', 
+
+                                            ', 
+                                            ', 
+                                                ', Quote ', 
+
+                                                ', 
+                                                    ', Quote', 
+                                                    ', News', 
+                                                    ', Insurance', 
+                                                    ', Mutual Funds', 
+                                                    ', Commodities',      
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                                    ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                    ', 
+                                    ', 
+                                ', 
+                                ',       
+
+                                
+                                ', 
+                                ', 
+                                    ', NIFTY', 
+                                    ', 8,190.50', 
+                                                                        ', 
+                                        ', 
+                                        ', -1.75', 
+                                        ', -0.02', 
+                                    ',  
+                                    ', |', 
+
+                                                                        ', SENSEX', 
+                                    ', 26,633.13', 
+                                    ', 
+                                        ', 
+                                        ', -10.11', 
+                                        ', -0.03', 
+                                    ', 
+                                    ',                                         
+                                        04-Jan-17 16:08                                    ', 
+                                ', 
+
+                                ', 
+                                ', 
+                                ', 
+                            ', 
+                        ', 
+
+                        ', 
+                        ', 
+
+                            ',     
+                            ', 
+                                ', 
+                            ', 
+                            ',  
+
+                            ', 
+                                ',    
+                                ',  
+									
+                                ', 								
+                                                                            ', 
+                                                ', 
+                                            
+                                        ', 
+                                        ', 
+                                            ', Sign IN', 
+                                            ', 
+                                            ', Register', 
+                                        ', 
+                                                                    ', 
+                                ',  
+
+                                ',     
+                                ', 
+                                                                            ', Login', 
+                                        ',  Register ',  
+                                                                    ', 
+                                ', 
+                                ', 
+                            ', 
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                    ',   
+                    ',  
+                ', 
+                ', 
+            ', 
+            ', 
+        ',        
+        ', 
+        ', 
+            ', 
+                ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                            ', 
+                            ', 
+                                ', Quote ', 
+
+                                ', 
+                                    ', Quote', 
+                                    ', News', 
+                                    ', Insurance', 
+                                    ', Mutual Funds', 
+                                    ', Commodities',      
+                                ', 
+                            ', 
+                            ', 
+                                ', 
+                                ',  
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                    ', 
+
+                ', 
+                ', 
+
+                ', 
+                ', 
+                    ', 1231321fasdasdfasdfasdf', 
+                ', 
+                ', 
+
+                ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                ', 
+                ', 
+            ', 
+        ', 
+
+        ', 
+        	', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', Toggle navigation', 
+                            ', 
+                            ', 
+                            ', 
+                        ', 
+
+                    ', 
+
+                    ', 
+                        ', 
+                            ', 
+							 ', 
+                                ', Market', 				
+                                ', 
+                                    ', 
+                                        ', 
+										', Equities', 
+										', 
+										', Market Map', 
+										', Derivatives', 
+										', Commodity', 
+										', IPO', 
+										', Companies', 
+										', NSE', 
+										', BSE', 
+                                        ', 
+                                    ', 
+                                ', 				
+                            ', 
+							
+							', 
+                                ', News', 				
+                                ', 
+						', 
+							', 
+						', Overview', 
+						', Top', 
+						', Business', 
+						', Corporate', 
+						', Equity', 
+						', Commodity', 
+						', Currency', 
+						', Mutual Funds', 
+						', Insurance', 
+						', IPO', 
+						', Economy', 
+						', Global News', 
+						', M&A Deals', 
+						', Gold', 
+						', Business Wire', 
+						', 
+						', PRNewsWire', 
+						', Start-Ups', 
+						                ', 
+                                    ', 
+                                ', 				
+                            ', 
+							
+							
+					', 
+						', Ideas', 
+					', 
+					', 
+						', MF', Mutual Funds', 
+						', 				
+					', 
+					', 
+					', 
+					', Fund Snapshot', 
+					', Fund Houses', 
+					', Equity Funds', 
+					', Debt Funds', 
+					', Balanced Funds', 
+					', ETFs', 
+					', NFO Updates', 
+					', Dividend Tracker', 
+					', Fund Manager Speak', 
+					', Apply Online', 
+
+					', Financial planning', 
+
+				
+                                        ', 
+                                    ', 
+                                ', 				
+                            ', 
+							
+							
+							
+							
+							
+							', 
+                                ', PF', Personal Finance', 				
+                                ', 
+                                    ', 
+                                        ', 
+								', Overview', 
+					', Insurance', 
+					', 
+					', Home Loans', 
+					', Personal Loan', 
+					', Calculator', 
+					', Articles', 
+					', Budget', 
+					', Railway Budget', 
+					', Tutorials', 
+					', 
+					', SME Loan', 
+					', Gold Loan', 
+					', Healthcare finance', 
+					', Financial planning', 
+					', 
+                                        ', 
+                                    ', 
+                                ', 				
+                            ', 
+							', Earnings', 
+		
+		', 
+			', Products', 				
+				', 
+					', 
+						', 
+							', 
+								', Portfolio', 
+							', 
+							', 
+								', Watchlist', 
+							', 
+						', 
+					', 
+				', 				
+		', 
+							
+		', Portfolio', 
+		', Watchlist', 
+		', Contact Us', 
+		', Blogs', 
+		',  ', RBI Updates',  ', 
+							
+                     
+
+                        ', 			
+
+                    ', 
+                ', 
+            ', 
+            ', 
+        ',         ', 
+    ', 
+    ',      
+
+                ', 
+        reloadCaptcha();
+    ', 
+    ', u"
+        $('#closeapp').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/user/login/setappsession',
+                success: function (data) {
+                    if (data == 'Y') {
+                        $('#hidemobileapp').hide();
+                    }
+                }
+            });
+
+        });        
+    ", 			
+			', 
+				', 
+				', 
+				', 
+			', 
+			
+			', 
+			', 
+				', 
+					var navHeight = $('#master_header').outerHeight(true);
+					if(navHeight > 140 ){
+					var navHeight = navHeight + 21;
+					}else{
+					var navHeight = navHeight + 15;
+					}
+					//var navHeight = 146;
+					$("#main").css("margin-top",navHeight);
+				', 
+				', 
+					', 
+					', 
+				', 
+					', 
+											', u"
+							$(window).load(function () {
+								$('.main_wrapper').addClass('mT0');
+							});
+						", 
+											', 
+						', 
+							', 
+							', 
+								', Home', Markets', Company', Summary', 							', 
+						', 
+						', 
+						', 
+                    ', 			
+                    
+                            ', 
+										
+					   
+					 
+					', 
+    ', 
+    ', 
+                ', 
+					
+					
+					', Overview', 
+					', Quote Page', 
+										', Chart', 
+					', Company Summary', 
+					', Financials', 
+					', News', 
+					', Peer Compairson', 
+					', Share Holding', 
+					', Corporate Action', 
+					', 
+					', Historical Data', 
+					', Comments', 36', 
+
+					
+				', 
+                ', +', 
+            ',     	', 
+        
+	        ', 
+             ', 
+        
+        
+            ', 
+        	', 
+                    
+                
+                 ',    
+                ',    
+', 
+	', 
+	', 
+						', Overview', 
+				', Quote Page', 
+								', Chart', 
+				', Company Summary', 
+				', Financials', 
+				', News', 
+				', Peer Comparison', 
+				', Share Holding', 
+				', Corporate Action', 
+				', 
+				', Historical Data', 
+				', Comments', 36', 
+
+				', 
+	', 
+	', 
+', 
+ ', 
+ ', 
+$(document).ready(function(){
+$('.nav-stacked a[href^="#"]').bind('click',function (e) {
+e.preventDefault();
+
+var target = this.hash,
+$target = $(target);
+
+$('html, body').stop().animate({
+'scrollTop': $target.offset().top
+}, 900, 'swing', function () {
+window.location.hash = target;
+});
+});
+});
+', 
+                  ', 
+                 
+                 
+                 ',       
+                ', 
+                
+                        
+                    ', 
+						 
+
+   ', 
+	                    ', 
+                        ', 
+													', 
+                            ', 
+                              ', Morganite Crucible (India) Ltd', 
+                              ', MORGAN CRU', 
+                            ', 
+                        ', 
+                        ', 
+                        	', 
+                            	', Buy', 
+                            	', Sell', 
+                            ', 
+							', 
+                        	', 
+                            	', Buy', 
+                            	', Sell', 
+                            ', 
+							', 
+                            ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+										', 
+                                        ',  ', 
+																													
+                                          ', BSE', 
+																				 
+                                        ', 
+                                        ', 
+																						', 
+																						', 
+											
+											', 
+																						
+										    ', 
+													', 
+														', 
+                                                            ', 
+                                                            	', 
+																	', 	
+																	', 611.15', 	
+                                                                ', 
+																', 
+                                                                ', 
+																																		',  
+																	', 
+																	4.70',      |     ', 
+																	0.78%', 
+                                                                ', 
+																', 
+                                                                ', 
+                                                            ', 
+															', 
+                                                            ', 
+																																	',  
+                                                                 ', 4.7',      |     ', 
+																 0.78%', 
+																 ', 03-Jan-17 11:56', 
+                                                            ', 
+															', 
+															 ', 
+															 
+                                                        ', 
+														
+														', 	
+                                                            ', 
+                                                                ', 
+                                                                        Open (', )
+                                                                ', 
+                                                                ', 
+                                                                        636.50																', 
+																', 
+                                                                ', 
+																', 
+                                                                        636.50																', 
+																', 
+                                                                ', 
+                                                            ', 
+                                                            ', 
+                                                                ', 
+                                                                        Turnover (', lac)
+                                                                    ', 
+                                                                    ', 
+																		2                                                                    ', 
+																', 
+                                                                ', 
+																', 
+																		2																', 
+																', 
+                                                                    ', 
+                                                            ', 
+                                                        ', 
+                                                        
+                                                        
+                                                        ', 	
+                                                            ', 
+                                                                ', 
+                                                                         Prev. Close (', )
+                                                                    ', 
+                                                                    ', 
+                                                                       606.45			  
+                                                                    ', 
+																', 
+                                                                ', 
+																', 
+                                                                       606.45																', 
+																', 
+                                                                    ', 
+                                                            ', 
+                                                            ', 
+                                                                    ', u"
+                                                                        Day's Vol.(shares)
+                                                                    ", 
+                                                                    ', 
+                                                                        1,529																		
+                                                                    ', 
+																', 
+                                                                ', 
+																', 
+                                                                        1,529																', 
+																', 
+                                                                    ', 
+                                                            ', 
+                                                        ', 
+                                                        ', 
+															$(document).ready(function() {
+																/*for slider picker*/
+																	var slider = new Slider("#bse-day-range");
+																/*for slider picker*/
+															});
+														', 
+														', 
+															', u"
+																	Day's Range (", )
+															', 
+															', 
+																', 
+																', 
+																  ', 
+																	611.15																	', 
+																  ', 
+																	  ', 
+																  ', 
+																  ', 
+																  636.50																  ', 
+															  ', 
+															 ', 
+															', 
+														', 
+													',                              
+                                            ', 
+											
+																						', 
+											
+											', 
+																						', 
+											
+										', 
+										', 
+									  ', Detailed Quote ', 
+									  ', 
+                                    ', 
+                                ', 
+                            
+                            ', 
+                            
+                        ', 
+                    ', 
+                    ', 
+                    					', 
+                    
+                   
+                	
+                    ', 
+                    	', 
+                        
+                        
+                        
+                        
+                        ', 
+                        ', 
+                            ', 
+                            
+                                ', 
+                                   
+                                    ', 
+                                    ',  
+                                    ', 
+									                                    ', 
+                                    ', 
+                                      ', 
+                                        
+                                        ', 
+                                        ', 
+                                          ', SUMMARY', 
+										  ',  MANAGEMENT', 
+                                          ', REGISTERED OFFICE ', 
+                                          ', REGISTRAR OFFICE ', 
+                                        ', 
+                                        ', 
+                                        
+                                        
+                                        
+                                        ', 
+                                        ', 
+                                          ', 
+                                            ', 
+                                                ', 
+                                                	', 
+                                                      ', 
+															
+                                                        ', 
+                                                          ', Chairman ', 
+                                                          ', Mukund Bhogale', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Independent Director ', 
+                                                          ', Subhash B Kolapkar', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Company Secretary ', 
+                                                          ', Rupesh Khokle', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Additional Director ', 
+                                                          ', Ian Keith Arber', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Independent Director ', 
+                                                          ', Maithilee Tambolkar', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Director ', 
+                                                          ', Micro Pavoni', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Director ', 
+                                                          ', Pauline Tan', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Managing Director ', 
+                                                          ', Aniruddha Karve', 
+                                                        ', 
+														                                                       ', 
+                                                    ', 
+                                                ', 
+                                            ', 
+                                          ', 
+                                          ', 
+                                            ', 
+                                                ', 
+                                                   ', Jointly promoted by Greaves Cotton & Company and Morganite Crucible, UK, Greaves Morganite Crucible, a Thapar group company, was incorporated in Jan.86. Greaves was marketing Morganites crucibles for over three decades in India, when it started manufacturing 600 tpa silicon carbide crucibles using resin bonded technology at Waluj, Aurangabad in 1987. It went public in Aug.87. The British collaborator holds a 28% stake in the company.', The companys collaborator, Morganite Crucibles, is engaged in this business for the past 100 years. Crucibles are used as containers for melting and holding molten metal. The company which manufactures resin-bonded silicon carbide crucibles, caters to the non-ferrous metal industry.', In Oct.94, the company obtained ISO 9002 certification from Bureau Veritas Quality International (BVQI). It exports to Egypt, Srilanka and Nepal through its concessionaires.', Expansion programme for manufacturing of Clay Graphite Crucibles had been completed and commercial production started on February 2001 and export of products had also commenced. In 2001-02 the company had manufactured 80.15 MT of Clay Graphite Crucibles.',                                                 ',                                                 
+                                            ', 
+                                            ', 
+                                          ', 
+                                          ', 
+                                            ', 
+                                                ', 
+                                                	', 
+                                                    ', REGISTERED OFFICE', 
+													                                                    ', B-11 MIDC Indl Area,',  Waluj,Aurangabad (Maharashtra),', Maharashtra-431136', 
+                                                    		', 
+                                                    ', 
+                                                       ', Tell. : +91-0240-6652523/6652520', 
+                                                       ', Website : ', http://www.morganmms.com', 
+                                                       ', Email : ', Sales.India@morganplc.com', 
+                                                    ', 
+                                                ', 
+                                                
+                                                ', 
+                                            ', 
+                                          ', 
+                                          ', 
+                                            ', 
+                                                ', 
+                                                	', 
+                                                    ', REGISTRAR OFFICE', 
+                                                    ', C-13  Pannalal Silk,',  Bhandup West,Mumbai - 400 078', 
+                                                    	INDIA', 
+                                                    ', 
+                                                       ', Tell. : +91-022-25963838', 
+                                                       ', Website : ', www.linkintime.com', 
+                                                       ', Email : ', rnt.helpdesk@linkintime.co.in/mumbai@linkintime.co.in', 
+													', 
+                                                    ', 
+                                                ', 
+                                                
+                                                ', 
+                                            ', 
+                                          ', 
+                                        ', 
+                                        ', 
+                                      ', 
+                                    ', 
+                                    ', 
+                                    
+                                ', 
+                                
+                            ', 
+                        ', 
+                        ', 
+    
+    
+                        
+                        ', 
+													
+				', 
+					', 
+						', 
+							', 
+							  ',  ',  ',  ',  ', QuickLinks  for Morganite Crucible (India) Ltd. ',  ',  
+								',  
+							  ', 
+							', 
+							', 
+								', 
+										', News', 
+										', 
+											', Company', 
+											', Sector News', 
+										',  
+								', 
+								', 
+										', Corporate Action', 
+										', 
+											', AGM', 
+											', Bonus', 
+											', Board Meetings', 
+											', Dividends ', 
+											', EGM	', 
+											', Rights ', 
+											', Split', 
+										', 
+								', 
+								', 
+										', Information', 
+										', 
+											', 
+											', Company Summary', 
+											', 
+											', Shareholding', 
+											', Peer Comparison', 
+											', 
+										', 
+								', 
+								', 
+										', Financials', 
+										', 
+											', Profit & Loss', 
+											', Balance Sheet', 
+											', Cash Flow ', 
+											', Key Ratios', 
+											
+											', Quarterly Result', 
+											', Half Yearly Result', 
+											', Nine Monthly Result', 
+											', Annual Result', 
+										', 
+								',  
+								', 
+										', Documents', 
+										', 
+											', 
+											', Company Management', 
+											', Directors Report', 
+											', Auditors Report', 
+											', Management Discussions', 
+										', 
+								', 
+								', 
+							', 
+						', 
+					', 
+					
+				', 
+		
+		                    
+ 
+					   ', 
+                        ', 
+            		', 
+        	', 
+                 ',   
+            
+        	', 
+            ', 
+            
+    ', 
+    ', 
+    
+
+', 
+', 
+				', 
+				', 
+				', 
+				', 
+			
+			', 
+', 
+
+    ', 
+        ', 
+            ', 
+                ', Connect with IIFL:', 
+            ', 
+            ', facebook', |', twitter', 
+            ', Commodity Ideas', Stock Ideas', IIFL Live', Corporate News', 
+                ', RSS', 
+            ', 
+            ', 
+        ', 
+    ', 
+
+    ', 
+        ', 
+            ',  
+                ', 
+                    ', CUSTOMER CARE', 
+                ', 
+                ', 
+                ', 
+                    ', Technology/Trader Terminal related queries', 
+                    ', 022-41514151', 
+                ', 
+                ', 
+                    ', Equity/Currency  & Commodity/Spot', 
+                    ', 022-40071000', 
+                ', 
+                ', 
+                    ', Gold/NCD/NBFC/Insurance and NPS', 
+                    ', 180030001155 / 022-61064444', 
+                ', 
+            ', 
+        ', 
+    ', 
+    ', 
+    ', 
+        ', 
+            ',  
+
+
+                ', 
+                    ', 
+                        ', Login To Trade',  ', | ',  ', Open a Trading Account', 
+                    ', 
+                ', 
+
+                ', 
+                    ',  
+                        ', Investor Relations',   ', | ',  ', About IIFL',   ', | ',  ', u"We're Hiring",   ', | ',  ', Contact Us', 
+                    ', 
+                ', 
+                ',  Wednesday, 04 January 2017 19:18 IST', 
+            ', 
+            ', 
+                ', 
+                    ', IIFL Group', 
+                    ', 
+                        ',               
+                        ', Trade', 
+                        ', Premia ', 
+                        ', Wealth ', 
+                        ', Flame ', 
+                        ', Property Solutions ', 
+                        ', Business Partners ', 
+						', Finance', 
+                    ', 
+                ', 
+                ', 
+                    ', Products & Services ', 
+                    ', 
+                        ', Desktop Widget', 	
+                        ', Research', 
+                        ', Mortgages ', 
+                        ', Insurance ', 
+                        ', Wealth Management ', 
+                        ',  
+                        ', Discretionary PMS', 
+						', TT Edge', 
+						', Business loans', 
+						', Personal Loan', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                    ', Trading Documentation ', 
+                    ', 
+                        ',  Download TT', 
+                        ', TT Login ', 
+                        ', TT Demo', 
+                        ', Account Details', 
+                        ', Fund Transfer', 
+                        ', Helpdesk', 
+                        ', Download Forms', 
+                        ', Document & Info', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                    ', Useful Links ', 
+                    ', 
+                        ', BSE', 
+                        ', NSE', 
+                        ', MCX', 
+                        ', NCDEX', 
+                        ', Bullion Desk', 
+                        ', Forex Factory', 
+                        ', Exchange Holidays', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                    ', Offbeat ', 
+                    ', 
+                        ', Bschool', 
+                        ', Economy', 
+                        ', Lifestyle', 
+                        ', RBI Governors', 
+                        ', Finance Ministers', 
+                        ', Prime Ministers', 
+                        ', Famous Speeches', 
+                    ', 
+                ', 
+                ', 
+                    ', Calculators ', 
+                    ', 
+                        ', Income
+                                Tax', 
+                        ', 
+                                Home Loan EMI', 
+                        ', 
+                                Auto Loan EMI', 
+                        ', 
+                                Education Loan EMI', 
+                        ', HRA
+                                Exemption', 
+                        ', 
+                                Retirement Planning', 
+                        ', 
+                                Savings Estimator', 
+						', Gold Loan calculator', 
+						', Revolving credit interest calculator', 
+						', EMI Calculator', 
+                    ', 
+                ', 
+                ', 
+            ', 
+            ', 
+            ', 
+                ', 
+                    ', Glossary:', 
+                    ', 
+                        ', Accountancy', 
+                        ', Advertising', 
+                        ', Budget', 
+                        ', Commerce', 
+                        ', Derivatives', 
+                        ', Economics', 
+                        ', Finance', 
+                        ', General Mgmt.', 
+                        ', HR Mgmt.',  
+                        ', IT', 
+                        ', Marketing',  
+                        ', Material Mgmt.', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', Stocks:', 
+                    ', 
+                        ', A',  ', B',  ', C',  ', D', 
+                        ', E',  ', F',  ', G',  ', H', 
+                        ', I',  ', J',  ', K',  ', L', 
+                        ', M',  ', N',  ', O',  ', P', 
+                        ', Q',  ', R',  ', S',  ', T', 
+                        ', U',  ', V',  ', W',  ', X', 
+                        ', Y',  ', Z', 
+
+                    ', 
+                ', 
+            ', 
+            ', 
+
+                ', 
+                    ', Mutual Funds:', 
+                    ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E', 
+                        ', F',  
+                        ', G', 
+                        ', H', 
+                        ', I', 
+                        ', J', 
+                        ', K',  
+                        ', L', 
+                        ', M',  
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V',  
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                ', 
+            ', 
+            ', 
+
+                ', 
+                    ', Insurance:', 
+                    ', A',  ', B', 
+                        ', C',  ', D', 
+                        ', E',  ', F', 
+                        ', G',  ', H', 
+                        ', I',  ', J', 
+                        ', K',  ', L', 
+                        ', M',  ', N', 
+                        ', O',  ', P', 
+                        ', Q',  ', R', 
+                        ', S',  ', T', 
+                        ', U',  ', V', 
+                        ', W',  ', X', 
+                        ', Y',  ', Z', 
+                ', 
+            ', 
+
+        ', 
+        ', 
+            ', 
+        ', 
+    ', 
+    ', 
+        ', 
+            ', Disclaimer  ',  
+            ', Disclaimer - Research Disclaimer', 
+            ',  Discussion Boards ', 
+            ', Disclaimer - Twitter ', 
+            ', Terms & Conditions ', 
+            ',  Privacy Policy', 
+        ', 
+    ', 
+    ', 
+        ', 
+            ', 
+                ', ATTENTION INVESTORS:', 
+            ', 
+            ', 
+                ',                 
+                ', 
+                    www.indiainfoline.com is part of the IIFL Group, a leading financial services player and a diversified NBFC. The site provides comprehensive and real time information on Indian corporates, sectors, financial markets and economy. On the site we feature industry and political leaders, entrepreneurs, and trend setters. The research, personal finance and market tutorial sections are widely followed by students, academia, corporates and investors among others.
+                ', 
+                ', 
+                    Copyright © 2017 India Infoline Ltd. All rights Reserved.
+                ', 
+                ', 
+                    National Stock Exchange of India Ltd. SEBI Regn. No. : INB231097537/ INF231097537/ INE231097537,', 
+                    Bombay Stock Exchange Ltd. SEBI Regn. No.:INB011097533/ INF011097533/ BSE Currency,', 
+                    MCX Stock Exchange Ltd. SEBI Regn. No.: INB261097530/ INF261097530/ INE261097537,', 
+                    United Stock Exchange Ltd. SEBI Regn. No.: INE271097532
+                ', 
+				', 
+				web7            ', 
+        ', 
+    ', 
+', 
+', 
+', 
+	$('.foot_ga a').click(function() {        
+		var label = $(this).html();
+		var action = $(this).parent().attr("data-id");
+		pushGoogleAnalytics('footer', action, label, 'event '+label);
+	});
+', 
+', 
+    function DropDown(el) {
+        this.dd = el;
+        this.initEvents();
+    }
+    DropDown.prototype = {
+        initEvents: function () {
+            var obj = this;
+
+            obj.dd.on('click', function (event) {
+                $(this).addClass('active');
+                event.stopPropagation();
+            });
+        }
+    }
+    $(function () {
+        var dd = new DropDown($('#dd'));
+        $('.wrapper-dropdown-5').mouseleave(function () {
+            // all dropdowns
+            $('.wrapper-dropdown-5').removeClass('active');
+        });
+    });
+
+    function mycarousel_initCallback(carousel) {
+        carousel.clip.hover(function () {
+            carousel.stopAuto();
+        }, function () {
+            carousel.startAuto();
+        });
+    }
+    ;
+    jQuery(document).ready(function () {
+        $(".iifl_acc > h4 > a").click(function () {
+            var iifl_acc_div = $(this).parent().parent().children('.iifl_acc_div');
+            if (iifl_acc_div.is(":visible")) {
+                $('.iifl_acc_div').slideUp();
+            } else {
+                $('.iifl_acc_div').slideUp();
+                iifl_acc_div.slideDown();
+            }
+        });
+        setTimeout("$('.wrapper-dropdown-5').addClass('active'),1000;", 200);
+        setTimeout("$('.wrapper-dropdown-5').removeClass('active');", 1400);
+        setTimeout("$('.wrapper-dropdown-5 .dropdown').css({'transition' : 'all 0.2s ease-out'});", 300);
+        setTimeout("$('.wrapper-dropdown-5 .dropdown').css({'transition' : 'all 0.3s ease-out'});", 1500);
+
+    });
+
+    $("html").addClass("js");
+    function Company_Tab(tabid) {
+        $('#Company_Tab_Cont_' + tabid).parents('.inner').find('.Company_Tab_Cont').hide();
+        $('#Company_Tab_' + tabid).parents('.inner').find('.com_tab_a a').removeClass('active');
+        $('#Company_Tab_' + tabid).addClass('active');
+        $('#Company_Tab_Cont_' + tabid).fadeToggle();
+    }
+
+    function showmkt_data(tabid) {
+        $('#mkt_tabs_cont_' + tabid).parents('.mkt_tab_content').find('.mkt_tabs_cont').hide();
+        $('#showmkt_tab_' + tabid).parents('.mkt_tab_content').find('.sub_tabs a').removeClass('active');
+        $('#showmkt_tab_' + tabid).addClass('active');
+        $('#mkt_tabs_cont_' + tabid).fadeToggle();
+    }
+
+    function showmkt_maindata(tabid) {
+        $('#mkt_tab_content_' + tabid).parents('.inner').find('.mkt_tab_content').hide();
+        $('#showmkt_maintab_' + tabid).parents('.inner').find('.mkt_main_tab a').removeClass('active');
+        $('#showmkt_maintab_' + tabid).addClass('active');
+        $('#mkt_tab_content_' + tabid).fadeToggle();
+        var value = $('#showmkt_maintab_' + tabid).html();
+    }
+
+    function showmkt_maindata_tab(tabid) {
+        $('#mkt_tab_content_tab_' + tabid).parents('.inner').find('.mkt_tab_content_tab').hide();
+        $('#showmkt_maintab_tab_' + tabid).parents('.inner').find('.mkt_main_tab_tab a').removeClass('active');
+        $('#showmkt_maintab_tab_' + tabid).addClass('active');
+        $('#mkt_tab_content_tab_' + tabid).fadeToggle();
+        var value = $('#showmkt_maintab_tab_' + tabid).html();
+    }
+
+    function showmkt_maindataCommodity(tabid) {
+        $('#mkt_tab_content_' + tabid).parents('.inner').find('.mkt_tab_content').hide();
+        $('#showmkt_maintab_' + tabid).parents('.inner').find('.mkt_main_tab a').removeClass('active');
+        $('#showmkt_maintab_' + tabid).addClass('active');
+        $('#mkt_tab_content_' + tabid).fadeToggle();
+        var value = $('#showmkt_maintab_' + tabid).html();
+
+    }
+
+    function one_liner_msg(selectValue, selectId) {
+        if (selectValue == 999999) {
+            $('#' + selectId + '_LinkLbl').html('* Please Select ' + selectId + '.');
+        } else {
+            $('#' + selectId + '_LinkLbl').html('');
+        }
+    }
+
+', 
+', 
+    $(document).ready(function () {
+    });
+', 
+', 
+', 
+	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+	document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+	fbq('init', '139439933088582');
+	fbq('track', "PageView");
+', 
+', 
+	', 
+', 
+',  
+
+
+', 
+
+
+', 
+', 
+    ', 
+        ', \u2190 Close Men, 
+
+        ', 
+                            ', Login to Trade', 
+                        ', Home', 
+
+            ',  ', Market ', 
+                ', 
+                    ', Equities ', 
+					', 
+						', Overview', 
+						', Market Commentary', 
+						', Trending', 
+						', Indices', 
+						', Sector Summary', 
+						', Global Markets', 
+						', Sectoral Newsletter', 
+						', FII & DII Activity', 
+						', GDR/ADR/IDR', 
+						', Bulk & Block Deals', 
+						', Corporate Actions', 
+					', 
+					', 
+                    ', 
+                    ', Market Map', 
+                    ', Derivatives', 
+                    ', Commodity', 
+                    ', IPO', 
+                    ', Companies', 
+                    ', NSE', 
+                    ', BSE', 
+                ', 
+                ',  
+            ', 
+            ', 
+            ', News ', 
+                ', 
+                    ', Overview', 
+                    ', Top', 
+                    ', Business', 
+                    ', Corporate', 
+                    ', Equity', 
+                    ', Commodity', 
+                    ', Currency', 
+                    ', Mutual Funds', 
+                    ', Insurance', 
+                    ', IPO', 
+                    ', Economy', 
+                    ', Global News', 
+                    ', M&A Deals', 
+                    ', Gold', 
+                    ', Business Wire', 
+                    ', 
+                    ', PRNewsWire', 
+                    ', Start-Ups', 
+                    ',  
+                ', 
+                ',  
+            ', 
+            ', Ideas', 
+            ',  ', Mutual Funds ', 
+                ', 
+                    ', Fund Snapshot', 
+                    ', Fund Houses', 
+                    ', Equity Funds', 
+                    ', Debt Funds', 
+                    ', Balanced Funds', 
+                    ', ETFs', 
+                    ', NFO Updates', 
+                    ', Dividend Tracker', 
+                    ', Fund Manager Speak', 
+                    ', Apply Online', 
+					', Financial planning', 
+                ', 
+                ',  
+            ', 
+            ',  ', Personal Finance ', 
+                ', 
+                    ', Overview', 
+                    ', Insurance', 
+                    ', NRI Corner', 
+                    ', Home Loans', 
+					', Personal Loan', 
+                    ', calculator', 
+                    ', Articles', 
+                    ', Budget', 
+                    ', Railway Budget', 
+                    ', Tutorials', 
+					', 
+					', SME Loan', 
+					', Gold Loan', 
+					', Healthcare finance', 
+					', Financial planning', 
+					', 
+                ', 
+                ',  
+            ', 
+            ', Earnings', 
+            ', Portfolio', 
+            ', Watchlist', 
+            ', Contact Us', 
+			', Blogs', 
+            ', RBI Updates', 
+    ', 
+', 
+', 
+
+', 
+', 
+	', 
+		', 
+			', 
+				', ×', 
+				', 
+					', 
+			', 
+		', 
+	', 
+', 
+', 
+
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', x', Close', 
+                ', Login or ', Sign up', 
+            ', 
+            ', 
+                ', 
+                    ',  ',  ',  ', Facebook',  ',  ', 
+                    ',  ',  ',  ', Twitter',  ',  ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                        ', OR',  ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+
+                            ',  ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                            ', 
+                            ',  ', 
+                              ', 
+                                ', 
+                                ', 
+                            ', 					 
+                            ', Login', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                    ', 
+                    ', 
+                        ',  ', Forgot password?',  ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+',  
+
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', x', Close', 
+                ',  ', Register ', or Connect with', 
+            ', 
+            ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 				
+                                ', 
+                                    ', Email id', 
+                                    ',  
+                                        ', 
+                                            ', 
+                                            ',  
+                                        ', 
+                                        ', 
+                                    ', 
+                                    ',  
+                                    ', 
+                                        ', *Choose a valid email address - An authentication email will be sent to your email id.', 
+                                    ', 
+                                ', 
+
+                                ', 
+                                    ', Password', 
+                                    ',  
+                                        ', 
+                                            ', 
+                                            ',  
+                                        ', 
+                                        ', 
+                                    ', 
+                                    ',  
+                                    ', 
+                                        ', *Password should have 8 to 12 Alphanumeric Characters with one Special Character.', 
+                                    ', 
+                                ', 
+
+                                ', 
+                                    ', Confirm Password', 
+                                    ',  
+                                        ', 
+                                            ', 
+                                            ',  
+                                        ', 
+                                        ', 
+                                    ', 
+                                    ',  
+                                ', 
+                                ', 
+                                    ', *Password does not match the confirm password.', 
+                                ', 
+
+                                ', 
+
+                                    ', Captcha', 
+
+                                    ', 
+
+                                    ', 
+
+                                    ', 
+                                        ',   
+                                    ', 
+									
+									', 
+									
+                                    ', 
+
+                                    ',  
+                                ', 
+
+                                ', 
+                                    ', *Please enter the characters of the above image.', 
+                                ', 	
+
+                                ', 
+                                    ',  I want to create a User ID and have read the ', terms and conditions',  for the same
+                                    ', 
+                                        ', *You must agree to terms and conditions inorder to sign up.', 
+                                    ', 
+                                ', 
+                                ', Register Now', 
+
+                            ', 
+                        ', 
+                    ', 
+                    ', 
+                        ', Connect with', 
+                        ',  ',  ',  ', Facebook',  ',  ',  ',  ', Twitter',  ',  ', 
+                        ', 
+                        ', 
+                        ', We encourage visitors to register on IIFL. Registering on the site is ', absolutely Free',  and offers you the following benefits.', 
+                        ', 
+                            ',  Free Portfolio of Equity and Assets', 
+                            ',  Exclusive E-newsletter', 
+                            ',  Post Comments and Share Feedback', 
+                            ',  Your Personal Page', 
+                            ',  Access Premium Services', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+',   		'][
+			', 
+				', 
+			', 
+			
+			', 
+						', 
+			
+						
+', 
+    var mktautoreftime = "100000";
+    $(document).ready(function () {
+        $("#searchhp").validationEngine();
+        createDropDown();
+        $(".dropdown dt a").click(function () {
+            $(".dropdown dd ul").toggle();
+        });
+        $(document).bind('click', function (e) {
+            var $clicked = $(e.target);
+            if (!$clicked.parents().hasClass("dropdown"))
+                $(".dropdown dd ul").hide();
+        });
+        $(".dropdown dd ul li a").click(function () {
+            var text = $(this).html();
+            $(".dropdown dt a").html(text);
+            $(".dropdown dd ul").hide();
+            //$("#result").html("Selected value is: " + getSelectedValue("target"));
+            var source = $("#searchcategory");
+            source.val($(this).find("span.value").html());
+        });
+        $(".searchdropdown li a").click(function () {
+            var a = $(this).attr('data-input');
+            if ($(this).attr('value') == 'news') {
+                $("#" + a).autocomplete({
+                    disabled: true
+                });
+            }
+            else {
+                $("#" + a).autocomplete({
+                    disabled: false
+                });
+            }
+        });
+        $('.searchsubmit').click(function () {
+            var keyword2 = $('#' + $(this).attr('data-input')).val();
+            var keyword2 = keyword2.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '+');
+            var keyword2 = keyword2.replace(/[^A-Z0-9]/ig, "_");
+            var keyword2 = keyword2.replace(/[^A-Z0-9]+/ig, "+");
+            var keyword3 = $('#' + $(this).attr('data-keyword')).val();
+            if (keyword2 != "") {
+                if (keyword3 == 'News') {
+                    window.location.href = "/search/news/" + keyword2;
+                    //window.location.href = "/search/news/" + encodeURIComponent(keyword2);
+                    return false;
+                } else {
+                    window.location.href = "/search/quotes/" + keyword2;
+                    return false;
+                }
+            }
+            else
+            {
+                alert('Please provide your search input !!');
+                return false;
+            }
+        });
+
+        $('.yt-videos').click(function () {
+            var ytVideoLink = $(this).attr('data-url');
+            $("#tvVideo").attr("src", ytVideoLink);
+        });
+
+		$('.utubevideo1').click(function(){
+			var videoId = $(this).attr('data-id');
+			$("#tvVideo").attr("src", videoId);
+        });
+		
+		$('#myModal').click(function () {
+            $("#tvVideo").attr("src", '');
+        });
+    });
+    /*		
+     function getSelectedValue(el) {
+     var a = $("#"+el).val();
+     a = a.toLowerCase();
+     a = a.replace(' ','');
+     return a;
+     }
+     */
+    function getSelectedValue() {
+
+        var a = $("#searchcategory").val();
+        a = a.toLowerCase();
+        a = a.replace(' ', '');
+        return a;
+    }
+
+    function getSelectedValueSticky() {
+
+        var a = $("#searchcategorySticky").val();
+        a = a.toLowerCase();
+        a = a.replace(' ', '');
+        return a;
+    }
+
+    function getSelectedValueMobile() {
+
+        var a = $("#searchcategoryMobile").val();
+        a = a.toLowerCase();
+        a = a.replace(' ', '');
+        return a;
+    }
+
+    function createDropDown() {
+        var source = $("#searchcategory");
+        var selected = source.find("option[selected]");
+        var options = $("option", source);
+        $("#searchcategorydl").append('<dl id="target" class="dropdown"></dl>')
+        $("#target").append('<dt><a href="javascript:void(0);">' + selected.text() +
+                '<span class="value">' + selected.val() +
+                '</span></a></dt>')
+        $("#target").append('<dd><ul></ul></dd>')
+        options.each(function () {
+            $("#target dd ul").append('<li><a href="javascript:void(0);">' +
+                    $(this).text() + '<span class="value">' +
+                    $(this).val() + '</span></a></li>');
+        });
+    }
+', 
+', 
+    {
+    "@context" : "http://schema.org",
+    "@type" : "Organization",
+    "name" : "Indiainfoline",
+    "url" : "http://www.indiainfoline.com",
+    "sameAs" : [
+    "https://www.facebook.com/IIFLMarkets/",
+    "https://twitter.com/iiflmarkets",
+    "https://www.youtube.com/user/IndiaInfolineGroup/",
+    "https://www.linkedin.com/company/india-infoline-ltd",
+	"https://www.instagram.com/iifl_markets/"
+    ]
+    }
+', 
+', 
+    {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name" : "Indiainfoline",
+    "alternateName" : "indiainfoline.com",
+    "url": "http://www.indiainfoline.com/",
+    "potentialAction": {
+    "@type": "SearchAction",
+    "target": "http://www.indiainfoline.com/search/news/{search_term_string}",
+    "query-input": {
+    "@type": "PropertyValueSpecification",
+    "valueRequired": true,
+    "valueMaxlength": 100,
+    "valueName": "search_term_string"
+    }
+    }
+    }
+', 
+', 
+', (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+            return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.6";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));', 
+', 
+    /* Autocomplete Header */
+    .ui-widget, .ui-widget_2{position:relative;}
+    .ui-widget #auto_com_drop{position:absolute;top:27px;}
+    .ui-widget_2 #auto_com_drop{position:absolute;top:27px;left:91px;}
+    .ui-autocomplete{background: #FFFFFF;	z-index: 999;border: 1px solid #dadada;}
+
+    #auto_drop_hp{position:absolute;left:0px;width:100% !important;top:31px;z-index: 9999999;}
+    #auto_drop_hp .ui-autocomplete{max-height:376px;-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);}
+    #auto_drop_hp .ui-autocomplete{position:absolute;left:0px;}
+
+    /* Autocomplete Header Sticky*/
+    .ui-widget, .ui-widget_2{position:relative;}
+    .ui-widget #auto_drop_hp_sticky{position:absolute;top:27px;}
+    .ui-widget_2 #auto_drop_hp_sticky{position:absolute;top:27px;left:91px;}
+    .ui-autocomplete{background: #FFFFFF;	z-index: 999;border: 1px solid #dadada;}
+
+    #auto_drop_hp_sticky{position:absolute;left:0px;width:100% !important;top:31px}
+    #auto_drop_hp_sticky .ui-autocomplete{max-height:376px;-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);}
+    #auto_drop_hp_sticky .ui-autocomplete{position:absolute;left:0px;}
+
+    /* Autocomplete Mobile Header*/
+    .ui-widget, .ui-widget_2{position:relative;}
+    .ui-widget #auto_drop_hp_mobile{position:absolute;}/*top:27px;*/
+    .ui-widget_2 #auto_drop_hp_mobile{position:absolute;left:91px;}/*top:27px;*/
+    .ui-autocomplete{background: #FFFFFF;	z-index: 999;border: 1px solid #dadada;}
+
+    #auto_drop_hp_mobile{position:absolute;left:0px;width:100% !important;}/*top:31px*/
+    #auto_drop_hp_mobile .ui-autocomplete{max-height:376px;overflow: auto;-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);}
+    #auto_drop_hp_mobile .ui-autocomplete{position:absolute;left:0px}
+', 
+
+
+', 
+', 
+', 
+', 
+
+', 
+', 
+', 
+', 
+ 
+', 
+    $(function () {
+        var pgurl = window.location.href;
+        var indexval = pgurl.indexOf("/", 10);
+        var realhref = pgurl.substr(indexval, (pgurl.length) + 1);
+        $(".navbar-nav >li> a").each(function () {
+            if ($(this).attr("href") == realhref || $(this).attr("href") == '') {
+                $(".navbar-nav >li> a").removeClass('active');
+                $(this).addClass("active");
+            }
+        })
+        $(".navbar-nav >li>ul.mega-dropdown-menu li a").each(function () {
+            if ($(this).attr("href") == realhref || $(this).attr("href") == '') {
+                $(".navbar-nav >li> a").removeClass('active');
+                $(this).addClass("active");
+                $(this).parents('.mega-dropdown').find('.dropdown-toggle').addClass("active");
+            }
+        })
+    });
+', 
+
+', 
+    ', 
+        ', 
+                ', 
+                    ', X', 
+                ', 
+                ', 
+                                    ', 
+                ', 
+                ', 
+            ', 
+        
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', Login To Trade',   | 
+                        ', Open a Trading Account', 
+                        ',  | ', 
+                        ', About IIFL', 
+                        ',   ', 
+                        ', Contact Us', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+					', 
+						', 
+							', 
+						', 
+						', 
+							', FOLLOW IIFL: ', 
+						', 
+					', 
+                ', 
+                ', 
+            ', 
+        ', 
+        ', 
+        ', 
+
+            ', 
+            ', 
+
+                ', 
+                ', 
+                    ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+
+                ', 
+                ', 
+                    ', 
+                    ', 
+                        ', 
+                        ', 
+
+                            ', 
+                                ', 
+                                ', 
+                                    ',  ',  
+                                ', 
+                                ', 
+
+                                ', 
+                                ', 
+                                    ', 
+                                ', 
+                                ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+
+                        ', 
+                            ', 
+                                ', 
+                                ', 
+                                    ', 
+                                    ', 
+                                        ', 
+
+                                            ', 
+                                            ', 
+                                                ', Quote ', 
+
+                                                ', 
+                                                    ', Quote', 
+                                                    ', News', 
+                                                    ', Insurance', 
+                                                    ', Mutual Funds', 
+                                                    ', Commodities',      
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                                    ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                    ', 
+                                    ', 
+                                ', 
+                                ',       
+
+                                
+                                ', 
+                                ', 
+                                    ', NIFTY', 
+                                    ', 8,190.50', 
+                                                                        ', 
+                                        ', 
+                                        ', -1.75', 
+                                        ', -0.02', 
+                                    ',  
+                                    ', |', 
+
+                                                                        ', SENSEX', 
+                                    ', 26,633.13', 
+                                    ', 
+                                        ', 
+                                        ', -10.11', 
+                                        ', -0.03', 
+                                    ', 
+                                    ',                                         
+                                        04-Jan-17 16:08                                    ', 
+                                ', 
+
+                                ', 
+                                ', 
+                                ', 
+                            ', 
+                        ', 
+
+                        ', 
+                        ', 
+
+                            ',     
+                            ', 
+                                ', 
+                            ', 
+                            ',  
+
+                            ', 
+                                ',    
+                                ',  
+									
+                                ', 								
+                                                                            ', 
+                                                ', 
+                                            
+                                        ', 
+                                        ', 
+                                            ', Sign IN', 
+                                            ', 
+                                            ', Register', 
+                                        ', 
+                                                                    ', 
+                                ',  
+
+                                ',     
+                                ', 
+                                                                            ', Login', 
+                                        ',  Register ',  
+                                                                    ', 
+                                ', 
+                                ', 
+                            ', 
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                    ',   
+                    ',  
+                ', 
+                ', 
+            ', 
+            ', 
+        ',        
+        ', 
+        ', 
+            ', 
+                ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                            ', 
+                            ', 
+                                ', Quote ', 
+
+                                ', 
+                                    ', Quote', 
+                                    ', News', 
+                                    ', Insurance', 
+                                    ', Mutual Funds', 
+                                    ', Commodities',      
+                                ', 
+                            ', 
+                            ', 
+                                ', 
+                                ',  
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                    ', 
+
+                ', 
+                ', 
+
+                ', 
+                ', 
+                    ', 1231321fasdasdfasdfasdf', 
+                ', 
+                ', 
+
+                ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                ', 
+                ', 
+            ', 
+        ', 
+
+        ', 
+        	', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', Toggle navigation', 
+                            ', 
+                            ', 
+                            ', 
+                        ', 
+
+                    ', 
+
+                    ', 
+                        ', 
+                            ', 
+							 ', 
+                                ', Market', 				
+                                ', 
+                                    ', 
+                                        ', 
+										', Equities', 
+										', 
+										', Market Map', 
+										', Derivatives', 
+										', Commodity', 
+										', IPO', 
+										', Companies', 
+										', NSE', 
+										', BSE', 
+                                        ', 
+                                    ', 
+                                ', 				
+                            ', 
+							
+							', 
+                                ', News', 				
+                                ', 
+						', 
+							', 
+						', Overview', 
+						', Top', 
+						', Business', 
+						', Corporate', 
+						', Equity', 
+						', Commodity', 
+						', Currency', 
+						', Mutual Funds', 
+						', Insurance', 
+						', IPO', 
+						', Economy', 
+						', Global News', 
+						', M&A Deals', 
+						', Gold', 
+						', Business Wire', 
+						', 
+						', PRNewsWire', 
+						', Start-Ups', 
+						                ', 
+                                    ', 
+                                ', 				
+                            ', 
+							
+							
+					', 
+						', Ideas', 
+					', 
+					', 
+						', MF', Mutual Funds', 
+						', 				
+					', 
+					', 
+					', 
+					', Fund Snapshot', 
+					', Fund Houses', 
+					', Equity Funds', 
+					', Debt Funds', 
+					', Balanced Funds', 
+					', ETFs', 
+					', NFO Updates', 
+					', Dividend Tracker', 
+					', Fund Manager Speak', 
+					', Apply Online', 
+
+					', Financial planning', 
+
+				
+                                        ', 
+                                    ', 
+                                ', 				
+                            ', 
+							
+							
+							
+							
+							
+							', 
+                                ', PF', Personal Finance', 				
+                                ', 
+                                    ', 
+                                        ', 
+								', Overview', 
+					', Insurance', 
+					', 
+					', Home Loans', 
+					', Personal Loan', 
+					', Calculator', 
+					', Articles', 
+					', Budget', 
+					', Railway Budget', 
+					', Tutorials', 
+					', 
+					', SME Loan', 
+					', Gold Loan', 
+					', Healthcare finance', 
+					', Financial planning', 
+					', 
+                                        ', 
+                                    ', 
+                                ', 				
+                            ', 
+							', Earnings', 
+		
+		', 
+			', Products', 				
+				', 
+					', 
+						', 
+							', 
+								', Portfolio', 
+							', 
+							', 
+								', Watchlist', 
+							', 
+						', 
+					', 
+				', 				
+		', 
+							
+		', Portfolio', 
+		', Watchlist', 
+		', Contact Us', 
+		', Blogs', 
+		',  ', RBI Updates',  ', 
+							
+                     
+
+                        ', 			
+
+                    ', 
+                ', 
+            ', 
+            ', 
+        ',         ', 
+    ', 
+    ',      
+
+                ', 
+        reloadCaptcha();
+    ', 
+    ', u"
+        $('#closeapp').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/user/login/setappsession',
+                success: function (data) {
+                    if (data == 'Y') {
+                        $('#hidemobileapp').hide();
+                    }
+                }
+            });
+
+        });        
+    ", 			
+			', 
+				', 
+				', 
+				', 
+			', 
+			
+			', 
+			', 
+				', 
+					var navHeight = $('#master_header').outerHeight(true);
+					if(navHeight > 140 ){
+					var navHeight = navHeight + 21;
+					}else{
+					var navHeight = navHeight + 15;
+					}
+					//var navHeight = 146;
+					$("#main").css("margin-top",navHeight);
+				', 
+				', 
+					', 
+					', 
+				', 
+					', 
+											', u"
+							$(window).load(function () {
+								$('.main_wrapper').addClass('mT0');
+							});
+						", 
+											', 
+						', 
+							', 
+							', 
+								', Home', Markets', Company', Summary', 							', 
+						', 
+						', 
+						', 
+                    ', 			
+                    
+                            ', 
+										
+					   
+					 
+					', 
+    ', 
+    ', 
+                ', 
+					
+					
+					', Overview', 
+					', Quote Page', 
+										', Chart', 
+					', Company Summary', 
+					', Financials', 
+					', News', 
+					', Peer Compairson', 
+					', Share Holding', 
+					', Corporate Action', 
+					', 
+					', Historical Data', 
+					', Comments', 36', 
+
+					
+				', 
+                ', +', 
+            ',     	', 
+        
+	        ', 
+             ', 
+        
+        
+            ', 
+        	', 
+                    
+                
+                 ',    
+                ',    
+', 
+	', 
+	', 
+						', Overview', 
+				', Quote Page', 
+								', Chart', 
+				', Company Summary', 
+				', Financials', 
+				', News', 
+				', Peer Comparison', 
+				', Share Holding', 
+				', Corporate Action', 
+				', 
+				', Historical Data', 
+				', Comments', 36', 
+
+				', 
+	', 
+	', 
+', 
+ ', 
+ ', 
+$(document).ready(function(){
+$('.nav-stacked a[href^="#"]').bind('click',function (e) {
+e.preventDefault();
+
+var target = this.hash,
+$target = $(target);
+
+$('html, body').stop().animate({
+'scrollTop': $target.offset().top
+}, 900, 'swing', function () {
+window.location.hash = target;
+});
+});
+});
+', 
+                  ', 
+                 
+                 
+                 ',       
+                ', 
+                
+                        
+                    ', 
+						 
+
+   ', 
+	                    ', 
+                        ', 
+													', 
+                            ', 
+                              ', Morganite Crucible (India) Ltd', 
+                              ', MORGAN CRU', 
+                            ', 
+                        ', 
+                        ', 
+                        	', 
+                            	', Buy', 
+                            	', Sell', 
+                            ', 
+							', 
+                        	', 
+                            	', Buy', 
+                            	', Sell', 
+                            ', 
+							', 
+                            ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+										', 
+                                        ',  ', 
+																													
+                                          ', BSE', 
+																				 
+                                        ', 
+                                        ', 
+																						', 
+																						', 
+											
+											', 
+																						
+										    ', 
+													', 
+														', 
+                                                            ', 
+                                                            	', 
+																	', 	
+																	', 611.15', 	
+                                                                ', 
+																', 
+                                                                ', 
+																																		',  
+																	', 
+																	4.70',      |     ', 
+																	0.78%', 
+                                                                ', 
+																', 
+                                                                ', 
+                                                            ', 
+															', 
+                                                            ', 
+																																	',  
+                                                                 ', 4.7',      |     ', 
+																 0.78%', 
+																 ', 03-Jan-17 11:56', 
+                                                            ', 
+															', 
+															 ', 
+															 
+                                                        ', 
+														
+														', 	
+                                                            ', 
+                                                                ', 
+                                                                        Open (', )
+                                                                ', 
+                                                                ', 
+                                                                        636.50																', 
+																', 
+                                                                ', 
+																', 
+                                                                        636.50																', 
+																', 
+                                                                ', 
+                                                            ', 
+                                                            ', 
+                                                                ', 
+                                                                        Turnover (', lac)
+                                                                    ', 
+                                                                    ', 
+																		2                                                                    ', 
+																', 
+                                                                ', 
+																', 
+																		2																', 
+																', 
+                                                                    ', 
+                                                            ', 
+                                                        ', 
+                                                        
+                                                        
+                                                        ', 	
+                                                            ', 
+                                                                ', 
+                                                                         Prev. Close (', )
+                                                                    ', 
+                                                                    ', 
+                                                                       606.45			  
+                                                                    ', 
+																', 
+                                                                ', 
+																', 
+                                                                       606.45																', 
+																', 
+                                                                    ', 
+                                                            ', 
+                                                            ', 
+                                                                    ', u"
+                                                                        Day's Vol.(shares)
+                                                                    ", 
+                                                                    ', 
+                                                                        1,529																		
+                                                                    ', 
+																', 
+                                                                ', 
+																', 
+                                                                        1,529																', 
+																', 
+                                                                    ', 
+                                                            ', 
+                                                        ', 
+                                                        ', 
+															$(document).ready(function() {
+																/*for slider picker*/
+																	var slider = new Slider("#bse-day-range");
+																/*for slider picker*/
+															});
+														', 
+														', 
+															', u"
+																	Day's Range (", )
+															', 
+															', 
+																', 
+																', 
+																  ', 
+																	611.15																	', 
+																  ', 
+																	  ', 
+																  ', 
+																  ', 
+																  636.50																  ', 
+															  ', 
+															 ', 
+															', 
+														', 
+													',                              
+                                            ', 
+											
+																						', 
+											
+											', 
+																						', 
+											
+										', 
+										', 
+									  ', Detailed Quote ', 
+									  ', 
+                                    ', 
+                                ', 
+                            
+                            ', 
+                            
+                        ', 
+                    ', 
+                    ', 
+                    					', 
+                    
+                   
+                	
+                    ', 
+                    	', 
+                        
+                        
+                        
+                        
+                        ', 
+                        ', 
+                            ', 
+                            
+                                ', 
+                                   
+                                    ', 
+                                    ',  
+                                    ', 
+									                                    ', 
+                                    ', 
+                                      ', 
+                                        
+                                        ', 
+                                        ', 
+                                          ', SUMMARY', 
+										  ',  MANAGEMENT', 
+                                          ', REGISTERED OFFICE ', 
+                                          ', REGISTRAR OFFICE ', 
+                                        ', 
+                                        ', 
+                                        
+                                        
+                                        
+                                        ', 
+                                        ', 
+                                          ', 
+                                            ', 
+                                                ', 
+                                                	', 
+                                                      ', 
+															
+                                                        ', 
+                                                          ', Chairman ', 
+                                                          ', Mukund Bhogale', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Independent Director ', 
+                                                          ', Subhash B Kolapkar', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Company Secretary ', 
+                                                          ', Rupesh Khokle', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Additional Director ', 
+                                                          ', Ian Keith Arber', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Independent Director ', 
+                                                          ', Maithilee Tambolkar', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Director ', 
+                                                          ', Micro Pavoni', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Director ', 
+                                                          ', Pauline Tan', 
+                                                        ', 
+															
+                                                        ', 
+                                                          ', Managing Director ', 
+                                                          ', Aniruddha Karve', 
+                                                        ', 
+														                                                       ', 
+                                                    ', 
+                                                ', 
+                                            ', 
+                                          ', 
+                                          ', 
+                                            ', 
+                                                ', 
+                                                   ', Jointly promoted by Greaves Cotton & Company and Morganite Crucible, UK, Greaves Morganite Crucible, a Thapar group company, was incorporated in Jan.86. Greaves was marketing Morganites crucibles for over three decades in India, when it started manufacturing 600 tpa silicon carbide crucibles using resin bonded technology at Waluj, Aurangabad in 1987. It went public in Aug.87. The British collaborator holds a 28% stake in the company.', The companys collaborator, Morganite Crucibles, is engaged in this business for the past 100 years. Crucibles are used as containers for melting and holding molten metal. The company which manufactures resin-bonded silicon carbide crucibles, caters to the non-ferrous metal industry.', In Oct.94, the company obtained ISO 9002 certification from Bureau Veritas Quality International (BVQI). It exports to Egypt, Srilanka and Nepal through its concessionaires.', Expansion programme for manufacturing of Clay Graphite Crucibles had been completed and commercial production started on February 2001 and export of products had also commenced. In 2001-02 the company had manufactured 80.15 MT of Clay Graphite Crucibles.',                                                 ',                                                 
+                                            ', 
+                                            ', 
+                                          ', 
+                                          ', 
+                                            ', 
+                                                ', 
+                                                	', 
+                                                    ', REGISTERED OFFICE', 
+													                                                    ', B-11 MIDC Indl Area,',  Waluj,Aurangabad (Maharashtra),', Maharashtra-431136', 
+                                                    		', 
+                                                    ', 
+                                                       ', Tell. : +91-0240-6652523/6652520', 
+                                                       ', Website : ', http://www.morganmms.com', 
+                                                       ', Email : ', Sales.India@morganplc.com', 
+                                                    ', 
+                                                ', 
+                                                
+                                                ', 
+                                            ', 
+                                          ', 
+                                          ', 
+                                            ', 
+                                                ', 
+                                                	', 
+                                                    ', REGISTRAR OFFICE', 
+                                                    ', C-13  Pannalal Silk,',  Bhandup West,Mumbai - 400 078', 
+                                                    	INDIA', 
+                                                    ', 
+                                                       ', Tell. : +91-022-25963838', 
+                                                       ', Website : ', www.linkintime.com', 
+                                                       ', Email : ', rnt.helpdesk@linkintime.co.in/mumbai@linkintime.co.in', 
+													', 
+                                                    ', 
+                                                ', 
+                                                
+                                                ', 
+                                            ', 
+                                          ', 
+                                        ', 
+                                        ', 
+                                      ', 
+                                    ', 
+                                    ', 
+                                    
+                                ', 
+                                
+                            ', 
+                        ', 
+                        ', 
+    
+    
+                        
+                        ', 
+													
+				', 
+					', 
+						', 
+							', 
+							  ',  ',  ',  ',  ', QuickLinks  for Morganite Crucible (India) Ltd. ',  ',  
+								',  
+							  ', 
+							', 
+							', 
+								', 
+										', News', 
+										', 
+											', Company', 
+											', Sector News', 
+										',  
+								', 
+								', 
+										', Corporate Action', 
+										', 
+											', AGM', 
+											', Bonus', 
+											', Board Meetings', 
+											', Dividends ', 
+											', EGM	', 
+											', Rights ', 
+											', Split', 
+										', 
+								', 
+								', 
+										', Information', 
+										', 
+											', 
+											', Company Summary', 
+											', 
+											', Shareholding', 
+											', Peer Comparison', 
+											', 
+										', 
+								', 
+								', 
+										', Financials', 
+										', 
+											', Profit & Loss', 
+											', Balance Sheet', 
+											', Cash Flow ', 
+											', Key Ratios', 
+											
+											', Quarterly Result', 
+											', Half Yearly Result', 
+											', Nine Monthly Result', 
+											', Annual Result', 
+										', 
+								',  
+								', 
+										', Documents', 
+										', 
+											', 
+											', Company Management', 
+											', Directors Report', 
+											', Auditors Report', 
+											', Management Discussions', 
+										', 
+								', 
+								', 
+							', 
+						', 
+					', 
+					
+				', 
+		
+		                    
+ 
+					   ', 
+                        ', 
+            		', 
+        	', 
+                 ',   
+            
+        	', 
+            ', 
+            
+    ', 
+    ', 
+    
+
+', 
+', 
+				', 
+				', 
+				', 
+				', 
+			
+			', 
+', 
+
+    ', 
+        ', 
+            ', 
+                ', Connect with IIFL:', 
+            ', 
+            ', facebook', |', twitter', 
+            ', Commodity Ideas', Stock Ideas', IIFL Live', Corporate News', 
+                ', RSS', 
+            ', 
+            ', 
+        ', 
+    ', 
+
+    ', 
+        ', 
+            ',  
+                ', 
+                    ', CUSTOMER CARE', 
+                ', 
+                ', 
+                ', 
+                    ', Technology/Trader Terminal related queries', 
+                    ', 022-41514151', 
+                ', 
+                ', 
+                    ', Equity/Currency  & Commodity/Spot', 
+                    ', 022-40071000', 
+                ', 
+                ', 
+                    ', Gold/NCD/NBFC/Insurance and NPS', 
+                    ', 180030001155 / 022-61064444', 
+                ', 
+            ', 
+        ', 
+    ', 
+    ', 
+    ', 
+        ', 
+            ',  
+
+
+                ', 
+                    ', 
+                        ', Login To Trade',  ', | ',  ', Open a Trading Account', 
+                    ', 
+                ', 
+
+                ', 
+                    ',  
+                        ', Investor Relations',   ', | ',  ', About IIFL',   ', | ',  ', u"We're Hiring",   ', | ',  ', Contact Us', 
+                    ', 
+                ', 
+                ',  Wednesday, 04 January 2017 19:18 IST', 
+            ', 
+            ', 
+                ', 
+                    ', IIFL Group', 
+                    ', 
+                        ',               
+                        ', Trade', 
+                        ', Premia ', 
+                        ', Wealth ', 
+                        ', Flame ', 
+                        ', Property Solutions ', 
+                        ', Business Partners ', 
+						', Finance', 
+                    ', 
+                ', 
+                ', 
+                    ', Products & Services ', 
+                    ', 
+                        ', Desktop Widget', 	
+                        ', Research', 
+                        ', Mortgages ', 
+                        ', Insurance ', 
+                        ', Wealth Management ', 
+                        ',  
+                        ', Discretionary PMS', 
+						', TT Edge', 
+						', Business loans', 
+						', Personal Loan', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                    ', Trading Documentation ', 
+                    ', 
+                        ',  Download TT', 
+                        ', TT Login ', 
+                        ', TT Demo', 
+                        ', Account Details', 
+                        ', Fund Transfer', 
+                        ', Helpdesk', 
+                        ', Download Forms', 
+                        ', Document & Info', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                    ', Useful Links ', 
+                    ', 
+                        ', BSE', 
+                        ', NSE', 
+                        ', MCX', 
+                        ', NCDEX', 
+                        ', Bullion Desk', 
+                        ', Forex Factory', 
+                        ', Exchange Holidays', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                    ', Offbeat ', 
+                    ', 
+                        ', Bschool', 
+                        ', Economy', 
+                        ', Lifestyle', 
+                        ', RBI Governors', 
+                        ', Finance Ministers', 
+                        ', Prime Ministers', 
+                        ', Famous Speeches', 
+                    ', 
+                ', 
+                ', 
+                    ', Calculators ', 
+                    ', 
+                        ', Income
+                                Tax', 
+                        ', 
+                                Home Loan EMI', 
+                        ', 
+                                Auto Loan EMI', 
+                        ', 
+                                Education Loan EMI', 
+                        ', HRA
+                                Exemption', 
+                        ', 
+                                Retirement Planning', 
+                        ', 
+                                Savings Estimator', 
+						', Gold Loan calculator', 
+						', Revolving credit interest calculator', 
+						', EMI Calculator', 
+                    ', 
+                ', 
+                ', 
+            ', 
+            ', 
+            ', 
+                ', 
+                    ', Glossary:', 
+                    ', 
+                        ', Accountancy', 
+                        ', Advertising', 
+                        ', Budget', 
+                        ', Commerce', 
+                        ', Derivatives', 
+                        ', Economics', 
+                        ', Finance', 
+                        ', General Mgmt.', 
+                        ', HR Mgmt.',  
+                        ', IT', 
+                        ', Marketing',  
+                        ', Material Mgmt.', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', Stocks:', 
+                    ', 
+                        ', A',  ', B',  ', C',  ', D', 
+                        ', E',  ', F',  ', G',  ', H', 
+                        ', I',  ', J',  ', K',  ', L', 
+                        ', M',  ', N',  ', O',  ', P', 
+                        ', Q',  ', R',  ', S',  ', T', 
+                        ', U',  ', V',  ', W',  ', X', 
+                        ', Y',  ', Z', 
+
+                    ', 
+                ', 
+            ', 
+            ', 
+
+                ', 
+                    ', Mutual Funds:', 
+                    ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E', 
+                        ', F',  
+                        ', G', 
+                        ', H', 
+                        ', I', 
+                        ', J', 
+                        ', K',  
+                        ', L', 
+                        ', M',  
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V',  
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                ', 
+            ', 
+            ', 
+
+                ', 
+                    ', Insurance:', 
+                    ', A',  ', B', 
+                        ', C',  ', D', 
+                        ', E',  ', F', 
+                        ', G',  ', H', 
+                        ', I',  ', J', 
+                        ', K',  ', L', 
+                        ', M',  ', N', 
+                        ', O',  ', P', 
+                        ', Q',  ', R', 
+                        ', S',  ', T', 
+                        ', U',  ', V', 
+                        ', W',  ', X', 
+                        ', Y',  ', Z', 
+                ', 
+            ', 
+
+        ', 
+        ', 
+            ', 
+        ', 
+    ', 
+    ', 
+        ', 
+            ', Disclaimer  ',  
+            ', Disclaimer - Research Disclaimer', 
+            ',  Discussion Boards ', 
+            ', Disclaimer - Twitter ', 
+            ', Terms & Conditions ', 
+            ',  Privacy Policy', 
+        ', 
+    ', 
+    ', 
+        ', 
+            ', 
+                ', ATTENTION INVESTORS:', 
+            ', 
+            ', 
+                ',                 
+                ', 
+                    www.indiainfoline.com is part of the IIFL Group, a leading financial services player and a diversified NBFC. The site provides comprehensive and real time information on Indian corporates, sectors, financial markets and economy. On the site we feature industry and political leaders, entrepreneurs, and trend setters. The research, personal finance and market tutorial sections are widely followed by students, academia, corporates and investors among others.
+                ', 
+                ', 
+                    Copyright © 2017 India Infoline Ltd. All rights Reserved.
+                ', 
+                ', 
+                    National Stock Exchange of India Ltd. SEBI Regn. No. : INB231097537/ INF231097537/ INE231097537,', 
+                    Bombay Stock Exchange Ltd. SEBI Regn. No.:INB011097533/ INF011097533/ BSE Currency,', 
+                    MCX Stock Exchange Ltd. SEBI Regn. No.: INB261097530/ INF261097530/ INE261097537,', 
+                    United Stock Exchange Ltd. SEBI Regn. No.: INE271097532
+                ', 
+				', 
+				web7            ', 
+        ', 
+    ', 
+', 
+', 
+', 
+	$('.foot_ga a').click(function() {        
+		var label = $(this).html();
+		var action = $(this).parent().attr("data-id");
+		pushGoogleAnalytics('footer', action, label, 'event '+label);
+	});
+', 
+', 
+    function DropDown(el) {
+        this.dd = el;
+        this.initEvents();
+    }
+    DropDown.prototype = {
+        initEvents: function () {
+            var obj = this;
+
+            obj.dd.on('click', function (event) {
+                $(this).addClass('active');
+                event.stopPropagation();
+            });
+        }
+    }
+    $(function () {
+        var dd = new DropDown($('#dd'));
+        $('.wrapper-dropdown-5').mouseleave(function () {
+            // all dropdowns
+            $('.wrapper-dropdown-5').removeClass('active');
+        });
+    });
+
+    function mycarousel_initCallback(carousel) {
+        carousel.clip.hover(function () {
+            carousel.stopAuto();
+        }, function () {
+            carousel.startAuto();
+        });
+    }
+    ;
+    jQuery(document).ready(function () {
+        $(".iifl_acc > h4 > a").click(function () {
+            var iifl_acc_div = $(this).parent().parent().children('.iifl_acc_div');
+            if (iifl_acc_div.is(":visible")) {
+                $('.iifl_acc_div').slideUp();
+            } else {
+                $('.iifl_acc_div').slideUp();
+                iifl_acc_div.slideDown();
+            }
+        });
+        setTimeout("$('.wrapper-dropdown-5').addClass('active'),1000;", 200);
+        setTimeout("$('.wrapper-dropdown-5').removeClass('active');", 1400);
+        setTimeout("$('.wrapper-dropdown-5 .dropdown').css({'transition' : 'all 0.2s ease-out'});", 300);
+        setTimeout("$('.wrapper-dropdown-5 .dropdown').css({'transition' : 'all 0.3s ease-out'});", 1500);
+
+    });
+
+    $("html").addClass("js");
+    function Company_Tab(tabid) {
+        $('#Company_Tab_Cont_' + tabid).parents('.inner').find('.Company_Tab_Cont').hide();
+        $('#Company_Tab_' + tabid).parents('.inner').find('.com_tab_a a').removeClass('active');
+        $('#Company_Tab_' + tabid).addClass('active');
+        $('#Company_Tab_Cont_' + tabid).fadeToggle();
+    }
+
+    function showmkt_data(tabid) {
+        $('#mkt_tabs_cont_' + tabid).parents('.mkt_tab_content').find('.mkt_tabs_cont').hide();
+        $('#showmkt_tab_' + tabid).parents('.mkt_tab_content').find('.sub_tabs a').removeClass('active');
+        $('#showmkt_tab_' + tabid).addClass('active');
+        $('#mkt_tabs_cont_' + tabid).fadeToggle();
+    }
+
+    function showmkt_maindata(tabid) {
+        $('#mkt_tab_content_' + tabid).parents('.inner').find('.mkt_tab_content').hide();
+        $('#showmkt_maintab_' + tabid).parents('.inner').find('.mkt_main_tab a').removeClass('active');
+        $('#showmkt_maintab_' + tabid).addClass('active');
+        $('#mkt_tab_content_' + tabid).fadeToggle();
+        var value = $('#showmkt_maintab_' + tabid).html();
+    }
+
+    function showmkt_maindata_tab(tabid) {
+        $('#mkt_tab_content_tab_' + tabid).parents('.inner').find('.mkt_tab_content_tab').hide();
+        $('#showmkt_maintab_tab_' + tabid).parents('.inner').find('.mkt_main_tab_tab a').removeClass('active');
+        $('#showmkt_maintab_tab_' + tabid).addClass('active');
+        $('#mkt_tab_content_tab_' + tabid).fadeToggle();
+        var value = $('#showmkt_maintab_tab_' + tabid).html();
+    }
+
+    function showmkt_maindataCommodity(tabid) {
+        $('#mkt_tab_content_' + tabid).parents('.inner').find('.mkt_tab_content').hide();
+        $('#showmkt_maintab_' + tabid).parents('.inner').find('.mkt_main_tab a').removeClass('active');
+        $('#showmkt_maintab_' + tabid).addClass('active');
+        $('#mkt_tab_content_' + tabid).fadeToggle();
+        var value = $('#showmkt_maintab_' + tabid).html();
+
+    }
+
+    function one_liner_msg(selectValue, selectId) {
+        if (selectValue == 999999) {
+            $('#' + selectId + '_LinkLbl').html('* Please Select ' + selectId + '.');
+        } else {
+            $('#' + selectId + '_LinkLbl').html('');
+        }
+    }
+
+', 
+', 
+    $(document).ready(function () {
+    });
+', 
+', 
+', 
+	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+	document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+	fbq('init', '139439933088582');
+	fbq('track', "PageView");
+', 
+', 
+	', 
+', 
+',  
+
+
+', 
+
+
+', 
+', 
+    ', 
+        ', \u2190 Close Men, 
+
+        ', 
+                            ', Login to Trade', 
+                        ', Home', 
+
+            ',  ', Market ', 
+                ', 
+                    ', Equities ', 
+					', 
+						', Overview', 
+						', Market Commentary', 
+						', Trending', 
+						', Indices', 
+						', Sector Summary', 
+						', Global Markets', 
+						', Sectoral Newsletter', 
+						', FII & DII Activity', 
+						', GDR/ADR/IDR', 
+						', Bulk & Block Deals', 
+						', Corporate Actions', 
+					', 
+					', 
+                    ', 
+                    ', Market Map', 
+                    ', Derivatives', 
+                    ', Commodity', 
+                    ', IPO', 
+                    ', Companies', 
+                    ', NSE', 
+                    ', BSE', 
+                ', 
+                ',  
+            ', 
+            ', 
+            ', News ', 
+                ', 
+                    ', Overview', 
+                    ', Top', 
+                    ', Business', 
+                    ', Corporate', 
+                    ', Equity', 
+                    ', Commodity', 
+                    ', Currency', 
+                    ', Mutual Funds', 
+                    ', Insurance', 
+                    ', IPO', 
+                    ', Economy', 
+                    ', Global News', 
+                    ', M&A Deals', 
+                    ', Gold', 
+                    ', Business Wire', 
+                    ', 
+                    ', PRNewsWire', 
+                    ', Start-Ups', 
+                    ',  
+                ', 
+                ',  
+            ', 
+            ', Ideas', 
+            ',  ', Mutual Funds ', 
+                ', 
+                    ', Fund Snapshot', 
+                    ', Fund Houses', 
+                    ', Equity Funds', 
+                    ', Debt Funds', 
+                    ', Balanced Funds', 
+                    ', ETFs', 
+                    ', NFO Updates', 
+                    ', Dividend Tracker', 
+                    ', Fund Manager Speak', 
+                    ', Apply Online', 
+					', Financial planning', 
+                ', 
+                ',  
+            ', 
+            ',  ', Personal Finance ', 
+                ', 
+                    ', Overview', 
+                    ', Insurance', 
+                    ', NRI Corner', 
+                    ', Home Loans', 
+					', Personal Loan', 
+                    ', calculator', 
+                    ', Articles', 
+                    ', Budget', 
+                    ', Railway Budget', 
+                    ', Tutorials', 
+					', 
+					', SME Loan', 
+					', Gold Loan', 
+					', Healthcare finance', 
+					', Financial planning', 
+					', 
+                ', 
+                ',  
+            ', 
+            ', Earnings', 
+            ', Portfolio', 
+            ', Watchlist', 
+            ', Contact Us', 
+			', Blogs', 
+            ', RBI Updates', 
+    ', 
+', 
+', 
+
+', 
+', 
+	', 
+		', 
+			', 
+				', ×', 
+				', 
+					', 
+			', 
+		', 
+	', 
+', 
+', 
+
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', x', Close', 
+                ', Login or ', Sign up', 
+            ', 
+            ', 
+                ', 
+                    ',  ',  ',  ', Facebook',  ',  ', 
+                    ',  ',  ',  ', Twitter',  ',  ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                        ', OR',  ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+
+                            ',  ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                            ', 
+                            ',  ', 
+                              ', 
+                                ', 
+                                ', 
+                            ', 					 
+                            ', Login', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                    ', 
+                    ', 
+                        ',  ', Forgot password?',  ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+',  
+
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', x', Close', 
+                ',  ', Register ', or Connect with', 
+            ', 
+            ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 				
+                                ', 
+                                    ', Email id', 
+                                    ',  
+                                        ', 
+                                            ', 
+                                            ',  
+                                        ', 
+                                        ', 
+                                    ', 
+                                    ',  
+                                    ', 
+                                        ', *Choose a valid email address - An authentication email will be sent to your email id.', 
+                                    ', 
+                                ', 
+
+                                ', 
+                                    ', Password', 
+                                    ',  
+                                        ', 
+                                            ', 
+                                            ',  
+                                        ', 
+                                        ', 
+                                    ', 
+                                    ',  
+                                    ', 
+                                        ', *Password should have 8 to 12 Alphanumeric Characters with one Special Character.', 
+                                    ', 
+                                ', 
+
+                                ', 
+                                    ', Confirm Password', 
+                                    ',  
+                                        ', 
+                                            ', 
+                                            ',  
+                                        ', 
+                                        ', 
+                                    ', 
+                                    ',  
+                                ', 
+                                ', 
+                                    ', *Password does not match the confirm password.', 
+                                ', 
+
+                                ', 
+
+                                    ', Captcha', 
+
+                                    ', 
+
+                                    ', 
+
+                                    ', 
+                                        ',   
+                                    ', 
+									
+									', 
+									
+                                    ', 
+
+                                    ',  
+                                ', 
+
+                                ', 
+                                    ', *Please enter the characters of the above image.', 
+                                ', 	
+
+                                ', 
+                                    ',  I want to create a User ID and have read the ', terms and conditions',  for the same
+                                    ', 
+                                        ', *You must agree to terms and conditions inorder to sign up.', 
+                                    ', 
+                                ', 
+                                ', Register Now', 
+
+                            ', 
+                        ', 
+                    ', 
+                    ', 
+                        ', Connect with', 
+                        ',  ',  ',  ', Facebook',  ',  ',  ',  ', Twitter',  ',  ', 
+                        ', 
+                        ', 
+                        ', We encourage visitors to register on IIFL. Registering on the site is ', absolutely Free',  and offers you the following benefits.', 
+                        ', 
+                            ',  Free Portfolio of Equity and Assets', 
+                            ',  Exclusive E-newsletter', 
+                            ',  Post Comments and Share Feedback', 
+                            ',  Your Personal Page', 
+                            ',  Access Premium Services', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+',   		']

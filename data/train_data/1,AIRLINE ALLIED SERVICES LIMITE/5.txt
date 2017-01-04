@@ -1,0 +1,1791 @@
+[
+', 
+ ', 
+    var lhnAccountN = "20171-1";
+    var lhnButtonN = 5462;
+    var lhnChatPosition = 'default';
+    var lhnInviteEnabled = 1;
+    var lhnWindowN = 0;
+    var lhnDepartmentN = 0;
+    ',  
+', 
+
+', 
+  ', 
+  ', 
+', 
+', 
+		//<![CDATA[
+
+    if (/Mobile|webOS|Android|iPad|iPod|iPhone|IEMobile|BlackBerry|Opera Mini|Bada/i.test(navigator.userAgent)) {
+        var myStylesLocation = "writereaddata/Portal/Design_CSS/7.css";
+        $('<link rel="stylesheet" type="text/css" href="' + myStylesLocation + '" >').appendTo("head");
+
+        //create and add meta tag
+        /*var ViewPortId = "viewport";
+        var meta = document.createElement('meta');
+        meta.id = ViewPortId;
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
+        document.getElementsByTagName('head')[0].appendChild(meta);*/
+
+
+        $('<script type="text/javascript" src="js/jquery.meanmenu.js">').appendTo("head");
+		
+        $(window).load(function () {
+            $("#carousel").jcarousel({
+                scroll: 1
+            });
+            $('.mainNav .menuPart').meanmenu();
+
+            $(".mean-expand").click(function () {
+                $('.overlay').hide();
+            }, function () {
+                $('.overlay').hide();
+            });
+            //$('.sliderNoArrow .jcarousel-skin-tango .jcarousel-prev-horizontal, .sliderNoArrow .jcarousel-skin-tango .jcarousel-next-horizontal').css({display: 'block'});
+        });
+    }
+    function AddBodyClass() {
+        $("#" + "bdMainSite").addClass("home");
+    }
+    function setMenu(objatagV) {
+        $('.menuFirstNode').removeClass('active');
+        $('#' + objatagV).addClass('active');
+        CreateCookie('_tmpActiveMn, objatagV);
+    }
+		//]]>
+    ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+', u"
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+",  This website uses Javascript ', 
+
+
+',  This website uses Javascript ', 
+
+
+',  This website uses Javascript ', 
+', 
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+',  This website uses Javascript ', 
+
+', 
+
+	', 
+	', 
+', 
+  ', 
+  ',  ', 
+    
+    
+    ', 
+    ', 
+    ', 
+    
+
+    ', 
+    
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Skip to Content',  ~', Screen Reader Access', 
+
+', 
+   
+    ', 
+        ', 
+        
+        ', 
+        
+        ', 
+	', 
+    ', 
+        ', 
+        
+        ', 
+    ',     
+',  ', 
+', 
+    $(document).ready(function () {
+        $("#ContentPlaceHolder1_UserLanguage1_ibtnCountryRefresh").css("display", "block");
+        $("#ContentPlaceHolder1_UserLanguage1_ibtnLanguageRefresh").css("display", "block");
+    });
+	',  This website uses Javascript ',  This website uses Javascript ', 
+
+
+', 
+    ', 
+        Select Country', 
+    ', 
+	', India', 
+	', USA/Canada', 
+	', UK', 
+	', Australia', 
+	', Others', 
+
+', 
+    
+', 
+', 
+', 
+    ', 
+        Select Language', 
+  
+', 
+	', English', 
+	', \u0939\u093f\u0902\u0926\u0940', 
+
+',     
+', 
+    ', 
+    
+ ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+	
+    ', 
+    ', 
+
+', 
+', 
+', 
+', 
+', 
+<!--
+    function CheckString() {
+        var Key = document.getElementById('ContentPlaceHolder1_KeywordSearch1_txtKeyword');
+        if (Key.value.length < 3) {
+            Key.value = "Minimum 3 character required";
+            return false;
+
+        }
+        if (Key.value == Key.defaultValue) {
+            Key.value = "Enter valid search text";
+            return false;
+        }
+        if (Key.value == "Minimum 3 character required" || Key.value == "Enter valid search text") {
+            return false;
+        }
+        return true;
+    }
+    var hdnLanguageID = document.getElementById('ContentPlaceHolder1_KeywordSearch1_hdnLanguageID');
+    if (hdnLanguageID.value == '3') {
+        google.load("elements", "1", { packages: "transliteration" });
+        function onLoad() {
+            var options = { sourceLanguage: 'en', destinationLanguage: ['hi'], shortcutKey: 'ctrl+g', transliterationEnabled: true };
+            var control = new google.elements.transliteration.TransliterationControl(options);
+            control.makeTransliteratable(['ContentPlaceHolder1_KeywordSearch1_txtKeyword']);
+        }
+        google.setOnLoadCallback(onLoad);
+    }
+
+
+    /*  Auto Suggestion Script */
+    $(function () {
+
+
+        $("#ContentPlaceHolder1_KeywordSearch1_txtKeyword").autocomplete({
+            source: function (request, response) {
+                var pID;
+                var hdnSiteID = document.getElementById('ContentPlaceHolder1_KeywordSearch1_hdnSiteID'); ;
+                var hdnLanguageID = document.getElementById('ContentPlaceHolder1_KeywordSearch1_hdnLanguageID');
+                if (hdnSiteID.value == '') pID = 1;
+                else pID = hdnSiteID.value;
+                $.ajax({
+                    url: "AutoCompleteService.asmx/AutoSugessionSiteSearch",
+                    data: "{ 'SearchText': '" + escape(request.term) + "' , 'SiteId':'" + pID + "', 'LanguageId':'" + hdnLanguageID.value + "', 'TopRecords':'" + 'top 15' + "' }",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.d, function (item) {
+                            var label1 = item.split("::");
+                            return {
+                                value: label1[1] + "::" + label1[2],
+                                label: label1[0]
+                            }
+                        }))
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        //                        alert(textStatus);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                $(event.target).val(ui.item.label);
+                var target = ui.item.value.split("::")
+                if (target[1] == "_blank") {
+                    window.open(target[0], '_blank');
+                }
+                else {
+                    //window.location = ui.item.value;
+                    window.location = target[0];
+                }
+                return false;
+            },
+            minLength: 3,
+            appendTo: ".topSearchList"
+        });
+        /*  Auto Suggestion Script */
+        //-->
+    });         
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+  
+//    function setMenu(objatagV) {
+//        $('.menuFirstNode').removeClass('active');
+//        $('#' + objatagV).addClass('active');
+//        CreateCookie('_tmpActiveMn, objatagV);
+
+//    }
+
+//    var _tmpActiveMnu = getCookie("_tmpActiveMnu");
+//    if (_tmpActiveMnu != null) {
+//        setMenu(_tmpActiveMnu);
+//        alert('getCookie' + _tmpActiveMnu);
+//    }
+    /*This file deals with coookies management*/
+    //setCookie('username',username,365)
+    /* check whetehr cookie is enabled by client or not*/
+    function isCookiesEnabled() {
+        if (window.clientInformation.cookieEnabled == false) {
+            alert("Cookies not enabled on this system, You may feel inconveniency, surfing this site,\nplease enable cookies for better user experience.");
+            return false;
+        }
+        else
+            return true;
+    }
+
+    /*The parameters of the function above hold the name of the cookie, the value of the cookie, and the number of 
+    days until the cookie expires.*/
+    function setCookie(c_name, value, expiredays) {
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate() + expiredays);
+        //document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
+        //document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : ";expires="+exdate.toGMTString()+";path=/");
+        //alert(path);
+        var domain;
+        var secure;
+        document.cookie = escape(c_name) + '=' + escape(value)
+			+ (expiredays ? '; expires=' + expiredays.toGMTString() : '')
+			+ ('; path=/')
+			+ (domain ? '; domain=' + domain : '')
+			+ (secure ? '; secure' : '');
+        //+ (path ? '; path=' + path : '')
+    }
+
+    /*
+    The function above first checks if a cookie is stored at all in the document.cookie object. If the document.cookie 
+    object holds some cookies, then check to see if our specific cookie is stored. If our cookie is found, then return 
+    the value, if not - return an empty string.
+    */
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=")
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1
+                c_end = document.cookie.indexOf(";", c_start)
+                if (c_end == -1)
+                    c_end = document.cookie.length
+                //alert( unescape(document.cookie.substring(c_start,c_end)) );
+                return unescape(document.cookie.substring(c_start, c_end))
+            }
+            return "";
+        }
+        return "";
+    }
+    function CreateCookie(cookiename, id) {
+        setCookie(cookiename, id, "", "/");
+    }
+
+', 
+', 
+', Home', Manage Your Trip', Book a Flight', Search and book flights conveniently.', My Booking', Cancel and rebook online. Book your seat and meal preferences.', Flight Schedules', Check the daily or weekly schedule for the required sectors.', Domestic Fares and Penalties', Air India domestic fares and penalties at a glance', Flight Status', Check the current flight arrival and departure times online.', Web Check-In', Check in online to avoid last minute delays.', Time Table', Check out our current timetable online.', Redeem Miles', Book online against redemption of miles.', Special Offers', International Schemes', All our current offers available at a glance.', Domestic Schemes', Concessionary Fares and more', Air India Holidays', Experience worry free vacations and weekend getaways with Air India Holidays', Corporate Houses', Special offers and services to our corporate clients', Travel Information', Before you fly', Tips for travel - let Air India help make your vacation or business travel a reality.', Network', Discover 35 international and 66 domestic destinations over 4 continents.', On Ground Services', City & Airport Services for out-going passengers.', On Board Facilities', Entertainment, dining and shopping on board.', Airport Information', Relax before the flight or catch up on work at our partnered lounges.', Route Map', Navigate our network with route maps and discover destinations.', Code Share Partners', Discover new destinations and more with our partners.', Flight Tracking', Flight Tracking', Preferred Seat Scheme', Book your preferred seat', Flying Returns', About Flying Returns', u"India's first frequent flyer programme & one of the most rewarding programme.", Join Now', Enroll now and start your mileage point accrual.', Earn Miles', Every time you fly Air India, you accrue miles based on sector and the booking class.', Redeem Miles', Unmatched opportunities to redeem miles for award tickets.', Promotions', As a Flying Returns member, you can enjoy a host of promotion offers.', Premium Clubs', Join any of our Premium Clubs..The Maharajah Club, Golden Edge Club or Silver Edge Club.', My Account', Log on now to check your Account details.', Alliance Partners', Get details about our Travel Partners.', Baggage', Hand luggage', Learn more about what you can take with you in the cabin.', Checked Baggage Allowances', Know the checked in baggage allowances for your journey.', Excess Baggage', Find out more about the excess baggage charges.', Special Baggage', Charges for carriage of Sports/Music and other Equipment', Baggage tips and restricted items', Guidelines for packing your baggage.', Lost, Damaged and Delayed delivery of Baggage', Contact us for lost, damaged or delayed baggage.', Unaccompanied baggage', Details of baggage which can be sent as cargo.', Student Offers', Additional baggage allowance for students', WorldTracer Baggage Tracing System', Check the Status of your delayed baggage', Lost & Found Baggage', Lost & Found Baggage', Contact', Customer Support', Our customer care centre is always there to assist you.', Contact Details', Check the contact details of Air India worldwide.', Frequently Asked Questions', Get the answers to all your queries.', Feedback', We welcome your Feedback.', Feedback Status', Get the status of your Feedback.', 
+
+
+ 
+', 
+    ', 
+        ', 
+            Frequent Flyer', 
+    ', 
+        ', 
+            ', 
+                ', 
+            ', 
+                ', 
+                    ', 
+                        Membership No.', 
+                    ', 
+                    ', 
+                    ', 
+                        Enter Membership No.',  ', 
+                ', 
+                    ', 
+                        Password', 
+                    ', 
+                    ', 
+                    ', 
+                        Enter Password',  ', 
+            ', 
+        ', 
+        ', 
+        ', 
+            
+            ', 
+                Sign Up?', 
+				 
+    ', 
+   
+', 
+', 
+ //<![CDATA[
+    function fnfrequentflyer() {
+        var IsValid = true;
+        var membershipno = $("#txtusername").val();
+        var password = $("#txtpassword").val();
+        $('#spnmembership').css("display", "none");
+        $('#spnpassword').css("display", "none");
+        
+        if (membershipno == "") {
+            $('#spnmembership').css("display", "block");
+            IsValid = false;
+        }
+        if (password == "") {
+            $('#spnpassword').css("display", "block");
+            IsValid = false;
+        }
+        if (!IsValid) {
+            return false;
+        }
+
+        $('#AjaxLoadingDiv').css("display", "block");
+        var form = 'form';
+        //        debugger;
+        $('input , select').not('#txtusername,#txtpassword').not('input[type="submit"]').remove();
+        //$(form).find('input[type="hidden"]').remove();
+        $(form).append('<input type="hidden" name="username" id="username" />');
+        $(form).append('<input type="hidden" id="password" name="password" />');
+
+
+        $(form).find('#username').val(membershipno);
+        $(form).find('#password').val(password);
+
+        $(form).get(0).action = "https://ffai.loyaltyplus.aero/ailoyalty/autoLogin.jsf?username="+membershipno+"&password="+password+"&language=en";
+        $(form).get(0).submit();
+        return false;
+    }
+//]]>
+',  ', 
+', 
+', 
+', 
+', Overlay', 
+', 
+', 
+', 
+', 
+    ', 
+        About Air India', 
+    ', 
+        Tenders
+    ', 
+        
+                ', 
+                   
+                            ', 
+                        eProcurement Tenders
+                        ',  ', 
+            
+                ', 
+                    Air India Tenders',  ', 
+                ', 
+            
+    ', 
+    ', 
+        Careers', 
+        
+                ', 
+            
+                ', 
+                    ', Recruitment Notifications', 
+                ', 
+                ', 
+            
+                ', 
+                    Training', 
+                ', 
+                    Air India Staff College', 
+                ', 
+            
+    ', 
+    ', 
+        Media Center', 
+        ', 
+            ', 
+                Press Releases', 
+            ', 
+            ', 
+                Milestones', 
+        ', 
+    ', 
+    ', u"
+        Citizen's Charter", 
+    ', 
+        AI Express', 
+    ', 
+        Vigilance', 
+    ', 
+        Downloads', 
+    ', 
+        FAQs', 
+    ', 
+        Right to Information', 
+', 
+', 
+', 
+', 
+', Airline Allied Services Limited', 
+(A wholly owned Subsidiary of Air India Limited)', 
+', 
+', 
+', 
+    ', 
+        ', 
+                ', 
+                    Home',  
+            ',  \u203a ', 
+                 
+                ', Alliance Air', 
+    ', 
+', 
+', 
+', The Airline commenced its operations from 15th April, 1996 under Brand Name "Alliance Air".', 
+', Alliance Air operates air services with a leased fleet of 8 ATR 72-600 (70 Seater), 3 CRJ (70 Seater) and 3 ATR 42-320 (48 Seater) and type of aircraft. Alliance Air has its base stations at Delhi, Mumbai, Bengaluru, Kolkata, Hyderabad & Bhopal.', 
+', Flights are operated mostly to Tier-2 and Tier-3 Cities, or those which link these cities to the metro hubs. Alliance Air has 272 flight departures per week and 39 flight departures per day.', 
+', Alliance Air operates flights to 34 destinations in India namely Agartala. Agatti, Allahabad, Bengaluru, Bhavnagar, Bhopal, Bhuj, Dehradun, Delhi, Diu, Dharamshala, Gorakhpur, Guwahati, Gwalior, Hyderabad, Hubli, Jaipur, Jabalpur, Jammu, Kochi, Kolkata,
+ Kullu, Lilabari, Mumbai, Pantnagar, Pune, Raipur, Rajkot, Shillong, Silchar, Surat, Vijayawada, Vizag and Tezpur.', 
+', The flight schedules of Alliance Air are structured in a manner which enables easy connections to / from smaller cities via the hubs of Delhi, Kolkata, Mumbai, & Bengaluru & Hyderabad. Alliance Air provides connections to International stations through its
+ hubs.', 
+', Light Vegetarian refreshments are served on Alliance Air flights. ', 
+', 
+', Where we fly', 
+', 
+', ATR', ATR', ATR', CRJ', CRJ', CRJ', CRJ', CRJ', CRJ Interrior', 
+ ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', About Air India', Engineering Services', Air India Airport Services', Conditions of Carriage', 
+', 
+', 
+', 
+', Media Center', u"Citizen's Charter", Downloads', FAQs', 
+', 
+', 
+', 
+', Right to Information', Vigilance', Tenders', Feedback', 
+', 
+', 
+', 
+', Sitemap', Careers', Travel Agents', 
+', 
+', 
+',  
+
+
+', 
+', 
+', Share now ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"All donations towards the Prime Minister's National Relief Fund (PMNRF) are notified for 100% deduction from taxable income under Section 80G of the Income Tax Act, 1961.", 
+', 
+', 
+', Copyright © 2017 Air India (India) Ltd. All rights reserved.', 
+', 
+', Terms & Conditions', Hyperlinking Policy', Accessibility Statement', Disclaimer', Help', 
+', 
+', Visitors: ', 114417193', 
+', 
+', Page last updated on: ', 29/8/2016', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', You are visiting a travel partner of ', 
+www.airindia.in', .', 
+', This website is owned and operated by a third party and not under the control of Air India.', 
+', You will be entering an agreement directly with our partner. All further communication shall be directed to the email address and/or phone number provided by our partner.', 
+', Your queries/claims, if any arising out of your usage of the said website, should be directed solely to the owner of the website and Air India shall not be responsible and/or liable in that regard.', 
+', Continue', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',  
+ <!--
+    function Validate_Subscribe(objtype) {
+
+        if (!Page_ClientValidate())
+        { return false; }
+    }
+    //-->
+    function setControl() {
+        var objbtnok = document.getElementById('ContentPlaceHolder1_UserSignup1_btnOK');
+        if (objbtnok.value.toLowerCase() == 'subscribe') {
+            $("#ContentPlaceHolder1_UserSignup1_lblHeader").html('User Un-Subscription for Newsletter/Special Offer');
+            $("#ContentPlaceHolder1_UserSignup1_btnOK").val('Un-subscribe');
+            $("#ContentPlaceHolder1_UserSignup1_lbllinkSubscribe").html('Click Here to Subscribe');
+            $("#ContentPlaceHolder1_UserSignup1_hdnType").val('1');
+            $("#dvInfo").css("display", "none");
+            $(".popupSubscribe .popupVideo .popVideoMain").css("height", "200px");
+            $(".popupSubscribe .popupVideo .popVideoMain .popVideoInner").css("height", "186px");
+            $(".hindiDoc .popupSubscribe .popupVideo .popVideoMain").css("height", "186px");
+            $(".hindiDoc .popupSubscribe .popupVideo .popVideoMain .popVideoInner").css("height", "186px");
+        }
+        else {
+            $("#ContentPlaceHolder1_UserSignup1_lblHeader").html('User Subscription for Newsletter/Special Offer');
+            $("#ContentPlaceHolder1_UserSignup1_btnOK").val('Subscribe');
+            $("#ContentPlaceHolder1_UserSignup1_lbllinkSubscribe").html('Click Here to Un-subscribe');
+            $("#ContentPlaceHolder1_UserSignup1_hdnType").val('0');
+            $("#dvInfo").css("display", "block");
+            $(".popupSubscribe .popupVideo .popVideoMain").css("height", "280px");
+            $(".popupSubscribe .popupVideo .popVideoMain .popVideoInner").css("height", "266px");
+            $(".hindiDoc .popupSubscribe .popupVideo .popVideoMain").css("height", "266px");
+            $(".hindiDoc .popupSubscribe .popupVideo .popVideoMain .popVideoInner").css("height", "266px");
+            
+        }
+    }
+', 
+', 
+
+', 
+    ', 
+        ', 
+        ', 
+            ', User Subscription for Newsletter/Special Offer', 
+        ', 
+        ', 
+            ', 
+            
+            ', Email Address', 
+            ', Email Address:', 
+            ', 
+            ', Email should not be blank', 
+            ', Enter Valid Email', 
+                ', 
+            ', First Name', 
+            ', First Name:', 
+            ', 
+            ', Last Name', 
+            ', Last Name:', 
+            ', 
+             ', Contact Number', 
+            ', Contact Number:', 
+            ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', Click Here to Un-subscribe', 
+            ', 
+        ', 
+        ', 
+            
+        ', 
+    ', 
+', 
+ ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', You are visiting a travel partner of ', 
+www.airindia.in', .', 
+', This website is owned and operated by a third party and not under the control of Air India.', 
+', You will be entering an agreement directly with our partner. All further communication shall be directed to the email address and/or phone number provided by our partner.', 
+', Your queries/claims, if any arising out of your usage of the said website, should be directed solely to the owner of the website and Air India shall not be responsible and/or liable in that regard.', 
+', Continue', 
+', 
+', 
+', 
+', 
+', 
+', 
+  
+ 
+
+    ', Back to Top',  ', 
+  ',  ',  ', 
+  ', 
+  ', 
+
+', 
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("ContentPlaceHolder1_UserSignup1_rfvEmail"), document.getElementById("ContentPlaceHolder1_UserSignup1_revEmail"));
+//]]>
+',  This website uses Javascript ', 
+
+', 
+//<![CDATA[
+var ContentPlaceHolder1_UserSignup1_rfvEmail = document.all ? document.all["ContentPlaceHolder1_UserSignup1_rfvEmail"] : document.getElementById("ContentPlaceHolder1_UserSignup1_rfvEmail");
+ContentPlaceHolder1_UserSignup1_rfvEmail.controltovalidate = "ContentPlaceHolder1_UserSignup1_txtEmail";
+ContentPlaceHolder1_UserSignup1_rfvEmail.errormessage = "Email should not be blank";
+ContentPlaceHolder1_UserSignup1_rfvEmail.display = "Dynamic";
+ContentPlaceHolder1_UserSignup1_rfvEmail.validationGroup = "Subscribe";
+ContentPlaceHolder1_UserSignup1_rfvEmail.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ContentPlaceHolder1_UserSignup1_rfvEmail.initialvalue = "";
+var ContentPlaceHolder1_UserSignup1_revEmail = document.all ? document.all["ContentPlaceHolder1_UserSignup1_revEmail"] : document.getElementById("ContentPlaceHolder1_UserSignup1_revEmail");
+ContentPlaceHolder1_UserSignup1_revEmail.controltovalidate = "ContentPlaceHolder1_UserSignup1_txtEmail";
+ContentPlaceHolder1_UserSignup1_revEmail.errormessage = "Enter Valid Email";
+ContentPlaceHolder1_UserSignup1_revEmail.validationGroup = "Subscribe";
+ContentPlaceHolder1_UserSignup1_revEmail.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+ContentPlaceHolder1_UserSignup1_revEmail.validationexpression = "\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+//]]>
+',  This website uses Javascript ',  This website uses Javascript ', 
+
+
+', 
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+',  This website uses Javascript ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    function validate() {
+        return false;
+    }    
+    ', 
+', 
+', 
+', 
+', 
+', 
+', u"    dropdown('nav', 'hover', 1);", 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    $(document).ready(function () {
+        if (navigator.platform == 'iPad' || navigator.platform == 'iPhone' || navigator.platform == 'iPod' || navigator.platform == 'android' || navigator.platform == 'windows phone' || navigator.platform == 'blackberry' || navigator.platform == 'webos') {
+            $("#carousel").jcarousel({ wrap: null });
+            $("#carousel").css({ 'margin-left': '-498px' });
+        }
+        /*if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        $("#carousel").jcarousel({wrap: null});
+        $("#carousel").css({'margin-left': '-498px'});
+        }*/
+
+        var objhdndark = document.getElementById('hdnDarkSite');
+        //alert(objhdndark.value);
+        if (objhdndark.value == "1") {
+            $('.darksite').show();
+            $('.darksite .popupVideo').show();
+            setTimeout(function () { closeDark(); }, 10000);
+
+
+
+        }
+        $('.closeVideoPopup, .fadeVideo').click(function () {
+            $('.popupDisclaimerDark').hide();
+            $('.popupDisclaimerDark .fadeWrapVideo').hide();
+            return false;
+        });
+    });
+       
+    ', 
+', 
+
+', 
+    function openDarkSitePopup() {
+        alert("test");
+        $('.darksite').show();
+        $('.darksite .popupVideo').show();
+        setTimeout(function () { closeDark(); }, 10000);
+    }
+    function closeDark() {
+        $('.darksite').hide();
+    }
+    ', 
+', 
+', 
+',  ', 
+  
+  ',  ',  ', 
+', 
+', 
+  
+', 
+', u"
+    function fnCloseFeedbackFromIframe() {
+        $('.feedbackpopupBg').hide();
+        $('.feedbackpopup').hide();
+        $('.feedbackpopup').empty();
+    }
+    $(document).ready(function () {
+        $('#afeedback').click(function () {
+
+            $('.feedbackpopupBg').show();
+            $('.feedbackpopup').show();
+
+            return false;
+        });
+        //        $('.closeFbPop).click(function () {
+        //            $('.feedbackpopupBg').hide();
+        //            $('.feedbackpopup').hide();
+        //            $('.feedbackpopup').empty();
+
+        //        });
+    });
+   
+", 
+', 
+', 
+ $(document).ready(function () {
+ 	$("#btnbooking").click(function () {
+		$("#from").focus();
+		if ($("#from").val()) {
+			$("#to").focus();
+		}
+		else{
+			$("#from").focus();
+		}
+	});
+  });
+', 
+', 
+'][
+', 
+ ', 
+    var lhnAccountN = "20171-1";
+    var lhnButtonN = 5462;
+    var lhnChatPosition = 'default';
+    var lhnInviteEnabled = 1;
+    var lhnWindowN = 0;
+    var lhnDepartmentN = 0;
+    ',  
+', 
+
+', 
+  ', 
+  ', 
+', 
+', 
+		//<![CDATA[
+
+    if (/Mobile|webOS|Android|iPad|iPod|iPhone|IEMobile|BlackBerry|Opera Mini|Bada/i.test(navigator.userAgent)) {
+        var myStylesLocation = "writereaddata/Portal/Design_CSS/7.css";
+        $('<link rel="stylesheet" type="text/css" href="' + myStylesLocation + '" >').appendTo("head");
+
+        //create and add meta tag
+        /*var ViewPortId = "viewport";
+        var meta = document.createElement('meta');
+        meta.id = ViewPortId;
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
+        document.getElementsByTagName('head')[0].appendChild(meta);*/
+
+
+        $('<script type="text/javascript" src="js/jquery.meanmenu.js">').appendTo("head");
+		
+        $(window).load(function () {
+            $("#carousel").jcarousel({
+                scroll: 1
+            });
+            $('.mainNav .menuPart').meanmenu();
+
+            $(".mean-expand").click(function () {
+                $('.overlay').hide();
+            }, function () {
+                $('.overlay').hide();
+            });
+            //$('.sliderNoArrow .jcarousel-skin-tango .jcarousel-prev-horizontal, .sliderNoArrow .jcarousel-skin-tango .jcarousel-next-horizontal').css({display: 'block'});
+        });
+    }
+    function AddBodyClass() {
+        $("#" + "bdMainSite").addClass("home");
+    }
+    function setMenu(objatagV) {
+        $('.menuFirstNode').removeClass('active');
+        $('#' + objatagV).addClass('active');
+        CreateCookie('_tmpActiveMn, objatagV);
+    }
+		//]]>
+    ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+', u"
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+",  This website uses Javascript ', 
+
+
+',  This website uses Javascript ', 
+
+
+',  This website uses Javascript ', 
+', 
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+',  This website uses Javascript ', 
+
+', 
+
+	', 
+	', 
+', 
+  ', 
+  ',  ', 
+    
+    
+    ', 
+    ', 
+    ', 
+    
+
+    ', 
+    
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Skip to Content',  ~', Screen Reader Access', 
+
+', 
+   
+    ', 
+        ', 
+        
+        ', 
+        
+        ', 
+	', 
+    ', 
+        ', 
+        
+        ', 
+    ',     
+',  ', 
+', 
+    $(document).ready(function () {
+        $("#ContentPlaceHolder1_UserLanguage1_ibtnCountryRefresh").css("display", "block");
+        $("#ContentPlaceHolder1_UserLanguage1_ibtnLanguageRefresh").css("display", "block");
+    });
+	',  This website uses Javascript ',  This website uses Javascript ', 
+
+
+', 
+    ', 
+        Select Country', 
+    ', 
+	', India', 
+	', USA/Canada', 
+	', UK', 
+	', Australia', 
+	', Others', 
+
+', 
+    
+', 
+', 
+', 
+    ', 
+        Select Language', 
+  
+', 
+	', English', 
+	', \u0939\u093f\u0902\u0926\u0940', 
+
+',     
+', 
+    ', 
+    
+ ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+	
+    ', 
+    ', 
+
+', 
+', 
+', 
+', 
+', 
+<!--
+    function CheckString() {
+        var Key = document.getElementById('ContentPlaceHolder1_KeywordSearch1_txtKeyword');
+        if (Key.value.length < 3) {
+            Key.value = "Minimum 3 character required";
+            return false;
+
+        }
+        if (Key.value == Key.defaultValue) {
+            Key.value = "Enter valid search text";
+            return false;
+        }
+        if (Key.value == "Minimum 3 character required" || Key.value == "Enter valid search text") {
+            return false;
+        }
+        return true;
+    }
+    var hdnLanguageID = document.getElementById('ContentPlaceHolder1_KeywordSearch1_hdnLanguageID');
+    if (hdnLanguageID.value == '3') {
+        google.load("elements", "1", { packages: "transliteration" });
+        function onLoad() {
+            var options = { sourceLanguage: 'en', destinationLanguage: ['hi'], shortcutKey: 'ctrl+g', transliterationEnabled: true };
+            var control = new google.elements.transliteration.TransliterationControl(options);
+            control.makeTransliteratable(['ContentPlaceHolder1_KeywordSearch1_txtKeyword']);
+        }
+        google.setOnLoadCallback(onLoad);
+    }
+
+
+    /*  Auto Suggestion Script */
+    $(function () {
+
+
+        $("#ContentPlaceHolder1_KeywordSearch1_txtKeyword").autocomplete({
+            source: function (request, response) {
+                var pID;
+                var hdnSiteID = document.getElementById('ContentPlaceHolder1_KeywordSearch1_hdnSiteID'); ;
+                var hdnLanguageID = document.getElementById('ContentPlaceHolder1_KeywordSearch1_hdnLanguageID');
+                if (hdnSiteID.value == '') pID = 1;
+                else pID = hdnSiteID.value;
+                $.ajax({
+                    url: "AutoCompleteService.asmx/AutoSugessionSiteSearch",
+                    data: "{ 'SearchText': '" + escape(request.term) + "' , 'SiteId':'" + pID + "', 'LanguageId':'" + hdnLanguageID.value + "', 'TopRecords':'" + 'top 15' + "' }",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.d, function (item) {
+                            var label1 = item.split("::");
+                            return {
+                                value: label1[1] + "::" + label1[2],
+                                label: label1[0]
+                            }
+                        }))
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        //                        alert(textStatus);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                $(event.target).val(ui.item.label);
+                var target = ui.item.value.split("::")
+                if (target[1] == "_blank") {
+                    window.open(target[0], '_blank');
+                }
+                else {
+                    //window.location = ui.item.value;
+                    window.location = target[0];
+                }
+                return false;
+            },
+            minLength: 3,
+            appendTo: ".topSearchList"
+        });
+        /*  Auto Suggestion Script */
+        //-->
+    });         
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+  
+//    function setMenu(objatagV) {
+//        $('.menuFirstNode').removeClass('active');
+//        $('#' + objatagV).addClass('active');
+//        CreateCookie('_tmpActiveMn, objatagV);
+
+//    }
+
+//    var _tmpActiveMnu = getCookie("_tmpActiveMnu");
+//    if (_tmpActiveMnu != null) {
+//        setMenu(_tmpActiveMnu);
+//        alert('getCookie' + _tmpActiveMnu);
+//    }
+    /*This file deals with coookies management*/
+    //setCookie('username',username,365)
+    /* check whetehr cookie is enabled by client or not*/
+    function isCookiesEnabled() {
+        if (window.clientInformation.cookieEnabled == false) {
+            alert("Cookies not enabled on this system, You may feel inconveniency, surfing this site,\nplease enable cookies for better user experience.");
+            return false;
+        }
+        else
+            return true;
+    }
+
+    /*The parameters of the function above hold the name of the cookie, the value of the cookie, and the number of 
+    days until the cookie expires.*/
+    function setCookie(c_name, value, expiredays) {
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate() + expiredays);
+        //document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
+        //document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : ";expires="+exdate.toGMTString()+";path=/");
+        //alert(path);
+        var domain;
+        var secure;
+        document.cookie = escape(c_name) + '=' + escape(value)
+			+ (expiredays ? '; expires=' + expiredays.toGMTString() : '')
+			+ ('; path=/')
+			+ (domain ? '; domain=' + domain : '')
+			+ (secure ? '; secure' : '');
+        //+ (path ? '; path=' + path : '')
+    }
+
+    /*
+    The function above first checks if a cookie is stored at all in the document.cookie object. If the document.cookie 
+    object holds some cookies, then check to see if our specific cookie is stored. If our cookie is found, then return 
+    the value, if not - return an empty string.
+    */
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=")
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1
+                c_end = document.cookie.indexOf(";", c_start)
+                if (c_end == -1)
+                    c_end = document.cookie.length
+                //alert( unescape(document.cookie.substring(c_start,c_end)) );
+                return unescape(document.cookie.substring(c_start, c_end))
+            }
+            return "";
+        }
+        return "";
+    }
+    function CreateCookie(cookiename, id) {
+        setCookie(cookiename, id, "", "/");
+    }
+
+', 
+', 
+', Home', Manage Your Trip', Book a Flight', Search and book flights conveniently.', My Booking', Cancel and rebook online. Book your seat and meal preferences.', Flight Schedules', Check the daily or weekly schedule for the required sectors.', Domestic Fares and Penalties', Air India domestic fares and penalties at a glance', Flight Status', Check the current flight arrival and departure times online.', Web Check-In', Check in online to avoid last minute delays.', Time Table', Check out our current timetable online.', Redeem Miles', Book online against redemption of miles.', Special Offers', International Schemes', All our current offers available at a glance.', Domestic Schemes', Concessionary Fares and more', Air India Holidays', Experience worry free vacations and weekend getaways with Air India Holidays', Corporate Houses', Special offers and services to our corporate clients', Travel Information', Before you fly', Tips for travel - let Air India help make your vacation or business travel a reality.', Network', Discover 35 international and 66 domestic destinations over 4 continents.', On Ground Services', City & Airport Services for out-going passengers.', On Board Facilities', Entertainment, dining and shopping on board.', Airport Information', Relax before the flight or catch up on work at our partnered lounges.', Route Map', Navigate our network with route maps and discover destinations.', Code Share Partners', Discover new destinations and more with our partners.', Flight Tracking', Flight Tracking', Preferred Seat Scheme', Book your preferred seat', Flying Returns', About Flying Returns', u"India's first frequent flyer programme & one of the most rewarding programme.", Join Now', Enroll now and start your mileage point accrual.', Earn Miles', Every time you fly Air India, you accrue miles based on sector and the booking class.', Redeem Miles', Unmatched opportunities to redeem miles for award tickets.', Promotions', As a Flying Returns member, you can enjoy a host of promotion offers.', Premium Clubs', Join any of our Premium Clubs..The Maharajah Club, Golden Edge Club or Silver Edge Club.', My Account', Log on now to check your Account details.', Alliance Partners', Get details about our Travel Partners.', Baggage', Hand luggage', Learn more about what you can take with you in the cabin.', Checked Baggage Allowances', Know the checked in baggage allowances for your journey.', Excess Baggage', Find out more about the excess baggage charges.', Special Baggage', Charges for carriage of Sports/Music and other Equipment', Baggage tips and restricted items', Guidelines for packing your baggage.', Lost, Damaged and Delayed delivery of Baggage', Contact us for lost, damaged or delayed baggage.', Unaccompanied baggage', Details of baggage which can be sent as cargo.', Student Offers', Additional baggage allowance for students', WorldTracer Baggage Tracing System', Check the Status of your delayed baggage', Lost & Found Baggage', Lost & Found Baggage', Contact', Customer Support', Our customer care centre is always there to assist you.', Contact Details', Check the contact details of Air India worldwide.', Frequently Asked Questions', Get the answers to all your queries.', Feedback', We welcome your Feedback.', Feedback Status', Get the status of your Feedback.', 
+
+
+ 
+', 
+    ', 
+        ', 
+            Frequent Flyer', 
+    ', 
+        ', 
+            ', 
+                ', 
+            ', 
+                ', 
+                    ', 
+                        Membership No.', 
+                    ', 
+                    ', 
+                    ', 
+                        Enter Membership No.',  ', 
+                ', 
+                    ', 
+                        Password', 
+                    ', 
+                    ', 
+                    ', 
+                        Enter Password',  ', 
+            ', 
+        ', 
+        ', 
+        ', 
+            
+            ', 
+                Sign Up?', 
+				 
+    ', 
+   
+', 
+', 
+ //<![CDATA[
+    function fnfrequentflyer() {
+        var IsValid = true;
+        var membershipno = $("#txtusername").val();
+        var password = $("#txtpassword").val();
+        $('#spnmembership').css("display", "none");
+        $('#spnpassword').css("display", "none");
+        
+        if (membershipno == "") {
+            $('#spnmembership').css("display", "block");
+            IsValid = false;
+        }
+        if (password == "") {
+            $('#spnpassword').css("display", "block");
+            IsValid = false;
+        }
+        if (!IsValid) {
+            return false;
+        }
+
+        $('#AjaxLoadingDiv').css("display", "block");
+        var form = 'form';
+        //        debugger;
+        $('input , select').not('#txtusername,#txtpassword').not('input[type="submit"]').remove();
+        //$(form).find('input[type="hidden"]').remove();
+        $(form).append('<input type="hidden" name="username" id="username" />');
+        $(form).append('<input type="hidden" id="password" name="password" />');
+
+
+        $(form).find('#username').val(membershipno);
+        $(form).find('#password').val(password);
+
+        $(form).get(0).action = "https://ffai.loyaltyplus.aero/ailoyalty/autoLogin.jsf?username="+membershipno+"&password="+password+"&language=en";
+        $(form).get(0).submit();
+        return false;
+    }
+//]]>
+',  ', 
+', 
+', 
+', 
+', Overlay', 
+', 
+', 
+', 
+', 
+    ', 
+        About Air India', 
+    ', 
+        Tenders
+    ', 
+        
+                ', 
+                   
+                            ', 
+                        eProcurement Tenders
+                        ',  ', 
+            
+                ', 
+                    Air India Tenders',  ', 
+                ', 
+            
+    ', 
+    ', 
+        Careers', 
+        
+                ', 
+            
+                ', 
+                    ', Recruitment Notifications', 
+                ', 
+                ', 
+            
+                ', 
+                    Training', 
+                ', 
+                    Air India Staff College', 
+                ', 
+            
+    ', 
+    ', 
+        Media Center', 
+        ', 
+            ', 
+                Press Releases', 
+            ', 
+            ', 
+                Milestones', 
+        ', 
+    ', 
+    ', u"
+        Citizen's Charter", 
+    ', 
+        AI Express', 
+    ', 
+        Vigilance', 
+    ', 
+        Downloads', 
+    ', 
+        FAQs', 
+    ', 
+        Right to Information', 
+', 
+', 
+', 
+', 
+', Airline Allied Services Limited', 
+(A wholly owned Subsidiary of Air India Limited)', 
+', 
+', 
+', 
+    ', 
+        ', 
+                ', 
+                    Home',  
+            ',  \u203a ', 
+                 
+                ', Alliance Air', 
+    ', 
+', 
+', 
+', The Airline commenced its operations from 15th April, 1996 under Brand Name "Alliance Air".', 
+', Alliance Air operates air services with a leased fleet of 8 ATR 72-600 (70 Seater), 3 CRJ (70 Seater) and 3 ATR 42-320 (48 Seater) and type of aircraft. Alliance Air has its base stations at Delhi, Mumbai, Bengaluru, Kolkata, Hyderabad & Bhopal.', 
+', Flights are operated mostly to Tier-2 and Tier-3 Cities, or those which link these cities to the metro hubs. Alliance Air has 272 flight departures per week and 39 flight departures per day.', 
+', Alliance Air operates flights to 34 destinations in India namely Agartala. Agatti, Allahabad, Bengaluru, Bhavnagar, Bhopal, Bhuj, Dehradun, Delhi, Diu, Dharamshala, Gorakhpur, Guwahati, Gwalior, Hyderabad, Hubli, Jaipur, Jabalpur, Jammu, Kochi, Kolkata,
+ Kullu, Lilabari, Mumbai, Pantnagar, Pune, Raipur, Rajkot, Shillong, Silchar, Surat, Vijayawada, Vizag and Tezpur.', 
+', The flight schedules of Alliance Air are structured in a manner which enables easy connections to / from smaller cities via the hubs of Delhi, Kolkata, Mumbai, & Bengaluru & Hyderabad. Alliance Air provides connections to International stations through its
+ hubs.', 
+', Light Vegetarian refreshments are served on Alliance Air flights. ', 
+', 
+', Where we fly', 
+', 
+', ATR', ATR', ATR', CRJ', CRJ', CRJ', CRJ', CRJ', CRJ Interrior', 
+ ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', About Air India', Engineering Services', Air India Airport Services', Conditions of Carriage', 
+', 
+', 
+', 
+', Media Center', u"Citizen's Charter", Downloads', FAQs', 
+', 
+', 
+', 
+', Right to Information', Vigilance', Tenders', Feedback', 
+', 
+', 
+', 
+', Sitemap', Careers', Travel Agents', 
+', 
+', 
+',  
+
+
+', 
+', 
+', Share now ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"All donations towards the Prime Minister's National Relief Fund (PMNRF) are notified for 100% deduction from taxable income under Section 80G of the Income Tax Act, 1961.", 
+', 
+', 
+', Copyright © 2017 Air India (India) Ltd. All rights reserved.', 
+', 
+', Terms & Conditions', Hyperlinking Policy', Accessibility Statement', Disclaimer', Help', 
+', 
+', Visitors: ', 114417193', 
+', 
+', Page last updated on: ', 29/8/2016', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', You are visiting a travel partner of ', 
+www.airindia.in', .', 
+', This website is owned and operated by a third party and not under the control of Air India.', 
+', You will be entering an agreement directly with our partner. All further communication shall be directed to the email address and/or phone number provided by our partner.', 
+', Your queries/claims, if any arising out of your usage of the said website, should be directed solely to the owner of the website and Air India shall not be responsible and/or liable in that regard.', 
+', Continue', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',  
+ <!--
+    function Validate_Subscribe(objtype) {
+
+        if (!Page_ClientValidate())
+        { return false; }
+    }
+    //-->
+    function setControl() {
+        var objbtnok = document.getElementById('ContentPlaceHolder1_UserSignup1_btnOK');
+        if (objbtnok.value.toLowerCase() == 'subscribe') {
+            $("#ContentPlaceHolder1_UserSignup1_lblHeader").html('User Un-Subscription for Newsletter/Special Offer');
+            $("#ContentPlaceHolder1_UserSignup1_btnOK").val('Un-subscribe');
+            $("#ContentPlaceHolder1_UserSignup1_lbllinkSubscribe").html('Click Here to Subscribe');
+            $("#ContentPlaceHolder1_UserSignup1_hdnType").val('1');
+            $("#dvInfo").css("display", "none");
+            $(".popupSubscribe .popupVideo .popVideoMain").css("height", "200px");
+            $(".popupSubscribe .popupVideo .popVideoMain .popVideoInner").css("height", "186px");
+            $(".hindiDoc .popupSubscribe .popupVideo .popVideoMain").css("height", "186px");
+            $(".hindiDoc .popupSubscribe .popupVideo .popVideoMain .popVideoInner").css("height", "186px");
+        }
+        else {
+            $("#ContentPlaceHolder1_UserSignup1_lblHeader").html('User Subscription for Newsletter/Special Offer');
+            $("#ContentPlaceHolder1_UserSignup1_btnOK").val('Subscribe');
+            $("#ContentPlaceHolder1_UserSignup1_lbllinkSubscribe").html('Click Here to Un-subscribe');
+            $("#ContentPlaceHolder1_UserSignup1_hdnType").val('0');
+            $("#dvInfo").css("display", "block");
+            $(".popupSubscribe .popupVideo .popVideoMain").css("height", "280px");
+            $(".popupSubscribe .popupVideo .popVideoMain .popVideoInner").css("height", "266px");
+            $(".hindiDoc .popupSubscribe .popupVideo .popVideoMain").css("height", "266px");
+            $(".hindiDoc .popupSubscribe .popupVideo .popVideoMain .popVideoInner").css("height", "266px");
+            
+        }
+    }
+', 
+', 
+
+', 
+    ', 
+        ', 
+        ', 
+            ', User Subscription for Newsletter/Special Offer', 
+        ', 
+        ', 
+            ', 
+            
+            ', Email Address', 
+            ', Email Address:', 
+            ', 
+            ', Email should not be blank', 
+            ', Enter Valid Email', 
+                ', 
+            ', First Name', 
+            ', First Name:', 
+            ', 
+            ', Last Name', 
+            ', Last Name:', 
+            ', 
+             ', Contact Number', 
+            ', Contact Number:', 
+            ', 
+            ', 
+        ', 
+        ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', Click Here to Un-subscribe', 
+            ', 
+        ', 
+        ', 
+            
+        ', 
+    ', 
+', 
+ ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', You are visiting a travel partner of ', 
+www.airindia.in', .', 
+', This website is owned and operated by a third party and not under the control of Air India.', 
+', You will be entering an agreement directly with our partner. All further communication shall be directed to the email address and/or phone number provided by our partner.', 
+', Your queries/claims, if any arising out of your usage of the said website, should be directed solely to the owner of the website and Air India shall not be responsible and/or liable in that regard.', 
+', Continue', 
+', 
+', 
+', 
+', 
+', 
+', 
+  
+ 
+
+    ', Back to Top',  ', 
+  ',  ',  ', 
+  ', 
+  ', 
+
+', 
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("ContentPlaceHolder1_UserSignup1_rfvEmail"), document.getElementById("ContentPlaceHolder1_UserSignup1_revEmail"));
+//]]>
+',  This website uses Javascript ', 
+
+', 
+//<![CDATA[
+var ContentPlaceHolder1_UserSignup1_rfvEmail = document.all ? document.all["ContentPlaceHolder1_UserSignup1_rfvEmail"] : document.getElementById("ContentPlaceHolder1_UserSignup1_rfvEmail");
+ContentPlaceHolder1_UserSignup1_rfvEmail.controltovalidate = "ContentPlaceHolder1_UserSignup1_txtEmail";
+ContentPlaceHolder1_UserSignup1_rfvEmail.errormessage = "Email should not be blank";
+ContentPlaceHolder1_UserSignup1_rfvEmail.display = "Dynamic";
+ContentPlaceHolder1_UserSignup1_rfvEmail.validationGroup = "Subscribe";
+ContentPlaceHolder1_UserSignup1_rfvEmail.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ContentPlaceHolder1_UserSignup1_rfvEmail.initialvalue = "";
+var ContentPlaceHolder1_UserSignup1_revEmail = document.all ? document.all["ContentPlaceHolder1_UserSignup1_revEmail"] : document.getElementById("ContentPlaceHolder1_UserSignup1_revEmail");
+ContentPlaceHolder1_UserSignup1_revEmail.controltovalidate = "ContentPlaceHolder1_UserSignup1_txtEmail";
+ContentPlaceHolder1_UserSignup1_revEmail.errormessage = "Enter Valid Email";
+ContentPlaceHolder1_UserSignup1_revEmail.validationGroup = "Subscribe";
+ContentPlaceHolder1_UserSignup1_revEmail.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+ContentPlaceHolder1_UserSignup1_revEmail.validationexpression = "\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+//]]>
+',  This website uses Javascript ',  This website uses Javascript ', 
+
+
+', 
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+',  This website uses Javascript ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    function validate() {
+        return false;
+    }    
+    ', 
+', 
+', 
+', 
+', 
+', 
+', u"    dropdown('nav', 'hover', 1);", 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    $(document).ready(function () {
+        if (navigator.platform == 'iPad' || navigator.platform == 'iPhone' || navigator.platform == 'iPod' || navigator.platform == 'android' || navigator.platform == 'windows phone' || navigator.platform == 'blackberry' || navigator.platform == 'webos') {
+            $("#carousel").jcarousel({ wrap: null });
+            $("#carousel").css({ 'margin-left': '-498px' });
+        }
+        /*if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        $("#carousel").jcarousel({wrap: null});
+        $("#carousel").css({'margin-left': '-498px'});
+        }*/
+
+        var objhdndark = document.getElementById('hdnDarkSite');
+        //alert(objhdndark.value);
+        if (objhdndark.value == "1") {
+            $('.darksite').show();
+            $('.darksite .popupVideo').show();
+            setTimeout(function () { closeDark(); }, 10000);
+
+
+
+        }
+        $('.closeVideoPopup, .fadeVideo').click(function () {
+            $('.popupDisclaimerDark').hide();
+            $('.popupDisclaimerDark .fadeWrapVideo').hide();
+            return false;
+        });
+    });
+       
+    ', 
+', 
+
+', 
+    function openDarkSitePopup() {
+        alert("test");
+        $('.darksite').show();
+        $('.darksite .popupVideo').show();
+        setTimeout(function () { closeDark(); }, 10000);
+    }
+    function closeDark() {
+        $('.darksite').hide();
+    }
+    ', 
+', 
+', 
+',  ', 
+  
+  ',  ',  ', 
+', 
+', 
+  
+', 
+', u"
+    function fnCloseFeedbackFromIframe() {
+        $('.feedbackpopupBg').hide();
+        $('.feedbackpopup').hide();
+        $('.feedbackpopup').empty();
+    }
+    $(document).ready(function () {
+        $('#afeedback').click(function () {
+
+            $('.feedbackpopupBg').show();
+            $('.feedbackpopup').show();
+
+            return false;
+        });
+        //        $('.closeFbPop).click(function () {
+        //            $('.feedbackpopupBg').hide();
+        //            $('.feedbackpopup').hide();
+        //            $('.feedbackpopup').empty();
+
+        //        });
+    });
+   
+", 
+', 
+', 
+ $(document).ready(function () {
+ 	$("#btnbooking").click(function () {
+		$("#from").focus();
+		if ($("#from").val()) {
+			$("#to").focus();
+		}
+		else{
+			$("#from").focus();
+		}
+	});
+  });
+', 
+', 
+']

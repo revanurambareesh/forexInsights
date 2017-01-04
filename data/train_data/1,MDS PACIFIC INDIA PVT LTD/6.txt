@@ -1,0 +1,1349 @@
+[
+', 
+	', 
+		', Home',  ', l',  ', Contact Us',  ', l',  ', Korean',  ', l',  ', Sitemap', 
+	', 
+', 
+',  
+	', 
+	', 
+	
+		', Company', 
+	
+		', R&D', 
+	
+		', Partnership', 
+	
+		', Training & Service', 
+	
+	', 
+	', 	
+', 
+', 
+var menuopen = false;
+
+$(document).ready(function () {
+	$(".slideout-menu").hide();
+
+	$($(".m_menu").find("li")).click(function () {
+		if($(this).find("ul").is( ":hidden" )){
+			$(this).find("ul").slideDown( "slow" );
+			$(this).attr('class','on');
+		}else{
+			$(this).find("ul").slideUp( "slow" );
+			$(this).attr('class','off');
+		}
+	});
+});
+
+function slide_toggle(){
+	$(".slideout-menu").show();
+	var slideoutMenu = $('.slideout-men);
+	var slideoutMenuWidth = $('.slideout-men).width();
+	var slideoutMenuHeight = $('.slideout-men).height();
+
+	// slide menu
+	if (!menuopen) {
+		menuopen = true;
+
+		$("body").css({"position" :  "fixed",  "width" : "100%", "z-index" : "100"});
+		slideoutMenu.animate({
+			opacity: 1,
+			right: "0px",
+			height :  slideoutMenuHeight, 
+			position : "fixed" 
+		}, 100, function() { $('body').prepend('<div class="slideout-menu-mask" onclick="hideLeftSlideMenu()"> </div>'); });
+	} else {
+		hideLeftSlideMenu();
+	}
+}
+
+function hideLeftSlideMenu() {
+	menuopen = false;
+
+	$(".slideout-menu-mask").remove();
+
+	$('.slideout-men).animate({
+		opacity: 0.25,
+		right: -($('.slideout-men).width()+50)
+	}, 100, function() {
+		$(".slideout-menu-mask").remove();
+		$(".slideout-menu").hide();
+		$(".on").find("ul").slideUp( "slow" );
+		$(".m_menu").find("li").attr('class','off');
+		$("body").css({"position" :  "",  "width" : "100%"});
+	});
+}
+
+', 
+
+', 
+
+', 
+	', 
+	
+		', Company', 					
+			', 
+			
+				', 
+					', About MDS', 
+					
+						', 
+						
+							', - Overview / History', 
+						
+							', - Organization / Human Resource', 
+						
+							', - Mission & Vision', 
+						
+							', - Core Business Infrastructure', 
+						
+							', - Location', 
+						
+						', 
+					
+				', 
+			
+				', 
+					', Business', 
+					
+						', 
+						
+							', - Business Domain', 
+						
+							', - Customers', 
+						
+							', - Subsidiaries', 
+						
+						', 
+					
+				', 
+			
+				', 
+					', Investor Relatations', 
+					
+						', 
+						
+							', - Stock Info', 
+						
+							', - Financial Info', 
+						
+						', 
+					
+				', 
+			
+				', 
+					', Event', 
+					
+				', 
+			
+			', 
+		', 
+	
+		', R&D', 					
+			', 
+			
+				', 
+					', Embedded SW for Defense & Aerospace', 
+					
+						', 
+						
+							', - NEOS RTOS', 
+						
+							', - NeoDDS Middleware', 
+						
+						', 
+					
+				', 
+			
+				', 
+					', SW Testing Solutions', 
+					
+						', 
+						
+							', - TestExpress', 
+						
+							', - TestExplorer', 
+						
+						', 
+					
+				', 
+			
+				', 
+					', Car Infotainment Solutions', 
+					
+						', 
+						
+							', - MirrorLink / Miracast Solution', 
+						
+						', 
+					
+				', 
+			
+			', 
+		', 
+	
+		', Partnership', 					
+			', 
+			
+				', 
+					', Global Partners', 
+					
+				', 
+			
+				', 
+					', Become a Partner', 
+					
+				', 
+			
+			', 
+		', 
+	
+		', Training & Service', 					
+			', 
+			
+				', 
+					', MDS Academy', 
+					
+				', 
+			
+			', 
+		', 
+	
+	', 
+	', 
+', 
+
+
+
+
+
+', 
+', 
+	', 
+		', 
+			', 
+				', 
+					', About MDS', 
+					', 
+					
+						', - Overview / History', 
+					
+						', - Organization / Human Resource', 
+					
+						', - Mission & Vision', 
+					
+						', - Core Business Infrastructure', 
+					
+						', - Location', 
+					
+					', 				
+					', Business', 
+					', 
+					
+						', - Business Domain', 
+					
+						', - Customers', 
+					
+						', - Subsidiaries', 
+					
+					', 				
+				', 
+				', 		
+					', Investor Relatations', 
+					', 
+					
+						', - Stock Info', 
+					
+						', - Financial Info', 
+					
+					', 
+					', Event', 				
+				', 
+			', 
+			', 			
+				', 
+					', Embedded SW for Defense & Aerospace', 				
+					', 
+					
+						', - NEOS RTOS', 
+					
+						', - NeoDDS Middleware', 
+					
+					', 				
+					', SW Testing Solutions', 
+					', 
+					
+						', - TestExpress', 
+					
+						', - TestExplorer', 
+					
+					', 		
+					', Car Infotainment Solutions', 
+					', 
+					
+						', - MirrorLink / Miracast Solution', 	
+													
+					', 	
+				', 
+			', 
+			', 				
+				', 
+					', Global Partners', 
+					', Become a Partner', 
+				', 
+			', 
+			', 			
+				', 
+					', MDS Academy', 			
+				', 
+			', 	
+		', 
+	', 
+', 
+', 
+
+
+
+', 
+var zoomx = 100;
+  $(document).ready(function() {
+    $(".top").hover(
+      function() {
+        $(".tmn_smn").stop().slideDown(200);
+      },
+      function() {
+        $(".tmn_smn").stop().slideUp(200);
+      }    );
+    
+
+	 $(".tmn_smn").hover(
+      function() {
+        $(".tmn_smn").stop().slideDown(200);
+      },
+      function() {
+        $(".tmn_smn").stop().slideUp(200);
+      }
+    );
+
+  
+//class="tabBtn tabBtngroupA" tar="lastA_1" tarc="lastA_1" tarx="tabBtngroupA"
+  });
+
+$(function(){
+	$(window).resize(function() {
+		$(".tmn_smn").css({"height" :  "auto"});
+	});
+});
+
+function body_zoomin() {
+  zoomx = zoomx + 10;
+  $("body").css("zoom",zoomx + "%");
+}
+function body_zoomout() {
+  zoomx = zoomx - 10;
+  $("body").css("zoom",zoomx + "%");
+}
+function body_zoomdef() {
+  zoomx = 100;
+  $("body").css("zoom",zoomx + "%");
+}
+function newWin(url,w,h) {
+window.open
+(url,'new_win','width='+w+',height='+h+',toolbars=no,menubars=no,scrollbars=auto');
+}
+', 
+
+
+', 
+	', Company', 
+	', Global Embedded Solution Company', 
+', 
+', u"
+	$(document).ready(function(){
+
+		var nav = $('.nav');
+		var navoffset = $('.nav').offset();  
+		/* offset\uc744 \uc774\uc6a9\ud558\uc5ec .nav(\uba54\ub274\uc601\uc5ed)\uc758 \uc704\uce58\uac12\uc744 \uc54c\uc544\ub0b4\uc5b4 navoffset\uc5d0 \ub123\uc5b4\ub454\ub2e4 */
+
+		$(window).scroll(function () {
+			if ($(this).scrollTop() >= navoffset.top) {  /* \ud654\uba74 \uc2a4\ud06c\ub864 \uac12\uc774 \uba54\ub274\uc601\uc5ed\uc758 top\ubcf4\ub2e4 \uac12\uc774 \ucee4\uc9c0\uba74 */
+				nav.css('position','fixed').css('top',0); /* \ud654\uba74 \uc704\ucabd\uc5d0 \uace0\uc815\uc2dc\ud0a8\ub2e4. */
+			}else {
+				nav.css('position','relative').css('top',0); /* \ucc98\uc74c \uba54\ub274\uc601\uc5ed\uc758 top \uac12\uc73c\ub85c \ub3cc\ub9ac\uae30 */
+			}
+		});
+	});
+", 
+
+', 
+', u"
+	$(document).ready(function(){
+
+		var nav = $('.navi');
+		var navoffset = $('.navi').offset();  
+		/* offset\uc744 \uc774\uc6a9\ud558\uc5ec .nav(\uba54\ub274\uc601\uc5ed)\uc758 \uc704\uce58\uac12\uc744 \uc54c\uc544\ub0b4\uc5b4 navoffset\uc5d0 \ub123\uc5b4\ub454\ub2e4 */
+
+		$(window).scroll(function () {
+			if ($(this).scrollTop() >= navoffset.top) {  /* \ud654\uba74 \uc2a4\ud06c\ub864 \uac12\uc774 \uba54\ub274\uc601\uc5ed\uc758 top\ubcf4\ub2e4 \uac12\uc774 \ucee4\uc9c0\uba74 */
+				nav.css('position','fixed').css('top',0); /* \ud654\uba74 \uc704\ucabd\uc5d0 \uace0\uc815\uc2dc\ud0a8\ub2e4. */
+			}else {
+				nav.css('position','relative').css('top',0); /* \ucc98\uc74c \uba54\ub274\uc601\uc5ed\uc758 top \uac12\uc73c\ub85c \ub3cc\ub9ac\uae30 */
+			}
+		});
+	});
+", 
+
+', 
+function subMenuClick(cnt){
+	
+	for(var i=1; i<=3; i++){
+		if(cnt != i){
+			$(".subMenu_"+i).slideUp("slow");
+		}
+	}
+
+	$(".subMenu_"+cnt).slideToggle("slow");
+
+}
+', 
+
+', 
+', 
+	
+
+	', 
+		', 
+			', Home', 
+			
+			', 
+				', Company', 
+				', 
+				
+					', Company', 
+				
+					', R&D', 
+				
+					', Partnership', 
+				
+					', Training & Service', 
+				
+				', 
+			', 
+			
+			', 
+			
+				', Business', 
+				', 
+				
+					', About MDS', 
+				
+					', Business', 
+				
+					', Investor Relatations', 
+				
+					', Event', 
+				
+				', 
+			
+			', 
+			
+			', 
+				', Subsidiaries', 
+				', 
+				
+					', Business Domain', 
+				
+					', Customers', 
+				
+					', Subsidiaries', 
+				
+				', 
+			', 
+			
+
+			
+		', 
+	', 
+', 
+', 
+
+', 
+', 
+	', 
+		', 
+		
+			', 
+				', About MDS', 
+			', 
+		
+			', 
+				', Business', 
+			', 
+		
+			', 
+				', Investor Relatations', 
+			', 
+		
+			', 
+				', Event', 
+			', 
+		
+		', 
+	', 
+	', 
+		', 
+		
+			', 
+				', Business Domain', 
+			', 
+		
+			', 
+				', Customers', 
+			', 
+		
+			', 
+				', Subsidiaries', 
+			', 
+		
+		', 
+	', 
+', 
+', 
+
+', 
+	', Subsidiaries', 
+', Based on business growth in Korea, MDS Technology is expanding its global business', in collaboration with the overseas subsidiaries.', 
+',  ', 
+', 
+', 
+', MDS Pacific Singapore Pte., Ltd.', 
+', 7030 Ang Mo Kio Avenue 5 #08-93 NorthStar @ AMK Singapore 569880', 
+', Tel : +65 6297 2800', 
+', Website :',  ', www.mdspacific.com', 
+', 
+', MDS Pacific India Pvt., Ltd', 
+', 3rd Floor, #79, 11th Main Road, Malleswaram, Bangalore-560 003 India', 
+', Tel: +91-80-4123-9727 / +91-80-4200-9254 / +91-96-3262-2488', 
+', Website :',  ', www.mdspacific.com', 
+', 
+', MDS Pacific (Malaysia) Branch', 
+', I-5-2 Setiawalk, Persiaran Wawasan, Pusat Bandar Puchong, 47160 Puchong, Selangor', 
+', Tel : +601 6553 3042', 
+', Website :',  ', www.mdspacific.com', 
+', 
+', MDS Pacific (Thailand) Branch', 
+', Prapasab 4 Village 778/87 Chareonpattana Rd. Bangchan, Klongsamwa District Bangkok 10510', 
+', Tel: +6681 547 8910', 
+', Website :',  ', www.mdspacific.com', 
+', 
+', MDS Pacific Australia Pty., Ltd.', 
+', Suite 2.02, 32 Delhi Road, North Ryde, Sydney, NSW, 2113, Australia', 
+', Tel : +61 2 9888 7715', 
+', Website :',  ', www.mdspacific.com', 
+', 
+', MDS Pacific Vina Co., Ltd.', 
+', 5F, 90 Dinh Tien Hoang, Phuong 1, quan Binh Thanh, TpHCM', 
+', Tel: (84) 090 548 7738', 
+', Website :',  ', www.mdspacific.com', 
+', 
+', 
+	', 
+		', Sitemap', 
+		', 
+			', Company', 
+			', About MDS', 
+			', 
+			
+				', Overview / History', 
+			
+				', Organization / Human Resource', 
+			
+				', Mission & Vision', 
+			
+				', Core Business Infrastructure', 
+			
+				', Location', 
+			
+			', 
+			', Business', 
+			', 
+			
+				', Business Domain', 
+			
+				', Customers', 
+			
+				', Subsidiaries', 
+			
+			', 
+		', 
+		', 
+			', 
+			', Investor Relatations', 
+			', 
+			
+				', Stock Info', 
+			
+				', Financial Info', 
+			
+			', 
+			', Event', 				
+		', 
+		', 
+			', R&D', 
+			', Embedded SW for Defense & Aerospace', 
+			', 
+			
+				', NEOS RTOS', 
+			
+				', NeoDDS Middleware', 
+			
+			', 
+			', SW Testing Solutions', 
+			', 
+			
+				', TestExpress', 
+			
+				', TestExplorer', 
+			
+			', 
+			', Car Infotainment Solutions', 
+			', 
+			
+				', MirrorLink / Miracast Solution', 
+			
+			', 
+		', 
+		', 
+			', Partnership', 
+			', Global Partners', 
+			', Become a Partner', 
+			', Training & Service', 
+			', MDS Academy', 
+		', 
+	', 
+', 
+	', 
+		', TEL', +82-31-627-3000', 
+		', FAX', +82-31-627-3100', 
+		', EMAIL', webmaster@mdstec.com', 
+		', Download', Company Profile >>', 
+		', 
+	', 
+', 
+', 
+	', MDS Technology Co., Ltd. ', 
+	', 3,4Fl. Hancom Tower, 49, Daewangpangyo-ro 644 Beon-gil Bundang-gu, Seongnam-si, Gyeonggi-do, 13493, Republic of Korea', Copyright 2016. MDS Technology Co., Ltd. All rights reserved.', 
+	', 
+		', 
+			', 
+				', FAMILY SITE', 					
+				', TRACE32', 
+				', Windows Embedded Solution', 
+				', MDS Academy', 
+				', Industrial IoT', 
+				', MDS FLIR', 
+				', MDS Embedded', 
+				', Splunk', 
+				', WECOM Community', 
+				', Automotive SW Blog', 
+				', NEOS RTOS Blog', 
+				', MDS FLIR Blog', 
+				', My MDS Story', 
+				', Unimax', 
+				', Teladin', 
+				', MDS Pacific', 
+			', 
+			', 
+				', FAMILY SITE', 
+			', 
+		', 
+	', 
+', 
+', u"
+	function openSite(select)
+	{
+		if(select.value!='none') {
+			window.open(select.value);
+			select.value = 'none';
+		} else {
+			return;
+		}
+	}
+", 
+
+'][
+', 
+	', 
+		', Home',  ', l',  ', Contact Us',  ', l',  ', Korean',  ', l',  ', Sitemap', 
+	', 
+', 
+',  
+	', 
+	', 
+	
+		', Company', 
+	
+		', R&D', 
+	
+		', Partnership', 
+	
+		', Training & Service', 
+	
+	', 
+	', 	
+', 
+', 
+var menuopen = false;
+
+$(document).ready(function () {
+	$(".slideout-menu").hide();
+
+	$($(".m_menu").find("li")).click(function () {
+		if($(this).find("ul").is( ":hidden" )){
+			$(this).find("ul").slideDown( "slow" );
+			$(this).attr('class','on');
+		}else{
+			$(this).find("ul").slideUp( "slow" );
+			$(this).attr('class','off');
+		}
+	});
+});
+
+function slide_toggle(){
+	$(".slideout-menu").show();
+	var slideoutMenu = $('.slideout-men);
+	var slideoutMenuWidth = $('.slideout-men).width();
+	var slideoutMenuHeight = $('.slideout-men).height();
+
+	// slide menu
+	if (!menuopen) {
+		menuopen = true;
+
+		$("body").css({"position" :  "fixed",  "width" : "100%", "z-index" : "100"});
+		slideoutMenu.animate({
+			opacity: 1,
+			right: "0px",
+			height :  slideoutMenuHeight, 
+			position : "fixed" 
+		}, 100, function() { $('body').prepend('<div class="slideout-menu-mask" onclick="hideLeftSlideMenu()"> </div>'); });
+	} else {
+		hideLeftSlideMenu();
+	}
+}
+
+function hideLeftSlideMenu() {
+	menuopen = false;
+
+	$(".slideout-menu-mask").remove();
+
+	$('.slideout-men).animate({
+		opacity: 0.25,
+		right: -($('.slideout-men).width()+50)
+	}, 100, function() {
+		$(".slideout-menu-mask").remove();
+		$(".slideout-menu").hide();
+		$(".on").find("ul").slideUp( "slow" );
+		$(".m_menu").find("li").attr('class','off');
+		$("body").css({"position" :  "",  "width" : "100%"});
+	});
+}
+
+', 
+
+', 
+
+', 
+	', 
+	
+		', Company', 					
+			', 
+			
+				', 
+					', About MDS', 
+					
+						', 
+						
+							', - Overview / History', 
+						
+							', - Organization / Human Resource', 
+						
+							', - Mission & Vision', 
+						
+							', - Core Business Infrastructure', 
+						
+							', - Location', 
+						
+						', 
+					
+				', 
+			
+				', 
+					', Business', 
+					
+						', 
+						
+							', - Business Domain', 
+						
+							', - Customers', 
+						
+							', - Subsidiaries', 
+						
+						', 
+					
+				', 
+			
+				', 
+					', Investor Relatations', 
+					
+						', 
+						
+							', - Stock Info', 
+						
+							', - Financial Info', 
+						
+						', 
+					
+				', 
+			
+				', 
+					', Event', 
+					
+				', 
+			
+			', 
+		', 
+	
+		', R&D', 					
+			', 
+			
+				', 
+					', Embedded SW for Defense & Aerospace', 
+					
+						', 
+						
+							', - NEOS RTOS', 
+						
+							', - NeoDDS Middleware', 
+						
+						', 
+					
+				', 
+			
+				', 
+					', SW Testing Solutions', 
+					
+						', 
+						
+							', - TestExpress', 
+						
+							', - TestExplorer', 
+						
+						', 
+					
+				', 
+			
+				', 
+					', Car Infotainment Solutions', 
+					
+						', 
+						
+							', - MirrorLink / Miracast Solution', 
+						
+						', 
+					
+				', 
+			
+			', 
+		', 
+	
+		', Partnership', 					
+			', 
+			
+				', 
+					', Global Partners', 
+					
+				', 
+			
+				', 
+					', Become a Partner', 
+					
+				', 
+			
+			', 
+		', 
+	
+		', Training & Service', 					
+			', 
+			
+				', 
+					', MDS Academy', 
+					
+				', 
+			
+			', 
+		', 
+	
+	', 
+	', 
+', 
+
+
+
+
+
+', 
+', 
+	', 
+		', 
+			', 
+				', 
+					', About MDS', 
+					', 
+					
+						', - Overview / History', 
+					
+						', - Organization / Human Resource', 
+					
+						', - Mission & Vision', 
+					
+						', - Core Business Infrastructure', 
+					
+						', - Location', 
+					
+					', 				
+					', Business', 
+					', 
+					
+						', - Business Domain', 
+					
+						', - Customers', 
+					
+						', - Subsidiaries', 
+					
+					', 				
+				', 
+				', 		
+					', Investor Relatations', 
+					', 
+					
+						', - Stock Info', 
+					
+						', - Financial Info', 
+					
+					', 
+					', Event', 				
+				', 
+			', 
+			', 			
+				', 
+					', Embedded SW for Defense & Aerospace', 				
+					', 
+					
+						', - NEOS RTOS', 
+					
+						', - NeoDDS Middleware', 
+					
+					', 				
+					', SW Testing Solutions', 
+					', 
+					
+						', - TestExpress', 
+					
+						', - TestExplorer', 
+					
+					', 		
+					', Car Infotainment Solutions', 
+					', 
+					
+						', - MirrorLink / Miracast Solution', 	
+													
+					', 	
+				', 
+			', 
+			', 				
+				', 
+					', Global Partners', 
+					', Become a Partner', 
+				', 
+			', 
+			', 			
+				', 
+					', MDS Academy', 			
+				', 
+			', 	
+		', 
+	', 
+', 
+', 
+
+
+
+', 
+var zoomx = 100;
+  $(document).ready(function() {
+    $(".top").hover(
+      function() {
+        $(".tmn_smn").stop().slideDown(200);
+      },
+      function() {
+        $(".tmn_smn").stop().slideUp(200);
+      }    );
+    
+
+	 $(".tmn_smn").hover(
+      function() {
+        $(".tmn_smn").stop().slideDown(200);
+      },
+      function() {
+        $(".tmn_smn").stop().slideUp(200);
+      }
+    );
+
+  
+//class="tabBtn tabBtngroupA" tar="lastA_1" tarc="lastA_1" tarx="tabBtngroupA"
+  });
+
+$(function(){
+	$(window).resize(function() {
+		$(".tmn_smn").css({"height" :  "auto"});
+	});
+});
+
+function body_zoomin() {
+  zoomx = zoomx + 10;
+  $("body").css("zoom",zoomx + "%");
+}
+function body_zoomout() {
+  zoomx = zoomx - 10;
+  $("body").css("zoom",zoomx + "%");
+}
+function body_zoomdef() {
+  zoomx = 100;
+  $("body").css("zoom",zoomx + "%");
+}
+function newWin(url,w,h) {
+window.open
+(url,'new_win','width='+w+',height='+h+',toolbars=no,menubars=no,scrollbars=auto');
+}
+', 
+
+
+', 
+	', Company', 
+	', Global Embedded Solution Company', 
+', 
+', u"
+	$(document).ready(function(){
+
+		var nav = $('.nav');
+		var navoffset = $('.nav').offset();  
+		/* offset\uc744 \uc774\uc6a9\ud558\uc5ec .nav(\uba54\ub274\uc601\uc5ed)\uc758 \uc704\uce58\uac12\uc744 \uc54c\uc544\ub0b4\uc5b4 navoffset\uc5d0 \ub123\uc5b4\ub454\ub2e4 */
+
+		$(window).scroll(function () {
+			if ($(this).scrollTop() >= navoffset.top) {  /* \ud654\uba74 \uc2a4\ud06c\ub864 \uac12\uc774 \uba54\ub274\uc601\uc5ed\uc758 top\ubcf4\ub2e4 \uac12\uc774 \ucee4\uc9c0\uba74 */
+				nav.css('position','fixed').css('top',0); /* \ud654\uba74 \uc704\ucabd\uc5d0 \uace0\uc815\uc2dc\ud0a8\ub2e4. */
+			}else {
+				nav.css('position','relative').css('top',0); /* \ucc98\uc74c \uba54\ub274\uc601\uc5ed\uc758 top \uac12\uc73c\ub85c \ub3cc\ub9ac\uae30 */
+			}
+		});
+	});
+", 
+
+', 
+', u"
+	$(document).ready(function(){
+
+		var nav = $('.navi');
+		var navoffset = $('.navi').offset();  
+		/* offset\uc744 \uc774\uc6a9\ud558\uc5ec .nav(\uba54\ub274\uc601\uc5ed)\uc758 \uc704\uce58\uac12\uc744 \uc54c\uc544\ub0b4\uc5b4 navoffset\uc5d0 \ub123\uc5b4\ub454\ub2e4 */
+
+		$(window).scroll(function () {
+			if ($(this).scrollTop() >= navoffset.top) {  /* \ud654\uba74 \uc2a4\ud06c\ub864 \uac12\uc774 \uba54\ub274\uc601\uc5ed\uc758 top\ubcf4\ub2e4 \uac12\uc774 \ucee4\uc9c0\uba74 */
+				nav.css('position','fixed').css('top',0); /* \ud654\uba74 \uc704\ucabd\uc5d0 \uace0\uc815\uc2dc\ud0a8\ub2e4. */
+			}else {
+				nav.css('position','relative').css('top',0); /* \ucc98\uc74c \uba54\ub274\uc601\uc5ed\uc758 top \uac12\uc73c\ub85c \ub3cc\ub9ac\uae30 */
+			}
+		});
+	});
+", 
+
+', 
+function subMenuClick(cnt){
+	
+	for(var i=1; i<=3; i++){
+		if(cnt != i){
+			$(".subMenu_"+i).slideUp("slow");
+		}
+	}
+
+	$(".subMenu_"+cnt).slideToggle("slow");
+
+}
+', 
+
+', 
+', 
+	
+
+	', 
+		', 
+			', Home', 
+			
+			', 
+				', Company', 
+				', 
+				
+					', Company', 
+				
+					', R&D', 
+				
+					', Partnership', 
+				
+					', Training & Service', 
+				
+				', 
+			', 
+			
+			', 
+			
+				', Business', 
+				', 
+				
+					', About MDS', 
+				
+					', Business', 
+				
+					', Investor Relatations', 
+				
+					', Event', 
+				
+				', 
+			
+			', 
+			
+			', 
+				', Subsidiaries', 
+				', 
+				
+					', Business Domain', 
+				
+					', Customers', 
+				
+					', Subsidiaries', 
+				
+				', 
+			', 
+			
+
+			
+		', 
+	', 
+', 
+', 
+
+', 
+', 
+	', 
+		', 
+		
+			', 
+				', About MDS', 
+			', 
+		
+			', 
+				', Business', 
+			', 
+		
+			', 
+				', Investor Relatations', 
+			', 
+		
+			', 
+				', Event', 
+			', 
+		
+		', 
+	', 
+	', 
+		', 
+		
+			', 
+				', Business Domain', 
+			', 
+		
+			', 
+				', Customers', 
+			', 
+		
+			', 
+				', Subsidiaries', 
+			', 
+		
+		', 
+	', 
+', 
+', 
+
+', 
+	', Subsidiaries', 
+', Based on business growth in Korea, MDS Technology is expanding its global business', in collaboration with the overseas subsidiaries.', 
+',  ', 
+', 
+', 
+', MDS Pacific Singapore Pte., Ltd.', 
+', 7030 Ang Mo Kio Avenue 5 #08-93 NorthStar @ AMK Singapore 569880', 
+', Tel : +65 6297 2800', 
+', Website :',  ', www.mdspacific.com', 
+', 
+', MDS Pacific India Pvt., Ltd', 
+', 3rd Floor, #79, 11th Main Road, Malleswaram, Bangalore-560 003 India', 
+', Tel: +91-80-4123-9727 / +91-80-4200-9254 / +91-96-3262-2488', 
+', Website :',  ', www.mdspacific.com', 
+', 
+', MDS Pacific (Malaysia) Branch', 
+', I-5-2 Setiawalk, Persiaran Wawasan, Pusat Bandar Puchong, 47160 Puchong, Selangor', 
+', Tel : +601 6553 3042', 
+', Website :',  ', www.mdspacific.com', 
+', 
+', MDS Pacific (Thailand) Branch', 
+', Prapasab 4 Village 778/87 Chareonpattana Rd. Bangchan, Klongsamwa District Bangkok 10510', 
+', Tel: +6681 547 8910', 
+', Website :',  ', www.mdspacific.com', 
+', 
+', MDS Pacific Australia Pty., Ltd.', 
+', Suite 2.02, 32 Delhi Road, North Ryde, Sydney, NSW, 2113, Australia', 
+', Tel : +61 2 9888 7715', 
+', Website :',  ', www.mdspacific.com', 
+', 
+', MDS Pacific Vina Co., Ltd.', 
+', 5F, 90 Dinh Tien Hoang, Phuong 1, quan Binh Thanh, TpHCM', 
+', Tel: (84) 090 548 7738', 
+', Website :',  ', www.mdspacific.com', 
+', 
+', 
+	', 
+		', Sitemap', 
+		', 
+			', Company', 
+			', About MDS', 
+			', 
+			
+				', Overview / History', 
+			
+				', Organization / Human Resource', 
+			
+				', Mission & Vision', 
+			
+				', Core Business Infrastructure', 
+			
+				', Location', 
+			
+			', 
+			', Business', 
+			', 
+			
+				', Business Domain', 
+			
+				', Customers', 
+			
+				', Subsidiaries', 
+			
+			', 
+		', 
+		', 
+			', 
+			', Investor Relatations', 
+			', 
+			
+				', Stock Info', 
+			
+				', Financial Info', 
+			
+			', 
+			', Event', 				
+		', 
+		', 
+			', R&D', 
+			', Embedded SW for Defense & Aerospace', 
+			', 
+			
+				', NEOS RTOS', 
+			
+				', NeoDDS Middleware', 
+			
+			', 
+			', SW Testing Solutions', 
+			', 
+			
+				', TestExpress', 
+			
+				', TestExplorer', 
+			
+			', 
+			', Car Infotainment Solutions', 
+			', 
+			
+				', MirrorLink / Miracast Solution', 
+			
+			', 
+		', 
+		', 
+			', Partnership', 
+			', Global Partners', 
+			', Become a Partner', 
+			', Training & Service', 
+			', MDS Academy', 
+		', 
+	', 
+', 
+	', 
+		', TEL', +82-31-627-3000', 
+		', FAX', +82-31-627-3100', 
+		', EMAIL', webmaster@mdstec.com', 
+		', Download', Company Profile >>', 
+		', 
+	', 
+', 
+', 
+	', MDS Technology Co., Ltd. ', 
+	', 3,4Fl. Hancom Tower, 49, Daewangpangyo-ro 644 Beon-gil Bundang-gu, Seongnam-si, Gyeonggi-do, 13493, Republic of Korea', Copyright 2016. MDS Technology Co., Ltd. All rights reserved.', 
+	', 
+		', 
+			', 
+				', FAMILY SITE', 					
+				', TRACE32', 
+				', Windows Embedded Solution', 
+				', MDS Academy', 
+				', Industrial IoT', 
+				', MDS FLIR', 
+				', MDS Embedded', 
+				', Splunk', 
+				', WECOM Community', 
+				', Automotive SW Blog', 
+				', NEOS RTOS Blog', 
+				', MDS FLIR Blog', 
+				', My MDS Story', 
+				', Unimax', 
+				', Teladin', 
+				', MDS Pacific', 
+			', 
+			', 
+				', FAMILY SITE', 
+			', 
+		', 
+	', 
+', 
+', u"
+	function openSite(select)
+	{
+		if(select.value!='none') {
+			window.open(select.value);
+			select.value = 'none';
+		} else {
+			return;
+		}
+	}
+", 
+
+']

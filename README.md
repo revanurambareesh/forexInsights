@@ -37,9 +37,7 @@ Python 2.7
 * Windows 10 (x64), v1607
 * 
 
-Some of the tools considered for this project includes [Pattern](http://www.clips.ua.ac.be/pattern).
 This link https://github.com/lorien/awesome-web-scraping/blob/master/python.md desbribes different web scraping techniques.
-https://in.mathworks.com/help/stats/naivebayes-class.html
 
 ## Steps:  
 **Feature Extraction**  
@@ -86,7 +84,8 @@ Win + R: scrapy shell "http://quotes.toscrape.com/page/1/"
 Go to -> scraper/google-api-python-client-master/main.py
 
 ## NLP Keyword Extraction
-RAKE algorithm has been used.
+RAKE algorithm has been used.  
+[RAKE algorithm description](http://www.mohamedrabeea.com/books/book1_1165.pdf)
 
 Go to -> scraper/rake/keywordExtraction.py
 

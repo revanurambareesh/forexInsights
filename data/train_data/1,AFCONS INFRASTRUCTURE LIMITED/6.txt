@@ -1,0 +1,713 @@
+[
+		', 
+				', 
+			', 
+			', 
+								', 
+				', 
+					', 
+					
+					', 
+						', 
+					', 
+					', 
+						', 					', 
+					', 
+						', Overview', 
+', Current Positions', 
+', Contact Us', 
+', afcons.com', 
+', 
+', 
+  ', Share On', 
+  ', 
+    ', 
+    ', 
+    ', 
+  ', 
+', 
+
+					', 
+				', 
+				', 
+				', 
+
+',  
+
+', 
+', 
+', 
+$(document).ready(function(){
+	
+	
+$('#c1 #inpc1 input').focus(function(e){
+	$('#c2,#c3,#c4').show();
+});
+
+$(".tag").click(function(){
+	var x=$(this).next('input').val(); 
+	$(this).attr("id","cluster_loc");
+	$("form#searchBar").append('<input name="qcity" type="hidden" class="suggest m0 pr30" value="'+x+'">');
+	if(($("#Sug_kwdsugg").val())=="Enter your areas of expertise")
+	{
+		$("#Sug_kwdsugg").attr("value","dummyvar");
+		}
+		
+		$("form#searchBar").submit();
+
+	});
+});
+', 
+', 
+  ', 
+  ', 
+      ',  
+        ', 
+        $(function(){
+
+      			
+		})
+		
+        ', 
+        ', Keyskills, Designation', 
+        ', 
+        ', 
+          ', 
+		 ', 
+            ', 
+          ', 
+        ', 
+        ',  
+        ',  ', 
+      ', 
+        ', Desired Location', 
+        ', 
+        ', 
+          ', 
+	    ', 
+            ', 
+		', 
+          ', 
+        ', 
+        ',  
+        ',  ', 
+	
+      ',  
+        ', 
+       $(function(){ $("#ddExp option[value='']").attr("selected", true);                $("#ddExp").parent('span.text').find('.fwselect-text').text("Select");
+                $("#ddExp").trigger("change");
+                })
+        ', 
+        ', Experience', 
+        ', 
+	', 
+	    ',  ', 
+        	', 
+	    ', 
+	', 
+
+       ', 
+        ',  ', 
+            ',  
+        ', 
+        $(function(){$("#ddMinSal option[value=qmVar]").attr('selected', true);
+		$("#ddMinSal").parent('span.text').find('.fwselect-text').text("Min");
+		$("#ddMinSal").trigger("change");
+		})
+        ', 
+        ', Expected Salary', 
+        ', 
+	 ', 
+            ',  ', 
+                ', 
+            ', 
+        ', 
+', 
+        ', 
+	', 
+            ',  ', 
+                ', 
+            ', 
+        ', 
+', 
+        ',  ', 
+            ', 
+        ', 
+      ', 
+      ',  ', Please enter Keywords or Location to search.',  ', 
+    ', 
+    ', 
+  ', 
+', 
+',  
+
+
+      ', 
+
+$(document).ready(function(){
+
+$('#searchBar').submit(function(e)
+ {
+ domain = "http://careers.afcons.com/";
+ keyword= $.trim( $('#Sug_kwdsugg').val() );
+ if($('#cluster_loc').length>0){
+	 loc1=$.trim( $('#LocationTags').find("#cluster_loc span").text() );
+	 }
+	 else{
+ loc1= $.trim( $('#Sug_locsugg').val() );
+	 }
+ if(keyword=="Enter your areas of expertise")
+   {keyword="";}
+ if(loc1=="Where you wish to work")
+   {loc1="";}
+ if( $.trim( keyword )=="" && $.trim( loc1 )==""){
+  $(".error").show();
+  e.preventDefault();
+  }
+else{
+ newUrl = domain+ generateStaticURL(keyword,loc1);
+ $("#searchBar").attr('action',newUrl);
+}
+
+});
+
+function replaceAll(txt, replace, with_this) {
+  return txt.replace(new RegExp(replace, 'gi'),with_this);
+}
+function generateStaticURL(kw,loc)
+{
+ kw = kw.replace(/Enter your areas of expertise/ig,"").replace(/Type skills, designation or company name/ig,"").replace(/\s{2,}/g, ' ').replace(/dummyvar/ig,""); 
+ loc=loc.replace(/Where you wish to work/ig,"");
+  var Kwrd_Action_Str="";var Loc_Action_Str="";var action="";
+  var Spcl_Char_Arr= {"+":" plus " , "#":" sharp " , ".":" dot " , "-":" dash ",'"':" quotes ","'":" quotes ","/":" "};
+  if(kw != "" )
+  {
+    kw= kw.toLowerCase();
+    kw =kw.replace(/\s{2,}/g," ");
+    kw=kw.replace(/\bjobs in\b/gi,"");
+    kw=kw.replace(/\bjobs\b/gi,"");
+    kw=kw.replace(/\blimited\b/gi,"");
+    kw=kw.replace(/\bcorporation\b/gi,"");
+    kw=kw.replace(/\bcareers\b/gi,"");
+    while(kw.indexOf("c++ c++")!=-1 )
+      kw=kw.replace("c++ c++","c++");
+/*    for(i in stopwordArr)
+    {
+      kw=replaceAll(kw,"\\b"+stopwordArr[i].toLowerCase(),"");
+    } */
+    kw = replaceAll(kw,","," ");
+    kw=kw.replace(/[^.+#\-'" a-zA-Z0-9]/ig," ").replace(/and {1,}$/g,"");
+    var Tmp_Kwrd_Str = $.trim(kw).toLowerCase();
+    var Tmp_Kwrd_Str = kw;
+    Tmp_Kwrd_Arr = Tmp_Kwrd_Str.split(",");
+    for(i in Tmp_Kwrd_Arr){
+      for (key in Spcl_Char_Arr)
+        Tmp_Kwrd_Arr[i]=replaceAll(Tmp_Kwrd_Arr[i],"\\"+key,Spcl_Char_Arr[key]);
+      Tmp_Kwrd_Arr[i]=$.trim(replaceAll(Tmp_Kwrd_Arr[i],"\ \ "," "));
+      Tmp_Arr = Tmp_Kwrd_Arr[i].split(" ");
+    }
+    Kwrd_Action_Str = Tmp_Kwrd_Arr.join(" ");
+  }
+  if(loc != "")
+  {
+    loc=loc.replace(/\bjobs in\b/gi,"");
+    loc=loc.replace(/\bjobs\b/gi,"");
+    loc=loc.split("\\").join(" ");
+    loc=loc.split("/").join(" ");
+    loc=loc.replace(/[^, a-zA-Z]/ig,"").replace(/,{1,}$/g,"");;
+    loc = replaceAll($.trim(loc).toLowerCase(),"  "," ");
+/*    for(i in stopwordArr)
+    {
+      loc=replaceAll(loc,"\\b"+stopwordArr[i].toLowerCase()+"\\b","");
+    } */
+    Loc_Arr = loc.split(",");
+    Tmp_Str = Loc_Arr.join(" and ");
+    Tmp_Arr = Tmp_Str.split(" ");
+    Loc_Action_Str = Tmp_Arr.join(" ");
+  }
+  if(Kwrd_Action_Str == "" && Loc_Action_Str != "")
+    action = action + "jobs in " + Loc_Action_Str;
+  else if (Kwrd_Action_Str != "" && Loc_Action_Str =="")
+    action = action + Kwrd_Action_Str +  " jobs";
+  else if (Kwrd_Action_Str != "" && Loc_Action_Str !="")
+    action = action + Kwrd_Action_Str +  " jobs in " + Loc_Action_Str;
+  //finally replace all consecutive duplicate words
+  action=action.replace(/[\s]*plus[\s]+(plus[\s]*)+/gi,' + ');
+  action = action.replace(/-/g," ").replace(/\s{2,}/g, ' ');
+  do {
+    var newTemp = action;
+    var action = newTemp.replace(/\s(\w+\s)\1/, " $1");
+    action = action.replace(/^(\w+\s)\1/, "$1");
+    action = action.replace(/(\s\w+)\1$/, "$1")
+  } while (action.length != newTemp.length);
+  while(action.indexOf(" + ") != -1)
+    action=action.replace(" + "," plus plus ");
+    action= $.trim(action).replace(/\s/g,"-");
+    action= action.replace(/\s/g,"-");
+  if(action == "")
+    action = "jobs-in-india";
+
+  return action;
+}
+
+});
+      ', 
+', 
+  ',  Jobs ', (1-1 out of 1) ', 
+			', Execution Engineer/senior Engineer', 
+			', 22 Nov', 
+			', 4 - 7 yrs.', 
+			', Jamm, 
+			', Candidates having B.Tech/Diploma in Civil Engineering in regular mode having at least 4 years experi...', view more', 
+			', 
+			', 
+	', 
+		', 
+		', 
+			', Drop your CV here', 
+			', We will consider your Profile for future Jobs', 
+			', Submit Profile', 
+		', 
+	', 
+	', 
+   ', Jobs by Location', 
+   ', Jamm, 1', 
+   ', Jobs by Role', 
+   ', Civil Engineer-Highway/Roadway', 1', 
+   ', Jobs by Functional Area', 
+   ', Site Engineering, Project Management', 1', 
+   ', Jobs by Industry', 
+   ', Construction / Engineering / Cement / Metals', 1',   ', 
+', 
+', 
+', 
+', 
+  ', 
+    ', Copyright 2004 AFCONS INFRASTRUCTURE LIMITED. All rights reserved.', 
+  ', 
+', Powered By ',   
+	
+', 
+',  
+
+',  #goToTop {position:absolute;bottom:0px;right:0}', 
+
+
+', u"
+$(document).ready( function(){
+var gotoTop = $('#goToTop');
+var func_gotoTop = function(){
+                if($(this).scrollTop() == 0){
+                                gotoTop.hide();                                                               
+                }
+                else{
+                                gotoTop.show();                             
+                }
+}
+
+
+
+func_gotoTop();
+
+$(window).scroll(func_gotoTop);
+
+//Click event to scroll to top
+
+$('#goToTop').click(function(){
+                $('html, body').animate({scrollTop : 0},500);
+                return false;
+}) });
+", 
+
+ ', 
+    ', 
+      ', 
+    ', 
+    ', 
+      ',         
+      ', 
+    ', 
+    ', 
+',  
+
+', 
+', 
+', 
+', 
+
+', 
+', 
+', 
+', 
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/careers.afcons.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ..."};
+/* ]]> */
+', 
+', 
+', 
+', 
+jQuery(function($) {
+$('a[rel^="prettyPhoto"]').prettyPhoto();
+});
+', 
+', 
+', 
+',  ', 
+
+'][
+		', 
+				', 
+			', 
+			', 
+								', 
+				', 
+					', 
+					
+					', 
+						', 
+					', 
+					', 
+						', 					', 
+					', 
+						', Overview', 
+', Current Positions', 
+', Contact Us', 
+', afcons.com', 
+', 
+', 
+  ', Share On', 
+  ', 
+    ', 
+    ', 
+    ', 
+  ', 
+', 
+
+					', 
+				', 
+				', 
+				', 
+
+',  
+
+', 
+', 
+', 
+$(document).ready(function(){
+	
+	
+$('#c1 #inpc1 input').focus(function(e){
+	$('#c2,#c3,#c4').show();
+});
+
+$(".tag").click(function(){
+	var x=$(this).next('input').val(); 
+	$(this).attr("id","cluster_loc");
+	$("form#searchBar").append('<input name="qcity" type="hidden" class="suggest m0 pr30" value="'+x+'">');
+	if(($("#Sug_kwdsugg").val())=="Enter your areas of expertise")
+	{
+		$("#Sug_kwdsugg").attr("value","dummyvar");
+		}
+		
+		$("form#searchBar").submit();
+
+	});
+});
+', 
+', 
+  ', 
+  ', 
+      ',  
+        ', 
+        $(function(){
+
+      			
+		})
+		
+        ', 
+        ', Keyskills, Designation', 
+        ', 
+        ', 
+          ', 
+		 ', 
+            ', 
+          ', 
+        ', 
+        ',  
+        ',  ', 
+      ', 
+        ', Desired Location', 
+        ', 
+        ', 
+          ', 
+	    ', 
+            ', 
+		', 
+          ', 
+        ', 
+        ',  
+        ',  ', 
+	
+      ',  
+        ', 
+       $(function(){ $("#ddExp option[value='']").attr("selected", true);                $("#ddExp").parent('span.text').find('.fwselect-text').text("Select");
+                $("#ddExp").trigger("change");
+                })
+        ', 
+        ', Experience', 
+        ', 
+	', 
+	    ',  ', 
+        	', 
+	    ', 
+	', 
+
+       ', 
+        ',  ', 
+            ',  
+        ', 
+        $(function(){$("#ddMinSal option[value=qmVar]").attr('selected', true);
+		$("#ddMinSal").parent('span.text').find('.fwselect-text').text("Min");
+		$("#ddMinSal").trigger("change");
+		})
+        ', 
+        ', Expected Salary', 
+        ', 
+	 ', 
+            ',  ', 
+                ', 
+            ', 
+        ', 
+', 
+        ', 
+	', 
+            ',  ', 
+                ', 
+            ', 
+        ', 
+', 
+        ',  ', 
+            ', 
+        ', 
+      ', 
+      ',  ', Please enter Keywords or Location to search.',  ', 
+    ', 
+    ', 
+  ', 
+', 
+',  
+
+
+      ', 
+
+$(document).ready(function(){
+
+$('#searchBar').submit(function(e)
+ {
+ domain = "http://careers.afcons.com/";
+ keyword= $.trim( $('#Sug_kwdsugg').val() );
+ if($('#cluster_loc').length>0){
+	 loc1=$.trim( $('#LocationTags').find("#cluster_loc span").text() );
+	 }
+	 else{
+ loc1= $.trim( $('#Sug_locsugg').val() );
+	 }
+ if(keyword=="Enter your areas of expertise")
+   {keyword="";}
+ if(loc1=="Where you wish to work")
+   {loc1="";}
+ if( $.trim( keyword )=="" && $.trim( loc1 )==""){
+  $(".error").show();
+  e.preventDefault();
+  }
+else{
+ newUrl = domain+ generateStaticURL(keyword,loc1);
+ $("#searchBar").attr('action',newUrl);
+}
+
+});
+
+function replaceAll(txt, replace, with_this) {
+  return txt.replace(new RegExp(replace, 'gi'),with_this);
+}
+function generateStaticURL(kw,loc)
+{
+ kw = kw.replace(/Enter your areas of expertise/ig,"").replace(/Type skills, designation or company name/ig,"").replace(/\s{2,}/g, ' ').replace(/dummyvar/ig,""); 
+ loc=loc.replace(/Where you wish to work/ig,"");
+  var Kwrd_Action_Str="";var Loc_Action_Str="";var action="";
+  var Spcl_Char_Arr= {"+":" plus " , "#":" sharp " , ".":" dot " , "-":" dash ",'"':" quotes ","'":" quotes ","/":" "};
+  if(kw != "" )
+  {
+    kw= kw.toLowerCase();
+    kw =kw.replace(/\s{2,}/g," ");
+    kw=kw.replace(/\bjobs in\b/gi,"");
+    kw=kw.replace(/\bjobs\b/gi,"");
+    kw=kw.replace(/\blimited\b/gi,"");
+    kw=kw.replace(/\bcorporation\b/gi,"");
+    kw=kw.replace(/\bcareers\b/gi,"");
+    while(kw.indexOf("c++ c++")!=-1 )
+      kw=kw.replace("c++ c++","c++");
+/*    for(i in stopwordArr)
+    {
+      kw=replaceAll(kw,"\\b"+stopwordArr[i].toLowerCase(),"");
+    } */
+    kw = replaceAll(kw,","," ");
+    kw=kw.replace(/[^.+#\-'" a-zA-Z0-9]/ig," ").replace(/and {1,}$/g,"");
+    var Tmp_Kwrd_Str = $.trim(kw).toLowerCase();
+    var Tmp_Kwrd_Str = kw;
+    Tmp_Kwrd_Arr = Tmp_Kwrd_Str.split(",");
+    for(i in Tmp_Kwrd_Arr){
+      for (key in Spcl_Char_Arr)
+        Tmp_Kwrd_Arr[i]=replaceAll(Tmp_Kwrd_Arr[i],"\\"+key,Spcl_Char_Arr[key]);
+      Tmp_Kwrd_Arr[i]=$.trim(replaceAll(Tmp_Kwrd_Arr[i],"\ \ "," "));
+      Tmp_Arr = Tmp_Kwrd_Arr[i].split(" ");
+    }
+    Kwrd_Action_Str = Tmp_Kwrd_Arr.join(" ");
+  }
+  if(loc != "")
+  {
+    loc=loc.replace(/\bjobs in\b/gi,"");
+    loc=loc.replace(/\bjobs\b/gi,"");
+    loc=loc.split("\\").join(" ");
+    loc=loc.split("/").join(" ");
+    loc=loc.replace(/[^, a-zA-Z]/ig,"").replace(/,{1,}$/g,"");;
+    loc = replaceAll($.trim(loc).toLowerCase(),"  "," ");
+/*    for(i in stopwordArr)
+    {
+      loc=replaceAll(loc,"\\b"+stopwordArr[i].toLowerCase()+"\\b","");
+    } */
+    Loc_Arr = loc.split(",");
+    Tmp_Str = Loc_Arr.join(" and ");
+    Tmp_Arr = Tmp_Str.split(" ");
+    Loc_Action_Str = Tmp_Arr.join(" ");
+  }
+  if(Kwrd_Action_Str == "" && Loc_Action_Str != "")
+    action = action + "jobs in " + Loc_Action_Str;
+  else if (Kwrd_Action_Str != "" && Loc_Action_Str =="")
+    action = action + Kwrd_Action_Str +  " jobs";
+  else if (Kwrd_Action_Str != "" && Loc_Action_Str !="")
+    action = action + Kwrd_Action_Str +  " jobs in " + Loc_Action_Str;
+  //finally replace all consecutive duplicate words
+  action=action.replace(/[\s]*plus[\s]+(plus[\s]*)+/gi,' + ');
+  action = action.replace(/-/g," ").replace(/\s{2,}/g, ' ');
+  do {
+    var newTemp = action;
+    var action = newTemp.replace(/\s(\w+\s)\1/, " $1");
+    action = action.replace(/^(\w+\s)\1/, "$1");
+    action = action.replace(/(\s\w+)\1$/, "$1")
+  } while (action.length != newTemp.length);
+  while(action.indexOf(" + ") != -1)
+    action=action.replace(" + "," plus plus ");
+    action= $.trim(action).replace(/\s/g,"-");
+    action= action.replace(/\s/g,"-");
+  if(action == "")
+    action = "jobs-in-india";
+
+  return action;
+}
+
+});
+      ', 
+', 
+  ',  Jobs ', (1-1 out of 1) ', 
+			', Execution Engineer/senior Engineer', 
+			', 22 Nov', 
+			', 4 - 7 yrs.', 
+			', Jamm, 
+			', Candidates having B.Tech/Diploma in Civil Engineering in regular mode having at least 4 years experi...', view more', 
+			', 
+			', 
+	', 
+		', 
+		', 
+			', Drop your CV here', 
+			', We will consider your Profile for future Jobs', 
+			', Submit Profile', 
+		', 
+	', 
+	', 
+   ', Jobs by Location', 
+   ', Jamm, 1', 
+   ', Jobs by Role', 
+   ', Civil Engineer-Highway/Roadway', 1', 
+   ', Jobs by Functional Area', 
+   ', Site Engineering, Project Management', 1', 
+   ', Jobs by Industry', 
+   ', Construction / Engineering / Cement / Metals', 1',   ', 
+', 
+', 
+', 
+', 
+  ', 
+    ', Copyright 2004 AFCONS INFRASTRUCTURE LIMITED. All rights reserved.', 
+  ', 
+', Powered By ',   
+	
+', 
+',  
+
+',  #goToTop {position:absolute;bottom:0px;right:0}', 
+
+
+', u"
+$(document).ready( function(){
+var gotoTop = $('#goToTop');
+var func_gotoTop = function(){
+                if($(this).scrollTop() == 0){
+                                gotoTop.hide();                                                               
+                }
+                else{
+                                gotoTop.show();                             
+                }
+}
+
+
+
+func_gotoTop();
+
+$(window).scroll(func_gotoTop);
+
+//Click event to scroll to top
+
+$('#goToTop').click(function(){
+                $('html, body').animate({scrollTop : 0},500);
+                return false;
+}) });
+", 
+
+ ', 
+    ', 
+      ', 
+    ', 
+    ', 
+      ',         
+      ', 
+    ', 
+    ', 
+',  
+
+', 
+', 
+', 
+', 
+
+', 
+', 
+', 
+', 
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/careers.afcons.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ..."};
+/* ]]> */
+', 
+', 
+', 
+', 
+jQuery(function($) {
+$('a[rel^="prettyPhoto"]').prettyPhoto();
+});
+', 
+', 
+', 
+',  ', 
+
+']

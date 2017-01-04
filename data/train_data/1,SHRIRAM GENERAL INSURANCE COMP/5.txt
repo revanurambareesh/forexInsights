@@ -1,0 +1,921 @@
+[
+
+', 
+
+
+', 
+ 
+',       
+', 
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    
+
+    $(document).scroll(function (e) {
+        var scrollTop = $(document).scrollTop();
+        if (scrollTop > 0) {
+            console.log(scrollTop);
+            $('.navbar').removeClass('navbar-static-top').addClass('navbar-fixed-top');
+        } else {
+            $('.navbar').removeClass('navbar-fixed-top').addClass('navbar-static-top');
+        }
+
+    });
+    
+
+
+
+
+', 
+', 
+', 
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+$.src="//v2.zopim.com/?3YtsIB6J3v9oDuESMzEfwc1a3CEB54hY";z.t=+new Date;$.
+type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+', 
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+', 
+', 
+
+', 
+', 
+', 
+
+', 
+  ', 
+ 
+
+  ', 
+  ', 
+  ', 
+    ', 
+      ', 
+           
+          ', 
+        ', CONTACT US', 
+            ', 
+                ', CONTACT US', 
+            ', 
+            ', 
+                ', FAQS', 
+            ', 
+            ', 
+           
+     ', 
+      ', 
+          $(function () {
+              $('#txtmobile').keydown(function (e) {
+                  if (e.shiftKey || e.ctrlKey || e.altKey) {
+                      e.preventDefault();
+                  } else {
+                      var key = e.keyCode;
+                      if (!((key == 8) || (key == 46) || (key >= 35 && key <= 40) || (key >= 48 && key <= 57) || (key >= 96 && key <= 105))) {
+                          e.preventDefault();
+                      }
+                  }
+              });
+          });
+          $(document).ready(function () {
+
+              var sub = $("#ddlsubject").val();
+
+              if (sub == "Claims") {
+                  $("#Attach").show();
+                  $("#PN").show();
+              }
+              else {
+                  $("#Attach").hide();
+                  $("#PN").hide();
+              }
+            //  $("#lblUploadStatus").hide();
+             // $("#error").hide();
+
+
+          });
+
+             
+         
+         
+          $('#btUpload').click(function () {
+              if (fileUpload.value.length == 0) {    // CHECK IF FILE(S) SELECTED.
+                  alert('No Files Selected.');
+                  return false;
+              }
+          });
+
+          function Validate() {
+
+              var sub = $("#ddlsubject").val();
+              var Product;
+              if (sub == "Claims") {
+                  $("#Attach").show();
+                  $("#PN").show();
+              }
+              else {
+                  $("#Attach").hide();
+                  $("#PN").hide();
+              }
+             
+              var Name = $("#txtname").val()
+              if (Name == null || Name == '') {
+
+                  $("#err1").show();
+                  $("#err1").text("Enter Name ");
+
+                  return false;
+
+              }
+              else {
+                  $("#err1").hide();
+              }
+
+
+             
+              var mobile = $("#txtmobile").val()
+              var pattern = /^\d{10}$/;
+              if (pattern.test(mobile)) {
+                 
+                  $("#err2").hide();
+              }
+              else {
+                  $("#err2").show();
+                  $("#err2").text("Enter Valid 10 Digits Mobile Number!");
+
+                  return false;
+              }
+              
+
+              //var sub = $("#ddlsubject").val();
+
+              if (sub == null || sub == 'Select') {
+                  $("#err4").show();
+                  $("#err4").text("Select Subject");
+
+                  return false;
+              }
+              else {
+                  $("#err4").hide();
+              }
+
+              if (sub == 'Surveyor Empanelment') {
+                  var emailAddress = $("#txtemail").val();
+
+                  if (emailAddress == null || emailAddress == '') {
+                      $("#err3").show();
+                      $("#err3").text("Email-Id Is Mandatory..!");
+                      return false;
+                  }
+                  else {
+                      $("#err3").hide();
+                      var emailRegex = new RegExp(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/i);
+                      var valid = emailRegex.test(emailAddress);
+                      if (!valid) {
+                          $("#err3").show();
+                          $("#err3").text("Enter Valid E-mail Address ");
+                          return false;
+                      } else {
+                          $("#err3").hide();
+                      }
+                  }
+              }
+              else {
+                  $("#err3").hide();
+              }
+
+
+
+              if (sub != "Claims") {
+
+                   Product = $("#ddlproduct").val();
+                  if (Product == null || Product == 'Select') {
+                      $("#err5").show();
+                      $("#err5").text("Select Product");
+
+                      return false;
+                  }
+                  else {
+                      $("#err5").hide();
+                  }
+              }
+
+              if (sub == "Claims") {
+
+                   Product = $("#ddlproduct").val();
+                  if (Product == null || Product == 'Select') {
+                      $("#err5").show();
+                      $("#err5").text("Select Product");
+
+                      return false;
+                  }
+                  else {
+                      $("#err5").hide();
+                  }
+
+
+                  var polcy = $("#txtPolicyno").val();
+                  if (polcy == null || polcy == '') {
+                      $("#err6").show();
+                      $("#err6").text("Enter Policy Number ");
+
+                      return false;
+                  }
+                  else {
+                      $("#err6").hide();
+                  }
+              }
+              else {
+                  $("#Attach").hide();
+                  $("#PN").hide();
+              }
+
+              var Messg = $("#mesg").val()
+              if (Messg == null || Messg == '') {
+
+                  $("#err7").show();
+                  $("#err7").text("Enter Message ");
+
+                  return false;
+
+              }
+              else {
+                  $("#err7").hide();
+
+                  //return true;
+              }
+
+          }
+
+          function getmail() {
+              var Subject;
+              var Pdt;
+              Subject = $('#ddlsubject :selected').text();
+              Pdt = $('#ddlproduct:selected').text();
+              
+              if (Subject == "Claims") {
+                 // alert(Subject);
+                  $("#Attach").show();
+                  $("#PN").show();
+
+              }
+
+            
+              else {
+                  //alert("No");
+                  $("#Attach").hide();
+                  $("#PN").hide();
+              }
+
+          }
+       
+
+', 
+
+
+   
+
+       ', 
+        ', 
+          ', CONTACT US', 
+          
+          ', 
+            ', Contact Us ', 
+            ', We are always there to hear from you,send us your valuable suggestion and comments so we can serve you better. there are multiple ways like E-mail Phone choose as per your comfort. ', 
+          ', 
+          ', 
+            ', 
+              ', 
+                ', 
+                        	', 
+                            	',  Contact-Us', 
+                                ', 
+                            ', 
+                            ', 
+                            	', Name ', *', 
+                                ',  ',  
+                                ', 
+                                
+                                ', 
+                            ', 
+                            ', 
+                            	', Mobile ', *',  ', 
+                                ', 
+                                ', 
+                                ', 
+                            ', 
+                            ', 
+                            	', City  ', 
+                                ', 
+                                
+                                ', 
+                                ', 
+                            ', 
+							', 
+                            	', Email  ', 
+                                ', 
+                                
+                                ', 
+                                ', 
+                            ', 
+                            ', 
+                            	', Subject ', *',  ', 
+                                ',  ', 
+	', Select', 
+	', Product - Query', 
+	', Product - Get Quote', 
+	', Grievance', 
+	', Renewals', 
+	', Agent Enquiry', 
+	', Claims', 
+	', Surveyor Empanelment', 
+	', Others', 
+', 
+                                 ', 
+                                ', 
+
+   
+
+                            ', 
+                            ', 
+                            	', Product ', *', 
+                                ',  ', 
+	', Select', 
+	', Car', 
+	', Two Wheeler', 
+	', Commercial Vehicle', 
+	', Business Protector', 
+	', Householder Insurance', 
+	', Travel Insurance', 
+	', IRCTC Passanger Travel Insurance', 
+	', Other Insurance', 
+', 
+                                 
+                                   ', 
+                                ', 
+                            ', 
+                            
+                            ', 
+	', Attachments', *', 
+	', 
+                            ', 
+                            ', 
+', 
+
+
+                            ', 
+                              ', 
+	', Policy Number', *', 
+	', 
+                            ', 
+                               ', 
+                            ', 
+                            ', 
+', 
+
+                            ', 
+
+                            ', 
+                            	', Message ', *', 
+                                ',  ',  
+                                ', 
+                                ', 
+                            ', 
+                            ', 
+                            ', 
+                            ',  
+                            
+                            ', 
+                            ', 
+                             ', 
+                        
+                        
+                    
+                    
+                    ', 
+                    ', 
+                            ', 
+                            ', 
+                           
+                        ', 
+
+                        ', 
+                        
+                       ',  Corporate Office:-
+
+Shriram General Insurance Co. Ltd. (In partnership with Sanlam, South Africa) E-8, EPIP, RIICO Industrial Area, Sitapura, Jaipur - 302022 (Raj.) 
+
+Customer Help Desk-
+
+Toll free: 1800-300-30000 
+
+Fax:-
+
+Fax No: 0141-2770692, 2770693', 
+
+
+              ', 
+             
+            ', 
+          ', 
+        ', 
+      ', 
+
+
+
+
+
+
+       ', 
+       ', 
+          
+', 
+
+ 
+', 
+', 
+
+', 
+
+', 
+
+', u" (function() { var hm = document.createElement('script'); hm.type ='text/javascript'; hm.async = true; hm.src = ('++u-heatmap-it+log-js').replace(/[+]/g,'/').replace(/-/g,'.'); var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(hm, s); })(); ", 
+
+'][
+
+', 
+
+
+', 
+ 
+',       
+', 
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    
+
+    $(document).scroll(function (e) {
+        var scrollTop = $(document).scrollTop();
+        if (scrollTop > 0) {
+            console.log(scrollTop);
+            $('.navbar').removeClass('navbar-static-top').addClass('navbar-fixed-top');
+        } else {
+            $('.navbar').removeClass('navbar-fixed-top').addClass('navbar-static-top');
+        }
+
+    });
+    
+
+
+
+
+', 
+', 
+', 
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+$.src="//v2.zopim.com/?3YtsIB6J3v9oDuESMzEfwc1a3CEB54hY";z.t=+new Date;$.
+type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+', 
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+', 
+', 
+
+', 
+', 
+', 
+
+', 
+  ', 
+ 
+
+  ', 
+  ', 
+  ', 
+    ', 
+      ', 
+           
+          ', 
+        ', CONTACT US', 
+            ', 
+                ', CONTACT US', 
+            ', 
+            ', 
+                ', FAQS', 
+            ', 
+            ', 
+           
+     ', 
+      ', 
+          $(function () {
+              $('#txtmobile').keydown(function (e) {
+                  if (e.shiftKey || e.ctrlKey || e.altKey) {
+                      e.preventDefault();
+                  } else {
+                      var key = e.keyCode;
+                      if (!((key == 8) || (key == 46) || (key >= 35 && key <= 40) || (key >= 48 && key <= 57) || (key >= 96 && key <= 105))) {
+                          e.preventDefault();
+                      }
+                  }
+              });
+          });
+          $(document).ready(function () {
+
+              var sub = $("#ddlsubject").val();
+
+              if (sub == "Claims") {
+                  $("#Attach").show();
+                  $("#PN").show();
+              }
+              else {
+                  $("#Attach").hide();
+                  $("#PN").hide();
+              }
+            //  $("#lblUploadStatus").hide();
+             // $("#error").hide();
+
+
+          });
+
+             
+         
+         
+          $('#btUpload').click(function () {
+              if (fileUpload.value.length == 0) {    // CHECK IF FILE(S) SELECTED.
+                  alert('No Files Selected.');
+                  return false;
+              }
+          });
+
+          function Validate() {
+
+              var sub = $("#ddlsubject").val();
+              var Product;
+              if (sub == "Claims") {
+                  $("#Attach").show();
+                  $("#PN").show();
+              }
+              else {
+                  $("#Attach").hide();
+                  $("#PN").hide();
+              }
+             
+              var Name = $("#txtname").val()
+              if (Name == null || Name == '') {
+
+                  $("#err1").show();
+                  $("#err1").text("Enter Name ");
+
+                  return false;
+
+              }
+              else {
+                  $("#err1").hide();
+              }
+
+
+             
+              var mobile = $("#txtmobile").val()
+              var pattern = /^\d{10}$/;
+              if (pattern.test(mobile)) {
+                 
+                  $("#err2").hide();
+              }
+              else {
+                  $("#err2").show();
+                  $("#err2").text("Enter Valid 10 Digits Mobile Number!");
+
+                  return false;
+              }
+              
+
+              //var sub = $("#ddlsubject").val();
+
+              if (sub == null || sub == 'Select') {
+                  $("#err4").show();
+                  $("#err4").text("Select Subject");
+
+                  return false;
+              }
+              else {
+                  $("#err4").hide();
+              }
+
+              if (sub == 'Surveyor Empanelment') {
+                  var emailAddress = $("#txtemail").val();
+
+                  if (emailAddress == null || emailAddress == '') {
+                      $("#err3").show();
+                      $("#err3").text("Email-Id Is Mandatory..!");
+                      return false;
+                  }
+                  else {
+                      $("#err3").hide();
+                      var emailRegex = new RegExp(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/i);
+                      var valid = emailRegex.test(emailAddress);
+                      if (!valid) {
+                          $("#err3").show();
+                          $("#err3").text("Enter Valid E-mail Address ");
+                          return false;
+                      } else {
+                          $("#err3").hide();
+                      }
+                  }
+              }
+              else {
+                  $("#err3").hide();
+              }
+
+
+
+              if (sub != "Claims") {
+
+                   Product = $("#ddlproduct").val();
+                  if (Product == null || Product == 'Select') {
+                      $("#err5").show();
+                      $("#err5").text("Select Product");
+
+                      return false;
+                  }
+                  else {
+                      $("#err5").hide();
+                  }
+              }
+
+              if (sub == "Claims") {
+
+                   Product = $("#ddlproduct").val();
+                  if (Product == null || Product == 'Select') {
+                      $("#err5").show();
+                      $("#err5").text("Select Product");
+
+                      return false;
+                  }
+                  else {
+                      $("#err5").hide();
+                  }
+
+
+                  var polcy = $("#txtPolicyno").val();
+                  if (polcy == null || polcy == '') {
+                      $("#err6").show();
+                      $("#err6").text("Enter Policy Number ");
+
+                      return false;
+                  }
+                  else {
+                      $("#err6").hide();
+                  }
+              }
+              else {
+                  $("#Attach").hide();
+                  $("#PN").hide();
+              }
+
+              var Messg = $("#mesg").val()
+              if (Messg == null || Messg == '') {
+
+                  $("#err7").show();
+                  $("#err7").text("Enter Message ");
+
+                  return false;
+
+              }
+              else {
+                  $("#err7").hide();
+
+                  //return true;
+              }
+
+          }
+
+          function getmail() {
+              var Subject;
+              var Pdt;
+              Subject = $('#ddlsubject :selected').text();
+              Pdt = $('#ddlproduct:selected').text();
+              
+              if (Subject == "Claims") {
+                 // alert(Subject);
+                  $("#Attach").show();
+                  $("#PN").show();
+
+              }
+
+            
+              else {
+                  //alert("No");
+                  $("#Attach").hide();
+                  $("#PN").hide();
+              }
+
+          }
+       
+
+', 
+
+
+   
+
+       ', 
+        ', 
+          ', CONTACT US', 
+          
+          ', 
+            ', Contact Us ', 
+            ', We are always there to hear from you,send us your valuable suggestion and comments so we can serve you better. there are multiple ways like E-mail Phone choose as per your comfort. ', 
+          ', 
+          ', 
+            ', 
+              ', 
+                ', 
+                        	', 
+                            	',  Contact-Us', 
+                                ', 
+                            ', 
+                            ', 
+                            	', Name ', *', 
+                                ',  ',  
+                                ', 
+                                
+                                ', 
+                            ', 
+                            ', 
+                            	', Mobile ', *',  ', 
+                                ', 
+                                ', 
+                                ', 
+                            ', 
+                            ', 
+                            	', City  ', 
+                                ', 
+                                
+                                ', 
+                                ', 
+                            ', 
+							', 
+                            	', Email  ', 
+                                ', 
+                                
+                                ', 
+                                ', 
+                            ', 
+                            ', 
+                            	', Subject ', *',  ', 
+                                ',  ', 
+	', Select', 
+	', Product - Query', 
+	', Product - Get Quote', 
+	', Grievance', 
+	', Renewals', 
+	', Agent Enquiry', 
+	', Claims', 
+	', Surveyor Empanelment', 
+	', Others', 
+', 
+                                 ', 
+                                ', 
+
+   
+
+                            ', 
+                            ', 
+                            	', Product ', *', 
+                                ',  ', 
+	', Select', 
+	', Car', 
+	', Two Wheeler', 
+	', Commercial Vehicle', 
+	', Business Protector', 
+	', Householder Insurance', 
+	', Travel Insurance', 
+	', IRCTC Passanger Travel Insurance', 
+	', Other Insurance', 
+', 
+                                 
+                                   ', 
+                                ', 
+                            ', 
+                            
+                            ', 
+	', Attachments', *', 
+	', 
+                            ', 
+                            ', 
+', 
+
+
+                            ', 
+                              ', 
+	', Policy Number', *', 
+	', 
+                            ', 
+                               ', 
+                            ', 
+                            ', 
+', 
+
+                            ', 
+
+                            ', 
+                            	', Message ', *', 
+                                ',  ',  
+                                ', 
+                                ', 
+                            ', 
+                            ', 
+                            ', 
+                            ',  
+                            
+                            ', 
+                            ', 
+                             ', 
+                        
+                        
+                    
+                    
+                    ', 
+                    ', 
+                            ', 
+                            ', 
+                           
+                        ', 
+
+                        ', 
+                        
+                       ',  Corporate Office:-
+
+Shriram General Insurance Co. Ltd. (In partnership with Sanlam, South Africa) E-8, EPIP, RIICO Industrial Area, Sitapura, Jaipur - 302022 (Raj.) 
+
+Customer Help Desk-
+
+Toll free: 1800-300-30000 
+
+Fax:-
+
+Fax No: 0141-2770692, 2770693', 
+
+
+              ', 
+             
+            ', 
+          ', 
+        ', 
+      ', 
+
+
+
+
+
+
+       ', 
+       ', 
+          
+', 
+
+ 
+', 
+', 
+
+', 
+
+', 
+
+', u" (function() { var hm = document.createElement('script'); hm.type ='text/javascript'; hm.async = true; hm.src = ('++u-heatmap-it+log-js').replace(/[+]/g,'/').replace(/-/g,'.'); var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(hm, s); })(); ", 
+
+']

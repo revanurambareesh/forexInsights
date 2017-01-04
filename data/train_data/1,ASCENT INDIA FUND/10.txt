@@ -1,0 +1,2045 @@
+[
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+	', 
+', 
+	', HOME', 
+	', NEWS', 
+	', BUSINESS', 
+	', MOVIES', 
+	', SPORTS', 
+	', CRICKET', 
+	', GET AHEAD', 
+	', SHOPPING', 
+	', rediff NewsApp', 
+', 
+
+', 
+function submitRTNewsSearch()
+{
+	for(var i=0; i < document.srchform.srch_in.length; i++){if (document.srchform.srch_in[i].checked){var rad_val = document.srchform.srch_in[i].value;}}
+	var srchword = trim(document.getElementById('srchword').value);
+	if(srchword == "" || srchword == "Search"){document.getElementById('srchword').focus();alert("Please enter search keyword");return false;}
+	srchword = srchword.replace(/\s/g,'-').replace(/\//g,' ');
+	if(rad_val == "web" ){var newsquery = "http://realtime.rediff.com/news/"+escape(srchword)+"?src=rediff_allnews_search";}
+	else{var newsquery = "http://realtime.rediff.com/news/"+escape(srchword)+"?service=site-search";}
+	document.location.href = newsquery;
+	return false;
+}
+function showDefValue(ob){if(ob.value == ob.defaultValue){ob.value ='';}else if(ob.value==''){ob.value=ob.defaultValue;}}
+function srchoption_on_off(ob)
+{
+	if(ob.title == "show options")
+	{
+		document.getElementById('div_srchoption').style.display = "block";
+		document.getElementById('srchop_arrow').title = "hide options";
+	}
+	else
+	{
+		document.getElementById('div_srchoption').style.display = "none";
+		document.getElementById('srchop_arrow').title = "show options";
+	}
+}
+function srchoptionHide()
+{
+	if(document.getElementById('srchop_arrow'))
+	{
+		document.getElementById('srchop_arrow').title= "show options";
+		document.getElementById('div_srchoption').style.display = "none";
+	}
+}
+function showNewsappPromo(tblid,tblid1,x,y){var curleft = 0;var curtop = 0;var obj = tblid;if(obj.offsetParent){while (obj.offsetParent){curleft += obj.offsetLeft;obj = obj.offsetParent;}}else if (obj.x){curleft += obj.x;}if(screen.width > 1400){curleft = curleft-150;}document.getElementById(tblid1).style.left= parseInt(curleft + x) + 'px' ;var obj1 = tblid;if (obj1.offsetParent){while (obj1.offsetParent){curtop += obj1.offsetTop;obj1 = obj1.offsetParent;}}else if (obj1.y){curtop += obj1.y;}document.getElementById(tblid1).style.top=parseInt(curtop + y) + 'px' ;document.getElementById(tblid1).style.display='block';}
+', 
+', 
+.divbtnarrow{float:left;}.new_wd_top_n{padding:8px 0 5px 0;border-top:solid 1px #ccc;border-bottom:solid 1px #ccc;margin:5px 0 0 0;}
+.btnarrow{border-top:5px solid #b0b0b0;border-left:5px solid #FFFFFF;border-right:5px solid #FFFFFF;font-size:0;line-height:0;width:0;margin:7px 7px 0 7px;cursor:pointer;cursor:hand;float:left;}.newsapppop{padding-right:0;}
+@media only screen and (device-width: 768px)
+{
+	#wrapper{padding:0 5px 0 5px;}
+	.n_srchbox{width:70px;-webkit-appearance:none;}
+	.btnarrow{border-top:8px solid #b0b0b0;border-left:8px solid #FFFFFF;border-right:8px solid #FFFFFF;font-size:0;line-height:0;width:0;margin:7px 7px 0 7px;cursor:pointer;cursor:hand;float:left;}
+}
+', 
+
+', 
+', 
+', 
+', Rediff News', All News', 
+', 
+', 
+', 
+', 
+', 
+', .appthumb{float:left;display:inline;width:70px;height:70px;margin:0 10px 0 0;background:url(http://imworld.rediff.com/worldrediff/pix/rna_sprite.png) no-repeat 0 0;cursor:pointer;cursor:hand;}.gplay{width:65px;height:15px;background:url(http://imworld.rediff.com/worldrediff/pix/rna_sprite.png) no-repeat 0 -73px;vertical-align:middle;}.apppromoright{float:left;width:155px;overflow:hidden;}.freeaap{color:#f35609}.appdwnbtn{width:132px;height:30px;margin:6px 0;background:url(http://imworld.rediff.com/worldrediff/pix/rna_sprite.png) no-repeat -78px -1px;}', 
+', 
+function trackAppURL(url){document.location.href = url;}
+', 
+
+				
+', 
+', NewsApp ', (Free)', Read news as it happens', 
+', 
+', 
+', 
+var ck=document.cookie;function getcookie(n)
+{var ar=n+"=";var al=ar.length;var cl=ck.length;var i=0;while(i<cl)
+{j=i+al;if(ck.substring(i,j)==ar)
+{e=ck.indexOf(";",j);if(e==-1)
+e=ck.length;return unescape(ck.substring(j,e));}
+i=ck.indexOf(" ",i)+1;if(i==0)
+break;}
+return "";}
+', 
+
+', 
+',  ', Sign in',    |  ', Create a Rediffmail account', 
+', 
+	', 
+		
+		var querystring	= "";
+		var path	= "";
+		var domain	= "";
+		var Rkey_data	= "";
+		var Rkey	= Math.floor(Math.random() * 1000000);
+		querystring	= window.location.search;
+		path		= window.location.pathname;
+		domain		= window.location.host;
+		var tmp_ref = encodeURIComponent(document.referrer);
+		if((tmp_ref == null) || (tmp_ref.length == 0)){tmp_ref = "";}
+		
+					
+			if (querystring == "")
+				Rkey_data = "?rkey="+Rkey;
+			else
+				Rkey_data = "&rkey="+Rkey;
+			
+				
+		
+		if(tmp_ref != "")
+		{
+			Rkey_data += "&ref="+tmp_ref;
+		}
+		
+
+		document.getElementById('metric_iframe').src ='http://metric.ind.rediff.com/'+domain+path+querystring+Rkey_data+'&device=pc';	
+	', 
+
+', 
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "6035613" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+
+	function comscore_ajax(url)
+	{
+		_comscore.push({ c1: "2", c2: "6035613",c4:url });
+		var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+		s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+		el.parentNode.insertBefore(s, el);
+	}
+', 
+
+', 
+
+', 
+var endyear 	= "2017";
+var  cdn_domain = "http://www.rediff.com";
+var  org_domain = "http://mypage.rediff.com";
+var  imgpath	= "http://imworld.rediff.com/worldrediff/pix";
+var  ishare_domain	= "http://ishare.rediff.com";
+var OAS_sitepage = "" ;
+var OAS_listpos = "" ;
+
+
+var Rlo="";
+var Rl = "";
+Rlo	=	getcookie("Rlo");
+Rlo =	unescape(Rlo).replace(/\+/g," ");
+Rlo =	Rlo.replace("@rediffmail.com","");
+Rlo = Rlo.replace(/[^\w\d\s\-\_]/ig,'');
+Rl = getcookie("Rl");
+Rl = Rl.replace(/[^\w\d\s\-\_@\.]/ig,'');
+var tmp_rsc1 = "";
+tmp_rsc1 = getcookie("Rsc");
+if((Rlo != "" || Rl!="" ) && tmp_rsc1 != "")
+{
+	
+	if(Rlo != "" )
+	{
+		document.getElementById('username').innerHTML	= "<a href='"+org_domain+"/profile/myprofile' class='proper'>"+Rlo+"</a>&nbsp; | &nbsp;" ;
+	}
+	else
+	{
+		Rl = Rl.substring(0,Rl.lastIndexOf('@'));
+		document.getElementById('username').innerHTML	= "<a href='"+org_domain+"/profile/myprofile'>"+Rl+"</a>&nbsp; | &nbsp;" ;
+	}
+	
+	if(document.getElementById('signin_info'))document.getElementById('signin_info').innerHTML = "" ;
+}
+else
+{
+	if(document.getElementById('signin_info')){document.getElementById('signin_info').innerHTML = " <a href='https://mail.rediff.com/cgi-bin/login.cgi' title='Already a user? Sign in'>Sign in</a>  &nbsp;|&nbsp; <a href='http://register.rediff.com/register/register.php?FormName=user_details' >Create a Rediffmail account</a>";}
+	if(Rlo != "" && Rl != "" )
+	{
+		if(document.getElementById('signin_info')){document.getElementById('signin_info').innerHTML += "&nbsp;|&nbsp;";}
+	}
+}
+if(Rl != "")
+{
+	if(document.getElementById('signin_info')){document.getElementById('signin_info').innerHTML += "<a href='"+org_domain+"/signout' title='Sign out'>Sign out</a>";}
+}
+
+', 
+', .popupcontainer{z-index:1000;}', 
+', 
+
+
+
+', 
+', 
+', 
+', Rediff.com',   » ', Business', u" » 'Foreign investors prefer independent managers'", 
+
+', u"'Foreign investors prefer independent managers'", 
+', Share', Comment', 
+', To get such articles in your inbox', 
+', 
+', Text size: ',  ', A',    ', A',    ', A', 
+
+', 
+
+', February  10, 2010 14:01 IST', 
+', N', u"ewly-formed Ascent Capital, which is a separate investment entity carved out of UTI Ventures, recently raised $350 million (Rs 1,575 crore) for its first fund. The fund is focused on growth capital and is advising and managing ITVUS Fund I, Ascent India Fund II and Ascent India Fund III. Director Ajay Mittal speaks to Shilpy Sinha about the fund's strategy. Excerpts: ", u"What will be Ascent Capital's strategy?", Ascent Capital follows an entrepreneur-centric investment approach. We actively seek out promising Indian companies driven by visionary leadership. Our constant endeavour is to complement the strengths of the teams backed by us.
+', 
+', We leverage our expertise and market insight to spot emerging opportunities with dynamic growth trajectories. We have time and again demonstrated our ability to recognise and support companies that have transformed into industry leaders. We believe in long-term partnerships.', 
+', From raising additional capital, attracting senior management talent, maintaining high standards of corporate governance, preparing companies for successful public offers to providing advice on inorganic growth plans, we leverage our experience and network to drive the success of every company we back.', 
+', Unlike earlier, are investors showing interest in funding individual teams? Will this spin-out model catch on in the Indian market?', Foreign investors (limited partners or LPs) like endowment funds, university funds, pension funds and fund of funds typically prefer independent investment managers (general partners or GPs). Any GP with the requisite track record, experience of working together as a team and showing skin in the game is preferred by these foreign Investors.', 
+', Was raising the fund a challenge? Did you tap the overseas market this time?', Ascent India Fund III (AIF III) is the third fund raised by our team. We have had overseas investors in the previous fund (Ascent India Fund – Fund II). The year 2009 was a wrong time for raising funds. However, what helped us was our track record as well as the fact that our team is one of the most experienced in this asset class and has worked together for a long period.', 
+', How do you look at the fund-raising scenario this year? How many investments will you be looking at this year?', Considering the adverse market conditions prevalent in 2008 and in substantial part of 2009, we consider 2010 as an appropriate time for companies on high growth trajectory to raise growth capital. It would be difficult to put a number to deals we will be doing this year, as it depends on how many deals sourced by us meet the investment criteria. We would be investing our funds over the next four years or so. We look at an ideal deal size of $15 million to $20 million.', 
+', Which are the sectors that you intend to focus on?', u"We prefer to invest in sectors that address domestic demand driven by a fast growing consumer market, services sector that benefits from India's infrastructure boom and those sectors that leverage India's outsourcing strengths in services and manufacturing.", 
+', How do you look at the recent SAT ruling on Subhkam Ventures and MSK Projects, which talks about veto rights to shareholders and which does not mean control over the company?', u"It is a welcome ruling considering that financial investors (such as venture capital and private equity) with significant minority stake don't intend to run the company and the veto rights are nothing but negative covenants to protect their interests.", 
+		', Source: ', 
+	
+', 
+', Related News: ', Ascent Capital', , ', UTI Ventures', , ', III', , ', MSK', , ', Ajay Mittal', 
+', 
+', Share', Comment', 
+', Print this article', 
+', 
+
+', 
+', 
+', 
+', 
+', 
+', u"It's free!", To get such articles in your inbox', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+', 
+
+function getScrollTop(){if(typeof pageYOffset != 'undefined'){return pageYOffset;}else{var B = document.body;var D = document.documentElement;D = (D.clientHeight)? D: B;return D.scrollTop;}}
+function viewPort(){var h = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;var w = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;return {width : w , height : h}}
+function stickyPopup()
+{
+	if(document.getElementById('div_bot_popup'))
+	{
+		var useremail = "";
+		useremail =	getcookie("Rl");
+		useremail = useremail.replace(/[^\w\d\s\-\_@\.]/ig,'');
+		if(getcookie("BT") != "1" || getcookie("BT") == null)
+		{
+			document.getElementById('div_bot_popup').style.display = "block";
+			if(useremail != ""){document.getElementById("sub_email").value = useremail;if(document.getElementById("sub_email_in")){document.getElementById("sub_email_in").value = useremail;}}
+			if(document.getElementById('metric_NLiframe')){document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe?rkey="+Math.random();}
+		}
+		else
+		{
+			document.getElementById('div_bot_popup').style.display = "none";
+			if(document.getElementById('div_subscribe_in')){document.getElementById('div_subscribe_in').style.display = "none";}
+		}
+	}
+}
+function closeSubscripBox()
+{
+	if(document.getElementById('div_bot_popup')){document.getElementById('div_bot_popup').style.display = "none";}
+	if(document.getElementById('div_subscribe_in')){document.getElementById('div_subscribe_in').style.display = "none";}
+	if(document.getElementById('metric_NLiframe')){document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/close?rkey="+Math.random();}
+}
+
+function submitSubscribe(emailfield,subscribebtn,div_thanks,div_errmsg)
+{
+	var email =  document.getElementById(emailfield).value;
+	var sub_captcha = "";
+	var section = "interview";
+	var article_url = "http://business.rediff.com/interview/2010/feb/10/inter-foreign-investors-prefer-independent-managers.htm";
+	var subreq;
+	if(section == "business"){section = "money" ;}
+	
+	if(!validEmail(email))
+	{
+		alert("Please enter a valid email");
+		document.getElementById(emailfield).focus();
+		return false;
+	}
+	if(emailfield == "sub_email_in")
+	{
+		sub_fillTacking('email_topbox',emailfield);
+	}
+	else
+	{
+		sub_fillTacking('email',emailfield); 
+	}
+
+	var url= cdn_domain+"/newsletter";
+	var postdata = "email="+email+"&captcha="+sub_captcha+"&section="+section+"&article_url="+encodeURIComponent(article_url)+"&country=india&output=xml";
+	if (window.XMLHttpRequest)
+	{
+		subreq = new XMLHttpRequest();
+		subreq.onreadystatechange = statusstateChanged;
+		subreq.open("POST", url, true);
+		subreq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		subreq.setRequestHeader("Content-Length", postdata.length.toString());
+		subreq.setRequestHeader("Connection", "Close");
+		subreq.send(postdata);
+	}
+	else if (window.ActiveXObject)
+	{
+		subreq = new ActiveXObject("Microsoft.XMLHTTP");
+		if (subreq)
+		{
+			subreq.onreadystatechange = statusstateChanged;
+			subreq.open("POST", url, true);
+			subreq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			subreq.setRequestHeader("Content-Length", postdata.length);
+			subreq.setRequestHeader("Connection", "Close");
+			subreq.send(postdata);
+		}
+	}
+
+	function statusstateChanged()
+	{
+		if (subreq.readyState==4 || subreq.readyState=="complete")
+		{
+			if(subreq.status == 200)
+			{
+				var resp_status = (subreq.responseXML.getElementsByTagName("status")[0].firstChild)?subreq.responseXML.getElementsByTagName("status")[0].firstChild.nodeValue:0;
+				var resp_message = (subreq.responseXML.getElementsByTagName("message")[0].firstChild)?subreq.responseXML.getElementsByTagName("message")[0].firstChild.nodeValue:0;
+				if(resp_status == "Success")
+				{
+					if(document.getElementById(div_thanks)){document.getElementById(div_thanks).innerHTML = "<div style='padding:0 0 5px 0;overflow:hidden;border:solid 1px #ccc;background:#fff;text-align:center;'><div title='Close' style='float:right;color:#0066bc;font:bold 16px arial;' class='floatR bold curhand f14' onclick='closeSubscripBox();'>x &nbsp;</div><span class='clear'></span><p class='f14 bold alignC'>Thank you for signing up for the Rediff NewsLetter!</p></div>" ;}
+					if(document.getElementById('metric_NLiframe'))
+					{
+						if(emailfield == "sub_email_in")
+						{
+							document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/thanks_topbox?rkey="+Math.random();
+						}
+						else
+						{
+							document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/thanks?rkey="+Math.random();
+						}
+					}
+				}
+				else
+				{
+					document.getElementById(div_errmsg).innerHTML  = "<p class=red>"+resp_message+"</p>"; 
+					document.getElementById(div_errmsg).style.display = "block";
+					if(document.getElementById(subscribebtn)){document.getElementById(subscribebtn).disabled = false;}
+				}
+			}
+		}
+		if (subreq.readyState == 1)
+		{
+			if(document.getElementById(subscribebtn)){document.getElementById(subscribebtn).disabled = true;}
+		}
+	}
+	return false;
+}
+
+function sub_clickTacking(ob)
+{
+	if(document.getElementById('metric_NLiframe'))
+	{
+		 setTimeout(function (){
+                document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/"+ob+"?rkey="+Math.random();
+            },500);
+		
+	}
+}
+function sub_fillTacking(ob,id)
+{
+	if(document.getElementById('metric_NLiframe'))
+	{
+		if(document.getElementById(id).value == "" || document.getElementById(id).value == "Enter Your email ID")
+		{
+			document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/"+ob+"/notfilled?rkey="+Math.random();
+		}
+		else
+		{
+			document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/"+ob+"/filled?rkey="+Math.random();
+		}
+	}
+}
+function newClickTracking()
+{
+	if(document.getElementById('sub_email').value == "" || document.getElementById('sub_email').value == "Enter Your email ID")
+	{
+		document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/email/notfilled?rkey="+Math.random();
+	}
+	else
+	{
+		document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/email/filled?rkey="+Math.random();
+	}
+}
+
+
+//stickyPopup();
+
+
+', 
+', 
+
+', 
+.div_morefrom_outer{position:relative;width:670px;height:240px;overflow:hidden;text-align:left;}.div_morefrom_inner{position:absolute;z-index:1;}.more_from_img{width:210px;height:180px;overflow:hidden;text-align:left;margin:0 0 5px 0;background:#d4d4d4;}.more_from_copy{line-height:1.3em;height:2.6em;overflow:hidden;width:210px;text-overflow:ellipsis;}.morefrom_right_arrow{display:none;width:35px;height:35px;border-radius:50%;background:#000;color:#fff;opacity:.7;filter:alpha(opacity=70);position:absolute;z-index:2;right:0;top:70px;cursor:pointer;cursor:hand;font-size:34px;line-height:34px;text-align:center;}.morefrom_left_arrow{display:none;width:35px;height:35px;border-radius:50%;background:#000;color:#fff;opacity:.7;filter:alpha(opacity=70);position:absolute;z-index:2;left:0;top:70px;cursor:pointer;cursor:hand;font-size:34px;line-height:34px;text-align:center;}.morefrom_box{width:224px;height:245px;overflow:hidden;float:left;}.slide_rel_left{left:-672px;overflow:hidden;animation:slideleft 1s 1;}.slide_rel_right{left:0px;overflow:hidden;animation:slideright 1s 1;}
+@keyframes slideleft{from {left:0px;}to{left:-672px;}}
+@keyframes slideright{from {left:-672px;}to{left:0px;}}
+', 
+
+', More from rediff', 
+', 
+	', 
+		', 
+	', 
+	', u"VC's hunt for business plans at IIM-B", 
+	', 
+		', 
+	', 
+	', Jesse Ryder to miss IPL III', 
+	', 
+		', 
+	', 
+	', Injured Tanvir hopeful of playing in IPL III', 
+	', 
+		', 
+	', 
+	', IPL-III auction: Who went where, for how much', 
+	', 
+		', 
+	', 
+	', Euro-III grade fuel sale to be delayed by 6 months', 
+	', 
+		', 
+	', 
+	', Akram hopeful of good show by KKR in IPL-III', 
+	', 
+		', 
+	', 
+	',  \u25b6', \u25c0 ', 
+', 
+
+', 
+var total_related = "8";
+
+if(total_related > 6){total_related = 6;}
+if(document.getElementById('div_morefrom_inner')){document.getElementById('div_morefrom_inner').style.width = (total_related * 224) + "px";}
+if(total_related > 3)
+{
+	document.getElementById('morefrom_right_arrow').style.display = 'block';
+	document.getElementById('morefrom_right_arrow').onclick = function(){
+		document.getElementById('morefrom_right_arrow').style.display = 'none';
+		document.getElementById('morefrom_left_arrow').style.display = 'block';
+		document.getElementById('div_morefrom_inner').className = "div_morefrom_inner slide_rel_left";
+	}
+	document.getElementById('morefrom_left_arrow').onclick = function(){
+		document.getElementById('morefrom_left_arrow').style.display = 'none';
+		document.getElementById('morefrom_right_arrow').style.display = 'block';
+		document.getElementById('div_morefrom_inner').className = "div_morefrom_inner slide_rel_right";
+	}
+
+}
+
+', 
+', 
+', 
+',  ', 
+', 
+<!--
+document.domain="rediff.com";
+var articledid = "money2010feb10/inter-foreign-investors-prefer-independent-managers" ;
+var service_name = "" ;
+
+if(navigator.userAgent.search(/iPad/i)>=0)
+{
+	document.write("<IFRAME id=\"boardiframe\" scrolling=\"no\" name=\"boardiframe\" width=\"100%\" frameborder=\"0\" src=\"\" height=\"1000\"></IFRAME><BR>");
+	loadBoard(articledid);
+}
+
+
+
+
+
+
+
+function resizer(ht)
+{   i = document.getElementById('boardiframe');
+i.style.height = "200px";
+i.style.height = ht + 5 + "px";
+}
+
+
+if(((navigator.appName.indexOf("Microsoft") != -1) || (navigator.userAgent.toLowerCase().indexOf('firefox'))) && (navigator.userAgent.search(/iPad/i) < 0))
+{ 
+	document.write("<IFRAME id=\"boardiframe\" scrolling=\"no\" name=\"boardiframe\" width=\"100%\" frameborder=\"0\" src=\"about:blank\" height=\"1000\"></IFRAME><BR>");
+}
+else
+{ 
+	document.write("<!-- //-->");
+}
+function loadBoard(eurl)
+{
+	if (eurl)
+	{
+	var did = eurl.replace(/\//gi,'');
+	var did = did.replace(/.htm/gi,'');
+	document.getElementById("boardiframe").src = "http://messageboard.rediff.com/newboard/board.php?service_name="+service_name+"&boardid="+did+"&from=story&dom=world";
+	}
+}
+function pageScrolled(e)
+{
+	if(!e) e=window.event;
+	var o = document.getElementById("boardiframe");
+
+	if(o && (document.body.scrollTop +document.body.clientHeight) > o.offsetTop)
+	{
+		if(o.src == "about:blank" || o.src == document.location.href) loadBoard(articledid); 
+	}
+}
+window.onscroll = function()
+{
+	pageScrolled();
+	if((typeof showMostCommentedFloater == 'function') && (document.getElementById('div_most_commented'))){showMostCommentedFloater();}
+	if((typeof floatBOX04 == 'function') && (document.getElementById('div_floater_ad_container'))){floatBOX04();}
+	if(document.getElementById('up_scroll_arrow')){if((parseInt((document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop) > (parseInt(window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight)*2)) ){document.getElementById('up_scroll_arrow').style.display = "block";}else{document.getElementById('up_scroll_arrow').style.display = "none";}}
+}
+//-->
+', 
+
+
+', 
+', 
+', 
+', 
+', 
+	', 
+	', 
+	', 
+	', Latest from rediff.com', 
+', 	
+', Market succumbs to late sell-off, ends lower', u"Restaurateurs reach tipping point over ministry's service charge advisory", u"Why advance GDP estimates won't fully capture note ban effect", u"All eyes on Uttar Pradesh, even Paytm's", More bad news as investment outlook continues to be grim', How to deal with an income tax notice', Why buying TriZetto is a pretty smart move by Cognizant', How ONGC plans to develop fields in Krishna Godavari basin', Can Indian markets absorb FII selling?', Maharashtra saw most farmer suicides in 2015', 
+', 
+
+	', 
+			', Moneywiz Live!', 
+		', 
+		', 
+		', 
+	', 
+	', 
+', 
+
+	', 
+
+', 
+', 
+', 
+', 
+
+function getDocHeight(){var doc = document;return Math.max(Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight),
+Math.max(doc.body.offsetHeight, doc.documentElement.offsetHeight),Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
+);}
+function showMostTab(n,tabnm,dvnm)
+{
+	for(i=1;i<=4;i++)
+	{
+		if(i==n)
+		{
+			if(document.getElementById(dvnm+i))document.getElementById(dvnm+i).style.display = 'block' ;
+			if(document.getElementById(tabnm+i))document.getElementById(tabnm+i).className = 'mosttabsel' ;
+		}
+		else
+		{
+			if(document.getElementById(dvnm+i))document.getElementById(dvnm+i).style.display='none';		
+			if(document.getElementById(tabnm+i))document.getElementById(tabnm+i).className = 'mosttabnormal' ;
+		}
+	}
+}
+function floatBOX04()
+{
+	if(document.getElementById('div_floater_ad_container'))
+	{
+		if(document.getElementById('rightcontainer'))
+		{
+			var rtop = parseInt(document.getElementById('rightcontainer').offsetHeight);
+			var scrolltop = parseInt((document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop);
+			if(scrolltop >= rtop)
+			{
+				document.getElementById('div_floater_ad_container').style.position = "fixed";
+			}
+			else
+			{
+				document.getElementById('div_floater_ad_container').style.position = "static";
+			}
+		}
+	}
+}
+function showShareIframe(arti_title,arti_url,msgid,service)
+{
+	var data ="";
+	var iframeurl = "http://share.rediff.com/pattern/friends?title="+escape(arti_title)+"&topic=&inviteurl="+arti_url+"&msgid="+msgid+"&inviteservice="+service+"&var=lightbox&grabber=1";
+	data += "<div id=shareframeloadmsg style='margin:120px 0 0 250px;font-family:arial;font-size:16px; position:absolute;'><img src="+imgpath+"/waitimg.gif /> <b>Loading! Please wait...</b></div>";
+	data += "<div style='padding: 5px 5px 0pt; width: 740px; text-align: right;'><div title=Close style='border: 1px solid #7899BB; background:#ffffff;float:right;color:#7899BB;cursor:pointer;cursor:hand;font-family: arial; font-size: 12px;height:15px;margin-right:10px;display:inline;' onclick=\"javascript:hideDiv('ieiframe');hideDiv('trans_div');hideDiv('div_shareframe');hideDiv('div_popupcontainer');\"><b>&nbsp;X&nbsp;</b></div></div>" ;
+	data += "<iframe id=shareThisLightBoxIframe height=420 frameborder=0 width=740 scrolling=auto src=\"about:blank\" onload=\"document.getElementById('shareframeloadmsg').innerHTML='';\"></iframe>"	;
+	document.getElementById('div_shareframe').innerHTML = 	data ;
+	var scrolltop = parseInt((document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop);
+	var toppos = scrolltop-200 ;
+	document.getElementById('div_shareframe').style.top = toppos+'px' ;
+	document.getElementById('shareThisLightBoxIframe').src = iframeurl ;
+	document.getElementById('trans_div').style.height = getDocHeight()+'px' ;
+	showDiv('ieiframe');
+	showDiv('trans_div');
+	showDiv('div_popupcontainer');
+	showDiv('div_shareframe');
+}
+function openArticlePrintWindow(urlpath) 
+{
+	var articleurlpath=urlpath+'?print=true';
+	window.open(articleurlpath, 'win_article_print','toolbar=no,directories=no,resize=yes,menubar=no,location=no,scrollbars=yes,width=600,height=500,maximize=null,top=70,left=80'); 
+}
+function slideAd1(){
+if(document.getElementById('toprdiv')){var toppos = parseInt(document.getElementById('toprdiv').style.height);
+if(toppos<150){document.getElementById('toprdiv').style.height= parseInt(toppos+3) + 'px' ;window.setTimeout("slideAd1()",10);}}
+}
+
+function setFontSize(sz,n){if(document.getElementById('arti_content_n')){document.getElementById('arti_content_n').className = sz;}if(n==1){document.getElementById("ft_1").className = "black";document.getElementById("ft_2").className = "f14 curhand";document.getElementById("ft_3").className = "f16 curhand";}else if(n==2){document.getElementById("ft_1").className = "curhand";document.getElementById("ft_2").className = "f14 black";document.getElementById("ft_3").className = "f16 curhand";}else{document.getElementById("ft_1").className = "curhand";document.getElementById("ft_2").className = "f14 curhand";document.getElementById("ft_3").className = "f16 black";}}
+
+function showTopSubscribe()
+{
+	if(getcookie("BT") != "1" || getcookie("BT") == null)
+	{
+		if(document.getElementById('div_subscribe_in')){document.getElementById('div_subscribe_in').style.display = "block";}
+	}
+}
+showTopSubscribe();
+
+
+
+	var OAS_sitepage = "inbusinessA.rediff.com/business-article.htm";
+	var OAS_listpos = "LB02,BOX03,BOX04,TopRight,TopLeft,x21,Top,Top1,Bottom,x22,BOX05,Bottom2";
+//window.setTimeout("slideAd1()",1500);
+', 
+	
+', #footerLinks {border-top:1px solid #d1d1d1;border-bottom:1px solid #d1d1d1;padding:5px 0;margin:25px 0 0 0;text-align:center;}
+#footerLinks span{font-family:arial,verdana,sans-serif,FreeSans;font-size:10px;margin:0px 5px;}
+.footer{margin:10px 0 0 0;border:none;padding:0 0 10px 0;}', 
+
+', Business email', Office email App', Domain registration', Website', Rediffmail', Money', Company email', Online Shopping', Books', Gifts', Videos', Blogs', Buzz', 
+', 
+', © 2017 Rediff.com - ', Investor Information',  - ', Advertise with us',  - ', Disclaimer',  - ', Privacy Policy',  - ', Careers',  - ', Feedback',  - ', Terms of use', 
+', 
+', 
+
+
+', 
+<!--
+function metriccall_img(sldcounter)
+{
+	var querystring	= "";
+	var path	= "";
+	var domain	= "";
+	var Rkey_data	= "";
+	var Rkey	= Math.floor(Math.random() * 1000000);
+	querystring	= window.location.search;
+	path		= window.location.pathname;
+	domain		= window.location.host;
+
+	if (querystring == "")
+		Rkey_data = "?rkey="+Rkey;
+	else
+		Rkey_data = "&rkey="+Rkey;
+
+	document.getElementById("metric_iframe").src = 'http://metric.ind.rediff.com/'+domain+path+"/"+sldcounter+querystring+Rkey_data;
+}
+
+function trackURL(url){if(navigator.userAgent.toLowerCase().indexOf('msie') != -1){var referLink = document.createElement('a');referLink.href = url;document.body.appendChild(referLink);referLink.click();}else{document.location.href = url;}}
+
+
+function resize()
+{
+	var winW = 1024 ;
+	if (navigator.appName=="Netscape"  || navigator.appName=="Opera" ) 
+	{
+		winW = window.innerWidth;
+	}
+	if (navigator.appName.indexOf("Microsoft")!=-1) 
+	{
+		winW = document.body.offsetWidth;
+
+	}
+	if(winW > 1000)
+	{
+		document.getElementById('wrapper').style.width='990px' ;
+		if(document.getElementById('leftcontainer'))document.getElementById('leftcontainer').style.width='670px' ;
+		if(document.getElementById('div_sldvideo_main'))
+		{
+			document.getElementById('div_sldvideo_main').style.width='630px' ;
+			leftlimit= -1345 ;
+		}
+		if(document.getElementById('fixed_footer_ad'))document.getElementById('fixed_footer_ad').style.width='990px' ;
+		if(document.getElementById('topsrch1'))document.getElementById('topsrch1').style.marginLeft='170px';
+	}
+	else
+	{
+		document.getElementById('wrapper').style.width='778px' ;
+		if(document.getElementById('leftcontainer'))document.getElementById('leftcontainer').style.width='465px' ;
+		if(document.getElementById('div_sldvideo_main'))
+		{
+			document.getElementById('div_sldvideo_main').style.width='405px' ;
+			leftlimit= -1420 ;
+		}
+		if(document.getElementById('fixed_footer_ad'))document.getElementById('fixed_footer_ad').style.width='778px' ;
+	
+		if(document.getElementById("div_samsung")){
+			document.getElementById("div_samsung").style.display='none';
+		}
+		if(document.getElementById('topsrch1'))document.getElementById('topsrch1').style.marginLeft='80px';
+	}
+}
+
+//resize();
+//window.onresize = resize ;
+if(document.getElementById('new_wd_top')){document.getElementById('new_wd_top').className = "new_wd_top_n";}
+function showAds(dvnm){if(typeof(glb_ad_detect) == 'undefined'){hideDiv(dvnm);return false;}else{return true;}}
+//-->
+', 
+
+', 
+', 
+document.write(unescape("%3Cscript src='http://imads.rediff.com/addetect.js' type='text/javascript'%3E%3C/script%3E"));
+', 
+', 
+', 
+	
+	', 
+	OAS_loc=getCookie('RLOC');
+	if (!(OAS_loc))
+	{
+		document.write("<TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0><TR><TD><IMG SRC=\"http://loc.rediff.com/cgi-bin/loc/setup/blank.gif\" BORDER=0 HSPACE=0 VSPACE=0></TD></TR></TABLE>");
+	}
+	if(document.getElementById("world_top")){if(showAds('world_top')){OAS_AD('LB02');}}
+	', 
+	
+', 
+
+', 
+	', 
+	
+	if(document.getElementById("world_right1")){if(showAds('world_right1')){OAS_AD('BOX03');}}
+	
+	', 
+', 
+
+', 
+	', 
+	
+	if(document.getElementById("world_right2")){if(showAds('world_right2')){OAS_AD('BOX04');}}
+	
+	', 
+', 
+', 
+	', 
+	
+	if(document.getElementById("world_bottom1")){if(showAds('world_bottom1')){OAS_AD('Bottom');}}
+	
+	', 
+', 
+', 
+', 
+if(document.getElementById("div_AD_x22")){if(showAds('div_AD_x22')){OAS_AD('x22');}}
+', 
+', 
+', 
+', 
+if(document.getElementById("div_ad_Top")){if(showAds('div_ad_Top')){OAS_AD('Top');}}
+', 
+', 
+', 
+', 
+if(document.getElementById("div_ad_top1")){if(showAds('div_ad_top1')){OAS_AD('Top1');}}', 
+', 
+
+
+', 
+if(document.getElementById("world_top"))
+{
+	var hdn = document.getElementById("world_top_hidden");
+	var vsbl = document.getElementById("world_top");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("world_right1"))
+{
+	var hdn = document.getElementById("world_right1_hidden");
+	var vsbl = document.getElementById("world_right1");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("world_right2"))
+{
+	var hdn = document.getElementById("world_right2_hidden");
+	var vsbl = document.getElementById("world_right2");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("world_bottom1"))
+{
+	var hdn = document.getElementById("world_bottom1_hidden");
+	var vsbl = document.getElementById("world_bottom1");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_AD_x22"))
+{
+	var hdn = document.getElementById("div_AD_x22_hidden");
+	var vsbl = document.getElementById("div_AD_x22");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_ad_Top"))
+{
+	var hdn = document.getElementById("div_ad_Top_hidden");
+	var vsbl = document.getElementById("div_ad_Top");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_ad_top1"))
+{
+	var hdn = document.getElementById("div_ad_top1_hidden");
+	var vsbl = document.getElementById("div_ad_top1");
+	copyInnerHtml(hdn, vsbl);
+}
+', 
+
+
+
+
+
+
+', 
+', 
+', <', <', More from rediff', 2017: IT jobs could start moving to richer countries', Is the Note Ban a success?', u"How are 'minorities' allowed tax benefits under HUF?", Why India will NEVER score well on ease of doing business', The pain of demonetisation was not justified', Vote: Will you buy Amul Girl merchandise?', Indian tax regime is set for total makeover', RBI awaits the power of one', 17 risks that can shake markets', u"8/11 and after: The going won't be easy for some more time", >', >',  ',  ',  ',  ',  ',  ',  ',  ',  ',  ', 
+', 
+', 
+<!--
+
+var total_commented = "10";
+if(document.getElementById('div_mcomm_abs')){document.getElementById('div_mcomm_abs').style.width = (total_commented * 360) + "px";}
+var glb_comm_timer;
+var glb_counter = 1;
+var glb_close = 0;
+var glb_upanimation = 0;
+function slideleftcommented(dvnm,limit)
+{
+	if(document.getElementById(dvnm))
+	{
+		var leftpos = parseInt(document.getElementById(dvnm).style.left);
+		if(leftpos > -(limit * glb_counter) && (glb_counter < total_commented))
+		{
+			document.getElementById(dvnm).style.left = (leftpos - 10)+'px';
+			glb_comm_timer = window.setTimeout(function(){slideleftcommented(dvnm,limit);},10);
+			if(glb_counter == (total_commented -1)){document.getElementById("mcom_right_arrow_grey").style.visibility = "visible";}
+			if(document.getElementById("mcom_left_arrow_grey")){document.getElementById("mcom_left_arrow_grey").style.visibility = "hidden";}
+		}
+		else
+		{
+			if(document.getElementById("sq_mc_"+glb_counter)){document.getElementById("sq_mc_"+glb_counter).className="spansquare";}
+			glb_counter++;
+			if(document.getElementById("sq_mc_"+glb_counter)){document.getElementById("sq_mc_"+glb_counter).className="spansquaresel";}
+		}
+	}
+}
+
+function sliderightcommented(dvnm,limit)
+{
+	if(document.getElementById(dvnm))
+	{
+		var leftpos = parseInt(document.getElementById(dvnm).style.left);
+		if(leftpos < -(((glb_counter - 1)*limit) - limit))
+		{
+			document.getElementById(dvnm).style.left = (leftpos + 10)+'px'; 
+			glb_comm_timer = window.setTimeout(function(){sliderightcommented(dvnm,limit);},10);
+			if(glb_counter == 2){document.getElementById("mcom_left_arrow_grey").style.visibility = "visible";}
+			document.getElementById("mcom_right_arrow_grey").style.visibility = "hidden";
+		}
+		else
+		{
+			if(document.getElementById("sq_mc_"+glb_counter)){document.getElementById("sq_mc_"+glb_counter).className="spansquare";}
+			glb_counter--;
+			if(document.getElementById("sq_mc_"+glb_counter)){document.getElementById("sq_mc_"+glb_counter).className="spansquaresel";}
+		}
+	}
+}
+
+
+function showCommneted(n)
+{
+	if(document.getElementById("sq_mc_"+glb_counter)){document.getElementById("sq_mc_"+glb_counter).className="spansquare";}
+	document.getElementById('div_mcomm_abs').style.left = -((n-1)*360) + 'px';
+	glb_counter = n;
+	if(document.getElementById("sq_mc_"+n)){document.getElementById("sq_mc_"+n).className="spansquaresel";}
+	if(n == total_commented)
+	{
+		document.getElementById("mcom_right_arrow_grey").style.visibility = "visible";
+	}
+	else
+	{
+		document.getElementById("mcom_right_arrow_grey").style.visibility = "hidden";
+	}
+	if(n==1)
+	{
+		document.getElementById("mcom_left_arrow_grey").style.visibility = "visible";
+	}
+	else
+	{
+		document.getElementById("mcom_left_arrow_grey").style.visibility = "hidden";
+	}
+
+}
+
+function showMostCommentedFloater()
+{
+	if(document.getElementById('div_most_commented') && glb_close == 0)
+	{
+		var boxheight = 220;
+		var scrolltop = getScrollTop();
+		var newtop = (viewPort().height +  scrolltop);
+		if(scrolltop > (document.getElementById('boardiframe').offsetTop - 600))
+		{
+			document.getElementById('div_most_commented').style.display = "block";
+			if(glb_upanimation == 0)
+			{
+				document.getElementById('div_most_commented').style.width = "1px";
+				slideFromRight();
+				glb_upanimation = 1;
+			}
+			document.getElementById('div_most_commented').style.top = (newtop - boxheight)  + "px";
+		}
+		else
+		{
+			document.getElementById('div_most_commented').style.top = (newtop - boxheight)  + "px";
+		}
+	}
+}
+
+function slideFromRight()
+{
+	var curwd = parseInt(document.getElementById('div_most_commented').style.width);
+	if(curwd <= 480)
+	{
+		document.getElementById('div_most_commented').style.width = (curwd + 10)  + "px";
+		window.setTimeout('slideFromRight()',10);
+	}
+}
+
+
+//-->
+', 
+', \u25b2', 
+', 
+
+
+
+
+', 
+	', 
+	if(document.getElementById("div_samsung")){if(showAds('div_samsung')){OAS_AD('TopRight');}}
+	', 
+', 
+', 
+', if(document.getElementById("div_AD_x21")){if(showAds('div_AD_x21')){OAS_AD('x21');}}', 
+', 
+', 
+	', 
+	if(document.getElementById("div_transitionAD")){if(showAds('div_transitionAD')){OAS_AD('TopLeft');}}
+	', 
+', 
+', 
+', if(document.getElementById("div_AD_box05")){if(showAds('div_AD_box05')){OAS_AD('BOX05');}}', 
+', 
+', if(document.getElementById("div_AD_Bottom2")){if(showAds('div_AD_Bottom2')){OAS_AD('Bottom2');}}', 
+
+', 
+if(document.getElementById("div_samsung"))
+{
+	var hdn = document.getElementById("div_samsung_hidden");
+	var vsbl = document.getElementById("div_samsung");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_transitionAD"))
+{
+	var hdn = document.getElementById("div_transitionAD_hidden");
+	var vsbl = document.getElementById("div_transitionAD");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_AD_x21"))
+{
+	var hdn = document.getElementById("div_AD_x21_hidden");
+	var vsbl = document.getElementById("div_AD_x21");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_AD_box05"))
+{
+	var hdn = document.getElementById("div_AD_box05_hidden");
+	var vsbl = document.getElementById("div_AD_box05");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_AD_Bottom2"))
+{
+	var hdn = document.getElementById("div_AD_Bottom2_hidden");
+	var vsbl = document.getElementById("div_AD_Bottom2");
+	copyInnerHtml(hdn, vsbl);
+}
+', 
+
+'][
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+	', 
+', 
+	', HOME', 
+	', NEWS', 
+	', BUSINESS', 
+	', MOVIES', 
+	', SPORTS', 
+	', CRICKET', 
+	', GET AHEAD', 
+	', SHOPPING', 
+	', rediff NewsApp', 
+', 
+
+', 
+function submitRTNewsSearch()
+{
+	for(var i=0; i < document.srchform.srch_in.length; i++){if (document.srchform.srch_in[i].checked){var rad_val = document.srchform.srch_in[i].value;}}
+	var srchword = trim(document.getElementById('srchword').value);
+	if(srchword == "" || srchword == "Search"){document.getElementById('srchword').focus();alert("Please enter search keyword");return false;}
+	srchword = srchword.replace(/\s/g,'-').replace(/\//g,' ');
+	if(rad_val == "web" ){var newsquery = "http://realtime.rediff.com/news/"+escape(srchword)+"?src=rediff_allnews_search";}
+	else{var newsquery = "http://realtime.rediff.com/news/"+escape(srchword)+"?service=site-search";}
+	document.location.href = newsquery;
+	return false;
+}
+function showDefValue(ob){if(ob.value == ob.defaultValue){ob.value ='';}else if(ob.value==''){ob.value=ob.defaultValue;}}
+function srchoption_on_off(ob)
+{
+	if(ob.title == "show options")
+	{
+		document.getElementById('div_srchoption').style.display = "block";
+		document.getElementById('srchop_arrow').title = "hide options";
+	}
+	else
+	{
+		document.getElementById('div_srchoption').style.display = "none";
+		document.getElementById('srchop_arrow').title = "show options";
+	}
+}
+function srchoptionHide()
+{
+	if(document.getElementById('srchop_arrow'))
+	{
+		document.getElementById('srchop_arrow').title= "show options";
+		document.getElementById('div_srchoption').style.display = "none";
+	}
+}
+function showNewsappPromo(tblid,tblid1,x,y){var curleft = 0;var curtop = 0;var obj = tblid;if(obj.offsetParent){while (obj.offsetParent){curleft += obj.offsetLeft;obj = obj.offsetParent;}}else if (obj.x){curleft += obj.x;}if(screen.width > 1400){curleft = curleft-150;}document.getElementById(tblid1).style.left= parseInt(curleft + x) + 'px' ;var obj1 = tblid;if (obj1.offsetParent){while (obj1.offsetParent){curtop += obj1.offsetTop;obj1 = obj1.offsetParent;}}else if (obj1.y){curtop += obj1.y;}document.getElementById(tblid1).style.top=parseInt(curtop + y) + 'px' ;document.getElementById(tblid1).style.display='block';}
+', 
+', 
+.divbtnarrow{float:left;}.new_wd_top_n{padding:8px 0 5px 0;border-top:solid 1px #ccc;border-bottom:solid 1px #ccc;margin:5px 0 0 0;}
+.btnarrow{border-top:5px solid #b0b0b0;border-left:5px solid #FFFFFF;border-right:5px solid #FFFFFF;font-size:0;line-height:0;width:0;margin:7px 7px 0 7px;cursor:pointer;cursor:hand;float:left;}.newsapppop{padding-right:0;}
+@media only screen and (device-width: 768px)
+{
+	#wrapper{padding:0 5px 0 5px;}
+	.n_srchbox{width:70px;-webkit-appearance:none;}
+	.btnarrow{border-top:8px solid #b0b0b0;border-left:8px solid #FFFFFF;border-right:8px solid #FFFFFF;font-size:0;line-height:0;width:0;margin:7px 7px 0 7px;cursor:pointer;cursor:hand;float:left;}
+}
+', 
+
+', 
+', 
+', 
+', Rediff News', All News', 
+', 
+', 
+', 
+', 
+', 
+', .appthumb{float:left;display:inline;width:70px;height:70px;margin:0 10px 0 0;background:url(http://imworld.rediff.com/worldrediff/pix/rna_sprite.png) no-repeat 0 0;cursor:pointer;cursor:hand;}.gplay{width:65px;height:15px;background:url(http://imworld.rediff.com/worldrediff/pix/rna_sprite.png) no-repeat 0 -73px;vertical-align:middle;}.apppromoright{float:left;width:155px;overflow:hidden;}.freeaap{color:#f35609}.appdwnbtn{width:132px;height:30px;margin:6px 0;background:url(http://imworld.rediff.com/worldrediff/pix/rna_sprite.png) no-repeat -78px -1px;}', 
+', 
+function trackAppURL(url){document.location.href = url;}
+', 
+
+				
+', 
+', NewsApp ', (Free)', Read news as it happens', 
+', 
+', 
+', 
+var ck=document.cookie;function getcookie(n)
+{var ar=n+"=";var al=ar.length;var cl=ck.length;var i=0;while(i<cl)
+{j=i+al;if(ck.substring(i,j)==ar)
+{e=ck.indexOf(";",j);if(e==-1)
+e=ck.length;return unescape(ck.substring(j,e));}
+i=ck.indexOf(" ",i)+1;if(i==0)
+break;}
+return "";}
+', 
+
+', 
+',  ', Sign in',    |  ', Create a Rediffmail account', 
+', 
+	', 
+		
+		var querystring	= "";
+		var path	= "";
+		var domain	= "";
+		var Rkey_data	= "";
+		var Rkey	= Math.floor(Math.random() * 1000000);
+		querystring	= window.location.search;
+		path		= window.location.pathname;
+		domain		= window.location.host;
+		var tmp_ref = encodeURIComponent(document.referrer);
+		if((tmp_ref == null) || (tmp_ref.length == 0)){tmp_ref = "";}
+		
+					
+			if (querystring == "")
+				Rkey_data = "?rkey="+Rkey;
+			else
+				Rkey_data = "&rkey="+Rkey;
+			
+				
+		
+		if(tmp_ref != "")
+		{
+			Rkey_data += "&ref="+tmp_ref;
+		}
+		
+
+		document.getElementById('metric_iframe').src ='http://metric.ind.rediff.com/'+domain+path+querystring+Rkey_data+'&device=pc';	
+	', 
+
+', 
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "6035613" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+
+	function comscore_ajax(url)
+	{
+		_comscore.push({ c1: "2", c2: "6035613",c4:url });
+		var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+		s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+		el.parentNode.insertBefore(s, el);
+	}
+', 
+
+', 
+
+', 
+var endyear 	= "2017";
+var  cdn_domain = "http://www.rediff.com";
+var  org_domain = "http://mypage.rediff.com";
+var  imgpath	= "http://imworld.rediff.com/worldrediff/pix";
+var  ishare_domain	= "http://ishare.rediff.com";
+var OAS_sitepage = "" ;
+var OAS_listpos = "" ;
+
+
+var Rlo="";
+var Rl = "";
+Rlo	=	getcookie("Rlo");
+Rlo =	unescape(Rlo).replace(/\+/g," ");
+Rlo =	Rlo.replace("@rediffmail.com","");
+Rlo = Rlo.replace(/[^\w\d\s\-\_]/ig,'');
+Rl = getcookie("Rl");
+Rl = Rl.replace(/[^\w\d\s\-\_@\.]/ig,'');
+var tmp_rsc1 = "";
+tmp_rsc1 = getcookie("Rsc");
+if((Rlo != "" || Rl!="" ) && tmp_rsc1 != "")
+{
+	
+	if(Rlo != "" )
+	{
+		document.getElementById('username').innerHTML	= "<a href='"+org_domain+"/profile/myprofile' class='proper'>"+Rlo+"</a>&nbsp; | &nbsp;" ;
+	}
+	else
+	{
+		Rl = Rl.substring(0,Rl.lastIndexOf('@'));
+		document.getElementById('username').innerHTML	= "<a href='"+org_domain+"/profile/myprofile'>"+Rl+"</a>&nbsp; | &nbsp;" ;
+	}
+	
+	if(document.getElementById('signin_info'))document.getElementById('signin_info').innerHTML = "" ;
+}
+else
+{
+	if(document.getElementById('signin_info')){document.getElementById('signin_info').innerHTML = " <a href='https://mail.rediff.com/cgi-bin/login.cgi' title='Already a user? Sign in'>Sign in</a>  &nbsp;|&nbsp; <a href='http://register.rediff.com/register/register.php?FormName=user_details' >Create a Rediffmail account</a>";}
+	if(Rlo != "" && Rl != "" )
+	{
+		if(document.getElementById('signin_info')){document.getElementById('signin_info').innerHTML += "&nbsp;|&nbsp;";}
+	}
+}
+if(Rl != "")
+{
+	if(document.getElementById('signin_info')){document.getElementById('signin_info').innerHTML += "<a href='"+org_domain+"/signout' title='Sign out'>Sign out</a>";}
+}
+
+', 
+', .popupcontainer{z-index:1000;}', 
+', 
+
+
+
+', 
+', 
+', 
+', Rediff.com',   » ', Business', u" » 'Foreign investors prefer independent managers'", 
+
+', u"'Foreign investors prefer independent managers'", 
+', Share', Comment', 
+', To get such articles in your inbox', 
+', 
+', Text size: ',  ', A',    ', A',    ', A', 
+
+', 
+
+', February  10, 2010 14:01 IST', 
+', N', u"ewly-formed Ascent Capital, which is a separate investment entity carved out of UTI Ventures, recently raised $350 million (Rs 1,575 crore) for its first fund. The fund is focused on growth capital and is advising and managing ITVUS Fund I, Ascent India Fund II and Ascent India Fund III. Director Ajay Mittal speaks to Shilpy Sinha about the fund's strategy. Excerpts: ", u"What will be Ascent Capital's strategy?", Ascent Capital follows an entrepreneur-centric investment approach. We actively seek out promising Indian companies driven by visionary leadership. Our constant endeavour is to complement the strengths of the teams backed by us.
+', 
+', We leverage our expertise and market insight to spot emerging opportunities with dynamic growth trajectories. We have time and again demonstrated our ability to recognise and support companies that have transformed into industry leaders. We believe in long-term partnerships.', 
+', From raising additional capital, attracting senior management talent, maintaining high standards of corporate governance, preparing companies for successful public offers to providing advice on inorganic growth plans, we leverage our experience and network to drive the success of every company we back.', 
+', Unlike earlier, are investors showing interest in funding individual teams? Will this spin-out model catch on in the Indian market?', Foreign investors (limited partners or LPs) like endowment funds, university funds, pension funds and fund of funds typically prefer independent investment managers (general partners or GPs). Any GP with the requisite track record, experience of working together as a team and showing skin in the game is preferred by these foreign Investors.', 
+', Was raising the fund a challenge? Did you tap the overseas market this time?', Ascent India Fund III (AIF III) is the third fund raised by our team. We have had overseas investors in the previous fund (Ascent India Fund – Fund II). The year 2009 was a wrong time for raising funds. However, what helped us was our track record as well as the fact that our team is one of the most experienced in this asset class and has worked together for a long period.', 
+', How do you look at the fund-raising scenario this year? How many investments will you be looking at this year?', Considering the adverse market conditions prevalent in 2008 and in substantial part of 2009, we consider 2010 as an appropriate time for companies on high growth trajectory to raise growth capital. It would be difficult to put a number to deals we will be doing this year, as it depends on how many deals sourced by us meet the investment criteria. We would be investing our funds over the next four years or so. We look at an ideal deal size of $15 million to $20 million.', 
+', Which are the sectors that you intend to focus on?', u"We prefer to invest in sectors that address domestic demand driven by a fast growing consumer market, services sector that benefits from India's infrastructure boom and those sectors that leverage India's outsourcing strengths in services and manufacturing.", 
+', How do you look at the recent SAT ruling on Subhkam Ventures and MSK Projects, which talks about veto rights to shareholders and which does not mean control over the company?', u"It is a welcome ruling considering that financial investors (such as venture capital and private equity) with significant minority stake don't intend to run the company and the veto rights are nothing but negative covenants to protect their interests.", 
+		', Source: ', 
+	
+', 
+', Related News: ', Ascent Capital', , ', UTI Ventures', , ', III', , ', MSK', , ', Ajay Mittal', 
+', 
+', Share', Comment', 
+', Print this article', 
+', 
+
+', 
+', 
+', 
+', 
+', 
+', u"It's free!", To get such articles in your inbox', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+', 
+
+function getScrollTop(){if(typeof pageYOffset != 'undefined'){return pageYOffset;}else{var B = document.body;var D = document.documentElement;D = (D.clientHeight)? D: B;return D.scrollTop;}}
+function viewPort(){var h = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;var w = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;return {width : w , height : h}}
+function stickyPopup()
+{
+	if(document.getElementById('div_bot_popup'))
+	{
+		var useremail = "";
+		useremail =	getcookie("Rl");
+		useremail = useremail.replace(/[^\w\d\s\-\_@\.]/ig,'');
+		if(getcookie("BT") != "1" || getcookie("BT") == null)
+		{
+			document.getElementById('div_bot_popup').style.display = "block";
+			if(useremail != ""){document.getElementById("sub_email").value = useremail;if(document.getElementById("sub_email_in")){document.getElementById("sub_email_in").value = useremail;}}
+			if(document.getElementById('metric_NLiframe')){document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe?rkey="+Math.random();}
+		}
+		else
+		{
+			document.getElementById('div_bot_popup').style.display = "none";
+			if(document.getElementById('div_subscribe_in')){document.getElementById('div_subscribe_in').style.display = "none";}
+		}
+	}
+}
+function closeSubscripBox()
+{
+	if(document.getElementById('div_bot_popup')){document.getElementById('div_bot_popup').style.display = "none";}
+	if(document.getElementById('div_subscribe_in')){document.getElementById('div_subscribe_in').style.display = "none";}
+	if(document.getElementById('metric_NLiframe')){document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/close?rkey="+Math.random();}
+}
+
+function submitSubscribe(emailfield,subscribebtn,div_thanks,div_errmsg)
+{
+	var email =  document.getElementById(emailfield).value;
+	var sub_captcha = "";
+	var section = "interview";
+	var article_url = "http://business.rediff.com/interview/2010/feb/10/inter-foreign-investors-prefer-independent-managers.htm";
+	var subreq;
+	if(section == "business"){section = "money" ;}
+	
+	if(!validEmail(email))
+	{
+		alert("Please enter a valid email");
+		document.getElementById(emailfield).focus();
+		return false;
+	}
+	if(emailfield == "sub_email_in")
+	{
+		sub_fillTacking('email_topbox',emailfield);
+	}
+	else
+	{
+		sub_fillTacking('email',emailfield); 
+	}
+
+	var url= cdn_domain+"/newsletter";
+	var postdata = "email="+email+"&captcha="+sub_captcha+"&section="+section+"&article_url="+encodeURIComponent(article_url)+"&country=india&output=xml";
+	if (window.XMLHttpRequest)
+	{
+		subreq = new XMLHttpRequest();
+		subreq.onreadystatechange = statusstateChanged;
+		subreq.open("POST", url, true);
+		subreq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		subreq.setRequestHeader("Content-Length", postdata.length.toString());
+		subreq.setRequestHeader("Connection", "Close");
+		subreq.send(postdata);
+	}
+	else if (window.ActiveXObject)
+	{
+		subreq = new ActiveXObject("Microsoft.XMLHTTP");
+		if (subreq)
+		{
+			subreq.onreadystatechange = statusstateChanged;
+			subreq.open("POST", url, true);
+			subreq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			subreq.setRequestHeader("Content-Length", postdata.length);
+			subreq.setRequestHeader("Connection", "Close");
+			subreq.send(postdata);
+		}
+	}
+
+	function statusstateChanged()
+	{
+		if (subreq.readyState==4 || subreq.readyState=="complete")
+		{
+			if(subreq.status == 200)
+			{
+				var resp_status = (subreq.responseXML.getElementsByTagName("status")[0].firstChild)?subreq.responseXML.getElementsByTagName("status")[0].firstChild.nodeValue:0;
+				var resp_message = (subreq.responseXML.getElementsByTagName("message")[0].firstChild)?subreq.responseXML.getElementsByTagName("message")[0].firstChild.nodeValue:0;
+				if(resp_status == "Success")
+				{
+					if(document.getElementById(div_thanks)){document.getElementById(div_thanks).innerHTML = "<div style='padding:0 0 5px 0;overflow:hidden;border:solid 1px #ccc;background:#fff;text-align:center;'><div title='Close' style='float:right;color:#0066bc;font:bold 16px arial;' class='floatR bold curhand f14' onclick='closeSubscripBox();'>x &nbsp;</div><span class='clear'></span><p class='f14 bold alignC'>Thank you for signing up for the Rediff NewsLetter!</p></div>" ;}
+					if(document.getElementById('metric_NLiframe'))
+					{
+						if(emailfield == "sub_email_in")
+						{
+							document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/thanks_topbox?rkey="+Math.random();
+						}
+						else
+						{
+							document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/thanks?rkey="+Math.random();
+						}
+					}
+				}
+				else
+				{
+					document.getElementById(div_errmsg).innerHTML  = "<p class=red>"+resp_message+"</p>"; 
+					document.getElementById(div_errmsg).style.display = "block";
+					if(document.getElementById(subscribebtn)){document.getElementById(subscribebtn).disabled = false;}
+				}
+			}
+		}
+		if (subreq.readyState == 1)
+		{
+			if(document.getElementById(subscribebtn)){document.getElementById(subscribebtn).disabled = true;}
+		}
+	}
+	return false;
+}
+
+function sub_clickTacking(ob)
+{
+	if(document.getElementById('metric_NLiframe'))
+	{
+		 setTimeout(function (){
+                document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/"+ob+"?rkey="+Math.random();
+            },500);
+		
+	}
+}
+function sub_fillTacking(ob,id)
+{
+	if(document.getElementById('metric_NLiframe'))
+	{
+		if(document.getElementById(id).value == "" || document.getElementById(id).value == "Enter Your email ID")
+		{
+			document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/"+ob+"/notfilled?rkey="+Math.random();
+		}
+		else
+		{
+			document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/"+ob+"/filled?rkey="+Math.random();
+		}
+	}
+}
+function newClickTracking()
+{
+	if(document.getElementById('sub_email').value == "" || document.getElementById('sub_email').value == "Enter Your email ID")
+	{
+		document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/email/notfilled?rkey="+Math.random();
+	}
+	else
+	{
+		document.getElementById('metric_NLiframe').src = "http://metric.ind.rediff.com/www.rediff.com/nlsubscribe/email/filled?rkey="+Math.random();
+	}
+}
+
+
+//stickyPopup();
+
+
+', 
+', 
+
+', 
+.div_morefrom_outer{position:relative;width:670px;height:240px;overflow:hidden;text-align:left;}.div_morefrom_inner{position:absolute;z-index:1;}.more_from_img{width:210px;height:180px;overflow:hidden;text-align:left;margin:0 0 5px 0;background:#d4d4d4;}.more_from_copy{line-height:1.3em;height:2.6em;overflow:hidden;width:210px;text-overflow:ellipsis;}.morefrom_right_arrow{display:none;width:35px;height:35px;border-radius:50%;background:#000;color:#fff;opacity:.7;filter:alpha(opacity=70);position:absolute;z-index:2;right:0;top:70px;cursor:pointer;cursor:hand;font-size:34px;line-height:34px;text-align:center;}.morefrom_left_arrow{display:none;width:35px;height:35px;border-radius:50%;background:#000;color:#fff;opacity:.7;filter:alpha(opacity=70);position:absolute;z-index:2;left:0;top:70px;cursor:pointer;cursor:hand;font-size:34px;line-height:34px;text-align:center;}.morefrom_box{width:224px;height:245px;overflow:hidden;float:left;}.slide_rel_left{left:-672px;overflow:hidden;animation:slideleft 1s 1;}.slide_rel_right{left:0px;overflow:hidden;animation:slideright 1s 1;}
+@keyframes slideleft{from {left:0px;}to{left:-672px;}}
+@keyframes slideright{from {left:-672px;}to{left:0px;}}
+', 
+
+', More from rediff', 
+', 
+	', 
+		', 
+	', 
+	', u"VC's hunt for business plans at IIM-B", 
+	', 
+		', 
+	', 
+	', Jesse Ryder to miss IPL III', 
+	', 
+		', 
+	', 
+	', Injured Tanvir hopeful of playing in IPL III', 
+	', 
+		', 
+	', 
+	', IPL-III auction: Who went where, for how much', 
+	', 
+		', 
+	', 
+	', Euro-III grade fuel sale to be delayed by 6 months', 
+	', 
+		', 
+	', 
+	', Akram hopeful of good show by KKR in IPL-III', 
+	', 
+		', 
+	', 
+	',  \u25b6', \u25c0 ', 
+', 
+
+', 
+var total_related = "8";
+
+if(total_related > 6){total_related = 6;}
+if(document.getElementById('div_morefrom_inner')){document.getElementById('div_morefrom_inner').style.width = (total_related * 224) + "px";}
+if(total_related > 3)
+{
+	document.getElementById('morefrom_right_arrow').style.display = 'block';
+	document.getElementById('morefrom_right_arrow').onclick = function(){
+		document.getElementById('morefrom_right_arrow').style.display = 'none';
+		document.getElementById('morefrom_left_arrow').style.display = 'block';
+		document.getElementById('div_morefrom_inner').className = "div_morefrom_inner slide_rel_left";
+	}
+	document.getElementById('morefrom_left_arrow').onclick = function(){
+		document.getElementById('morefrom_left_arrow').style.display = 'none';
+		document.getElementById('morefrom_right_arrow').style.display = 'block';
+		document.getElementById('div_morefrom_inner').className = "div_morefrom_inner slide_rel_right";
+	}
+
+}
+
+', 
+', 
+', 
+',  ', 
+', 
+<!--
+document.domain="rediff.com";
+var articledid = "money2010feb10/inter-foreign-investors-prefer-independent-managers" ;
+var service_name = "" ;
+
+if(navigator.userAgent.search(/iPad/i)>=0)
+{
+	document.write("<IFRAME id=\"boardiframe\" scrolling=\"no\" name=\"boardiframe\" width=\"100%\" frameborder=\"0\" src=\"\" height=\"1000\"></IFRAME><BR>");
+	loadBoard(articledid);
+}
+
+
+
+
+
+
+
+function resizer(ht)
+{   i = document.getElementById('boardiframe');
+i.style.height = "200px";
+i.style.height = ht + 5 + "px";
+}
+
+
+if(((navigator.appName.indexOf("Microsoft") != -1) || (navigator.userAgent.toLowerCase().indexOf('firefox'))) && (navigator.userAgent.search(/iPad/i) < 0))
+{ 
+	document.write("<IFRAME id=\"boardiframe\" scrolling=\"no\" name=\"boardiframe\" width=\"100%\" frameborder=\"0\" src=\"about:blank\" height=\"1000\"></IFRAME><BR>");
+}
+else
+{ 
+	document.write("<!-- //-->");
+}
+function loadBoard(eurl)
+{
+	if (eurl)
+	{
+	var did = eurl.replace(/\//gi,'');
+	var did = did.replace(/.htm/gi,'');
+	document.getElementById("boardiframe").src = "http://messageboard.rediff.com/newboard/board.php?service_name="+service_name+"&boardid="+did+"&from=story&dom=world";
+	}
+}
+function pageScrolled(e)
+{
+	if(!e) e=window.event;
+	var o = document.getElementById("boardiframe");
+
+	if(o && (document.body.scrollTop +document.body.clientHeight) > o.offsetTop)
+	{
+		if(o.src == "about:blank" || o.src == document.location.href) loadBoard(articledid); 
+	}
+}
+window.onscroll = function()
+{
+	pageScrolled();
+	if((typeof showMostCommentedFloater == 'function') && (document.getElementById('div_most_commented'))){showMostCommentedFloater();}
+	if((typeof floatBOX04 == 'function') && (document.getElementById('div_floater_ad_container'))){floatBOX04();}
+	if(document.getElementById('up_scroll_arrow')){if((parseInt((document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop) > (parseInt(window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight)*2)) ){document.getElementById('up_scroll_arrow').style.display = "block";}else{document.getElementById('up_scroll_arrow').style.display = "none";}}
+}
+//-->
+', 
+
+
+', 
+', 
+', 
+', 
+', 
+	', 
+	', 
+	', 
+	', Latest from rediff.com', 
+', 	
+', Market succumbs to late sell-off, ends lower', u"Restaurateurs reach tipping point over ministry's service charge advisory", u"Why advance GDP estimates won't fully capture note ban effect", u"All eyes on Uttar Pradesh, even Paytm's", More bad news as investment outlook continues to be grim', How to deal with an income tax notice', Why buying TriZetto is a pretty smart move by Cognizant', How ONGC plans to develop fields in Krishna Godavari basin', Can Indian markets absorb FII selling?', Maharashtra saw most farmer suicides in 2015', 
+', 
+
+	', 
+			', Moneywiz Live!', 
+		', 
+		', 
+		', 
+	', 
+	', 
+', 
+
+	', 
+
+', 
+', 
+', 
+', 
+
+function getDocHeight(){var doc = document;return Math.max(Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight),
+Math.max(doc.body.offsetHeight, doc.documentElement.offsetHeight),Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
+);}
+function showMostTab(n,tabnm,dvnm)
+{
+	for(i=1;i<=4;i++)
+	{
+		if(i==n)
+		{
+			if(document.getElementById(dvnm+i))document.getElementById(dvnm+i).style.display = 'block' ;
+			if(document.getElementById(tabnm+i))document.getElementById(tabnm+i).className = 'mosttabsel' ;
+		}
+		else
+		{
+			if(document.getElementById(dvnm+i))document.getElementById(dvnm+i).style.display='none';		
+			if(document.getElementById(tabnm+i))document.getElementById(tabnm+i).className = 'mosttabnormal' ;
+		}
+	}
+}
+function floatBOX04()
+{
+	if(document.getElementById('div_floater_ad_container'))
+	{
+		if(document.getElementById('rightcontainer'))
+		{
+			var rtop = parseInt(document.getElementById('rightcontainer').offsetHeight);
+			var scrolltop = parseInt((document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop);
+			if(scrolltop >= rtop)
+			{
+				document.getElementById('div_floater_ad_container').style.position = "fixed";
+			}
+			else
+			{
+				document.getElementById('div_floater_ad_container').style.position = "static";
+			}
+		}
+	}
+}
+function showShareIframe(arti_title,arti_url,msgid,service)
+{
+	var data ="";
+	var iframeurl = "http://share.rediff.com/pattern/friends?title="+escape(arti_title)+"&topic=&inviteurl="+arti_url+"&msgid="+msgid+"&inviteservice="+service+"&var=lightbox&grabber=1";
+	data += "<div id=shareframeloadmsg style='margin:120px 0 0 250px;font-family:arial;font-size:16px; position:absolute;'><img src="+imgpath+"/waitimg.gif /> <b>Loading! Please wait...</b></div>";
+	data += "<div style='padding: 5px 5px 0pt; width: 740px; text-align: right;'><div title=Close style='border: 1px solid #7899BB; background:#ffffff;float:right;color:#7899BB;cursor:pointer;cursor:hand;font-family: arial; font-size: 12px;height:15px;margin-right:10px;display:inline;' onclick=\"javascript:hideDiv('ieiframe');hideDiv('trans_div');hideDiv('div_shareframe');hideDiv('div_popupcontainer');\"><b>&nbsp;X&nbsp;</b></div></div>" ;
+	data += "<iframe id=shareThisLightBoxIframe height=420 frameborder=0 width=740 scrolling=auto src=\"about:blank\" onload=\"document.getElementById('shareframeloadmsg').innerHTML='';\"></iframe>"	;
+	document.getElementById('div_shareframe').innerHTML = 	data ;
+	var scrolltop = parseInt((document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop);
+	var toppos = scrolltop-200 ;
+	document.getElementById('div_shareframe').style.top = toppos+'px' ;
+	document.getElementById('shareThisLightBoxIframe').src = iframeurl ;
+	document.getElementById('trans_div').style.height = getDocHeight()+'px' ;
+	showDiv('ieiframe');
+	showDiv('trans_div');
+	showDiv('div_popupcontainer');
+	showDiv('div_shareframe');
+}
+function openArticlePrintWindow(urlpath) 
+{
+	var articleurlpath=urlpath+'?print=true';
+	window.open(articleurlpath, 'win_article_print','toolbar=no,directories=no,resize=yes,menubar=no,location=no,scrollbars=yes,width=600,height=500,maximize=null,top=70,left=80'); 
+}
+function slideAd1(){
+if(document.getElementById('toprdiv')){var toppos = parseInt(document.getElementById('toprdiv').style.height);
+if(toppos<150){document.getElementById('toprdiv').style.height= parseInt(toppos+3) + 'px' ;window.setTimeout("slideAd1()",10);}}
+}
+
+function setFontSize(sz,n){if(document.getElementById('arti_content_n')){document.getElementById('arti_content_n').className = sz;}if(n==1){document.getElementById("ft_1").className = "black";document.getElementById("ft_2").className = "f14 curhand";document.getElementById("ft_3").className = "f16 curhand";}else if(n==2){document.getElementById("ft_1").className = "curhand";document.getElementById("ft_2").className = "f14 black";document.getElementById("ft_3").className = "f16 curhand";}else{document.getElementById("ft_1").className = "curhand";document.getElementById("ft_2").className = "f14 curhand";document.getElementById("ft_3").className = "f16 black";}}
+
+function showTopSubscribe()
+{
+	if(getcookie("BT") != "1" || getcookie("BT") == null)
+	{
+		if(document.getElementById('div_subscribe_in')){document.getElementById('div_subscribe_in').style.display = "block";}
+	}
+}
+showTopSubscribe();
+
+
+
+	var OAS_sitepage = "inbusinessA.rediff.com/business-article.htm";
+	var OAS_listpos = "LB02,BOX03,BOX04,TopRight,TopLeft,x21,Top,Top1,Bottom,x22,BOX05,Bottom2";
+//window.setTimeout("slideAd1()",1500);
+', 
+	
+', #footerLinks {border-top:1px solid #d1d1d1;border-bottom:1px solid #d1d1d1;padding:5px 0;margin:25px 0 0 0;text-align:center;}
+#footerLinks span{font-family:arial,verdana,sans-serif,FreeSans;font-size:10px;margin:0px 5px;}
+.footer{margin:10px 0 0 0;border:none;padding:0 0 10px 0;}', 
+
+', Business email', Office email App', Domain registration', Website', Rediffmail', Money', Company email', Online Shopping', Books', Gifts', Videos', Blogs', Buzz', 
+', 
+', © 2017 Rediff.com - ', Investor Information',  - ', Advertise with us',  - ', Disclaimer',  - ', Privacy Policy',  - ', Careers',  - ', Feedback',  - ', Terms of use', 
+', 
+', 
+
+
+', 
+<!--
+function metriccall_img(sldcounter)
+{
+	var querystring	= "";
+	var path	= "";
+	var domain	= "";
+	var Rkey_data	= "";
+	var Rkey	= Math.floor(Math.random() * 1000000);
+	querystring	= window.location.search;
+	path		= window.location.pathname;
+	domain		= window.location.host;
+
+	if (querystring == "")
+		Rkey_data = "?rkey="+Rkey;
+	else
+		Rkey_data = "&rkey="+Rkey;
+
+	document.getElementById("metric_iframe").src = 'http://metric.ind.rediff.com/'+domain+path+"/"+sldcounter+querystring+Rkey_data;
+}
+
+function trackURL(url){if(navigator.userAgent.toLowerCase().indexOf('msie') != -1){var referLink = document.createElement('a');referLink.href = url;document.body.appendChild(referLink);referLink.click();}else{document.location.href = url;}}
+
+
+function resize()
+{
+	var winW = 1024 ;
+	if (navigator.appName=="Netscape"  || navigator.appName=="Opera" ) 
+	{
+		winW = window.innerWidth;
+	}
+	if (navigator.appName.indexOf("Microsoft")!=-1) 
+	{
+		winW = document.body.offsetWidth;
+
+	}
+	if(winW > 1000)
+	{
+		document.getElementById('wrapper').style.width='990px' ;
+		if(document.getElementById('leftcontainer'))document.getElementById('leftcontainer').style.width='670px' ;
+		if(document.getElementById('div_sldvideo_main'))
+		{
+			document.getElementById('div_sldvideo_main').style.width='630px' ;
+			leftlimit= -1345 ;
+		}
+		if(document.getElementById('fixed_footer_ad'))document.getElementById('fixed_footer_ad').style.width='990px' ;
+		if(document.getElementById('topsrch1'))document.getElementById('topsrch1').style.marginLeft='170px';
+	}
+	else
+	{
+		document.getElementById('wrapper').style.width='778px' ;
+		if(document.getElementById('leftcontainer'))document.getElementById('leftcontainer').style.width='465px' ;
+		if(document.getElementById('div_sldvideo_main'))
+		{
+			document.getElementById('div_sldvideo_main').style.width='405px' ;
+			leftlimit= -1420 ;
+		}
+		if(document.getElementById('fixed_footer_ad'))document.getElementById('fixed_footer_ad').style.width='778px' ;
+	
+		if(document.getElementById("div_samsung")){
+			document.getElementById("div_samsung").style.display='none';
+		}
+		if(document.getElementById('topsrch1'))document.getElementById('topsrch1').style.marginLeft='80px';
+	}
+}
+
+//resize();
+//window.onresize = resize ;
+if(document.getElementById('new_wd_top')){document.getElementById('new_wd_top').className = "new_wd_top_n";}
+function showAds(dvnm){if(typeof(glb_ad_detect) == 'undefined'){hideDiv(dvnm);return false;}else{return true;}}
+//-->
+', 
+
+', 
+', 
+document.write(unescape("%3Cscript src='http://imads.rediff.com/addetect.js' type='text/javascript'%3E%3C/script%3E"));
+', 
+', 
+', 
+	
+	', 
+	OAS_loc=getCookie('RLOC');
+	if (!(OAS_loc))
+	{
+		document.write("<TABLE CELLSPACING=0 CELLPADDING=0 BORDER=0><TR><TD><IMG SRC=\"http://loc.rediff.com/cgi-bin/loc/setup/blank.gif\" BORDER=0 HSPACE=0 VSPACE=0></TD></TR></TABLE>");
+	}
+	if(document.getElementById("world_top")){if(showAds('world_top')){OAS_AD('LB02');}}
+	', 
+	
+', 
+
+', 
+	', 
+	
+	if(document.getElementById("world_right1")){if(showAds('world_right1')){OAS_AD('BOX03');}}
+	
+	', 
+', 
+
+', 
+	', 
+	
+	if(document.getElementById("world_right2")){if(showAds('world_right2')){OAS_AD('BOX04');}}
+	
+	', 
+', 
+', 
+	', 
+	
+	if(document.getElementById("world_bottom1")){if(showAds('world_bottom1')){OAS_AD('Bottom');}}
+	
+	', 
+', 
+', 
+', 
+if(document.getElementById("div_AD_x22")){if(showAds('div_AD_x22')){OAS_AD('x22');}}
+', 
+', 
+', 
+', 
+if(document.getElementById("div_ad_Top")){if(showAds('div_ad_Top')){OAS_AD('Top');}}
+', 
+', 
+', 
+', 
+if(document.getElementById("div_ad_top1")){if(showAds('div_ad_top1')){OAS_AD('Top1');}}', 
+', 
+
+
+', 
+if(document.getElementById("world_top"))
+{
+	var hdn = document.getElementById("world_top_hidden");
+	var vsbl = document.getElementById("world_top");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("world_right1"))
+{
+	var hdn = document.getElementById("world_right1_hidden");
+	var vsbl = document.getElementById("world_right1");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("world_right2"))
+{
+	var hdn = document.getElementById("world_right2_hidden");
+	var vsbl = document.getElementById("world_right2");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("world_bottom1"))
+{
+	var hdn = document.getElementById("world_bottom1_hidden");
+	var vsbl = document.getElementById("world_bottom1");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_AD_x22"))
+{
+	var hdn = document.getElementById("div_AD_x22_hidden");
+	var vsbl = document.getElementById("div_AD_x22");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_ad_Top"))
+{
+	var hdn = document.getElementById("div_ad_Top_hidden");
+	var vsbl = document.getElementById("div_ad_Top");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_ad_top1"))
+{
+	var hdn = document.getElementById("div_ad_top1_hidden");
+	var vsbl = document.getElementById("div_ad_top1");
+	copyInnerHtml(hdn, vsbl);
+}
+', 
+
+
+
+
+
+
+', 
+', 
+', <', <', More from rediff', 2017: IT jobs could start moving to richer countries', Is the Note Ban a success?', u"How are 'minorities' allowed tax benefits under HUF?", Why India will NEVER score well on ease of doing business', The pain of demonetisation was not justified', Vote: Will you buy Amul Girl merchandise?', Indian tax regime is set for total makeover', RBI awaits the power of one', 17 risks that can shake markets', u"8/11 and after: The going won't be easy for some more time", >', >',  ',  ',  ',  ',  ',  ',  ',  ',  ',  ', 
+', 
+', 
+<!--
+
+var total_commented = "10";
+if(document.getElementById('div_mcomm_abs')){document.getElementById('div_mcomm_abs').style.width = (total_commented * 360) + "px";}
+var glb_comm_timer;
+var glb_counter = 1;
+var glb_close = 0;
+var glb_upanimation = 0;
+function slideleftcommented(dvnm,limit)
+{
+	if(document.getElementById(dvnm))
+	{
+		var leftpos = parseInt(document.getElementById(dvnm).style.left);
+		if(leftpos > -(limit * glb_counter) && (glb_counter < total_commented))
+		{
+			document.getElementById(dvnm).style.left = (leftpos - 10)+'px';
+			glb_comm_timer = window.setTimeout(function(){slideleftcommented(dvnm,limit);},10);
+			if(glb_counter == (total_commented -1)){document.getElementById("mcom_right_arrow_grey").style.visibility = "visible";}
+			if(document.getElementById("mcom_left_arrow_grey")){document.getElementById("mcom_left_arrow_grey").style.visibility = "hidden";}
+		}
+		else
+		{
+			if(document.getElementById("sq_mc_"+glb_counter)){document.getElementById("sq_mc_"+glb_counter).className="spansquare";}
+			glb_counter++;
+			if(document.getElementById("sq_mc_"+glb_counter)){document.getElementById("sq_mc_"+glb_counter).className="spansquaresel";}
+		}
+	}
+}
+
+function sliderightcommented(dvnm,limit)
+{
+	if(document.getElementById(dvnm))
+	{
+		var leftpos = parseInt(document.getElementById(dvnm).style.left);
+		if(leftpos < -(((glb_counter - 1)*limit) - limit))
+		{
+			document.getElementById(dvnm).style.left = (leftpos + 10)+'px'; 
+			glb_comm_timer = window.setTimeout(function(){sliderightcommented(dvnm,limit);},10);
+			if(glb_counter == 2){document.getElementById("mcom_left_arrow_grey").style.visibility = "visible";}
+			document.getElementById("mcom_right_arrow_grey").style.visibility = "hidden";
+		}
+		else
+		{
+			if(document.getElementById("sq_mc_"+glb_counter)){document.getElementById("sq_mc_"+glb_counter).className="spansquare";}
+			glb_counter--;
+			if(document.getElementById("sq_mc_"+glb_counter)){document.getElementById("sq_mc_"+glb_counter).className="spansquaresel";}
+		}
+	}
+}
+
+
+function showCommneted(n)
+{
+	if(document.getElementById("sq_mc_"+glb_counter)){document.getElementById("sq_mc_"+glb_counter).className="spansquare";}
+	document.getElementById('div_mcomm_abs').style.left = -((n-1)*360) + 'px';
+	glb_counter = n;
+	if(document.getElementById("sq_mc_"+n)){document.getElementById("sq_mc_"+n).className="spansquaresel";}
+	if(n == total_commented)
+	{
+		document.getElementById("mcom_right_arrow_grey").style.visibility = "visible";
+	}
+	else
+	{
+		document.getElementById("mcom_right_arrow_grey").style.visibility = "hidden";
+	}
+	if(n==1)
+	{
+		document.getElementById("mcom_left_arrow_grey").style.visibility = "visible";
+	}
+	else
+	{
+		document.getElementById("mcom_left_arrow_grey").style.visibility = "hidden";
+	}
+
+}
+
+function showMostCommentedFloater()
+{
+	if(document.getElementById('div_most_commented') && glb_close == 0)
+	{
+		var boxheight = 220;
+		var scrolltop = getScrollTop();
+		var newtop = (viewPort().height +  scrolltop);
+		if(scrolltop > (document.getElementById('boardiframe').offsetTop - 600))
+		{
+			document.getElementById('div_most_commented').style.display = "block";
+			if(glb_upanimation == 0)
+			{
+				document.getElementById('div_most_commented').style.width = "1px";
+				slideFromRight();
+				glb_upanimation = 1;
+			}
+			document.getElementById('div_most_commented').style.top = (newtop - boxheight)  + "px";
+		}
+		else
+		{
+			document.getElementById('div_most_commented').style.top = (newtop - boxheight)  + "px";
+		}
+	}
+}
+
+function slideFromRight()
+{
+	var curwd = parseInt(document.getElementById('div_most_commented').style.width);
+	if(curwd <= 480)
+	{
+		document.getElementById('div_most_commented').style.width = (curwd + 10)  + "px";
+		window.setTimeout('slideFromRight()',10);
+	}
+}
+
+
+//-->
+', 
+', \u25b2', 
+', 
+
+
+
+
+', 
+	', 
+	if(document.getElementById("div_samsung")){if(showAds('div_samsung')){OAS_AD('TopRight');}}
+	', 
+', 
+', 
+', if(document.getElementById("div_AD_x21")){if(showAds('div_AD_x21')){OAS_AD('x21');}}', 
+', 
+', 
+	', 
+	if(document.getElementById("div_transitionAD")){if(showAds('div_transitionAD')){OAS_AD('TopLeft');}}
+	', 
+', 
+', 
+', if(document.getElementById("div_AD_box05")){if(showAds('div_AD_box05')){OAS_AD('BOX05');}}', 
+', 
+', if(document.getElementById("div_AD_Bottom2")){if(showAds('div_AD_Bottom2')){OAS_AD('Bottom2');}}', 
+
+', 
+if(document.getElementById("div_samsung"))
+{
+	var hdn = document.getElementById("div_samsung_hidden");
+	var vsbl = document.getElementById("div_samsung");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_transitionAD"))
+{
+	var hdn = document.getElementById("div_transitionAD_hidden");
+	var vsbl = document.getElementById("div_transitionAD");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_AD_x21"))
+{
+	var hdn = document.getElementById("div_AD_x21_hidden");
+	var vsbl = document.getElementById("div_AD_x21");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_AD_box05"))
+{
+	var hdn = document.getElementById("div_AD_box05_hidden");
+	var vsbl = document.getElementById("div_AD_box05");
+	copyInnerHtml(hdn, vsbl);
+}
+if(document.getElementById("div_AD_Bottom2"))
+{
+	var hdn = document.getElementById("div_AD_Bottom2_hidden");
+	var vsbl = document.getElementById("div_AD_Bottom2");
+	copyInnerHtml(hdn, vsbl);
+}
+', 
+
+']

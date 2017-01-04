@@ -1,0 +1,1093 @@
+[
+	', 
+	', 
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=374694589323514";
+		fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    ', 
+    ',  
+    	',  
+        	', 
+                ', 
+                	', 
+                    	', VCCIRCLE',  | ', VCCEDGE',  | ', TECHCIRCLE',  | ', TRAINING',  | ', EVENTS', 
+                    ', 
+                	', 
+                    	', 
+                        	', ABOUT',  | ', FAQs', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                    	', 
+                        							', Login',  | ', Register', 						                    ', 
+            	', 
+            ', 
+            ',   
+            
+               ', 
+', 
+', 
+', 
+	', 
+        // Google map object
+        // Initialize and display a google map
+        // Update the Google map for the user's inputted address
+        var map;
+        function loadMap()
+        {	
+            var latlng = new google.maps.LatLng( 12.9715987, 77.5945627 );
+            var mapOptions = { zoom: 12, center: latlng  };
+            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            var geocoder = new google.maps.Geocoder();    // instantiate a geocoder object
+            var address = "Concorde Block, 16th Floor, U.B. City, 24 Vittal Mallaya Road,Bangalore,Karnataka,India";
+        
+            // Make asynchronous call to Google geocoding API
+            geocoder.geocode( { 'address': address }, function(results, status) {
+                var addr_type = results[0].types[0];	// type of address inputted that was geocoded
+                if ( status == google.maps.GeocoderStatus.OK ) 
+                    ShowLocation( results[0].geometry.location, address, addr_type );
+                else     
+                    alert("Geocode was not successful for the following reason: " + status);        
+            });
+        }
+        
+        // Show the location (address) on the map.
+        function ShowLocation( latlng, address, addr_type )
+        {
+            // Center the map at the specified location
+            map.setCenter( latlng );
+            
+            // Set the zoom level according to the address level of detail the user specified
+            var zoom = 12;
+            switch ( addr_type )
+            {
+            case "administrative_area_level_1"	: zoom = 6; break;		// user specified a state
+            case "locality"						: zoom = 10; break;		// user specified a city/town
+            case "street_address"				: zoom = 15; break;		// user specified a street address
+            }
+            map.setZoom( zoom );
+            
+            // Place a Google Marker at the same location as the map center 
+            // When you hover over the marker, it will display the title
+            var marker = new google.maps.Marker( { 
+                position: latlng,     
+                map: map,      
+                title: address
+            });
+            
+            // Create an InfoWindow for the marker
+            var contentString = "<b>" + address + "</b>";	// HTML text to display in the InfoWindow
+            var infowindow = new google.maps.InfoWindow( { content: contentString } );
+            
+            // Set event to display the InfoWindow anchored to the marker when the marker is clicked.
+            google.maps.event.addListener( marker, 'click', function() { infowindow.open( map, marker ); });
+        }
+    ', 
+', 
+$(document).ready(function() {
+	$(function() {
+		$( "#search" ).autocomplete({
+			source: function(request, response) {
+				$.ajax({ url: "http://www.vccircle.com/bizcircle/company/suggestions",
+				data: { term: $("#search").val()},
+				dataType: "json",
+				type: "POST",
+				success: function(data){
+					response(data);
+				}
+			});
+		},
+		minLength: 2
+		});
+	});
+	
+	$('.fancybox').fancybox();
+	
+	ajax_paging = function(){
+		$(document).on( "click", "a.pagination", function() {
+		//$("a.pagination").click(function() {               
+			   $.ajax({
+				 type: "GET",
+				 url: $(this).get(),
+				 success: function(html){
+					//console.log(html);
+					$(".middle_content").html(html);
+				  }
+			   });               
+			 });            
+	   return false;
+	 };
+
+	 $("#upload_company_logo").click(function(){
+		$("#upfile").click();
+	 });
+
+	$("#not_upload_logo").click(function(){
+		window.location = '../../user/signup';
+	 });
+	 
+	 $("#more_key_devs").click(function(){
+		 var count1 = '6';	
+		 $("#less_key_devs").show();
+		  $("#more_key_devs").hide();
+		 while(count1 <= 10){
+			 var data1 = {};
+			 data1[count1] = count1;	
+			 $.each(data1, function(index, value) {	
+				 $("#key_dev_more" + value).slideDown('slow');
+			 });
+			 count1++;
+		 }
+	 });
+	
+	 
+	 $("#less_key_devs").click(function(){
+		 var count2 = '6';	
+		 $("#more_key_devs").show();
+		  $("#less_key_devs").hide();
+		 while(count2 <= 10){
+			 var data1 = {};
+			 data1[count2] = count2;	
+			 $.each(data1, function(index, value) {	
+				 $("#key_dev_more" + value).slideUp('slow');
+			 });
+			 count2++;
+		 }
+	 });
+
+	 $("#more_people").click(function(){
+		 var count3 = 5;	
+		 var total_number_of_peoles = $("#total_peoples").val();
+		 $("#less_people").show();
+		  $("#more_people").hide();
+		 while(count3 <= total_number_of_peoles){
+			 var data3 = {};
+			 data3[count3] = count3;	
+			 $.each(data3, function(index, value) {	
+				 $("#people_more" + value).slideDown('slow');
+			 });
+			 count3++;
+		 }
+	 });
+
+	 $("#less_people").click(function(){
+		 var count4 = 5;	
+		 var total_number_of_peoles = $("#total_peoples").val();
+		 $("#more_people").show();
+		  $("#less_people").hide();
+		 while(count4 <= total_number_of_peoles){
+			 var data4 = {};
+			 data4[count4] = count4;	
+			 $.each(data4, function(index, value) {	
+				 $("#people_more" + value).slideUp('slow');
+			 });
+			 count4++;
+		 }
+	 });
+
+	 $("#submit").click(function(){
+		var search_form = $("#search").val()
+		if(search_form == ''){
+			alert("Please Enter Company Name.");
+			return false;
+		}
+	});
+	$.Placeholder.init();
+});
+', 
+', 
+	', 
+    	', 
+        	', 
+				
+				
+            	', 
+                	', 
+                	', 
+                ', 
+                ', 
+                  ', 
+						', Ascent India Fund III', 
+                        ', 
+													', [ Edit ]', 
+						                        ', 
+                    ', 
+					', 
+                    ', 
+                    	', 
+                        	', 
+                                ', Company Type', :', 
+                                ', Private Equity Fund', 
+                            ', 
+                            ', 
+                                ', Company Status', :', 
+                                ', Operating', 
+                            ', 
+                        ', 
+                        ', 
+                        	', 
+                                ', Trade/DBA Name', :', 
+                                ', 
+									                                        	', [ Add ]', 
+                                    									', 
+                            ', 
+                            ', 
+                                ', Previous Name', :', 
+                                ', 
+									                                        	', [ Add ]', 
+                                    	                                ', 
+                            ', 
+                        ', 
+                        ', 
+                        	', 
+                                ', # of Employees ', :', 
+                                ', 
+									                                        	', [ Add ]', 
+                                    	                                ', 
+                            ', 
+                            ', 
+                                ', Year Founded', :', 
+                                ', 
+									2009                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Industry', :', 
+                                ', 
+									Asset Management & Custody Banks                                ', 
+                            ', 
+                                                    ',  
+						', 
+                        	', 
+                                ', Website', :', 
+                    			', 
+									', http://www.ascentcapital.in/',                                 ', 
+                            ', 
+                            ', 
+                                ', City', :', 
+                                ', 
+									Bangalore                                ', 
+                            ', 
+                        ', 
+                    ', 
+                    ', 
+						                        	', 
+                        		                        			', 
+                        		                                ',   
+                        	', 
+                        							', A', scent India Fund III is a $350 million private equity fund managed by Ascent Capital Advisors India Pvt. Ltd. It provides growth capital finance to companies operating in India. The fund would follow a sector agnostic approach for its investments. It typically invests between $10 million and $35 million in its portfolio companies. ', 
+                        
+                ', 
+                ', 
+                    	', related articles from',  ', No News Available',                 ', 
+                ', 
+                    ', key developments ', 
+                    ', 
+                    	', No Key Developments Available',                     ', 
+                ', 	
+
+				', 
+                    ', 
+                    	Press Releases
+                    	', 
+                        	                                ', [ Add ]', 
+                                                    ', 
+                    ', 
+                    ', 
+                    	                        	', 
+                                ', No Press Release Available', 
+                            ', 
+                                            ', 
+                ', 
+
+                ', 
+                    ', 
+                    	product/brand logos
+                        ', 
+                        	                                ', [ Add ]', 
+                                                    ', 
+                    ', 
+                    ', 
+                    	                            ', 
+                            ', 
+                            ', 
+						                    ', 
+                ', 
+                ', 
+                ', 
+                    ', 
+                    	VIDEOS
+                        ', 
+                        	                                ', [ Add ]', 
+                                                    ', 
+                    ', 
+                    ', 
+                    	                            ', 
+                            ', 
+                            ', 
+						                    ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            	', 
+                ', 
+                    ', Trending Companies', 
+                    ', 
+                    	', 
+                    		', 
+                            	', Onus Payment Systems India Pvt. Ltd.', North End Foods Marketing Pvt. Ltd.', Shop Online Trading Pvt. Ltd.', Adama India Pvt. Ltd.', Go Fashion India Pvt. Ltd.', Ambic Ayurved India Pvt. Ltd.', Gemini Industries and Imaging Pvt. Ltd.', DE Healthcare Pvt. Ltd.',     
+                            ', 
+                    	', 
+                    ', 
+                ', 
+
+				', 
+                ', 
+                    ', Similar Companies', 
+                    ', 
+                    	', 
+                    		', 
+                            	', Global Opportunistic Fund II', Indira Gandhi Institute of Technology, Technology ..', Inventus Capital Partners Fund I', Kotak India Private Equity Fund-III', Lakshmi Narayan College of Technology, Business In..', Lightbank LLC', Samridhi Fund', Sashi Reddy Investment Capital Fund', Small is Beautiful', Zone Startups India Advisory Pvt. Ltd.',     
+                            ', 
+                    	', 
+                    ', 
+                ', 
+
+                ', 
+                ', 
+                    ', People ', 
+                    ', 
+                    	', 
+                    		', 
+                            	                                    ', Management:',  ', [ Edit ]', 
+                                                            ', 
+                    		', 
+                            								
+                            ', 
+
+							                    	', 
+						
+                        ', 
+                        	', 
+                                                            	', Board:',  ', [ Edit ]', 
+                                                        	
+                            ', 
+                        	', 
+                            	                            ', 
+                        ', 
+                    ', 
+                ', 
+
+                ', 
+                ', 
+											', Contact Details', [ Edit ]', 
+					                    ', 
+                    	', 
+                    		', Address:', 
+                    		', 
+                            	Concorde Block, 16th Floor, U.B. City, 24 Vittal Mallaya Road, Bangalore, Karnataka - 560001 - India.                            ', 
+                    	', 
+                    	', 
+                    		', Phone:', 
+                    		', +91-80-30551230', 
+                    	', 
+                    	', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                	', View on Google Maps ', 
+                	', 
+                ', 
+            ', 
+        ', 
+    	', 
+    ', 
+', 
+    ', 
+    	', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300C");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300C");
+			', 
+		  ', 
+		', 
+		  ', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "biz_RHS_300A");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("biz_RHS_300A");
+			', 
+		', 
+		
+        ', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300B");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300B");
+			', 
+		', 
+
+          
+
+		  ', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300D");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300D");
+			', 
+		  ', 
+
+		  ', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300E");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300E");
+			', 
+		  ', 
+    ', 
+', 
+', 
+	',  loadMap();', 
+			', 
+        ',         
+        ', 
+	        ', 
+		        ', 
+                	Copyright © 2017 VCCircle.com.', 
+        			', Property of Mosaic Media Ventures Pvt. Ltd.', 
+                   ',   ', A ', 
+                    ', 
+                    	', 
+                    ', 
+                    ', company.', 
+                    ', 
+                ', 
+                ', 
+                    ', About',  | ', Contact',  | ', Copyright',  | ', Privacy',  | ', Terms of Service', 
+                ', 
+            ', 
+        ', 
+    ', window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"8eac03d699","applicationID":"25778257","transactionName":"YVNQYEdVXRZYU0AKWlgZc1dBXVwLFnNbDkVXWEsbVlteFVheTTxRU0JTXVlH","queueTime":0,"applicationTime":650,"atts":"TRRTFg9PThg=","errorBeacon":"bam.nr-data.net","agent":""}'][
+	', 
+	', 
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=374694589323514";
+		fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    ', 
+    ',  
+    	',  
+        	', 
+                ', 
+                	', 
+                    	', VCCIRCLE',  | ', VCCEDGE',  | ', TECHCIRCLE',  | ', TRAINING',  | ', EVENTS', 
+                    ', 
+                	', 
+                    	', 
+                        	', ABOUT',  | ', FAQs', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                    	', 
+                        							', Login',  | ', Register', 						                    ', 
+            	', 
+            ', 
+            ',   
+            
+               ', 
+', 
+', 
+', 
+	', 
+        // Google map object
+        // Initialize and display a google map
+        // Update the Google map for the user's inputted address
+        var map;
+        function loadMap()
+        {	
+            var latlng = new google.maps.LatLng( 12.9715987, 77.5945627 );
+            var mapOptions = { zoom: 12, center: latlng  };
+            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            var geocoder = new google.maps.Geocoder();    // instantiate a geocoder object
+            var address = "Concorde Block, 16th Floor, U.B. City, 24 Vittal Mallaya Road,Bangalore,Karnataka,India";
+        
+            // Make asynchronous call to Google geocoding API
+            geocoder.geocode( { 'address': address }, function(results, status) {
+                var addr_type = results[0].types[0];	// type of address inputted that was geocoded
+                if ( status == google.maps.GeocoderStatus.OK ) 
+                    ShowLocation( results[0].geometry.location, address, addr_type );
+                else     
+                    alert("Geocode was not successful for the following reason: " + status);        
+            });
+        }
+        
+        // Show the location (address) on the map.
+        function ShowLocation( latlng, address, addr_type )
+        {
+            // Center the map at the specified location
+            map.setCenter( latlng );
+            
+            // Set the zoom level according to the address level of detail the user specified
+            var zoom = 12;
+            switch ( addr_type )
+            {
+            case "administrative_area_level_1"	: zoom = 6; break;		// user specified a state
+            case "locality"						: zoom = 10; break;		// user specified a city/town
+            case "street_address"				: zoom = 15; break;		// user specified a street address
+            }
+            map.setZoom( zoom );
+            
+            // Place a Google Marker at the same location as the map center 
+            // When you hover over the marker, it will display the title
+            var marker = new google.maps.Marker( { 
+                position: latlng,     
+                map: map,      
+                title: address
+            });
+            
+            // Create an InfoWindow for the marker
+            var contentString = "<b>" + address + "</b>";	// HTML text to display in the InfoWindow
+            var infowindow = new google.maps.InfoWindow( { content: contentString } );
+            
+            // Set event to display the InfoWindow anchored to the marker when the marker is clicked.
+            google.maps.event.addListener( marker, 'click', function() { infowindow.open( map, marker ); });
+        }
+    ', 
+', 
+$(document).ready(function() {
+	$(function() {
+		$( "#search" ).autocomplete({
+			source: function(request, response) {
+				$.ajax({ url: "http://www.vccircle.com/bizcircle/company/suggestions",
+				data: { term: $("#search").val()},
+				dataType: "json",
+				type: "POST",
+				success: function(data){
+					response(data);
+				}
+			});
+		},
+		minLength: 2
+		});
+	});
+	
+	$('.fancybox').fancybox();
+	
+	ajax_paging = function(){
+		$(document).on( "click", "a.pagination", function() {
+		//$("a.pagination").click(function() {               
+			   $.ajax({
+				 type: "GET",
+				 url: $(this).get(),
+				 success: function(html){
+					//console.log(html);
+					$(".middle_content").html(html);
+				  }
+			   });               
+			 });            
+	   return false;
+	 };
+
+	 $("#upload_company_logo").click(function(){
+		$("#upfile").click();
+	 });
+
+	$("#not_upload_logo").click(function(){
+		window.location = '../../user/signup';
+	 });
+	 
+	 $("#more_key_devs").click(function(){
+		 var count1 = '6';	
+		 $("#less_key_devs").show();
+		  $("#more_key_devs").hide();
+		 while(count1 <= 10){
+			 var data1 = {};
+			 data1[count1] = count1;	
+			 $.each(data1, function(index, value) {	
+				 $("#key_dev_more" + value).slideDown('slow');
+			 });
+			 count1++;
+		 }
+	 });
+	
+	 
+	 $("#less_key_devs").click(function(){
+		 var count2 = '6';	
+		 $("#more_key_devs").show();
+		  $("#less_key_devs").hide();
+		 while(count2 <= 10){
+			 var data1 = {};
+			 data1[count2] = count2;	
+			 $.each(data1, function(index, value) {	
+				 $("#key_dev_more" + value).slideUp('slow');
+			 });
+			 count2++;
+		 }
+	 });
+
+	 $("#more_people").click(function(){
+		 var count3 = 5;	
+		 var total_number_of_peoles = $("#total_peoples").val();
+		 $("#less_people").show();
+		  $("#more_people").hide();
+		 while(count3 <= total_number_of_peoles){
+			 var data3 = {};
+			 data3[count3] = count3;	
+			 $.each(data3, function(index, value) {	
+				 $("#people_more" + value).slideDown('slow');
+			 });
+			 count3++;
+		 }
+	 });
+
+	 $("#less_people").click(function(){
+		 var count4 = 5;	
+		 var total_number_of_peoles = $("#total_peoples").val();
+		 $("#more_people").show();
+		  $("#less_people").hide();
+		 while(count4 <= total_number_of_peoles){
+			 var data4 = {};
+			 data4[count4] = count4;	
+			 $.each(data4, function(index, value) {	
+				 $("#people_more" + value).slideUp('slow');
+			 });
+			 count4++;
+		 }
+	 });
+
+	 $("#submit").click(function(){
+		var search_form = $("#search").val()
+		if(search_form == ''){
+			alert("Please Enter Company Name.");
+			return false;
+		}
+	});
+	$.Placeholder.init();
+});
+', 
+', 
+	', 
+    	', 
+        	', 
+				
+				
+            	', 
+                	', 
+                	', 
+                ', 
+                ', 
+                  ', 
+						', Ascent India Fund III', 
+                        ', 
+													', [ Edit ]', 
+						                        ', 
+                    ', 
+					', 
+                    ', 
+                    	', 
+                        	', 
+                                ', Company Type', :', 
+                                ', Private Equity Fund', 
+                            ', 
+                            ', 
+                                ', Company Status', :', 
+                                ', Operating', 
+                            ', 
+                        ', 
+                        ', 
+                        	', 
+                                ', Trade/DBA Name', :', 
+                                ', 
+									                                        	', [ Add ]', 
+                                    									', 
+                            ', 
+                            ', 
+                                ', Previous Name', :', 
+                                ', 
+									                                        	', [ Add ]', 
+                                    	                                ', 
+                            ', 
+                        ', 
+                        ', 
+                        	', 
+                                ', # of Employees ', :', 
+                                ', 
+									                                        	', [ Add ]', 
+                                    	                                ', 
+                            ', 
+                            ', 
+                                ', Year Founded', :', 
+                                ', 
+									2009                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Industry', :', 
+                                ', 
+									Asset Management & Custody Banks                                ', 
+                            ', 
+                                                    ',  
+						', 
+                        	', 
+                                ', Website', :', 
+                    			', 
+									', http://www.ascentcapital.in/',                                 ', 
+                            ', 
+                            ', 
+                                ', City', :', 
+                                ', 
+									Bangalore                                ', 
+                            ', 
+                        ', 
+                    ', 
+                    ', 
+						                        	', 
+                        		                        			', 
+                        		                                ',   
+                        	', 
+                        							', A', scent India Fund III is a $350 million private equity fund managed by Ascent Capital Advisors India Pvt. Ltd. It provides growth capital finance to companies operating in India. The fund would follow a sector agnostic approach for its investments. It typically invests between $10 million and $35 million in its portfolio companies. ', 
+                        
+                ', 
+                ', 
+                    	', related articles from',  ', No News Available',                 ', 
+                ', 
+                    ', key developments ', 
+                    ', 
+                    	', No Key Developments Available',                     ', 
+                ', 	
+
+				', 
+                    ', 
+                    	Press Releases
+                    	', 
+                        	                                ', [ Add ]', 
+                                                    ', 
+                    ', 
+                    ', 
+                    	                        	', 
+                                ', No Press Release Available', 
+                            ', 
+                                            ', 
+                ', 
+
+                ', 
+                    ', 
+                    	product/brand logos
+                        ', 
+                        	                                ', [ Add ]', 
+                                                    ', 
+                    ', 
+                    ', 
+                    	                            ', 
+                            ', 
+                            ', 
+						                    ', 
+                ', 
+                ', 
+                ', 
+                    ', 
+                    	VIDEOS
+                        ', 
+                        	                                ', [ Add ]', 
+                                                    ', 
+                    ', 
+                    ', 
+                    	                            ', 
+                            ', 
+                            ', 
+						                    ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            	', 
+                ', 
+                    ', Trending Companies', 
+                    ', 
+                    	', 
+                    		', 
+                            	', Onus Payment Systems India Pvt. Ltd.', North End Foods Marketing Pvt. Ltd.', Shop Online Trading Pvt. Ltd.', Adama India Pvt. Ltd.', Go Fashion India Pvt. Ltd.', Ambic Ayurved India Pvt. Ltd.', Gemini Industries and Imaging Pvt. Ltd.', DE Healthcare Pvt. Ltd.',     
+                            ', 
+                    	', 
+                    ', 
+                ', 
+
+				', 
+                ', 
+                    ', Similar Companies', 
+                    ', 
+                    	', 
+                    		', 
+                            	', Global Opportunistic Fund II', Indira Gandhi Institute of Technology, Technology ..', Inventus Capital Partners Fund I', Kotak India Private Equity Fund-III', Lakshmi Narayan College of Technology, Business In..', Lightbank LLC', Samridhi Fund', Sashi Reddy Investment Capital Fund', Small is Beautiful', Zone Startups India Advisory Pvt. Ltd.',     
+                            ', 
+                    	', 
+                    ', 
+                ', 
+
+                ', 
+                ', 
+                    ', People ', 
+                    ', 
+                    	', 
+                    		', 
+                            	                                    ', Management:',  ', [ Edit ]', 
+                                                            ', 
+                    		', 
+                            								
+                            ', 
+
+							                    	', 
+						
+                        ', 
+                        	', 
+                                                            	', Board:',  ', [ Edit ]', 
+                                                        	
+                            ', 
+                        	', 
+                            	                            ', 
+                        ', 
+                    ', 
+                ', 
+
+                ', 
+                ', 
+											', Contact Details', [ Edit ]', 
+					                    ', 
+                    	', 
+                    		', Address:', 
+                    		', 
+                            	Concorde Block, 16th Floor, U.B. City, 24 Vittal Mallaya Road, Bangalore, Karnataka - 560001 - India.                            ', 
+                    	', 
+                    	', 
+                    		', Phone:', 
+                    		', +91-80-30551230', 
+                    	', 
+                    	', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                	', View on Google Maps ', 
+                	', 
+                ', 
+            ', 
+        ', 
+    	', 
+    ', 
+', 
+    ', 
+    	', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300C");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300C");
+			', 
+		  ', 
+		', 
+		  ', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "biz_RHS_300A");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("biz_RHS_300A");
+			', 
+		', 
+		
+        ', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300B");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300B");
+			', 
+		', 
+
+          
+
+		  ', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300D");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300D");
+			', 
+		  ', 
+
+		  ', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300E");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300E");
+			', 
+		  ', 
+    ', 
+', 
+', 
+	',  loadMap();', 
+			', 
+        ',         
+        ', 
+	        ', 
+		        ', 
+                	Copyright © 2017 VCCircle.com.', 
+        			', Property of Mosaic Media Ventures Pvt. Ltd.', 
+                   ',   ', A ', 
+                    ', 
+                    	', 
+                    ', 
+                    ', company.', 
+                    ', 
+                ', 
+                ', 
+                    ', About',  | ', Contact',  | ', Copyright',  | ', Privacy',  | ', Terms of Service', 
+                ', 
+            ', 
+        ', 
+    ', window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"8eac03d699","applicationID":"25778257","transactionName":"YVNQYEdVXRZYU0AKWlgZc1dBXVwLFnNbDkVXWEsbVlteFVheTTxRU0JTXVlH","queueTime":0,"applicationTime":650,"atts":"TRRTFg9PThg=","errorBeacon":"bam.nr-data.net","agent":""}']

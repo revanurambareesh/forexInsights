@@ -1,0 +1,911 @@
+[
+		', 
+				', 
+			', 
+			', 
+								', 
+				', 
+					', 
+					
+					', 
+						', 
+					', 
+					', 
+						', 					', 
+					', 
+						', Overview', 
+', What Makes Us \u2018SP\u2019ECIAL', 
+', Current Openings', 
+', Reach Us', 
+', shapoorji.in', 
+', 
+', 
+  ', Share On', 
+  ', 
+    ', 
+    ', 
+    ', 
+  ', 
+', 
+
+					', 
+				', 
+				', 
+				', 
+
+',  
+
+', 
+', 
+', 
+$(document).ready(function(){
+	
+	
+$('#c1 #inpc1 input').focus(function(e){
+	$('#c2,#c3,#c4').show();
+});
+
+$(".tag").click(function(){
+	var x=$(this).next('input').val(); 
+	$(this).attr("id","cluster_loc");
+	$("form#searchBar").append('<input name="qcity" type="hidden" class="suggest m0 pr30" value="'+x+'">');
+	if(($("#Sug_kwdsugg").val())=="Enter your areas of expertise")
+	{
+		$("#Sug_kwdsugg").attr("value","dummyvar");
+		}
+		
+		$("form#searchBar").submit();
+
+	});
+});
+', 
+', 
+  ', 
+  ', 
+      ',  
+        ', 
+        $(function(){
+
+      			
+		})
+		
+        ', 
+        ', Keyskills, Designation', 
+        ', 
+        ', 
+          ', 
+		 ', 
+            ', 
+          ', 
+        ', 
+        ',  
+        ',  ', 
+      ', 
+        ', Desired Location', 
+        ', 
+        ', 
+          ', 
+	    ', 
+            ', 
+		', 
+          ', 
+        ', 
+        ',  
+        ',  ', 
+	
+      ',  
+        ', 
+       $(function(){ $("#ddExp option[value='']").attr("selected", true);                $("#ddExp").parent('span.text').find('.fwselect-text').text("Select");
+                $("#ddExp").trigger("change");
+                })
+        ', 
+        ', Experience', 
+        ', 
+	', 
+	    ',  ', 
+        	', 
+	    ', 
+	', 
+
+       ', 
+        ',  ', 
+            ',  
+        ', 
+        $(function(){$("#ddMinSal option[value=qmVar]").attr('selected', true);
+		$("#ddMinSal").parent('span.text').find('.fwselect-text').text("Min");
+		$("#ddMinSal").trigger("change");
+		})
+        ', 
+        ', Expected Salary', 
+        ', 
+	 ', 
+            ',  ', 
+                ', 
+            ', 
+        ', 
+', 
+        ', 
+	', 
+            ',  ', 
+                ', 
+            ', 
+        ', 
+', 
+        ',  ', 
+            ', 
+        ', 
+      ', 
+      ',  ', Please enter Keywords or Location to search.',  ', 
+    ', 
+    ', 
+  ', 
+', 
+',  
+
+
+      ', 
+
+$(document).ready(function(){
+
+$('#searchBar').submit(function(e)
+ {
+ domain = "http://careers.shapoorji.in/";
+ keyword= $.trim( $('#Sug_kwdsugg').val() );
+ if($('#cluster_loc').length>0){
+	 loc1=$.trim( $('#LocationTags').find("#cluster_loc span").text() );
+	 }
+	 else{
+ loc1= $.trim( $('#Sug_locsugg').val() );
+	 }
+ if(keyword=="Enter your areas of expertise")
+   {keyword="";}
+ if(loc1=="Where you wish to work")
+   {loc1="";}
+ if( $.trim( keyword )=="" && $.trim( loc1 )==""){
+  $(".error").show();
+  e.preventDefault();
+  }
+else{
+ newUrl = domain+ generateStaticURL(keyword,loc1);
+ $("#searchBar").attr('action',newUrl);
+}
+
+});
+
+function replaceAll(txt, replace, with_this) {
+  return txt.replace(new RegExp(replace, 'gi'),with_this);
+}
+function generateStaticURL(kw,loc)
+{
+ kw = kw.replace(/Enter your areas of expertise/ig,"").replace(/Type skills, designation or company name/ig,"").replace(/\s{2,}/g, ' ').replace(/dummyvar/ig,""); 
+ loc=loc.replace(/Where you wish to work/ig,"");
+  var Kwrd_Action_Str="";var Loc_Action_Str="";var action="";
+  var Spcl_Char_Arr= {"+":" plus " , "#":" sharp " , ".":" dot " , "-":" dash ",'"':" quotes ","'":" quotes ","/":" "};
+  if(kw != "" )
+  {
+    kw= kw.toLowerCase();
+    kw =kw.replace(/\s{2,}/g," ");
+    kw=kw.replace(/\bjobs in\b/gi,"");
+    kw=kw.replace(/\bjobs\b/gi,"");
+    kw=kw.replace(/\blimited\b/gi,"");
+    kw=kw.replace(/\bcorporation\b/gi,"");
+    kw=kw.replace(/\bcareers\b/gi,"");
+    while(kw.indexOf("c++ c++")!=-1 )
+      kw=kw.replace("c++ c++","c++");
+/*    for(i in stopwordArr)
+    {
+      kw=replaceAll(kw,"\\b"+stopwordArr[i].toLowerCase(),"");
+    } */
+    kw = replaceAll(kw,","," ");
+    kw=kw.replace(/[^.+#\-'" a-zA-Z0-9]/ig," ").replace(/and {1,}$/g,"");
+    var Tmp_Kwrd_Str = $.trim(kw).toLowerCase();
+    var Tmp_Kwrd_Str = kw;
+    Tmp_Kwrd_Arr = Tmp_Kwrd_Str.split(",");
+    for(i in Tmp_Kwrd_Arr){
+      for (key in Spcl_Char_Arr)
+        Tmp_Kwrd_Arr[i]=replaceAll(Tmp_Kwrd_Arr[i],"\\"+key,Spcl_Char_Arr[key]);
+      Tmp_Kwrd_Arr[i]=$.trim(replaceAll(Tmp_Kwrd_Arr[i],"\ \ "," "));
+      Tmp_Arr = Tmp_Kwrd_Arr[i].split(" ");
+    }
+    Kwrd_Action_Str = Tmp_Kwrd_Arr.join(" ");
+  }
+  if(loc != "")
+  {
+    loc=loc.replace(/\bjobs in\b/gi,"");
+    loc=loc.replace(/\bjobs\b/gi,"");
+    loc=loc.split("\\").join(" ");
+    loc=loc.split("/").join(" ");
+    loc=loc.replace(/[^, a-zA-Z]/ig,"").replace(/,{1,}$/g,"");;
+    loc = replaceAll($.trim(loc).toLowerCase(),"  "," ");
+/*    for(i in stopwordArr)
+    {
+      loc=replaceAll(loc,"\\b"+stopwordArr[i].toLowerCase()+"\\b","");
+    } */
+    Loc_Arr = loc.split(",");
+    Tmp_Str = Loc_Arr.join(" and ");
+    Tmp_Arr = Tmp_Str.split(" ");
+    Loc_Action_Str = Tmp_Arr.join(" ");
+  }
+  if(Kwrd_Action_Str == "" && Loc_Action_Str != "")
+    action = action + "jobs in " + Loc_Action_Str;
+  else if (Kwrd_Action_Str != "" && Loc_Action_Str =="")
+    action = action + Kwrd_Action_Str +  " jobs";
+  else if (Kwrd_Action_Str != "" && Loc_Action_Str !="")
+    action = action + Kwrd_Action_Str +  " jobs in " + Loc_Action_Str;
+  //finally replace all consecutive duplicate words
+  action=action.replace(/[\s]*plus[\s]+(plus[\s]*)+/gi,' + ');
+  action = action.replace(/-/g," ").replace(/\s{2,}/g, ' ');
+  do {
+    var newTemp = action;
+    var action = newTemp.replace(/\s(\w+\s)\1/, " $1");
+    action = action.replace(/^(\w+\s)\1/, "$1");
+    action = action.replace(/(\s\w+)\1$/, "$1")
+  } while (action.length != newTemp.length);
+  while(action.indexOf(" + ") != -1)
+    action=action.replace(" + "," plus plus ");
+    action= $.trim(action).replace(/\s/g,"-");
+    action= action.replace(/\s/g,"-");
+  if(action == "")
+    action = "jobs-in-india";
+
+  return action;
+}
+
+});
+      ', 
+', 
+  ',  Jobs ', (1-15 out of 15) ', 
+			', Civil Engineer', 
+			', 28 Dec', 
+			', 2 - 7 yrs.', 
+			', Nagpur', 
+			', KEY RESPONSIBILITIES (Deliverables)							 1.	Timely execution of the job within given specification...', view more', 
+			', 
+			', 
+			', Urgent Opening for Plumbing/fire Fighting Engineer in Mumbai', 
+			', 20 Dec', 
+			', 5 - 10 yrs.', 
+			', Mumbai', 
+			', We have an urgent opening for MEP Engineer (Plumbing/Fire fighting) for Residential Projects in Mumb...', view more', 
+			', 
+			', 
+			', Sr Engineer/dy Manager (qa/qc)', 
+			', 12 Dec', 
+			', 5 - 10 yrs.', 
+			', North India', 
+			',  Responsibilities:   Preparation of project quality plan based on contract specifications, Indi...', view more', 
+			', 
+			', 
+			', Project Planning Engineer(civil)', 
+			', 30 Nov', 
+			', 3 - 7 yrs.', 
+			', Pune', 
+			', Key Responsibilities: 1. To draw up a detailed plan and monitoring the activities based on contract ...', view more', 
+			', 
+			', 
+			', Deputy Manager - Industrial Relation', 
+			', 28 Nov', 
+			', 6 - 8 yrs.', 
+			', Mumbai, Mumbai Suburbs', 
+			', Industrial Relation : 	Ensure compliance of provisions of prevailing Labour laws by all sites across...', view more', 
+			', 
+			', 
+			', Civil Design Engineer - EPC Division', 
+			', 26 Nov', 
+			', 6 - 10 yrs.', 
+			', Pune', 
+			', Interested candidates kindly send updated resume to epc.recruit@shapoorji.com  Opening for Material ...', view more', 
+			', 
+			', 
+			', Urgent Required - Corporate Safety Head', 
+			', 26 Nov', 
+			', 15 - 25 yrs.', 
+			', Pune', 
+			', Interested candidate kindly mail your updated resume to epc.recruit@shapoorji.com  Qualification: BS...', view more', 
+			', 
+			', 
+			', Planning Manager - EPC Division', 
+			', 26 Nov', 
+			', 10 - 15 yrs.', 
+			', Pune', 
+			', Urgent opening for Planning Manager for Material Handling Projects in Pune Experience: 10+ years in ...', view more', 
+			', 
+			', 
+			', Engineer / Sr Engineer(hse)', 
+			', 25 Nov', 
+			', 3 - 8 yrs.', 
+			', North India', 
+			',  KEY Responsibility :  1. Compliance of Statutory requirements with respect to EHS.  2. Investi...', view more', 
+			', 
+			', 
+			', Purchase/stores Assistant', 
+			', 17 Nov', 
+			', 3 - 5 yrs.', 
+			', Mumbai, Mumbai Suburbs', 
+			', 1	maintaining petty cash vouchers 2	maintain time to time purchase of raw material for production 3	...', view more', 
+			', 
+			', 
+			', Sr. Engineer Qa/qc(civil)', 
+			', 14 Nov', 
+			', 3 - 8 yrs.', 
+			', Aurangabad, Pune', 
+			',  Key Responsibilities:   1. Stagewise implementation of quality as per contract specifications. 			 ...', view more', 
+			', 
+			', 
+			', Engineer (quantity Survey)', 
+			', 11 Nov', 
+			', 3 - 5 yrs.', 
+			', Mumbai Suburbs, Mumbai', 
+			', The roles and responsibilities shall include: 1.	Pre Contract Costing/Budgeting  2.	Rate Analysis of...', view more', 
+			', 
+			', 
+			', WALK IN Interviews ON 14-nov-16 (mon)', 
+			', 09 Nov', 
+			', 5 - 10 yrs.', 
+			', Andhra Pradesh, Telangana, Orissa', 
+			', WALK IN INTERVIEWS ON 14-NOV-16 (MON)  POSITION: SUPERVISOR / FOREMAN  (CIVIL/REINFORCEMENT)  Candid...', view more', 
+			', 
+			', 
+			', QA / QC  ( Civil) -- Sr. Engineer/ Dy Manager/ Manager', 
+			', 05 Nov', 
+			', 5 - 10 yrs.', 
+			', Bengalur, 
+			',  QA/QC  (Civil) --   Engineer / Sr. Engineer/ Dy Manager    Note : Please send updated CV on " ban.h...', view more', 
+			', 
+			', 
+			', Planning (civil)-- Engineer/ Sr. Engineer/ Manager', 
+			', 05 Nov', 
+			', 5 - 10 yrs.', 
+			', Bengalur, 
+			',  Planning (Civil) -- Engineer/ Sr. Engineer/ Manager        Note : Please send updated CV ...', view more', 
+			', 
+			', 
+	', 
+		', 
+		', 
+			', Drop your CV here', 
+			', We will consider your Profile for future Jobs', 
+			', Submit Profile', 
+		', 
+	', 
+	', 
+   ', Jobs by Location', 
+   ', Other National Locations', 7', Mumbai Suburbs', 3', Mumbai', 3', Pune', 2', Bengalur, 2', Nagpur', 1', Aurangabad', 1', 
+   ', Jobs by Role', 
+   ', Other', 4', Civil Engineer-Land Development', 3', Construction-Heavy', 1', Mechanical  Engineer-Plumbing/Fire Protection', 1', Construction-Residential', 1', Construction-Construction Management', 1', Quality Assurance & Quality Control-Manager', 1', Industrial/Labour Relations Manager', 1', Design Engineer', 1', Accounts Executive/Accountant', 1', 
+   ', Jobs by Functional Area', 
+   ', Site Engineering, Project Management', 7', Other', 4', Engineering Design, R&D', 2', Accounts, Finance, Tax, Company Secretary, Audit', 1', HR, Recruitment, Administration, IR', 1', 
+   ', Jobs by Industry', 
+   ', Construction / Engineering / Cement / Metals', 14', Chemicals / PetroChemical / Plastic / Rubber', 1',   ', 
+', 
+', 
+', 
+', 
+  ', 
+    ', All Rights Reserved | © 2011 SPCL', 
+  ', 
+', Powered By ',   
+	
+', 
+',  
+
+',  #goToTop {position:absolute;bottom:0px;right:0}', 
+
+
+', u"
+$(document).ready( function(){
+var gotoTop = $('#goToTop');
+var func_gotoTop = function(){
+                if($(this).scrollTop() == 0){
+                                gotoTop.hide();                                                               
+                }
+                else{
+                                gotoTop.show();                             
+                }
+}
+
+
+
+func_gotoTop();
+
+$(window).scroll(func_gotoTop);
+
+//Click event to scroll to top
+
+$('#goToTop').click(function(){
+                $('html, body').animate({scrollTop : 0},500);
+                return false;
+}) });
+", 
+
+ ', 
+    ', 
+      ', 
+    ', 
+    ', 
+      ',         
+      ', 
+    ', 
+    ', 
+',  
+
+', 
+', 
+', 
+', 
+
+', 
+', 
+', 
+', 
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/careers.shapoorji.in\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ..."};
+/* ]]> */
+', 
+', 
+', 
+', 
+jQuery(function($) {
+$('a[rel^="prettyPhoto"]').prettyPhoto();
+});
+', 
+', 
+', 
+',  ', 
+
+'][
+		', 
+				', 
+			', 
+			', 
+								', 
+				', 
+					', 
+					
+					', 
+						', 
+					', 
+					', 
+						', 					', 
+					', 
+						', Overview', 
+', What Makes Us \u2018SP\u2019ECIAL', 
+', Current Openings', 
+', Reach Us', 
+', shapoorji.in', 
+', 
+', 
+  ', Share On', 
+  ', 
+    ', 
+    ', 
+    ', 
+  ', 
+', 
+
+					', 
+				', 
+				', 
+				', 
+
+',  
+
+', 
+', 
+', 
+$(document).ready(function(){
+	
+	
+$('#c1 #inpc1 input').focus(function(e){
+	$('#c2,#c3,#c4').show();
+});
+
+$(".tag").click(function(){
+	var x=$(this).next('input').val(); 
+	$(this).attr("id","cluster_loc");
+	$("form#searchBar").append('<input name="qcity" type="hidden" class="suggest m0 pr30" value="'+x+'">');
+	if(($("#Sug_kwdsugg").val())=="Enter your areas of expertise")
+	{
+		$("#Sug_kwdsugg").attr("value","dummyvar");
+		}
+		
+		$("form#searchBar").submit();
+
+	});
+});
+', 
+', 
+  ', 
+  ', 
+      ',  
+        ', 
+        $(function(){
+
+      			
+		})
+		
+        ', 
+        ', Keyskills, Designation', 
+        ', 
+        ', 
+          ', 
+		 ', 
+            ', 
+          ', 
+        ', 
+        ',  
+        ',  ', 
+      ', 
+        ', Desired Location', 
+        ', 
+        ', 
+          ', 
+	    ', 
+            ', 
+		', 
+          ', 
+        ', 
+        ',  
+        ',  ', 
+	
+      ',  
+        ', 
+       $(function(){ $("#ddExp option[value='']").attr("selected", true);                $("#ddExp").parent('span.text').find('.fwselect-text').text("Select");
+                $("#ddExp").trigger("change");
+                })
+        ', 
+        ', Experience', 
+        ', 
+	', 
+	    ',  ', 
+        	', 
+	    ', 
+	', 
+
+       ', 
+        ',  ', 
+            ',  
+        ', 
+        $(function(){$("#ddMinSal option[value=qmVar]").attr('selected', true);
+		$("#ddMinSal").parent('span.text').find('.fwselect-text').text("Min");
+		$("#ddMinSal").trigger("change");
+		})
+        ', 
+        ', Expected Salary', 
+        ', 
+	 ', 
+            ',  ', 
+                ', 
+            ', 
+        ', 
+', 
+        ', 
+	', 
+            ',  ', 
+                ', 
+            ', 
+        ', 
+', 
+        ',  ', 
+            ', 
+        ', 
+      ', 
+      ',  ', Please enter Keywords or Location to search.',  ', 
+    ', 
+    ', 
+  ', 
+', 
+',  
+
+
+      ', 
+
+$(document).ready(function(){
+
+$('#searchBar').submit(function(e)
+ {
+ domain = "http://careers.shapoorji.in/";
+ keyword= $.trim( $('#Sug_kwdsugg').val() );
+ if($('#cluster_loc').length>0){
+	 loc1=$.trim( $('#LocationTags').find("#cluster_loc span").text() );
+	 }
+	 else{
+ loc1= $.trim( $('#Sug_locsugg').val() );
+	 }
+ if(keyword=="Enter your areas of expertise")
+   {keyword="";}
+ if(loc1=="Where you wish to work")
+   {loc1="";}
+ if( $.trim( keyword )=="" && $.trim( loc1 )==""){
+  $(".error").show();
+  e.preventDefault();
+  }
+else{
+ newUrl = domain+ generateStaticURL(keyword,loc1);
+ $("#searchBar").attr('action',newUrl);
+}
+
+});
+
+function replaceAll(txt, replace, with_this) {
+  return txt.replace(new RegExp(replace, 'gi'),with_this);
+}
+function generateStaticURL(kw,loc)
+{
+ kw = kw.replace(/Enter your areas of expertise/ig,"").replace(/Type skills, designation or company name/ig,"").replace(/\s{2,}/g, ' ').replace(/dummyvar/ig,""); 
+ loc=loc.replace(/Where you wish to work/ig,"");
+  var Kwrd_Action_Str="";var Loc_Action_Str="";var action="";
+  var Spcl_Char_Arr= {"+":" plus " , "#":" sharp " , ".":" dot " , "-":" dash ",'"':" quotes ","'":" quotes ","/":" "};
+  if(kw != "" )
+  {
+    kw= kw.toLowerCase();
+    kw =kw.replace(/\s{2,}/g," ");
+    kw=kw.replace(/\bjobs in\b/gi,"");
+    kw=kw.replace(/\bjobs\b/gi,"");
+    kw=kw.replace(/\blimited\b/gi,"");
+    kw=kw.replace(/\bcorporation\b/gi,"");
+    kw=kw.replace(/\bcareers\b/gi,"");
+    while(kw.indexOf("c++ c++")!=-1 )
+      kw=kw.replace("c++ c++","c++");
+/*    for(i in stopwordArr)
+    {
+      kw=replaceAll(kw,"\\b"+stopwordArr[i].toLowerCase(),"");
+    } */
+    kw = replaceAll(kw,","," ");
+    kw=kw.replace(/[^.+#\-'" a-zA-Z0-9]/ig," ").replace(/and {1,}$/g,"");
+    var Tmp_Kwrd_Str = $.trim(kw).toLowerCase();
+    var Tmp_Kwrd_Str = kw;
+    Tmp_Kwrd_Arr = Tmp_Kwrd_Str.split(",");
+    for(i in Tmp_Kwrd_Arr){
+      for (key in Spcl_Char_Arr)
+        Tmp_Kwrd_Arr[i]=replaceAll(Tmp_Kwrd_Arr[i],"\\"+key,Spcl_Char_Arr[key]);
+      Tmp_Kwrd_Arr[i]=$.trim(replaceAll(Tmp_Kwrd_Arr[i],"\ \ "," "));
+      Tmp_Arr = Tmp_Kwrd_Arr[i].split(" ");
+    }
+    Kwrd_Action_Str = Tmp_Kwrd_Arr.join(" ");
+  }
+  if(loc != "")
+  {
+    loc=loc.replace(/\bjobs in\b/gi,"");
+    loc=loc.replace(/\bjobs\b/gi,"");
+    loc=loc.split("\\").join(" ");
+    loc=loc.split("/").join(" ");
+    loc=loc.replace(/[^, a-zA-Z]/ig,"").replace(/,{1,}$/g,"");;
+    loc = replaceAll($.trim(loc).toLowerCase(),"  "," ");
+/*    for(i in stopwordArr)
+    {
+      loc=replaceAll(loc,"\\b"+stopwordArr[i].toLowerCase()+"\\b","");
+    } */
+    Loc_Arr = loc.split(",");
+    Tmp_Str = Loc_Arr.join(" and ");
+    Tmp_Arr = Tmp_Str.split(" ");
+    Loc_Action_Str = Tmp_Arr.join(" ");
+  }
+  if(Kwrd_Action_Str == "" && Loc_Action_Str != "")
+    action = action + "jobs in " + Loc_Action_Str;
+  else if (Kwrd_Action_Str != "" && Loc_Action_Str =="")
+    action = action + Kwrd_Action_Str +  " jobs";
+  else if (Kwrd_Action_Str != "" && Loc_Action_Str !="")
+    action = action + Kwrd_Action_Str +  " jobs in " + Loc_Action_Str;
+  //finally replace all consecutive duplicate words
+  action=action.replace(/[\s]*plus[\s]+(plus[\s]*)+/gi,' + ');
+  action = action.replace(/-/g," ").replace(/\s{2,}/g, ' ');
+  do {
+    var newTemp = action;
+    var action = newTemp.replace(/\s(\w+\s)\1/, " $1");
+    action = action.replace(/^(\w+\s)\1/, "$1");
+    action = action.replace(/(\s\w+)\1$/, "$1")
+  } while (action.length != newTemp.length);
+  while(action.indexOf(" + ") != -1)
+    action=action.replace(" + "," plus plus ");
+    action= $.trim(action).replace(/\s/g,"-");
+    action= action.replace(/\s/g,"-");
+  if(action == "")
+    action = "jobs-in-india";
+
+  return action;
+}
+
+});
+      ', 
+', 
+  ',  Jobs ', (1-15 out of 15) ', 
+			', Civil Engineer', 
+			', 28 Dec', 
+			', 2 - 7 yrs.', 
+			', Nagpur', 
+			', KEY RESPONSIBILITIES (Deliverables)							 1.	Timely execution of the job within given specification...', view more', 
+			', 
+			', 
+			', Urgent Opening for Plumbing/fire Fighting Engineer in Mumbai', 
+			', 20 Dec', 
+			', 5 - 10 yrs.', 
+			', Mumbai', 
+			', We have an urgent opening for MEP Engineer (Plumbing/Fire fighting) for Residential Projects in Mumb...', view more', 
+			', 
+			', 
+			', Sr Engineer/dy Manager (qa/qc)', 
+			', 12 Dec', 
+			', 5 - 10 yrs.', 
+			', North India', 
+			',  Responsibilities:   Preparation of project quality plan based on contract specifications, Indi...', view more', 
+			', 
+			', 
+			', Project Planning Engineer(civil)', 
+			', 30 Nov', 
+			', 3 - 7 yrs.', 
+			', Pune', 
+			', Key Responsibilities: 1. To draw up a detailed plan and monitoring the activities based on contract ...', view more', 
+			', 
+			', 
+			', Deputy Manager - Industrial Relation', 
+			', 28 Nov', 
+			', 6 - 8 yrs.', 
+			', Mumbai, Mumbai Suburbs', 
+			', Industrial Relation : 	Ensure compliance of provisions of prevailing Labour laws by all sites across...', view more', 
+			', 
+			', 
+			', Civil Design Engineer - EPC Division', 
+			', 26 Nov', 
+			', 6 - 10 yrs.', 
+			', Pune', 
+			', Interested candidates kindly send updated resume to epc.recruit@shapoorji.com  Opening for Material ...', view more', 
+			', 
+			', 
+			', Urgent Required - Corporate Safety Head', 
+			', 26 Nov', 
+			', 15 - 25 yrs.', 
+			', Pune', 
+			', Interested candidate kindly mail your updated resume to epc.recruit@shapoorji.com  Qualification: BS...', view more', 
+			', 
+			', 
+			', Planning Manager - EPC Division', 
+			', 26 Nov', 
+			', 10 - 15 yrs.', 
+			', Pune', 
+			', Urgent opening for Planning Manager for Material Handling Projects in Pune Experience: 10+ years in ...', view more', 
+			', 
+			', 
+			', Engineer / Sr Engineer(hse)', 
+			', 25 Nov', 
+			', 3 - 8 yrs.', 
+			', North India', 
+			',  KEY Responsibility :  1. Compliance of Statutory requirements with respect to EHS.  2. Investi...', view more', 
+			', 
+			', 
+			', Purchase/stores Assistant', 
+			', 17 Nov', 
+			', 3 - 5 yrs.', 
+			', Mumbai, Mumbai Suburbs', 
+			', 1	maintaining petty cash vouchers 2	maintain time to time purchase of raw material for production 3	...', view more', 
+			', 
+			', 
+			', Sr. Engineer Qa/qc(civil)', 
+			', 14 Nov', 
+			', 3 - 8 yrs.', 
+			', Aurangabad, Pune', 
+			',  Key Responsibilities:   1. Stagewise implementation of quality as per contract specifications. 			 ...', view more', 
+			', 
+			', 
+			', Engineer (quantity Survey)', 
+			', 11 Nov', 
+			', 3 - 5 yrs.', 
+			', Mumbai Suburbs, Mumbai', 
+			', The roles and responsibilities shall include: 1.	Pre Contract Costing/Budgeting  2.	Rate Analysis of...', view more', 
+			', 
+			', 
+			', WALK IN Interviews ON 14-nov-16 (mon)', 
+			', 09 Nov', 
+			', 5 - 10 yrs.', 
+			', Andhra Pradesh, Telangana, Orissa', 
+			', WALK IN INTERVIEWS ON 14-NOV-16 (MON)  POSITION: SUPERVISOR / FOREMAN  (CIVIL/REINFORCEMENT)  Candid...', view more', 
+			', 
+			', 
+			', QA / QC  ( Civil) -- Sr. Engineer/ Dy Manager/ Manager', 
+			', 05 Nov', 
+			', 5 - 10 yrs.', 
+			', Bengalur, 
+			',  QA/QC  (Civil) --   Engineer / Sr. Engineer/ Dy Manager    Note : Please send updated CV on " ban.h...', view more', 
+			', 
+			', 
+			', Planning (civil)-- Engineer/ Sr. Engineer/ Manager', 
+			', 05 Nov', 
+			', 5 - 10 yrs.', 
+			', Bengalur, 
+			',  Planning (Civil) -- Engineer/ Sr. Engineer/ Manager        Note : Please send updated CV ...', view more', 
+			', 
+			', 
+	', 
+		', 
+		', 
+			', Drop your CV here', 
+			', We will consider your Profile for future Jobs', 
+			', Submit Profile', 
+		', 
+	', 
+	', 
+   ', Jobs by Location', 
+   ', Other National Locations', 7', Mumbai Suburbs', 3', Mumbai', 3', Pune', 2', Bengalur, 2', Nagpur', 1', Aurangabad', 1', 
+   ', Jobs by Role', 
+   ', Other', 4', Civil Engineer-Land Development', 3', Construction-Heavy', 1', Mechanical  Engineer-Plumbing/Fire Protection', 1', Construction-Residential', 1', Construction-Construction Management', 1', Quality Assurance & Quality Control-Manager', 1', Industrial/Labour Relations Manager', 1', Design Engineer', 1', Accounts Executive/Accountant', 1', 
+   ', Jobs by Functional Area', 
+   ', Site Engineering, Project Management', 7', Other', 4', Engineering Design, R&D', 2', Accounts, Finance, Tax, Company Secretary, Audit', 1', HR, Recruitment, Administration, IR', 1', 
+   ', Jobs by Industry', 
+   ', Construction / Engineering / Cement / Metals', 14', Chemicals / PetroChemical / Plastic / Rubber', 1',   ', 
+', 
+', 
+', 
+', 
+  ', 
+    ', All Rights Reserved | © 2011 SPCL', 
+  ', 
+', Powered By ',   
+	
+', 
+',  
+
+',  #goToTop {position:absolute;bottom:0px;right:0}', 
+
+
+', u"
+$(document).ready( function(){
+var gotoTop = $('#goToTop');
+var func_gotoTop = function(){
+                if($(this).scrollTop() == 0){
+                                gotoTop.hide();                                                               
+                }
+                else{
+                                gotoTop.show();                             
+                }
+}
+
+
+
+func_gotoTop();
+
+$(window).scroll(func_gotoTop);
+
+//Click event to scroll to top
+
+$('#goToTop').click(function(){
+                $('html, body').animate({scrollTop : 0},500);
+                return false;
+}) });
+", 
+
+ ', 
+    ', 
+      ', 
+    ', 
+    ', 
+      ',         
+      ', 
+    ', 
+    ', 
+',  
+
+', 
+', 
+', 
+', 
+
+', 
+', 
+', 
+', 
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/careers.shapoorji.in\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ..."};
+/* ]]> */
+', 
+', 
+', 
+', 
+jQuery(function($) {
+$('a[rel^="prettyPhoto"]').prettyPhoto();
+});
+', 
+', 
+', 
+',  ', 
+
+']

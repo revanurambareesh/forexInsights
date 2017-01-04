@@ -1,0 +1,857 @@
+[
+    
+', u"
+    var searchtest =  function (searchTerm) {
+    var href = '/Products/r?d=0&r=0&p=0&o=-1&t=' + searchTerm;
+
+    if ($('#sid') !== undefined) {
+    href = href + '&s=' + $('#sid').val();
+    }
+    document.location = href;
+    };
+", 
+
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+        ', 
+        ', 
+
+
+    ', Login', 
+
+', Shopping Cart  ', (empty)', 
+            ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            Wines
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            Spirits
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            Auctions
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            Wine Clubs
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            Accessories
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            Shipping
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            Contact
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+        ', 
+',                 ', 
+                    Search
+                    ', 
+',                 ', 
+',                         ', Best Sellers
+            ', 
+            ', New Arrivals
+            ', 
+            ', Local Events
+            ', 
+            ', Locations
+            ', 
+            ', 
+                Gift Cards
+            ', 
+            ', My Account
+            ', 
+            ', Advanced Search
+            ',  
+        ', 
+        ', 
+', 
+    K&L cares about the security of your credit card and personal information.  We detected that your browser and/or operating system is not compliant with current credit card security protocols.  Please click this message for more information.
+', 
+', 
+    ', 
+        K&L cares about the security of your credit card and personal information.  We detected that your browser and/or operating system is not compliant with current credit card security protocols.  Please upgrade your browser and/or operating system.  Your browser and operating system need to support industry standard transport security protocol TLS version 1.2.  Alternatively, contact K&L and we can help you with your order.
+    ', 
+        877-KLWines (877-559-4637) (Toll Free)', 
+        (650) 364-8544 (Local)', 
+        (650) 364-4687 (Fax)', 
+    ', 
+        Helpful Links:
+        ', 
+            ', Safari', 
+            ', Google Chrome', 
+            ', Firefox', 
+            ', Internet Explorer', 
+        ', 
+        ', 
+', 
+
+', 
+    //++++++++++++++++++++++++
+    // Initial Settings
+    var isTLS12Compatible = true;
+    var sslCheckUrl = "https://www.howsmyssl.com/a/check";
+    var browserAgentStatUrl = "/BrowserAgentLogging?agent=" + (navigator.userAgent ? navigator.userAgent : "unknown");
+    var cookieName = "TLS12Compatibility";
+    var cookieExpDays = 1;
+
+    var dialogConfig = {
+        title: "Browser Incompatibility Warning",
+        autoOpen: false,
+        modal: true,
+        resizable: true,
+        dialogClass: 'no-close success-dialog'
+    }
+
+    var cookie = {
+        create: function (name, value, days) {
+            var expires = "";
+
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toGMTString();
+            }
+
+            document.cookie = name + "=" + value + expires + "; path=/";
+        },
+
+        read: function (name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1, c.length)
+                };
+
+                if (c.indexOf(nameEQ) == 0) {
+                    return c.substring(nameEQ.length, c.length);
+                }
+            }
+
+            return null;
+        },
+
+        erase: function (name) {
+            createCookie(name, "", -1);
+        }
+    };
+
+    var ajaxObj = {
+        url: sslCheckUrl,
+        type: 'GET',
+        success: function (data) {
+            if (typeof (data.Error) !== 'undefined') {
+                $("#error").text(data.Error);
+            }
+            else {
+                if (data != null) {
+                    var tlsVersionNum = data.tls_version.split(' ')[1] // data.tls_version format: "TLS 1.2"
+
+                    if (!isNaN(tlsVersionNum) && tlsVersionNum < 1.2) {
+                        isTLS12Compatible = false;
+                    }
+                }
+
+                if (isTLS12Compatible) {
+                    cookie.create(cookieName, "true", cookieExpDays);
+                }
+                else {
+                    LogToGoogleAnalytics();
+                    $("#popup").dialog("open");
+                    $("#banner").show();
+                    cookie.create(cookieName, "false", cookieExpDays);
+                    $.ajax(ajaxLoggingAgent);
+                }
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            cookie.create(cookieName, "true", cookieExpDays);
+        }
+    }
+
+    var LogToGoogleAnalytics = function () {
+        var platform = findPlatform(window);
+        var logValue = platform.browser + ' ' + platform.browserMajorVersion + ' - ' + platform.os + ' ' + platform.osVersion;
+        ga('set', 'dimension3', logValue);
+        ga('send', 'pageview');
+    }
+
+    //++++++++++++++++++++++++
+    // Presentation logics
+    $("#popup").dialog(dialogConfig);
+
+    $(document).ready(function () {
+        var isCookieExists = cookie.read(cookieName);
+        if (isCookieExists == null) {
+            $.ajax(ajaxObj);
+        }
+        else {
+            if (cookie.read(cookieName) === "false") {
+                $("#banner").show();
+            }
+        }
+
+        $("#banner").click(function () {
+            LogToGoogleAnalytics();
+            $("#popup").dialog("open");
+        });
+
+        $("#btnClose").click(function () {
+            $("#popup").dialog("close");
+        })
+    });
+', 
+        ', 
+            ', 
+
+    
+
+', 
+    
+
+
+
+    ', 
+
+                ', Shipping', 
+                ', 
+                    ', Shipping Rates', 
+                    ', Shipping States', 
+                    ', International Orders', 
+                    ', Order Status', 
+                ', 
+
+        
+
+        ', 
+        ', 
+
+
+
+        ', 
+        ', K&L Email Alerts', 
+        ', 
+            Sign up to receive custom alerts, new arrivals and the latest happenings from K&L
+            Wines
+        ', 
+        ', 
+            ', 
+            ', 
+            ', 
+        ', 
+    ', 
+
+
+    ', 
+        
+
+
+    ', 
+        ', 
+            ', Home', 
+
+                    ', :  ', Shipping', 
+
+                ', : Shipping', 
+        ', 
+    ', 
+
+
+
+        ', Shipping Information', 
+
+        ', Frequently Asked Shipping Questions', 
+        ', 
+            ', u"What are K&L's shipping rates?", 
+            ', Can K&L ship to my state?', 
+            ', Can K&L ship to my country?', 
+            ', How do I check my order status?', 
+        ', 
+
+        ', Important Notes Regarding K&L Shipments', 
+        ', 
+            ', u"Our fulfillment methods vary by the locations where your products are located.  Because we give you access to everything in stock (regardless of where it's located), we use a few different business rules.  If yore having items shipped to an address, we transfer all items back to our Northern California warehouse and ship them out from there, unless there are items located in our Hollywood store.  Hollywood items will ship directly to you separately.  If you are picking items up (will call) at any of our locations, we create individual orders for each separate location and then consolidate these individual orders together at the final pickup location.", 
+            ', Unless you live on the West Coast, we strongly discourage you from selecting "Ground Service" as your shipping method. During the winter and summer months, weather conditions (temperature) and longer delivery times can often result in the spoilage of your order. It doesn't make sense to invest in fine wines and then take the chance of ruining them due environmental factors during transit (faster and safer delivery generally isn't much more expensive).  We don't make an additional profit on accelerated delivery, but we frequently recommend faster shipping options to our customers outside the West Coast.', 
+            ', You must be 21 years of age to order or receive alcoholic beverages from K&L Wine Merchants.  Any shipments containing alcoholic beverages are sent with an "Adult Signature Required" sticker, and the common carrier that delivers our merchandise is required to ask and check for identification upon delivery.  This means that you will have to be present at the time of delivery.', 
+            ', u"During periods of extreme weather, we attempt to ship wines at the beginning of each week in order to get shipments to you before the weekend.  This is because we have no control over the temperature conditions at our freight carriers' warehouses. The result may be that your shipment doesn't go out the day that you place an order.  Please understand that during business hours, your orders are immediately packaged and scheduled for delivery, but may be delayed until ideal conditions for shipment arise.", 
+            ', We ship by ground or air. Our prices include packaging materials.  Insurance may be available for an additional charge.', 
+            ', A small percentage of our products are sold on a "pre-arrival" or "futures" basis.  These products are explicitly indicated as "pre-arrivals" or "futures" on our Web site and newsletter, along with the expected arrival dates.  K&L will notify you by US mail when your "pre-arrivals" or "futures" have arrived and are ready to be shipped.  You will be given the opportunity to coordinate the proper shipping address and method (we won't automatically ship out pre-arrival wines when they arrive).', 
+            ', K&L Wine Merchants will arrange for shipment on behalf of the buyer, to an address specified by the buyer, provided that K&L Wine Merchants in its sole judgement believes that such shipment will not subject K&L to the risk of any sort of legal action or other harm. If a buyer lives in a state where the direct shipment of wine by K&L violates the law, we suggest that the buyer provide an alternative address in another state or have their wine shipped to a third-party storage facility in a direct shipping-friendly state.  As a service to our buyers, we have compiled a listing of these facilities, which are not affiliated with K&L.  We do not provide an endorsement of any facility and we recommend that you contact the facility directly to determine if their costs and services meet your needs.', 
+                Third party storage facilities within states we CAN ship to...
+									', 
+                                        ', Fifty-Five Degrees',  (St Helena, California -- 707-963-5513)', 
+                                        ', Portland Wine Storage',  (Portland, Oregon -- 503-231-1121)', 
+                                        ', Safe Haven Wine Services',  (Paso Robles, CA -- 805-238-7233)', 
+                                        ', Subterranean (Oakland, California -- 510-451-3939)', 
+                                            ', * Note - Subterranean does not provide outbound shipping services', 
+                                    ', 
+            ', 
+        ', 
+
+        ', Contact our Customer Service Department', 
+
+        ', By Phone:', 
+        ', 
+            ', (800) 247-5987', 
+            ', (650) 364-8544', 
+        ', 
+
+        ', By Email:',  ', customerservice@klwines.com', 
+    ', 
+', 
+
+                ', 
+        ', 
+	    ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    Wines
+                ', 
+                | 
+                ', 
+                    Spirits
+                ', 
+                | 
+                ', 
+                    Auctions
+                ', 
+                |
+                ', 
+                    Accessories
+                ', 
+                |
+                ', 
+                    Wine Clubs
+                ', 
+                | 
+                ', 
+                    About Us
+                ', 
+                | 
+                ', 
+                    Blog
+                ',                 
+                | 
+                ', 
+                    Shipping
+                ', 
+                |
+                ', 
+                    Contact
+                ', 
+            ', 
+            ', © 
+                ', Copyright 2017', 
+                ',  K&L Wine Merchants. All Rights Reserved.', 
+                ', Privacy Policy', 
+                ', Jobs/Employment', 
+                ', 877-KLWines', 
+            ', 
+        ', 
+    ', 
+', 
+	
+', 
+
+', 
+    ', 
+', 
+
+
+
+    ', 
+    ', 
+
+
+    ', 
+'][
+    
+', u"
+    var searchtest =  function (searchTerm) {
+    var href = '/Products/r?d=0&r=0&p=0&o=-1&t=' + searchTerm;
+
+    if ($('#sid') !== undefined) {
+    href = href + '&s=' + $('#sid').val();
+    }
+    document.location = href;
+    };
+", 
+
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+        ', 
+        ', 
+
+
+    ', Login', 
+
+', Shopping Cart  ', (empty)', 
+            ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            Wines
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            Spirits
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            Auctions
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            Wine Clubs
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            Accessories
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            Shipping
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            Contact
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+    ', 
+        ', 
+',                 ', 
+                    Search
+                    ', 
+',                 ', 
+',                         ', Best Sellers
+            ', 
+            ', New Arrivals
+            ', 
+            ', Local Events
+            ', 
+            ', Locations
+            ', 
+            ', 
+                Gift Cards
+            ', 
+            ', My Account
+            ', 
+            ', Advanced Search
+            ',  
+        ', 
+        ', 
+', 
+    K&L cares about the security of your credit card and personal information.  We detected that your browser and/or operating system is not compliant with current credit card security protocols.  Please click this message for more information.
+', 
+', 
+    ', 
+        K&L cares about the security of your credit card and personal information.  We detected that your browser and/or operating system is not compliant with current credit card security protocols.  Please upgrade your browser and/or operating system.  Your browser and operating system need to support industry standard transport security protocol TLS version 1.2.  Alternatively, contact K&L and we can help you with your order.
+    ', 
+        877-KLWines (877-559-4637) (Toll Free)', 
+        (650) 364-8544 (Local)', 
+        (650) 364-4687 (Fax)', 
+    ', 
+        Helpful Links:
+        ', 
+            ', Safari', 
+            ', Google Chrome', 
+            ', Firefox', 
+            ', Internet Explorer', 
+        ', 
+        ', 
+', 
+
+', 
+    //++++++++++++++++++++++++
+    // Initial Settings
+    var isTLS12Compatible = true;
+    var sslCheckUrl = "https://www.howsmyssl.com/a/check";
+    var browserAgentStatUrl = "/BrowserAgentLogging?agent=" + (navigator.userAgent ? navigator.userAgent : "unknown");
+    var cookieName = "TLS12Compatibility";
+    var cookieExpDays = 1;
+
+    var dialogConfig = {
+        title: "Browser Incompatibility Warning",
+        autoOpen: false,
+        modal: true,
+        resizable: true,
+        dialogClass: 'no-close success-dialog'
+    }
+
+    var cookie = {
+        create: function (name, value, days) {
+            var expires = "";
+
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toGMTString();
+            }
+
+            document.cookie = name + "=" + value + expires + "; path=/";
+        },
+
+        read: function (name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1, c.length)
+                };
+
+                if (c.indexOf(nameEQ) == 0) {
+                    return c.substring(nameEQ.length, c.length);
+                }
+            }
+
+            return null;
+        },
+
+        erase: function (name) {
+            createCookie(name, "", -1);
+        }
+    };
+
+    var ajaxObj = {
+        url: sslCheckUrl,
+        type: 'GET',
+        success: function (data) {
+            if (typeof (data.Error) !== 'undefined') {
+                $("#error").text(data.Error);
+            }
+            else {
+                if (data != null) {
+                    var tlsVersionNum = data.tls_version.split(' ')[1] // data.tls_version format: "TLS 1.2"
+
+                    if (!isNaN(tlsVersionNum) && tlsVersionNum < 1.2) {
+                        isTLS12Compatible = false;
+                    }
+                }
+
+                if (isTLS12Compatible) {
+                    cookie.create(cookieName, "true", cookieExpDays);
+                }
+                else {
+                    LogToGoogleAnalytics();
+                    $("#popup").dialog("open");
+                    $("#banner").show();
+                    cookie.create(cookieName, "false", cookieExpDays);
+                    $.ajax(ajaxLoggingAgent);
+                }
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            cookie.create(cookieName, "true", cookieExpDays);
+        }
+    }
+
+    var LogToGoogleAnalytics = function () {
+        var platform = findPlatform(window);
+        var logValue = platform.browser + ' ' + platform.browserMajorVersion + ' - ' + platform.os + ' ' + platform.osVersion;
+        ga('set', 'dimension3', logValue);
+        ga('send', 'pageview');
+    }
+
+    //++++++++++++++++++++++++
+    // Presentation logics
+    $("#popup").dialog(dialogConfig);
+
+    $(document).ready(function () {
+        var isCookieExists = cookie.read(cookieName);
+        if (isCookieExists == null) {
+            $.ajax(ajaxObj);
+        }
+        else {
+            if (cookie.read(cookieName) === "false") {
+                $("#banner").show();
+            }
+        }
+
+        $("#banner").click(function () {
+            LogToGoogleAnalytics();
+            $("#popup").dialog("open");
+        });
+
+        $("#btnClose").click(function () {
+            $("#popup").dialog("close");
+        })
+    });
+', 
+        ', 
+            ', 
+
+    
+
+', 
+    
+
+
+
+    ', 
+
+                ', Shipping', 
+                ', 
+                    ', Shipping Rates', 
+                    ', Shipping States', 
+                    ', International Orders', 
+                    ', Order Status', 
+                ', 
+
+        
+
+        ', 
+        ', 
+
+
+
+        ', 
+        ', K&L Email Alerts', 
+        ', 
+            Sign up to receive custom alerts, new arrivals and the latest happenings from K&L
+            Wines
+        ', 
+        ', 
+            ', 
+            ', 
+            ', 
+        ', 
+    ', 
+
+
+    ', 
+        
+
+
+    ', 
+        ', 
+            ', Home', 
+
+                    ', :  ', Shipping', 
+
+                ', : Shipping', 
+        ', 
+    ', 
+
+
+
+        ', Shipping Information', 
+
+        ', Frequently Asked Shipping Questions', 
+        ', 
+            ', u"What are K&L's shipping rates?", 
+            ', Can K&L ship to my state?', 
+            ', Can K&L ship to my country?', 
+            ', How do I check my order status?', 
+        ', 
+
+        ', Important Notes Regarding K&L Shipments', 
+        ', 
+            ', u"Our fulfillment methods vary by the locations where your products are located.  Because we give you access to everything in stock (regardless of where it's located), we use a few different business rules.  If yore having items shipped to an address, we transfer all items back to our Northern California warehouse and ship them out from there, unless there are items located in our Hollywood store.  Hollywood items will ship directly to you separately.  If you are picking items up (will call) at any of our locations, we create individual orders for each separate location and then consolidate these individual orders together at the final pickup location.", 
+            ', Unless you live on the West Coast, we strongly discourage you from selecting "Ground Service" as your shipping method. During the winter and summer months, weather conditions (temperature) and longer delivery times can often result in the spoilage of your order. It doesn't make sense to invest in fine wines and then take the chance of ruining them due environmental factors during transit (faster and safer delivery generally isn't much more expensive).  We don't make an additional profit on accelerated delivery, but we frequently recommend faster shipping options to our customers outside the West Coast.', 
+            ', You must be 21 years of age to order or receive alcoholic beverages from K&L Wine Merchants.  Any shipments containing alcoholic beverages are sent with an "Adult Signature Required" sticker, and the common carrier that delivers our merchandise is required to ask and check for identification upon delivery.  This means that you will have to be present at the time of delivery.', 
+            ', u"During periods of extreme weather, we attempt to ship wines at the beginning of each week in order to get shipments to you before the weekend.  This is because we have no control over the temperature conditions at our freight carriers' warehouses. The result may be that your shipment doesn't go out the day that you place an order.  Please understand that during business hours, your orders are immediately packaged and scheduled for delivery, but may be delayed until ideal conditions for shipment arise.", 
+            ', We ship by ground or air. Our prices include packaging materials.  Insurance may be available for an additional charge.', 
+            ', A small percentage of our products are sold on a "pre-arrival" or "futures" basis.  These products are explicitly indicated as "pre-arrivals" or "futures" on our Web site and newsletter, along with the expected arrival dates.  K&L will notify you by US mail when your "pre-arrivals" or "futures" have arrived and are ready to be shipped.  You will be given the opportunity to coordinate the proper shipping address and method (we won't automatically ship out pre-arrival wines when they arrive).', 
+            ', K&L Wine Merchants will arrange for shipment on behalf of the buyer, to an address specified by the buyer, provided that K&L Wine Merchants in its sole judgement believes that such shipment will not subject K&L to the risk of any sort of legal action or other harm. If a buyer lives in a state where the direct shipment of wine by K&L violates the law, we suggest that the buyer provide an alternative address in another state or have their wine shipped to a third-party storage facility in a direct shipping-friendly state.  As a service to our buyers, we have compiled a listing of these facilities, which are not affiliated with K&L.  We do not provide an endorsement of any facility and we recommend that you contact the facility directly to determine if their costs and services meet your needs.', 
+                Third party storage facilities within states we CAN ship to...
+									', 
+                                        ', Fifty-Five Degrees',  (St Helena, California -- 707-963-5513)', 
+                                        ', Portland Wine Storage',  (Portland, Oregon -- 503-231-1121)', 
+                                        ', Safe Haven Wine Services',  (Paso Robles, CA -- 805-238-7233)', 
+                                        ', Subterranean (Oakland, California -- 510-451-3939)', 
+                                            ', * Note - Subterranean does not provide outbound shipping services', 
+                                    ', 
+            ', 
+        ', 
+
+        ', Contact our Customer Service Department', 
+
+        ', By Phone:', 
+        ', 
+            ', (800) 247-5987', 
+            ', (650) 364-8544', 
+        ', 
+
+        ', By Email:',  ', customerservice@klwines.com', 
+    ', 
+', 
+
+                ', 
+        ', 
+	    ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    Wines
+                ', 
+                | 
+                ', 
+                    Spirits
+                ', 
+                | 
+                ', 
+                    Auctions
+                ', 
+                |
+                ', 
+                    Accessories
+                ', 
+                |
+                ', 
+                    Wine Clubs
+                ', 
+                | 
+                ', 
+                    About Us
+                ', 
+                | 
+                ', 
+                    Blog
+                ',                 
+                | 
+                ', 
+                    Shipping
+                ', 
+                |
+                ', 
+                    Contact
+                ', 
+            ', 
+            ', © 
+                ', Copyright 2017', 
+                ',  K&L Wine Merchants. All Rights Reserved.', 
+                ', Privacy Policy', 
+                ', Jobs/Employment', 
+                ', 877-KLWines', 
+            ', 
+        ', 
+    ', 
+', 
+	
+', 
+
+', 
+    ', 
+', 
+
+
+
+    ', 
+    ', 
+
+
+    ', 
+']

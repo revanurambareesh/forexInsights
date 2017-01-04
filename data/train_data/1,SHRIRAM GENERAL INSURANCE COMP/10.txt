@@ -1,0 +1,1729 @@
+[
+ ', 
+     var environment_mic = 'production';
+     var cdn_domain = 'https://d5gdqotkuzdho.cloudfront.net';
+     var ga_code = (environment_mic == 'production') ? 'UA-10819086-1' : 'UA-74831561-1';
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', ga_code, 'auto');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview');
+       var data_json =  {
+        "term": {
+               "form": {
+                   "step1": ["coverage_amount_term", "policy_term"],
+                   "step2": ["desktop_cust_dob", "cust_gender", "smoker", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+	"health": {
+               "form": {
+                   "step1": ["coverage_amount", "plan_type_name"],
+                   "step2": ["cust_dob", "cust_gender", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "car": {
+               "form": {
+                   "step1": ["carinsurancetype"],
+                   "step2": ["veh_man", "veh_model", "veh_variant","veh_year"],
+                   "step3": ["reg_no_field1","reg_no_field2","reg_no_field3","reg_no_field4","first_pur_date", "car_registered_name", "is_ownership_change"],
+                   "step4": ["prev_insurer","policy_expiry_date","exist_policy_claims"],
+                   "step5": ["cust_email"]
+               }
+        },
+        "tw": {
+               "form": {
+                   "step1": ["carinsurancetype"],
+                   "step2": ["veh_man", "veh_model", "veh_variant","veh_year"],
+                   "step3": ["reg_no_field1","reg_no_field2","reg_no_field3","reg_no_field4","first_pur_date", "car_registered_name", "is_ownership_change"],
+                   "step4": ["prev_insurer","policy_expiry_date","exist_policy_claims"],
+                   "step5": ["cust_email"]
+               }
+        },
+        "endowment": {
+               "form": {
+                   "step1": ["coverage_amount_endowment"],
+                   "step2": ["desktop_cust_dob", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "moneyback": {
+               "form": {
+                   "step1": ["coverage_amount_moneyback"],
+                   "step2": ["desktop_cust_dob", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "child": {
+               "form": {
+                   "step1": ["coverage_amount_child"],
+                   "step2": ["desktop_cust_dob", "child_dob","cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "pension": {
+               "form": {
+                   "step1": ["coverage_amount_pension"],
+                   "step2": ["desktop_cust_dob","cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "ulip": {
+               "form": {
+                   "step1": ["coverage_amount_pension"],
+                   "step2": ["desktop_cust_dob","cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "travel": {
+               "form": {
+                   "step1": ["travel_type"],
+                   "step2": ["trip_location"],
+                   "step3": ["trip_start_date", "trip_end_date"],
+                   "step4": ["travel_insurance_type","desktop_cust_dob"],
+		   "step5": ["cust_name","cust_email"]
+               }
+        },
+        "ci": {
+               "form": {
+                   "step1": ["coverage_amount","plan_type","cust_gender","prop_desk_dob"],
+                   "step2": ["spouce_dob","child1_dob","child2_dob","child1_gender","child2_gender"]
+               }
+        },
+        "pa": {
+               "form": {
+                   "step1": ["cust_occupation_name"]
+               }
+        }
+       };
+     
+     ', 
+
+ ', 
+    
+ 
+  
+   function ga_step(category, action, label, value) {
+               if (action == 'form')
+               {
+                   var arr_json = eval('data_json.' + category + '.form.' + label);
+                   var arr_step_status = [];
+                   $.each(arr_json, function (k, v) {
+                       if ($("#" + v).val() == '')
+                       {
+                           arr_step_status.push(false);
+                       }
+                       else {
+                           arr_step_status.push(true);
+                       }
+                   });
+                   if ($.inArray(false, arr_step_status) == -1) {
+                       console.log(category, action, label, value);
+                       ga('send', 'event', {eventCategory: category, eventAction: action, eventLabel: label, eventValue: 0});
+                   }
+               }
+               else
+               {
+		   console.log(category, action, label, value);
+                   if(value == null || value == undefined || value == ''){
+                       value = '0';
+                   }
+                   ga('send', 'event', {eventCategory: category, eventAction: action, eventLabel: label, eventValue: value});
+               }
+
+           }
+ 
+  ', 
+    ', 
+  
+var CONS_INSP_LIST = {
+	    "controller": [
+	                   "controller_car",
+	                   "common"
+	                 //  "controller_two_wheeler"
+	                  // "controller_basicmediclaim"
+	               ],
+	               "action": [
+	                   "index",
+                           "new_index",
+	                 //  "get_car_results",
+	                  // "health_policy",
+	                 //  "BuyNow",
+	                   "return_url_motor",
+	                  // "get_two_wheeler_results"
+	               ]
+	           };
+  ',  
+
+
+', u"
+var clicky_site_ids = clicky_site_ids || [];
+clicky_site_ids.push(154599);
+(function() {
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = '//static.getclicky.com/js';
+  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+})();
+", 
+
+', 
+
+
+ 
+', 
+   /* jQuery( document ).ready(function( $ ) {
+		if($(".msie8").length){
+$(".odometer").addClass("no_odometer").removeClass('odometer');
+			}
+	});*/
+', 
+', 
+   /* Styles specific to this particular page */
+   .scroll-pane {
+   width: 100%;
+   height: 200px;
+   overflow: auto;
+   }
+', 
+', 
+   ', 
+      
+             ', 
+         ', 
+            ', 
+               ', 
+                  ',  
+                  ', 
+                   ',  
+                  ', 
+
+                  ', u"India's 1st IRDAI Approved Insurance Web Aggregator", 
+                  ', 
+                    
+                      ', Get your Policy Analysed', 
+                      ', 
+
+                                      ', 
+               ', 
+            ', 
+         ', 
+      ', 
+              
+       
+      
+      ', 
+         ', 
+            
+            ', 
+               ', 
+                  ', 
+                 
+                  ', 
+                     ', 
+			 
+			 ', Home', 
+			
+                     ', 
+                  
+                     ', Health Insurance', 
+                     ', Car Insurance', 
+                      ', Two-Wheeler Insurance', 
+                         ',  ', Term Insurance', 
+                     ', 
+                        ', Life Insurance',  
+                        ', 
+                        ', 
+                           ',  ', Term Plans',  ', 
+                           ',  ', Endowment Plans',  ', 
+                           
+                         
+                           ',  ', Money Back Plans',  ', 
+                           ',  ', Child Plans',  ', 
+                           ',  ', Pension Plans',  ', 
+                             ',  ', ULIP',  ', 
+                        ', 
+                     ', 
+                     ', 
+                        ', Other Plans',  
+                        ', 
+                        
+                           ',  ', Critical Illness Insurance', 
+                           ',  ', Personal Accident Insurance', 
+                                                ', Travel Insurance', 
+                                                  ', Home Insurance', 
+                                                    ', Corporate Insurance', 
+
+                        ', 
+                     ', 
+                  ', 
+               ', 
+                ', 
+                
+                ', 
+                    ', 
+                      
+                    ', 
+                      ',  Profile', 
+                      ',  Policy', 
+                      ',  Signout', 
+                    ', 
+                  ', 
+            ', 
+           
+            
+         ', 
+      ', 
+   ', 
+', 
+', 
+	', 
+		', 
+		
+', 
+  ',  ', Shriram General Insurance Company ',  ', 
+  ', 
+    ', 
+
+   
+      ', 
+   ', 
+      ', 
+      ', 
+      ', 
+      ', 
+     ', 
+      ', 		
+ ', 
+      ',   ',  Views', 
+    ', 
+    
+    ', 
+     ',   ',  Views', 
+                
+    ', 
+        ', 
+   ', 
+    
+    ', 
+        ', 
+
+', 
+    
+            ', 
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+ if(typeof wabtn4fg==="undefined"){wabtn4fg=1;h=document.head||document.getElementsByTagName("head")[0],s=document.createElement("script");s.type="text/javascript";s.src="/assets/js/whatsapp-button.js";h.appendChild(s);}
+}
+else
+{jQuery( document ).ready(function( $ ) {  
+		loadSocial_policy_view();  
+	});
+}
+	', 
+  ', 
+  
+	
+  ', 
+    ',  ', List of Plans from Shriram General Insurance Company ',  ', 
+    ', 
+      		      	', Health Insurance Plan', 
+		      	', 
+		      	
+		      
+                			',  
+        		Shriram Personal Accident Insurance		 
+        			', 
+        					        			',  
+        				', Compare Health Insurance Plans ',  ',  
+        			', 
+        			      			', 
+      		      	', Two Wheeler Insurance Plan', 
+		      	', 
+		      	
+		      
+                			',  
+        		Shriram General Two Wheeler Insurance Plan		 
+        			', 
+        					        			',  
+        				', Compare Two Wheeler Insurance Plans ',  ',  
+        			', 
+        			      			', 
+      		      
+    ', 
+	
+
+        ', 
+      			      	', Car Insurance Plan', 
+			      	', 
+	        		        			',  
+		        		Shriram General Car Insurance Plan		 
+		        			', 
+	        						        			',  
+	        				', Compare Car Insurance Plans ',  ',  
+	        			', 
+	        				      			', 
+      			      	', Home Insurance Plan', 
+			      	', 
+	        		        			',  
+		        		Shriram Householder\u2019s Umbrella Package Insurance Plan		 
+		        			', 
+	        						        			',  
+	        				', Compare Home Insurance Plans ',  ',  
+	        			', 
+	        				      			', 
+          ', 
+  
+  ', 
+    
+        	
+        	  
+			    ', 
+    ',  ', About Shriram General Insurance Company',  ', 
+    ', 
+            ', 
+      ', Shriram General Insurance Company',  is a joint venture between the Indian financial sector major ', Shriram Capital',  and ', Sanlam Limited', , which is the largest general insurance company in South Africa. In the partnership Shriram Capital holds 74% stake while the remaining 26% is held by Sanlam.', 
+The ', Shriram Group',  was established in 1974 and the commercial vehicle financing business is the biggest success storu so far. The company also has a retail lending business which caters to personal loans, home loans, consumer durable and gold loans. The company also has a life insurance business in Shriram Life insurance. The ', Sanlam Group',  is a financial services major with insurance, banking and asset management business lines.    ', 
+  ', 
+  ', 
+    ',  ', Leadership',  ', 
+    ', 
+            ',  ', 
+    ',  ', Jasmit Singh Gujral',  is the ', Managing Director and CEO',  of ', Shriram General Insurance Company', . ', 
+  ', 
+    ', 
+    ',  ', Contact Details',  ', 
+    ', 
+            ', 
+      ',  ', Corporate Office', 
+      ',  Shriram General Insurance Company', 
+E-8, EPIP, RIICO Industrial Area, Sitapura, ', 
+Jaipur - 302022,', 
+Rajasthan ', 
+      ', 
+      ', 
+            ', 
+                              ', 
+    ', 
+    
+    ',  
+            ', 
+      	',  1800-180-7474', 1800-300-30000 ', 	
+      ', 
+                  ', www.shriramgi.com', 
+                             
+    ', 
+  ', 
+    ', 
+    ',  ', Claims ratio of Shriram General Insurance Company',  ', 
+    ', 
+      ', 
+        ', 
+          ', Year', 
+          ', 2007 - 08', 2008 - 09', 2009 - 10', 2010 - 11', 2011 - 12', 2012 - 13', 2013 - 14', 2014 - 15', 2015 - 16', 2016 - 17',         ', 
+      ', 
+      ', 
+        ', 
+          ', Claims ratio', 
+          ', -', -', -', -', -', -', -', -', 60.24', Yet to be ', published',         ', 
+      ', 
+    ', 
+      ', 
+      
+  ', 
+  
+  ', 
+        ', 
+  			
+			', 
+				', 
+				', 
+					News on Shriram General Insurance Company				', 
+				
+			', 		
+					', 
+						', First private insurer Shriram General acqu...', 
+						', 
+							', 
+															With market regulator Insurance Regulatory and Development Authority permitting Indian insurance companies to do business with overseas insurance companies, subject to a stipulation that a life insurance company should h...							', 
+						', 
+						', 
+							', Nov 03, 2013',  
+                            ', 1,542',  views', 
+						', 
+					', 
+	      					', 
+						', Shriram Life Insurance targets Rs 500 crores revenue in 3 years', 
+						', 
+							', 
+															Mr. Manoj Kumar Jain, Chief Executive Officer of Shriram Life Insurance revealed company\u2019s plan of achieving Rs. 500 crores turno...							', 
+						', 
+						', 
+							', Jun 18, 2013',  
+                            ', 1,122',  views', 
+						', 
+					', 
+	      			', 
+			
+				    ', 
+		      							', 
+								', Shriram Transport adds one more subsidiary...', 
+								', 
+									', 
+																			In order to expand the existing portfolio and enter into new business line, as a part of growth strategy, Mr. Umesh Revakar, Managing Director and Chief Executive Officer of Shriram Transport, announced the start of its ...									', 
+								', 
+							
+                                	', 
+							', Jul 15, 2013',  
+                            ', 929',  views', 
+						', 
+							', 
+			      							', 
+								', Shriram Life Insurance plans to increase t...', 
+								', 
+									', 
+																			Mrs. Akhila Srinivasan, Managing Director \u2013 Shriram Life Insurance, positively stated that the new business premium of the company for the year ending March 2014 is expected to be Rs. 545 crores i.e 29% increase in...									', 
+								', 
+							
+                                	', 
+							', May 03, 2013',  
+                            ', 1,029',  views', 
+						', 
+							', 
+			      		    ', 
+		 			
+				
+				', 
+					', More News ', +', 
+				', 
+				
+			', 
+  ', 
+  
+  ', 
+      
+      ', 
+      
+    			', 
+				', 
+				', 
+					Videos on Shriram General Insurance Company				', 
+				', No video found', 			', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+    ', 
+  ', 
+', 
+		', 
+	', 
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', Company Information', 
+                        ', 
+                            ', About Us', 
+                            ', Media', 
+                        ', 
+                    ', 
+                    ', 
+                        ', Connect with Us', 
+                        ', 
+                            ', Contact Us', 
+                            ', Feedback', 
+                            ', Investors', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', Other Links', 
+                        ', 
+                            ', Ask an Expert', 
+                            ', Insurance Articles', 
+                            ', Insurance Guides', 
+                            ', Insurance News', 
+                            ', Life Insurance Companies in India', 
+                            ', General Insurance Companies in India', 
+                            ', Terms of Use', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ',  
+
+                    ', 
+                        ', Quick Links', 
+                        ', 
+                            ', Get your Policy Analysed', 
+                            ', Claim Assistance', 
+                            ', Partner Program', 
+                            ', My Account', 
+                        ', 
+                    ', 
+
+                    ', 
+                        ', Quick Connect', 
+                        ', 
+                            ', Phone: ', 022 61647056', 
+                            ', Email: ', contact@myinsuranceclub.com', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                        ', 
+                        ', Important', : Insurance is the subject matter of solicitation', 
+                        ', © 2009-2017 MyInsuranceClub.com', 
+                    ', 
+
+                    ', 
+  ', 
+  ', 
+
+                    ', 
+                                    ', 
+
+            ', 
+        ', 
+    ', 
+', 
+ ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', 
+             ', Stay Connected!', 
+            ', 
+            ', Latest Product Launches', 
+            
+            ', Resolve Queries', 
+            
+            ', Industry News', 
+            
+            ', Contests & Prizes', 
+          ', 
+          ', 
+            ',  
+', 
+		
+		
+		', 
+		',  ', 
+		', 
+', 
+		', 
+', 
+		', 
+', 
+
+              ', 
+                ', 
+                  ', 
+                    ', 
+                    
+             
+                    
+                      ', 
+                        ', 
+                        ', Like us on Facebook', 
+                      ', 
+                      
+                      ',  ', Follow @myinsuranceclub',  ', 
+                      
+                      ', 
+                        ', Recommend us on G+', 
+                      ', 
+                      
+                      ', 
+                        ', Subscribe to our Youtube Channel', 
+                      ', 
+                      
+                      ',  
+                        ', Follow us on Linkedin', 
+                        
+                        
+                    ', 
+                    
+                    ', 
+                  ', 
+                ', 
+              ', 
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+ 
+
+', 
+var PAGE_DETAILS_JSON = null;
+var CONTENT_TYPE = '';
+var CONTENT_ID = '';
+var USER_DATA; 
+    jQuery( document ).ready(function( $ ) {
+    //Storing Visitor Information Start
+    var page_url = $(location).attr('href');
+    if(page_url.indexOf("/search-form/") > -1){
+        var arr_page = page_url.split("/search-form/");
+        if(arr_page[1] != ""){
+            if(typeof posted_data.length == "undefined"){
+        		posted_data.mailer_id = arr_page[1];
+            }
+        else{
+        	posted_data = {"SID":arr_page[1]};
+            }
+
+        }
+    }  
+    console.log('POSTEDDATA - ',posted_data);   
+    $.ajax({
+        url: '/Pre_Hook_Controller/getsessiondata',
+        method : 'POST',
+        data : posted_data,
+        cache: false                    
+    })
+    .done(function( html ) {
+		  if(html != ""){
+			USER_DATA = JSON.parse(html);
+                console.log(USER_DATA);
+			var referral_url = document.referrer;
+		   if(environment_mic == 'production' && $('.search_page_t').length &&  window.location.href.indexOf('jd') < 0 && referral_url.indexOf('jd') < 0){
+			   if(USER_DATA.country == 'IND'){
+					$('.search_page_h').parent().append('<div style="z-index:999999991;opacity:0.93" id="" class="modal-backdrop fade in" ></div><div class="alert_cmp_sr" style="display: block;"> <strong><span style="color: rgb(255, 104, 73); font-size: 17px;"><i class="fa fa-exclamation-triangle"></i> Important Notice</span></strong> <br><div class="al_msg_cmp"><p><b>Dear Customer,</b> we are temporarily unable to show the comparison as our Web Aggregator License is under renewal at IRDAI. We will continue with the display as soon as our License is renewed.</p><p>While this is disappointing for our clients, we think it is more important to comply with the Regulations governing us.</p><p>Please bear with us for this short period.</p><p><b>Deepak Yohannan<br/>CEO, MyInsuranceClub</b></p></div></div>');
+		   	}
+		   }
+if(USER_DATA.utm_source == "jd"){
+//setTimeout(function(){$("#bottom-bg,#footer,#feature-pannels,.nav-tabs-simple,.accordion,.home_news_content").remove();
+// }, 1000);
+}
+
+    
+			if(typeof USER_DATA.user_input != "undefined"){	
+                        console.log(USER_DATA);
+				fill_session_data(USER_DATA,JS_CTRL_NAME,JS_ACTION_NAME);
+				
+			}
+		  }
+    });
+	 });
+    // 
+    
+    // Increment Page view count for policy     
+    
+', 
+    
+', 
+PAGE_DETAILS_JSON = JSON.parse('{"type":"company","field_id":"24","count_element_type":"name","count_element_val":"company_page_view_count"}');
+', 
+ ',      
+     function set_content_viewcount(){
+var article_ids = [] , news_ids = [] ,  guide_ids = [] , t = '';
+    $('*[id*=news_v_cnt_]').each(function() {
+        t  = $(this).attr('id');
+        t = t.replace('news_v_cnt_','');
+        news_ids.push(t);
+    });
+    $('*[id*=article_v_cnt_]').each(function() {
+        t  = $(this).attr('id');
+        t = t.replace('article_v_cnt_','');
+        article_ids.push(t);
+    });
+    
+    $('*[id*=guide_v_cnt_]').each(function() {
+        t  = $(this).attr('id');
+        t = t.replace('guide_v_cnt_','');
+         guide_ids.push(t);
+    });
+    //console.log(article_ids,news_ids,guide_ids);
+    var json_lan = {"en":"Views","hindi":"Views"};
+    var url_d = window.location.pathname.split('/'); 
+     $.each(json_lan, function(k, v) {
+    console.log(k,url_d[1])
+      if(k == url_d[1])
+        {
+            $('.view_txt').html(v);
+        }
+    });
+
+    if(news_ids.length > 0 || article_ids.length > 0 || guide_ids.length > 0){
+        $.ajax({
+            url: '/common/get_view_count',
+            type: 'POST',
+            data:{'article_ids':article_ids,
+                      'news_ids':news_ids,
+                            'guide_ids':guide_ids
+             },
+                    cache: false                    
+        })
+        .done(function(html) {
+            if(html != ""){
+                var data = JSON.parse(html);
+
+                    $.each(data, function(i, item) {
+      var cnt = numberWithCommas(data[i].c_view_cnt);
+      var type_name = data[i].c_type;
+      var type = type_name+'_v_cnt_'+data[i].c_id;
+     // console.log(type);
+            $('#' + type).html(cnt);
+    });
+
+
+                    
+
+                    }
+
+        });
+    }
+}
+  jQuery( document ).ready(function( $ ) {
+    if(PAGE_DETAILS_JSON != null && PAGE_DETAILS_JSON.field_id != null){    	
+        $.ajax({
+            url: '/common/increment_viewcount',
+            type: 'POST',
+            data : PAGE_DETAILS_JSON,
+            cache: false                    
+        })
+        .done(function( html ) {
+            if(html != ""){
+            var ajax_res = JSON.parse(html);
+			var cnt = numberWithCommas(ajax_res.page_view_count);
+			$('['+PAGE_DETAILS_JSON.count_element_type+'='+PAGE_DETAILS_JSON.count_element_val +']').html(cnt);
+            }
+        });
+    }
+
+
+set_content_viewcount();
+
+});  
+  
+
+', 
+
+
+
+ ', 
+jQuery( document ).ready(function( $ ) {
+	/*  $.ajax({
+	        url: '/pre_hook_controller/getsessiondata',
+	        method : 'POST',
+	        data : posted_data,
+	        cache: false                    
+	    })
+	    .done(function( html ) {
+			  if(html != ""){
+				USER_DATA = JSON.parse(html);
+				if(typeof USER_DATA.user_input != "undefined"){	
+					fill_session_data(USER_DATA,JS_CTRL_NAME,JS_ACTION_NAME);
+				}
+			  }
+	    }); */
+
+	setTimeout(function(){ session()} , 2000);//10 seconds
+});
+    function session() {
+        $.ajax({
+            cache: false,
+            url: "/session_update.php?" + new Date().getTime() + Math.random(),
+            method: 'POST',
+            data: {'session_id': '6c37aaeccfa57b6f2ba35d969555b55d635b889f'}
+
+        })
+                .done(function (data) {
+                    setTimeout(function () {
+                        session()
+                    }, 7000);//30 seconds
+                });
+    }
+    
+
+    
+
+', 
+
+'][
+ ', 
+     var environment_mic = 'production';
+     var cdn_domain = 'https://d5gdqotkuzdho.cloudfront.net';
+     var ga_code = (environment_mic == 'production') ? 'UA-10819086-1' : 'UA-74831561-1';
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', ga_code, 'auto');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview');
+       var data_json =  {
+        "term": {
+               "form": {
+                   "step1": ["coverage_amount_term", "policy_term"],
+                   "step2": ["desktop_cust_dob", "cust_gender", "smoker", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+	"health": {
+               "form": {
+                   "step1": ["coverage_amount", "plan_type_name"],
+                   "step2": ["cust_dob", "cust_gender", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "car": {
+               "form": {
+                   "step1": ["carinsurancetype"],
+                   "step2": ["veh_man", "veh_model", "veh_variant","veh_year"],
+                   "step3": ["reg_no_field1","reg_no_field2","reg_no_field3","reg_no_field4","first_pur_date", "car_registered_name", "is_ownership_change"],
+                   "step4": ["prev_insurer","policy_expiry_date","exist_policy_claims"],
+                   "step5": ["cust_email"]
+               }
+        },
+        "tw": {
+               "form": {
+                   "step1": ["carinsurancetype"],
+                   "step2": ["veh_man", "veh_model", "veh_variant","veh_year"],
+                   "step3": ["reg_no_field1","reg_no_field2","reg_no_field3","reg_no_field4","first_pur_date", "car_registered_name", "is_ownership_change"],
+                   "step4": ["prev_insurer","policy_expiry_date","exist_policy_claims"],
+                   "step5": ["cust_email"]
+               }
+        },
+        "endowment": {
+               "form": {
+                   "step1": ["coverage_amount_endowment"],
+                   "step2": ["desktop_cust_dob", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "moneyback": {
+               "form": {
+                   "step1": ["coverage_amount_moneyback"],
+                   "step2": ["desktop_cust_dob", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "child": {
+               "form": {
+                   "step1": ["coverage_amount_child"],
+                   "step2": ["desktop_cust_dob", "child_dob","cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "pension": {
+               "form": {
+                   "step1": ["coverage_amount_pension"],
+                   "step2": ["desktop_cust_dob","cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "ulip": {
+               "form": {
+                   "step1": ["coverage_amount_pension"],
+                   "step2": ["desktop_cust_dob","cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "travel": {
+               "form": {
+                   "step1": ["travel_type"],
+                   "step2": ["trip_location"],
+                   "step3": ["trip_start_date", "trip_end_date"],
+                   "step4": ["travel_insurance_type","desktop_cust_dob"],
+		   "step5": ["cust_name","cust_email"]
+               }
+        },
+        "ci": {
+               "form": {
+                   "step1": ["coverage_amount","plan_type","cust_gender","prop_desk_dob"],
+                   "step2": ["spouce_dob","child1_dob","child2_dob","child1_gender","child2_gender"]
+               }
+        },
+        "pa": {
+               "form": {
+                   "step1": ["cust_occupation_name"]
+               }
+        }
+       };
+     
+     ', 
+
+ ', 
+    
+ 
+  
+   function ga_step(category, action, label, value) {
+               if (action == 'form')
+               {
+                   var arr_json = eval('data_json.' + category + '.form.' + label);
+                   var arr_step_status = [];
+                   $.each(arr_json, function (k, v) {
+                       if ($("#" + v).val() == '')
+                       {
+                           arr_step_status.push(false);
+                       }
+                       else {
+                           arr_step_status.push(true);
+                       }
+                   });
+                   if ($.inArray(false, arr_step_status) == -1) {
+                       console.log(category, action, label, value);
+                       ga('send', 'event', {eventCategory: category, eventAction: action, eventLabel: label, eventValue: 0});
+                   }
+               }
+               else
+               {
+		   console.log(category, action, label, value);
+                   if(value == null || value == undefined || value == ''){
+                       value = '0';
+                   }
+                   ga('send', 'event', {eventCategory: category, eventAction: action, eventLabel: label, eventValue: value});
+               }
+
+           }
+ 
+  ', 
+    ', 
+  
+var CONS_INSP_LIST = {
+	    "controller": [
+	                   "controller_car",
+	                   "common"
+	                 //  "controller_two_wheeler"
+	                  // "controller_basicmediclaim"
+	               ],
+	               "action": [
+	                   "index",
+                           "new_index",
+	                 //  "get_car_results",
+	                  // "health_policy",
+	                 //  "BuyNow",
+	                   "return_url_motor",
+	                  // "get_two_wheeler_results"
+	               ]
+	           };
+  ',  
+
+
+', u"
+var clicky_site_ids = clicky_site_ids || [];
+clicky_site_ids.push(154599);
+(function() {
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = '//static.getclicky.com/js';
+  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+})();
+", 
+
+', 
+
+
+ 
+', 
+   /* jQuery( document ).ready(function( $ ) {
+		if($(".msie8").length){
+$(".odometer").addClass("no_odometer").removeClass('odometer');
+			}
+	});*/
+', 
+', 
+   /* Styles specific to this particular page */
+   .scroll-pane {
+   width: 100%;
+   height: 200px;
+   overflow: auto;
+   }
+', 
+', 
+   ', 
+      
+             ', 
+         ', 
+            ', 
+               ', 
+                  ',  
+                  ', 
+                   ',  
+                  ', 
+
+                  ', u"India's 1st IRDAI Approved Insurance Web Aggregator", 
+                  ', 
+                    
+                      ', Get your Policy Analysed', 
+                      ', 
+
+                                      ', 
+               ', 
+            ', 
+         ', 
+      ', 
+              
+       
+      
+      ', 
+         ', 
+            
+            ', 
+               ', 
+                  ', 
+                 
+                  ', 
+                     ', 
+			 
+			 ', Home', 
+			
+                     ', 
+                  
+                     ', Health Insurance', 
+                     ', Car Insurance', 
+                      ', Two-Wheeler Insurance', 
+                         ',  ', Term Insurance', 
+                     ', 
+                        ', Life Insurance',  
+                        ', 
+                        ', 
+                           ',  ', Term Plans',  ', 
+                           ',  ', Endowment Plans',  ', 
+                           
+                         
+                           ',  ', Money Back Plans',  ', 
+                           ',  ', Child Plans',  ', 
+                           ',  ', Pension Plans',  ', 
+                             ',  ', ULIP',  ', 
+                        ', 
+                     ', 
+                     ', 
+                        ', Other Plans',  
+                        ', 
+                        
+                           ',  ', Critical Illness Insurance', 
+                           ',  ', Personal Accident Insurance', 
+                                                ', Travel Insurance', 
+                                                  ', Home Insurance', 
+                                                    ', Corporate Insurance', 
+
+                        ', 
+                     ', 
+                  ', 
+               ', 
+                ', 
+                
+                ', 
+                    ', 
+                      
+                    ', 
+                      ',  Profile', 
+                      ',  Policy', 
+                      ',  Signout', 
+                    ', 
+                  ', 
+            ', 
+           
+            
+         ', 
+      ', 
+   ', 
+', 
+', 
+	', 
+		', 
+		
+', 
+  ',  ', Shriram General Insurance Company ',  ', 
+  ', 
+    ', 
+
+   
+      ', 
+   ', 
+      ', 
+      ', 
+      ', 
+      ', 
+     ', 
+      ', 		
+ ', 
+      ',   ',  Views', 
+    ', 
+    
+    ', 
+     ',   ',  Views', 
+                
+    ', 
+        ', 
+   ', 
+    
+    ', 
+        ', 
+
+', 
+    
+            ', 
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+ if(typeof wabtn4fg==="undefined"){wabtn4fg=1;h=document.head||document.getElementsByTagName("head")[0],s=document.createElement("script");s.type="text/javascript";s.src="/assets/js/whatsapp-button.js";h.appendChild(s);}
+}
+else
+{jQuery( document ).ready(function( $ ) {  
+		loadSocial_policy_view();  
+	});
+}
+	', 
+  ', 
+  
+	
+  ', 
+    ',  ', List of Plans from Shriram General Insurance Company ',  ', 
+    ', 
+      		      	', Health Insurance Plan', 
+		      	', 
+		      	
+		      
+                			',  
+        		Shriram Personal Accident Insurance		 
+        			', 
+        					        			',  
+        				', Compare Health Insurance Plans ',  ',  
+        			', 
+        			      			', 
+      		      	', Two Wheeler Insurance Plan', 
+		      	', 
+		      	
+		      
+                			',  
+        		Shriram General Two Wheeler Insurance Plan		 
+        			', 
+        					        			',  
+        				', Compare Two Wheeler Insurance Plans ',  ',  
+        			', 
+        			      			', 
+      		      
+    ', 
+	
+
+        ', 
+      			      	', Car Insurance Plan', 
+			      	', 
+	        		        			',  
+		        		Shriram General Car Insurance Plan		 
+		        			', 
+	        						        			',  
+	        				', Compare Car Insurance Plans ',  ',  
+	        			', 
+	        				      			', 
+      			      	', Home Insurance Plan', 
+			      	', 
+	        		        			',  
+		        		Shriram Householder\u2019s Umbrella Package Insurance Plan		 
+		        			', 
+	        						        			',  
+	        				', Compare Home Insurance Plans ',  ',  
+	        			', 
+	        				      			', 
+          ', 
+  
+  ', 
+    
+        	
+        	  
+			    ', 
+    ',  ', About Shriram General Insurance Company',  ', 
+    ', 
+            ', 
+      ', Shriram General Insurance Company',  is a joint venture between the Indian financial sector major ', Shriram Capital',  and ', Sanlam Limited', , which is the largest general insurance company in South Africa. In the partnership Shriram Capital holds 74% stake while the remaining 26% is held by Sanlam.', 
+The ', Shriram Group',  was established in 1974 and the commercial vehicle financing business is the biggest success storu so far. The company also has a retail lending business which caters to personal loans, home loans, consumer durable and gold loans. The company also has a life insurance business in Shriram Life insurance. The ', Sanlam Group',  is a financial services major with insurance, banking and asset management business lines.    ', 
+  ', 
+  ', 
+    ',  ', Leadership',  ', 
+    ', 
+            ',  ', 
+    ',  ', Jasmit Singh Gujral',  is the ', Managing Director and CEO',  of ', Shriram General Insurance Company', . ', 
+  ', 
+    ', 
+    ',  ', Contact Details',  ', 
+    ', 
+            ', 
+      ',  ', Corporate Office', 
+      ',  Shriram General Insurance Company', 
+E-8, EPIP, RIICO Industrial Area, Sitapura, ', 
+Jaipur - 302022,', 
+Rajasthan ', 
+      ', 
+      ', 
+            ', 
+                              ', 
+    ', 
+    
+    ',  
+            ', 
+      	',  1800-180-7474', 1800-300-30000 ', 	
+      ', 
+                  ', www.shriramgi.com', 
+                             
+    ', 
+  ', 
+    ', 
+    ',  ', Claims ratio of Shriram General Insurance Company',  ', 
+    ', 
+      ', 
+        ', 
+          ', Year', 
+          ', 2007 - 08', 2008 - 09', 2009 - 10', 2010 - 11', 2011 - 12', 2012 - 13', 2013 - 14', 2014 - 15', 2015 - 16', 2016 - 17',         ', 
+      ', 
+      ', 
+        ', 
+          ', Claims ratio', 
+          ', -', -', -', -', -', -', -', -', 60.24', Yet to be ', published',         ', 
+      ', 
+    ', 
+      ', 
+      
+  ', 
+  
+  ', 
+        ', 
+  			
+			', 
+				', 
+				', 
+					News on Shriram General Insurance Company				', 
+				
+			', 		
+					', 
+						', First private insurer Shriram General acqu...', 
+						', 
+							', 
+															With market regulator Insurance Regulatory and Development Authority permitting Indian insurance companies to do business with overseas insurance companies, subject to a stipulation that a life insurance company should h...							', 
+						', 
+						', 
+							', Nov 03, 2013',  
+                            ', 1,542',  views', 
+						', 
+					', 
+	      					', 
+						', Shriram Life Insurance targets Rs 500 crores revenue in 3 years', 
+						', 
+							', 
+															Mr. Manoj Kumar Jain, Chief Executive Officer of Shriram Life Insurance revealed company\u2019s plan of achieving Rs. 500 crores turno...							', 
+						', 
+						', 
+							', Jun 18, 2013',  
+                            ', 1,122',  views', 
+						', 
+					', 
+	      			', 
+			
+				    ', 
+		      							', 
+								', Shriram Transport adds one more subsidiary...', 
+								', 
+									', 
+																			In order to expand the existing portfolio and enter into new business line, as a part of growth strategy, Mr. Umesh Revakar, Managing Director and Chief Executive Officer of Shriram Transport, announced the start of its ...									', 
+								', 
+							
+                                	', 
+							', Jul 15, 2013',  
+                            ', 929',  views', 
+						', 
+							', 
+			      							', 
+								', Shriram Life Insurance plans to increase t...', 
+								', 
+									', 
+																			Mrs. Akhila Srinivasan, Managing Director \u2013 Shriram Life Insurance, positively stated that the new business premium of the company for the year ending March 2014 is expected to be Rs. 545 crores i.e 29% increase in...									', 
+								', 
+							
+                                	', 
+							', May 03, 2013',  
+                            ', 1,029',  views', 
+						', 
+							', 
+			      		    ', 
+		 			
+				
+				', 
+					', More News ', +', 
+				', 
+				
+			', 
+  ', 
+  
+  ', 
+      
+      ', 
+      
+    			', 
+				', 
+				', 
+					Videos on Shriram General Insurance Company				', 
+				', No video found', 			', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+    ', 
+  ', 
+', 
+		', 
+	', 
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', Company Information', 
+                        ', 
+                            ', About Us', 
+                            ', Media', 
+                        ', 
+                    ', 
+                    ', 
+                        ', Connect with Us', 
+                        ', 
+                            ', Contact Us', 
+                            ', Feedback', 
+                            ', Investors', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', Other Links', 
+                        ', 
+                            ', Ask an Expert', 
+                            ', Insurance Articles', 
+                            ', Insurance Guides', 
+                            ', Insurance News', 
+                            ', Life Insurance Companies in India', 
+                            ', General Insurance Companies in India', 
+                            ', Terms of Use', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ',  
+
+                    ', 
+                        ', Quick Links', 
+                        ', 
+                            ', Get your Policy Analysed', 
+                            ', Claim Assistance', 
+                            ', Partner Program', 
+                            ', My Account', 
+                        ', 
+                    ', 
+
+                    ', 
+                        ', Quick Connect', 
+                        ', 
+                            ', Phone: ', 022 61647056', 
+                            ', Email: ', contact@myinsuranceclub.com', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                        ', 
+                        ', Important', : Insurance is the subject matter of solicitation', 
+                        ', © 2009-2017 MyInsuranceClub.com', 
+                    ', 
+
+                    ', 
+  ', 
+  ', 
+
+                    ', 
+                                    ', 
+
+            ', 
+        ', 
+    ', 
+', 
+ ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', 
+             ', Stay Connected!', 
+            ', 
+            ', Latest Product Launches', 
+            
+            ', Resolve Queries', 
+            
+            ', Industry News', 
+            
+            ', Contests & Prizes', 
+          ', 
+          ', 
+            ',  
+', 
+		
+		
+		', 
+		',  ', 
+		', 
+', 
+		', 
+', 
+		', 
+', 
+
+              ', 
+                ', 
+                  ', 
+                    ', 
+                    
+             
+                    
+                      ', 
+                        ', 
+                        ', Like us on Facebook', 
+                      ', 
+                      
+                      ',  ', Follow @myinsuranceclub',  ', 
+                      
+                      ', 
+                        ', Recommend us on G+', 
+                      ', 
+                      
+                      ', 
+                        ', Subscribe to our Youtube Channel', 
+                      ', 
+                      
+                      ',  
+                        ', Follow us on Linkedin', 
+                        
+                        
+                    ', 
+                    
+                    ', 
+                  ', 
+                ', 
+              ', 
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+ 
+
+', 
+var PAGE_DETAILS_JSON = null;
+var CONTENT_TYPE = '';
+var CONTENT_ID = '';
+var USER_DATA; 
+    jQuery( document ).ready(function( $ ) {
+    //Storing Visitor Information Start
+    var page_url = $(location).attr('href');
+    if(page_url.indexOf("/search-form/") > -1){
+        var arr_page = page_url.split("/search-form/");
+        if(arr_page[1] != ""){
+            if(typeof posted_data.length == "undefined"){
+        		posted_data.mailer_id = arr_page[1];
+            }
+        else{
+        	posted_data = {"SID":arr_page[1]};
+            }
+
+        }
+    }  
+    console.log('POSTEDDATA - ',posted_data);   
+    $.ajax({
+        url: '/Pre_Hook_Controller/getsessiondata',
+        method : 'POST',
+        data : posted_data,
+        cache: false                    
+    })
+    .done(function( html ) {
+		  if(html != ""){
+			USER_DATA = JSON.parse(html);
+                console.log(USER_DATA);
+			var referral_url = document.referrer;
+		   if(environment_mic == 'production' && $('.search_page_t').length &&  window.location.href.indexOf('jd') < 0 && referral_url.indexOf('jd') < 0){
+			   if(USER_DATA.country == 'IND'){
+					$('.search_page_h').parent().append('<div style="z-index:999999991;opacity:0.93" id="" class="modal-backdrop fade in" ></div><div class="alert_cmp_sr" style="display: block;"> <strong><span style="color: rgb(255, 104, 73); font-size: 17px;"><i class="fa fa-exclamation-triangle"></i> Important Notice</span></strong> <br><div class="al_msg_cmp"><p><b>Dear Customer,</b> we are temporarily unable to show the comparison as our Web Aggregator License is under renewal at IRDAI. We will continue with the display as soon as our License is renewed.</p><p>While this is disappointing for our clients, we think it is more important to comply with the Regulations governing us.</p><p>Please bear with us for this short period.</p><p><b>Deepak Yohannan<br/>CEO, MyInsuranceClub</b></p></div></div>');
+		   	}
+		   }
+if(USER_DATA.utm_source == "jd"){
+//setTimeout(function(){$("#bottom-bg,#footer,#feature-pannels,.nav-tabs-simple,.accordion,.home_news_content").remove();
+// }, 1000);
+}
+
+    
+			if(typeof USER_DATA.user_input != "undefined"){	
+                        console.log(USER_DATA);
+				fill_session_data(USER_DATA,JS_CTRL_NAME,JS_ACTION_NAME);
+				
+			}
+		  }
+    });
+	 });
+    // 
+    
+    // Increment Page view count for policy     
+    
+', 
+    
+', 
+PAGE_DETAILS_JSON = JSON.parse('{"type":"company","field_id":"24","count_element_type":"name","count_element_val":"company_page_view_count"}');
+', 
+ ',      
+     function set_content_viewcount(){
+var article_ids = [] , news_ids = [] ,  guide_ids = [] , t = '';
+    $('*[id*=news_v_cnt_]').each(function() {
+        t  = $(this).attr('id');
+        t = t.replace('news_v_cnt_','');
+        news_ids.push(t);
+    });
+    $('*[id*=article_v_cnt_]').each(function() {
+        t  = $(this).attr('id');
+        t = t.replace('article_v_cnt_','');
+        article_ids.push(t);
+    });
+    
+    $('*[id*=guide_v_cnt_]').each(function() {
+        t  = $(this).attr('id');
+        t = t.replace('guide_v_cnt_','');
+         guide_ids.push(t);
+    });
+    //console.log(article_ids,news_ids,guide_ids);
+    var json_lan = {"en":"Views","hindi":"Views"};
+    var url_d = window.location.pathname.split('/'); 
+     $.each(json_lan, function(k, v) {
+    console.log(k,url_d[1])
+      if(k == url_d[1])
+        {
+            $('.view_txt').html(v);
+        }
+    });
+
+    if(news_ids.length > 0 || article_ids.length > 0 || guide_ids.length > 0){
+        $.ajax({
+            url: '/common/get_view_count',
+            type: 'POST',
+            data:{'article_ids':article_ids,
+                      'news_ids':news_ids,
+                            'guide_ids':guide_ids
+             },
+                    cache: false                    
+        })
+        .done(function(html) {
+            if(html != ""){
+                var data = JSON.parse(html);
+
+                    $.each(data, function(i, item) {
+      var cnt = numberWithCommas(data[i].c_view_cnt);
+      var type_name = data[i].c_type;
+      var type = type_name+'_v_cnt_'+data[i].c_id;
+     // console.log(type);
+            $('#' + type).html(cnt);
+    });
+
+
+                    
+
+                    }
+
+        });
+    }
+}
+  jQuery( document ).ready(function( $ ) {
+    if(PAGE_DETAILS_JSON != null && PAGE_DETAILS_JSON.field_id != null){    	
+        $.ajax({
+            url: '/common/increment_viewcount',
+            type: 'POST',
+            data : PAGE_DETAILS_JSON,
+            cache: false                    
+        })
+        .done(function( html ) {
+            if(html != ""){
+            var ajax_res = JSON.parse(html);
+			var cnt = numberWithCommas(ajax_res.page_view_count);
+			$('['+PAGE_DETAILS_JSON.count_element_type+'='+PAGE_DETAILS_JSON.count_element_val +']').html(cnt);
+            }
+        });
+    }
+
+
+set_content_viewcount();
+
+});  
+  
+
+', 
+
+
+
+ ', 
+jQuery( document ).ready(function( $ ) {
+	/*  $.ajax({
+	        url: '/pre_hook_controller/getsessiondata',
+	        method : 'POST',
+	        data : posted_data,
+	        cache: false                    
+	    })
+	    .done(function( html ) {
+			  if(html != ""){
+				USER_DATA = JSON.parse(html);
+				if(typeof USER_DATA.user_input != "undefined"){	
+					fill_session_data(USER_DATA,JS_CTRL_NAME,JS_ACTION_NAME);
+				}
+			  }
+	    }); */
+
+	setTimeout(function(){ session()} , 2000);//10 seconds
+});
+    function session() {
+        $.ajax({
+            cache: false,
+            url: "/session_update.php?" + new Date().getTime() + Math.random(),
+            method: 'POST',
+            data: {'session_id': '6c37aaeccfa57b6f2ba35d969555b55d635b889f'}
+
+        })
+                .done(function (data) {
+                    setTimeout(function () {
+                        session()
+                    }, 7000);//30 seconds
+                });
+    }
+    
+
+    
+
+', 
+
+']

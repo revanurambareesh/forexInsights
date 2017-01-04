@@ -1,0 +1,915 @@
+[
+    ', 
+body { margin-top: 0; margin-left: 0; margin-right: 0; padding-top: 0; padding-right: 0; padding-left: 0; }
+
+#g_nav { border-bottom:1px solid #ccc; margin-bottom: 9px; }
+
+#g_nav a,
+#g_nav a:visited { color: #00c; }
+
+.navBi { display: -moz-inline-box; display: inline-block; padding: 9px 12px; margin: 0; list-style-type: none; }
+', 
+', 
+', 
+', 
+', 
+#p_nav a.selected { font-weight: bold; text-decoration:none; color: #000 !important; }
+', 
+
+
+', Find Jobs', Find Resumes', Employers / Post Job', 
+', 
+', 
+
+
+#navpromo a,
+#navpromo a:visited {
+color: #f60;
+}
+
+
+#u_nav .login_unconfirmed,
+#u_nav .login_unconfirmed a,
+#u_nav .login_unconfirmed a:visited {
+color: #c00
+}
+
+#u_nav .resume_pending,
+#u_nav .resume_pending a,
+#u_nav .resume_pending a:visited {
+color: #c00
+}
+
+#userOptionsLabel {
+position: relative;
+z-index: 5;
+}
+
+#userOptionsLabel b {
+cursor: pointer;
+text-decoration: underline;
+position: relative;
+z-index: 5;
+}
+
+#userOptionsLabel:active {
+outline: none;
+}
+
+#userOptionsLabel.active {
+padding: 9px 11px;
+margin-bottom: -1px;
+_margin-bottom: 0px;
+border: 1px solid #ccc;
+border-top: 0;
+}
+
+#userOptionsLabel.active b {
+color: #666;
+}
+
+#userOptionsLabel.active .arrowStub {
+border-width: 0 3px 3px;
+_border-width: 0px 3px 4px;
+border-color: transparent;
+border-bottom-color: #666;
+top: -2px;
+border-style: dashed dashed solid;
+}
+
+#userOptionsLabel.active .halfPxlFix {
+background: #fff;
+bottom: -3px;
+height: 6px;
+left: 0;
+position: absolute;
+right: 0;
+border: 1px solid #fff;
+}
+
+.arrowStub {
+position: relative;
+border-style: solid dashed dashed;
+border-color: transparent;
+border-top-color: #666;
+display: -moz-inline-box;
+display: inline-block;
+font-size: 0;
+height: 0;
+line-height: 0;
+width: 0;
+left: 4px;
+border-top-width: 3px;
+border-bottom-width: 0;
+border-right-width: 3px;
+padding-top: 1px;
+top: -1px;
+}
+
+#userOptions {
+z-index: 2;
+visibility: hidden;
+position: absolute;
+right: 0;
+x_right: -1px;
+top: 100%;
+padding: 9px 15px;
+border: 1px solid #ccc;
+background: #fff;
+min-width: 150px;
+_width: 150px;
+text-align: left;
+}
+
+#userOptions.open {
+visibility: visible;
+}
+
+.userOptionItem {
+margin: 6px 0;
+}
+
+.userOptionItem a {
+white-space: nowrap;
+}
+
+.userOptionGroup {
+border-top: 1px solid #e8e8e8;
+margin-top: 12px;
+}
+
+.userNameRepeat {
+color: #a8a8a8;
+padding-right: 48px;
+font-weight: bold;
+}
+
+.userOptionGroupHeader {
+font-weight: bold;
+margin: 6px 0;
+}
+
+', 
+', 
+', u"
+function isUserOptionsOpen() {
+return document.getElementById('userOptions').className === 'open';
+}
+
+function hideUserOptions() {
+destroyKeyboardTrap();
+document.getElementById('userOptions').className = '';
+document.getElementById('userOptionsLabel').className = 'navBi';
+document.getElementById('userOptionsLabel').setAttribute('aria-label', 'open user action drop down men);
+}
+function toggleUserOptions(e) {
+var options = document.getElementById('userOptions');
+var label = document.getElementById('userOptionsLabel');
+if (isUserOptionsOpen()) {
+hideUserOptions();
+if (!e.keyCode) {
+label.blur();
+}
+} else {
+options.className = 'open';
+label.className = 'navBi active navMenuDropDown';
+label.setAttribute('aria-label', 'close user action drop down men);
+document.onclick = function() {
+hideUserOptions();
+document.onclick = function() {
+};
+};
+if (e.keyCode && (e.keyCode == 13 || e.keyCode == 32)) {
+var fL = document.getElementById('userOptions').getElementsByTagName('a')[0];
+if (fL) {
+fL.focus();
+}
+}
+else {
+label.blur();
+}
+createKeyboardTrap(document.getElementById('user_actions'), 'navMenuDropDown', hideUserOptions);
+}
+stopPropagation(e);
+
+}
+
+
+function createKeyboardTrap(containingElement, dropdownLinkClass) {
+var dropdownLinks = containingElement.getElementsByClassName(dropdownLinkClass);
+var numLinks = dropdownLinks.length;
+
+document.onkeydown = function(e) {
+if (e.keyCode === 9) {
+if (e.target === dropdownLinks[0] && e.shiftKey) {
+dropdownLinks[numLinks -1].focus();
+e.preventDefault();
+} else if (e.target === dropdownLinks[numLinks -1] && !e.shiftKey) {
+dropdownLinks[0].focus();
+e.preventDefault()
+}
+} else if (e.keyCode === 27) {
+hideUserOptions();
+}
+}
+}
+
+function destroyKeyboardTrap() {
+document.onkeydown = null;
+}
+
+function stopPropagation(e) {
+var e = e || window.event;
+e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+}
+
+", 
+', u"
+
+function regExpEscape(s) {
+    return String(s).replace(/([-()\[\]{}+?*.$\^|,:#<!\\])/g, '\\$1').
+            replace(/\x08/g, '\\x08');
+}
+
+
+function appendParamsOnce(url, params) {
+    var useParams = params.replace(/^(\?|\&)/, '');
+    if (url.match(new RegExp('[\\?|\\&]' + regExpEscape(useParams))) == null) {
+        return url += (url.indexOf('?') > 0 ? '&' : '?' ) + useParams;
+    }
+    return url;
+}
+
+", 
+', 
+
+', 
+', Upload your resume', 
+', 
+', Sign in', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    #g_nav {
+        position: relative;
+    }
+    #float_logo {
+        background: url("/images/indeed_white.png") no-repeat left center;
+        background-size: 109px 30px;
+        display: inline-block;
+        width: 109px;
+        height: 30px;
+        position: absolute;
+        top: 12px;
+        left: 9px;
+        z-index: 15000;
+    }
+
+    @media (-webkit-min-device-pixel-ratio: 2),
+    (   min--moz-device-pixel-ratio: 2),
+    (     -o-min-device-pixel-ratio: 2/1),
+    (        min-device-pixel-ratio: 2),
+    (                min-resolution: 192dpi),
+    (                min-resolution: 2dppx) {
+        #float_logo {
+            background: url("/images/indeed_white@2x.png") no-repeat left center;
+            background-size: 109px 30px;
+        }
+    }
+
+    
+    #user_actions #userOptionsLabel.active {
+        border: 0;
+        line-height: 58px;
+        padding: 0 11px;
+        margin-bottom: 0;
+    }
+    #user_actions #userOptionsLabel {
+        line-height: 58px;
+        padding: 0 11px;
+    }
+    #g_nav td {
+        text-align: right;
+        height: 58px;
+    }
+
+    
+        #user_actions .navBi a#userOptionsLabel {
+            line-height: initial;
+        }
+    
+    #user_actions #userOptions {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+    
+    #g_nav td:last-child {
+        width: 1%;
+    }
+    
+    div#g_nav {
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+    
+            #g_nav #p_nav a:link,
+            #g_nav #p_nav a:visited,
+            .navBi #navpromo a:link,
+            .navBi #navpromo a:visited,
+            #g_nav #u_nav .navBi a:link,
+            #g_nav #u_nav .navBi a:visited
+            ,#user_actions:not(.loggedin) .navBi #userOptionsLabel
+            {
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+            }
+            #g_nav #p_nav a:hover,
+            .navBi #navpromo a:hover,
+            #g_nav #u_nav .navBi a:hover,
+            #user_actions:not(.loggedin) .navBi a#userOptionsLabel:hover
+            {
+                text-decoration: underline;
+            }
+            
+            #user_actions #userOptionsLabel b {
+                text-decoration: none;
+                color: #ffffff;
+                font-weight: normal;
+            }
+            #user_actions #userOptionsLabel.active b {
+                color: #ffffff;
+            }
+            
+            #g_nav tr {
+                background: #2164f3;
+            }
+            #user_actions #userOptionsLabel.active {
+                background: #1251d7;
+            }
+            #user_actions #userOptionsLabel.active span.halfPxlFix {
+                display: none;
+            }
+            
+            #user_actions #userOptionsLabel .arrowStub  {
+                border-top-color: #ffffff;
+            }
+            #user_actions #userOptionsLabel.active .arrowStub {
+                border-bottom-color: #ffffff;
+            }
+            
+            #g_nav #p_nav a.selected {
+                font-weight: normal;
+                color: rgb(255, 255, 255) !important;
+            }
+        ', 
+', #userOptions {z-index: 10000;}', The First American Corporation', 146 reviews', About', 146', Reviews', 26', Salaries', Photos', Jobs', Q&A', The First American Corporation Employee Reviews', Job Title', (all)', Customer Service Representative - 7', Data Entry Clerk - 3', Associate - 2', Clerk - 2', Executive Assistant - 2', Legal Assistant - 2', Processor - 2', Quality Control Supervisor - 2', Researcher - 2', Senior Processor - 2', Supervisor - 2', Underwriter - 2', Account Representative - 1', Accountant - 1', Accounting Clerk - 1', Accounting Specialist - 1', Administrative Assistant - 1', Agent Support - 1', Area Manager - 1', Author - 1', Bankruptcy Specialist - 1', Business Consultant - 1', Case Manager - 1', Collection Manager - 1', Collection Representative - 1', Collector - 1', Contract Coordinator - 1', Credit Verifier - 1', Customer Relations Representative - 1', Customer Service Analyst - 1', Customer Service Team Lead - 1', Data Analyst - 1', Developer - 1', Document Specialist - 1', Escrow Officer - 1', First Touch - 1', Foreclosure Specialist - 1', Human Resources Coordinator - 1', Human Resources Generalist - 1', Human Resources Manager - 1', Inside Sales Representative - 1', Legal Secretary - 1', Loan Processor - 1', Mailroom Clerk - 1', Manager - 1', Marketing Representative - 1', Operations Administrator - 1', Operations Analyst - 1', Operations Associate - 1', Operations Supervisor - 1', Process Executive (Mortgage Process) - 1', Project Coordinator - 1', Quality Assurance Analyst - 1', Quality Control Manager - 1', Quality Specialist - 1', Real Estate Manager - 1', Recorder - 1', Regional Manager - 1', Sales Representative - 1', Sales Support Representative - 1', Senior Analyst - 1', Senior Area Manager - 1', Senior Customer Service Representative - 1', Senior Research Engineer - 1', Senior Tax Specialist - 1', Senior Team Leader - 1', Senior Underwriter - 1', Tax Analyst - 1', Temporary Employee - 1', Title Examiner - 1', Vice President of Marketing - 1', Vice President of Operations - 1', Vice President of Sales and Marketing - 1', YOH Temporary - 1', Location', (all)', United States - 92',     Agoura Hills, CA - 1',     Ashville, AL - 1',     Atlanta, GA - 1',     Barnwell, SC - 1',     Bloomington, MN - 1',     Blue Springs, MO - 1',     Boise, ID - 1',     Branch, MN - 1',     Chapin, SC - 1',     City of Sunrise, FL - 1',     Clearwater, FL - 1',     Cleveland, OH - 3',     Columbia, SC - 2',     Columbus, OH - 2',     Dallas, TX - 5',     Danvers, MA - 2',     Exton, PA - 1',     Fort Mill, SC - 1',     Fort Worth, TX - 2',     Garden City, NY - 1',     Glendale, CA - 1',     Hazelwood, MO - 1',     Irvine, CA - 2',     Irving, TX - 1',     Jacksonville, FL - 1',     Largo, FL - 1',     Lewisville, TX - 1',     Miami, FL - 1',     Milwaukee, WI - 2',     New York, NY - 1', u"    O'Fallon, MO - 1",     Phoenix, AZ - 2',     Pleasanton, CA - 1',     Portland, OR - 1',     Poway, CA - 1',     Rancho Cucamonga, CA - 1',     Roanoke, TX - 1',     Rochester, NY - 1',     San Diego, CA - 2',     Sandy, UT - 1',     Santa Ana, CA - 12',     Santiago, MN - 1',     Sterling, VA - 1',     Tempe, AZ - 1',     Walnut Creek, CA - 1',     Waterloo, IA - 1',     Westlake, OH - 1',     Westlake, TX - 12', Dominican Republic - 1',     Santiago de los Caballeros - 1', India - 51',     Bangalore, Karnataka - 31',     Hyderabad, Andhra Pradesh - 11',     Salem, Tamil Nadu - 6', Pakistan - 1',     Sialkot - 1', United Kingdom - 1',     London - 1', See reviews about:', Work-Life Balance', Pay & Benefits', Job Security & Advancement', Management', Culture', Found ', 92',  reviews matching the search', See all 146 reviews',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', A large corporate environment with a strong culture', HR COORDINATOR',  (Current Employee) \u2013  ', Santa Ana, CA',  \u2013 ', December 6, 2016', I learn something new every day and feel productive when I leave. My teammates and manager are encouraging, positive, and helpful. I have grown faster than I could have ever anticipated, and am so thankful for this opportunity.', Pros', Cafe on campus', Cons', Corporate, Politics', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Awesome  work place', Warehouse Facility/Data Analyst',  (Former Employee) \u2013  ', City of Sunrise, FL',  \u2013 ', January 2, 2017', First American was enjoyable job with not a lot of responsibilities. I had excellent co-workers and awesome Boss. To include the had a couple gathering for the employees to appreciate the hard work we endure on a daily basis.', Pros', excellent place to work', Cons', none', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Loved This Company', Operations Supervisor',  (Former Employee) \u2013  ', Westlake, TX',  \u2013 ', October 20, 2016', u"I started with my department in it's infancy, and found a lot of growth. I will always remember FARETS with so much fondness. I learned to love call center environments.", Pros', Great Benefits, Great Incentives, Flexible Hours Of Operation, Fun environment.', Cons', Limited Advancement, High Turnaround', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Great Employees!', Top Sales and Marketing Representative',  (Former Employee) \u2013  ', Santa Ana, CA',  \u2013 ', September 15, 2016', They need to do exit interviews with key employees! Culture has changed since family is not as active in the day to day operation!', Pros', Great Location and Building', Cons', Too many Politics', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Great Company', Auditor/Sr. Underwriter',  (Current Employee) \u2013  ', Tempe, AZ',  \u2013 ', August 29, 2016', Great company and you can grow this onebest jobs i ever had and they put employees first and stable most important i wish they had location in california so i can transfer but i have to be close to my family due to personal issues', Pros', you can move up quickly', Cons', nothing', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Great place to work', Collections Representative',  (Former Employee) \u2013  ', Irvine, CA',  \u2013 ', August 9, 2016', Everyday there were lots of details to take care of on each and every account. the people were awesome and everyone was helpful without delay to process accounts. The pace was fast and fun. Managers rolled up their sleeves to help get the job done. the hardest part of the job was leaving. awesome place to work.', Pros', co-workers were friendly and a fun place to work', Cons', Job was temporary for only 1 year', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Fast Pace, challenging and rewarding.', Loan Document Specialist',  (Former Employee) \u2013  ', Fort Mill, SC',  \u2013 ', June 9, 2016', pull, review and update reports, call attorneys, pull, review and update files, file and return files to custodians, assist co-workers when needed.', Pros', work environment, rewards and appreciation', Cons', office politics', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Keeps you busy, creates a family environment.', CURATIVE ASSOCIATE',  (Former Employee) \u2013  ', Westlake, TX',  \u2013 ', May 26, 2016', u"A typical day would be coming in working on your daily spreadsheet while clearing Titles that have issues with them for cusomters refinances. Learning something new about mortgage and state laws on a daily basis, while creating a new professional customer service brand for the company as a whole. The employees work together to create a friendly work environment to keep the attitudes light while dealing with heavy situations such as customer's losing family members or jobs, these being the reasons for the refinances. Creating a way to clear the title's of the customers who have issues and seeing the opportunity of an easier life open up.", Pros', healthcare, fun team building games', Cons', issues between co-workers are not always addressed, management shows favoritism', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', wonderful', Research Leader',  (Former Employee) \u2013  ', Exton, PA',  \u2013 ', April 5, 2016', Great Company to work for ,wonderful culture . More of a family environment . Upper management wanted employees to find a work /home balance .First American kept a family culture on their campus.', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', case-manager', CASE MANAGER ABC HOME HEALTH',  (Former Employee) \u2013  ', Ashville, AL',  \u2013 ', April 2, 2016', ·	Care of home bound patients.', ·	Care of patient in their homes', ·	Supervision of home health aides.', home care taking care of patient, total pt care from assessments to wound care and IV therapy', Pros', pt care', Cons', poor management, long hours, high turn over in staff', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Productive', Underwriter',  (Former Employee) \u2013  ', Agoura Hills, CA',  \u2013 ', January 25, 2016', Self motivation, great team work.', Well organized, great work environment. Always informed, past paced environment. Co workers friendly , active learning environment.', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Great Place to work', Customer Relations Representative',  (Current Employee) \u2013  ', Bloomington, MN',  \u2013 ', January 22, 2016', Great Company to work for. Great benifits. Friendly Atmostphere. Low turn over. Staff hard working to keep company moral.', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Good company to work for', Corporate Customer Serv/Collections Supervisor',  (Former Employee) \u2013  ', Santa Ana, CA',  \u2013 ', January 12, 2016', Treated employees well while I was employed there.  They always had fun things plan for employees.  They also had a flex schedule for those with families', Was this review helpful?', Yes', - ', 1', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Job with good pay', Authorization Specialist',  (Current Employee) \u2013  ', Phoenix, AZ',  \u2013 ', December 2, 2015', u"The job itself wasn't hard but they had very rude and unskilled management. I was in authorizations so I had to authorize a certain dollar amount for the customers to have appliances approved in their home.", Pros', Good pay', Cons', poor management', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Fun place and great opportunity to work with cross functional teams', SQA Manager / Sr. SQA Team Lead',  (Former Employee) \u2013  ', San Diego, CA',  \u2013 ', November 3, 2015', I have improved the communication with executive management,product development,quality assurance teams, clients and vendors to execute the results in order to meet the product release schedules.', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Very productive company.', Operational Supervisor',  (Former Employee) \u2013  ', Westlake, TX',  \u2013 ', September 30, 2015', I begin this job as a temp and was given the opportunity to become a full time employee after 90 days.  I learned so much in regards escrow, delinquent taxes, payment process, property research.  I had the opportunity to advance quickly in this company, Research Lead, Operational Supervisor in Outsourcing and Check Control Manager.  This company provided the way for me to succeed and move forward with my career in the mortgage industry.', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Great corporation to work for', TYPING AND QUALITY CONTROL SUPERVISOR',  (Former Employee) \u2013  ', Cleveland, OH',  \u2013 ', September 9, 2015', Excellent company to work for. Worked for First American for many years in many different departments and always enjoyed working there. Amazing staff and great pay and benefits.', Was this review helpful?', Yes', - ', No', - ', 1', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Amazing Company over 30 years old.', Area Manager',  (Former Employee) \u2013  ', Boise, ID',  \u2013 ', July 31, 2015', u"First American is a class act company that provided a quality product that I could stand behind.  The management team was very helpful and encouraging.  The hardest part of the job was that my sales depended on homes being sold in the area and when those #'s are low so are mine.  The best part of the job was meeting new people and being of service to clients and customers.", Pros', Work from home', Cons', Market saturation', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Open and identify important documents to other foreclosure and bankruptcy analysts.', Operations Document Support Analyst',  (Former Employee) \u2013  ', Columbus, OH',  \u2013 ', July 27, 2015', Delivered bankruptcy and foreclosure carts.', Sort out express mail.', Logged check.', Delivered Invoice Carts.', Filed default mail.', Pros', Achieved raises and Annevisary Awards', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', fun place, stable work', Quality Assurance Analyst',  (Former Employee) \u2013  ', Santiago, MN',  \u2013 ', July 22, 2015', Fun place and coworkers, small issues with benefits and related.', small to none opportunities to grow.', low motivation from supervisory, good planification from management.', Pros', holidays payments, healthcare and others', Cons', Always the same things to do', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Good learning experience', Data Entry Clerk',  (Former Employee) \u2013  ', Santa Ana, CA',  \u2013 ', June 2, 2015', I sat in front of a computer all day and no bothered me.  I knew what needed to be done everyday and completed all my projects in a great timely matter.', Pros', Good boss', Cons', no raises', Was this review helpful?', Yes', - ', No', - ', Report', 1', 2', 3', 4', 5', Next »', Review this company', Review this company', Want to know more about working here?', Ask a question about working or interviewing at The First American Corporation. Our community is ready to answer.', Ask a Question', Overall rating', 3.9', Based on ', 146',  reviews', 5 stars', 4 stars', 3 stars', 2 stars', 1 star', Ratings by category', Work/Life Balance', 3.7', Compensation/Benefits', 3.5', Job Security/Advancement', 3.6', Management', 3.6', Culture', 3.8', The First American Corporation Reviews by Job Title', Customer Service Representative',  (7)', Data Entry Clerk',  (3)', Associate',  (2)', Clerk',  (2)', Executive Assistant',  (2)', The First American Corporation Reviews by Location', Santa Ana, CA', Westlake, TX', Dallas, TX', Cleveland, OH', Columbia, SC', Columbus, OH', Danvers, MA', Fort Worth, TX', Irvine, CA', Milwaukee, WI', Phoenix, AZ', San Diego, CA', Agoura Hills, CA', Ashville, AL', Atlanta, GA', Show more ', Show less ', indeed.init('1b5kqb8s10mt97t2', '\/\/t.indeed.com\/s\/313acc1\/turnstile-compiled.js', [[0,null],[-1,null],[1,null],[1,null],[-1,null],[-1,null],[2,null],[1,null],[-1,null],[1,null],[1,null],[1,null],[-1,null],[1,null],[-1,null],[0,null],[-1,null],[3,null],[0,null],[1,null],[1,null],[1,null],[0,null],[-1,null],[-1,null],[2,null],[-1,null],[1,null],[-1,null],[-1,null],[-1,null],[1,null],[1,null],[1,null],[1,null],[-1,null],[2,null],[-1,null],[1,null],[1,null],[0,null],[1,null],[1,null],[1,null],[-1,null],[-1,null],[-1,null],[1,null],[-1,"jobclickOriginal"],[-1,null],[-1,null],[1,null],[1,null],[0,null],[-1,null],[1,null],[1,null],[3,null],[2,null],[0,null],[-1,null],[1,null],[1,null],[-1,null],[-1,null],[0,null],[-1,null],[1,null],[1,null],[-1,null],[-1,null],[-1,null],[-1,null],[1,null],[1,null],[0,null],[3,null],[1,null],[0,null],[1,null],[-1,null],[1,null],[1,null],[-1,null],[1,null],[3,null],[-1,null],[0,null],[0,null],[-1,null],[-1,null],[-1,null],[1,null],[-1,null],[-1,null],[1,null],[1,null],[-1,null],[-1,null],[-1,[]],[-1,null],[1,null],[3,null],[-1,null],[-1,null],[1,null],[-1,null],[2,null],[0,null],[-1,null],[2,null],[1,null],[3,null],[-1,null],[-1,null],[-1,null],[3,null],[-1,null],[-1,null],[2,null],[-1,null],[-1,null],[1,null],[0,null],[-1,null]]); indeed.pc.init( '1b5kqb8s10mt97t2', 'The First American Corporation', '34c0f721a1db96a1', 'reviews', 'd5e01d77378cbaeb2741bc5cac6ef65d',false, '', '',false);', u"indeed.reviews.initialize( '1b5kqb8s10mt97t2',false,false, '34c0f721a1db96a1', 'VG79rclEWDEIW4blsXfEYuqx6LwJ5jP7' );", 
+#secondary_nav a,#secondary_nav a:link,#secondary_nav a:visited{color:#77c;text-decoration:none}#secondary_nav a:hover{text-decoration:underline}', 
+', 
+', 
+', 
+
+', 
+', 
+
+', For India jobs, visit ', Indeed India', Jobs',  - ', Browse Companies',  - ', Salaries',  - ', Trends',  - ', Forums',  - ', u"
+var jobsProductLink = document.getElementById('jobs_product_link');
+document.getElementById('companies_product_link').onclick = function() { window.location = '/Best-Places-to-Work?campaignid=footer'; return false;};", 
+
+', Browse Jobs',  - ', Tools',  - ', API',  - ', About',  - ', Help Center', 
+', 
+#footer-legal {
+margin-top: 10px;
+font-size: 9pt;
+}
+', 
+', 
+', ©2017 Indeed - ', Cookies, Privacy and Terms', 
+', 
+', 
+', 
+', u"
+PENDING_ANALYTICS_VARS = window.PENDING_ANALYTICS_VARS || [];
+PENDING_ANALYTICS_VARS[PENDING_ANALYTICS_VARS.length] = ['_setCustomVar', 1, 'acmeTest', 'true', 3];
+", 
+', u"
+PENDING_ANALYTICS_VARS = window.PENDING_ANALYTICS_VARS || [];
+PENDING_ANALYTICS_VARS[PENDING_ANALYTICS_VARS.length] = ['_setCustomVar', 5, 'loggedIn', 'false', 3];
+", 
+', u"
+        var ga_domains = [];
+        ga_domains.push('indeed.co.in');ga_domains.push('indeed.l);ga_domains.push('indeed.fr');ga_domains.push('indeed.de');ga_domains.push('indeed.com.br');ga_domains.push('indeed.co.uk');ga_domains.push('indeed.hk');ga_domains.push('indeed.fi');ga_domains.push('indeed.pt');ga_domains.push('indeed.jp');ga_domains.push('indeed.com');ga_domains.push('indeed.com.sg');ga_domains.push('indeed.nl');ga_domains.push('indeed.com.pk');ga_domains.push('indeed.cl');ga_domains.push('indeed.es');ga_domains.push('indeed.co.ve');ga_domains.push('indeed.ae');ga_domains.push('indeed.com.mx');ga_domains.push('indeed.com.my');ga_domains.push('indeed.ch');ga_domains.push('indeed.com.co');ga_domains.push('indeed.com.ph');ga_domains.push('indeed.co.za');ga_domains.push('indeed.ie');ga_domains.push('indeed.com.a);ga_domains.push('indeed.ca');ga_domains.push('indeed.com.pe');
+
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        var ga = ga || [];
+        ga('create', 'UA-90780-1', 'auto', {
+            'allowLinker': true
+        });
+        ga('require', 'linkid');
+        ga('require', 'linker');
+        ga('linker:autoLink', ga_domains, false, true);
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+
+        
+        (function () {
+            if (window.PENDING_ANALYTICS_VARS && window.PENDING_ANALYTICS_VARS.length > 0) {
+                for (var i in PENDING_ANALYTICS_VARS) {
+                    ga('set', PENDING_ANALYTICS_VARS[i][2], PENDING_ANALYTICS_VARS[i][3]);
+                }
+            }
+        })();
+    ", 
+', 
+', 
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+            document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '579216298929618');
+    fbq('track', "PageView");', 
+', 
+', 
+', 
+var _comscore = _comscore || [];
+_comscore.push({ c1: "2", c2: "6486505", c4:"www.indeed.com/cmp/The-First-American-Corporation/reviews", c15:"1b5kqb8rr5m8lao8"});
+(function() { var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true; s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();
+', 
+', 
+', 
+', 
+'][
+    ', 
+body { margin-top: 0; margin-left: 0; margin-right: 0; padding-top: 0; padding-right: 0; padding-left: 0; }
+
+#g_nav { border-bottom:1px solid #ccc; margin-bottom: 9px; }
+
+#g_nav a,
+#g_nav a:visited { color: #00c; }
+
+.navBi { display: -moz-inline-box; display: inline-block; padding: 9px 12px; margin: 0; list-style-type: none; }
+', 
+', 
+', 
+', 
+', 
+#p_nav a.selected { font-weight: bold; text-decoration:none; color: #000 !important; }
+', 
+
+
+', Find Jobs', Find Resumes', Employers / Post Job', 
+', 
+', 
+
+
+#navpromo a,
+#navpromo a:visited {
+color: #f60;
+}
+
+
+#u_nav .login_unconfirmed,
+#u_nav .login_unconfirmed a,
+#u_nav .login_unconfirmed a:visited {
+color: #c00
+}
+
+#u_nav .resume_pending,
+#u_nav .resume_pending a,
+#u_nav .resume_pending a:visited {
+color: #c00
+}
+
+#userOptionsLabel {
+position: relative;
+z-index: 5;
+}
+
+#userOptionsLabel b {
+cursor: pointer;
+text-decoration: underline;
+position: relative;
+z-index: 5;
+}
+
+#userOptionsLabel:active {
+outline: none;
+}
+
+#userOptionsLabel.active {
+padding: 9px 11px;
+margin-bottom: -1px;
+_margin-bottom: 0px;
+border: 1px solid #ccc;
+border-top: 0;
+}
+
+#userOptionsLabel.active b {
+color: #666;
+}
+
+#userOptionsLabel.active .arrowStub {
+border-width: 0 3px 3px;
+_border-width: 0px 3px 4px;
+border-color: transparent;
+border-bottom-color: #666;
+top: -2px;
+border-style: dashed dashed solid;
+}
+
+#userOptionsLabel.active .halfPxlFix {
+background: #fff;
+bottom: -3px;
+height: 6px;
+left: 0;
+position: absolute;
+right: 0;
+border: 1px solid #fff;
+}
+
+.arrowStub {
+position: relative;
+border-style: solid dashed dashed;
+border-color: transparent;
+border-top-color: #666;
+display: -moz-inline-box;
+display: inline-block;
+font-size: 0;
+height: 0;
+line-height: 0;
+width: 0;
+left: 4px;
+border-top-width: 3px;
+border-bottom-width: 0;
+border-right-width: 3px;
+padding-top: 1px;
+top: -1px;
+}
+
+#userOptions {
+z-index: 2;
+visibility: hidden;
+position: absolute;
+right: 0;
+x_right: -1px;
+top: 100%;
+padding: 9px 15px;
+border: 1px solid #ccc;
+background: #fff;
+min-width: 150px;
+_width: 150px;
+text-align: left;
+}
+
+#userOptions.open {
+visibility: visible;
+}
+
+.userOptionItem {
+margin: 6px 0;
+}
+
+.userOptionItem a {
+white-space: nowrap;
+}
+
+.userOptionGroup {
+border-top: 1px solid #e8e8e8;
+margin-top: 12px;
+}
+
+.userNameRepeat {
+color: #a8a8a8;
+padding-right: 48px;
+font-weight: bold;
+}
+
+.userOptionGroupHeader {
+font-weight: bold;
+margin: 6px 0;
+}
+
+', 
+', 
+', u"
+function isUserOptionsOpen() {
+return document.getElementById('userOptions').className === 'open';
+}
+
+function hideUserOptions() {
+destroyKeyboardTrap();
+document.getElementById('userOptions').className = '';
+document.getElementById('userOptionsLabel').className = 'navBi';
+document.getElementById('userOptionsLabel').setAttribute('aria-label', 'open user action drop down men);
+}
+function toggleUserOptions(e) {
+var options = document.getElementById('userOptions');
+var label = document.getElementById('userOptionsLabel');
+if (isUserOptionsOpen()) {
+hideUserOptions();
+if (!e.keyCode) {
+label.blur();
+}
+} else {
+options.className = 'open';
+label.className = 'navBi active navMenuDropDown';
+label.setAttribute('aria-label', 'close user action drop down men);
+document.onclick = function() {
+hideUserOptions();
+document.onclick = function() {
+};
+};
+if (e.keyCode && (e.keyCode == 13 || e.keyCode == 32)) {
+var fL = document.getElementById('userOptions').getElementsByTagName('a')[0];
+if (fL) {
+fL.focus();
+}
+}
+else {
+label.blur();
+}
+createKeyboardTrap(document.getElementById('user_actions'), 'navMenuDropDown', hideUserOptions);
+}
+stopPropagation(e);
+
+}
+
+
+function createKeyboardTrap(containingElement, dropdownLinkClass) {
+var dropdownLinks = containingElement.getElementsByClassName(dropdownLinkClass);
+var numLinks = dropdownLinks.length;
+
+document.onkeydown = function(e) {
+if (e.keyCode === 9) {
+if (e.target === dropdownLinks[0] && e.shiftKey) {
+dropdownLinks[numLinks -1].focus();
+e.preventDefault();
+} else if (e.target === dropdownLinks[numLinks -1] && !e.shiftKey) {
+dropdownLinks[0].focus();
+e.preventDefault()
+}
+} else if (e.keyCode === 27) {
+hideUserOptions();
+}
+}
+}
+
+function destroyKeyboardTrap() {
+document.onkeydown = null;
+}
+
+function stopPropagation(e) {
+var e = e || window.event;
+e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+}
+
+", 
+', u"
+
+function regExpEscape(s) {
+    return String(s).replace(/([-()\[\]{}+?*.$\^|,:#<!\\])/g, '\\$1').
+            replace(/\x08/g, '\\x08');
+}
+
+
+function appendParamsOnce(url, params) {
+    var useParams = params.replace(/^(\?|\&)/, '');
+    if (url.match(new RegExp('[\\?|\\&]' + regExpEscape(useParams))) == null) {
+        return url += (url.indexOf('?') > 0 ? '&' : '?' ) + useParams;
+    }
+    return url;
+}
+
+", 
+', 
+
+', 
+', Upload your resume', 
+', 
+', Sign in', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    #g_nav {
+        position: relative;
+    }
+    #float_logo {
+        background: url("/images/indeed_white.png") no-repeat left center;
+        background-size: 109px 30px;
+        display: inline-block;
+        width: 109px;
+        height: 30px;
+        position: absolute;
+        top: 12px;
+        left: 9px;
+        z-index: 15000;
+    }
+
+    @media (-webkit-min-device-pixel-ratio: 2),
+    (   min--moz-device-pixel-ratio: 2),
+    (     -o-min-device-pixel-ratio: 2/1),
+    (        min-device-pixel-ratio: 2),
+    (                min-resolution: 192dpi),
+    (                min-resolution: 2dppx) {
+        #float_logo {
+            background: url("/images/indeed_white@2x.png") no-repeat left center;
+            background-size: 109px 30px;
+        }
+    }
+
+    
+    #user_actions #userOptionsLabel.active {
+        border: 0;
+        line-height: 58px;
+        padding: 0 11px;
+        margin-bottom: 0;
+    }
+    #user_actions #userOptionsLabel {
+        line-height: 58px;
+        padding: 0 11px;
+    }
+    #g_nav td {
+        text-align: right;
+        height: 58px;
+    }
+
+    
+        #user_actions .navBi a#userOptionsLabel {
+            line-height: initial;
+        }
+    
+    #user_actions #userOptions {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+    
+    #g_nav td:last-child {
+        width: 1%;
+    }
+    
+    div#g_nav {
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+    
+            #g_nav #p_nav a:link,
+            #g_nav #p_nav a:visited,
+            .navBi #navpromo a:link,
+            .navBi #navpromo a:visited,
+            #g_nav #u_nav .navBi a:link,
+            #g_nav #u_nav .navBi a:visited
+            ,#user_actions:not(.loggedin) .navBi #userOptionsLabel
+            {
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+            }
+            #g_nav #p_nav a:hover,
+            .navBi #navpromo a:hover,
+            #g_nav #u_nav .navBi a:hover,
+            #user_actions:not(.loggedin) .navBi a#userOptionsLabel:hover
+            {
+                text-decoration: underline;
+            }
+            
+            #user_actions #userOptionsLabel b {
+                text-decoration: none;
+                color: #ffffff;
+                font-weight: normal;
+            }
+            #user_actions #userOptionsLabel.active b {
+                color: #ffffff;
+            }
+            
+            #g_nav tr {
+                background: #2164f3;
+            }
+            #user_actions #userOptionsLabel.active {
+                background: #1251d7;
+            }
+            #user_actions #userOptionsLabel.active span.halfPxlFix {
+                display: none;
+            }
+            
+            #user_actions #userOptionsLabel .arrowStub  {
+                border-top-color: #ffffff;
+            }
+            #user_actions #userOptionsLabel.active .arrowStub {
+                border-bottom-color: #ffffff;
+            }
+            
+            #g_nav #p_nav a.selected {
+                font-weight: normal;
+                color: rgb(255, 255, 255) !important;
+            }
+        ', 
+', #userOptions {z-index: 10000;}', The First American Corporation', 146 reviews', About', 146', Reviews', 26', Salaries', Photos', Jobs', Q&A', The First American Corporation Employee Reviews', Job Title', (all)', Customer Service Representative - 7', Data Entry Clerk - 3', Associate - 2', Clerk - 2', Executive Assistant - 2', Legal Assistant - 2', Processor - 2', Quality Control Supervisor - 2', Researcher - 2', Senior Processor - 2', Supervisor - 2', Underwriter - 2', Account Representative - 1', Accountant - 1', Accounting Clerk - 1', Accounting Specialist - 1', Administrative Assistant - 1', Agent Support - 1', Area Manager - 1', Author - 1', Bankruptcy Specialist - 1', Business Consultant - 1', Case Manager - 1', Collection Manager - 1', Collection Representative - 1', Collector - 1', Contract Coordinator - 1', Credit Verifier - 1', Customer Relations Representative - 1', Customer Service Analyst - 1', Customer Service Team Lead - 1', Data Analyst - 1', Developer - 1', Document Specialist - 1', Escrow Officer - 1', First Touch - 1', Foreclosure Specialist - 1', Human Resources Coordinator - 1', Human Resources Generalist - 1', Human Resources Manager - 1', Inside Sales Representative - 1', Legal Secretary - 1', Loan Processor - 1', Mailroom Clerk - 1', Manager - 1', Marketing Representative - 1', Operations Administrator - 1', Operations Analyst - 1', Operations Associate - 1', Operations Supervisor - 1', Process Executive (Mortgage Process) - 1', Project Coordinator - 1', Quality Assurance Analyst - 1', Quality Control Manager - 1', Quality Specialist - 1', Real Estate Manager - 1', Recorder - 1', Regional Manager - 1', Sales Representative - 1', Sales Support Representative - 1', Senior Analyst - 1', Senior Area Manager - 1', Senior Customer Service Representative - 1', Senior Research Engineer - 1', Senior Tax Specialist - 1', Senior Team Leader - 1', Senior Underwriter - 1', Tax Analyst - 1', Temporary Employee - 1', Title Examiner - 1', Vice President of Marketing - 1', Vice President of Operations - 1', Vice President of Sales and Marketing - 1', YOH Temporary - 1', Location', (all)', United States - 92',     Agoura Hills, CA - 1',     Ashville, AL - 1',     Atlanta, GA - 1',     Barnwell, SC - 1',     Bloomington, MN - 1',     Blue Springs, MO - 1',     Boise, ID - 1',     Branch, MN - 1',     Chapin, SC - 1',     City of Sunrise, FL - 1',     Clearwater, FL - 1',     Cleveland, OH - 3',     Columbia, SC - 2',     Columbus, OH - 2',     Dallas, TX - 5',     Danvers, MA - 2',     Exton, PA - 1',     Fort Mill, SC - 1',     Fort Worth, TX - 2',     Garden City, NY - 1',     Glendale, CA - 1',     Hazelwood, MO - 1',     Irvine, CA - 2',     Irving, TX - 1',     Jacksonville, FL - 1',     Largo, FL - 1',     Lewisville, TX - 1',     Miami, FL - 1',     Milwaukee, WI - 2',     New York, NY - 1', u"    O'Fallon, MO - 1",     Phoenix, AZ - 2',     Pleasanton, CA - 1',     Portland, OR - 1',     Poway, CA - 1',     Rancho Cucamonga, CA - 1',     Roanoke, TX - 1',     Rochester, NY - 1',     San Diego, CA - 2',     Sandy, UT - 1',     Santa Ana, CA - 12',     Santiago, MN - 1',     Sterling, VA - 1',     Tempe, AZ - 1',     Walnut Creek, CA - 1',     Waterloo, IA - 1',     Westlake, OH - 1',     Westlake, TX - 12', Dominican Republic - 1',     Santiago de los Caballeros - 1', India - 51',     Bangalore, Karnataka - 31',     Hyderabad, Andhra Pradesh - 11',     Salem, Tamil Nadu - 6', Pakistan - 1',     Sialkot - 1', United Kingdom - 1',     London - 1', See reviews about:', Work-Life Balance', Pay & Benefits', Job Security & Advancement', Management', Culture', Found ', 92',  reviews matching the search', See all 146 reviews',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', A large corporate environment with a strong culture', HR COORDINATOR',  (Current Employee) \u2013  ', Santa Ana, CA',  \u2013 ', December 6, 2016', I learn something new every day and feel productive when I leave. My teammates and manager are encouraging, positive, and helpful. I have grown faster than I could have ever anticipated, and am so thankful for this opportunity.', Pros', Cafe on campus', Cons', Corporate, Politics', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Awesome  work place', Warehouse Facility/Data Analyst',  (Former Employee) \u2013  ', City of Sunrise, FL',  \u2013 ', January 2, 2017', First American was enjoyable job with not a lot of responsibilities. I had excellent co-workers and awesome Boss. To include the had a couple gathering for the employees to appreciate the hard work we endure on a daily basis.', Pros', excellent place to work', Cons', none', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Loved This Company', Operations Supervisor',  (Former Employee) \u2013  ', Westlake, TX',  \u2013 ', October 20, 2016', u"I started with my department in it's infancy, and found a lot of growth. I will always remember FARETS with so much fondness. I learned to love call center environments.", Pros', Great Benefits, Great Incentives, Flexible Hours Of Operation, Fun environment.', Cons', Limited Advancement, High Turnaround', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Great Employees!', Top Sales and Marketing Representative',  (Former Employee) \u2013  ', Santa Ana, CA',  \u2013 ', September 15, 2016', They need to do exit interviews with key employees! Culture has changed since family is not as active in the day to day operation!', Pros', Great Location and Building', Cons', Too many Politics', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Great Company', Auditor/Sr. Underwriter',  (Current Employee) \u2013  ', Tempe, AZ',  \u2013 ', August 29, 2016', Great company and you can grow this onebest jobs i ever had and they put employees first and stable most important i wish they had location in california so i can transfer but i have to be close to my family due to personal issues', Pros', you can move up quickly', Cons', nothing', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Great place to work', Collections Representative',  (Former Employee) \u2013  ', Irvine, CA',  \u2013 ', August 9, 2016', Everyday there were lots of details to take care of on each and every account. the people were awesome and everyone was helpful without delay to process accounts. The pace was fast and fun. Managers rolled up their sleeves to help get the job done. the hardest part of the job was leaving. awesome place to work.', Pros', co-workers were friendly and a fun place to work', Cons', Job was temporary for only 1 year', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Fast Pace, challenging and rewarding.', Loan Document Specialist',  (Former Employee) \u2013  ', Fort Mill, SC',  \u2013 ', June 9, 2016', pull, review and update reports, call attorneys, pull, review and update files, file and return files to custodians, assist co-workers when needed.', Pros', work environment, rewards and appreciation', Cons', office politics', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Keeps you busy, creates a family environment.', CURATIVE ASSOCIATE',  (Former Employee) \u2013  ', Westlake, TX',  \u2013 ', May 26, 2016', u"A typical day would be coming in working on your daily spreadsheet while clearing Titles that have issues with them for cusomters refinances. Learning something new about mortgage and state laws on a daily basis, while creating a new professional customer service brand for the company as a whole. The employees work together to create a friendly work environment to keep the attitudes light while dealing with heavy situations such as customer's losing family members or jobs, these being the reasons for the refinances. Creating a way to clear the title's of the customers who have issues and seeing the opportunity of an easier life open up.", Pros', healthcare, fun team building games', Cons', issues between co-workers are not always addressed, management shows favoritism', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', wonderful', Research Leader',  (Former Employee) \u2013  ', Exton, PA',  \u2013 ', April 5, 2016', Great Company to work for ,wonderful culture . More of a family environment . Upper management wanted employees to find a work /home balance .First American kept a family culture on their campus.', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', case-manager', CASE MANAGER ABC HOME HEALTH',  (Former Employee) \u2013  ', Ashville, AL',  \u2013 ', April 2, 2016', ·	Care of home bound patients.', ·	Care of patient in their homes', ·	Supervision of home health aides.', home care taking care of patient, total pt care from assessments to wound care and IV therapy', Pros', pt care', Cons', poor management, long hours, high turn over in staff', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Productive', Underwriter',  (Former Employee) \u2013  ', Agoura Hills, CA',  \u2013 ', January 25, 2016', Self motivation, great team work.', Well organized, great work environment. Always informed, past paced environment. Co workers friendly , active learning environment.', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Great Place to work', Customer Relations Representative',  (Current Employee) \u2013  ', Bloomington, MN',  \u2013 ', January 22, 2016', Great Company to work for. Great benifits. Friendly Atmostphere. Low turn over. Staff hard working to keep company moral.', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Good company to work for', Corporate Customer Serv/Collections Supervisor',  (Former Employee) \u2013  ', Santa Ana, CA',  \u2013 ', January 12, 2016', Treated employees well while I was employed there.  They always had fun things plan for employees.  They also had a flex schedule for those with families', Was this review helpful?', Yes', - ', 1', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Job with good pay', Authorization Specialist',  (Current Employee) \u2013  ', Phoenix, AZ',  \u2013 ', December 2, 2015', u"The job itself wasn't hard but they had very rude and unskilled management. I was in authorizations so I had to authorize a certain dollar amount for the customers to have appliances approved in their home.", Pros', Good pay', Cons', poor management', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Fun place and great opportunity to work with cross functional teams', SQA Manager / Sr. SQA Team Lead',  (Former Employee) \u2013  ', San Diego, CA',  \u2013 ', November 3, 2015', I have improved the communication with executive management,product development,quality assurance teams, clients and vendors to execute the results in order to meet the product release schedules.', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Very productive company.', Operational Supervisor',  (Former Employee) \u2013  ', Westlake, TX',  \u2013 ', September 30, 2015', I begin this job as a temp and was given the opportunity to become a full time employee after 90 days.  I learned so much in regards escrow, delinquent taxes, payment process, property research.  I had the opportunity to advance quickly in this company, Research Lead, Operational Supervisor in Outsourcing and Check Control Manager.  This company provided the way for me to succeed and move forward with my career in the mortgage industry.', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Great corporation to work for', TYPING AND QUALITY CONTROL SUPERVISOR',  (Former Employee) \u2013  ', Cleveland, OH',  \u2013 ', September 9, 2015', Excellent company to work for. Worked for First American for many years in many different departments and always enjoyed working there. Amazing staff and great pay and benefits.', Was this review helpful?', Yes', - ', No', - ', 1', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Amazing Company over 30 years old.', Area Manager',  (Former Employee) \u2013  ', Boise, ID',  \u2013 ', July 31, 2015', u"First American is a class act company that provided a quality product that I could stand behind.  The management team was very helpful and encouraging.  The hardest part of the job was that my sales depended on homes being sold in the area and when those #'s are low so are mine.  The best part of the job was meeting new people and being of service to clients and customers.", Pros', Work from home', Cons', Market saturation', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Open and identify important documents to other foreclosure and bankruptcy analysts.', Operations Document Support Analyst',  (Former Employee) \u2013  ', Columbus, OH',  \u2013 ', July 27, 2015', Delivered bankruptcy and foreclosure carts.', Sort out express mail.', Logged check.', Delivered Invoice Carts.', Filed default mail.', Pros', Achieved raises and Annevisary Awards', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', fun place, stable work', Quality Assurance Analyst',  (Former Employee) \u2013  ', Santiago, MN',  \u2013 ', July 22, 2015', Fun place and coworkers, small issues with benefits and related.', small to none opportunities to grow.', low motivation from supervisory, good planification from management.', Pros', holidays payments, healthcare and others', Cons', Always the same things to do', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Good learning experience', Data Entry Clerk',  (Former Employee) \u2013  ', Santa Ana, CA',  \u2013 ', June 2, 2015', I sat in front of a computer all day and no bothered me.  I knew what needed to be done everyday and completed all my projects in a great timely matter.', Pros', Good boss', Cons', no raises', Was this review helpful?', Yes', - ', No', - ', Report', 1', 2', 3', 4', 5', Next »', Review this company', Review this company', Want to know more about working here?', Ask a question about working or interviewing at The First American Corporation. Our community is ready to answer.', Ask a Question', Overall rating', 3.9', Based on ', 146',  reviews', 5 stars', 4 stars', 3 stars', 2 stars', 1 star', Ratings by category', Work/Life Balance', 3.7', Compensation/Benefits', 3.5', Job Security/Advancement', 3.6', Management', 3.6', Culture', 3.8', The First American Corporation Reviews by Job Title', Customer Service Representative',  (7)', Data Entry Clerk',  (3)', Associate',  (2)', Clerk',  (2)', Executive Assistant',  (2)', The First American Corporation Reviews by Location', Santa Ana, CA', Westlake, TX', Dallas, TX', Cleveland, OH', Columbia, SC', Columbus, OH', Danvers, MA', Fort Worth, TX', Irvine, CA', Milwaukee, WI', Phoenix, AZ', San Diego, CA', Agoura Hills, CA', Ashville, AL', Atlanta, GA', Show more ', Show less ', indeed.init('1b5kqb9u80kbr2pt', '\/\/t.indeed.com\/s\/313acc1\/turnstile-compiled.js', [[0,null],[-1,null],[1,null],[1,null],[-1,null],[-1,null],[2,null],[1,null],[-1,null],[1,null],[1,null],[1,null],[-1,null],[1,null],[-1,null],[0,null],[-1,null],[3,null],[0,null],[1,null],[1,null],[1,null],[0,null],[-1,null],[-1,null],[2,null],[-1,null],[1,null],[-1,null],[-1,null],[-1,null],[1,null],[1,null],[1,null],[1,null],[-1,null],[2,null],[-1,null],[1,null],[1,null],[0,null],[1,null],[1,null],[1,null],[-1,null],[-1,null],[-1,null],[1,null],[-1,"jobclickOriginal"],[-1,null],[-1,null],[1,null],[1,null],[0,null],[-1,null],[1,null],[1,null],[3,null],[2,null],[0,null],[-1,null],[1,null],[1,null],[-1,null],[-1,null],[0,null],[-1,null],[1,null],[1,null],[-1,null],[-1,null],[-1,null],[-1,null],[1,null],[1,null],[0,null],[3,null],[1,null],[0,null],[1,null],[-1,null],[1,null],[1,null],[-1,null],[1,null],[3,null],[-1,null],[0,null],[0,null],[-1,null],[-1,null],[-1,null],[1,null],[-1,null],[-1,null],[1,null],[1,null],[-1,null],[-1,null],[-1,[]],[-1,null],[1,null],[3,null],[-1,null],[-1,null],[1,null],[-1,null],[2,null],[0,null],[-1,null],[2,null],[1,null],[3,null],[-1,null],[-1,null],[-1,null],[3,null],[-1,null],[-1,null],[2,null],[-1,null],[-1,null],[1,null],[0,null],[-1,null]]); indeed.pc.init( '1b5kqb9u80kbr2pt', 'The First American Corporation', '34c0f721a1db96a1', 'reviews', 'd5e01d77378cbaeb2741bc5cac6ef65d',false, '', '',false);', u"indeed.reviews.initialize( '1b5kqb9u80kbr2pt',false,false, '34c0f721a1db96a1', 'VG79rclEWDEIW4blsXfEYuqx6LwJ5jP7' );", 
+#secondary_nav a,#secondary_nav a:link,#secondary_nav a:visited{color:#77c;text-decoration:none}#secondary_nav a:hover{text-decoration:underline}', 
+', 
+', 
+', 
+
+', 
+', 
+
+', For India jobs, visit ', Indeed India', Jobs',  - ', Browse Companies',  - ', Salaries',  - ', Trends',  - ', Forums',  - ', u"
+var jobsProductLink = document.getElementById('jobs_product_link');
+document.getElementById('companies_product_link').onclick = function() { window.location = '/Best-Places-to-Work?campaignid=footer'; return false;};", 
+
+', Browse Jobs',  - ', Tools',  - ', API',  - ', About',  - ', Help Center', 
+', 
+#footer-legal {
+margin-top: 10px;
+font-size: 9pt;
+}
+', 
+', 
+', ©2017 Indeed - ', Cookies, Privacy and Terms', 
+', 
+', 
+', 
+', u"
+PENDING_ANALYTICS_VARS = window.PENDING_ANALYTICS_VARS || [];
+PENDING_ANALYTICS_VARS[PENDING_ANALYTICS_VARS.length] = ['_setCustomVar', 1, 'acmeTest', 'true', 3];
+", 
+', u"
+PENDING_ANALYTICS_VARS = window.PENDING_ANALYTICS_VARS || [];
+PENDING_ANALYTICS_VARS[PENDING_ANALYTICS_VARS.length] = ['_setCustomVar', 5, 'loggedIn', 'false', 3];
+", 
+', u"
+        var ga_domains = [];
+        ga_domains.push('indeed.co.in');ga_domains.push('indeed.l);ga_domains.push('indeed.fr');ga_domains.push('indeed.de');ga_domains.push('indeed.com.br');ga_domains.push('indeed.co.uk');ga_domains.push('indeed.hk');ga_domains.push('indeed.fi');ga_domains.push('indeed.pt');ga_domains.push('indeed.jp');ga_domains.push('indeed.com');ga_domains.push('indeed.com.sg');ga_domains.push('indeed.nl');ga_domains.push('indeed.com.pk');ga_domains.push('indeed.cl');ga_domains.push('indeed.es');ga_domains.push('indeed.co.ve');ga_domains.push('indeed.ae');ga_domains.push('indeed.com.mx');ga_domains.push('indeed.com.my');ga_domains.push('indeed.ch');ga_domains.push('indeed.com.co');ga_domains.push('indeed.com.ph');ga_domains.push('indeed.co.za');ga_domains.push('indeed.ie');ga_domains.push('indeed.com.a);ga_domains.push('indeed.ca');ga_domains.push('indeed.com.pe');
+
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        var ga = ga || [];
+        ga('create', 'UA-90780-1', 'auto', {
+            'allowLinker': true
+        });
+        ga('require', 'linkid');
+        ga('require', 'linker');
+        ga('linker:autoLink', ga_domains, false, true);
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+
+        
+        (function () {
+            if (window.PENDING_ANALYTICS_VARS && window.PENDING_ANALYTICS_VARS.length > 0) {
+                for (var i in PENDING_ANALYTICS_VARS) {
+                    ga('set', PENDING_ANALYTICS_VARS[i][2], PENDING_ANALYTICS_VARS[i][3]);
+                }
+            }
+        })();
+    ", 
+', 
+', 
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+            document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '579216298929618');
+    fbq('track', "PageView");', 
+', 
+', 
+', 
+var _comscore = _comscore || [];
+_comscore.push({ c1: "2", c2: "6486505", c4:"www.indeed.com/cmp/The-First-American-Corporation/reviews", c15:"1b5kqb8rr5m8lao8"});
+(function() { var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true; s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();
+', 
+', 
+', 
+', 
+']

@@ -31,9 +31,10 @@ class ThreadClassSample(QtCore.QThread):
         super(ThreadClassSample, self).__init__(parent)
 
     def run(self):
-        #parent_dir_name = os.getcwd()
-        #sys.path.append(parent_dir_name + '/scraper/googlecse')
 
+        '''GET DATA'''
+
+        '''
         Query = 'SAMPLE'
         label = -99
 
@@ -41,27 +42,23 @@ class ThreadClassSample(QtCore.QThread):
             reader = csv.reader(f)
             Data_list = list(reader)
 
-        for i in range(100, 101):   #range(1,n+2)
+        for i in range(101, 201):   #range(1,n+2)
             Query = Data_list[i][0]
             if Data_list[i][1] == 'Forex':
                 label = 1
             else:
                 label = 0
 
-            #listRes = scrapeData.storeResTxt(Query, label)
+            listRes = scrapeData.storeResTxt(Query, label)
 
         univList = getUniversalList.makeListScrape()
 
         WebScraper.startReactor(univList)
+        '''
+
+        '''LEARN MODEL WITH EXISTING DATA'''
 
 
-
-        #print your_list[1][1]
-
-        #listRes = scrapeData.storeResTxt(Query, label)
-        #print listRes
-
-        #scrapeData.getDataToTXT(Query, label, listRes)
 
 
 
