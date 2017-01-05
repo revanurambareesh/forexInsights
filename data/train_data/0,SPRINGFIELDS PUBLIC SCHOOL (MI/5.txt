@@ -1,0 +1,3035 @@
+[
+
+    ', 
+    ', 
+    ', 
+    ', 
+
+    ', 
+    ', 
+    ', 
+
+    ', 
+    ', 
+        ', Skip to Main Content', 
+    ', 
+
+    ', 
+    
+    ', 
+
+    ', 
+    
+
+    
+
+', u"
+	/* SPECIAL MODE BAR */
+	div.sw-special-mode-bar {
+		background: #FBC243 url('http://mcas.schoolwires.net/Static/V2_16_01//GlobalAssets/Images/special-mode-bar-background.png') no-repeat;
+		height: 30px;
+		text-align: left;
+		font-size: 12px;
+		position: relative;
+		z-index: 10000;
+	}
+	div.sw-special-mode-bar > div {
+		padding: 8px 0 0 55px;
+		font-weight: bold;
+	}
+	div.sw-special-mode-bar > div > a {
+		margin-left: 20px;
+		background: #A0803D;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		color: #fff;
+		padding: 4px 6px 4px 6px;
+		font-size: 11px;
+	}
+	
+	body.blue div.sw-special-mode-bar, body.green div.sw-special-mode-bar, body.red div.sw-special-mode-bar {
+	    display: none;
+	}
+
+	/* END SPECIAL MODE BAR */
+", 
+
+', 
+	
+	function SWEndPreviewMode() { 
+		var data = "{}";
+		var success = "window.location='';";
+		var failure = "CallControllerFailure(result[0].errormessage);";
+		CallController("http://mcas.schoolwires.net/site/SiteController.aspx/EndPreviewMode", data, success, failure);
+	}
+	
+	function SWEndEmulationMode() {
+		SetUnescapedCookie('UserID', GetCookie('SourceEmulationUserID'));
+		DeleteCookie('SourceEmulationUserID');
+		window.location = 'http://mcas.schoolwires.net/ums/Users/Users.aspx';
+	}
+
+	function SWEndPreviewConfigMode() {
+	    var data = "{}";
+	    var success = "window.location='';";
+	    var failure = "CallControllerFailure(result[0].errormessage);";
+	    CallController("http://mcas.schoolwires.net/site/SiteController.aspx/EndPreviewConfigMode", data, success, failure);
+	}
+', 
+            
+
+    ', 
+', 
+', 
+', 
+', District Home', 
+', 
+', 
+', Select a School...', 
+', 
+', Select a School', 
+', 
+', Coolspring Elementary School', 
+', Edgewood Elementary School', 
+', Joy Elementary School', 
+', Knapp Elementary School', 
+', Lake Hills Elementary School', 
+', Marsh Elementary School', 
+', Pine Elementary School', 
+', Springfield Elementary School', 
+', Barker Middle School', 
+', Krueger Middle School', 
+', Michigan City High School', 
+', LaPorte Co. Career & Tech Education', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Sign In', 
+', Register', 
+', 
+', 
+$(document).ready(function() {
+    $('#sw-search-input').keyup(function(e) {        if (e.keyCode == 13) {
+            SWGoToSearchResultsPageswsearchinput();
+        }
+    });
+    $('#sw-search-input').val($('#swsearch-hid-word').val())});
+function SWGoToSearchResultsPageswsearchinput() {
+window.location.href="http://mcas.schoolwires.net/site/Default.aspx?PageType=6&SiteID=16&SearchString=" + $('#sw-search-input').val();
+}
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    
+    ', 
+		', 
+			', 
+				', 
+			', 
+			', 
+				', 
+					', Springfield Elementary School', 
+					', Responsive Web Design', 
+                    ', Extra Tagline Here', 
+				', 	
+			', 
+			', 
+				', 
+                	', 
+						', District Home', 
+					', 
+                    ', 
+						', Select a School ', 
+						', 
+						', 
+					', 
+					
+                    	', 
+						', 
+					
+				', 
+			', 
+		', 
+	', 
+	', 
+		', 
+			', 
+', 
+', Home', 
+', 
+', 
+', Our School', 
+', 
+', General Information', 
+', Parent/Student Handbook', 
+', u"Principal's Page", 
+', Springfield Staff Directory', 
+', Springfield Gallery', 
+', 
+', 
+', 
+', Teacher Sites', 
+', 
+', 
+', Academics', 
+', 
+', Curriculum', 
+', Technology', 
+', Media Center', 
+', 
+', 
+', 
+', Activities', 
+', 
+', National Elementary Honor Society', 
+', Student Council', 
+', Drama Club', 
+', 
+', 
+', 
+', Athletics', 
+', 
+', 
+', Student Services', 
+', 
+', Before and After School Care', 
+', u"Counselor's Corner", 
+', English as a New Language (ENL)', 
+', Food Service', 
+', Gifted And Talented Program', 
+', Magnet School Information', 
+', School Nurse', 
+', Special Education', 
+', Transportation', 
+', 
+', 
+', 
+', Parents', 
+', 
+', General Information', 
+', Parent Access Log In', 
+', Volunteer Forms', 
+', My Payments Plus', 
+', Title 1 Parent Handbook', 
+', Deaf and Hard of Hearing Services', 
+', 
+', Calendar', 
+', 
+', 
+
+
+
+', 
+    $(document).ready(function() {
+        channelHoverIE();
+        channelTouch();
+    });
+
+    function channelTouch() {
+        // this will change the dropdown behavior when it is touched vs clicked.
+        // channels will be clickable on second click. first click simply opens the menu.
+        $('#channel-navigation > .sw-channel-item > a').on({
+            'touchstart': function (e) {
+                
+                // see if has menu
+                if ($(this).siblings('ul.sw-channel-dropdown').length > 0) {
+                    var button = $(this);
+
+                    // add href as property if not already set
+                    // then remove href attribute
+                    if (!button.prop('linkHref')) {
+                        button.prop('linkHref', button.attr('href'));
+                        button.removeAttr('href');
+                    }
+
+                    // check to see if menu is already open
+                    if ($(this).siblings('ul.sw-channel-dropdown').is(':visible')) {
+                        // if open go to link
+                        window.location.href = button.prop('linkHref');
+                    } 
+
+                } 
+            }
+        });
+    }
+
+
+    
+    function channelHoverIE(){
+		// set z-index for IE7
+		var parentZindex = $('#channel-navigation').parents('div:first').css('z-index');
+		var zindex = (parentZindex > 0 ? parentZindex : 8000);
+		$(".sw-channel-item").each(function(ind) {
+			$(this).css('z-index', zindex - ind);
+			zindex --;
+		});
+	    $(".sw-channel-item").hover(function(){
+	        var subList = $(this).children('ul');
+	        if ($.trim(subList.html()) !== "") {
+		        subList.show();
+		    }
+		    $(this).addClass("hover");
+	    }, function(){
+		    $(".sw-channel-dropdown").hide();
+		    $(this).removeClass("hover");
+	    });
+    }
+
+', 
+
+
+		', 
+	', 
+    
+    ', 
+    	', 
+        	', 
+            	', 
+                ', 
+                	', 
+$(document).ready(function() {
+    $('#swsitesearch-txt-searchstring').keyup(function(e) {        if (e.keyCode == 13) {
+            SWGoToSearchResultsPageswsitesearchtxtsearchstring();
+        }
+    });
+    $('#swsitesearch-txt-searchstring').val($('#swsearch-hid-word').val())});
+function SWGoToSearchResultsPageswsitesearchtxtsearchstring() {
+window.location.href="http://mcas.schoolwires.net/site/Default.aspx?PageType=6&SiteID=16&SearchString=" + $('#swsitesearch-txt-searchstring').val();
+}
+', 
+', 
+', 
+                ', 
+            ', 
+            ', 
+            	', 
+                ', 
+                	', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            	', 
+                ', 
+                    ', 
+                        ', Pinterest', 
+                        ', YouTube', 
+                        ', Google +', 
+                        ', Vimeo', 
+                        ', Twitter', 
+                        ', Flickr', 
+                        ', Linkedin', 
+                        ', Facebook', 
+                        ', Instagram', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            ', 
+        ', 
+    ', 
+    
+    
+    
+    
+	', 
+    ', 
+        ', 
+            ', 
+                ', 
+', 
+', 
+', 
+var photoGallery22801= {"Album": {"title":"Sunrise 1500 x 915","description":"","transitiondelay":"6","fadestyle":"NO","gallerywidth":"1500","backgroundaudio":"/cms/lib5/IN01001792/Centricity/ModuleInstance/22528/","loopaudio":"False","lgpath":"/cms/lib5/IN01001792/Centricity/ModuleInstance/22528/large/","tnpath":"/cms/lib5/IN01001792/Centricity/ModuleInstance/22528/thumbs/","Images": [{"photoname":"Reading Champions!","src":"IMG_6214-cropped.jpg?rnd=0.402751322557568","caption":"Congrats to our \"Name that Book\" teams...","pause":"","link":"http://educatemc.net/site/default.aspx?PageType=3&DomainID=16&ModuleInstanceID=7821&ViewID=047E6BE3-6D87-4130-8424-D8E4E9ED6C2A&RenderLoc=0&FlexDataID=24012&PageID=25","target":"_self"},{"photoname":"hide","src":"IMG_6205-cropped.JPG?rnd=0.357121032363326","caption":"","pause":"","link":"","target":"_self"},{"photoname":"hide","src":"IMG_6253-cropped3.JPG?rnd=0.558403119704874","caption":"","pause":"","link":"","target":"_self"},{"photoname":"hide","src":"IMG_6225-cropped.JPG?rnd=0.863652558002459","caption":"","pause":"","link":"","target":"_self"},{"photoname":"hide","src":"IMG_6256-cropped.JPG?rnd=0.861499032872496","caption":"","pause":"","link":"","target":"_self"},{"photoname":"hide","src":"IMG_6175-cropped3.JPG?rnd=0.332544644983739","caption":"","pause":"","link":"","target":"_self"},{"photoname":"hide","src":"IMG_6275-cropped.JPG?rnd=0.00475212047097838","caption":"","pause":"","link":"","target":"_self"}]}}
+', 
+', 
+', 
+', 
+', 
+                
+                ', 
+            ', 
+        ', 
+        ', 
+        	', 
+            	', 
+                	', 
+                    	', Popular Links', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                	', 
+', 
+ ', 
+     ', Upcoming Events', 
+ ', 
+ ', 
+		', 
+', 
+', 
+     ', January 16, 2017', 
+     ', 
+         ', School in Session (Snow Makeup) - Martin Luther King Jr. Day', 
+     ', 
+', 
+', 
+', 
+', 
+     ', February 10, 2017', 
+     ', 
+         ', 8:00 PM - 11:00 PM', 
+         ', "Music in the City" Benefit Concert', 
+     ', 
+', 
+', 
+', 
+', 
+     ', February 20, 2017', 
+     ', 
+         ', Presidents Day - No School', 
+     ', 
+', 
+', 
+', 
+', 
+     ', February 23, 2017', 
+     ', 
+         ', 8:00 AM', 
+         ', End of Second Trimester (Elementary)', 
+     ', 
+', 
+', 
+', 
+', 
+     ', March 1, 2017', 
+     ', 
+         ', 10:00 AM - 6:00 PM', 
+         ', Kindergarten Roundup - All elementary schools', 
+     ', 
+', 
+', 
+', 
+', 
+     ', 
+         ', 3:15 PM - 7:15 PM', 
+         ', Elementary Parent-Teacher Conferences', 
+     ', 
+', 
+', 
+	', 
+', View Calendar', 
+ ', 
+ ', 
+ ', 
+', 
+', 
+', 
+', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+', 
+', 
+	', Site Shortcuts ', 
+	', 
+		', 
+', Winter Learning Packet', 
+', 
+', Donate', 
+', 
+', Pre-K Information', 
+', 
+', Middle School Course Guide', 
+', 
+', Krueger Environmental Curriculum', 
+', 
+', School Supply List', 
+', 
+', MCAS Success Stories', 
+', 
+', 
+	', 
+	', 
+	', 
+', 
+', 
+', 
+                    ', 
+                    ', 
+                        ', 
+
+
+
+', 
+    ', 
+        $(document).ready(function() {
+            var DomainID = '16';
+            var PageID = '25';
+            var RenderLoc = '0';
+            var MIID = '7819';
+
+            //added to check to make sure moderated content doesn't bleed through the dialog
+            if ($('#dialog-overlay-WindowLargeModal-body.moderateContent').length > 0) {
+                $("#module-content-" + MIID).find(".ui-widget-detail").find(".ui-article").append("<p>&nbsp;</p>");
+            }
+        });
+    ', 
+
+    ', u"$(document).ready(function() {CheckScript('ModuleView');CheckScript('Mustache');
+ });", 
+    
+    ', 
+', 
+	', 
+		', Welcome!', 
+	', 
+	
+	', 
+		', 
+', 
+    ', 
+		', 
+			',  ', 
+', Welcome to Springfield Elementary School 2015-2016!  We are proud to be recognized as an Indiana Four Star School.', 
+', We are excited to educate daily approximately 400 students from kindergarten through sixth grade. We have three sections of kindergarten - third grade and two sections of each grade fourth - sixth as well as a high-ability classroom serving students in fourth through sixth grade. ', 
+', Springfield provides programs and opportunities that allow all students to meet their potential and create a learning community that provides each student academic success.', 
+', Our vision is create a K-6 school that embraces diversity, establishes academic excellence, and empowers students and community members to enhance the environments in which learn and grow.', 
+',  ', 
+',  ', 
+', The Mission of Springfield Elementary School is to ensure our students are equipped with the necessary skils to be productive members of society by', 
+', 
+', 
+', providing differentiated learning experiences to meet the needs of all of our students', 
+', u"encouraging parents to be an active participate/partner in their child's education", 
+', teaching peacemaking and leadership skills in an envionment with shared values of nonviolence, equality, and unity.', 
+', 
+', 
+',                        ', By working together, we will ensure that every child excels!', 
+',  ', 
+', Please check back frequently to our website for additional information!', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+', 
+	', 
+		
+		',  
+		', 
+	', 
+', 
+', 
+$(document).ready(function (){
+});
+function LoadGroupedData(container, MIID, PMI, groupYear, groupMonth, groupBy, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&EnableQuirksMode=0&ViewID=' + viewToUse + '&Tag=' + tag, container, 2, 'chkSidebar();');
+}
+function LoadData(container, MIID, PMI, flexDataID, groupYear, groupMonth, groupBy, targetView, tag) {
+  if(targetView !== undefined || targetView.Length() == 0){
+  //targetView looks at the hidden Detail View defined in the Builder View.
+      targetView = $('#hid-'+MIID+'-DetailView').val();
+   }
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&FlexDataID=' + flexDataID + '&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&RenderLoc=0&FromRenderLoc=0&EnableQuirksMode=0&Tag=' + tag + '&ViewID=' + targetView, container, 2, 'chkSidebar();');
+}
+function LoadTaggedData(container, MIID, PMI, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&Tag=' + tag + '&EnableQuirksMode=0&ViewID='+viewToUse, container, 2, 'chkSidebar();');
+}
+', 
+', 
+
+', 
+', 
+
+
+
+', 
+    ', 
+        $(document).ready(function() {
+            var DomainID = '16';
+            var PageID = '25';
+            var RenderLoc = '0';
+            var MIID = '16628';
+
+            //added to check to make sure moderated content doesn't bleed through the dialog
+            if ($('#dialog-overlay-WindowLargeModal-body.moderateContent').length > 0) {
+                $("#module-content-" + MIID).find(".ui-widget-detail").find(".ui-article").append("<p>&nbsp;</p>");
+            }
+        });
+    ', 
+
+    ', u"$(document).ready(function() {CheckScript('ModuleView');CheckScript('Mustache');
+ });", 
+    
+    ', 
+', 
+	', 
+		
+	', 
+	
+	', 
+		
+	', 
+	', 
+		
+			
+		
+		', 
+	', 
+', 
+', 
+$(document).ready(function (){
+});
+function LoadGroupedData(container, MIID, PMI, groupYear, groupMonth, groupBy, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&EnableQuirksMode=0&ViewID=' + viewToUse + '&Tag=' + tag, container, 2, 'chkSidebar();');
+}
+function LoadData(container, MIID, PMI, flexDataID, groupYear, groupMonth, groupBy, targetView, tag) {
+  if(targetView !== undefined || targetView.Length() == 0){
+  //targetView looks at the hidden Detail View defined in the Builder View.
+      targetView = $('#hid-'+MIID+'-DetailView').val();
+   }
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&FlexDataID=' + flexDataID + '&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&RenderLoc=0&FromRenderLoc=0&EnableQuirksMode=0&Tag=' + tag + '&ViewID=' + targetView, container, 2, 'chkSidebar();');
+}
+function LoadTaggedData(container, MIID, PMI, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&Tag=' + tag + '&EnableQuirksMode=0&ViewID='+viewToUse, container, 2, 'chkSidebar();');
+}
+', 
+', 
+
+', 
+', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            	', 
+                	', 
+
+
+
+', 
+    ', 
+        $(document).ready(function() {
+            var DomainID = '16';
+            var PageID = '25';
+            var RenderLoc = '0';
+            var MIID = '7821';
+
+            //added to check to make sure moderated content doesn't bleed through the dialog
+            if ($('#dialog-overlay-WindowLargeModal-body.moderateContent').length > 0) {
+                $("#module-content-" + MIID).find(".ui-widget-detail").find(".ui-article").append("<p>&nbsp;</p>");
+            }
+        });
+    ', 
+
+    ', u"$(document).ready(function() {CheckScript('ModuleView');CheckScript('Mustache');
+ });", 
+    
+    ', 
+', 
+	
+	', 
+		', News & Headlines', 
+	', 
+	
+	', 
+		', 
+', 
+	', 
+		', 
+		', Championship Readers!', 
+	
+		', Springfield advances to finals in county "Name that Book" competition', 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+		', 
+		', Springfield Student Supply List 2016-2017', 
+	
+		', 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+		', 
+		', Luau Night! Friday May 6th from 5 pm-7 pm', 
+	
+		', u"The PTO is having a Luau Family Fun Night including games, prizes, cakewalk and food! This is a great , FUN way to help and support your child's school.", 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+		
+		', Kindergarten, Here I Come! - May 12 3:30-4:30', 
+	
+		', Incoming kindergartens and parents come join the Springfield Staff to get excited about becoming a Springfield Shark!', 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+		', 
+		', To see photos click Springfield Gallery!', 
+	
+		', Springfield hosted our annual Family Literacy Night Tuesday March 29 ! Thank you families for attending and making this event successful! ', 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+		', 
+		', Muffins With Moms was a huge success!!!', 
+	
+		', u"Celebrate the special bond between a mom, grandmother, or other female adult in a child's life. Click on Springfield Galley to see photos.", 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+		', 
+		', Internet and App Safety Tips', 
+	
+		', Reminders for parents from MCAS and the MC Police Dept.', 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+
+	', 
+		
+		
+		', 
+	', 
+', 
+', u"
+	$(document).ready(function() {
+		$('a.ui-article-thumb').click(function () {      
+        		window.location = $(this).attr('href');
+    		});
+    		
+		$('#sw-app-headlines-7821').find('img').each(function() {
+			if ($.trim(this.src) == '' )
+			{
+				$(this).parent().parent().remove();
+			}
+		});
+
+	});
+", 
+', 
+$(document).ready(function (){
+});
+function LoadGroupedData(container, MIID, PMI, groupYear, groupMonth, groupBy, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&EnableQuirksMode=0&ViewID=' + viewToUse + '&Tag=' + tag, container, 2, 'chkSidebar();');
+}
+function LoadData(container, MIID, PMI, flexDataID, groupYear, groupMonth, groupBy, targetView, tag) {
+  if(targetView !== undefined || targetView.Length() == 0){
+  //targetView looks at the hidden Detail View defined in the Builder View.
+      targetView = $('#hid-'+MIID+'-DetailView').val();
+   }
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&FlexDataID=' + flexDataID + '&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&RenderLoc=0&FromRenderLoc=0&EnableQuirksMode=0&Tag=' + tag + '&ViewID=' + targetView, container, 2, 'chkSidebar();');
+}
+function LoadTaggedData(container, MIID, PMI, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&Tag=' + tag + '&EnableQuirksMode=0&ViewID='+viewToUse, container, 2, 'chkSidebar();');
+}
+', 
+', 
+
+', 
+', 
+                ', 
+            ', 
+        ', 
+    ', 
+    
+    
+    
+    
+    
+    ', 
+        ', 
+            ', 
+            	', Springfield Elementary School', 
+                ', Responsive Web Design', 
+                ', 
+                	', ADDRESS:',  3054 W. 800 N., Michigan City, IN 46360', 	
+                    ', PHONE:',  (219) 873-2117', 
+                    ', FAX:',  (219) 877-3064', 
+                    
+                    ', 
+                        ', Site Map',  
+
+                    ', 
+                ', 
+            ', 
+        ', 
+        
+        ', 
+            ', 
+                ', Pinterest', 
+                ', YouTube', 
+                ', Google +', 
+                ', Vimeo', 
+                ', Twitter', 
+                ', Flickr', 
+                ', Linkedin', 
+                ', Facebook', 
+                ', Instagram', 
+            ', 
+        ', 
+        
+        ', 
+            ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                ', 
+                    ', Use This Area for Additional Text', 
+                    ', Make this space your own by placing text in this area! Use it for a mission / vision statement or add a tagline. List some advertising or highlight a staff member\u2019s accomplishments. This is also a great spot for a disclaimer on it\u2019s own, or in addition to the standard disclaimer area below. ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                ', 
+                    ', Additional Resources', 
+                    ', 
+                        ', MCAS Staff Directory', 
+                        ', About Michigan City', 
+                        ', Visit LaPorte County', 
+                        ', Indiana Dept. of Education', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        
+        
+        ', 
+            ', 
+                ', 
+                    ', Disclaimer Text goes in this spot. Magna adipiscing vel eu semper ridiculus sodales a augue adipiscing nisl aliquam vestibulum dis consectetur parturient.', 
+                ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                    ', Disclaimer Text goes in this spot. Magna adipiscing vel eu semper ridiculus sodales a augue adipiscing nisl aliquam vestibulum dis consectetur parturient.', 
+                ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Questions or Feedback?',  | ', 
+', Blackboard Web Community Manager Privacy Policy (Updated)',  | ', 
+', Terms of Use', 
+', 
+', 
+', Copyright © 2002-2017 Blackboard, Inc. All rights reserved.', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"
+   $(document).ready(function(){
+      var beaconURL='http://analytics.schoolwires.com/analytics.asmx/Insert?AccountNumber=IrfZvArWwOPKcAg1JerITQ%3d%3d&SessionID=5b3c5167-efbb-4a97-8852-e1cc27356621&SiteID=16&ChannelID=0&SectionID=16&PageID=25&HitDate=1%2f5%2f2017+6%3a26%3a47+AM&Browser=Unknown+0.0&OS=Unknown&IPAddress=117.192.201.51';
+      try {
+         $.getJSON(beaconURL + '&jsonp=?', function(myData) {});
+      } catch(err) { 
+         // prevent site error for analytics
+      }
+   });
+", 
+
+    ', 
+
+    
+    
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowMedium-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowSmall-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowLarge-base').appendTo('body');
+ 		
+		
+    });
+", 
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowMediumModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowSmallModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowLargeModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowXLargeModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-MyAccountSubscriptionOverlay-base').appendTo('body');
+ 		
+		
+    });
+", 
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-InsertOverlay-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-InsertOverlay2-base').appendTo('body');
+ 		
+		
+    });
+", 
+    
+    ', 
+    #videowrapper {
+        position: fixed;
+        z-index: 20000;
+        background: rgba(0, 0, 0, 0.5) none repeat scroll 0% 0%;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+    #videodialog {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        right: 50px;
+        background: #FFF none repeat scroll 0% 0%;
+        z-index: 30000;
+        box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.65);
+        box-sizing: border-box;
+        border: 8px solid #FFF;
+    }
+
+    #videodialog .close-btn {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: 0px 25px 0px 0px;
+        color: #666;
+        line-height: 1;
+        font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    #videodialog .close-btn::after {
+        content: "X";
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 50%;
+        right: 0px;
+        margin-top: -8px;
+        background: #999 none repeat scroll 0% 0%;
+        border-radius: 9px;
+        color: #FFF;
+        font-weight: bold;
+        line-height: 16px;
+        font-size: 9px;
+        text-align: center;
+    }
+        #videodialog-video {
+            margin-top:25px;
+        }
+    ', 
+    ', 
+        function resizeVideoIframe() {
+            $("#videodialog-video iframe").css({ "width": "auto", "height": "auto" });
+            var screenWidth = $(window).width();
+            var screenHeight = $(window).height();
+            //alert('screen width =' + screenWidth + '  screen height=' + screenHeight);
+            var initVidW = 800, initVidH = 600;
+            var vidRatio = initVidH / initVidW;
+            var vidWidth = $("#videodialog-video").width();
+            //alert('videoWidth = ' +vidWidth);
+            var vidHeight = vidWidth * vidRatio;
+
+            if ((vidHeight + 100) > screenHeight) {
+                vidHeight = screenHeight - 140;
+            }
+
+            $("#videodialog-video").css({ "height": (vidHeight) });
+            $("#videodialog-video iframe").css({ "width": vidWidth, "height": vidHeight }); 
+        }
+
+        function resizeVideo() {
+            $("#videodialog-video video").css({ "width": "auto", "height": "auto" });
+            var screenWidth = $(window).width();
+            var screenHeight = $(window).height();
+            //alert('screen width =' + screenWidth + '  screen height=' + screenHeight);
+            var initVidW = 800, initVidH = 600;
+            var vidRatio = initVidH / initVidW;
+            var vidWidth = $("#videodialog-video").width();
+            //alert('videoWidth = ' +vidWidth);
+            var vidHeight = vidWidth * vidRatio;
+
+            if ((vidHeight + 100) > screenHeight) {
+                vidHeight = screenHeight - 140;
+            }
+
+            $("#videodialog-video").css({ "height": (vidHeight) });
+            $("#videodialog-video video").css({ "width": vidWidth, "height": vidHeight });
+            //$(".videoControl").css({ "bottom": $("#videodialog-video video").bottom() + 5, "width": 100 });
+        }
+
+        function closeVideoDialog() {
+            $('#videowrapper').addClass('ui-helper-hidden');
+            $('#videodialog-video').html('');
+            $(window).resize(function () { });
+        }
+    ', 
+    ', 
+        ', 
+            ', CLOSE', 
+            ', 
+        ', 
+    ', 
+    ', 
+
+        $(document).ready(function () {
+
+            removeBrokenImages();
+            checkSidebar();
+            RemoveCookie();
+
+            $('.navigation li.collapsible').each(function () {
+                if ($(this).find('ul').length == 0) {
+                    $(this).removeClass('collapsible');
+                }
+            });
+
+            // find page nav state cookie and add open chevron
+            var arrValues = GetCookie('SWPageNavState').split('~');
+
+            $.each(arrValues, function () {
+                if (this != '') {
+                    $('#' + this).addClass('collapsible').prepend("<div class='bullet collapsible' />");
+                }
+            });
+
+            // find remaining sub menus and add closed chevron and close menu
+            $('.navigation li > ul').each(function () {
+                var list = $(this);
+
+                if (list.parent().hasClass('active') && !list.parent().hasClass('collapsible')) {
+                    // open sub for currently selected page                    
+                    list.parent().addClass('collapsible').prepend("<div class='bullet collapsible' />");
+                } else {
+                    if (list.parent().hasClass('collapsible') && !list.siblings('div').hasClass('collapsible')) {
+                        // open sub for page with auto expand
+                        list.siblings('div.expandable').remove();
+                        list.parent().prepend("<div class='bullet collapsible' />");
+                    }
+                }
+
+                if (!list.siblings('div').hasClass('collapsible')) {
+                    // keep all closed that aren't already set to open
+                    list.parent().addClass('expandable').prepend("<div class='bullet expandable' />");
+                    ClosePageSubMenu(list.parent());
+                } else {
+                    OpenPageSubMenu(list.parent());
+                }
+            });
+
+            // remove bullet from hierarchy if no-bullet set
+            $('.navigation li.collapsible').each(function () {
+                if ($(this).hasClass('no-bullet')) {
+                    if (!$(this).hasClass('navigationgroup')) { $(this).removeClass('collapsible'); }
+                    $(this).children('div.collapsible').remove();
+                }
+            });
+
+            $('.navigation li.expandable').each(function () {
+                if ($(this).hasClass('no-bullet')) {
+                    if (!$(this).hasClass('navigationgroup')) { $(this).removeClass('expandable'); }
+                    $(this).children('div.expandable').remove();
+                }
+            });
+
+            $('.navigation li:not(.collapsible,.expandable,.no-bullet)').each(function () {
+                $(this).prepend("<div class='bullet' />");
+            });
+
+            $('.navigation li.active').parents('ul').each(function () {
+                if (!$(this).hasClass('page-navigation')) {
+                    OpenPageSubMenu($(this).parent());
+                }
+            });
+
+            // set click event for chevron
+            $(document).on('click', '.navigation div.collapsible', function () {
+                ClosePageSubMenu($(this).parent());
+            });
+
+            $(document).on('click', '.navigation div.expandable', function () {
+                OpenPageSubMenu($(this).parent());
+            });
+
+            // set navigation grouping links
+            $(document).on('click', '.navigationgroup.collapsible > a', function () {
+                ClosePageSubMenu($(this).parent());
+            });
+
+            $(document).on('click', '.navigationgroup.expandable > a', function () {
+                OpenPageSubMenu($(this).parent());
+            });
+
+            //SW MYSTART DROPDOWNS
+            $(document).on('click', '.sw-mystart-dropdown', function () {
+                $(this).children(".sw-dropdown").css("display", "block");
+            });
+
+            $(".sw-mystart-dropdown").hover(function () { }, function () {
+                $(this).children(".sw-dropdown").hide();
+                $(this).blur();
+            });
+
+            //SW ACCOUNT DROPDOWN
+            $(document).on('click', '#sw-mystart-account', function () {
+                $(this).children("#sw-myaccount-list").show();
+                $(this).addClass("clicked-state");
+            });
+
+            $("#sw-mystart-account, #sw-myaccount-list").hover(function () { }, function () {
+                $(this).children("#sw-myaccount-list").hide();
+                $(this).removeClass("clicked-state");
+                $("#sw-myaccount").blur();
+            });
+
+            // set hover class for page and section navigation
+            $('.ui-widget.app.pagenavigation, .ui-widget.app.sectionnavigation').find('li > a').hover(function () {
+                $(this).addClass('hover');
+            }, function () {
+                $(this).removeClass('hover');
+            });
+
+            // set active class on channel and section
+            var activeChannelNavType = $('input#hidActiveChannelNavType').val();
+            if (activeChannelNavType == -1) {
+                // homepage is active
+                $('#navc-HP').addClass('active');
+            } else if (activeChannelNavType == 1) {
+                // calendar page is active
+                $('#navc-CA').addClass('active');
+            } else {
+                // channel is active
+                var activeSelectorID = $('input#hidActiveChannel').val();
+                $('#navc-' + activeSelectorID).addClass('active');
+                activeSelectorID = $('input#hidActiveSection').val();
+                $('#navs-' + activeSelectorID).addClass('active');
+            }
+        }); // end document ready
+
+        function OpenPageSubMenu(li) {
+            if (li.prop('tagName').toLowerCase() == "li") {
+                if (li.hasClass('expandable')) {
+                    li.removeClass('expandable').addClass('collapsible');
+                }
+                if (li.find('div:first').hasClass('expandable')) {
+                    li.find('div:first').removeClass('expandable').addClass('collapsible');
+                }
+                li.find('ul:first').show();
+
+                PageNavigationStateCookie();
+            }
+        }
+
+        function ClosePageSubMenu(li) {
+            if (li.prop('tagName').toLowerCase() == "li") {
+                li.removeClass('collapsible').addClass('expandable');
+                li.find('div:first').removeClass('collapsible').addClass('expandable');
+                li.find('ul:first').hide();
+
+                PageNavigationStateCookie();
+            }
+        }
+
+        function PageNavigationStateCookie() {
+            var strCookie = "";
+
+            $('.pagenavigation li > ul').each(function () {
+                var item = $(this).parent('li');
+                if (item.hasClass('collapsible') && !item.hasClass('no-bullet')) {
+                    strCookie += $(this).parent().attr('id') + '~';
+                }
+            });
+
+            SetCookie('SWPageNavState', strCookie);
+        }
+
+        function checkSidebar() {
+            $(".ui-widget-sidebar").each(function () {
+                if ($.trim($(this).html()) != "") {
+                    $(this).show();
+                    $(this).siblings(".ui-widget-detail").addClass("with-sidebar");
+                }
+            });
+        }
+
+        function removeBrokenImages() {
+            //REMOVES ANY BROKEN IMAGES
+            $("span.img img").each(function () {
+                if ($(this).attr("src") !== undefined) {
+                    $(this).parent().parent().show();
+                    $(this).parent().parent().siblings().addClass("has-thumb");
+                }
+            });
+        }
+
+        function LoadEventDetailUE(moduleInstanceID, eventDateID, userRegID, isEdit) {
+            (userRegID === undefined ? userRegID = 0 : '');
+            (isEdit === undefined ? isEdit = false : '');
+            OpenDialogOverlay("WindowMediumModal", { LoadType: "U", LoadURL: "http://mcas.schoolwires.net//site/UserControls/Calendar/EventDetailWrapper.aspx?ModuleInstanceID=" + moduleInstanceID + "&EventDateID=" + eventDateID + "&UserRegID=" + userRegID + "&IsEdit=" + isEdit });
+        }
+
+        function RemoveCookie() {
+            // There are no sub page            
+            if ($('.pagenavigation li li').length == 0) {
+                //return false;
+                PageNavigationStateCookie();
+            }
+        }
+    ', 
+
+    ', 
+
+        function AddOffCanvasMenuHeightForSiteNav() {
+            var sitenavulHeight = 0;
+
+            if ($('#sw-pg-sitenav-ul').length > 0) {
+                sitenavulHeight = parseInt($("#sw-pg-sitenav-ul").height());
+            }
+
+            var swinnerwrapHeight = 0;
+
+            if ($('#sw-inner-wrap').length > 0) {
+                swinnerwrapHeight = parseInt($("#sw-inner-wrap").height());
+            }
+
+            // 360px is abount 5 li height
+            if (sitenavulHeight + 360 >= swinnerwrapHeight) {
+                $("#sw-inner-wrap").height(sitenavulHeight + 360);
+            }
+        }
+
+        function AddOffCanvasMenuHeightForSelectSchool() {
+            var selectschoolulHeight = 0;
+
+            if ($('#sw-pg-selectschool-ul').length > 0) {
+                selectschoolulHeight = parseInt($("#sw-pg-selectschool-ul").height());
+            }
+
+            var swinnerwrapHeight = 0;
+
+            if ($('#sw-inner-wrap').length > 0) {
+                swinnerwrapHeight = parseInt($("#sw-inner-wrap").height());
+            }
+
+            // 360px is abount 5 li height
+            if (selectschoolulHeight + 360 >= swinnerwrapHeight) {
+                $("#sw-inner-wrap").height(selectschoolulHeight + 360);
+            }
+        }
+
+        $(document).ready(function () {
+            if ($("#sw-pg-sitenav-a").length > 0) {
+                $(document).on('click', '#sw-pg-sitenav-a', function () {
+                    if ($("#sw-pg-sitenav-ul").hasClass('sw-pgmenu-closed')) {
+                        AddOffCanvasMenuHeightForSiteNav();
+
+                        $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+                        $("#sw-pg-sitenav-ul").removeClass('sw-pgmenu-closed');
+                        $("#sw-pg-sitenav-ul").addClass('sw-pgmenu-open');
+                    } else {
+                        $("#sw-pg-sitenav-ul").removeClass('sw-pgmenu-open');
+                        $("#sw-pg-sitenav-ul").addClass('sw-pgmenu-closed');
+                    }
+                });
+
+                $(document).on('click', '#sw-pg-selectschool-a', function () {
+                    if ($("#sw-pg-selectschool-ul").hasClass('sw-pgmenu-closed')) {
+                        AddOffCanvasMenuHeightForSelectSchool();
+
+                        $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+                        $("#sw-pg-selectschool-ul").removeClass('sw-pgmenu-closed');
+                        $("#sw-pg-selectschool-ul").addClass('sw-pgmenu-open');
+                    } else {
+                        $("#sw-pg-selectschool-ul").removeClass('sw-pgmenu-open');
+                        $("#sw-pg-selectschool-ul").addClass('sw-pgmenu-closed');
+                    }
+                });
+
+                $(document).on('click', '#sw-pg-myaccount-a', function () {
+                    if ($("#sw-pg-myaccount-ul").hasClass('sw-pgmenu-closed')) {
+                        $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+                        $("#sw-pg-myaccount-ul").removeClass('sw-pgmenu-closed');
+                        $("#sw-pg-myaccount-ul").addClass('sw-pgmenu-open');
+                    } else {
+                        $("#sw-pg-myaccount-ul").removeClass('sw-pgmenu-open');
+                        $("#sw-pg-myaccount-ul").addClass('sw-pgmenu-closed');
+                    }
+                });
+
+                $(document).on('click', '.pg-list-bullet', function () {
+                    $(this).prev().toggle();
+
+                    if ($(this).hasClass('closed')) {
+                        AddOffCanvasMenuHeightForSiteNav();
+
+                        $(this).removeClass('closed');
+                        $(this).addClass('open');
+                    } else {
+                        $(this).removeClass('open');
+                        $(this).addClass('closed');
+                    }
+                });
+
+                $(document).on('mouseover', '#sw-pg-selectschool', function () {
+                    $("#sw-pg-selectschool-firstli").removeClass('sw-pg-selectschool-firstli-mouseout').addClass('sw-pg-selectschool-firstli-mouseover');
+                    $("#sw-pg-selectschool-firstli a").addClass('sw-pg-selectschool-firstli-a-mouseover').removeClass('sw-pg-selectschool-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-selectschool', function () {
+                    $("#sw-pg-selectschool-firstli").removeClass('sw-pg-selectschool-firstli-mouseover').addClass('sw-pg-selectschool-firstli-mouseout');
+                    $("#sw-pg-selectschool-firstli a").addClass('sw-pg-selectschool-firstli-a-mouseout').removeClass('sw-pg-selectschool-firstli-a-mouseover');
+                });
+
+                $(document).on('mouseover', '#sw-pg-myaccount', function () {
+                    $("#sw-pg-myaccount-firstli").removeClass('sw-pg-myaccount-firstli-mouseout').addClass('sw-pg-myaccount-firstli-mouseover');
+                    $("#sw-pg-myaccount-firstli a").addClass('sw-pg-myaccount-firstli-a-mouseover').removeClass('sw-pg-myaccount-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-myaccount', function () {
+                    $("#sw-pg-myaccount-firstli").removeClass('sw-pg-myaccount-firstli-mouseover').addClass('sw-pg-myaccount-firstli-mouseout');
+                    $("#sw-pg-myaccount-firstli a").addClass('sw-pg-myaccount-firstli-a-mouseout').removeClass('sw-pg-myaccount-firstli-a-mouseover');
+                });
+
+                $(document).on('mouseover', '#sw-pg-sitenav', function () {
+                    $("#sw-pg-sitenav-firstli").removeClass('sw-pg-sitenav-firstli-mouseout').addClass('sw-pg-sitenav-firstli-mouseover');
+                    $("#sw-pg-sitenav-firstli a").addClass('sw-pg-sitenav-firstli-a-mouseover').removeClass('sw-pg-sitenav-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-sitenav', function () {
+                    $("#sw-pg-sitenav-firstli").removeClass('sw-pg-sitenav-firstli-mouseover').addClass('sw-pg-sitenav-firstli-mouseout');
+                    $("#sw-pg-sitenav-firstli a").addClass('sw-pg-sitenav-firstli-a-mouseout').removeClass('sw-pg-sitenav-firstli-a-mouseover');
+                });
+
+                $(document).on('mouseover', '#sw-pg-district', function () {
+                    $("#sw-pg-district-firstli").removeClass('sw-pg-district-firstli-mouseout').addClass('sw-pg-district-firstli-mouseover');
+                    $("#sw-pg-district-firstli a").addClass('sw-pg-district-firstli-a-mouseover').removeClass('sw-pg-district-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-district', function () {
+                    $("#sw-pg-district-firstli").removeClass('sw-pg-district-firstli-mouseover').addClass('sw-pg-district-firstli-mouseout');
+                    $("#sw-pg-district-firstli a").addClass('sw-pg-district-firstli-a-mouseout').removeClass('sw-pg-district-firstli-a-mouseover');
+                });
+            }
+        });
+
+
+    ', 
+    
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+
+    ', 
+  ', 
+  ', 
+', 
+
+
+    ', 
+
+    
+
+    ', 
+    
+
+'][
+
+    ', 
+    ', 
+    ', 
+    ', 
+
+    ', 
+    ', 
+    ', 
+
+    ', 
+    ', 
+        ', Skip to Main Content', 
+    ', 
+
+    ', 
+    
+    ', 
+
+    ', 
+    
+
+    
+
+', u"
+	/* SPECIAL MODE BAR */
+	div.sw-special-mode-bar {
+		background: #FBC243 url('http://mcas.schoolwires.net/Static/V2_16_01//GlobalAssets/Images/special-mode-bar-background.png') no-repeat;
+		height: 30px;
+		text-align: left;
+		font-size: 12px;
+		position: relative;
+		z-index: 10000;
+	}
+	div.sw-special-mode-bar > div {
+		padding: 8px 0 0 55px;
+		font-weight: bold;
+	}
+	div.sw-special-mode-bar > div > a {
+		margin-left: 20px;
+		background: #A0803D;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		color: #fff;
+		padding: 4px 6px 4px 6px;
+		font-size: 11px;
+	}
+	
+	body.blue div.sw-special-mode-bar, body.green div.sw-special-mode-bar, body.red div.sw-special-mode-bar {
+	    display: none;
+	}
+
+	/* END SPECIAL MODE BAR */
+", 
+
+', 
+	
+	function SWEndPreviewMode() { 
+		var data = "{}";
+		var success = "window.location='';";
+		var failure = "CallControllerFailure(result[0].errormessage);";
+		CallController("http://mcas.schoolwires.net/site/SiteController.aspx/EndPreviewMode", data, success, failure);
+	}
+	
+	function SWEndEmulationMode() {
+		SetUnescapedCookie('UserID', GetCookie('SourceEmulationUserID'));
+		DeleteCookie('SourceEmulationUserID');
+		window.location = 'http://mcas.schoolwires.net/ums/Users/Users.aspx';
+	}
+
+	function SWEndPreviewConfigMode() {
+	    var data = "{}";
+	    var success = "window.location='';";
+	    var failure = "CallControllerFailure(result[0].errormessage);";
+	    CallController("http://mcas.schoolwires.net/site/SiteController.aspx/EndPreviewConfigMode", data, success, failure);
+	}
+', 
+            
+
+    ', 
+', 
+', 
+', 
+', District Home', 
+', 
+', 
+', Select a School...', 
+', 
+', Select a School', 
+', 
+', Coolspring Elementary School', 
+', Edgewood Elementary School', 
+', Joy Elementary School', 
+', Knapp Elementary School', 
+', Lake Hills Elementary School', 
+', Marsh Elementary School', 
+', Pine Elementary School', 
+', Springfield Elementary School', 
+', Barker Middle School', 
+', Krueger Middle School', 
+', Michigan City High School', 
+', LaPorte Co. Career & Tech Education', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Sign In', 
+', Register', 
+', 
+', 
+$(document).ready(function() {
+    $('#sw-search-input').keyup(function(e) {        if (e.keyCode == 13) {
+            SWGoToSearchResultsPageswsearchinput();
+        }
+    });
+    $('#sw-search-input').val($('#swsearch-hid-word').val())});
+function SWGoToSearchResultsPageswsearchinput() {
+window.location.href="http://mcas.schoolwires.net/site/Default.aspx?PageType=6&SiteID=16&SearchString=" + $('#sw-search-input').val();
+}
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    
+    ', 
+		', 
+			', 
+				', 
+			', 
+			', 
+				', 
+					', Springfield Elementary School', 
+					', Responsive Web Design', 
+                    ', Extra Tagline Here', 
+				', 	
+			', 
+			', 
+				', 
+                	', 
+						', District Home', 
+					', 
+                    ', 
+						', Select a School ', 
+						', 
+						', 
+					', 
+					
+                    	', 
+						', 
+					
+				', 
+			', 
+		', 
+	', 
+	', 
+		', 
+			', 
+', 
+', Home', 
+', 
+', 
+', Our School', 
+', 
+', General Information', 
+', Parent/Student Handbook', 
+', u"Principal's Page", 
+', Springfield Staff Directory', 
+', Springfield Gallery', 
+', 
+', 
+', 
+', Teacher Sites', 
+', 
+', 
+', Academics', 
+', 
+', Curriculum', 
+', Technology', 
+', Media Center', 
+', 
+', 
+', 
+', Activities', 
+', 
+', National Elementary Honor Society', 
+', Student Council', 
+', Drama Club', 
+', 
+', 
+', 
+', Athletics', 
+', 
+', 
+', Student Services', 
+', 
+', Before and After School Care', 
+', u"Counselor's Corner", 
+', English as a New Language (ENL)', 
+', Food Service', 
+', Gifted And Talented Program', 
+', Magnet School Information', 
+', School Nurse', 
+', Special Education', 
+', Transportation', 
+', 
+', 
+', 
+', Parents', 
+', 
+', General Information', 
+', Parent Access Log In', 
+', Volunteer Forms', 
+', My Payments Plus', 
+', Title 1 Parent Handbook', 
+', Deaf and Hard of Hearing Services', 
+', 
+', Calendar', 
+', 
+', 
+
+
+
+', 
+    $(document).ready(function() {
+        channelHoverIE();
+        channelTouch();
+    });
+
+    function channelTouch() {
+        // this will change the dropdown behavior when it is touched vs clicked.
+        // channels will be clickable on second click. first click simply opens the menu.
+        $('#channel-navigation > .sw-channel-item > a').on({
+            'touchstart': function (e) {
+                
+                // see if has menu
+                if ($(this).siblings('ul.sw-channel-dropdown').length > 0) {
+                    var button = $(this);
+
+                    // add href as property if not already set
+                    // then remove href attribute
+                    if (!button.prop('linkHref')) {
+                        button.prop('linkHref', button.attr('href'));
+                        button.removeAttr('href');
+                    }
+
+                    // check to see if menu is already open
+                    if ($(this).siblings('ul.sw-channel-dropdown').is(':visible')) {
+                        // if open go to link
+                        window.location.href = button.prop('linkHref');
+                    } 
+
+                } 
+            }
+        });
+    }
+
+
+    
+    function channelHoverIE(){
+		// set z-index for IE7
+		var parentZindex = $('#channel-navigation').parents('div:first').css('z-index');
+		var zindex = (parentZindex > 0 ? parentZindex : 8000);
+		$(".sw-channel-item").each(function(ind) {
+			$(this).css('z-index', zindex - ind);
+			zindex --;
+		});
+	    $(".sw-channel-item").hover(function(){
+	        var subList = $(this).children('ul');
+	        if ($.trim(subList.html()) !== "") {
+		        subList.show();
+		    }
+		    $(this).addClass("hover");
+	    }, function(){
+		    $(".sw-channel-dropdown").hide();
+		    $(this).removeClass("hover");
+	    });
+    }
+
+', 
+
+
+		', 
+	', 
+    
+    ', 
+    	', 
+        	', 
+            	', 
+                ', 
+                	', 
+$(document).ready(function() {
+    $('#swsitesearch-txt-searchstring').keyup(function(e) {        if (e.keyCode == 13) {
+            SWGoToSearchResultsPageswsitesearchtxtsearchstring();
+        }
+    });
+    $('#swsitesearch-txt-searchstring').val($('#swsearch-hid-word').val())});
+function SWGoToSearchResultsPageswsitesearchtxtsearchstring() {
+window.location.href="http://mcas.schoolwires.net/site/Default.aspx?PageType=6&SiteID=16&SearchString=" + $('#swsitesearch-txt-searchstring').val();
+}
+', 
+', 
+', 
+                ', 
+            ', 
+            ', 
+            	', 
+                ', 
+                	', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            	', 
+                ', 
+                    ', 
+                        ', Pinterest', 
+                        ', YouTube', 
+                        ', Google +', 
+                        ', Vimeo', 
+                        ', Twitter', 
+                        ', Flickr', 
+                        ', Linkedin', 
+                        ', Facebook', 
+                        ', Instagram', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            ', 
+        ', 
+    ', 
+    
+    
+    
+    
+	', 
+    ', 
+        ', 
+            ', 
+                ', 
+', 
+', 
+', 
+var photoGallery22801= {"Album": {"title":"Sunrise 1500 x 915","description":"","transitiondelay":"6","fadestyle":"NO","gallerywidth":"1500","backgroundaudio":"/cms/lib5/IN01001792/Centricity/ModuleInstance/22528/","loopaudio":"False","lgpath":"/cms/lib5/IN01001792/Centricity/ModuleInstance/22528/large/","tnpath":"/cms/lib5/IN01001792/Centricity/ModuleInstance/22528/thumbs/","Images": [{"photoname":"Reading Champions!","src":"IMG_6214-cropped.jpg?rnd=0.402751322557568","caption":"Congrats to our \"Name that Book\" teams...","pause":"","link":"http://educatemc.net/site/default.aspx?PageType=3&DomainID=16&ModuleInstanceID=7821&ViewID=047E6BE3-6D87-4130-8424-D8E4E9ED6C2A&RenderLoc=0&FlexDataID=24012&PageID=25","target":"_self"},{"photoname":"hide","src":"IMG_6205-cropped.JPG?rnd=0.357121032363326","caption":"","pause":"","link":"","target":"_self"},{"photoname":"hide","src":"IMG_6253-cropped3.JPG?rnd=0.558403119704874","caption":"","pause":"","link":"","target":"_self"},{"photoname":"hide","src":"IMG_6225-cropped.JPG?rnd=0.863652558002459","caption":"","pause":"","link":"","target":"_self"},{"photoname":"hide","src":"IMG_6256-cropped.JPG?rnd=0.861499032872496","caption":"","pause":"","link":"","target":"_self"},{"photoname":"hide","src":"IMG_6175-cropped3.JPG?rnd=0.332544644983739","caption":"","pause":"","link":"","target":"_self"},{"photoname":"hide","src":"IMG_6275-cropped.JPG?rnd=0.00475212047097838","caption":"","pause":"","link":"","target":"_self"}]}}
+', 
+', 
+', 
+', 
+', 
+                
+                ', 
+            ', 
+        ', 
+        ', 
+        	', 
+            	', 
+                	', 
+                    	', Popular Links', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                	', 
+', 
+ ', 
+     ', Upcoming Events', 
+ ', 
+ ', 
+		', 
+', 
+', 
+     ', January 16, 2017', 
+     ', 
+         ', School in Session (Snow Makeup) - Martin Luther King Jr. Day', 
+     ', 
+', 
+', 
+', 
+', 
+     ', February 10, 2017', 
+     ', 
+         ', 8:00 PM - 11:00 PM', 
+         ', "Music in the City" Benefit Concert', 
+     ', 
+', 
+', 
+', 
+', 
+     ', February 20, 2017', 
+     ', 
+         ', Presidents Day - No School', 
+     ', 
+', 
+', 
+', 
+', 
+     ', February 23, 2017', 
+     ', 
+         ', 8:00 AM', 
+         ', End of Second Trimester (Elementary)', 
+     ', 
+', 
+', 
+', 
+', 
+     ', March 1, 2017', 
+     ', 
+         ', 10:00 AM - 6:00 PM', 
+         ', Kindergarten Roundup - All elementary schools', 
+     ', 
+', 
+', 
+', 
+', 
+     ', 
+         ', 3:15 PM - 7:15 PM', 
+         ', Elementary Parent-Teacher Conferences', 
+     ', 
+', 
+', 
+	', 
+', View Calendar', 
+ ', 
+ ', 
+ ', 
+', 
+', 
+', 
+', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+', 
+', 
+	', Site Shortcuts ', 
+	', 
+		', 
+', Winter Learning Packet', 
+', 
+', Donate', 
+', 
+', Pre-K Information', 
+', 
+', Middle School Course Guide', 
+', 
+', Krueger Environmental Curriculum', 
+', 
+', School Supply List', 
+', 
+', MCAS Success Stories', 
+', 
+', 
+	', 
+	', 
+	', 
+', 
+', 
+', 
+                    ', 
+                    ', 
+                        ', 
+
+
+
+', 
+    ', 
+        $(document).ready(function() {
+            var DomainID = '16';
+            var PageID = '25';
+            var RenderLoc = '0';
+            var MIID = '7819';
+
+            //added to check to make sure moderated content doesn't bleed through the dialog
+            if ($('#dialog-overlay-WindowLargeModal-body.moderateContent').length > 0) {
+                $("#module-content-" + MIID).find(".ui-widget-detail").find(".ui-article").append("<p>&nbsp;</p>");
+            }
+        });
+    ', 
+
+    ', u"$(document).ready(function() {CheckScript('ModuleView');CheckScript('Mustache');
+ });", 
+    
+    ', 
+', 
+	', 
+		', Welcome!', 
+	', 
+	
+	', 
+		', 
+', 
+    ', 
+		', 
+			',  ', 
+', Welcome to Springfield Elementary School 2015-2016!  We are proud to be recognized as an Indiana Four Star School.', 
+', We are excited to educate daily approximately 400 students from kindergarten through sixth grade. We have three sections of kindergarten - third grade and two sections of each grade fourth - sixth as well as a high-ability classroom serving students in fourth through sixth grade. ', 
+', Springfield provides programs and opportunities that allow all students to meet their potential and create a learning community that provides each student academic success.', 
+', Our vision is create a K-6 school that embraces diversity, establishes academic excellence, and empowers students and community members to enhance the environments in which learn and grow.', 
+',  ', 
+',  ', 
+', The Mission of Springfield Elementary School is to ensure our students are equipped with the necessary skils to be productive members of society by', 
+', 
+', 
+', providing differentiated learning experiences to meet the needs of all of our students', 
+', u"encouraging parents to be an active participate/partner in their child's education", 
+', teaching peacemaking and leadership skills in an envionment with shared values of nonviolence, equality, and unity.', 
+', 
+', 
+',                        ', By working together, we will ensure that every child excels!', 
+',  ', 
+', Please check back frequently to our website for additional information!', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+', 
+	', 
+		
+		',  
+		', 
+	', 
+', 
+', 
+$(document).ready(function (){
+});
+function LoadGroupedData(container, MIID, PMI, groupYear, groupMonth, groupBy, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&EnableQuirksMode=0&ViewID=' + viewToUse + '&Tag=' + tag, container, 2, 'chkSidebar();');
+}
+function LoadData(container, MIID, PMI, flexDataID, groupYear, groupMonth, groupBy, targetView, tag) {
+  if(targetView !== undefined || targetView.Length() == 0){
+  //targetView looks at the hidden Detail View defined in the Builder View.
+      targetView = $('#hid-'+MIID+'-DetailView').val();
+   }
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&FlexDataID=' + flexDataID + '&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&RenderLoc=0&FromRenderLoc=0&EnableQuirksMode=0&Tag=' + tag + '&ViewID=' + targetView, container, 2, 'chkSidebar();');
+}
+function LoadTaggedData(container, MIID, PMI, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&Tag=' + tag + '&EnableQuirksMode=0&ViewID='+viewToUse, container, 2, 'chkSidebar();');
+}
+', 
+', 
+
+', 
+', 
+
+
+
+', 
+    ', 
+        $(document).ready(function() {
+            var DomainID = '16';
+            var PageID = '25';
+            var RenderLoc = '0';
+            var MIID = '16628';
+
+            //added to check to make sure moderated content doesn't bleed through the dialog
+            if ($('#dialog-overlay-WindowLargeModal-body.moderateContent').length > 0) {
+                $("#module-content-" + MIID).find(".ui-widget-detail").find(".ui-article").append("<p>&nbsp;</p>");
+            }
+        });
+    ', 
+
+    ', u"$(document).ready(function() {CheckScript('ModuleView');CheckScript('Mustache');
+ });", 
+    
+    ', 
+', 
+	', 
+		
+	', 
+	
+	', 
+		
+	', 
+	', 
+		
+			
+		
+		', 
+	', 
+', 
+', 
+$(document).ready(function (){
+});
+function LoadGroupedData(container, MIID, PMI, groupYear, groupMonth, groupBy, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&EnableQuirksMode=0&ViewID=' + viewToUse + '&Tag=' + tag, container, 2, 'chkSidebar();');
+}
+function LoadData(container, MIID, PMI, flexDataID, groupYear, groupMonth, groupBy, targetView, tag) {
+  if(targetView !== undefined || targetView.Length() == 0){
+  //targetView looks at the hidden Detail View defined in the Builder View.
+      targetView = $('#hid-'+MIID+'-DetailView').val();
+   }
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&FlexDataID=' + flexDataID + '&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&RenderLoc=0&FromRenderLoc=0&EnableQuirksMode=0&Tag=' + tag + '&ViewID=' + targetView, container, 2, 'chkSidebar();');
+}
+function LoadTaggedData(container, MIID, PMI, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&Tag=' + tag + '&EnableQuirksMode=0&ViewID='+viewToUse, container, 2, 'chkSidebar();');
+}
+', 
+', 
+
+', 
+', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            	', 
+                	', 
+
+
+
+', 
+    ', 
+        $(document).ready(function() {
+            var DomainID = '16';
+            var PageID = '25';
+            var RenderLoc = '0';
+            var MIID = '7821';
+
+            //added to check to make sure moderated content doesn't bleed through the dialog
+            if ($('#dialog-overlay-WindowLargeModal-body.moderateContent').length > 0) {
+                $("#module-content-" + MIID).find(".ui-widget-detail").find(".ui-article").append("<p>&nbsp;</p>");
+            }
+        });
+    ', 
+
+    ', u"$(document).ready(function() {CheckScript('ModuleView');CheckScript('Mustache');
+ });", 
+    
+    ', 
+', 
+	
+	', 
+		', News & Headlines', 
+	', 
+	
+	', 
+		', 
+', 
+	', 
+		', 
+		', Championship Readers!', 
+	
+		', Springfield advances to finals in county "Name that Book" competition', 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+		', 
+		', Springfield Student Supply List 2016-2017', 
+	
+		', 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+		', 
+		', Luau Night! Friday May 6th from 5 pm-7 pm', 
+	
+		', u"The PTO is having a Luau Family Fun Night including games, prizes, cakewalk and food! This is a great , FUN way to help and support your child's school.", 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+		
+		', Kindergarten, Here I Come! - May 12 3:30-4:30', 
+	
+		', Incoming kindergartens and parents come join the Springfield Staff to get excited about becoming a Springfield Shark!', 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+		', 
+		', To see photos click Springfield Gallery!', 
+	
+		', Springfield hosted our annual Family Literacy Night Tuesday March 29 ! Thank you families for attending and making this event successful! ', 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+		', 
+		', Muffins With Moms was a huge success!!!', 
+	
+		', u"Celebrate the special bond between a mom, grandmother, or other female adult in a child's life. Click on Springfield Galley to see photos.", 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+		', 
+		', Internet and App Safety Tips', 
+	
+		', Reminders for parents from MCAS and the MC Police Dept.', 
+		', 
+                	
+                	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+	', 
+
+	', 
+		
+		
+		', 
+	', 
+', 
+', u"
+	$(document).ready(function() {
+		$('a.ui-article-thumb').click(function () {      
+        		window.location = $(this).attr('href');
+    		});
+    		
+		$('#sw-app-headlines-7821').find('img').each(function() {
+			if ($.trim(this.src) == '' )
+			{
+				$(this).parent().parent().remove();
+			}
+		});
+
+	});
+", 
+', 
+$(document).ready(function (){
+});
+function LoadGroupedData(container, MIID, PMI, groupYear, groupMonth, groupBy, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&EnableQuirksMode=0&ViewID=' + viewToUse + '&Tag=' + tag, container, 2, 'chkSidebar();');
+}
+function LoadData(container, MIID, PMI, flexDataID, groupYear, groupMonth, groupBy, targetView, tag) {
+  if(targetView !== undefined || targetView.Length() == 0){
+  //targetView looks at the hidden Detail View defined in the Builder View.
+      targetView = $('#hid-'+MIID+'-DetailView').val();
+   }
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&FlexDataID=' + flexDataID + '&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&RenderLoc=0&FromRenderLoc=0&EnableQuirksMode=0&Tag=' + tag + '&ViewID=' + targetView, container, 2, 'chkSidebar();');
+}
+function LoadTaggedData(container, MIID, PMI, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://mcas.schoolwires.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=16&PageID=25&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&Tag=' + tag + '&EnableQuirksMode=0&ViewID='+viewToUse, container, 2, 'chkSidebar();');
+}
+', 
+', 
+
+', 
+', 
+                ', 
+            ', 
+        ', 
+    ', 
+    
+    
+    
+    
+    
+    ', 
+        ', 
+            ', 
+            	', Springfield Elementary School', 
+                ', Responsive Web Design', 
+                ', 
+                	', ADDRESS:',  3054 W. 800 N., Michigan City, IN 46360', 	
+                    ', PHONE:',  (219) 873-2117', 
+                    ', FAX:',  (219) 877-3064', 
+                    
+                    ', 
+                        ', Site Map',  
+
+                    ', 
+                ', 
+            ', 
+        ', 
+        
+        ', 
+            ', 
+                ', Pinterest', 
+                ', YouTube', 
+                ', Google +', 
+                ', Vimeo', 
+                ', Twitter', 
+                ', Flickr', 
+                ', Linkedin', 
+                ', Facebook', 
+                ', Instagram', 
+            ', 
+        ', 
+        
+        ', 
+            ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                ', 
+                    ', Use This Area for Additional Text', 
+                    ', Make this space your own by placing text in this area! Use it for a mission / vision statement or add a tagline. List some advertising or highlight a staff member\u2019s accomplishments. This is also a great spot for a disclaimer on it\u2019s own, or in addition to the standard disclaimer area below. ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                ', 
+                    ', Additional Resources', 
+                    ', 
+                        ', MCAS Staff Directory', 
+                        ', About Michigan City', 
+                        ', Visit LaPorte County', 
+                        ', Indiana Dept. of Education', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        
+        
+        ', 
+            ', 
+                ', 
+                    ', Disclaimer Text goes in this spot. Magna adipiscing vel eu semper ridiculus sodales a augue adipiscing nisl aliquam vestibulum dis consectetur parturient.', 
+                ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                    ', Disclaimer Text goes in this spot. Magna adipiscing vel eu semper ridiculus sodales a augue adipiscing nisl aliquam vestibulum dis consectetur parturient.', 
+                ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Questions or Feedback?',  | ', 
+', Blackboard Web Community Manager Privacy Policy (Updated)',  | ', 
+', Terms of Use', 
+', 
+', 
+', Copyright © 2002-2017 Blackboard, Inc. All rights reserved.', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"
+   $(document).ready(function(){
+      var beaconURL='http://analytics.schoolwires.com/analytics.asmx/Insert?AccountNumber=IrfZvArWwOPKcAg1JerITQ%3d%3d&SessionID=5b3c5167-efbb-4a97-8852-e1cc27356621&SiteID=16&ChannelID=0&SectionID=16&PageID=25&HitDate=1%2f5%2f2017+6%3a26%3a49+AM&Browser=Unknown+0.0&OS=Unknown&IPAddress=117.192.201.51';
+      try {
+         $.getJSON(beaconURL + '&jsonp=?', function(myData) {});
+      } catch(err) { 
+         // prevent site error for analytics
+      }
+   });
+", 
+
+    ', 
+
+    
+    
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowMedium-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowSmall-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowLarge-base').appendTo('body');
+ 		
+		
+    });
+", 
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowMediumModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowSmallModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowLargeModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowXLargeModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-MyAccountSubscriptionOverlay-base').appendTo('body');
+ 		
+		
+    });
+", 
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-InsertOverlay-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-InsertOverlay2-base').appendTo('body');
+ 		
+		
+    });
+", 
+    
+    ', 
+    #videowrapper {
+        position: fixed;
+        z-index: 20000;
+        background: rgba(0, 0, 0, 0.5) none repeat scroll 0% 0%;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+    #videodialog {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        right: 50px;
+        background: #FFF none repeat scroll 0% 0%;
+        z-index: 30000;
+        box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.65);
+        box-sizing: border-box;
+        border: 8px solid #FFF;
+    }
+
+    #videodialog .close-btn {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: 0px 25px 0px 0px;
+        color: #666;
+        line-height: 1;
+        font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    #videodialog .close-btn::after {
+        content: "X";
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 50%;
+        right: 0px;
+        margin-top: -8px;
+        background: #999 none repeat scroll 0% 0%;
+        border-radius: 9px;
+        color: #FFF;
+        font-weight: bold;
+        line-height: 16px;
+        font-size: 9px;
+        text-align: center;
+    }
+        #videodialog-video {
+            margin-top:25px;
+        }
+    ', 
+    ', 
+        function resizeVideoIframe() {
+            $("#videodialog-video iframe").css({ "width": "auto", "height": "auto" });
+            var screenWidth = $(window).width();
+            var screenHeight = $(window).height();
+            //alert('screen width =' + screenWidth + '  screen height=' + screenHeight);
+            var initVidW = 800, initVidH = 600;
+            var vidRatio = initVidH / initVidW;
+            var vidWidth = $("#videodialog-video").width();
+            //alert('videoWidth = ' +vidWidth);
+            var vidHeight = vidWidth * vidRatio;
+
+            if ((vidHeight + 100) > screenHeight) {
+                vidHeight = screenHeight - 140;
+            }
+
+            $("#videodialog-video").css({ "height": (vidHeight) });
+            $("#videodialog-video iframe").css({ "width": vidWidth, "height": vidHeight }); 
+        }
+
+        function resizeVideo() {
+            $("#videodialog-video video").css({ "width": "auto", "height": "auto" });
+            var screenWidth = $(window).width();
+            var screenHeight = $(window).height();
+            //alert('screen width =' + screenWidth + '  screen height=' + screenHeight);
+            var initVidW = 800, initVidH = 600;
+            var vidRatio = initVidH / initVidW;
+            var vidWidth = $("#videodialog-video").width();
+            //alert('videoWidth = ' +vidWidth);
+            var vidHeight = vidWidth * vidRatio;
+
+            if ((vidHeight + 100) > screenHeight) {
+                vidHeight = screenHeight - 140;
+            }
+
+            $("#videodialog-video").css({ "height": (vidHeight) });
+            $("#videodialog-video video").css({ "width": vidWidth, "height": vidHeight });
+            //$(".videoControl").css({ "bottom": $("#videodialog-video video").bottom() + 5, "width": 100 });
+        }
+
+        function closeVideoDialog() {
+            $('#videowrapper').addClass('ui-helper-hidden');
+            $('#videodialog-video').html('');
+            $(window).resize(function () { });
+        }
+    ', 
+    ', 
+        ', 
+            ', CLOSE', 
+            ', 
+        ', 
+    ', 
+    ', 
+
+        $(document).ready(function () {
+
+            removeBrokenImages();
+            checkSidebar();
+            RemoveCookie();
+
+            $('.navigation li.collapsible').each(function () {
+                if ($(this).find('ul').length == 0) {
+                    $(this).removeClass('collapsible');
+                }
+            });
+
+            // find page nav state cookie and add open chevron
+            var arrValues = GetCookie('SWPageNavState').split('~');
+
+            $.each(arrValues, function () {
+                if (this != '') {
+                    $('#' + this).addClass('collapsible').prepend("<div class='bullet collapsible' />");
+                }
+            });
+
+            // find remaining sub menus and add closed chevron and close menu
+            $('.navigation li > ul').each(function () {
+                var list = $(this);
+
+                if (list.parent().hasClass('active') && !list.parent().hasClass('collapsible')) {
+                    // open sub for currently selected page                    
+                    list.parent().addClass('collapsible').prepend("<div class='bullet collapsible' />");
+                } else {
+                    if (list.parent().hasClass('collapsible') && !list.siblings('div').hasClass('collapsible')) {
+                        // open sub for page with auto expand
+                        list.siblings('div.expandable').remove();
+                        list.parent().prepend("<div class='bullet collapsible' />");
+                    }
+                }
+
+                if (!list.siblings('div').hasClass('collapsible')) {
+                    // keep all closed that aren't already set to open
+                    list.parent().addClass('expandable').prepend("<div class='bullet expandable' />");
+                    ClosePageSubMenu(list.parent());
+                } else {
+                    OpenPageSubMenu(list.parent());
+                }
+            });
+
+            // remove bullet from hierarchy if no-bullet set
+            $('.navigation li.collapsible').each(function () {
+                if ($(this).hasClass('no-bullet')) {
+                    if (!$(this).hasClass('navigationgroup')) { $(this).removeClass('collapsible'); }
+                    $(this).children('div.collapsible').remove();
+                }
+            });
+
+            $('.navigation li.expandable').each(function () {
+                if ($(this).hasClass('no-bullet')) {
+                    if (!$(this).hasClass('navigationgroup')) { $(this).removeClass('expandable'); }
+                    $(this).children('div.expandable').remove();
+                }
+            });
+
+            $('.navigation li:not(.collapsible,.expandable,.no-bullet)').each(function () {
+                $(this).prepend("<div class='bullet' />");
+            });
+
+            $('.navigation li.active').parents('ul').each(function () {
+                if (!$(this).hasClass('page-navigation')) {
+                    OpenPageSubMenu($(this).parent());
+                }
+            });
+
+            // set click event for chevron
+            $(document).on('click', '.navigation div.collapsible', function () {
+                ClosePageSubMenu($(this).parent());
+            });
+
+            $(document).on('click', '.navigation div.expandable', function () {
+                OpenPageSubMenu($(this).parent());
+            });
+
+            // set navigation grouping links
+            $(document).on('click', '.navigationgroup.collapsible > a', function () {
+                ClosePageSubMenu($(this).parent());
+            });
+
+            $(document).on('click', '.navigationgroup.expandable > a', function () {
+                OpenPageSubMenu($(this).parent());
+            });
+
+            //SW MYSTART DROPDOWNS
+            $(document).on('click', '.sw-mystart-dropdown', function () {
+                $(this).children(".sw-dropdown").css("display", "block");
+            });
+
+            $(".sw-mystart-dropdown").hover(function () { }, function () {
+                $(this).children(".sw-dropdown").hide();
+                $(this).blur();
+            });
+
+            //SW ACCOUNT DROPDOWN
+            $(document).on('click', '#sw-mystart-account', function () {
+                $(this).children("#sw-myaccount-list").show();
+                $(this).addClass("clicked-state");
+            });
+
+            $("#sw-mystart-account, #sw-myaccount-list").hover(function () { }, function () {
+                $(this).children("#sw-myaccount-list").hide();
+                $(this).removeClass("clicked-state");
+                $("#sw-myaccount").blur();
+            });
+
+            // set hover class for page and section navigation
+            $('.ui-widget.app.pagenavigation, .ui-widget.app.sectionnavigation').find('li > a').hover(function () {
+                $(this).addClass('hover');
+            }, function () {
+                $(this).removeClass('hover');
+            });
+
+            // set active class on channel and section
+            var activeChannelNavType = $('input#hidActiveChannelNavType').val();
+            if (activeChannelNavType == -1) {
+                // homepage is active
+                $('#navc-HP').addClass('active');
+            } else if (activeChannelNavType == 1) {
+                // calendar page is active
+                $('#navc-CA').addClass('active');
+            } else {
+                // channel is active
+                var activeSelectorID = $('input#hidActiveChannel').val();
+                $('#navc-' + activeSelectorID).addClass('active');
+                activeSelectorID = $('input#hidActiveSection').val();
+                $('#navs-' + activeSelectorID).addClass('active');
+            }
+        }); // end document ready
+
+        function OpenPageSubMenu(li) {
+            if (li.prop('tagName').toLowerCase() == "li") {
+                if (li.hasClass('expandable')) {
+                    li.removeClass('expandable').addClass('collapsible');
+                }
+                if (li.find('div:first').hasClass('expandable')) {
+                    li.find('div:first').removeClass('expandable').addClass('collapsible');
+                }
+                li.find('ul:first').show();
+
+                PageNavigationStateCookie();
+            }
+        }
+
+        function ClosePageSubMenu(li) {
+            if (li.prop('tagName').toLowerCase() == "li") {
+                li.removeClass('collapsible').addClass('expandable');
+                li.find('div:first').removeClass('collapsible').addClass('expandable');
+                li.find('ul:first').hide();
+
+                PageNavigationStateCookie();
+            }
+        }
+
+        function PageNavigationStateCookie() {
+            var strCookie = "";
+
+            $('.pagenavigation li > ul').each(function () {
+                var item = $(this).parent('li');
+                if (item.hasClass('collapsible') && !item.hasClass('no-bullet')) {
+                    strCookie += $(this).parent().attr('id') + '~';
+                }
+            });
+
+            SetCookie('SWPageNavState', strCookie);
+        }
+
+        function checkSidebar() {
+            $(".ui-widget-sidebar").each(function () {
+                if ($.trim($(this).html()) != "") {
+                    $(this).show();
+                    $(this).siblings(".ui-widget-detail").addClass("with-sidebar");
+                }
+            });
+        }
+
+        function removeBrokenImages() {
+            //REMOVES ANY BROKEN IMAGES
+            $("span.img img").each(function () {
+                if ($(this).attr("src") !== undefined) {
+                    $(this).parent().parent().show();
+                    $(this).parent().parent().siblings().addClass("has-thumb");
+                }
+            });
+        }
+
+        function LoadEventDetailUE(moduleInstanceID, eventDateID, userRegID, isEdit) {
+            (userRegID === undefined ? userRegID = 0 : '');
+            (isEdit === undefined ? isEdit = false : '');
+            OpenDialogOverlay("WindowMediumModal", { LoadType: "U", LoadURL: "http://mcas.schoolwires.net//site/UserControls/Calendar/EventDetailWrapper.aspx?ModuleInstanceID=" + moduleInstanceID + "&EventDateID=" + eventDateID + "&UserRegID=" + userRegID + "&IsEdit=" + isEdit });
+        }
+
+        function RemoveCookie() {
+            // There are no sub page            
+            if ($('.pagenavigation li li').length == 0) {
+                //return false;
+                PageNavigationStateCookie();
+            }
+        }
+    ', 
+
+    ', 
+
+        function AddOffCanvasMenuHeightForSiteNav() {
+            var sitenavulHeight = 0;
+
+            if ($('#sw-pg-sitenav-ul').length > 0) {
+                sitenavulHeight = parseInt($("#sw-pg-sitenav-ul").height());
+            }
+
+            var swinnerwrapHeight = 0;
+
+            if ($('#sw-inner-wrap').length > 0) {
+                swinnerwrapHeight = parseInt($("#sw-inner-wrap").height());
+            }
+
+            // 360px is abount 5 li height
+            if (sitenavulHeight + 360 >= swinnerwrapHeight) {
+                $("#sw-inner-wrap").height(sitenavulHeight + 360);
+            }
+        }
+
+        function AddOffCanvasMenuHeightForSelectSchool() {
+            var selectschoolulHeight = 0;
+
+            if ($('#sw-pg-selectschool-ul').length > 0) {
+                selectschoolulHeight = parseInt($("#sw-pg-selectschool-ul").height());
+            }
+
+            var swinnerwrapHeight = 0;
+
+            if ($('#sw-inner-wrap').length > 0) {
+                swinnerwrapHeight = parseInt($("#sw-inner-wrap").height());
+            }
+
+            // 360px is abount 5 li height
+            if (selectschoolulHeight + 360 >= swinnerwrapHeight) {
+                $("#sw-inner-wrap").height(selectschoolulHeight + 360);
+            }
+        }
+
+        $(document).ready(function () {
+            if ($("#sw-pg-sitenav-a").length > 0) {
+                $(document).on('click', '#sw-pg-sitenav-a', function () {
+                    if ($("#sw-pg-sitenav-ul").hasClass('sw-pgmenu-closed')) {
+                        AddOffCanvasMenuHeightForSiteNav();
+
+                        $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+                        $("#sw-pg-sitenav-ul").removeClass('sw-pgmenu-closed');
+                        $("#sw-pg-sitenav-ul").addClass('sw-pgmenu-open');
+                    } else {
+                        $("#sw-pg-sitenav-ul").removeClass('sw-pgmenu-open');
+                        $("#sw-pg-sitenav-ul").addClass('sw-pgmenu-closed');
+                    }
+                });
+
+                $(document).on('click', '#sw-pg-selectschool-a', function () {
+                    if ($("#sw-pg-selectschool-ul").hasClass('sw-pgmenu-closed')) {
+                        AddOffCanvasMenuHeightForSelectSchool();
+
+                        $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+                        $("#sw-pg-selectschool-ul").removeClass('sw-pgmenu-closed');
+                        $("#sw-pg-selectschool-ul").addClass('sw-pgmenu-open');
+                    } else {
+                        $("#sw-pg-selectschool-ul").removeClass('sw-pgmenu-open');
+                        $("#sw-pg-selectschool-ul").addClass('sw-pgmenu-closed');
+                    }
+                });
+
+                $(document).on('click', '#sw-pg-myaccount-a', function () {
+                    if ($("#sw-pg-myaccount-ul").hasClass('sw-pgmenu-closed')) {
+                        $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+                        $("#sw-pg-myaccount-ul").removeClass('sw-pgmenu-closed');
+                        $("#sw-pg-myaccount-ul").addClass('sw-pgmenu-open');
+                    } else {
+                        $("#sw-pg-myaccount-ul").removeClass('sw-pgmenu-open');
+                        $("#sw-pg-myaccount-ul").addClass('sw-pgmenu-closed');
+                    }
+                });
+
+                $(document).on('click', '.pg-list-bullet', function () {
+                    $(this).prev().toggle();
+
+                    if ($(this).hasClass('closed')) {
+                        AddOffCanvasMenuHeightForSiteNav();
+
+                        $(this).removeClass('closed');
+                        $(this).addClass('open');
+                    } else {
+                        $(this).removeClass('open');
+                        $(this).addClass('closed');
+                    }
+                });
+
+                $(document).on('mouseover', '#sw-pg-selectschool', function () {
+                    $("#sw-pg-selectschool-firstli").removeClass('sw-pg-selectschool-firstli-mouseout').addClass('sw-pg-selectschool-firstli-mouseover');
+                    $("#sw-pg-selectschool-firstli a").addClass('sw-pg-selectschool-firstli-a-mouseover').removeClass('sw-pg-selectschool-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-selectschool', function () {
+                    $("#sw-pg-selectschool-firstli").removeClass('sw-pg-selectschool-firstli-mouseover').addClass('sw-pg-selectschool-firstli-mouseout');
+                    $("#sw-pg-selectschool-firstli a").addClass('sw-pg-selectschool-firstli-a-mouseout').removeClass('sw-pg-selectschool-firstli-a-mouseover');
+                });
+
+                $(document).on('mouseover', '#sw-pg-myaccount', function () {
+                    $("#sw-pg-myaccount-firstli").removeClass('sw-pg-myaccount-firstli-mouseout').addClass('sw-pg-myaccount-firstli-mouseover');
+                    $("#sw-pg-myaccount-firstli a").addClass('sw-pg-myaccount-firstli-a-mouseover').removeClass('sw-pg-myaccount-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-myaccount', function () {
+                    $("#sw-pg-myaccount-firstli").removeClass('sw-pg-myaccount-firstli-mouseover').addClass('sw-pg-myaccount-firstli-mouseout');
+                    $("#sw-pg-myaccount-firstli a").addClass('sw-pg-myaccount-firstli-a-mouseout').removeClass('sw-pg-myaccount-firstli-a-mouseover');
+                });
+
+                $(document).on('mouseover', '#sw-pg-sitenav', function () {
+                    $("#sw-pg-sitenav-firstli").removeClass('sw-pg-sitenav-firstli-mouseout').addClass('sw-pg-sitenav-firstli-mouseover');
+                    $("#sw-pg-sitenav-firstli a").addClass('sw-pg-sitenav-firstli-a-mouseover').removeClass('sw-pg-sitenav-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-sitenav', function () {
+                    $("#sw-pg-sitenav-firstli").removeClass('sw-pg-sitenav-firstli-mouseover').addClass('sw-pg-sitenav-firstli-mouseout');
+                    $("#sw-pg-sitenav-firstli a").addClass('sw-pg-sitenav-firstli-a-mouseout').removeClass('sw-pg-sitenav-firstli-a-mouseover');
+                });
+
+                $(document).on('mouseover', '#sw-pg-district', function () {
+                    $("#sw-pg-district-firstli").removeClass('sw-pg-district-firstli-mouseout').addClass('sw-pg-district-firstli-mouseover');
+                    $("#sw-pg-district-firstli a").addClass('sw-pg-district-firstli-a-mouseover').removeClass('sw-pg-district-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-district', function () {
+                    $("#sw-pg-district-firstli").removeClass('sw-pg-district-firstli-mouseover').addClass('sw-pg-district-firstli-mouseout');
+                    $("#sw-pg-district-firstli a").addClass('sw-pg-district-firstli-a-mouseout').removeClass('sw-pg-district-firstli-a-mouseover');
+                });
+            }
+        });
+
+
+    ', 
+    
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+
+    ', 
+  ', 
+  ', 
+', 
+
+
+    ', 
+
+    
+
+    ', 
+    
+
+']

@@ -1,0 +1,1091 @@
+[
+	', 
+	', 
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=374694589323514";
+		fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    ', 
+    ',  
+    	',  
+        	', 
+                ', 
+                	', 
+                    	', VCCIRCLE',  | ', VCCEDGE',  | ', TECHCIRCLE',  | ', TRAINING',  | ', EVENTS', 
+                    ', 
+                	', 
+                    	', 
+                        	', ABOUT',  | ', FAQs', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                    	', 
+                        							', Login',  | ', Register', 						                    ', 
+            	', 
+            ', 
+            ',   
+            
+               ', 
+', 
+', 
+', 
+	', 
+        // Google map object
+        // Initialize and display a google map
+        // Update the Google map for the user's inputted address
+        var map;
+        function loadMap()
+        {	
+            var latlng = new google.maps.LatLng( 12.9489043, 80.2407164 );
+            var mapOptions = { zoom: 12, center: latlng  };
+            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            var geocoder = new google.maps.Geocoder();    // instantiate a geocoder object
+            var address = "Chennai One, Pallavaram - Thuraipakkam 200 Feet Road, Okkiam Thoraipakkam,Chennai,Tamil Nadu,India";
+        
+            // Make asynchronous call to Google geocoding API
+            geocoder.geocode( { 'address': address }, function(results, status) {
+                var addr_type = results[0].types[0];	// type of address inputted that was geocoded
+                if ( status == google.maps.GeocoderStatus.OK ) 
+                    ShowLocation( results[0].geometry.location, address, addr_type );
+                else     
+                    alert("Geocode was not successful for the following reason: " + status);        
+            });
+        }
+        
+        // Show the location (address) on the map.
+        function ShowLocation( latlng, address, addr_type )
+        {
+            // Center the map at the specified location
+            map.setCenter( latlng );
+            
+            // Set the zoom level according to the address level of detail the user specified
+            var zoom = 12;
+            switch ( addr_type )
+            {
+            case "administrative_area_level_1"	: zoom = 6; break;		// user specified a state
+            case "locality"						: zoom = 10; break;		// user specified a city/town
+            case "street_address"				: zoom = 15; break;		// user specified a street address
+            }
+            map.setZoom( zoom );
+            
+            // Place a Google Marker at the same location as the map center 
+            // When you hover over the marker, it will display the title
+            var marker = new google.maps.Marker( { 
+                position: latlng,     
+                map: map,      
+                title: address
+            });
+            
+            // Create an InfoWindow for the marker
+            var contentString = "<b>" + address + "</b>";	// HTML text to display in the InfoWindow
+            var infowindow = new google.maps.InfoWindow( { content: contentString } );
+            
+            // Set event to display the InfoWindow anchored to the marker when the marker is clicked.
+            google.maps.event.addListener( marker, 'click', function() { infowindow.open( map, marker ); });
+        }
+    ', 
+', 
+$(document).ready(function() {
+	$(function() {
+		$( "#search" ).autocomplete({
+			source: function(request, response) {
+				$.ajax({ url: "http://www.vccircle.com/bizcircle/company/suggestions",
+				data: { term: $("#search").val()},
+				dataType: "json",
+				type: "POST",
+				success: function(data){
+					response(data);
+				}
+			});
+		},
+		minLength: 2
+		});
+	});
+	
+	$('.fancybox').fancybox();
+	
+	ajax_paging = function(){
+		$(document).on( "click", "a.pagination", function() {
+		//$("a.pagination").click(function() {               
+			   $.ajax({
+				 type: "GET",
+				 url: $(this).get(),
+				 success: function(html){
+					//console.log(html);
+					$(".middle_content").html(html);
+				  }
+			   });               
+			 });            
+	   return false;
+	 };
+
+	 $("#upload_company_logo").click(function(){
+		$("#upfile").click();
+	 });
+
+	$("#not_upload_logo").click(function(){
+		window.location = '../../user/signup';
+	 });
+	 
+	 $("#more_key_devs").click(function(){
+		 var count1 = '6';	
+		 $("#less_key_devs").show();
+		  $("#more_key_devs").hide();
+		 while(count1 <= 10){
+			 var data1 = {};
+			 data1[count1] = count1;	
+			 $.each(data1, function(index, value) {	
+				 $("#key_dev_more" + value).slideDown('slow');
+			 });
+			 count1++;
+		 }
+	 });
+	
+	 
+	 $("#less_key_devs").click(function(){
+		 var count2 = '6';	
+		 $("#more_key_devs").show();
+		  $("#less_key_devs").hide();
+		 while(count2 <= 10){
+			 var data1 = {};
+			 data1[count2] = count2;	
+			 $.each(data1, function(index, value) {	
+				 $("#key_dev_more" + value).slideUp('slow');
+			 });
+			 count2++;
+		 }
+	 });
+
+	 $("#more_people").click(function(){
+		 var count3 = 5;	
+		 var total_number_of_peoles = $("#total_peoples").val();
+		 $("#less_people").show();
+		  $("#more_people").hide();
+		 while(count3 <= total_number_of_peoles){
+			 var data3 = {};
+			 data3[count3] = count3;	
+			 $.each(data3, function(index, value) {	
+				 $("#people_more" + value).slideDown('slow');
+			 });
+			 count3++;
+		 }
+	 });
+
+	 $("#less_people").click(function(){
+		 var count4 = 5;	
+		 var total_number_of_peoles = $("#total_peoples").val();
+		 $("#more_people").show();
+		  $("#less_people").hide();
+		 while(count4 <= total_number_of_peoles){
+			 var data4 = {};
+			 data4[count4] = count4;	
+			 $.each(data4, function(index, value) {	
+				 $("#people_more" + value).slideUp('slow');
+			 });
+			 count4++;
+		 }
+	 });
+
+	 $("#submit").click(function(){
+		var search_form = $("#search").val()
+		if(search_form == ''){
+			alert("Please Enter Company Name.");
+			return false;
+		}
+	});
+	$.Placeholder.init();
+});
+', 
+', 
+	', 
+    	', 
+        	', 
+				
+				
+            	', 
+                	', 
+                	', 
+                ', 
+                ', 
+                  ', 
+						', Ig3 Infra Ltd.', 
+                        ', 
+													', [ Edit ]', 
+						                        ', 
+                    ', 
+					', 
+                    ', 
+                    	', 
+                        	', 
+                                ', Company Type', :', 
+                                ', Private Company', 
+                            ', 
+                            ', 
+                                ', Company Status', :', 
+                                ', Subsidiary', 
+                            ', 
+                        ', 
+                        ', 
+                        	', 
+                                ', Trade/DBA Name', :', 
+                                ', 
+									Indian Green Grid Group Ltd.								', 
+                            ', 
+                            ', 
+                                ', Previous Name', :', 
+                                ', 
+									ETL Infrastructure Services Ltd.                                ', 
+                            ', 
+                        ', 
+                        ', 
+                        	', 
+                                ', # of Employees ', :', 
+                                ', 
+									                                        	', [ Add ]', 
+                                    	                                ', 
+                            ', 
+                            ', 
+                                ', Year Founded', :', 
+                                ', 
+									2004                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Industry', :', 
+                                ', 
+									Real Estate Development                                ', 
+                            ', 
+                                                    ',  
+						', 
+                        	', 
+                                ', Website', :', 
+                    			', 
+									', http://www.greengridgroup.co',                                 ', 
+                            ', 
+                            ', 
+                                ', City', :', 
+                                ', 
+									Chennai                                ', 
+                            ', 
+                        ', 
+                    ', 
+                    ', 
+						                        	', 
+                        		                        			', 
+                        		                                ',   
+                        	', 
+                        							', I', g3 Infra Ltd. (formerly ETL Infrastructure Services Ltd.) is engaged in developing and managing business infrastructure. It develops information technology infrastructure, data centres and industrial park development. It owns and operates hotel properties at Maduari and Pudukkotai. The company was incorporated in 2004 and is based in Chennai, Tamil Nadu. Ig3 Infra Ltd. operates as a wholly owned subsidiary of  Green Grid Group Pte. Ltd.', 
+                        
+                ', 
+                ', 
+                    	', related articles from',  ', No News Available',                 ', 
+                ', 
+                    ', key developments ', 
+                    ', 
+                    	', No Key Developments Available',                     ', 
+                ', 	
+
+				', 
+                    ', 
+                    	Press Releases
+                    	', 
+                        	                                ', [ Add ]', 
+                                                    ', 
+                    ', 
+                    ', 
+                    	                        	', 
+                                ', No Press Release Available', 
+                            ', 
+                                            ', 
+                ', 
+
+                ', 
+                    ', 
+                    	product/brand logos
+                        ', 
+                        	                                ', [ Add ]', 
+                                                    ', 
+                    ', 
+                    ', 
+                    	                            ', 
+                            ', 
+                            ', 
+						                    ', 
+                ', 
+                ', 
+                ', 
+                    ', 
+                    	VIDEOS
+                        ', 
+                        	                                ', [ Add ]', 
+                                                    ', 
+                    ', 
+                    ', 
+                    	                            ', 
+                            ', 
+                            ', 
+						                    ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            	', 
+                ', 
+                    ', Trending Companies', 
+                    ', 
+                    	', 
+                    		', 
+                            	', Expedient Healthcare Marketing Pvt. Ltd.', Locodel Solutions Pvt. Ltd.', Big Indian Wedding Pvt. Ltd.', Lionbridge Technologies Pvt. Ltd.', Appirio India Cloud Solutions Pvt. Ltd.', Amra Remedies Ltd.', Dolphin Foods India Ltd.', ZoomCar India Pvt. Ltd.',     
+                            ', 
+                    	', 
+                    ', 
+                ', 
+
+				', 
+                ', 
+                    ', Similar Companies', 
+                    ', 
+                    	', 
+                    		', 
+                            	', Ferrous Infrastructure Pvt. Ltd.', Genus Prime Infra Ltd.', Indicon Estates Pvt. Ltd.', LandCraft Developers Pvt. Ltd.', Melmount Construction Pvt. Ltd.', Mycon Construction Ltd. ', Pic Properties Ltd.', Sahil Realtors Pvt. Ltd.   ', Suraj Condominiums Pvt. Ltd.', Vascon Infrastructure Ltd., Forest County ',     
+                            ', 
+                    	', 
+                    ', 
+                ', 
+
+                ', 
+                ', 
+                    ', People ', 
+                    ', 
+                    	', 
+                    		', 
+                            	                                    ', Management:',  ', [ Edit ]', 
+                                                            ', 
+                    		', 
+                            	', Chakkolath Ramchandran',  - Chairman cum Whole Time Director', Ummamalai Thiagarajan',  - Managing Director', 									', 
+															
+                            ', 
+
+							                    	', 
+						
+                        ', 
+                        	', 
+                                                            	', Board:',  ', [ Edit ]', 
+                                                        	
+                            ', 
+                        	', 
+                            	Chakkolath Ramchandran                            ', 
+                        ', 
+                    ', 
+                ', 
+
+                ', 
+                ', 
+											', Contact Details', [ Edit ]', 
+					                    ', 
+                    	', 
+                    		', Address:', 
+                    		', 
+                            	Chennai One, Pallavaram - Thuraipakkam 200 Feet Road, Okkiam Thoraipakkam, Chennai, Tamil Nadu - 600097 - India.                            ', 
+                    	', 
+                    	', 
+                    		', Phone:', 
+                    		', -', 
+                    	', 
+                    	', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                	', View on Google Maps ', 
+                	', 
+                ', 
+            ', 
+        ', 
+    	', 
+    ', 
+', 
+    ', 
+    	', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300C");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300C");
+			', 
+		  ', 
+		', 
+		  ', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "biz_RHS_300A");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("biz_RHS_300A");
+			', 
+		', 
+		
+        ', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300B");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300B");
+			', 
+		', 
+
+          
+
+		  ', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300D");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300D");
+			', 
+		  ', 
+
+		  ', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300E");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300E");
+			', 
+		  ', 
+    ', 
+', 
+', 
+	',  loadMap();', 
+			', 
+        ',         
+        ', 
+	        ', 
+		        ', 
+                	Copyright © 2017 VCCircle.com.', 
+        			', Property of Mosaic Media Ventures Pvt. Ltd.', 
+                   ',   ', A ', 
+                    ', 
+                    	', 
+                    ', 
+                    ', company.', 
+                    ', 
+                ', 
+                ', 
+                    ', About',  | ', Contact',  | ', Copyright',  | ', Privacy',  | ', Terms of Service', 
+                ', 
+            ', 
+        ', 
+    ', window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"8eac03d699","applicationID":"25778257","transactionName":"YVNQYEdVXRZYU0AKWlgZc1dBXVwLFnNbDkVXWEsbVlteFVheTTxRU0JTXVlH","queueTime":0,"applicationTime":828,"atts":"TRRTFg9PThg=","errorBeacon":"bam.nr-data.net","agent":""}'][
+	', 
+	', 
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=374694589323514";
+		fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    ', 
+    ',  
+    	',  
+        	', 
+                ', 
+                	', 
+                    	', VCCIRCLE',  | ', VCCEDGE',  | ', TECHCIRCLE',  | ', TRAINING',  | ', EVENTS', 
+                    ', 
+                	', 
+                    	', 
+                        	', ABOUT',  | ', FAQs', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                    	', 
+                        							', Login',  | ', Register', 						                    ', 
+            	', 
+            ', 
+            ',   
+            
+               ', 
+', 
+', 
+', 
+	', 
+        // Google map object
+        // Initialize and display a google map
+        // Update the Google map for the user's inputted address
+        var map;
+        function loadMap()
+        {	
+            var latlng = new google.maps.LatLng( 12.9489043, 80.2407164 );
+            var mapOptions = { zoom: 12, center: latlng  };
+            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            var geocoder = new google.maps.Geocoder();    // instantiate a geocoder object
+            var address = "Chennai One, Pallavaram - Thuraipakkam 200 Feet Road, Okkiam Thoraipakkam,Chennai,Tamil Nadu,India";
+        
+            // Make asynchronous call to Google geocoding API
+            geocoder.geocode( { 'address': address }, function(results, status) {
+                var addr_type = results[0].types[0];	// type of address inputted that was geocoded
+                if ( status == google.maps.GeocoderStatus.OK ) 
+                    ShowLocation( results[0].geometry.location, address, addr_type );
+                else     
+                    alert("Geocode was not successful for the following reason: " + status);        
+            });
+        }
+        
+        // Show the location (address) on the map.
+        function ShowLocation( latlng, address, addr_type )
+        {
+            // Center the map at the specified location
+            map.setCenter( latlng );
+            
+            // Set the zoom level according to the address level of detail the user specified
+            var zoom = 12;
+            switch ( addr_type )
+            {
+            case "administrative_area_level_1"	: zoom = 6; break;		// user specified a state
+            case "locality"						: zoom = 10; break;		// user specified a city/town
+            case "street_address"				: zoom = 15; break;		// user specified a street address
+            }
+            map.setZoom( zoom );
+            
+            // Place a Google Marker at the same location as the map center 
+            // When you hover over the marker, it will display the title
+            var marker = new google.maps.Marker( { 
+                position: latlng,     
+                map: map,      
+                title: address
+            });
+            
+            // Create an InfoWindow for the marker
+            var contentString = "<b>" + address + "</b>";	// HTML text to display in the InfoWindow
+            var infowindow = new google.maps.InfoWindow( { content: contentString } );
+            
+            // Set event to display the InfoWindow anchored to the marker when the marker is clicked.
+            google.maps.event.addListener( marker, 'click', function() { infowindow.open( map, marker ); });
+        }
+    ', 
+', 
+$(document).ready(function() {
+	$(function() {
+		$( "#search" ).autocomplete({
+			source: function(request, response) {
+				$.ajax({ url: "http://www.vccircle.com/bizcircle/company/suggestions",
+				data: { term: $("#search").val()},
+				dataType: "json",
+				type: "POST",
+				success: function(data){
+					response(data);
+				}
+			});
+		},
+		minLength: 2
+		});
+	});
+	
+	$('.fancybox').fancybox();
+	
+	ajax_paging = function(){
+		$(document).on( "click", "a.pagination", function() {
+		//$("a.pagination").click(function() {               
+			   $.ajax({
+				 type: "GET",
+				 url: $(this).get(),
+				 success: function(html){
+					//console.log(html);
+					$(".middle_content").html(html);
+				  }
+			   });               
+			 });            
+	   return false;
+	 };
+
+	 $("#upload_company_logo").click(function(){
+		$("#upfile").click();
+	 });
+
+	$("#not_upload_logo").click(function(){
+		window.location = '../../user/signup';
+	 });
+	 
+	 $("#more_key_devs").click(function(){
+		 var count1 = '6';	
+		 $("#less_key_devs").show();
+		  $("#more_key_devs").hide();
+		 while(count1 <= 10){
+			 var data1 = {};
+			 data1[count1] = count1;	
+			 $.each(data1, function(index, value) {	
+				 $("#key_dev_more" + value).slideDown('slow');
+			 });
+			 count1++;
+		 }
+	 });
+	
+	 
+	 $("#less_key_devs").click(function(){
+		 var count2 = '6';	
+		 $("#more_key_devs").show();
+		  $("#less_key_devs").hide();
+		 while(count2 <= 10){
+			 var data1 = {};
+			 data1[count2] = count2;	
+			 $.each(data1, function(index, value) {	
+				 $("#key_dev_more" + value).slideUp('slow');
+			 });
+			 count2++;
+		 }
+	 });
+
+	 $("#more_people").click(function(){
+		 var count3 = 5;	
+		 var total_number_of_peoles = $("#total_peoples").val();
+		 $("#less_people").show();
+		  $("#more_people").hide();
+		 while(count3 <= total_number_of_peoles){
+			 var data3 = {};
+			 data3[count3] = count3;	
+			 $.each(data3, function(index, value) {	
+				 $("#people_more" + value).slideDown('slow');
+			 });
+			 count3++;
+		 }
+	 });
+
+	 $("#less_people").click(function(){
+		 var count4 = 5;	
+		 var total_number_of_peoles = $("#total_peoples").val();
+		 $("#more_people").show();
+		  $("#less_people").hide();
+		 while(count4 <= total_number_of_peoles){
+			 var data4 = {};
+			 data4[count4] = count4;	
+			 $.each(data4, function(index, value) {	
+				 $("#people_more" + value).slideUp('slow');
+			 });
+			 count4++;
+		 }
+	 });
+
+	 $("#submit").click(function(){
+		var search_form = $("#search").val()
+		if(search_form == ''){
+			alert("Please Enter Company Name.");
+			return false;
+		}
+	});
+	$.Placeholder.init();
+});
+', 
+', 
+	', 
+    	', 
+        	', 
+				
+				
+            	', 
+                	', 
+                	', 
+                ', 
+                ', 
+                  ', 
+						', Ig3 Infra Ltd.', 
+                        ', 
+													', [ Edit ]', 
+						                        ', 
+                    ', 
+					', 
+                    ', 
+                    	', 
+                        	', 
+                                ', Company Type', :', 
+                                ', Private Company', 
+                            ', 
+                            ', 
+                                ', Company Status', :', 
+                                ', Subsidiary', 
+                            ', 
+                        ', 
+                        ', 
+                        	', 
+                                ', Trade/DBA Name', :', 
+                                ', 
+									Indian Green Grid Group Ltd.								', 
+                            ', 
+                            ', 
+                                ', Previous Name', :', 
+                                ', 
+									ETL Infrastructure Services Ltd.                                ', 
+                            ', 
+                        ', 
+                        ', 
+                        	', 
+                                ', # of Employees ', :', 
+                                ', 
+									                                        	', [ Add ]', 
+                                    	                                ', 
+                            ', 
+                            ', 
+                                ', Year Founded', :', 
+                                ', 
+									2004                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Industry', :', 
+                                ', 
+									Real Estate Development                                ', 
+                            ', 
+                                                    ',  
+						', 
+                        	', 
+                                ', Website', :', 
+                    			', 
+									', http://www.greengridgroup.co',                                 ', 
+                            ', 
+                            ', 
+                                ', City', :', 
+                                ', 
+									Chennai                                ', 
+                            ', 
+                        ', 
+                    ', 
+                    ', 
+						                        	', 
+                        		                        			', 
+                        		                                ',   
+                        	', 
+                        							', I', g3 Infra Ltd. (formerly ETL Infrastructure Services Ltd.) is engaged in developing and managing business infrastructure. It develops information technology infrastructure, data centres and industrial park development. It owns and operates hotel properties at Maduari and Pudukkotai. The company was incorporated in 2004 and is based in Chennai, Tamil Nadu. Ig3 Infra Ltd. operates as a wholly owned subsidiary of  Green Grid Group Pte. Ltd.', 
+                        
+                ', 
+                ', 
+                    	', related articles from',  ', No News Available',                 ', 
+                ', 
+                    ', key developments ', 
+                    ', 
+                    	', No Key Developments Available',                     ', 
+                ', 	
+
+				', 
+                    ', 
+                    	Press Releases
+                    	', 
+                        	                                ', [ Add ]', 
+                                                    ', 
+                    ', 
+                    ', 
+                    	                        	', 
+                                ', No Press Release Available', 
+                            ', 
+                                            ', 
+                ', 
+
+                ', 
+                    ', 
+                    	product/brand logos
+                        ', 
+                        	                                ', [ Add ]', 
+                                                    ', 
+                    ', 
+                    ', 
+                    	                            ', 
+                            ', 
+                            ', 
+						                    ', 
+                ', 
+                ', 
+                ', 
+                    ', 
+                    	VIDEOS
+                        ', 
+                        	                                ', [ Add ]', 
+                                                    ', 
+                    ', 
+                    ', 
+                    	                            ', 
+                            ', 
+                            ', 
+						                    ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+            	', 
+                ', 
+                    ', Trending Companies', 
+                    ', 
+                    	', 
+                    		', 
+                            	', Expedient Healthcare Marketing Pvt. Ltd.', Locodel Solutions Pvt. Ltd.', Big Indian Wedding Pvt. Ltd.', Lionbridge Technologies Pvt. Ltd.', Appirio India Cloud Solutions Pvt. Ltd.', Amra Remedies Ltd.', Dolphin Foods India Ltd.', ZoomCar India Pvt. Ltd.',     
+                            ', 
+                    	', 
+                    ', 
+                ', 
+
+				', 
+                ', 
+                    ', Similar Companies', 
+                    ', 
+                    	', 
+                    		', 
+                            	', Ferrous Infrastructure Pvt. Ltd.', Genus Prime Infra Ltd.', Indicon Estates Pvt. Ltd.', LandCraft Developers Pvt. Ltd.', Melmount Construction Pvt. Ltd.', Mycon Construction Ltd. ', Pic Properties Ltd.', Sahil Realtors Pvt. Ltd.   ', Suraj Condominiums Pvt. Ltd.', Vascon Infrastructure Ltd., Forest County ',     
+                            ', 
+                    	', 
+                    ', 
+                ', 
+
+                ', 
+                ', 
+                    ', People ', 
+                    ', 
+                    	', 
+                    		', 
+                            	                                    ', Management:',  ', [ Edit ]', 
+                                                            ', 
+                    		', 
+                            	', Chakkolath Ramchandran',  - Chairman cum Whole Time Director', Ummamalai Thiagarajan',  - Managing Director', 									', 
+															
+                            ', 
+
+							                    	', 
+						
+                        ', 
+                        	', 
+                                                            	', Board:',  ', [ Edit ]', 
+                                                        	
+                            ', 
+                        	', 
+                            	Chakkolath Ramchandran                            ', 
+                        ', 
+                    ', 
+                ', 
+
+                ', 
+                ', 
+											', Contact Details', [ Edit ]', 
+					                    ', 
+                    	', 
+                    		', Address:', 
+                    		', 
+                            	Chennai One, Pallavaram - Thuraipakkam 200 Feet Road, Okkiam Thoraipakkam, Chennai, Tamil Nadu - 600097 - India.                            ', 
+                    	', 
+                    	', 
+                    		', Phone:', 
+                    		', -', 
+                    	', 
+                    	', 
+                    ', 
+                ', 
+                ', 
+                ', 
+                	', View on Google Maps ', 
+                	', 
+                ', 
+            ', 
+        ', 
+    	', 
+    ', 
+', 
+    ', 
+    	', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300C");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300C");
+			', 
+		  ', 
+		', 
+		  ', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "biz_RHS_300A");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("biz_RHS_300A");
+			', 
+		', 
+		
+        ', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300B");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300B");
+			', 
+		', 
+
+          
+
+		  ', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300D");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300D");
+			', 
+		  ', 
+
+		  ', 
+			', 
+			', 
+			', 
+			GS_googleAddAdSenseService("ca-pub-2733504325575062");
+			GS_googleEnableAllServices();
+			', 
+			', 
+			GA_googleAddSlot("ca-pub-2733504325575062", "Biz_RHS_300E");
+			', 
+			', 
+			GA_googleFetchAds();
+			', 
+
+			', 
+			', 
+			GA_googleFillSlot("Biz_RHS_300E");
+			', 
+		  ', 
+    ', 
+', 
+', 
+	',  loadMap();', 
+			', 
+        ',         
+        ', 
+	        ', 
+		        ', 
+                	Copyright © 2017 VCCircle.com.', 
+        			', Property of Mosaic Media Ventures Pvt. Ltd.', 
+                   ',   ', A ', 
+                    ', 
+                    	', 
+                    ', 
+                    ', company.', 
+                    ', 
+                ', 
+                ', 
+                    ', About',  | ', Contact',  | ', Copyright',  | ', Privacy',  | ', Terms of Service', 
+                ', 
+            ', 
+        ', 
+    ', window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"8eac03d699","applicationID":"25778257","transactionName":"YVNQYEdVXRZYU0AKWlgZc1dBXVwLFnNbDkVXWEsbVlteFVheTTxRU0JTXVlH","queueTime":0,"applicationTime":828,"atts":"TRRTFg9PThg=","errorBeacon":"bam.nr-data.net","agent":""}']

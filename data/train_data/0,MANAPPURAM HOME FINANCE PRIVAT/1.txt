@@ -1,0 +1,1625 @@
+[
+', (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=270121083101775";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));', 
+
+
+
+', 
+',  
+  ',  
+  ',  
+', 
+      ',  
+      ', 
+       ', 1800-420-22-33 ', (8.00 AM to 8.00 PM)', 
+       ', 
+       ', 
+       ', News',  ', |',  ', Events',  ', |',  ', Blog', 
+       ', Branch Network', 
+       ', Help', 
+       ', 
+        ', 
+', 
+      ', 
+      ', 
+        ', 
+ 
+   ', 
+ 
+', 
+
+ 
+  ', 
+	var fbApplicationID = '270121083101775';
+    var siteUrl   =  'http://www.manappuram.com' ;
+	var lblUpdatePermission="Your facebook status not updated.Please Login and Give Status Update Permission.";
+	var lblfacebookUpdate="Your facebook status updated";
+	var lblPostNotPublished="Post was not published.";
+	var lblPostPublished="Post was published.";
+', 
+', 
+ ',  ', 
+',  ', LOGIN', 
+', 
+ ',  Company',  ',  Company',  ',  ', Overview of the Company',  ', Mission, Vision and Values',  ', Management Team',  ', A Profile of the MD & CEO',  ', Promoter Group Entities',  ', Brand Manappuram, the early days',  ', The Social Relevance of Gold Loans',  ', Safalya - Success Stories',  ',  ',  Products',  ',  Products',  ',  ', Online Gold Loan',  ', Gold Loan',  ', SME Finance',  ', Forex & Money Transfer',  ', Commercial Vehicle Loan',  ', Depository Services',  ',  ',  ',  Subsidiaries',  ',  Subsidiaries',  ',  ', Manappuram Home Finance Pvt Ltd',  ', Manappuram Insurance Brokers Pvt Ltd',  ', Asirvad Microfinance Limited',  ',  ',  ',  Investors',  ',  Investors',  ',  ', Stock Watch',  ', Annual Reports',  ', Quarterly Results',  ', Notice to Shareholders',  ', Investor Contact',  ', Unpaid Dividend',  ', Corporate Governance',  Help Center',  ',  ', Our Branches',  ', Interest Rates',  ', Auction Venue',  ',  ', Careers',  ', Contact us', 
+', 
+     ', 
+            ',  ', News',  ', |',  ', Events',  ', |',  ', Blog', 
+        ', 
+        ', 
+            ',  ', Branch Network', 
+        ', 
+        ', 
+            ',  ', Help', 
+        ', 
+', 
+', 
+', 
+', 
+', top', 
+', 
+   var bool;  
+   $(document).ready(function () {
+     if ($(window).width() > 850) {
+			bool = true;
+			 $(".nav-cms ul:first").show();
+			
+        } else {
+            bool = false;
+			$(".nav-cms ul:first").show();
+        }
+    $(window).resize(function () {
+        if ($(window).width() > 850) {
+			bool = true;
+			 $(".nav-cms ul:first").show();
+			
+        } else {
+            bool = false;
+			$(".nav-cms ul:first").show();
+        }
+    });
+
+    $(".nav-cms ul li").each(function () {
+        if ($(this).find('ul').length > 0) {
+            $(this).addClass('sub-itm-lnk').append("<span class='expand plus'><span></span></span>")
+        }
+    })
+	$(".footerlink-block ul li").each(function () {
+        if ($(this).find('ul').length > 0) {
+            $(this).addClass('sub-itm-lnk').append("<span class='expand plus'><span></span></span>")
+        }
+    })
+	
+    $(".nav-cms ul:first > li").each(function () {
+
+        if ($(this).find('ul').length > 0) {
+            $(this).children("ul:first").addClass("sublevel");
+        }
+    }).addClass('level01');
+
+    var ulTop = parseInt($(".sublevel").css('top'));
+    $(".nav-cms .menu-mobile ul:first > li").hover(function () {
+        if (bool) {
+            $(this).find(".sublevel").slideDown('slow', 'easeInOutCubic').animate({
+//                "opacity": 1
+            }, 200);
+        }
+    }, function () {
+        if (bool) {
+            $(".sublevel").hide().css({
+               
+//                "opacity": 0
+            });
+        }
+    });
+
+    $(".mobmenu").click(function () {
+        if (!bool) {
+            $(".btm-bar .nav-cms .menu-mobile > ul:first").toggleClass("move");
+            $(".btm-bar .nav-cms .menu-mobile").toggleClass("active");
+            $("body").toggleClass("overlay");
+            $(this).toggleClass("close"); 
+        }
+    });
+    $(".nav-cms .expand").click(function () {
+        if (!bool) {
+            var dis = $(this);
+            var siblings = dis.parent('li').siblings('li');
+            if (dis.hasClass("plus")) {
+                dis.removeClass("plus");
+                siblings.find('ul').hide();
+                siblings.find('.expand').addClass('plus');
+                dis.siblings("ul").slideDown(200);
+            } else {
+                dis.siblings("ul").slideUp(200);
+                dis.addClass("plus");
+                siblings.addClass("plus");
+
+            }
+        }
+
+    })
+	 $(".footerlink-block .expand").click(function () {
+        if (!bool) {
+            var dis = $(this);
+            var siblings = dis.parent('li').siblings('li');
+            if (dis.hasClass("plus")) {
+                dis.removeClass("plus");
+                siblings.find('ul').hide();
+                siblings.find('.expand').addClass('plus');
+                dis.siblings("ul").slideDown(200);
+            } else {
+                dis.siblings("ul").slideUp(200);
+                dis.addClass("plus");
+                siblings.addClass("plus");
+
+            }
+        }
+
+    })
+
+		setMenu();	 
+
+});
+
+function setMenu()
+{
+	if ($(window).width() > 850) {   
+		$(".level01 .sublevel").css({'visibility':'visible','display':'block'});		
+		$(".nav-cms .level01").each(function(){
+			var subLevel = $(this).find(".sublevel li").length;
+			var subLevelInner = $(this).find(".sublevel li ul li").length;
+			if(subLevelInner<=10)
+			{
+				$(this).addClass("sublevel01");
+			}
+			else
+			{	var outerwidth = $(".wrapper").width();
+				var totalWidthSubLevel = 0;		
+				$(this).children(".sublevel").children("li").each(function(){
+					totalWidthSubLevel = totalWidthSubLevel + $(this).outerWidth(true); 
+				});
+				if(totalWidthSubLevel>outerwidth)
+				totalWidthSubLevel = outerwidth;
+				$(this).children(".sublevel").css("width",totalWidthSubLevel+'px');	
+			}	
+		});	
+		$(".level01 .sublevel").css({'visibility':'visible','display':'none'});	
+	}
+}	
+     $(".btm-bar .nav-cms .menu-mobile > ul > li").hover(function () {
+    $(this).toggleClass("active");
+ });
+
+', 
+
+  ', 
+  ', 
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "1f1f78c0-8f30-4c73-85d6-9da6e9e3ba3c",
+      autoRegister: false, /* Set to true to automatically prompt visitors */
+      subdomainName: 'turbo-oorjit.onesignal.com',   
+      notifyButton: {
+          enable: true /* Set to false to hide */
+      }
+    }]);
+  ', 
+ 
+    ', 
+     ',      ', 
+', 
+', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+', 
+', 
+', 
+', 
+', Pay online', 
+', Loan Calculator', 
+', Call me back', 
+', Get in Touch', 
+', Login', 
+', New User? Register Now', 
+
+', 
+
+
+           ', 
+      ', 
+       
+
+', 
+
+    ', 
+', 
+   
+    ', 
+  
+  ', 
+ 
+', 
+      ', 
+      ', 
+         ', 
+            ', 
+                ', Pay Online', 
+                ', Loan Calculator', 
+                ', Call me Back', 
+                ', Get in Touch', 
+                ', Login / Sign up', 
+            ', 
+ 
+        ', 
+	  ', 
+	  ',  
+	  ', 
+',  
+$(document).ready(function() {
+	
+	$(".various").fancybox({
+	maxWidth    : 400,
+	maxHeight    : 350,
+	fitToView    : false,
+	width        : '70%',
+	height        : '70%',
+	autoSize    : false,
+	closeClick    : false,
+	openEffect    : 'fade',
+	closeEffect    : 'fade',
+    openSpeed   : 200
+	});
+	 
+	
+});
+', 
+', 
+ 
+    	          ', 
+            ',  
+                               ',  
+                                      ', THE CAREER LADDER AT MANAPPURAM ', 
+LEADS TO GREATER HEIGHTS !',  ', 
+                                                   ', 
+          ', 
+  	  
+    ', 
+  ',  
+    ', 
+    ', 
+        ', 
+            ', 
+    ', 
+      ', 
+   ', 
+    ', HOME', ->', CAREERS', 
+    ', 
+    ', 
+      
+     ', 
+     ',   ', 
+
+', 
+', 
+
+', 
+', 
+',  ', 
+
+', Click Here', 
+', 
+', 
+', 
+', 
+
+', THE EMPLOYE CAREER GROWTH AT MANAPPURAM IS AT GREATER PACE', 
+
+', CHOOSE A CAREER, NOT A JOB', 
+
+', LEARN ON THE JOB, SHARPEN YOUR SKILLS GROW TO HEIGHTS', 
+MAFIL gives ample opportunities to exhibit your potential skills and knowledge that will enhance your career growth. We do not put you in training before you are posted but we post you on the job and train you on the job and make you effective performer thereby ensuring your growth at a faster pace.', 
+
+', At MANAPPURAM, we believe in offering a long term career to our employees. For the right candidates, MANAPPURAM is a step in the right direction. Our domain is vast and offers ample opportunities for you to distinguish yourself and get recognised.', 
+
+', We at MANAPPURAM believe in the vast potential of human capital, be it a child, adult or old, this is what we have in mind for you. Our countrywide network and offices, multiple business verticals, fully owned subsidiaries etc. offers ample opportunities for you to grow.', 
+
+', In short, we offer the right environment for Professional growth, thus we are the preferred Employer', 
+
+', Join our Team at Manappuram. And count on us to deliver on your career aspirations.', 
+
+', Who Are We?', 
+
+', We are a company with humble beginnings that has stayed true to its roots.', 
+
+', Manappuram Finance Limited is the first corporate entity to enter the gold loans business and went on to create ripples in India\u2019s wider financial sector. We are India\u2019s first gold loan company to be listed in the stock market and the first to be credit rated. We take credit for having modernised a very traditional activity, introducing professionalism, technology and modern management practices to age-old practices. Not surprisingly, we have the status of pioneers in the business.', 
+
+', Our origins dates back to 1949 when Manappuram was founded in Valapad (a coastal village in the Thrissur District of Kerala) by the late V.C. Padmanabhan. For a long time, the firm remained a single branch business dealing in pawn broking and money lending on a modest scale. Thanks to the integrity and foresight of our Founder, even in those days Manappuram had acquired a reputation as solid as of a bank. To the people of this area, Manappuram is the safe place to lodge their money.', 
+
+', In 1986, Shri V.P. Nandakumar took over the reins of this one Branch business upon the death of his father. Since then, the story of Manappuram has been witnessing remarkable growth touching new milestones year on year. Manappuram Finance Ltd. was incorporated in 1992 and is recognised today as a leading national player in its core activity of gold loans. We have a nationwide presence through 3,747 branches across 28 states and UTs. Our Assets under Management (AUM) exceed Rs.13,000 crores and our workforce is about 19,000 strong.', 
+
+', Beyond the focus on business, our wide-ranging Corporate Social Responsibility (CSR) activities are proof of our abiding commitment to the wider society. For example, through the Manappuram Foundation, we provide free health insurance coverage of up to Rs.60, 000 per annum to over one lakh people in the BPL category in the Valapad and six other adjoining Panchayats of Thrissur District. In fact, since the project began in May 2010, over six thousand families have benefitted, and about four crore rupees have been reimbursed to them against their medical bills.', 
+
+', And, talking about staying true to our roots, even today we continue to be based in that same village of Valapad where we were born six decades ago.', 
+
+', Working at Manappuram', 
+
+', Manappuram is a different kind of work experience... we are a diverse and talented lot, passionate about what we do.', 
+
+', There are challenges to test your mettle every day, and frankly, we expect our people to raise to the occasion. We take on board people who bring focus and commitment to their work, and who are willing to walk extra mile to deliver results.', 
+
+', Our fast growing business provides excellent opportunities for you to put your knowledge and skills to work. We encourage our future leaders to innovate and to think creatively. We are now on a mission to foster diversity in the workplace in keeping in mind our national profile.', 
+
+', We believe that people give their best at work when they have a stake in the outcome, when they have share in the outcome. That was how we became perhaps the first company in Kerala to offer lucrative ESOPs to all deserving employees who remain for long-term career building.. We sponsor employees for an MBA/BBA programme of repute. In fact, our values are rooted in ethics and transparency, in the idea that success must be shared with all our stakeholders.', 
+
+', Work with Manappuram is enriching in terms of career, skill and competency enhancement along with growth it offers.', 
+',  ', 
+    
+', 
+
+', 
+', 
+	', Disclaimer', 
+	', It has been brought to our notice that certain individuals are misleading job applicants by claiming themselves to be employees of Manappuram Finance Limited or as authorized job agency of Manappuram Finance Limited. They have been misguiding the candidates to deposit certain amount of money in lieu of providing employment or as deposit towards travel for final interview round, etc.', 
+	', Manappuram Finance Limited does not take any such fees/facilitation charges in lieu of employment.', 
+	', Anyone dealing with such an agency/employment portal/individual will be doing so at his/her own risk and the Company will not be held responsible for such loss or damage suffered directly or indirectly.', 
+', 
+', 
+', 
+', 
+', 
+    ', 
+        ', 
+           ', 
+            ', 
+                ', News', View all', 
+                ', 
+								  					                    				    ', 
+                        ',     
+                        ', 29-Dec-2016 ', 
+                        ', Mr. V. P. Nandakumar, MD & CEO, Manappuram Finance Limited, makes it to Business Today\u2019s Top 40 Best CEOs in the BFSI Sector, 2016.', 
+                        ', .', 
+                        ', 
+                    ', 
+									                    				    ', 
+                        ',     
+                        ', 27-Dec-2016 ', 
+                        ', Gold loan now just a click away: Manappuram Finance, CTO', 
+                        ', ETCIO,
+
+Manappuram Finance has introduced a mobile...', 
+                        ', 
+                    ', 
+								                ', 
+			 ', 
+			 			            ', 
+             ', BLOG', View all', 
+             ', 
+                                  ', 
+                                
+                 ', 
+                     ', A REPORT ON THE ACTIVITIES OF SMT. SAROJINI PADMANABHAN MEMORIAL WOMEN\u2019S CLUB', 
+                 ', 27-Oct-2016', 
+                 ', 
+             ', 
+            ', 
+						            ', 
+                 ', Events', View all', 
+             ', 
+                                           ', 
+                                  
+                 ', 
+                     ', Renovated Manappuram Yoga Centre Inaugurated', 
+                ', Mr. V. P. Nandakumar, MD & CEO, Manappuram Finance...', 
+                 ', 
+             ', 
+                
+            ', 
+            ', 
+            
+        ', 
+        
+    ', 
+    
+',   
+ 
+                 ', 
+ ', 
+      ', 
+', 
+      
+        ', 
+            ', 
+          ', Newsletter sign up', 
+        ', Subscribe Our Newsletter for Latest News & Updates', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                           ', Please enter valid name', 
+                    ', 
+            
+                ', 
+                ', 
+                    ', 
+                    ', Enter valid Email Address', 
+               ', 
+                ', 
+                ', 
+                    ', 
+                      ', 
+                      ', 
+                ', 
+        
+        ', 
+        ', 
+   
+        
+        ', 
+	   ', 
+
+',   
+            ',               
+             
+
+	', 
+	', 
+      ', 
+        
+    ', 
+     ',     
+      ', 
+             ',  ', 
+               ',  ', 
+', 
+',  ', 
+', ONLINE GOLD LOAN', 
+
+', With our new online gold loan facility, you can avail gold loan 24x7, from anywhere in the world!', 
+', get started', 
+', 
+', 
+               ',  ', 
+', 
+	',  ', Gold loan',  ', 
+	',  ', SME finance',  ', 
+	',  ', money transfer',  ', 
+	',  ', commercial vehicle loans',  ', 
+	',  ', Depository Services',  ', 
+', 
+
+', 
+	', 
+	', Subsidiary', 
+	', 
+	',  ', Micro Finance',  ', 
+	',  ', Home Loan',  ', 
+	',  ', Insurance',  ', 
+', 
+', 
+               ',  ', 
+               ',  ', 
+', Customer Service', 
+
+', Toll Free', 
+
+', 1800-220-22-33', 
+
+', 8.00 AM - 8.00 PM on Monday to Saturday', 
+', 
+', [email protected]', u"/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */", 
+               ',  ', 
+', 
+	', 
+	', Gold Loan Enquiry', 
+
+	', 
+	', Andhra Pradesh', 93498 11115', 
+
+	', Central and Eastern States', 93882 90833 ', 
+
+	', Karnataka', 93496 11115', 
+
+	', Kerala', 93887 11115', 
+
+	', Northern States', 93494 11115', 
+
+	', Tamil Nad, 93494 41473', 
+
+	', Western States', 93886 11115', 
+
+	', SMS', GLOAN to 56070', 
+	', 
+
+	', Gold Loan FAQ', 
+	', 
+', 
+', 
+               ',  ', 
+         ', 
+ ',    
+', 
+    ', 
+		', 	
+      ', 
+      ', 
+    ', 
+    ', 
+    ',  
+  
+  ',  
+  ', 
+ ', 
+  ', 
+  ', 
+  
+     ', 
+  ', 
+
+ ', 
+    ', 
+      ', 
+        ', 
+          ', 
+           ',  ABOUT US',  ',  ', Overview of the Company',  ', Mission, Vision and Values',  ', Management Team',  ', A Profile of the MD & CEO',  ', Promoter Group Entities',  ', Brand Manappuram, the early days',  ', The Social Relevance of Gold Loans',  Products',  ',  ', Online Gold Loan',  ', Gold Loan',  ', SME Finance',  ', Forex & Money Transfer',  ', Commercial Vehicle Loan',  ', Depository Services',  Subsidiaries',  ',  ', Manappuram Home Finance Pvt Ltd',  ', Manappuram Insurance Brokers Pvt Ltd',  ', Asirvad Microfinance Limited',  INVESTORS',  ',  ', Stock Watch',  ', Annual Reports',  ', Quarterly Results',  ', Notice to Shareholders',  ', Investor Contact',  ', Notice to Customers',  ', Unpaid Dividend',  ', Corporate Governance',  OTHERS',  ',  ', Interest Rates',  ', Auction Policy',  ', Auction Venue',  ', Empanelment of Auctioneer',  ', Fair Practice Code',  ', Disclaimer',  ', Feedback',  ', Media',  ', Gallery',  ', Media kit', 
+          ', 
+        ', 
+      ', 
+      ', 
+              ', OFFICE', 
+         ', Manappuram House, ', 
+         Head Office:  IV / 470 (old) W638A (New), Manappuram House, Valapad,Thrissur ', 
+         Kerala, India, ', 
+         pin code : 680567
+        ', 1800-420-22-33 (toll free)', 
+         ', [email protected]', u"/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */", 
+        ',  
+          ',   
+ ', 
+', 
+                
+          
+   ', 
+   
+   ', 
+    ', 
+      ', 
+        ', 
+          ', 
+          ', 
+          ', 
+          ', Facebook', 
+          ', Like us on Facebook', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', Twitter', 
+          ', Follow us on Twitter', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', Linkedin', 
+          ', Follow us on Linkedin', 
+          ', 
+          ', 
+          ', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', 
+           ', 
+            ', 
+            ', Youtube', 
+          ', Subscribe on Youtube', 
+          ', 
+          
+          ', 
+          ', 
+          ', 
+          ', 
+          
+          ', 
+          ', Mail Us', 
+          ', Any Question?', 
+          ', 
+          ', 
+          ', 
+        ', 
+      ', 
+    ', \u200b', 
+ ', 
+   
+   ', 
+', 
+ ', 
+  ', 
+  ', 
+  
+  
+', 
+ ', 
+    ',  ', © 2017 Manappuram.    All rights reserved.', 
+   
+   ', Privacy',  ',  ', Sitemap', Site best viewed in browsers I.E 11+, firefox 30+, chrome 30+', 
+     ', 
+     ', 
+     get mobile app ', 
+     ', 
+     ', 
+     ', 
+      ', 
+  ', 
+  
+ ', 
+     $(document).ready(function(){
+         
+        
+          $(".getlnk-txtbx").hide();
+         
+         $(".getlnk-btn").click(function() {
+              $(".getlnk-txtbx").show();
+         })
+         
+          var ele = $(".getlnk-txtbx");
+          var ele2 = $(".getlnk-btn");
+         
+         $("body").click(function(e){
+             
+             if (!ele.is(e.target) && !ele2.is(e.target) )
+    {
+        ele.hide();
+    }
+             
+         });
+       
+     });
+', 
+
+', 
+var GLOBAL_BASE_PATH = '';
+$(document).ready(function(){ 
+$(document).on('blur','#subscName',function() { $(this).validate( { form : "formCmsEmailSubscription" , field : "subscName" , key : "required~*isAlpha" , error: "Please enter valid name", inline:"1" , group: "", row: ""} ); });
+ $('#formCmsEmailSubscription').bindFirst('submit',function() { return $('#subscName').validate( { form : "formCmsEmailSubscription" , field : "subscName" , key : "required~*isAlpha" , error: "Please enter valid name" , group: "", row: "", inline:"1"} ); });
+ $(document).on('blur','#cmsSubscEmailID',function() { $(this).validate( { form : "formCmsEmailSubscription" , field : "cmsSubscEmailID" , key : "required~*email" , error: "Enter valid Email Address", inline:"1" , group: "", row: ""} ); });
+ $('#formCmsEmailSubscription').bindFirst('submit',function() { return $('#cmsSubscEmailID').validate( { form : "formCmsEmailSubscription" , field : "cmsSubscEmailID" , key : "required~*email" , error: "Enter valid Email Address" , group: "", row: "", inline:"1"} ); });
+ $('#formCmsEmailSubscription').bindLast('submit',function(){var className='.hid_err_'+$(this).attr('name')+'_validations';return $.scrollToDiv(className);});});', 
+
+
+', 
+', u"
+    $(document).ready(function(){
+if ($('.table-respo').length) {
+    var th_data;
+    $('.table-respo').each(function () {
+        var _table = $(this);
+        $(this).find('th').each(function (index) {
+            var index_th = index;
+            th_data = $(this).text();
+            _table.find('tr').each(function () {
+                $(this).find('td').each(function (index) {
+                    var index_td = index;
+                    if (index_th == index_td) {
+                        $(this).attr('data-name', th_data);
+                    }
+                });
+            });
+        });
+    });
+}
+    });
+",  
+  ',  
+', 
+',  
+', 
+', 
+', 
+$(document).ready(function() {
+	if (bool) {	
+		//$('#scrollbar1').tinyscrollbar({ sizethumb:100 }); 
+		var leftBlockHeight	=$(".left-content-block01").height();
+		var rightBlockHeight=$(".right-content-block01").height();
+		
+		$(window).scroll(function(){ 
+			var wrapper = $("#content-wrapper").offset();
+			var wrapperOuterHeight = $("#content-wrapper").outerHeight();
+			var wrapperTop = wrapper.top;
+			var docScrollTop = $(this).scrollTop();
+			var adjustedTop = docScrollTop ;
+			var windowH=$(window).height();
+			var diff=$(window).scrollTop()-($(document).height() - windowH-parseInt($("#footer").height()));
+			if(adjustedTop-wrapperTop>0)
+			{
+				if(diff>0){
+					if(leftBlockHeight<rightBlockHeight){
+						if($(".position-element").height()>windowH-diff){
+							$(".position-element").css("bottom",(diff)+'px');	
+							$(".position-element").css("position",'fixed');	
+							$(".position-element").removeClass("fix");
+							
+						}
+					}
+					
+					$("#scroll-top").css('bottom',diff+"px");
+				}
+				else{
+					$("#scroll-top").css('bottom',"0px");
+					if(leftBlockHeight<rightBlockHeight){
+						$(".position-element").addClass("fix");	
+						  
+						$(".position-element").css("bottom",'');	
+						$(".position-element").css("position",'');	
+					}
+					
+				}
+			}
+			else
+			{
+				$(".position-element").removeClass("fix");			
+			}
+			var bottom = $(window).height() - wrapperTop - wrapperOuterHeight;		
+		});
+	}
+
+	   $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('#scroll-top').fadeIn();
+            } else {
+                $('#scroll-top').fadeOut();
+            }
+        }); 
+ 
+        $('#scroll-top').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+});
+
+', 
+
+', u"
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-9272445-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	
+	
+", 
+
+
+
+', u"/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */"][
+', (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=270121083101775";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));', 
+
+
+
+', 
+',  
+  ',  
+  ',  
+', 
+      ',  
+      ', 
+       ', 1800-420-22-33 ', (8.00 AM to 8.00 PM)', 
+       ', 
+       ', 
+       ', News',  ', |',  ', Events',  ', |',  ', Blog', 
+       ', Branch Network', 
+       ', Help', 
+       ', 
+        ', 
+', 
+      ', 
+      ', 
+        ', 
+ 
+   ', 
+ 
+', 
+
+ 
+  ', 
+	var fbApplicationID = '270121083101775';
+    var siteUrl   =  'http://www.manappuram.com' ;
+	var lblUpdatePermission="Your facebook status not updated.Please Login and Give Status Update Permission.";
+	var lblfacebookUpdate="Your facebook status updated";
+	var lblPostNotPublished="Post was not published.";
+	var lblPostPublished="Post was published.";
+', 
+', 
+ ',  ', 
+',  ', LOGIN', 
+', 
+ ',  Company',  ',  Company',  ',  ', Overview of the Company',  ', Mission, Vision and Values',  ', Management Team',  ', A Profile of the MD & CEO',  ', Promoter Group Entities',  ', Brand Manappuram, the early days',  ', The Social Relevance of Gold Loans',  ', Safalya - Success Stories',  ',  ',  Products',  ',  Products',  ',  ', Online Gold Loan',  ', Gold Loan',  ', SME Finance',  ', Forex & Money Transfer',  ', Commercial Vehicle Loan',  ', Depository Services',  ',  ',  ',  Subsidiaries',  ',  Subsidiaries',  ',  ', Manappuram Home Finance Pvt Ltd',  ', Manappuram Insurance Brokers Pvt Ltd',  ', Asirvad Microfinance Limited',  ',  ',  ',  Investors',  ',  Investors',  ',  ', Stock Watch',  ', Annual Reports',  ', Quarterly Results',  ', Notice to Shareholders',  ', Investor Contact',  ', Unpaid Dividend',  ', Corporate Governance',  Help Center',  ',  ', Our Branches',  ', Interest Rates',  ', Auction Venue',  ',  ', Careers',  ', Contact us', 
+', 
+     ', 
+            ',  ', News',  ', |',  ', Events',  ', |',  ', Blog', 
+        ', 
+        ', 
+            ',  ', Branch Network', 
+        ', 
+        ', 
+            ',  ', Help', 
+        ', 
+', 
+', 
+', 
+', 
+', top', 
+', 
+   var bool;  
+   $(document).ready(function () {
+     if ($(window).width() > 850) {
+			bool = true;
+			 $(".nav-cms ul:first").show();
+			
+        } else {
+            bool = false;
+			$(".nav-cms ul:first").show();
+        }
+    $(window).resize(function () {
+        if ($(window).width() > 850) {
+			bool = true;
+			 $(".nav-cms ul:first").show();
+			
+        } else {
+            bool = false;
+			$(".nav-cms ul:first").show();
+        }
+    });
+
+    $(".nav-cms ul li").each(function () {
+        if ($(this).find('ul').length > 0) {
+            $(this).addClass('sub-itm-lnk').append("<span class='expand plus'><span></span></span>")
+        }
+    })
+	$(".footerlink-block ul li").each(function () {
+        if ($(this).find('ul').length > 0) {
+            $(this).addClass('sub-itm-lnk').append("<span class='expand plus'><span></span></span>")
+        }
+    })
+	
+    $(".nav-cms ul:first > li").each(function () {
+
+        if ($(this).find('ul').length > 0) {
+            $(this).children("ul:first").addClass("sublevel");
+        }
+    }).addClass('level01');
+
+    var ulTop = parseInt($(".sublevel").css('top'));
+    $(".nav-cms .menu-mobile ul:first > li").hover(function () {
+        if (bool) {
+            $(this).find(".sublevel").slideDown('slow', 'easeInOutCubic').animate({
+//                "opacity": 1
+            }, 200);
+        }
+    }, function () {
+        if (bool) {
+            $(".sublevel").hide().css({
+               
+//                "opacity": 0
+            });
+        }
+    });
+
+    $(".mobmenu").click(function () {
+        if (!bool) {
+            $(".btm-bar .nav-cms .menu-mobile > ul:first").toggleClass("move");
+            $(".btm-bar .nav-cms .menu-mobile").toggleClass("active");
+            $("body").toggleClass("overlay");
+            $(this).toggleClass("close"); 
+        }
+    });
+    $(".nav-cms .expand").click(function () {
+        if (!bool) {
+            var dis = $(this);
+            var siblings = dis.parent('li').siblings('li');
+            if (dis.hasClass("plus")) {
+                dis.removeClass("plus");
+                siblings.find('ul').hide();
+                siblings.find('.expand').addClass('plus');
+                dis.siblings("ul").slideDown(200);
+            } else {
+                dis.siblings("ul").slideUp(200);
+                dis.addClass("plus");
+                siblings.addClass("plus");
+
+            }
+        }
+
+    })
+	 $(".footerlink-block .expand").click(function () {
+        if (!bool) {
+            var dis = $(this);
+            var siblings = dis.parent('li').siblings('li');
+            if (dis.hasClass("plus")) {
+                dis.removeClass("plus");
+                siblings.find('ul').hide();
+                siblings.find('.expand').addClass('plus');
+                dis.siblings("ul").slideDown(200);
+            } else {
+                dis.siblings("ul").slideUp(200);
+                dis.addClass("plus");
+                siblings.addClass("plus");
+
+            }
+        }
+
+    })
+
+		setMenu();	 
+
+});
+
+function setMenu()
+{
+	if ($(window).width() > 850) {   
+		$(".level01 .sublevel").css({'visibility':'visible','display':'block'});		
+		$(".nav-cms .level01").each(function(){
+			var subLevel = $(this).find(".sublevel li").length;
+			var subLevelInner = $(this).find(".sublevel li ul li").length;
+			if(subLevelInner<=10)
+			{
+				$(this).addClass("sublevel01");
+			}
+			else
+			{	var outerwidth = $(".wrapper").width();
+				var totalWidthSubLevel = 0;		
+				$(this).children(".sublevel").children("li").each(function(){
+					totalWidthSubLevel = totalWidthSubLevel + $(this).outerWidth(true); 
+				});
+				if(totalWidthSubLevel>outerwidth)
+				totalWidthSubLevel = outerwidth;
+				$(this).children(".sublevel").css("width",totalWidthSubLevel+'px');	
+			}	
+		});	
+		$(".level01 .sublevel").css({'visibility':'visible','display':'none'});	
+	}
+}	
+     $(".btm-bar .nav-cms .menu-mobile > ul > li").hover(function () {
+    $(this).toggleClass("active");
+ });
+
+', 
+
+  ', 
+  ', 
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "1f1f78c0-8f30-4c73-85d6-9da6e9e3ba3c",
+      autoRegister: false, /* Set to true to automatically prompt visitors */
+      subdomainName: 'turbo-oorjit.onesignal.com',   
+      notifyButton: {
+          enable: true /* Set to false to hide */
+      }
+    }]);
+  ', 
+ 
+    ', 
+     ',      ', 
+', 
+', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+', 
+', 
+', 
+', 
+', Pay online', 
+', Loan Calculator', 
+', Call me back', 
+', Get in Touch', 
+', Login', 
+', New User? Register Now', 
+
+', 
+
+
+           ', 
+      ', 
+       
+
+', 
+
+    ', 
+', 
+   
+    ', 
+  
+  ', 
+ 
+', 
+      ', 
+      ', 
+         ', 
+            ', 
+                ', Pay Online', 
+                ', Loan Calculator', 
+                ', Call me Back', 
+                ', Get in Touch', 
+                ', Login / Sign up', 
+            ', 
+ 
+        ', 
+	  ', 
+	  ',  
+	  ', 
+',  
+$(document).ready(function() {
+	
+	$(".various").fancybox({
+	maxWidth    : 400,
+	maxHeight    : 350,
+	fitToView    : false,
+	width        : '70%',
+	height        : '70%',
+	autoSize    : false,
+	closeClick    : false,
+	openEffect    : 'fade',
+	closeEffect    : 'fade',
+    openSpeed   : 200
+	});
+	 
+	
+});
+', 
+', 
+ 
+    	          ', 
+            ',  
+                               ',  
+                                      ', THE CAREER LADDER AT MANAPPURAM ', 
+LEADS TO GREATER HEIGHTS !',  ', 
+                                                   ', 
+          ', 
+  	  
+    ', 
+  ',  
+    ', 
+    ', 
+        ', 
+            ', 
+    ', 
+      ', 
+   ', 
+    ', HOME', ->', CAREERS', 
+    ', 
+    ', 
+      
+     ', 
+     ',   ', 
+
+', 
+', 
+
+', 
+', 
+',  ', 
+
+', Click Here', 
+', 
+', 
+', 
+', 
+
+', THE EMPLOYE CAREER GROWTH AT MANAPPURAM IS AT GREATER PACE', 
+
+', CHOOSE A CAREER, NOT A JOB', 
+
+', LEARN ON THE JOB, SHARPEN YOUR SKILLS GROW TO HEIGHTS', 
+MAFIL gives ample opportunities to exhibit your potential skills and knowledge that will enhance your career growth. We do not put you in training before you are posted but we post you on the job and train you on the job and make you effective performer thereby ensuring your growth at a faster pace.', 
+
+', At MANAPPURAM, we believe in offering a long term career to our employees. For the right candidates, MANAPPURAM is a step in the right direction. Our domain is vast and offers ample opportunities for you to distinguish yourself and get recognised.', 
+
+', We at MANAPPURAM believe in the vast potential of human capital, be it a child, adult or old, this is what we have in mind for you. Our countrywide network and offices, multiple business verticals, fully owned subsidiaries etc. offers ample opportunities for you to grow.', 
+
+', In short, we offer the right environment for Professional growth, thus we are the preferred Employer', 
+
+', Join our Team at Manappuram. And count on us to deliver on your career aspirations.', 
+
+', Who Are We?', 
+
+', We are a company with humble beginnings that has stayed true to its roots.', 
+
+', Manappuram Finance Limited is the first corporate entity to enter the gold loans business and went on to create ripples in India\u2019s wider financial sector. We are India\u2019s first gold loan company to be listed in the stock market and the first to be credit rated. We take credit for having modernised a very traditional activity, introducing professionalism, technology and modern management practices to age-old practices. Not surprisingly, we have the status of pioneers in the business.', 
+
+', Our origins dates back to 1949 when Manappuram was founded in Valapad (a coastal village in the Thrissur District of Kerala) by the late V.C. Padmanabhan. For a long time, the firm remained a single branch business dealing in pawn broking and money lending on a modest scale. Thanks to the integrity and foresight of our Founder, even in those days Manappuram had acquired a reputation as solid as of a bank. To the people of this area, Manappuram is the safe place to lodge their money.', 
+
+', In 1986, Shri V.P. Nandakumar took over the reins of this one Branch business upon the death of his father. Since then, the story of Manappuram has been witnessing remarkable growth touching new milestones year on year. Manappuram Finance Ltd. was incorporated in 1992 and is recognised today as a leading national player in its core activity of gold loans. We have a nationwide presence through 3,747 branches across 28 states and UTs. Our Assets under Management (AUM) exceed Rs.13,000 crores and our workforce is about 19,000 strong.', 
+
+', Beyond the focus on business, our wide-ranging Corporate Social Responsibility (CSR) activities are proof of our abiding commitment to the wider society. For example, through the Manappuram Foundation, we provide free health insurance coverage of up to Rs.60, 000 per annum to over one lakh people in the BPL category in the Valapad and six other adjoining Panchayats of Thrissur District. In fact, since the project began in May 2010, over six thousand families have benefitted, and about four crore rupees have been reimbursed to them against their medical bills.', 
+
+', And, talking about staying true to our roots, even today we continue to be based in that same village of Valapad where we were born six decades ago.', 
+
+', Working at Manappuram', 
+
+', Manappuram is a different kind of work experience... we are a diverse and talented lot, passionate about what we do.', 
+
+', There are challenges to test your mettle every day, and frankly, we expect our people to raise to the occasion. We take on board people who bring focus and commitment to their work, and who are willing to walk extra mile to deliver results.', 
+
+', Our fast growing business provides excellent opportunities for you to put your knowledge and skills to work. We encourage our future leaders to innovate and to think creatively. We are now on a mission to foster diversity in the workplace in keeping in mind our national profile.', 
+
+', We believe that people give their best at work when they have a stake in the outcome, when they have share in the outcome. That was how we became perhaps the first company in Kerala to offer lucrative ESOPs to all deserving employees who remain for long-term career building.. We sponsor employees for an MBA/BBA programme of repute. In fact, our values are rooted in ethics and transparency, in the idea that success must be shared with all our stakeholders.', 
+
+', Work with Manappuram is enriching in terms of career, skill and competency enhancement along with growth it offers.', 
+',  ', 
+    
+', 
+
+', 
+', 
+	', Disclaimer', 
+	', It has been brought to our notice that certain individuals are misleading job applicants by claiming themselves to be employees of Manappuram Finance Limited or as authorized job agency of Manappuram Finance Limited. They have been misguiding the candidates to deposit certain amount of money in lieu of providing employment or as deposit towards travel for final interview round, etc.', 
+	', Manappuram Finance Limited does not take any such fees/facilitation charges in lieu of employment.', 
+	', Anyone dealing with such an agency/employment portal/individual will be doing so at his/her own risk and the Company will not be held responsible for such loss or damage suffered directly or indirectly.', 
+', 
+', 
+', 
+', 
+', 
+    ', 
+        ', 
+           ', 
+            ', 
+                ', News', View all', 
+                ', 
+								  					                    				    ', 
+                        ',     
+                        ', 29-Dec-2016 ', 
+                        ', Mr. V. P. Nandakumar, MD & CEO, Manappuram Finance Limited, makes it to Business Today\u2019s Top 40 Best CEOs in the BFSI Sector, 2016.', 
+                        ', .', 
+                        ', 
+                    ', 
+									                    				    ', 
+                        ',     
+                        ', 27-Dec-2016 ', 
+                        ', Gold loan now just a click away: Manappuram Finance, CTO', 
+                        ', ETCIO,
+
+Manappuram Finance has introduced a mobile...', 
+                        ', 
+                    ', 
+								                ', 
+			 ', 
+			 			            ', 
+             ', BLOG', View all', 
+             ', 
+                                  ', 
+                                
+                 ', 
+                     ', A REPORT ON THE ACTIVITIES OF SMT. SAROJINI PADMANABHAN MEMORIAL WOMEN\u2019S CLUB', 
+                 ', 27-Oct-2016', 
+                 ', 
+             ', 
+            ', 
+						            ', 
+                 ', Events', View all', 
+             ', 
+                                           ', 
+                                  
+                 ', 
+                     ', Renovated Manappuram Yoga Centre Inaugurated', 
+                ', Mr. V. P. Nandakumar, MD & CEO, Manappuram Finance...', 
+                 ', 
+             ', 
+                
+            ', 
+            ', 
+            
+        ', 
+        
+    ', 
+    
+',   
+ 
+                 ', 
+ ', 
+      ', 
+', 
+      
+        ', 
+            ', 
+          ', Newsletter sign up', 
+        ', Subscribe Our Newsletter for Latest News & Updates', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                           ', Please enter valid name', 
+                    ', 
+            
+                ', 
+                ', 
+                    ', 
+                    ', Enter valid Email Address', 
+               ', 
+                ', 
+                ', 
+                    ', 
+                      ', 
+                      ', 
+                ', 
+        
+        ', 
+        ', 
+   
+        
+        ', 
+	   ', 
+
+',   
+            ',               
+             
+
+	', 
+	', 
+      ', 
+        
+    ', 
+     ',     
+      ', 
+             ',  ', 
+               ',  ', 
+', 
+',  ', 
+', ONLINE GOLD LOAN', 
+
+', With our new online gold loan facility, you can avail gold loan 24x7, from anywhere in the world!', 
+', get started', 
+', 
+', 
+               ',  ', 
+', 
+	',  ', Gold loan',  ', 
+	',  ', SME finance',  ', 
+	',  ', money transfer',  ', 
+	',  ', commercial vehicle loans',  ', 
+	',  ', Depository Services',  ', 
+', 
+
+', 
+	', 
+	', Subsidiary', 
+	', 
+	',  ', Micro Finance',  ', 
+	',  ', Home Loan',  ', 
+	',  ', Insurance',  ', 
+', 
+', 
+               ',  ', 
+               ',  ', 
+', Customer Service', 
+
+', Toll Free', 
+
+', 1800-220-22-33', 
+
+', 8.00 AM - 8.00 PM on Monday to Saturday', 
+', 
+', [email protected]', u"/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */", 
+               ',  ', 
+', 
+	', 
+	', Gold Loan Enquiry', 
+
+	', 
+	', Andhra Pradesh', 93498 11115', 
+
+	', Central and Eastern States', 93882 90833 ', 
+
+	', Karnataka', 93496 11115', 
+
+	', Kerala', 93887 11115', 
+
+	', Northern States', 93494 11115', 
+
+	', Tamil Nad, 93494 41473', 
+
+	', Western States', 93886 11115', 
+
+	', SMS', GLOAN to 56070', 
+	', 
+
+	', Gold Loan FAQ', 
+	', 
+', 
+', 
+               ',  ', 
+         ', 
+ ',    
+', 
+    ', 
+		', 	
+      ', 
+      ', 
+    ', 
+    ', 
+    ',  
+  
+  ',  
+  ', 
+ ', 
+  ', 
+  ', 
+  
+     ', 
+  ', 
+
+ ', 
+    ', 
+      ', 
+        ', 
+          ', 
+           ',  ABOUT US',  ',  ', Overview of the Company',  ', Mission, Vision and Values',  ', Management Team',  ', A Profile of the MD & CEO',  ', Promoter Group Entities',  ', Brand Manappuram, the early days',  ', The Social Relevance of Gold Loans',  Products',  ',  ', Online Gold Loan',  ', Gold Loan',  ', SME Finance',  ', Forex & Money Transfer',  ', Commercial Vehicle Loan',  ', Depository Services',  Subsidiaries',  ',  ', Manappuram Home Finance Pvt Ltd',  ', Manappuram Insurance Brokers Pvt Ltd',  ', Asirvad Microfinance Limited',  INVESTORS',  ',  ', Stock Watch',  ', Annual Reports',  ', Quarterly Results',  ', Notice to Shareholders',  ', Investor Contact',  ', Notice to Customers',  ', Unpaid Dividend',  ', Corporate Governance',  OTHERS',  ',  ', Interest Rates',  ', Auction Policy',  ', Auction Venue',  ', Empanelment of Auctioneer',  ', Fair Practice Code',  ', Disclaimer',  ', Feedback',  ', Media',  ', Gallery',  ', Media kit', 
+          ', 
+        ', 
+      ', 
+      ', 
+              ', OFFICE', 
+         ', Manappuram House, ', 
+         Head Office:  IV / 470 (old) W638A (New), Manappuram House, Valapad,Thrissur ', 
+         Kerala, India, ', 
+         pin code : 680567
+        ', 1800-420-22-33 (toll free)', 
+         ', [email protected]', u"/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */", 
+        ',  
+          ',   
+ ', 
+', 
+                
+          
+   ', 
+   
+   ', 
+    ', 
+      ', 
+        ', 
+          ', 
+          ', 
+          ', 
+          ', Facebook', 
+          ', Like us on Facebook', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', Twitter', 
+          ', Follow us on Twitter', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', Linkedin', 
+          ', Follow us on Linkedin', 
+          ', 
+          ', 
+          ', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', 
+           ', 
+            ', 
+            ', Youtube', 
+          ', Subscribe on Youtube', 
+          ', 
+          
+          ', 
+          ', 
+          ', 
+          ', 
+          
+          ', 
+          ', Mail Us', 
+          ', Any Question?', 
+          ', 
+          ', 
+          ', 
+        ', 
+      ', 
+    ', \u200b', 
+ ', 
+   
+   ', 
+', 
+ ', 
+  ', 
+  ', 
+  
+  
+', 
+ ', 
+    ',  ', © 2017 Manappuram.    All rights reserved.', 
+   
+   ', Privacy',  ',  ', Sitemap', Site best viewed in browsers I.E 11+, firefox 30+, chrome 30+', 
+     ', 
+     ', 
+     get mobile app ', 
+     ', 
+     ', 
+     ', 
+      ', 
+  ', 
+  
+ ', 
+     $(document).ready(function(){
+         
+        
+          $(".getlnk-txtbx").hide();
+         
+         $(".getlnk-btn").click(function() {
+              $(".getlnk-txtbx").show();
+         })
+         
+          var ele = $(".getlnk-txtbx");
+          var ele2 = $(".getlnk-btn");
+         
+         $("body").click(function(e){
+             
+             if (!ele.is(e.target) && !ele2.is(e.target) )
+    {
+        ele.hide();
+    }
+             
+         });
+       
+     });
+', 
+
+', 
+var GLOBAL_BASE_PATH = '';
+$(document).ready(function(){ 
+$(document).on('blur','#subscName',function() { $(this).validate( { form : "formCmsEmailSubscription" , field : "subscName" , key : "required~*isAlpha" , error: "Please enter valid name", inline:"1" , group: "", row: ""} ); });
+ $('#formCmsEmailSubscription').bindFirst('submit',function() { return $('#subscName').validate( { form : "formCmsEmailSubscription" , field : "subscName" , key : "required~*isAlpha" , error: "Please enter valid name" , group: "", row: "", inline:"1"} ); });
+ $(document).on('blur','#cmsSubscEmailID',function() { $(this).validate( { form : "formCmsEmailSubscription" , field : "cmsSubscEmailID" , key : "required~*email" , error: "Enter valid Email Address", inline:"1" , group: "", row: ""} ); });
+ $('#formCmsEmailSubscription').bindFirst('submit',function() { return $('#cmsSubscEmailID').validate( { form : "formCmsEmailSubscription" , field : "cmsSubscEmailID" , key : "required~*email" , error: "Enter valid Email Address" , group: "", row: "", inline:"1"} ); });
+ $('#formCmsEmailSubscription').bindLast('submit',function(){var className='.hid_err_'+$(this).attr('name')+'_validations';return $.scrollToDiv(className);});});', 
+
+
+', 
+', u"
+    $(document).ready(function(){
+if ($('.table-respo').length) {
+    var th_data;
+    $('.table-respo').each(function () {
+        var _table = $(this);
+        $(this).find('th').each(function (index) {
+            var index_th = index;
+            th_data = $(this).text();
+            _table.find('tr').each(function () {
+                $(this).find('td').each(function (index) {
+                    var index_td = index;
+                    if (index_th == index_td) {
+                        $(this).attr('data-name', th_data);
+                    }
+                });
+            });
+        });
+    });
+}
+    });
+",  
+  ',  
+', 
+',  
+', 
+', 
+', 
+$(document).ready(function() {
+	if (bool) {	
+		//$('#scrollbar1').tinyscrollbar({ sizethumb:100 }); 
+		var leftBlockHeight	=$(".left-content-block01").height();
+		var rightBlockHeight=$(".right-content-block01").height();
+		
+		$(window).scroll(function(){ 
+			var wrapper = $("#content-wrapper").offset();
+			var wrapperOuterHeight = $("#content-wrapper").outerHeight();
+			var wrapperTop = wrapper.top;
+			var docScrollTop = $(this).scrollTop();
+			var adjustedTop = docScrollTop ;
+			var windowH=$(window).height();
+			var diff=$(window).scrollTop()-($(document).height() - windowH-parseInt($("#footer").height()));
+			if(adjustedTop-wrapperTop>0)
+			{
+				if(diff>0){
+					if(leftBlockHeight<rightBlockHeight){
+						if($(".position-element").height()>windowH-diff){
+							$(".position-element").css("bottom",(diff)+'px');	
+							$(".position-element").css("position",'fixed');	
+							$(".position-element").removeClass("fix");
+							
+						}
+					}
+					
+					$("#scroll-top").css('bottom',diff+"px");
+				}
+				else{
+					$("#scroll-top").css('bottom',"0px");
+					if(leftBlockHeight<rightBlockHeight){
+						$(".position-element").addClass("fix");	
+						  
+						$(".position-element").css("bottom",'');	
+						$(".position-element").css("position",'');	
+					}
+					
+				}
+			}
+			else
+			{
+				$(".position-element").removeClass("fix");			
+			}
+			var bottom = $(window).height() - wrapperTop - wrapperOuterHeight;		
+		});
+	}
+
+	   $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('#scroll-top').fadeIn();
+            } else {
+                $('#scroll-top').fadeOut();
+            }
+        }); 
+ 
+        $('#scroll-top').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+});
+
+', 
+
+', u"
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-9272445-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	
+	
+", 
+
+
+
+', u"/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */"]

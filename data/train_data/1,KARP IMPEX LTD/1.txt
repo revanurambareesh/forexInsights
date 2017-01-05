@@ -1,0 +1,523 @@
+[
+    ', 
+', 
+
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+	
+                    ', 
+                        ', MEMBER LOGIN', 
+                    ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                                User Name :', 
+                            ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                Password :', 
+                            ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Guest Login', 
+                                ', Login',                                                                                                             
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Sign up', 
+                                ', 
+                                    Tender Registration', 
+                            ', 
+                        ', 
+                    ', 
+                    ', 
+                    ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', VIEW CERTIFICATE', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', GO',  ', 
+                            ', 
+                        ', 
+                    ', 
+                
+', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', About KARP', 
+                    ', 
+                    ', 
+                    ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                    ', 
+                    ', 
+                        is a trademark used under licence from The De Beers Group of Companies.', 
+                    ', 
+                    ', 
+                         ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ©2009, KARP Group, All right reserved.
+                    ', 
+                    ', 
+                        (', Privacy Policy', 
+                        | ', Terms and Conditions', )', 
+                ', 
+            ', 
+        ', 
+    ', 
+    ', 
+        ', 
+        ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+    ', 
+        ', 
+            ', 
+                SHOW INVITATION :', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+
+        window.onresize = window_resize;
+
+        function window_resize(ev) {
+            setimagesize();
+            //$('#main').center();
+        }
+
+        function setimagesize() {
+            try {
+
+                document.getElementById("DIV_ADV").style.height = (document.documentElement.clientHeight) + "px";
+                $(".adv_image").height(document.documentElement.clientHeight - (document.documentElement.clientHeight * 0.30));
+                $(".adv_image").width('auto');
+                document.getElementById("DIV_ADV").style.height = 'auto';
+                document.getElementById("DIV_ADV").style.width = 'auto';
+                //document.getElementById("DIV_ADV").style.overflow = "auto";
+                $("#DIV_ADV").center();
+            }
+            catch (err) {
+
+            }
+            //alert(document.documentElement.clientWidth + "px"); 
+            //alert("Tried");
+
+        }
+
+        $(document).ready(function () {
+            //            if ($('#ad_show').val() == "1") {
+            //                
+            //                $('#ad_show').val("2");
+            //            }
+            //$(".simple-modal-overlay").hide();
+            //$("#DIV_ADV").hide();
+            //$("#DIV_FILTER").center();
+            if (document.cookie.indexOf('visited=true') == -1) {
+                var fifteenDays = 1000 * 60 * 60 * 24 * 1;
+                var expires = new Date((new Date()).valueOf() + fifteenDays);
+                document.cookie = "visited=true;expires=" + expires.toUTCString();
+
+            }
+            else {
+                //alert('no colorbox -- we\'ve already shown in it.');
+            }
+
+            $('#CMD__CLOSE , div#DIV_ADV').on('click', function () {
+                $(".simple-modal-overlay").hide();
+                $('div#DIV_ADV').fadeOut("slow");
+            });
+
+            /*$('div#DIV_ADV').on('click', function() {
+            $(".simple-modal-overlay").hide();
+            $('div#DIV_ADV').hide();
+            });*/
+
+            $("#DIV_ADV").center();
+
+        });
+
+
+
+
+        $(".adv_image").load(function () {
+            $(".simple-modal-overlay").show();
+            $("#DIV_ADV").show();
+            setimagesize();
+
+        });
+
+
+        /*
+        $(".adv_image")
+        .after('<img src="/Admin/images/loading.gif" style="align:center" />')
+        .hide()
+        .attr("src", $(this).attr('src'))
+        .one('load', function() {
+        $("#DIV_ADV").center();
+        $(this).fadeIn().next().remove();
+        setimagesize();
+        $("#DIV_ADV").fadeIn(3000);                        
+        $(".simple-modal-overlay").show();
+        })
+        .load(function() {
+        //$(this).hide();
+        //console.log("image loaded correctly");
+        //setImageLoading();
+        })
+        .error(function() {
+        $("#DIV_ADV").hide();
+        //console.log("error loading image");
+        //iCount = 100;
+        //vFrameSpeed = 160;
+        //setImageLoading();
+        });
+        */
+
+
+
+        jQuery.fn.centerP = function () {
+            //this.css("position", "absolute");
+            //this.css("top", (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop() + "px");
+            //this.css("left", (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft() + "px");
+            return this;
+        }
+
+        jQuery.fn.center = function () {
+            this.css("position", "absolute");
+            //this.css("top", (($(window).height() - this.outerHeight()) / 2) +$(window).scrollTop() + "px");
+            this.css("left", (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft() + "px");
+            return this;
+        }
+
+    ', 
+    ', 
+'][
+    ', 
+', 
+
+', 
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+	
+                    ', 
+                        ', MEMBER LOGIN', 
+                    ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                                User Name :', 
+                            ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                Password :', 
+                            ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Guest Login', 
+                                ', Login',                                                                                                             
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Sign up', 
+                                ', 
+                                    Tender Registration', 
+                            ', 
+                        ', 
+                    ', 
+                    ', 
+                    ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', VIEW CERTIFICATE', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', GO',  ', 
+                            ', 
+                        ', 
+                    ', 
+                
+', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', About KARP', 
+                    ', 
+                    ', 
+                    ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                    ', 
+                    ', 
+                        is a trademark used under licence from The De Beers Group of Companies.', 
+                    ', 
+                    ', 
+                         ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ©2009, KARP Group, All right reserved.
+                    ', 
+                    ', 
+                        (', Privacy Policy', 
+                        | ', Terms and Conditions', )', 
+                ', 
+            ', 
+        ', 
+    ', 
+    ', 
+        ', 
+        ', 
+        ', 
+            ', 
+            ', 
+        ', 
+    ', 
+    ', 
+        ', 
+            ', 
+                SHOW INVITATION :', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+
+        window.onresize = window_resize;
+
+        function window_resize(ev) {
+            setimagesize();
+            //$('#main').center();
+        }
+
+        function setimagesize() {
+            try {
+
+                document.getElementById("DIV_ADV").style.height = (document.documentElement.clientHeight) + "px";
+                $(".adv_image").height(document.documentElement.clientHeight - (document.documentElement.clientHeight * 0.30));
+                $(".adv_image").width('auto');
+                document.getElementById("DIV_ADV").style.height = 'auto';
+                document.getElementById("DIV_ADV").style.width = 'auto';
+                //document.getElementById("DIV_ADV").style.overflow = "auto";
+                $("#DIV_ADV").center();
+            }
+            catch (err) {
+
+            }
+            //alert(document.documentElement.clientWidth + "px"); 
+            //alert("Tried");
+
+        }
+
+        $(document).ready(function () {
+            //            if ($('#ad_show').val() == "1") {
+            //                
+            //                $('#ad_show').val("2");
+            //            }
+            //$(".simple-modal-overlay").hide();
+            //$("#DIV_ADV").hide();
+            //$("#DIV_FILTER").center();
+            if (document.cookie.indexOf('visited=true') == -1) {
+                var fifteenDays = 1000 * 60 * 60 * 24 * 1;
+                var expires = new Date((new Date()).valueOf() + fifteenDays);
+                document.cookie = "visited=true;expires=" + expires.toUTCString();
+
+            }
+            else {
+                //alert('no colorbox -- we\'ve already shown in it.');
+            }
+
+            $('#CMD__CLOSE , div#DIV_ADV').on('click', function () {
+                $(".simple-modal-overlay").hide();
+                $('div#DIV_ADV').fadeOut("slow");
+            });
+
+            /*$('div#DIV_ADV').on('click', function() {
+            $(".simple-modal-overlay").hide();
+            $('div#DIV_ADV').hide();
+            });*/
+
+            $("#DIV_ADV").center();
+
+        });
+
+
+
+
+        $(".adv_image").load(function () {
+            $(".simple-modal-overlay").show();
+            $("#DIV_ADV").show();
+            setimagesize();
+
+        });
+
+
+        /*
+        $(".adv_image")
+        .after('<img src="/Admin/images/loading.gif" style="align:center" />')
+        .hide()
+        .attr("src", $(this).attr('src'))
+        .one('load', function() {
+        $("#DIV_ADV").center();
+        $(this).fadeIn().next().remove();
+        setimagesize();
+        $("#DIV_ADV").fadeIn(3000);                        
+        $(".simple-modal-overlay").show();
+        })
+        .load(function() {
+        //$(this).hide();
+        //console.log("image loaded correctly");
+        //setImageLoading();
+        })
+        .error(function() {
+        $("#DIV_ADV").hide();
+        //console.log("error loading image");
+        //iCount = 100;
+        //vFrameSpeed = 160;
+        //setImageLoading();
+        });
+        */
+
+
+
+        jQuery.fn.centerP = function () {
+            //this.css("position", "absolute");
+            //this.css("top", (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop() + "px");
+            //this.css("left", (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft() + "px");
+            return this;
+        }
+
+        jQuery.fn.center = function () {
+            this.css("position", "absolute");
+            //this.css("top", (($(window).height() - this.outerHeight()) / 2) +$(window).scrollTop() + "px");
+            this.css("left", (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft() + "px");
+            return this;
+        }
+
+    ', 
+    ', 
+']

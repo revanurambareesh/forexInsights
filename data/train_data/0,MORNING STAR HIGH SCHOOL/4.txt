@@ -1,0 +1,1281 @@
+[
+    
+
+', 
+
+    ', 
+', 
+', 
+', 
+
+
+', 
+', 
+            
+                function OpenNewWindow(url, arguments)
+                {  
+                    return window.open(url, "",arguments);
+                }
+
+                function OpenNewWindowJS(url, ignore, arguments){  
+                    return OpenNewWindow(url, arguments);  
+                }
+
+
+                function OpenNewWindowNoReturn(url, arguments){  
+                    OpenNewWindow(url, arguments);  
+                }
+
+              ',  
+', 
+', 
+', 
+//<![CDATA[
+function _search(){var frm=document.forms['aspnetForm'];if(!frm)frm=document.aspnetForm;window.location='/workspaces/Search.aspx?contextId='+frm.ctl00_SearchPlace.value+'&place='+frm.ctl00_SearchOne.value+'&searchTerm='+escape(frm.ctl00_SearchTerm.value).replace(/\+/g, '%2C').replace(/\"/g,'%22').replace(/'/g, '%27');}
+            function clickButton(e, buttonid)
+            { 
+              var bt = document.getElementById(buttonid); 
+              if (typeof bt == 'object')
+		        { 
+
+                    if (navigator.appName.indexOf('Microsoft Internet Explorer')>(-1)){ 
+                          if (event.keyCode == 13){ 
+                                bt.click(); 
+                                return false; 
+                          } 
+                    } 
+	    	        else
+			        {
+	                  if (e.keyCode == 13)
+	          	        { 
+                                bt.click(); 
+                                return false; 
+                          } 
+                    } 
+              } 
+            } //]]>
+', 
+
+', 
+', 
+', 
+', u"
+//<![CDATA[
+
+String.prototype.Trim = function() 
+{
+    return this.replace(/^\s+|\s+$/g,'');
+}
+String.prototype.LTrim = function() 
+{
+    return this.replace(/^\s+/,'');
+}
+String.prototype.RTrim = function() 
+{
+    return this.replace(/\s+$/,'');
+}
+
+
+function DisplayError(errorMessageTableRowId, errorMessageControlId, errorMessage, defaultErrorMessage)
+{
+    var oErrorMessageControl = document.getElementById(errorMessageControlId);
+    if (oErrorMessageControl == null)
+        alert('Error message control does not exist. you may need to change the ErrorDisplayTableRow from Visible=false to style=display:none');
+    else
+    {
+        var ErrMsg = errorMessage;
+        if (ErrMsg == null || ErrMsg == '')
+            ErrMsg = defaultErrorMessage;
+        if (ErrMsg != null && ErrMsg != '')
+        {
+            ErrMsg = ErrMsg.Trim();
+            if (ErrMsg.charAt(ErrMsg.length - 1) != '.') 
+                ErrMsg += '.';
+            ErrMsg = '&nbsp;' + ('Error: ' + ErrMsg).fontcolor('Red');       // style='color: red'
+        }
+        if (oErrorMessageControl.nodeName == 'LABEL' || oErrorMessageControl.nodeName == 'SPAN')
+            oErrorMessageControl.innerHTML = ErrMsg;
+        else     
+            oErrorMessageControl.value = ErrMsg;                                                    // Can't be used for displaying error message
+        if (errorMessageTableRowId != null && errorMessageTableRowId != '')
+        {
+            var oErrorMessageTableRow = document.getElementById(errorMessageTableRowId); 
+            if (oErrorMessageTableRow == null)
+                alert('Error message TableRow does not exist. you may need to change the ErrorDisplayTableRow from Visible=false to style=display:none'); 
+            else 
+                oErrorMessageTableRow.style.display = (ErrMsg=='') ? 'none' : '';
+        }    
+    }
+    return (ErrMsg == '');
+}
+
+
+function CommonFunction_DateTime_MinDateTime()
+{
+    return new Date(1, 0, 1);
+}
+function CommonFunction_DateTime_MonthNameToMonth(monthName)
+{
+    var MonthName = monthName.substr(0, 3).toLowerCase();
+    switch (MonthName)
+    {
+        case 'jan' : return '01';
+        case 'feb' : return '02';
+        case 'mar' : return '03';
+        case 'apr' : return '04';
+        case 'may' : return '05';
+        case 'jun' : return '06';
+        case 'jul' : return '07';
+        case 'aug' : return '08';
+        case 'sep' : return '09';
+        case 'oct' : return '10';
+        case 'nov' : return '11';
+        case 'dec' : return '12';
+        default    : return '00'; 
+    }
+}
+function CommonFunction_DateTime_ToDateTime(dateTimeString)
+{
+    dateTimeString = dateTimeString.Trim();
+    if (/^\d{1,2}\/\d{1,2}\/\d{4}\s*/.test(dateTimeString))                     // Default Date format(with any Time format): '10/12/2008 02:23:45 PM GMT-4'
+        return new Date(dateTimeString);                            
+    else if (/^\d{4}-\d{1,2}-\d{1,2}\s*/.test(dateTimeString))                  // '2008-10-12 02:23:45 PM GMT-4'
+    {
+        /^(\d{4})-(\d{1,2})-(\d{1,2})\s*(.*)/.exec(dateTimeString);
+        var NewDateTimeString = RegExp.$2 + '/' + RegExp.$3 + '/' + RegExp.$1 + ' ' + RegExp.$4;
+//        alert(RegExp.input + ' || ' + RegExp.$1 + ' || ' + RegExp.$2 + ' || ' + RegExp.$3 + ' || ' + RegExp.$4 + ' || ' + NewDateTimeString + ' || ' + new Date(NewDateTimeString));
+        return new Date(NewDateTimeString);
+    }
+    else if (/^\d{2}-\d{1,2}-\d{1,2}\s*/.test(dateTimeString))                  // '08-10-12 02:23:45 PM GMT-4'
+        return CommonFunction_DateTime_ToDateTime('20' + dateTimeString);
+    else if (/^[a-zA-Z]+\s+\d{1,2}\s*\,\s*\d{4}\s*/.test(dateTimeString))       // 'October 01, 2008 22:33:44'
+    {
+        /^([a-zA-Z]+)\s+(\d{1,2})\s*\,\s*(\d{4})\s*(.*)/.exec(dateTimeString);
+        var NewDateTimeString = CommonFunction_DateTime_MonthNameToMonth(RegExp.$1) + '/' + RegExp.$2 + '/' + RegExp.$3 + ' ' + RegExp.$4;
+//        alert(RegExp.input + ' || ' + RegExp.$1 + ' || ' + RegExp.$2 + ' || ' + RegExp.$3 + ' || ' + RegExp.$4 + ' || ' + NewDateTimeString + ' || ' + new Date(NewDateTimeString));
+        return new Date(NewDateTimeString);
+    }
+    else return CommonFunction_DateTime_MinDateTime();
+}
+
+
+function AppendHtmlToParent(childControl, HtmlString)
+{
+    var Id = childControl.id;
+    childControl = document.getElementById(Id);
+    childControl.parentNode.innerHTML += HtmlString;
+    childControl = document.getElementById(Id);
+    return childControl;
+}
+function RemoveHtmlFromParent(childControl, HtmlStringPattern, HtmlString)
+{
+    if (HtmlString != null)
+    {
+        childControl = AppendHtmlToParent(childControl, HtmlString);
+        var MatchString = childControl.parentNode.innerHTML.match(HtmlStringPattern);
+        if (MatchString != null)
+            alert(MatchString);
+        else    
+            alert('Error! HtmlStringPattern can not match the HtmlString when it is added to innerHTML.');
+    }
+    var Id = childControl.id;
+    var InputValue = childControl.value;
+    childControl.parentNode.innerHTML = childControl.parentNode.innerHTML.replace(HtmlStringPattern, '');
+    childControl = document.getElementById(Id);            
+    childControl.value = InputValue;
+    return childControl;
+}
+
+
+function ControlCollectionToArray(ControlArray1, ControlArray2)
+{
+    var ControlCount = 0;
+    for (var i=0; i<arguments.length; i++)
+        ControlCount += arguments[i].length;
+    var ControlArray = new Array(ControlCount);
+    ControlCount = 0;
+    for (var i=0; i<arguments.length; i++)
+    {
+        var ControlCollection = arguments[i];
+        for (var j=0; j<ControlCollection.length; j++)
+            ControlArray[ControlCount++] = ControlCollection[j];
+    }
+//    for (var i=0; i<ControlArray.length; i++)
+//        alert(i + '-[' + ControlArray[i] + '|' + ControlArray[i].value + ']');
+    return ControlArray;
+}
+
+//]]>
+", 
+
+', 
+', u"
+//<![CDATA[
+
+function InputConstraint_OnLoad(textBoxControlId, oRegExp)            
+{
+    oTextBoxControl = document.getElementById(textBoxControlId);
+	if (oTextBoxControl)
+	{
+		if (oRegExp.test(oTextBoxControl.value))
+			oTextBoxControl.OldValue = oTextBoxControl.value;
+		else 
+			oTextBoxControl.value = oTextBoxControl.OldValue = '';
+	}
+}
+function InputConstraint_OnChange(oTextBoxControl, oRegExp)         
+{
+    if (oRegExp.test(oTextBoxControl.value))
+        oTextBoxControl.OldValue = oTextBoxControl.value;
+    else {
+        if (typeof(oTextBoxControl.OldValue) == 'undefined' || oTextBoxControl.value == '') 
+            oTextBoxControl.OldValue = '';
+        oTextBoxControl.value = oTextBoxControl.OldValue;
+    } 
+}
+
+function isChildOf(parentId,element) {
+    while(element) {
+       if(element.id&&element.id.indexOf(parentId)> -1) {
+          return true; 
+
+       } 
+       element=element.parentNode; 
+   } 
+
+   return false;
+}
+function onRowDroppingctl00_ContentPlaceHolder1_ctl07_grdPendingImageOrders(sender,args) {
+   if(sender.get_id()== 'ctl00_ContentPlaceHolder1_ctl07_grdPendingImageOrders') {
+      var node=args.get_destinationHtmlElement();
+      if(!isChildOf('ctl00_ContentPlaceHolder1_ctl07_grdPendingImageOrders',node)) {
+         args.set_cancel(true);
+      }
+   }
+} 
+
+//]]>
+", 
+
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            
+            
+    
+    
+            
+    
+    
+    
+    
+    
+    
+    
+    
+            
+    
+            
+    
+    
+    
+    
+    
+    
+            
+    
+    
+    
+    
+    
+    ', &amp;nbsp;', &amp;nbsp;', Bozeman Public Schools', B', Bozeman High School', Bridger Alternative Program', C', Chief Joseph Middle School', E', Emily Dickinson Elementary School', H', Hawthorne Elementary School', Hyalite Elementary School', I', Irving Elementary School', L', Longfellow Elementary School', M', Meadowlark Elementary School', Morning Star Elementary School', S', Sacajawea Middle School', W', Whittier Elementary School', 
+	', Search', 
+', View Original', Spanish', Cantonese', French', German', Italian', Tagalog', Vietnamese', Korean', Russian', Hindi', Guest',  | ', Login', 
+    
+    
+', 
+	', 
+		', Home', Morning Star News', 
+			', 
+				', Morning Star School Newsletters', 
+			', 
+		', Calendar', 
+			', 
+				', Morning Star Events Calendar', 
+			', 
+		', For Parents & Students', 
+			', 
+				', For Morning Star Parents & Students', About Us', Enrollment', kidsLINK Afterschool', Parent Advisory Council', Library Catalog', Moodle Pages', Morning Star Student Work', Multi-Tiered System of Support', Our Library', 
+					', 
+						', Student Work', Library Media Curriculum', 
+					', 
+				', SchoolMessenger Information for Parents', Volunteer with the Bozeman Public Schools', 
+			', 
+		', Contact School', 
+			', 
+				', Safe Routes to School', 
+			', 
+		', Staff Directory', 
+			', 
+				', Our Staff Directory', 
+			', 
+		', For Staff', 
+	', 
+', 
+
+    ', 
+    ', 
+
+        $(document).ready(function () {
+            giveAllMenuLinksAUniqueIdentifier();
+            $(".rmLink").on("keydown", setSpacebarToOpenMenus);
+        });
+
+        function giveAllMenuLinksAUniqueIdentifier() {
+            //Give all menu items a unique attribute value so that I can identify them when spacebar is clicked. Same 'menunumber' attribute is set in .aspx code on menu items.
+            var index = 0;
+            $(".telerik_main_menu li.rmItem a.rmLink").each(function (index) {
+                $(this).attr("menunumber", index);
+            });
+        }
+
+        function setSpacebarToOpenMenus(e) {
+            //Open submenus on spacebar press. 
+            var theKey = e.which;
+            if (theKey == 32) { // 32 is keycode for spacebar. 
+                var menuNumber = $(this).attr("menunumber");
+                var menu = $find("ctl00_ContentPlaceHolder1_ctl01_radmenu");
+                var menuItem = menu.findItemByAttribute("menunumber", menuNumber);
+                var submenuItems = menuItem.get_items();
+                if (submenuItems.get_count() > 0) {
+                    if (menuItem.get_isOpen() == false) {
+                        menuItem.open();
+                        e.preventDefault();
+                    };
+                };
+            };
+        };
+
+        function ClickItem(menu, args) {
+            //Event set in OnClientItemClicking="ClickItem";
+            //When user clicks (presses Enter key) a menu item, if submenu is not open, then open it; otherwise navigate to the item's link. 
+            var item = args.get_item();
+            var submenuItems = item.get_items();
+            if (submenuItems.get_count() > 0) {
+                //If submenu is closed, then open it; otherwise click the menu item link. 
+                if (item.get_isOpen() == false) {
+                    args.set_cancel(true); //Cancel the default click action so that it doesn't trigger the menu item's navigation link.
+                    item.open();
+                }
+                else {
+                    if (typeof item.redirectToLink == 'undefined') {
+                        item.redirectToLink = true;
+                        item.click();
+                    } else {
+                        delete item.redirectToLink;
+                    }
+                }
+            }
+        }
+
+    ', 
+
+
+', 
+	', 
+', 
+	', u"Chief Dull Knife, Morning Star's Namesake", 
+', 
+                                $(window).load(function() {
+                                    $('#sliderctl00_ContentPlaceHolder1_ctl07_divView').nivoSlider({
+                                        effect: 'boxRandom',                                                                                 
+                                        pauseTime: 7000,
+                                        startSlide: 2,
+                                        directionNav: false,                                  
+                                        controlNav: false,
+                                        controlNavThumbs: false, 
+                                        controlNavThumbsFromRel: false,                                                                                 
+                                        keyboardNav: false,
+                                        pauseOnHover: true,
+                                        manualAdvance:false, 
+                                        captionOpacity: 0.8, 
+                                        prevText: '',
+                                        nextText: '',
+                                        beforeChange: function(){}, 
+                                        afterChange: function(){},
+                                        slideshowEnd: function(){$('#sliderctl00_ContentPlaceHolder1_ctl07_divView').data('nivoslider').start();},
+                                        lastSlide: function(){},
+                                        afterLoad: function(){}
+                                    });var slider = jQuery('#sliderctl00_ContentPlaceHolder1_ctl07_divView');
+                                            var nivoStartStopControl = jQuery('<div class=\"nivo-startstopNav\"></div>');
+                                            slider.find('.nivo-startstopNav').remove();
+                                            slider.prepend(nivoStartStopControl);
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-startstopNav').empty();
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-startstopNav').append('<a href=\"#\" class=\"nivo-slideShowControlButton pause\"><span class=\"fa\"></span><em>Pause</em></a>');
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-slideShowControlButton').off('click');
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-slideShowControlButton').on('click', function (event) {
+                                                event.preventDefault();
+                                                if ($(this).hasClass('pause')) {
+                                                    $(this).removeClass('pause');
+                                                    $(this).addClass('play');
+                                                    $(this).find('em').text('Play');
+                                                    slider.data('nivoslider').stop();
+                                                }
+                                                else {
+                                                    $(this).removeClass('play');
+                                                    $(this).addClass('pause');
+                                                    $(this).find('em').text('Pause');
+                                                    slider.data('nivoslider').start();
+                                                }
+                                            });
+
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-prevNav, #sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-nextNav, #sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-control').attr('href', '#');  
+                                  $('#sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-prevNav, #sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-nextNav, #sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-control').on('click', function (event) {
+                                  event.preventDefault();
+                                  });
+
+                                });                                 
+                                ', 
+', 
+    function GoNextSlide(containerID, nextSlideIndex) {
+        var navItems = $("#" + containerID + " .nivo-nextNav");
+        $(navItems[0]).click();
+    }
+
+    function confirmDeleteImage(message) {
+        result = window.confirm(message);
+        if (result) {
+            spinnerAlertModule.show();
+            return true;
+        }
+        else
+            return false;
+    }
+
+', 
+
+
+
+', Latest News', 
+', 
+    ', Mark Your Calendars!', Parent University January 5th ', BSD7 Weather Procedure', Bozeman School District #7 - Inclement Weather Procedures', Resources for Parents', Helping Children with Crisis and Tragedy', BSD7:  College and Career Readiness Framework', 
+', 
+
+', 
+', 
+', 
+', 
+', 
+
+', 
+
+', 
+
+', 
+', 
+', Jan', 23', PIR Day K-12 - No School', All Day', Jan', 24', PIR Day 9-12 No School', All Day', Feb', 20', u"President's Day Holiday", All Day', Mar', 13', Spring Break', All Day - Mar 17', Apr', 06', Parent/Teacher Conferences - No School K-8', All Day', Apr', 07', PIR Day K-12 - No School', All Day', May', 26', PIR Day K-12 - No School', All Day', Previous', Next', More Events',  >', 
+
+
+', WEATHER', 
+', 
+', 
+', 
+', Welcome to Morning Star!', 
+', 
+', Our Mission: ', 
+We at Morning Star School are dedicated to providing a safe learning environment that enriches the whole child. We are committed to promoting academic achievement, fostering creative problem solving that inspires respect for others and developing a sense of dignity and personal responsibility for self and community.', 
+', 
+Morning Star is a truly
+special place!  Come into our school and see our talented,
+student-centered staff working collaboratively with parents and community
+members to create a warm, nurturing environment. We use the Multi-Tiered System
+of Support (MTSS) model (a blend of the Montana Behavioral Initiative and Response to Intervention) to identify and support students to grow academically, socially and emotionally.  Visit us and see for yourself what a truly special place our staff, families and students have
+created!
+', 
+', 
+', We are Morning STARs - ', 
+We Solve problems, Take responsibility, Act safety and show Respect', 
+', 
+', 
+', 
+', 
+', 
+', Crisis Response', 
+', 
+', Resource guide for parents & teachers when talking with children about crisis & tragedy', 
+', Death and Grief: Supporting Children and Youth', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_beginRequest(function (sender, args) {
+            var elem = args.get_postBackElement();
+            spinnerAlertModule.show();
+        });
+prm.add_endRequest(function () {
+            spinnerAlertModule.hide();
+        });
+', 
+
+', Safety Updates', 
+', \u200b', 
+', 
+
+', 
+    
+    
+    ', 
+	
+            ', 
+                
+            ', 
+        
+', 
+    
+', 
+', QUICK LINKS', 
+', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+', 
+', Morning Star Elementary School', 830 Arnold Street, Bozeman MT 59715 | Phone (406) 522-6500 | Fax (406) 522-6550', Website by ', SchoolMessenger Presence', .  © 2017 West Corporation. All rights reserved.', 
+
+                $(document).ready(function(){
+            
+            if ($('#ctl00_ContentPlaceHolder1_ctl00_ctl00_men).length == 0)
+                {  
+                    $('#ctl00_PageBody').css('backgroundPosition', 'center 33px');
+                }
+            else {
+                    $('#ctl00_PageBody').css('backgroundPosition', 'center 68px');
+                }
+            
+            if ($('.div-to-hide-when-collapsed').css('display') == 'block')
+                {
+                  $('#ctl00_PageBody').css('backgroundPosition', 'center 200px');
+                }
+                
+            $("#divportlethide").click(function () {
+                $('#ctl00_PageBody').css('backgroundPosition', 'center 35px');
+            });
+            
+            $("#divportletshow").click(function () {
+                $('#ctl00_PageBody').css('backgroundPosition', 'center 168px');
+            });
+
+        });
+', 
+
+', u"
+//<![CDATA[
+InputCheck_AddErrorFlagControlToInputCheckControls();InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl07_tbSettingsSpeed', /^\d*\.?\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl07_tbSettingsMaxLimit', /^\d*\.?\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl07_tbSettingsMaxImageH', /^\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl07_tbSettingsMaxImageW', /^\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl45_tbDefaultWidth', /^\d*$/);//]]>
+", 
+', 
+', 
+//<![CDATA[
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadMenu, {"_childListElementCssClass":null,"_selectedItemIndex":"0","_selectedValue":"117341","clientStateFieldID":"ctl00_ContentPlaceHolder1_ctl01_radmenu_ClientState","collapseAnimation":"{\"duration\":450}","expandAnimation":"{\"duration\":450}","itemData":[{"attributes":{"menunumber":"0"},"value":"117341","selected":true,"navigateUrl":"/home","cssClass":"rmFocused"},{"attributes":{"menunumber":"1"},"items":[{"attributes":{"menunumber":"2"},"value":"713262","navigateUrl":"/morning_star_news/morning_star_school_newsletters"}],"value":"117350","navigateUrl":"/morning_star_news"},{"attributes":{"menunumber":"3"},"items":[{"attributes":{"menunumber":"4"},"value":"4498154","navigateUrl":"/calendar/morning_star_events_calendar"}],"value":"117357","navigateUrl":"/calendar"},{"attributes":{"menunumber":"5"},"items":[{"attributes":{"menunumber":"6"},"value":"30115632","navigateUrl":"/for_parents_students/for_morning_star_parents___students"},{"attributes":{"menunumber":"7"},"value":"713066","navigateUrl":"/for_parents_students/about_us"},{"attributes":{"menunumber":"8"},"value":"948140","navigateUrl":"javascript:var w=window.open(\u0027/for_parents_students/enrollment\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"9"},"value":"948146","navigateUrl":"javascript:var w=window.open(\u0027/for_parents_students/kidslink_afterschool\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"10"},"value":"948158","navigateUrl":"/for_parents_students/parent_advisory_council"},{"attributes":{"menunumber":"11"},"value":"3236871","navigateUrl":"javascript:var w=window.open(\u0027/for_parents_students/library_catalog\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"12"},"value":"948168","navigateUrl":"javascript:var w=window.open(\u0027/for_parents_students/moodle_pages\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"13"},"value":"3236902","navigateUrl":"/for_parents_students/morning_star_student_work"},{"attributes":{"menunumber":"14"},"value":"4808438","navigateUrl":"/for_parents_students/multi-_tiered_system_of_support"},{"attributes":{"menunumber":"15"},"items":[{"attributes":{"menunumber":"16"},"value":"2788652","navigateUrl":"/for_parents_students/our_library/student_work"},{"attributes":{"menunumber":"17"},"value":"2804240","navigateUrl":"/for_parents_students/our_library/library_media_curriculum"}],"value":"713098","navigateUrl":"/for_parents_students/our_library"},{"attributes":{"menunumber":"18"},"value":"4884766","navigateUrl":"javascript:var w=window.open(\u0027/for_parents_students/school_messenger_information_for_parents\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"19"},"value":"3811990","navigateUrl":"javascript:var w=window.open(\u0027/for_parents_students/volunteer_with_the_bozeman_public_schools\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"}],"value":"117359","navigateUrl":"/for_parents_students"},{"attributes":{"menunumber":"20"},"items":[{"attributes":{"menunumber":"21"},"value":"948181","navigateUrl":"/contact_school/safe_routes_to_school"}],"value":"117366","navigateUrl":"/contact_school"},{"attributes":{"menunumber":"22"},"items":[{"attributes":{"menunumber":"23"},"value":"4099932","navigateUrl":"/staff_directory/our_staff_directory"}],"value":"117364","navigateUrl":"/staff_directory"},{"attributes":{"menunumber":"24"},"value":"117362","navigateUrl":"/for_staff"}]}, {"itemClicking":ClickItem}, null, $get("ctl00_ContentPlaceHolder1_ctl01_radmenu"));
+});
+//]]>
+', 
+', 
+    ', 
+        window.isMobile = 0 == 1;
+    ', 
+'][
+    
+
+', 
+
+    ', 
+', 
+', 
+', 
+
+
+', 
+', 
+            
+                function OpenNewWindow(url, arguments)
+                {  
+                    return window.open(url, "",arguments);
+                }
+
+                function OpenNewWindowJS(url, ignore, arguments){  
+                    return OpenNewWindow(url, arguments);  
+                }
+
+
+                function OpenNewWindowNoReturn(url, arguments){  
+                    OpenNewWindow(url, arguments);  
+                }
+
+              ',  
+', 
+', 
+', 
+//<![CDATA[
+function _search(){var frm=document.forms['aspnetForm'];if(!frm)frm=document.aspnetForm;window.location='/workspaces/Search.aspx?contextId='+frm.ctl00_SearchPlace.value+'&place='+frm.ctl00_SearchOne.value+'&searchTerm='+escape(frm.ctl00_SearchTerm.value).replace(/\+/g, '%2C').replace(/\"/g,'%22').replace(/'/g, '%27');}
+            function clickButton(e, buttonid)
+            { 
+              var bt = document.getElementById(buttonid); 
+              if (typeof bt == 'object')
+		        { 
+
+                    if (navigator.appName.indexOf('Microsoft Internet Explorer')>(-1)){ 
+                          if (event.keyCode == 13){ 
+                                bt.click(); 
+                                return false; 
+                          } 
+                    } 
+	    	        else
+			        {
+	                  if (e.keyCode == 13)
+	          	        { 
+                                bt.click(); 
+                                return false; 
+                          } 
+                    } 
+              } 
+            } //]]>
+', 
+
+', 
+', 
+', 
+', u"
+//<![CDATA[
+
+String.prototype.Trim = function() 
+{
+    return this.replace(/^\s+|\s+$/g,'');
+}
+String.prototype.LTrim = function() 
+{
+    return this.replace(/^\s+/,'');
+}
+String.prototype.RTrim = function() 
+{
+    return this.replace(/\s+$/,'');
+}
+
+
+function DisplayError(errorMessageTableRowId, errorMessageControlId, errorMessage, defaultErrorMessage)
+{
+    var oErrorMessageControl = document.getElementById(errorMessageControlId);
+    if (oErrorMessageControl == null)
+        alert('Error message control does not exist. you may need to change the ErrorDisplayTableRow from Visible=false to style=display:none');
+    else
+    {
+        var ErrMsg = errorMessage;
+        if (ErrMsg == null || ErrMsg == '')
+            ErrMsg = defaultErrorMessage;
+        if (ErrMsg != null && ErrMsg != '')
+        {
+            ErrMsg = ErrMsg.Trim();
+            if (ErrMsg.charAt(ErrMsg.length - 1) != '.') 
+                ErrMsg += '.';
+            ErrMsg = '&nbsp;' + ('Error: ' + ErrMsg).fontcolor('Red');       // style='color: red'
+        }
+        if (oErrorMessageControl.nodeName == 'LABEL' || oErrorMessageControl.nodeName == 'SPAN')
+            oErrorMessageControl.innerHTML = ErrMsg;
+        else     
+            oErrorMessageControl.value = ErrMsg;                                                    // Can't be used for displaying error message
+        if (errorMessageTableRowId != null && errorMessageTableRowId != '')
+        {
+            var oErrorMessageTableRow = document.getElementById(errorMessageTableRowId); 
+            if (oErrorMessageTableRow == null)
+                alert('Error message TableRow does not exist. you may need to change the ErrorDisplayTableRow from Visible=false to style=display:none'); 
+            else 
+                oErrorMessageTableRow.style.display = (ErrMsg=='') ? 'none' : '';
+        }    
+    }
+    return (ErrMsg == '');
+}
+
+
+function CommonFunction_DateTime_MinDateTime()
+{
+    return new Date(1, 0, 1);
+}
+function CommonFunction_DateTime_MonthNameToMonth(monthName)
+{
+    var MonthName = monthName.substr(0, 3).toLowerCase();
+    switch (MonthName)
+    {
+        case 'jan' : return '01';
+        case 'feb' : return '02';
+        case 'mar' : return '03';
+        case 'apr' : return '04';
+        case 'may' : return '05';
+        case 'jun' : return '06';
+        case 'jul' : return '07';
+        case 'aug' : return '08';
+        case 'sep' : return '09';
+        case 'oct' : return '10';
+        case 'nov' : return '11';
+        case 'dec' : return '12';
+        default    : return '00'; 
+    }
+}
+function CommonFunction_DateTime_ToDateTime(dateTimeString)
+{
+    dateTimeString = dateTimeString.Trim();
+    if (/^\d{1,2}\/\d{1,2}\/\d{4}\s*/.test(dateTimeString))                     // Default Date format(with any Time format): '10/12/2008 02:23:45 PM GMT-4'
+        return new Date(dateTimeString);                            
+    else if (/^\d{4}-\d{1,2}-\d{1,2}\s*/.test(dateTimeString))                  // '2008-10-12 02:23:45 PM GMT-4'
+    {
+        /^(\d{4})-(\d{1,2})-(\d{1,2})\s*(.*)/.exec(dateTimeString);
+        var NewDateTimeString = RegExp.$2 + '/' + RegExp.$3 + '/' + RegExp.$1 + ' ' + RegExp.$4;
+//        alert(RegExp.input + ' || ' + RegExp.$1 + ' || ' + RegExp.$2 + ' || ' + RegExp.$3 + ' || ' + RegExp.$4 + ' || ' + NewDateTimeString + ' || ' + new Date(NewDateTimeString));
+        return new Date(NewDateTimeString);
+    }
+    else if (/^\d{2}-\d{1,2}-\d{1,2}\s*/.test(dateTimeString))                  // '08-10-12 02:23:45 PM GMT-4'
+        return CommonFunction_DateTime_ToDateTime('20' + dateTimeString);
+    else if (/^[a-zA-Z]+\s+\d{1,2}\s*\,\s*\d{4}\s*/.test(dateTimeString))       // 'October 01, 2008 22:33:44'
+    {
+        /^([a-zA-Z]+)\s+(\d{1,2})\s*\,\s*(\d{4})\s*(.*)/.exec(dateTimeString);
+        var NewDateTimeString = CommonFunction_DateTime_MonthNameToMonth(RegExp.$1) + '/' + RegExp.$2 + '/' + RegExp.$3 + ' ' + RegExp.$4;
+//        alert(RegExp.input + ' || ' + RegExp.$1 + ' || ' + RegExp.$2 + ' || ' + RegExp.$3 + ' || ' + RegExp.$4 + ' || ' + NewDateTimeString + ' || ' + new Date(NewDateTimeString));
+        return new Date(NewDateTimeString);
+    }
+    else return CommonFunction_DateTime_MinDateTime();
+}
+
+
+function AppendHtmlToParent(childControl, HtmlString)
+{
+    var Id = childControl.id;
+    childControl = document.getElementById(Id);
+    childControl.parentNode.innerHTML += HtmlString;
+    childControl = document.getElementById(Id);
+    return childControl;
+}
+function RemoveHtmlFromParent(childControl, HtmlStringPattern, HtmlString)
+{
+    if (HtmlString != null)
+    {
+        childControl = AppendHtmlToParent(childControl, HtmlString);
+        var MatchString = childControl.parentNode.innerHTML.match(HtmlStringPattern);
+        if (MatchString != null)
+            alert(MatchString);
+        else    
+            alert('Error! HtmlStringPattern can not match the HtmlString when it is added to innerHTML.');
+    }
+    var Id = childControl.id;
+    var InputValue = childControl.value;
+    childControl.parentNode.innerHTML = childControl.parentNode.innerHTML.replace(HtmlStringPattern, '');
+    childControl = document.getElementById(Id);            
+    childControl.value = InputValue;
+    return childControl;
+}
+
+
+function ControlCollectionToArray(ControlArray1, ControlArray2)
+{
+    var ControlCount = 0;
+    for (var i=0; i<arguments.length; i++)
+        ControlCount += arguments[i].length;
+    var ControlArray = new Array(ControlCount);
+    ControlCount = 0;
+    for (var i=0; i<arguments.length; i++)
+    {
+        var ControlCollection = arguments[i];
+        for (var j=0; j<ControlCollection.length; j++)
+            ControlArray[ControlCount++] = ControlCollection[j];
+    }
+//    for (var i=0; i<ControlArray.length; i++)
+//        alert(i + '-[' + ControlArray[i] + '|' + ControlArray[i].value + ']');
+    return ControlArray;
+}
+
+//]]>
+", 
+
+', 
+', u"
+//<![CDATA[
+
+function InputConstraint_OnLoad(textBoxControlId, oRegExp)            
+{
+    oTextBoxControl = document.getElementById(textBoxControlId);
+	if (oTextBoxControl)
+	{
+		if (oRegExp.test(oTextBoxControl.value))
+			oTextBoxControl.OldValue = oTextBoxControl.value;
+		else 
+			oTextBoxControl.value = oTextBoxControl.OldValue = '';
+	}
+}
+function InputConstraint_OnChange(oTextBoxControl, oRegExp)         
+{
+    if (oRegExp.test(oTextBoxControl.value))
+        oTextBoxControl.OldValue = oTextBoxControl.value;
+    else {
+        if (typeof(oTextBoxControl.OldValue) == 'undefined' || oTextBoxControl.value == '') 
+            oTextBoxControl.OldValue = '';
+        oTextBoxControl.value = oTextBoxControl.OldValue;
+    } 
+}
+
+function isChildOf(parentId,element) {
+    while(element) {
+       if(element.id&&element.id.indexOf(parentId)> -1) {
+          return true; 
+
+       } 
+       element=element.parentNode; 
+   } 
+
+   return false;
+}
+function onRowDroppingctl00_ContentPlaceHolder1_ctl07_grdPendingImageOrders(sender,args) {
+   if(sender.get_id()== 'ctl00_ContentPlaceHolder1_ctl07_grdPendingImageOrders') {
+      var node=args.get_destinationHtmlElement();
+      if(!isChildOf('ctl00_ContentPlaceHolder1_ctl07_grdPendingImageOrders',node)) {
+         args.set_cancel(true);
+      }
+   }
+} 
+
+//]]>
+", 
+
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            
+            
+    
+    
+            
+    
+    
+    
+    
+    
+    
+    
+    
+            
+    
+            
+    
+    
+    
+    
+    
+    
+            
+    
+    
+    
+    
+    
+    ', &amp;nbsp;', &amp;nbsp;', Bozeman Public Schools', B', Bozeman High School', Bridger Alternative Program', C', Chief Joseph Middle School', E', Emily Dickinson Elementary School', H', Hawthorne Elementary School', Hyalite Elementary School', I', Irving Elementary School', L', Longfellow Elementary School', M', Meadowlark Elementary School', Morning Star Elementary School', S', Sacajawea Middle School', W', Whittier Elementary School', 
+	', Search', 
+', View Original', Spanish', Cantonese', French', German', Italian', Tagalog', Vietnamese', Korean', Russian', Hindi', Guest',  | ', Login', 
+    
+    
+', 
+	', 
+		', Home', Morning Star News', 
+			', 
+				', Morning Star School Newsletters', 
+			', 
+		', Calendar', 
+			', 
+				', Morning Star Events Calendar', 
+			', 
+		', For Parents & Students', 
+			', 
+				', For Morning Star Parents & Students', About Us', Enrollment', kidsLINK Afterschool', Parent Advisory Council', Library Catalog', Moodle Pages', Morning Star Student Work', Multi-Tiered System of Support', Our Library', 
+					', 
+						', Student Work', Library Media Curriculum', 
+					', 
+				', SchoolMessenger Information for Parents', Volunteer with the Bozeman Public Schools', 
+			', 
+		', Contact School', 
+			', 
+				', Safe Routes to School', 
+			', 
+		', Staff Directory', 
+			', 
+				', Our Staff Directory', 
+			', 
+		', For Staff', 
+	', 
+', 
+
+    ', 
+    ', 
+
+        $(document).ready(function () {
+            giveAllMenuLinksAUniqueIdentifier();
+            $(".rmLink").on("keydown", setSpacebarToOpenMenus);
+        });
+
+        function giveAllMenuLinksAUniqueIdentifier() {
+            //Give all menu items a unique attribute value so that I can identify them when spacebar is clicked. Same 'menunumber' attribute is set in .aspx code on menu items.
+            var index = 0;
+            $(".telerik_main_menu li.rmItem a.rmLink").each(function (index) {
+                $(this).attr("menunumber", index);
+            });
+        }
+
+        function setSpacebarToOpenMenus(e) {
+            //Open submenus on spacebar press. 
+            var theKey = e.which;
+            if (theKey == 32) { // 32 is keycode for spacebar. 
+                var menuNumber = $(this).attr("menunumber");
+                var menu = $find("ctl00_ContentPlaceHolder1_ctl01_radmenu");
+                var menuItem = menu.findItemByAttribute("menunumber", menuNumber);
+                var submenuItems = menuItem.get_items();
+                if (submenuItems.get_count() > 0) {
+                    if (menuItem.get_isOpen() == false) {
+                        menuItem.open();
+                        e.preventDefault();
+                    };
+                };
+            };
+        };
+
+        function ClickItem(menu, args) {
+            //Event set in OnClientItemClicking="ClickItem";
+            //When user clicks (presses Enter key) a menu item, if submenu is not open, then open it; otherwise navigate to the item's link. 
+            var item = args.get_item();
+            var submenuItems = item.get_items();
+            if (submenuItems.get_count() > 0) {
+                //If submenu is closed, then open it; otherwise click the menu item link. 
+                if (item.get_isOpen() == false) {
+                    args.set_cancel(true); //Cancel the default click action so that it doesn't trigger the menu item's navigation link.
+                    item.open();
+                }
+                else {
+                    if (typeof item.redirectToLink == 'undefined') {
+                        item.redirectToLink = true;
+                        item.click();
+                    } else {
+                        delete item.redirectToLink;
+                    }
+                }
+            }
+        }
+
+    ', 
+
+
+', 
+	', 
+', 
+	', u"Chief Dull Knife, Morning Star's Namesake", 
+', 
+                                $(window).load(function() {
+                                    $('#sliderctl00_ContentPlaceHolder1_ctl07_divView').nivoSlider({
+                                        effect: 'boxRandom',                                                                                 
+                                        pauseTime: 7000,
+                                        startSlide: 2,
+                                        directionNav: false,                                  
+                                        controlNav: false,
+                                        controlNavThumbs: false, 
+                                        controlNavThumbsFromRel: false,                                                                                 
+                                        keyboardNav: false,
+                                        pauseOnHover: true,
+                                        manualAdvance:false, 
+                                        captionOpacity: 0.8, 
+                                        prevText: '',
+                                        nextText: '',
+                                        beforeChange: function(){}, 
+                                        afterChange: function(){},
+                                        slideshowEnd: function(){$('#sliderctl00_ContentPlaceHolder1_ctl07_divView').data('nivoslider').start();},
+                                        lastSlide: function(){},
+                                        afterLoad: function(){}
+                                    });var slider = jQuery('#sliderctl00_ContentPlaceHolder1_ctl07_divView');
+                                            var nivoStartStopControl = jQuery('<div class=\"nivo-startstopNav\"></div>');
+                                            slider.find('.nivo-startstopNav').remove();
+                                            slider.prepend(nivoStartStopControl);
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-startstopNav').empty();
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-startstopNav').append('<a href=\"#\" class=\"nivo-slideShowControlButton pause\"><span class=\"fa\"></span><em>Pause</em></a>');
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-slideShowControlButton').off('click');
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-slideShowControlButton').on('click', function (event) {
+                                                event.preventDefault();
+                                                if ($(this).hasClass('pause')) {
+                                                    $(this).removeClass('pause');
+                                                    $(this).addClass('play');
+                                                    $(this).find('em').text('Play');
+                                                    slider.data('nivoslider').stop();
+                                                }
+                                                else {
+                                                    $(this).removeClass('play');
+                                                    $(this).addClass('pause');
+                                                    $(this).find('em').text('Pause');
+                                                    slider.data('nivoslider').start();
+                                                }
+                                            });
+
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-prevNav, #sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-nextNav, #sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-control').attr('href', '#');  
+                                  $('#sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-prevNav, #sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-nextNav, #sliderctl00_ContentPlaceHolder1_ctl07_divView .nivo-control').on('click', function (event) {
+                                  event.preventDefault();
+                                  });
+
+                                });                                 
+                                ', 
+', 
+    function GoNextSlide(containerID, nextSlideIndex) {
+        var navItems = $("#" + containerID + " .nivo-nextNav");
+        $(navItems[0]).click();
+    }
+
+    function confirmDeleteImage(message) {
+        result = window.confirm(message);
+        if (result) {
+            spinnerAlertModule.show();
+            return true;
+        }
+        else
+            return false;
+    }
+
+', 
+
+
+
+', Latest News', 
+', 
+    ', Mark Your Calendars!', Parent University January 5th ', BSD7 Weather Procedure', Bozeman School District #7 - Inclement Weather Procedures', Resources for Parents', Helping Children with Crisis and Tragedy', BSD7:  College and Career Readiness Framework', 
+', 
+
+', 
+', 
+', 
+', 
+', 
+
+', 
+
+', 
+
+', 
+', 
+', Jan', 23', PIR Day K-12 - No School', All Day', Jan', 24', PIR Day 9-12 No School', All Day', Feb', 20', u"President's Day Holiday", All Day', Mar', 13', Spring Break', All Day - Mar 17', Apr', 06', Parent/Teacher Conferences - No School K-8', All Day', Apr', 07', PIR Day K-12 - No School', All Day', May', 26', PIR Day K-12 - No School', All Day', Previous', Next', More Events',  >', 
+
+
+', WEATHER', 
+', 
+', 
+', 
+', Welcome to Morning Star!', 
+', 
+', Our Mission: ', 
+We at Morning Star School are dedicated to providing a safe learning environment that enriches the whole child. We are committed to promoting academic achievement, fostering creative problem solving that inspires respect for others and developing a sense of dignity and personal responsibility for self and community.', 
+', 
+Morning Star is a truly
+special place!  Come into our school and see our talented,
+student-centered staff working collaboratively with parents and community
+members to create a warm, nurturing environment. We use the Multi-Tiered System
+of Support (MTSS) model (a blend of the Montana Behavioral Initiative and Response to Intervention) to identify and support students to grow academically, socially and emotionally.  Visit us and see for yourself what a truly special place our staff, families and students have
+created!
+', 
+', 
+', We are Morning STARs - ', 
+We Solve problems, Take responsibility, Act safety and show Respect', 
+', 
+', 
+', 
+', 
+', 
+', Crisis Response', 
+', 
+', Resource guide for parents & teachers when talking with children about crisis & tragedy', 
+', Death and Grief: Supporting Children and Youth', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_beginRequest(function (sender, args) {
+            var elem = args.get_postBackElement();
+            spinnerAlertModule.show();
+        });
+prm.add_endRequest(function () {
+            spinnerAlertModule.hide();
+        });
+', 
+
+', Safety Updates', 
+', \u200b', 
+', 
+
+', 
+    
+    
+    ', 
+	
+            ', 
+                
+            ', 
+        
+', 
+    
+', 
+', QUICK LINKS', 
+', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+', 
+', Morning Star Elementary School', 830 Arnold Street, Bozeman MT 59715 | Phone (406) 522-6500 | Fax (406) 522-6550', Website by ', SchoolMessenger Presence', .  © 2017 West Corporation. All rights reserved.', 
+
+                $(document).ready(function(){
+            
+            if ($('#ctl00_ContentPlaceHolder1_ctl00_ctl00_men).length == 0)
+                {  
+                    $('#ctl00_PageBody').css('backgroundPosition', 'center 33px');
+                }
+            else {
+                    $('#ctl00_PageBody').css('backgroundPosition', 'center 68px');
+                }
+            
+            if ($('.div-to-hide-when-collapsed').css('display') == 'block')
+                {
+                  $('#ctl00_PageBody').css('backgroundPosition', 'center 200px');
+                }
+                
+            $("#divportlethide").click(function () {
+                $('#ctl00_PageBody').css('backgroundPosition', 'center 35px');
+            });
+            
+            $("#divportletshow").click(function () {
+                $('#ctl00_PageBody').css('backgroundPosition', 'center 168px');
+            });
+
+        });
+', 
+
+', u"
+//<![CDATA[
+InputCheck_AddErrorFlagControlToInputCheckControls();InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl07_tbSettingsSpeed', /^\d*\.?\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl07_tbSettingsMaxLimit', /^\d*\.?\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl07_tbSettingsMaxImageH', /^\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl07_tbSettingsMaxImageW', /^\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl45_tbDefaultWidth', /^\d*$/);//]]>
+", 
+', 
+', 
+//<![CDATA[
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadMenu, {"_childListElementCssClass":null,"_selectedItemIndex":"0","_selectedValue":"117341","clientStateFieldID":"ctl00_ContentPlaceHolder1_ctl01_radmenu_ClientState","collapseAnimation":"{\"duration\":450}","expandAnimation":"{\"duration\":450}","itemData":[{"attributes":{"menunumber":"0"},"value":"117341","selected":true,"navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=117341","cssClass":"rmFocused"},{"attributes":{"menunumber":"1"},"items":[{"attributes":{"menunumber":"2"},"value":"713262","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=713262"}],"value":"117350","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=117350"},{"attributes":{"menunumber":"3"},"items":[{"attributes":{"menunumber":"4"},"value":"4498154","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=4498154"}],"value":"117357","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=117357"},{"attributes":{"menunumber":"5"},"items":[{"attributes":{"menunumber":"6"},"value":"30115632","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=30115632"},{"attributes":{"menunumber":"7"},"value":"713066","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=713066"},{"attributes":{"menunumber":"8"},"value":"948140","navigateUrl":"javascript:var w=window.open(\u0027/cms/One.aspx?portalId=117333\u0026pageId=948140\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"9"},"value":"948146","navigateUrl":"javascript:var w=window.open(\u0027/cms/One.aspx?portalId=117333\u0026pageId=948146\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"10"},"value":"948158","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=948158"},{"attributes":{"menunumber":"11"},"value":"3236871","navigateUrl":"javascript:var w=window.open(\u0027/cms/One.aspx?portalId=117333\u0026pageId=3236871\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"12"},"value":"948168","navigateUrl":"javascript:var w=window.open(\u0027/cms/One.aspx?portalId=117333\u0026pageId=948168\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"13"},"value":"3236902","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=3236902"},{"attributes":{"menunumber":"14"},"value":"4808438","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=4808438"},{"attributes":{"menunumber":"15"},"items":[{"attributes":{"menunumber":"16"},"value":"2788652","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=2788652"},{"attributes":{"menunumber":"17"},"value":"2804240","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=2804240"}],"value":"713098","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=713098"},{"attributes":{"menunumber":"18"},"value":"4884766","navigateUrl":"javascript:var w=window.open(\u0027/cms/One.aspx?portalId=117333\u0026pageId=4884766\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"19"},"value":"3811990","navigateUrl":"javascript:var w=window.open(\u0027/cms/One.aspx?portalId=117333\u0026pageId=3811990\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"}],"value":"117359","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=117359"},{"attributes":{"menunumber":"20"},"items":[{"attributes":{"menunumber":"21"},"value":"948181","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=948181"}],"value":"117366","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=117366"},{"attributes":{"menunumber":"22"},"items":[{"attributes":{"menunumber":"23"},"value":"4099932","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=4099932"}],"value":"117364","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=117364"},{"attributes":{"menunumber":"24"},"value":"117362","navigateUrl":"/cms/One.aspx?portalId=117333\u0026pageId=117362"}]}, {"itemClicking":ClickItem}, null, $get("ctl00_ContentPlaceHolder1_ctl01_radmenu"));
+});
+//]]>
+', 
+', 
+    ', 
+        window.isMobile = 0 == 1;
+    ', 
+']

@@ -1,0 +1,772 @@
+[var WRInitTime=(new Date()).getTime();',  
+				  var _gaq = _gaq || [];
+				
+			', //if(document.location.port == '') {
+				var analytics_js_path = 'https://www.google-analytics.com/analytics.js';
+				
+				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    			  })(window,document,'script',analytics_js_path,'ga');
+    
+    			  ga('create', 'UA-198011-5', 'auto', {'allowLinker': true});
+    			  ga('require', 'linker');
+    			  ga('linker:autoLink', ['economictimes.com']);
+    			  ga('require', 'displayfeatures');
+				  window.optimizely = window.optimizely || [];
+				  window.optimizely.push("activateUniversalAnalytics");
+				  ga('send', 'pageview');
+			 //}', u"var geolocation = '';", var _comscore = _comscore || [];
+			  _comscore.push({ c1: "2", c2: "6036484" });
+			  (function() {
+				var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			  })();', u"window._newsroom = window._newsroom || [];
+					    !function (e, f, u) {
+					        e.async = 1;
+					        e.src = u;
+					        f.parentNode.insertBefore(e, f);
+					    }(document.createElement('script'),	document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/timesofindia-et/newsroom.js');", u"
+		    var subsec1_common='13352306',
+		    subsec2_common='13358259';
+		", 
+		            lazyLoadColombia = {
+                        showAdDivVideo: function (data,ele) {
+                            var $this = $(ele);
+                            var container = $this.attr('id');
+                            if($('#' + container).html() == '') {
+                                //$('#' + container).parent().slideUp(700);
+                                $.ajax({
+        							url: "/ctn_video_player.cms",
+        							dataType: 'text',
+        							success: function(snippet){ 
+        								var iframe = document.createElement('iframe');
+        								iframe.style.width = '630px';
+        								iframe.style.height = '360px';
+        								iframe.style.border = '0';
+        								iframe.setAttribute("scrolling","no");
+        								iframe.setAttribute("frameBorder",'0');
+        								iframe.style.overflow = "hidden";
+        								iframe.id = 'ifr_' + container;
+        								iframe.name = 'ifr_' + container;
+        								document.getElementById(container).innerHTML = '';
+        								document.getElementById(container).appendChild(iframe);
+        								document.getElementById(container).style.display = '';
+        								document.getElementById(iframe.id).onload = function() {
+        									iframe.contentWindow.colombiaVideoAd(data,container);
+        								}
+                                        
+        								iframe.contentWindow.document.write(snippet);
+        								iframe.contentWindow.document.close();
+        								//$('#' + container).parent().slideDown('slow');
+        							},
+        							    error:function(a,b,c){
+        							}
+        						});	
+                            }
+                        },
+                    }
+                    function colombiaVidAdStart(iframe_id){
+                        $('#' + iframe_id).parent().parent().parent().css('display','');
+                        $('#' + iframe_id).parent().parent().slideDown('slow');     	    
+                    }
+                    function colombiaVidAdComplete(iframe_id) {
+                        //console.log('video completed for farme id :- ' + iframe_id);
+                       // $('#' + iframe_id).parent('div').html('').slideUp(700);
+                       $('#' + iframe_id).parent().parent().slideUp('slow');
+                        $('.ad_img').show();
+                    }
+                    
+                    function collapseDiv(iframe_id) {
+                        // alert(frame_id);
+                        $('#' + iframe_id).parent().parent().slideUp('slow');
+                        $('.ad_img').show();
+                    }
+		        	function adwidgetbottom(data,container){
+    			         if(data!=null) {
+    			            var conObj = document.getElementById(container);
+							var context='', context2='', cnt = data.paidAds.length, cnt2 = data.organicAds.length;
+							context='<div class="ob_dual_left"><span class="ob_ads_header"><div class="ob_custom_header">From Around the Web</div></span><ul id="div-clmb-ctn-129777-1" class="div-clmb-ctn-129777-1">';
+							context2='<div class="ob_dual_right"><span class="ob_ads_header"><div class="ob_custom_header">More from The Economic Times</div></span><ul class="div-clmb-ctn-129777-1">';
+        				    var className ='';
+        				    for(var i = 0; i < cnt; i++){
+								if(i==2){
+								    className = 'high';
+								}
+								else{
+								  className = '';  
+								}
+								context= context+'<li class="odb_li"> <a target="_blank" onclick="" href="'+data.paidAds[i].clk[0]+'" rel="nofollow" class="rec-link '+className+'">'+data.paidAds[i].title+'</a><span class="ob_source"> <span class="rec-src-date"></span><br/><span class="rec-src-link">'+data.paidAds[i].brandtext+'</span> </span> </li>';
+        				    }
+        				     for(var i = 0; i < cnt2; i++){
+								if(i==2){
+								    className = 'high';
+								}
+								else{
+								  className = '';  
+								}
+								context2= context2+'<li class="odb_li"> <a target="_blank" onclick="" href="'+data.organicAds[i].clk[0]+'" rel="nofollow" class="rec-link '+className+'">'+data.organicAds[i].title+'</a><span class="ob_source"> <span class="rec-src-date"></span><br/> </span></li>';
+        				    }
+        				    context = context+'</ul></div>';
+        				    context2 = context2+'</ul></div>';
+							conObj.innerHTML = context + context2 +'<div class="sponsored_tg"><div></div><span>Recommended by</span></div>';
+							var c = conObj.className;
+    						c = c.replace('all_zero', '').replace('hidden', '');
+    						conObj.className = c;
+        			    }
+        			}  
+        			function adwidgetimage(data,container){
+    			         if(data!=null) {
+    			            var conObj = document.getElementById(container);
+    			            var context='', context2='';
+    			            var context='<h2>FROM AROUND THE WEB</h2><ul>';
+    			            var context2='<h2>MORE FROM ECONOMIC TIMES</h2><ul>';
+    			            var j;
+    			            if(typeof midAd !='undefined' && midAd =='noAd'){
+    			               j= 4;
+    			            }
+    			            else{ j=3;}
+    			            for(var i = 0; i < 3; i++){
+								context= context+'<li> <a target="_blank" href="'+data.paidAds[i].clk[0]+'"><img height="145" width="203" src="' + data.paidAds[i].mainimage + '"/><span class="title">'+data.paidAds[i].title+'</span></a><span class="sponsored">'+data.paidAds[i].brandtext+'</span> </li>';
+								context2= context2+'<li> <a target="_blank" href="'+data.organicAds[i].clk[0]+'"><img height="145" width="203" src="' + data.organicAds[i].mainimage + '"/><span class="title">'+data.organicAds[i].title+'</span></a></li>';
+        				    }
+    			            context=context+'</ul>';
+							context2=context2+'</ul>';
+							conObj.innerHTML = context+' '+context2 +'<div class="sponsored_tg"><div></div><span>Recommended by</span></div>';
+							var c = conObj.className;
+    						c = c.replace('all_zero', '').replace('hidden', '');
+    						conObj.className = c;
+        			    }
+        			}
+		        
+				', 
+
+        
+        
+             
+            		        
+                         
+            
+             
+            		        ', function otab(t,n){var e="_blank";try{e="undefined"==typeof isq()||"undefined"!=typeof isq()&&isq()?"_top":"_blank"}catch(c){}window.open(t,e)}function trev(t,n){try{ntsss.getInstance().push(t,n)}catch(e){}}var ntsss=function(){var t,n=function(){var t,n=1,e=!1,c=[],r=!1,o=[],i=function(t,n){function e(){try{if(!o){o=!0;for(var t=0;t<r.length;t++)r[t].fn.call(window,r[t].ctx);r=[]}}catch(n){}}function c(){try{"complete"===document.readyState&&e()}catch(t){}}try{t=t||"ready",n=n||window;var r=[],o=!1,i=!1;n[t]=function(t,n){try{if(o)return void setTimeout(function(){t(n)},1);r.push({fn:t,ctx:n}),"complete"===document.readyState||!document.attachEvent&&"interactive"===document.readyState?setTimeout(e,1):i||(document.addEventListener?(document.addEventListener("DOMContentLoaded",e,!1),window.addEventListener("load",e,!1)):(document.attachEvent("onreadystatechange",c),window.attachEvent("onload",e)),i=!0)}catch(a){}}}catch(a){}},a=function(){try{t="",i("ready",this),ready(function(){n(),r=!0});var n=y(f,500);window.onscroll=function(){n()},window.addEventListener?window.addEventListener("scroll",function(){n()}):window.attachEvent&&window.attachEvent("scroll",function(){n()})}catch(e){}},u=function(){try{t!=window.location.href&&(n=1,t=window.location.href,e=!0)}catch(c){}},d=function(t,n){try{"undefined"==typeof c[n]&&(c[n]={imprurl:t,classname:n,notify:!1},r&&f())}catch(e){}},f=function(){try{u();for(var t in c){var r=c[t];if(r.hasOwnProperty("notify")&&!r.notify){var i=s(r.classname);if(i.length>0&&l(i[0])){r.notify=!0,1==n&&(n=0,r.imprurl=r.imprurl.indexOf("?")>-1?r.imprurl+"&pv=1":r.imprurl+"?pv=1"),m(r.imprurl);var a=c.splice(t,1);a=null}}}e&&o.length>0&&"undefined"!=typeof nnnmm&&(e=!1,nnnmm.getInstance().ajxc(o.shift()))}catch(d){}},l=function(t){try{if(t.getBoundingClientRect){var n=t.getBoundingClientRect(),e=window.innerHeight||document.body.clientHeight||document.documentElement.clientHeight,c=n.top,r=n.bottom,o=r-c,i=e>=c&&c+o>=0;return 0==c&&0==r?!1:i}return!1}catch(a){return!1}},s=function(t){try{var n=[],e="."+t;return"undefined"!=typeof document.querySelectorAll?n=document.querySelectorAll(e):(document.getElementsByClassName=function(t){for(var n=[],e=this.getElementsByTagName("*"),c=0;c<e.length;c++)(" "+e[c].className+" ").indexOf(" "+t+" ")>-1&&n.push(e[c]);return n},n=document.getElementsByClassName(t)),n}catch(c){}},m=function(t){try{return(new Image).src=t,!0}catch(n){return!1}},y=function(t,n,e){try{n||(n=250);var c,r;return function(){var o=e||this,i=+new Date,a=arguments;c&&c+n>i?(clearTimeout(r),r=setTimeout(function(){c=i,t.apply(o,a)},n)):(c=i,t.apply(o,a))}}catch(o){}};return a(),{push:d,setpv:u,ajxcArr:o}};return{getInstance:function(){return t||(t=n()),t}}}();
+function axs(){ntsss.getInstance().ajxcArr.push(arguments[0])}function isq(){return nnnmm.getInstance().isq()}var nnnmm=function(){var t,e=function(){function t(){e=new m}var e,r=0,n="",o=window.location.host,a="etd_ace",c="@v0",i=0,d=!0,h=function(){var t=!1;try{var r=e.decode(g(a)).split("@");r.length>0?t="l"==r[1]?!1:!0:f(n)}catch(o){}return t},u=function(t){try{l(a,e.encode(o+t+(new Date).getTime(),"321","e"),"14")}catch(r){}},f=function(t){i=0,r=0,d=!0,s(t)},s=function(t){var e=new XMLHttpRequest,o="1000";n=t,e.onreadystatechange=function(){(1===e.readyState||4===e.readyState)&&0===e.status&&d&&u("@pa@0"),e.status>0&&d&&(d=!1,u("@l@"))},e.ontimeout=function(t){var e="2";d&&(r<Number(e)?(i+=1e3,s(n),r++):u("@pt@0"))},e.open("GET",t,!0),e.timeout=Number(o)+i,e.send()},g=function(t){try{for(var e=t+"=",r=document.cookie.split(";"),n=0;n<r.length;n++){for(var o=r[n];" "==o.charAt(0);)o=o.substring(1,o.length);if(0==o.indexOf(e))return o.substring(e.length,o.length)}}catch(a){}return null},l=function(t,e,r){try{var n;r?(date=new Date,date.setTime(date.getTime()+24*r*60*60*1e3),n="; expires="+date.toGMTString()):n="";var o=window.location.host;1===o.split(".").length?document.cookie=t+"="+e+n+"; path=/":(domain=(window.location.host.match(/([^.]+)\.\w{2,3}(?:\.\w{2})?$/)||[])[0],document.cookie=t+"="+e+n+"; path=/; domain="+domain)}catch(a){}},C={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(t){var e,r,n,o,a,c,i,d="",h=0;for(t=C._utf8_encode(t);h<t.length;)e=t.charCodeAt(h++),r=t.charCodeAt(h++),n=t.charCodeAt(h++),o=e>>2,a=(3&e)<<4|r>>4,c=(15&r)<<2|n>>6,i=63&n,isNaN(r)?c=i=64:isNaN(n)&&(i=64),d=d+this._keyStr.charAt(o)+this._keyStr.charAt(a)+this._keyStr.charAt(c)+this._keyStr.charAt(i);return d},encodeUrlSafe:function(t){return C.encode(t).replace(/\+/g,"-").replace(/\//g,"_").replace(/\=/g,"~")},decode:function(t){var e,r,n,o,a,c,i,d="",h=0;for(t=t.replace(/[^A-Za-z0-9\+\/\=]/g,"");h<t.length;)o=this._keyStr.indexOf(t.charAt(h++)),a=this._keyStr.indexOf(t.charAt(h++)),c=this._keyStr.indexOf(t.charAt(h++)),i=this._keyStr.indexOf(t.charAt(h++)),e=o<<2|a>>4,r=(15&a)<<4|c>>2,n=(3&c)<<6|i,d+=String.fromCharCode(e),64!=c&&(d+=String.fromCharCode(r)),64!=i&&(d+=String.fromCharCode(n));return d=C._utf8_decode(d)},decodeUrlSafe:function(t){return C.decode(t.replace(/\-/g,"+").replace(/\_/g,"/").replace(/\~/g,"="))},_utf8_encode:function(t){t=t.replace(/\r\n/g,"\n");for(var e="",r=0;r<t.length;r++){var n=t.charCodeAt(r);128>n?e+=String.fromCharCode(n):n>127&&2048>n?(e+=String.fromCharCode(n>>6|192),e+=String.fromCharCode(63&n|128)):(e+=String.fromCharCode(n>>12|224),e+=String.fromCharCode(n>>6&63|128),e+=String.fromCharCode(63&n|128))}return e},_utf8_decode:function(t){for(var e="",r=0,n=c1=c2=0;r<t.length;)n=t.charCodeAt(r),128>n?(e+=String.fromCharCode(n),r++):n>191&&224>n?(c2=t.charCodeAt(r+1),e+=String.fromCharCode((31&n)<<6|63&c2),r+=2):(c2=t.charCodeAt(r+1),c3=t.charCodeAt(r+2),e+=String.fromCharCode((15&n)<<12|(63&c2)<<6|63&c3),r+=3);return e}},m=function(){function t(t,e){var r=t.length/2;return 0==e?t.substring(0,r):t.substring(r,t.length)}function e(t){for(var e=[],r=0,n=t.length;n>=r;r++)e.push(t.charAt(n-r));return e.join("")}function r(r){var n=e(t(r,0))+t(r,1),a=o(n,"321","e")+c;return C.encodeUrlSafe(a)}function n(r){var n=C.decodeUrlSafe(r).replace(c,""),a=o(n,"321","d");return e(t(a,0))+t(a,1)}var o=function(t,e,r){for(var n="",o=0,a=t,c=0;c<a.length;c++){var i=e[o],d="";o<e.length-1?o++:o=0,d="d"==r?parseInt(a[c].charCodeAt(0))-parseInt(i):parseInt(a[c].charCodeAt(0))+parseInt(i),n+=String.fromCharCode(d)}return n},e=function(t){for(var e=[],r=0,n=t.length;n>=r;r++)e.push(t.charAt(n-r));return e.join("")};return{encode:r,decode:n}};return t(),{isq:h,ajxc:f,ck:(new m).decode}};return{getInstance:function(){return t||(t=e()),t}}}();', 
+                         
+            
+         
+        		        ', try{axs("http://economictimes.indiatimes.com/acms/jsAds/getContent?ad_channel=413373228&Cywm=-1591557743&ad_classid=1661537289&AwRx=1127165644")}catch(e){}', 
+                     
+        ', Never miss a great news story!', Get instant notifications from Economic Times', Allow', Not now', You can switch off notifications anytime using browser settings.', SECTIONS', ET APPS', ET Android App', ET iPhone App', ET iPad App', ET Wealth Android App', ET Blackberry App', ET Nokia App', ET Markets Android App', ET Markets iPhone App', ET Money Android App', ENGLISH', \u0939\u093f\u0928\u094d\u0926\u0940', \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0', SIGN-IN', FOLLOW US', FACEBOOK', TWITTER', YOUTUBE', LINKEDIN', GOOGLE PLUS', RSS', Finance', LATEST NEWS', u"We should talk to Pakistan, but they have to understand terror & talks can't go together: Yashwant Sinha", Once foe, Modi, Nitish now all praise for each other', Toyota, Honda say no immediate plans to curb Mexico production', Data collection by pvt agencies for Aadhaar not a good idea: SC', u"TMC MPs detained as police thwarts march to PM's residence", India eyes to cut defence budget by 50% within a decade: Minister of State for Defence Subhash Bhamre', Home', Markets', News', Industry', Small Biz', Politics', Wealth', MF', Tech', Jobs', Opinion', Blogs', NRI', Magazines', Slideshows', ET NOW', ET Speed', ET Portfolio', Industry', Auto', News', Banking/Finance', Cons. Products', Durables', Electronics', Fashion / Cosmetics / Jewellery', FMCG', Food', Garments / Textiles', Liquor', Paints', Tobacco', Energy', Power', Oil & Gas', u"Ind'l Goods/Svs", Construction', Engineering', Cement', Chem / Fertilisers', Metals & Mining', Packaging', Paper / Wood / Glass/ Plastic/ Marbles', Petrochem', Steel', Healthcare/Biotech', Biotech', Healthcare', Pharmaceuticals', Services', Advertising', Consultancy / Audit', Education', Hotels / Restaurants', u"Property / C'struction", Retail', Travel', More', Media/Entertainment', Entertainment', Media', Telecom', Transportation', Railways', Airlines / Aviation', Shipping / Transport', Banking', Finance', ET Home', \u203a', Industry', \u203a', Banking/Finance', \u203a', Finance', u"
+		    var objPage = typeof objPage != 'undefined' ? objPage : {};
+		    objPage.band_ad_active = '';
+		    objPage.keepAdFirst = '';
+		", 04:05 PM | 05 Jan', market stats', SENSEX', 26,878', 245.11', NIFTY 50', 8,274', 83.30', GOLD (MCX) (Rs/10g.)', 27,830', 148.00', USD/INR', 67.96', -0.08', Portfolio', Loading...', Select Portfolio and Asset Combination for Display on Market Band', Select Portfolio', Select Asset Class', Stocks', MF', ETF', Show More', CREATE PORTFOLIO', ADD INVESTMENT', 
+                    	Download ET MARKETS APP
+                    ', Get ET Markets in your own language', DOWNLOAD THE APP NOW', +91', CHOOSE LANGUAGE', ENG', ENG - English', HIN - \u0939\u093f\u0928\u094d\u0926\u0940', GUJ - \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0', MAR - \u092e\u0930\u093e\u0920\u0940', BEN - \u09ac\u09be\u0982\u09b2\u09be ', KAN - \u0c95\u0ca8\u0ccd\u0ca8\u0ca1', ORI - \u0b13\u0b21\u0b3f\u0b06', TEL - \u0c24\u0c46\u0c32\u0c41\u0c17\u0c41', TAM - \u0ba4\u0bae\u0bbf\u0bb4\u0bcd', Sensex ends 245 pts higher, Nifty50 settles above 8,250; Adani Ports up 4%', Drag according to your convenience', ET NOW RADIO', ET NOW', TIMES NOW', u"var default_tv_popup = '';", u"Reliance Capital approves Reliance Home Finance's listing on stock exchange", By ET Bureau | Updated: Sep 14, 2016, 07.49 AM IST', Post a Comment', READ MORE ON » ', Reliance Home Finance Ltd',  | ', Reliance Capital',  | ', Anmol A Ambani', RELATED VIDEO', u"Reliance Capital approves Reliance Home Finance's listing on stock exchange", RELATED COMPANIES', EXPAND', ADD TO', Portfolio', Watchlist', OUTLOOK?', +ve', -ve', Reliance Capital', x', Loading data...', Charts', Valuation & Peer Comparison', Community Buzz', Close \u2715', .ss_menu{padding: 10px 0px;}
+            									    .ss_menu .lbl{padding: 0 15px 0 0;font-size: 14px;cursor:pointer;position: relative;}
+            									    .ss_menu .lbl.active{font-weight: 700}',   MUMBAI: The board of directors of ', Reliance Capital',  on Tuesday approved a proposal to independently list its home finance business, ', Reliance Home Finance Ltd',  (RHF), on the stock exchanges.  ',   ',   As per the proposal, 49 per cent stake in RHF will be allotted to all shareholders of Reliance Capital in the ratio of one share free of cost in Reliance Home Finance for every one share held in Reliance Capital, the company said in a statement. The proposal is subject to necessary shareholders and other approvals.  ',   ',   "We expect the listing and allotment of shares in Reliance Home Finance, free of cost, to unlock significant value for our almost one million strong shareholder family," said ', Anmol A Ambani', , director, Reliance Capital Ltd.  ',   ',   Reliance Capital will hold 51 per cent stake in RHF and the company will be adequately capitalised to grow the lending book to over Rs 20,000 crore in the next 18 months.  ',   ',   RHF, a 100 per cent subsidiary of Reliance Capital, provides a wide range of loan solutions like home loan, loan against property and construction finance. The company reported assets under management of Rs 8,259 crore ($1.2 billion) during the quarter ended June 30, 2016.  ',   ',   "There is presently an estimated shortage of 100 million residential units in India," Ambani said. "To address the needs of this sector, Reliance Home Finance has charted an aggressive growth plan in this space, and aims to increase its book size to over Rs 50,000 crore in the next few years."  ',   ',   The company, which has a credit rating "CARE AA+", also believes that the listing of Reliance Home Finance will lead to increased management focus and accelerated growth in the home finance business.  ', Stay on top of business news with The Economic Times App. ', Download it Now!', u"DON'T MISS", any stories, follow us on Twitter', Follow', 
+
+', .IcqBtuOq h1,h3,p {margin:0;padding:0;}.IcqBtuOq:hover{background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo-red.png?v=1.1); }.IcqBtuOq {width: 100%;height: auto;float: left;padding-bottom: 14px;background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo.png?v=1.1); background-repeat: no-repeat;background-position: 98% 100%;background-size: auto auto;position: relative;}.IcqBtuOq > div a img {width:100%;height:145px;float:left;}.IcqBtuOq > div a {width:32%;float: left;margin-left:1.7%; text-decoration: none;margin-bottom: 12px;cursor: pointer;}.IcqBtuOq > div a:first-child {margin-left: 0;}.IcqBtuOq > div h3 {width: 100%; height: auto; float: left; overflow: hidden;display: -webkit-box; -webkit-line-clamp: 3;-webkit-box-orient: vertical;font-family: inherit;   color: #333; padding: 6px 0 0;text-align: left;line-height: 1.25;font-size: 13px !important;max-height: 49px !important;}.IcqBtuOq > div p {width: 100%; height: auto; float: left;overflow: hidden; display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;    max-height: 13px;font-family: inherit;color: #999;padding: 2px 0 0;text-align: left;font-size: 12px;}.IcqBtuOq h1 {height: auto; display: block;margin-bottom: 9px; width: 100%; margin-top: 8px; float: left;color: #000;font: bold 14px arial;padding: 6px 6px; margin: 2px 0 10px 0; text-transform: uppercase;font-size: 15px !important;}.IcqBtuOq h1::before { content: "";}.IcqBtuOq > div > a > div {float: left;width: 100%;height:75px;}.IcqBtuOq > div {float: left;}.IcqBtuOq:after {content: 'Recommended by';float: right;margin-right: 20px; bottom: 0; position: absolute;right: 12%; color: #959595;font-size: 12px;font-family: arial; font-weight: 500;}@media (max-width:1920px) {.IcqBtuOq > div h3{font-size:26px;max-height: 71px;}.IcqBtuOq h1{font-size:28px;}.IcqBtuOq > div > a > div {height: Auto; }}@media (max-width:1366px) {.IcqBtuOq > div h3{font-size:14px;}.IcqBtuOq h1{font-size:24px;}}@media (max-width:1280px) {.IcqBtuOq > div h3{font-size:14px;}.IcqBtuOq h1{font-size:20px;}}@media (max-width:840px) {.IcqBtuOq > div h3{font-size:14px;}.IcqBtuOq h1{font-size:18px;}}@media (max-width:640px) {.IcqBtuOq > div h3{font-size:14px;}.IcqBtuOq h1{font-size:16px;}}@media (max-width:320px) {.IcqBtuOq > div h3{font-size:13px;}.IcqBtuOq h1{font-size:16px;}}',     ', FROM AROUND THE WEB',     ', Looking for an expert home tutor?', HelloClass', Book your home at Provident Welworth City', Provident Welworth City', Secret method to treat hair loss is revealed!', Hair & Beauty Care', MORE FROM ECONOMIC TIMES', u"The party destination to be at for New Year's eve: Mykonos", Day in Pics', Road ahead not easy, Infosys CEO Sikka tells employees', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="ZgnGifFNI('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow" ><div><h3>{{title}}</h3><p class="brand_ctn">{{brand}}</p></div></a>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<a onclick="ZgnGifFNI('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow"><div><h3>{{title}}</h3></div></a>#og#';*/function ZgnGifFNI(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_top');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){try{if (window.frameElement !== null){window.canRun = true;document.body.style.margin="0px";  parent.top.document.getElementById(window.frameElement.parentNode.getAttribute('id')).style.height='520px';; }}catch(e){}};try{trev('http://economictimes.indiatimes.com/itetnfy/notify.htm?imprId=37fadff7-59f8-4ab2-bdbb-faf4dd9c89d7-10ocs&id=210766&fpc=f2aa571d-fdfa-4b50-841a-523945271dbd-10ocs~1','IcqBtuOq');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+', 
+
+', .cqURVDnL h1,h3,p {margin:0;padding:0;}.cqURVDnL:hover{background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo-red.png?v=1.1);}.cqURVDnL {width: 100%;height: auto;float: left;padding-bottom: 20px;background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo.png?v=1.1); background-repeat: no-repeat;background-position: 98% 98.5%;background-size: auto auto;margin-top: 5px;position: relative;}.cqURVDnL > div a img {float: left;margin-right: 10px;width: 100px;}.cqURVDnL > div a {width: 100%;display: block;float: left;color: #5c5c5c;text-decoration: none; cursor: pointer;margin: 10px 0 0 0;padding-bottom: 10px; border-bottom: 1px solid #ccc; min-height: 46px;}.cqURVDnL > div h3 {max-height: 31px; overflow: hidden; display: -webkit-box;-webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 14px !important; height: auto;   padding-right: 13px; color: #000; font: 14px Arial;line-height: 15px;}.cqURVDnL > div p {padding-right: 13px; margin: 0; max-height: 13px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-size: 11px; float: left; font: 11px Arial; color: #8c8c8c;margin-top: 5px;}.cqURVDnL h1 {width: 49%; float: left; padding: 5px 0; color: #000000;margin-right: 2%; font: normal 18px/17px Arial; padding-bottom: 6px; border-bottom: 2px solid #8c8c8c;font-size: 18px !important;}.cqURVDnL > div a:last-child { border: 0 !important;}.cqURVDnL h1::before { content: ""; }.cqURVDnL h1:nth-child(2) {margin-right: 0 !important;}.cqURVDnL > div > a > div {height:61px;    float: left;}.cqURVDnL > div {width:49%;float:left;}.cqURVDnL:after {content: 'Recommended by';float: right;margin-right: 20px; bottom: 1%; position: absolute;right: 12%; color: #959595;font-size: 12px;font-family: arial; font-weight: 500;}@media (max-width:1920px) {.cqURVDnL > div h3{font-size:26px;}.cqURVDnL h1{font-size:28px;}.cqURVDnL > div > a > div {height: Auto;max-height: 46px;min-height: 46px;}}.cqURVDnL .aWfwFNQLd {float: right !important;}@media (max-width:1366px) {.cqURVDnL > div h3{font-size:14px;}.cqURVDnL h1{font-size:24px;}}@media (max-width:1280px) {.cqURVDnL > div h3{font-size:14px;}.cqURVDnL h1{font-size:20px;}}@media (max-width:840px) {.cqURVDnL > div h3{font-size:14px;}.cqURVDnL h1{font-size:18px;}}@media (max-width:640px) {.cqURVDnL > div h3{font-size:13px;}.cqURVDnL h1{font-size:16px;}}@media (max-width:320px) {.cqURVDnL > div h3{font-size:13px;}.cqURVDnL h1{font-size:16px;}}',     ', From Around the Web', More from The Economic Times',     ', u"Curious children learn faster, here's why", Magic Crate', How Indians are making Rs 6302 while working', CareerTimes', u"PaneerMania at Dunkin' Donuts! Starting at \u20b985*", u"Dunkin' Donuts & More", Experience the best of Dubai with great deals', SOTC', u"Scooter's back, with new hero on road", u"Long leads to Dhoni's decision, CT could be swansong", u"'Post-demonetisation best time to invest in property'", u"PM Modi's speech disappointing: Kejriwal", var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="ReaaRNc('{{href}}')"  rel="nofollow,noindex"><div><h3>{{title}}</h3><p>{{brand}}</p></div></a>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<a onclick="ReaaRNc('{{href}}')"  rel="nofollow,noindex"><div><h3>{{title}}</h3></div></a>#og#';*/function ReaaRNc(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_top');}else{window.open(par,'_blank'); }   }                   };   window.onload = function (){         try{if (window.frameElement !== null){window.canRun = true;document.body.style.margin="0px";  parent.top.document.getElementById(window.frameElement.parentNode.getAttribute('id')).style.height='480px';; }}catch(e){}};try{trev('http://economictimes.indiatimes.com/itetnfy/notify.htm?imprId=89072517-deb1-4f12-8acf-c4ef03e22907-10ocs&id=129777&fpc=f2aa571d-fdfa-4b50-841a-523945271dbd-10ocs~1','cqURVDnL');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+', READ MORE ON » ', Reliance Home Finance Ltd',  | ', Reliance Capital',  | ', Anmol A Ambani', To post this comment you must', Log In/Connect with:', Indiatimes Network', or', Fill in your details:', Will be displayed', Will not be displayed', Will be displayed', Share this Comment:', Post to Twitter ', Have something to say? ', Post your comment', To post this comment you must', Log In/Connect with:', Indiatimes Network', Fill in your details:', Will be displayed', Will not be displayed', Will be displayed', Share this Comment:', Post to Twitter ', Most', Read', Most', Shared', Most', Commented', u"Here is why 'the flavour of the season', mobile wallets will die", u"View: Fallout from India's cash crunch is just starting", Air India takes on Rajdhani Express in fare war', I-T dept ropes in experts from Big Four to unearth black money', Tata Motors launches Xenon Yodha starting at Rs 6.05 lakh', More »', Get a Quote', Browse Companies', A', B', C', D', E', F', G', H', I', J', K', L', M', N', O', P', Q', R', S', T', U', V', W', X', Y', Z', |', 1', 2', 3', 4', 5', 6', 7', 8', 9', Browse Mutual Funds', A', B', C', D', E', F', G', H', I', J', K', L', M', N', O', P', Q', R', S', T', U', V', W', X', Y', Z', The Economic Times', Live Market', News', Portfolio', Mobile', Live TV', Newsletter', Commodities', Speed', QnA', Blogs', Alerts', RSS', Other Times Group news sites', Times of India', |', \u0907\u0915\u0928\u0949\u092e\u093f\u0915 \u091f\u093e\u0907\u092e\u094d\u0938', \u0a88\u0a95\u0acb\u0aa8\u0acb\u0aae\u0abf\u0a95 \u0a9f\u0abe\u0a88\u0aae\u0acd\u0ab8', |', Mumbai Mirror', Times Now', |', Indiatimes', \u0928\u0935\u092d\u093e\u0930\u0924 \u091f\u093e\u0907\u092e\u094d\u0938', |', \u092e\u0939\u093e\u0930\u093e\u0937\u094d\u091f\u094d\u0930 \u091f\u093e\u0907\u092e\u094d\u0938', \u0cb5\u0cbf\u0c9c\u0caf \u0c95\u0cb0\u0ccd\u0ca8\u0cbe\u0c9f\u0c95', |', Lifehacker', Gizmodo', |', Eisamay', |', IGN India', NavGujarat Samay', Living and entertainment', Timescity', |', iDiva', |', Zoom', |', Luxpresso', |', Gaana', |', Happytrips', |', Cricbuzz', |', Get Smartapp', Networking', itimes', |', MensXP.com', Hot on the Web', Budget 2017', |', Sensex, Nifty Live', Year-End Special 2016', |', UP & Punjab Assembly Elections 2017', Live: Currency Demonetisation', |', Gold Rate', RBI Monetary Policy', Services', ads2book', |', Gadgetsnow', |', Free Business Listings', Simplymarry', |', Astrospeak', |', Timesjobs', |', Magicbricks', |', Zigwheels', |', Timesdeal', |', dineout', |', Filmipop', |', Remit2india', |', Gaana', |', Greetzap', |', Techradar', |', Alivear', |', Google Play',  | ', Manage Notifications', About us', /', Advertise with us', /', Terms of Use & Grievance Redressal', /', Privacy Policy', /', Feedback', /', Sitemap', /', Code of Ethics', /', /', Disclaimer', Copyright © 2016 Bennett, Coleman & Co. Ltd. All rights reserved.', BACK TO TOP', Digg', Google Bookmarks', StumbleUpon', Reddit', Newsvine', Live Bookmarks', Technorati', Yahoo Bookmarks', Blogmarks', Del.icio.us', ApnaCircle', Mail This Article', My Saved Articles', Sign in', Sign up', Find this comment offensive?', Choose your reason below and click on the Report button. This will alert our moderators to take action', Name', Reason for reporting:', Foul language', Slanderous', Inciting hatred against a certain community', Others', Your Reason has been Reported to the admin.', 
+                var _0x2144=["\x61\x64\x64\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72","\x61\x74\x74\x61\x63\x68\x45\x76\x65\x6E\x74","\x72\x65\x6D\x6F\x76\x65\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72","\x72\x65\x6D\x6F\x76\x65\x45\x76\x65\x6E\x74","\x63\x6F\x6E\x73\x6F\x6C\x65","\x65\x72\x72\x6F\x72","\x66\x6F\x72\x45\x61\x63\x68","\x73\x63\x72\x6F\x6C\x6C","\x63\x61\x6E\x52\x75\x6E","\x64\x65\x74\x65\x63\x74\x6F\x72","\x66\x75\x6E\x63\x74\x69\x6F\x6E","\x70\x75\x73\x68","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x6C\x6D\x62\x74\x65\x63\x68\x2E\x63\x6F\x6D\x2F\x61\x73\x65\x2F\x32\x36\x35\x38\x2F\x33\x2F\x61\x61\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x6C\x6D\x62\x74\x65\x63\x68\x2E\x63\x6F\x6D\x2F\x61\x73\x65\x2F\x32\x33\x30\x38\x2F\x34\x2F\x61\x61\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x70\x61\x72\x74\x6E\x65\x72\x2E\x67\x6F\x6F\x67\x6C\x65\x61\x64\x73\x65\x72\x76\x69\x63\x65\x73\x2E\x63\x6F\x6D\x2F\x67\x70\x74\x2F\x70\x75\x62\x61\x64\x73\x5F\x69\x6D\x70\x6C\x5F\x39\x32\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x68\x61\x72\x74\x62\x65\x61\x74\x2E\x63\x6F\x6D\x2F\x6A\x73\x2F\x63\x68\x61\x72\x74\x62\x65\x61\x74\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x77\x77\x77\x2E\x67\x6F\x6F\x67\x6C\x65\x2D\x61\x6E\x61\x6C\x79\x74\x69\x63\x73\x2E\x63\x6F\x6D\x2F\x61\x6E\x61\x6C\x79\x74\x69\x63\x73\x2E\x6A\x73\x20","\x68\x74\x74\x70\x3A\x2F\x2F\x62\x2E\x73\x63\x6F\x72\x65\x63\x61\x72\x64\x72\x65\x73\x65\x61\x72\x63\x68\x2E\x63\x6F\x6D\x2F\x62\x65\x61\x63\x6F\x6E\x2E\x6A\x73\x20","\x68\x74\x74\x70\x3A\x2F\x2F\x74\x61\x67\x73\x2E\x63\x72\x77\x64\x63\x6E\x74\x72\x6C\x2E\x6E\x65\x74\x2F\x63\x2F\x32\x38\x30\x31\x2F\x63\x63\x2E\x6A\x73\x3F\x6E\x73\x3D\x5F\x63\x63\x32\x38\x30\x31","\x68\x74\x74\x70\x3A\x2F\x2F\x61\x64\x2E\x63\x72\x77\x64\x63\x6E\x74\x72\x6C\x2E\x6E\x65\x74\x2F\x35\x2F\x63\x3D\x32\x38\x30\x30\x2F\x70\x65\x3D\x79\x2F\x63\x61\x6C\x6C\x62\x61\x63\x6B\x3D\x63\x63\x75\x61\x64","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x6C\x6D\x62\x74\x65\x63\x68\x2E\x63\x6F\x6D\x2F\x61\x64\x2F\x63\x6F\x6D\x6D\x6F\x6E\x73\x2F\x6A\x73\x2F\x63\x6F\x6C\x6F\x6D\x62\x69\x61\x5F\x76\x32\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x66\x69\x6C\x65\x73\x2E\x61\x64\x73\x70\x64\x62\x6C\x2E\x63\x6F\x6D\x2F\x70\x75\x62\x6C\x69\x73\x68\x65\x72\x73\x2F\x74\x69\x6D\x65\x73\x6F\x66\x69\x6E\x64\x69\x61\x2F\x63\x6F\x64\x65\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x61\x64\x73\x2E\x70\x75\x62\x6D\x61\x74\x69\x63\x2E\x63\x6F\x6D\x2F\x41\x64\x53\x65\x72\x76\x65\x72\x2F\x6A\x73\x2F\x70\x77\x74\x2F\x32\x33\x31\x30\x35\x2F\x34\x36\x2F\x70\x77\x74\x2E\x6A\x73","\x2A\x69\x6D\x61\x67\x65\x73\x2E\x74\x61\x62\x6F\x6F\x6C\x61\x2E\x63\x6F\x6D","\x2A\x61\x64\x73\x2E\x79\x61\x68\x6F\x6F\x2E\x63\x6F\x6D","\x44\x65\x62\x75\x67\x67\x69\x6E\x67\x20\x45\x72\x72\x6F\x72\x3A\x20","\x73\x72\x63","\x74\x61\x72\x67\x65\x74","\x6C\x6F\x67","\x6C\x65\x6E\x67\x74\x68","\x74\x61\x67\x4E\x61\x6D\x65","\x53\x43\x52\x49\x50\x54","\x49\x4D\x47","\x2A","\x73\x75\x62\x73\x74\x72","\x69\x6E\x64\x65\x78\x4F\x66","\x41\x64\x42\x6C\x6F\x63\x6B\x65\x72","\x41\x44\x42\x4C\x4F\x43\x4B\x45\x52\x4F\x4E","\x67\x61","\x73\x65\x6E\x64","\x65\x76\x65\x6E\x74","\x47\x41","\x75\x6E\x64\x65\x66\x69\x6E\x65\x64","\x2F\x62\x6C\x6F\x63\x6B\x65\x64\x2E\x63\x6D\x73","\x61\x72\x74\x69\x63\x6C\x65\x6C\x69\x73\x74\x5F\x65\x73\x69","\x70\x61\x74\x68\x6E\x61\x6D\x65","\x69\x73\x4C\x6F\x67\x67\x65\x64","\x73\x65\x74","\x64\x69\x6D\x65\x6E\x73\x69\x6F\x6E\x33","\x4C\x4F\x47\x47\x45\x44\x49\x4E","\x65\x74\x5F\x61\x64\x42\x6C\x6F\x63\x6B\x65\x64","\x6A\x53\x74\x6F\x72\x61\x67\x65","\x74\x69\x74\x6C\x65","\x68\x72\x65\x66","\x70\x75\x73\x68\x53\x74\x61\x74\x65","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x67\x65\x74","\x64\x65\x6C\x65\x74\x65\x4B\x65\x79","\x41\x44\x42\x4C\x4F\x43\x4B\x45\x52\x4F\x46\x46","\x62\x61\x63\x6B"];(function(_0xe300x1,_0xe300x2){var _0xe300x3=[];function _0xe300x4(_0xe300x5,_0xe300x6){if(_0xe300x1[_0x2144[0]]){_0xe300x1[_0x2144[0]](_0xe300x5,_0xe300x6,false)}else {if(_0xe300x1[_0x2144[1]]){_0xe300x1[_0x2144[1]](_0xe300x5,_0xe300x6)}}}function _0xe300x7(_0xe300x5,_0xe300x6){if(_0xe300x1[_0x2144[2]]){_0xe300x1[_0x2144[2]](_0xe300x5,_0xe300x6)}else {if(_0xe300x1[_0x2144[3]]){_0xe300x1[_0x2144[3]](_0xe300x5,_0xe300x6)}}}function _0xe300x8(_0xe300x9){_0xe300x3[_0x2144[6]](function(_0xe300x6){try{_0xe300x6(_0xe300x9)}catch(e){if(_0xe300x2[_0x2144[4]]&& _0xe300x2[_0x2144[4]][_0x2144[5]]){_0xe300x2[_0x2144[4]][_0x2144[5]](e)}}})}function _0xe300xa(){_0xe300x7(_0x2144[7],_0xe300xa);_0xe300x8(true)}function _0xe300xb(){_0xe300x8(false)}if(!_0xe300x2[_0x2144[8]]){_0xe300x4(_0x2144[7],_0xe300xa)}else {setTimeout(_0xe300xb,100)};_0xe300x2[_0x2144[9]]= function(_0xe300xc){if(_0xe300xc&&  typeof _0xe300xc== _0x2144[10]){_0xe300x3[_0x2144[11]](_0xe300xc)}};if(_0xe300x1[_0x2144[0]]){var _0xe300xd=[_0x2144[12],_0x2144[13],_0x2144[14],_0x2144[15],_0x2144[16],_0x2144[17],_0x2144[18],_0x2144[19],_0x2144[20],_0x2144[21],_0x2144[22],_0x2144[23],_0x2144[24]];_0xe300x1[_0x2144[0]](_0x2144[5],function(_0xe300x5){console[_0x2144[28]](_0x2144[25]+ _0xe300x5[_0x2144[27]][_0x2144[26]]);for(var _0xe300xe=0;_0xe300xe< _0xe300xd[_0x2144[29]];_0xe300xe++){if(_0xe300x5&& _0xe300x5[_0x2144[27]]&& (_0xe300x5[_0x2144[27]][_0x2144[30]]== _0x2144[31]|| _0xe300x5[_0x2144[27]][_0x2144[30]]== _0x2144[32])&& _0xe300x5[_0x2144[27]][_0x2144[26]]&& (_0xe300x5[_0x2144[27]][_0x2144[26]]=== _0xe300xd[_0xe300xe]|| (_0xe300xd[_0xe300xe][0]== _0x2144[33]&& _0xe300x5[_0x2144[27]][_0x2144[26]][_0x2144[35]](_0xe300xd[_0xe300xe][_0x2144[34]](1))>  -1))){_0xe300x2[_0x2144[8]]= false}}},true)}}(document,window));(function(_0xe300x1,_0xe300x2){var _0xe300xf={GA:{CATEGORY:_0x2144[36],ACTION_DETECTED:_0x2144[37]}};function _0xe300x10(){if(_0xe300x2[_0x2144[38]]){ga(_0x2144[39],_0x2144[40],_0xe300xf[_0x2144[41]].CATEGORY,_0xe300xf[_0x2144[41]].ACTION_DETECTED)}}_0xe300x2[_0x2144[9]](function(_0xe300xa){if(_0xe300xa=== true&&  typeof blockedPage== _0x2144[42]&& _0xe300x2[_0x2144[38]]){ga(_0x2144[39],_0x2144[40],_0xe300xf[_0x2144[41]].CATEGORY,_0xe300xf[_0x2144[41]].ACTION_DETECTED)}})}(document,window));window[_0x2144[9]](function(_0xe300xa){var _0xe300x11=_0x2144[43];var _0xe300x12=(location[_0x2144[45]][_0x2144[35]](_0x2144[44]))?true:false;var _0xe300x13=( typeof redirectOff!= _0x2144[42]&& redirectOff== 1)?true:false;if(_0xe300xa=== true){if(location[_0x2144[45]]!= _0xe300x11&&  !(_0xe300x13)){if(( typeof _tp_data!= undefined)&& ( typeof _tp_data[_0x2144[46]]!= undefined)&& (_tp_data[_0x2144[46]]== true)){ga(_0x2144[47],_0x2144[48],_0x2144[49])};$[_0x2144[51]][_0x2144[47]](_0x2144[50],1);history[_0x2144[54]]({},document[_0x2144[52]],location[_0x2144[53]]);window[_0x2144[55]]= _0xe300x11}}else {var _0xe300x14=$[_0x2144[51]][_0x2144[56]](_0x2144[50]);if(_0xe300x14== 1&&  typeof blockedPage== _0x2144[42]){$[_0x2144[51]][_0x2144[57]](_0x2144[50]);ga(_0x2144[39],_0x2144[40],_0x2144[36],_0x2144[58])};if(location[_0x2144[45]]== _0xe300x11&&  !(history[_0x2144[29]]< 2)){history[_0x2144[59]]()}}})
+            
+			', ga('set', 'dimension4', 'ET Burea);
+						var page = {
+							msid : 54321332,
+							subsec1 : '13352306',
+							compId : '13189',
+							cfmid : '',
+							budgetCommentKeyword: '0',
+							articleDate : 'Sep 14, 2016, 07.41 AM IST'
+						}
+						var sharer = {
+							title:"Reliance Capital approves Reliance Home Finance's listing on stock exchange - The Economic Times",
+							twttitle:"Reliance Capital approves Reliance Home Finance's listing on stock exchange",
+							img:"http://img.etimg.com/thumb/msid-54321366,width-672,resizemode-4,imglength-93364/industry/banking/finance/reliance-capital-approves-reliance-home-finances-listing-on-stock-exchange/fund-bccl.jpg",
+							desc:"Reliance Capital will hold 51% stake in RHF and company will be adequately capitalised to grow lending book to over Rs 20,000 crore in the next 18 months.",
+							url:"http://economictimes.indiatimes.com/industry/banking/finance/reliance-capital-approves-reliance-home-finances-listing-on-stock-exchange/articleshow/54321332.cms"
+						}
+						var isMarket = 0;
+						var lp_read_act = "read";var articleDate = "Sep 14, 2016, 07.41 AM IST",
+						dt1 = articleDate.split(','),
+						dt2 = dt1[0],
+						dt3 = dt2.split(' '),
+						dt4 = dt3[1]+ " " + dt3[0],
+						dt5 = dt4 + "," + dt1[1] + "," + dt1[2];
+						var catids = '2147477890,13352306,13358259,13358311';
+					var _pg_startpt = (new Date()).getTime();
+					function trim(str){return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');}
+					var _iBeat_articleid="54321332";
+					var _iBeat_tag='Reliance Home Finance Ltd,Reliance Capital,Anmol A Ambani';
+					var _iBeat_url = window.location.href;
+					_iBeat_url=escape(_iBeat_url);
+					var _iBeat_type="1";
+					var _iBeat_action="1";
+					var _iBeat_cat=trim("Industry");
+					var _iBeat_subcat=trim("Banking/Finance");
+					var _iBeat_articledt='Sep 14, 2016, 07.41 AM IST';
+					var _iBeat_author="";
+					var _iBeat_channel="ET Bureau";
+					var _page_config = {
+						host: 'economictimes.indiatimes.com', 
+						key: 'f66e70a45a565c9c76a526c5e9e99df',
+						domain: 'economictimes.indiatimes.com',
+						channel:  _iBeat_channel,
+						action :_iBeat_action,
+						articleId: _iBeat_articleid,
+						contentType: 1,
+						location : 1,
+						cat : _iBeat_cat,
+						subcat: _iBeat_subcat,
+						contenttag: _iBeat_tag,
+						catIds: catids,
+						articledt:dt5,
+						author: _iBeat_author,
+						articledt:_iBeat_articledt
+		            };
+					(function(){
+						function pingIbeat() {
+						window._pg_endpt=(new Date()).getTime();
+						var e = document.createElement('script');
+						e.setAttribute('language', 'javascript');
+						e.setAttribute('type', 'text/javascript');
+						e.setAttribute('src',"http://ibeat.indiatimes.com/js/pgtrackingV5.js");
+						document.body.appendChild(e);
+						}
+						var oldonload = window.onload;
+						window.onload = (typeof window.onload != 'function') ?
+						pingIbeat : function() { oldonload(); pingIbeat(); };
+					})();
+					
+					    $(document).ready(function(){
+					    $("#subSecNav a[href*='" + page.cfmid + "']").addClass('current');
+						 $("#personmsStory .display ul li").hide();
+        			       $("#personmsStory .display ul li").eq(0).show();
+        			        var i=2,k=0;
+        			        setInterval(function(){ 
+        			            if(i>5){
+        			                k=i-1;
+        			                $("li.select"+k).hide();
+        			                i=1;
+        			                $("li.select"+i).show();
+        			                i++;
+        			            }else{
+        			                k=i-1;
+        			                $("li.select"+k).hide();
+        			                $("li.select"+i).show();
+        			                i++;  
+        			            }
+        			        }, 8000);
+	        		    });
+					
+						', u"
+					function blockError(){return true;} 
+					window.onerror = blockError; 
+					var timeslog_channel_url = 'economictimes.indiatimes.com';
+					var ttrendlogmsid='54321332';", var secname="Industry Banking/Finance Finance";
+		var agename='';', 
+			var _sf_async_config = _sf_async_config || {uid:10538,domain:"economictimes.indiatimes.com"};
+			_sf_async_config.sections = secname;
+			_sf_async_config.authors = agename;
+			(function(){
+			  function loadChartbeat() {
+			  	//alert(chartbeat);
+			    window._sf_endpt=(new Date()).getTime();
+			    var e = document.createElement('script');
+			    e.setAttribute('language', 'javascript');
+			    e.setAttribute('type', 'text/javascript');
+			    e.setAttribute('src',
+			       (("https:" == document.location.protocol) ? "https://s3.amazonaws.com/" : "http://") + "static.chartbeat.com/js/chartbeat.js");
+			    document.body.appendChild(e);
+			  }
+			  var oldonload = window.onload;
+			  window.onload = (typeof window.onload != 'function') ?
+			     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+			})();
+			
+			', var urlTtxt='54321332.cms?msid=54321332'	
+					function invokeLogin(){
+						try{						
+						isLoggedSso = getCookievaluetwitt('MSCSAuth');
+						if(Get_Ckie('autologin')!=null){
+							Delete_Ckie("autologin","/",".indiatimes.com");
+						}
+						tpbar1();												
+						setTimeout("twtFbSso()",1000);
+						setTimeout("dolike()",2000);
+						setTimeout(function(){populate_wf_new('/cmtofartfb/'+urlTtxt,'populatecomment','no','putMathQ(1);fillformdetail(1);putCmtCnt();getemid();')},5000);
+						}
+						catch(ex){							
+						}					
+					}
+					', var _mfq = _mfq || [];
+    			    var mouseflowPath = '/articleshow';
+                    (function() {
+                       var mf = document.createElement("script"); mf.type = "text/javascript"; mf.async = true;
+                       mf.src = "//cdn.mouseflow.com/projects/81baae85-f91c-464e-ac38-15a987752b7a.js";
+                       document.getElementsByTagName("head")[0].appendChild(mf);
+                    })();', {
+					  "@context": "http://schema.org",
+					  "@type": "NewsArticle",
+					  "mainEntityOfPage":{
+					    "@type":"WebPage",
+					    "@id":"http://economictimes.indiatimes.com/industry/banking/finance/reliance-capital-approves-reliance-home-finances-listing-on-stock-exchange/articleshow/54321332.cms"
+					  },
+					  "headline": "Reliance Capital approves Reliance Home Finance's listing on stock exchange",
+					  "image": {
+					    "@type": "ImageObject",
+					    "url": "http://img.etimg.com/thumb/msid-54321366,width-672,resizemode-4,imglength-93364/industry/banking/finance/reliance-capital-approves-reliance-home-finances-listing-on-stock-exchange/fund-bccl.jpg",
+					    "height": 800,
+					    "width": 800
+					  },
+					  "datePublished": "2016-09-14T07:41:00.000Z",
+					  "dateModified": "2016-09-14T07:41:00.000Z",
+					  "author": {
+					    "@type": "Organization",
+					    "name": "ET Bureau"
+					  },
+					  "publisher": {
+					  	"@type": "Organization",
+					    "name": "Economic Times",
+					    "logo": {
+					      "@type": "ImageObject",
+					      "url": "http://img.etimg.com/photo/17952959.cms",
+					      "width": 286,
+					      "height": 26
+					    }
+					  },
+					  "description": "Reliance Capital will hold 51% stake in RHF and company will be adequately capitalised to grow lending book to over Rs 20,000 crore in the next 18 months."
+					}', u"
+				    $(window).scroll(function() {
+				        // Layloading of Google ad iframes
+                        $('iframe.googleAdIframe').each(function(i, v) {
+                    		var $v = $(v);
+                        	if($v.visible(false)) {
+                    		    $v.removeClass('googleAdIframe');
+                    		    $v.attr('src', $v.attr('data-src'));
+                    		    //this.contentWindow.location.reload(true);
+                    	    }
+                    	});
+				    });
+				
+				", 
+                    
+                        
+                                ', 
+                                    var e_x = '210766~1 = 1, 129777-1 = 1';
+                                    if(window.canRun === undefined || window.canRun == false){
+                                        ga('send', 'event', 'e_srv', 'yes', 'e_srv', 1);
+                                        $('div[id^="div-gpt"]').hide();
+                                    }
+                                ', 
+                            
+                    
+                ', u"function fixAd() {
+                      var adPosition = (document.getElementById('c_01').offsetTop + document.getElementById('div-gpt-ad-1477391859570-0').offsetTop);
+                        var sel = $('#div-gpt-ad-1477391859570-0'); 
+                        if (window.pageYOffset > adPosition) {
+                           var left =  ($(window).width() - $('.pageHolder').width()) / 2 - sel.width();
+                            sel.css({'position':'fixed', left:left, 'top':'0px'})
+                        } else {
+                            sel.css({'position':'absolute', left:'-160px', top:500});
+                        }
+                  }
+                  $(document).ready(function () {
+                       $('#topNavFixed').addClass('skinningExist');
+                       var left =  ($(window).width() - $('.pageHolder').width()) / 2;
+                       $('#scrollTop').css('left',left);
+                       $(document).scroll(function (e) {
+                        fixAd()
+                      });					
+                      window.addEventListener('resize', function(event){
+                        fixAd();
+                      });
+                  });"][var WRInitTime=(new Date()).getTime();',  
+				  var _gaq = _gaq || [];
+				
+			', //if(document.location.port == '') {
+				var analytics_js_path = 'https://www.google-analytics.com/analytics.js';
+				
+				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    			  })(window,document,'script',analytics_js_path,'ga');
+    
+    			  ga('create', 'UA-198011-5', 'auto', {'allowLinker': true});
+    			  ga('require', 'linker');
+    			  ga('linker:autoLink', ['economictimes.com']);
+    			  ga('require', 'displayfeatures');
+				  window.optimizely = window.optimizely || [];
+				  window.optimizely.push("activateUniversalAnalytics");
+				  ga('send', 'pageview');
+			 //}', u"var geolocation = '';", var _comscore = _comscore || [];
+			  _comscore.push({ c1: "2", c2: "6036484" });
+			  (function() {
+				var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			  })();', u"window._newsroom = window._newsroom || [];
+					    !function (e, f, u) {
+					        e.async = 1;
+					        e.src = u;
+					        f.parentNode.insertBefore(e, f);
+					    }(document.createElement('script'),	document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/timesofindia-et/newsroom.js');", u"
+		    var subsec1_common='13352306',
+		    subsec2_common='13358259';
+		", 
+		            lazyLoadColombia = {
+                        showAdDivVideo: function (data,ele) {
+                            var $this = $(ele);
+                            var container = $this.attr('id');
+                            if($('#' + container).html() == '') {
+                                //$('#' + container).parent().slideUp(700);
+                                $.ajax({
+        							url: "/ctn_video_player.cms",
+        							dataType: 'text',
+        							success: function(snippet){ 
+        								var iframe = document.createElement('iframe');
+        								iframe.style.width = '630px';
+        								iframe.style.height = '360px';
+        								iframe.style.border = '0';
+        								iframe.setAttribute("scrolling","no");
+        								iframe.setAttribute("frameBorder",'0');
+        								iframe.style.overflow = "hidden";
+        								iframe.id = 'ifr_' + container;
+        								iframe.name = 'ifr_' + container;
+        								document.getElementById(container).innerHTML = '';
+        								document.getElementById(container).appendChild(iframe);
+        								document.getElementById(container).style.display = '';
+        								document.getElementById(iframe.id).onload = function() {
+        									iframe.contentWindow.colombiaVideoAd(data,container);
+        								}
+                                        
+        								iframe.contentWindow.document.write(snippet);
+        								iframe.contentWindow.document.close();
+        								//$('#' + container).parent().slideDown('slow');
+        							},
+        							    error:function(a,b,c){
+        							}
+        						});	
+                            }
+                        },
+                    }
+                    function colombiaVidAdStart(iframe_id){
+                        $('#' + iframe_id).parent().parent().parent().css('display','');
+                        $('#' + iframe_id).parent().parent().slideDown('slow');     	    
+                    }
+                    function colombiaVidAdComplete(iframe_id) {
+                        //console.log('video completed for farme id :- ' + iframe_id);
+                       // $('#' + iframe_id).parent('div').html('').slideUp(700);
+                       $('#' + iframe_id).parent().parent().slideUp('slow');
+                        $('.ad_img').show();
+                    }
+                    
+                    function collapseDiv(iframe_id) {
+                        // alert(frame_id);
+                        $('#' + iframe_id).parent().parent().slideUp('slow');
+                        $('.ad_img').show();
+                    }
+		        	function adwidgetbottom(data,container){
+    			         if(data!=null) {
+    			            var conObj = document.getElementById(container);
+							var context='', context2='', cnt = data.paidAds.length, cnt2 = data.organicAds.length;
+							context='<div class="ob_dual_left"><span class="ob_ads_header"><div class="ob_custom_header">From Around the Web</div></span><ul id="div-clmb-ctn-129777-1" class="div-clmb-ctn-129777-1">';
+							context2='<div class="ob_dual_right"><span class="ob_ads_header"><div class="ob_custom_header">More from The Economic Times</div></span><ul class="div-clmb-ctn-129777-1">';
+        				    var className ='';
+        				    for(var i = 0; i < cnt; i++){
+								if(i==2){
+								    className = 'high';
+								}
+								else{
+								  className = '';  
+								}
+								context= context+'<li class="odb_li"> <a target="_blank" onclick="" href="'+data.paidAds[i].clk[0]+'" rel="nofollow" class="rec-link '+className+'">'+data.paidAds[i].title+'</a><span class="ob_source"> <span class="rec-src-date"></span><br/><span class="rec-src-link">'+data.paidAds[i].brandtext+'</span> </span> </li>';
+        				    }
+        				     for(var i = 0; i < cnt2; i++){
+								if(i==2){
+								    className = 'high';
+								}
+								else{
+								  className = '';  
+								}
+								context2= context2+'<li class="odb_li"> <a target="_blank" onclick="" href="'+data.organicAds[i].clk[0]+'" rel="nofollow" class="rec-link '+className+'">'+data.organicAds[i].title+'</a><span class="ob_source"> <span class="rec-src-date"></span><br/> </span></li>';
+        				    }
+        				    context = context+'</ul></div>';
+        				    context2 = context2+'</ul></div>';
+							conObj.innerHTML = context + context2 +'<div class="sponsored_tg"><div></div><span>Recommended by</span></div>';
+							var c = conObj.className;
+    						c = c.replace('all_zero', '').replace('hidden', '');
+    						conObj.className = c;
+        			    }
+        			}  
+        			function adwidgetimage(data,container){
+    			         if(data!=null) {
+    			            var conObj = document.getElementById(container);
+    			            var context='', context2='';
+    			            var context='<h2>FROM AROUND THE WEB</h2><ul>';
+    			            var context2='<h2>MORE FROM ECONOMIC TIMES</h2><ul>';
+    			            var j;
+    			            if(typeof midAd !='undefined' && midAd =='noAd'){
+    			               j= 4;
+    			            }
+    			            else{ j=3;}
+    			            for(var i = 0; i < 3; i++){
+								context= context+'<li> <a target="_blank" href="'+data.paidAds[i].clk[0]+'"><img height="145" width="203" src="' + data.paidAds[i].mainimage + '"/><span class="title">'+data.paidAds[i].title+'</span></a><span class="sponsored">'+data.paidAds[i].brandtext+'</span> </li>';
+								context2= context2+'<li> <a target="_blank" href="'+data.organicAds[i].clk[0]+'"><img height="145" width="203" src="' + data.organicAds[i].mainimage + '"/><span class="title">'+data.organicAds[i].title+'</span></a></li>';
+        				    }
+    			            context=context+'</ul>';
+							context2=context2+'</ul>';
+							conObj.innerHTML = context+' '+context2 +'<div class="sponsored_tg"><div></div><span>Recommended by</span></div>';
+							var c = conObj.className;
+    						c = c.replace('all_zero', '').replace('hidden', '');
+    						conObj.className = c;
+        			    }
+        			}
+		        
+				', 
+
+        
+        
+             
+            
+             
+            		        ', function otab(t,n){var e="_blank";try{e="undefined"==typeof isq()||"undefined"!=typeof isq()&&isq()?"_top":"_blank"}catch(c){}window.open(t,e)}function trev(t,n){try{ntsss.getInstance().push(t,n)}catch(e){}}var ntsss=function(){var t,n=function(){var t,n=1,e=!1,c=[],r=!1,o=[],i=function(t,n){function e(){try{if(!o){o=!0;for(var t=0;t<r.length;t++)r[t].fn.call(window,r[t].ctx);r=[]}}catch(n){}}function c(){try{"complete"===document.readyState&&e()}catch(t){}}try{t=t||"ready",n=n||window;var r=[],o=!1,i=!1;n[t]=function(t,n){try{if(o)return void setTimeout(function(){t(n)},1);r.push({fn:t,ctx:n}),"complete"===document.readyState||!document.attachEvent&&"interactive"===document.readyState?setTimeout(e,1):i||(document.addEventListener?(document.addEventListener("DOMContentLoaded",e,!1),window.addEventListener("load",e,!1)):(document.attachEvent("onreadystatechange",c),window.attachEvent("onload",e)),i=!0)}catch(a){}}}catch(a){}},a=function(){try{t="",i("ready",this),ready(function(){n(),r=!0});var n=y(f,500);window.onscroll=function(){n()},window.addEventListener?window.addEventListener("scroll",function(){n()}):window.attachEvent&&window.attachEvent("scroll",function(){n()})}catch(e){}},u=function(){try{t!=window.location.href&&(n=1,t=window.location.href,e=!0)}catch(c){}},d=function(t,n){try{"undefined"==typeof c[n]&&(c[n]={imprurl:t,classname:n,notify:!1},r&&f())}catch(e){}},f=function(){try{u();for(var t in c){var r=c[t];if(r.hasOwnProperty("notify")&&!r.notify){var i=s(r.classname);if(i.length>0&&l(i[0])){r.notify=!0,1==n&&(n=0,r.imprurl=r.imprurl.indexOf("?")>-1?r.imprurl+"&pv=1":r.imprurl+"?pv=1"),m(r.imprurl);var a=c.splice(t,1);a=null}}}e&&o.length>0&&"undefined"!=typeof nnnmm&&(e=!1,nnnmm.getInstance().ajxc(o.shift()))}catch(d){}},l=function(t){try{if(t.getBoundingClientRect){var n=t.getBoundingClientRect(),e=window.innerHeight||document.body.clientHeight||document.documentElement.clientHeight,c=n.top,r=n.bottom,o=r-c,i=e>=c&&c+o>=0;return 0==c&&0==r?!1:i}return!1}catch(a){return!1}},s=function(t){try{var n=[],e="."+t;return"undefined"!=typeof document.querySelectorAll?n=document.querySelectorAll(e):(document.getElementsByClassName=function(t){for(var n=[],e=this.getElementsByTagName("*"),c=0;c<e.length;c++)(" "+e[c].className+" ").indexOf(" "+t+" ")>-1&&n.push(e[c]);return n},n=document.getElementsByClassName(t)),n}catch(c){}},m=function(t){try{return(new Image).src=t,!0}catch(n){return!1}},y=function(t,n,e){try{n||(n=250);var c,r;return function(){var o=e||this,i=+new Date,a=arguments;c&&c+n>i?(clearTimeout(r),r=setTimeout(function(){c=i,t.apply(o,a)},n)):(c=i,t.apply(o,a))}}catch(o){}};return a(),{push:d,setpv:u,ajxcArr:o}};return{getInstance:function(){return t||(t=n()),t}}}();
+function axs(){ntsss.getInstance().ajxcArr.push(arguments[0])}function isq(){return nnnmm.getInstance().isq()}var nnnmm=function(){var t,e=function(){function t(){e=new m}var e,r=0,n="",o=window.location.host,a="etd_ace",c="@v0",i=0,d=!0,h=function(){var t=!1;try{var r=e.decode(g(a)).split("@");r.length>0?t="l"==r[1]?!1:!0:f(n)}catch(o){}return t},u=function(t){try{l(a,e.encode(o+t+(new Date).getTime(),"321","e"),"14")}catch(r){}},f=function(t){i=0,r=0,d=!0,s(t)},s=function(t){var e=new XMLHttpRequest,o="1000";n=t,e.onreadystatechange=function(){(1===e.readyState||4===e.readyState)&&0===e.status&&d&&u("@pa@0"),e.status>0&&d&&(d=!1,u("@l@"))},e.ontimeout=function(t){var e="2";d&&(r<Number(e)?(i+=1e3,s(n),r++):u("@pt@0"))},e.open("GET",t,!0),e.timeout=Number(o)+i,e.send()},g=function(t){try{for(var e=t+"=",r=document.cookie.split(";"),n=0;n<r.length;n++){for(var o=r[n];" "==o.charAt(0);)o=o.substring(1,o.length);if(0==o.indexOf(e))return o.substring(e.length,o.length)}}catch(a){}return null},l=function(t,e,r){try{var n;r?(date=new Date,date.setTime(date.getTime()+24*r*60*60*1e3),n="; expires="+date.toGMTString()):n="";var o=window.location.host;1===o.split(".").length?document.cookie=t+"="+e+n+"; path=/":(domain=(window.location.host.match(/([^.]+)\.\w{2,3}(?:\.\w{2})?$/)||[])[0],document.cookie=t+"="+e+n+"; path=/; domain="+domain)}catch(a){}},C={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(t){var e,r,n,o,a,c,i,d="",h=0;for(t=C._utf8_encode(t);h<t.length;)e=t.charCodeAt(h++),r=t.charCodeAt(h++),n=t.charCodeAt(h++),o=e>>2,a=(3&e)<<4|r>>4,c=(15&r)<<2|n>>6,i=63&n,isNaN(r)?c=i=64:isNaN(n)&&(i=64),d=d+this._keyStr.charAt(o)+this._keyStr.charAt(a)+this._keyStr.charAt(c)+this._keyStr.charAt(i);return d},encodeUrlSafe:function(t){return C.encode(t).replace(/\+/g,"-").replace(/\//g,"_").replace(/\=/g,"~")},decode:function(t){var e,r,n,o,a,c,i,d="",h=0;for(t=t.replace(/[^A-Za-z0-9\+\/\=]/g,"");h<t.length;)o=this._keyStr.indexOf(t.charAt(h++)),a=this._keyStr.indexOf(t.charAt(h++)),c=this._keyStr.indexOf(t.charAt(h++)),i=this._keyStr.indexOf(t.charAt(h++)),e=o<<2|a>>4,r=(15&a)<<4|c>>2,n=(3&c)<<6|i,d+=String.fromCharCode(e),64!=c&&(d+=String.fromCharCode(r)),64!=i&&(d+=String.fromCharCode(n));return d=C._utf8_decode(d)},decodeUrlSafe:function(t){return C.decode(t.replace(/\-/g,"+").replace(/\_/g,"/").replace(/\~/g,"="))},_utf8_encode:function(t){t=t.replace(/\r\n/g,"\n");for(var e="",r=0;r<t.length;r++){var n=t.charCodeAt(r);128>n?e+=String.fromCharCode(n):n>127&&2048>n?(e+=String.fromCharCode(n>>6|192),e+=String.fromCharCode(63&n|128)):(e+=String.fromCharCode(n>>12|224),e+=String.fromCharCode(n>>6&63|128),e+=String.fromCharCode(63&n|128))}return e},_utf8_decode:function(t){for(var e="",r=0,n=c1=c2=0;r<t.length;)n=t.charCodeAt(r),128>n?(e+=String.fromCharCode(n),r++):n>191&&224>n?(c2=t.charCodeAt(r+1),e+=String.fromCharCode((31&n)<<6|63&c2),r+=2):(c2=t.charCodeAt(r+1),c3=t.charCodeAt(r+2),e+=String.fromCharCode((15&n)<<12|(63&c2)<<6|63&c3),r+=3);return e}},m=function(){function t(t,e){var r=t.length/2;return 0==e?t.substring(0,r):t.substring(r,t.length)}function e(t){for(var e=[],r=0,n=t.length;n>=r;r++)e.push(t.charAt(n-r));return e.join("")}function r(r){var n=e(t(r,0))+t(r,1),a=o(n,"321","e")+c;return C.encodeUrlSafe(a)}function n(r){var n=C.decodeUrlSafe(r).replace(c,""),a=o(n,"321","d");return e(t(a,0))+t(a,1)}var o=function(t,e,r){for(var n="",o=0,a=t,c=0;c<a.length;c++){var i=e[o],d="";o<e.length-1?o++:o=0,d="d"==r?parseInt(a[c].charCodeAt(0))-parseInt(i):parseInt(a[c].charCodeAt(0))+parseInt(i),n+=String.fromCharCode(d)}return n},e=function(t){for(var e=[],r=0,n=t.length;n>=r;r++)e.push(t.charAt(n-r));return e.join("")};return{encode:r,decode:n}};return t(),{isq:h,ajxc:f,ck:(new m).decode}};return{getInstance:function(){return t||(t=e()),t}}}();', 
+                         
+            
+         
+        		        ', try{axs("http://economictimes.indiatimes.com/acms/jsAds/getContent?gDOK=1929688697&ad_classid=-2119982771&YMbg=1809594906&ad_channel=1696319288")}catch(e){}', 
+                     
+        ', Never miss a great news story!', Get instant notifications from Economic Times', Allow', Not now', You can switch off notifications anytime using browser settings.', SECTIONS', ET APPS', ET Android App', ET iPhone App', ET iPad App', ET Wealth Android App', ET Blackberry App', ET Nokia App', ET Markets Android App', ET Markets iPhone App', ET Money Android App', ENGLISH', \u0939\u093f\u0928\u094d\u0926\u0940', \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0', SIGN-IN', FOLLOW US', FACEBOOK', TWITTER', YOUTUBE', LINKEDIN', GOOGLE PLUS', RSS', Finance', LATEST NEWS', u"We should talk to Pakistan, but they have to understand terror & talks can't go together: Yashwant Sinha", Once foe, Modi, Nitish now all praise for each other', Toyota, Honda say no immediate plans to curb Mexico production', Data collection by pvt agencies for Aadhaar not a good idea: SC', u"TMC MPs detained as police thwarts march to PM's residence", India eyes to cut defence budget by 50% within a decade: Minister of State for Defence Subhash Bhamre', Home', Markets', News', Industry', Small Biz', Politics', Wealth', MF', Tech', Jobs', Opinion', Blogs', NRI', Magazines', Slideshows', ET NOW', ET Speed', ET Portfolio', Industry', Auto', News', Banking/Finance', Cons. Products', Durables', Electronics', Fashion / Cosmetics / Jewellery', FMCG', Food', Garments / Textiles', Liquor', Paints', Tobacco', Energy', Power', Oil & Gas', u"Ind'l Goods/Svs", Construction', Engineering', Cement', Chem / Fertilisers', Metals & Mining', Packaging', Paper / Wood / Glass/ Plastic/ Marbles', Petrochem', Steel', Healthcare/Biotech', Biotech', Healthcare', Pharmaceuticals', Services', Advertising', Consultancy / Audit', Education', Hotels / Restaurants', u"Property / C'struction", Retail', Travel', More', Media/Entertainment', Entertainment', Media', Telecom', Transportation', Railways', Airlines / Aviation', Shipping / Transport', Banking', Finance', ET Home', \u203a', Industry', \u203a', Banking/Finance', \u203a', Finance', u"
+		    var objPage = typeof objPage != 'undefined' ? objPage : {};
+		    objPage.band_ad_active = '';
+		    objPage.keepAdFirst = '';
+		", 04:05 PM | 05 Jan', market stats', SENSEX', 26,878', 245.11', NIFTY 50', 8,274', 83.30', GOLD (MCX) (Rs/10g.)', 27,830', 148.00', USD/INR', 67.96', -0.08', Portfolio', Loading...', Select Portfolio and Asset Combination for Display on Market Band', Select Portfolio', Select Asset Class', Stocks', MF', ETF', Show More', CREATE PORTFOLIO', ADD INVESTMENT', 
+                    	Download ET MARKETS APP
+                    ', Get ET Markets in your own language', DOWNLOAD THE APP NOW', +91', CHOOSE LANGUAGE', ENG', ENG - English', HIN - \u0939\u093f\u0928\u094d\u0926\u0940', GUJ - \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0', MAR - \u092e\u0930\u093e\u0920\u0940', BEN - \u09ac\u09be\u0982\u09b2\u09be ', KAN - \u0c95\u0ca8\u0ccd\u0ca8\u0ca1', ORI - \u0b13\u0b21\u0b3f\u0b06', TEL - \u0c24\u0c46\u0c32\u0c41\u0c17\u0c41', TAM - \u0ba4\u0bae\u0bbf\u0bb4\u0bcd', Sensex ends 245 pts higher, Nifty50 settles above 8,250; Adani Ports up 4%', Drag according to your convenience', ET NOW RADIO', ET NOW', TIMES NOW', u"var default_tv_popup = '';", u"Reliance Capital approves Reliance Home Finance's listing on stock exchange", By ET Bureau | Updated: Sep 14, 2016, 07.49 AM IST', Post a Comment', READ MORE ON » ', Reliance Home Finance Ltd',  | ', Reliance Capital',  | ', Anmol A Ambani', RELATED VIDEO', u"Reliance Capital approves Reliance Home Finance's listing on stock exchange", RELATED COMPANIES', EXPAND', ADD TO', Portfolio', Watchlist', OUTLOOK?', +ve', -ve', Reliance Capital', x', Loading data...', Charts', Valuation & Peer Comparison', Community Buzz', Close \u2715', .ss_menu{padding: 10px 0px;}
+            									    .ss_menu .lbl{padding: 0 15px 0 0;font-size: 14px;cursor:pointer;position: relative;}
+            									    .ss_menu .lbl.active{font-weight: 700}',   MUMBAI: The board of directors of ', Reliance Capital',  on Tuesday approved a proposal to independently list its home finance business, ', Reliance Home Finance Ltd',  (RHF), on the stock exchanges.  ',   ',   As per the proposal, 49 per cent stake in RHF will be allotted to all shareholders of Reliance Capital in the ratio of one share free of cost in Reliance Home Finance for every one share held in Reliance Capital, the company said in a statement. The proposal is subject to necessary shareholders and other approvals.  ',   ',   "We expect the listing and allotment of shares in Reliance Home Finance, free of cost, to unlock significant value for our almost one million strong shareholder family," said ', Anmol A Ambani', , director, Reliance Capital Ltd.  ',   ',   Reliance Capital will hold 51 per cent stake in RHF and the company will be adequately capitalised to grow the lending book to over Rs 20,000 crore in the next 18 months.  ',   ',   RHF, a 100 per cent subsidiary of Reliance Capital, provides a wide range of loan solutions like home loan, loan against property and construction finance. The company reported assets under management of Rs 8,259 crore ($1.2 billion) during the quarter ended June 30, 2016.  ',   ',   "There is presently an estimated shortage of 100 million residential units in India," Ambani said. "To address the needs of this sector, Reliance Home Finance has charted an aggressive growth plan in this space, and aims to increase its book size to over Rs 50,000 crore in the next few years."  ',   ',   The company, which has a credit rating "CARE AA+", also believes that the listing of Reliance Home Finance will lead to increased management focus and accelerated growth in the home finance business.  ', Stay on top of business news with The Economic Times App. ', Download it Now!', u"DON'T MISS", any stories, follow us on Twitter', Follow', 
+
+', .UUrgSXdUc h1,h3,p {margin:0;padding:0;}.UUrgSXdUc:hover{background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo-red.png?v=1.1); }.UUrgSXdUc {width: 100%;height: auto;float: left;padding-bottom: 14px;background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo.png?v=1.1); background-repeat: no-repeat;background-position: 98% 100%;background-size: auto auto;position: relative;}.UUrgSXdUc > div a img {width:100%;height:145px;float:left;}.UUrgSXdUc > div a {width:32%;float: left;margin-left:1.7%; text-decoration: none;margin-bottom: 12px;cursor: pointer;}.UUrgSXdUc > div a:first-child {margin-left: 0;}.UUrgSXdUc > div h3 {width: 100%; height: auto; float: left; overflow: hidden;display: -webkit-box; -webkit-line-clamp: 3;-webkit-box-orient: vertical;font-family: inherit;   color: #333; padding: 6px 0 0;text-align: left;line-height: 1.25;font-size: 13px !important;max-height: 49px !important;}.UUrgSXdUc > div p {width: 100%; height: auto; float: left;overflow: hidden; display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;    max-height: 13px;font-family: inherit;color: #999;padding: 2px 0 0;text-align: left;font-size: 12px;}.UUrgSXdUc h1 {height: auto; display: block;margin-bottom: 9px; width: 100%; margin-top: 8px; float: left;color: #000;font: bold 14px arial;padding: 6px 6px; margin: 2px 0 10px 0; text-transform: uppercase;font-size: 15px !important;}.UUrgSXdUc h1::before { content: "";}.UUrgSXdUc > div > a > div {float: left;width: 100%;height:75px;}.UUrgSXdUc > div {float: left;}.UUrgSXdUc:after {content: 'Recommended by';float: right;margin-right: 20px; bottom: 0; position: absolute;right: 12%; color: #959595;font-size: 12px;font-family: arial; font-weight: 500;}@media (max-width:1920px) {.UUrgSXdUc > div h3{font-size:26px;max-height: 71px;}.UUrgSXdUc h1{font-size:28px;}.UUrgSXdUc > div > a > div {height: Auto; }}@media (max-width:1366px) {.UUrgSXdUc > div h3{font-size:14px;}.UUrgSXdUc h1{font-size:24px;}}@media (max-width:1280px) {.UUrgSXdUc > div h3{font-size:14px;}.UUrgSXdUc h1{font-size:20px;}}@media (max-width:840px) {.UUrgSXdUc > div h3{font-size:14px;}.UUrgSXdUc h1{font-size:18px;}}@media (max-width:640px) {.UUrgSXdUc > div h3{font-size:14px;}.UUrgSXdUc h1{font-size:16px;}}@media (max-width:320px) {.UUrgSXdUc > div h3{font-size:13px;}.UUrgSXdUc h1{font-size:16px;}}',     ', FROM AROUND THE WEB',     ', Complete health insurance:Now get help when you need it most', ICICI Lombard', Help these parents save their new born baby!', Milaap', Play the ultimate battle of minds!', Junglee Rummy', MORE FROM ECONOMIC TIMES', Infrastructure', Union Budget 2017-18 likely to be presented on February 1', Here is how to use UPI-based BHIM app', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="ItnZeUBFnN('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow" ><div><h3>{{title}}</h3><p class="brand_ctn">{{brand}}</p></div></a>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<a onclick="ItnZeUBFnN('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow"><div><h3>{{title}}</h3></div></a>#og#';*/function ItnZeUBFnN(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_top');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){try{if (window.frameElement !== null){window.canRun = true;document.body.style.margin="0px";  parent.top.document.getElementById(window.frameElement.parentNode.getAttribute('id')).style.height='520px';; }}catch(e){}};try{trev('http://economictimes.indiatimes.com/itetnfy/notify.htm?imprId=98ec9bc0-d81d-46b4-a5b3-259eb31ca417-10o78&id=210766&fpc=f2aa571d-fdfa-4b50-841a-523945271dbd-10ocs~1','UUrgSXdUc');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+', 
+
+', .OeRRcqli h1,h3,p {margin:0;padding:0;}.OeRRcqli:hover{background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo-red.png?v=1.1);}.OeRRcqli {width: 100%;height: auto;float: left;padding-bottom: 20px;background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo.png?v=1.1); background-repeat: no-repeat;background-position: 98% 98.5%;background-size: auto auto;margin-top: 5px;position: relative;}.OeRRcqli > div a img {float: left;margin-right: 10px;width: 100px;}.OeRRcqli > div a {width: 100%;display: block;float: left;color: #5c5c5c;text-decoration: none; cursor: pointer;margin: 10px 0 0 0;padding-bottom: 10px; border-bottom: 1px solid #ccc; min-height: 46px;}.OeRRcqli > div h3 {max-height: 31px; overflow: hidden; display: -webkit-box;-webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 14px !important; height: auto;   padding-right: 13px; color: #000; font: 14px Arial;line-height: 15px;}.OeRRcqli > div p {padding-right: 13px; margin: 0; max-height: 13px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-size: 11px; float: left; font: 11px Arial; color: #8c8c8c;margin-top: 5px;}.OeRRcqli h1 {width: 49%; float: left; padding: 5px 0; color: #000000;margin-right: 2%; font: normal 18px/17px Arial; padding-bottom: 6px; border-bottom: 2px solid #8c8c8c;font-size: 18px !important;}.OeRRcqli > div a:last-child { border: 0 !important;}.OeRRcqli h1::before { content: ""; }.OeRRcqli h1:nth-child(2) {margin-right: 0 !important;}.OeRRcqli > div > a > div {height:61px;    float: left;}.OeRRcqli > div {width:49%;float:left;}.OeRRcqli:after {content: 'Recommended by';float: right;margin-right: 20px; bottom: 1%; position: absolute;right: 12%; color: #959595;font-size: 12px;font-family: arial; font-weight: 500;}@media (max-width:1920px) {.OeRRcqli > div h3{font-size:26px;}.OeRRcqli h1{font-size:28px;}.OeRRcqli > div > a > div {height: Auto;max-height: 46px;min-height: 46px;}}.OeRRcqli .mUnfwSr {float: right !important;}@media (max-width:1366px) {.OeRRcqli > div h3{font-size:14px;}.OeRRcqli h1{font-size:24px;}}@media (max-width:1280px) {.OeRRcqli > div h3{font-size:14px;}.OeRRcqli h1{font-size:20px;}}@media (max-width:840px) {.OeRRcqli > div h3{font-size:14px;}.OeRRcqli h1{font-size:18px;}}@media (max-width:640px) {.OeRRcqli > div h3{font-size:13px;}.OeRRcqli h1{font-size:16px;}}@media (max-width:320px) {.OeRRcqli > div h3{font-size:13px;}.OeRRcqli h1{font-size:16px;}}',     ', From Around the Web', More from The Economic Times',     ', All natural whiteness serum (try it now!)', Fit Mom Daily', Bring the Lava 4G VoLTE home for Rs. 4,970', Gadgets Now', These will be the highest
+paying jobs in India in 2017', Business Insider', 40% or more off on adidas products', Amazon', IndiGo grows fleet size, announces 10 additional frequencies', Mutual funds bet on new investors post demonetisation', u"MS Dhoni steps down as India's limited overs captain", Mamata Banerjee challenges Narendra Modi to arrest her', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="ScerDONnld('{{href}}')"  rel="nofollow,noindex"><div><h3>{{title}}</h3><p>{{brand}}</p></div></a>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<a onclick="ScerDONnld('{{href}}')"  rel="nofollow,noindex"><div><h3>{{title}}</h3></div></a>#og#';*/function ScerDONnld(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_top');}else{window.open(par,'_blank'); }   }                   };   window.onload = function (){         try{if (window.frameElement !== null){window.canRun = true;document.body.style.margin="0px";  parent.top.document.getElementById(window.frameElement.parentNode.getAttribute('id')).style.height='480px';; }}catch(e){}};try{trev('http://economictimes.indiatimes.com/itetnfy/notify.htm?imprId=9998682a-74ae-4007-848b-b893996345ce-10o78&id=129777&fpc=f2aa571d-fdfa-4b50-841a-523945271dbd-10ocs~1','OeRRcqli');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+', READ MORE ON » ', Reliance Home Finance Ltd',  | ', Reliance Capital',  | ', Anmol A Ambani', To post this comment you must', Log In/Connect with:', Indiatimes Network', or', Fill in your details:', Will be displayed', Will not be displayed', Will be displayed', Share this Comment:', Post to Twitter ', Have something to say? ', Post your comment', To post this comment you must', Log In/Connect with:', Indiatimes Network', Fill in your details:', Will be displayed', Will not be displayed', Will be displayed', Share this Comment:', Post to Twitter ', Most', Read', Most', Shared', Most', Commented', u"Here is why 'the flavour of the season', mobile wallets will die", u"View: Fallout from India's cash crunch is just starting", Air India takes on Rajdhani Express in fare war', I-T dept ropes in experts from Big Four to unearth black money', Tata Motors launches Xenon Yodha starting at Rs 6.05 lakh', More »', Get a Quote', Browse Companies', A', B', C', D', E', F', G', H', I', J', K', L', M', N', O', P', Q', R', S', T', U', V', W', X', Y', Z', |', 1', 2', 3', 4', 5', 6', 7', 8', 9', Browse Mutual Funds', A', B', C', D', E', F', G', H', I', J', K', L', M', N', O', P', Q', R', S', T', U', V', W', X', Y', Z', The Economic Times', Live Market', News', Portfolio', Mobile', Live TV', Newsletter', Commodities', Speed', QnA', Blogs', Alerts', RSS', Other Times Group news sites', Times of India', |', \u0907\u0915\u0928\u0949\u092e\u093f\u0915 \u091f\u093e\u0907\u092e\u094d\u0938', \u0a88\u0a95\u0acb\u0aa8\u0acb\u0aae\u0abf\u0a95 \u0a9f\u0abe\u0a88\u0aae\u0acd\u0ab8', |', Mumbai Mirror', Times Now', |', Indiatimes', \u0928\u0935\u092d\u093e\u0930\u0924 \u091f\u093e\u0907\u092e\u094d\u0938', |', \u092e\u0939\u093e\u0930\u093e\u0937\u094d\u091f\u094d\u0930 \u091f\u093e\u0907\u092e\u094d\u0938', \u0cb5\u0cbf\u0c9c\u0caf \u0c95\u0cb0\u0ccd\u0ca8\u0cbe\u0c9f\u0c95', |', Lifehacker', Gizmodo', |', Eisamay', |', IGN India', NavGujarat Samay', Living and entertainment', Timescity', |', iDiva', |', Zoom', |', Luxpresso', |', Gaana', |', Happytrips', |', Cricbuzz', |', Get Smartapp', Networking', itimes', |', MensXP.com', Hot on the Web', Budget 2017', |', Sensex, Nifty Live', Year-End Special 2016', |', UP & Punjab Assembly Elections 2017', Live: Currency Demonetisation', |', Gold Rate', RBI Monetary Policy', Services', ads2book', |', Gadgetsnow', |', Free Business Listings', Simplymarry', |', Astrospeak', |', Timesjobs', |', Magicbricks', |', Zigwheels', |', Timesdeal', |', dineout', |', Filmipop', |', Remit2india', |', Gaana', |', Greetzap', |', Techradar', |', Alivear', |', Google Play',  | ', Manage Notifications', About us', /', Advertise with us', /', Terms of Use & Grievance Redressal', /', Privacy Policy', /', Feedback', /', Sitemap', /', Code of Ethics', /', /', Disclaimer', Copyright © 2016 Bennett, Coleman & Co. Ltd. All rights reserved.', BACK TO TOP', Digg', Google Bookmarks', StumbleUpon', Reddit', Newsvine', Live Bookmarks', Technorati', Yahoo Bookmarks', Blogmarks', Del.icio.us', ApnaCircle', Mail This Article', My Saved Articles', Sign in', Sign up', Find this comment offensive?', Choose your reason below and click on the Report button. This will alert our moderators to take action', Name', Reason for reporting:', Foul language', Slanderous', Inciting hatred against a certain community', Others', Your Reason has been Reported to the admin.', 
+                var _0x2144=["\x61\x64\x64\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72","\x61\x74\x74\x61\x63\x68\x45\x76\x65\x6E\x74","\x72\x65\x6D\x6F\x76\x65\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72","\x72\x65\x6D\x6F\x76\x65\x45\x76\x65\x6E\x74","\x63\x6F\x6E\x73\x6F\x6C\x65","\x65\x72\x72\x6F\x72","\x66\x6F\x72\x45\x61\x63\x68","\x73\x63\x72\x6F\x6C\x6C","\x63\x61\x6E\x52\x75\x6E","\x64\x65\x74\x65\x63\x74\x6F\x72","\x66\x75\x6E\x63\x74\x69\x6F\x6E","\x70\x75\x73\x68","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x6C\x6D\x62\x74\x65\x63\x68\x2E\x63\x6F\x6D\x2F\x61\x73\x65\x2F\x32\x36\x35\x38\x2F\x33\x2F\x61\x61\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x6C\x6D\x62\x74\x65\x63\x68\x2E\x63\x6F\x6D\x2F\x61\x73\x65\x2F\x32\x33\x30\x38\x2F\x34\x2F\x61\x61\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x70\x61\x72\x74\x6E\x65\x72\x2E\x67\x6F\x6F\x67\x6C\x65\x61\x64\x73\x65\x72\x76\x69\x63\x65\x73\x2E\x63\x6F\x6D\x2F\x67\x70\x74\x2F\x70\x75\x62\x61\x64\x73\x5F\x69\x6D\x70\x6C\x5F\x39\x32\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x68\x61\x72\x74\x62\x65\x61\x74\x2E\x63\x6F\x6D\x2F\x6A\x73\x2F\x63\x68\x61\x72\x74\x62\x65\x61\x74\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x77\x77\x77\x2E\x67\x6F\x6F\x67\x6C\x65\x2D\x61\x6E\x61\x6C\x79\x74\x69\x63\x73\x2E\x63\x6F\x6D\x2F\x61\x6E\x61\x6C\x79\x74\x69\x63\x73\x2E\x6A\x73\x20","\x68\x74\x74\x70\x3A\x2F\x2F\x62\x2E\x73\x63\x6F\x72\x65\x63\x61\x72\x64\x72\x65\x73\x65\x61\x72\x63\x68\x2E\x63\x6F\x6D\x2F\x62\x65\x61\x63\x6F\x6E\x2E\x6A\x73\x20","\x68\x74\x74\x70\x3A\x2F\x2F\x74\x61\x67\x73\x2E\x63\x72\x77\x64\x63\x6E\x74\x72\x6C\x2E\x6E\x65\x74\x2F\x63\x2F\x32\x38\x30\x31\x2F\x63\x63\x2E\x6A\x73\x3F\x6E\x73\x3D\x5F\x63\x63\x32\x38\x30\x31","\x68\x74\x74\x70\x3A\x2F\x2F\x61\x64\x2E\x63\x72\x77\x64\x63\x6E\x74\x72\x6C\x2E\x6E\x65\x74\x2F\x35\x2F\x63\x3D\x32\x38\x30\x30\x2F\x70\x65\x3D\x79\x2F\x63\x61\x6C\x6C\x62\x61\x63\x6B\x3D\x63\x63\x75\x61\x64","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x6C\x6D\x62\x74\x65\x63\x68\x2E\x63\x6F\x6D\x2F\x61\x64\x2F\x63\x6F\x6D\x6D\x6F\x6E\x73\x2F\x6A\x73\x2F\x63\x6F\x6C\x6F\x6D\x62\x69\x61\x5F\x76\x32\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x66\x69\x6C\x65\x73\x2E\x61\x64\x73\x70\x64\x62\x6C\x2E\x63\x6F\x6D\x2F\x70\x75\x62\x6C\x69\x73\x68\x65\x72\x73\x2F\x74\x69\x6D\x65\x73\x6F\x66\x69\x6E\x64\x69\x61\x2F\x63\x6F\x64\x65\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x61\x64\x73\x2E\x70\x75\x62\x6D\x61\x74\x69\x63\x2E\x63\x6F\x6D\x2F\x41\x64\x53\x65\x72\x76\x65\x72\x2F\x6A\x73\x2F\x70\x77\x74\x2F\x32\x33\x31\x30\x35\x2F\x34\x36\x2F\x70\x77\x74\x2E\x6A\x73","\x2A\x69\x6D\x61\x67\x65\x73\x2E\x74\x61\x62\x6F\x6F\x6C\x61\x2E\x63\x6F\x6D","\x2A\x61\x64\x73\x2E\x79\x61\x68\x6F\x6F\x2E\x63\x6F\x6D","\x44\x65\x62\x75\x67\x67\x69\x6E\x67\x20\x45\x72\x72\x6F\x72\x3A\x20","\x73\x72\x63","\x74\x61\x72\x67\x65\x74","\x6C\x6F\x67","\x6C\x65\x6E\x67\x74\x68","\x74\x61\x67\x4E\x61\x6D\x65","\x53\x43\x52\x49\x50\x54","\x49\x4D\x47","\x2A","\x73\x75\x62\x73\x74\x72","\x69\x6E\x64\x65\x78\x4F\x66","\x41\x64\x42\x6C\x6F\x63\x6B\x65\x72","\x41\x44\x42\x4C\x4F\x43\x4B\x45\x52\x4F\x4E","\x67\x61","\x73\x65\x6E\x64","\x65\x76\x65\x6E\x74","\x47\x41","\x75\x6E\x64\x65\x66\x69\x6E\x65\x64","\x2F\x62\x6C\x6F\x63\x6B\x65\x64\x2E\x63\x6D\x73","\x61\x72\x74\x69\x63\x6C\x65\x6C\x69\x73\x74\x5F\x65\x73\x69","\x70\x61\x74\x68\x6E\x61\x6D\x65","\x69\x73\x4C\x6F\x67\x67\x65\x64","\x73\x65\x74","\x64\x69\x6D\x65\x6E\x73\x69\x6F\x6E\x33","\x4C\x4F\x47\x47\x45\x44\x49\x4E","\x65\x74\x5F\x61\x64\x42\x6C\x6F\x63\x6B\x65\x64","\x6A\x53\x74\x6F\x72\x61\x67\x65","\x74\x69\x74\x6C\x65","\x68\x72\x65\x66","\x70\x75\x73\x68\x53\x74\x61\x74\x65","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x67\x65\x74","\x64\x65\x6C\x65\x74\x65\x4B\x65\x79","\x41\x44\x42\x4C\x4F\x43\x4B\x45\x52\x4F\x46\x46","\x62\x61\x63\x6B"];(function(_0xe300x1,_0xe300x2){var _0xe300x3=[];function _0xe300x4(_0xe300x5,_0xe300x6){if(_0xe300x1[_0x2144[0]]){_0xe300x1[_0x2144[0]](_0xe300x5,_0xe300x6,false)}else {if(_0xe300x1[_0x2144[1]]){_0xe300x1[_0x2144[1]](_0xe300x5,_0xe300x6)}}}function _0xe300x7(_0xe300x5,_0xe300x6){if(_0xe300x1[_0x2144[2]]){_0xe300x1[_0x2144[2]](_0xe300x5,_0xe300x6)}else {if(_0xe300x1[_0x2144[3]]){_0xe300x1[_0x2144[3]](_0xe300x5,_0xe300x6)}}}function _0xe300x8(_0xe300x9){_0xe300x3[_0x2144[6]](function(_0xe300x6){try{_0xe300x6(_0xe300x9)}catch(e){if(_0xe300x2[_0x2144[4]]&& _0xe300x2[_0x2144[4]][_0x2144[5]]){_0xe300x2[_0x2144[4]][_0x2144[5]](e)}}})}function _0xe300xa(){_0xe300x7(_0x2144[7],_0xe300xa);_0xe300x8(true)}function _0xe300xb(){_0xe300x8(false)}if(!_0xe300x2[_0x2144[8]]){_0xe300x4(_0x2144[7],_0xe300xa)}else {setTimeout(_0xe300xb,100)};_0xe300x2[_0x2144[9]]= function(_0xe300xc){if(_0xe300xc&&  typeof _0xe300xc== _0x2144[10]){_0xe300x3[_0x2144[11]](_0xe300xc)}};if(_0xe300x1[_0x2144[0]]){var _0xe300xd=[_0x2144[12],_0x2144[13],_0x2144[14],_0x2144[15],_0x2144[16],_0x2144[17],_0x2144[18],_0x2144[19],_0x2144[20],_0x2144[21],_0x2144[22],_0x2144[23],_0x2144[24]];_0xe300x1[_0x2144[0]](_0x2144[5],function(_0xe300x5){console[_0x2144[28]](_0x2144[25]+ _0xe300x5[_0x2144[27]][_0x2144[26]]);for(var _0xe300xe=0;_0xe300xe< _0xe300xd[_0x2144[29]];_0xe300xe++){if(_0xe300x5&& _0xe300x5[_0x2144[27]]&& (_0xe300x5[_0x2144[27]][_0x2144[30]]== _0x2144[31]|| _0xe300x5[_0x2144[27]][_0x2144[30]]== _0x2144[32])&& _0xe300x5[_0x2144[27]][_0x2144[26]]&& (_0xe300x5[_0x2144[27]][_0x2144[26]]=== _0xe300xd[_0xe300xe]|| (_0xe300xd[_0xe300xe][0]== _0x2144[33]&& _0xe300x5[_0x2144[27]][_0x2144[26]][_0x2144[35]](_0xe300xd[_0xe300xe][_0x2144[34]](1))>  -1))){_0xe300x2[_0x2144[8]]= false}}},true)}}(document,window));(function(_0xe300x1,_0xe300x2){var _0xe300xf={GA:{CATEGORY:_0x2144[36],ACTION_DETECTED:_0x2144[37]}};function _0xe300x10(){if(_0xe300x2[_0x2144[38]]){ga(_0x2144[39],_0x2144[40],_0xe300xf[_0x2144[41]].CATEGORY,_0xe300xf[_0x2144[41]].ACTION_DETECTED)}}_0xe300x2[_0x2144[9]](function(_0xe300xa){if(_0xe300xa=== true&&  typeof blockedPage== _0x2144[42]&& _0xe300x2[_0x2144[38]]){ga(_0x2144[39],_0x2144[40],_0xe300xf[_0x2144[41]].CATEGORY,_0xe300xf[_0x2144[41]].ACTION_DETECTED)}})}(document,window));window[_0x2144[9]](function(_0xe300xa){var _0xe300x11=_0x2144[43];var _0xe300x12=(location[_0x2144[45]][_0x2144[35]](_0x2144[44]))?true:false;var _0xe300x13=( typeof redirectOff!= _0x2144[42]&& redirectOff== 1)?true:false;if(_0xe300xa=== true){if(location[_0x2144[45]]!= _0xe300x11&&  !(_0xe300x13)){if(( typeof _tp_data!= undefined)&& ( typeof _tp_data[_0x2144[46]]!= undefined)&& (_tp_data[_0x2144[46]]== true)){ga(_0x2144[47],_0x2144[48],_0x2144[49])};$[_0x2144[51]][_0x2144[47]](_0x2144[50],1);history[_0x2144[54]]({},document[_0x2144[52]],location[_0x2144[53]]);window[_0x2144[55]]= _0xe300x11}}else {var _0xe300x14=$[_0x2144[51]][_0x2144[56]](_0x2144[50]);if(_0xe300x14== 1&&  typeof blockedPage== _0x2144[42]){$[_0x2144[51]][_0x2144[57]](_0x2144[50]);ga(_0x2144[39],_0x2144[40],_0x2144[36],_0x2144[58])};if(location[_0x2144[45]]== _0xe300x11&&  !(history[_0x2144[29]]< 2)){history[_0x2144[59]]()}}})
+            
+			', ga('set', 'dimension4', 'ET Burea);
+						var page = {
+							msid : 54321332,
+							subsec1 : '13352306',
+							compId : '13189',
+							cfmid : '',
+							budgetCommentKeyword: '0',
+							articleDate : 'Sep 14, 2016, 07.41 AM IST'
+						}
+						var sharer = {
+							title:"Reliance Capital approves Reliance Home Finance's listing on stock exchange - The Economic Times",
+							twttitle:"Reliance Capital approves Reliance Home Finance's listing on stock exchange",
+							img:"http://img.etimg.com/thumb/msid-54321366,width-672,resizemode-4,imglength-93364/industry/banking/finance/reliance-capital-approves-reliance-home-finances-listing-on-stock-exchange/fund-bccl.jpg",
+							desc:"Reliance Capital will hold 51% stake in RHF and company will be adequately capitalised to grow lending book to over Rs 20,000 crore in the next 18 months.",
+							url:"http://economictimes.indiatimes.com/industry/banking/finance/reliance-capital-approves-reliance-home-finances-listing-on-stock-exchange/articleshow/54321332.cms"
+						}
+						var isMarket = 0;
+						var lp_read_act = "read";var articleDate = "Sep 14, 2016, 07.41 AM IST",
+						dt1 = articleDate.split(','),
+						dt2 = dt1[0],
+						dt3 = dt2.split(' '),
+						dt4 = dt3[1]+ " " + dt3[0],
+						dt5 = dt4 + "," + dt1[1] + "," + dt1[2];
+						var catids = '2147477890,13352306,13358259,13358311';
+					var _pg_startpt = (new Date()).getTime();
+					function trim(str){return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');}
+					var _iBeat_articleid="54321332";
+					var _iBeat_tag='Reliance Home Finance Ltd,Reliance Capital,Anmol A Ambani';
+					var _iBeat_url = window.location.href;
+					_iBeat_url=escape(_iBeat_url);
+					var _iBeat_type="1";
+					var _iBeat_action="1";
+					var _iBeat_cat=trim("Industry");
+					var _iBeat_subcat=trim("Banking/Finance");
+					var _iBeat_articledt='Sep 14, 2016, 07.41 AM IST';
+					var _iBeat_author="";
+					var _iBeat_channel="ET Bureau";
+					var _page_config = {
+						host: 'economictimes.indiatimes.com', 
+						key: 'f66e70a45a565c9c76a526c5e9e99df',
+						domain: 'economictimes.indiatimes.com',
+						channel:  _iBeat_channel,
+						action :_iBeat_action,
+						articleId: _iBeat_articleid,
+						contentType: 1,
+						location : 1,
+						cat : _iBeat_cat,
+						subcat: _iBeat_subcat,
+						contenttag: _iBeat_tag,
+						catIds: catids,
+						articledt:dt5,
+						author: _iBeat_author,
+						articledt:_iBeat_articledt
+		            };
+					(function(){
+						function pingIbeat() {
+						window._pg_endpt=(new Date()).getTime();
+						var e = document.createElement('script');
+						e.setAttribute('language', 'javascript');
+						e.setAttribute('type', 'text/javascript');
+						e.setAttribute('src',"http://ibeat.indiatimes.com/js/pgtrackingV5.js");
+						document.body.appendChild(e);
+						}
+						var oldonload = window.onload;
+						window.onload = (typeof window.onload != 'function') ?
+						pingIbeat : function() { oldonload(); pingIbeat(); };
+					})();
+					
+					    $(document).ready(function(){
+					    $("#subSecNav a[href*='" + page.cfmid + "']").addClass('current');
+						 $("#personmsStory .display ul li").hide();
+        			       $("#personmsStory .display ul li").eq(0).show();
+        			        var i=2,k=0;
+        			        setInterval(function(){ 
+        			            if(i>5){
+        			                k=i-1;
+        			                $("li.select"+k).hide();
+        			                i=1;
+        			                $("li.select"+i).show();
+        			                i++;
+        			            }else{
+        			                k=i-1;
+        			                $("li.select"+k).hide();
+        			                $("li.select"+i).show();
+        			                i++;  
+        			            }
+        			        }, 8000);
+	        		    });
+					
+						', u"
+					function blockError(){return true;} 
+					window.onerror = blockError; 
+					var timeslog_channel_url = 'economictimes.indiatimes.com';
+					var ttrendlogmsid='54321332';", var secname="Industry Banking/Finance Finance";
+		var agename='';', 
+			var _sf_async_config = _sf_async_config || {uid:10538,domain:"economictimes.indiatimes.com"};
+			_sf_async_config.sections = secname;
+			_sf_async_config.authors = agename;
+			(function(){
+			  function loadChartbeat() {
+			  	//alert(chartbeat);
+			    window._sf_endpt=(new Date()).getTime();
+			    var e = document.createElement('script');
+			    e.setAttribute('language', 'javascript');
+			    e.setAttribute('type', 'text/javascript');
+			    e.setAttribute('src',
+			       (("https:" == document.location.protocol) ? "https://s3.amazonaws.com/" : "http://") + "static.chartbeat.com/js/chartbeat.js");
+			    document.body.appendChild(e);
+			  }
+			  var oldonload = window.onload;
+			  window.onload = (typeof window.onload != 'function') ?
+			     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+			})();
+			
+			', var urlTtxt='54321332.cms?msid=54321332'	
+					function invokeLogin(){
+						try{						
+						isLoggedSso = getCookievaluetwitt('MSCSAuth');
+						if(Get_Ckie('autologin')!=null){
+							Delete_Ckie("autologin","/",".indiatimes.com");
+						}
+						tpbar1();												
+						setTimeout("twtFbSso()",1000);
+						setTimeout("dolike()",2000);
+						setTimeout(function(){populate_wf_new('/cmtofartfb/'+urlTtxt,'populatecomment','no','putMathQ(1);fillformdetail(1);putCmtCnt();getemid();')},5000);
+						}
+						catch(ex){							
+						}					
+					}
+					', var _mfq = _mfq || [];
+    			    var mouseflowPath = '/articleshow';
+                    (function() {
+                       var mf = document.createElement("script"); mf.type = "text/javascript"; mf.async = true;
+                       mf.src = "//cdn.mouseflow.com/projects/81baae85-f91c-464e-ac38-15a987752b7a.js";
+                       document.getElementsByTagName("head")[0].appendChild(mf);
+                    })();', {
+					  "@context": "http://schema.org",
+					  "@type": "NewsArticle",
+					  "mainEntityOfPage":{
+					    "@type":"WebPage",
+					    "@id":"http://economictimes.indiatimes.com/industry/banking/finance/reliance-capital-approves-reliance-home-finances-listing-on-stock-exchange/articleshow/54321332.cms"
+					  },
+					  "headline": "Reliance Capital approves Reliance Home Finance's listing on stock exchange",
+					  "image": {
+					    "@type": "ImageObject",
+					    "url": "http://img.etimg.com/thumb/msid-54321366,width-672,resizemode-4,imglength-93364/industry/banking/finance/reliance-capital-approves-reliance-home-finances-listing-on-stock-exchange/fund-bccl.jpg",
+					    "height": 800,
+					    "width": 800
+					  },
+					  "datePublished": "2016-09-14T07:41:00.000Z",
+					  "dateModified": "2016-09-14T07:41:00.000Z",
+					  "author": {
+					    "@type": "Organization",
+					    "name": "ET Bureau"
+					  },
+					  "publisher": {
+					  	"@type": "Organization",
+					    "name": "Economic Times",
+					    "logo": {
+					      "@type": "ImageObject",
+					      "url": "http://img.etimg.com/photo/17952959.cms",
+					      "width": 286,
+					      "height": 26
+					    }
+					  },
+					  "description": "Reliance Capital will hold 51% stake in RHF and company will be adequately capitalised to grow lending book to over Rs 20,000 crore in the next 18 months."
+					}', u"
+				    $(window).scroll(function() {
+				        // Layloading of Google ad iframes
+                        $('iframe.googleAdIframe').each(function(i, v) {
+                    		var $v = $(v);
+                        	if($v.visible(false)) {
+                    		    $v.removeClass('googleAdIframe');
+                    		    $v.attr('src', $v.attr('data-src'));
+                    		    //this.contentWindow.location.reload(true);
+                    	    }
+                    	});
+				    });
+				
+				", 
+                    
+                        
+                                ', 
+                                    var e_x = '210766~1 = 1, 129777-1 = 1';
+                                    if(window.canRun === undefined || window.canRun == false){
+                                        ga('send', 'event', 'e_srv', 'yes', 'e_srv', 1);
+                                        $('div[id^="div-gpt"]').hide();
+                                    }
+                                ', 
+                            
+                    
+                ', u"function fixAd() {
+                      var adPosition = (document.getElementById('c_01').offsetTop + document.getElementById('div-gpt-ad-1477391859570-0').offsetTop);
+                        var sel = $('#div-gpt-ad-1477391859570-0'); 
+                        if (window.pageYOffset > adPosition) {
+                           var left =  ($(window).width() - $('.pageHolder').width()) / 2 - sel.width();
+                            sel.css({'position':'fixed', left:left, 'top':'0px'})
+                        } else {
+                            sel.css({'position':'absolute', left:'-160px', top:500});
+                        }
+                  }
+                  $(document).ready(function () {
+                       $('#topNavFixed').addClass('skinningExist');
+                       var left =  ($(window).width() - $('.pageHolder').width()) / 2;
+                       $('#scrollTop').css('left',left);
+                       $(document).scroll(function (e) {
+                        fixAd()
+                      });					
+                      window.addEventListener('resize', function(event){
+                        fixAd();
+                      });
+                  });"]

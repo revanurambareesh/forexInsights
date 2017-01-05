@@ -34,7 +34,7 @@ class ThreadClassSample(QtCore.QThread):
 
         '''GET DATA'''
 
-        '''
+
         Query = 'SAMPLE'
         label = -99
 
@@ -42,7 +42,7 @@ class ThreadClassSample(QtCore.QThread):
             reader = csv.reader(f)
             Data_list = list(reader)
 
-        for i in range(101, 201):   #range(1,n+2)
+        for i in range(201, 301):   #range(1,n+2)
             Query = Data_list[i][0]
             if Data_list[i][1] == 'Forex':
                 label = 1
@@ -54,7 +54,7 @@ class ThreadClassSample(QtCore.QThread):
         univList = getUniversalList.makeListScrape()
 
         WebScraper.startReactor(univList)
-        '''
+
 
         '''LEARN MODEL WITH EXISTING DATA'''
 

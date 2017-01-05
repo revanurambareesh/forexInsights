@@ -1,0 +1,1483 @@
+[
+    
+
+', 
+
+    ', 
+', 
+', 
+', 
+
+
+', 
+', 
+            
+                function OpenNewWindow(url, arguments)
+                {  
+                    return window.open(url, "",arguments);
+                }
+
+                function OpenNewWindowJS(url, ignore, arguments){  
+                    return OpenNewWindow(url, arguments);  
+                }
+
+
+                function OpenNewWindowNoReturn(url, arguments){  
+                    OpenNewWindow(url, arguments);  
+                }
+
+              ',  
+', 
+', 
+//<![CDATA[
+function _search(){var frm=document.forms['aspnetForm'];if(!frm)frm=document.aspnetForm;window.location='/workspaces/Search.aspx?contextId='+frm.ctl00_SearchPlace.value+'&place='+frm.ctl00_SearchOne.value+'&searchTerm='+escape(frm.ctl00_SearchTerm.value).replace(/\+/g, '%2C').replace(/\"/g,'%22').replace(/'/g, '%27');}
+            function clickButton(e, buttonid)
+            { 
+              var bt = document.getElementById(buttonid); 
+              if (typeof bt == 'object')
+		        { 
+
+                    if (navigator.appName.indexOf('Microsoft Internet Explorer')>(-1)){ 
+                          if (event.keyCode == 13){ 
+                                bt.click(); 
+                                return false; 
+                          } 
+                    } 
+	    	        else
+			        {
+	                  if (e.keyCode == 13)
+	          	        { 
+                                bt.click(); 
+                                return false; 
+                          } 
+                    } 
+              } 
+            } //]]>
+', 
+
+', 
+', 
+', 
+', 
+//<![CDATA[
+;$(function() { $('nav#mMenuCMS').mmenu({"slidingSubmenus":false,"position":"left","zposition":"back"}, {"pageNodetype":"form"});});
+String.prototype.Trim = function() 
+{
+    return this.replace(/^\s+|\s+$/g,'');
+}
+String.prototype.LTrim = function() 
+{
+    return this.replace(/^\s+/,'');
+}
+String.prototype.RTrim = function() 
+{
+    return this.replace(/\s+$/,'');
+}
+
+
+function DisplayError(errorMessageTableRowId, errorMessageControlId, errorMessage, defaultErrorMessage)
+{
+    var oErrorMessageControl = document.getElementById(errorMessageControlId);
+    if (oErrorMessageControl == null)
+        alert('Error message control does not exist. you may need to change the ErrorDisplayTableRow from Visible=false to style=display:none');
+    else
+    {
+        var ErrMsg = errorMessage;
+        if (ErrMsg == null || ErrMsg == '')
+            ErrMsg = defaultErrorMessage;
+        if (ErrMsg != null && ErrMsg != '')
+        {
+            ErrMsg = ErrMsg.Trim();
+            if (ErrMsg.charAt(ErrMsg.length - 1) != '.') 
+                ErrMsg += '.';
+            ErrMsg = '&nbsp;' + ('Error: ' + ErrMsg).fontcolor('Red');       // style='color: red'
+        }
+        if (oErrorMessageControl.nodeName == 'LABEL' || oErrorMessageControl.nodeName == 'SPAN')
+            oErrorMessageControl.innerHTML = ErrMsg;
+        else     
+            oErrorMessageControl.value = ErrMsg;                                                    // Can't be used for displaying error message
+        if (errorMessageTableRowId != null && errorMessageTableRowId != '')
+        {
+            var oErrorMessageTableRow = document.getElementById(errorMessageTableRowId); 
+            if (oErrorMessageTableRow == null)
+                alert('Error message TableRow does not exist. you may need to change the ErrorDisplayTableRow from Visible=false to style=display:none'); 
+            else 
+                oErrorMessageTableRow.style.display = (ErrMsg=='') ? 'none' : '';
+        }    
+    }
+    return (ErrMsg == '');
+}
+
+
+function CommonFunction_DateTime_MinDateTime()
+{
+    return new Date(1, 0, 1);
+}
+function CommonFunction_DateTime_MonthNameToMonth(monthName)
+{
+    var MonthName = monthName.substr(0, 3).toLowerCase();
+    switch (MonthName)
+    {
+        case 'jan' : return '01';
+        case 'feb' : return '02';
+        case 'mar' : return '03';
+        case 'apr' : return '04';
+        case 'may' : return '05';
+        case 'jun' : return '06';
+        case 'jul' : return '07';
+        case 'aug' : return '08';
+        case 'sep' : return '09';
+        case 'oct' : return '10';
+        case 'nov' : return '11';
+        case 'dec' : return '12';
+        default    : return '00'; 
+    }
+}
+function CommonFunction_DateTime_ToDateTime(dateTimeString)
+{
+    dateTimeString = dateTimeString.Trim();
+    if (/^\d{1,2}\/\d{1,2}\/\d{4}\s*/.test(dateTimeString))                     // Default Date format(with any Time format): '10/12/2008 02:23:45 PM GMT-4'
+        return new Date(dateTimeString);                            
+    else if (/^\d{4}-\d{1,2}-\d{1,2}\s*/.test(dateTimeString))                  // '2008-10-12 02:23:45 PM GMT-4'
+    {
+        /^(\d{4})-(\d{1,2})-(\d{1,2})\s*(.*)/.exec(dateTimeString);
+        var NewDateTimeString = RegExp.$2 + '/' + RegExp.$3 + '/' + RegExp.$1 + ' ' + RegExp.$4;
+//        alert(RegExp.input + ' || ' + RegExp.$1 + ' || ' + RegExp.$2 + ' || ' + RegExp.$3 + ' || ' + RegExp.$4 + ' || ' + NewDateTimeString + ' || ' + new Date(NewDateTimeString));
+        return new Date(NewDateTimeString);
+    }
+    else if (/^\d{2}-\d{1,2}-\d{1,2}\s*/.test(dateTimeString))                  // '08-10-12 02:23:45 PM GMT-4'
+        return CommonFunction_DateTime_ToDateTime('20' + dateTimeString);
+    else if (/^[a-zA-Z]+\s+\d{1,2}\s*\,\s*\d{4}\s*/.test(dateTimeString))       // 'October 01, 2008 22:33:44'
+    {
+        /^([a-zA-Z]+)\s+(\d{1,2})\s*\,\s*(\d{4})\s*(.*)/.exec(dateTimeString);
+        var NewDateTimeString = CommonFunction_DateTime_MonthNameToMonth(RegExp.$1) + '/' + RegExp.$2 + '/' + RegExp.$3 + ' ' + RegExp.$4;
+//        alert(RegExp.input + ' || ' + RegExp.$1 + ' || ' + RegExp.$2 + ' || ' + RegExp.$3 + ' || ' + RegExp.$4 + ' || ' + NewDateTimeString + ' || ' + new Date(NewDateTimeString));
+        return new Date(NewDateTimeString);
+    }
+    else return CommonFunction_DateTime_MinDateTime();
+}
+
+
+function AppendHtmlToParent(childControl, HtmlString)
+{
+    var Id = childControl.id;
+    childControl = document.getElementById(Id);
+    childControl.parentNode.innerHTML += HtmlString;
+    childControl = document.getElementById(Id);
+    return childControl;
+}
+function RemoveHtmlFromParent(childControl, HtmlStringPattern, HtmlString)
+{
+    if (HtmlString != null)
+    {
+        childControl = AppendHtmlToParent(childControl, HtmlString);
+        var MatchString = childControl.parentNode.innerHTML.match(HtmlStringPattern);
+        if (MatchString != null)
+            alert(MatchString);
+        else    
+            alert('Error! HtmlStringPattern can not match the HtmlString when it is added to innerHTML.');
+    }
+    var Id = childControl.id;
+    var InputValue = childControl.value;
+    childControl.parentNode.innerHTML = childControl.parentNode.innerHTML.replace(HtmlStringPattern, '');
+    childControl = document.getElementById(Id);            
+    childControl.value = InputValue;
+    return childControl;
+}
+
+
+function ControlCollectionToArray(ControlArray1, ControlArray2)
+{
+    var ControlCount = 0;
+    for (var i=0; i<arguments.length; i++)
+        ControlCount += arguments[i].length;
+    var ControlArray = new Array(ControlCount);
+    ControlCount = 0;
+    for (var i=0; i<arguments.length; i++)
+    {
+        var ControlCollection = arguments[i];
+        for (var j=0; j<ControlCollection.length; j++)
+            ControlArray[ControlCount++] = ControlCollection[j];
+    }
+//    for (var i=0; i<ControlArray.length; i++)
+//        alert(i + '-[' + ControlArray[i] + '|' + ControlArray[i].value + ']');
+    return ControlArray;
+}
+
+//]]>
+', 
+
+', 
+', u"
+//<![CDATA[
+
+function InputConstraint_OnLoad(textBoxControlId, oRegExp)            
+{
+    oTextBoxControl = document.getElementById(textBoxControlId);
+	if (oTextBoxControl)
+	{
+		if (oRegExp.test(oTextBoxControl.value))
+			oTextBoxControl.OldValue = oTextBoxControl.value;
+		else 
+			oTextBoxControl.value = oTextBoxControl.OldValue = '';
+	}
+}
+function InputConstraint_OnChange(oTextBoxControl, oRegExp)         
+{
+    if (oRegExp.test(oTextBoxControl.value))
+        oTextBoxControl.OldValue = oTextBoxControl.value;
+    else {
+        if (typeof(oTextBoxControl.OldValue) == 'undefined' || oTextBoxControl.value == '') 
+            oTextBoxControl.OldValue = '';
+        oTextBoxControl.value = oTextBoxControl.OldValue;
+    } 
+}
+
+function isChildOf(parentId,element) {
+    while(element) {
+       if(element.id&&element.id.indexOf(parentId)> -1) {
+          return true; 
+
+       } 
+       element=element.parentNode; 
+   } 
+
+   return false;
+}
+function onRowDroppingctl00_ContentPlaceHolder1_ctl08_grdPendingImageOrders(sender,args) {
+   if(sender.get_id()== 'ctl00_ContentPlaceHolder1_ctl08_grdPendingImageOrders') {
+      var node=args.get_destinationHtmlElement();
+      if(!isChildOf('ctl00_ContentPlaceHolder1_ctl08_grdPendingImageOrders',node)) {
+         args.set_cancel(true);
+      }
+   }
+} 
+
+//]]>
+", 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            
+            
+    
+    
+            
+    
+    
+    
+    
+    
+    
+    
+    
+            
+    
+            
+    
+    
+    
+    
+    
+    
+            
+    
+    
+    
+    
+    
+    ', 
+	', Search', 
+', translate', View Original', Spanish', Cantonese', French', German', Italian', Tagalog', Vietnamese', Korean', Russian', Hindi', Guest',  | ', Login', Holy Cross', School', \u2630 MENU', 
+    
+    
+', 
+	', 
+		', Home', News', 
+			', 
+				', u"What's New", 
+					', 
+						', Holy Cross Preschool', Holy Cross Happenings', 
+					', 
+				', 
+			', 
+		', Contact Us', 
+			', 
+				', Staff Directory', School Office', 
+			', 
+		', About Us', 
+			', 
+				', u"Principal's Message", History', Mission', Academics', Test Results', Brochures', 
+			', 
+		', Admissions', 
+			', 
+				', Cost of Attendance', K-8 Interest Form', Preschool Interest Form', Frequently Asked Questions', Financial Assistance', Benefits for your Child', 
+			', 
+		', Calendar', Parents/Students', 
+			', 
+				', Athletics', Activities & Clubs', 
+					', 
+						', Boy Scouts', Girl Scouts', 
+					', 
+				', Classroom Pages', 
+					', 
+						', Preschool', 
+							', 
+								', Program Overview', Mrs. Schweighart', Miss Scaff', Mrs. LeFaivre', Mrs. Rentschler', 
+							', 
+						', Kindergarten', 
+							', 
+								', Ms. Cain', Mrs. Bellina', 
+							', 
+						', First Grade', 
+							', 
+								', Mrs. Bonadies - First Grade', 
+							', 
+						', Second Grade', 
+							', 
+								', Mrs. Thompson', Mrs. Davis', 
+							', 
+						', Third Grade', 
+							', 
+								', Mrs. Grider', 
+							', 
+						', Fourth Grade', 
+							', 
+								', Mrs. Bramfeld', Mrs. Tate', 
+							', 
+						', Fifth Grade', 
+							', 
+								', Mrs. Roberts', Miss Henwood', 
+							', 
+						', Sixth Grade', 
+							', 
+								', Mrs. Crull', Mrs. Kelley', 
+							', 
+						', Seventh Grade', 
+							', 
+								', Mr. Frasca', Teacher', 
+							', 
+						', Eighth Grade', 
+							', 
+								', Ms. Ketcham - 7th-8th Language Arts', Mr. Paulus', 
+							', 
+						', Art', 
+							', 
+								', John Jaspers', 
+							', 
+						', Library', Music', Physical Education', 
+							', 
+								', Calendar', 
+							', 
+						', Spanish', 
+					', 
+				', Lunch Men, Make a Gift', Resources', After Care', Service', 
+					', 
+						', How to Sign-up', Service Opportunities', 
+					', 
+				', 
+			', 
+		', Committees', 
+			', 
+				', Education Commission', Parent Teacher Club', 
+					', 
+						', Meetings', Scrip', Magazine Drive', PTC Calendar', PTC Volunteer Opportunities', 
+							', 
+								', Forms', 
+							', 
+						', 
+					', 
+				', Parent Ambassador Committee', 
+			', 
+		', Alumni', 
+			', 
+				', Introduction', Registration Form', Make a Gift', 
+			', 
+		', Quicklinks', 
+			', 
+				', Holy Cross Church', Catholic Dioceses of Peoria ', The High School of St. Thomas More', Facebook', 
+			', 
+		', 
+	', 
+', 
+
+    ', 
+    ', 
+
+        $(document).ready(function () {
+            giveAllMenuLinksAUniqueIdentifier();
+            $(".rmLink").on("keydown", setSpacebarToOpenMenus);
+        });
+
+        function giveAllMenuLinksAUniqueIdentifier() {
+            //Give all menu items a unique attribute value so that I can identify them when spacebar is clicked. Same 'menunumber' attribute is set in .aspx code on menu items.
+            var index = 0;
+            $(".telerik_main_menu li.rmItem a.rmLink").each(function (index) {
+                $(this).attr("menunumber", index);
+            });
+        }
+
+        function setSpacebarToOpenMenus(e) {
+            //Open submenus on spacebar press. 
+            var theKey = e.which;
+            if (theKey == 32) { // 32 is keycode for spacebar. 
+                var menuNumber = $(this).attr("menunumber");
+                var menu = $find("ctl00_ContentPlaceHolder1_ctl01_radmenu");
+                var menuItem = menu.findItemByAttribute("menunumber", menuNumber);
+                var submenuItems = menuItem.get_items();
+                if (submenuItems.get_count() > 0) {
+                    if (menuItem.get_isOpen() == false) {
+                        menuItem.open();
+                        e.preventDefault();
+                    };
+                };
+            };
+        };
+
+        function ClickItem(menu, args) {
+            //Event set in OnClientItemClicking="ClickItem";
+            //When user clicks (presses Enter key) a menu item, if submenu is not open, then open it; otherwise navigate to the item's link. 
+            var item = args.get_item();
+            var submenuItems = item.get_items();
+            if (submenuItems.get_count() > 0) {
+                //If submenu is closed, then open it; otherwise click the menu item link. 
+                if (item.get_isOpen() == false) {
+                    args.set_cancel(true); //Cancel the default click action so that it doesn't trigger the menu item's navigation link.
+                    item.open();
+                }
+                else {
+                    if (typeof item.redirectToLink == 'undefined') {
+                        item.redirectToLink = true;
+                        item.click();
+                    } else {
+                        delete item.redirectToLink;
+                    }
+                }
+            }
+        }
+
+    ', 
+
+
+
+
+', 
+    $(document).ready(function () {
+        $("a.mm-subopen").html("<span class=\"offScreen\">Expand menu item</span>");
+    });
+', Home', News', u"What's New", Holy Cross Preschool', Holy Cross Happenings', Contact Us', Staff Directory', School Office', About Us', u"Principal's Message", History', Mission', Academics', Test Results', Brochures', Admissions', Cost of Attendance', K-8 Interest Form', Preschool Interest Form', Frequently Asked Questions', Financial Assistance', Benefits for your Child', Calendar', Parents/Students', Athletics', Activities & Clubs', Boy Scouts', Girl Scouts', Classroom Pages', Preschool', Program Overview', Mrs. Schweighart', Miss Scaff', Mrs. LeFaivre', Mrs. Rentschler', Kindergarten', Ms. Cain', Mrs. Bellina', First Grade', Mrs. Bonadies - First Grade', Second Grade', Mrs. Thompson', Mrs. Davis', Third Grade', Mrs. Grider', Fourth Grade', Mrs. Bramfeld', Mrs. Tate', Fifth Grade', Mrs. Roberts', Miss Henwood', Sixth Grade', Mrs. Crull', Mrs. Kelley', Seventh Grade', Mr. Frasca', Teacher', Eighth Grade', Ms. Ketcham - 7th-8th Language Arts', Mr. Paulus', Art', John Jaspers', Library', Music', Physical Education', Calendar', Spanish', Lunch Men, Make a Gift', Resources', After Care', Service', How to Sign-up', Service Opportunities', Committees', Education Commission', Parent Teacher Club', Meetings', Scrip', Magazine Drive', PTC Calendar', PTC Volunteer Opportunities', Forms', Parent Ambassador Committee', Alumni', Introduction', Registration Form', Make a Gift', Quicklinks', Holy Cross Church', Catholic Dioceses of Peoria ', The High School of St. Thomas More', Facebook', 
+	', 
+', 
+                                $(window).load(function() {
+                                    $('#sliderctl00_ContentPlaceHolder1_ctl08_divView').nivoSlider({
+                                        effect: 'fade',                                                                                 
+                                        pauseTime: 3000,
+                                        startSlide: 0,
+                                        directionNav: false,                                  
+                                        controlNav: false,
+                                        controlNavThumbs: false, 
+                                        controlNavThumbsFromRel: false,                                                                                 
+                                        keyboardNav: false,
+                                        pauseOnHover: true,
+                                        manualAdvance:false, 
+                                        captionOpacity: 0.8, 
+                                        prevText: '',
+                                        nextText: '',
+                                        beforeChange: function(){}, 
+                                        afterChange: function(){},
+                                        slideshowEnd: function(){$('#sliderctl00_ContentPlaceHolder1_ctl08_divView').data('nivoslider').start();},
+                                        lastSlide: function(){},
+                                        afterLoad: function(){}
+                                    });var slider = jQuery('#sliderctl00_ContentPlaceHolder1_ctl08_divView');
+                                            var nivoStartStopControl = jQuery('<div class=\"nivo-startstopNav\"></div>');
+                                            slider.find('.nivo-startstopNav').remove();
+                                            slider.prepend(nivoStartStopControl);
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-startstopNav').empty();
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-startstopNav').append('<a href=\"#\" class=\"nivo-slideShowControlButton pause\"><span class=\"fa\"></span><em>Pause</em></a>');
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-slideShowControlButton').off('click');
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-slideShowControlButton').on('click', function (event) {
+                                                event.preventDefault();
+                                                if ($(this).hasClass('pause')) {
+                                                    $(this).removeClass('pause');
+                                                    $(this).addClass('play');
+                                                    $(this).find('em').text('Play');
+                                                    slider.data('nivoslider').stop();
+                                                }
+                                                else {
+                                                    $(this).removeClass('play');
+                                                    $(this).addClass('pause');
+                                                    $(this).find('em').text('Pause');
+                                                    slider.data('nivoslider').start();
+                                                }
+                                            });
+
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-prevNav, #sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-nextNav, #sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-control').attr('href', '#');  
+                                  $('#sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-prevNav, #sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-nextNav, #sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-control').on('click', function (event) {
+                                  event.preventDefault();
+                                  });
+
+                                });                                 
+                                ', 
+', 
+    function GoNextSlide(containerID, nextSlideIndex) {
+        var navItems = $("#" + containerID + " .nivo-nextNav");
+        $(navItems[0]).click();
+    }
+
+    function confirmDeleteImage(message) {
+        result = window.confirm(message);
+        if (result) {
+            spinnerAlertModule.show();
+            return true;
+        }
+        else
+            return false;
+    }
+
+', 
+
+
+
+', 
+', Welcome to Holy Cross School', 
+', Our legacy spans 100 years in the development of Catholic youth with faith-based values and high academic accomplishments. Our goal is to ensure that each child is prepared-both spiritually and intellectually-to succeed in high school as well as becoming responsible Catholic Christians throughout their adult lives.', 
+', 
+', 
+', Current Events @ Holy Cross School', 
+', 
+',  ', 
+', 
+    ', 
+        ', RSS Feed', //', 
+  ', 
+    ', 
+    ', 
+      ', Holy Cross Happenings', 11/15/2016', 
+        ', Read the latest about what is happening at Holy Cross School.', Read More', 
+    ', 
+    ', clear', 
+  ', 
+  ', 
+    ', 
+    ', 
+      ', Holy Cross Preschool & Kindergarten', 03/31/2016', 
+        ', Holy Cross is proud of our preschool and kindergarten programs.  Brochures with detailed information are available in the "About Us" tab.', Read More', 
+    ', 
+    ', clear', 
+  ', 
+', 
+    ', 
+', 
+
+
+', 
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_beginRequest(function (sender, args) {
+            var elem = args.get_postBackElement();
+            spinnerAlertModule.show();
+        });
+prm.add_endRequest(function () {
+            spinnerAlertModule.hide();
+        });
+', 
+
+', 
+', u"Principal's Message", 
+', 
+',  ', 
+', 
+
+
+', 
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_beginRequest(function (sender, args) {
+            var elem = args.get_postBackElement();
+            spinnerAlertModule.show();
+        });
+prm.add_endRequest(function () {
+            spinnerAlertModule.hide();
+        });
+', 
+
+', 
+Welcome!', 
+', It is my honor to present you the unique opportunities and advantages Holy Cross School has to offer your child in these critical years of spiritual, intellectual, physical, and emotional development. We hope you find this web site helpful in learning all that Holy Cross School has to offer. Please feel free to contact me if you have any questions or would like to set up an appointment to discuss how Holy Cross School can benefit your child. ', 
+', 
+', 
+', Chris Ellis', 
+Principal', 
+', 
+', Calendar & Events', 
+', 
+',  ', 
+', 
+    ', 
+	', 
+		', 
+                ', 
+			', 
+				',   January 2017  ', S', M', T', W', T', F', S',  ',  ',  ',  ',  ',  ',  ', 1', 2', 3', 4', 5', 6', 7', 8', 9', 10', 11', 12', 13', 14', 15', 16', 17', 18', 19', 20', 21', 22', 23', 24', 25', 26', 27', 28', 29', 30', 31',  ',  ',  ',  ', Go to Main Calendar', 
+			', 
+		', 
+		
+            ', 
+	', 
+', 
+
+', 
+
+
+
+', 
+', 
+
+', 
+
+', 
+
+', 
+', Jan', 06', Fri', School Mass', 8:15AM
+                                - 9:15AM', Jan', 12', Th, 5th Grade Band Parent Invitational', 6:30PM
+                                - 7:15PM', Jan', 13', Fri', No School-Teacher In-Service', 
+                                        All Day
+                             ', More...', 
+
+
+', 
+', Quick Links', 
+', 
+',  ', 
+', 
+    ', 
+    ',     ', 
+    ', Athletics', 
+    ', 
+    ', 
+    ',     ', 
+    ', Contact Us', 
+    ', 
+    ', 
+    ',     ', 
+    ', Email', 
+    ', 
+    ',     ', 
+    ',     ', 
+    ',     ', 
+    ', Facebook', 
+    ', 
+    ',     ', 
+    ',     ', 
+    ',     ', 
+    ', Lunch Men, 
+    ', 
+    ', 
+    ',     ', 
+    ', Renweb', 
+    ', 
+    ', 
+    ',     ', 
+    ', Twitter', 
+    ', 
+', 
+', Holy Cross School', 410 W. White Street, Champaign, IL  61820', Phone 217-356-9521 | Fax 217-356-1745', Facebook Page', Website by ', SchoolMessenger Presence', .  © 2017 West Corporation. All rights reserved.', u"
+$('.bxslider').bxSlider({
+  minSlides: 2,
+  maxSlides: 3,
+  slideWidth: 300,
+  slideHeight: 385,
+  slideMargin: 20,
+  auto: true,
+  pause: 7000,
+  pager: false
+});
+", 
+ $(document).ready(function(){
+  $("#backr").backstretch("/UserFiles/Servers/Server_21018856/Templates/bg.jpg");
+});
+', 
+
+', u"
+//<![CDATA[
+InputCheck_AddErrorFlagControlToInputCheckControls();InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl08_tbSettingsSpeed', /^\d*\.?\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl08_tbSettingsMaxLimit', /^\d*\.?\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl08_tbSettingsMaxImageH', /^\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl08_tbSettingsMaxImageW', /^\d*$/);//]]>
+", 
+', 
+', 
+//<![CDATA[
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadMenu, {"_childListElementCssClass":null,"_selectedItemIndex":"0","_selectedValue":"21018948","clientStateFieldID":"ctl00_ContentPlaceHolder1_ctl01_radmenu_ClientState","collapseAnimation":"{\"duration\":450}","expandAnimation":"{\"duration\":450}","itemData":[{"attributes":{"menunumber":"0"},"value":"21018948","selected":true,"navigateUrl":"/home","cssClass":"rmFocused"},{"attributes":{"menunumber":"1"},"items":[{"attributes":{"menunumber":"2"},"items":[{"attributes":{"menunumber":"3"},"value":"21673645","navigateUrl":"/news/what_s_new/holy_cross_preschool"},{"attributes":{"menunumber":"4"},"value":"31208706","navigateUrl":"/news/what_s_new/holy_cross_happenings"}],"value":"21018955","navigateUrl":"/news/what_s_new"}],"value":"21018954","navigateUrl":"/news"},{"attributes":{"menunumber":"5"},"items":[{"attributes":{"menunumber":"6"},"value":"21018968","navigateUrl":"/contact_us/staff_directory"},{"attributes":{"menunumber":"7"},"value":"21652813","navigateUrl":"/contact_us/school_office"}],"value":"21018970","navigateUrl":"/contact_us"},{"attributes":{"menunumber":"8"},"items":[{"attributes":{"menunumber":"9"},"value":"21652829","navigateUrl":"/about_us/principal_s_message"},{"attributes":{"menunumber":"10"},"value":"21652833","navigateUrl":"/about_us/history"},{"attributes":{"menunumber":"11"},"value":"21652837","navigateUrl":"/about_us/mission"},{"attributes":{"menunumber":"12"},"value":"21652841","navigateUrl":"/about_us/academics"},{"attributes":{"menunumber":"13"},"value":"21652844","navigateUrl":"/about_us/test_results"},{"attributes":{"menunumber":"14"},"value":"21652846","navigateUrl":"/about_us/brochures"}],"value":"21652772","navigateUrl":"/about_us"},{"attributes":{"menunumber":"15"},"items":[{"attributes":{"menunumber":"16"},"value":"21652864","navigateUrl":"/admissions/cost_of_attendence"},{"attributes":{"menunumber":"17"},"value":"21652867","navigateUrl":"/admissions/k-8_interest_form"},{"attributes":{"menunumber":"18"},"value":"21652871","navigateUrl":"/admissions/preschool_interest_form"},{"attributes":{"menunumber":"19"},"value":"21652876","navigateUrl":"/admissions/frequently_asked_questions"},{"attributes":{"menunumber":"20"},"value":"21674840","navigateUrl":"/admissions/financial_assistance"},{"attributes":{"menunumber":"21"},"value":"21674867","navigateUrl":"/admissions/benefits_for_your_child"}],"value":"21652775","navigateUrl":"/admissions"},{"attributes":{"menunumber":"22"},"value":"21018961","navigateUrl":"/calendar"},{"attributes":{"menunumber":"23"},"items":[{"attributes":{"menunumber":"24"},"value":"21652886","navigateUrl":"/parents__students/athletics"},{"attributes":{"menunumber":"25"},"items":[{"attributes":{"menunumber":"26"},"value":"21725524","navigateUrl":"/parents__students/activities___clubs/boy_scouts"},{"attributes":{"menunumber":"27"},"value":"21725526","navigateUrl":"/parents__students/activities___clubs/girl_scouts"}],"value":"21652890","navigateUrl":"/parents__students/activities___clubs"},{"attributes":{"menunumber":"28"},"items":[{"attributes":{"menunumber":"29"},"items":[{"attributes":{"menunumber":"30"},"value":"21725605","navigateUrl":"/parents__students/classroom_pages/preschool/holy_cross_preschool"},{"attributes":{"menunumber":"31"},"value":"32891945","navigateUrl":"/parents__students/classroom_pages/preschool/mrs__schweighart"},{"attributes":{"menunumber":"32"},"value":"32891959","navigateUrl":"/parents__students/classroom_pages/preschool/miss_scaff"},{"attributes":{"menunumber":"33"},"value":"32891968","navigateUrl":"/parents__students/classroom_pages/preschool/mrs__le_faivre"},{"attributes":{"menunumber":"34"},"value":"33249485","navigateUrl":"/parents__students/classroom_pages/preschool/mrs__rentschler"}],"value":"21725534","navigateUrl":"/parents__students/classroom_pages/preschool"},{"attributes":{"menunumber":"35"},"items":[{"attributes":{"menunumber":"36"},"value":"21725636","navigateUrl":"/parents__students/classroom_pages/kindergarten/Miss_Cain"},{"attributes":{"menunumber":"37"},"value":"32418100","navigateUrl":"/parents__students/classroom_pages/kindergarten/Erica_Bellina"}],"value":"21725536","navigateUrl":"/parents__students/classroom_pages/kindergarten"},{"attributes":{"menunumber":"38"},"items":[{"attributes":{"menunumber":"39"},"value":"21725657","navigateUrl":"/parents__students/classroom_pages/first_grade/mrs__bonadies_-_first_grade"}],"value":"21725538","navigateUrl":"/parents__students/classroom_pages/first_grade"},{"attributes":{"menunumber":"40"},"items":[{"attributes":{"menunumber":"41"},"value":"21725670","navigateUrl":"/parents__students/classroom_pages/second_grade/mrs__thompson"},{"attributes":{"menunumber":"42"},"value":"32418107","navigateUrl":"/parents__students/classroom_pages/second_grade/mrs__davis"}],"value":"21725540","navigateUrl":"/parents__students/classroom_pages/second_grade"},{"attributes":{"menunumber":"43"},"items":[{"attributes":{"menunumber":"44"},"value":"21725692","navigateUrl":"/parents__students/classroom_pages/third_grade/mrs__grider"}],"value":"21725542","navigateUrl":"/parents__students/classroom_pages/third_grade"},{"attributes":{"menunumber":"45"},"items":[{"attributes":{"menunumber":"46"},"value":"21725712","navigateUrl":"/parents__students/classroom_pages/fourth_grade/mrs__bramfeld"},{"attributes":{"menunumber":"47"},"value":"21725718","navigateUrl":"/parents__students/classroom_pages/fourth_grade/mrs__tate"}],"value":"21725544","navigateUrl":"/parents__students/classroom_pages/fourth_grade"},{"attributes":{"menunumber":"48"},"items":[{"attributes":{"menunumber":"49"},"value":"21725733","navigateUrl":"/parents__students/classroom_pages/fifth_grade/mrs__roberts"},{"attributes":{"menunumber":"50"},"value":"21725742","navigateUrl":"/parents__students/classroom_pages/fifth_grade/miss__walder"}],"value":"21725546","navigateUrl":"/parents__students/classroom_pages/fifth_grade"},{"attributes":{"menunumber":"51"},"items":[{"attributes":{"menunumber":"52"},"value":"21725753","navigateUrl":"/parents__students/classroom_pages/sixth_grade/mrs__crull"},{"attributes":{"menunumber":"53"},"value":"21725761","navigateUrl":"/parents__students/classroom_pages/sixth_grade/mrs__roberts"}],"value":"21725548","navigateUrl":"/parents__students/classroom_pages/sixth_grade"},{"attributes":{"menunumber":"54"},"items":[{"attributes":{"menunumber":"55"},"value":"21725777","navigateUrl":"/parents__students/classroom_pages/seventh_grade/mr__frasca"},{"attributes":{"menunumber":"56"},"value":"32359177","navigateUrl":"/parents__students/classroom_pages/seventh_grade/miss_gill"}],"value":"21725551","navigateUrl":"/parents__students/classroom_pages/seventh_grade"},{"attributes":{"menunumber":"57"},"items":[{"attributes":{"menunumber":"58"},"value":"21725826","navigateUrl":"/parents__students/classroom_pages/eighth_grade/ms__ketcham_-_7th-8th_language_arts"},{"attributes":{"menunumber":"59"},"value":"21725832","navigateUrl":"/parents__students/classroom_pages/eighth_grade/miss__lessaris"}],"value":"21725554","navigateUrl":"/parents__students/classroom_pages/eighth_grade"},{"attributes":{"menunumber":"60"},"items":[{"attributes":{"menunumber":"61"},"value":"32891846","navigateUrl":"/parents__students/classroom_pages/art/john_jaspers"}],"value":"21725572","navigateUrl":"/parents__students/classroom_pages/art"},{"attributes":{"menunumber":"62"},"value":"21725574","navigateUrl":"/parents__students/classroom_pages/library"},{"attributes":{"menunumber":"63"},"value":"21725576","navigateUrl":"/parents__students/classroom_pages/music"},{"attributes":{"menunumber":"64"},"items":[{"attributes":{"menunumber":"65"},"value":"32893719","navigateUrl":"/parents__students/classroom_pages/physical_education/calendar"}],"value":"21725578","navigateUrl":"/parents__students/classroom_pages/physical_education"},{"attributes":{"menunumber":"66"},"value":"21725580","navigateUrl":"/parents__students/classroom_pages/spanish"}],"value":"21652892","navigateUrl":"/parents__students/classroom_pages"},{"attributes":{"menunumber":"67"},"value":"21652894","navigateUrl":"/parents__students/lunch_menu"},{"attributes":{"menunumber":"68"},"value":"21652897","navigateUrl":"/parents__students/make_a_gift"},{"attributes":{"menunumber":"69"},"value":"21674526","navigateUrl":"/parents__students/resources"},{"attributes":{"menunumber":"70"},"value":"21725847","navigateUrl":"/parents__students/after_care"},{"attributes":{"menunumber":"71"},"items":[{"attributes":{"menunumber":"72"},"value":"28186328","navigateUrl":"/parents__students/service/how_to_sign-up"},{"attributes":{"menunumber":"73"},"value":"28186405","navigateUrl":"/parents__students/service/service_opportunities"}],"value":"21956152","navigateUrl":"/parents__students/service"}],"value":"21652777","navigateUrl":"/parents__students"},{"attributes":{"menunumber":"74"},"items":[{"attributes":{"menunumber":"75"},"value":"21652900","navigateUrl":"/committees/education_commission"},{"attributes":{"menunumber":"76"},"items":[{"attributes":{"menunumber":"77"},"value":"21658585","navigateUrl":"/committees/parent_teacher_club/meetings"},{"attributes":{"menunumber":"78"},"value":"21658592","navigateUrl":"/committees/parent_teacher_club/scrip"},{"attributes":{"menunumber":"79"},"value":"21658631","navigateUrl":"/committees/parent_teacher_club/magazine_drive"},{"attributes":{"menunumber":"80"},"value":"22462904","navigateUrl":"/committees/parent_teacher_club/p_t_c_calendar"},{"attributes":{"menunumber":"81"},"items":[{"attributes":{"menunumber":"82"},"value":"28004750","navigateUrl":"/committees/parent_teacher_club/p_t_c_volunteer_opportunities/Forms"}],"value":"22463179","navigateUrl":"/committees/parent_teacher_club/p_t_c_volunteer_opportunities"}],"value":"21652903","navigateUrl":"/committees/parent_teacher_club"},{"attributes":{"menunumber":"83"},"value":"32363424","navigateUrl":"/committees/parent_ambassador_committee"}],"value":"21652782","navigateUrl":"/committees"},{"attributes":{"menunumber":"84"},"items":[{"attributes":{"menunumber":"85"},"value":"21652909","navigateUrl":"/alumni/introduction"},{"attributes":{"menunumber":"86"},"value":"21652912","navigateUrl":"/alumni/registration_form"},{"attributes":{"menunumber":"87"},"value":"21652914","navigateUrl":"/alumni/make_a_gift"}],"value":"21652784","navigateUrl":"/alumni"},{"attributes":{"menunumber":"88"},"items":[{"attributes":{"menunumber":"89"},"value":"21652930","navigateUrl":"javascript:var w=window.open(\u0027/quicklinks/holy_cross_church\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"90"},"value":"21652934","navigateUrl":"javascript:var w=window.open(\u0027/quicklinks/catholic_dioceses_of_peoria\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"91"},"value":"21652942","navigateUrl":"javascript:var w=window.open(\u0027/quicklinks/the_high_school_of_st__thomas_moore\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"92"},"value":"21652947","navigateUrl":"javascript:var w=window.open(\u0027/quicklinks/facebook\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"}],"value":"21652786","navigateUrl":"/quicklinks"}]}, {"itemClicking":ClickItem}, null, $get("ctl00_ContentPlaceHolder1_ctl01_radmenu"));
+});
+//]]>
+', 
+', 
+    ', 
+        window.isMobile = 0 == 1;
+    ', 
+'][
+    
+
+', 
+
+    ', 
+', 
+', 
+', 
+
+
+', 
+', 
+            
+                function OpenNewWindow(url, arguments)
+                {  
+                    return window.open(url, "",arguments);
+                }
+
+                function OpenNewWindowJS(url, ignore, arguments){  
+                    return OpenNewWindow(url, arguments);  
+                }
+
+
+                function OpenNewWindowNoReturn(url, arguments){  
+                    OpenNewWindow(url, arguments);  
+                }
+
+              ',  
+', 
+', 
+//<![CDATA[
+function _search(){var frm=document.forms['aspnetForm'];if(!frm)frm=document.aspnetForm;window.location='/workspaces/Search.aspx?contextId='+frm.ctl00_SearchPlace.value+'&place='+frm.ctl00_SearchOne.value+'&searchTerm='+escape(frm.ctl00_SearchTerm.value).replace(/\+/g, '%2C').replace(/\"/g,'%22').replace(/'/g, '%27');}
+            function clickButton(e, buttonid)
+            { 
+              var bt = document.getElementById(buttonid); 
+              if (typeof bt == 'object')
+		        { 
+
+                    if (navigator.appName.indexOf('Microsoft Internet Explorer')>(-1)){ 
+                          if (event.keyCode == 13){ 
+                                bt.click(); 
+                                return false; 
+                          } 
+                    } 
+	    	        else
+			        {
+	                  if (e.keyCode == 13)
+	          	        { 
+                                bt.click(); 
+                                return false; 
+                          } 
+                    } 
+              } 
+            } //]]>
+', 
+
+', 
+', 
+', 
+', 
+//<![CDATA[
+;$(function() { $('nav#mMenuCMS').mmenu({"slidingSubmenus":false,"position":"left","zposition":"back"}, {"pageNodetype":"form"});});
+String.prototype.Trim = function() 
+{
+    return this.replace(/^\s+|\s+$/g,'');
+}
+String.prototype.LTrim = function() 
+{
+    return this.replace(/^\s+/,'');
+}
+String.prototype.RTrim = function() 
+{
+    return this.replace(/\s+$/,'');
+}
+
+
+function DisplayError(errorMessageTableRowId, errorMessageControlId, errorMessage, defaultErrorMessage)
+{
+    var oErrorMessageControl = document.getElementById(errorMessageControlId);
+    if (oErrorMessageControl == null)
+        alert('Error message control does not exist. you may need to change the ErrorDisplayTableRow from Visible=false to style=display:none');
+    else
+    {
+        var ErrMsg = errorMessage;
+        if (ErrMsg == null || ErrMsg == '')
+            ErrMsg = defaultErrorMessage;
+        if (ErrMsg != null && ErrMsg != '')
+        {
+            ErrMsg = ErrMsg.Trim();
+            if (ErrMsg.charAt(ErrMsg.length - 1) != '.') 
+                ErrMsg += '.';
+            ErrMsg = '&nbsp;' + ('Error: ' + ErrMsg).fontcolor('Red');       // style='color: red'
+        }
+        if (oErrorMessageControl.nodeName == 'LABEL' || oErrorMessageControl.nodeName == 'SPAN')
+            oErrorMessageControl.innerHTML = ErrMsg;
+        else     
+            oErrorMessageControl.value = ErrMsg;                                                    // Can't be used for displaying error message
+        if (errorMessageTableRowId != null && errorMessageTableRowId != '')
+        {
+            var oErrorMessageTableRow = document.getElementById(errorMessageTableRowId); 
+            if (oErrorMessageTableRow == null)
+                alert('Error message TableRow does not exist. you may need to change the ErrorDisplayTableRow from Visible=false to style=display:none'); 
+            else 
+                oErrorMessageTableRow.style.display = (ErrMsg=='') ? 'none' : '';
+        }    
+    }
+    return (ErrMsg == '');
+}
+
+
+function CommonFunction_DateTime_MinDateTime()
+{
+    return new Date(1, 0, 1);
+}
+function CommonFunction_DateTime_MonthNameToMonth(monthName)
+{
+    var MonthName = monthName.substr(0, 3).toLowerCase();
+    switch (MonthName)
+    {
+        case 'jan' : return '01';
+        case 'feb' : return '02';
+        case 'mar' : return '03';
+        case 'apr' : return '04';
+        case 'may' : return '05';
+        case 'jun' : return '06';
+        case 'jul' : return '07';
+        case 'aug' : return '08';
+        case 'sep' : return '09';
+        case 'oct' : return '10';
+        case 'nov' : return '11';
+        case 'dec' : return '12';
+        default    : return '00'; 
+    }
+}
+function CommonFunction_DateTime_ToDateTime(dateTimeString)
+{
+    dateTimeString = dateTimeString.Trim();
+    if (/^\d{1,2}\/\d{1,2}\/\d{4}\s*/.test(dateTimeString))                     // Default Date format(with any Time format): '10/12/2008 02:23:45 PM GMT-4'
+        return new Date(dateTimeString);                            
+    else if (/^\d{4}-\d{1,2}-\d{1,2}\s*/.test(dateTimeString))                  // '2008-10-12 02:23:45 PM GMT-4'
+    {
+        /^(\d{4})-(\d{1,2})-(\d{1,2})\s*(.*)/.exec(dateTimeString);
+        var NewDateTimeString = RegExp.$2 + '/' + RegExp.$3 + '/' + RegExp.$1 + ' ' + RegExp.$4;
+//        alert(RegExp.input + ' || ' + RegExp.$1 + ' || ' + RegExp.$2 + ' || ' + RegExp.$3 + ' || ' + RegExp.$4 + ' || ' + NewDateTimeString + ' || ' + new Date(NewDateTimeString));
+        return new Date(NewDateTimeString);
+    }
+    else if (/^\d{2}-\d{1,2}-\d{1,2}\s*/.test(dateTimeString))                  // '08-10-12 02:23:45 PM GMT-4'
+        return CommonFunction_DateTime_ToDateTime('20' + dateTimeString);
+    else if (/^[a-zA-Z]+\s+\d{1,2}\s*\,\s*\d{4}\s*/.test(dateTimeString))       // 'October 01, 2008 22:33:44'
+    {
+        /^([a-zA-Z]+)\s+(\d{1,2})\s*\,\s*(\d{4})\s*(.*)/.exec(dateTimeString);
+        var NewDateTimeString = CommonFunction_DateTime_MonthNameToMonth(RegExp.$1) + '/' + RegExp.$2 + '/' + RegExp.$3 + ' ' + RegExp.$4;
+//        alert(RegExp.input + ' || ' + RegExp.$1 + ' || ' + RegExp.$2 + ' || ' + RegExp.$3 + ' || ' + RegExp.$4 + ' || ' + NewDateTimeString + ' || ' + new Date(NewDateTimeString));
+        return new Date(NewDateTimeString);
+    }
+    else return CommonFunction_DateTime_MinDateTime();
+}
+
+
+function AppendHtmlToParent(childControl, HtmlString)
+{
+    var Id = childControl.id;
+    childControl = document.getElementById(Id);
+    childControl.parentNode.innerHTML += HtmlString;
+    childControl = document.getElementById(Id);
+    return childControl;
+}
+function RemoveHtmlFromParent(childControl, HtmlStringPattern, HtmlString)
+{
+    if (HtmlString != null)
+    {
+        childControl = AppendHtmlToParent(childControl, HtmlString);
+        var MatchString = childControl.parentNode.innerHTML.match(HtmlStringPattern);
+        if (MatchString != null)
+            alert(MatchString);
+        else    
+            alert('Error! HtmlStringPattern can not match the HtmlString when it is added to innerHTML.');
+    }
+    var Id = childControl.id;
+    var InputValue = childControl.value;
+    childControl.parentNode.innerHTML = childControl.parentNode.innerHTML.replace(HtmlStringPattern, '');
+    childControl = document.getElementById(Id);            
+    childControl.value = InputValue;
+    return childControl;
+}
+
+
+function ControlCollectionToArray(ControlArray1, ControlArray2)
+{
+    var ControlCount = 0;
+    for (var i=0; i<arguments.length; i++)
+        ControlCount += arguments[i].length;
+    var ControlArray = new Array(ControlCount);
+    ControlCount = 0;
+    for (var i=0; i<arguments.length; i++)
+    {
+        var ControlCollection = arguments[i];
+        for (var j=0; j<ControlCollection.length; j++)
+            ControlArray[ControlCount++] = ControlCollection[j];
+    }
+//    for (var i=0; i<ControlArray.length; i++)
+//        alert(i + '-[' + ControlArray[i] + '|' + ControlArray[i].value + ']');
+    return ControlArray;
+}
+
+//]]>
+', 
+
+', 
+', u"
+//<![CDATA[
+
+function InputConstraint_OnLoad(textBoxControlId, oRegExp)            
+{
+    oTextBoxControl = document.getElementById(textBoxControlId);
+	if (oTextBoxControl)
+	{
+		if (oRegExp.test(oTextBoxControl.value))
+			oTextBoxControl.OldValue = oTextBoxControl.value;
+		else 
+			oTextBoxControl.value = oTextBoxControl.OldValue = '';
+	}
+}
+function InputConstraint_OnChange(oTextBoxControl, oRegExp)         
+{
+    if (oRegExp.test(oTextBoxControl.value))
+        oTextBoxControl.OldValue = oTextBoxControl.value;
+    else {
+        if (typeof(oTextBoxControl.OldValue) == 'undefined' || oTextBoxControl.value == '') 
+            oTextBoxControl.OldValue = '';
+        oTextBoxControl.value = oTextBoxControl.OldValue;
+    } 
+}
+
+function isChildOf(parentId,element) {
+    while(element) {
+       if(element.id&&element.id.indexOf(parentId)> -1) {
+          return true; 
+
+       } 
+       element=element.parentNode; 
+   } 
+
+   return false;
+}
+function onRowDroppingctl00_ContentPlaceHolder1_ctl08_grdPendingImageOrders(sender,args) {
+   if(sender.get_id()== 'ctl00_ContentPlaceHolder1_ctl08_grdPendingImageOrders') {
+      var node=args.get_destinationHtmlElement();
+      if(!isChildOf('ctl00_ContentPlaceHolder1_ctl08_grdPendingImageOrders',node)) {
+         args.set_cancel(true);
+      }
+   }
+} 
+
+//]]>
+", 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            
+            
+    
+    
+            
+    
+    
+    
+    
+    
+    
+    
+    
+            
+    
+            
+    
+    
+    
+    
+    
+    
+            
+    
+    
+    
+    
+    
+    ', 
+	', Search', 
+', translate', View Original', Spanish', Cantonese', French', German', Italian', Tagalog', Vietnamese', Korean', Russian', Hindi', Guest',  | ', Login', Holy Cross', School', \u2630 MENU', 
+    
+    
+', 
+	', 
+		', Home', News', 
+			', 
+				', u"What's New", 
+					', 
+						', Holy Cross Preschool', Holy Cross Happenings', 
+					', 
+				', 
+			', 
+		', Contact Us', 
+			', 
+				', Staff Directory', School Office', 
+			', 
+		', About Us', 
+			', 
+				', u"Principal's Message", History', Mission', Academics', Test Results', Brochures', 
+			', 
+		', Admissions', 
+			', 
+				', Cost of Attendance', K-8 Interest Form', Preschool Interest Form', Frequently Asked Questions', Financial Assistance', Benefits for your Child', 
+			', 
+		', Calendar', Parents/Students', 
+			', 
+				', Athletics', Activities & Clubs', 
+					', 
+						', Boy Scouts', Girl Scouts', 
+					', 
+				', Classroom Pages', 
+					', 
+						', Preschool', 
+							', 
+								', Program Overview', Mrs. Schweighart', Miss Scaff', Mrs. LeFaivre', Mrs. Rentschler', 
+							', 
+						', Kindergarten', 
+							', 
+								', Ms. Cain', Mrs. Bellina', 
+							', 
+						', First Grade', 
+							', 
+								', Mrs. Bonadies - First Grade', 
+							', 
+						', Second Grade', 
+							', 
+								', Mrs. Thompson', Mrs. Davis', 
+							', 
+						', Third Grade', 
+							', 
+								', Mrs. Grider', 
+							', 
+						', Fourth Grade', 
+							', 
+								', Mrs. Bramfeld', Mrs. Tate', 
+							', 
+						', Fifth Grade', 
+							', 
+								', Mrs. Roberts', Miss Henwood', 
+							', 
+						', Sixth Grade', 
+							', 
+								', Mrs. Crull', Mrs. Kelley', 
+							', 
+						', Seventh Grade', 
+							', 
+								', Mr. Frasca', Teacher', 
+							', 
+						', Eighth Grade', 
+							', 
+								', Ms. Ketcham - 7th-8th Language Arts', Mr. Paulus', 
+							', 
+						', Art', 
+							', 
+								', John Jaspers', 
+							', 
+						', Library', Music', Physical Education', 
+							', 
+								', Calendar', 
+							', 
+						', Spanish', 
+					', 
+				', Lunch Men, Make a Gift', Resources', After Care', Service', 
+					', 
+						', How to Sign-up', Service Opportunities', 
+					', 
+				', 
+			', 
+		', Committees', 
+			', 
+				', Education Commission', Parent Teacher Club', 
+					', 
+						', Meetings', Scrip', Magazine Drive', PTC Calendar', PTC Volunteer Opportunities', 
+							', 
+								', Forms', 
+							', 
+						', 
+					', 
+				', Parent Ambassador Committee', 
+			', 
+		', Alumni', 
+			', 
+				', Introduction', Registration Form', Make a Gift', 
+			', 
+		', Quicklinks', 
+			', 
+				', Holy Cross Church', Catholic Dioceses of Peoria ', The High School of St. Thomas More', Facebook', 
+			', 
+		', 
+	', 
+', 
+
+    ', 
+    ', 
+
+        $(document).ready(function () {
+            giveAllMenuLinksAUniqueIdentifier();
+            $(".rmLink").on("keydown", setSpacebarToOpenMenus);
+        });
+
+        function giveAllMenuLinksAUniqueIdentifier() {
+            //Give all menu items a unique attribute value so that I can identify them when spacebar is clicked. Same 'menunumber' attribute is set in .aspx code on menu items.
+            var index = 0;
+            $(".telerik_main_menu li.rmItem a.rmLink").each(function (index) {
+                $(this).attr("menunumber", index);
+            });
+        }
+
+        function setSpacebarToOpenMenus(e) {
+            //Open submenus on spacebar press. 
+            var theKey = e.which;
+            if (theKey == 32) { // 32 is keycode for spacebar. 
+                var menuNumber = $(this).attr("menunumber");
+                var menu = $find("ctl00_ContentPlaceHolder1_ctl01_radmenu");
+                var menuItem = menu.findItemByAttribute("menunumber", menuNumber);
+                var submenuItems = menuItem.get_items();
+                if (submenuItems.get_count() > 0) {
+                    if (menuItem.get_isOpen() == false) {
+                        menuItem.open();
+                        e.preventDefault();
+                    };
+                };
+            };
+        };
+
+        function ClickItem(menu, args) {
+            //Event set in OnClientItemClicking="ClickItem";
+            //When user clicks (presses Enter key) a menu item, if submenu is not open, then open it; otherwise navigate to the item's link. 
+            var item = args.get_item();
+            var submenuItems = item.get_items();
+            if (submenuItems.get_count() > 0) {
+                //If submenu is closed, then open it; otherwise click the menu item link. 
+                if (item.get_isOpen() == false) {
+                    args.set_cancel(true); //Cancel the default click action so that it doesn't trigger the menu item's navigation link.
+                    item.open();
+                }
+                else {
+                    if (typeof item.redirectToLink == 'undefined') {
+                        item.redirectToLink = true;
+                        item.click();
+                    } else {
+                        delete item.redirectToLink;
+                    }
+                }
+            }
+        }
+
+    ', 
+
+
+
+
+', 
+    $(document).ready(function () {
+        $("a.mm-subopen").html("<span class=\"offScreen\">Expand menu item</span>");
+    });
+', Home', News', u"What's New", Holy Cross Preschool', Holy Cross Happenings', Contact Us', Staff Directory', School Office', About Us', u"Principal's Message", History', Mission', Academics', Test Results', Brochures', Admissions', Cost of Attendance', K-8 Interest Form', Preschool Interest Form', Frequently Asked Questions', Financial Assistance', Benefits for your Child', Calendar', Parents/Students', Athletics', Activities & Clubs', Boy Scouts', Girl Scouts', Classroom Pages', Preschool', Program Overview', Mrs. Schweighart', Miss Scaff', Mrs. LeFaivre', Mrs. Rentschler', Kindergarten', Ms. Cain', Mrs. Bellina', First Grade', Mrs. Bonadies - First Grade', Second Grade', Mrs. Thompson', Mrs. Davis', Third Grade', Mrs. Grider', Fourth Grade', Mrs. Bramfeld', Mrs. Tate', Fifth Grade', Mrs. Roberts', Miss Henwood', Sixth Grade', Mrs. Crull', Mrs. Kelley', Seventh Grade', Mr. Frasca', Teacher', Eighth Grade', Ms. Ketcham - 7th-8th Language Arts', Mr. Paulus', Art', John Jaspers', Library', Music', Physical Education', Calendar', Spanish', Lunch Men, Make a Gift', Resources', After Care', Service', How to Sign-up', Service Opportunities', Committees', Education Commission', Parent Teacher Club', Meetings', Scrip', Magazine Drive', PTC Calendar', PTC Volunteer Opportunities', Forms', Parent Ambassador Committee', Alumni', Introduction', Registration Form', Make a Gift', Quicklinks', Holy Cross Church', Catholic Dioceses of Peoria ', The High School of St. Thomas More', Facebook', 
+	', 
+', 
+                                $(window).load(function() {
+                                    $('#sliderctl00_ContentPlaceHolder1_ctl08_divView').nivoSlider({
+                                        effect: 'fade',                                                                                 
+                                        pauseTime: 3000,
+                                        startSlide: 0,
+                                        directionNav: false,                                  
+                                        controlNav: false,
+                                        controlNavThumbs: false, 
+                                        controlNavThumbsFromRel: false,                                                                                 
+                                        keyboardNav: false,
+                                        pauseOnHover: true,
+                                        manualAdvance:false, 
+                                        captionOpacity: 0.8, 
+                                        prevText: '',
+                                        nextText: '',
+                                        beforeChange: function(){}, 
+                                        afterChange: function(){},
+                                        slideshowEnd: function(){$('#sliderctl00_ContentPlaceHolder1_ctl08_divView').data('nivoslider').start();},
+                                        lastSlide: function(){},
+                                        afterLoad: function(){}
+                                    });var slider = jQuery('#sliderctl00_ContentPlaceHolder1_ctl08_divView');
+                                            var nivoStartStopControl = jQuery('<div class=\"nivo-startstopNav\"></div>');
+                                            slider.find('.nivo-startstopNav').remove();
+                                            slider.prepend(nivoStartStopControl);
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-startstopNav').empty();
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-startstopNav').append('<a href=\"#\" class=\"nivo-slideShowControlButton pause\"><span class=\"fa\"></span><em>Pause</em></a>');
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-slideShowControlButton').off('click');
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-slideShowControlButton').on('click', function (event) {
+                                                event.preventDefault();
+                                                if ($(this).hasClass('pause')) {
+                                                    $(this).removeClass('pause');
+                                                    $(this).addClass('play');
+                                                    $(this).find('em').text('Play');
+                                                    slider.data('nivoslider').stop();
+                                                }
+                                                else {
+                                                    $(this).removeClass('play');
+                                                    $(this).addClass('pause');
+                                                    $(this).find('em').text('Pause');
+                                                    slider.data('nivoslider').start();
+                                                }
+                                            });
+
+                                            $('#sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-prevNav, #sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-nextNav, #sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-control').attr('href', '#');  
+                                  $('#sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-prevNav, #sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-nextNav, #sliderctl00_ContentPlaceHolder1_ctl08_divView .nivo-control').on('click', function (event) {
+                                  event.preventDefault();
+                                  });
+
+                                });                                 
+                                ', 
+', 
+    function GoNextSlide(containerID, nextSlideIndex) {
+        var navItems = $("#" + containerID + " .nivo-nextNav");
+        $(navItems[0]).click();
+    }
+
+    function confirmDeleteImage(message) {
+        result = window.confirm(message);
+        if (result) {
+            spinnerAlertModule.show();
+            return true;
+        }
+        else
+            return false;
+    }
+
+', 
+
+
+
+', 
+', Welcome to Holy Cross School', 
+', Our legacy spans 100 years in the development of Catholic youth with faith-based values and high academic accomplishments. Our goal is to ensure that each child is prepared-both spiritually and intellectually-to succeed in high school as well as becoming responsible Catholic Christians throughout their adult lives.', 
+', 
+', 
+', Current Events @ Holy Cross School', 
+', 
+',  ', 
+', 
+    ', 
+        ', RSS Feed', //', 
+  ', 
+    ', 
+    ', 
+      ', Holy Cross Happenings', 11/15/2016', 
+        ', Read the latest about what is happening at Holy Cross School.', Read More', 
+    ', 
+    ', clear', 
+  ', 
+  ', 
+    ', 
+    ', 
+      ', Holy Cross Preschool & Kindergarten', 03/31/2016', 
+        ', Holy Cross is proud of our preschool and kindergarten programs.  Brochures with detailed information are available in the "About Us" tab.', Read More', 
+    ', 
+    ', clear', 
+  ', 
+', 
+    ', 
+', 
+
+
+', 
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_beginRequest(function (sender, args) {
+            var elem = args.get_postBackElement();
+            spinnerAlertModule.show();
+        });
+prm.add_endRequest(function () {
+            spinnerAlertModule.hide();
+        });
+', 
+
+', 
+', u"Principal's Message", 
+', 
+',  ', 
+', 
+
+
+', 
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_beginRequest(function (sender, args) {
+            var elem = args.get_postBackElement();
+            spinnerAlertModule.show();
+        });
+prm.add_endRequest(function () {
+            spinnerAlertModule.hide();
+        });
+', 
+
+', 
+Welcome!', 
+', It is my honor to present you the unique opportunities and advantages Holy Cross School has to offer your child in these critical years of spiritual, intellectual, physical, and emotional development. We hope you find this web site helpful in learning all that Holy Cross School has to offer. Please feel free to contact me if you have any questions or would like to set up an appointment to discuss how Holy Cross School can benefit your child. ', 
+', 
+', 
+', Chris Ellis', 
+Principal', 
+', 
+', Calendar & Events', 
+', 
+',  ', 
+', 
+    ', 
+	', 
+		', 
+                ', 
+			', 
+				',   January 2017  ', S', M', T', W', T', F', S',  ',  ',  ',  ',  ',  ',  ', 1', 2', 3', 4', 5', 6', 7', 8', 9', 10', 11', 12', 13', 14', 15', 16', 17', 18', 19', 20', 21', 22', 23', 24', 25', 26', 27', 28', 29', 30', 31',  ',  ',  ',  ', Go to Main Calendar', 
+			', 
+		', 
+		
+            ', 
+	', 
+', 
+
+', 
+
+
+
+', 
+', 
+
+', 
+
+', 
+
+', 
+', Jan', 06', Fri', School Mass', 8:15AM
+                                - 9:15AM', Jan', 12', Th, 5th Grade Band Parent Invitational', 6:30PM
+                                - 7:15PM', Jan', 13', Fri', No School-Teacher In-Service', 
+                                        All Day
+                             ', More...', 
+
+
+', 
+', Quick Links', 
+', 
+',  ', 
+', 
+    ', 
+    ',     ', 
+    ', Athletics', 
+    ', 
+    ', 
+    ',     ', 
+    ', Contact Us', 
+    ', 
+    ', 
+    ',     ', 
+    ', Email', 
+    ', 
+    ',     ', 
+    ',     ', 
+    ',     ', 
+    ', Facebook', 
+    ', 
+    ',     ', 
+    ',     ', 
+    ',     ', 
+    ', Lunch Men, 
+    ', 
+    ', 
+    ',     ', 
+    ', Renweb', 
+    ', 
+    ', 
+    ',     ', 
+    ', Twitter', 
+    ', 
+', 
+', Holy Cross School', 410 W. White Street, Champaign, IL  61820', Phone 217-356-9521 | Fax 217-356-1745', Facebook Page', Website by ', SchoolMessenger Presence', .  © 2017 West Corporation. All rights reserved.', u"
+$('.bxslider').bxSlider({
+  minSlides: 2,
+  maxSlides: 3,
+  slideWidth: 300,
+  slideHeight: 385,
+  slideMargin: 20,
+  auto: true,
+  pause: 7000,
+  pager: false
+});
+", 
+ $(document).ready(function(){
+  $("#backr").backstretch("/UserFiles/Servers/Server_21018856/Templates/bg.jpg");
+});
+', 
+
+', u"
+//<![CDATA[
+InputCheck_AddErrorFlagControlToInputCheckControls();InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl08_tbSettingsSpeed', /^\d*\.?\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl08_tbSettingsMaxLimit', /^\d*\.?\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl08_tbSettingsMaxImageH', /^\d*$/);InputConstraint_OnLoad('ctl00_ContentPlaceHolder1_ctl08_tbSettingsMaxImageW', /^\d*$/);//]]>
+", 
+', 
+', 
+//<![CDATA[
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadMenu, {"_childListElementCssClass":null,"_selectedItemIndex":"0","_selectedValue":"21018948","clientStateFieldID":"ctl00_ContentPlaceHolder1_ctl01_radmenu_ClientState","collapseAnimation":"{\"duration\":450}","expandAnimation":"{\"duration\":450}","itemData":[{"attributes":{"menunumber":"0"},"value":"21018948","selected":true,"navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21018948","cssClass":"rmFocused"},{"attributes":{"menunumber":"1"},"items":[{"attributes":{"menunumber":"2"},"items":[{"attributes":{"menunumber":"3"},"value":"21673645","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21673645"},{"attributes":{"menunumber":"4"},"value":"31208706","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=31208706"}],"value":"21018955","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21018955"}],"value":"21018954","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21018954"},{"attributes":{"menunumber":"5"},"items":[{"attributes":{"menunumber":"6"},"value":"21018968","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21018968"},{"attributes":{"menunumber":"7"},"value":"21652813","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652813"}],"value":"21018970","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21018970"},{"attributes":{"menunumber":"8"},"items":[{"attributes":{"menunumber":"9"},"value":"21652829","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652829"},{"attributes":{"menunumber":"10"},"value":"21652833","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652833"},{"attributes":{"menunumber":"11"},"value":"21652837","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652837"},{"attributes":{"menunumber":"12"},"value":"21652841","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652841"},{"attributes":{"menunumber":"13"},"value":"21652844","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652844"},{"attributes":{"menunumber":"14"},"value":"21652846","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652846"}],"value":"21652772","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652772"},{"attributes":{"menunumber":"15"},"items":[{"attributes":{"menunumber":"16"},"value":"21652864","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652864"},{"attributes":{"menunumber":"17"},"value":"21652867","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652867"},{"attributes":{"menunumber":"18"},"value":"21652871","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652871"},{"attributes":{"menunumber":"19"},"value":"21652876","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652876"},{"attributes":{"menunumber":"20"},"value":"21674840","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21674840"},{"attributes":{"menunumber":"21"},"value":"21674867","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21674867"}],"value":"21652775","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652775"},{"attributes":{"menunumber":"22"},"value":"21018961","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21018961"},{"attributes":{"menunumber":"23"},"items":[{"attributes":{"menunumber":"24"},"value":"21652886","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652886"},{"attributes":{"menunumber":"25"},"items":[{"attributes":{"menunumber":"26"},"value":"21725524","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725524"},{"attributes":{"menunumber":"27"},"value":"21725526","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725526"}],"value":"21652890","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652890"},{"attributes":{"menunumber":"28"},"items":[{"attributes":{"menunumber":"29"},"items":[{"attributes":{"menunumber":"30"},"value":"21725605","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725605"},{"attributes":{"menunumber":"31"},"value":"32891945","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=32891945"},{"attributes":{"menunumber":"32"},"value":"32891959","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=32891959"},{"attributes":{"menunumber":"33"},"value":"32891968","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=32891968"},{"attributes":{"menunumber":"34"},"value":"33249485","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=33249485"}],"value":"21725534","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725534"},{"attributes":{"menunumber":"35"},"items":[{"attributes":{"menunumber":"36"},"value":"21725636","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725636"},{"attributes":{"menunumber":"37"},"value":"32418100","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=32418100"}],"value":"21725536","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725536"},{"attributes":{"menunumber":"38"},"items":[{"attributes":{"menunumber":"39"},"value":"21725657","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725657"}],"value":"21725538","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725538"},{"attributes":{"menunumber":"40"},"items":[{"attributes":{"menunumber":"41"},"value":"21725670","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725670"},{"attributes":{"menunumber":"42"},"value":"32418107","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=32418107"}],"value":"21725540","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725540"},{"attributes":{"menunumber":"43"},"items":[{"attributes":{"menunumber":"44"},"value":"21725692","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725692"}],"value":"21725542","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725542"},{"attributes":{"menunumber":"45"},"items":[{"attributes":{"menunumber":"46"},"value":"21725712","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725712"},{"attributes":{"menunumber":"47"},"value":"21725718","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725718"}],"value":"21725544","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725544"},{"attributes":{"menunumber":"48"},"items":[{"attributes":{"menunumber":"49"},"value":"21725733","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725733"},{"attributes":{"menunumber":"50"},"value":"21725742","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725742"}],"value":"21725546","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725546"},{"attributes":{"menunumber":"51"},"items":[{"attributes":{"menunumber":"52"},"value":"21725753","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725753"},{"attributes":{"menunumber":"53"},"value":"21725761","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725761"}],"value":"21725548","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725548"},{"attributes":{"menunumber":"54"},"items":[{"attributes":{"menunumber":"55"},"value":"21725777","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725777"},{"attributes":{"menunumber":"56"},"value":"32359177","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=32359177"}],"value":"21725551","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725551"},{"attributes":{"menunumber":"57"},"items":[{"attributes":{"menunumber":"58"},"value":"21725826","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725826"},{"attributes":{"menunumber":"59"},"value":"21725832","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725832"}],"value":"21725554","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725554"},{"attributes":{"menunumber":"60"},"items":[{"attributes":{"menunumber":"61"},"value":"32891846","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=32891846"}],"value":"21725572","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725572"},{"attributes":{"menunumber":"62"},"value":"21725574","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725574"},{"attributes":{"menunumber":"63"},"value":"21725576","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725576"},{"attributes":{"menunumber":"64"},"items":[{"attributes":{"menunumber":"65"},"value":"32893719","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=32893719"}],"value":"21725578","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725578"},{"attributes":{"menunumber":"66"},"value":"21725580","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725580"}],"value":"21652892","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652892"},{"attributes":{"menunumber":"67"},"value":"21652894","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652894"},{"attributes":{"menunumber":"68"},"value":"21652897","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652897"},{"attributes":{"menunumber":"69"},"value":"21674526","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21674526"},{"attributes":{"menunumber":"70"},"value":"21725847","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21725847"},{"attributes":{"menunumber":"71"},"items":[{"attributes":{"menunumber":"72"},"value":"28186328","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=28186328"},{"attributes":{"menunumber":"73"},"value":"28186405","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=28186405"}],"value":"21956152","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21956152"}],"value":"21652777","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652777"},{"attributes":{"menunumber":"74"},"items":[{"attributes":{"menunumber":"75"},"value":"21652900","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652900"},{"attributes":{"menunumber":"76"},"items":[{"attributes":{"menunumber":"77"},"value":"21658585","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21658585"},{"attributes":{"menunumber":"78"},"value":"21658592","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21658592"},{"attributes":{"menunumber":"79"},"value":"21658631","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21658631"},{"attributes":{"menunumber":"80"},"value":"22462904","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=22462904"},{"attributes":{"menunumber":"81"},"items":[{"attributes":{"menunumber":"82"},"value":"28004750","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=28004750"}],"value":"22463179","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=22463179"}],"value":"21652903","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652903"},{"attributes":{"menunumber":"83"},"value":"32363424","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=32363424"}],"value":"21652782","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652782"},{"attributes":{"menunumber":"84"},"items":[{"attributes":{"menunumber":"85"},"value":"21652909","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652909"},{"attributes":{"menunumber":"86"},"value":"21652912","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652912"},{"attributes":{"menunumber":"87"},"value":"21652914","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652914"}],"value":"21652784","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652784"},{"attributes":{"menunumber":"88"},"items":[{"attributes":{"menunumber":"89"},"value":"21652930","navigateUrl":"javascript:var w=window.open(\u0027/cms/One.aspx?portalId=21018940\u0026pageId=21652930\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"90"},"value":"21652934","navigateUrl":"javascript:var w=window.open(\u0027/cms/One.aspx?portalId=21018940\u0026pageId=21652934\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"91"},"value":"21652942","navigateUrl":"javascript:var w=window.open(\u0027/cms/One.aspx?portalId=21018940\u0026pageId=21652942\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"},{"attributes":{"menunumber":"92"},"value":"21652947","navigateUrl":"javascript:var w=window.open(\u0027/cms/One.aspx?portalId=21018940\u0026pageId=21652947\u0027,\u0027\u0027,\u0027width=700,height=500,toolbar=1,location=1,directories=0,status=1,menubar=1,scrollbars=1,resizable=1\u0027);"}],"value":"21652786","navigateUrl":"/cms/One.aspx?portalId=21018940\u0026pageId=21652786"}]}, {"itemClicking":ClickItem}, null, $get("ctl00_ContentPlaceHolder1_ctl01_radmenu"));
+});
+//]]>
+', 
+', 
+    ', 
+        window.isMobile = 0 == 1;
+    ', 
+']

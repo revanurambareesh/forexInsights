@@ -1,0 +1,4503 @@
+[
+', 
+   ', 
+   ', 
+   ', 
+	var urlArray = ["/article/", "/content/", "/budget/"];
+	var blockThisUrl = false;
+	for (checkedUrl = 0; checkedUrl < urlArray.length; checkedUrl++) { 
+		if(document.location.pathname.indexOf(urlArray[checkedUrl]) !== -1){
+			blockThisUrl = true;
+		}
+	}
+	var subs_pw = getCookie('_pw');
+	if((typeof adsLoaded != 'undefined')  == false && (subs_pw == null || subs_pw != 't') && blockThisUrl){
+		console.log("adBlocker");
+		$("#main-warp").hide();
+		$("body").load("/adBlocker.html");
+		$("head").html("");
+		$("body").addClass("mainbg");
+	}
+	', 
+      ', 
+	        ', 
+		', 
+		', 
+    ', 
+              ', 
+        ', 
+          ', 
+          	', 
+			', Home', Markets', Companies', Opinion', Politics', Technology', Specials', PF', Portfolio', My Page', Budget 2017', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', North', East', West', South', Election', News', Mobiles & Tablets', Apps', People', Computers', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017',            	', 
+
+          ', 
+          ', 
+            ', BS APPS
+            ', 
+           ', 
+                ', iPad', 
+                ', iPhone', 
+                ', Android', 
+                ', Wap', 
+              ', 
+            ', 
+
+            ', 
+           ', BS PRODUCTS
+           ', 
+           ', 
+				', Smart Investor', 
+				', BS Hindi', 
+			    ', BS Motoring', 
+			    ', BS Books', 		    
+			    ', u"Today's Paper", 			    
+			    ', 
+			    ', Economy & Industry', 
+              ', 
+            ', 
+
+            ', 
+           ', BS SPECIALS
+           ', 
+           ', 
+                ', B2B Connect', 
+                ', Power & Energy', 
+                ', SME', 
+              ', 
+            ', 
+			
+		   ', 
+			', BS E-Paper', 
+           ', 
+
+          ', 
+           ', 
+        ', 
+
+          ', 
+          ', 
+        		.displayNone{display: none !important;}
+          ', 
+          ', 
+          				', 
+			', Hi', , ', 
+			', 
+				', 
+	                	                ', Change Password', 
+	                            			', Subscribe', 
+			 			                ',  Sign out', 
+              ', 
+			 ', 
+	                ', Change Password',             		
+					', Manage My Account', 
+					', 
+	                ',  Sign out', 
+              ', 
+			', 
+			            ', SIGN IN', 
+            ', Subscribe', 
+			          ', 
+          ', 
+          	function getLoginCookie(cname) {
+	      	    var name = cname + "=";
+	      	    var ca = document.cookie.split(';');
+	      	    for(var i=0; i<ca.length; i++) {
+	      	        var c = ca[i];
+	      	        while (c.charAt(0)==' ') c = c.substring(1);
+	      	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+	      	    }
+	      	    return "";
+      		}
+      		var usrLoginCookie = getLoginCookie('_userLoggedIn');
+          	if(usrLoginCookie == ''){
+				$(".userNotLoggedIn").removeClass('displayNone');
+            }else{
+            	$(".userLoggedIn").removeClass('displayNone');
+            	var usrObj = decodeURIComponent(usrLoginCookie);			
+				usrObj = JSON.parse(usrObj);				
+				usrObj.ufname = usrObj.ufname.replace(/\+/g, ' ');
+            	$(".ucnameSpan").html(decodeURIComponent(usrObj.ufname));	
+            	if(usrObj.s == 't'){
+                	$(".usrSubcribe a").html('Manage My Account');
+					$(".usrSubcribe a").attr("href", "/subscription-cart/manage");					
+                }else{                	
+					var subExp = getLoginCookie('_sub_exp');					
+                    if(subExp!=''){                    	
+						var timestamp = Math.floor(Date.now() / 1000);						
+						if((timestamp.toString().length == subExp.length) && (subExp<timestamp) ){
+							$(".manageMyAccount").show();
+							$(".usrSubcribe a").html('Subscribe');
+						}else{
+							$(".usrSubcribe a").html('Manage My Account');
+							$(".usrSubcribe a").attr("href", "/subscription-cart/manage");		
+						}
+                    }else{
+                		$(".usrSubcribe a").html('Subscribe');						
+						$(".manageMyAccount").show();
+                    }
+                }
+
+                if(usrObj.r == "f"){
+                	$(".siteSignout a").click(function(){
+                		FB.logout();
+                    });
+                }else if(usrObj.r == "t"){
+                	$(".siteSignout a").click(function(){
+                		twttr.anywhere.signOut();
+                    });
+                }
+            }
+          ', 
+          ', 
+            ', 
+                   ', 
+					',  ', 
+					',  ', 
+                    ',  ', 
+					',  ', 
+					',  ', 
+					',  ', 
+					',  ', 
+            		                   ', 
+                   ', 
+               ', 
+          ', 
+           ', 
+        ', 
+         ', 
+        ', 
+         ', 
+   ', 
+        ', 
+		', 
+						', 
+			', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/Web_chat_175x60_left', [175, 60], 'div-gpt-ad-1480487618894-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1480487618894-0'); });
+", 
+', 			', 
+					', 
+		', 
+						', 
+			', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/webchat_earpanel_175x60', [175, 60], 'div-gpt-ad-1479738033184-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479738033184-0'); });
+", 
+', 			', 
+					', 
+		', 
+        ', 
+            ', 
+            ', 
+                    ', 
+        ', 
+
+		', 
+		', 
+    ', 
+
+
+
+   ', 
+    ', 
+        ', 
+        ', 
+      ', 
+      ', 
+		.second-menu-panel{z-index:9999999 !important;}
+		.top-menu{z-index:10000000 !important;}
+      	.fancybox-overlay,#fancybox-overlay{z-index:10000001 !important;}
+		#overlay{z-index:10000002 !important;}
+		.popup,#fancybox-wrap{z-index:10000003 !important;}
+		#fancybox-content{min-height: 380px;min-width:600px;}
+		#fancybox-wrap{min-width: 640px;}
+		#menu li.drop{padding: 8px 10px 8px 2px;}
+      ', 
+   
+   ', 
+   ', 
+      ', 
+      ',  ', Company',  ',  Science & Technology',  ',  ',       ', 
+      ', 
+       ', 
+      ', 
+          ', 
+          ', 
+          ', 
+            ', 
+               ', News', 
+				', Stock Quote', 
+				', Authors', 
+            ', 
+            ', 
+             ', 
+
+          ', 
+          ', 
+          ', 
+          ', 
+
+          ', 
+	         
+	          $("#select_type").change(function(){
+	          	document.cookie="selectType=" + $(this).val();
+           	  });
+	           getCookieAndSetDefault("selectType");
+	         
+	          
+	          function getCookieAndSetDefault(c_name){
+					var c_value = document.cookie;console.log(c_value);
+					var c_start = c_value.indexOf(" " + c_name + "=");
+					if (c_start == -1){
+						c_start = c_value.indexOf(c_name + "=");
+					}
+					if (c_start == -1){
+						c_value = null;
+					}
+					else{
+						c_start = c_value.indexOf("=", c_start) + 1;
+						var c_end = c_value.indexOf(";", c_start);
+					if (c_end == -1){
+						c_end = c_value.length;
+					}
+					c_value = unescape(c_value.substring(c_start,c_end));
+					}
+
+					if(c_value != 'null' && c_value != null){
+						$("#select_type").val(c_value);
+					}
+	         }
+	          
+          ', 
+		  
+    ', 
+	var companyJsonFile = "";
+	
+	function getCompaniesJson() {
+		var o = $("#head-suggest");
+		objHiddenValField = "";
+		if (objHiddenValField == undefined || objHiddenValField == "") {
+			objHiddenValField = $("#company_code");
+		}
+
+		$.ajax({
+			url : "/api-handler/article/get-company-json",
+			cache : true,
+			success : function(data) {
+				var jsonObj = eval(data);
+				companyFileLoaded = true;
+				companyJsonFile = jsonObj;
+
+				
+				$(o).autocomplete({
+					source: function (request, response) {
+				            var term = $.ui.autocomplete.escapeRegex(request.term)
+				                , startsWithMatcher = new RegExp("^"+ term, "i")
+				                , startsWith = $.grep(companyJsonFile, function(value) {
+				                    return (startsWithMatcher.test(value.value) || (startsWithMatcher.test(value.compSym)));
+				                })
+				                
+				                , containsMatcher = new RegExp(term, "i")
+				                , contains = $.grep(companyJsonFile, function (value) {
+				                    return $.inArray(value, startsWith) < 0 &&
+				                        (containsMatcher.test(value.value) || (containsMatcher.test(value.compSym)));
+				                });
+				            response(startsWith.concat(contains));
+				        },
+					minLength : 3,
+					autoFocus : true,
+					disabled : false,
+					select : function(event, ui) {
+						$(objHiddenValField).val(ui.item.compId);
+						$(o).val(ui.item.compFormatted);
+						$objForm = $(o).closest("form");
+						if ($objForm.attr("name") != "frm_equity") {
+							$objForm.submit();
+						}
+					},
+					open : function() {
+						$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+					},
+					close : function() {
+						$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+					}
+				}).data("autocomplete")._renderItem = function(ul, item) {
+					var result = String(item.label).replace(new RegExp(this.term, "gi"),"<b>$&</b>");
+					return $( "<li></li>" )
+	                      .data( "item.autocomplete", item )
+	                      .append($( "<a></a>" ).html(result))
+	                      .appendTo( ul );
+
+				};
+
+			}
+		});
+	}
+	', 
+
+
+		', 
+		$("#select_type").change(function(){
+			var itemVal = $(this).val();
+			if(itemVal == 'news'){
+				$("#radio_news").attr("checked","checked");
+				$("#radio_news").trigger("click");
+			}else if(itemVal == 'stocks'){
+				$("#radio_stock").attr("checked","checked");
+				$("#radio_stock").trigger("click");
+			}else if(itemVal == 'authors'){
+				$("#radio_authors").attr("checked","checked");
+				$("#radio_authors").trigger("click");
+			}
+		});
+		$(document).ready(function(){
+			var itemVal = $('#select_type').val();
+			if(itemVal == 'news'){
+				$("#radio_news").attr("checked","checked");
+				$("#radio_news").trigger("click");
+			}else if(itemVal == 'stocks'){
+				$("#radio_stock").attr("checked","checked");
+				$("#radio_stock").trigger("click");
+			}else if(itemVal == 'authors'){
+				$("#radio_authors").attr("checked","checked");
+				$("#radio_authors").trigger("click");
+			}
+		});
+		$("#search_btn").click(function(){
+			$("#search_box_text").val($("#head-suggest").val());
+			$("#frm_search").submit();
+		});
+
+		$("#head-suggest").keypress(function(e){
+			if(e.charCode == 13){
+				$("#frm_search").submit();
+			}
+		});
+		', 
+
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		',  News', 
+		',  
+		', 
+		',  Stock Quote', 
+		',  
+		', 
+		',  Authors', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+
+      ', 
+      ', 
+
+      ', 
+
+   ', 
+     ', 
+    ',     ', 
+    
+     ', 
+			', u"
+		<!--
+		.breadcrum{ padding:5px 0 5px 10px; margin-bottom:-5px;  font-family: 'Open Sans', sans-serif; font-weight:400; color:#888; border-bottom: 1px solid #c4c6c8;}
+		.breadcrum a{ font-size:13px;} 
+		.breadcrum a:hover{ color:#c31316; text-decoration:underline;}
+		.breadcrum a.bact{color:#c31316; text-decoration:none;}
+		.breadcrum a {text-transform: none;}
+		-->
+		", 
+		', Companies',  » ', News',  » ', News',     ', 
+    ', 
+    ', 
+', 
+	$(document).ready(function(){
+		 $(".iframe").fancybox({
+		     maxWidth	: 600,
+			 maxHeight	: 580,
+			fitToView	: false,
+			autoSize	: false,
+			closeClick	: false,
+			href		: '/core/request-handler/sign-in-content',
+			openEffect	: 'none',
+			closeEffect	: 'none'
+	
+		});
+	$('.fancybox').fancybox();
+	});
+', 
+', 
+
+', 
+//Bs New Menu 
+   	$("#newMenuNavigationSecond").html($("#newMenuNavigationSecondHide").html());
+   	$("#newMenuNavigationSecondHide").html("");
+		$('.select_sub').first().removeClass('default-disp');
+		var mid = '287';
+		var rel = $('#nav_menu_' + mid).attr('rel');
+		if (rel != undefined && rel != '') {
+			$('#nav_menu_' + rel).addClass('activelink');
+			$('#nav_menu_' + mid).addClass('activelink');
+			$('#nav_menu_' + rel).parent().find('.select_sub').addClass('default-disp');		
+			$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+		} else {
+			$('#nav_menu_' + mid).addClass('activelink');
+			if($('#nav_menu_' + mid).parent().find('.select_sub').length==0){
+				$(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+				$(".nav-outer-repeat").css("height","62px");
+			}else{
+				$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+				$(".nav-outer-repeat").css("height","62px");
+			}
+		}
+		$('.select').mouseenter(function() {
+			
+			 $( ".select" ).each(function() { 
+				 if(($(this).find('.activelink').length>0)){
+					 $(this).find('.select_sub').removeClass('default-disp');
+					 $(this).find('li').removeClass('activelink');
+				 }
+				 
+		    });
+		      if(!($(this).find('.select_sub').length>0)){
+		    	     $(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+		    	     $(".nav-outer-repeat").css("height","62px");
+			  }else{ 
+				    $(".nav-new").find('.select:first').find('.select_sub').removeClass('default-disp');
+				 	$(".nav-outer-repeat").css("height","62px");
+			  }
+	     });
+		 
+		 $('.nav-outer').mouseleave(function() {
+			 if (rel != undefined && rel != '') {
+					$('#nav_menu_' + rel).addClass('activelink');
+					$('#nav_menu_' + mid).addClass('activelink');
+					$('#nav_menu_' + rel).parent().find('.select_sub').addClass('default-disp');		
+					$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+					$(".nav-outer-repeat").css("height","62px");
+				}else{
+					if($('#nav_menu_' + mid).parent().find('.select_sub').length==0){
+						$(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+						$(".nav-outer-repeat").css("height","62px");
+					}else{
+						$(".nav-new").find('.select:first').find('.select_sub').removeClass('default-disp');
+						$('#nav_menu_' + mid).addClass('activelink');
+						$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+						$(".nav-outer-repeat").css("height","62px");
+					}
+					
+			 }
+	    }); 
+		 
+		  $('.activelink').mouseenter(function() {
+	       $('.activelink').first().addClass('nolink');
+	    }); 
+	', 
+
+
+', 
+', 		', 
+
+		', 
+	    ', 
+', u"
+ var googletag = googletag || {};
+ googletag.cmd = googletag.cmd || [];
+ (function() {
+   var gads = document.createElement('script');
+   gads.async = true;
+   gads.type = 'text/javascript';
+   var useSSL = 'https:' == document.location.protocol;
+   gads.src = (useSSL ? 'https:' : 'http:') +
+     '//www.googletagservices.com/tag/js/gpt.js';
+   var node = document.getElementsByTagName('script')[0];
+   node.parentNode.insertBefore(gads, node);
+ })();
+", 
+
+', 
+
+', 
+span.p-content{font-family: 'Open Sans',sans-serif;font-size: 15px;line-height: 24px;}
+span.p-content a{color: #2591dc; text-decoration: none;}
+.bBorder1{border-bottom:1px solid #c4c6c8!important;}
+li.size16 .bB1:last-child{border-bottom: 0px !important;}
+.colL_MktColumn1.panel-left .banner240-180 div[style="float: left;"] div[style="float: left; clear: both; font-style:italic; padding: 10px 10px 10px 0px; width:620px;"]{
+width:100% !important;
+}
+/** CSS Changes for follow Columnist **/ 
+.unlock_bg {padding: 8px 15px;height: 44px;background: #EEE none repeat scroll 0% 0%;border-width: 1px 1px 1px 4px;border-style: solid;border-color: #FFF #FFF #FFF #AC2122; box-shadow: 0px 0px 10px 0px #D6D6D6;font-family: "Open Sans",sans-serif; font-size: 16px;color: #1D1D1D;font-weight: 600;width: 640px;}
+.unlock_bg ul{margin:0px; padding:0px;}
+.unlock_bg ul li{list-style-type:none; float:left;}
+.unlock_bg .unlock{padding:3px 0px 0px 10px; vertical-align:middle;}
+.unlock_bg .unlock a{text-decoration:none; color:#1d1d1d;}
+.unlock_bg .circle {width: 22px;height: 22px;background-color:#ac2122;-moz-border-radius: 70px;-webkit-border-radius: 70px;border-radius: 70px;text-align:center; color:#fff;margin-left:45px; margin-top:3px;}
+.unlock_bg .article{padding:3px 0px 0px 10px; vertical-align:middle; color:#017e22;}
+.unlock_bg .article a{text-decoration:none; color:#017e22;}
+.columnist{ padding:6px 10px; border:0; display:block; background:#4d5557; color:#fff; font-size:14px;cursor:pointer;}
+.modal {opacity: 0;visibility: hidden;position: fixed;top: 0;right: 0;bottom: 0;left: 0;text-align: left;transition: opacity .25s ease; z-index:999; position:relative;}
+.modal__bg {position: relative;  top: 0;right: 0;bottom: 0;left: 0;cursor: pointer;}
+.modal-state {display: none;}
+.modal-state:checked + .modal {opacity: 1;visibility: visible;}
+.modal-state:checked + .modal .modal__inner {top: 0px;}
+.modal__inner {transition: top .25s ease;position: relative;top: 0px;right: 0;bottom: 0;left: 0px;width:640px;margin: auto;overflow: auto;background: #eeeeee;padding:10px 15px;height:70px;
+  border-top:1px solid #fff;border-right:1px solid #fff;border-bottom:1px solid #fff;border-left:4px solid #ac2122;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(214,214,214,1);-moz-box-shadow: 0px 0px 10px 0px rgba(214,214,214,1);
+  box-shadow: 0px 0px 10px 0px rgba(214,214,214,1);font-family: 'Open Sans', sans-serif;  font-size:15px; color:#1d1d1d; line-height:22px;
+}
+.modal__inner_left {width:70%; float:left;}
+.modal__inner_right {width:30%; float:right;}
+.modal__close {position: absolute;right: 10px;top: 20px;width: 70px;height: 24px;cursor: pointer;background-color: #AC2122; font-size:13px; font-weight:normal;border-radius:2px; text-align:center; color:#fff;}
+.modal__proceed {position: absolute;right: 90px;top: 20px;width: 70px;height: 24px;cursor: pointer;background-color: #0a6d02; font-size:13px; font-weight:normal;border-radius:2px; text-align:center; color:#fff;}
+
+
+/** MEDIA **/
+
+@media (max-width: 768px) { 
+
+.modal__inner {width: 692px;}
+.floatR{float:right!important;}
+.unlock_bg { width: 692px;}
+}
+', 
+
+', 
+
+', 
+', 
+
+
+	  						', 
+			', 
+	        	', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1474961759587-0'); });
+", 
+', 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="95"; var zflag_sid="0"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14"; 
+', 
+', 
+
+', document.write("<!--"); if(isUserBanner=="fis") document.write("-->"); ',  ', $("#id_3_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_fis-1480077568.png"); ', document.write("<!--"); if(isUserBanner=="kotak") document.write("-->"); ',  ', $("#id_4_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_kotak-1480077568.jpg"); ', document.write("<!--"); if(isUserBanner=="capgemini") document.write("-->"); ',  ', $("#id_5_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_capgemini-1480077568.jpg"); ', 	       		', 
+		
+	  	   		  		    		', Business Standard', 
+  		
+	', 
+    ', 
+		', 
+        	   
+	   ', 
+	   ', 
+	   
+        ', 
+      	', 
+      	        ', 
+			', 
+	        	', 
+	          	', 
+					  					  
+					 ', u"
+					 					 At Rs 5 lakh cr, LIC to be India's most valuable firm if listed					 ", 
+				  					   		', u"But listing insurance giant won't be easy, given the legal and procedural hassles", 
+				   	
+					', 
+					', 
+						  ', 
+							  ', 
+								  								  ', M Saraswathy',  &  ', Krishna Kant',  								  								  | 
+								  								  								  ', Mumbai',  							  ', 
+							  							  ', 
+							  ', June 12, 2014							  Last Updated at 00:31 IST', 
+							  						', 
+					  	
+
+											      ', 
+					   
+					   					   
+					', 
+					', 
+					
+					
+					', 
+					 	', 
+						', 
+							', 
+																', 
+								 	', 
+								', 
+								', 
+								 	', 
+								', 
+								', 
+									', 
+								', 
+								', 
+									', 
+								', 
+							', 
+						', 
+						', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+            ', 
+            ', email this article', 
+
+         	', 
+            	', 
+                    ', 
+                    	', Message:', 
+			            ', 
+			            ', u"Recipients' Email:", 
+			            ', 
+					        ', Type address separated by commas', 
+         			', 
+			   		', 
+			   			', Your Email:', 
+			   			', 
+			   			', Enter the characters shown in the image.', 
+			   			', 
+			   		', 
+			   		', 
+			   			', Send me a copy:
+			   			  ', 
+			            ', 
+			   		', 
+			   		', 
+				    	',  ', 
+			       		', 
+			       		', 
+			       		', 
+			       		  ', 
+			   		', 
+       	       	', 
+            ', 
+         	', 
+', 
+
+', 
+', 
+$(document).ready(function(){
+	$("#email_formarticle").validationEngine({promptPosition : "topRight:-100"});
+	$(".reload_image_captcha").click(function(){
+		var _id = this.id;
+		$.ajax({
+			"type"		:	"POST",
+			"url"		:	"/request-handler/reload-captcha",
+			"success"	:	function(data){
+				if(data!=undefined){
+					try{
+						var _res = eval(data);
+						if(_res.err!=undefined && _res.id!=undefined && _res.msg!=undefined){
+							if(_res.err=='0'){
+								var captchaId = "#captcha_id_"+_id;
+								var imgCaptchaBox = "#image_captcha_box_"+_id;
+								$(captchaId).val(_res.id);
+								$(imgCaptchaBox).html(_res.msg);
+							}else{
+								alert(_res.msg);
+							}
+						}
+					}catch(e){}
+				}
+			}
+		});
+		return false;
+	});
+	$(".at-svc-email").one("click", function(){
+		$( ".reload_image_captcha" ).trigger( "click");
+	});
+});
+', 
+', 						', 
+					', 
+					 				', 
+
+
+		       	', 
+								', 
+					', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+ 
+ ', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/640x90_ad', [640, 60], 'div-gpt-ad-1479277932687-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+ 
+
+ 
+  
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479277932687-0'); });
+", 
+', 
+
+ 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+ 
+ ', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/640x90_ad', [640, 60], 'div-gpt-ad-1479277932687-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+ 
+
+ 
+  
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479277932687-0'); });
+", 
+', 
+
+ 
+
+', 
+				
+
+        ', 
+ 				
+					', 
+  					
+				', 
+				
+  				
+  					  					   					   					
+   					', 
+					
+											
+					', 
+
+				     	  							', 
+  															       	 									', 
+	', 										 ', 
+										 	var imgWidth = $(".colL_MktColumn1 div img").first().width();
+												$(".colL_MktColumn1 div img").first().removeAttr('height width');
+												$(".colL_MktColumn1 div img").first().css({'width': 240, 'height':''});
+												
+										 ', 
+																		
+																											
+										    								', 
+		    								', 
+			    								', 
+				  																			  													      															', 
+																', ALSO READ', 
+																												          															          			', LIC debt investment cap raised to 20%', 
+																	 
+												          														          															          			', FinMin asks LIC to name board members in 50 firms', 
+																	 
+												          														          															          			', u"LIC Nomura eyes Rs 10,000 cr AUM in FY'14", 
+																	 
+												          														          															          			', LIC Nomura targets over Rs 15,000 cr AUM in Q3', 
+																	 
+												          														          															          			', u"FinMin seeks details about LIC's investment in Gitanjali Gems", 
+																	 
+												          																	', 
+												     												
+																																						  										
+																										  										
+																																					', 
+													', 
+													', 
+', 
+', 
+', 
+(adsbygoogle = window.adsbygoogle || []).push({});
+', 
+													', 
+														  										
+		  												  												  												  										', 
+	  										', 
+										', 
+															', 
+					  								
+
+	            ', 
+				    				       ', 
+				    	
+Life Insurance Corporation (LIC), the country\u2019s largest insurer, could be the most valuable Indian company at Rs 4.5-5 lakh crore if it debuts on the bourses, as bankers have suggested to the Union finance ministry.', 
+', 
+In 2012-13, the latest year for which data are available, ', LIC ', reported a revenue of Rs 3.26 lakh crore ($54.4 billion) and Rs 15.2 lakh crore ($253.9 billion) of assets under management. In 2013-14, the state-owned ', LIC ', reported first premium income of Rs 90,123.8 crore, a rise of 17.8 per cent over 2012-13 and a key metric for valuing insurance companies. Private Indian insurance companies, on the other hand, saw a four per cent drop in new premiums to Rs 29,517.4 crore in 2013-14.', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+ ', 
+  ', u"
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  (function() {
+    var gads = document.createElement('script');
+    gads.async = true;
+    gads.type = 'text/javascript';
+    var useSSL = 'https:' == document.location.protocol;
+    gads.src = (useSSL ? 'https:' : 'http:') +
+      '//www.googletagservices.com/tag/js/gpt.js';
+    var node = document.getElementsByTagName('script')[0];
+    node.parentNode.insertBefore(gads, node);
+  })();
+", 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/inpage_video_1x1', [1, 1], 'div-gpt-ad-1466593210966-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+", 
+ 
+
+ 
+  
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1466593210966-0'); });
+", 
+', 
+ 
+', 
+', 
+Asian insurance giants like the AIA Group and China Life Insurance are, respectively, valued at around 41 per cent and 20 per cent of their assets under management. In slow-growing Europe and North America, insurers typically are valued at 10 per cent of their assets under management. American International Group (AIG), the world\u2019s largest insurance company, is valued at 15 per cent of its assets under management (AUM). Taking an average of the shares of Asian insurers\u2019 valuation in their respective AUMs as a yardstick, LIC\u2019s market value is likely to be Rs 4.5-5 lakh crore.', 
+', 
+At this valuation, floating 10 per cent of the ', LIC ', stock would fetch the government around Rs 50,000 crore. Analysts said an issue of this size would squeeze the secondary market and participation by retail and foreign institutional investors would be key.', 
+', 
+\u201cLife insurance companies, like mutual funds, are valued on their assets under management, their key source of revenue and profit. ', LIC ', will get a premium for being a market leader and for its huge investment portfolio accumulated over the past six decades,\u201d said G Chokkalingam, founder of Equinomics Research Advisory.', 
+', 
+In 2012-13, LIC\u2019s investment income was Rs 1.04 lakh crore and miscellaneous income Rs 21,243 crore. It reported a surplus of Rs 1.49 lakh crore after paying all expenses, including claims, commissions, management and employee expenses and a five per cent valuation surplus to the government.', 
+', 
+Tata Consultancy Services (TCS), currently India\u2019s most valuable company, is worth around 4.31 lakh crore. It is followed by Oil and Natural Gas Corporation (Rs 3.65 lakh crore). In revenue, ', LIC ', ranks only below Indian Oil Corporation (Rs 4.93 lakh crore in 2013-14) and Reliance Industries (Rs 4.43 lakh crore).', 
+', 
+Conservatively, ', LIC ', can be valued at 3-3.5 times its first-year premium income, a typical valuation matrix for insurance companies. This pegs LIC\u2019s market valuation at Rs 3-3.5 lakh crore.', 
+', 
+\u201cLife insurance companies (can also be listed) according to their appraisal value, which is a multiple of their first-year premium income. This is likely to be high for LIC, given its low expense, high market share and nationwide network,\u201d said Ashvin Parikh, managing partner, Ashvin Parikh Advisory Services LLP.', 
+', 
+Listing LIC, though, will not be easy. It was created in 1956 through a law and follows an accounting method that is different from private insurers. Before listing, it needs to be corporatised if the suggestion by bankers to the ', finance ministry ', is accepted. The proposal is for the government to hold 51 per cent in ', LIC ', and divest the rest.', 
+', 
+Senior executives and a former chairman of LIC, however, said it would not be an easy process. A former managing director of ', LIC ', explained that when the government had earlier considered listing LIC, the trade unions had objected, citing pay and pension benefits available to government employees.', 
+', 
+', 
+	', 
+Another issue, the executives said, was the appointment of LIC\u2019s senior management team, which is currently approved by the government. That, if the insurer is listed, will have to be done after shareholder approval. \u201cThis may require an amendment in the ', LIC ', Act to allow shareholders to take a call on appointment issues, though it may still largely be decided by the government,\u201d said a former ', LIC ', chairman.', 
+', 
+Transparency and additional disclosures were what would be the major game-changer, said former ', LIC ', executives. \u201cLarge equity and debt transactions conducted on a daily basis are not disclosed, since it is not mandatorily required. Once ', LIC ', is listed, this will undergo a change and we are not sure if the staff will be comfortable with the move, since there could be fears about particular investment decisions being questioned. So, listing proposals are easier said than done,\u201d said a former ', LIC ', executive.', 
+', 
+In 2004, the All-India ', LIC ', Employees Federation had expressed concerns over a report by an accounting firm that proposed corporatisation of ', LIC ', and a possible listing. Some provisions also related to withdrawal of government guarantees on ', LIC ', policies. The Malhotra committee report had in 1994 proposed a similar concept for professionalising the insurance sector.', 
+', 
+According to the ', LIC ', Act, there is a sovereign guarantee on its policies. The Act says the sum assured by all policies issued by LIC, including any bonuses declared, will be guaranteed as to payment in cash by the central government. Hence, former ', LIC ', executives said, though the government might continue to hold 51 per cent in LIC, there was the question of whether the guarantee would continue. One way out could be retaining the sovereign guarantee on policies already issued and discontinuing it for new policies.', 
+', 
+If this provision has to be removed, the ', LIC ', Act has to be amended in Parliament. While there earlier were talks of amendment of the ', LIC ', Act and removal of the guarantee, a Bill was not tabled fearing a public backlash.', 
+', 
+Earlier reports by the insurance regulator and accounting firms said listing ', LIC ', would create a level playing field in the industry. But before ', LIC ', hits the market with an initial public offering , the government would be required to recapitalise the entity.				       
+				    	            ', 
+	            
+												
+            ', 
+            	            ', 
+          ', 
+                  ', 
+
+        ', 
+        ', 
+           ', 
+             ', Read More On', 
+             ', Lic',  ',  | ',  ', Fy13',  ',  | ',  ', Aum',  ',  | ',  ', Most Valuable Firm',  ',  | ',  ', Finance Ministry', 
+           ', 
+        ', 
+        ', 
+        
+        	 	
+        ', 
+			', 
+			   ', 
+			      ', 
+			         ', 
+			            ', 
+			               ', PREVIOUS STORY', 
+			            ', 
+			            ', 
+			               ', NEXT STORY', 
+			            ', 
+			            ', 
+			         ', 
+			         ',   ', 
+			         ', 
+				            ', 
+				               ', 
+				                  ', 
+				               ', 
+				               ', 
+				            ', 
+			         ', 
+			         ', 
+			      ', 
+			   ', 
+			', 
+       ', 
+
+
+', 
+', 
+
+      ', 
+            	', 
+		', 
+', RECOMMENDED FOR YOU', 
+', 
+', 
+', 
+', 
+(adsbygoogle = window.adsbygoogle || []).push({});
+', 
+',        ', 
+	  
+ ', 
+         ', 
+	    ', 
+', 
+', Advertisements', 
+', 
+', 
+', New to the stock market? Take your FirstStep', Super Saver Health Insurance For Your Family', Learn the Art of Investing through Sharekhan', Open Free Demat A/c with low brokerage fee', Yet to open a Sharekhan Account?', Rs 3 lakh health coverage @ Rs 11* per day', The Power of the Hybrid Cloud', 
+', 
+', 
+     ', 
+        
+    ', 
+      ', 
+      		', 
+				', 
+				', 
+				',  
+		', 
+		      ', 
+      
+		', 
+		', 
+			', 
+			  ', 
+			  ', u"At Rs 5 lakh cr, LIC to be India's most valuable firm if listed", 
+			  ', u"But listing insurance giant won't be easy, given the legal and procedural hassles", 
+			  ', u"But listing insurance giant won't be easy, given the legal and procedural hassles", 
+			  					', 
+Life Insurance Corporation (LIC), the country\u2019s largest insurer, could be the most valuable Indian company at Rs 4.5-5 lakh crore if it debuts on the bourses, as bankers have suggested to the Union finance ministry.', 
+', 
+In 2012-13, the latest year for which data are available, ', LIC ', reported a revenue of Rs 3.26 lakh crore ($54.4 billion) and Rs 15.2 lakh crore ($253.9 billion) of assets under management. In 2013-14, the state-owned ', LIC ', reported first premium income of Rs 90,123.8 crore, a rise of 17.8 per cent over 2012-13 and a key metric for valuing insurance companies. Private Indian insurance companies, on the other hand, saw a four per cent drop in new premiums to Rs 29,517.4 crore in 2013-14.', 
+', 
+Asian insurance giants like the AIA Group and China Life Insurance are, respectively, valued at around 41 per cent and 20 per cent of their assets under management. In slow-growing Europe and North America, insurers typically are valued at 10 per cent of their assets under management. American International Group (AIG), the world\u2019s largest insurance company, is valued at 15 per cent of its assets under management (AUM). Taking an average of the shares of Asian insurers\u2019 valuation in their respective AUMs as a yardstick, LIC\u2019s market value is likely to be Rs 4.5-5 lakh crore.', 
+', 
+At this valuation, floating 10 per cent of the ', LIC ', stock would fetch the government around Rs 50,000 crore. Analysts said an issue of this size would squeeze the secondary market and participation by retail and foreign institutional investors would be key.', 
+', 
+\u201cLife insurance companies, like mutual funds, are valued on their assets under management, their key source of revenue and profit. ', LIC ', will get a premium for being a market leader and for its huge investment portfolio accumulated over the past six decades,\u201d said G Chokkalingam, founder of Equinomics Research Advisory.', 
+', 
+In 2012-13, LIC\u2019s investment income was Rs 1.04 lakh crore and miscellaneous income Rs 21,243 crore. It reported a surplus of Rs 1.49 lakh crore after paying all expenses, including claims, commissions, management and employee expenses and a five per cent valuation surplus to the government.', 
+', 
+Tata Consultancy Services (TCS), currently India\u2019s most valuable company, is worth around 4.31 lakh crore. It is followed by Oil and Natural Gas Corporation (Rs 3.65 lakh crore). In revenue, ', LIC ', ranks only below Indian Oil Corporation (Rs 4.93 lakh crore in 2013-14) and Reliance Industries (Rs 4.43 lakh crore).', 
+', 
+Conservatively, ', LIC ', can be valued at 3-3.5 times its first-year premium income, a typical valuation matrix for insurance companies. This pegs LIC\u2019s market valuation at Rs 3-3.5 lakh crore.', 
+', 
+\u201cLife insurance companies (can also be listed) according to their appraisal value, which is a multiple of their first-year premium income. This is likely to be high for LIC, given its low expense, high market share and nationwide network,\u201d said Ashvin Parikh, managing partner, Ashvin Parikh Advisory Services LLP.', 
+', 
+Listing LIC, though, will not be easy. It was created in 1956 through a law and follows an accounting method that is different from private insurers. Before listing, it needs to be corporatised if the suggestion by bankers to the ', finance ministry ', is accepted. The proposal is for the government to hold 51 per cent in ', LIC ', and divest the rest.', 
+', 
+Senior executives and a former chairman of LIC, however, said it would not be an easy process. A former managing director of ', LIC ', explained that when the government had earlier considered listing LIC, the trade unions had objected, citing pay and pension benefits available to government employees.', 
+', 
+', 
+	', 
+Another issue, the executives said, was the appointment of LIC\u2019s senior management team, which is currently approved by the government. That, if the insurer is listed, will have to be done after shareholder approval. \u201cThis may require an amendment in the ', LIC ', Act to allow shareholders to take a call on appointment issues, though it may still largely be decided by the government,\u201d said a former ', LIC ', chairman.', 
+', 
+Transparency and additional disclosures were what would be the major game-changer, said former ', LIC ', executives. \u201cLarge equity and debt transactions conducted on a daily basis are not disclosed, since it is not mandatorily required. Once ', LIC ', is listed, this will undergo a change and we are not sure if the staff will be comfortable with the move, since there could be fears about particular investment decisions being questioned. So, listing proposals are easier said than done,\u201d said a former ', LIC ', executive.', 
+', 
+In 2004, the All-India ', LIC ', Employees Federation had expressed concerns over a report by an accounting firm that proposed corporatisation of ', LIC ', and a possible listing. Some provisions also related to withdrawal of government guarantees on ', LIC ', policies. The Malhotra committee report had in 1994 proposed a similar concept for professionalising the insurance sector.', 
+', 
+According to the ', LIC ', Act, there is a sovereign guarantee on its policies. The Act says the sum assured by all policies issued by LIC, including any bonuses declared, will be guaranteed as to payment in cash by the central government. Hence, former ', LIC ', executives said, though the government might continue to hold 51 per cent in LIC, there was the question of whether the guarantee would continue. One way out could be retaining the sovereign guarantee on policies already issued and discontinuing it for new policies.', 
+', 
+If this provision has to be removed, the ', LIC ', Act has to be amended in Parliament. While there earlier were talks of amendment of the ', LIC ', Act and removal of the guarantee, a Bill was not tabled fearing a public backlash.', 
+', 
+Earlier reports by the insurance regulator and accounting firms said listing ', LIC ', would create a level playing field in the industry. But before ', LIC ', hits the market with an initial public offering , the government would be required to recapitalise the entity.', 
+							  ', 
+			   ', 
+      				', M Saraswathy & Krishna Kant', 
+ 			  ', 
+			  ', 
+			     ', Business Standard', 
+			     ', 
+			       ', http://bsmedia.business-standard.com/_media/bs/wap/images/bs_logo_amp.png', 
+			       ', 177', 
+			       ', 22', 
+			     ', 
+ 			 ', 
+ 			 ', 
+			 ', 
+			', 
+		', 
+		', 
+
+      ', 
+       ', 
+            ', 
+        		      		      		      		      		      		', 
+				', 
+				var cmtIframe = $("#article-comment-frame");
+				var cmtIframeOffset = cmtIframe.offset();
+				var iframeDivhgt = cmtIframeOffset.top;
+				iframeDivhgt = iframeDivhgt - 600;
+				var iframeDistanceTop = iframeDivhgt;
+				var iframeLoaded = false;
+				$(function() {
+					$(window).scroll(function() {
+						if ($(window).scrollTop() > iframeDistanceTop) {
+							if(iframeLoaded == false){
+								$("#article-comment-frame").attr("src",$("#article-comment-frame").attr("data-original"));
+								iframeLoaded = true;
+							}
+						}
+					});
+				});
+				', 
+	      		      	            ', 
+          ', 
+
+         ', 
+        ', 
+      ', 
+
+
+     	', 
+  		', 
+        ', 
+       ', 
+
+      
+      ', 
+		  		  ', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1474961759587-10'); });
+", 
+', 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="95"; var zflag_sid="0"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="30"; 
+', 
+', 
+
+', document.write("<!--"); if(isUserBanner=="fis") document.write("-->"); ',  ', $("#id_3_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_fis-1479188012.png"); ', document.write("<!--"); if(isUserBanner=="kotak") document.write("-->"); ',  ', $("#id_4_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_kotak-1479188012.jpg"); ', document.write("<!--"); if(isUserBanner=="capgemini") document.write("-->"); ',  ', $("#id_5_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_capgemini-1479188012.jpg"); ', 
+		  ', 
+		      ', 
+
+', 
+var idPaidArticle = false;
+', 
+
+
+', 
+
+$.ajax({
+    url : '/request-handler/get-latest-articles/catId/101/cache-control/1800',
+    async: true,
+    success : function(data){
+        $("#next-prev").html(data);
+        var owl = $("#next-prev");
+        if(data != ''){
+        	var checkIdExists = $(".more-stories-pagination.disNone div").hasClass("latestArticleId-114061101114");
+        	if(checkIdExists){
+        		$(".latestArticleId-114061101114").remove();
+            }else{
+            	$(".latestArticleLastId").remove();
+            }
+        	$(".more-stories-pagination.disNone").show();
+        }
+        owl.owlCarousel({
+        items : 2, //10 items above 1000px browser width
+        itemsDesktop : [980,2], //5 items between 1000px and 901px
+        itemsDesktopSmall : [900,2], // 3 items betweem 900px and 601px
+        itemsTablet: [360,2], //2 items between 600 and 0;
+        itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+        });
+
+        // Custom Navigation Events
+        $(".next").click(function(){
+          owl.trigger('owl.next');
+        });
+        $(".prev").click(function(){
+          owl.trigger('owl.prev');
+        });
+        $(".play").click(function(){
+          owl.trigger('owl.play',1000);
+        });
+        $(".stop").click(function(){
+          owl.trigger('owl.stop');
+        });
+    }
+});
+
+function unFollowColumnist(){
+	var author_id = '0';
+	var userInfo = decodeURIComponent(getCookie('_userLoggedIn'));
+	var isPaidUser="N";
+	if(userInfo !=null && userInfo!= 'undefined'){
+		var userType = JSON.parse(userInfo);
+		if(userType !=null && userType!= 'undefined' && userType.s != 'undefined' && userType.s == 't'){
+			isPaidUser="Y";
+		}else{
+			isPaidUser="N";
+		}
+	}
+	
+	
+	if(author_id != ''){
+		if(confirm("Are you sure to unfollow this columnist!")==true){
+	        $.ajax({
+	            url : '/request-handler/article/unmap-user-columnist',
+	            type : 'post',
+	            data: {
+					'authorId'	: author_id,'isPaidUser':isPaidUser
+				},
+	            success : function(msg){
+	                if(msg == 'success'){
+	                	location.reload(); return false();
+	                }else{
+	                    message = 'Please try again';
+	                    alert(message); return false();
+	                }
+	            }
+	        });
+		}
+    }else{
+       alert("Invalid columnist request!");
+       return false();
+    }
+
+}
+
+function followColumnist(){
+  var author_id = '0';
+  var userInfo = decodeURIComponent(getCookie('_userLoggedIn'));
+	var isPaidUser="N";
+	var isLoggedIn = "N";
+	if(userInfo !=null && userInfo!= 'undefined'){
+		var userType = JSON.parse(userInfo);
+		if(userType !=null && userType!= 'undefined' && userType.s != 'undefined' && userType.s == 't'){
+			isPaidUser="Y";
+			isLoggedIn = "Y";
+		}else if(userType !=null && userType!= 'undefined'){
+			isPaidUser="N";
+			isLoggedIn = "Y";
+		}
+	}
+
+	  if(isLoggedIn=="Y"){
+		 
+			  if(author_id != ''){
+			    $.ajax({
+			         url : '/request-handler/article/map-user-columnist',
+			         type : 'post',
+			         data: {
+							'authorId'	: author_id,'isPaidUser':isPaidUser
+					 },
+			         success : function(msg){
+			                if(msg == 'success'){
+			                	location.reload(); return false();
+			         }else{
+			        	 customLogin();
+						}
+			        }
+			       });
+			    }else{
+			       alert("Invalid columnist request!");
+			       return false();
+			    }
+		  
+	  }else if(isLoggedIn=="N"){
+		   customLogin();
+	  }
+}
+
+function unLockArticle(){
+	  var article_id = '114061101114';
+	  var userInfo = decodeURIComponent(getCookie('_userLoggedIn'));
+	  var isPaidUser="N";
+	  if(userInfo !=null && userInfo!= 'undefined'){
+			var userType = JSON.parse(userInfo);
+			if(userType !=null && userType!= 'undefined' && userType.s != 'undefined' && userType.s == 't'){
+				isPaidUser="Y";
+			}else{
+				isPaidUser="N";
+			}
+	  }
+		
+		if(article_id != ''){
+	        $.ajax({
+	            url : '/request-handler/article/unlock-article',
+	            type : 'post',
+	            data: {
+					'article_id'	: article_id,'isPaidUser':isPaidUser
+				},
+	            success : function(msg){console.log(msg);
+	                if(msg == 'success'){
+	                	location.reload(); return false();
+	                }else{
+	                    $(".iframe").trigger('click');
+	                }
+	            }
+	        });
+	    }else{
+	       alert("Invalid columnist request!");
+	       return false();
+	    }
+
+}
+
+function customLogin(){
+	var author_id = '0';
+	var articleId = '114061101114';
+	var parentUrl = window.location.href;
+
+	if (parentUrl.indexOf("?")>-1){
+		parentUrl = parentUrl.substr(0,parentUrl.indexOf("?"));
+	}
+	
+	$("#sign_in").fancybox({
+	    maxWidth	: 600,
+		maxHeight	: 580,
+		fitToView	: false,
+		autoSize	: false,
+		closeClick	: false,
+		href		: '/core/request-handler/sign-in-content?ref='+parentUrl+'&fc='+author_id+'&articleId='+articleId,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+
+	});
+	$('.fancybox').fancybox();
+	$("#sign_in").trigger('click');
+	
+} 
+
+function showhide()
+{
+      var div = document.getElementById("follow");
+	  if(div.style.display !== "block") {
+		   div.style.display = "block";
+	  }
+      else {
+		   div.style.display = "none";
+	  }
+}
+
+
+$(document).ready(function(){
+	$('.articleCompanyStockInfo').hide();
+	$('.bsNewArticleCompanyStockInfo').show();
+});
+', 
+
+', 
+.articleCompanyStockInfo{display: none;}
+.bsNewArticleCompanyStockInfo{display: block;}
+#article-chart-_article_ft{
+	margin-bottom: 40px;
+	display: block;
+	padding: 5px 30px;
+}
+});
+', 
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1454577991396-0'); });
+", 
+', 
+
+', 
+', 
+', 
+    ', 
+    ', 
+	', u"At Rs 5 lakh cr, LIC to be India's most valuable firm if listed", 
+			', u"But listing insurance giant won't be easy, given the legal and procedural hassles", 
+		', 
+	', 
+	 		', 
+Life Insurance Corporation (LIC), the country\u2019s largest insurer, could be the most valuable Indian company at Rs 4.5-5 lakh crore if it debuts on the bourses, as bankers have suggested to the Union finance ministry.', 
+', 
+In 2012-13, the latest year for which data are available, ', LIC ', reported a revenue of Rs 3.26 lakh crore ($54.4 billion) and Rs 15.2 lakh crore ($253.9 billion) of assets under management. In 2013-14, the state-owned ', LIC ', reported first premium income of Rs 90,123.8 crore, a rise of 17.8 per cent over 2012-13 and a key metric for valuing insurance companies. Private Indian insurance companies, on the other hand, saw a four per cent drop in new premiums to Rs 29,517.4 crore in 2013-14.', 
+', 
+Asian insurance giants like the AIA Group and China Life Insurance are, respectively, valued at around 41 per cent and 20 per cent of their assets under management. In slow-growing Europe and North America, insurers typically are valued at 10 per cent of their assets under management. American International Group (AIG), the world\u2019s largest insurance company, is valued at 15 per cent of its assets under management (AUM). Taking an average of the shares of Asian insurers\u2019 valuation in their respective AUMs as a yardstick, LIC\u2019s market value is likely to be Rs 4.5-5 lakh crore.', 
+', 
+At this valuation, floating 10 per cent of the ', LIC ', stock would fetch the government around Rs 50,000 crore. Analysts said an issue of this size would squeeze the secondary market and participation by retail and foreign institutional investors would be key.', 
+', 
+\u201cLife insurance companies, like mutual funds, are valued on their assets under management, their key source of revenue and profit. ', LIC ', will get a premium for being a market leader and for its huge investment portfolio accumulated over the past six decades,\u201d said G Chokkalingam, founder of Equinomics Research Advisory.', 
+', 
+In 2012-13, LIC\u2019s investment income was Rs 1.04 lakh crore and miscellaneous income Rs 21,243 crore. It reported a surplus of Rs 1.49 lakh crore after paying all expenses, including claims, commissions, management and employee expenses and a five per cent valuation surplus to the government.', 
+', 
+Tata Consultancy Services (TCS), currently India\u2019s most valuable company, is worth around 4.31 lakh crore. It is followed by Oil and Natural Gas Corporation (Rs 3.65 lakh crore). In revenue, ', LIC ', ranks only below Indian Oil Corporation (Rs 4.93 lakh crore in 2013-14) and Reliance Industries (Rs 4.43 lakh crore).', 
+', 
+Conservatively, ', LIC ', can be valued at 3-3.5 times its first-year premium income, a typical valuation matrix for insurance companies. This pegs LIC\u2019s market valuation at Rs 3-3.5 lakh crore.', 
+', 
+\u201cLife insurance companies (can also be listed) according to their appraisal value, which is a multiple of their first-year premium income. This is likely to be high for LIC, given its low expense, high market share and nationwide network,\u201d said Ashvin Parikh, managing partner, Ashvin Parikh Advisory Services LLP.', 
+', 
+Listing LIC, though, will not be easy. It was created in 1956 through a law and follows an accounting method that is different from private insurers. Before listing, it needs to be corporatised if the suggestion by bankers to the ', finance ministry ', is accepted. The proposal is for the government to hold 51 per cent in ', LIC ', and divest the rest.', 
+', 
+Senior executives and a former chairman of LIC, however, said it would not be an easy process. A former managing director of ', LIC ', explained that when the government had earlier considered listing LIC, the trade unions had objected, citing pay and pension benefits available to government employees.', 
+', 
+', 
+	', 
+Another issue, the executives said, was the appointment of LIC\u2019s senior management team, which is currently approved by the government. That, if the insurer is listed, will have to be done after shareholder approval. \u201cThis may require an amendment in the ', LIC ', Act to allow shareholders to take a call on appointment issues, though it may still largely be decided by the government,\u201d said a former ', LIC ', chairman.', 
+', 
+Transparency and additional disclosures were what would be the major game-changer, said former ', LIC ', executives. \u201cLarge equity and debt transactions conducted on a daily basis are not disclosed, since it is not mandatorily required. Once ', LIC ', is listed, this will undergo a change and we are not sure if the staff will be comfortable with the move, since there could be fears about particular investment decisions being questioned. So, listing proposals are easier said than done,\u201d said a former ', LIC ', executive.', 
+', 
+In 2004, the All-India ', LIC ', Employees Federation had expressed concerns over a report by an accounting firm that proposed corporatisation of ', LIC ', and a possible listing. Some provisions also related to withdrawal of government guarantees on ', LIC ', policies. The Malhotra committee report had in 1994 proposed a similar concept for professionalising the insurance sector.', 
+', 
+According to the ', LIC ', Act, there is a sovereign guarantee on its policies. The Act says the sum assured by all policies issued by LIC, including any bonuses declared, will be guaranteed as to payment in cash by the central government. Hence, former ', LIC ', executives said, though the government might continue to hold 51 per cent in LIC, there was the question of whether the guarantee would continue. One way out could be retaining the sovereign guarantee on policies already issued and discontinuing it for new policies.', 
+', 
+If this provision has to be removed, the ', LIC ', Act has to be amended in Parliament. While there earlier were talks of amendment of the ', LIC ', Act and removal of the guarantee, a Bill was not tabled fearing a public backlash.', 
+', 
+Earlier reports by the insurance regulator and accounting firms said listing ', LIC ', would create a level playing field in the industry. But before ', LIC ', hits the market with an initial public offering , the government would be required to recapitalise the entity.
+		', 
+	', 
+      		', M Saraswathy & Krishna Kant', 
+ 	', 
+	', 
+		', Business Standard', 
+		', 
+			', http://bsmedia.business-standard.com/_media/bs/wap/images/bs_logo_amp.png', 
+			', 177', 
+			', 22', 
+		', 
+	
+ ', 
+ ', 
+ ', 
+', 
+$( document ).ready(function() {
+	var _id = 114061101114;
+	$.ajax({
+		"type"		:	"POST",
+		"url"		:	"http://bsapi.business-standard.com/request-handler/article/article-update-count.php",
+		data: { 'articleId': _id  },
+		"success"	:	function(data){
+			if(data!=undefined){
+				try{
+				 //$(_id).html(data);
+				}catch(e){}
+			}
+		}
+	});
+	return false;	
+});
+', 
+', 
+', 
+', 
+$( ".activator" ).click(function() { 
+ ids = this.id;
+ var $this = $("#"+ids);
+ var searchText = $this.html();
+ str = searchText.replace(/\s+/g, '+');
+	$.ajax({
+		type: 'GET',
+		url: '/ajax-search?type=news&q='+str+'&artId=114061101114',
+		contentType: "text/html",
+		success: function(data)
+		{	//$('#'+ids)
+			$('.overlay3').remove();
+			$('.box').remove();
+			$(data).insertAfter($("#readMoreSpanAjx"));
+		},
+		error: function(e)
+		{
+		   alert(e.message);
+		}
+	});
+});
+',  ', 
+	    ', 
+
+	    ', 
+	    ', 
+	    ', 
+#moreOnMarkets{
+	display: block !important;
+}
+', 
+', 
+    ', 
+    	', 
+    		', MORE ON MARKETS:', 
+    		', 
+    		',   
+    			', 
+    				', Quick Links ',  
+    				', 						
+						', Stock Market Live', 
+                        ', Portfolio ', 
+                        ', Commodity Market', 
+                        ', Upcoming IPO', 
+                        ', Personal Finance', 
+                       					
+    				', 
+    				', 						
+						', Stock Market News', 
+    					', Derivatives', 
+    					', Mutual Funds', 
+    					', Gold Price', 
+    					', Sensex', 
+    				', 
+    			', 
+    		',  
+    		', 
+    		',  
+    			', 
+    				', Browse STOCK Companies',  
+                    ', 
+                        ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E',  
+                        ', F', 
+                        ', G', 
+                        ', H',  
+                        ', I', 
+                        ', J', 
+                        ', K', 
+                        ', L', 
+                        ', M', 
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V', 
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 1', 
+                        ', 2', 
+                        ', 3', 
+                        ', 4', 
+                        ', 5',  
+                        ', 6', 
+                        ', 7', 
+                        ', 8',  
+                        ', 9',  
+                        ', 
+    				', 
+    			', 
+    			', 
+    				', Browse Mutual Funds',  
+    				', 
+                        ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E',  
+                        ', F', 
+                        ', G', 
+                        ', H',  
+                        ', I', 
+                        ', J', 
+                        ', K', 
+                        ', L', 
+                        ', M', 
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V', 
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                        ', 
+    				',   
+    			', 
+    			',  
+    		',      
+    		',   
+    		',  
+    	', 
+    	', 
+        	',  
+        		', 
+        			', Index Stocks', 
+        			', 
+        				',  ACC ', 
+        				',  Adani Ports ', 
+        				',  Ambuja Cem. ', 
+        				',  Asian Paints ', 
+        				',  Aurobindo Pharma ', 
+        				',  Axis Bank ', 
+        				',  B H E L ', 
+        				',  B P C L ', 
+        				',  Bajaj Auto ', 
+        				',  Bank of Baroda ', 
+        				',  Bharti Airtel ', 
+        				',  Bharti Infra. ', 
+        				',  Bosch ', 
+        				',  Cipla ', 
+        				',  Coal India ', 
+        				', u" Dr Reddy's Labs ", 
+        				',  Eicher Motors ', 
+        				',  GAIL (India) ', 
+        				',  Grasim Inds ', 
+        				',  H D F C ', 
+        				',  HCL Technologies ', 
+        				',  HDFC Bank ', 
+        				',  Hero Motocorp ', 
+        				',  Hind. Unilever ', 
+        				',  Hindalco Inds. ', 
+        				',  ICICI Bank ', 
+        				',  Idea Cellular ', 
+        				',  IndusInd Bank ', 
+        				',  Infosys ', 
+        				',  ITC ', 
+        				',  Kotak Mah. Bank ', 
+        				',  Larsen & Toubro ', 
+        				',  Lupin ', 
+        				',  M & M ', 
+        				',  Maruri Suzuki ', 
+        				',  NTPC ', 
+        				',  O N G C ', 
+        				',  Power Grid Corpn ', 
+        				',  Reliance Inds. ', 
+        				',  St Bk of India ', 
+        				',  Sun Pharma. Inds. ', 
+        				',  Tata Motors ', 
+        				',  Tata Motors-DVR ', 
+        				',  Tata Power Co. ', 
+        				',  Tata Steel ', 
+        				',  TCS ', 
+        				',  Tech Mahindra ', 
+        				',  UltraTech Cement Ltd ', 
+        				',  Wipro ', 
+        				',  Yes Bank ', 
+        				',  Zee Entertainment ', 
+        				', 
+        			', 
+        		', 
+        		',  
+        	',      
+        	',   
+        	',  
+        ', 
+    ', 
+', 
+
+', 
+', 
+  ', 
+     ', 
+     ', 
+     ', Copyrights © 2017 Business Standard Private Ltd. All rights reserved.', 
+     ', 
+  ', 
+
+  ', 
+     ', 
+          ', 
+             ', 
+                ', 
+               ', From BS Website', 
+               ', Home', 
+               ', Companies', 
+               ', Markets', 
+               ', Opinion', 
+               ', Politics', 
+               ', Technology', 
+               ', Specials', 
+               ', Personal Finance', 
+               ', Budget', 
+               ', Latest News', 
+               ', u"Today's Paper", 
+              ',  
+               ', RBI Policy', 
+               ', General News', 
+               ', General Videos', 
+               ', General Photo Gallery', 
+               ', Events', 
+               ', Authors', 
+              ', 
+              ', 
+              ', 
+                 ', 
+               ', About us', 
+               ', About Us', 
+               ', Code of Conduct', 
+               ', Terms & Conditions', 
+               ', Cookie Policy', 
+               ', Disclaimer', 
+               ', Investor Communication', 
+              ', 
+
+              ', 
+
+                 ', 
+               ', Support & Contact', 
+               ', Partner with Us', 
+               ', Careers', 
+               ', Advertise with Us', 
+               ', Contact Us', 
+               ', Feedback', 
+               ', Browser Support', 
+               ', Sitemap', 
+               ', 
+              ', 
+
+              ', 
+                 ', 
+               ', Subscribe', 
+               ', E-Paper', 
+               ', BS Magazines', 
+               ', Portfolio Tracker', 
+              ', 
+
+              ', 
+
+                 ', 
+               ', BS Products', 
+			   ', Smart Investor', 
+               ', BS Hindi', 
+               ', BS Motoring', 
+               ', BS Books', 
+               ', B2B Connect', 
+               ', iPhone', 
+               ', iPad', 
+               ', android', 
+               ', wap', 
+               ', BS Banking Round Table 2016', 
+               ', BS Fund Cafe 2016', 
+              ', 
+              ', 
+          ', 
+          ', 
+     ', 
+
+     ', 
+	 ', 
+                            ', Budget 2017', 
+                            ', Budget 2017', 
+                            ', Budget News', 
+                            ', Budget', 
+						', 
+						', 
+     	', 
+      		', Connect with BS', 
+        	', 
+            	', Facebook',   
+                ', Google+',  
+                ', Linkedin',  
+                ', Twitter', 
+                ', Youtube', 
+                ', RSS',   
+                ',   
+            ', 
+     	', 
+     ', 
+  ', 
+  ', 
+  ', 
+', 
+', 
+', 
+    .notification_error_div {
+        position: fixed;
+        z-index:100;
+        bottom: 0;
+        right: 0;
+        width: 350px;
+        background-color: #FFFFF0;
+        border: 1px solid black;
+
+        padding: 15px;
+        margin: 10px;
+
+        text-align: center;
+        font-size : 14px;
+        font-family: Tahoma,Arial,Georgia;
+    }
+', 
+', 
+', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="31"; var zflag_sid="0"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="93"; 
+', 
+', 
+', 
+', 
+    .notification_error_div {
+        position: fixed;
+        z-index:100;
+        bottom: 0;
+        right: 0;
+        width: 350px;
+        background-color: #FFFFF0;
+        border: 1px solid black;
+
+        padding: 15px;
+        margin: 10px;
+
+        text-align: center;
+        font-size : 14px;
+        font-family: Tahoma,Arial,Georgia;
+    }
+
+/** Free User Notification Popup **/
+.subscription-notification-popup{color: #000;padding: 0px !important;margin: 0px !important;}
+.free_user_notification_popup{padding: 10px;display: none;background: #fff;}
+.btn-maroon{padding: 5px 10px;margin: 0;border: 0;background: #ac2122;color: #fff;font-size: 16px;cursor: pointer;}
+.fis_user_notification_popup{padding: 10px;display: none;background: #fff;}
+', 
+', 
+    ', 
+       ', 
+          ', 
+             ', 
+                ', 
+                   ', 
+                   ', Upgrade To Premium Services', 
+                ', 
+             ', 
+             ', 
+                ', 
+                   ', 
+                ', 
+             ', 
+          ', 
+          ', 
+             ', Welcome ', User', 
+             ', 
+          ', 
+          ',  Business Standard is happy to inform you of the launch of "Business Standard Premium Services"', 
+          ', As a premium subscriber you get an across device unfettered access to a range of services which include:', 
+          ', 
+             ', Access Exclusive content - articles, features & opinion pieces', 
+             ', Weekly Industry/Genre specific newsletters - Choose multiple industries/genres', 
+             ', Access to 17 plus years of content archives', 
+             ', Set Stock price alerts for your portfolio and watch list and get them delivered to your e-mail box', 
+             ', End of day news alerts on 5 companies (via email)', 
+             ', NEW', : Get seamless access to WSJ.com at a great price. No additional sign-up required.', 
+          ', 
+          ', 
+             ', 
+                ',  ', 
+             ', 
+             ', 
+                ', 
+             ', 
+          ', 
+          ', 
+       ', 
+    ', 
+', 
+
+', 
+', 
+   ', 
+      ', 
+         ', 
+            ', 
+               ', 
+               ', Premium Services ', 
+               ', In Partnership with ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ',  ', 
+         ', 
+         ', 
+            ', 
+            ', Dear ', Guest', ,', 
+            ', 
+         ', 
+         ', 
+            ',  ', 
+         ', 
+      ', 
+      ', Welcome to the premium services of Business Standard brought to you courtesy FIS.', 
+         Kindly visit the ', Manage my subscription page',  to discover the benefits of this programme.', 
+         ', 
+         Enjoy Reading!', 
+         Team Business Standard
+      ', 
+      ', 
+         ', 
+            ',  ', 
+         ', 
+      ', 
+      ', 
+   ', 
+', 
+', 
+', 
+function getCookie(name) {		
+    var value = "; " + document.cookie;		
+    var parts = value.split("; " + name + "=");		
+    if (parts.length == 2)		
+        return parts.pop().split(";").shift();		
+}
+$('#head-suggest_ftr').focus(function(){
+	  $(this).attr('placeholder','');
+	});
+	$('#head-suggest_ftr').focusout(function(){
+	  $(this).attr('placeholder','Enter the first three letters of the company');
+});
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+function setCookieNoti(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+$(document).ready(function() {
+	if($('.breadcrum').find('a').size() != null && $('.breadcrum').find('a').size() == 3){
+		var lc = 1;
+		$('.breadcrum').find('a').each(function() {
+			if(lc == 2){ $(this).attr('class','bact'); }
+		    lc++;
+		});
+	}
+});
+//-->
+', 
+
+', 
+', 
+function setCookieNoti(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+
+$(document).ready(function(){//free-username-popup
+	var usrLoginCookie = getLoginCookie('_userLoggedIn');
+	if(isUserBanner=='fis'){
+		var usrObj = JSON.parse(decodeURIComponent(usrLoginCookie));
+    	if(usrObj.ufname != ''){
+        	var uId = usrObj.uId;
+        	var uName = usrObj.ufname;
+			var ckVal = getLoginCookie('_chkFisUserNotificationPopup');
+			var isCkSet = ckVal.indexOf(uId);
+			if(ckVal == '' || ckVal == 'undefined'){
+				//cookie is not set
+				$("#fis-username-popup").html(uName);
+				$.fancybox({
+					href		:	"#fis_user_notification_popup",
+				    maxWidth	:	600,
+					maxHeight	:	500,
+					fitToView	:	false,
+					autoSize	:	false,
+					closeClick	:	false,
+					openEffect	:	'none',
+					closeEffect	:	'none'
+				});
+		    	setCookieNoti("_chkFisUserNotificationPopup",uId,130);
+			}else{
+				if(isCkSet == -1){
+					//cookie for current user is not set
+					$("#fis-username-popup").html(uName);
+					$.fancybox({
+						href		:	"#fis_user_notification_popup",
+					    maxWidth	:	600,
+						maxHeight	:	500,
+						fitToView	:	false,
+						autoSize	:	false,
+						closeClick	:	false,
+						openEffect	:	'none',
+						closeEffect	:	'none'
+					});
+			    	ckVal += ","+uId;
+			    	setCookieNoti("_chkFisUserNotificationPopup",ckVal,130);
+				}else{
+					//cookie is already set, no need to show popup
+				}
+			}
+    	}
+	}
+  	if(usrLoginCookie != '' && false){
+    	var usrObj = JSON.parse(decodeURIComponent(usrLoginCookie));
+    	if(usrObj.s == 'f'){
+        	var uId = usrObj.uId;
+        	var uName = usrObj.ufname;
+			var ckVal = getLoginCookie('_chkFreeUserNotificationPopup');
+			var isCkSet = ckVal.indexOf(uId);
+			if(ckVal == '' || ckVal == 'undefined'){
+				//cookie is not set
+				$("#free-username-popup").html(uName);
+				$.fancybox({
+					href		:	"#free_user_notification_popup",
+				    maxWidth	:	600,
+					maxHeight	:	500,
+					fitToView	:	false,
+					autoSize	:	false,
+					closeClick	:	false,
+					openEffect	:	'none',
+					closeEffect	:	'none'
+				});
+		    	setCookieNoti("_chkFreeUserNotificationPopup",uId,30);
+			}else{
+				if(isCkSet == -1){
+					//cookie for current user is not set
+					$("#free-username-popup").html(uName);
+					$.fancybox({
+						href		:	"#free_user_notification_popup",
+					    maxWidth	:	600,
+						maxHeight	:	500,
+						fitToView	:	false,
+						autoSize	:	false,
+						closeClick	:	false,
+						openEffect	:	'none',
+						closeEffect	:	'none'
+					});
+			    	ckVal += ","+uId;
+			    	setCookieNoti("_chkFreeUserNotificationPopup",ckVal,30);
+				}else{
+					//cookie is already set, no need to show popup
+				}
+			}
+    	}
+  	}
+});
+
+$(document).ready(function(){
+	var loginCookie = getCookie('_userLoggedIn');
+	if( loginCookie == '' || loginCookie == 'undefined' ){
+		//Do Nothing
+	}else{
+		var loginParamObj = JSON.parse(decodeURIComponent(loginCookie));
+		if( loginParamObj.uId > 0 ){
+			var pwCookie = getCookie('_pw');
+			if( pwCookie == 't' ){
+				//Do Nothing
+			}else{
+				var subExpCookie = getCookie('_sub_exp');
+				if( (subExpCookie > 0) ){
+					var currentTimestamp = Math.floor(Date.now() / 1000);
+					
+					//Expiry Notification Logic
+					var neverShowNotificaitonCookie = getCookie('_nsn');
+					if(neverShowNotificaitonCookie == '' || neverShowNotificaitonCookie == 'undefined' || neverShowNotificaitonCookie == null){
+						var lastReminderCookie = getCookie('_ler'+loginParamObj.uId);//last expiry reminder
+						if( (lastReminderCookie == "") || (lastReminderCookie == "undefined") || (lastReminderCookie == null) ){
+							$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+						}else{
+							if(lastReminderCookie < currentTimestamp){
+								$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+							}
+						}
+					}else{
+						var isCkSet = neverShowNotificaitonCookie.indexOf(loginParamObj.uId);
+						if(isCkSet == -1){
+							//cookie for current user is not set
+							var lastReminderCookie = getCookie('_ler'+loginParamObj.uId);//last expiry reminder
+							if( (lastReminderCookie == "") || (lastReminderCookie == "undefined") || (lastReminderCookie == null) ){
+								$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+							}else{
+								if(lastReminderCookie < currentTimestamp){
+									$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+});
+
+function remindNotificationLater(userId){
+	var currentTimestamp = Math.floor(Date.now() / 1000);
+	var tempTime = new Date(currentTimestamp*1000);
+	var lastExpNotification = Math.floor(tempTime.setMinutes(tempTime.getMinutes() + 60) / 1000);//+60 mins
+	//Set Cookie
+    var d = new Date();
+    d.setTime(d.getTime() + (60*60*1000));//60 min
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "_ler"+userId+"=" + lastExpNotification + "; " + expires + "; path=/";
+	$('#endSubscriptionNotification').remove();
+}
+
+function closeNotificationForever(userId){
+	var neverShowNotificaitonCookie = getCookie('_nsn');
+	neverShowNotificaitonCookie += ","+userId;
+	//Set Cookie
+    var d = new Date();
+    d.setTime(d.getTime() + (30*24*60*60*1000));//30 days
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "_nsn=" + neverShowNotificaitonCookie + "; " + expires + "; path=/";
+	
+	$('#endSubscriptionNotification').remove();
+}
+', 
+
+', 
+$.browser.chrome = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()); 
+if($.browser.chrome){
+	setTimeout(showChromeNotification,1000);
+}
+', 	    ', 
+      ', 
+         ', 
+', 
+
+    	', 
+
+function show(target) {
+    document.getElementById(target).style.display = 'block';
+}
+
+function hide(target) {
+   document.getElementById(target).style.display = 'none';
+    notifyCookie =  decodeURIComponent(getCookie('_notifyCookie'));
+    if(notifyCookie !=null && notifyCookie != 'undefined'){
+        var notifyValues = JSON.parse(notifyCookie);
+	if(notifyValues !=null && notifyValues != 'undefined' ){
+	  notifyValues.nty="Y";
+	  notifyValues.cnty="Y";
+	  notifyValues.rTime= (new Date().getTime()+ 24*60*60*1000) /1000|0;
+	  notifyValues=JSON.stringify(notifyValues);
+	  notifyValues = encodeURIComponent(notifyValues);
+	  setCookieColumn('_notifyCookie',notifyValues,2);
+	}
+   }
+}
+function setCookieColumn(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+', 
+
+
+
+
+
+
+
+', 
+var userCookie = decodeURIComponent(getCookie('_userLoggedIn'));
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-3333643-1', 'auto');
+if(userCookie !=null && userCookie!= 'undefined'){
+	 var userInfo = JSON.parse(userCookie);
+	 ga('set', '&uid', userInfo.uId);
+}
+if(isBannerActive == false){
+	if(userCookie !=null && userCookie!= 'undefined'){
+		var userInfo = JSON.parse(userCookie);
+		if(userInfo !=null && userInfo!= 'undefined' && userInfo.s != 'undefined' && userInfo.s == 't'){
+			ga('set', 'dimension1', 'Paid adblocker!!!');
+		}else{
+			ga('set', 'dimension1', 'Free adblocker!!!');
+		}
+	}else{
+		ga('set', 'dimension1', 'Anonymous adblocker!!!');
+	}
+}
+
+
+if(idPaidArticle == true){
+	   var url = window.location.href; var articleUrl = " ";
+	       if(url.indexOf('?') != -1)
+	         articleUrl = url.split('?')[0] ;
+	       else
+	         articleUrl = url;
+	    if(articleUrl !=null && articleUrl!= 'undefined'){
+	   
+	    	ga('set', 'dimension2', articleUrl);
+	    }
+}
+
+
+ga('send', 'pageview');
+', 
+', 
+', 
+', var _comscore=_comscore||[];_comscore.push({c1:"2",c2:"8021726"});(function(){var b=document.createElement("script"),a=document.getElementsByTagName("script")[0];b.async=true;b.src=(document.location.protocol=="https:"?"https://sb":"http://b")+".scorecardresearch.com/beacon.js";a.parentNode.insertBefore(b,a)})();', 
+', 
+', 
+', 
+', 
+var AKSB=AKSB||{};AKSB.q=[];AKSB.mark=function(b,a){AKSB.q.push(["mark",b,a||(new Date).getTime()])};AKSB.measure=function(b,a,c){AKSB.q.push(["measure",b,a,c||(new Date).getTime()])};AKSB.done=function(b){AKSB.q.push(["done",b])};AKSB.mark("firstbyte",(new Date).getTime());
+AKSB.prof={custid:"356860",beaconrate:20};
+(function(b){var a=document.createElement("iframe");a.src="javascript:false";(a.frameElement||a).style.cssText="width: 0; height: 0; border: 0; display: none";var c=document.getElementsByTagName("script"),c=c[c.length-1];c.parentNode.insertBefore(a,c);a=a.contentWindow.document;a.open().write("<body onload=\"var js = document.createElement('script');js.id = 'aksb-ifr';js.src = '"+b+"';document.body.appendChild(js);\">");a.close()})(("https:"===document.location.protocol?"https:":"http:")+"//ds-aksb-a.akamaihd.net/356860/aksb-a/aksb.min.js");
+', 
+', 
+', 
+var addthis_config = {"data_track_addressbar":false, "services_exclude":'print, email','recommended' : {}, 'thankyo : false};
+addthis_config.pubid = 'bsorg08';
+var addthisScript = document.createElement('script');
+addthisScript.setAttribute('src', '//s7.addthis.com/js/300/addthis_widget.js#domready=1');
+document.body.appendChild(addthisScript);
+', 
+', 
+#at4-thankyou{display:none !important;}
+', 
+', u"
+var subs_pw = getCookie('_pw');
+if( subs_pw != null && subs_pw == 't'){
+	$('.paid_article_key').hide();
+}else{
+	$('.paid_article_key').show();
+}
+", 
+'][
+', 
+   ', 
+   ', 
+   ', 
+	var urlArray = ["/article/", "/content/", "/budget/"];
+	var blockThisUrl = false;
+	for (checkedUrl = 0; checkedUrl < urlArray.length; checkedUrl++) { 
+		if(document.location.pathname.indexOf(urlArray[checkedUrl]) !== -1){
+			blockThisUrl = true;
+		}
+	}
+	var subs_pw = getCookie('_pw');
+	if((typeof adsLoaded != 'undefined')  == false && (subs_pw == null || subs_pw != 't') && blockThisUrl){
+		console.log("adBlocker");
+		$("#main-warp").hide();
+		$("body").load("/adBlocker.html");
+		$("head").html("");
+		$("body").addClass("mainbg");
+	}
+	', 
+      ', 
+	        ', 
+		', 
+		', 
+    ', 
+              ', 
+        ', 
+          ', 
+          	', 
+			', Home', Markets', Companies', Opinion', Politics', Technology', Specials', PF', Portfolio', My Page', Budget 2017', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', North', East', West', South', Election', News', Mobiles & Tablets', Apps', People', Computers', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017',            	', 
+
+          ', 
+          ', 
+            ', BS APPS
+            ', 
+           ', 
+                ', iPad', 
+                ', iPhone', 
+                ', Android', 
+                ', Wap', 
+              ', 
+            ', 
+
+            ', 
+           ', BS PRODUCTS
+           ', 
+           ', 
+				', Smart Investor', 
+				', BS Hindi', 
+			    ', BS Motoring', 
+			    ', BS Books', 		    
+			    ', u"Today's Paper", 			    
+			    ', 
+			    ', Economy & Industry', 
+              ', 
+            ', 
+
+            ', 
+           ', BS SPECIALS
+           ', 
+           ', 
+                ', B2B Connect', 
+                ', Power & Energy', 
+                ', SME', 
+              ', 
+            ', 
+			
+		   ', 
+			', BS E-Paper', 
+           ', 
+
+          ', 
+           ', 
+        ', 
+
+          ', 
+          ', 
+        		.displayNone{display: none !important;}
+          ', 
+          ', 
+          				', 
+			', Hi', , ', 
+			', 
+				', 
+	                	                ', Change Password', 
+	                            			', Subscribe', 
+			 			                ',  Sign out', 
+              ', 
+			 ', 
+	                ', Change Password',             		
+					', Manage My Account', 
+					', 
+	                ',  Sign out', 
+              ', 
+			', 
+			            ', SIGN IN', 
+            ', Subscribe', 
+			          ', 
+          ', 
+          	function getLoginCookie(cname) {
+	      	    var name = cname + "=";
+	      	    var ca = document.cookie.split(';');
+	      	    for(var i=0; i<ca.length; i++) {
+	      	        var c = ca[i];
+	      	        while (c.charAt(0)==' ') c = c.substring(1);
+	      	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+	      	    }
+	      	    return "";
+      		}
+      		var usrLoginCookie = getLoginCookie('_userLoggedIn');
+          	if(usrLoginCookie == ''){
+				$(".userNotLoggedIn").removeClass('displayNone');
+            }else{
+            	$(".userLoggedIn").removeClass('displayNone');
+            	var usrObj = decodeURIComponent(usrLoginCookie);			
+				usrObj = JSON.parse(usrObj);				
+				usrObj.ufname = usrObj.ufname.replace(/\+/g, ' ');
+            	$(".ucnameSpan").html(decodeURIComponent(usrObj.ufname));	
+            	if(usrObj.s == 't'){
+                	$(".usrSubcribe a").html('Manage My Account');
+					$(".usrSubcribe a").attr("href", "/subscription-cart/manage");					
+                }else{                	
+					var subExp = getLoginCookie('_sub_exp');					
+                    if(subExp!=''){                    	
+						var timestamp = Math.floor(Date.now() / 1000);						
+						if((timestamp.toString().length == subExp.length) && (subExp<timestamp) ){
+							$(".manageMyAccount").show();
+							$(".usrSubcribe a").html('Subscribe');
+						}else{
+							$(".usrSubcribe a").html('Manage My Account');
+							$(".usrSubcribe a").attr("href", "/subscription-cart/manage");		
+						}
+                    }else{
+                		$(".usrSubcribe a").html('Subscribe');						
+						$(".manageMyAccount").show();
+                    }
+                }
+
+                if(usrObj.r == "f"){
+                	$(".siteSignout a").click(function(){
+                		FB.logout();
+                    });
+                }else if(usrObj.r == "t"){
+                	$(".siteSignout a").click(function(){
+                		twttr.anywhere.signOut();
+                    });
+                }
+            }
+          ', 
+          ', 
+            ', 
+                   ', 
+					',  ', 
+					',  ', 
+                    ',  ', 
+					',  ', 
+					',  ', 
+					',  ', 
+					',  ', 
+            		                   ', 
+                   ', 
+               ', 
+          ', 
+           ', 
+        ', 
+         ', 
+        ', 
+         ', 
+   ', 
+        ', 
+		', 
+						', 
+			', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/Web_chat_175x60_left', [175, 60], 'div-gpt-ad-1480487618894-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1480487618894-0'); });
+", 
+', 			', 
+					', 
+		', 
+						', 
+			', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/webchat_earpanel_175x60', [175, 60], 'div-gpt-ad-1479738033184-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479738033184-0'); });
+", 
+', 			', 
+					', 
+		', 
+        ', 
+            ', 
+            ', 
+                    ', 
+        ', 
+
+		', 
+		', 
+    ', 
+
+
+
+   ', 
+    ', 
+        ', 
+        ', 
+      ', 
+      ', 
+		.second-menu-panel{z-index:9999999 !important;}
+		.top-menu{z-index:10000000 !important;}
+      	.fancybox-overlay,#fancybox-overlay{z-index:10000001 !important;}
+		#overlay{z-index:10000002 !important;}
+		.popup,#fancybox-wrap{z-index:10000003 !important;}
+		#fancybox-content{min-height: 380px;min-width:600px;}
+		#fancybox-wrap{min-width: 640px;}
+		#menu li.drop{padding: 8px 10px 8px 2px;}
+      ', 
+   
+   ', 
+   ', 
+      ', 
+      ',  ', Company',  ',  Science & Technology',  ',  ',       ', 
+      ', 
+       ', 
+      ', 
+          ', 
+          ', 
+          ', 
+            ', 
+               ', News', 
+				', Stock Quote', 
+				', Authors', 
+            ', 
+            ', 
+             ', 
+
+          ', 
+          ', 
+          ', 
+          ', 
+
+          ', 
+	         
+	          $("#select_type").change(function(){
+	          	document.cookie="selectType=" + $(this).val();
+           	  });
+	           getCookieAndSetDefault("selectType");
+	         
+	          
+	          function getCookieAndSetDefault(c_name){
+					var c_value = document.cookie;console.log(c_value);
+					var c_start = c_value.indexOf(" " + c_name + "=");
+					if (c_start == -1){
+						c_start = c_value.indexOf(c_name + "=");
+					}
+					if (c_start == -1){
+						c_value = null;
+					}
+					else{
+						c_start = c_value.indexOf("=", c_start) + 1;
+						var c_end = c_value.indexOf(";", c_start);
+					if (c_end == -1){
+						c_end = c_value.length;
+					}
+					c_value = unescape(c_value.substring(c_start,c_end));
+					}
+
+					if(c_value != 'null' && c_value != null){
+						$("#select_type").val(c_value);
+					}
+	         }
+	          
+          ', 
+		  
+    ', 
+	var companyJsonFile = "";
+	
+	function getCompaniesJson() {
+		var o = $("#head-suggest");
+		objHiddenValField = "";
+		if (objHiddenValField == undefined || objHiddenValField == "") {
+			objHiddenValField = $("#company_code");
+		}
+
+		$.ajax({
+			url : "/api-handler/article/get-company-json",
+			cache : true,
+			success : function(data) {
+				var jsonObj = eval(data);
+				companyFileLoaded = true;
+				companyJsonFile = jsonObj;
+
+				
+				$(o).autocomplete({
+					source: function (request, response) {
+				            var term = $.ui.autocomplete.escapeRegex(request.term)
+				                , startsWithMatcher = new RegExp("^"+ term, "i")
+				                , startsWith = $.grep(companyJsonFile, function(value) {
+				                    return (startsWithMatcher.test(value.value) || (startsWithMatcher.test(value.compSym)));
+				                })
+				                
+				                , containsMatcher = new RegExp(term, "i")
+				                , contains = $.grep(companyJsonFile, function (value) {
+				                    return $.inArray(value, startsWith) < 0 &&
+				                        (containsMatcher.test(value.value) || (containsMatcher.test(value.compSym)));
+				                });
+				            response(startsWith.concat(contains));
+				        },
+					minLength : 3,
+					autoFocus : true,
+					disabled : false,
+					select : function(event, ui) {
+						$(objHiddenValField).val(ui.item.compId);
+						$(o).val(ui.item.compFormatted);
+						$objForm = $(o).closest("form");
+						if ($objForm.attr("name") != "frm_equity") {
+							$objForm.submit();
+						}
+					},
+					open : function() {
+						$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+					},
+					close : function() {
+						$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+					}
+				}).data("autocomplete")._renderItem = function(ul, item) {
+					var result = String(item.label).replace(new RegExp(this.term, "gi"),"<b>$&</b>");
+					return $( "<li></li>" )
+	                      .data( "item.autocomplete", item )
+	                      .append($( "<a></a>" ).html(result))
+	                      .appendTo( ul );
+
+				};
+
+			}
+		});
+	}
+	', 
+
+
+		', 
+		$("#select_type").change(function(){
+			var itemVal = $(this).val();
+			if(itemVal == 'news'){
+				$("#radio_news").attr("checked","checked");
+				$("#radio_news").trigger("click");
+			}else if(itemVal == 'stocks'){
+				$("#radio_stock").attr("checked","checked");
+				$("#radio_stock").trigger("click");
+			}else if(itemVal == 'authors'){
+				$("#radio_authors").attr("checked","checked");
+				$("#radio_authors").trigger("click");
+			}
+		});
+		$(document).ready(function(){
+			var itemVal = $('#select_type').val();
+			if(itemVal == 'news'){
+				$("#radio_news").attr("checked","checked");
+				$("#radio_news").trigger("click");
+			}else if(itemVal == 'stocks'){
+				$("#radio_stock").attr("checked","checked");
+				$("#radio_stock").trigger("click");
+			}else if(itemVal == 'authors'){
+				$("#radio_authors").attr("checked","checked");
+				$("#radio_authors").trigger("click");
+			}
+		});
+		$("#search_btn").click(function(){
+			$("#search_box_text").val($("#head-suggest").val());
+			$("#frm_search").submit();
+		});
+
+		$("#head-suggest").keypress(function(e){
+			if(e.charCode == 13){
+				$("#frm_search").submit();
+			}
+		});
+		', 
+
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		',  News', 
+		',  
+		', 
+		',  Stock Quote', 
+		',  
+		', 
+		',  Authors', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+
+      ', 
+      ', 
+
+      ', 
+
+   ', 
+     ', 
+    ',     ', 
+    
+     ', 
+			', u"
+		<!--
+		.breadcrum{ padding:5px 0 5px 10px; margin-bottom:-5px;  font-family: 'Open Sans', sans-serif; font-weight:400; color:#888; border-bottom: 1px solid #c4c6c8;}
+		.breadcrum a{ font-size:13px;} 
+		.breadcrum a:hover{ color:#c31316; text-decoration:underline;}
+		.breadcrum a.bact{color:#c31316; text-decoration:none;}
+		.breadcrum a {text-transform: none;}
+		-->
+		", 
+		', Companies',  » ', News',  » ', News',     ', 
+    ', 
+    ', 
+', 
+	$(document).ready(function(){
+		 $(".iframe").fancybox({
+		     maxWidth	: 600,
+			 maxHeight	: 580,
+			fitToView	: false,
+			autoSize	: false,
+			closeClick	: false,
+			href		: '/core/request-handler/sign-in-content',
+			openEffect	: 'none',
+			closeEffect	: 'none'
+	
+		});
+	$('.fancybox').fancybox();
+	});
+', 
+', 
+
+', 
+//Bs New Menu 
+   	$("#newMenuNavigationSecond").html($("#newMenuNavigationSecondHide").html());
+   	$("#newMenuNavigationSecondHide").html("");
+		$('.select_sub').first().removeClass('default-disp');
+		var mid = '287';
+		var rel = $('#nav_menu_' + mid).attr('rel');
+		if (rel != undefined && rel != '') {
+			$('#nav_menu_' + rel).addClass('activelink');
+			$('#nav_menu_' + mid).addClass('activelink');
+			$('#nav_menu_' + rel).parent().find('.select_sub').addClass('default-disp');		
+			$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+		} else {
+			$('#nav_menu_' + mid).addClass('activelink');
+			if($('#nav_menu_' + mid).parent().find('.select_sub').length==0){
+				$(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+				$(".nav-outer-repeat").css("height","62px");
+			}else{
+				$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+				$(".nav-outer-repeat").css("height","62px");
+			}
+		}
+		$('.select').mouseenter(function() {
+			
+			 $( ".select" ).each(function() { 
+				 if(($(this).find('.activelink').length>0)){
+					 $(this).find('.select_sub').removeClass('default-disp');
+					 $(this).find('li').removeClass('activelink');
+				 }
+				 
+		    });
+		      if(!($(this).find('.select_sub').length>0)){
+		    	     $(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+		    	     $(".nav-outer-repeat").css("height","62px");
+			  }else{ 
+				    $(".nav-new").find('.select:first').find('.select_sub').removeClass('default-disp');
+				 	$(".nav-outer-repeat").css("height","62px");
+			  }
+	     });
+		 
+		 $('.nav-outer').mouseleave(function() {
+			 if (rel != undefined && rel != '') {
+					$('#nav_menu_' + rel).addClass('activelink');
+					$('#nav_menu_' + mid).addClass('activelink');
+					$('#nav_menu_' + rel).parent().find('.select_sub').addClass('default-disp');		
+					$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+					$(".nav-outer-repeat").css("height","62px");
+				}else{
+					if($('#nav_menu_' + mid).parent().find('.select_sub').length==0){
+						$(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+						$(".nav-outer-repeat").css("height","62px");
+					}else{
+						$(".nav-new").find('.select:first').find('.select_sub').removeClass('default-disp');
+						$('#nav_menu_' + mid).addClass('activelink');
+						$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+						$(".nav-outer-repeat").css("height","62px");
+					}
+					
+			 }
+	    }); 
+		 
+		  $('.activelink').mouseenter(function() {
+	       $('.activelink').first().addClass('nolink');
+	    }); 
+	', 
+
+
+', 
+', 		', 
+
+		', 
+	    ', 
+', u"
+ var googletag = googletag || {};
+ googletag.cmd = googletag.cmd || [];
+ (function() {
+   var gads = document.createElement('script');
+   gads.async = true;
+   gads.type = 'text/javascript';
+   var useSSL = 'https:' == document.location.protocol;
+   gads.src = (useSSL ? 'https:' : 'http:') +
+     '//www.googletagservices.com/tag/js/gpt.js';
+   var node = document.getElementsByTagName('script')[0];
+   node.parentNode.insertBefore(gads, node);
+ })();
+", 
+
+', 
+
+', 
+span.p-content{font-family: 'Open Sans',sans-serif;font-size: 15px;line-height: 24px;}
+span.p-content a{color: #2591dc; text-decoration: none;}
+.bBorder1{border-bottom:1px solid #c4c6c8!important;}
+li.size16 .bB1:last-child{border-bottom: 0px !important;}
+.colL_MktColumn1.panel-left .banner240-180 div[style="float: left;"] div[style="float: left; clear: both; font-style:italic; padding: 10px 10px 10px 0px; width:620px;"]{
+width:100% !important;
+}
+/** CSS Changes for follow Columnist **/ 
+.unlock_bg {padding: 8px 15px;height: 44px;background: #EEE none repeat scroll 0% 0%;border-width: 1px 1px 1px 4px;border-style: solid;border-color: #FFF #FFF #FFF #AC2122; box-shadow: 0px 0px 10px 0px #D6D6D6;font-family: "Open Sans",sans-serif; font-size: 16px;color: #1D1D1D;font-weight: 600;width: 640px;}
+.unlock_bg ul{margin:0px; padding:0px;}
+.unlock_bg ul li{list-style-type:none; float:left;}
+.unlock_bg .unlock{padding:3px 0px 0px 10px; vertical-align:middle;}
+.unlock_bg .unlock a{text-decoration:none; color:#1d1d1d;}
+.unlock_bg .circle {width: 22px;height: 22px;background-color:#ac2122;-moz-border-radius: 70px;-webkit-border-radius: 70px;border-radius: 70px;text-align:center; color:#fff;margin-left:45px; margin-top:3px;}
+.unlock_bg .article{padding:3px 0px 0px 10px; vertical-align:middle; color:#017e22;}
+.unlock_bg .article a{text-decoration:none; color:#017e22;}
+.columnist{ padding:6px 10px; border:0; display:block; background:#4d5557; color:#fff; font-size:14px;cursor:pointer;}
+.modal {opacity: 0;visibility: hidden;position: fixed;top: 0;right: 0;bottom: 0;left: 0;text-align: left;transition: opacity .25s ease; z-index:999; position:relative;}
+.modal__bg {position: relative;  top: 0;right: 0;bottom: 0;left: 0;cursor: pointer;}
+.modal-state {display: none;}
+.modal-state:checked + .modal {opacity: 1;visibility: visible;}
+.modal-state:checked + .modal .modal__inner {top: 0px;}
+.modal__inner {transition: top .25s ease;position: relative;top: 0px;right: 0;bottom: 0;left: 0px;width:640px;margin: auto;overflow: auto;background: #eeeeee;padding:10px 15px;height:70px;
+  border-top:1px solid #fff;border-right:1px solid #fff;border-bottom:1px solid #fff;border-left:4px solid #ac2122;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(214,214,214,1);-moz-box-shadow: 0px 0px 10px 0px rgba(214,214,214,1);
+  box-shadow: 0px 0px 10px 0px rgba(214,214,214,1);font-family: 'Open Sans', sans-serif;  font-size:15px; color:#1d1d1d; line-height:22px;
+}
+.modal__inner_left {width:70%; float:left;}
+.modal__inner_right {width:30%; float:right;}
+.modal__close {position: absolute;right: 10px;top: 20px;width: 70px;height: 24px;cursor: pointer;background-color: #AC2122; font-size:13px; font-weight:normal;border-radius:2px; text-align:center; color:#fff;}
+.modal__proceed {position: absolute;right: 90px;top: 20px;width: 70px;height: 24px;cursor: pointer;background-color: #0a6d02; font-size:13px; font-weight:normal;border-radius:2px; text-align:center; color:#fff;}
+
+
+/** MEDIA **/
+
+@media (max-width: 768px) { 
+
+.modal__inner {width: 692px;}
+.floatR{float:right!important;}
+.unlock_bg { width: 692px;}
+}
+', 
+
+', 
+
+', 
+', 
+
+
+	  						', 
+			', 
+	        	', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1474961759587-0'); });
+", 
+', 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="95"; var zflag_sid="0"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14"; 
+', 
+', 
+
+', document.write("<!--"); if(isUserBanner=="fis") document.write("-->"); ',  ', $("#id_3_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_fis-1480077568.png"); ', document.write("<!--"); if(isUserBanner=="kotak") document.write("-->"); ',  ', $("#id_4_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_kotak-1480077568.jpg"); ', document.write("<!--"); if(isUserBanner=="capgemini") document.write("-->"); ',  ', $("#id_5_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_capgemini-1480077568.jpg"); ', 	       		', 
+		
+	  	   		  		    		', Business Standard', 
+  		
+	', 
+    ', 
+		', 
+        	   
+	   ', 
+	   ', 
+	   
+        ', 
+      	', 
+      	        ', 
+			', 
+	        	', 
+	          	', 
+					  					  
+					 ', u"
+					 					 At Rs 5 lakh cr, LIC to be India's most valuable firm if listed					 ", 
+				  					   		', u"But listing insurance giant won't be easy, given the legal and procedural hassles", 
+				   	
+					', 
+					', 
+						  ', 
+							  ', 
+								  								  ', M Saraswathy',  &  ', Krishna Kant',  								  								  | 
+								  								  								  ', Mumbai',  							  ', 
+							  							  ', 
+							  ', June 12, 2014							  Last Updated at 00:31 IST', 
+							  						', 
+					  	
+
+											      ', 
+					   
+					   					   
+					', 
+					', 
+					
+					
+					', 
+					 	', 
+						', 
+							', 
+																', 
+								 	', 
+								', 
+								', 
+								 	', 
+								', 
+								', 
+									', 
+								', 
+								', 
+									', 
+								', 
+							', 
+						', 
+						', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+            ', 
+            ', email this article', 
+
+         	', 
+            	', 
+                    ', 
+                    	', Message:', 
+			            ', 
+			            ', u"Recipients' Email:", 
+			            ', 
+					        ', Type address separated by commas', 
+         			', 
+			   		', 
+			   			', Your Email:', 
+			   			', 
+			   			', Enter the characters shown in the image.', 
+			   			', 
+			   		', 
+			   		', 
+			   			', Send me a copy:
+			   			  ', 
+			            ', 
+			   		', 
+			   		', 
+				    	',  ', 
+			       		', 
+			       		', 
+			       		', 
+			       		  ', 
+			   		', 
+       	       	', 
+            ', 
+         	', 
+', 
+
+', 
+', 
+$(document).ready(function(){
+	$("#email_formarticle").validationEngine({promptPosition : "topRight:-100"});
+	$(".reload_image_captcha").click(function(){
+		var _id = this.id;
+		$.ajax({
+			"type"		:	"POST",
+			"url"		:	"/request-handler/reload-captcha",
+			"success"	:	function(data){
+				if(data!=undefined){
+					try{
+						var _res = eval(data);
+						if(_res.err!=undefined && _res.id!=undefined && _res.msg!=undefined){
+							if(_res.err=='0'){
+								var captchaId = "#captcha_id_"+_id;
+								var imgCaptchaBox = "#image_captcha_box_"+_id;
+								$(captchaId).val(_res.id);
+								$(imgCaptchaBox).html(_res.msg);
+							}else{
+								alert(_res.msg);
+							}
+						}
+					}catch(e){}
+				}
+			}
+		});
+		return false;
+	});
+	$(".at-svc-email").one("click", function(){
+		$( ".reload_image_captcha" ).trigger( "click");
+	});
+});
+', 
+', 						', 
+					', 
+					 				', 
+
+
+		       	', 
+								', 
+					', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+ 
+ ', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/640x90_ad', [640, 60], 'div-gpt-ad-1479277932687-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+ 
+
+ 
+  
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479277932687-0'); });
+", 
+', 
+
+ 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+ 
+ ', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/640x90_ad', [640, 60], 'div-gpt-ad-1479277932687-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+ 
+
+ 
+  
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479277932687-0'); });
+", 
+', 
+
+ 
+
+', 
+				
+
+        ', 
+ 				
+					', 
+  					
+				', 
+				
+  				
+  					  					   					   					
+   					', 
+					
+											
+					', 
+
+				     	  							', 
+  															       	 									', 
+	', 										 ', 
+										 	var imgWidth = $(".colL_MktColumn1 div img").first().width();
+												$(".colL_MktColumn1 div img").first().removeAttr('height width');
+												$(".colL_MktColumn1 div img").first().css({'width': 240, 'height':''});
+												
+										 ', 
+																		
+																											
+										    								', 
+		    								', 
+			    								', 
+				  																			  													      															', 
+																', ALSO READ', 
+																												          															          			', LIC debt investment cap raised to 20%', 
+																	 
+												          														          															          			', FinMin asks LIC to name board members in 50 firms', 
+																	 
+												          														          															          			', u"LIC Nomura eyes Rs 10,000 cr AUM in FY'14", 
+																	 
+												          														          															          			', LIC Nomura targets over Rs 15,000 cr AUM in Q3', 
+																	 
+												          														          															          			', u"FinMin seeks details about LIC's investment in Gitanjali Gems", 
+																	 
+												          																	', 
+												     												
+																																						  										
+																										  										
+																																					', 
+													', 
+													', 
+', 
+', 
+', 
+(adsbygoogle = window.adsbygoogle || []).push({});
+', 
+													', 
+														  										
+		  												  												  												  										', 
+	  										', 
+										', 
+															', 
+					  								
+
+	            ', 
+				    				       ', 
+				    	
+Life Insurance Corporation (LIC), the country\u2019s largest insurer, could be the most valuable Indian company at Rs 4.5-5 lakh crore if it debuts on the bourses, as bankers have suggested to the Union finance ministry.', 
+', 
+In 2012-13, the latest year for which data are available, ', LIC ', reported a revenue of Rs 3.26 lakh crore ($54.4 billion) and Rs 15.2 lakh crore ($253.9 billion) of assets under management. In 2013-14, the state-owned ', LIC ', reported first premium income of Rs 90,123.8 crore, a rise of 17.8 per cent over 2012-13 and a key metric for valuing insurance companies. Private Indian insurance companies, on the other hand, saw a four per cent drop in new premiums to Rs 29,517.4 crore in 2013-14.', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+ ', 
+  ', u"
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  (function() {
+    var gads = document.createElement('script');
+    gads.async = true;
+    gads.type = 'text/javascript';
+    var useSSL = 'https:' == document.location.protocol;
+    gads.src = (useSSL ? 'https:' : 'http:') +
+      '//www.googletagservices.com/tag/js/gpt.js';
+    var node = document.getElementsByTagName('script')[0];
+    node.parentNode.insertBefore(gads, node);
+  })();
+", 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/inpage_video_1x1', [1, 1], 'div-gpt-ad-1466593210966-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+", 
+ 
+
+ 
+  
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1466593210966-0'); });
+", 
+', 
+ 
+', 
+', 
+Asian insurance giants like the AIA Group and China Life Insurance are, respectively, valued at around 41 per cent and 20 per cent of their assets under management. In slow-growing Europe and North America, insurers typically are valued at 10 per cent of their assets under management. American International Group (AIG), the world\u2019s largest insurance company, is valued at 15 per cent of its assets under management (AUM). Taking an average of the shares of Asian insurers\u2019 valuation in their respective AUMs as a yardstick, LIC\u2019s market value is likely to be Rs 4.5-5 lakh crore.', 
+', 
+At this valuation, floating 10 per cent of the ', LIC ', stock would fetch the government around Rs 50,000 crore. Analysts said an issue of this size would squeeze the secondary market and participation by retail and foreign institutional investors would be key.', 
+', 
+\u201cLife insurance companies, like mutual funds, are valued on their assets under management, their key source of revenue and profit. ', LIC ', will get a premium for being a market leader and for its huge investment portfolio accumulated over the past six decades,\u201d said G Chokkalingam, founder of Equinomics Research Advisory.', 
+', 
+In 2012-13, LIC\u2019s investment income was Rs 1.04 lakh crore and miscellaneous income Rs 21,243 crore. It reported a surplus of Rs 1.49 lakh crore after paying all expenses, including claims, commissions, management and employee expenses and a five per cent valuation surplus to the government.', 
+', 
+Tata Consultancy Services (TCS), currently India\u2019s most valuable company, is worth around 4.31 lakh crore. It is followed by Oil and Natural Gas Corporation (Rs 3.65 lakh crore). In revenue, ', LIC ', ranks only below Indian Oil Corporation (Rs 4.93 lakh crore in 2013-14) and Reliance Industries (Rs 4.43 lakh crore).', 
+', 
+Conservatively, ', LIC ', can be valued at 3-3.5 times its first-year premium income, a typical valuation matrix for insurance companies. This pegs LIC\u2019s market valuation at Rs 3-3.5 lakh crore.', 
+', 
+\u201cLife insurance companies (can also be listed) according to their appraisal value, which is a multiple of their first-year premium income. This is likely to be high for LIC, given its low expense, high market share and nationwide network,\u201d said Ashvin Parikh, managing partner, Ashvin Parikh Advisory Services LLP.', 
+', 
+Listing LIC, though, will not be easy. It was created in 1956 through a law and follows an accounting method that is different from private insurers. Before listing, it needs to be corporatised if the suggestion by bankers to the ', finance ministry ', is accepted. The proposal is for the government to hold 51 per cent in ', LIC ', and divest the rest.', 
+', 
+Senior executives and a former chairman of LIC, however, said it would not be an easy process. A former managing director of ', LIC ', explained that when the government had earlier considered listing LIC, the trade unions had objected, citing pay and pension benefits available to government employees.', 
+', 
+', 
+	', 
+Another issue, the executives said, was the appointment of LIC\u2019s senior management team, which is currently approved by the government. That, if the insurer is listed, will have to be done after shareholder approval. \u201cThis may require an amendment in the ', LIC ', Act to allow shareholders to take a call on appointment issues, though it may still largely be decided by the government,\u201d said a former ', LIC ', chairman.', 
+', 
+Transparency and additional disclosures were what would be the major game-changer, said former ', LIC ', executives. \u201cLarge equity and debt transactions conducted on a daily basis are not disclosed, since it is not mandatorily required. Once ', LIC ', is listed, this will undergo a change and we are not sure if the staff will be comfortable with the move, since there could be fears about particular investment decisions being questioned. So, listing proposals are easier said than done,\u201d said a former ', LIC ', executive.', 
+', 
+In 2004, the All-India ', LIC ', Employees Federation had expressed concerns over a report by an accounting firm that proposed corporatisation of ', LIC ', and a possible listing. Some provisions also related to withdrawal of government guarantees on ', LIC ', policies. The Malhotra committee report had in 1994 proposed a similar concept for professionalising the insurance sector.', 
+', 
+According to the ', LIC ', Act, there is a sovereign guarantee on its policies. The Act says the sum assured by all policies issued by LIC, including any bonuses declared, will be guaranteed as to payment in cash by the central government. Hence, former ', LIC ', executives said, though the government might continue to hold 51 per cent in LIC, there was the question of whether the guarantee would continue. One way out could be retaining the sovereign guarantee on policies already issued and discontinuing it for new policies.', 
+', 
+If this provision has to be removed, the ', LIC ', Act has to be amended in Parliament. While there earlier were talks of amendment of the ', LIC ', Act and removal of the guarantee, a Bill was not tabled fearing a public backlash.', 
+', 
+Earlier reports by the insurance regulator and accounting firms said listing ', LIC ', would create a level playing field in the industry. But before ', LIC ', hits the market with an initial public offering , the government would be required to recapitalise the entity.				       
+				    	            ', 
+	            
+												
+            ', 
+            	            ', 
+          ', 
+                  ', 
+
+        ', 
+        ', 
+           ', 
+             ', Read More On', 
+             ', Lic',  ',  | ',  ', Fy13',  ',  | ',  ', Aum',  ',  | ',  ', Most Valuable Firm',  ',  | ',  ', Finance Ministry', 
+           ', 
+        ', 
+        ', 
+        
+        	 	
+        ', 
+			', 
+			   ', 
+			      ', 
+			         ', 
+			            ', 
+			               ', PREVIOUS STORY', 
+			            ', 
+			            ', 
+			               ', NEXT STORY', 
+			            ', 
+			            ', 
+			         ', 
+			         ',   ', 
+			         ', 
+				            ', 
+				               ', 
+				                  ', 
+				               ', 
+				               ', 
+				            ', 
+			         ', 
+			         ', 
+			      ', 
+			   ', 
+			', 
+       ', 
+
+
+', 
+', 
+
+      ', 
+            	', 
+		', 
+', RECOMMENDED FOR YOU', 
+', 
+', 
+', 
+', 
+(adsbygoogle = window.adsbygoogle || []).push({});
+', 
+',        ', 
+	  
+ ', 
+         ', 
+	    ', 
+', 
+', Advertisements', 
+', 
+', 
+', New to the stock market? Take your FirstStep', Super Saver Health Insurance For Your Family', Learn the Art of Investing through Sharekhan', Open Free Demat A/c with low brokerage fee', Yet to open a Sharekhan Account?', Rs 3 lakh health coverage @ Rs 11* per day', The Power of the Hybrid Cloud', 
+', 
+', 
+     ', 
+        
+    ', 
+      ', 
+      		', 
+				', 
+				', 
+				',  
+		', 
+		      ', 
+      
+		', 
+		', 
+			', 
+			  ', 
+			  ', u"At Rs 5 lakh cr, LIC to be India's most valuable firm if listed", 
+			  ', u"But listing insurance giant won't be easy, given the legal and procedural hassles", 
+			  ', u"But listing insurance giant won't be easy, given the legal and procedural hassles", 
+			  					', 
+Life Insurance Corporation (LIC), the country\u2019s largest insurer, could be the most valuable Indian company at Rs 4.5-5 lakh crore if it debuts on the bourses, as bankers have suggested to the Union finance ministry.', 
+', 
+In 2012-13, the latest year for which data are available, ', LIC ', reported a revenue of Rs 3.26 lakh crore ($54.4 billion) and Rs 15.2 lakh crore ($253.9 billion) of assets under management. In 2013-14, the state-owned ', LIC ', reported first premium income of Rs 90,123.8 crore, a rise of 17.8 per cent over 2012-13 and a key metric for valuing insurance companies. Private Indian insurance companies, on the other hand, saw a four per cent drop in new premiums to Rs 29,517.4 crore in 2013-14.', 
+', 
+Asian insurance giants like the AIA Group and China Life Insurance are, respectively, valued at around 41 per cent and 20 per cent of their assets under management. In slow-growing Europe and North America, insurers typically are valued at 10 per cent of their assets under management. American International Group (AIG), the world\u2019s largest insurance company, is valued at 15 per cent of its assets under management (AUM). Taking an average of the shares of Asian insurers\u2019 valuation in their respective AUMs as a yardstick, LIC\u2019s market value is likely to be Rs 4.5-5 lakh crore.', 
+', 
+At this valuation, floating 10 per cent of the ', LIC ', stock would fetch the government around Rs 50,000 crore. Analysts said an issue of this size would squeeze the secondary market and participation by retail and foreign institutional investors would be key.', 
+', 
+\u201cLife insurance companies, like mutual funds, are valued on their assets under management, their key source of revenue and profit. ', LIC ', will get a premium for being a market leader and for its huge investment portfolio accumulated over the past six decades,\u201d said G Chokkalingam, founder of Equinomics Research Advisory.', 
+', 
+In 2012-13, LIC\u2019s investment income was Rs 1.04 lakh crore and miscellaneous income Rs 21,243 crore. It reported a surplus of Rs 1.49 lakh crore after paying all expenses, including claims, commissions, management and employee expenses and a five per cent valuation surplus to the government.', 
+', 
+Tata Consultancy Services (TCS), currently India\u2019s most valuable company, is worth around 4.31 lakh crore. It is followed by Oil and Natural Gas Corporation (Rs 3.65 lakh crore). In revenue, ', LIC ', ranks only below Indian Oil Corporation (Rs 4.93 lakh crore in 2013-14) and Reliance Industries (Rs 4.43 lakh crore).', 
+', 
+Conservatively, ', LIC ', can be valued at 3-3.5 times its first-year premium income, a typical valuation matrix for insurance companies. This pegs LIC\u2019s market valuation at Rs 3-3.5 lakh crore.', 
+', 
+\u201cLife insurance companies (can also be listed) according to their appraisal value, which is a multiple of their first-year premium income. This is likely to be high for LIC, given its low expense, high market share and nationwide network,\u201d said Ashvin Parikh, managing partner, Ashvin Parikh Advisory Services LLP.', 
+', 
+Listing LIC, though, will not be easy. It was created in 1956 through a law and follows an accounting method that is different from private insurers. Before listing, it needs to be corporatised if the suggestion by bankers to the ', finance ministry ', is accepted. The proposal is for the government to hold 51 per cent in ', LIC ', and divest the rest.', 
+', 
+Senior executives and a former chairman of LIC, however, said it would not be an easy process. A former managing director of ', LIC ', explained that when the government had earlier considered listing LIC, the trade unions had objected, citing pay and pension benefits available to government employees.', 
+', 
+', 
+	', 
+Another issue, the executives said, was the appointment of LIC\u2019s senior management team, which is currently approved by the government. That, if the insurer is listed, will have to be done after shareholder approval. \u201cThis may require an amendment in the ', LIC ', Act to allow shareholders to take a call on appointment issues, though it may still largely be decided by the government,\u201d said a former ', LIC ', chairman.', 
+', 
+Transparency and additional disclosures were what would be the major game-changer, said former ', LIC ', executives. \u201cLarge equity and debt transactions conducted on a daily basis are not disclosed, since it is not mandatorily required. Once ', LIC ', is listed, this will undergo a change and we are not sure if the staff will be comfortable with the move, since there could be fears about particular investment decisions being questioned. So, listing proposals are easier said than done,\u201d said a former ', LIC ', executive.', 
+', 
+In 2004, the All-India ', LIC ', Employees Federation had expressed concerns over a report by an accounting firm that proposed corporatisation of ', LIC ', and a possible listing. Some provisions also related to withdrawal of government guarantees on ', LIC ', policies. The Malhotra committee report had in 1994 proposed a similar concept for professionalising the insurance sector.', 
+', 
+According to the ', LIC ', Act, there is a sovereign guarantee on its policies. The Act says the sum assured by all policies issued by LIC, including any bonuses declared, will be guaranteed as to payment in cash by the central government. Hence, former ', LIC ', executives said, though the government might continue to hold 51 per cent in LIC, there was the question of whether the guarantee would continue. One way out could be retaining the sovereign guarantee on policies already issued and discontinuing it for new policies.', 
+', 
+If this provision has to be removed, the ', LIC ', Act has to be amended in Parliament. While there earlier were talks of amendment of the ', LIC ', Act and removal of the guarantee, a Bill was not tabled fearing a public backlash.', 
+', 
+Earlier reports by the insurance regulator and accounting firms said listing ', LIC ', would create a level playing field in the industry. But before ', LIC ', hits the market with an initial public offering , the government would be required to recapitalise the entity.', 
+							  ', 
+			   ', 
+      				', M Saraswathy & Krishna Kant', 
+ 			  ', 
+			  ', 
+			     ', Business Standard', 
+			     ', 
+			       ', http://bsmedia.business-standard.com/_media/bs/wap/images/bs_logo_amp.png', 
+			       ', 177', 
+			       ', 22', 
+			     ', 
+ 			 ', 
+ 			 ', 
+			 ', 
+			', 
+		', 
+		', 
+
+      ', 
+       ', 
+            ', 
+        		      		      		      		      		      		', 
+				', 
+				var cmtIframe = $("#article-comment-frame");
+				var cmtIframeOffset = cmtIframe.offset();
+				var iframeDivhgt = cmtIframeOffset.top;
+				iframeDivhgt = iframeDivhgt - 600;
+				var iframeDistanceTop = iframeDivhgt;
+				var iframeLoaded = false;
+				$(function() {
+					$(window).scroll(function() {
+						if ($(window).scrollTop() > iframeDistanceTop) {
+							if(iframeLoaded == false){
+								$("#article-comment-frame").attr("src",$("#article-comment-frame").attr("data-original"));
+								iframeLoaded = true;
+							}
+						}
+					});
+				});
+				', 
+	      		      	            ', 
+          ', 
+
+         ', 
+        ', 
+      ', 
+
+
+     	', 
+  		', 
+        ', 
+       ', 
+
+      
+      ', 
+		  		  ', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1474961759587-10'); });
+", 
+', 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="95"; var zflag_sid="0"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="30"; 
+', 
+', 
+
+', document.write("<!--"); if(isUserBanner=="fis") document.write("-->"); ',  ', $("#id_3_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_fis-1479188012.png"); ', document.write("<!--"); if(isUserBanner=="kotak") document.write("-->"); ',  ', $("#id_4_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_kotak-1479188012.jpg"); ', document.write("<!--"); if(isUserBanner=="capgemini") document.write("-->"); ',  ', $("#id_5_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_capgemini-1479188012.jpg"); ', 
+		  ', 
+		      ', 
+
+', 
+var idPaidArticle = false;
+', 
+
+
+', 
+
+$.ajax({
+    url : '/request-handler/get-latest-articles/catId/101/cache-control/1800',
+    async: true,
+    success : function(data){
+        $("#next-prev").html(data);
+        var owl = $("#next-prev");
+        if(data != ''){
+        	var checkIdExists = $(".more-stories-pagination.disNone div").hasClass("latestArticleId-114061101114");
+        	if(checkIdExists){
+        		$(".latestArticleId-114061101114").remove();
+            }else{
+            	$(".latestArticleLastId").remove();
+            }
+        	$(".more-stories-pagination.disNone").show();
+        }
+        owl.owlCarousel({
+        items : 2, //10 items above 1000px browser width
+        itemsDesktop : [980,2], //5 items between 1000px and 901px
+        itemsDesktopSmall : [900,2], // 3 items betweem 900px and 601px
+        itemsTablet: [360,2], //2 items between 600 and 0;
+        itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+        });
+
+        // Custom Navigation Events
+        $(".next").click(function(){
+          owl.trigger('owl.next');
+        });
+        $(".prev").click(function(){
+          owl.trigger('owl.prev');
+        });
+        $(".play").click(function(){
+          owl.trigger('owl.play',1000);
+        });
+        $(".stop").click(function(){
+          owl.trigger('owl.stop');
+        });
+    }
+});
+
+function unFollowColumnist(){
+	var author_id = '0';
+	var userInfo = decodeURIComponent(getCookie('_userLoggedIn'));
+	var isPaidUser="N";
+	if(userInfo !=null && userInfo!= 'undefined'){
+		var userType = JSON.parse(userInfo);
+		if(userType !=null && userType!= 'undefined' && userType.s != 'undefined' && userType.s == 't'){
+			isPaidUser="Y";
+		}else{
+			isPaidUser="N";
+		}
+	}
+	
+	
+	if(author_id != ''){
+		if(confirm("Are you sure to unfollow this columnist!")==true){
+	        $.ajax({
+	            url : '/request-handler/article/unmap-user-columnist',
+	            type : 'post',
+	            data: {
+					'authorId'	: author_id,'isPaidUser':isPaidUser
+				},
+	            success : function(msg){
+	                if(msg == 'success'){
+	                	location.reload(); return false();
+	                }else{
+	                    message = 'Please try again';
+	                    alert(message); return false();
+	                }
+	            }
+	        });
+		}
+    }else{
+       alert("Invalid columnist request!");
+       return false();
+    }
+
+}
+
+function followColumnist(){
+  var author_id = '0';
+  var userInfo = decodeURIComponent(getCookie('_userLoggedIn'));
+	var isPaidUser="N";
+	var isLoggedIn = "N";
+	if(userInfo !=null && userInfo!= 'undefined'){
+		var userType = JSON.parse(userInfo);
+		if(userType !=null && userType!= 'undefined' && userType.s != 'undefined' && userType.s == 't'){
+			isPaidUser="Y";
+			isLoggedIn = "Y";
+		}else if(userType !=null && userType!= 'undefined'){
+			isPaidUser="N";
+			isLoggedIn = "Y";
+		}
+	}
+
+	  if(isLoggedIn=="Y"){
+		 
+			  if(author_id != ''){
+			    $.ajax({
+			         url : '/request-handler/article/map-user-columnist',
+			         type : 'post',
+			         data: {
+							'authorId'	: author_id,'isPaidUser':isPaidUser
+					 },
+			         success : function(msg){
+			                if(msg == 'success'){
+			                	location.reload(); return false();
+			         }else{
+			        	 customLogin();
+						}
+			        }
+			       });
+			    }else{
+			       alert("Invalid columnist request!");
+			       return false();
+			    }
+		  
+	  }else if(isLoggedIn=="N"){
+		   customLogin();
+	  }
+}
+
+function unLockArticle(){
+	  var article_id = '114061101114';
+	  var userInfo = decodeURIComponent(getCookie('_userLoggedIn'));
+	  var isPaidUser="N";
+	  if(userInfo !=null && userInfo!= 'undefined'){
+			var userType = JSON.parse(userInfo);
+			if(userType !=null && userType!= 'undefined' && userType.s != 'undefined' && userType.s == 't'){
+				isPaidUser="Y";
+			}else{
+				isPaidUser="N";
+			}
+	  }
+		
+		if(article_id != ''){
+	        $.ajax({
+	            url : '/request-handler/article/unlock-article',
+	            type : 'post',
+	            data: {
+					'article_id'	: article_id,'isPaidUser':isPaidUser
+				},
+	            success : function(msg){console.log(msg);
+	                if(msg == 'success'){
+	                	location.reload(); return false();
+	                }else{
+	                    $(".iframe").trigger('click');
+	                }
+	            }
+	        });
+	    }else{
+	       alert("Invalid columnist request!");
+	       return false();
+	    }
+
+}
+
+function customLogin(){
+	var author_id = '0';
+	var articleId = '114061101114';
+	var parentUrl = window.location.href;
+
+	if (parentUrl.indexOf("?")>-1){
+		parentUrl = parentUrl.substr(0,parentUrl.indexOf("?"));
+	}
+	
+	$("#sign_in").fancybox({
+	    maxWidth	: 600,
+		maxHeight	: 580,
+		fitToView	: false,
+		autoSize	: false,
+		closeClick	: false,
+		href		: '/core/request-handler/sign-in-content?ref='+parentUrl+'&fc='+author_id+'&articleId='+articleId,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+
+	});
+	$('.fancybox').fancybox();
+	$("#sign_in").trigger('click');
+	
+} 
+
+function showhide()
+{
+      var div = document.getElementById("follow");
+	  if(div.style.display !== "block") {
+		   div.style.display = "block";
+	  }
+      else {
+		   div.style.display = "none";
+	  }
+}
+
+
+$(document).ready(function(){
+	$('.articleCompanyStockInfo').hide();
+	$('.bsNewArticleCompanyStockInfo').show();
+});
+', 
+
+', 
+.articleCompanyStockInfo{display: none;}
+.bsNewArticleCompanyStockInfo{display: block;}
+#article-chart-_article_ft{
+	margin-bottom: 40px;
+	display: block;
+	padding: 5px 30px;
+}
+});
+', 
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1454577991396-0'); });
+", 
+', 
+
+', 
+', 
+', 
+    ', 
+    ', 
+	', u"At Rs 5 lakh cr, LIC to be India's most valuable firm if listed", 
+			', u"But listing insurance giant won't be easy, given the legal and procedural hassles", 
+		', 
+	', 
+	 		', 
+Life Insurance Corporation (LIC), the country\u2019s largest insurer, could be the most valuable Indian company at Rs 4.5-5 lakh crore if it debuts on the bourses, as bankers have suggested to the Union finance ministry.', 
+', 
+In 2012-13, the latest year for which data are available, ', LIC ', reported a revenue of Rs 3.26 lakh crore ($54.4 billion) and Rs 15.2 lakh crore ($253.9 billion) of assets under management. In 2013-14, the state-owned ', LIC ', reported first premium income of Rs 90,123.8 crore, a rise of 17.8 per cent over 2012-13 and a key metric for valuing insurance companies. Private Indian insurance companies, on the other hand, saw a four per cent drop in new premiums to Rs 29,517.4 crore in 2013-14.', 
+', 
+Asian insurance giants like the AIA Group and China Life Insurance are, respectively, valued at around 41 per cent and 20 per cent of their assets under management. In slow-growing Europe and North America, insurers typically are valued at 10 per cent of their assets under management. American International Group (AIG), the world\u2019s largest insurance company, is valued at 15 per cent of its assets under management (AUM). Taking an average of the shares of Asian insurers\u2019 valuation in their respective AUMs as a yardstick, LIC\u2019s market value is likely to be Rs 4.5-5 lakh crore.', 
+', 
+At this valuation, floating 10 per cent of the ', LIC ', stock would fetch the government around Rs 50,000 crore. Analysts said an issue of this size would squeeze the secondary market and participation by retail and foreign institutional investors would be key.', 
+', 
+\u201cLife insurance companies, like mutual funds, are valued on their assets under management, their key source of revenue and profit. ', LIC ', will get a premium for being a market leader and for its huge investment portfolio accumulated over the past six decades,\u201d said G Chokkalingam, founder of Equinomics Research Advisory.', 
+', 
+In 2012-13, LIC\u2019s investment income was Rs 1.04 lakh crore and miscellaneous income Rs 21,243 crore. It reported a surplus of Rs 1.49 lakh crore after paying all expenses, including claims, commissions, management and employee expenses and a five per cent valuation surplus to the government.', 
+', 
+Tata Consultancy Services (TCS), currently India\u2019s most valuable company, is worth around 4.31 lakh crore. It is followed by Oil and Natural Gas Corporation (Rs 3.65 lakh crore). In revenue, ', LIC ', ranks only below Indian Oil Corporation (Rs 4.93 lakh crore in 2013-14) and Reliance Industries (Rs 4.43 lakh crore).', 
+', 
+Conservatively, ', LIC ', can be valued at 3-3.5 times its first-year premium income, a typical valuation matrix for insurance companies. This pegs LIC\u2019s market valuation at Rs 3-3.5 lakh crore.', 
+', 
+\u201cLife insurance companies (can also be listed) according to their appraisal value, which is a multiple of their first-year premium income. This is likely to be high for LIC, given its low expense, high market share and nationwide network,\u201d said Ashvin Parikh, managing partner, Ashvin Parikh Advisory Services LLP.', 
+', 
+Listing LIC, though, will not be easy. It was created in 1956 through a law and follows an accounting method that is different from private insurers. Before listing, it needs to be corporatised if the suggestion by bankers to the ', finance ministry ', is accepted. The proposal is for the government to hold 51 per cent in ', LIC ', and divest the rest.', 
+', 
+Senior executives and a former chairman of LIC, however, said it would not be an easy process. A former managing director of ', LIC ', explained that when the government had earlier considered listing LIC, the trade unions had objected, citing pay and pension benefits available to government employees.', 
+', 
+', 
+	', 
+Another issue, the executives said, was the appointment of LIC\u2019s senior management team, which is currently approved by the government. That, if the insurer is listed, will have to be done after shareholder approval. \u201cThis may require an amendment in the ', LIC ', Act to allow shareholders to take a call on appointment issues, though it may still largely be decided by the government,\u201d said a former ', LIC ', chairman.', 
+', 
+Transparency and additional disclosures were what would be the major game-changer, said former ', LIC ', executives. \u201cLarge equity and debt transactions conducted on a daily basis are not disclosed, since it is not mandatorily required. Once ', LIC ', is listed, this will undergo a change and we are not sure if the staff will be comfortable with the move, since there could be fears about particular investment decisions being questioned. So, listing proposals are easier said than done,\u201d said a former ', LIC ', executive.', 
+', 
+In 2004, the All-India ', LIC ', Employees Federation had expressed concerns over a report by an accounting firm that proposed corporatisation of ', LIC ', and a possible listing. Some provisions also related to withdrawal of government guarantees on ', LIC ', policies. The Malhotra committee report had in 1994 proposed a similar concept for professionalising the insurance sector.', 
+', 
+According to the ', LIC ', Act, there is a sovereign guarantee on its policies. The Act says the sum assured by all policies issued by LIC, including any bonuses declared, will be guaranteed as to payment in cash by the central government. Hence, former ', LIC ', executives said, though the government might continue to hold 51 per cent in LIC, there was the question of whether the guarantee would continue. One way out could be retaining the sovereign guarantee on policies already issued and discontinuing it for new policies.', 
+', 
+If this provision has to be removed, the ', LIC ', Act has to be amended in Parliament. While there earlier were talks of amendment of the ', LIC ', Act and removal of the guarantee, a Bill was not tabled fearing a public backlash.', 
+', 
+Earlier reports by the insurance regulator and accounting firms said listing ', LIC ', would create a level playing field in the industry. But before ', LIC ', hits the market with an initial public offering , the government would be required to recapitalise the entity.
+		', 
+	', 
+      		', M Saraswathy & Krishna Kant', 
+ 	', 
+	', 
+		', Business Standard', 
+		', 
+			', http://bsmedia.business-standard.com/_media/bs/wap/images/bs_logo_amp.png', 
+			', 177', 
+			', 22', 
+		', 
+	
+ ', 
+ ', 
+ ', 
+', 
+$( document ).ready(function() {
+	var _id = 114061101114;
+	$.ajax({
+		"type"		:	"POST",
+		"url"		:	"http://bsapi.business-standard.com/request-handler/article/article-update-count.php",
+		data: { 'articleId': _id  },
+		"success"	:	function(data){
+			if(data!=undefined){
+				try{
+				 //$(_id).html(data);
+				}catch(e){}
+			}
+		}
+	});
+	return false;	
+});
+', 
+', 
+', 
+', 
+$( ".activator" ).click(function() { 
+ ids = this.id;
+ var $this = $("#"+ids);
+ var searchText = $this.html();
+ str = searchText.replace(/\s+/g, '+');
+	$.ajax({
+		type: 'GET',
+		url: '/ajax-search?type=news&q='+str+'&artId=114061101114',
+		contentType: "text/html",
+		success: function(data)
+		{	//$('#'+ids)
+			$('.overlay3').remove();
+			$('.box').remove();
+			$(data).insertAfter($("#readMoreSpanAjx"));
+		},
+		error: function(e)
+		{
+		   alert(e.message);
+		}
+	});
+});
+',  ', 
+	    ', 
+
+	    ', 
+	    ', 
+	    ', 
+#moreOnMarkets{
+	display: block !important;
+}
+', 
+', 
+    ', 
+    	', 
+    		', MORE ON MARKETS:', 
+    		', 
+    		',   
+    			', 
+    				', Quick Links ',  
+    				', 						
+						', Stock Market Live', 
+                        ', Portfolio ', 
+                        ', Commodity Market', 
+                        ', Upcoming IPO', 
+                        ', Personal Finance', 
+                       					
+    				', 
+    				', 						
+						', Stock Market News', 
+    					', Derivatives', 
+    					', Mutual Funds', 
+    					', Gold Price', 
+    					', Sensex', 
+    				', 
+    			', 
+    		',  
+    		', 
+    		',  
+    			', 
+    				', Browse STOCK Companies',  
+                    ', 
+                        ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E',  
+                        ', F', 
+                        ', G', 
+                        ', H',  
+                        ', I', 
+                        ', J', 
+                        ', K', 
+                        ', L', 
+                        ', M', 
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V', 
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 1', 
+                        ', 2', 
+                        ', 3', 
+                        ', 4', 
+                        ', 5',  
+                        ', 6', 
+                        ', 7', 
+                        ', 8',  
+                        ', 9',  
+                        ', 
+    				', 
+    			', 
+    			', 
+    				', Browse Mutual Funds',  
+    				', 
+                        ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E',  
+                        ', F', 
+                        ', G', 
+                        ', H',  
+                        ', I', 
+                        ', J', 
+                        ', K', 
+                        ', L', 
+                        ', M', 
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V', 
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                        ', 
+    				',   
+    			', 
+    			',  
+    		',      
+    		',   
+    		',  
+    	', 
+    	', 
+        	',  
+        		', 
+        			', Index Stocks', 
+        			', 
+        				',  ACC ', 
+        				',  Adani Ports ', 
+        				',  Ambuja Cem. ', 
+        				',  Asian Paints ', 
+        				',  Aurobindo Pharma ', 
+        				',  Axis Bank ', 
+        				',  B H E L ', 
+        				',  B P C L ', 
+        				',  Bajaj Auto ', 
+        				',  Bank of Baroda ', 
+        				',  Bharti Airtel ', 
+        				',  Bharti Infra. ', 
+        				',  Bosch ', 
+        				',  Cipla ', 
+        				',  Coal India ', 
+        				', u" Dr Reddy's Labs ", 
+        				',  Eicher Motors ', 
+        				',  GAIL (India) ', 
+        				',  Grasim Inds ', 
+        				',  H D F C ', 
+        				',  HCL Technologies ', 
+        				',  HDFC Bank ', 
+        				',  Hero Motocorp ', 
+        				',  Hind. Unilever ', 
+        				',  Hindalco Inds. ', 
+        				',  ICICI Bank ', 
+        				',  Idea Cellular ', 
+        				',  IndusInd Bank ', 
+        				',  Infosys ', 
+        				',  ITC ', 
+        				',  Kotak Mah. Bank ', 
+        				',  Larsen & Toubro ', 
+        				',  Lupin ', 
+        				',  M & M ', 
+        				',  Maruri Suzuki ', 
+        				',  NTPC ', 
+        				',  O N G C ', 
+        				',  Power Grid Corpn ', 
+        				',  Reliance Inds. ', 
+        				',  St Bk of India ', 
+        				',  Sun Pharma. Inds. ', 
+        				',  Tata Motors ', 
+        				',  Tata Motors-DVR ', 
+        				',  Tata Power Co. ', 
+        				',  Tata Steel ', 
+        				',  TCS ', 
+        				',  Tech Mahindra ', 
+        				',  UltraTech Cement Ltd ', 
+        				',  Wipro ', 
+        				',  Yes Bank ', 
+        				',  Zee Entertainment ', 
+        				', 
+        			', 
+        		', 
+        		',  
+        	',      
+        	',   
+        	',  
+        ', 
+    ', 
+', 
+
+', 
+', 
+  ', 
+     ', 
+     ', 
+     ', Copyrights © 2017 Business Standard Private Ltd. All rights reserved.', 
+     ', 
+  ', 
+
+  ', 
+     ', 
+          ', 
+             ', 
+                ', 
+               ', From BS Website', 
+               ', Home', 
+               ', Companies', 
+               ', Markets', 
+               ', Opinion', 
+               ', Politics', 
+               ', Technology', 
+               ', Specials', 
+               ', Personal Finance', 
+               ', Budget', 
+               ', Latest News', 
+               ', u"Today's Paper", 
+              ',  
+               ', RBI Policy', 
+               ', General News', 
+               ', General Videos', 
+               ', General Photo Gallery', 
+               ', Events', 
+               ', Authors', 
+              ', 
+              ', 
+              ', 
+                 ', 
+               ', About us', 
+               ', About Us', 
+               ', Code of Conduct', 
+               ', Terms & Conditions', 
+               ', Cookie Policy', 
+               ', Disclaimer', 
+               ', Investor Communication', 
+              ', 
+
+              ', 
+
+                 ', 
+               ', Support & Contact', 
+               ', Partner with Us', 
+               ', Careers', 
+               ', Advertise with Us', 
+               ', Contact Us', 
+               ', Feedback', 
+               ', Browser Support', 
+               ', Sitemap', 
+               ', 
+              ', 
+
+              ', 
+                 ', 
+               ', Subscribe', 
+               ', E-Paper', 
+               ', BS Magazines', 
+               ', Portfolio Tracker', 
+              ', 
+
+              ', 
+
+                 ', 
+               ', BS Products', 
+			   ', Smart Investor', 
+               ', BS Hindi', 
+               ', BS Motoring', 
+               ', BS Books', 
+               ', B2B Connect', 
+               ', iPhone', 
+               ', iPad', 
+               ', android', 
+               ', wap', 
+               ', BS Banking Round Table 2016', 
+               ', BS Fund Cafe 2016', 
+              ', 
+              ', 
+          ', 
+          ', 
+     ', 
+
+     ', 
+	 ', 
+                            ', Budget 2017', 
+                            ', Budget 2017', 
+                            ', Budget News', 
+                            ', Budget', 
+						', 
+						', 
+     	', 
+      		', Connect with BS', 
+        	', 
+            	', Facebook',   
+                ', Google+',  
+                ', Linkedin',  
+                ', Twitter', 
+                ', Youtube', 
+                ', RSS',   
+                ',   
+            ', 
+     	', 
+     ', 
+  ', 
+  ', 
+  ', 
+', 
+', 
+', 
+    .notification_error_div {
+        position: fixed;
+        z-index:100;
+        bottom: 0;
+        right: 0;
+        width: 350px;
+        background-color: #FFFFF0;
+        border: 1px solid black;
+
+        padding: 15px;
+        margin: 10px;
+
+        text-align: center;
+        font-size : 14px;
+        font-family: Tahoma,Arial,Georgia;
+    }
+', 
+', 
+', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="31"; var zflag_sid="0"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="93"; 
+', 
+', 
+', 
+', 
+    .notification_error_div {
+        position: fixed;
+        z-index:100;
+        bottom: 0;
+        right: 0;
+        width: 350px;
+        background-color: #FFFFF0;
+        border: 1px solid black;
+
+        padding: 15px;
+        margin: 10px;
+
+        text-align: center;
+        font-size : 14px;
+        font-family: Tahoma,Arial,Georgia;
+    }
+
+/** Free User Notification Popup **/
+.subscription-notification-popup{color: #000;padding: 0px !important;margin: 0px !important;}
+.free_user_notification_popup{padding: 10px;display: none;background: #fff;}
+.btn-maroon{padding: 5px 10px;margin: 0;border: 0;background: #ac2122;color: #fff;font-size: 16px;cursor: pointer;}
+.fis_user_notification_popup{padding: 10px;display: none;background: #fff;}
+', 
+', 
+    ', 
+       ', 
+          ', 
+             ', 
+                ', 
+                   ', 
+                   ', Upgrade To Premium Services', 
+                ', 
+             ', 
+             ', 
+                ', 
+                   ', 
+                ', 
+             ', 
+          ', 
+          ', 
+             ', Welcome ', User', 
+             ', 
+          ', 
+          ',  Business Standard is happy to inform you of the launch of "Business Standard Premium Services"', 
+          ', As a premium subscriber you get an across device unfettered access to a range of services which include:', 
+          ', 
+             ', Access Exclusive content - articles, features & opinion pieces', 
+             ', Weekly Industry/Genre specific newsletters - Choose multiple industries/genres', 
+             ', Access to 17 plus years of content archives', 
+             ', Set Stock price alerts for your portfolio and watch list and get them delivered to your e-mail box', 
+             ', End of day news alerts on 5 companies (via email)', 
+             ', NEW', : Get seamless access to WSJ.com at a great price. No additional sign-up required.', 
+          ', 
+          ', 
+             ', 
+                ',  ', 
+             ', 
+             ', 
+                ', 
+             ', 
+          ', 
+          ', 
+       ', 
+    ', 
+', 
+
+', 
+', 
+   ', 
+      ', 
+         ', 
+            ', 
+               ', 
+               ', Premium Services ', 
+               ', In Partnership with ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ',  ', 
+         ', 
+         ', 
+            ', 
+            ', Dear ', Guest', ,', 
+            ', 
+         ', 
+         ', 
+            ',  ', 
+         ', 
+      ', 
+      ', Welcome to the premium services of Business Standard brought to you courtesy FIS.', 
+         Kindly visit the ', Manage my subscription page',  to discover the benefits of this programme.', 
+         ', 
+         Enjoy Reading!', 
+         Team Business Standard
+      ', 
+      ', 
+         ', 
+            ',  ', 
+         ', 
+      ', 
+      ', 
+   ', 
+', 
+', 
+', 
+function getCookie(name) {		
+    var value = "; " + document.cookie;		
+    var parts = value.split("; " + name + "=");		
+    if (parts.length == 2)		
+        return parts.pop().split(";").shift();		
+}
+$('#head-suggest_ftr').focus(function(){
+	  $(this).attr('placeholder','');
+	});
+	$('#head-suggest_ftr').focusout(function(){
+	  $(this).attr('placeholder','Enter the first three letters of the company');
+});
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+function setCookieNoti(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+$(document).ready(function() {
+	if($('.breadcrum').find('a').size() != null && $('.breadcrum').find('a').size() == 3){
+		var lc = 1;
+		$('.breadcrum').find('a').each(function() {
+			if(lc == 2){ $(this).attr('class','bact'); }
+		    lc++;
+		});
+	}
+});
+//-->
+', 
+
+', 
+', 
+function setCookieNoti(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+
+$(document).ready(function(){//free-username-popup
+	var usrLoginCookie = getLoginCookie('_userLoggedIn');
+	if(isUserBanner=='fis'){
+		var usrObj = JSON.parse(decodeURIComponent(usrLoginCookie));
+    	if(usrObj.ufname != ''){
+        	var uId = usrObj.uId;
+        	var uName = usrObj.ufname;
+			var ckVal = getLoginCookie('_chkFisUserNotificationPopup');
+			var isCkSet = ckVal.indexOf(uId);
+			if(ckVal == '' || ckVal == 'undefined'){
+				//cookie is not set
+				$("#fis-username-popup").html(uName);
+				$.fancybox({
+					href		:	"#fis_user_notification_popup",
+				    maxWidth	:	600,
+					maxHeight	:	500,
+					fitToView	:	false,
+					autoSize	:	false,
+					closeClick	:	false,
+					openEffect	:	'none',
+					closeEffect	:	'none'
+				});
+		    	setCookieNoti("_chkFisUserNotificationPopup",uId,130);
+			}else{
+				if(isCkSet == -1){
+					//cookie for current user is not set
+					$("#fis-username-popup").html(uName);
+					$.fancybox({
+						href		:	"#fis_user_notification_popup",
+					    maxWidth	:	600,
+						maxHeight	:	500,
+						fitToView	:	false,
+						autoSize	:	false,
+						closeClick	:	false,
+						openEffect	:	'none',
+						closeEffect	:	'none'
+					});
+			    	ckVal += ","+uId;
+			    	setCookieNoti("_chkFisUserNotificationPopup",ckVal,130);
+				}else{
+					//cookie is already set, no need to show popup
+				}
+			}
+    	}
+	}
+  	if(usrLoginCookie != '' && false){
+    	var usrObj = JSON.parse(decodeURIComponent(usrLoginCookie));
+    	if(usrObj.s == 'f'){
+        	var uId = usrObj.uId;
+        	var uName = usrObj.ufname;
+			var ckVal = getLoginCookie('_chkFreeUserNotificationPopup');
+			var isCkSet = ckVal.indexOf(uId);
+			if(ckVal == '' || ckVal == 'undefined'){
+				//cookie is not set
+				$("#free-username-popup").html(uName);
+				$.fancybox({
+					href		:	"#free_user_notification_popup",
+				    maxWidth	:	600,
+					maxHeight	:	500,
+					fitToView	:	false,
+					autoSize	:	false,
+					closeClick	:	false,
+					openEffect	:	'none',
+					closeEffect	:	'none'
+				});
+		    	setCookieNoti("_chkFreeUserNotificationPopup",uId,30);
+			}else{
+				if(isCkSet == -1){
+					//cookie for current user is not set
+					$("#free-username-popup").html(uName);
+					$.fancybox({
+						href		:	"#free_user_notification_popup",
+					    maxWidth	:	600,
+						maxHeight	:	500,
+						fitToView	:	false,
+						autoSize	:	false,
+						closeClick	:	false,
+						openEffect	:	'none',
+						closeEffect	:	'none'
+					});
+			    	ckVal += ","+uId;
+			    	setCookieNoti("_chkFreeUserNotificationPopup",ckVal,30);
+				}else{
+					//cookie is already set, no need to show popup
+				}
+			}
+    	}
+  	}
+});
+
+$(document).ready(function(){
+	var loginCookie = getCookie('_userLoggedIn');
+	if( loginCookie == '' || loginCookie == 'undefined' ){
+		//Do Nothing
+	}else{
+		var loginParamObj = JSON.parse(decodeURIComponent(loginCookie));
+		if( loginParamObj.uId > 0 ){
+			var pwCookie = getCookie('_pw');
+			if( pwCookie == 't' ){
+				//Do Nothing
+			}else{
+				var subExpCookie = getCookie('_sub_exp');
+				if( (subExpCookie > 0) ){
+					var currentTimestamp = Math.floor(Date.now() / 1000);
+					
+					//Expiry Notification Logic
+					var neverShowNotificaitonCookie = getCookie('_nsn');
+					if(neverShowNotificaitonCookie == '' || neverShowNotificaitonCookie == 'undefined' || neverShowNotificaitonCookie == null){
+						var lastReminderCookie = getCookie('_ler'+loginParamObj.uId);//last expiry reminder
+						if( (lastReminderCookie == "") || (lastReminderCookie == "undefined") || (lastReminderCookie == null) ){
+							$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+						}else{
+							if(lastReminderCookie < currentTimestamp){
+								$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+							}
+						}
+					}else{
+						var isCkSet = neverShowNotificaitonCookie.indexOf(loginParamObj.uId);
+						if(isCkSet == -1){
+							//cookie for current user is not set
+							var lastReminderCookie = getCookie('_ler'+loginParamObj.uId);//last expiry reminder
+							if( (lastReminderCookie == "") || (lastReminderCookie == "undefined") || (lastReminderCookie == null) ){
+								$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+							}else{
+								if(lastReminderCookie < currentTimestamp){
+									$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+});
+
+function remindNotificationLater(userId){
+	var currentTimestamp = Math.floor(Date.now() / 1000);
+	var tempTime = new Date(currentTimestamp*1000);
+	var lastExpNotification = Math.floor(tempTime.setMinutes(tempTime.getMinutes() + 60) / 1000);//+60 mins
+	//Set Cookie
+    var d = new Date();
+    d.setTime(d.getTime() + (60*60*1000));//60 min
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "_ler"+userId+"=" + lastExpNotification + "; " + expires + "; path=/";
+	$('#endSubscriptionNotification').remove();
+}
+
+function closeNotificationForever(userId){
+	var neverShowNotificaitonCookie = getCookie('_nsn');
+	neverShowNotificaitonCookie += ","+userId;
+	//Set Cookie
+    var d = new Date();
+    d.setTime(d.getTime() + (30*24*60*60*1000));//30 days
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "_nsn=" + neverShowNotificaitonCookie + "; " + expires + "; path=/";
+	
+	$('#endSubscriptionNotification').remove();
+}
+', 
+
+', 
+$.browser.chrome = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()); 
+if($.browser.chrome){
+	setTimeout(showChromeNotification,1000);
+}
+', 	    ', 
+      ', 
+         ', 
+', 
+
+    	', 
+
+function show(target) {
+    document.getElementById(target).style.display = 'block';
+}
+
+function hide(target) {
+   document.getElementById(target).style.display = 'none';
+    notifyCookie =  decodeURIComponent(getCookie('_notifyCookie'));
+    if(notifyCookie !=null && notifyCookie != 'undefined'){
+        var notifyValues = JSON.parse(notifyCookie);
+	if(notifyValues !=null && notifyValues != 'undefined' ){
+	  notifyValues.nty="Y";
+	  notifyValues.cnty="Y";
+	  notifyValues.rTime= (new Date().getTime()+ 24*60*60*1000) /1000|0;
+	  notifyValues=JSON.stringify(notifyValues);
+	  notifyValues = encodeURIComponent(notifyValues);
+	  setCookieColumn('_notifyCookie',notifyValues,2);
+	}
+   }
+}
+function setCookieColumn(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+', 
+
+
+
+
+
+
+
+', 
+var userCookie = decodeURIComponent(getCookie('_userLoggedIn'));
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-3333643-1', 'auto');
+if(userCookie !=null && userCookie!= 'undefined'){
+	 var userInfo = JSON.parse(userCookie);
+	 ga('set', '&uid', userInfo.uId);
+}
+if(isBannerActive == false){
+	if(userCookie !=null && userCookie!= 'undefined'){
+		var userInfo = JSON.parse(userCookie);
+		if(userInfo !=null && userInfo!= 'undefined' && userInfo.s != 'undefined' && userInfo.s == 't'){
+			ga('set', 'dimension1', 'Paid adblocker!!!');
+		}else{
+			ga('set', 'dimension1', 'Free adblocker!!!');
+		}
+	}else{
+		ga('set', 'dimension1', 'Anonymous adblocker!!!');
+	}
+}
+
+
+if(idPaidArticle == true){
+	   var url = window.location.href; var articleUrl = " ";
+	       if(url.indexOf('?') != -1)
+	         articleUrl = url.split('?')[0] ;
+	       else
+	         articleUrl = url;
+	    if(articleUrl !=null && articleUrl!= 'undefined'){
+	   
+	    	ga('set', 'dimension2', articleUrl);
+	    }
+}
+
+
+ga('send', 'pageview');
+', 
+', 
+', 
+', var _comscore=_comscore||[];_comscore.push({c1:"2",c2:"8021726"});(function(){var b=document.createElement("script"),a=document.getElementsByTagName("script")[0];b.async=true;b.src=(document.location.protocol=="https:"?"https://sb":"http://b")+".scorecardresearch.com/beacon.js";a.parentNode.insertBefore(b,a)})();', 
+', 
+', 
+', 
+', 
+var AKSB=AKSB||{};AKSB.q=[];AKSB.mark=function(b,a){AKSB.q.push(["mark",b,a||(new Date).getTime()])};AKSB.measure=function(b,a,c){AKSB.q.push(["measure",b,a,c||(new Date).getTime()])};AKSB.done=function(b){AKSB.q.push(["done",b])};AKSB.mark("firstbyte",(new Date).getTime());
+AKSB.prof={custid:"356860",beaconrate:20};
+(function(b){var a=document.createElement("iframe");a.src="javascript:false";(a.frameElement||a).style.cssText="width: 0; height: 0; border: 0; display: none";var c=document.getElementsByTagName("script"),c=c[c.length-1];c.parentNode.insertBefore(a,c);a=a.contentWindow.document;a.open().write("<body onload=\"var js = document.createElement('script');js.id = 'aksb-ifr';js.src = '"+b+"';document.body.appendChild(js);\">");a.close()})(("https:"===document.location.protocol?"https:":"http:")+"//ds-aksb-a.akamaihd.net/356860/aksb-a/aksb.min.js");
+', 
+', 
+', 
+var addthis_config = {"data_track_addressbar":false, "services_exclude":'print, email','recommended' : {}, 'thankyo : false};
+addthis_config.pubid = 'bsorg08';
+var addthisScript = document.createElement('script');
+addthisScript.setAttribute('src', '//s7.addthis.com/js/300/addthis_widget.js#domready=1');
+document.body.appendChild(addthisScript);
+', 
+', 
+#at4-thankyou{display:none !important;}
+', 
+', u"
+var subs_pw = getCookie('_pw');
+if( subs_pw != null && subs_pw == 't'){
+	$('.paid_article_key').hide();
+}else{
+	$('.paid_article_key').show();
+}
+", 
+']

@@ -1,0 +1,5945 @@
+[
+
+    
+
+    ', 
+         
+    ', 
+
+    
+
+
+    
+
+    
+
+    
+    ', Skip to Content', 
+
+    
+    ', 
+
+        
+
+
+        ', 
+            ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+
+                         
+
+                        ', 
+
+                         
+
+                        ', 
+
+                    ', 
+                ', 
+
+                    
+                    ', 
+                        ', 
+                              
+                            ', 
+                            ', All locations', 
+                             
+                            ', 
+                        ', 
+                    ', 
+
+                    
+                    ', 
+                        ', 
+                        ', 
+                    ', 
+
+
+            ', 
+        ', 
+
+
+        ', 
+            ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                          
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                        ', 
+                              
+                            ', 
+                            ', Change in all locations', 
+                             
+                            ', 
+                        ', 
+                ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+
+
+    ', 
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+    ', 
+    
+
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', Springfield R-12', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+', :', 
+
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', About SPS', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+', :', 
+
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', Departments', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+', :', 
+
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', Communications', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+', :', 
+
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', General Info', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+', :', 
+
+    ', 
+        ', 
+            Communications Department
+        ', 
+    ', 
+
+
+
+        ', 
+    ', 
+', 
+
+
+
+
+
+
+
+', 
+', 
+
+
+', 
+
+', 
+', 
+
+
+
+/* MOVED FUNCTION TO BOTTOM */
+function addHtmlAttribute(element, attributeName, attributeValue)
+{
+    var tempVar = "";
+    if (element.hasAttribute(attributeName) == true)
+    {
+       tempVar = element.getAttribute(attributeName);
+    }
+    element.setAttribute(attributeName, attributeValue + tempVar);
+}
+
+    var menuWidth = 200;
+    var menuBarWidth = 600;
+    var ajaxRequestEntid = "";
+    var globalMenuItem;
+    var itemDescrArray = new Array();
+    var itemNameArray = new Array();
+    var itemTypeArray = new Array();
+    var itemUrlArray = new Array();
+    var itemTargetArray = new Array();
+    var itemIconClassArray = new Array();
+    var itemHasItemsArray = new Array();
+    var urlsPerEntidArray = new Array();
+    var descrsPerEntidArray = new Array();
+    var overflowAdjustedDivsArray = new Array();
+    var menuNamesArray = new Array();
+    var navLinkClicked = false;
+    var ua = navigator.userAgent;
+    var isMSIE = ua.indexOf ('MSIE') != -1;
+    var nbIsIE9 = ua.indexOf ('MSIE 9') != -1;
+    var isFirefox = ua.indexOf ('Firefox') != -1;
+    var isMacFirefox = (ua.indexOf ('Macintosh') != -1) && (isFirefox);
+    var nbIsChrome = ua.indexOf ('Chrome') != -1;
+    var previousEntid = "";
+    var previousTime = new Date();
+    var timeOfPageLoad = new Date();
+    var overrideMenuHiding = false;
+    var nbGlobalTopBorderStyle = "";
+    var nbIsWorldUser = false;
+    var nbShowAjaxErrorsToWorldUsers = false;
+    var nbFolderGroupTypeString = "Folder";
+    var nbWebPageGroupTypeString = "Web Page";
+    var nbHomeLinkId = "root-x5284417265795929042--sep--Springfield_R-12homeLink";
+    var nbBreadcrumbStripDropDownMenuFetchDelayMs = 450;
+    var nbHomeAndBreadcrumbDropDownSubmenuFetchDelayMs = 50;
+    var homeLinkElem = document.getElementById('edlHomeLink');
+    if (  (homeLinkElem != null) && (homeLinkElem != undefined)  )
+    {
+        homeLinkElem.id = "root-x5284417265795929042--sep--Springfield_R-12homeLink";
+        homeLinkElem.className = "breadcrumbLink";
+    }
+    
+    var onloadFnName = "nbnNavigationBarOnload";
+    
+    var pageBody = document.body;
+    var func = onloadFnName + "('false')";
+    
+    if (pageBody.attachEvent!=undefined) // attachEvent is a deprecated IE method
+    {
+        pageBody.onload = appendToFunction(pageBody.onload, func);
+    } else {
+        addHtmlAttribute(pageBody, "onload", func +";");
+    }
+
+function appendToFunction(func, str)
+{
+    var nfs = "";
+    if (func != null){
+        var ofs = func.toString();
+        var fcb = ofs.indexOf("{");
+        var lcb = ofs.indexOf("}",fcb+1);
+        var oss = ofs.substring(fcb + 1, lcb);
+        //alert('h3=' + ofs + '||||\n' + oss);
+        nfs = nbStripLeadingSemicolons(oss);
+    }
+	var s = nbStripLeadingSemicolons(nfs + ";" + str);
+    var f = new Function(s);
+    return f;
+}
+function nbStripLeadingSemicolons(s){
+	while (s.substr(0,1) == ';' && s.length>1) {
+    	s = s.substr(1);
+    }
+	return s;
+}
+', 
+
+
+        ', 
+
+    ', 
+
+
+        ', 
+            ', 
+                
+
+                ', 
+
+                    ', 
+
+                    
+                    
+
+
+
+
+
+
+
+
+', 
+', 
+<!--
+
+    var CLICK_OK_BUTTON_DURATION = 60;
+    var CONFIRM_MSG_SECS = 1200 - CLICK_OK_BUTTON_DURATION - 30;
+    var secsTilMsg = CONFIRM_MSG_SECS;
+    function openInfoPopupWindowIfNeeded()
+    {
+        
+
+        return false;
+    }
+  
+    var HAS_DEFAULT_ENTER_KEY  =  false;
+    var DEFAULT_ENTER_KEY_NAME = "";
+    var HAS_PAGE_VALIDATION    =  false;
+    var PAGE_VALIDATION        = "()";
+
+
+
+    function adjustIFrameSize (iframeWindow) {
+
+      if (iframeWindow.document.height) {
+        var iframeElement = parent.document.getElementById (iframeWindow.name);
+        iframeElement.style.height = iframeWindow.document.height + 'px';
+
+        iframeElement.style.width = iframeWindow.document.width + 'px';
+      }
+      else if (document.all) {
+        var iframeElement = parent.document.all[iframeWindow.name];
+        if (iframeWindow.document.compatMode &&
+            iframeWindow.document.compatMode != 'BackCompat')
+        {
+          iframeElement.style.height =
+            iframeWindow.document.documentElement.scrollHeight + 5 + 'px';
+
+          iframeElement.style.width =
+            iframeWindow.document.documentElement.scrollWidth + 5 + 'px';
+        }
+        else {
+          iframeElement.style.height =
+            iframeWindow.document.body.scrollHeight + 5 + 'px';
+          iframeElement.style.width =
+            iframeWindow.document.body.scrollWidth + 5 + 'px';
+        }
+      }
+    }
+
+    
+    function checkStale()
+    {
+        
+        if (document.cookie.search(/pgt=c1483619088574t/i) == null)
+        {
+            document.location.reload();
+        }
+    }
+//-->
+', 
+', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+
+
+
+', 
+
+', 
+ ', 
+', 
+
+', 
+ ', 
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', 
+
+
+', 
+
+
+    $(function(){
+
+    
+
+        hcOnDocumentReady();
+        
+    });//document ready
+
+
+
+
+
+function hcLogin()
+{
+    aefhLogin(false);
+}
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+', 
+
+', 
+    hcMyEdlineXmlDataJQueryObj = $("#edlMenuXmlData");
+
+    
+        hcMyEdlineBackCompatXmlDataJQueryObj = hcMyEdlineXmlDataJQueryObj;
+    
+
+', 
+
+
+
+
+
+
+
+
+', 
+
+
+    function translateMenuOver(pEvent)
+    {
+        overrideMenuHiding = true;
+        showTranslateMenu(pEvent);
+    }
+
+
+    function translateMenuOut(pEvent)
+    {
+    }
+
+
+    function showTranslateMenu(pEvent)
+    {
+      // Hide the navbar menus if they are open:
+      hdrHideAllDropDownMenus();
+
+      var linkElem = document.getElementById("edlLangLink");
+      var linkElemOffset = $("#edlLangLink").offset();
+      var linkLeftEdge = linkElemOffset.left;
+      var linkBottomEdge = linkElemOffset.top + linkElem.offsetHeight;
+
+      translateMenu.moveTo(linkLeftEdge, linkBottomEdge + 1);
+      translateMenu.show();
+    }
+
+    function switchLang(lang)
+    {
+        if (translationDisabledMessage())
+        {
+            return;
+        }
+
+        submitEvent('language', 'TCNK=headerComponent;language='+lang);
+    }
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Want to translate this page?', 
+                      ', 
+                        ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Share This Page', 
+                      ', 
+                        ', 
+                          ', 
+                          ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', 
+                        ', Search', 
+                        ', 
+                          ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                              ', 
+                              ', 
+                                ', 
+                                  ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                              ', 
+                            ', 
+                            ', 
+                            ', 
+                              ', 
+                              ', Springfield R-12', 
+                            ', 
+                            ', 
+                              ', 
+                              ', General Info', 
+                            ', 
+                            ', 
+                            ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', HELP', 
+                  ', 
+                  ', 
+                  ', 
+                    ',  ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', SIGN IN', 
+                  ', 
+                  ', 
+                ', 
+                ', 
+              ', 
+            ', 
+
+
+
+
+
+
+
+
+
+
+  ', 
+    ', 
+    ', 
+  ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+function initForms()
+{
+	var frm = window.document.authenticationEntryFormForHeader;
+	frm.kclq.value = "";
+	frm.ajaxSupported.value = isAjaxSupported();
+}
+
+
+
+function debounceEnterKey(frm, eventNm)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function debounceEnterKeyToEntid(frm, eventNm, entid)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.targetEntid.value = entid;
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function handleSubmitOnEnter(e)
+{
+    
+    if (window.ghKeyPressHandler != null)
+    {
+        if ( typeof(ghKeyPressHandler == "function") )
+        {
+            ghKeyPressHandler(e);
+        }
+    }
+    
+    var keyPressed = '';
+
+    var isMSIE = navigator.userAgent.indexOf('MSIE') != -1;
+
+    if (isMSIE)
+        keyPressed = String.fromCharCode(window.event.keyCode);
+    else
+        keyPressed = String.fromCharCode(e.which);
+
+    if (keyPressed == "\r" || keyPressed == "\n")
+    {
+        
+        var authenticationFormToUse = null;
+
+        if (document.authenticationEntryFormForHeader && !document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryFormForHeader;
+        }
+        else if (!document.authenticationEntryFormForHeader && document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryForm;
+        }
+
+        if (authenticationFormToUse == null)
+        {
+            var headerFieldsFilledIn = 0;
+            if (document.authenticationEntryFormForHeader)
+            {
+                if (typeof(document.authenticationEntryFormForHeader.screenName) != "undefined"
+                    && document.authenticationEntryFormForHeader.screenName.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryFormForHeader.kclq) != "undefined"
+                    && document.authenticationEntryFormForHeader.kclq.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+            }
+
+            var bodyFieldsFilledIn = 0;
+            if (document.authenticationEntryForm)
+            {
+                if (typeof(document.authenticationEntryForm.screenName) != "undefined"
+                    && document.authenticationEntryForm.screenName.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryForm.kclq) != "undefined"
+                    && document.authenticationEntryForm.kclq.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+            }
+
+            if (headerFieldsFilledIn > bodyFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryFormForHeader;
+            }
+
+            if (bodyFieldsFilledIn > headerFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryForm;
+            }
+        }
+
+        // If no form or a search is being performed
+        if ( authenticationFormToUse == null || (typeof searchCtlr !== "undefined" && searchCtlr && document.forms["hcSearchForm"].token.value != '') )
+        {
+            window.document.onkeypress = doNothing;
+        }
+        else
+        {
+            if (authenticationFormToUse.kclq.value == "")
+            {   
+                authenticationFormToUse.kclq.focus();
+            }
+            else
+            {
+                authenticationFormToUse.submitButton.click();
+    
+                window.document.onkeypress = doNothing;
+            }
+        }
+
+
+        return false;
+    }
+
+    return true;
+}
+
+
+    if (window.document.captureEvents != null){
+        window.document.captureEvents(Event.KEYPRESS);
+    }
+    window.document.onkeypress = handleSubmitOnEnter;
+
+
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+
+function aefhCancelLogin()
+{
+    var elem = document.getElementById('edlHeaderControlsLoginPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        aefhRestoreBreadcrumbBorder();
+        elem.style.display = "none";
+    }
+}
+
+
+function aefhSaveAndClearBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        nbGlobalTopBorderStyle = elem.style.borderTop;
+        elem.style.borderTop = "";
+    }
+}
+
+
+function aefhRestoreBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        elem.style.borderTop = nbGlobalTopBorderStyle;
+    }
+}
+
+
+<!--
+function checkBrowserTime()
+{
+    var edlineDateString       = "Thursday, January 5, 2017 6:24AM CST";
+    var edlineTimeInMillis     = 1483619088984;
+    var browserTimeInMillis    = (new Date()).getTime();
+    var timeDifferenceInMillis = (edlineTimeInMillis  - browserTimeInMillis);
+    var timeDifferenceInDays   = timeDifferenceInMillis / 86400000;
+
+    if ((timeDifferenceInDays < -2) || (timeDifferenceInDays > 2))
+    {
+        alert("Your computer clock reads " + (new Date()).toLocaleString() + " \r\nwhich is off by more than 24 hours. Please correct your computer clock.");
+
+    }
+}
+
+
+checkBrowserTime();
+
+//-->
+', 
+
+
+', 
+        ',    
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+
+    ', 
+
+        ', 
+            ', 
+                ', 
+                  ', Screen Name:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                  
+            ', 
+            ', 
+                ', 
+                    ', Click here if you forgot your screen name or password', 
+                ', 
+            ', 
+        ', 
+        
+        ', 
+            ', 
+                ', 
+                  ', Password:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+
+            ', 
+                ',     
+            ', 
+
+            ', 
+                  
+            ', 
+
+            ', 
+                ', 
+                    ', Click here to Sign Up', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+        ', 
+
+        
+', 
+
+
+
+', 
+window.document.cookie="bpcc=tu";
+
+  var frm = window.document.authenticationEntryFormForHeader;
+  frm.bscv.value = window.document.cookie;
+  frm.bscf.value = (window.document.cookie.indexOf("bpcc=tu") >= 0)
+    ? "1" : "0";
+
+
+
+
+try
+{
+  
+  if (frm.screenName.offsetWidth > 0)
+  {
+	  frm.screenName.focus();
+      frm.screenName.select();
+  }
+}
+catch(e)
+{
+
+}                                             
+', 
+
+
+', 
+
+
+
+
+
+', 
+
+
+    
+        
+            
+        
+
+        
+
+', 
+
+', 
+
+    
+
+    if (typeof suTrimLeadingTrailingSpace != "undefined")
+    {
+        var headerAreaQuery = $("#edlHeaderArea");
+
+        if (suTrimLeadingTrailingSpace(headerAreaQuery.html() ).length == 0)
+        {
+            headerAreaQuery.hide();//css("display","none");
+        }
+    }
+
+', 
+
+
+
+
+
+
+  ', 
+    var ga_analytics_data = {
+  "furl": "/pages/SPSMO/About/Departments/Community_Relations/General_Info/Community_Relations_and_Strate",
+  "ids": ["UA-8905864-1"],
+  "role": "Guest",
+  "wmids": ["UA-19625889-3"]
+};
+  ', 
+  ', 
+  ', 
+
+
+', 
+    function translationDisabledMessage()
+    {
+
+        return false;
+
+    }
+
+
+
+', 
+
+
+                    
+
+                        ', 
+                            ', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("5284418377228028098.folder", "");
+    ghPinnedSlideShows["5284418377228028098"] = true;
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+', 
+
+
+
+    
+    ', Default Slideshow', 
+    
+
+            
+
+            
+
+
+
+
+
+
+  ', 
+
+  
+
+  
+
+
+
+
+
+    ', 
+
+    
+
+        .ed-slider-controlbar a {
+            display: block;
+            position: absolute;
+            text-decoration: none;
+            text-indent: -999em;
+            overflow: hidden;
+            background: transparent url('/images/SlideShowControlButtonsSprite16x16.png') no-repeat 0 0;
+            height: 16px;
+            width: 16px;
+        /*	left: 0;*/
+            left: 50%;
+            top: 50%;
+            margin: -8px 0 0 -8px;
+        }
+        /*sprites begin*/
+        /*a.ed-slider-prev {
+            background-position:-10px -10px;
+        }
+
+        a.ed-slider-prev:hover {
+            background-position:-40px -10px;
+        }
+
+        a.ed-slider-prev:active {
+            background-position:-70px -10px;
+        }*/
+
+        a.ed-slider-play {
+            background-position:-10px -100px;
+        }
+
+        a.ed-slider-play.selected {
+            display: none;
+        }
+
+        a.ed-slider-play:hover {
+            background-position:-40px -100px;
+        }
+
+        a.ed-slider-play:active {
+            background-position:-70px -100px;
+        }
+
+        a.ed-slider-pause {
+            background-position:-10px -70px;
+        }
+
+        a.ed-slider-pause.selected {
+            display: none;
+        }
+
+        a.ed-slider-pause:hover {
+            background-position:-40px -70px;
+        }
+
+        a.ed-slider-pause:active {
+            background-position:-70px -70px;
+        }
+
+        /*a.ed-slider-next {
+            background-position:-10px -40px;
+            left: 32px;
+        }
+
+        a.ed-slider-next:hover {
+            background-position:-40px -40px;
+        }
+
+        a.ed-slider-next:active {
+            background-position:-70px -40px;
+        }*/
+
+        a.ed-slider-fullscreen {
+            background-position:-10px -130px;
+        }
+
+        a.ed-slider-fullscreen:hover {
+            background-position:-40px -130px;
+        }
+
+        a.ed-slider-fullscreen:active {
+            background-position:-70px -130px;
+        }
+        /*sprites end*/
+        .ed-slider-prevNext {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat -100% -100%;
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .ed-slider-prevNext a {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 100%;
+            text-indent: -999em;
+            overflow: hidden;
+            outline: none;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next {
+            left: auto;
+            right: 0;
+            width: 80%;
+        }
+
+        .ed-slider-prevNext div {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext span {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat 0 0;
+            display: block;
+            width: 25px;
+            height: 47px;
+            text-indent: -999em;
+            overflow: hidden;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            margin: -23px 0 0;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext a.ed-slider-prev:hover span,
+        a.ed-slider-prev div.hover span {
+            background-position: 0 -60px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next span {
+            background-position: right 0;
+            left: auto;
+            right: 10px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next:hover span,
+        a.ed-slider-next div.hover span {
+            background-position: right -60px;
+        }
+
+        /*caption-controlbar container begin*/
+        ul .ed-slider-image-caption-controlbar-container {
+            display: none;
+        }
+
+        .ed-slider-image-caption-controlbar-container.ext {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 85px;
+            color: #fff;
+            z-index: 10;
+            vertical-align:bottom;
+        }
+
+        .ed-slider-image-caption,
+        .ed-slider-image-caption-summary,
+        .ed-slider-image-caption-title-has-summary,
+        .ed-slider-image-caption-title-no-summary
+        {
+            color: #fff;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption .ed-slider-countinfo,
+        .ed-slider-image-caption-controlbar-container.hasCaption .prevNext,
+        .ed-slider-image-caption-controlbar-container.hasCaption .fullscreen {
+            background-image: none;
+        }
+
+        /*caption-controlbar container end*/
+        /*caption begin*/
+        .ed-slider-image-caption-controlbar-container.hasCaption {
+            width: 100%;
+            min-height: 30px;
+            height: auto;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption  .captionHolder {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+            float: left;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        
+        /*caption end*/
+        
+        /*controlbar begin*/
+        .ed-slider-controlbar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            min-height:31px;
+            width:105px;
+        }
+
+
+        /*.ed-slider-controlbar div{*/
+             /*padding-top:4px;*/
+             /*padding-right:2px;*/
+             /*padding-left:2px;*/
+        /*}*/
+
+        .ed-slider-controlbar .fullscreen, .ed-slider-controlbar .playPause {
+            float: right;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+        }
+
+        .ed-slider-controlbar.hasNoCaption, .ed-slider-controlbar.captionHidden {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+        }
+        
+        .ed-slider-controlbar .ed-slider-countinfo {
+        	float: right;
+            padding: 8px 10px 0 6px;
+            height: 20px;
+            font-weight: bold;
+            font-size: 12px;  
+        }
+
+        /*.ed-slider-controlbar .prevNext {*/
+            /*position: absolute;*/
+            /*right: 20px;*/
+            /*width: 48px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .playPause {*/
+            /*position: absolute;*/
+            /*right: 30px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 11;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .fullscreen {*/
+            /*position: absolute;*/
+            /*right: 4px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+        /*controlbar end*/    
+         .ed-slider-cached-image
+        {
+            display:none;
+        }
+
+        /**********************/
+        /* thumbnail controls */
+        /**********************/
+        .ncWrap {
+            float: left;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        /* round button look */
+        .ncWrap a.prev, .ncWrap a.next {
+            background: transparent url("/images/thumbnailControls.png") no-repeat 0 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -18px;
+            width: 32px;
+            height: 36px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prev { left: 0; margin-left: 5px;}
+        .ncWrap a.prev:hover { background-position: 0 -40px; }
+        .ncWrap a.prev:active { background-position: 0 -80px; }
+
+        .ncWrap a.next { background-position: -40px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.next:hover { background-position: -40px -40px; }
+        .ncWrap a.next:active { background-position: -40px -80px; }
+        /* end round button look */
+
+        /* small round button look */
+        .ncWrap a.prevSmall, .ncWrap a.nextSmall {
+            background: transparent url("/images/thumbnailControls.png") no-repeat -160px 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prevSmall { left: 0; margin-left: 5px;}
+        .ncWrap a.prevSmall:hover { background-position: -160px -40px; }
+        .ncWrap a.prevSmall:active { background-position: -160px -80px; }
+
+        .ncWrap a.nextSmall { background-position: -200px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.nextSmall:hover { background-position: -200px -40px; }
+        .ncWrap a.nextSmall:active { background-position: -200px -80px; }
+        /* end small round button look */
+
+        .carouselContainer {
+            position: relative;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            margin: 0 0 0 30px;
+        }
+
+        .carousel {
+            width: 99999px;/* huge width prior to js set width */
+        }
+
+        .carousel li {
+            float: left;
+            margin: 0 5px;
+            background-color: #fff;
+            border: 1px solid #e3e3e3;
+            opacity: .4;
+            width: auto !important;
+            height: auto !important;
+            position: relative;
+            filter: alpha(opacity = 40);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+            -webkit-transition: all .4s linear;
+            -moz-transition: all .4s linear;
+            -o-transition: all .4s linear;
+            -ms-transition: all .4s linear;
+            transition: all .4s linear;
+        }
+
+        /* ie8 */
+        .ie8 .carousel li img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        }
+
+        .carousel li a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+
+        .carousel li.selected, .carousel li:hover {
+            opacity: 1;
+            filter: alpha(opacity = 100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        /* ie8 */
+        .ie8 .carousel li.selected img, .ie8 .carousel li:hover img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        .carousel li img {
+            position: relative;
+        }
+        /**************************/
+        /* end thumbnail controls */
+        /**************************/
+    ', 
+    ', 
+        .ed-slider-image-caption-title-no-summary-5ef964b337 {
+            font-weight:bold;
+            font-size:16px;
+        }
+
+        .ed-slider-image-caption-title-has-summary-5ef964b337 {
+            font-weight:bold;
+            font-size:16px;
+            padding-bottom: 2px;
+        }
+
+        .ed-slider-image-caption-summary-5ef964b337 {
+            font-weight:bold;
+            font-size:10px;
+        }
+        .ed-slider-image-caption-5ef964b337,
+        .ed-slider-image-caption-summary-5ef964b337,
+        .ed-slider-image-caption-title-has-summary-5ef964b337 ,
+        .ed-slider-image-caption-title-no-summary-5ef964b337
+        {
+            color: #fff;
+        }
+
+       #ed-slider-gallery-loading-5ef964b337
+       {
+           width:950px;
+           height:150px;
+           position: absolute;
+           z-index: 999;
+       }
+
+       #ed-slider-wrap-5ef964b337
+       {
+           overflow:hidden;
+
+           
+           width:950px;
+           height:150px;
+           position:relative;
+           
+
+           font-family:Arial, Helvetica, sans-serif;
+
+
+
+
+       }
+
+        #ed-slider-wrap-5ef964b337 .galleryWrap {
+            width: 950px;
+            height: 150px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+
+       #ed-slider-wrap-5ef964b337 ul {
+           float: left;
+           width: 950px;
+           height: 150px;
+           overflow: hidden;
+       }
+
+
+       #ed-slider-wrap-5ef964b337 ul li
+       {
+           list-style-type:none;
+           overflow: hidden;
+           width: 950px;
+           height: 150px;
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-5ef964b337 .group .block {
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-5ef964b337 .group .block.imgTransition {
+           background-color: transparent;
+       }
+
+       .ed-slider-image-caption-controlbar-container .captionHolder .ed-slider-image-caption-5ef964b337 {
+            float: left;
+            min-height: 15px;
+            padding: 8px 8px 8px 10px;
+            position: relative;
+            width: 834px;
+        }
+
+        #ed-slider-wrap-5ef964b337 .ed-slider-prevNext {
+            height: 150px;
+        }
+   ', 
+
+    ', 
+        ', 
+
+    
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+
+        ', 
+        ', 
+            
+            ', 
+               ', 
+            ', 
+            
+        ', 
+    ', 
+', 
+	', 
+    ', 
+
+	', u"
+
+        $(document).ready(function()
+        {
+            fssbOnload('5ef964b337',
+                    5000,
+                    'never',
+                    true,
+                    'fade',
+                    'None',
+                    'small',
+                    false,
+                    'off',
+                    '5284418377228028098',
+                    'edlElement_5284418377228028098_folderContents',
+                    'edlElement_5284418377228028098_folder',
+                    true
+            );
+		});
+
+	", 
+
+
+
+
+  
+
+  
+
+    ', 
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    $(document).ready(function() {
+        ghPrepNavMenu("globalTopNavMenu", false,
+                "/images/icons/sets/None/");
+    });
+
+
+    
+
+', 
+
+
+
+
+', 
+
+    
+
+
+
+
+    ', Global Main Navigation', 
+    
+    
+
+    
+
+    ', 
+
+        ', 
+        ', 
+          ', 
+              ', 
+', About SPS', 
+', |', 
+', District', 
+', |', 
+', Programs & Services', 
+', |', 
+', Our Schools', 
+', |', 
+', Families', 
+', |', 
+', SPS Staff', 
+', |', 
+', Community', 
+', |', 
+', Contact', 
+', 
+
+          ', 
+        ', 
+        ', 
+
+    ', 
+
+
+', 
+
+
+', 
+', Administration', 
+', Alumni', 
+', Board of Education', 
+', Bond & Levy Information', 
+', Bond Projects', 
+', Budget', 
+', Strategic Plan', 
+', 
+', 
+', A-D', 
+', E-M', 
+', N-Z', 
+', 
+', 
+', Academics', 
+', Departments', 
+', District Publications', 
+', Report Cards (District & Schools)', 
+', Springfield Public Schools', 
+', 
+', 
+', Benefits', 
+', Canvas Learning Management System', 
+', District Calendar', 
+', Employee Self Service', 
+', Employee Recognition Form', 
+', Enrollment of Student/Non-Resident Employee', 
+', iShareSPS Intranet (SharePoint)', 
+', IT Work Order', 
+', SPS Email Access', 
+', MAP Test Information', 
+', More...', 
+', 
+', 
+', Activities & Athletics', 
+', Alumni', 
+', Career Opportunities', 
+', Board of Education', 
+', Bond & Levy 2013', 
+', Connect with SPS', 
+', Facility Master Plan', 
+', Facility Rental', 
+', Hall of Fame', 
+', New to Springfield', 
+', Tornado Safe Room', 
+', Volunteer Program', 
+', 
+', 
+', Early Childhood', 
+', Elementary Schools (A-G)', 
+', Elementary Schools (H-R)', 
+', Elementary Schools (S-Z)', 
+', Intermediate Schools', 
+', Middle Schools', 
+', High Schools', 
+', 
+', 
+', Activities & Athletics', 
+', Back To School Information', 
+', Bulletin Board', 
+', District Calendar', 
+', Family Crisis Resources', 
+', Family Home Access Center', 
+', Here to Help', 
+', Influenza (Flu) Information', 
+', Maps & Boundaries', 
+', New to Springfield', 
+', Online Enrollment Application', 
+', PTA', 
+', School Cancellations', 
+', School Report Cards', 
+', Student Handbook', 
+', Transfer Request', 
+', Volunteer Programs', 
+', 
+', 
+', Activities & Athletics', 
+', Administration', 
+', Analytics, Accountability & Assessment', 
+', Business Operations', 
+', Communications', 
+', Curriculum, Instruction and Assessment', 
+', Finance', 
+', Human Resources', 
+', Information Literacy', 
+', Information Technology', 
+', Internal Audit', 
+', Learning Development', 
+', Learning Support & Partnerships', 
+', Nutrition Services', 
+', Payroll', 
+', Purchasing and Distribution', 
+', Records', 
+', Risk Management', 
+', Special Education Services', 
+', Transportation', 
+', 
+', 
+', Alternative Programs', 
+', Attendance Services', 
+', Before & After School Programs', 
+', Catering', 
+', Character Ed', 
+', Choice Programs', 
+', Counseling Services', 
+', Curriculum, Instruction and Assessment', 
+', Diversity & Inclusion', 
+', 
+', 
+', Nutrition Services', 
+', Open 24/7', 
+', SPS Partners', 
+', Parents as Teachers', 
+', School Police Services', 
+', Special Education Services', 
+', SPS Online', 
+', Summer Learning (Explore!)', 
+', Title I', 
+', Transportation', 
+', Volunteer Programs', 
+', 
+', 
+', Early Childhood', 
+', English Language Learners (ELL)', 
+', Explore!', 
+', Extended Learning Program (ELP)', 
+', Facility Rentals', 
+', Foundation for SPS', 
+', Health & Wellness', 
+', IGNiTE', 
+', Information Technology', 
+', Library Services', 
+', 
+', 
+', Bingham', 
+', Bissett', 
+', Bowerman', 
+', Boyd', 
+', Campbell', 
+', Cowden', 
+', Delaware', 
+', Disney', 
+', Field', 
+', Fremont', 
+', Gray', 
+', 
+', 
+', Early Childhood Center Shining Stars', 
+', Early Childhood Shady Dell', 
+', Parents as Teachers', 
+', 
+', 
+', Sequiota', 
+', Sherwood', 
+', Sunshine', 
+', Truman', 
+', Twain', 
+', Watkins', 
+', Weaver', 
+', Weller', 
+', Westport', 
+', Wilder', 
+', Williams', 
+', York', 
+', 
+', 
+', Harrison', 
+', Hickory HIlls', 
+', Holland', 
+', Horace Mann', 
+', Jeffries', 
+', McBride', 
+', McGregor', 
+', Pershing', 
+', Pittman', 
+', Pleasant View', 
+', Portland', 
+', Robberson Community School', 
+', Rountree', 
+', 
+', 
+', Carver', 
+', Cherokee', 
+', Hickory Hills', 
+', Jarrett', 
+', Pershing', 
+', Pipkin', 
+', Pleasant View', 
+', Reed', 
+', Westport', 
+', 
+', 
+', u"Wilson's Creek", 
+', 
+', 
+', Central', 
+', Glendale', 
+', Hillcrest', 
+', Kickapoo', 
+', Parkview', 
+', 
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', HeaderScript', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc5284418464335821380";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "5284418464335821380",
+            "5284418464335821380",
+            "iFrame_edlElement_5284418464335821380_document",
+            'iFrame_edlElement_5284418464335821380_document',
+            '*',
+            'edlThemeTopsectionZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            false,
+            false,
+            1,
+            '#004370',
+            false,
+            false,
+            true,
+            false,
+            '934',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+', 
+
+    function commentOn(commentId)
+    {
+        submitEvent('comment', 'TCNK=docViewBoxComponent;commentId=' + commentId);
+    }
+
+    function deleteComment(commentId)
+    {
+        submitEvent('commentDelete', 'TCNK=docViewBoxComponent;commentId=' + commentId);
+    }
+
+    function downloadFormAttachment(fieldName)
+    {
+    	var frm = document.downloadFormAttachmentForm;
+        frm.fileAttachmentFieldName.value = fieldName;
+        frm.submit();
+    }
+
+    function approveComment(commentId)
+    {
+      submitEvent('commentApprove', 'TCNK=docViewBoxComponent;commentId=' + commentId);
+    }
+
+    function rejectComment(commentId)
+    {
+        var reason = prompt("Optionally specify a reason for rejection.", "");
+        if (reason !=null)
+        {
+            submitEvent('commentReject', 'TCNK=docViewBoxComponent;commentId=' + commentId +
+                  ';rejectReason=' + encodeURIComponent(reason) );
+        }
+    }
+
+    function changeCommentOrder(commentOrder)
+    {
+        submitEvent('changeCommentOrder', 'TCNK=docViewBoxComponent;commentOrder=' + commentOrder);
+    }
+
+    function showAllComments(showAllComments)
+    {
+        submitEvent('showAllComments', 'TCNK=docViewBoxComponent;showAllComments=' + showAllComments);
+    }
+
+    // Moves the comment input box to the position reply button that was clicked, rebinds needed events.
+    // commentId = 0 refers to the top-most "reply to post" comment.
+    // commentId's 1-n refer to "reply-to-other-comment" comments.
+    function moveCommentInputBox(elmReply, commentId)
+    {
+        $(elmReply).removeAttr('onclick').unbind('click');
+
+        // Get the id of the previous comment from the hidden form field.
+        var oldCommentOn = $('#commentId').attr('value') || "";
+
+        // Store the new id of what we are commenting on in the hidden form field.
+        $('#commentId').attr('value', commentId);
+
+        //calculate new size of textarea / profile image and reset the text
+        var newWidth = $(elmReply).parent().width() - 70;
+
+        var $commentInput = $('#commentInput');
+        $commentInput.css('width', newWidth + "px");
+
+        // EDL-9678
+        // Don't show the "Leave a comment" text when the user clicks "reply". Instead, just set focus to the textarea.
+        $commentInput.empty();
+        $commentInput.removeAttr('onfocus').removeAttr('onblur');
+        $commentInput.unbind('focus').unbind('blur');
+
+        if (commentId == "0")
+        {
+            $('#commentInputDiv div.profileImage').removeClass('small').addClass('medium');
+        }
+        else
+        {
+            $('#commentInputDiv div.profileImage').removeClass('medium').addClass('small');
+        }
+
+        //swap the positions of the reply and comment input
+        var elmCommentInputDiv  = $('#commentInputDiv');
+        var elmPlaceHolder      = $('<div id=\"placeholder\" style=\"display:none;\"></div>');
+
+        elmPlaceHolder.insertAfter($(elmReply));
+        $(elmReply).remove()
+                   .insertAfter(elmCommentInputDiv)
+                   .bind('click', function() { moveCommentInputBox(elmReply, oldCommentOn); }); // Change the reply button's click event to make it move the comment box to where it was before.
+
+        // Note: We use TWO focus() commands at the end of this chain because otherwise in IE 8 jQuery 1.3.2 will not always focus the textarea element properly.
+        // For example, focus won't be set properly in IE 8 if the user clicks on a "reply" button above the current comment textarea.
+        elmCommentInputDiv.remove()
+                          .insertAfter(elmPlaceHolder)
+                          .find('#commentInput').focus().focus();
+        elmPlaceHolder.remove();
+
+        return false;
+    }
+
+
+    function bindReplyEvents()
+    {
+        $('.replyButton').each(function(index) {
+            $(this).bind('click', function(e) { moveCommentInputBox(this, $(this).attr('commentid')); });
+        });
+    }
+
+
+    function initializeCommentInput(e)
+    {
+        if ($('#commentInput').text() == 'Leave a Comment' && e.type == 'focus')
+        {
+           $('#commentInput').empty();
+        }
+        else if ($('#commentInput').val() == '' && e.type == 'blur')
+        {
+           $('#commentInput').text('Leave a Comment');
+        }
+    }
+
+
+    function dvboxPotentiallyDisableMouseClicks()
+    {
+        
+    }
+
+    var docProps = {};
+    mmAddEmbedInfo(docProps);
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    
+
+    
+
+    ', 
+        var isDesignMode = false;
+        var isEditingMode = false;
+        var isHTML5FlowplayerEnabled = true;
+    ', 
+
+    
+
+
+    
+
+
+    ', 
+
+        ', Communications Department', 
+        
+            ', 
+', 
+', 
+', Communications Department', 
+', 
+
+
+        
+
+        
+
+        
+
+        ', 
+
+            
+
+            
+
+                
+
+                ', 
+
+                    
+
+                    
+
+                    ', 
+
+                        
+                            
+
+                            
+                        
+
+
+                        
+
+                        
+
+                        
+
+
+                        
+
+                            
+
+                            
+
+                                ', 
+
+                                    
+
+                                        
+
+                                        
+                                            ', 
+                                        
+
+                                        ', The Communications Department plays a central role in engaging all stakeholders by fostering two-way communication. The office is responsible for the district\u2019s internal and external communications, media relations, newsletters and other publications. ', 
+',  ', 
+', Vision', 
+', Empower stakeholders to value Springfield Public Schools and to take ownership of its success to ensure Springfield\u2019s continued vitality as a community.', 
+',  ', 
+', Mission', 
+', With an intense focus on the customer, we will promote transparency, foster constructive, two-way dialogue and cultivate relationships to satisfy the needs and exceed the expectations of our customers.', 
+',  ',  ', 
+', Contact Information', 
+',  ', 
+', 
+', The Communications Department is located at:', 
+', Kraft Administrative Center', 1359 E. St. Louis St.', Springfield, MO 65802', Phone: 417-523-0021', Fax: 417-523-0196', 
+', 
+',  ', 
+', Teresa Bledsoe', Director of Communications', 
+', Phone: 417-523-0117 ', E-mail: ', tbledsoe@spsmail.org', 
+',  ', 
+', Pam Bodine', 
+', Senior Communications Specialist ', Phone: 417-523-0053 ', E-mail: ', plbodine@spsmail.org', Emily Higgins', Administrative Assistant to the Director', Phone: 417-523-0021', Email: ', ehiggins@spsmail.org', 
+',  ', 
+', Ren Luebbering', 
+', Social Media Specialist', 
+', Phone:  417-523-0888', 
+', Email:  ', lmluebbering@spsmail.org', 
+',  ', 
+', Have a suggestion on how to improve our district? We want to hear from you!', 
+
+                                        
+                                            ', 
+                                        
+
+                                    
+
+                                ', 
+
+                                
+
+                            
+                        
+                    ', 
+
+
+                    
+
+                    
+
+
+
+                ', 
+
+            
+
+
+            
+
+
+        ',    
+
+    ', 
+
+    ', 
+        ', 
+        ', 
+        ', 
+        ', 
+
+        
+
+    ', 
+
+',    
+
+    ', 
+  ', 
+', 
+',   ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x495605B767F6F374/6":{"renderer":"image","mimeType":"image/png"},"0x495605B767F6F374/5":{"renderer":"image","mimeType":"image/png"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Footer', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc5284417498047247220";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "5284417498047247220",
+            "5284417498047247220",
+            "iFrame_edlElement_5284417498047247220_document",
+            'iFrame_edlElement_5284417498047247220_document',
+            '*',
+            'edlThemeBottomsectionZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            80,
+            'transparent',
+            false,
+            false,
+            true,
+            false,
+            '934',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', FooterScript', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc5284418465923781268";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "5284418465923781268",
+            "5284418465923781268",
+            "iFrame_edlElement_5284418465923781268_document",
+            'iFrame_edlElement_5284418465923781268_document',
+            '*',
+            'edlThemeBottomsectionZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            0,
+            'transparent',
+            false,
+            true,
+            false,
+            false,
+            '934',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+
+                        ', 
+
+                    
+
+
+    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+    ', 
+
+    ', 
+
+    
+    ', translate monitor', 
+
+    '][
+
+    
+
+    ', 
+         
+    ', 
+
+    
+
+
+    
+
+    
+
+    
+    ', Skip to Content', 
+
+    
+    ', 
+
+        
+
+
+        ', 
+            ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+
+                         
+
+                        ', 
+
+                         
+
+                        ', 
+
+                    ', 
+                ', 
+
+                    
+                    ', 
+                        ', 
+                              
+                            ', 
+                            ', All locations', 
+                             
+                            ', 
+                        ', 
+                    ', 
+
+                    
+                    ', 
+                        ', 
+                        ', 
+                    ', 
+
+
+            ', 
+        ', 
+
+
+        ', 
+            ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                          
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                        ', 
+                              
+                            ', 
+                            ', Change in all locations', 
+                             
+                            ', 
+                        ', 
+                ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+
+
+    ', 
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+    ', 
+    
+
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', Springfield R-12', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+', :', 
+
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', About SPS', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+', :', 
+
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', Departments', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+', :', 
+
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', Communications', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+', :', 
+
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', General Info', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+', :', 
+
+    ', 
+        ', 
+            Communications Department
+        ', 
+    ', 
+
+
+
+        ', 
+    ', 
+', 
+
+
+
+
+
+
+
+', 
+', 
+
+
+', 
+
+', 
+', 
+
+
+
+/* MOVED FUNCTION TO BOTTOM */
+function addHtmlAttribute(element, attributeName, attributeValue)
+{
+    var tempVar = "";
+    if (element.hasAttribute(attributeName) == true)
+    {
+       tempVar = element.getAttribute(attributeName);
+    }
+    element.setAttribute(attributeName, attributeValue + tempVar);
+}
+
+    var menuWidth = 200;
+    var menuBarWidth = 600;
+    var ajaxRequestEntid = "";
+    var globalMenuItem;
+    var itemDescrArray = new Array();
+    var itemNameArray = new Array();
+    var itemTypeArray = new Array();
+    var itemUrlArray = new Array();
+    var itemTargetArray = new Array();
+    var itemIconClassArray = new Array();
+    var itemHasItemsArray = new Array();
+    var urlsPerEntidArray = new Array();
+    var descrsPerEntidArray = new Array();
+    var overflowAdjustedDivsArray = new Array();
+    var menuNamesArray = new Array();
+    var navLinkClicked = false;
+    var ua = navigator.userAgent;
+    var isMSIE = ua.indexOf ('MSIE') != -1;
+    var nbIsIE9 = ua.indexOf ('MSIE 9') != -1;
+    var isFirefox = ua.indexOf ('Firefox') != -1;
+    var isMacFirefox = (ua.indexOf ('Macintosh') != -1) && (isFirefox);
+    var nbIsChrome = ua.indexOf ('Chrome') != -1;
+    var previousEntid = "";
+    var previousTime = new Date();
+    var timeOfPageLoad = new Date();
+    var overrideMenuHiding = false;
+    var nbGlobalTopBorderStyle = "";
+    var nbIsWorldUser = false;
+    var nbShowAjaxErrorsToWorldUsers = false;
+    var nbFolderGroupTypeString = "Folder";
+    var nbWebPageGroupTypeString = "Web Page";
+    var nbHomeLinkId = "root-x5284417265795929042--sep--Springfield_R-12homeLink";
+    var nbBreadcrumbStripDropDownMenuFetchDelayMs = 450;
+    var nbHomeAndBreadcrumbDropDownSubmenuFetchDelayMs = 50;
+    var homeLinkElem = document.getElementById('edlHomeLink');
+    if (  (homeLinkElem != null) && (homeLinkElem != undefined)  )
+    {
+        homeLinkElem.id = "root-x5284417265795929042--sep--Springfield_R-12homeLink";
+        homeLinkElem.className = "breadcrumbLink";
+    }
+    
+    var onloadFnName = "nbnNavigationBarOnload";
+    
+    var pageBody = document.body;
+    var func = onloadFnName + "('false')";
+    
+    if (pageBody.attachEvent!=undefined) // attachEvent is a deprecated IE method
+    {
+        pageBody.onload = appendToFunction(pageBody.onload, func);
+    } else {
+        addHtmlAttribute(pageBody, "onload", func +";");
+    }
+
+function appendToFunction(func, str)
+{
+    var nfs = "";
+    if (func != null){
+        var ofs = func.toString();
+        var fcb = ofs.indexOf("{");
+        var lcb = ofs.indexOf("}",fcb+1);
+        var oss = ofs.substring(fcb + 1, lcb);
+        //alert('h3=' + ofs + '||||\n' + oss);
+        nfs = nbStripLeadingSemicolons(oss);
+    }
+	var s = nbStripLeadingSemicolons(nfs + ";" + str);
+    var f = new Function(s);
+    return f;
+}
+function nbStripLeadingSemicolons(s){
+	while (s.substr(0,1) == ';' && s.length>1) {
+    	s = s.substr(1);
+    }
+	return s;
+}
+', 
+
+
+        ', 
+
+    ', 
+
+
+        ', 
+            ', 
+                
+
+                ', 
+
+                    ', 
+
+                    
+                    
+
+
+
+
+
+
+
+
+', 
+', 
+<!--
+
+    var CLICK_OK_BUTTON_DURATION = 60;
+    var CONFIRM_MSG_SECS = 1200 - CLICK_OK_BUTTON_DURATION - 30;
+    var secsTilMsg = CONFIRM_MSG_SECS;
+    function openInfoPopupWindowIfNeeded()
+    {
+        
+
+        return false;
+    }
+  
+    var HAS_DEFAULT_ENTER_KEY  =  false;
+    var DEFAULT_ENTER_KEY_NAME = "";
+    var HAS_PAGE_VALIDATION    =  false;
+    var PAGE_VALIDATION        = "()";
+
+
+
+    function adjustIFrameSize (iframeWindow) {
+
+      if (iframeWindow.document.height) {
+        var iframeElement = parent.document.getElementById (iframeWindow.name);
+        iframeElement.style.height = iframeWindow.document.height + 'px';
+
+        iframeElement.style.width = iframeWindow.document.width + 'px';
+      }
+      else if (document.all) {
+        var iframeElement = parent.document.all[iframeWindow.name];
+        if (iframeWindow.document.compatMode &&
+            iframeWindow.document.compatMode != 'BackCompat')
+        {
+          iframeElement.style.height =
+            iframeWindow.document.documentElement.scrollHeight + 5 + 'px';
+
+          iframeElement.style.width =
+            iframeWindow.document.documentElement.scrollWidth + 5 + 'px';
+        }
+        else {
+          iframeElement.style.height =
+            iframeWindow.document.body.scrollHeight + 5 + 'px';
+          iframeElement.style.width =
+            iframeWindow.document.body.scrollWidth + 5 + 'px';
+        }
+      }
+    }
+
+    
+    function checkStale()
+    {
+        
+        if (document.cookie.search(/pgt=c1483619091366t/i) == null)
+        {
+            document.location.reload();
+        }
+    }
+//-->
+', 
+', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+
+
+
+', 
+
+', 
+ ', 
+', 
+
+', 
+ ', 
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', 
+
+
+', 
+
+
+    $(function(){
+
+    
+
+        hcOnDocumentReady();
+        
+    });//document ready
+
+
+
+
+
+function hcLogin()
+{
+    aefhLogin(false);
+}
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+', 
+
+', 
+    hcMyEdlineXmlDataJQueryObj = $("#edlMenuXmlData");
+
+    
+        hcMyEdlineBackCompatXmlDataJQueryObj = hcMyEdlineXmlDataJQueryObj;
+    
+
+', 
+
+
+
+
+
+
+
+
+', 
+
+
+    function translateMenuOver(pEvent)
+    {
+        overrideMenuHiding = true;
+        showTranslateMenu(pEvent);
+    }
+
+
+    function translateMenuOut(pEvent)
+    {
+    }
+
+
+    function showTranslateMenu(pEvent)
+    {
+      // Hide the navbar menus if they are open:
+      hdrHideAllDropDownMenus();
+
+      var linkElem = document.getElementById("edlLangLink");
+      var linkElemOffset = $("#edlLangLink").offset();
+      var linkLeftEdge = linkElemOffset.left;
+      var linkBottomEdge = linkElemOffset.top + linkElem.offsetHeight;
+
+      translateMenu.moveTo(linkLeftEdge, linkBottomEdge + 1);
+      translateMenu.show();
+    }
+
+    function switchLang(lang)
+    {
+        if (translationDisabledMessage())
+        {
+            return;
+        }
+
+        submitEvent('language', 'TCNK=headerComponent;language='+lang);
+    }
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Want to translate this page?', 
+                      ', 
+                        ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Share This Page', 
+                      ', 
+                        ', 
+                          ', 
+                          ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', 
+                        ', Search', 
+                        ', 
+                          ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                              ', 
+                              ', 
+                                ', 
+                                  ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                              ', 
+                            ', 
+                            ', 
+                            ', 
+                              ', 
+                              ', Springfield R-12', 
+                            ', 
+                            ', 
+                              ', 
+                              ', General Info', 
+                            ', 
+                            ', 
+                            ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', HELP', 
+                  ', 
+                  ', 
+                  ', 
+                    ',  ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', SIGN IN', 
+                  ', 
+                  ', 
+                ', 
+                ', 
+              ', 
+            ', 
+
+
+
+
+
+
+
+
+
+
+  ', 
+    ', 
+    ', 
+  ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+function initForms()
+{
+	var frm = window.document.authenticationEntryFormForHeader;
+	frm.kclq.value = "";
+	frm.ajaxSupported.value = isAjaxSupported();
+}
+
+
+
+function debounceEnterKey(frm, eventNm)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function debounceEnterKeyToEntid(frm, eventNm, entid)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.targetEntid.value = entid;
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function handleSubmitOnEnter(e)
+{
+    
+    if (window.ghKeyPressHandler != null)
+    {
+        if ( typeof(ghKeyPressHandler == "function") )
+        {
+            ghKeyPressHandler(e);
+        }
+    }
+    
+    var keyPressed = '';
+
+    var isMSIE = navigator.userAgent.indexOf('MSIE') != -1;
+
+    if (isMSIE)
+        keyPressed = String.fromCharCode(window.event.keyCode);
+    else
+        keyPressed = String.fromCharCode(e.which);
+
+    if (keyPressed == "\r" || keyPressed == "\n")
+    {
+        
+        var authenticationFormToUse = null;
+
+        if (document.authenticationEntryFormForHeader && !document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryFormForHeader;
+        }
+        else if (!document.authenticationEntryFormForHeader && document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryForm;
+        }
+
+        if (authenticationFormToUse == null)
+        {
+            var headerFieldsFilledIn = 0;
+            if (document.authenticationEntryFormForHeader)
+            {
+                if (typeof(document.authenticationEntryFormForHeader.screenName) != "undefined"
+                    && document.authenticationEntryFormForHeader.screenName.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryFormForHeader.kclq) != "undefined"
+                    && document.authenticationEntryFormForHeader.kclq.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+            }
+
+            var bodyFieldsFilledIn = 0;
+            if (document.authenticationEntryForm)
+            {
+                if (typeof(document.authenticationEntryForm.screenName) != "undefined"
+                    && document.authenticationEntryForm.screenName.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryForm.kclq) != "undefined"
+                    && document.authenticationEntryForm.kclq.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+            }
+
+            if (headerFieldsFilledIn > bodyFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryFormForHeader;
+            }
+
+            if (bodyFieldsFilledIn > headerFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryForm;
+            }
+        }
+
+        // If no form or a search is being performed
+        if ( authenticationFormToUse == null || (typeof searchCtlr !== "undefined" && searchCtlr && document.forms["hcSearchForm"].token.value != '') )
+        {
+            window.document.onkeypress = doNothing;
+        }
+        else
+        {
+            if (authenticationFormToUse.kclq.value == "")
+            {   
+                authenticationFormToUse.kclq.focus();
+            }
+            else
+            {
+                authenticationFormToUse.submitButton.click();
+    
+                window.document.onkeypress = doNothing;
+            }
+        }
+
+
+        return false;
+    }
+
+    return true;
+}
+
+
+    if (window.document.captureEvents != null){
+        window.document.captureEvents(Event.KEYPRESS);
+    }
+    window.document.onkeypress = handleSubmitOnEnter;
+
+
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+
+function aefhCancelLogin()
+{
+    var elem = document.getElementById('edlHeaderControlsLoginPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        aefhRestoreBreadcrumbBorder();
+        elem.style.display = "none";
+    }
+}
+
+
+function aefhSaveAndClearBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        nbGlobalTopBorderStyle = elem.style.borderTop;
+        elem.style.borderTop = "";
+    }
+}
+
+
+function aefhRestoreBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        elem.style.borderTop = nbGlobalTopBorderStyle;
+    }
+}
+
+
+<!--
+function checkBrowserTime()
+{
+    var edlineDateString       = "Thursday, January 5, 2017 6:24AM CST";
+    var edlineTimeInMillis     = 1483619091386;
+    var browserTimeInMillis    = (new Date()).getTime();
+    var timeDifferenceInMillis = (edlineTimeInMillis  - browserTimeInMillis);
+    var timeDifferenceInDays   = timeDifferenceInMillis / 86400000;
+
+    if ((timeDifferenceInDays < -2) || (timeDifferenceInDays > 2))
+    {
+        alert("Your computer clock reads " + (new Date()).toLocaleString() + " \r\nwhich is off by more than 24 hours. Please correct your computer clock.");
+
+    }
+}
+
+
+checkBrowserTime();
+
+//-->
+', 
+
+
+', 
+        ',    
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+
+    ', 
+
+        ', 
+            ', 
+                ', 
+                  ', Screen Name:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                  
+            ', 
+            ', 
+                ', 
+                    ', Click here if you forgot your screen name or password', 
+                ', 
+            ', 
+        ', 
+        
+        ', 
+            ', 
+                ', 
+                  ', Password:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+
+            ', 
+                ',     
+            ', 
+
+            ', 
+                  
+            ', 
+
+            ', 
+                ', 
+                    ', Click here to Sign Up', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+        ', 
+
+        
+', 
+
+
+
+', 
+window.document.cookie="bpcc=tu";
+
+  var frm = window.document.authenticationEntryFormForHeader;
+  frm.bscv.value = window.document.cookie;
+  frm.bscf.value = (window.document.cookie.indexOf("bpcc=tu") >= 0)
+    ? "1" : "0";
+
+
+
+
+try
+{
+  
+  if (frm.screenName.offsetWidth > 0)
+  {
+	  frm.screenName.focus();
+      frm.screenName.select();
+  }
+}
+catch(e)
+{
+
+}                                             
+', 
+
+
+', 
+
+
+
+
+
+', 
+
+
+    
+        
+            
+        
+
+        
+
+', 
+
+', 
+
+    
+
+    if (typeof suTrimLeadingTrailingSpace != "undefined")
+    {
+        var headerAreaQuery = $("#edlHeaderArea");
+
+        if (suTrimLeadingTrailingSpace(headerAreaQuery.html() ).length == 0)
+        {
+            headerAreaQuery.hide();//css("display","none");
+        }
+    }
+
+', 
+
+
+
+
+
+
+  ', 
+    var ga_analytics_data = {
+  "furl": "/pages/SPSMO/About/Departments/Community_Relations/General_Info/Community_Relations_and_Strate",
+  "ids": ["UA-8905864-1"],
+  "role": "Guest",
+  "wmids": ["UA-19625889-3"]
+};
+  ', 
+  ', 
+  ', 
+
+
+', 
+    function translationDisabledMessage()
+    {
+
+        return false;
+
+    }
+
+
+
+', 
+
+
+                    
+
+                        ', 
+                            ', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("5284418377228028098.folder", "");
+    ghPinnedSlideShows["5284418377228028098"] = true;
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+', 
+
+
+
+    
+    ', Default Slideshow', 
+    
+
+            
+
+            
+
+
+
+
+
+
+  ', 
+
+  
+
+  
+
+
+
+
+
+    ', 
+
+    
+
+        .ed-slider-controlbar a {
+            display: block;
+            position: absolute;
+            text-decoration: none;
+            text-indent: -999em;
+            overflow: hidden;
+            background: transparent url('/images/SlideShowControlButtonsSprite16x16.png') no-repeat 0 0;
+            height: 16px;
+            width: 16px;
+        /*	left: 0;*/
+            left: 50%;
+            top: 50%;
+            margin: -8px 0 0 -8px;
+        }
+        /*sprites begin*/
+        /*a.ed-slider-prev {
+            background-position:-10px -10px;
+        }
+
+        a.ed-slider-prev:hover {
+            background-position:-40px -10px;
+        }
+
+        a.ed-slider-prev:active {
+            background-position:-70px -10px;
+        }*/
+
+        a.ed-slider-play {
+            background-position:-10px -100px;
+        }
+
+        a.ed-slider-play.selected {
+            display: none;
+        }
+
+        a.ed-slider-play:hover {
+            background-position:-40px -100px;
+        }
+
+        a.ed-slider-play:active {
+            background-position:-70px -100px;
+        }
+
+        a.ed-slider-pause {
+            background-position:-10px -70px;
+        }
+
+        a.ed-slider-pause.selected {
+            display: none;
+        }
+
+        a.ed-slider-pause:hover {
+            background-position:-40px -70px;
+        }
+
+        a.ed-slider-pause:active {
+            background-position:-70px -70px;
+        }
+
+        /*a.ed-slider-next {
+            background-position:-10px -40px;
+            left: 32px;
+        }
+
+        a.ed-slider-next:hover {
+            background-position:-40px -40px;
+        }
+
+        a.ed-slider-next:active {
+            background-position:-70px -40px;
+        }*/
+
+        a.ed-slider-fullscreen {
+            background-position:-10px -130px;
+        }
+
+        a.ed-slider-fullscreen:hover {
+            background-position:-40px -130px;
+        }
+
+        a.ed-slider-fullscreen:active {
+            background-position:-70px -130px;
+        }
+        /*sprites end*/
+        .ed-slider-prevNext {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat -100% -100%;
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .ed-slider-prevNext a {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 100%;
+            text-indent: -999em;
+            overflow: hidden;
+            outline: none;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next {
+            left: auto;
+            right: 0;
+            width: 80%;
+        }
+
+        .ed-slider-prevNext div {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext span {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat 0 0;
+            display: block;
+            width: 25px;
+            height: 47px;
+            text-indent: -999em;
+            overflow: hidden;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            margin: -23px 0 0;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext a.ed-slider-prev:hover span,
+        a.ed-slider-prev div.hover span {
+            background-position: 0 -60px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next span {
+            background-position: right 0;
+            left: auto;
+            right: 10px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next:hover span,
+        a.ed-slider-next div.hover span {
+            background-position: right -60px;
+        }
+
+        /*caption-controlbar container begin*/
+        ul .ed-slider-image-caption-controlbar-container {
+            display: none;
+        }
+
+        .ed-slider-image-caption-controlbar-container.ext {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 85px;
+            color: #fff;
+            z-index: 10;
+            vertical-align:bottom;
+        }
+
+        .ed-slider-image-caption,
+        .ed-slider-image-caption-summary,
+        .ed-slider-image-caption-title-has-summary,
+        .ed-slider-image-caption-title-no-summary
+        {
+            color: #fff;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption .ed-slider-countinfo,
+        .ed-slider-image-caption-controlbar-container.hasCaption .prevNext,
+        .ed-slider-image-caption-controlbar-container.hasCaption .fullscreen {
+            background-image: none;
+        }
+
+        /*caption-controlbar container end*/
+        /*caption begin*/
+        .ed-slider-image-caption-controlbar-container.hasCaption {
+            width: 100%;
+            min-height: 30px;
+            height: auto;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption  .captionHolder {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+            float: left;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        
+        /*caption end*/
+        
+        /*controlbar begin*/
+        .ed-slider-controlbar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            min-height:31px;
+            width:105px;
+        }
+
+
+        /*.ed-slider-controlbar div{*/
+             /*padding-top:4px;*/
+             /*padding-right:2px;*/
+             /*padding-left:2px;*/
+        /*}*/
+
+        .ed-slider-controlbar .fullscreen, .ed-slider-controlbar .playPause {
+            float: right;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+        }
+
+        .ed-slider-controlbar.hasNoCaption, .ed-slider-controlbar.captionHidden {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+        }
+        
+        .ed-slider-controlbar .ed-slider-countinfo {
+        	float: right;
+            padding: 8px 10px 0 6px;
+            height: 20px;
+            font-weight: bold;
+            font-size: 12px;  
+        }
+
+        /*.ed-slider-controlbar .prevNext {*/
+            /*position: absolute;*/
+            /*right: 20px;*/
+            /*width: 48px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .playPause {*/
+            /*position: absolute;*/
+            /*right: 30px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 11;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .fullscreen {*/
+            /*position: absolute;*/
+            /*right: 4px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+        /*controlbar end*/    
+         .ed-slider-cached-image
+        {
+            display:none;
+        }
+
+        /**********************/
+        /* thumbnail controls */
+        /**********************/
+        .ncWrap {
+            float: left;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        /* round button look */
+        .ncWrap a.prev, .ncWrap a.next {
+            background: transparent url("/images/thumbnailControls.png") no-repeat 0 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -18px;
+            width: 32px;
+            height: 36px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prev { left: 0; margin-left: 5px;}
+        .ncWrap a.prev:hover { background-position: 0 -40px; }
+        .ncWrap a.prev:active { background-position: 0 -80px; }
+
+        .ncWrap a.next { background-position: -40px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.next:hover { background-position: -40px -40px; }
+        .ncWrap a.next:active { background-position: -40px -80px; }
+        /* end round button look */
+
+        /* small round button look */
+        .ncWrap a.prevSmall, .ncWrap a.nextSmall {
+            background: transparent url("/images/thumbnailControls.png") no-repeat -160px 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prevSmall { left: 0; margin-left: 5px;}
+        .ncWrap a.prevSmall:hover { background-position: -160px -40px; }
+        .ncWrap a.prevSmall:active { background-position: -160px -80px; }
+
+        .ncWrap a.nextSmall { background-position: -200px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.nextSmall:hover { background-position: -200px -40px; }
+        .ncWrap a.nextSmall:active { background-position: -200px -80px; }
+        /* end small round button look */
+
+        .carouselContainer {
+            position: relative;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            margin: 0 0 0 30px;
+        }
+
+        .carousel {
+            width: 99999px;/* huge width prior to js set width */
+        }
+
+        .carousel li {
+            float: left;
+            margin: 0 5px;
+            background-color: #fff;
+            border: 1px solid #e3e3e3;
+            opacity: .4;
+            width: auto !important;
+            height: auto !important;
+            position: relative;
+            filter: alpha(opacity = 40);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+            -webkit-transition: all .4s linear;
+            -moz-transition: all .4s linear;
+            -o-transition: all .4s linear;
+            -ms-transition: all .4s linear;
+            transition: all .4s linear;
+        }
+
+        /* ie8 */
+        .ie8 .carousel li img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        }
+
+        .carousel li a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+
+        .carousel li.selected, .carousel li:hover {
+            opacity: 1;
+            filter: alpha(opacity = 100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        /* ie8 */
+        .ie8 .carousel li.selected img, .ie8 .carousel li:hover img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        .carousel li img {
+            position: relative;
+        }
+        /**************************/
+        /* end thumbnail controls */
+        /**************************/
+    ', 
+    ', 
+        .ed-slider-image-caption-title-no-summary-eb59b8dd0c {
+            font-weight:bold;
+            font-size:16px;
+        }
+
+        .ed-slider-image-caption-title-has-summary-eb59b8dd0c {
+            font-weight:bold;
+            font-size:16px;
+            padding-bottom: 2px;
+        }
+
+        .ed-slider-image-caption-summary-eb59b8dd0c {
+            font-weight:bold;
+            font-size:10px;
+        }
+        .ed-slider-image-caption-eb59b8dd0c,
+        .ed-slider-image-caption-summary-eb59b8dd0c,
+        .ed-slider-image-caption-title-has-summary-eb59b8dd0c ,
+        .ed-slider-image-caption-title-no-summary-eb59b8dd0c
+        {
+            color: #fff;
+        }
+
+       #ed-slider-gallery-loading-eb59b8dd0c
+       {
+           width:950px;
+           height:150px;
+           position: absolute;
+           z-index: 999;
+       }
+
+       #ed-slider-wrap-eb59b8dd0c
+       {
+           overflow:hidden;
+
+           
+           width:950px;
+           height:150px;
+           position:relative;
+           
+
+           font-family:Arial, Helvetica, sans-serif;
+
+
+
+
+       }
+
+        #ed-slider-wrap-eb59b8dd0c .galleryWrap {
+            width: 950px;
+            height: 150px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+
+       #ed-slider-wrap-eb59b8dd0c ul {
+           float: left;
+           width: 950px;
+           height: 150px;
+           overflow: hidden;
+       }
+
+
+       #ed-slider-wrap-eb59b8dd0c ul li
+       {
+           list-style-type:none;
+           overflow: hidden;
+           width: 950px;
+           height: 150px;
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-eb59b8dd0c .group .block {
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-eb59b8dd0c .group .block.imgTransition {
+           background-color: transparent;
+       }
+
+       .ed-slider-image-caption-controlbar-container .captionHolder .ed-slider-image-caption-eb59b8dd0c {
+            float: left;
+            min-height: 15px;
+            padding: 8px 8px 8px 10px;
+            position: relative;
+            width: 834px;
+        }
+
+        #ed-slider-wrap-eb59b8dd0c .ed-slider-prevNext {
+            height: 150px;
+        }
+   ', 
+
+    ', 
+        ', 
+
+    
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+
+        ', 
+        ', 
+            
+            ', 
+               ', 
+            ', 
+            
+        ', 
+    ', 
+', 
+	', 
+    ', 
+
+	', u"
+
+        $(document).ready(function()
+        {
+            fssbOnload('eb59b8dd0c',
+                    5000,
+                    'never',
+                    true,
+                    'fade',
+                    'None',
+                    'small',
+                    false,
+                    'off',
+                    '5284418377228028098',
+                    'edlElement_5284418377228028098_folderContents',
+                    'edlElement_5284418377228028098_folder',
+                    true
+            );
+		});
+
+	", 
+
+
+
+
+  
+
+  
+
+    ', 
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    $(document).ready(function() {
+        ghPrepNavMenu("globalTopNavMenu", false,
+                "/images/icons/sets/None/");
+    });
+
+
+    
+
+', 
+
+
+
+
+', 
+
+    
+
+
+
+
+    ', Global Main Navigation', 
+    
+    
+
+    
+
+    ', 
+
+        ', 
+        ', 
+          ', 
+              ', 
+', About SPS', 
+', |', 
+', District', 
+', |', 
+', Programs & Services', 
+', |', 
+', Our Schools', 
+', |', 
+', Families', 
+', |', 
+', SPS Staff', 
+', |', 
+', Community', 
+', |', 
+', Contact', 
+', 
+
+          ', 
+        ', 
+        ', 
+
+    ', 
+
+
+', 
+
+
+', 
+', Administration', 
+', Alumni', 
+', Board of Education', 
+', Bond & Levy Information', 
+', Bond Projects', 
+', Budget', 
+', Strategic Plan', 
+', 
+', 
+', A-D', 
+', E-M', 
+', N-Z', 
+', 
+', 
+', Academics', 
+', Departments', 
+', District Publications', 
+', Report Cards (District & Schools)', 
+', Springfield Public Schools', 
+', 
+', 
+', Benefits', 
+', Canvas Learning Management System', 
+', District Calendar', 
+', Employee Self Service', 
+', Employee Recognition Form', 
+', Enrollment of Student/Non-Resident Employee', 
+', iShareSPS Intranet (SharePoint)', 
+', IT Work Order', 
+', SPS Email Access', 
+', MAP Test Information', 
+', More...', 
+', 
+', 
+', Activities & Athletics', 
+', Alumni', 
+', Career Opportunities', 
+', Board of Education', 
+', Bond & Levy 2013', 
+', Connect with SPS', 
+', Facility Master Plan', 
+', Facility Rental', 
+', Hall of Fame', 
+', New to Springfield', 
+', Tornado Safe Room', 
+', Volunteer Program', 
+', 
+', 
+', Early Childhood', 
+', Elementary Schools (A-G)', 
+', Elementary Schools (H-R)', 
+', Elementary Schools (S-Z)', 
+', Intermediate Schools', 
+', Middle Schools', 
+', High Schools', 
+', 
+', 
+', Activities & Athletics', 
+', Back To School Information', 
+', Bulletin Board', 
+', District Calendar', 
+', Family Crisis Resources', 
+', Family Home Access Center', 
+', Here to Help', 
+', Influenza (Flu) Information', 
+', Maps & Boundaries', 
+', New to Springfield', 
+', Online Enrollment Application', 
+', PTA', 
+', School Cancellations', 
+', School Report Cards', 
+', Student Handbook', 
+', Transfer Request', 
+', Volunteer Programs', 
+', 
+', 
+', Activities & Athletics', 
+', Administration', 
+', Analytics, Accountability & Assessment', 
+', Business Operations', 
+', Communications', 
+', Curriculum, Instruction and Assessment', 
+', Finance', 
+', Human Resources', 
+', Information Literacy', 
+', Information Technology', 
+', Internal Audit', 
+', Learning Development', 
+', Learning Support & Partnerships', 
+', Nutrition Services', 
+', Payroll', 
+', Purchasing and Distribution', 
+', Records', 
+', Risk Management', 
+', Special Education Services', 
+', Transportation', 
+', 
+', 
+', Alternative Programs', 
+', Attendance Services', 
+', Before & After School Programs', 
+', Catering', 
+', Character Ed', 
+', Choice Programs', 
+', Counseling Services', 
+', Curriculum, Instruction and Assessment', 
+', Diversity & Inclusion', 
+', 
+', 
+', Nutrition Services', 
+', Open 24/7', 
+', SPS Partners', 
+', Parents as Teachers', 
+', School Police Services', 
+', Special Education Services', 
+', SPS Online', 
+', Summer Learning (Explore!)', 
+', Title I', 
+', Transportation', 
+', Volunteer Programs', 
+', 
+', 
+', Early Childhood', 
+', English Language Learners (ELL)', 
+', Explore!', 
+', Extended Learning Program (ELP)', 
+', Facility Rentals', 
+', Foundation for SPS', 
+', Health & Wellness', 
+', IGNiTE', 
+', Information Technology', 
+', Library Services', 
+', 
+', 
+', Bingham', 
+', Bissett', 
+', Bowerman', 
+', Boyd', 
+', Campbell', 
+', Cowden', 
+', Delaware', 
+', Disney', 
+', Field', 
+', Fremont', 
+', Gray', 
+', 
+', 
+', Early Childhood Center Shining Stars', 
+', Early Childhood Shady Dell', 
+', Parents as Teachers', 
+', 
+', 
+', Sequiota', 
+', Sherwood', 
+', Sunshine', 
+', Truman', 
+', Twain', 
+', Watkins', 
+', Weaver', 
+', Weller', 
+', Westport', 
+', Wilder', 
+', Williams', 
+', York', 
+', 
+', 
+', Harrison', 
+', Hickory HIlls', 
+', Holland', 
+', Horace Mann', 
+', Jeffries', 
+', McBride', 
+', McGregor', 
+', Pershing', 
+', Pittman', 
+', Pleasant View', 
+', Portland', 
+', Robberson Community School', 
+', Rountree', 
+', 
+', 
+', Carver', 
+', Cherokee', 
+', Hickory Hills', 
+', Jarrett', 
+', Pershing', 
+', Pipkin', 
+', Pleasant View', 
+', Reed', 
+', Westport', 
+', 
+', 
+', u"Wilson's Creek", 
+', 
+', 
+', Central', 
+', Glendale', 
+', Hillcrest', 
+', Kickapoo', 
+', Parkview', 
+', 
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', HeaderScript', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc5284418464335821380";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "5284418464335821380",
+            "5284418464335821380",
+            "iFrame_edlElement_5284418464335821380_document",
+            'iFrame_edlElement_5284418464335821380_document',
+            '*',
+            'edlThemeTopsectionZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            false,
+            false,
+            1,
+            '#004370',
+            false,
+            false,
+            true,
+            false,
+            '934',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+', 
+
+    function commentOn(commentId)
+    {
+        submitEvent('comment', 'TCNK=docViewBoxComponent;commentId=' + commentId);
+    }
+
+    function deleteComment(commentId)
+    {
+        submitEvent('commentDelete', 'TCNK=docViewBoxComponent;commentId=' + commentId);
+    }
+
+    function downloadFormAttachment(fieldName)
+    {
+    	var frm = document.downloadFormAttachmentForm;
+        frm.fileAttachmentFieldName.value = fieldName;
+        frm.submit();
+    }
+
+    function approveComment(commentId)
+    {
+      submitEvent('commentApprove', 'TCNK=docViewBoxComponent;commentId=' + commentId);
+    }
+
+    function rejectComment(commentId)
+    {
+        var reason = prompt("Optionally specify a reason for rejection.", "");
+        if (reason !=null)
+        {
+            submitEvent('commentReject', 'TCNK=docViewBoxComponent;commentId=' + commentId +
+                  ';rejectReason=' + encodeURIComponent(reason) );
+        }
+    }
+
+    function changeCommentOrder(commentOrder)
+    {
+        submitEvent('changeCommentOrder', 'TCNK=docViewBoxComponent;commentOrder=' + commentOrder);
+    }
+
+    function showAllComments(showAllComments)
+    {
+        submitEvent('showAllComments', 'TCNK=docViewBoxComponent;showAllComments=' + showAllComments);
+    }
+
+    // Moves the comment input box to the position reply button that was clicked, rebinds needed events.
+    // commentId = 0 refers to the top-most "reply to post" comment.
+    // commentId's 1-n refer to "reply-to-other-comment" comments.
+    function moveCommentInputBox(elmReply, commentId)
+    {
+        $(elmReply).removeAttr('onclick').unbind('click');
+
+        // Get the id of the previous comment from the hidden form field.
+        var oldCommentOn = $('#commentId').attr('value') || "";
+
+        // Store the new id of what we are commenting on in the hidden form field.
+        $('#commentId').attr('value', commentId);
+
+        //calculate new size of textarea / profile image and reset the text
+        var newWidth = $(elmReply).parent().width() - 70;
+
+        var $commentInput = $('#commentInput');
+        $commentInput.css('width', newWidth + "px");
+
+        // EDL-9678
+        // Don't show the "Leave a comment" text when the user clicks "reply". Instead, just set focus to the textarea.
+        $commentInput.empty();
+        $commentInput.removeAttr('onfocus').removeAttr('onblur');
+        $commentInput.unbind('focus').unbind('blur');
+
+        if (commentId == "0")
+        {
+            $('#commentInputDiv div.profileImage').removeClass('small').addClass('medium');
+        }
+        else
+        {
+            $('#commentInputDiv div.profileImage').removeClass('medium').addClass('small');
+        }
+
+        //swap the positions of the reply and comment input
+        var elmCommentInputDiv  = $('#commentInputDiv');
+        var elmPlaceHolder      = $('<div id=\"placeholder\" style=\"display:none;\"></div>');
+
+        elmPlaceHolder.insertAfter($(elmReply));
+        $(elmReply).remove()
+                   .insertAfter(elmCommentInputDiv)
+                   .bind('click', function() { moveCommentInputBox(elmReply, oldCommentOn); }); // Change the reply button's click event to make it move the comment box to where it was before.
+
+        // Note: We use TWO focus() commands at the end of this chain because otherwise in IE 8 jQuery 1.3.2 will not always focus the textarea element properly.
+        // For example, focus won't be set properly in IE 8 if the user clicks on a "reply" button above the current comment textarea.
+        elmCommentInputDiv.remove()
+                          .insertAfter(elmPlaceHolder)
+                          .find('#commentInput').focus().focus();
+        elmPlaceHolder.remove();
+
+        return false;
+    }
+
+
+    function bindReplyEvents()
+    {
+        $('.replyButton').each(function(index) {
+            $(this).bind('click', function(e) { moveCommentInputBox(this, $(this).attr('commentid')); });
+        });
+    }
+
+
+    function initializeCommentInput(e)
+    {
+        if ($('#commentInput').text() == 'Leave a Comment' && e.type == 'focus')
+        {
+           $('#commentInput').empty();
+        }
+        else if ($('#commentInput').val() == '' && e.type == 'blur')
+        {
+           $('#commentInput').text('Leave a Comment');
+        }
+    }
+
+
+    function dvboxPotentiallyDisableMouseClicks()
+    {
+        
+    }
+
+    var docProps = {};
+    mmAddEmbedInfo(docProps);
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    
+
+    
+
+    ', 
+        var isDesignMode = false;
+        var isEditingMode = false;
+        var isHTML5FlowplayerEnabled = true;
+    ', 
+
+    
+
+
+    
+
+
+    ', 
+
+        ', Communications Department', 
+        
+            ', 
+', 
+', 
+', Communications Department', 
+', 
+
+
+        
+
+        
+
+        
+
+        ', 
+
+            
+
+            
+
+                
+
+                ', 
+
+                    
+
+                    
+
+                    ', 
+
+                        
+                            
+
+                            
+                        
+
+
+                        
+
+                        
+
+                        
+
+
+                        
+
+                            
+
+                            
+
+                                ', 
+
+                                    
+
+                                        
+
+                                        
+                                            ', 
+                                        
+
+                                        ', The Communications Department plays a central role in engaging all stakeholders by fostering two-way communication. The office is responsible for the district\u2019s internal and external communications, media relations, newsletters and other publications. ', 
+',  ', 
+', Vision', 
+', Empower stakeholders to value Springfield Public Schools and to take ownership of its success to ensure Springfield\u2019s continued vitality as a community.', 
+',  ', 
+', Mission', 
+', With an intense focus on the customer, we will promote transparency, foster constructive, two-way dialogue and cultivate relationships to satisfy the needs and exceed the expectations of our customers.', 
+',  ',  ', 
+', Contact Information', 
+',  ', 
+', 
+', The Communications Department is located at:', 
+', Kraft Administrative Center', 1359 E. St. Louis St.', Springfield, MO 65802', Phone: 417-523-0021', Fax: 417-523-0196', 
+', 
+',  ', 
+', Teresa Bledsoe', Director of Communications', 
+', Phone: 417-523-0117 ', E-mail: ', tbledsoe@spsmail.org', 
+',  ', 
+', Pam Bodine', 
+', Senior Communications Specialist ', Phone: 417-523-0053 ', E-mail: ', plbodine@spsmail.org', Emily Higgins', Administrative Assistant to the Director', Phone: 417-523-0021', Email: ', ehiggins@spsmail.org', 
+',  ', 
+', Ren Luebbering', 
+', Social Media Specialist', 
+', Phone:  417-523-0888', 
+', Email:  ', lmluebbering@spsmail.org', 
+',  ', 
+', Have a suggestion on how to improve our district? We want to hear from you!', 
+
+                                        
+                                            ', 
+                                        
+
+                                    
+
+                                ', 
+
+                                
+
+                            
+                        
+                    ', 
+
+
+                    
+
+                    
+
+
+
+                ', 
+
+            
+
+
+            
+
+
+        ',    
+
+    ', 
+
+    ', 
+        ', 
+        ', 
+        ', 
+        ', 
+
+        
+
+    ', 
+
+',    
+
+    ', 
+  ', 
+', 
+',   ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x495605B767F6F374/6":{"renderer":"image","mimeType":"image/png"},"0x495605B767F6F374/5":{"renderer":"image","mimeType":"image/png"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Footer', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc5284417498047247220";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "5284417498047247220",
+            "5284417498047247220",
+            "iFrame_edlElement_5284417498047247220_document",
+            'iFrame_edlElement_5284417498047247220_document',
+            '*',
+            'edlThemeBottomsectionZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            80,
+            'transparent',
+            false,
+            false,
+            true,
+            false,
+            '934',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', FooterScript', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc5284418465923781268";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "5284418465923781268",
+            "5284418465923781268",
+            "iFrame_edlElement_5284418465923781268_document",
+            'iFrame_edlElement_5284418465923781268_document',
+            '*',
+            'edlThemeBottomsectionZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            0,
+            'transparent',
+            false,
+            true,
+            false,
+            false,
+            '934',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+
+                        ', 
+
+                    
+
+
+    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+    ', 
+
+    ', 
+
+    
+    ', translate monitor', 
+
+    ']

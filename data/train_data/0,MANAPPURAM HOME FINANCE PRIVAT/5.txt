@@ -1,0 +1,1781 @@
+[
+	
+', u"
+ var emailmsg='Enter Email Address';
+ var markers = [];
+ var infoWindowContent =[];
+ var gmarkers = [];
+$('#subscEmailID').each(function() {										
+			var email = $('#subscEmailID').val();			
+			if(email == emailmsg)
+			{
+			var default_value = $(this).val();			
+			$(this).focus(function() {	
+				if(this.value == default_value) {	
+					this.value = '';	
+				}	
+			});	
+			$(this).blur(function() {	
+				if(this.value == '') {	
+					this.value = default_value;	
+				}	
+			});
+			}
+			else
+			{	
+				return false
+			}
+		});
+
+",  
+
+
+
+ 
+ ', 
+
+', 
+',  
+
+  ',  
+  ',  
+', 
+      ',  
+      ', 
+       ', 1800-420-22-33 ', (8.00 AM to 8.00 PM)', 
+       ', 
+       ', 
+       ', News',  ', |',  ', Events',  ', |',  ', Blog', 
+       ', Branch Network', 
+       ', Help', 
+       ', 
+        ', 
+', 
+      ', 
+      ', 
+        ', 
+ 
+   ', 
+ 
+', 
+
+ 
+  ', 
+	var fbApplicationID = '270121083101775';
+    var siteUrl   =  'http://www.manappuram.com' ;
+	var lblUpdatePermission="Your facebook status not updated.Please Login and Give Status Update Permission.";
+	var lblfacebookUpdate="Your facebook status updated";
+	var lblPostNotPublished="Post was not published.";
+	var lblPostPublished="Post was published.";
+', 
+', 
+ ',  ', 
+',  ', LOGIN', 
+', 
+ ',  Company',  ',  Company',  ',  ', Overview of the Company',  ', Mission, Vision and Values',  ', Management Team',  ', A Profile of the MD & CEO',  ', Promoter Group Entities',  ', Brand Manappuram, the early days',  ', The Social Relevance of Gold Loans',  ', Safalya - Success Stories',  ',  ',  Products',  ',  Products',  ',  ', Online Gold Loan',  ', Gold Loan',  ', SME Finance',  ', Forex & Money Transfer',  ', Commercial Vehicle Loan',  ', Depository Services',  ',  ',  ',  Subsidiaries',  ',  Subsidiaries',  ',  ', Manappuram Home Finance Pvt Ltd',  ', Manappuram Insurance Brokers Pvt Ltd',  ', Asirvad Microfinance Limited',  ',  ',  ',  Investors',  ',  Investors',  ',  ', Stock Watch',  ', Annual Reports',  ', Quarterly Results',  ', Notice to Shareholders',  ', Investor Contact',  ', Unpaid Dividend',  ', Corporate Governance',  Help Center',  ',  ', Our Branches',  ', Interest Rates',  ', Auction Venue',  ',  ', Careers',  ', Contact us', 
+', 
+     ', 
+            ',  ', News',  ', |',  ', Events',  ', |',  ', Blog', 
+        ', 
+        ', 
+            ',  ', Branch Network', 
+        ', 
+        ', 
+            ',  ', Help', 
+        ', 
+', 
+', 
+', 
+', 
+', top', 
+', 
+   var bool;  
+   $(document).ready(function () {
+     if ($(window).width() > 850) {
+			bool = true;
+			 $(".nav-cms ul:first").show();
+			
+        } else {
+            bool = false;
+			$(".nav-cms ul:first").show();
+        }
+    $(window).resize(function () {
+        if ($(window).width() > 850) {
+			bool = true;
+			 $(".nav-cms ul:first").show();
+			
+        } else {
+            bool = false;
+			$(".nav-cms ul:first").show();
+        }
+    });
+
+    $(".nav-cms ul li").each(function () {
+        if ($(this).find('ul').length > 0) {
+            $(this).addClass('sub-itm-lnk').append("<span class='expand plus'><span></span></span>")
+        }
+    })
+	$(".footerlink-block ul li").each(function () {
+        if ($(this).find('ul').length > 0) {
+            $(this).addClass('sub-itm-lnk').append("<span class='expand plus'><span></span></span>")
+        }
+    })
+	
+    $(".nav-cms ul:first > li").each(function () {
+
+        if ($(this).find('ul').length > 0) {
+            $(this).children("ul:first").addClass("sublevel");
+        }
+    }).addClass('level01');
+
+    var ulTop = parseInt($(".sublevel").css('top'));
+    $(".nav-cms .menu-mobile ul:first > li").hover(function () {
+        if (bool) {
+            $(this).find(".sublevel").slideDown('slow', 'easeInOutCubic').animate({
+//                "opacity": 1
+            }, 200);
+        }
+    }, function () {
+        if (bool) {
+            $(".sublevel").hide().css({
+               
+//                "opacity": 0
+            });
+        }
+    });
+
+    $(".mobmenu").click(function () {
+        if (!bool) {
+            $(".btm-bar .nav-cms .menu-mobile > ul:first").toggleClass("move");
+            $(".btm-bar .nav-cms .menu-mobile").toggleClass("active");
+            $("body").toggleClass("overlay");
+            $(this).toggleClass("close"); 
+        }
+    });
+    $(".nav-cms .expand").click(function () {
+        if (!bool) {
+            var dis = $(this);
+            var siblings = dis.parent('li').siblings('li');
+            if (dis.hasClass("plus")) {
+                dis.removeClass("plus");
+                siblings.find('ul').hide();
+                siblings.find('.expand').addClass('plus');
+                dis.siblings("ul").slideDown(200);
+            } else {
+                dis.siblings("ul").slideUp(200);
+                dis.addClass("plus");
+                siblings.addClass("plus");
+
+            }
+        }
+
+    })
+	 $(".footerlink-block .expand").click(function () {
+        if (!bool) {
+            var dis = $(this);
+            var siblings = dis.parent('li').siblings('li');
+            if (dis.hasClass("plus")) {
+                dis.removeClass("plus");
+                siblings.find('ul').hide();
+                siblings.find('.expand').addClass('plus');
+                dis.siblings("ul").slideDown(200);
+            } else {
+                dis.siblings("ul").slideUp(200);
+                dis.addClass("plus");
+                siblings.addClass("plus");
+
+            }
+        }
+
+    })
+
+		setMenu();	 
+
+});
+
+function setMenu()
+{
+	if ($(window).width() > 850) {   
+		$(".level01 .sublevel").css({'visibility':'visible','display':'block'});		
+		$(".nav-cms .level01").each(function(){
+			var subLevel = $(this).find(".sublevel li").length;
+			var subLevelInner = $(this).find(".sublevel li ul li").length;
+			if(subLevelInner<=10)
+			{
+				$(this).addClass("sublevel01");
+			}
+			else
+			{	var outerwidth = $(".wrapper").width();
+				var totalWidthSubLevel = 0;		
+				$(this).children(".sublevel").children("li").each(function(){
+					totalWidthSubLevel = totalWidthSubLevel + $(this).outerWidth(true); 
+				});
+				if(totalWidthSubLevel>outerwidth)
+				totalWidthSubLevel = outerwidth;
+				$(this).children(".sublevel").css("width",totalWidthSubLevel+'px');	
+			}	
+		});	
+		$(".level01 .sublevel").css({'visibility':'visible','display':'none'});	
+	}
+}	
+     $(".btm-bar .nav-cms .menu-mobile > ul > li").hover(function () {
+    $(this).toggleClass("active");
+ });
+
+', 
+
+  ', 
+  ', 
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "1f1f78c0-8f30-4c73-85d6-9da6e9e3ba3c",
+      autoRegister: false, /* Set to true to automatically prompt visitors */
+      subdomainName: 'turbo-oorjit.onesignal.com',   
+      notifyButton: {
+          enable: true /* Set to false to hide */
+      }
+    }]);
+  ', 
+ 
+    ', 
+     ',      ', 
+', 
+', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+', 
+', 
+', 
+', 
+', Pay online', 
+', Loan Calculator', 
+', Call me back', 
+', Get in Touch', 
+', Login', 
+', New User? Register Now', 
+
+', 
+
+
+           ', 
+      ', 
+       
+
+', 
+
+    ', 
+', 
+   
+    ', 
+  
+  ', 
+ 
+', 
+      ', 
+      ', 
+         ', 
+            ', 
+                ', Pay Online', 
+                ', Loan Calculator', 
+                ', Call me Back', 
+                ', Get in Touch', 
+                ', Login / Sign up', 
+            ', 
+ 
+        ', 
+	  ', 
+	  ',  
+	  ', 
+',  
+$(document).ready(function() {
+	
+	$(".various").fancybox({
+	maxWidth    : 400,
+	maxHeight    : 350,
+	fitToView    : false,
+	width        : '70%',
+	height        : '70%',
+	autoSize    : false,
+	closeClick    : false,
+	openEffect    : 'fade',
+	closeEffect    : 'fade',
+    openSpeed   : 200
+	});
+	 
+	
+});
+', 
+', 
+ 
+  
+
+  ',  
+
+	
+      ', 
+	  ', 
+		', 
+		', 
+		', FIND MANAPPURAM BRANCHES', 
+		', 
+		', 
+		', 
+			', 
+			', 
+			', Select State', Andaman & Nicober Island', Andhra Pradesh', Arunachal Pradesh', Assam', Bihar', Chandigarh', Chattisgarh', Dadra and Nagar Haveli', Daman and Di, Delhi', Goa', Gujarat', Haryana', Himachal Pradesh', Jammu & Kashmir', Jharkhand', Karnataka', Kerala', Lakshadweep Islands', Madhya Pradesh', Maharashtra', Manipur', Meghalaya', Mizoram', Nagaland', Odisha', Pondicherry', Punjab', Rajasthan', Sikkim', Tamilnad, Telangana', Tripura', Uttar Pradesh', Uttaranchal', Uttarkhand', West Bengal',  
+				', 
+				', 
+                                
+                        ', 
+			', 
+			', Select District',  
+				', 
+				', 
+				', 
+				', 
+				',  
+				', 
+				', 
+				', 				
+				', 
+				', 
+				',  
+				', 
+				', 
+		', 
+		', 
+		', 
+		', 
+	 
+                
+				', 
+		    ', 
+		        ', 
+		            ', Branch Network', 
+		            ', Manappuram Finance Limited has 3700+ branches across 28 states of India.', 
+		            ', Manappuram Finance Limited has an ', 
+extensive branch network of 3700+ branches spread across 28 states of the country. ', 
+There is a branch in vicinity of everyone in need of financial solution.', 
+		        ', 
+		    ', 
+		    
+		', 
+		 
+		', 
+                  ', 
+		
+		', 
+		', 
+		', Our Branches in States', 
+	', 
+     ', 
+     ', 
+		 		 ', 
+		 ', 
+			', Andaman & Nicober Island',  [ 5 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Andhra Pradesh',  [ 330 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Assam',  [ 8 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Bihar',  [ 12 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Chandigarh',  [ 4 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Daman and Di,  [ 1 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Delhi',  [ 58 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Goa',  [ 8 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Gujarat',  [ 109 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Haryana',  [ 62 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Himachal Pradesh',  [ 6 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Jammu & Kashmir',  [ 13 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Karnataka',  [ 568 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Kerala',  [ 485 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Madhya Pradesh',  [ 94 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Maharashtra',  [ 193 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Odisha',  [ 72 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Pondicherry',  [ 12 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Punjab',  [ 75 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Rajasthan',  [ 78 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Tamilnad,  [ 578 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Tripura',  [ 1 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Uttar Pradesh',  [ 105 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', West Bengal',  [ 92 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Telangana',  [ 248 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Chattisgarh',  [ 49 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Jharkhand',  [ 7 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Uttarkhand',  [ 5 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				
+		', 
+		', 
+		
+		', 
+		
+       ', 
+       ', 
+       
+       
+       
+        ', 
+    ', 
+			
+        ', 
+		', 
+                
+ ', 
+    ', 
+    ',  
+    
+  ', 
+  
+  
+', 
+ 
+
+  
+  
+      
+  ', 
+  
+', 
+  ',  
+  ', 
+ ', 
+  ', 
+  ', 
+  
+     ', 
+  ', 
+
+ ', 
+    ', 
+      ', 
+        ', 
+          ', 
+           ',  ABOUT US',  ',  ', Overview of the Company',  ', Mission, Vision and Values',  ', Management Team',  ', A Profile of the MD & CEO',  ', Promoter Group Entities',  ', Brand Manappuram, the early days',  ', The Social Relevance of Gold Loans',  Products',  ',  ', Online Gold Loan',  ', Gold Loan',  ', SME Finance',  ', Forex & Money Transfer',  ', Commercial Vehicle Loan',  ', Depository Services',  Subsidiaries',  ',  ', Manappuram Home Finance Pvt Ltd',  ', Manappuram Insurance Brokers Pvt Ltd',  ', Asirvad Microfinance Limited',  INVESTORS',  ',  ', Stock Watch',  ', Annual Reports',  ', Quarterly Results',  ', Notice to Shareholders',  ', Investor Contact',  ', Notice to Customers',  ', Unpaid Dividend',  ', Corporate Governance',  OTHERS',  ',  ', Interest Rates',  ', Auction Policy',  ', Auction Venue',  ', Empanelment of Auctioneer',  ', Fair Practice Code',  ', Disclaimer',  ', Feedback',  ', Media',  ', Gallery',  ', Media kit', 
+          ', 
+        ', 
+      ', 
+      ', 
+              ', OFFICE', 
+         ', Manappuram House, ', 
+         Head Office:  IV / 470 (old) W638A (New), Manappuram House, Valapad,Thrissur ', 
+         Kerala, India, ', 
+         pin code : 680567
+        ', 1800-420-22-33 (toll free)', 
+         ', [email protected]', u"/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */", 
+        ',  
+          ',   
+ ', 
+', 
+                
+          
+   ', 
+   
+   ', 
+    ', 
+      ', 
+        ', 
+          ', 
+          ', 
+          ', 
+          ', Facebook', 
+          ', Like us on Facebook', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', Twitter', 
+          ', Follow us on Twitter', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', Linkedin', 
+          ', Follow us on Linkedin', 
+          ', 
+          ', 
+          ', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', 
+           ', 
+            ', 
+            ', Youtube', 
+          ', Subscribe on Youtube', 
+          ', 
+          
+          ', 
+          ', 
+          ', 
+          ', 
+          
+          ', 
+          ', Mail Us', 
+          ', Any Question?', 
+          ', 
+          ', 
+          ', 
+        ', 
+      ', 
+    ', \u200b', 
+ ', 
+   
+   ', 
+', 
+ ', 
+  ', 
+  ', 
+  
+  
+', 
+ ', 
+    ',  ', © 2017 Manappuram.    All rights reserved.', 
+   
+   ', Privacy',  ',  ', Sitemap', Site best viewed in browsers I.E 11+, firefox 30+, chrome 30+', 
+     ', 
+     ', 
+     get mobile app ', 
+     ', 
+     ', 
+     ', 
+      ', 
+  ', 
+  
+ ', 
+     $(document).ready(function(){
+         
+        
+          $(".getlnk-txtbx").hide();
+         
+         $(".getlnk-btn").click(function() {
+              $(".getlnk-txtbx").show();
+         })
+         
+          var ele = $(".getlnk-txtbx");
+          var ele2 = $(".getlnk-btn");
+         
+         $("body").click(function(e){
+             
+             if (!ele.is(e.target) && !ele2.is(e.target) )
+    {
+        ele.hide();
+    }
+             
+         });
+       
+     });
+', 
+
+', u"
+var GLOBAL_BASE_PATH = '';
+$(document).ready(function(){ 
+});", 
+
+
+', 
+', u"
+    $(document).ready(function(){
+if ($('.table-respo').length) {
+    var th_data;
+    $('.table-respo').each(function () {
+        var _table = $(this);
+        $(this).find('th').each(function (index) {
+            var index_th = index;
+            th_data = $(this).text();
+            _table.find('tr').each(function () {
+                $(this).find('td').each(function (index) {
+                    var index_td = index;
+                    if (index_th == index_td) {
+                        $(this).attr('data-name', th_data);
+                    }
+                });
+            });
+        });
+    });
+}
+    });
+",  
+  ',  
+
+  ',  
+', 
+', 
+', 
+$(document).ready(function() {
+	if (bool) {	
+		//$('#scrollbar1').tinyscrollbar({ sizethumb:100 }); 
+		var leftBlockHeight	=$(".left-content-block01").height();
+		var rightBlockHeight=$(".right-content-block01").height();
+		
+		$(window).scroll(function(){ 
+			var wrapper = $("#content-wrapper").offset();
+			var wrapperOuterHeight = $("#content-wrapper").outerHeight();
+			var wrapperTop = wrapper.top;
+			var docScrollTop = $(this).scrollTop();
+			var adjustedTop = docScrollTop ;
+			var windowH=$(window).height();
+			var diff=$(window).scrollTop()-($(document).height() - windowH-parseInt($("#footer").height()));
+			if(adjustedTop-wrapperTop>0)
+			{
+				if(diff>0){
+					if(leftBlockHeight<rightBlockHeight){
+						if($(".position-element").height()>windowH-diff){
+							$(".position-element").css("bottom",(diff)+'px');	
+							$(".position-element").css("position",'fixed');	
+							$(".position-element").removeClass("fix");
+							
+						}
+					}
+					
+					$("#scroll-top").css('bottom',diff+"px");
+				}
+				else{
+					$("#scroll-top").css('bottom',"0px");
+					if(leftBlockHeight<rightBlockHeight){
+						$(".position-element").addClass("fix");	
+						  
+						$(".position-element").css("bottom",'');	
+						$(".position-element").css("position",'');	
+					}
+					
+				}
+			}
+			else
+			{
+				$(".position-element").removeClass("fix");			
+			}
+			var bottom = $(window).height() - wrapperTop - wrapperOuterHeight;		
+		});
+	}
+
+	   $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('#scroll-top').fadeIn();
+            } else {
+                $('#scroll-top').fadeOut();
+            }
+        }); 
+ 
+        $('#scroll-top').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+});
+
+', 
+
+', u"
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-9272445-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	
+	
+", 
+
+
+
+', 
+$(document).ready(function(){ 
+$('#common_message').hide();
+jNotifyShow("", "common_message","");});', 
+', 
+$(document).ready(function(){ 
+$('#common_message_page').hide();
+jNotifyShow("", "common_message_page","");});', 
+', u"/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */"][
+	
+', u"
+ var emailmsg='Enter Email Address';
+ var markers = [];
+ var infoWindowContent =[];
+ var gmarkers = [];
+$('#subscEmailID').each(function() {										
+			var email = $('#subscEmailID').val();			
+			if(email == emailmsg)
+			{
+			var default_value = $(this).val();			
+			$(this).focus(function() {	
+				if(this.value == default_value) {	
+					this.value = '';	
+				}	
+			});	
+			$(this).blur(function() {	
+				if(this.value == '') {	
+					this.value = default_value;	
+				}	
+			});
+			}
+			else
+			{	
+				return false
+			}
+		});
+
+",  
+
+
+
+ 
+ ', 
+
+', 
+',  
+
+  ',  
+  ',  
+', 
+      ',  
+      ', 
+       ', 1800-420-22-33 ', (8.00 AM to 8.00 PM)', 
+       ', 
+       ', 
+       ', News',  ', |',  ', Events',  ', |',  ', Blog', 
+       ', Branch Network', 
+       ', Help', 
+       ', 
+        ', 
+', 
+      ', 
+      ', 
+        ', 
+ 
+   ', 
+ 
+', 
+
+ 
+  ', 
+	var fbApplicationID = '270121083101775';
+    var siteUrl   =  'http://www.manappuram.com' ;
+	var lblUpdatePermission="Your facebook status not updated.Please Login and Give Status Update Permission.";
+	var lblfacebookUpdate="Your facebook status updated";
+	var lblPostNotPublished="Post was not published.";
+	var lblPostPublished="Post was published.";
+', 
+', 
+ ',  ', 
+',  ', LOGIN', 
+', 
+ ',  Company',  ',  Company',  ',  ', Overview of the Company',  ', Mission, Vision and Values',  ', Management Team',  ', A Profile of the MD & CEO',  ', Promoter Group Entities',  ', Brand Manappuram, the early days',  ', The Social Relevance of Gold Loans',  ', Safalya - Success Stories',  ',  ',  Products',  ',  Products',  ',  ', Online Gold Loan',  ', Gold Loan',  ', SME Finance',  ', Forex & Money Transfer',  ', Commercial Vehicle Loan',  ', Depository Services',  ',  ',  ',  Subsidiaries',  ',  Subsidiaries',  ',  ', Manappuram Home Finance Pvt Ltd',  ', Manappuram Insurance Brokers Pvt Ltd',  ', Asirvad Microfinance Limited',  ',  ',  ',  Investors',  ',  Investors',  ',  ', Stock Watch',  ', Annual Reports',  ', Quarterly Results',  ', Notice to Shareholders',  ', Investor Contact',  ', Unpaid Dividend',  ', Corporate Governance',  Help Center',  ',  ', Our Branches',  ', Interest Rates',  ', Auction Venue',  ',  ', Careers',  ', Contact us', 
+', 
+     ', 
+            ',  ', News',  ', |',  ', Events',  ', |',  ', Blog', 
+        ', 
+        ', 
+            ',  ', Branch Network', 
+        ', 
+        ', 
+            ',  ', Help', 
+        ', 
+', 
+', 
+', 
+', 
+', top', 
+', 
+   var bool;  
+   $(document).ready(function () {
+     if ($(window).width() > 850) {
+			bool = true;
+			 $(".nav-cms ul:first").show();
+			
+        } else {
+            bool = false;
+			$(".nav-cms ul:first").show();
+        }
+    $(window).resize(function () {
+        if ($(window).width() > 850) {
+			bool = true;
+			 $(".nav-cms ul:first").show();
+			
+        } else {
+            bool = false;
+			$(".nav-cms ul:first").show();
+        }
+    });
+
+    $(".nav-cms ul li").each(function () {
+        if ($(this).find('ul').length > 0) {
+            $(this).addClass('sub-itm-lnk').append("<span class='expand plus'><span></span></span>")
+        }
+    })
+	$(".footerlink-block ul li").each(function () {
+        if ($(this).find('ul').length > 0) {
+            $(this).addClass('sub-itm-lnk').append("<span class='expand plus'><span></span></span>")
+        }
+    })
+	
+    $(".nav-cms ul:first > li").each(function () {
+
+        if ($(this).find('ul').length > 0) {
+            $(this).children("ul:first").addClass("sublevel");
+        }
+    }).addClass('level01');
+
+    var ulTop = parseInt($(".sublevel").css('top'));
+    $(".nav-cms .menu-mobile ul:first > li").hover(function () {
+        if (bool) {
+            $(this).find(".sublevel").slideDown('slow', 'easeInOutCubic').animate({
+//                "opacity": 1
+            }, 200);
+        }
+    }, function () {
+        if (bool) {
+            $(".sublevel").hide().css({
+               
+//                "opacity": 0
+            });
+        }
+    });
+
+    $(".mobmenu").click(function () {
+        if (!bool) {
+            $(".btm-bar .nav-cms .menu-mobile > ul:first").toggleClass("move");
+            $(".btm-bar .nav-cms .menu-mobile").toggleClass("active");
+            $("body").toggleClass("overlay");
+            $(this).toggleClass("close"); 
+        }
+    });
+    $(".nav-cms .expand").click(function () {
+        if (!bool) {
+            var dis = $(this);
+            var siblings = dis.parent('li').siblings('li');
+            if (dis.hasClass("plus")) {
+                dis.removeClass("plus");
+                siblings.find('ul').hide();
+                siblings.find('.expand').addClass('plus');
+                dis.siblings("ul").slideDown(200);
+            } else {
+                dis.siblings("ul").slideUp(200);
+                dis.addClass("plus");
+                siblings.addClass("plus");
+
+            }
+        }
+
+    })
+	 $(".footerlink-block .expand").click(function () {
+        if (!bool) {
+            var dis = $(this);
+            var siblings = dis.parent('li').siblings('li');
+            if (dis.hasClass("plus")) {
+                dis.removeClass("plus");
+                siblings.find('ul').hide();
+                siblings.find('.expand').addClass('plus');
+                dis.siblings("ul").slideDown(200);
+            } else {
+                dis.siblings("ul").slideUp(200);
+                dis.addClass("plus");
+                siblings.addClass("plus");
+
+            }
+        }
+
+    })
+
+		setMenu();	 
+
+});
+
+function setMenu()
+{
+	if ($(window).width() > 850) {   
+		$(".level01 .sublevel").css({'visibility':'visible','display':'block'});		
+		$(".nav-cms .level01").each(function(){
+			var subLevel = $(this).find(".sublevel li").length;
+			var subLevelInner = $(this).find(".sublevel li ul li").length;
+			if(subLevelInner<=10)
+			{
+				$(this).addClass("sublevel01");
+			}
+			else
+			{	var outerwidth = $(".wrapper").width();
+				var totalWidthSubLevel = 0;		
+				$(this).children(".sublevel").children("li").each(function(){
+					totalWidthSubLevel = totalWidthSubLevel + $(this).outerWidth(true); 
+				});
+				if(totalWidthSubLevel>outerwidth)
+				totalWidthSubLevel = outerwidth;
+				$(this).children(".sublevel").css("width",totalWidthSubLevel+'px');	
+			}	
+		});	
+		$(".level01 .sublevel").css({'visibility':'visible','display':'none'});	
+	}
+}	
+     $(".btm-bar .nav-cms .menu-mobile > ul > li").hover(function () {
+    $(this).toggleClass("active");
+ });
+
+', 
+
+  ', 
+  ', 
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "1f1f78c0-8f30-4c73-85d6-9da6e9e3ba3c",
+      autoRegister: false, /* Set to true to automatically prompt visitors */
+      subdomainName: 'turbo-oorjit.onesignal.com',   
+      notifyButton: {
+          enable: true /* Set to false to hide */
+      }
+    }]);
+  ', 
+ 
+    ', 
+     ',      ', 
+', 
+', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+', 
+', 
+', 
+', 
+', Pay online', 
+', Loan Calculator', 
+', Call me back', 
+', Get in Touch', 
+', Login', 
+', New User? Register Now', 
+
+', 
+
+
+           ', 
+      ', 
+       
+
+', 
+
+    ', 
+', 
+   
+    ', 
+  
+  ', 
+ 
+', 
+      ', 
+      ', 
+         ', 
+            ', 
+                ', Pay Online', 
+                ', Loan Calculator', 
+                ', Call me Back', 
+                ', Get in Touch', 
+                ', Login / Sign up', 
+            ', 
+ 
+        ', 
+	  ', 
+	  ',  
+	  ', 
+',  
+$(document).ready(function() {
+	
+	$(".various").fancybox({
+	maxWidth    : 400,
+	maxHeight    : 350,
+	fitToView    : false,
+	width        : '70%',
+	height        : '70%',
+	autoSize    : false,
+	closeClick    : false,
+	openEffect    : 'fade',
+	closeEffect    : 'fade',
+    openSpeed   : 200
+	});
+	 
+	
+});
+', 
+', 
+ 
+  
+
+  ',  
+
+	
+      ', 
+	  ', 
+		', 
+		', 
+		', FIND MANAPPURAM BRANCHES', 
+		', 
+		', 
+		', 
+			', 
+			', 
+			', Select State', Andaman & Nicober Island', Andhra Pradesh', Arunachal Pradesh', Assam', Bihar', Chandigarh', Chattisgarh', Dadra and Nagar Haveli', Daman and Di, Delhi', Goa', Gujarat', Haryana', Himachal Pradesh', Jammu & Kashmir', Jharkhand', Karnataka', Kerala', Lakshadweep Islands', Madhya Pradesh', Maharashtra', Manipur', Meghalaya', Mizoram', Nagaland', Odisha', Pondicherry', Punjab', Rajasthan', Sikkim', Tamilnad, Telangana', Tripura', Uttar Pradesh', Uttaranchal', Uttarkhand', West Bengal',  
+				', 
+				', 
+                                
+                        ', 
+			', 
+			', Select District',  
+				', 
+				', 
+				', 
+				', 
+				',  
+				', 
+				', 
+				', 				
+				', 
+				', 
+				',  
+				', 
+				', 
+		', 
+		', 
+		', 
+		', 
+	 
+                
+				', 
+		    ', 
+		        ', 
+		            ', Branch Network', 
+		            ', Manappuram Finance Limited has 3700+ branches across 28 states of India.', 
+		            ', Manappuram Finance Limited has an ', 
+extensive branch network of 3700+ branches spread across 28 states of the country. ', 
+There is a branch in vicinity of everyone in need of financial solution.', 
+		        ', 
+		    ', 
+		    
+		', 
+		 
+		', 
+                  ', 
+		
+		', 
+		', 
+		', Our Branches in States', 
+	', 
+     ', 
+     ', 
+		 		 ', 
+		 ', 
+			', Andaman & Nicober Island',  [ 5 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Andhra Pradesh',  [ 330 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Assam',  [ 8 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Bihar',  [ 12 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Chandigarh',  [ 4 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Daman and Di,  [ 1 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Delhi',  [ 58 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Goa',  [ 8 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Gujarat',  [ 109 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Haryana',  [ 62 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Himachal Pradesh',  [ 6 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Jammu & Kashmir',  [ 13 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Karnataka',  [ 568 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Kerala',  [ 485 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Madhya Pradesh',  [ 94 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Maharashtra',  [ 193 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Odisha',  [ 72 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Pondicherry',  [ 12 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Punjab',  [ 75 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Rajasthan',  [ 78 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Tamilnad,  [ 578 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Tripura',  [ 1 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Uttar Pradesh',  [ 105 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', West Bengal',  [ 92 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Telangana',  [ 248 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Chattisgarh',  [ 49 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Jharkhand',  [ 7 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				 ', 
+		 ', 
+			', Uttarkhand',  [ 5 ]
+			', 
+		', 
+			', 
+			    
+			', 
+				
+		', 
+		', 
+		
+		', 
+		
+       ', 
+       ', 
+       
+       
+       
+        ', 
+    ', 
+			
+        ', 
+		', 
+                
+ ', 
+    ', 
+    ',  
+    
+  ', 
+  
+  
+', 
+ 
+
+  
+  
+      
+  ', 
+  
+', 
+  ',  
+  ', 
+ ', 
+  ', 
+  ', 
+  
+     ', 
+  ', 
+
+ ', 
+    ', 
+      ', 
+        ', 
+          ', 
+           ',  ABOUT US',  ',  ', Overview of the Company',  ', Mission, Vision and Values',  ', Management Team',  ', A Profile of the MD & CEO',  ', Promoter Group Entities',  ', Brand Manappuram, the early days',  ', The Social Relevance of Gold Loans',  Products',  ',  ', Online Gold Loan',  ', Gold Loan',  ', SME Finance',  ', Forex & Money Transfer',  ', Commercial Vehicle Loan',  ', Depository Services',  Subsidiaries',  ',  ', Manappuram Home Finance Pvt Ltd',  ', Manappuram Insurance Brokers Pvt Ltd',  ', Asirvad Microfinance Limited',  INVESTORS',  ',  ', Stock Watch',  ', Annual Reports',  ', Quarterly Results',  ', Notice to Shareholders',  ', Investor Contact',  ', Notice to Customers',  ', Unpaid Dividend',  ', Corporate Governance',  OTHERS',  ',  ', Interest Rates',  ', Auction Policy',  ', Auction Venue',  ', Empanelment of Auctioneer',  ', Fair Practice Code',  ', Disclaimer',  ', Feedback',  ', Media',  ', Gallery',  ', Media kit', 
+          ', 
+        ', 
+      ', 
+      ', 
+              ', OFFICE', 
+         ', Manappuram House, ', 
+         Head Office:  IV / 470 (old) W638A (New), Manappuram House, Valapad,Thrissur ', 
+         Kerala, India, ', 
+         pin code : 680567
+        ', 1800-420-22-33 (toll free)', 
+         ', [email protected]', u"/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */", 
+        ',  
+          ',   
+ ', 
+', 
+                
+          
+   ', 
+   
+   ', 
+    ', 
+      ', 
+        ', 
+          ', 
+          ', 
+          ', 
+          ', Facebook', 
+          ', Like us on Facebook', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', Twitter', 
+          ', Follow us on Twitter', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', 
+          ', Linkedin', 
+          ', Follow us on Linkedin', 
+          ', 
+          ', 
+          ', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', 
+           ', 
+            ', 
+            ', Youtube', 
+          ', Subscribe on Youtube', 
+          ', 
+          
+          ', 
+          ', 
+          ', 
+          ', 
+          
+          ', 
+          ', Mail Us', 
+          ', Any Question?', 
+          ', 
+          ', 
+          ', 
+        ', 
+      ', 
+    ', \u200b', 
+ ', 
+   
+   ', 
+', 
+ ', 
+  ', 
+  ', 
+  
+  
+', 
+ ', 
+    ',  ', © 2017 Manappuram.    All rights reserved.', 
+   
+   ', Privacy',  ',  ', Sitemap', Site best viewed in browsers I.E 11+, firefox 30+, chrome 30+', 
+     ', 
+     ', 
+     get mobile app ', 
+     ', 
+     ', 
+     ', 
+      ', 
+  ', 
+  
+ ', 
+     $(document).ready(function(){
+         
+        
+          $(".getlnk-txtbx").hide();
+         
+         $(".getlnk-btn").click(function() {
+              $(".getlnk-txtbx").show();
+         })
+         
+          var ele = $(".getlnk-txtbx");
+          var ele2 = $(".getlnk-btn");
+         
+         $("body").click(function(e){
+             
+             if (!ele.is(e.target) && !ele2.is(e.target) )
+    {
+        ele.hide();
+    }
+             
+         });
+       
+     });
+', 
+
+', u"
+var GLOBAL_BASE_PATH = '';
+$(document).ready(function(){ 
+});", 
+
+
+', 
+', u"
+    $(document).ready(function(){
+if ($('.table-respo').length) {
+    var th_data;
+    $('.table-respo').each(function () {
+        var _table = $(this);
+        $(this).find('th').each(function (index) {
+            var index_th = index;
+            th_data = $(this).text();
+            _table.find('tr').each(function () {
+                $(this).find('td').each(function (index) {
+                    var index_td = index;
+                    if (index_th == index_td) {
+                        $(this).attr('data-name', th_data);
+                    }
+                });
+            });
+        });
+    });
+}
+    });
+",  
+  ',  
+
+  ',  
+', 
+', 
+', 
+$(document).ready(function() {
+	if (bool) {	
+		//$('#scrollbar1').tinyscrollbar({ sizethumb:100 }); 
+		var leftBlockHeight	=$(".left-content-block01").height();
+		var rightBlockHeight=$(".right-content-block01").height();
+		
+		$(window).scroll(function(){ 
+			var wrapper = $("#content-wrapper").offset();
+			var wrapperOuterHeight = $("#content-wrapper").outerHeight();
+			var wrapperTop = wrapper.top;
+			var docScrollTop = $(this).scrollTop();
+			var adjustedTop = docScrollTop ;
+			var windowH=$(window).height();
+			var diff=$(window).scrollTop()-($(document).height() - windowH-parseInt($("#footer").height()));
+			if(adjustedTop-wrapperTop>0)
+			{
+				if(diff>0){
+					if(leftBlockHeight<rightBlockHeight){
+						if($(".position-element").height()>windowH-diff){
+							$(".position-element").css("bottom",(diff)+'px');	
+							$(".position-element").css("position",'fixed');	
+							$(".position-element").removeClass("fix");
+							
+						}
+					}
+					
+					$("#scroll-top").css('bottom',diff+"px");
+				}
+				else{
+					$("#scroll-top").css('bottom',"0px");
+					if(leftBlockHeight<rightBlockHeight){
+						$(".position-element").addClass("fix");	
+						  
+						$(".position-element").css("bottom",'');	
+						$(".position-element").css("position",'');	
+					}
+					
+				}
+			}
+			else
+			{
+				$(".position-element").removeClass("fix");			
+			}
+			var bottom = $(window).height() - wrapperTop - wrapperOuterHeight;		
+		});
+	}
+
+	   $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('#scroll-top').fadeIn();
+            } else {
+                $('#scroll-top').fadeOut();
+            }
+        }); 
+ 
+        $('#scroll-top').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+});
+
+', 
+
+', u"
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-9272445-1']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	
+	
+", 
+
+
+
+', 
+$(document).ready(function(){ 
+$('#common_message').hide();
+jNotifyShow("", "common_message","");});', 
+', 
+$(document).ready(function(){ 
+$('#common_message_page').hide();
+jNotifyShow("", "common_message_page","");});', 
+', u"/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */"]

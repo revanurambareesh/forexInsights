@@ -1,0 +1,3331 @@
+[
+    ', 
+        ', Performance Profile', 
+    ', 
+    
+	', 
+		', 
+			', Return to Previous Page',  
+		', 
+		', 
+			', Find a Performance Profile', 
+			', (Select from the map or use the menus below.)',  
+		', 
+
+			
+', 
+    ', 
+        ', School Name', 
+        ', County/District/CTC', 
+        ', Charter/Cyber Charter', 
+        ', Advanced Search', 
+    ', 
+    ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+            ', Enter a School Name:',  ', 
+            ', 
+            ', 
+                Search', 
+        ', 
+         ', 
+        ', 
+            
+
+
+', 
+	', -- Select a County or Intermediate Unit --',  
+
+    ', Adams', 
+
+    ', Allegheny', 
+
+    ', Armstrong', 
+
+    ', Beaver', 
+
+    ', Bedford', 
+
+    ', Berks', 
+
+    ', Blair', 
+
+    ', Bradford', 
+
+    ', Bucks', 
+
+    ', Butler', 
+
+    ', Cambria', 
+
+    ', Cameron', 
+
+    ', Carbon', 
+
+    ', Centre', 
+
+    ', Chester', 
+
+    ', Clarion', 
+
+    ', Clearfield', 
+
+    ', Clinton', 
+
+    ', Columbia', 
+
+    ', Crawford', 
+
+    ', Cumberland', 
+
+    ', Dauphin', 
+
+    ', Delaware', 
+
+    ', Elk', 
+
+    ', Erie', 
+
+    ', Fayette', 
+
+    ', Forest', 
+
+    ', Franklin', 
+
+    ', Fulton', 
+
+    ', Greene', 
+
+    ', Huntingdon', 
+
+    ', Indiana', 
+
+    ', Jefferson', 
+
+    ', Juniata', 
+
+    ', Lackawanna', 
+
+    ', Lancaster', 
+
+    ', Lawrence', 
+
+    ', Lebanon', 
+
+    ', Lehigh', 
+
+    ', Luzerne', 
+
+    ', Lycoming', 
+
+    ', Mckean', 
+
+    ', Mercer', 
+
+    ', Mifflin', 
+
+    ', Monroe', 
+
+    ', Montgomery', 
+
+    ', Montour', 
+
+    ', Northampton', 
+
+    ', Northumberland', 
+
+    ', Perry', 
+
+    ', Philadelphia', 
+
+    ', Pike', 
+
+    ', Potter', 
+
+    ', Schuylkill', 
+
+    ', Snyder', 
+
+    ', Somerset', 
+
+    ', Sullivan', 
+
+    ', Susquehanna', 
+
+    ', Tioga', 
+
+    ', Union', 
+
+    ', Venango', 
+
+    ', Warren', 
+
+    ', Washington', 
+
+    ', Wayne', 
+
+    ', Westmoreland', 
+
+    ', Wyoming', 
+
+    ', York', 
+
+    ', ------------------------------------------', 
+
+    ', Allegheny IU 3', 
+
+    ', Appalachia IU 8', 
+
+    ', ARIN IU 28', 
+
+    ', Beaver Valley IU 27', 
+
+    ', Berks County IU 14', 
+
+    ', BLaST IU 17', 
+
+    ', Bucks County IU 22', 
+
+    ', Capital Area IU 15', 
+
+    ', Carbon-Lehigh IU 21', 
+
+    ', Central IU 10', 
+
+    ', Central Susquehanna IU 16', 
+
+    ', Chester County IU 24', 
+
+    ', Colonial IU 20', 
+
+    ', Delaware County IU 25', 
+
+    ', Intermediate Unit 1', 
+
+    ', Lancaster-Lebanon IU 13', 
+
+    ', Lincoln IU 12', 
+
+    ', Luzerne IU 18', 
+
+    ', Midwestern IU 4', 
+
+    ', Montgomery County IU 23', 
+
+    ', Northeastern Educational IU 19', 
+
+    ', Northwest Tri-County IU 5', 
+
+    ', PaTTAN Harrisburg', 
+
+    ', PaTTAN King of Prussia', 
+
+    ', PaTTAN Pittsburgh', 
+
+    ', Philadelphia IU 26', 
+
+    ', Pittsburgh-Mt Oliver IU 2', 
+
+    ', Riverview IU 6', 
+
+    ', Schuylkill IU 29', 
+
+    ', Seneca Highlands IU 9', 
+
+    ', Tuscarora IU 11', 
+
+    ', Westmoreland IU 7', 
+
+', 
+', u"
+    $().ready(function () {
+        $('#county_i).change(function () {
+
+            var type = $('#county_iu option:selected').attr('type');
+            var id = $('#county_iu option:selected').val();
+            var iuId = type == 'i ? id : 0;
+            var countyId = type == 'county' ? id : 0;
+
+            $('#CountyId').val($('#county_i).val());
+            $('#DistrictId').val('');
+            $('#IntermediateUnitId').val(iuId);
+
+            if (id == 0) {
+                //Portal.UI.Alert('Application Message', 'Please select a county or intermediate unit.');
+                return;
+            }
+
+            Arc.Search.LoadDistricts(countyId, iuId);
+        });
+    });
+", 
+', 
+    ', -- Select a District --', 
+
+    ', Abington Heights SD', 
+
+    ', Abington SD', 
+
+    ', Albert Gallatin Area SD', 
+
+    ', Aliquippa SD', 
+
+    ', Allegheny Valley SD', 
+
+    ', Allegheny-Clarion Valley SD', 
+
+    ', Allentown City SD', 
+
+    ', Altoona Area SD', 
+
+    ', Ambridge Area SD', 
+
+    ', Annville-Cleona SD', 
+
+    ', Antietam SD', 
+
+    ', Apollo-Ridge SD', 
+
+    ', Armstrong SD', 
+
+    ', Athens Area SD', 
+
+    ', Austin Area SD', 
+
+    ', Avella Area SD', 
+
+    ', Avon Grove SD', 
+
+    ', Avonworth SD', 
+
+    ', Bald Eagle Area SD', 
+
+    ', Baldwin-Whitehall SD', 
+
+    ', Bangor Area SD', 
+
+    ', Beaver Area SD', 
+
+    ', Bedford Area SD', 
+
+    ', Belle Vernon Area SD', 
+
+    ', Bellefonte Area SD', 
+
+    ', Bellwood-Antis SD', 
+
+    ', Bensalem Township SD', 
+
+    ', Benton Area SD', 
+
+    ', Bentworth SD', 
+
+    ', Berlin Brothersvalley SD', 
+
+    ', Bermudian Springs SD', 
+
+    ', Berwick Area SD', 
+
+    ', Bethel Park SD', 
+
+    ', Bethlehem Area SD', 
+
+    ', Bethlehem-Center SD', 
+
+    ', Big Beaver Falls Area SD', 
+
+    ', Big Spring SD', 
+
+    ', Blackhawk SD', 
+
+    ', Blacklick Valley SD', 
+
+    ', Blairsville-Saltsburg SD', 
+
+    ', Bloomsburg Area SD', 
+
+    ', Blue Mountain SD', 
+
+    ', Blue Ridge SD', 
+
+    ', Boyertown Area SD', 
+
+    ', Bradford Area SD', 
+
+    ', Brandywine Heights Area SD', 
+
+    ', Brentwood Borough SD', 
+
+    ', Bristol Borough SD', 
+
+    ', Bristol Township SD', 
+
+    ', Brockway Area SD', 
+
+    ', Brookville Area SD', 
+
+    ', Brownsville Area SD', 
+
+    ', Burgettstown Area SD', 
+
+    ', Burrell SD', 
+
+    ', Butler Area SD', 
+
+    ', California Area SD', 
+
+    ', Cambria Heights SD', 
+
+    ', Cameron County SD', 
+
+    ', Camp Hill SD', 
+
+    ', Canon-McMillan SD', 
+
+    ', Canton Area SD', 
+
+    ', Carbondale Area SD', 
+
+    ', Carlisle Area SD', 
+
+    ', Carlynton SD', 
+
+    ', Carmichaels Area SD', 
+
+    ', Catasauqua Area SD', 
+
+    ', Centennial SD', 
+
+    ', Central Bucks SD', 
+
+    ', Central Cambria SD', 
+
+    ', Central Columbia SD', 
+
+    ', Central Dauphin SD', 
+
+    ', Central Fulton SD', 
+
+    ', Central Greene SD', 
+
+    ', Central Valley SD', 
+
+    ', Central York SD', 
+
+    ', Chambersburg Area SD', 
+
+    ', Charleroi SD', 
+
+    ', Chartiers Valley SD', 
+
+    ', Chartiers-Houston SD', 
+
+    ', Cheltenham Township SD', 
+
+    ', Chester-Upland SD', 
+
+    ', Chestnut Ridge SD', 
+
+    ', Chichester SD', 
+
+    ', Clairton City SD', 
+
+    ', Clarion Area SD', 
+
+    ', Clarion-Limestone Area SD', 
+
+    ', Claysburg-Kimmel SD', 
+
+    ', Clearfield Area SD', 
+
+    ', Coatesville Area SD', 
+
+    ', Cocalico SD', 
+
+    ', Colonial SD', 
+
+    ', Columbia Borough SD', 
+
+    ', Commodore Perry SD', 
+
+    ', Conemaugh Township Area SD', 
+
+    ', Conemaugh Valley SD', 
+
+    ', Conestoga Valley SD', 
+
+    ', Conewago Valley SD', 
+
+    ', Conneaut SD', 
+
+    ', Connellsville Area SD', 
+
+    ', Conrad Weiser Area SD', 
+
+    ', Cornell SD', 
+
+    ', Cornwall-Lebanon SD', 
+
+    ', Corry Area SD', 
+
+    ', Coudersport Area SD', 
+
+    ', Council Rock SD', 
+
+    ', Cranberry Area SD', 
+
+    ', Crawford Central SD', 
+
+    ', Crestwood SD', 
+
+    ', Cumberland Valley SD', 
+
+    ', Curwensville Area SD', 
+
+    ', Dallas SD', 
+
+    ', Dallastown Area SD', 
+
+    ', Daniel Boone Area SD', 
+
+    ', Danville Area SD', 
+
+    ', Deer Lakes SD', 
+
+    ', Delaware Valley SD', 
+
+    ', Derry Area SD', 
+
+    ', Derry Township SD', 
+
+    ', Donegal SD', 
+
+    ', Dover Area SD', 
+
+    ', Downingtown Area SD', 
+
+    ', Dubois Area SD', 
+
+    ', Dunmore SD', 
+
+    ', Duquesne City SD', 
+
+    ', East Allegheny SD', 
+
+    ', East Lycoming SD', 
+
+    ', East Penn SD', 
+
+    ', East Pennsboro Area SD', 
+
+    ', East Stroudsburg Area SD', 
+
+    ', Eastern Lancaster County SD', 
+
+    ', Eastern Lebanon County SD', 
+
+    ', Eastern York SD', 
+
+    ', Easton Area SD', 
+
+    ', Elizabeth Forward SD', 
+
+    ', Elizabethtown Area SD', 
+
+    ', Elk Lake SD', 
+
+    ', Ellwood City Area SD', 
+
+    ', Ephrata Area SD', 
+
+    ', Erie City SD', 
+
+    ', Everett Area SD', 
+
+    ', Exeter Township SD', 
+
+    ', Fairfield Area SD', 
+
+    ', Fairview SD', 
+
+    ', Fannett-Metal SD', 
+
+    ', Farrell Area SD', 
+
+    ', Ferndale Area SD', 
+
+    ', Fleetwood Area SD', 
+
+    ', Forbes Road SD', 
+
+    ', Forest Area SD', 
+
+    ', Forest City Regional SD', 
+
+    ', Forest Hills SD', 
+
+    ', Fort Cherry SD', 
+
+    ', Fort LeBoeuf SD', 
+
+    ', Fox Chapel Area SD', 
+
+    ', Franklin Area SD', 
+
+    ', Franklin Regional SD', 
+
+    ', Frazier SD', 
+
+    ', Freedom Area SD', 
+
+    ', Freeport Area SD', 
+
+    ', Galeton Area SD', 
+
+    ', Garnet Valley SD', 
+
+    ', Gateway SD', 
+
+    ', General McLane SD', 
+
+    ', Gettysburg Area SD', 
+
+    ', Girard SD', 
+
+    ', Glendale SD', 
+
+    ', Governor Mifflin SD', 
+
+    ', Great Valley SD', 
+
+    ', Greater Johnstown SD', 
+
+    ', Greater Latrobe SD', 
+
+    ', Greater Nanticoke Area SD', 
+
+    ', Greencastle-Antrim SD', 
+
+    ', Greensburg Salem SD', 
+
+    ', Greenville Area SD', 
+
+    ', Greenwood SD', 
+
+    ', Grove City Area SD', 
+
+    ', Halifax Area SD', 
+
+    ', Hamburg Area SD', 
+
+    ', Hampton Township SD', 
+
+    ', Hanover Area SD', 
+
+    ', Hanover Public SD', 
+
+    ', Harbor Creek SD', 
+
+    ', Harmony Area SD', 
+
+    ', Harrisburg City SD', 
+
+    ', Hatboro-Horsham SD', 
+
+    ', Haverford Township SD', 
+
+    ', Hazleton Area SD', 
+
+    ', Hempfield  SD', 
+
+    ', Hempfield Area SD', 
+
+    ', Hermitage SD', 
+
+    ', Highlands SD', 
+
+    ', Hollidaysburg Area SD', 
+
+    ', Homer-Center SD', 
+
+    ', Hopewell Area SD', 
+
+    ', Huntingdon Area SD', 
+
+    ', Indiana Area SD', 
+
+    ', Interboro SD', 
+
+    ', Iroquois SD', 
+
+    ', Jamestown Area SD', 
+
+    ', Jeannette City SD', 
+
+    ', Jefferson-Morgan SD', 
+
+    ', Jenkintown SD', 
+
+    ', Jersey Shore Area SD', 
+
+    ', Jim Thorpe Area SD', 
+
+    ', Johnsonburg Area SD', 
+
+    ', Juniata County SD', 
+
+    ', Juniata Valley SD', 
+
+    ', Kane Area SD', 
+
+    ', Karns City Area SD', 
+
+    ', Kennett Consolidated SD', 
+
+    ', Keystone  SD', 
+
+    ', Keystone Central SD', 
+
+    ', Keystone Oaks SD', 
+
+    ', Kiski Area SD', 
+
+    ', Kutztown Area SD', 
+
+    ', Lackawanna Trail SD', 
+
+    ', Lakeland SD', 
+
+    ', Lake-Lehman SD', 
+
+    ', Lakeview SD', 
+
+    ', Lampeter-Strasburg SD', 
+
+    ', Lancaster SD', 
+
+    ', Laurel Highlands SD', 
+
+    ', Laurel SD', 
+
+    ', Lebanon SD', 
+
+    ', Leechburg Area SD', 
+
+    ', Lehighton Area SD', 
+
+    ', Lewisburg Area SD', 
+
+    ', Ligonier Valley SD', 
+
+    ', Line Mountain SD', 
+
+    ', Littlestown Area SD', 
+
+    ', Lower Dauphin SD', 
+
+    ', Lower Merion SD', 
+
+    ', Lower Moreland Township SD', 
+
+    ', Loyalsock Township SD', 
+
+    ', Mahanoy Area SD', 
+
+    ', Manheim Central SD', 
+
+    ', Manheim Township SD', 
+
+    ', Marion Center Area SD', 
+
+    ', Marple Newtown SD', 
+
+    ', Mars Area SD', 
+
+    ', McGuffey SD', 
+
+    ', McKeesport Area SD', 
+
+    ', Mechanicsburg Area SD', 
+
+    ', Mercer Area SD', 
+
+    ', Methacton SD', 
+
+    ', Meyersdale Area SD', 
+
+    ', Mid Valley SD', 
+
+    ', Middletown Area SD', 
+
+    ', Midd-West SD', 
+
+    ', Midland Borough SD', 
+
+    ', Mifflin County SD', 
+
+    ', Mifflinburg Area SD', 
+
+    ', Millcreek Township SD', 
+
+    ', Millersburg Area SD', 
+
+    ', Millville Area SD', 
+
+    ', Milton Area SD', 
+
+    ', Minersville Area SD', 
+
+    ', Mohawk Area SD', 
+
+    ', Monessen City SD', 
+
+    ', Moniteau SD', 
+
+    ', Montgomery Area SD', 
+
+    ', Montour SD', 
+
+    ', Montoursville Area SD', 
+
+    ', Montrose Area SD', 
+
+    ', Moon Area SD', 
+
+    ', Morrisville Borough SD', 
+
+    ', Moshannon Valley SD', 
+
+    ', Mount Carmel Area SD', 
+
+    ', Mount Pleasant Area SD', 
+
+    ', Mount Union Area SD', 
+
+    ', Mountain View SD', 
+
+    ', Mt Lebanon SD', 
+
+    ', Muhlenberg SD', 
+
+    ', Muncy SD', 
+
+    ', Nazareth Area SD', 
+
+    ', Neshaminy SD', 
+
+    ', Neshannock Township SD', 
+
+    ', New Brighton Area SD', 
+
+    ', New Castle Area SD', 
+
+    ', New Hope-Solebury SD', 
+
+    ', New Kensington-Arnold SD', 
+
+    ', Newport SD', 
+
+    ', Norristown Area SD', 
+
+    ', North Allegheny SD', 
+
+    ', North Clarion County SD', 
+
+    ', North East SD', 
+
+    ', North Hills SD', 
+
+    ', North Penn SD', 
+
+    ', North Pocono SD', 
+
+    ', North Schuylkill SD', 
+
+    ', North Star SD', 
+
+    ', Northampton Area SD', 
+
+    ', Northeast Bradford SD', 
+
+    ', Northeastern York SD', 
+
+    ', Northern Bedford County SD', 
+
+    ', Northern Cambria SD', 
+
+    ', Northern Lebanon SD', 
+
+    ', Northern Lehigh SD', 
+
+    ', Northern Potter SD', 
+
+    ', Northern Tioga SD', 
+
+    ', Northern York County SD', 
+
+    ', Northgate SD', 
+
+    ', Northwest Area SD', 
+
+    ', Northwestern  SD', 
+
+    ', Northwestern Lehigh SD', 
+
+    ', Norwin SD', 
+
+    ', Octorara Area SD', 
+
+    ', Oil City Area SD', 
+
+    ', Old Forge SD', 
+
+    ', Oley Valley SD', 
+
+    ', Oswayo Valley SD', 
+
+    ', Otto-Eldred SD', 
+
+    ', Owen J Roberts SD', 
+
+    ', Oxford Area SD', 
+
+    ', Palisades SD', 
+
+    ', Palmerton Area SD', 
+
+    ', Palmyra Area SD', 
+
+    ', Panther Valley SD', 
+
+    ', Parkland SD', 
+
+    ', Pen Argyl Area SD', 
+
+    ', Penn Cambria SD', 
+
+    ', Penn Hills SD', 
+
+    ', Penn Manor SD', 
+
+    ', Penncrest SD', 
+
+    ', Penn-Delco SD', 
+
+    ', Pennridge SD', 
+
+    ', Penns Manor Area SD', 
+
+    ', Penns Valley Area SD', 
+
+    ', Pennsbury SD', 
+
+    ', Penn-Trafford SD', 
+
+    ', Pequea Valley SD', 
+
+    ', Perkiomen Valley SD', 
+
+    ', Peters Township SD', 
+
+    ', Philadelphia City SD', 
+
+    ', Philipsburg-Osceola Area SD', 
+
+    ', Phoenixville Area SD', 
+
+    ', Pine Grove Area SD', 
+
+    ', Pine-Richland SD', 
+
+    ', Pittsburgh SD', 
+
+    ', Pittston Area SD', 
+
+    ', Pleasant Valley SD', 
+
+    ', Plum Borough SD', 
+
+    ', Pocono Mountain SD', 
+
+    ', Port Allegany SD', 
+
+    ', Portage Area SD', 
+
+    ', Pottsgrove SD', 
+
+    ', Pottstown SD', 
+
+    ', Pottsville Area SD', 
+
+    ', Punxsutawney Area SD', 
+
+    ', Purchase Line SD', 
+
+    ', Quaker Valley SD', 
+
+    ', Quakertown Community SD', 
+
+    ', Radnor Township SD', 
+
+    ', Reading SD', 
+
+    ', Red Lion Area SD', 
+
+    ', Redbank Valley SD', 
+
+    ', Reynolds SD', 
+
+    ', Richland SD', 
+
+    ', Ridgway Area SD', 
+
+    ', Ridley SD', 
+
+    ', Ringgold SD', 
+
+    ', Riverside Beaver County SD', 
+
+    ', Riverside SD', 
+
+    ', Riverview SD', 
+
+    ', Rochester Area SD', 
+
+    ', Rockwood Area SD', 
+
+    ', Rose Tree Media SD', 
+
+    ', Saint Clair Area SD', 
+
+    ', Saint Marys Area SD', 
+
+    ', Salisbury Township SD', 
+
+    ', Salisbury-Elk Lick SD', 
+
+    ', Saucon Valley SD', 
+
+    ', Sayre Area SD', 
+
+    ', Schuylkill Haven Area SD', 
+
+    ', Schuylkill Valley SD', 
+
+    ', Scranton SD', 
+
+    ', Selinsgrove Area SD', 
+
+    ', Seneca Valley SD', 
+
+    ', Shade-Central City SD', 
+
+    ', Shaler Area SD', 
+
+    ', Shamokin Area SD', 
+
+    ', Shanksville-Stonycreek SD', 
+
+    ', Sharon City SD', 
+
+    ', Sharpsville Area SD', 
+
+    ', Shenandoah Valley SD', 
+
+    ', Shenango Area SD', 
+
+    ', Shikellamy SD', 
+
+    ', Shippensburg Area SD', 
+
+    ', Slippery Rock Area SD', 
+
+    ', Smethport Area SD', 
+
+    ', Solanco SD', 
+
+    ', Somerset Area SD', 
+
+    ', Souderton Area SD', 
+
+    ', South Allegheny SD', 
+
+    ', South Butler County SD', 
+
+    ', South Eastern SD', 
+
+    ', South Fayette Township SD', 
+
+    ', South Middleton SD', 
+
+    ', South Park SD', 
+
+    ', South Side Area SD', 
+
+    ', South Western SD', 
+
+    ', South Williamsport Area SD', 
+
+    ', Southeast Delco SD', 
+
+    ', Southeastern Greene SD', 
+
+    ', Southern Columbia Area SD', 
+
+    ', Southern Fulton SD', 
+
+    ', Southern Huntingdon County SD', 
+
+    ', Southern Lehigh SD', 
+
+    ', Southern Tioga SD', 
+
+    ', Southern York County SD', 
+
+    ', Southmoreland SD', 
+
+    ', Spring Cove SD', 
+
+    ', Spring Grove Area SD', 
+
+    ', Springfield SD', 
+
+    ', Springfield Township SD', 
+
+    ', Spring-Ford Area SD', 
+
+    ', State College Area SD', 
+
+    ', Steel Valley SD', 
+
+    ', Steelton-Highspire SD', 
+
+    ', Sto-Rox SD', 
+
+    ', Stroudsburg Area SD', 
+
+    ', Sullivan County SD', 
+
+    ', Susquehanna Community SD', 
+
+    ', Susquehanna Township SD', 
+
+    ', Susquenita SD', 
+
+    ', Tamaqua Area SD', 
+
+    ', Titusville Area SD', 
+
+    ', Towanda Area SD', 
+
+    ', Tredyffrin-Easttown SD', 
+
+    ', Trinity Area SD', 
+
+    ', Tri-Valley SD', 
+
+    ', Troy Area SD', 
+
+    ', Tulpehocken Area SD', 
+
+    ', Tunkhannock Area SD', 
+
+    ', Turkeyfoot Valley Area SD', 
+
+    ', Tuscarora SD', 
+
+    ', Tussey Mountain SD', 
+
+    ', Twin Valley SD', 
+
+    ', Tyrone Area SD', 
+
+    ', Union Area SD', 
+
+    ', Union City Area SD', 
+
+    ', Union SD', 
+
+    ', Uniontown Area SD', 
+
+    ', Unionville-Chadds Ford SD', 
+
+    ', United SD', 
+
+    ', Upper Adams SD', 
+
+    ', Upper Darby SD', 
+
+    ', Upper Dauphin Area SD', 
+
+    ', Upper Dublin SD', 
+
+    ', Upper Merion Area SD', 
+
+    ', Upper Moreland Township SD', 
+
+    ', Upper Perkiomen SD', 
+
+    ', Upper Saint Clair SD', 
+
+    ', Valley Grove SD', 
+
+    ', Valley View SD', 
+
+    ', Wallenpaupack Area SD', 
+
+    ', Wallingford-Swarthmore SD', 
+
+    ', Warren County SD', 
+
+    ', Warrior Run SD', 
+
+    ', Warwick SD', 
+
+    ', Washington SD', 
+
+    ', Wattsburg Area SD', 
+
+    ', Wayne Highlands SD', 
+
+    ', Waynesboro Area SD', 
+
+    ', Weatherly Area SD', 
+
+    ', Wellsboro Area SD', 
+
+    ', West Allegheny SD', 
+
+    ', West Branch Area SD', 
+
+    ', West Chester Area SD', 
+
+    ', West Greene SD', 
+
+    ', West Jefferson Hills SD', 
+
+    ', West Middlesex Area SD', 
+
+    ', West Mifflin Area SD', 
+
+    ', West Perry SD', 
+
+    ', West Shore SD', 
+
+    ', West York Area SD', 
+
+    ', Western Beaver County SD', 
+
+    ', Western Wayne SD', 
+
+    ', Westmont Hilltop SD', 
+
+    ', Whitehall-Coplay SD', 
+
+    ', Wilkes-Barre Area SD', 
+
+    ', Wilkinsburg Borough SD', 
+
+    ', William Penn SD', 
+
+    ', Williams Valley SD', 
+
+    ', Williamsburg Community SD', 
+
+    ', Williamsport Area SD', 
+
+    ', Wilmington Area SD', 
+
+    ', Wilson  SD', 
+
+    ', Wilson Area SD', 
+
+    ', Windber Area SD', 
+
+    ', Wissahickon SD', 
+
+    ', Woodland Hills SD', 
+
+    ', Wyalusing Area SD', 
+
+    ', Wyoming Area SD', 
+
+    ', Wyoming Valley West SD', 
+
+    ', Wyomissing Area SD', 
+
+    ', York City SD', 
+
+    ', York Suburban SD', 
+
+    ', Yough SD', 
+
+', 
+
+', u"
+    $().ready(function () {
+        $('#districtId').change(function () {
+            $('#DistrictId').val($('#districtId').val());
+            $('#SchoolId').val('');
+            var districtId = $('#districtId option:selected').attr('value');
+            if (districtId == 0) {
+                //Portal.UI.Alert('Application Message', 'Please select a district.');
+                return;
+            }
+            
+            Arc.Search.LoadSchools(districtId)
+        });
+    });
+", 
+            ', 
+                
+', 
+    ', -- Select a School --', 
+
+', 
+
+', u"
+    $().ready(function () {
+        $('#schoolId').change(function () {
+            var schoolId = $('#schoolId option:selected').attr('value');
+            if (schoolId == 0) {
+                //Portal.UI.Alert('Application Message', 'Please select a district.');
+                return;
+            }
+            $('#SchoolId').val(schoolId);
+
+        });
+    });
+", 
+            ', 
+            
+', 
+    ', -- Select a Career and Technical Center --', 
+    ', 
+
+    ', Bucks County Technical High School', 
+
+    ', Carbon Career & Technical Institute', 
+
+    ', Columbia-Montour AVTS', 
+
+    ', Connellsville Area Career & Technical Ce', 
+
+    ', Dauphin County Technical School', 
+
+    ', Dobbins AVT HS', 
+
+    ', Edison HS/Fareira Skills', 
+
+    ', Jefferson County-DuBois AVTS', 
+
+    ', Lawrence County CTC', 
+
+    ', Lenape Tech', 
+
+    ', Mastbaum Jules E AVTS', 
+
+    ', North Montco Tech Career Center', 
+
+    ', Randolph A. Philip AVT HS', 
+
+    ', Saul W B Agricultural School', 
+
+    ', Swenson Arts & Technology HS', 
+
+    ', West Side CTC', 
+
+    ', York Co School of Technology', 
+
+', 
+', 
+
+    ', A W Beattie Career Center', 
+
+    ', Admiral Peary AVTS', 
+
+    ', Beaver County CTC', 
+
+    ', Bedford County Technical Center', 
+
+    ', Berks CTC-East Campus', 
+
+    ', Berks CTC-West Campus', 
+
+    ', Bethlehem AVTS', 
+
+    ', Butler County AVTS', 
+
+    ', Career Institute of Technology', 
+
+    ', Central Montco Technical High School', 
+
+    ', Central PA Institute of Science & Techno', 
+
+    ', Central Westmoreland CTC', 
+
+    ', Chester County Technical College High Sc', 
+
+    ', Chester County Technical College High Sc', 
+
+    ', Chester County Technical College High Sc', 
+
+    ', Clarion County Career Center', 
+
+    ', Clearfield County CTC', 
+
+    ', Crawford County CTC', 
+
+    ', CTC of Lackawanna County', 
+
+    ', Cumberland Perry AVTS', 
+
+    ', Delaware County Technical High School-As', 
+
+    ', Delaware County Technical High School-Fo', 
+
+    ', Delaware County Technical High School-Ma', 
+
+    ', Eastern Center for Arts & Technology', 
+
+    ', Eastern Westmoreland CTC', 
+
+    ', Erie County Technical School', 
+
+    ', Fayette County Career & Technical Instit', 
+
+    ', Forbes Road CTC', 
+
+    ', Franklin County CTC', 
+
+    ', Fulton County AVTS', 
+
+    ', Greater Altoona CTC', 
+
+    ', Greater Johnstown CTC', 
+
+    ', Greene County CTC', 
+
+    ', Hazleton Area Career Center', 
+
+    ', Huntingdon County CTC', 
+
+    ', Indiana County Technology Center', 
+
+    ', Keystone Central CTC', 
+
+    ', Lancaster County CTC-Brownstown Campus', 
+
+    ', Lancaster County CTC-Mt Joy Campus', 
+
+    ', Lancaster County CTC-Willow St Campus', 
+
+    ', Lebanon County CTC', 
+
+    ', Lehigh Career & Technical Institute', 
+
+    ', Lycoming CTC', 
+
+    ', McKeesport Area Tech Ctr', 
+
+    ', Mercer County Career Center', 
+
+    ', Middle Bucks Institute of Technology', 
+
+    ', Mifflin County Academy of Science and Technology', 
+
+    ', Mon Valley CTC', 
+
+    ', Monroe Career & Tech Inst', 
+
+    ', Northern Tier Career Center', 
+
+    ', Northern Westmoreland CTC', 
+
+    ', Northumberland County CTC', 
+
+    ', Parkway West CTC', 
+
+    ', Reading Muhlenberg CTC', 
+
+    ', Schuylkill Technology Centers-North Camp', 
+
+    ', Schuylkill Technology Centers-South Camp', 
+
+    ', Seneca Highlands Career and Technical Ce', 
+
+    ', Somerset County Technology Center', 
+
+    ', Steel Center AVTS', 
+
+    ', SUN Area Technical Institute', 
+
+    ', Susquehanna County CTC', 
+
+    ', Upper Bucks County Technical School', 
+
+    ', Venango Technology Center', 
+
+    ', Warren County AVTS', 
+
+    ', Western Area CTC', 
+
+    ', Western Montgomery CTC', 
+
+    ', Wilkes-Barre Area CTC', 
+
+', 
+', 
+
+', u"
+    $().ready(function () {
+        $('#ctc-select').change(function () {
+            $('#SchoolId').val($('#ctc-select').val());           
+        });
+    });
+", 
+            ', 
+                Submit', 
+        ',        
+
+        ', 
+            ', 
+                ', 
+                    Filter', 
+                ', 
+                ', 
+                    Academic Score', 
+                ', 90-100', 
+                ', 80-89.9', 
+                ', 70-79.9', 
+                ', 60-69.9', 
+                ', < 60', 
+                ', 
+                ', 
+                ', 
+                    Enrollment', 
+                ', 0 \u2013 500', 
+                ', 501 \u2013 1000', 
+                ', 1001 \u2013 2500', 
+                ', 2501 \u2013 5000', 
+                ', 5001 \u2013 7500', 
+                ', 7501 \u2013 10000', 
+                ', > 10000', 
+
+                ', 
+                ', 
+                ', 
+                    Location', 
+                ', Zip Code:',  ', 
+                ', 
+                ', Within Zip Code', 
+                ', Within 10 Miles', 
+                ', Within 20 Miles', 
+                ', Within 30 Miles', 
+                ', 
+                ', 
+                ', 
+                    Grade Configurations', 
+                ', Has Grade 3', 
+                ', No Grade 3 or 11', 
+                ', Has Grade 11', 
+                ', Has Grade 3 & 11', 
+                ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', Find', 
+            ', 
+        ', 
+        ', 
+            ', 
+            ', 
+            ', 
+            ', 
+
+            ', Find', 
+        ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+	$(document).ready(function () {
+        
+		$('#filters ul.tabs li a').click(function () {
+			$('#filters ul.tabs li a').removeClass('active');
+			var tabId = $(this).attr('tab');
+			Arc.Map.toggleDivs(tabId);
+			$(this).addClass('active');
+			$('#ActiveTab').val(tabId);
+            $('#UseAdvancedSearch').val((tabId == 'zip'));
+		});
+
+		$('#filters ul.tabs li a').removeClass('active');
+		Arc.Map.toggleDivs('search');
+		$('#filters ul.tabs li a[tab="search"]').addClass('active')
+		if (0 > 0)
+		{
+			$('#school-dropdown').show();
+			$('#SchoolId').val(0);
+		}
+
+		$('input[type="checkbox"].AcademicGrade').change(function() {
+			var arrGrade = new Array();
+			$('input[type="checkbox"].AcademicGrade').each(function() { if ($(this).attr('checked') == true) { arrGrade.push($(this).val()); }});
+			$('input[type="hidden"][name="AcademicGrade"]').val(arrGrade.join(','));
+		});
+
+        $('#SchoolName').on('change', function(){
+            // Clear out all other items, since the keyword should ignore other dropdowns
+            $('#county_i).val('0').trigger('change');
+            $('#districtId').val('0').trigger('change');
+            $('#schoolId').val('0').trigger('change');
+            $('#ctc-select').val('0').trigger('change');
+            $('#CharterSchoolId').val('').trigger('change');
+            $('#CyberCharterSchoolId').val('').trigger('change');
+        });
+
+        
+	});
+', 
+
+	', 
+	    $(document).ready(function () {
+	        $("#SelectCyberSchool").click(function (e) {
+	            Arc.School.SelectCyberSchool();
+	            return false;
+	        });
+	        SPP.Search.SetupCharterSearch();
+	    });
+
+	    InitArea = function () {
+	        cvi_map.add(document.getElementById('sharpMap'), { opacity: 30, areacolor: '', noborder: true });
+	        $('#areaMap area').click(function () {
+	            var rowId = $(this).attr('rowId');
+	            var tipTitle = $(this).attr('tipTitle');
+	            window.location = String.format('/{0}/Districts', rowId);
+	        });
+	    }
+	', 
+
+		
+', 
+    ', 
+    
+', 
+', 
+', 
+', 
+		
+		', 
+			', Return to Previous Page',  
+		', 
+	', 
+
+
+    ', 
+        ', 
+        ', Pennsylvania Department of Education', 
+        ', 333 Market Street
+        ', Harrisburg, PA 17103 
+        ', 
+        ', Main Information Number:',  717-783-6788 ', 
+        ', TTY Number:',  717-783-8445 
+        ', 
+        ',  Research',   |  ',  Glossary of Terms',   |  ', FAQ',   | ',  Contact Us',  | ',  Data Files',  
+        ', Copyright © 2017 ', Commonwealth of Pennsylvania ', 
+    ', 
+
+    ', 
+        SchoolTypeId = 3;
+        var defaultPageSize = 10;
+    ', 
+        ', 
+    ', close', 
+            ', 
+        ', 
+        School Performance Profile - Message
+        ', 
+        ', 
+    ', 
+  
+'][
+    ', 
+        ', Performance Profile', 
+    ', 
+    
+	', 
+		', 
+			', Return to Previous Page',  
+		', 
+		', 
+			', Find a Performance Profile', 
+			', (Select from the map or use the menus below.)',  
+		', 
+
+			
+', 
+    ', 
+        ', School Name', 
+        ', County/District/CTC', 
+        ', Charter/Cyber Charter', 
+        ', Advanced Search', 
+    ', 
+    ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+            ', Enter a School Name:',  ', 
+            ', 
+            ', 
+                Search', 
+        ', 
+         ', 
+        ', 
+            
+
+
+', 
+	', -- Select a County or Intermediate Unit --',  
+
+    ', Adams', 
+
+    ', Allegheny', 
+
+    ', Armstrong', 
+
+    ', Beaver', 
+
+    ', Bedford', 
+
+    ', Berks', 
+
+    ', Blair', 
+
+    ', Bradford', 
+
+    ', Bucks', 
+
+    ', Butler', 
+
+    ', Cambria', 
+
+    ', Cameron', 
+
+    ', Carbon', 
+
+    ', Centre', 
+
+    ', Chester', 
+
+    ', Clarion', 
+
+    ', Clearfield', 
+
+    ', Clinton', 
+
+    ', Columbia', 
+
+    ', Crawford', 
+
+    ', Cumberland', 
+
+    ', Dauphin', 
+
+    ', Delaware', 
+
+    ', Elk', 
+
+    ', Erie', 
+
+    ', Fayette', 
+
+    ', Forest', 
+
+    ', Franklin', 
+
+    ', Fulton', 
+
+    ', Greene', 
+
+    ', Huntingdon', 
+
+    ', Indiana', 
+
+    ', Jefferson', 
+
+    ', Juniata', 
+
+    ', Lackawanna', 
+
+    ', Lancaster', 
+
+    ', Lawrence', 
+
+    ', Lebanon', 
+
+    ', Lehigh', 
+
+    ', Luzerne', 
+
+    ', Lycoming', 
+
+    ', Mckean', 
+
+    ', Mercer', 
+
+    ', Mifflin', 
+
+    ', Monroe', 
+
+    ', Montgomery', 
+
+    ', Montour', 
+
+    ', Northampton', 
+
+    ', Northumberland', 
+
+    ', Perry', 
+
+    ', Philadelphia', 
+
+    ', Pike', 
+
+    ', Potter', 
+
+    ', Schuylkill', 
+
+    ', Snyder', 
+
+    ', Somerset', 
+
+    ', Sullivan', 
+
+    ', Susquehanna', 
+
+    ', Tioga', 
+
+    ', Union', 
+
+    ', Venango', 
+
+    ', Warren', 
+
+    ', Washington', 
+
+    ', Wayne', 
+
+    ', Westmoreland', 
+
+    ', Wyoming', 
+
+    ', York', 
+
+    ', ------------------------------------------', 
+
+    ', Allegheny IU 3', 
+
+    ', Appalachia IU 8', 
+
+    ', ARIN IU 28', 
+
+    ', Beaver Valley IU 27', 
+
+    ', Berks County IU 14', 
+
+    ', BLaST IU 17', 
+
+    ', Bucks County IU 22', 
+
+    ', Capital Area IU 15', 
+
+    ', Carbon-Lehigh IU 21', 
+
+    ', Central IU 10', 
+
+    ', Central Susquehanna IU 16', 
+
+    ', Chester County IU 24', 
+
+    ', Colonial IU 20', 
+
+    ', Delaware County IU 25', 
+
+    ', Intermediate Unit 1', 
+
+    ', Lancaster-Lebanon IU 13', 
+
+    ', Lincoln IU 12', 
+
+    ', Luzerne IU 18', 
+
+    ', Midwestern IU 4', 
+
+    ', Montgomery County IU 23', 
+
+    ', Northeastern Educational IU 19', 
+
+    ', Northwest Tri-County IU 5', 
+
+    ', PaTTAN Harrisburg', 
+
+    ', PaTTAN King of Prussia', 
+
+    ', PaTTAN Pittsburgh', 
+
+    ', Philadelphia IU 26', 
+
+    ', Pittsburgh-Mt Oliver IU 2', 
+
+    ', Riverview IU 6', 
+
+    ', Schuylkill IU 29', 
+
+    ', Seneca Highlands IU 9', 
+
+    ', Tuscarora IU 11', 
+
+    ', Westmoreland IU 7', 
+
+', 
+', u"
+    $().ready(function () {
+        $('#county_i).change(function () {
+
+            var type = $('#county_iu option:selected').attr('type');
+            var id = $('#county_iu option:selected').val();
+            var iuId = type == 'i ? id : 0;
+            var countyId = type == 'county' ? id : 0;
+
+            $('#CountyId').val($('#county_i).val());
+            $('#DistrictId').val('');
+            $('#IntermediateUnitId').val(iuId);
+
+            if (id == 0) {
+                //Portal.UI.Alert('Application Message', 'Please select a county or intermediate unit.');
+                return;
+            }
+
+            Arc.Search.LoadDistricts(countyId, iuId);
+        });
+    });
+", 
+', 
+    ', -- Select a District --', 
+
+    ', Abington Heights SD', 
+
+    ', Abington SD', 
+
+    ', Albert Gallatin Area SD', 
+
+    ', Aliquippa SD', 
+
+    ', Allegheny Valley SD', 
+
+    ', Allegheny-Clarion Valley SD', 
+
+    ', Allentown City SD', 
+
+    ', Altoona Area SD', 
+
+    ', Ambridge Area SD', 
+
+    ', Annville-Cleona SD', 
+
+    ', Antietam SD', 
+
+    ', Apollo-Ridge SD', 
+
+    ', Armstrong SD', 
+
+    ', Athens Area SD', 
+
+    ', Austin Area SD', 
+
+    ', Avella Area SD', 
+
+    ', Avon Grove SD', 
+
+    ', Avonworth SD', 
+
+    ', Bald Eagle Area SD', 
+
+    ', Baldwin-Whitehall SD', 
+
+    ', Bangor Area SD', 
+
+    ', Beaver Area SD', 
+
+    ', Bedford Area SD', 
+
+    ', Belle Vernon Area SD', 
+
+    ', Bellefonte Area SD', 
+
+    ', Bellwood-Antis SD', 
+
+    ', Bensalem Township SD', 
+
+    ', Benton Area SD', 
+
+    ', Bentworth SD', 
+
+    ', Berlin Brothersvalley SD', 
+
+    ', Bermudian Springs SD', 
+
+    ', Berwick Area SD', 
+
+    ', Bethel Park SD', 
+
+    ', Bethlehem Area SD', 
+
+    ', Bethlehem-Center SD', 
+
+    ', Big Beaver Falls Area SD', 
+
+    ', Big Spring SD', 
+
+    ', Blackhawk SD', 
+
+    ', Blacklick Valley SD', 
+
+    ', Blairsville-Saltsburg SD', 
+
+    ', Bloomsburg Area SD', 
+
+    ', Blue Mountain SD', 
+
+    ', Blue Ridge SD', 
+
+    ', Boyertown Area SD', 
+
+    ', Bradford Area SD', 
+
+    ', Brandywine Heights Area SD', 
+
+    ', Brentwood Borough SD', 
+
+    ', Bristol Borough SD', 
+
+    ', Bristol Township SD', 
+
+    ', Brockway Area SD', 
+
+    ', Brookville Area SD', 
+
+    ', Brownsville Area SD', 
+
+    ', Burgettstown Area SD', 
+
+    ', Burrell SD', 
+
+    ', Butler Area SD', 
+
+    ', California Area SD', 
+
+    ', Cambria Heights SD', 
+
+    ', Cameron County SD', 
+
+    ', Camp Hill SD', 
+
+    ', Canon-McMillan SD', 
+
+    ', Canton Area SD', 
+
+    ', Carbondale Area SD', 
+
+    ', Carlisle Area SD', 
+
+    ', Carlynton SD', 
+
+    ', Carmichaels Area SD', 
+
+    ', Catasauqua Area SD', 
+
+    ', Centennial SD', 
+
+    ', Central Bucks SD', 
+
+    ', Central Cambria SD', 
+
+    ', Central Columbia SD', 
+
+    ', Central Dauphin SD', 
+
+    ', Central Fulton SD', 
+
+    ', Central Greene SD', 
+
+    ', Central Valley SD', 
+
+    ', Central York SD', 
+
+    ', Chambersburg Area SD', 
+
+    ', Charleroi SD', 
+
+    ', Chartiers Valley SD', 
+
+    ', Chartiers-Houston SD', 
+
+    ', Cheltenham Township SD', 
+
+    ', Chester-Upland SD', 
+
+    ', Chestnut Ridge SD', 
+
+    ', Chichester SD', 
+
+    ', Clairton City SD', 
+
+    ', Clarion Area SD', 
+
+    ', Clarion-Limestone Area SD', 
+
+    ', Claysburg-Kimmel SD', 
+
+    ', Clearfield Area SD', 
+
+    ', Coatesville Area SD', 
+
+    ', Cocalico SD', 
+
+    ', Colonial SD', 
+
+    ', Columbia Borough SD', 
+
+    ', Commodore Perry SD', 
+
+    ', Conemaugh Township Area SD', 
+
+    ', Conemaugh Valley SD', 
+
+    ', Conestoga Valley SD', 
+
+    ', Conewago Valley SD', 
+
+    ', Conneaut SD', 
+
+    ', Connellsville Area SD', 
+
+    ', Conrad Weiser Area SD', 
+
+    ', Cornell SD', 
+
+    ', Cornwall-Lebanon SD', 
+
+    ', Corry Area SD', 
+
+    ', Coudersport Area SD', 
+
+    ', Council Rock SD', 
+
+    ', Cranberry Area SD', 
+
+    ', Crawford Central SD', 
+
+    ', Crestwood SD', 
+
+    ', Cumberland Valley SD', 
+
+    ', Curwensville Area SD', 
+
+    ', Dallas SD', 
+
+    ', Dallastown Area SD', 
+
+    ', Daniel Boone Area SD', 
+
+    ', Danville Area SD', 
+
+    ', Deer Lakes SD', 
+
+    ', Delaware Valley SD', 
+
+    ', Derry Area SD', 
+
+    ', Derry Township SD', 
+
+    ', Donegal SD', 
+
+    ', Dover Area SD', 
+
+    ', Downingtown Area SD', 
+
+    ', Dubois Area SD', 
+
+    ', Dunmore SD', 
+
+    ', Duquesne City SD', 
+
+    ', East Allegheny SD', 
+
+    ', East Lycoming SD', 
+
+    ', East Penn SD', 
+
+    ', East Pennsboro Area SD', 
+
+    ', East Stroudsburg Area SD', 
+
+    ', Eastern Lancaster County SD', 
+
+    ', Eastern Lebanon County SD', 
+
+    ', Eastern York SD', 
+
+    ', Easton Area SD', 
+
+    ', Elizabeth Forward SD', 
+
+    ', Elizabethtown Area SD', 
+
+    ', Elk Lake SD', 
+
+    ', Ellwood City Area SD', 
+
+    ', Ephrata Area SD', 
+
+    ', Erie City SD', 
+
+    ', Everett Area SD', 
+
+    ', Exeter Township SD', 
+
+    ', Fairfield Area SD', 
+
+    ', Fairview SD', 
+
+    ', Fannett-Metal SD', 
+
+    ', Farrell Area SD', 
+
+    ', Ferndale Area SD', 
+
+    ', Fleetwood Area SD', 
+
+    ', Forbes Road SD', 
+
+    ', Forest Area SD', 
+
+    ', Forest City Regional SD', 
+
+    ', Forest Hills SD', 
+
+    ', Fort Cherry SD', 
+
+    ', Fort LeBoeuf SD', 
+
+    ', Fox Chapel Area SD', 
+
+    ', Franklin Area SD', 
+
+    ', Franklin Regional SD', 
+
+    ', Frazier SD', 
+
+    ', Freedom Area SD', 
+
+    ', Freeport Area SD', 
+
+    ', Galeton Area SD', 
+
+    ', Garnet Valley SD', 
+
+    ', Gateway SD', 
+
+    ', General McLane SD', 
+
+    ', Gettysburg Area SD', 
+
+    ', Girard SD', 
+
+    ', Glendale SD', 
+
+    ', Governor Mifflin SD', 
+
+    ', Great Valley SD', 
+
+    ', Greater Johnstown SD', 
+
+    ', Greater Latrobe SD', 
+
+    ', Greater Nanticoke Area SD', 
+
+    ', Greencastle-Antrim SD', 
+
+    ', Greensburg Salem SD', 
+
+    ', Greenville Area SD', 
+
+    ', Greenwood SD', 
+
+    ', Grove City Area SD', 
+
+    ', Halifax Area SD', 
+
+    ', Hamburg Area SD', 
+
+    ', Hampton Township SD', 
+
+    ', Hanover Area SD', 
+
+    ', Hanover Public SD', 
+
+    ', Harbor Creek SD', 
+
+    ', Harmony Area SD', 
+
+    ', Harrisburg City SD', 
+
+    ', Hatboro-Horsham SD', 
+
+    ', Haverford Township SD', 
+
+    ', Hazleton Area SD', 
+
+    ', Hempfield  SD', 
+
+    ', Hempfield Area SD', 
+
+    ', Hermitage SD', 
+
+    ', Highlands SD', 
+
+    ', Hollidaysburg Area SD', 
+
+    ', Homer-Center SD', 
+
+    ', Hopewell Area SD', 
+
+    ', Huntingdon Area SD', 
+
+    ', Indiana Area SD', 
+
+    ', Interboro SD', 
+
+    ', Iroquois SD', 
+
+    ', Jamestown Area SD', 
+
+    ', Jeannette City SD', 
+
+    ', Jefferson-Morgan SD', 
+
+    ', Jenkintown SD', 
+
+    ', Jersey Shore Area SD', 
+
+    ', Jim Thorpe Area SD', 
+
+    ', Johnsonburg Area SD', 
+
+    ', Juniata County SD', 
+
+    ', Juniata Valley SD', 
+
+    ', Kane Area SD', 
+
+    ', Karns City Area SD', 
+
+    ', Kennett Consolidated SD', 
+
+    ', Keystone  SD', 
+
+    ', Keystone Central SD', 
+
+    ', Keystone Oaks SD', 
+
+    ', Kiski Area SD', 
+
+    ', Kutztown Area SD', 
+
+    ', Lackawanna Trail SD', 
+
+    ', Lakeland SD', 
+
+    ', Lake-Lehman SD', 
+
+    ', Lakeview SD', 
+
+    ', Lampeter-Strasburg SD', 
+
+    ', Lancaster SD', 
+
+    ', Laurel Highlands SD', 
+
+    ', Laurel SD', 
+
+    ', Lebanon SD', 
+
+    ', Leechburg Area SD', 
+
+    ', Lehighton Area SD', 
+
+    ', Lewisburg Area SD', 
+
+    ', Ligonier Valley SD', 
+
+    ', Line Mountain SD', 
+
+    ', Littlestown Area SD', 
+
+    ', Lower Dauphin SD', 
+
+    ', Lower Merion SD', 
+
+    ', Lower Moreland Township SD', 
+
+    ', Loyalsock Township SD', 
+
+    ', Mahanoy Area SD', 
+
+    ', Manheim Central SD', 
+
+    ', Manheim Township SD', 
+
+    ', Marion Center Area SD', 
+
+    ', Marple Newtown SD', 
+
+    ', Mars Area SD', 
+
+    ', McGuffey SD', 
+
+    ', McKeesport Area SD', 
+
+    ', Mechanicsburg Area SD', 
+
+    ', Mercer Area SD', 
+
+    ', Methacton SD', 
+
+    ', Meyersdale Area SD', 
+
+    ', Mid Valley SD', 
+
+    ', Middletown Area SD', 
+
+    ', Midd-West SD', 
+
+    ', Midland Borough SD', 
+
+    ', Mifflin County SD', 
+
+    ', Mifflinburg Area SD', 
+
+    ', Millcreek Township SD', 
+
+    ', Millersburg Area SD', 
+
+    ', Millville Area SD', 
+
+    ', Milton Area SD', 
+
+    ', Minersville Area SD', 
+
+    ', Mohawk Area SD', 
+
+    ', Monessen City SD', 
+
+    ', Moniteau SD', 
+
+    ', Montgomery Area SD', 
+
+    ', Montour SD', 
+
+    ', Montoursville Area SD', 
+
+    ', Montrose Area SD', 
+
+    ', Moon Area SD', 
+
+    ', Morrisville Borough SD', 
+
+    ', Moshannon Valley SD', 
+
+    ', Mount Carmel Area SD', 
+
+    ', Mount Pleasant Area SD', 
+
+    ', Mount Union Area SD', 
+
+    ', Mountain View SD', 
+
+    ', Mt Lebanon SD', 
+
+    ', Muhlenberg SD', 
+
+    ', Muncy SD', 
+
+    ', Nazareth Area SD', 
+
+    ', Neshaminy SD', 
+
+    ', Neshannock Township SD', 
+
+    ', New Brighton Area SD', 
+
+    ', New Castle Area SD', 
+
+    ', New Hope-Solebury SD', 
+
+    ', New Kensington-Arnold SD', 
+
+    ', Newport SD', 
+
+    ', Norristown Area SD', 
+
+    ', North Allegheny SD', 
+
+    ', North Clarion County SD', 
+
+    ', North East SD', 
+
+    ', North Hills SD', 
+
+    ', North Penn SD', 
+
+    ', North Pocono SD', 
+
+    ', North Schuylkill SD', 
+
+    ', North Star SD', 
+
+    ', Northampton Area SD', 
+
+    ', Northeast Bradford SD', 
+
+    ', Northeastern York SD', 
+
+    ', Northern Bedford County SD', 
+
+    ', Northern Cambria SD', 
+
+    ', Northern Lebanon SD', 
+
+    ', Northern Lehigh SD', 
+
+    ', Northern Potter SD', 
+
+    ', Northern Tioga SD', 
+
+    ', Northern York County SD', 
+
+    ', Northgate SD', 
+
+    ', Northwest Area SD', 
+
+    ', Northwestern  SD', 
+
+    ', Northwestern Lehigh SD', 
+
+    ', Norwin SD', 
+
+    ', Octorara Area SD', 
+
+    ', Oil City Area SD', 
+
+    ', Old Forge SD', 
+
+    ', Oley Valley SD', 
+
+    ', Oswayo Valley SD', 
+
+    ', Otto-Eldred SD', 
+
+    ', Owen J Roberts SD', 
+
+    ', Oxford Area SD', 
+
+    ', Palisades SD', 
+
+    ', Palmerton Area SD', 
+
+    ', Palmyra Area SD', 
+
+    ', Panther Valley SD', 
+
+    ', Parkland SD', 
+
+    ', Pen Argyl Area SD', 
+
+    ', Penn Cambria SD', 
+
+    ', Penn Hills SD', 
+
+    ', Penn Manor SD', 
+
+    ', Penncrest SD', 
+
+    ', Penn-Delco SD', 
+
+    ', Pennridge SD', 
+
+    ', Penns Manor Area SD', 
+
+    ', Penns Valley Area SD', 
+
+    ', Pennsbury SD', 
+
+    ', Penn-Trafford SD', 
+
+    ', Pequea Valley SD', 
+
+    ', Perkiomen Valley SD', 
+
+    ', Peters Township SD', 
+
+    ', Philadelphia City SD', 
+
+    ', Philipsburg-Osceola Area SD', 
+
+    ', Phoenixville Area SD', 
+
+    ', Pine Grove Area SD', 
+
+    ', Pine-Richland SD', 
+
+    ', Pittsburgh SD', 
+
+    ', Pittston Area SD', 
+
+    ', Pleasant Valley SD', 
+
+    ', Plum Borough SD', 
+
+    ', Pocono Mountain SD', 
+
+    ', Port Allegany SD', 
+
+    ', Portage Area SD', 
+
+    ', Pottsgrove SD', 
+
+    ', Pottstown SD', 
+
+    ', Pottsville Area SD', 
+
+    ', Punxsutawney Area SD', 
+
+    ', Purchase Line SD', 
+
+    ', Quaker Valley SD', 
+
+    ', Quakertown Community SD', 
+
+    ', Radnor Township SD', 
+
+    ', Reading SD', 
+
+    ', Red Lion Area SD', 
+
+    ', Redbank Valley SD', 
+
+    ', Reynolds SD', 
+
+    ', Richland SD', 
+
+    ', Ridgway Area SD', 
+
+    ', Ridley SD', 
+
+    ', Ringgold SD', 
+
+    ', Riverside Beaver County SD', 
+
+    ', Riverside SD', 
+
+    ', Riverview SD', 
+
+    ', Rochester Area SD', 
+
+    ', Rockwood Area SD', 
+
+    ', Rose Tree Media SD', 
+
+    ', Saint Clair Area SD', 
+
+    ', Saint Marys Area SD', 
+
+    ', Salisbury Township SD', 
+
+    ', Salisbury-Elk Lick SD', 
+
+    ', Saucon Valley SD', 
+
+    ', Sayre Area SD', 
+
+    ', Schuylkill Haven Area SD', 
+
+    ', Schuylkill Valley SD', 
+
+    ', Scranton SD', 
+
+    ', Selinsgrove Area SD', 
+
+    ', Seneca Valley SD', 
+
+    ', Shade-Central City SD', 
+
+    ', Shaler Area SD', 
+
+    ', Shamokin Area SD', 
+
+    ', Shanksville-Stonycreek SD', 
+
+    ', Sharon City SD', 
+
+    ', Sharpsville Area SD', 
+
+    ', Shenandoah Valley SD', 
+
+    ', Shenango Area SD', 
+
+    ', Shikellamy SD', 
+
+    ', Shippensburg Area SD', 
+
+    ', Slippery Rock Area SD', 
+
+    ', Smethport Area SD', 
+
+    ', Solanco SD', 
+
+    ', Somerset Area SD', 
+
+    ', Souderton Area SD', 
+
+    ', South Allegheny SD', 
+
+    ', South Butler County SD', 
+
+    ', South Eastern SD', 
+
+    ', South Fayette Township SD', 
+
+    ', South Middleton SD', 
+
+    ', South Park SD', 
+
+    ', South Side Area SD', 
+
+    ', South Western SD', 
+
+    ', South Williamsport Area SD', 
+
+    ', Southeast Delco SD', 
+
+    ', Southeastern Greene SD', 
+
+    ', Southern Columbia Area SD', 
+
+    ', Southern Fulton SD', 
+
+    ', Southern Huntingdon County SD', 
+
+    ', Southern Lehigh SD', 
+
+    ', Southern Tioga SD', 
+
+    ', Southern York County SD', 
+
+    ', Southmoreland SD', 
+
+    ', Spring Cove SD', 
+
+    ', Spring Grove Area SD', 
+
+    ', Springfield SD', 
+
+    ', Springfield Township SD', 
+
+    ', Spring-Ford Area SD', 
+
+    ', State College Area SD', 
+
+    ', Steel Valley SD', 
+
+    ', Steelton-Highspire SD', 
+
+    ', Sto-Rox SD', 
+
+    ', Stroudsburg Area SD', 
+
+    ', Sullivan County SD', 
+
+    ', Susquehanna Community SD', 
+
+    ', Susquehanna Township SD', 
+
+    ', Susquenita SD', 
+
+    ', Tamaqua Area SD', 
+
+    ', Titusville Area SD', 
+
+    ', Towanda Area SD', 
+
+    ', Tredyffrin-Easttown SD', 
+
+    ', Trinity Area SD', 
+
+    ', Tri-Valley SD', 
+
+    ', Troy Area SD', 
+
+    ', Tulpehocken Area SD', 
+
+    ', Tunkhannock Area SD', 
+
+    ', Turkeyfoot Valley Area SD', 
+
+    ', Tuscarora SD', 
+
+    ', Tussey Mountain SD', 
+
+    ', Twin Valley SD', 
+
+    ', Tyrone Area SD', 
+
+    ', Union Area SD', 
+
+    ', Union City Area SD', 
+
+    ', Union SD', 
+
+    ', Uniontown Area SD', 
+
+    ', Unionville-Chadds Ford SD', 
+
+    ', United SD', 
+
+    ', Upper Adams SD', 
+
+    ', Upper Darby SD', 
+
+    ', Upper Dauphin Area SD', 
+
+    ', Upper Dublin SD', 
+
+    ', Upper Merion Area SD', 
+
+    ', Upper Moreland Township SD', 
+
+    ', Upper Perkiomen SD', 
+
+    ', Upper Saint Clair SD', 
+
+    ', Valley Grove SD', 
+
+    ', Valley View SD', 
+
+    ', Wallenpaupack Area SD', 
+
+    ', Wallingford-Swarthmore SD', 
+
+    ', Warren County SD', 
+
+    ', Warrior Run SD', 
+
+    ', Warwick SD', 
+
+    ', Washington SD', 
+
+    ', Wattsburg Area SD', 
+
+    ', Wayne Highlands SD', 
+
+    ', Waynesboro Area SD', 
+
+    ', Weatherly Area SD', 
+
+    ', Wellsboro Area SD', 
+
+    ', West Allegheny SD', 
+
+    ', West Branch Area SD', 
+
+    ', West Chester Area SD', 
+
+    ', West Greene SD', 
+
+    ', West Jefferson Hills SD', 
+
+    ', West Middlesex Area SD', 
+
+    ', West Mifflin Area SD', 
+
+    ', West Perry SD', 
+
+    ', West Shore SD', 
+
+    ', West York Area SD', 
+
+    ', Western Beaver County SD', 
+
+    ', Western Wayne SD', 
+
+    ', Westmont Hilltop SD', 
+
+    ', Whitehall-Coplay SD', 
+
+    ', Wilkes-Barre Area SD', 
+
+    ', Wilkinsburg Borough SD', 
+
+    ', William Penn SD', 
+
+    ', Williams Valley SD', 
+
+    ', Williamsburg Community SD', 
+
+    ', Williamsport Area SD', 
+
+    ', Wilmington Area SD', 
+
+    ', Wilson  SD', 
+
+    ', Wilson Area SD', 
+
+    ', Windber Area SD', 
+
+    ', Wissahickon SD', 
+
+    ', Woodland Hills SD', 
+
+    ', Wyalusing Area SD', 
+
+    ', Wyoming Area SD', 
+
+    ', Wyoming Valley West SD', 
+
+    ', Wyomissing Area SD', 
+
+    ', York City SD', 
+
+    ', York Suburban SD', 
+
+    ', Yough SD', 
+
+', 
+
+', u"
+    $().ready(function () {
+        $('#districtId').change(function () {
+            $('#DistrictId').val($('#districtId').val());
+            $('#SchoolId').val('');
+            var districtId = $('#districtId option:selected').attr('value');
+            if (districtId == 0) {
+                //Portal.UI.Alert('Application Message', 'Please select a district.');
+                return;
+            }
+            
+            Arc.Search.LoadSchools(districtId)
+        });
+    });
+", 
+            ', 
+                
+', 
+    ', -- Select a School --', 
+
+', 
+
+', u"
+    $().ready(function () {
+        $('#schoolId').change(function () {
+            var schoolId = $('#schoolId option:selected').attr('value');
+            if (schoolId == 0) {
+                //Portal.UI.Alert('Application Message', 'Please select a district.');
+                return;
+            }
+            $('#SchoolId').val(schoolId);
+
+        });
+    });
+", 
+            ', 
+            
+', 
+    ', -- Select a Career and Technical Center --', 
+    ', 
+
+    ', Bucks County Technical High School', 
+
+    ', Carbon Career & Technical Institute', 
+
+    ', Columbia-Montour AVTS', 
+
+    ', Connellsville Area Career & Technical Ce', 
+
+    ', Dauphin County Technical School', 
+
+    ', Dobbins AVT HS', 
+
+    ', Edison HS/Fareira Skills', 
+
+    ', Jefferson County-DuBois AVTS', 
+
+    ', Lawrence County CTC', 
+
+    ', Lenape Tech', 
+
+    ', Mastbaum Jules E AVTS', 
+
+    ', North Montco Tech Career Center', 
+
+    ', Randolph A. Philip AVT HS', 
+
+    ', Saul W B Agricultural School', 
+
+    ', Swenson Arts & Technology HS', 
+
+    ', West Side CTC', 
+
+    ', York Co School of Technology', 
+
+', 
+', 
+
+    ', A W Beattie Career Center', 
+
+    ', Admiral Peary AVTS', 
+
+    ', Beaver County CTC', 
+
+    ', Bedford County Technical Center', 
+
+    ', Berks CTC-East Campus', 
+
+    ', Berks CTC-West Campus', 
+
+    ', Bethlehem AVTS', 
+
+    ', Butler County AVTS', 
+
+    ', Career Institute of Technology', 
+
+    ', Central Montco Technical High School', 
+
+    ', Central PA Institute of Science & Techno', 
+
+    ', Central Westmoreland CTC', 
+
+    ', Chester County Technical College High Sc', 
+
+    ', Chester County Technical College High Sc', 
+
+    ', Chester County Technical College High Sc', 
+
+    ', Clarion County Career Center', 
+
+    ', Clearfield County CTC', 
+
+    ', Crawford County CTC', 
+
+    ', CTC of Lackawanna County', 
+
+    ', Cumberland Perry AVTS', 
+
+    ', Delaware County Technical High School-As', 
+
+    ', Delaware County Technical High School-Fo', 
+
+    ', Delaware County Technical High School-Ma', 
+
+    ', Eastern Center for Arts & Technology', 
+
+    ', Eastern Westmoreland CTC', 
+
+    ', Erie County Technical School', 
+
+    ', Fayette County Career & Technical Instit', 
+
+    ', Forbes Road CTC', 
+
+    ', Franklin County CTC', 
+
+    ', Fulton County AVTS', 
+
+    ', Greater Altoona CTC', 
+
+    ', Greater Johnstown CTC', 
+
+    ', Greene County CTC', 
+
+    ', Hazleton Area Career Center', 
+
+    ', Huntingdon County CTC', 
+
+    ', Indiana County Technology Center', 
+
+    ', Keystone Central CTC', 
+
+    ', Lancaster County CTC-Brownstown Campus', 
+
+    ', Lancaster County CTC-Mt Joy Campus', 
+
+    ', Lancaster County CTC-Willow St Campus', 
+
+    ', Lebanon County CTC', 
+
+    ', Lehigh Career & Technical Institute', 
+
+    ', Lycoming CTC', 
+
+    ', McKeesport Area Tech Ctr', 
+
+    ', Mercer County Career Center', 
+
+    ', Middle Bucks Institute of Technology', 
+
+    ', Mifflin County Academy of Science and Technology', 
+
+    ', Mon Valley CTC', 
+
+    ', Monroe Career & Tech Inst', 
+
+    ', Northern Tier Career Center', 
+
+    ', Northern Westmoreland CTC', 
+
+    ', Northumberland County CTC', 
+
+    ', Parkway West CTC', 
+
+    ', Reading Muhlenberg CTC', 
+
+    ', Schuylkill Technology Centers-North Camp', 
+
+    ', Schuylkill Technology Centers-South Camp', 
+
+    ', Seneca Highlands Career and Technical Ce', 
+
+    ', Somerset County Technology Center', 
+
+    ', Steel Center AVTS', 
+
+    ', SUN Area Technical Institute', 
+
+    ', Susquehanna County CTC', 
+
+    ', Upper Bucks County Technical School', 
+
+    ', Venango Technology Center', 
+
+    ', Warren County AVTS', 
+
+    ', Western Area CTC', 
+
+    ', Western Montgomery CTC', 
+
+    ', Wilkes-Barre Area CTC', 
+
+', 
+', 
+
+', u"
+    $().ready(function () {
+        $('#ctc-select').change(function () {
+            $('#SchoolId').val($('#ctc-select').val());           
+        });
+    });
+", 
+            ', 
+                Submit', 
+        ',        
+
+        ', 
+            ', 
+                ', 
+                    Filter', 
+                ', 
+                ', 
+                    Academic Score', 
+                ', 90-100', 
+                ', 80-89.9', 
+                ', 70-79.9', 
+                ', 60-69.9', 
+                ', < 60', 
+                ', 
+                ', 
+                ', 
+                    Enrollment', 
+                ', 0 \u2013 500', 
+                ', 501 \u2013 1000', 
+                ', 1001 \u2013 2500', 
+                ', 2501 \u2013 5000', 
+                ', 5001 \u2013 7500', 
+                ', 7501 \u2013 10000', 
+                ', > 10000', 
+
+                ', 
+                ', 
+                ', 
+                    Location', 
+                ', Zip Code:',  ', 
+                ', 
+                ', Within Zip Code', 
+                ', Within 10 Miles', 
+                ', Within 20 Miles', 
+                ', Within 30 Miles', 
+                ', 
+                ', 
+                ', 
+                    Grade Configurations', 
+                ', Has Grade 3', 
+                ', No Grade 3 or 11', 
+                ', Has Grade 11', 
+                ', Has Grade 3 & 11', 
+                ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', Find', 
+            ', 
+        ', 
+        ', 
+            ', 
+            ', 
+            ', 
+            ', 
+
+            ', Find', 
+        ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+	$(document).ready(function () {
+        
+		$('#filters ul.tabs li a').click(function () {
+			$('#filters ul.tabs li a').removeClass('active');
+			var tabId = $(this).attr('tab');
+			Arc.Map.toggleDivs(tabId);
+			$(this).addClass('active');
+			$('#ActiveTab').val(tabId);
+            $('#UseAdvancedSearch').val((tabId == 'zip'));
+		});
+
+		$('#filters ul.tabs li a').removeClass('active');
+		Arc.Map.toggleDivs('search');
+		$('#filters ul.tabs li a[tab="search"]').addClass('active')
+		if (0 > 0)
+		{
+			$('#school-dropdown').show();
+			$('#SchoolId').val(0);
+		}
+
+		$('input[type="checkbox"].AcademicGrade').change(function() {
+			var arrGrade = new Array();
+			$('input[type="checkbox"].AcademicGrade').each(function() { if ($(this).attr('checked') == true) { arrGrade.push($(this).val()); }});
+			$('input[type="hidden"][name="AcademicGrade"]').val(arrGrade.join(','));
+		});
+
+        $('#SchoolName').on('change', function(){
+            // Clear out all other items, since the keyword should ignore other dropdowns
+            $('#county_i).val('0').trigger('change');
+            $('#districtId').val('0').trigger('change');
+            $('#schoolId').val('0').trigger('change');
+            $('#ctc-select').val('0').trigger('change');
+            $('#CharterSchoolId').val('').trigger('change');
+            $('#CyberCharterSchoolId').val('').trigger('change');
+        });
+
+        
+	});
+', 
+
+	', 
+	    $(document).ready(function () {
+	        $("#SelectCyberSchool").click(function (e) {
+	            Arc.School.SelectCyberSchool();
+	            return false;
+	        });
+	        SPP.Search.SetupCharterSearch();
+	    });
+
+	    InitArea = function () {
+	        cvi_map.add(document.getElementById('sharpMap'), { opacity: 30, areacolor: '', noborder: true });
+	        $('#areaMap area').click(function () {
+	            var rowId = $(this).attr('rowId');
+	            var tipTitle = $(this).attr('tipTitle');
+	            window.location = String.format('/{0}/Districts', rowId);
+	        });
+	    }
+	', 
+
+		
+', 
+    ', 
+    
+', 
+', 
+', 
+', 
+		
+		', 
+			', Return to Previous Page',  
+		', 
+	', 
+
+
+    ', 
+        ', 
+        ', Pennsylvania Department of Education', 
+        ', 333 Market Street
+        ', Harrisburg, PA 17103 
+        ', 
+        ', Main Information Number:',  717-783-6788 ', 
+        ', TTY Number:',  717-783-8445 
+        ', 
+        ',  Research',   |  ',  Glossary of Terms',   |  ', FAQ',   | ',  Contact Us',  | ',  Data Files',  
+        ', Copyright © 2017 ', Commonwealth of Pennsylvania ', 
+    ', 
+
+    ', 
+        SchoolTypeId = 3;
+        var defaultPageSize = 10;
+    ', 
+        ', 
+    ', close', 
+            ', 
+        ', 
+        School Performance Profile - Message
+        ', 
+        ', 
+    ', 
+  
+']

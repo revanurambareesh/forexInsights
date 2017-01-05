@@ -1,0 +1,5645 @@
+[
+', 
+   ', 
+   ', 
+   ', 
+	var urlArray = ["/article/", "/content/", "/budget/"];
+	var blockThisUrl = false;
+	for (checkedUrl = 0; checkedUrl < urlArray.length; checkedUrl++) { 
+		if(document.location.pathname.indexOf(urlArray[checkedUrl]) !== -1){
+			blockThisUrl = true;
+		}
+	}
+	var subs_pw = getCookie('_pw');
+	if((typeof adsLoaded != 'undefined')  == false && (subs_pw == null || subs_pw != 't') && blockThisUrl){
+		console.log("adBlocker");
+		$("#main-warp").hide();
+		$("body").load("/adBlocker.html");
+		$("head").html("");
+		$("body").addClass("mainbg");
+	}
+	', 
+      ', 
+	        ', 
+		', 
+		', 
+    ', 
+              ', 
+        ', 
+          ', 
+          	', 
+			', Home', Markets', Companies', Opinion', Politics', Technology', Specials', PF', Portfolio', My Page', Budget 2017', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', North', East', West', South', Election', News', Mobiles & Tablets', Apps', People', Computers', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017',            	', 
+
+          ', 
+          ', 
+            ', BS APPS
+            ', 
+           ', 
+                ', iPad', 
+                ', iPhone', 
+                ', Android', 
+                ', Wap', 
+              ', 
+            ', 
+
+            ', 
+           ', BS PRODUCTS
+           ', 
+           ', 
+				', Smart Investor', 
+				', BS Hindi', 
+			    ', BS Motoring', 
+			    ', BS Books', 		    
+			    ', u"Today's Paper", 			    
+			    ', 
+			    ', Economy & Industry', 
+              ', 
+            ', 
+
+            ', 
+           ', BS SPECIALS
+           ', 
+           ', 
+                ', B2B Connect', 
+                ', Power & Energy', 
+                ', SME', 
+              ', 
+            ', 
+			
+		   ', 
+			', BS E-Paper', 
+           ', 
+
+          ', 
+           ', 
+        ', 
+
+          ', 
+          ', 
+        		.displayNone{display: none !important;}
+          ', 
+          ', 
+          				', 
+			', Hi', , ', 
+			', 
+				', 
+	                	                ', Change Password', 
+	                            			', Subscribe', 
+			 			                ',  Sign out', 
+              ', 
+			 ', 
+	                ', Change Password',             		
+					', Manage My Account', 
+					', 
+	                ',  Sign out', 
+              ', 
+			', 
+			            ', SIGN IN', 
+            ', Subscribe', 
+			          ', 
+          ', 
+          	function getLoginCookie(cname) {
+	      	    var name = cname + "=";
+	      	    var ca = document.cookie.split(';');
+	      	    for(var i=0; i<ca.length; i++) {
+	      	        var c = ca[i];
+	      	        while (c.charAt(0)==' ') c = c.substring(1);
+	      	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+	      	    }
+	      	    return "";
+      		}
+      		var usrLoginCookie = getLoginCookie('_userLoggedIn');
+          	if(usrLoginCookie == ''){
+				$(".userNotLoggedIn").removeClass('displayNone');
+            }else{
+            	$(".userLoggedIn").removeClass('displayNone');
+            	var usrObj = decodeURIComponent(usrLoginCookie);			
+				usrObj = JSON.parse(usrObj);				
+				usrObj.ufname = usrObj.ufname.replace(/\+/g, ' ');
+            	$(".ucnameSpan").html(decodeURIComponent(usrObj.ufname));	
+            	if(usrObj.s == 't'){
+                	$(".usrSubcribe a").html('Manage My Account');
+					$(".usrSubcribe a").attr("href", "/subscription-cart/manage");					
+                }else{                	
+					var subExp = getLoginCookie('_sub_exp');					
+                    if(subExp!=''){                    	
+						var timestamp = Math.floor(Date.now() / 1000);						
+						if((timestamp.toString().length == subExp.length) && (subExp<timestamp) ){
+							$(".manageMyAccount").show();
+							$(".usrSubcribe a").html('Subscribe');
+						}else{
+							$(".usrSubcribe a").html('Manage My Account');
+							$(".usrSubcribe a").attr("href", "/subscription-cart/manage");		
+						}
+                    }else{
+                		$(".usrSubcribe a").html('Subscribe');						
+						$(".manageMyAccount").show();
+                    }
+                }
+
+                if(usrObj.r == "f"){
+                	$(".siteSignout a").click(function(){
+                		FB.logout();
+                    });
+                }else if(usrObj.r == "t"){
+                	$(".siteSignout a").click(function(){
+                		twttr.anywhere.signOut();
+                    });
+                }
+            }
+          ', 
+          ', 
+            ', 
+                   ', 
+					',  ', 
+					',  ', 
+                    ',  ', 
+					',  ', 
+					',  ', 
+					',  ', 
+					',  ', 
+            		                   ', 
+                   ', 
+               ', 
+          ', 
+           ', 
+        ', 
+         ', 
+        ', 
+         ', 
+   ', 
+        ', 
+		', 
+						', 
+			', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/Web_chat_175x60_left', [175, 60], 'div-gpt-ad-1480487618894-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1480487618894-0'); });
+", 
+', 			', 
+					', 
+		', 
+						', 
+			', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/webchat_earpanel_175x60', [175, 60], 'div-gpt-ad-1479738033184-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479738033184-0'); });
+", 
+', 			', 
+					', 
+		', 
+        ', 
+            ', 
+            ', 
+                    ', 
+        ', 
+
+		', 
+		', 
+    ', 
+
+
+
+   ', 
+    ', 
+        ', 
+        ', 
+      ', 
+      ', 
+		.second-menu-panel{z-index:9999999 !important;}
+		.top-menu{z-index:10000000 !important;}
+      	.fancybox-overlay,#fancybox-overlay{z-index:10000001 !important;}
+		#overlay{z-index:10000002 !important;}
+		.popup,#fancybox-wrap{z-index:10000003 !important;}
+		#fancybox-content{min-height: 380px;min-width:600px;}
+		#fancybox-wrap{min-width: 640px;}
+		#menu li.drop{padding: 8px 10px 8px 2px;}
+      ', 
+   
+   ', 
+   ', 
+      ', 
+      ',  ', Company',  ',  Science & Technology',  ',  ',       ', 
+      ', 
+       ', 
+      ', 
+          ', 
+          ', 
+          ', 
+            ', 
+               ', News', 
+				', Stock Quote', 
+				', Authors', 
+            ', 
+            ', 
+             ', 
+
+          ', 
+          ', 
+          ', 
+          ', 
+
+          ', 
+	         
+	          $("#select_type").change(function(){
+	          	document.cookie="selectType=" + $(this).val();
+           	  });
+	           getCookieAndSetDefault("selectType");
+	         
+	          
+	          function getCookieAndSetDefault(c_name){
+					var c_value = document.cookie;console.log(c_value);
+					var c_start = c_value.indexOf(" " + c_name + "=");
+					if (c_start == -1){
+						c_start = c_value.indexOf(c_name + "=");
+					}
+					if (c_start == -1){
+						c_value = null;
+					}
+					else{
+						c_start = c_value.indexOf("=", c_start) + 1;
+						var c_end = c_value.indexOf(";", c_start);
+					if (c_end == -1){
+						c_end = c_value.length;
+					}
+					c_value = unescape(c_value.substring(c_start,c_end));
+					}
+
+					if(c_value != 'null' && c_value != null){
+						$("#select_type").val(c_value);
+					}
+	         }
+	          
+          ', 
+		  
+    ', 
+	var companyJsonFile = "";
+	
+	function getCompaniesJson() {
+		var o = $("#head-suggest");
+		objHiddenValField = "";
+		if (objHiddenValField == undefined || objHiddenValField == "") {
+			objHiddenValField = $("#company_code");
+		}
+
+		$.ajax({
+			url : "/api-handler/article/get-company-json",
+			cache : true,
+			success : function(data) {
+				var jsonObj = eval(data);
+				companyFileLoaded = true;
+				companyJsonFile = jsonObj;
+
+				
+				$(o).autocomplete({
+					source: function (request, response) {
+				            var term = $.ui.autocomplete.escapeRegex(request.term)
+				                , startsWithMatcher = new RegExp("^"+ term, "i")
+				                , startsWith = $.grep(companyJsonFile, function(value) {
+				                    return (startsWithMatcher.test(value.value) || (startsWithMatcher.test(value.compSym)));
+				                })
+				                
+				                , containsMatcher = new RegExp(term, "i")
+				                , contains = $.grep(companyJsonFile, function (value) {
+				                    return $.inArray(value, startsWith) < 0 &&
+				                        (containsMatcher.test(value.value) || (containsMatcher.test(value.compSym)));
+				                });
+				            response(startsWith.concat(contains));
+				        },
+					minLength : 3,
+					autoFocus : true,
+					disabled : false,
+					select : function(event, ui) {
+						$(objHiddenValField).val(ui.item.compId);
+						$(o).val(ui.item.compFormatted);
+						$objForm = $(o).closest("form");
+						if ($objForm.attr("name") != "frm_equity") {
+							$objForm.submit();
+						}
+					},
+					open : function() {
+						$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+					},
+					close : function() {
+						$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+					}
+				}).data("autocomplete")._renderItem = function(ul, item) {
+					var result = String(item.label).replace(new RegExp(this.term, "gi"),"<b>$&</b>");
+					return $( "<li></li>" )
+	                      .data( "item.autocomplete", item )
+	                      .append($( "<a></a>" ).html(result))
+	                      .appendTo( ul );
+
+				};
+
+			}
+		});
+	}
+	', 
+
+
+		', 
+		$("#select_type").change(function(){
+			var itemVal = $(this).val();
+			if(itemVal == 'news'){
+				$("#radio_news").attr("checked","checked");
+				$("#radio_news").trigger("click");
+			}else if(itemVal == 'stocks'){
+				$("#radio_stock").attr("checked","checked");
+				$("#radio_stock").trigger("click");
+			}else if(itemVal == 'authors'){
+				$("#radio_authors").attr("checked","checked");
+				$("#radio_authors").trigger("click");
+			}
+		});
+		$(document).ready(function(){
+			var itemVal = $('#select_type').val();
+			if(itemVal == 'news'){
+				$("#radio_news").attr("checked","checked");
+				$("#radio_news").trigger("click");
+			}else if(itemVal == 'stocks'){
+				$("#radio_stock").attr("checked","checked");
+				$("#radio_stock").trigger("click");
+			}else if(itemVal == 'authors'){
+				$("#radio_authors").attr("checked","checked");
+				$("#radio_authors").trigger("click");
+			}
+		});
+		$("#search_btn").click(function(){
+			$("#search_box_text").val($("#head-suggest").val());
+			$("#frm_search").submit();
+		});
+
+		$("#head-suggest").keypress(function(e){
+			if(e.charCode == 13){
+				$("#frm_search").submit();
+			}
+		});
+		', 
+
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		',  News', 
+		',  
+		', 
+		',  Stock Quote', 
+		',  
+		', 
+		',  Authors', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+
+      ', 
+      ', 
+
+      ', 
+
+   ', 
+     ', 
+    ',     ', 
+    
+     ', 
+	    ', 
+    ', 
+    ', 
+', 
+	$(document).ready(function(){
+		 $(".iframe").fancybox({
+		     maxWidth	: 600,
+			 maxHeight	: 580,
+			fitToView	: false,
+			autoSize	: false,
+			closeClick	: false,
+			href		: '/core/request-handler/sign-in-content',
+			openEffect	: 'none',
+			closeEffect	: 'none'
+	
+		});
+	$('.fancybox').fancybox();
+	});
+', 
+', 
+', u"
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') +
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+", 
+
+', u"
+googletag.cmd.push(function() {
+googletag.defineSlot('/6516239/BS_company_bottom_728x90', [728, 90], 'div-gpt-ad-1436413990957-0').addService(googletag.pubads());
+googletag.defineSlot('/6516239/BS_company_R1_300x250', [300, 250], 'div-gpt-ad-1436413990957-1').addService(googletag.pubads());
+googletag.defineSlot('/6516239/BS_company_R2_300x250', [300, 250], 'div-gpt-ad-1436413990957-2').addService(googletag.pubads());
+googletag.defineSlot('/6516239/BS_company_R3_300x250', [300, 250], 'div-gpt-ad-1436413990957-3').addService(googletag.pubads());
+googletag.defineSlot('/6516239/BS_company_R4_300x250', [300, 250], 'div-gpt-ad-1436413990957-4').addService(googletag.pubads());
+googletag.defineSlot('/6516239/BS_company_super_728x90', [728, 90], 'div-gpt-ad-1436413990957-5').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+", 
+
+', 
+//Bs New Menu 
+   	$("#newMenuNavigationSecond").html($("#newMenuNavigationSecondHide").html());
+   	$("#newMenuNavigationSecondHide").html("");
+		$('.select_sub').first().removeClass('default-disp');
+		var mid = '211';
+		var rel = $('#nav_menu_' + mid).attr('rel');
+		if (rel != undefined && rel != '') {
+			$('#nav_menu_' + rel).addClass('activelink');
+			$('#nav_menu_' + mid).addClass('activelink');
+			$('#nav_menu_' + rel).parent().find('.select_sub').addClass('default-disp');		
+			$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+		} else {
+			$('#nav_menu_' + mid).addClass('activelink');
+			if($('#nav_menu_' + mid).parent().find('.select_sub').length==0){
+				$(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+				$(".nav-outer-repeat").css("height","62px");
+			}else{
+				$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+				$(".nav-outer-repeat").css("height","62px");
+			}
+		}
+		$('.select').mouseenter(function() {
+			
+			 $( ".select" ).each(function() { 
+				 if(($(this).find('.activelink').length>0)){
+					 $(this).find('.select_sub').removeClass('default-disp');
+					 $(this).find('li').removeClass('activelink');
+				 }
+				 
+		    });
+		      if(!($(this).find('.select_sub').length>0)){
+		    	     $(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+		    	     $(".nav-outer-repeat").css("height","62px");
+			  }else{ 
+				    $(".nav-new").find('.select:first').find('.select_sub').removeClass('default-disp');
+				 	$(".nav-outer-repeat").css("height","62px");
+			  }
+	     });
+		 
+		 $('.nav-outer').mouseleave(function() {
+			 if (rel != undefined && rel != '') {
+					$('#nav_menu_' + rel).addClass('activelink');
+					$('#nav_menu_' + mid).addClass('activelink');
+					$('#nav_menu_' + rel).parent().find('.select_sub').addClass('default-disp');		
+					$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+					$(".nav-outer-repeat").css("height","62px");
+				}else{
+					if($('#nav_menu_' + mid).parent().find('.select_sub').length==0){
+						$(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+						$(".nav-outer-repeat").css("height","62px");
+					}else{
+						$(".nav-new").find('.select:first').find('.select_sub').removeClass('default-disp');
+						$('#nav_menu_' + mid).addClass('activelink');
+						$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+						$(".nav-outer-repeat").css("height","62px");
+					}
+					
+			 }
+	    }); 
+		 
+		  $('.activelink').mouseenter(function() {
+	       $('.activelink').first().addClass('nolink');
+	    }); 
+	', 
+
+
+', 
+', 		', 
+
+		', 
+	    ', u"
+	var pageCompanyInfo = {'coCode':'1814', 'sectorId':5, 'subSectorId':'00000051'};
+", 
+    
+', You are here » ', Home',  » ', Companies',  » ', Company Overview',  » Dewan Housing Finance Corporation Ltd', 
+', 
+
+', 
+', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1474961759587-0'); });
+", 
+', 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="95"; var zflag_sid="0"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14"; 
+', 
+', 
+
+', document.write("<!--"); if(isUserBanner=="fis") document.write("-->"); ',  ', $("#id_3_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_fis-1480077568.png"); ', document.write("<!--"); if(isUserBanner=="kotak") document.write("-->"); ',  ', $("#id_4_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_kotak-1480077568.jpg"); ', document.write("<!--"); if(isUserBanner=="capgemini") document.write("-->"); ',  ', $("#id_5_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_capgemini-1480077568.jpg"); ', 
+
+', 
+', 
+ 	', 
+	', 
+		', Dewan Housing Finance Corporation Ltd.', 
+		', 
+			', 
+    			', BSE: 511072', 
+    			', Sector: Financials',  
+  			', 
+  			', 
+    			', NSE: DHFL', 
+    			', ISIN Code: INE202B01012',  
+  			', 
+		', 
+		', 
+	', 
+	', 
+    	',  
+       		', 
+  				', 
+    				', 
+    					', BSE',   ', LIVE', 
+    					', 15:47 | 05 Jan', 
+    				', 
+    				    				', 
+    					', 247.30', 
+    				', 
+    				', 
+    					', 3.60', (1.48%)', 
+    				', 
+    				  				', 
+			',  
+       		', 
+       		       		', 
+  				', 
+    				', 
+      					', OPEN', 
+      					', 244.10', 
+    				', 
+    				', 
+    					', HIGH', 
+      					', 248.70', 
+      				', 
+    				', 
+     					', LOW', 
+      					', 244.00', 
+      				', 
+  				', 
+			',  
+			 		', 
+    	', 
+         	', 
+  				', 
+    				', 
+    					', NSE',   ', LIVE', 
+    					', 15:49 | 05 Jan', 
+    				', 
+    				    				', 
+    					', 247.45', 
+    				', 
+    				', 
+    					', 4.25', (1.75%)', 
+    				', 
+    				  				', 	
+			',  
+       		', 
+       		       		', 
+  				', 
+    				', 
+      					', OPEN', 
+      					', 245.00', 
+    				', 
+    				', 
+    					', HIGH', 
+      					', 248.60', 
+      				', 
+    				', 
+     					', LOW', 
+      					', 243.70', 
+      				', 
+  				', 
+			', 
+			    	',  
+		', 
+	', 
+	',   
+', 
+', 
+
+', 
+', 
+	', 
+#stock-chart-contailner ul li { float: right;}
+#stock-chart-contailner ul li a{cursor: pointer;}
+#stock-chart-contailner ul li .active{background: green;}
+#stock-chart-contailner-nse ul li { float: right;}
+#stock-chart-contailner-nse ul li a{cursor: pointer;}
+#stock-chart-contailner-nse ul li .active{background: green;}
+.M-down-MKT{color: #fff;}
+.disNone {display: none;}
+.login-fields{padding: 7px 2%;}
+.amChartsButton {border-width: 0px;color: #fff;-moz-border-radius: 0px;border-radius:0px;margin: 0 0px;
+padding: 10px;border-right: 1px dotted #4c4c4c;background: #333;font-weight: normal;cursor: pointer;
+}
+.amChartsButtonSelected{border-width:0px;border-radius:0px;padding: 10px;background-color: #008000;
+border-color: #008000;}
+.graph-btn a{padding: 0px 0px;}
+.graph-btn ul{padding: 0px 0px;}
+#stock-chart-contailner ul li .active{padding: 10px}
+#stock-chart-contailner ul li a{padding: 10px;}
+#stock-chart-contailner-nse ul li .active{padding: 10px}
+#stock-chart-contailner-nse ul li a{padding: 10px;}
+.{width: auto;height: auto;}
+', 
+', 
+
+', 
+	', 
+		', 
+			', 
+				', BSE', 
+			', 
+			', 
+				', NSE', 
+			', 
+		', 
+		', 
+		', 
+			', 
+				', 
+					', 
+						', 
+							', 
+							', 
+								', Add to Watchlist',   |   ', Add to Portfolio', 
+							', 
+						', 
+						', 
+                       		', 
+						  		', 
+						    		', OPEN ', 
+						    		', 244.10', 
+						  		', 
+						  		', 
+						    		', PREVIOUS CLOSE', 
+						    		', 243.70', 
+						  		', 
+						  		', 
+						    		', VOLUME', 
+						    		', 165275', 
+						  		', 
+						  		', 
+						    		', 52-Week high ', 
+						    		', 337.00', 
+						  		', 
+						  		', 
+						    		', 52-Week low ', 
+						    		', 140.55', 
+						  		', 
+						  		', 
+						    		', P/E ', 
+						    		', 9.57', 
+						  		', 
+						  		', 
+						    		', Mkt Cap.(Rs cr) ', 
+						    		', 7743.71', 
+						  		', 
+						  		', 
+						    		', Buy Price', 
+						    		', 247.30', 
+						  		', 
+						  		', 
+						    		', Buy Qty', 
+						    		', 256.00', 
+						  		', 
+						  		', 
+						    		', Sell Price', 
+						    		', 0.00', 
+						  		', 
+						  		', 
+						    		', Sell Qty', 
+						    		', 0.00', 
+						  		', 
+							', 
+						', 
+					', 
+					', 
+						', 
+							', 
+                        	', 
+                     	', 
+						', 
+                        	', 
+                     	', 
+                  	', 
+                  	', 
+				', 
+			', 
+            ', 
+				', 
+					', 
+						', 
+							', 
+							', 
+								', Add to Watchlist',   |   ', Add to Portfolio', 
+							', 
+						', 
+						', 
+                       		', 
+						  		', 
+						    		', OPEN ', 
+						    		', 245.00', 
+						  		', 
+						  		', 
+						    		', PREVIOUS CLOSE', 
+						    		', 243.20', 
+						  		', 
+						  		', 
+						    		', VOLUME', 
+						    		', 1430894', 
+						  		', 
+						  		', 
+						    		', 52-Week high ', 
+						    		', 336.20', 
+						  		', 
+						  		', 
+						    		', 52-Week low ', 
+						    		', 140.30', 
+						  		', 
+						  		', 
+						    		', P/E ', 
+						    		', 9.57', 
+						  		', 
+						  		', 
+						    		', Mkt Cap.(Rs cr) ', 
+						    		', 7743.71', 
+						  		', 
+						  		', 
+						    		', Buy Price', 
+						    		', 0.00', 
+						  		', 
+						  		', 
+						    		', Buy Qty', 
+						    		', 0.00', 
+						  		', 
+						  		', 
+						    		', Sell Price', 
+						    		', 247.45', 
+						  		', 
+						  		', 
+						    		', Sell Qty', 
+						    		', 192.00', 
+						  		', 
+							', 
+						', 
+					', 
+					', 
+						', 
+							', 
+                        	', 
+                     	', 
+                     	', 
+                        	', 
+                     	', 
+					', 
+                  	', 
+				', 
+			', 
+		', 
+	', 
+', 
+
+
+', 
+	', 
+		', 
+			', 
+				', BSE', 
+			', 
+			', 
+				', NSE', 
+			', 
+		', 
+		', 
+		', 
+			', 
+			', 
+				', 
+					', 
+						', 
+    					', 
+    						', 
+    							', 
+    								', OPEN ', 
+    								', 244.10', 
+    							', 
+    							', 
+    								', CLOSE', 
+    								', 243.70', 
+    							', 
+    							', 
+    								', VOLUME', 
+    								', 165275', 
+    							', 
+    							', 
+    								', 52-Week high ', 
+    								', 337.00', 
+    							', 
+    							', 
+    								', 52-Week low ', 
+    								', 140.55', 
+    							', 
+    							', 
+    								', P/E ', 
+    								', 9.57', 
+    							', 
+    							', 
+    								', Mkt Cap.(Rs cr) ', 
+    								', 7743.71', 
+    							', 
+    							', 
+    								', Buy Price', 
+    								', 247.30', 
+    							', 
+    							', 
+    								', Buy Qty', 
+    								', 256.00', 
+    							', 
+    							', 
+    								', Sell Price', 
+    								', 0.00', 
+    							', 
+    							', 
+    								', Sell Qty', 
+    								', 0.00', 
+    							', 
+    						', 
+    					', 
+    				', 
+    				', 
+    					', 
+    						', 
+    							', 
+    								', Chart Type', 
+    								', Line', 
+    								', OHLC', 
+    								', Candle Stick', 
+    							', 
+    						', 
+    						', 
+    							', 
+    								', Draw', 
+    								', Trendline', 
+    							', 
+    						', 
+    						', 
+    							', 
+    								', Benchmarks', 
+    								', Sensex', 
+    								', Nifty', 
+    								', Clear', 
+    							', 
+    						', 
+    						', 
+    							', 
+    								', Events', 
+    								', Bonus', 
+    								', Dividend', 
+    								', Right', 
+    								', Split', 
+    							', 
+    						', 
+    						', 
+    						', 
+    							', 
+    							', 
+    							', 
+    							', 
+    								', Select Index', 
+    	                                									', BANKEX', 
+                                        									', BSE 100', 
+                                        									', BSE 200', 
+                                        									', BSE 500', 
+                                        									', BSE Auto', 
+                                        									', BSE Cap Goods', 
+                                        									', BSE CARBONEX', 
+                                        									', BSE Cons Durable', 
+                                        									', BSE Dollex 200', 
+                                        									', BSE FMCG Sector', 
+                                        									', BSE Greenex', 
+                                        									', BSE Healthcare', 
+                                        									', BSE IPO', 
+                                        									', BSE IT Sector', 
+                                        									', BSE Metal', 
+                                        									', BSE Mid-Cap', 
+                                        									', BSE Oil&Gas', 
+                                        									', BSE Power', 
+                                        									', BSE PSU', 
+                                        									', BSE Realty Index', 
+                                        									', BSE Sensex', 
+                                        									', BSE Small-Cap', 
+                                        									', BSE SME IPO', 
+                                        									', BSE Tech', 
+                                        									', MFG', 
+                                        									', Nfty Commodities', 
+                                        									', Nifty 100', 
+                                        									', Nifty 100 Liq 15', 
+                                        									', Nifty 200', 
+                                        									', Nifty 50', 
+                                        									', Nifty 500', 
+                                        									', Nifty Auto', 
+                                        									', Nifty Bank', 
+                                        									', Nifty Consumptin', 
+                                        									', Nifty CPSE', 
+                                        									', Nifty Div Opp 50', 
+                                        									', Nifty Energy', 
+                                        									', Nifty Financial', 
+                                        									', Nifty FMCG', 
+                                        									', Nifty Grow Sec15', 
+                                        									', Nifty Infra', 
+                                        									', Nifty IT', 
+                                        									', Nifty Media', 
+                                        									', Nifty Metal', 
+                                        									', Nifty Mid Liq 15', 
+                                        									', Nifty Midcap 100', 
+                                        									', Nifty Midcap 50', 
+                                        									', Nifty MNC', 
+                                        									', Nifty Next 50', 
+                                        									', Nifty Pharma', 
+                                        									', Nifty PSE', 
+                                        									', Nifty PSU Bank', 
+                                        									', Nifty Pvt Bank', 
+                                        									', Nifty Quality 30', 
+                                        									', Nifty Realty', 
+                                        									', Nifty Services', 
+                                        									', Nifty Small 100', 
+                                        									', Nifty50 Value 20', 
+                                        									', S&P BSE Allcap', 
+                                        									', S&P BSE BasicMat', 
+                                        									', S&P BSE Cons. Di', 
+                                        									', S&P BSE CPSE', 
+                                        									', S&P BSE Energy', 
+                                        									', S&P BSE Finance', 
+                                        									', S&P BSE Indus.', 
+                                        									', S&P BSE Infra.', 
+                                        									', S&P BSE Largecap', 
+                                        									', S&P BSE SENSEX50', 
+                                        									', S&P BSE Telecom', 
+                                        									', S&P BSE Utiliti.', 
+                                        									', S&P MidcapSelect', 
+                                        									', S&P Small Select', 
+                                        							', 
+    							', 
+    						', 
+    						', 
+    					', 
+    					', 
+    						', 
+    							', 
+    						', 
+    					', 
+    					', 
+    				', 
+    				', 
+    			', 
+			', 
+			', 
+				', 
+					', 
+						', 
+    					', 
+    						', 
+						  		', 
+						    		', OPEN ', 
+						    		', 245.00', 
+						  		', 
+						  		', 
+						    		', PREVIOUS CLOSE', 
+						    		', 243.20', 
+						  		', 
+						  		', 
+						    		', VOLUME', 
+						    		', 1430894', 
+						  		', 
+						  		', 
+						    		', 52-Week high ', 
+						    		', 336.20', 
+						  		', 
+						  		', 
+						    		', 52-Week low ', 
+						    		', 140.30', 
+						  		', 
+						  		', 
+						    		', P/E ', 
+						    		', 9.57', 
+						  		', 
+						  		', 
+						    		', Mkt Cap.(Rs cr) ', 
+						    		', 7743.71', 
+						  		', 
+						  		', 
+						    		', Buy Price', 
+						    		', 0.00', 
+						  		', 
+						  		', 
+						    		', Buy Qty', 
+						    		', 0.00', 
+						  		', 
+						  		', 
+						    		', Sell Price', 
+						    		', 247.45', 
+						  		', 
+						  		', 
+						    		', Sell Qty', 
+						    		', 192.00', 
+						  		', 
+							', 
+    					', 
+    				', 
+    				', 
+    					', 
+    						', 
+    							', 
+    								', Chart Type', 
+    								', Line', 
+    								', OHLC', 
+    								', Candle Stick', 
+    							', 
+    						', 
+    						', 
+    							', 
+    								', Draw', 
+    								', Trendline', 
+    							', 
+    						', 
+    						', 
+    							', 
+    								', Benchmarks', 
+    								', Sensex', 
+    								', Nifty', 
+    								', Clear', 
+    							', 
+    						', 
+    						', 
+    							', 
+    								', Events', 
+    								', Bonus', 
+    								', Dividend', 
+    								', Right', 
+    								', Split', 
+    							', 
+    						', 
+    						', 
+    						', 
+    							', 
+    							', 
+    							', 
+    							', 
+    								', Select Index', 
+    	                                									', BANKEX', 
+                                        									', BSE 100', 
+                                        									', BSE 200', 
+                                        									', BSE 500', 
+                                        									', BSE Auto', 
+                                        									', BSE Cap Goods', 
+                                        									', BSE CARBONEX', 
+                                        									', BSE Cons Durable', 
+                                        									', BSE Dollex 200', 
+                                        									', BSE FMCG Sector', 
+                                        									', BSE Greenex', 
+                                        									', BSE Healthcare', 
+                                        									', BSE IPO', 
+                                        									', BSE IT Sector', 
+                                        									', BSE Metal', 
+                                        									', BSE Mid-Cap', 
+                                        									', BSE Oil&Gas', 
+                                        									', BSE Power', 
+                                        									', BSE PSU', 
+                                        									', BSE Realty Index', 
+                                        									', BSE Sensex', 
+                                        									', BSE Small-Cap', 
+                                        									', BSE SME IPO', 
+                                        									', BSE Tech', 
+                                        									', MFG', 
+                                        									', Nfty Commodities', 
+                                        									', Nifty 100', 
+                                        									', Nifty 100 Liq 15', 
+                                        									', Nifty 200', 
+                                        									', Nifty 50', 
+                                        									', Nifty 500', 
+                                        									', Nifty Auto', 
+                                        									', Nifty Bank', 
+                                        									', Nifty Consumptin', 
+                                        									', Nifty CPSE', 
+                                        									', Nifty Div Opp 50', 
+                                        									', Nifty Energy', 
+                                        									', Nifty Financial', 
+                                        									', Nifty FMCG', 
+                                        									', Nifty Grow Sec15', 
+                                        									', Nifty Infra', 
+                                        									', Nifty IT', 
+                                        									', Nifty Media', 
+                                        									', Nifty Metal', 
+                                        									', Nifty Mid Liq 15', 
+                                        									', Nifty Midcap 100', 
+                                        									', Nifty Midcap 50', 
+                                        									', Nifty MNC', 
+                                        									', Nifty Next 50', 
+                                        									', Nifty Pharma', 
+                                        									', Nifty PSE', 
+                                        									', Nifty PSU Bank', 
+                                        									', Nifty Pvt Bank', 
+                                        									', Nifty Quality 30', 
+                                        									', Nifty Realty', 
+                                        									', Nifty Services', 
+                                        									', Nifty Small 100', 
+                                        									', Nifty50 Value 20', 
+                                        									', S&P BSE Allcap', 
+                                        									', S&P BSE BasicMat', 
+                                        									', S&P BSE Cons. Di', 
+                                        									', S&P BSE CPSE', 
+                                        									', S&P BSE Energy', 
+                                        									', S&P BSE Finance', 
+                                        									', S&P BSE Indus.', 
+                                        									', S&P BSE Infra.', 
+                                        									', S&P BSE Largecap', 
+                                        									', S&P BSE SENSEX50', 
+                                        									', S&P BSE Telecom', 
+                                        									', S&P BSE Utiliti.', 
+                                        									', S&P MidcapSelect', 
+                                        									', S&P Small Select', 
+                                        							', 
+    							', 
+    						', 
+    						', 
+    					', 
+    					', 
+    						', 
+    							', 
+    						', 
+    					', 
+    					', 
+    				', 
+    				', 
+    			', 
+			', 
+		', 
+	', 
+',    
+
+
+', u"
+$(document).ready(function () {
+    $('.nav-drop-down li').hover(
+        function () {
+            //show its submenu
+            if(!$(this).hasClass('disableMen))
+            {
+            	$('ul', this).slideDown(100);
+            }
+        },
+        function () {
+            //hide its submenu
+            $('ul', this).slideUp(100);
+        }
+    );
+});
+",    
+   
+', 
+	', 
+		',  Click here for interactive graph ', 
+	', 	
+', 
+
+
+', 
+$(document).ready(function(){
+	$('#smryGraph').parent('.row-panel').css({"margin-bottom":"60px"});
+
+	//bsNewCreateInteractiveChart('fullchartdiv',1814,'','bse');
+	$("#chartTypeBse").change(function(){
+		if($(this).val() == "LINE"){bsNewUpdateFullChartGraphType('smoothedLine','bse');}
+		if($(this).val() == "OHLC"){bsNewUpdateFullChartGraphType('ohlc','bse');}
+		if($(this).val() == "CANDLESTICK"){bsNewUpdateFullChartGraphType('candlestick','bse');}
+	});
+	$("#chartTypeNse").change(function(){
+		if($(this).val() == "LINE"){bsNewUpdateFullChartGraphType('smoothedLine','nse');}
+		if($(this).val() == "OHLC"){bsNewUpdateFullChartGraphType('ohlc','nse');}
+		if($(this).val() == "CANDLESTICK"){bsNewUpdateFullChartGraphType('candlestick','nse');}
+	});
+
+	$("#benchMarkBse").change(function(){
+		if($(this).val() == "SENSEX"){compareScript(1814,'Sensex','BSE','bse');}
+		if($(this).val() == "NIFTY"){compareScript(1814,'Nifty','NSE','bse');}
+		if($(this).val() == "CLEAR"){clearComparison();}
+	});
+	$("#benchMarkNse").change(function(){
+		if($(this).val() == "SENSEX"){compareScript(1814,'Sensex','BSE','nse');}
+		if($(this).val() == "NIFTY"){compareScript(1814,'Nifty','NSE','nse');}
+		if($(this).val() == "CLEAR"){clearComparison();}
+	});
+
+	$("#trendLine1,#trendLine2").change(function(){
+		if($(this).val() == "TRENDLINE"){ drawTrendline(); }
+	});
+	$("#eventUpdate1,#eventUpdate2").change(function(){
+		if($(this).val() == "BONUS"){updateStockEvents('b');}
+		if($(this).val() == "DIVIDENT"){updateStockEvents('d');}
+		if($(this).val() == "DIVIDENT"){updateStockEvents('r');}
+		if($(this).val() == "SPLIT"){updateStockEvents('s');}
+	});
+});
+', 
+
+', 
+var timerId = 0;
+AppVars.indicesCatBlock.push('');
+
+var _indicesBlockCurrExchange = "BSE";
+var _indicesBlockCurrCode = 1814;
+var _indicesBlockCurrChartDuration = "1D";
+var _indicesBlockCurrStatsTabIndex = 0;
+var topTabId = "marTab1";
+
+function getMerketChartBlockNew(coCode,durationType,stockExchange,onThisDiv,blockContailnerId,statsTabIndex,reqType,topTabId){
+	if(topTabId == "marTab1"){
+		$("#marTab2").removeClass("selected");
+		$("#"+topTabId).addClass("selected");
+		$("#NSEmkt").hide();
+		$("#BSEmkt").show();
+	}
+	if(topTabId == "marTab2"){
+		$("#marTab1").removeClass("selected");
+		$("#"+topTabId).addClass("selected");
+		$("#BSEmkt").hide();
+		$("#NSEmkt").show();
+	}
+	_indicesBlockCurrExchange = stockExchange;
+	_indicesBlockCurrCode = coCode;
+	_indicesBlockCurrChartDuration = durationType;
+	var blockHtml = '<ul><li><a onclick="updateChartDurationContent(this,\''+onThisDiv+'\',\''+coCode+'\',\'2Y\',\''+stockExchange+'\')" class="  ';
+	if(durationType=="2Y"){blockHtml = blockHtml+"active"; }
+		blockHtml=blockHtml+'">2Y</a></li><li><a onclick="updateChartDurationContent(this,\''+onThisDiv+'\',\''+coCode+'\',\'1Y\',\''+stockExchange+'\')" class="  ';
+	if(durationType=="1Y"){blockHtml = blockHtml+"active"; }
+		blockHtml=blockHtml+'">1Y</a></li><li><a onclick="updateChartDurationContent(this,\''+onThisDiv+'\',\''+coCode+'\',\'6M\',\''+stockExchange+'\')" class="  ';
+	if(durationType=="6M"){blockHtml = blockHtml+"active"; }
+		blockHtml=blockHtml+'">6M</a></li><li><a onclick="updateChartDurationContent(this,\''+onThisDiv+'\',\''+coCode+'\',\'1M\',\''+stockExchange+'\')" class="  ';
+	if(durationType=="1M"){blockHtml = blockHtml+"active"; }
+		blockHtml=blockHtml+'">1M</a></li><li><a onclick="updateChartDurationContent(this,\''+onThisDiv+'\',\''+coCode+'\',\'5D\',\''+stockExchange+'\')" class="  ';
+	if(durationType=="5D"){blockHtml = blockHtml+"active"; }
+		blockHtml=blockHtml+'">5D</a></li><li><a onclick="updateChartDurationContent(this,\''+onThisDiv+'\',\''+coCode+'\',\'1D\',\''+stockExchange+'\')" class="graph_btn_'+ stockExchange+' ';
+	if(durationType=="1D"){blockHtml = blockHtml+"active"; }
+		blockHtml=blockHtml+'">1D</a></li><div class="clearfix"></div></ul>';
+	
+	$('#'+blockContailnerId).html(blockHtml);
+	newBsCreateChart(onThisDiv,coCode,durationType,stockExchange,reqType,6,statsTabIndex,'') ;
+}
+
+function updateChartDurationContent(obj,onThisDiv,coCode,durationType,stockExchange){
+	_indicesBlockCurrChartDuration = durationType ;
+	$("#stock-chart-contailner ul li a").removeClass("active");
+	$("#stock-chart-contailner-nse ul li a").removeClass("active");
+	updateChart(obj,onThisDiv,coCode,durationType,stockExchange);
+}
+
+function indicesBlockShowHideStokeTab(tabId, contId) {
+
+	if(tabId == "stkTab1")
+	{
+		_indicesBlockCurrStatsTabIndex = 0;
+	}
+	else if (tabId == "stkTab2")
+	{
+		_indicesBlockCurrStatsTabIndex = 1;
+	}
+	else if (tabId == "stkTab3")
+	{
+		_indicesBlockCurrStatsTabIndex = 2;
+	}
+	else if (tabId == "stkTab4")
+	{
+		_indicesBlockCurrStatsTabIndex = 3;
+	}
+
+	$("#" +tabId).siblings().removeClass("active");
+	$("#" + contId).siblings("div.indicesStat").css("display", "none");
+	$("#" + tabId).addClass("active");
+	$("#" + contId).css("display", "block");
+}
+getMerketChartBlockNew(_indicesBlockCurrCode,_indicesBlockCurrChartDuration,_indicesBlockCurrExchange,'stock-chart','stock-chart-contailner',_indicesBlockCurrStatsTabIndex,3,topTabId);
+', 
+
+', 
+', 
+	', 
+		', 
+						', Summary', 
+          				', Financials', 
+          				', Peer Group', 
+          				', Corporate Action', 
+          				', Price History', 
+          				', Bulk Deals', 
+          				', Info', 
+          				', News', 
+          				', 
+		', 
+	', 
+', 
+
+', 
+', 
+	', 
+	', 
+		', 
+		', 
+			', About Dewan Housing Finance Corporation Ltd.', 
+			', 
+				', Dewan Housing Finance Corporation Ltd', 
+	            ', u"Incorporated in Maharashtra in 1984 as Dewan Housing Finance & Leasing Co, the company was renamed as Dewan Housing Development Finance in 1984, then after to Dewan Housing Finance Corporation (DHFC) with its registered office in Bombay. The company commenced its activities in Aug.'84 and has several branches all over India. It was promoted by the late Dewan Kuldip Singh Wadhawan and his family.
+...", > More ', 
+            	', 
+          	', 
+		', 
+		', 
+#chartdiv text {
+    fill: #000;
+}
+.strg-bar{
+	width: 300px;
+}
+', 
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - Key Fundamentals ', 
+	', 
+		', 
+			', 
+    			', Parameter ', 
+    			', Values', 
+  			', 
+  			', 
+    			', Market Cap ', 
+    			', (',  cr)', 
+    			',  ', 
+    			', 7,744', 
+  			', 
+  			', 
+    			', EPS - TTM ', 
+    			', (', ) ', 
+    			', [*S]', 
+    			', 25.85', 
+  			', 
+  			', 
+    			', P/E Ratio ', 
+    			', (X) ', 
+    			', [*S]', 
+    			', 9.57', 
+  			', 
+  				', 
+    			', Face Value', 
+   				', (', ) ', 
+    			',  ', 
+   				', 10', 
+  			', 
+   			', 
+    			', Latest Dividend ', 
+    			', (%)', 
+    			',  ', 
+    			', 10.00', 
+  			', 
+  			', 
+    			', Latest Dividend Date', 
+    			',  ', 
+    			',  ', 
+    			', 26 Oct 2016', 
+  			', 
+  			', 
+    			', Dividend Yield ', 
+    			', (%)', 
+    			',  ', 
+    			', 3.06', 
+  			', 
+  			', 
+    			', Book Value / Share', 
+   				', (', ) ', 
+    			', [*S]', 
+   				', 183.40', 
+  			', 
+   			', 
+    			', P/B Ratio ', 
+    			', (', ) ', 
+    			', [*S]', 
+    			', 1.35', 
+  			', 
+		', 
+		', [*C] Consolidated      [*S] Standalone', 
+		', 
+ 	', 
+', 
+
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - Financial Results', 
+	', 
+		', 
+					', 
+				', Particulars (',  cr)', 
+				', Sep 2016', 
+				            	', Sep 2015', 
+                ', % Chg', 
+            				', 
+			', 
+				', Net Sales', 
+				', 2166.65', 
+								', 1810.73', 
+				', 19.66', 
+							', 
+			', 
+				', Other Income ', 
+				', 1.07', 
+								', 0.91', 
+				', 17.58', 
+							', 
+			', 
+				', Total Income ', 
+				', 2167.72', 
+								', 1811.64', 
+				', 19.66', 
+							', 
+			', 
+            	', Total Expenses ', 
+                ', 178.03', 
+                                ', 170.1', 
+                ', 4.66', 
+                			', 
+            ', 
+            	', Operating Profit', 
+                ', 1989.69', 
+                                ', 1641.54', 
+                ', 21.21', 
+                			', 
+            ', 
+            	', Net Profit ', 
+                ', 232.61', 
+                                ', 180.37', 
+                ', 28.96', 
+                			', 
+            ', 
+            	', Equity Capital ', 
+                ', 313.03', 
+                                ', 291.71', 
+                ',  - ', 
+                			', 
+		', 
+		', > More on Dewan Housing Finance Corporation Ltd Financials Results', 
+	', 
+', 
+
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - Peer Group', 
+	', 
+		', 
+			', 
+				', Company ', 
+				', Price(', ) ', 
+                ', Chg (%)', 
+                ', Mkt Cap (',  CR)', 
+            ', 
+                        ', 
+                ', I D F C', 
+                ', 57.05', 
+                ', 3.92', 
+                ', 9104.84', 
+            ', 
+                        ', 
+                ', Bharat Financial', 
+                ', 637.20', 
+                ', 1.35', 
+                ', 8788.90', 
+            ', 
+                        ', 
+                ', Edelweiss.Fin.', 
+                ', 98.65', 
+                ', -0.50', 
+                ', 8199.79', 
+            ', 
+                        ', 
+                ', Dewan Hsg. Fin.', 
+                ', 247.30', 
+                ', 1.48', 
+                ', 7743.71', 
+            ', 
+                        ', 
+                ', Motil.Oswal.Fin.', 
+                ', 518.55', 
+                ', 0.38', 
+                ', 7441.19', 
+            ', 
+                        ', 
+                ', Manappuram Fin.', 
+                ', 70.65', 
+                ', 1.73', 
+                ', 5945.90', 
+            ', 
+                        ', 
+                ', Capital First', 
+                ', 605.00', 
+                ', -0.14', 
+                ', 5891.49', 
+            ', 
+            		', 
+		', > More on Dewan Housing Finance Corporation Ltd Peer Group', 
+	', 
+', 
+
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - SHAREHOLDING PATTERN ', 
+	', 
+		', 
+			', 
+				', 
+					', 
+						                  		', 
+			            	var chartshare;
+			            	var legend;
+			            	var chartData = [
+				     			             {title: "Promoters",value: 39.31},
+				     			             {title: "Banks/FIs",value: 1.23},
+				     			             {title: "FIIs",value: 29.47},
+				     			             {title: "Insurance",value: 0.00},
+				     			             {title: "Mutual Funds",value: 2.67},
+				     			             {title: "Indian Public",value: 12.82},
+				     			             {title: "Custodians",value: 0.00},
+				     			             {title: "Other",value: 14.50}
+				     			            ];
+			            	var chartColor = ["#BE4F4C","#4E7FBB","#FCD202", "#008080", "#99B958", "#425C0E", "#7E63A0","#EC633F"];
+
+				            AmCharts.ready(function () {
+				                // PIE CHART
+				                chartshare = new AmCharts.AmPieChart();
+				                chartshare.dataProvider = chartData;
+				                chartshare.titleField = "title";
+				                chartshare.valueField = "value";
+				                chartshare.colors = chartColor;
+				                chartshare.marginTop=0;
+				                chartshare.marginBottom=0;
+				                chartshare.marginRight=0;
+				                chartshare.marginLeft=0;
+				                chartshare.pieY = 110;
+				                chartshare.visibleInLegendField="value";
+				                chartshare.balloonText="[[title]]: [[percents]]%";
+				                chartshare.labelText="[[percents]]%";
+
+				            	// changes label position (labelRadius)
+				                chartshare.labelRadius = 2;
+
+				                // makes chart 2D/3D
+				                chartshare.depth3D = 10;
+				                chartshare.angle = 10;
+				             	// WRITE
+
+				                chartshare.write("chartdiv");
+				            });
+			        	', 
+                  							', 
+				', 
+    			', 
+      				', 
+  						', 
+    						', Category', 
+    						', Share (%)', 
+  						', 
+  						', 
+    						',  Promoters', 
+    						', 39.31', 
+  						', 
+  						', 
+    						',  Banks/FIs', 
+    						', 1.23', 
+  						', 
+  						', 
+							',  FIIs', 
+    						', 29.47', 
+  						', 
+						  ', 
+						    ',  Insurance', 
+						    ', 0.00', 
+						  ', 
+						  ', 
+						    ',  Mutual Funds', 
+						    ', 2.67', 
+						  ', 
+						   ', 
+						    ',  Indian Public', 
+						    ', 12.82', 
+						  ', 
+						   ', 
+						    ',  Custodians', 
+						    ', 0.00', 
+						  ', 
+						   ', 
+						    ',  Other', 
+						    ', 14.50', 
+						  ', 
+					', 
+					', > More on Dewan Housing Finance Corporation Ltd Share Holding Pattern',    
+    			', 
+ 			', 
+		', 
+    ', 
+', 
+
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - Research Reports', 
+	', 
+		', 
+			', 
+				', Date', 
+				', Broker ', 
+    			', Action ', 
+    			', Price', 
+    			', Report', 
+  			', 
+  			  				  			', 
+    			', 04/05', 
+    			', Motilal Oswal', 
+    			', Buy', 
+    			', 198', 
+    			', Details', 
+  			', 
+          		  			', 
+    			', 05/04', 
+    			', Angel Broking', 
+    			', Buy', 
+    			', 189', 
+    			', Details', 
+  			', 
+          		  			', 
+    			', 20/10', 
+    			', Motilal Oswal', 
+    			', Buy', 
+    			', 237', 
+    			', Details', 
+  			', 
+          		  			', 
+    			', 28/01', 
+    			', Motilal Oswal', 
+    			', Buy', 
+    			', 472', 
+    			', Details', 
+  			', 
+          		  					', 
+		', > More on Dewan Housing Finance Corporation Ltd Research Reports', 
+	', 
+', 
+
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - RETURNS', 
+	', 
+		', 
+			', 
+				', Period', 
+				', BSE', 
+				', NSE', 
+				', Sensex', 
+				', NIFTY', 
+			', 
+						', 
+				', 1 Week', 
+				', 0.94%', 
+				', 0.94%', 
+				', 1.94%', 
+				', 2.10%', 
+			', 
+						', 
+				', 1 Month', 
+				', -0.98%', 
+				', -0.84%', 
+				', 2.01%', 
+				', 1.78%', 
+			', 
+						', 
+				', 3 Month', 
+				', -16.50%', 
+				', -16.54%', 
+				', -4.76%', 
+				', -5.38%', 
+			', 
+						', 
+				', 6 Month', 
+				', 16.82%', 
+				', 16.61%', 
+				', -1.06%', 
+				', -0.75%', 
+			', 
+						', 
+				', 1 Year', 
+				', 6.94%', 
+				', 6.89%', 
+				', 5.07%', 
+				', 6.28%', 
+			', 
+						', 
+				', 3 Year', 
+				', 140.14%', 
+				', 141.06%', 
+				', 28.90%', 
+				', 33.21%', 
+			', 
+					', 
+	', 
+', 
+
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - STOCK STRENGTH', 
+	', 
+		', 
+						', 
+				', u"Today's Low/High", 
+				', 244.00', 
+				', 
+					', 
+						', 
+							',  ', 
+							', 
+								', 
+							', 
+							', 
+						', 
+					', 
+				', 
+				', 248.70', 
+			', 
+						', 
+				', Week Low/High', 
+				', 240.85', 
+				', 
+					', 
+						', 
+							',  ', 
+							', 
+								', 
+							', 
+							', 
+						', 
+					', 
+				', 
+				', 251.00', 
+			', 
+						', 
+				', Month Low/High', 
+				', 227.55', 
+				', 
+					', 
+						', 
+							',  ', 
+							', 
+								', 
+							', 
+							', 
+						', 
+					', 
+				', 
+				', 259.00', 
+			', 
+						', 
+				', YEAR Low/High', 
+				', 140.55', 
+				', 
+					', 
+						', 
+							',  ', 
+							', 
+								', 
+							', 
+							', 
+						', 
+					', 
+				', 
+				', 337.00', 
+			', 
+						', 
+				', All TIME Low/High', 
+				', 1.85', 
+				', 
+					', 
+						', 
+							',  ', 
+							', 
+								', 
+							', 
+							', 
+						', 
+					', 
+				', 
+				', 337.00', 
+			', 
+					',  
+	', 
+', 
+
+', 
+function showMemo(memo,obj) {
+
+    var pos = $(obj).position();
+
+	$('#popup_box').fadeIn("slow");
+	$('#popup_box').css({
+		'left': pos.left,
+		'top': pos.top
+	});
+	$('#memo').html(memo);
+}
+
+function closePopup() {
+	$('#popup_box').fadeOut("slow");
+}
+
+function showhideGraTab(tabId, contId)
+{
+	$('#'+tabId+"Tab").removeClass('btnlitBluUnSel');
+	$('#'+tabId+"Tab").addClass('btnBlkSel');
+	$('#'+contId+"Tab").removeClass('btnBlkSel');
+	$('#'+contId+"Tab").addClass('btnlitBluUnSel');
+	$('#'+tabId).show();
+	$('#'+contId).hide();
+}
+', 	', 
+	', 
+	', 
+		', 	', 
+	', 
+', 
+
+', 
+', 
+	', 
+		', 
+ul.A-Z-links a{padding:0px 5px;}
+', 
+', 
+              ', Browse STOCK Companies',  
+              ', 
+              ',  ', Search Company:',  ', 
+     			', 
+          ',  ',  ', 
+            ', A', 
+            ', B', 
+            ', C', 
+            ', D', 
+            ', E', 
+            ', F', 
+            ', G', 
+            ', H', 
+            ', I', 
+            ', J', 
+            ', K', 
+            ', L', 
+            ', M', 
+            ', N', 
+            ', O', 
+            ', P', 
+            ', Q', 
+            ', R', 
+            ', S', 
+            ', T', 
+            ', U', 
+            ', V', 
+            ', W', 
+            ', X', 
+            ', Y', 
+            ', Z', 
+            ', 1', 
+            ', 2', 
+            ', 3', 
+            ', 4', 
+            ', 5', 
+            ', 6', 
+            ', 7', 
+            ', 8', 
+            ', 9', 
+              ', 
+              ', 
+          ', 		', Quick Links for Dewan Housing Finance Corporation:', 
+        ',   
+			', 
+                ', 
+                	', News', 
+                	', Announcements', 
+                    ', Brokerage Reports', 
+                    ', Business', 
+                    ', Earnings', 
+                    ', Sector', 
+                ', 
+                ', 
+                	', Corporate Action', 
+                    ', AGM', 
+                    ', Board Meetings', 
+                    ', Bonus', 
+                    ', Dividends', 
+                    ', EGM', 
+                    ', Rights', 
+                    ', Split', 
+                ', 
+                ', 
+	                ', INFORMATION', 
+	                ', Bulk Deals', 
+                    ', Company History', 
+                    ', MF Holding', 
+                    ', Listing Info', 
+                    ', Locations', 
+                    ', Shareholding', 
+                ', 
+                ', 
+	                ', Financials', 
+	                ', Financial Overview', 
+                    ', Balance Sheet', 
+                    ', Profit & Loss', 
+                    ', Cash Flow', 
+                    ', Ratios', 
+                    ', Quarterly Results', 
+              		', Half Yearly Results', 
+                    ', Nine Monthly Results', 
+                    ', Yearly Results',  
+                ', 
+                ', 
+	                ', Annual Report', 
+	                ', Auditors Report', 
+                	', u"Chairman's Speech", 
+                	', Company Management', 
+                    ', u"Directors' Report", 
+                    ', Finished Goods', 
+                    ', Raw Materials', 
+                ', 
+                ', 
+	                ', Peer Comparison', 
+	                ', Competition', 
+                    ', Market Cap', 
+                    ', Price', 
+                    ', Price Performance', 
+                    ', Net Sales', 
+                    ', Net Profit', 
+                    ', Total Assets', 
+                    ', Historical Prices',  
+                ', 
+				', 
+			', 
+        ',  
+		',  
+	', 
+', 
+', 
+	  	  	', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1474961759587-10'); });
+", 
+', 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="95"; var zflag_sid="0"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="30"; 
+', 
+', 
+
+', document.write("<!--"); if(isUserBanner=="fis") document.write("-->"); ',  ', $("#id_3_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_fis-1479188012.png"); ', document.write("<!--"); if(isUserBanner=="kotak") document.write("-->"); ',  ', $("#id_4_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_kotak-1479188012.jpg"); ', document.write("<!--"); if(isUserBanner=="capgemini") document.write("-->"); ',  ', $("#id_5_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_capgemini-1479188012.jpg"); ',   	  	', 
+	    ', 
+
+	    ', 
+	    ', 
+	    ', 
+#moreOnMarkets{
+	display: block !important;
+}
+', 
+', 
+    ', 
+    	', 
+    		', MORE ON MARKETS:', 
+    		', 
+    		',   
+    			', 
+    				', Quick Links ',  
+    				', 						
+						', Stock Market Live', 
+                        ', Portfolio ', 
+                        ', Commodity Market', 
+                        ', Upcoming IPO', 
+                        ', Personal Finance', 
+                       					
+    				', 
+    				', 						
+						', Stock Market News', 
+    					', Derivatives', 
+    					', Mutual Funds', 
+    					', Gold Price', 
+    					', Sensex', 
+    				', 
+    			', 
+    		',  
+    		', 
+    		',  
+    			', 
+    				', Browse STOCK Companies',  
+                    ', 
+                        ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E',  
+                        ', F', 
+                        ', G', 
+                        ', H',  
+                        ', I', 
+                        ', J', 
+                        ', K', 
+                        ', L', 
+                        ', M', 
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V', 
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 1', 
+                        ', 2', 
+                        ', 3', 
+                        ', 4', 
+                        ', 5',  
+                        ', 6', 
+                        ', 7', 
+                        ', 8',  
+                        ', 9',  
+                        ', 
+    				', 
+    			', 
+    			', 
+    				', Browse Mutual Funds',  
+    				', 
+                        ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E',  
+                        ', F', 
+                        ', G', 
+                        ', H',  
+                        ', I', 
+                        ', J', 
+                        ', K', 
+                        ', L', 
+                        ', M', 
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V', 
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                        ', 
+    				',   
+    			', 
+    			',  
+    		',      
+    		',   
+    		',  
+    	', 
+    	', 
+        	',  
+        		', 
+        			', Index Stocks', 
+        			', 
+        				',  ACC ', 
+        				',  Adani Ports ', 
+        				',  Ambuja Cem. ', 
+        				',  Asian Paints ', 
+        				',  Aurobindo Pharma ', 
+        				',  Axis Bank ', 
+        				',  B H E L ', 
+        				',  B P C L ', 
+        				',  Bajaj Auto ', 
+        				',  Bank of Baroda ', 
+        				',  Bharti Airtel ', 
+        				',  Bharti Infra. ', 
+        				',  Bosch ', 
+        				',  Cipla ', 
+        				',  Coal India ', 
+        				', u" Dr Reddy's Labs ", 
+        				',  Eicher Motors ', 
+        				',  GAIL (India) ', 
+        				',  Grasim Inds ', 
+        				',  H D F C ', 
+        				',  HCL Technologies ', 
+        				',  HDFC Bank ', 
+        				',  Hero Motocorp ', 
+        				',  Hind. Unilever ', 
+        				',  Hindalco Inds. ', 
+        				',  ICICI Bank ', 
+        				',  Idea Cellular ', 
+        				',  IndusInd Bank ', 
+        				',  Infosys ', 
+        				',  ITC ', 
+        				',  Kotak Mah. Bank ', 
+        				',  Larsen & Toubro ', 
+        				',  Lupin ', 
+        				',  M & M ', 
+        				',  Maruri Suzuki ', 
+        				',  NTPC ', 
+        				',  O N G C ', 
+        				',  Power Grid Corpn ', 
+        				',  Reliance Inds. ', 
+        				',  St Bk of India ', 
+        				',  Sun Pharma. Inds. ', 
+        				',  Tata Motors ', 
+        				',  Tata Motors-DVR ', 
+        				',  Tata Power Co. ', 
+        				',  Tata Steel ', 
+        				',  TCS ', 
+        				',  Tech Mahindra ', 
+        				',  UltraTech Cement Ltd ', 
+        				',  Wipro ', 
+        				',  Yes Bank ', 
+        				',  Zee Entertainment ', 
+        				', 
+        			', 
+        		', 
+        		',  
+        	',      
+        	',   
+        	',  
+        ', 
+    ', 
+', 
+
+', 
+', 
+  ', 
+     ', 
+     ', 
+     ', Copyrights © 2017 Business Standard Private Ltd. All rights reserved.', 
+     ', 
+  ', 
+
+  ', 
+     ', 
+          ', 
+             ', 
+                ', 
+               ', From BS Website', 
+               ', Home', 
+               ', Companies', 
+               ', Markets', 
+               ', Opinion', 
+               ', Politics', 
+               ', Technology', 
+               ', Specials', 
+               ', Personal Finance', 
+               ', Budget', 
+               ', Latest News', 
+               ', u"Today's Paper", 
+              ',  
+               ', RBI Policy', 
+               ', General News', 
+               ', General Videos', 
+               ', General Photo Gallery', 
+               ', Events', 
+               ', Authors', 
+              ', 
+              ', 
+              ', 
+                 ', 
+               ', About us', 
+               ', About Us', 
+               ', Code of Conduct', 
+               ', Terms & Conditions', 
+               ', Cookie Policy', 
+               ', Disclaimer', 
+               ', Investor Communication', 
+              ', 
+
+              ', 
+
+                 ', 
+               ', Support & Contact', 
+               ', Partner with Us', 
+               ', Careers', 
+               ', Advertise with Us', 
+               ', Contact Us', 
+               ', Feedback', 
+               ', Browser Support', 
+               ', Sitemap', 
+               ', 
+              ', 
+
+              ', 
+                 ', 
+               ', Subscribe', 
+               ', E-Paper', 
+               ', BS Magazines', 
+               ', Portfolio Tracker', 
+              ', 
+
+              ', 
+
+                 ', 
+               ', BS Products', 
+			   ', Smart Investor', 
+               ', BS Hindi', 
+               ', BS Motoring', 
+               ', BS Books', 
+               ', B2B Connect', 
+               ', iPhone', 
+               ', iPad', 
+               ', android', 
+               ', wap', 
+               ', BS Banking Round Table 2016', 
+               ', BS Fund Cafe 2016', 
+              ', 
+              ', 
+          ', 
+          ', 
+     ', 
+
+     ', 
+	 ', 
+                            ', Budget 2017', 
+                            ', Budget 2017', 
+                            ', Budget News', 
+                            ', Budget', 
+						', 
+						', 
+     	', 
+      		', Connect with BS', 
+        	', 
+            	', Facebook',   
+                ', Google+',  
+                ', Linkedin',  
+                ', Twitter', 
+                ', Youtube', 
+                ', RSS',   
+                ',   
+            ', 
+     	', 
+     ', 
+  ', 
+  ', 
+  ', 
+', 
+', 
+', 
+    .notification_error_div {
+        position: fixed;
+        z-index:100;
+        bottom: 0;
+        right: 0;
+        width: 350px;
+        background-color: #FFFFF0;
+        border: 1px solid black;
+
+        padding: 15px;
+        margin: 10px;
+
+        text-align: center;
+        font-size : 14px;
+        font-family: Tahoma,Arial,Georgia;
+    }
+', 
+', 
+', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="31"; var zflag_sid="0"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="93"; 
+', 
+', 
+', 
+', 
+    .notification_error_div {
+        position: fixed;
+        z-index:100;
+        bottom: 0;
+        right: 0;
+        width: 350px;
+        background-color: #FFFFF0;
+        border: 1px solid black;
+
+        padding: 15px;
+        margin: 10px;
+
+        text-align: center;
+        font-size : 14px;
+        font-family: Tahoma,Arial,Georgia;
+    }
+
+/** Free User Notification Popup **/
+.subscription-notification-popup{color: #000;padding: 0px !important;margin: 0px !important;}
+.free_user_notification_popup{padding: 10px;display: none;background: #fff;}
+.btn-maroon{padding: 5px 10px;margin: 0;border: 0;background: #ac2122;color: #fff;font-size: 16px;cursor: pointer;}
+.fis_user_notification_popup{padding: 10px;display: none;background: #fff;}
+', 
+', 
+    ', 
+       ', 
+          ', 
+             ', 
+                ', 
+                   ', 
+                   ', Upgrade To Premium Services', 
+                ', 
+             ', 
+             ', 
+                ', 
+                   ', 
+                ', 
+             ', 
+          ', 
+          ', 
+             ', Welcome ', User', 
+             ', 
+          ', 
+          ',  Business Standard is happy to inform you of the launch of "Business Standard Premium Services"', 
+          ', As a premium subscriber you get an across device unfettered access to a range of services which include:', 
+          ', 
+             ', Access Exclusive content - articles, features & opinion pieces', 
+             ', Weekly Industry/Genre specific newsletters - Choose multiple industries/genres', 
+             ', Access to 17 plus years of content archives', 
+             ', Set Stock price alerts for your portfolio and watch list and get them delivered to your e-mail box', 
+             ', End of day news alerts on 5 companies (via email)', 
+             ', NEW', : Get seamless access to WSJ.com at a great price. No additional sign-up required.', 
+          ', 
+          ', 
+             ', 
+                ',  ', 
+             ', 
+             ', 
+                ', 
+             ', 
+          ', 
+          ', 
+       ', 
+    ', 
+', 
+
+', 
+', 
+   ', 
+      ', 
+         ', 
+            ', 
+               ', 
+               ', Premium Services ', 
+               ', In Partnership with ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ',  ', 
+         ', 
+         ', 
+            ', 
+            ', Dear ', Guest', ,', 
+            ', 
+         ', 
+         ', 
+            ',  ', 
+         ', 
+      ', 
+      ', Welcome to the premium services of Business Standard brought to you courtesy FIS.', 
+         Kindly visit the ', Manage my subscription page',  to discover the benefits of this programme.', 
+         ', 
+         Enjoy Reading!', 
+         Team Business Standard
+      ', 
+      ', 
+         ', 
+            ',  ', 
+         ', 
+      ', 
+      ', 
+   ', 
+', 
+', 
+', 
+function getCookie(name) {		
+    var value = "; " + document.cookie;		
+    var parts = value.split("; " + name + "=");		
+    if (parts.length == 2)		
+        return parts.pop().split(";").shift();		
+}
+$('#head-suggest_ftr').focus(function(){
+	  $(this).attr('placeholder','');
+	});
+	$('#head-suggest_ftr').focusout(function(){
+	  $(this).attr('placeholder','Enter the first three letters of the company');
+});
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+function setCookieNoti(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+$(document).ready(function() {
+	if($('.breadcrum').find('a').size() != null && $('.breadcrum').find('a').size() == 3){
+		var lc = 1;
+		$('.breadcrum').find('a').each(function() {
+			if(lc == 2){ $(this).attr('class','bact'); }
+		    lc++;
+		});
+	}
+});
+//-->
+', 
+
+', 
+', 
+function setCookieNoti(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+
+$(document).ready(function(){//free-username-popup
+	var usrLoginCookie = getLoginCookie('_userLoggedIn');
+	if(isUserBanner=='fis'){
+		var usrObj = JSON.parse(decodeURIComponent(usrLoginCookie));
+    	if(usrObj.ufname != ''){
+        	var uId = usrObj.uId;
+        	var uName = usrObj.ufname;
+			var ckVal = getLoginCookie('_chkFisUserNotificationPopup');
+			var isCkSet = ckVal.indexOf(uId);
+			if(ckVal == '' || ckVal == 'undefined'){
+				//cookie is not set
+				$("#fis-username-popup").html(uName);
+				$.fancybox({
+					href		:	"#fis_user_notification_popup",
+				    maxWidth	:	600,
+					maxHeight	:	500,
+					fitToView	:	false,
+					autoSize	:	false,
+					closeClick	:	false,
+					openEffect	:	'none',
+					closeEffect	:	'none'
+				});
+		    	setCookieNoti("_chkFisUserNotificationPopup",uId,130);
+			}else{
+				if(isCkSet == -1){
+					//cookie for current user is not set
+					$("#fis-username-popup").html(uName);
+					$.fancybox({
+						href		:	"#fis_user_notification_popup",
+					    maxWidth	:	600,
+						maxHeight	:	500,
+						fitToView	:	false,
+						autoSize	:	false,
+						closeClick	:	false,
+						openEffect	:	'none',
+						closeEffect	:	'none'
+					});
+			    	ckVal += ","+uId;
+			    	setCookieNoti("_chkFisUserNotificationPopup",ckVal,130);
+				}else{
+					//cookie is already set, no need to show popup
+				}
+			}
+    	}
+	}
+  	if(usrLoginCookie != '' && false){
+    	var usrObj = JSON.parse(decodeURIComponent(usrLoginCookie));
+    	if(usrObj.s == 'f'){
+        	var uId = usrObj.uId;
+        	var uName = usrObj.ufname;
+			var ckVal = getLoginCookie('_chkFreeUserNotificationPopup');
+			var isCkSet = ckVal.indexOf(uId);
+			if(ckVal == '' || ckVal == 'undefined'){
+				//cookie is not set
+				$("#free-username-popup").html(uName);
+				$.fancybox({
+					href		:	"#free_user_notification_popup",
+				    maxWidth	:	600,
+					maxHeight	:	500,
+					fitToView	:	false,
+					autoSize	:	false,
+					closeClick	:	false,
+					openEffect	:	'none',
+					closeEffect	:	'none'
+				});
+		    	setCookieNoti("_chkFreeUserNotificationPopup",uId,30);
+			}else{
+				if(isCkSet == -1){
+					//cookie for current user is not set
+					$("#free-username-popup").html(uName);
+					$.fancybox({
+						href		:	"#free_user_notification_popup",
+					    maxWidth	:	600,
+						maxHeight	:	500,
+						fitToView	:	false,
+						autoSize	:	false,
+						closeClick	:	false,
+						openEffect	:	'none',
+						closeEffect	:	'none'
+					});
+			    	ckVal += ","+uId;
+			    	setCookieNoti("_chkFreeUserNotificationPopup",ckVal,30);
+				}else{
+					//cookie is already set, no need to show popup
+				}
+			}
+    	}
+  	}
+});
+
+$(document).ready(function(){
+	var loginCookie = getCookie('_userLoggedIn');
+	if( loginCookie == '' || loginCookie == 'undefined' ){
+		//Do Nothing
+	}else{
+		var loginParamObj = JSON.parse(decodeURIComponent(loginCookie));
+		if( loginParamObj.uId > 0 ){
+			var pwCookie = getCookie('_pw');
+			if( pwCookie == 't' ){
+				//Do Nothing
+			}else{
+				var subExpCookie = getCookie('_sub_exp');
+				if( (subExpCookie > 0) ){
+					var currentTimestamp = Math.floor(Date.now() / 1000);
+					
+					//Expiry Notification Logic
+					var neverShowNotificaitonCookie = getCookie('_nsn');
+					if(neverShowNotificaitonCookie == '' || neverShowNotificaitonCookie == 'undefined' || neverShowNotificaitonCookie == null){
+						var lastReminderCookie = getCookie('_ler'+loginParamObj.uId);//last expiry reminder
+						if( (lastReminderCookie == "") || (lastReminderCookie == "undefined") || (lastReminderCookie == null) ){
+							$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+						}else{
+							if(lastReminderCookie < currentTimestamp){
+								$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+							}
+						}
+					}else{
+						var isCkSet = neverShowNotificaitonCookie.indexOf(loginParamObj.uId);
+						if(isCkSet == -1){
+							//cookie for current user is not set
+							var lastReminderCookie = getCookie('_ler'+loginParamObj.uId);//last expiry reminder
+							if( (lastReminderCookie == "") || (lastReminderCookie == "undefined") || (lastReminderCookie == null) ){
+								$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+							}else{
+								if(lastReminderCookie < currentTimestamp){
+									$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+});
+
+function remindNotificationLater(userId){
+	var currentTimestamp = Math.floor(Date.now() / 1000);
+	var tempTime = new Date(currentTimestamp*1000);
+	var lastExpNotification = Math.floor(tempTime.setMinutes(tempTime.getMinutes() + 60) / 1000);//+60 mins
+	//Set Cookie
+    var d = new Date();
+    d.setTime(d.getTime() + (60*60*1000));//60 min
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "_ler"+userId+"=" + lastExpNotification + "; " + expires + "; path=/";
+	$('#endSubscriptionNotification').remove();
+}
+
+function closeNotificationForever(userId){
+	var neverShowNotificaitonCookie = getCookie('_nsn');
+	neverShowNotificaitonCookie += ","+userId;
+	//Set Cookie
+    var d = new Date();
+    d.setTime(d.getTime() + (30*24*60*60*1000));//30 days
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "_nsn=" + neverShowNotificaitonCookie + "; " + expires + "; path=/";
+	
+	$('#endSubscriptionNotification').remove();
+}
+', 
+
+', 
+$.browser.chrome = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()); 
+if($.browser.chrome){
+	setTimeout(showChromeNotification,1000);
+}
+', 	    ', 
+      ', 
+         ', 
+', 
+
+    	', 
+
+function show(target) {
+    document.getElementById(target).style.display = 'block';
+}
+
+function hide(target) {
+   document.getElementById(target).style.display = 'none';
+    notifyCookie =  decodeURIComponent(getCookie('_notifyCookie'));
+    if(notifyCookie !=null && notifyCookie != 'undefined'){
+        var notifyValues = JSON.parse(notifyCookie);
+	if(notifyValues !=null && notifyValues != 'undefined' ){
+	  notifyValues.nty="Y";
+	  notifyValues.cnty="Y";
+	  notifyValues.rTime= (new Date().getTime()+ 24*60*60*1000) /1000|0;
+	  notifyValues=JSON.stringify(notifyValues);
+	  notifyValues = encodeURIComponent(notifyValues);
+	  setCookieColumn('_notifyCookie',notifyValues,2);
+	}
+   }
+}
+function setCookieColumn(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+', 
+
+
+
+
+
+
+
+', 
+var userCookie = decodeURIComponent(getCookie('_userLoggedIn'));
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-3333643-1', 'auto');
+if(userCookie !=null && userCookie!= 'undefined'){
+	 var userInfo = JSON.parse(userCookie);
+	 ga('set', '&uid', userInfo.uId);
+}
+if(isBannerActive == false){
+	if(userCookie !=null && userCookie!= 'undefined'){
+		var userInfo = JSON.parse(userCookie);
+		if(userInfo !=null && userInfo!= 'undefined' && userInfo.s != 'undefined' && userInfo.s == 't'){
+			ga('set', 'dimension1', 'Paid adblocker!!!');
+		}else{
+			ga('set', 'dimension1', 'Free adblocker!!!');
+		}
+	}else{
+		ga('set', 'dimension1', 'Anonymous adblocker!!!');
+	}
+}
+
+
+if(idPaidArticle == true){
+	   var url = window.location.href; var articleUrl = " ";
+	       if(url.indexOf('?') != -1)
+	         articleUrl = url.split('?')[0] ;
+	       else
+	         articleUrl = url;
+	    if(articleUrl !=null && articleUrl!= 'undefined'){
+	   
+	    	ga('set', 'dimension2', articleUrl);
+	    }
+}
+
+
+ga('send', 'pageview');
+', 
+', 
+', 
+', var _comscore=_comscore||[];_comscore.push({c1:"2",c2:"8021726"});(function(){var b=document.createElement("script"),a=document.getElementsByTagName("script")[0];b.async=true;b.src=(document.location.protocol=="https:"?"https://sb":"http://b")+".scorecardresearch.com/beacon.js";a.parentNode.insertBefore(b,a)})();', 
+', 
+', 
+', 
+', 
+var AKSB=AKSB||{};AKSB.q=[];AKSB.mark=function(b,a){AKSB.q.push(["mark",b,a||(new Date).getTime()])};AKSB.measure=function(b,a,c){AKSB.q.push(["measure",b,a,c||(new Date).getTime()])};AKSB.done=function(b){AKSB.q.push(["done",b])};AKSB.mark("firstbyte",(new Date).getTime());
+AKSB.prof={custid:"356860",beaconrate:20};
+(function(b){var a=document.createElement("iframe");a.src="javascript:false";(a.frameElement||a).style.cssText="width: 0; height: 0; border: 0; display: none";var c=document.getElementsByTagName("script"),c=c[c.length-1];c.parentNode.insertBefore(a,c);a=a.contentWindow.document;a.open().write("<body onload=\"var js = document.createElement('script');js.id = 'aksb-ifr';js.src = '"+b+"';document.body.appendChild(js);\">");a.close()})(("https:"===document.location.protocol?"https:":"http:")+"//ds-aksb-a.akamaihd.net/356860/aksb-a/aksb.min.js");
+', 
+', 
+', 
+var addthis_config = {"data_track_addressbar":false, "services_exclude":'print, email','recommended' : {}, 'thankyo : false};
+addthis_config.pubid = 'bsorg08';
+var addthisScript = document.createElement('script');
+addthisScript.setAttribute('src', '//s7.addthis.com/js/300/addthis_widget.js#domready=1');
+document.body.appendChild(addthisScript);
+', 
+', 
+#at4-thankyou{display:none !important;}
+', 
+', u"
+var subs_pw = getCookie('_pw');
+if( subs_pw != null && subs_pw == 't'){
+	$('.paid_article_key').hide();
+}else{
+	$('.paid_article_key').show();
+}
+", 
+'][
+', 
+   ', 
+   ', 
+   ', 
+	var urlArray = ["/article/", "/content/", "/budget/"];
+	var blockThisUrl = false;
+	for (checkedUrl = 0; checkedUrl < urlArray.length; checkedUrl++) { 
+		if(document.location.pathname.indexOf(urlArray[checkedUrl]) !== -1){
+			blockThisUrl = true;
+		}
+	}
+	var subs_pw = getCookie('_pw');
+	if((typeof adsLoaded != 'undefined')  == false && (subs_pw == null || subs_pw != 't') && blockThisUrl){
+		console.log("adBlocker");
+		$("#main-warp").hide();
+		$("body").load("/adBlocker.html");
+		$("head").html("");
+		$("body").addClass("mainbg");
+	}
+	', 
+      ', 
+	        ', 
+		', 
+		', 
+    ', 
+              ', 
+        ', 
+          ', 
+          	', 
+			', Home', Markets', Companies', Opinion', Politics', Technology', Specials', PF', Portfolio', My Page', Budget 2017', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', North', East', West', South', Election', News', Mobiles & Tablets', Apps', People', Computers', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017',            	', 
+
+          ', 
+          ', 
+            ', BS APPS
+            ', 
+           ', 
+                ', iPad', 
+                ', iPhone', 
+                ', Android', 
+                ', Wap', 
+              ', 
+            ', 
+
+            ', 
+           ', BS PRODUCTS
+           ', 
+           ', 
+				', Smart Investor', 
+				', BS Hindi', 
+			    ', BS Motoring', 
+			    ', BS Books', 		    
+			    ', u"Today's Paper", 			    
+			    ', 
+			    ', Economy & Industry', 
+              ', 
+            ', 
+
+            ', 
+           ', BS SPECIALS
+           ', 
+           ', 
+                ', B2B Connect', 
+                ', Power & Energy', 
+                ', SME', 
+              ', 
+            ', 
+			
+		   ', 
+			', BS E-Paper', 
+           ', 
+
+          ', 
+           ', 
+        ', 
+
+          ', 
+          ', 
+        		.displayNone{display: none !important;}
+          ', 
+          ', 
+          				', 
+			', Hi', , ', 
+			', 
+				', 
+	                	                ', Change Password', 
+	                            			', Subscribe', 
+			 			                ',  Sign out', 
+              ', 
+			 ', 
+	                ', Change Password',             		
+					', Manage My Account', 
+					', 
+	                ',  Sign out', 
+              ', 
+			', 
+			            ', SIGN IN', 
+            ', Subscribe', 
+			          ', 
+          ', 
+          	function getLoginCookie(cname) {
+	      	    var name = cname + "=";
+	      	    var ca = document.cookie.split(';');
+	      	    for(var i=0; i<ca.length; i++) {
+	      	        var c = ca[i];
+	      	        while (c.charAt(0)==' ') c = c.substring(1);
+	      	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+	      	    }
+	      	    return "";
+      		}
+      		var usrLoginCookie = getLoginCookie('_userLoggedIn');
+          	if(usrLoginCookie == ''){
+				$(".userNotLoggedIn").removeClass('displayNone');
+            }else{
+            	$(".userLoggedIn").removeClass('displayNone');
+            	var usrObj = decodeURIComponent(usrLoginCookie);			
+				usrObj = JSON.parse(usrObj);				
+				usrObj.ufname = usrObj.ufname.replace(/\+/g, ' ');
+            	$(".ucnameSpan").html(decodeURIComponent(usrObj.ufname));	
+            	if(usrObj.s == 't'){
+                	$(".usrSubcribe a").html('Manage My Account');
+					$(".usrSubcribe a").attr("href", "/subscription-cart/manage");					
+                }else{                	
+					var subExp = getLoginCookie('_sub_exp');					
+                    if(subExp!=''){                    	
+						var timestamp = Math.floor(Date.now() / 1000);						
+						if((timestamp.toString().length == subExp.length) && (subExp<timestamp) ){
+							$(".manageMyAccount").show();
+							$(".usrSubcribe a").html('Subscribe');
+						}else{
+							$(".usrSubcribe a").html('Manage My Account');
+							$(".usrSubcribe a").attr("href", "/subscription-cart/manage");		
+						}
+                    }else{
+                		$(".usrSubcribe a").html('Subscribe');						
+						$(".manageMyAccount").show();
+                    }
+                }
+
+                if(usrObj.r == "f"){
+                	$(".siteSignout a").click(function(){
+                		FB.logout();
+                    });
+                }else if(usrObj.r == "t"){
+                	$(".siteSignout a").click(function(){
+                		twttr.anywhere.signOut();
+                    });
+                }
+            }
+          ', 
+          ', 
+            ', 
+                   ', 
+					',  ', 
+					',  ', 
+                    ',  ', 
+					',  ', 
+					',  ', 
+					',  ', 
+					',  ', 
+            		                   ', 
+                   ', 
+               ', 
+          ', 
+           ', 
+        ', 
+         ', 
+        ', 
+         ', 
+   ', 
+        ', 
+		', 
+						', 
+			', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/Web_chat_175x60_left', [175, 60], 'div-gpt-ad-1480487618894-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1480487618894-0'); });
+", 
+', 			', 
+					', 
+		', 
+						', 
+			', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/webchat_earpanel_175x60', [175, 60], 'div-gpt-ad-1479738033184-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479738033184-0'); });
+", 
+', 			', 
+					', 
+		', 
+        ', 
+            ', 
+            ', 
+                    ', 
+        ', 
+
+		', 
+		', 
+    ', 
+
+
+
+   ', 
+    ', 
+        ', 
+        ', 
+      ', 
+      ', 
+		.second-menu-panel{z-index:9999999 !important;}
+		.top-menu{z-index:10000000 !important;}
+      	.fancybox-overlay,#fancybox-overlay{z-index:10000001 !important;}
+		#overlay{z-index:10000002 !important;}
+		.popup,#fancybox-wrap{z-index:10000003 !important;}
+		#fancybox-content{min-height: 380px;min-width:600px;}
+		#fancybox-wrap{min-width: 640px;}
+		#menu li.drop{padding: 8px 10px 8px 2px;}
+      ', 
+   
+   ', 
+   ', 
+      ', 
+      ',  ', Company',  ',  Science & Technology',  ',  ',       ', 
+      ', 
+       ', 
+      ', 
+          ', 
+          ', 
+          ', 
+            ', 
+               ', News', 
+				', Stock Quote', 
+				', Authors', 
+            ', 
+            ', 
+             ', 
+
+          ', 
+          ', 
+          ', 
+          ', 
+
+          ', 
+	         
+	          $("#select_type").change(function(){
+	          	document.cookie="selectType=" + $(this).val();
+           	  });
+	           getCookieAndSetDefault("selectType");
+	         
+	          
+	          function getCookieAndSetDefault(c_name){
+					var c_value = document.cookie;console.log(c_value);
+					var c_start = c_value.indexOf(" " + c_name + "=");
+					if (c_start == -1){
+						c_start = c_value.indexOf(c_name + "=");
+					}
+					if (c_start == -1){
+						c_value = null;
+					}
+					else{
+						c_start = c_value.indexOf("=", c_start) + 1;
+						var c_end = c_value.indexOf(";", c_start);
+					if (c_end == -1){
+						c_end = c_value.length;
+					}
+					c_value = unescape(c_value.substring(c_start,c_end));
+					}
+
+					if(c_value != 'null' && c_value != null){
+						$("#select_type").val(c_value);
+					}
+	         }
+	          
+          ', 
+		  
+    ', 
+	var companyJsonFile = "";
+	
+	function getCompaniesJson() {
+		var o = $("#head-suggest");
+		objHiddenValField = "";
+		if (objHiddenValField == undefined || objHiddenValField == "") {
+			objHiddenValField = $("#company_code");
+		}
+
+		$.ajax({
+			url : "/api-handler/article/get-company-json",
+			cache : true,
+			success : function(data) {
+				var jsonObj = eval(data);
+				companyFileLoaded = true;
+				companyJsonFile = jsonObj;
+
+				
+				$(o).autocomplete({
+					source: function (request, response) {
+				            var term = $.ui.autocomplete.escapeRegex(request.term)
+				                , startsWithMatcher = new RegExp("^"+ term, "i")
+				                , startsWith = $.grep(companyJsonFile, function(value) {
+				                    return (startsWithMatcher.test(value.value) || (startsWithMatcher.test(value.compSym)));
+				                })
+				                
+				                , containsMatcher = new RegExp(term, "i")
+				                , contains = $.grep(companyJsonFile, function (value) {
+				                    return $.inArray(value, startsWith) < 0 &&
+				                        (containsMatcher.test(value.value) || (containsMatcher.test(value.compSym)));
+				                });
+				            response(startsWith.concat(contains));
+				        },
+					minLength : 3,
+					autoFocus : true,
+					disabled : false,
+					select : function(event, ui) {
+						$(objHiddenValField).val(ui.item.compId);
+						$(o).val(ui.item.compFormatted);
+						$objForm = $(o).closest("form");
+						if ($objForm.attr("name") != "frm_equity") {
+							$objForm.submit();
+						}
+					},
+					open : function() {
+						$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+					},
+					close : function() {
+						$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+					}
+				}).data("autocomplete")._renderItem = function(ul, item) {
+					var result = String(item.label).replace(new RegExp(this.term, "gi"),"<b>$&</b>");
+					return $( "<li></li>" )
+	                      .data( "item.autocomplete", item )
+	                      .append($( "<a></a>" ).html(result))
+	                      .appendTo( ul );
+
+				};
+
+			}
+		});
+	}
+	', 
+
+
+		', 
+		$("#select_type").change(function(){
+			var itemVal = $(this).val();
+			if(itemVal == 'news'){
+				$("#radio_news").attr("checked","checked");
+				$("#radio_news").trigger("click");
+			}else if(itemVal == 'stocks'){
+				$("#radio_stock").attr("checked","checked");
+				$("#radio_stock").trigger("click");
+			}else if(itemVal == 'authors'){
+				$("#radio_authors").attr("checked","checked");
+				$("#radio_authors").trigger("click");
+			}
+		});
+		$(document).ready(function(){
+			var itemVal = $('#select_type').val();
+			if(itemVal == 'news'){
+				$("#radio_news").attr("checked","checked");
+				$("#radio_news").trigger("click");
+			}else if(itemVal == 'stocks'){
+				$("#radio_stock").attr("checked","checked");
+				$("#radio_stock").trigger("click");
+			}else if(itemVal == 'authors'){
+				$("#radio_authors").attr("checked","checked");
+				$("#radio_authors").trigger("click");
+			}
+		});
+		$("#search_btn").click(function(){
+			$("#search_box_text").val($("#head-suggest").val());
+			$("#frm_search").submit();
+		});
+
+		$("#head-suggest").keypress(function(e){
+			if(e.charCode == 13){
+				$("#frm_search").submit();
+			}
+		});
+		', 
+
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		',  News', 
+		',  
+		', 
+		',  Stock Quote', 
+		',  
+		', 
+		',  Authors', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+
+      ', 
+      ', 
+
+      ', 
+
+   ', 
+     ', 
+    ',     ', 
+    
+     ', 
+	    ', 
+    ', 
+    ', 
+', 
+	$(document).ready(function(){
+		 $(".iframe").fancybox({
+		     maxWidth	: 600,
+			 maxHeight	: 580,
+			fitToView	: false,
+			autoSize	: false,
+			closeClick	: false,
+			href		: '/core/request-handler/sign-in-content',
+			openEffect	: 'none',
+			closeEffect	: 'none'
+	
+		});
+	$('.fancybox').fancybox();
+	});
+', 
+', 
+', u"
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') +
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+", 
+
+', u"
+googletag.cmd.push(function() {
+googletag.defineSlot('/6516239/BS_company_bottom_728x90', [728, 90], 'div-gpt-ad-1436413990957-0').addService(googletag.pubads());
+googletag.defineSlot('/6516239/BS_company_R1_300x250', [300, 250], 'div-gpt-ad-1436413990957-1').addService(googletag.pubads());
+googletag.defineSlot('/6516239/BS_company_R2_300x250', [300, 250], 'div-gpt-ad-1436413990957-2').addService(googletag.pubads());
+googletag.defineSlot('/6516239/BS_company_R3_300x250', [300, 250], 'div-gpt-ad-1436413990957-3').addService(googletag.pubads());
+googletag.defineSlot('/6516239/BS_company_R4_300x250', [300, 250], 'div-gpt-ad-1436413990957-4').addService(googletag.pubads());
+googletag.defineSlot('/6516239/BS_company_super_728x90', [728, 90], 'div-gpt-ad-1436413990957-5').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+", 
+
+', 
+//Bs New Menu 
+   	$("#newMenuNavigationSecond").html($("#newMenuNavigationSecondHide").html());
+   	$("#newMenuNavigationSecondHide").html("");
+		$('.select_sub').first().removeClass('default-disp');
+		var mid = '211';
+		var rel = $('#nav_menu_' + mid).attr('rel');
+		if (rel != undefined && rel != '') {
+			$('#nav_menu_' + rel).addClass('activelink');
+			$('#nav_menu_' + mid).addClass('activelink');
+			$('#nav_menu_' + rel).parent().find('.select_sub').addClass('default-disp');		
+			$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+		} else {
+			$('#nav_menu_' + mid).addClass('activelink');
+			if($('#nav_menu_' + mid).parent().find('.select_sub').length==0){
+				$(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+				$(".nav-outer-repeat").css("height","62px");
+			}else{
+				$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+				$(".nav-outer-repeat").css("height","62px");
+			}
+		}
+		$('.select').mouseenter(function() {
+			
+			 $( ".select" ).each(function() { 
+				 if(($(this).find('.activelink').length>0)){
+					 $(this).find('.select_sub').removeClass('default-disp');
+					 $(this).find('li').removeClass('activelink');
+				 }
+				 
+		    });
+		      if(!($(this).find('.select_sub').length>0)){
+		    	     $(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+		    	     $(".nav-outer-repeat").css("height","62px");
+			  }else{ 
+				    $(".nav-new").find('.select:first').find('.select_sub').removeClass('default-disp');
+				 	$(".nav-outer-repeat").css("height","62px");
+			  }
+	     });
+		 
+		 $('.nav-outer').mouseleave(function() {
+			 if (rel != undefined && rel != '') {
+					$('#nav_menu_' + rel).addClass('activelink');
+					$('#nav_menu_' + mid).addClass('activelink');
+					$('#nav_menu_' + rel).parent().find('.select_sub').addClass('default-disp');		
+					$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+					$(".nav-outer-repeat").css("height","62px");
+				}else{
+					if($('#nav_menu_' + mid).parent().find('.select_sub').length==0){
+						$(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+						$(".nav-outer-repeat").css("height","62px");
+					}else{
+						$(".nav-new").find('.select:first').find('.select_sub').removeClass('default-disp');
+						$('#nav_menu_' + mid).addClass('activelink');
+						$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+						$(".nav-outer-repeat").css("height","62px");
+					}
+					
+			 }
+	    }); 
+		 
+		  $('.activelink').mouseenter(function() {
+	       $('.activelink').first().addClass('nolink');
+	    }); 
+	', 
+
+
+', 
+', 		', 
+
+		', 
+	    ', u"
+	var pageCompanyInfo = {'coCode':'1814', 'sectorId':5, 'subSectorId':'00000051'};
+", 
+    
+', You are here » ', Home',  » ', Companies',  » ', Company Overview',  » Dewan Housing Finance Corporation Ltd', 
+', 
+
+', 
+', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1474961759587-0'); });
+", 
+', 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="95"; var zflag_sid="0"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14"; 
+', 
+', 
+
+', document.write("<!--"); if(isUserBanner=="fis") document.write("-->"); ',  ', $("#id_3_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_fis-1480077568.png"); ', document.write("<!--"); if(isUserBanner=="kotak") document.write("-->"); ',  ', $("#id_4_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_kotak-1480077568.jpg"); ', document.write("<!--"); if(isUserBanner=="capgemini") document.write("-->"); ',  ', $("#id_5_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_capgemini-1480077568.jpg"); ', 
+
+', 
+', 
+ 	', 
+	', 
+		', Dewan Housing Finance Corporation Ltd.', 
+		', 
+			', 
+    			', BSE: 511072', 
+    			', Sector: Financials',  
+  			', 
+  			', 
+    			', NSE: DHFL', 
+    			', ISIN Code: INE202B01012',  
+  			', 
+		', 
+		', 
+	', 
+	', 
+    	',  
+       		', 
+  				', 
+    				', 
+    					', BSE',   ', LIVE', 
+    					', 15:47 | 05 Jan', 
+    				', 
+    				    				', 
+    					', 247.30', 
+    				', 
+    				', 
+    					', 3.60', (1.48%)', 
+    				', 
+    				  				', 
+			',  
+       		', 
+       		       		', 
+  				', 
+    				', 
+      					', OPEN', 
+      					', 244.10', 
+    				', 
+    				', 
+    					', HIGH', 
+      					', 248.70', 
+      				', 
+    				', 
+     					', LOW', 
+      					', 244.00', 
+      				', 
+  				', 
+			',  
+			 		', 
+    	', 
+         	', 
+  				', 
+    				', 
+    					', NSE',   ', LIVE', 
+    					', 15:49 | 05 Jan', 
+    				', 
+    				    				', 
+    					', 247.45', 
+    				', 
+    				', 
+    					', 4.25', (1.75%)', 
+    				', 
+    				  				', 	
+			',  
+       		', 
+       		       		', 
+  				', 
+    				', 
+      					', OPEN', 
+      					', 245.00', 
+    				', 
+    				', 
+    					', HIGH', 
+      					', 248.60', 
+      				', 
+    				', 
+     					', LOW', 
+      					', 243.70', 
+      				', 
+  				', 
+			', 
+			    	',  
+		', 
+	', 
+	',   
+', 
+', 
+
+', 
+', 
+	', 
+#stock-chart-contailner ul li { float: right;}
+#stock-chart-contailner ul li a{cursor: pointer;}
+#stock-chart-contailner ul li .active{background: green;}
+#stock-chart-contailner-nse ul li { float: right;}
+#stock-chart-contailner-nse ul li a{cursor: pointer;}
+#stock-chart-contailner-nse ul li .active{background: green;}
+.M-down-MKT{color: #fff;}
+.disNone {display: none;}
+.login-fields{padding: 7px 2%;}
+.amChartsButton {border-width: 0px;color: #fff;-moz-border-radius: 0px;border-radius:0px;margin: 0 0px;
+padding: 10px;border-right: 1px dotted #4c4c4c;background: #333;font-weight: normal;cursor: pointer;
+}
+.amChartsButtonSelected{border-width:0px;border-radius:0px;padding: 10px;background-color: #008000;
+border-color: #008000;}
+.graph-btn a{padding: 0px 0px;}
+.graph-btn ul{padding: 0px 0px;}
+#stock-chart-contailner ul li .active{padding: 10px}
+#stock-chart-contailner ul li a{padding: 10px;}
+#stock-chart-contailner-nse ul li .active{padding: 10px}
+#stock-chart-contailner-nse ul li a{padding: 10px;}
+.{width: auto;height: auto;}
+', 
+', 
+
+', 
+	', 
+		', 
+			', 
+				', BSE', 
+			', 
+			', 
+				', NSE', 
+			', 
+		', 
+		', 
+		', 
+			', 
+				', 
+					', 
+						', 
+							', 
+							', 
+								', Add to Watchlist',   |   ', Add to Portfolio', 
+							', 
+						', 
+						', 
+                       		', 
+						  		', 
+						    		', OPEN ', 
+						    		', 244.10', 
+						  		', 
+						  		', 
+						    		', PREVIOUS CLOSE', 
+						    		', 243.70', 
+						  		', 
+						  		', 
+						    		', VOLUME', 
+						    		', 165275', 
+						  		', 
+						  		', 
+						    		', 52-Week high ', 
+						    		', 337.00', 
+						  		', 
+						  		', 
+						    		', 52-Week low ', 
+						    		', 140.55', 
+						  		', 
+						  		', 
+						    		', P/E ', 
+						    		', 9.57', 
+						  		', 
+						  		', 
+						    		', Mkt Cap.(Rs cr) ', 
+						    		', 7743.71', 
+						  		', 
+						  		', 
+						    		', Buy Price', 
+						    		', 247.30', 
+						  		', 
+						  		', 
+						    		', Buy Qty', 
+						    		', 256.00', 
+						  		', 
+						  		', 
+						    		', Sell Price', 
+						    		', 0.00', 
+						  		', 
+						  		', 
+						    		', Sell Qty', 
+						    		', 0.00', 
+						  		', 
+							', 
+						', 
+					', 
+					', 
+						', 
+							', 
+                        	', 
+                     	', 
+						', 
+                        	', 
+                     	', 
+                  	', 
+                  	', 
+				', 
+			', 
+            ', 
+				', 
+					', 
+						', 
+							', 
+							', 
+								', Add to Watchlist',   |   ', Add to Portfolio', 
+							', 
+						', 
+						', 
+                       		', 
+						  		', 
+						    		', OPEN ', 
+						    		', 245.00', 
+						  		', 
+						  		', 
+						    		', PREVIOUS CLOSE', 
+						    		', 243.20', 
+						  		', 
+						  		', 
+						    		', VOLUME', 
+						    		', 1430894', 
+						  		', 
+						  		', 
+						    		', 52-Week high ', 
+						    		', 336.20', 
+						  		', 
+						  		', 
+						    		', 52-Week low ', 
+						    		', 140.30', 
+						  		', 
+						  		', 
+						    		', P/E ', 
+						    		', 9.57', 
+						  		', 
+						  		', 
+						    		', Mkt Cap.(Rs cr) ', 
+						    		', 7743.71', 
+						  		', 
+						  		', 
+						    		', Buy Price', 
+						    		', 0.00', 
+						  		', 
+						  		', 
+						    		', Buy Qty', 
+						    		', 0.00', 
+						  		', 
+						  		', 
+						    		', Sell Price', 
+						    		', 247.45', 
+						  		', 
+						  		', 
+						    		', Sell Qty', 
+						    		', 192.00', 
+						  		', 
+							', 
+						', 
+					', 
+					', 
+						', 
+							', 
+                        	', 
+                     	', 
+                     	', 
+                        	', 
+                     	', 
+					', 
+                  	', 
+				', 
+			', 
+		', 
+	', 
+', 
+
+
+', 
+	', 
+		', 
+			', 
+				', BSE', 
+			', 
+			', 
+				', NSE', 
+			', 
+		', 
+		', 
+		', 
+			', 
+			', 
+				', 
+					', 
+						', 
+    					', 
+    						', 
+    							', 
+    								', OPEN ', 
+    								', 244.10', 
+    							', 
+    							', 
+    								', CLOSE', 
+    								', 243.70', 
+    							', 
+    							', 
+    								', VOLUME', 
+    								', 165275', 
+    							', 
+    							', 
+    								', 52-Week high ', 
+    								', 337.00', 
+    							', 
+    							', 
+    								', 52-Week low ', 
+    								', 140.55', 
+    							', 
+    							', 
+    								', P/E ', 
+    								', 9.57', 
+    							', 
+    							', 
+    								', Mkt Cap.(Rs cr) ', 
+    								', 7743.71', 
+    							', 
+    							', 
+    								', Buy Price', 
+    								', 247.30', 
+    							', 
+    							', 
+    								', Buy Qty', 
+    								', 256.00', 
+    							', 
+    							', 
+    								', Sell Price', 
+    								', 0.00', 
+    							', 
+    							', 
+    								', Sell Qty', 
+    								', 0.00', 
+    							', 
+    						', 
+    					', 
+    				', 
+    				', 
+    					', 
+    						', 
+    							', 
+    								', Chart Type', 
+    								', Line', 
+    								', OHLC', 
+    								', Candle Stick', 
+    							', 
+    						', 
+    						', 
+    							', 
+    								', Draw', 
+    								', Trendline', 
+    							', 
+    						', 
+    						', 
+    							', 
+    								', Benchmarks', 
+    								', Sensex', 
+    								', Nifty', 
+    								', Clear', 
+    							', 
+    						', 
+    						', 
+    							', 
+    								', Events', 
+    								', Bonus', 
+    								', Dividend', 
+    								', Right', 
+    								', Split', 
+    							', 
+    						', 
+    						', 
+    						', 
+    							', 
+    							', 
+    							', 
+    							', 
+    								', Select Index', 
+    	                                									', BANKEX', 
+                                        									', BSE 100', 
+                                        									', BSE 200', 
+                                        									', BSE 500', 
+                                        									', BSE Auto', 
+                                        									', BSE Cap Goods', 
+                                        									', BSE CARBONEX', 
+                                        									', BSE Cons Durable', 
+                                        									', BSE Dollex 200', 
+                                        									', BSE FMCG Sector', 
+                                        									', BSE Greenex', 
+                                        									', BSE Healthcare', 
+                                        									', BSE IPO', 
+                                        									', BSE IT Sector', 
+                                        									', BSE Metal', 
+                                        									', BSE Mid-Cap', 
+                                        									', BSE Oil&Gas', 
+                                        									', BSE Power', 
+                                        									', BSE PSU', 
+                                        									', BSE Realty Index', 
+                                        									', BSE Sensex', 
+                                        									', BSE Small-Cap', 
+                                        									', BSE SME IPO', 
+                                        									', BSE Tech', 
+                                        									', MFG', 
+                                        									', Nfty Commodities', 
+                                        									', Nifty 100', 
+                                        									', Nifty 100 Liq 15', 
+                                        									', Nifty 200', 
+                                        									', Nifty 50', 
+                                        									', Nifty 500', 
+                                        									', Nifty Auto', 
+                                        									', Nifty Bank', 
+                                        									', Nifty Consumptin', 
+                                        									', Nifty CPSE', 
+                                        									', Nifty Div Opp 50', 
+                                        									', Nifty Energy', 
+                                        									', Nifty Financial', 
+                                        									', Nifty FMCG', 
+                                        									', Nifty Grow Sec15', 
+                                        									', Nifty Infra', 
+                                        									', Nifty IT', 
+                                        									', Nifty Media', 
+                                        									', Nifty Metal', 
+                                        									', Nifty Mid Liq 15', 
+                                        									', Nifty Midcap 100', 
+                                        									', Nifty Midcap 50', 
+                                        									', Nifty MNC', 
+                                        									', Nifty Next 50', 
+                                        									', Nifty Pharma', 
+                                        									', Nifty PSE', 
+                                        									', Nifty PSU Bank', 
+                                        									', Nifty Pvt Bank', 
+                                        									', Nifty Quality 30', 
+                                        									', Nifty Realty', 
+                                        									', Nifty Services', 
+                                        									', Nifty Small 100', 
+                                        									', Nifty50 Value 20', 
+                                        									', S&P BSE Allcap', 
+                                        									', S&P BSE BasicMat', 
+                                        									', S&P BSE Cons. Di', 
+                                        									', S&P BSE CPSE', 
+                                        									', S&P BSE Energy', 
+                                        									', S&P BSE Finance', 
+                                        									', S&P BSE Indus.', 
+                                        									', S&P BSE Infra.', 
+                                        									', S&P BSE Largecap', 
+                                        									', S&P BSE SENSEX50', 
+                                        									', S&P BSE Telecom', 
+                                        									', S&P BSE Utiliti.', 
+                                        									', S&P MidcapSelect', 
+                                        									', S&P Small Select', 
+                                        							', 
+    							', 
+    						', 
+    						', 
+    					', 
+    					', 
+    						', 
+    							', 
+    						', 
+    					', 
+    					', 
+    				', 
+    				', 
+    			', 
+			', 
+			', 
+				', 
+					', 
+						', 
+    					', 
+    						', 
+						  		', 
+						    		', OPEN ', 
+						    		', 245.00', 
+						  		', 
+						  		', 
+						    		', PREVIOUS CLOSE', 
+						    		', 243.20', 
+						  		', 
+						  		', 
+						    		', VOLUME', 
+						    		', 1430894', 
+						  		', 
+						  		', 
+						    		', 52-Week high ', 
+						    		', 336.20', 
+						  		', 
+						  		', 
+						    		', 52-Week low ', 
+						    		', 140.30', 
+						  		', 
+						  		', 
+						    		', P/E ', 
+						    		', 9.57', 
+						  		', 
+						  		', 
+						    		', Mkt Cap.(Rs cr) ', 
+						    		', 7743.71', 
+						  		', 
+						  		', 
+						    		', Buy Price', 
+						    		', 0.00', 
+						  		', 
+						  		', 
+						    		', Buy Qty', 
+						    		', 0.00', 
+						  		', 
+						  		', 
+						    		', Sell Price', 
+						    		', 247.45', 
+						  		', 
+						  		', 
+						    		', Sell Qty', 
+						    		', 192.00', 
+						  		', 
+							', 
+    					', 
+    				', 
+    				', 
+    					', 
+    						', 
+    							', 
+    								', Chart Type', 
+    								', Line', 
+    								', OHLC', 
+    								', Candle Stick', 
+    							', 
+    						', 
+    						', 
+    							', 
+    								', Draw', 
+    								', Trendline', 
+    							', 
+    						', 
+    						', 
+    							', 
+    								', Benchmarks', 
+    								', Sensex', 
+    								', Nifty', 
+    								', Clear', 
+    							', 
+    						', 
+    						', 
+    							', 
+    								', Events', 
+    								', Bonus', 
+    								', Dividend', 
+    								', Right', 
+    								', Split', 
+    							', 
+    						', 
+    						', 
+    						', 
+    							', 
+    							', 
+    							', 
+    							', 
+    								', Select Index', 
+    	                                									', BANKEX', 
+                                        									', BSE 100', 
+                                        									', BSE 200', 
+                                        									', BSE 500', 
+                                        									', BSE Auto', 
+                                        									', BSE Cap Goods', 
+                                        									', BSE CARBONEX', 
+                                        									', BSE Cons Durable', 
+                                        									', BSE Dollex 200', 
+                                        									', BSE FMCG Sector', 
+                                        									', BSE Greenex', 
+                                        									', BSE Healthcare', 
+                                        									', BSE IPO', 
+                                        									', BSE IT Sector', 
+                                        									', BSE Metal', 
+                                        									', BSE Mid-Cap', 
+                                        									', BSE Oil&Gas', 
+                                        									', BSE Power', 
+                                        									', BSE PSU', 
+                                        									', BSE Realty Index', 
+                                        									', BSE Sensex', 
+                                        									', BSE Small-Cap', 
+                                        									', BSE SME IPO', 
+                                        									', BSE Tech', 
+                                        									', MFG', 
+                                        									', Nfty Commodities', 
+                                        									', Nifty 100', 
+                                        									', Nifty 100 Liq 15', 
+                                        									', Nifty 200', 
+                                        									', Nifty 50', 
+                                        									', Nifty 500', 
+                                        									', Nifty Auto', 
+                                        									', Nifty Bank', 
+                                        									', Nifty Consumptin', 
+                                        									', Nifty CPSE', 
+                                        									', Nifty Div Opp 50', 
+                                        									', Nifty Energy', 
+                                        									', Nifty Financial', 
+                                        									', Nifty FMCG', 
+                                        									', Nifty Grow Sec15', 
+                                        									', Nifty Infra', 
+                                        									', Nifty IT', 
+                                        									', Nifty Media', 
+                                        									', Nifty Metal', 
+                                        									', Nifty Mid Liq 15', 
+                                        									', Nifty Midcap 100', 
+                                        									', Nifty Midcap 50', 
+                                        									', Nifty MNC', 
+                                        									', Nifty Next 50', 
+                                        									', Nifty Pharma', 
+                                        									', Nifty PSE', 
+                                        									', Nifty PSU Bank', 
+                                        									', Nifty Pvt Bank', 
+                                        									', Nifty Quality 30', 
+                                        									', Nifty Realty', 
+                                        									', Nifty Services', 
+                                        									', Nifty Small 100', 
+                                        									', Nifty50 Value 20', 
+                                        									', S&P BSE Allcap', 
+                                        									', S&P BSE BasicMat', 
+                                        									', S&P BSE Cons. Di', 
+                                        									', S&P BSE CPSE', 
+                                        									', S&P BSE Energy', 
+                                        									', S&P BSE Finance', 
+                                        									', S&P BSE Indus.', 
+                                        									', S&P BSE Infra.', 
+                                        									', S&P BSE Largecap', 
+                                        									', S&P BSE SENSEX50', 
+                                        									', S&P BSE Telecom', 
+                                        									', S&P BSE Utiliti.', 
+                                        									', S&P MidcapSelect', 
+                                        									', S&P Small Select', 
+                                        							', 
+    							', 
+    						', 
+    						', 
+    					', 
+    					', 
+    						', 
+    							', 
+    						', 
+    					', 
+    					', 
+    				', 
+    				', 
+    			', 
+			', 
+		', 
+	', 
+',    
+
+
+', u"
+$(document).ready(function () {
+    $('.nav-drop-down li').hover(
+        function () {
+            //show its submenu
+            if(!$(this).hasClass('disableMen))
+            {
+            	$('ul', this).slideDown(100);
+            }
+        },
+        function () {
+            //hide its submenu
+            $('ul', this).slideUp(100);
+        }
+    );
+});
+",    
+   
+', 
+	', 
+		',  Click here for interactive graph ', 
+	', 	
+', 
+
+
+', 
+$(document).ready(function(){
+	$('#smryGraph').parent('.row-panel').css({"margin-bottom":"60px"});
+
+	//bsNewCreateInteractiveChart('fullchartdiv',1814,'','bse');
+	$("#chartTypeBse").change(function(){
+		if($(this).val() == "LINE"){bsNewUpdateFullChartGraphType('smoothedLine','bse');}
+		if($(this).val() == "OHLC"){bsNewUpdateFullChartGraphType('ohlc','bse');}
+		if($(this).val() == "CANDLESTICK"){bsNewUpdateFullChartGraphType('candlestick','bse');}
+	});
+	$("#chartTypeNse").change(function(){
+		if($(this).val() == "LINE"){bsNewUpdateFullChartGraphType('smoothedLine','nse');}
+		if($(this).val() == "OHLC"){bsNewUpdateFullChartGraphType('ohlc','nse');}
+		if($(this).val() == "CANDLESTICK"){bsNewUpdateFullChartGraphType('candlestick','nse');}
+	});
+
+	$("#benchMarkBse").change(function(){
+		if($(this).val() == "SENSEX"){compareScript(1814,'Sensex','BSE','bse');}
+		if($(this).val() == "NIFTY"){compareScript(1814,'Nifty','NSE','bse');}
+		if($(this).val() == "CLEAR"){clearComparison();}
+	});
+	$("#benchMarkNse").change(function(){
+		if($(this).val() == "SENSEX"){compareScript(1814,'Sensex','BSE','nse');}
+		if($(this).val() == "NIFTY"){compareScript(1814,'Nifty','NSE','nse');}
+		if($(this).val() == "CLEAR"){clearComparison();}
+	});
+
+	$("#trendLine1,#trendLine2").change(function(){
+		if($(this).val() == "TRENDLINE"){ drawTrendline(); }
+	});
+	$("#eventUpdate1,#eventUpdate2").change(function(){
+		if($(this).val() == "BONUS"){updateStockEvents('b');}
+		if($(this).val() == "DIVIDENT"){updateStockEvents('d');}
+		if($(this).val() == "DIVIDENT"){updateStockEvents('r');}
+		if($(this).val() == "SPLIT"){updateStockEvents('s');}
+	});
+});
+', 
+
+', 
+var timerId = 0;
+AppVars.indicesCatBlock.push('');
+
+var _indicesBlockCurrExchange = "BSE";
+var _indicesBlockCurrCode = 1814;
+var _indicesBlockCurrChartDuration = "1D";
+var _indicesBlockCurrStatsTabIndex = 0;
+var topTabId = "marTab1";
+
+function getMerketChartBlockNew(coCode,durationType,stockExchange,onThisDiv,blockContailnerId,statsTabIndex,reqType,topTabId){
+	if(topTabId == "marTab1"){
+		$("#marTab2").removeClass("selected");
+		$("#"+topTabId).addClass("selected");
+		$("#NSEmkt").hide();
+		$("#BSEmkt").show();
+	}
+	if(topTabId == "marTab2"){
+		$("#marTab1").removeClass("selected");
+		$("#"+topTabId).addClass("selected");
+		$("#BSEmkt").hide();
+		$("#NSEmkt").show();
+	}
+	_indicesBlockCurrExchange = stockExchange;
+	_indicesBlockCurrCode = coCode;
+	_indicesBlockCurrChartDuration = durationType;
+	var blockHtml = '<ul><li><a onclick="updateChartDurationContent(this,\''+onThisDiv+'\',\''+coCode+'\',\'2Y\',\''+stockExchange+'\')" class="  ';
+	if(durationType=="2Y"){blockHtml = blockHtml+"active"; }
+		blockHtml=blockHtml+'">2Y</a></li><li><a onclick="updateChartDurationContent(this,\''+onThisDiv+'\',\''+coCode+'\',\'1Y\',\''+stockExchange+'\')" class="  ';
+	if(durationType=="1Y"){blockHtml = blockHtml+"active"; }
+		blockHtml=blockHtml+'">1Y</a></li><li><a onclick="updateChartDurationContent(this,\''+onThisDiv+'\',\''+coCode+'\',\'6M\',\''+stockExchange+'\')" class="  ';
+	if(durationType=="6M"){blockHtml = blockHtml+"active"; }
+		blockHtml=blockHtml+'">6M</a></li><li><a onclick="updateChartDurationContent(this,\''+onThisDiv+'\',\''+coCode+'\',\'1M\',\''+stockExchange+'\')" class="  ';
+	if(durationType=="1M"){blockHtml = blockHtml+"active"; }
+		blockHtml=blockHtml+'">1M</a></li><li><a onclick="updateChartDurationContent(this,\''+onThisDiv+'\',\''+coCode+'\',\'5D\',\''+stockExchange+'\')" class="  ';
+	if(durationType=="5D"){blockHtml = blockHtml+"active"; }
+		blockHtml=blockHtml+'">5D</a></li><li><a onclick="updateChartDurationContent(this,\''+onThisDiv+'\',\''+coCode+'\',\'1D\',\''+stockExchange+'\')" class="graph_btn_'+ stockExchange+' ';
+	if(durationType=="1D"){blockHtml = blockHtml+"active"; }
+		blockHtml=blockHtml+'">1D</a></li><div class="clearfix"></div></ul>';
+	
+	$('#'+blockContailnerId).html(blockHtml);
+	newBsCreateChart(onThisDiv,coCode,durationType,stockExchange,reqType,6,statsTabIndex,'') ;
+}
+
+function updateChartDurationContent(obj,onThisDiv,coCode,durationType,stockExchange){
+	_indicesBlockCurrChartDuration = durationType ;
+	$("#stock-chart-contailner ul li a").removeClass("active");
+	$("#stock-chart-contailner-nse ul li a").removeClass("active");
+	updateChart(obj,onThisDiv,coCode,durationType,stockExchange);
+}
+
+function indicesBlockShowHideStokeTab(tabId, contId) {
+
+	if(tabId == "stkTab1")
+	{
+		_indicesBlockCurrStatsTabIndex = 0;
+	}
+	else if (tabId == "stkTab2")
+	{
+		_indicesBlockCurrStatsTabIndex = 1;
+	}
+	else if (tabId == "stkTab3")
+	{
+		_indicesBlockCurrStatsTabIndex = 2;
+	}
+	else if (tabId == "stkTab4")
+	{
+		_indicesBlockCurrStatsTabIndex = 3;
+	}
+
+	$("#" +tabId).siblings().removeClass("active");
+	$("#" + contId).siblings("div.indicesStat").css("display", "none");
+	$("#" + tabId).addClass("active");
+	$("#" + contId).css("display", "block");
+}
+getMerketChartBlockNew(_indicesBlockCurrCode,_indicesBlockCurrChartDuration,_indicesBlockCurrExchange,'stock-chart','stock-chart-contailner',_indicesBlockCurrStatsTabIndex,3,topTabId);
+', 
+
+', 
+', 
+	', 
+		', 
+						', Summary', 
+          				', Financials', 
+          				', Peer Group', 
+          				', Corporate Action', 
+          				', Price History', 
+          				', Bulk Deals', 
+          				', Info', 
+          				', News', 
+          				', 
+		', 
+	', 
+', 
+
+', 
+', 
+	', 
+	', 
+		', 
+		', 
+			', About Dewan Housing Finance Corporation Ltd.', 
+			', 
+				', Dewan Housing Finance Corporation Ltd', 
+	            ', u"Incorporated in Maharashtra in 1984 as Dewan Housing Finance & Leasing Co, the company was renamed as Dewan Housing Development Finance in 1984, then after to Dewan Housing Finance Corporation (DHFC) with its registered office in Bombay. The company commenced its activities in Aug.'84 and has several branches all over India. It was promoted by the late Dewan Kuldip Singh Wadhawan and his family.
+...", > More ', 
+            	', 
+          	', 
+		', 
+		', 
+#chartdiv text {
+    fill: #000;
+}
+.strg-bar{
+	width: 300px;
+}
+', 
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - Key Fundamentals ', 
+	', 
+		', 
+			', 
+    			', Parameter ', 
+    			', Values', 
+  			', 
+  			', 
+    			', Market Cap ', 
+    			', (',  cr)', 
+    			',  ', 
+    			', 7,744', 
+  			', 
+  			', 
+    			', EPS - TTM ', 
+    			', (', ) ', 
+    			', [*S]', 
+    			', 25.85', 
+  			', 
+  			', 
+    			', P/E Ratio ', 
+    			', (X) ', 
+    			', [*S]', 
+    			', 9.57', 
+  			', 
+  				', 
+    			', Face Value', 
+   				', (', ) ', 
+    			',  ', 
+   				', 10', 
+  			', 
+   			', 
+    			', Latest Dividend ', 
+    			', (%)', 
+    			',  ', 
+    			', 10.00', 
+  			', 
+  			', 
+    			', Latest Dividend Date', 
+    			',  ', 
+    			',  ', 
+    			', 26 Oct 2016', 
+  			', 
+  			', 
+    			', Dividend Yield ', 
+    			', (%)', 
+    			',  ', 
+    			', 3.06', 
+  			', 
+  			', 
+    			', Book Value / Share', 
+   				', (', ) ', 
+    			', [*S]', 
+   				', 183.40', 
+  			', 
+   			', 
+    			', P/B Ratio ', 
+    			', (', ) ', 
+    			', [*S]', 
+    			', 1.35', 
+  			', 
+		', 
+		', [*C] Consolidated      [*S] Standalone', 
+		', 
+ 	', 
+', 
+
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - Financial Results', 
+	', 
+		', 
+					', 
+				', Particulars (',  cr)', 
+				', Sep 2016', 
+				            	', Sep 2015', 
+                ', % Chg', 
+            				', 
+			', 
+				', Net Sales', 
+				', 2166.65', 
+								', 1810.73', 
+				', 19.66', 
+							', 
+			', 
+				', Other Income ', 
+				', 1.07', 
+								', 0.91', 
+				', 17.58', 
+							', 
+			', 
+				', Total Income ', 
+				', 2167.72', 
+								', 1811.64', 
+				', 19.66', 
+							', 
+			', 
+            	', Total Expenses ', 
+                ', 178.03', 
+                                ', 170.1', 
+                ', 4.66', 
+                			', 
+            ', 
+            	', Operating Profit', 
+                ', 1989.69', 
+                                ', 1641.54', 
+                ', 21.21', 
+                			', 
+            ', 
+            	', Net Profit ', 
+                ', 232.61', 
+                                ', 180.37', 
+                ', 28.96', 
+                			', 
+            ', 
+            	', Equity Capital ', 
+                ', 313.03', 
+                                ', 291.71', 
+                ',  - ', 
+                			', 
+		', 
+		', > More on Dewan Housing Finance Corporation Ltd Financials Results', 
+	', 
+', 
+
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - Peer Group', 
+	', 
+		', 
+			', 
+				', Company ', 
+				', Price(', ) ', 
+                ', Chg (%)', 
+                ', Mkt Cap (',  CR)', 
+            ', 
+                        ', 
+                ', I D F C', 
+                ', 57.05', 
+                ', 3.92', 
+                ', 9104.84', 
+            ', 
+                        ', 
+                ', Bharat Financial', 
+                ', 637.20', 
+                ', 1.35', 
+                ', 8788.90', 
+            ', 
+                        ', 
+                ', Edelweiss.Fin.', 
+                ', 98.65', 
+                ', -0.50', 
+                ', 8199.79', 
+            ', 
+                        ', 
+                ', Dewan Hsg. Fin.', 
+                ', 247.30', 
+                ', 1.48', 
+                ', 7743.71', 
+            ', 
+                        ', 
+                ', Motil.Oswal.Fin.', 
+                ', 518.55', 
+                ', 0.38', 
+                ', 7441.19', 
+            ', 
+                        ', 
+                ', Manappuram Fin.', 
+                ', 70.65', 
+                ', 1.73', 
+                ', 5945.90', 
+            ', 
+                        ', 
+                ', Capital First', 
+                ', 605.00', 
+                ', -0.14', 
+                ', 5891.49', 
+            ', 
+            		', 
+		', > More on Dewan Housing Finance Corporation Ltd Peer Group', 
+	', 
+', 
+
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - SHAREHOLDING PATTERN ', 
+	', 
+		', 
+			', 
+				', 
+					', 
+						                  		', 
+			            	var chartshare;
+			            	var legend;
+			            	var chartData = [
+				     			             {title: "Promoters",value: 39.31},
+				     			             {title: "Banks/FIs",value: 1.23},
+				     			             {title: "FIIs",value: 29.47},
+				     			             {title: "Insurance",value: 0.00},
+				     			             {title: "Mutual Funds",value: 2.67},
+				     			             {title: "Indian Public",value: 12.82},
+				     			             {title: "Custodians",value: 0.00},
+				     			             {title: "Other",value: 14.50}
+				     			            ];
+			            	var chartColor = ["#BE4F4C","#4E7FBB","#FCD202", "#008080", "#99B958", "#425C0E", "#7E63A0","#EC633F"];
+
+				            AmCharts.ready(function () {
+				                // PIE CHART
+				                chartshare = new AmCharts.AmPieChart();
+				                chartshare.dataProvider = chartData;
+				                chartshare.titleField = "title";
+				                chartshare.valueField = "value";
+				                chartshare.colors = chartColor;
+				                chartshare.marginTop=0;
+				                chartshare.marginBottom=0;
+				                chartshare.marginRight=0;
+				                chartshare.marginLeft=0;
+				                chartshare.pieY = 110;
+				                chartshare.visibleInLegendField="value";
+				                chartshare.balloonText="[[title]]: [[percents]]%";
+				                chartshare.labelText="[[percents]]%";
+
+				            	// changes label position (labelRadius)
+				                chartshare.labelRadius = 2;
+
+				                // makes chart 2D/3D
+				                chartshare.depth3D = 10;
+				                chartshare.angle = 10;
+				             	// WRITE
+
+				                chartshare.write("chartdiv");
+				            });
+			        	', 
+                  							', 
+				', 
+    			', 
+      				', 
+  						', 
+    						', Category', 
+    						', Share (%)', 
+  						', 
+  						', 
+    						',  Promoters', 
+    						', 39.31', 
+  						', 
+  						', 
+    						',  Banks/FIs', 
+    						', 1.23', 
+  						', 
+  						', 
+							',  FIIs', 
+    						', 29.47', 
+  						', 
+						  ', 
+						    ',  Insurance', 
+						    ', 0.00', 
+						  ', 
+						  ', 
+						    ',  Mutual Funds', 
+						    ', 2.67', 
+						  ', 
+						   ', 
+						    ',  Indian Public', 
+						    ', 12.82', 
+						  ', 
+						   ', 
+						    ',  Custodians', 
+						    ', 0.00', 
+						  ', 
+						   ', 
+						    ',  Other', 
+						    ', 14.50', 
+						  ', 
+					', 
+					', > More on Dewan Housing Finance Corporation Ltd Share Holding Pattern',    
+    			', 
+ 			', 
+		', 
+    ', 
+', 
+
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - Research Reports', 
+	', 
+		', 
+			', 
+				', Date', 
+				', Broker ', 
+    			', Action ', 
+    			', Price', 
+    			', Report', 
+  			', 
+  			  				  			', 
+    			', 04/05', 
+    			', Motilal Oswal', 
+    			', Buy', 
+    			', 198', 
+    			', Details', 
+  			', 
+          		  			', 
+    			', 05/04', 
+    			', Angel Broking', 
+    			', Buy', 
+    			', 189', 
+    			', Details', 
+  			', 
+          		  			', 
+    			', 20/10', 
+    			', Motilal Oswal', 
+    			', Buy', 
+    			', 237', 
+    			', Details', 
+  			', 
+          		  			', 
+    			', 28/01', 
+    			', Motilal Oswal', 
+    			', Buy', 
+    			', 472', 
+    			', Details', 
+  			', 
+          		  					', 
+		', > More on Dewan Housing Finance Corporation Ltd Research Reports', 
+	', 
+', 
+
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - RETURNS', 
+	', 
+		', 
+			', 
+				', Period', 
+				', BSE', 
+				', NSE', 
+				', Sensex', 
+				', NIFTY', 
+			', 
+						', 
+				', 1 Week', 
+				', 0.94%', 
+				', 0.94%', 
+				', 1.94%', 
+				', 2.10%', 
+			', 
+						', 
+				', 1 Month', 
+				', -0.98%', 
+				', -0.84%', 
+				', 2.01%', 
+				', 1.78%', 
+			', 
+						', 
+				', 3 Month', 
+				', -16.50%', 
+				', -16.54%', 
+				', -4.76%', 
+				', -5.38%', 
+			', 
+						', 
+				', 6 Month', 
+				', 16.82%', 
+				', 16.61%', 
+				', -1.06%', 
+				', -0.75%', 
+			', 
+						', 
+				', 1 Year', 
+				', 6.94%', 
+				', 6.89%', 
+				', 5.07%', 
+				', 6.28%', 
+			', 
+						', 
+				', 3 Year', 
+				', 140.14%', 
+				', 141.06%', 
+				', 28.90%', 
+				', 33.21%', 
+			', 
+					', 
+	', 
+', 
+
+', 
+', 
+	', Dewan Housing Finance Corporation Ltd - STOCK STRENGTH', 
+	', 
+		', 
+						', 
+				', u"Today's Low/High", 
+				', 244.00', 
+				', 
+					', 
+						', 
+							',  ', 
+							', 
+								', 
+							', 
+							', 
+						', 
+					', 
+				', 
+				', 248.70', 
+			', 
+						', 
+				', Week Low/High', 
+				', 240.85', 
+				', 
+					', 
+						', 
+							',  ', 
+							', 
+								', 
+							', 
+							', 
+						', 
+					', 
+				', 
+				', 251.00', 
+			', 
+						', 
+				', Month Low/High', 
+				', 227.55', 
+				', 
+					', 
+						', 
+							',  ', 
+							', 
+								', 
+							', 
+							', 
+						', 
+					', 
+				', 
+				', 259.00', 
+			', 
+						', 
+				', YEAR Low/High', 
+				', 140.55', 
+				', 
+					', 
+						', 
+							',  ', 
+							', 
+								', 
+							', 
+							', 
+						', 
+					', 
+				', 
+				', 337.00', 
+			', 
+						', 
+				', All TIME Low/High', 
+				', 1.85', 
+				', 
+					', 
+						', 
+							',  ', 
+							', 
+								', 
+							', 
+							', 
+						', 
+					', 
+				', 
+				', 337.00', 
+			', 
+					',  
+	', 
+', 
+
+', 
+function showMemo(memo,obj) {
+
+    var pos = $(obj).position();
+
+	$('#popup_box').fadeIn("slow");
+	$('#popup_box').css({
+		'left': pos.left,
+		'top': pos.top
+	});
+	$('#memo').html(memo);
+}
+
+function closePopup() {
+	$('#popup_box').fadeOut("slow");
+}
+
+function showhideGraTab(tabId, contId)
+{
+	$('#'+tabId+"Tab").removeClass('btnlitBluUnSel');
+	$('#'+tabId+"Tab").addClass('btnBlkSel');
+	$('#'+contId+"Tab").removeClass('btnBlkSel');
+	$('#'+contId+"Tab").addClass('btnlitBluUnSel');
+	$('#'+tabId).show();
+	$('#'+contId).hide();
+}
+', 	', 
+	', 
+	', 
+		', 	', 
+	', 
+', 
+
+', 
+', 
+	', 
+		', 
+ul.A-Z-links a{padding:0px 5px;}
+', 
+', 
+              ', Browse STOCK Companies',  
+              ', 
+              ',  ', Search Company:',  ', 
+     			', 
+          ',  ',  ', 
+            ', A', 
+            ', B', 
+            ', C', 
+            ', D', 
+            ', E', 
+            ', F', 
+            ', G', 
+            ', H', 
+            ', I', 
+            ', J', 
+            ', K', 
+            ', L', 
+            ', M', 
+            ', N', 
+            ', O', 
+            ', P', 
+            ', Q', 
+            ', R', 
+            ', S', 
+            ', T', 
+            ', U', 
+            ', V', 
+            ', W', 
+            ', X', 
+            ', Y', 
+            ', Z', 
+            ', 1', 
+            ', 2', 
+            ', 3', 
+            ', 4', 
+            ', 5', 
+            ', 6', 
+            ', 7', 
+            ', 8', 
+            ', 9', 
+              ', 
+              ', 
+          ', 		', Quick Links for Dewan Housing Finance Corporation:', 
+        ',   
+			', 
+                ', 
+                	', News', 
+                	', Announcements', 
+                    ', Brokerage Reports', 
+                    ', Business', 
+                    ', Earnings', 
+                    ', Sector', 
+                ', 
+                ', 
+                	', Corporate Action', 
+                    ', AGM', 
+                    ', Board Meetings', 
+                    ', Bonus', 
+                    ', Dividends', 
+                    ', EGM', 
+                    ', Rights', 
+                    ', Split', 
+                ', 
+                ', 
+	                ', INFORMATION', 
+	                ', Bulk Deals', 
+                    ', Company History', 
+                    ', MF Holding', 
+                    ', Listing Info', 
+                    ', Locations', 
+                    ', Shareholding', 
+                ', 
+                ', 
+	                ', Financials', 
+	                ', Financial Overview', 
+                    ', Balance Sheet', 
+                    ', Profit & Loss', 
+                    ', Cash Flow', 
+                    ', Ratios', 
+                    ', Quarterly Results', 
+              		', Half Yearly Results', 
+                    ', Nine Monthly Results', 
+                    ', Yearly Results',  
+                ', 
+                ', 
+	                ', Annual Report', 
+	                ', Auditors Report', 
+                	', u"Chairman's Speech", 
+                	', Company Management', 
+                    ', u"Directors' Report", 
+                    ', Finished Goods', 
+                    ', Raw Materials', 
+                ', 
+                ', 
+	                ', Peer Comparison', 
+	                ', Competition', 
+                    ', Market Cap', 
+                    ', Price', 
+                    ', Price Performance', 
+                    ', Net Sales', 
+                    ', Net Profit', 
+                    ', Total Assets', 
+                    ', Historical Prices',  
+                ', 
+				', 
+			', 
+        ',  
+		',  
+	', 
+', 
+', 
+	  	  	', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1474961759587-10'); });
+", 
+', 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="95"; var zflag_sid="0"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="30"; 
+', 
+', 
+
+', document.write("<!--"); if(isUserBanner=="fis") document.write("-->"); ',  ', $("#id_3_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_fis-1479188012.png"); ', document.write("<!--"); if(isUserBanner=="kotak") document.write("-->"); ',  ', $("#id_4_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_kotak-1479188012.jpg"); ', document.write("<!--"); if(isUserBanner=="capgemini") document.write("-->"); ',  ', $("#id_5_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_capgemini-1479188012.jpg"); ',   	  	', 
+	    ', 
+
+	    ', 
+	    ', 
+	    ', 
+#moreOnMarkets{
+	display: block !important;
+}
+', 
+', 
+    ', 
+    	', 
+    		', MORE ON MARKETS:', 
+    		', 
+    		',   
+    			', 
+    				', Quick Links ',  
+    				', 						
+						', Stock Market Live', 
+                        ', Portfolio ', 
+                        ', Commodity Market', 
+                        ', Upcoming IPO', 
+                        ', Personal Finance', 
+                       					
+    				', 
+    				', 						
+						', Stock Market News', 
+    					', Derivatives', 
+    					', Mutual Funds', 
+    					', Gold Price', 
+    					', Sensex', 
+    				', 
+    			', 
+    		',  
+    		', 
+    		',  
+    			', 
+    				', Browse STOCK Companies',  
+                    ', 
+                        ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E',  
+                        ', F', 
+                        ', G', 
+                        ', H',  
+                        ', I', 
+                        ', J', 
+                        ', K', 
+                        ', L', 
+                        ', M', 
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V', 
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 1', 
+                        ', 2', 
+                        ', 3', 
+                        ', 4', 
+                        ', 5',  
+                        ', 6', 
+                        ', 7', 
+                        ', 8',  
+                        ', 9',  
+                        ', 
+    				', 
+    			', 
+    			', 
+    				', Browse Mutual Funds',  
+    				', 
+                        ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E',  
+                        ', F', 
+                        ', G', 
+                        ', H',  
+                        ', I', 
+                        ', J', 
+                        ', K', 
+                        ', L', 
+                        ', M', 
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V', 
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                        ', 
+    				',   
+    			', 
+    			',  
+    		',      
+    		',   
+    		',  
+    	', 
+    	', 
+        	',  
+        		', 
+        			', Index Stocks', 
+        			', 
+        				',  ACC ', 
+        				',  Adani Ports ', 
+        				',  Ambuja Cem. ', 
+        				',  Asian Paints ', 
+        				',  Aurobindo Pharma ', 
+        				',  Axis Bank ', 
+        				',  B H E L ', 
+        				',  B P C L ', 
+        				',  Bajaj Auto ', 
+        				',  Bank of Baroda ', 
+        				',  Bharti Airtel ', 
+        				',  Bharti Infra. ', 
+        				',  Bosch ', 
+        				',  Cipla ', 
+        				',  Coal India ', 
+        				', u" Dr Reddy's Labs ", 
+        				',  Eicher Motors ', 
+        				',  GAIL (India) ', 
+        				',  Grasim Inds ', 
+        				',  H D F C ', 
+        				',  HCL Technologies ', 
+        				',  HDFC Bank ', 
+        				',  Hero Motocorp ', 
+        				',  Hind. Unilever ', 
+        				',  Hindalco Inds. ', 
+        				',  ICICI Bank ', 
+        				',  Idea Cellular ', 
+        				',  IndusInd Bank ', 
+        				',  Infosys ', 
+        				',  ITC ', 
+        				',  Kotak Mah. Bank ', 
+        				',  Larsen & Toubro ', 
+        				',  Lupin ', 
+        				',  M & M ', 
+        				',  Maruri Suzuki ', 
+        				',  NTPC ', 
+        				',  O N G C ', 
+        				',  Power Grid Corpn ', 
+        				',  Reliance Inds. ', 
+        				',  St Bk of India ', 
+        				',  Sun Pharma. Inds. ', 
+        				',  Tata Motors ', 
+        				',  Tata Motors-DVR ', 
+        				',  Tata Power Co. ', 
+        				',  Tata Steel ', 
+        				',  TCS ', 
+        				',  Tech Mahindra ', 
+        				',  UltraTech Cement Ltd ', 
+        				',  Wipro ', 
+        				',  Yes Bank ', 
+        				',  Zee Entertainment ', 
+        				', 
+        			', 
+        		', 
+        		',  
+        	',      
+        	',   
+        	',  
+        ', 
+    ', 
+', 
+
+', 
+', 
+  ', 
+     ', 
+     ', 
+     ', Copyrights © 2017 Business Standard Private Ltd. All rights reserved.', 
+     ', 
+  ', 
+
+  ', 
+     ', 
+          ', 
+             ', 
+                ', 
+               ', From BS Website', 
+               ', Home', 
+               ', Companies', 
+               ', Markets', 
+               ', Opinion', 
+               ', Politics', 
+               ', Technology', 
+               ', Specials', 
+               ', Personal Finance', 
+               ', Budget', 
+               ', Latest News', 
+               ', u"Today's Paper", 
+              ',  
+               ', RBI Policy', 
+               ', General News', 
+               ', General Videos', 
+               ', General Photo Gallery', 
+               ', Events', 
+               ', Authors', 
+              ', 
+              ', 
+              ', 
+                 ', 
+               ', About us', 
+               ', About Us', 
+               ', Code of Conduct', 
+               ', Terms & Conditions', 
+               ', Cookie Policy', 
+               ', Disclaimer', 
+               ', Investor Communication', 
+              ', 
+
+              ', 
+
+                 ', 
+               ', Support & Contact', 
+               ', Partner with Us', 
+               ', Careers', 
+               ', Advertise with Us', 
+               ', Contact Us', 
+               ', Feedback', 
+               ', Browser Support', 
+               ', Sitemap', 
+               ', 
+              ', 
+
+              ', 
+                 ', 
+               ', Subscribe', 
+               ', E-Paper', 
+               ', BS Magazines', 
+               ', Portfolio Tracker', 
+              ', 
+
+              ', 
+
+                 ', 
+               ', BS Products', 
+			   ', Smart Investor', 
+               ', BS Hindi', 
+               ', BS Motoring', 
+               ', BS Books', 
+               ', B2B Connect', 
+               ', iPhone', 
+               ', iPad', 
+               ', android', 
+               ', wap', 
+               ', BS Banking Round Table 2016', 
+               ', BS Fund Cafe 2016', 
+              ', 
+              ', 
+          ', 
+          ', 
+     ', 
+
+     ', 
+	 ', 
+                            ', Budget 2017', 
+                            ', Budget 2017', 
+                            ', Budget News', 
+                            ', Budget', 
+						', 
+						', 
+     	', 
+      		', Connect with BS', 
+        	', 
+            	', Facebook',   
+                ', Google+',  
+                ', Linkedin',  
+                ', Twitter', 
+                ', Youtube', 
+                ', RSS',   
+                ',   
+            ', 
+     	', 
+     ', 
+  ', 
+  ', 
+  ', 
+', 
+', 
+', 
+    .notification_error_div {
+        position: fixed;
+        z-index:100;
+        bottom: 0;
+        right: 0;
+        width: 350px;
+        background-color: #FFFFF0;
+        border: 1px solid black;
+
+        padding: 15px;
+        margin: 10px;
+
+        text-align: center;
+        font-size : 14px;
+        font-family: Tahoma,Arial,Georgia;
+    }
+', 
+', 
+', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="31"; var zflag_sid="0"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="93"; 
+', 
+', 
+', 
+', 
+    .notification_error_div {
+        position: fixed;
+        z-index:100;
+        bottom: 0;
+        right: 0;
+        width: 350px;
+        background-color: #FFFFF0;
+        border: 1px solid black;
+
+        padding: 15px;
+        margin: 10px;
+
+        text-align: center;
+        font-size : 14px;
+        font-family: Tahoma,Arial,Georgia;
+    }
+
+/** Free User Notification Popup **/
+.subscription-notification-popup{color: #000;padding: 0px !important;margin: 0px !important;}
+.free_user_notification_popup{padding: 10px;display: none;background: #fff;}
+.btn-maroon{padding: 5px 10px;margin: 0;border: 0;background: #ac2122;color: #fff;font-size: 16px;cursor: pointer;}
+.fis_user_notification_popup{padding: 10px;display: none;background: #fff;}
+', 
+', 
+    ', 
+       ', 
+          ', 
+             ', 
+                ', 
+                   ', 
+                   ', Upgrade To Premium Services', 
+                ', 
+             ', 
+             ', 
+                ', 
+                   ', 
+                ', 
+             ', 
+          ', 
+          ', 
+             ', Welcome ', User', 
+             ', 
+          ', 
+          ',  Business Standard is happy to inform you of the launch of "Business Standard Premium Services"', 
+          ', As a premium subscriber you get an across device unfettered access to a range of services which include:', 
+          ', 
+             ', Access Exclusive content - articles, features & opinion pieces', 
+             ', Weekly Industry/Genre specific newsletters - Choose multiple industries/genres', 
+             ', Access to 17 plus years of content archives', 
+             ', Set Stock price alerts for your portfolio and watch list and get them delivered to your e-mail box', 
+             ', End of day news alerts on 5 companies (via email)', 
+             ', NEW', : Get seamless access to WSJ.com at a great price. No additional sign-up required.', 
+          ', 
+          ', 
+             ', 
+                ',  ', 
+             ', 
+             ', 
+                ', 
+             ', 
+          ', 
+          ', 
+       ', 
+    ', 
+', 
+
+', 
+', 
+   ', 
+      ', 
+         ', 
+            ', 
+               ', 
+               ', Premium Services ', 
+               ', In Partnership with ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ',  ', 
+         ', 
+         ', 
+            ', 
+            ', Dear ', Guest', ,', 
+            ', 
+         ', 
+         ', 
+            ',  ', 
+         ', 
+      ', 
+      ', Welcome to the premium services of Business Standard brought to you courtesy FIS.', 
+         Kindly visit the ', Manage my subscription page',  to discover the benefits of this programme.', 
+         ', 
+         Enjoy Reading!', 
+         Team Business Standard
+      ', 
+      ', 
+         ', 
+            ',  ', 
+         ', 
+      ', 
+      ', 
+   ', 
+', 
+', 
+', 
+function getCookie(name) {		
+    var value = "; " + document.cookie;		
+    var parts = value.split("; " + name + "=");		
+    if (parts.length == 2)		
+        return parts.pop().split(";").shift();		
+}
+$('#head-suggest_ftr').focus(function(){
+	  $(this).attr('placeholder','');
+	});
+	$('#head-suggest_ftr').focusout(function(){
+	  $(this).attr('placeholder','Enter the first three letters of the company');
+});
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+function setCookieNoti(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+$(document).ready(function() {
+	if($('.breadcrum').find('a').size() != null && $('.breadcrum').find('a').size() == 3){
+		var lc = 1;
+		$('.breadcrum').find('a').each(function() {
+			if(lc == 2){ $(this).attr('class','bact'); }
+		    lc++;
+		});
+	}
+});
+//-->
+', 
+
+', 
+', 
+function setCookieNoti(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+
+$(document).ready(function(){//free-username-popup
+	var usrLoginCookie = getLoginCookie('_userLoggedIn');
+	if(isUserBanner=='fis'){
+		var usrObj = JSON.parse(decodeURIComponent(usrLoginCookie));
+    	if(usrObj.ufname != ''){
+        	var uId = usrObj.uId;
+        	var uName = usrObj.ufname;
+			var ckVal = getLoginCookie('_chkFisUserNotificationPopup');
+			var isCkSet = ckVal.indexOf(uId);
+			if(ckVal == '' || ckVal == 'undefined'){
+				//cookie is not set
+				$("#fis-username-popup").html(uName);
+				$.fancybox({
+					href		:	"#fis_user_notification_popup",
+				    maxWidth	:	600,
+					maxHeight	:	500,
+					fitToView	:	false,
+					autoSize	:	false,
+					closeClick	:	false,
+					openEffect	:	'none',
+					closeEffect	:	'none'
+				});
+		    	setCookieNoti("_chkFisUserNotificationPopup",uId,130);
+			}else{
+				if(isCkSet == -1){
+					//cookie for current user is not set
+					$("#fis-username-popup").html(uName);
+					$.fancybox({
+						href		:	"#fis_user_notification_popup",
+					    maxWidth	:	600,
+						maxHeight	:	500,
+						fitToView	:	false,
+						autoSize	:	false,
+						closeClick	:	false,
+						openEffect	:	'none',
+						closeEffect	:	'none'
+					});
+			    	ckVal += ","+uId;
+			    	setCookieNoti("_chkFisUserNotificationPopup",ckVal,130);
+				}else{
+					//cookie is already set, no need to show popup
+				}
+			}
+    	}
+	}
+  	if(usrLoginCookie != '' && false){
+    	var usrObj = JSON.parse(decodeURIComponent(usrLoginCookie));
+    	if(usrObj.s == 'f'){
+        	var uId = usrObj.uId;
+        	var uName = usrObj.ufname;
+			var ckVal = getLoginCookie('_chkFreeUserNotificationPopup');
+			var isCkSet = ckVal.indexOf(uId);
+			if(ckVal == '' || ckVal == 'undefined'){
+				//cookie is not set
+				$("#free-username-popup").html(uName);
+				$.fancybox({
+					href		:	"#free_user_notification_popup",
+				    maxWidth	:	600,
+					maxHeight	:	500,
+					fitToView	:	false,
+					autoSize	:	false,
+					closeClick	:	false,
+					openEffect	:	'none',
+					closeEffect	:	'none'
+				});
+		    	setCookieNoti("_chkFreeUserNotificationPopup",uId,30);
+			}else{
+				if(isCkSet == -1){
+					//cookie for current user is not set
+					$("#free-username-popup").html(uName);
+					$.fancybox({
+						href		:	"#free_user_notification_popup",
+					    maxWidth	:	600,
+						maxHeight	:	500,
+						fitToView	:	false,
+						autoSize	:	false,
+						closeClick	:	false,
+						openEffect	:	'none',
+						closeEffect	:	'none'
+					});
+			    	ckVal += ","+uId;
+			    	setCookieNoti("_chkFreeUserNotificationPopup",ckVal,30);
+				}else{
+					//cookie is already set, no need to show popup
+				}
+			}
+    	}
+  	}
+});
+
+$(document).ready(function(){
+	var loginCookie = getCookie('_userLoggedIn');
+	if( loginCookie == '' || loginCookie == 'undefined' ){
+		//Do Nothing
+	}else{
+		var loginParamObj = JSON.parse(decodeURIComponent(loginCookie));
+		if( loginParamObj.uId > 0 ){
+			var pwCookie = getCookie('_pw');
+			if( pwCookie == 't' ){
+				//Do Nothing
+			}else{
+				var subExpCookie = getCookie('_sub_exp');
+				if( (subExpCookie > 0) ){
+					var currentTimestamp = Math.floor(Date.now() / 1000);
+					
+					//Expiry Notification Logic
+					var neverShowNotificaitonCookie = getCookie('_nsn');
+					if(neverShowNotificaitonCookie == '' || neverShowNotificaitonCookie == 'undefined' || neverShowNotificaitonCookie == null){
+						var lastReminderCookie = getCookie('_ler'+loginParamObj.uId);//last expiry reminder
+						if( (lastReminderCookie == "") || (lastReminderCookie == "undefined") || (lastReminderCookie == null) ){
+							$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+						}else{
+							if(lastReminderCookie < currentTimestamp){
+								$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+							}
+						}
+					}else{
+						var isCkSet = neverShowNotificaitonCookie.indexOf(loginParamObj.uId);
+						if(isCkSet == -1){
+							//cookie for current user is not set
+							var lastReminderCookie = getCookie('_ler'+loginParamObj.uId);//last expiry reminder
+							if( (lastReminderCookie == "") || (lastReminderCookie == "undefined") || (lastReminderCookie == null) ){
+								$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+							}else{
+								if(lastReminderCookie < currentTimestamp){
+									$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+});
+
+function remindNotificationLater(userId){
+	var currentTimestamp = Math.floor(Date.now() / 1000);
+	var tempTime = new Date(currentTimestamp*1000);
+	var lastExpNotification = Math.floor(tempTime.setMinutes(tempTime.getMinutes() + 60) / 1000);//+60 mins
+	//Set Cookie
+    var d = new Date();
+    d.setTime(d.getTime() + (60*60*1000));//60 min
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "_ler"+userId+"=" + lastExpNotification + "; " + expires + "; path=/";
+	$('#endSubscriptionNotification').remove();
+}
+
+function closeNotificationForever(userId){
+	var neverShowNotificaitonCookie = getCookie('_nsn');
+	neverShowNotificaitonCookie += ","+userId;
+	//Set Cookie
+    var d = new Date();
+    d.setTime(d.getTime() + (30*24*60*60*1000));//30 days
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "_nsn=" + neverShowNotificaitonCookie + "; " + expires + "; path=/";
+	
+	$('#endSubscriptionNotification').remove();
+}
+', 
+
+', 
+$.browser.chrome = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()); 
+if($.browser.chrome){
+	setTimeout(showChromeNotification,1000);
+}
+', 	    ', 
+      ', 
+         ', 
+', 
+
+    	', 
+
+function show(target) {
+    document.getElementById(target).style.display = 'block';
+}
+
+function hide(target) {
+   document.getElementById(target).style.display = 'none';
+    notifyCookie =  decodeURIComponent(getCookie('_notifyCookie'));
+    if(notifyCookie !=null && notifyCookie != 'undefined'){
+        var notifyValues = JSON.parse(notifyCookie);
+	if(notifyValues !=null && notifyValues != 'undefined' ){
+	  notifyValues.nty="Y";
+	  notifyValues.cnty="Y";
+	  notifyValues.rTime= (new Date().getTime()+ 24*60*60*1000) /1000|0;
+	  notifyValues=JSON.stringify(notifyValues);
+	  notifyValues = encodeURIComponent(notifyValues);
+	  setCookieColumn('_notifyCookie',notifyValues,2);
+	}
+   }
+}
+function setCookieColumn(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+', 
+
+
+
+
+
+
+
+', 
+var userCookie = decodeURIComponent(getCookie('_userLoggedIn'));
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-3333643-1', 'auto');
+if(userCookie !=null && userCookie!= 'undefined'){
+	 var userInfo = JSON.parse(userCookie);
+	 ga('set', '&uid', userInfo.uId);
+}
+if(isBannerActive == false){
+	if(userCookie !=null && userCookie!= 'undefined'){
+		var userInfo = JSON.parse(userCookie);
+		if(userInfo !=null && userInfo!= 'undefined' && userInfo.s != 'undefined' && userInfo.s == 't'){
+			ga('set', 'dimension1', 'Paid adblocker!!!');
+		}else{
+			ga('set', 'dimension1', 'Free adblocker!!!');
+		}
+	}else{
+		ga('set', 'dimension1', 'Anonymous adblocker!!!');
+	}
+}
+
+
+if(idPaidArticle == true){
+	   var url = window.location.href; var articleUrl = " ";
+	       if(url.indexOf('?') != -1)
+	         articleUrl = url.split('?')[0] ;
+	       else
+	         articleUrl = url;
+	    if(articleUrl !=null && articleUrl!= 'undefined'){
+	   
+	    	ga('set', 'dimension2', articleUrl);
+	    }
+}
+
+
+ga('send', 'pageview');
+', 
+', 
+', 
+', var _comscore=_comscore||[];_comscore.push({c1:"2",c2:"8021726"});(function(){var b=document.createElement("script"),a=document.getElementsByTagName("script")[0];b.async=true;b.src=(document.location.protocol=="https:"?"https://sb":"http://b")+".scorecardresearch.com/beacon.js";a.parentNode.insertBefore(b,a)})();', 
+', 
+', 
+', 
+', 
+var AKSB=AKSB||{};AKSB.q=[];AKSB.mark=function(b,a){AKSB.q.push(["mark",b,a||(new Date).getTime()])};AKSB.measure=function(b,a,c){AKSB.q.push(["measure",b,a,c||(new Date).getTime()])};AKSB.done=function(b){AKSB.q.push(["done",b])};AKSB.mark("firstbyte",(new Date).getTime());
+AKSB.prof={custid:"356860",beaconrate:20};
+(function(b){var a=document.createElement("iframe");a.src="javascript:false";(a.frameElement||a).style.cssText="width: 0; height: 0; border: 0; display: none";var c=document.getElementsByTagName("script"),c=c[c.length-1];c.parentNode.insertBefore(a,c);a=a.contentWindow.document;a.open().write("<body onload=\"var js = document.createElement('script');js.id = 'aksb-ifr';js.src = '"+b+"';document.body.appendChild(js);\">");a.close()})(("https:"===document.location.protocol?"https:":"http:")+"//ds-aksb-a.akamaihd.net/356860/aksb-a/aksb.min.js");
+', 
+', 
+', 
+var addthis_config = {"data_track_addressbar":false, "services_exclude":'print, email','recommended' : {}, 'thankyo : false};
+addthis_config.pubid = 'bsorg08';
+var addthisScript = document.createElement('script');
+addthisScript.setAttribute('src', '//s7.addthis.com/js/300/addthis_widget.js#domready=1');
+document.body.appendChild(addthisScript);
+', 
+', 
+#at4-thankyou{display:none !important;}
+', 
+', u"
+var subs_pw = getCookie('_pw');
+if( subs_pw != null && subs_pw == 't'){
+	$('.paid_article_key').hide();
+}else{
+	$('.paid_article_key').show();
+}
+", 
+']

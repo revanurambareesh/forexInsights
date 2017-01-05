@@ -1,0 +1,768 @@
+[var WRInitTime=(new Date()).getTime();',  
+				  var _gaq = _gaq || [];
+				
+			', //if(document.location.port == '') {
+				var analytics_js_path = 'https://www.google-analytics.com/analytics.js';
+				
+				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    			  })(window,document,'script',analytics_js_path,'ga');
+    
+    			  ga('create', 'UA-198011-5', 'auto', {'allowLinker': true});
+    			  ga('require', 'linker');
+    			  ga('linker:autoLink', ['economictimes.com']);
+    			  ga('require', 'displayfeatures');
+				  window.optimizely = window.optimizely || [];
+				  window.optimizely.push("activateUniversalAnalytics");
+				  ga('send', 'pageview');
+			 //}', u"var geolocation = '';", var _comscore = _comscore || [];
+			  _comscore.push({ c1: "2", c2: "6036484" });
+			  (function() {
+				var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			  })();', u"window._newsroom = window._newsroom || [];
+					    !function (e, f, u) {
+					        e.async = 1;
+					        e.src = u;
+					        f.parentNode.insertBefore(e, f);
+					    }(document.createElement('script'),	document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/timesofindia-et/newsroom.js');", u"
+		    var subsec1_common='13352306',
+		    subsec2_common='13358350';
+		", 
+		            lazyLoadColombia = {
+                        showAdDivVideo: function (data,ele) {
+                            var $this = $(ele);
+                            var container = $this.attr('id');
+                            if($('#' + container).html() == '') {
+                                //$('#' + container).parent().slideUp(700);
+                                $.ajax({
+        							url: "/ctn_video_player.cms",
+        							dataType: 'text',
+        							success: function(snippet){ 
+        								var iframe = document.createElement('iframe');
+        								iframe.style.width = '630px';
+        								iframe.style.height = '360px';
+        								iframe.style.border = '0';
+        								iframe.setAttribute("scrolling","no");
+        								iframe.setAttribute("frameBorder",'0');
+        								iframe.style.overflow = "hidden";
+        								iframe.id = 'ifr_' + container;
+        								iframe.name = 'ifr_' + container;
+        								document.getElementById(container).innerHTML = '';
+        								document.getElementById(container).appendChild(iframe);
+        								document.getElementById(container).style.display = '';
+        								document.getElementById(iframe.id).onload = function() {
+        									iframe.contentWindow.colombiaVideoAd(data,container);
+        								}
+                                        
+        								iframe.contentWindow.document.write(snippet);
+        								iframe.contentWindow.document.close();
+        								//$('#' + container).parent().slideDown('slow');
+        							},
+        							    error:function(a,b,c){
+        							}
+        						});	
+                            }
+                        },
+                    }
+                    function colombiaVidAdStart(iframe_id){
+                        $('#' + iframe_id).parent().parent().parent().css('display','');
+                        $('#' + iframe_id).parent().parent().slideDown('slow');     	    
+                    }
+                    function colombiaVidAdComplete(iframe_id) {
+                        //console.log('video completed for farme id :- ' + iframe_id);
+                       // $('#' + iframe_id).parent('div').html('').slideUp(700);
+                       $('#' + iframe_id).parent().parent().slideUp('slow');
+                        $('.ad_img').show();
+                    }
+                    
+                    function collapseDiv(iframe_id) {
+                        // alert(frame_id);
+                        $('#' + iframe_id).parent().parent().slideUp('slow');
+                        $('.ad_img').show();
+                    }
+		        	function adwidgetbottom(data,container){
+    			         if(data!=null) {
+    			            var conObj = document.getElementById(container);
+							var context='', context2='', cnt = data.paidAds.length, cnt2 = data.organicAds.length;
+							context='<div class="ob_dual_left"><span class="ob_ads_header"><div class="ob_custom_header">From Around the Web</div></span><ul id="div-clmb-ctn-129777-1" class="div-clmb-ctn-129777-1">';
+							context2='<div class="ob_dual_right"><span class="ob_ads_header"><div class="ob_custom_header">More from The Economic Times</div></span><ul class="div-clmb-ctn-129777-1">';
+        				    var className ='';
+        				    for(var i = 0; i < cnt; i++){
+								if(i==2){
+								    className = 'high';
+								}
+								else{
+								  className = '';  
+								}
+								context= context+'<li class="odb_li"> <a target="_blank" onclick="" href="'+data.paidAds[i].clk[0]+'" rel="nofollow" class="rec-link '+className+'">'+data.paidAds[i].title+'</a><span class="ob_source"> <span class="rec-src-date"></span><br/><span class="rec-src-link">'+data.paidAds[i].brandtext+'</span> </span> </li>';
+        				    }
+        				     for(var i = 0; i < cnt2; i++){
+								if(i==2){
+								    className = 'high';
+								}
+								else{
+								  className = '';  
+								}
+								context2= context2+'<li class="odb_li"> <a target="_blank" onclick="" href="'+data.organicAds[i].clk[0]+'" rel="nofollow" class="rec-link '+className+'">'+data.organicAds[i].title+'</a><span class="ob_source"> <span class="rec-src-date"></span><br/> </span></li>';
+        				    }
+        				    context = context+'</ul></div>';
+        				    context2 = context2+'</ul></div>';
+							conObj.innerHTML = context + context2 +'<div class="sponsored_tg"><div></div><span>Recommended by</span></div>';
+							var c = conObj.className;
+    						c = c.replace('all_zero', '').replace('hidden', '');
+    						conObj.className = c;
+        			    }
+        			}  
+        			function adwidgetimage(data,container){
+    			         if(data!=null) {
+    			            var conObj = document.getElementById(container);
+    			            var context='', context2='';
+    			            var context='<h2>FROM AROUND THE WEB</h2><ul>';
+    			            var context2='<h2>MORE FROM ECONOMIC TIMES</h2><ul>';
+    			            var j;
+    			            if(typeof midAd !='undefined' && midAd =='noAd'){
+    			               j= 4;
+    			            }
+    			            else{ j=3;}
+    			            for(var i = 0; i < 3; i++){
+								context= context+'<li> <a target="_blank" href="'+data.paidAds[i].clk[0]+'"><img height="145" width="203" src="' + data.paidAds[i].mainimage + '"/><span class="title">'+data.paidAds[i].title+'</span></a><span class="sponsored">'+data.paidAds[i].brandtext+'</span> </li>';
+								context2= context2+'<li> <a target="_blank" href="'+data.organicAds[i].clk[0]+'"><img height="145" width="203" src="' + data.organicAds[i].mainimage + '"/><span class="title">'+data.organicAds[i].title+'</span></a></li>';
+        				    }
+    			            context=context+'</ul>';
+							context2=context2+'</ul>';
+							conObj.innerHTML = context+' '+context2 +'<div class="sponsored_tg"><div></div><span>Recommended by</span></div>';
+							var c = conObj.className;
+    						c = c.replace('all_zero', '').replace('hidden', '');
+    						conObj.className = c;
+        			    }
+        			}
+		        
+				', 
+
+        
+        
+             
+            		        
+                         
+            
+             
+            		        ', function otab(t,n){var e="_blank";try{e="undefined"==typeof isq()||"undefined"!=typeof isq()&&isq()?"_top":"_blank"}catch(c){}window.open(t,e)}function trev(t,n){try{ntsss.getInstance().push(t,n)}catch(e){}}var ntsss=function(){var t,n=function(){var t,n=1,e=!1,c=[],r=!1,o=[],i=function(t,n){function e(){try{if(!o){o=!0;for(var t=0;t<r.length;t++)r[t].fn.call(window,r[t].ctx);r=[]}}catch(n){}}function c(){try{"complete"===document.readyState&&e()}catch(t){}}try{t=t||"ready",n=n||window;var r=[],o=!1,i=!1;n[t]=function(t,n){try{if(o)return void setTimeout(function(){t(n)},1);r.push({fn:t,ctx:n}),"complete"===document.readyState||!document.attachEvent&&"interactive"===document.readyState?setTimeout(e,1):i||(document.addEventListener?(document.addEventListener("DOMContentLoaded",e,!1),window.addEventListener("load",e,!1)):(document.attachEvent("onreadystatechange",c),window.attachEvent("onload",e)),i=!0)}catch(a){}}}catch(a){}},a=function(){try{t="",i("ready",this),ready(function(){n(),r=!0});var n=y(f,500);window.onscroll=function(){n()},window.addEventListener?window.addEventListener("scroll",function(){n()}):window.attachEvent&&window.attachEvent("scroll",function(){n()})}catch(e){}},u=function(){try{t!=window.location.href&&(n=1,t=window.location.href,e=!0)}catch(c){}},d=function(t,n){try{"undefined"==typeof c[n]&&(c[n]={imprurl:t,classname:n,notify:!1},r&&f())}catch(e){}},f=function(){try{u();for(var t in c){var r=c[t];if(r.hasOwnProperty("notify")&&!r.notify){var i=s(r.classname);if(i.length>0&&l(i[0])){r.notify=!0,1==n&&(n=0,r.imprurl=r.imprurl.indexOf("?")>-1?r.imprurl+"&pv=1":r.imprurl+"?pv=1"),m(r.imprurl);var a=c.splice(t,1);a=null}}}e&&o.length>0&&"undefined"!=typeof nnnmm&&(e=!1,nnnmm.getInstance().ajxc(o.shift()))}catch(d){}},l=function(t){try{if(t.getBoundingClientRect){var n=t.getBoundingClientRect(),e=window.innerHeight||document.body.clientHeight||document.documentElement.clientHeight,c=n.top,r=n.bottom,o=r-c,i=e>=c&&c+o>=0;return 0==c&&0==r?!1:i}return!1}catch(a){return!1}},s=function(t){try{var n=[],e="."+t;return"undefined"!=typeof document.querySelectorAll?n=document.querySelectorAll(e):(document.getElementsByClassName=function(t){for(var n=[],e=this.getElementsByTagName("*"),c=0;c<e.length;c++)(" "+e[c].className+" ").indexOf(" "+t+" ")>-1&&n.push(e[c]);return n},n=document.getElementsByClassName(t)),n}catch(c){}},m=function(t){try{return(new Image).src=t,!0}catch(n){return!1}},y=function(t,n,e){try{n||(n=250);var c,r;return function(){var o=e||this,i=+new Date,a=arguments;c&&c+n>i?(clearTimeout(r),r=setTimeout(function(){c=i,t.apply(o,a)},n)):(c=i,t.apply(o,a))}}catch(o){}};return a(),{push:d,setpv:u,ajxcArr:o}};return{getInstance:function(){return t||(t=n()),t}}}();
+function axs(){ntsss.getInstance().ajxcArr.push(arguments[0])}function isq(){return nnnmm.getInstance().isq()}var nnnmm=function(){var t,e=function(){function t(){e=new m}var e,r=0,n="",o=window.location.host,a="etd_ace",c="@v0",i=0,d=!0,h=function(){var t=!1;try{var r=e.decode(g(a)).split("@");r.length>0?t="l"==r[1]?!1:!0:f(n)}catch(o){}return t},u=function(t){try{l(a,e.encode(o+t+(new Date).getTime(),"321","e"),"14")}catch(r){}},f=function(t){i=0,r=0,d=!0,s(t)},s=function(t){var e=new XMLHttpRequest,o="1000";n=t,e.onreadystatechange=function(){(1===e.readyState||4===e.readyState)&&0===e.status&&d&&u("@pa@0"),e.status>0&&d&&(d=!1,u("@l@"))},e.ontimeout=function(t){var e="2";d&&(r<Number(e)?(i+=1e3,s(n),r++):u("@pt@0"))},e.open("GET",t,!0),e.timeout=Number(o)+i,e.send()},g=function(t){try{for(var e=t+"=",r=document.cookie.split(";"),n=0;n<r.length;n++){for(var o=r[n];" "==o.charAt(0);)o=o.substring(1,o.length);if(0==o.indexOf(e))return o.substring(e.length,o.length)}}catch(a){}return null},l=function(t,e,r){try{var n;r?(date=new Date,date.setTime(date.getTime()+24*r*60*60*1e3),n="; expires="+date.toGMTString()):n="";var o=window.location.host;1===o.split(".").length?document.cookie=t+"="+e+n+"; path=/":(domain=(window.location.host.match(/([^.]+)\.\w{2,3}(?:\.\w{2})?$/)||[])[0],document.cookie=t+"="+e+n+"; path=/; domain="+domain)}catch(a){}},C={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(t){var e,r,n,o,a,c,i,d="",h=0;for(t=C._utf8_encode(t);h<t.length;)e=t.charCodeAt(h++),r=t.charCodeAt(h++),n=t.charCodeAt(h++),o=e>>2,a=(3&e)<<4|r>>4,c=(15&r)<<2|n>>6,i=63&n,isNaN(r)?c=i=64:isNaN(n)&&(i=64),d=d+this._keyStr.charAt(o)+this._keyStr.charAt(a)+this._keyStr.charAt(c)+this._keyStr.charAt(i);return d},encodeUrlSafe:function(t){return C.encode(t).replace(/\+/g,"-").replace(/\//g,"_").replace(/\=/g,"~")},decode:function(t){var e,r,n,o,a,c,i,d="",h=0;for(t=t.replace(/[^A-Za-z0-9\+\/\=]/g,"");h<t.length;)o=this._keyStr.indexOf(t.charAt(h++)),a=this._keyStr.indexOf(t.charAt(h++)),c=this._keyStr.indexOf(t.charAt(h++)),i=this._keyStr.indexOf(t.charAt(h++)),e=o<<2|a>>4,r=(15&a)<<4|c>>2,n=(3&c)<<6|i,d+=String.fromCharCode(e),64!=c&&(d+=String.fromCharCode(r)),64!=i&&(d+=String.fromCharCode(n));return d=C._utf8_decode(d)},decodeUrlSafe:function(t){return C.decode(t.replace(/\-/g,"+").replace(/\_/g,"/").replace(/\~/g,"="))},_utf8_encode:function(t){t=t.replace(/\r\n/g,"\n");for(var e="",r=0;r<t.length;r++){var n=t.charCodeAt(r);128>n?e+=String.fromCharCode(n):n>127&&2048>n?(e+=String.fromCharCode(n>>6|192),e+=String.fromCharCode(63&n|128)):(e+=String.fromCharCode(n>>12|224),e+=String.fromCharCode(n>>6&63|128),e+=String.fromCharCode(63&n|128))}return e},_utf8_decode:function(t){for(var e="",r=0,n=c1=c2=0;r<t.length;)n=t.charCodeAt(r),128>n?(e+=String.fromCharCode(n),r++):n>191&&224>n?(c2=t.charCodeAt(r+1),e+=String.fromCharCode((31&n)<<6|63&c2),r+=2):(c2=t.charCodeAt(r+1),c3=t.charCodeAt(r+2),e+=String.fromCharCode((15&n)<<12|(63&c2)<<6|63&c3),r+=3);return e}},m=function(){function t(t,e){var r=t.length/2;return 0==e?t.substring(0,r):t.substring(r,t.length)}function e(t){for(var e=[],r=0,n=t.length;n>=r;r++)e.push(t.charAt(n-r));return e.join("")}function r(r){var n=e(t(r,0))+t(r,1),a=o(n,"321","e")+c;return C.encodeUrlSafe(a)}function n(r){var n=C.decodeUrlSafe(r).replace(c,""),a=o(n,"321","d");return e(t(a,0))+t(a,1)}var o=function(t,e,r){for(var n="",o=0,a=t,c=0;c<a.length;c++){var i=e[o],d="";o<e.length-1?o++:o=0,d="d"==r?parseInt(a[c].charCodeAt(0))-parseInt(i):parseInt(a[c].charCodeAt(0))+parseInt(i),n+=String.fromCharCode(d)}return n},e=function(t){for(var e=[],r=0,n=t.length;n>=r;r++)e.push(t.charAt(n-r));return e.join("")};return{encode:r,decode:n}};return t(),{isq:h,ajxc:f,ck:(new m).decode}};return{getInstance:function(){return t||(t=e()),t}}}();', 
+                         
+            
+         
+        		        ', try{axs("http://economictimes.indiatimes.com/acms/jsAds/getContent?mIJB=578434769&adslot=-634482613&AeJG=-1018188852&adslot=2140535177")}catch(e){}', 
+                     
+        ', Never miss a great news story!', Get instant notifications from Economic Times', Allow', Not now', You can switch off notifications anytime using browser settings.', SECTIONS', ET APPS', ET Android App', ET iPhone App', ET iPad App', ET Wealth Android App', ET Blackberry App', ET Nokia App', ET Markets Android App', ET Markets iPhone App', ET Money Android App', ENGLISH', \u0939\u093f\u0928\u094d\u0926\u0940', \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0', SIGN-IN', FOLLOW US', FACEBOOK', TWITTER', YOUTUBE', LINKEDIN', GOOGLE PLUS', RSS', Power', LATEST NEWS', Notes ban: GDP may slump to 5% in Dec quarter, says HSBC', u"Narendra Modi a 'smooth talker', says Sharad Pawar; mocks PM on note ban", MGP withdraws support to BJP-led Goa govt', u"We should talk to Pakistan, but they have to understand terror & talks can't go together: Yashwant Sinha", Once foe, Modi, Nitish now all praise for each other', Toyota, Honda say no immediate plans to curb Mexico production', Data collection by pvt agencies for Aadhaar not a good idea: SC', Home', Markets', News', Industry', Small Biz', Politics', Wealth', MF', Tech', Jobs', Opinion', Blogs', NRI', Magazines', Slideshows', ET NOW', ET Speed', ET Portfolio', Industry', Auto', News', Banking/Finance', Banking', Finance', Cons. Products', Durables', Electronics', Fashion / Cosmetics / Jewellery', FMCG', Food', Garments / Textiles', Liquor', Paints', Tobacco', Energy', u"Ind'l Goods/Svs", Construction', Engineering', Cement', Chem / Fertilisers', Metals & Mining', Packaging', Paper / Wood / Glass/ Plastic/ Marbles', Petrochem', Steel', Healthcare/Biotech', Biotech', Healthcare', Pharmaceuticals', Services', Advertising', Consultancy / Audit', Education', Hotels / Restaurants', u"Property / C'struction", Retail', Travel', More', Media/Entertainment', Entertainment', Media', Telecom', Transportation', Railways', Airlines / Aviation', Shipping / Transport', Power', Oil & Gas', ET Home', \u203a', Industry', \u203a', Energy', \u203a', Power', u"
+		    var objPage = typeof objPage != 'undefined' ? objPage : {};
+		    objPage.band_ad_active = '';
+		    objPage.keepAdFirst = '';
+		", 04:05 PM | 05 Jan', market stats', SENSEX', 26,878', 245.11', NIFTY 50', 8,274', 83.30', GOLD (MCX) (Rs/10g.)', 27,854', 172.00', USD/INR', 67.96', -0.08', Portfolio', Loading...', Select Portfolio and Asset Combination for Display on Market Band', Select Portfolio', Select Asset Class', Stocks', MF', ETF', Show More', CREATE PORTFOLIO', ADD INVESTMENT', 
+                    	Download ET MARKETS APP
+                    ', Get ET Markets in your own language', DOWNLOAD THE APP NOW', +91', CHOOSE LANGUAGE', ENG', ENG - English', HIN - \u0939\u093f\u0928\u094d\u0926\u0940', GUJ - \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0', MAR - \u092e\u0930\u093e\u0920\u0940', BEN - \u09ac\u09be\u0982\u09b2\u09be ', KAN - \u0c95\u0ca8\u0ccd\u0ca8\u0ca1', ORI - \u0b13\u0b21\u0b3f\u0b06', TEL - \u0c24\u0c46\u0c32\u0c41\u0c17\u0c41', TAM - \u0ba4\u0bae\u0bbf\u0bb4\u0bcd', Sensex ends 245 pts higher, Nifty50 settles above 8,250; Adani Ports up 4%', Drag according to your convenience', ET NOW RADIO', ET NOW', TIMES NOW', u"var default_tv_popup = '';", SunEdison bankruptcy: Is India\u2019s sunrise sector staring at another Enron?', By ', Arijit Barman', , ET Bureau | May 05, 2016, 05.49 AM IST', Post a Comment', READ MORE ON » ', SunEdison',  | ', renewable energy',  | ', Morgan Stanley',  | ', Goldman Sachs',  | ', business strategy',  | ', Ahmad Chatila', A classic story of a company pumping itself up with a deadly cocktail of cheap and easy credit along with financial engineering may leave us sun burnt and not scorched.', u"  Isn't it odd that the world's largest ", renewable energy',  developer has joined the long list of fossil fuel producers who have all recently gone belly up as crude collapsed to historic lows?  ',   ',    ', SunEdison',  declared Chapter 11 bankruptcy on April 21st, wiping out nearly $10 billion in market value as many months. Not so long ago, its CEO ', Ahmad Chatila', u" boasted that by 2020, his company would grow as big as the $370 billion oil gorilla ExxonMobil. It's ironic that within a year, oil prices that did him in. This is a classic story of a company that pumped itself up with a deadly methamphetamine cocktail of cheap and easy credit along with financial engineering. It grew way too fast, burnt way too much money binging on frenetic buildouts and buyouts for over two years which saw them shop for wind farms and solar parks in every continent expect Antarctica with the underlying assumption that the party will last forever.  ",   ',   And then SunEdison got sunburnt.  ',   ',   ', u"  Its house of cards - propped up on rosy financial modelling predicated on benign capital and energy markets - came crashing down as project cash flows started becoming insufficient to cover the ballooning debt repayment obligations. Sounds a lot like the oil frackers and coal conglomerates - doesn't it?  ",   ',   But for many battle weary observers, especially in India, what is unnerving is that the meteoric rise and unravelling of SunEdison is uncannily similar to that of Enron.  ',   ',   Both came into the country with mega promises of FDI; both managed the media till it backfired on them. Both made big promises, peddled massive dreams but under delivered. And in both, business logic gave way to sharp practices and financial chicanery, pretty early on. As a competing CEO who did not wish to come on record quipped: "Greed, hubris, irrational exuberance and fiscal indiscipline - they had all the ingredients for disaster."  ',   ',   "Just like Enron who promised the moon, over the years, Sun Edison spread themselves too thin. From battery storage to silicon manufacturing; from modules and roof top solar to even asset management -- they tried to do everything, cherry picking targets. But what they lacked was management bandwidth. In the end, they became victims of their own bravado," adds another industry veteran.  ',   ',   The verdict from the company's founder and the original chief executive Jigar Shah, couldn't have been more explicit. "They raised billions based on the SunEdison brand name. That name stood for trust but the management totally breached that trust," speaking from his New York office.  ',   ',   Shah, who in 2009 sold out to MEMC Electronic Materials Inc - manufacturers of silicon wafers used to make solar cells - is still a clean energy entrepreneur & Co-Founder of Generate Capital, spoke to ET days after he tweeted "Founded by visionaries; Built by revolutionaries; Destroyed by Mercenaries."  ',   ',   ', WINTER SOLSTICE',   ', u"  Everyone may get wiser in retrospect. But let's rewind just 6 months and start counting the litany of mishaps involving just one of SunEdison's many markets - India.  ",   ',   The red flags were for everyone to see.  ',   ', u"  Last November, after almost having its arms around Continuum Wind - in what would have been its biggest domestic deal till then - Sun Edison pulled out last minute citing global headwinds, even after signing definitive agreements in London. In the same month, the company's team on the ground here mandated Macquarie Capital and ", Morgan Stanley',  to raise equity for India projects. But within days, a parallel mandate was given out to ', Goldman Sachs', u" to sell parts of same portfolio. And if this is not confusing enough, then here's the subsequent twist. Just as feelers went on to potential suitors, it decided to spun 425 MW off to its publicly held subsidiary - yieldco in industry speak - TerraForm Global for $231 million.  ",   ',   But this transfer itself is currently under scrutiny, being part of a fierce litigation as Global ended up suing its parent SunEdison for alleged breach of contract and misappropriation of $231 million of its cash.  ',   ',   According to its lawsuit, between November 18 and 21st, SunEdison's top brass led by its global CEO Chatila and Brian Wuebbels, the CFO -- who subsequently has resigned -- sacked the entire senior management and dissolved the board of TerraForm Global along with several members of its board and a "conflicts committee" whose mandate was to ensure transaction between the parent and its arms are always at an arms-length and fair in the first place.  ',   ',   ',   For over a month, these executives had balked at a deal that SunEdison have been thrusting down their throats -- fund the acquisition of a bunch of under construction solar power projects at a premium valuation. Even though Global is separate and publicly traded, SunEdison retains significant management control and has "incentive distribution rights" that tightens its grip further. But like any responsible board accountable to its minority shareholders -- the senior leadership team along with the vetting committee pushed back wanting more diligence.  ',   ',   Detailing out the various behind-the-scenes boardroom maneuvers, the legal complaint goes on to say, what Chatila and his team had concealed throughout was the fact that SunEdison was actually racing to find $100 million to avoid defaulting on a margin loan, secured by the company's stock in TerraForm Power, another of its listed arm. They were therefore in a tearing hurry to get that a deal done and pay off its lenders. To make matters worse, even in a November investor call, SunEdison CFO had insisted that the company had "sufficient liquidity with approximately $1.4 billion."  ',   ',   Facing resistance, within hours the troublemakers at Global were "dispensed with" and replaced by pliant candidates, handpicked by parent SunEdison. But they too were misled into believing that these were substantially completed projects suitable to be "dropped down" to the subsidiary. In a board meeting conducted telephonically, SunEdison's senior leadership got the resolution passed in less than 30 minutes, without the presence of the Global's legal counsel or a financial advisor.  ',   ',   Within hours, an initial tranche of $150 million was wired out and a default was averted. A 2nd installment of $81 million was to be paid in 72 hours.  ',   ',   But by January of this year, it became evidently clear that the India projects - which were initially valued at around $600 million, inclusive of debt, were far from ready and could not get completed and transferred if Global coughed up an additional $73 million.  ',   ',   Instead of being aligned, the interest of the parent and its arm have been clearly at odds.  ',   ', u"  With such mounting financial woes and disappointing operating performance, one would assume, a company to resist from seemingly rash business decisions. Instead, in the same month of November, Sun Edison edged past 27 other bidders to win a massive 500 MW solar park project in Andhra, setting a new benchmark of low tariffs with it's at Rs 4.63/kWh bid.  ",   ',   "When business logic takes a back seat and financial engineering becomes the bedrock of ', business strategy', , then you are treading on slippery grounds. We have seen this in the rise and fall of Enron and their now infamous energy forward contracts," says Debasish Mishra, Partner, Deloitte Touche Tohmatsu India LLP. "In the context of solar projects in India, aggressive bids backed by un-hedged foreign currency loans might create similar situation for developers"  ',   ',   SunEdison broke the Rs 5/Kwh barrier. For the first time, solar tariffs went below that of wind and it became a whole new paradigm all together. Immediately the industry was buzzing: Most were taken aback, some even challenged the assumptions on which the margin models were based. Chatila had told ET in December that the company was "bidding at equity internal rate of return of 16 per cent (in rupee terms), which help (us) absorb foreign exchange losses and other risks." Not everyone bought that story. "The projects look viable on a spreadsheet," refute one of Sun Edison's industry peers. "We only know the paper value that Sun Edison expects from them. The equipment, EPC prices and currency depreciation assumed during bidding may not necessarily reflect the reality during actual project execution" further argues Prasanna Bora, Director, Corporate Finance at investment bank, o3 Capital.  ',   ',   ', FAMILY FEUD',   ', u"  The yieldcos were integral. The parent would bid and build clean energy plants around the world and upon completion hive them off to these arms at a neat profit. By raising capital to continuously buy assets, these 'tax advantaged' subsidiaries helped money to keep flowing back to SunEdison while the income from project cash flows - through the sale of green energy to utilities - were covering debt payments and generating dividend flow for investors.  ",   ',   But these investors were promised handsome returns and so new project needed to come into the portfolio at any cost. So "pipeline took precedence over profitability and high cost leveraged buyouts provided the growth steroid," recalls a senior company executive.  ',   ',   What remained ignored though was a contingency in business plans when the markets turned.  ',   ',   And it did from mid-2015 -- Oil prices were cracking and US interest rates were firming up. Emerging market currencies were simultaneously getting devalued. Even though clean tech apologists insist sun and sand to be two polarized asset class, investors always draw a co-relation.  ',   ', u"  The first casualty was Global's IPO that tanked. Sentiments were changing thick and fast. Emerging markets like India were no longer that sizzling.  ",   ',   "The yieldco investors were not ready to accept the 12-13% rupee returns anymore which gave them an implied dollar yield of 9-10% at 3% long term rupee depreciation. They sought 15-16% rupee returns or even more, which meant a 12%-14% in dollar returns. Selling assets to Global at such rates was unviable for SunEdison after taking all the development risks," explained another official in the know. Both wished to remain anonymous.  ',   ',   ', u"  So the vehicle designed to free up cash for its parent started distancing themselves. Assets couldn't be down streamed any longer and SunEdison got shut out. On the other hand, the ballooning corporate debts to fund the operating expenses, development capital and acquisitions compounded the matter.  ",   ',   The sun king was singed.  ',   ',   ', INDIA ECLIPSE?',   ', u"  Ahmad R Chatila, who looks like a TV star, was the biggest cheerleader of Narendra Modi government's ambitious programme that is striving to achieve a 20-fold jump in solar power generation capacity by 2022, to 100 GW to minimise India's dependence on coal fired electricity. He made the single largest development commitment -- 15.2 GW of solar and wind projects by 2020; rustled up an MoU for $4 billion joint venture with Adani for solar photovoltaic manufacturing in Mundra Gujarat after sounding out other blue chip corporates like Tata, Anil Ambani and even Kumar Mangalam Birla as a support to Modi's Make in India call.  ",   ',   He and his team is also responsible for delivering the biggest pipeline of projects (see graphics: The Green Folder) that were bided out. ""What they brought to the industry was a momentum of growth," feels Mahesh Makhija, Dir, Business Dev (Renewables), CLP in India, (formerly, China Light and Power). "When the biggest player is bullish on a country, naturally many others global players followed them into India. They instilled a stronger competitive spirit in the market."  ',   ', u"  Since setting up shop 6 years ago, the team in India was always geared to chase megawatts, as much as 4000 GW/year. At its peak, the headcount had gone up to 200 with talent meticulously picked from top B-Schools like IIM-A or plucked from premier set of diverse corporates like ICICI Bank, Vodafone, PwC, Amarchand Mangaldas or even from peers Alstom and Vestas. From the Chennai HQ, Pashupathy Gopalan, oversaw several markets in the region including South Africa as the company's President & MD -Asia Pacific. SunEdison's emphasis on rural electrification under a dedicated CEO, micro grids, quick, early rollouts of high profile projects in Gujarat helped in the optics too and it soon emerged as the government's thought partners, especially at a time when the renewable narrative was quickly changing towards solar from the traditional focus on wind, buoyed largely by 80% drop in cost of solar panels since 2010.  ",   ',   "Wind sector MNC veterans like GE have been weak in policy advocacy and Suzlon who led that piece got caught up in its own financial stress. This created a vacuum and in came in the global solar suits and high jacked the plot. Most like SunEdison to SkyPower promised a dollars deluge and the government was swayed," accepts a leading, home-grown renewables entrepreneur. "But the turning point was when SunEdison submitted a paper to the government that said Rs 4.50/unit solar tariff was possible in India when the prevailing wind rates were close to Rs 5.50/unit."  ',   ', u"  So naturally there is one question that everyone wants to know today: How would SunEdison's bankruptcy impact the sunrise solar industry of India?  ",   ',   Most local industry veterans downplay the impact, but admit the sector is at an inflection point. "The timing of the bankruptcy may impact investor sentiments in the short term. But on the brighter side, more checks and balances will come in. So will sound judgement," said Sunil Jain, CEO, Hero Future Energies. "The Indian solar story remains hot." "Speculation and aggressive financial modelling based on aggressive calls on module prices, currency movement and the exchange rates will subside," adds Vineet Mittal, MD, Welspun Energy. Agrees ReNew Power's Founder and Chief Executive Sumant Sinha: "Today not all developers who are coming in may be long term owners of assets. Their model is to build and sell. We need players/investors who will hold these assets for the long term. Who this will be is not yet clear."  ',   ',   Even Power Minister Piyush Goyal feels the industry is not threatened at all. "I don't think it deters us or deflects the success of the solar program," he told journalists recently during a London roadshow. "If one or two companies fail, there will be others who can take their projects."  ',   ',   His lieutenant at the ministry, Tarun Kapoor, Joint Secretary, National Solar Mission thinks the same way. "They are about two months to provide financial closure. If they don't do that, then their bank guarantee will get encashed after which we will re-tender."  ',   ',   But the nervousness is palpable. Some CEOs privately admit that if SunEdison doesn't deliver on time there will be a slowdown, impacting the tall targets. "Tariffs may shoot up as people will be risk averse," said an industry veteran. He too wished to remain anonymous since he regularly deals with the policymakers.  ',   ',   ', "WE ARE INSULATED" .... ARE THEY?',   ',   Sipping tulsi green tea, the suave Pashupaty Gopalan is a case study of keeping a cool head. He hides his nerves perfectly when he says one needs to be "careful while crafting a strategy" linked to "tumultuous capital markets." But India, he says remains largely insulated from the ongoing US bankruptcy proceedings. "We are not a filing entity. We will submit a detailed business plan to our lenders and India will be a part of it," he told ET.  ',   ',   Maryland Heights, Missouri-based SunEdison has commitments for $300 million in financing to support day-to-day operations during the reorganization. "We will dip into that," asserts Gopalan.  ',   ',   But for a global subsidiary that in turn is routed through Singapore and Dutch entities, Sun Edison India's access to liquid capital to finish projects will certainly get curtailed. Till date, it has largely been funded by the parent. So now, Gopalan is looking at bringing on board equity partners - either at a project SPV level or even at a holding company for the entire India platform. "Some of my PPAs allow me to sell up to 49% till a year of project commissioning but in some I can dilute even 100%. In my wind portfolio, there are no restrictions. We will use all the boundary conditions to rope in a partner." As per his maths, he needs to put in only Rs 380 cr of equity to manage his sizeable operations, contrary to industry perception that the requirement would be at least five times higher.  ',   ',   Like in most cases involving SunEdison, the local rivals sneer at these calculations. "His average project cost is a lot higher than Rs 5.50 crore/MW, considering there is a decent chunk of wind assets in the portfolio which are more expensive to build," says one of the CEOs quoted earlier in the story. "Moreover he seems to seek mezzanine financing even to fund part of the project equity. Which lender in his right mind will allow 90% debt financing in a company whose parent is bankrupt. He's making projections that are insouciant and naive."  ',   ',   It is a fact that a tottering SunEdison has made Indian lenders extremely wary and tight fisted. They are reminding developers the mistakes the thermal generators made during aggressive reverse bidding. "The sustainability of both the debt that these companies are taking on and these tariffs (below Rs 5/Kwh) is to be seen," says V Srinivasan, ED, Axis Bank.  ',   ',   "We are very careful before lending to projects which have bid below Rs 5/unit. We are also looking at several parameters before lending including sponsor background. In fact, if you see, the projects that have bid below Rs 5/kwh have not even reached financial closure, so we will have to see what happens to them," adds Y.M. Deosthalee, MD, L&T Finance Holdings. Both have been bankrolling projects in the sector.  ',   ', u"  Naturally when the parent is challenged for cash, lender scrutiny for the India portfolio is bound to go up. This can be a big deal breaker as some of SunEdison's creditors insist that their funding is predominantly for the US operations and India has to largely fend for itself.  ",   ', u"  It is getting intense. The team in India hasn't paid some of its vendors. One, Mahindra Susten has already taken the company to court over non-payment of dues. As per Global's lawsuit, SunEdison has recently confessed that transfer of the pre-sold projects from India to them will also be difficult with outstanding vendor payments.  ",   ',   Investment bankers say at least top 5 potential bidders have evaluated the portfolio and passed. This however could not be independently verified. "Many of these projects have hard deadlines. The more you wait, the clock keeps ticking," warns a rival CEO who has dilligenced the assets but declined. "For example, in the 500 MW AP project, the PPAs were signed in February of 2016 and the project completion is due by March 2017. It's getting tougher and tougher. The window is closing."  ',   ',   These are trying times for sure. The sector may still sizzle but whipping SunEdison back into shape will be a tall order. Meanwhile, the morale is low at the India shop. As one official succinctly puts it: "We do feel totally let down by our HQ. They were to provide us with capital. If they had forewarned, we could've fend for ourselves. But now our negotiating leverage is very less."  ',   ',   The SunEdison misadventures should act as an eye-opener. It will not derail the entire industry for sure but gives an immense opportunity to all stakeholders - government, lenders and developers - to step back and evaluate the entire eco-system. Will low tariffs be sustainable? How many players can handle the exponential jump in scale as India strives to emerge as world leaders? Or will they all get bogged down in hyper competition much the same way that many did in telecom? One man has the advantage of dipping into his experience from the past. Without commenting on specific cases, he has the final word.  ',   ',   "Reverse auction process requires a certain degree of self-control from the developers. If they don't have that, then sometimes they get into trouble by bidding beyond their means. As there is no paucity of capacity, there is no need for any desperation. Bid according to your own margin model. It's a simple message of being prudent and cautious for long term financial health." That's Manoj Kohli, executive chairman of Softbank Energy and old Bharti warhorse, summing it up neatly for all.  ',   ',   ',     ', (Additional reporting Saloni Shukla in Mumbai, Kaavya Chandrasekaran in New Delhi)',   ',   ', Stay on top of business news with The Economic Times App. ', Download it Now!', u"DON'T MISS", any stories, follow us on Twitter', Follow', 
+
+', .RgnjySWpK h1,h3,p {margin:0;padding:0;}.RgnjySWpK:hover{background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo-red.png?v=1.1); }.RgnjySWpK {width: 100%;height: auto;float: left;padding-bottom: 14px;background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo.png?v=1.1); background-repeat: no-repeat;background-position: 98% 100%;background-size: auto auto;position: relative;}.RgnjySWpK > div a img {width:100%;height:145px;float:left;}.RgnjySWpK > div a {width:32%;float: left;margin-left:1.7%; text-decoration: none;margin-bottom: 12px;cursor: pointer;}.RgnjySWpK > div a:first-child {margin-left: 0;}.RgnjySWpK > div h3 {width: 100%; height: auto; float: left; overflow: hidden;display: -webkit-box; -webkit-line-clamp: 3;-webkit-box-orient: vertical;font-family: inherit;   color: #333; padding: 6px 0 0;text-align: left;line-height: 1.25;font-size: 13px !important;max-height: 49px !important;}.RgnjySWpK > div p {width: 100%; height: auto; float: left;overflow: hidden; display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;    max-height: 13px;font-family: inherit;color: #999;padding: 2px 0 0;text-align: left;font-size: 12px;}.RgnjySWpK h1 {height: auto; display: block;margin-bottom: 9px; width: 100%; margin-top: 8px; float: left;color: #000;font: bold 14px arial;padding: 6px 6px; margin: 2px 0 10px 0; text-transform: uppercase;font-size: 15px !important;}.RgnjySWpK h1::before { content: "";}.RgnjySWpK > div > a > div {float: left;width: 100%;height:75px;}.RgnjySWpK > div {float: left;}.RgnjySWpK:after {content: 'Recommended by';float: right;margin-right: 20px; bottom: 0; position: absolute;right: 12%; color: #959595;font-size: 12px;font-family: arial; font-weight: 500;}@media (max-width:1920px) {.RgnjySWpK > div h3{font-size:26px;max-height: 71px;}.RgnjySWpK h1{font-size:28px;}.RgnjySWpK > div > a > div {height: Auto; }}@media (max-width:1366px) {.RgnjySWpK > div h3{font-size:14px;}.RgnjySWpK h1{font-size:24px;}}@media (max-width:1280px) {.RgnjySWpK > div h3{font-size:14px;}.RgnjySWpK h1{font-size:20px;}}@media (max-width:840px) {.RgnjySWpK > div h3{font-size:14px;}.RgnjySWpK h1{font-size:18px;}}@media (max-width:640px) {.RgnjySWpK > div h3{font-size:14px;}.RgnjySWpK h1{font-size:16px;}}@media (max-width:320px) {.RgnjySWpK > div h3{font-size:13px;}.RgnjySWpK h1{font-size:16px;}}',     ', FROM AROUND THE WEB',     ', Book your home at Provident Welworth City', Provident Welworth City', Secret method to treat hair loss is revealed!', Hair & Beauty Care', u"Curious children learn faster, here's why", Magic Crate', MORE FROM ECONOMIC TIMES', u"The party destination to be at for New Year's eve: Mykonos", Day in Pics', Road ahead not easy, Infosys CEO Sikka tells employees', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="SpwDcyfp('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow" ><div><h3>{{title}}</h3><p class="brand_ctn">{{brand}}</p></div></a>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<a onclick="SpwDcyfp('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow"><div><h3>{{title}}</h3></div></a>#og#';*/function SpwDcyfp(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_top');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){try{if (window.frameElement !== null){window.canRun = true;document.body.style.margin="0px";  parent.top.document.getElementById(window.frameElement.parentNode.getAttribute('id')).style.height='520px';; }}catch(e){}};try{trev('http://economictimes.indiatimes.com/itetnfy/notify.htm?imprId=d333b786-a058-415b-b92b-935484537880-3rk0&id=210766&fpc=dd8e9805-fb98-47d0-8356-e5e4bced8ff0-3rk0~1','RgnjySWpK');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+', 
+
+', .ReeqKWuD h1,h3,p {margin:0;padding:0;}.ReeqKWuD:hover{background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo-red.png?v=1.1);}.ReeqKWuD {width: 100%;height: auto;float: left;padding-bottom: 20px;background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo.png?v=1.1); background-repeat: no-repeat;background-position: 98% 98.5%;background-size: auto auto;margin-top: 5px;position: relative;}.ReeqKWuD > div a img {float: left;margin-right: 10px;width: 100px;}.ReeqKWuD > div a {width: 100%;display: block;float: left;color: #5c5c5c;text-decoration: none; cursor: pointer;margin: 10px 0 0 0;padding-bottom: 10px; border-bottom: 1px solid #ccc; min-height: 46px;}.ReeqKWuD > div h3 {max-height: 31px; overflow: hidden; display: -webkit-box;-webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 14px !important; height: auto;   padding-right: 13px; color: #000; font: 14px Arial;line-height: 15px;}.ReeqKWuD > div p {padding-right: 13px; margin: 0; max-height: 13px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-size: 11px; float: left; font: 11px Arial; color: #8c8c8c;margin-top: 5px;}.ReeqKWuD h1 {width: 49%; float: left; padding: 5px 0; color: #000000;margin-right: 2%; font: normal 18px/17px Arial; padding-bottom: 6px; border-bottom: 2px solid #8c8c8c;font-size: 18px !important;}.ReeqKWuD > div a:last-child { border: 0 !important;}.ReeqKWuD h1::before { content: ""; }.ReeqKWuD h1:nth-child(2) {margin-right: 0 !important;}.ReeqKWuD > div > a > div {height:61px;    float: left;}.ReeqKWuD > div {width:49%;float:left;}.ReeqKWuD:after {content: 'Recommended by';float: right;margin-right: 20px; bottom: 1%; position: absolute;right: 12%; color: #959595;font-size: 12px;font-family: arial; font-weight: 500;}@media (max-width:1920px) {.ReeqKWuD > div h3{font-size:26px;}.ReeqKWuD h1{font-size:28px;}.ReeqKWuD > div > a > div {height: Auto;max-height: 46px;min-height: 46px;}}.ReeqKWuD .NtZgdlAncuF {float: right !important;}@media (max-width:1366px) {.ReeqKWuD > div h3{font-size:14px;}.ReeqKWuD h1{font-size:24px;}}@media (max-width:1280px) {.ReeqKWuD > div h3{font-size:14px;}.ReeqKWuD h1{font-size:20px;}}@media (max-width:840px) {.ReeqKWuD > div h3{font-size:14px;}.ReeqKWuD h1{font-size:18px;}}@media (max-width:640px) {.ReeqKWuD > div h3{font-size:13px;}.ReeqKWuD h1{font-size:16px;}}@media (max-width:320px) {.ReeqKWuD > div h3{font-size:13px;}.ReeqKWuD h1{font-size:16px;}}',     ', From Around the Web', More from The Economic Times',     ', How Indians are making Rs 6302 while working', CareerTimes', u"PaneerMania at Dunkin' Donuts! Starting at \u20b985*", u"Dunkin' Donuts & More", Experience the best of Dubai with great deals', SOTC', Complete health insurance:Now get help when you need it most', ICICI Lombard', u"Scooter's back, with new hero on road", u"Long leads to Dhoni's decision, CT could be swansong", u"'Post-demonetisation best time to invest in property'", u"PM Modi's speech disappointing: Kejriwal", var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="VrSHjOn('{{href}}')"  rel="nofollow,noindex"><div><h3>{{title}}</h3><p>{{brand}}</p></div></a>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<a onclick="VrSHjOn('{{href}}')"  rel="nofollow,noindex"><div><h3>{{title}}</h3></div></a>#og#';*/function VrSHjOn(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_top');}else{window.open(par,'_blank'); }   }                   };   window.onload = function (){         try{if (window.frameElement !== null){window.canRun = true;document.body.style.margin="0px";  parent.top.document.getElementById(window.frameElement.parentNode.getAttribute('id')).style.height='480px';; }}catch(e){}};try{trev('http://economictimes.indiatimes.com/itetnfy/notify.htm?imprId=2e79f7a5-e85a-4d48-9e27-e60651e00bf2-3rk0&id=129777&fpc=dd8e9805-fb98-47d0-8356-e5e4bced8ff0-3rk0~1','ReeqKWuD');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+', READ MORE ON » ', SunEdison',  | ', renewable energy',  | ', Morgan Stanley',  | ', Goldman Sachs',  | ', business strategy',  | ', Ahmad Chatila', To post this comment you must', Log In/Connect with:', Indiatimes Network', or', Fill in your details:', Will be displayed', Will not be displayed', Will be displayed', Share this Comment:', Post to Twitter ', Have something to say? ', Post your comment', To post this comment you must', Log In/Connect with:', Indiatimes Network', Fill in your details:', Will be displayed', Will not be displayed', Will be displayed', Share this Comment:', Post to Twitter ', Most', Read', Most', Shared', Most', Commented', u"Here is why 'the flavour of the season', mobile wallets will die", u"View: Fallout from India's cash crunch is just starting", Air India takes on Rajdhani Express in fare war', I-T dept ropes in experts from Big Four to unearth black money', Tata Motors launches Xenon Yodha starting at Rs 6.05 lakh', More »', Get a Quote', Browse Companies', A', B', C', D', E', F', G', H', I', J', K', L', M', N', O', P', Q', R', S', T', U', V', W', X', Y', Z', |', 1', 2', 3', 4', 5', 6', 7', 8', 9', Browse Mutual Funds', A', B', C', D', E', F', G', H', I', J', K', L', M', N', O', P', Q', R', S', T', U', V', W', X', Y', Z', The Economic Times', Live Market', News', Portfolio', Mobile', Live TV', Newsletter', Commodities', Speed', QnA', Blogs', Alerts', RSS', Other Times Group news sites', Times of India', |', \u0907\u0915\u0928\u0949\u092e\u093f\u0915 \u091f\u093e\u0907\u092e\u094d\u0938', \u0a88\u0a95\u0acb\u0aa8\u0acb\u0aae\u0abf\u0a95 \u0a9f\u0abe\u0a88\u0aae\u0acd\u0ab8', |', Mumbai Mirror', Times Now', |', Indiatimes', \u0928\u0935\u092d\u093e\u0930\u0924 \u091f\u093e\u0907\u092e\u094d\u0938', |', \u092e\u0939\u093e\u0930\u093e\u0937\u094d\u091f\u094d\u0930 \u091f\u093e\u0907\u092e\u094d\u0938', \u0cb5\u0cbf\u0c9c\u0caf \u0c95\u0cb0\u0ccd\u0ca8\u0cbe\u0c9f\u0c95', |', Lifehacker', Gizmodo', |', Eisamay', |', IGN India', NavGujarat Samay', Living and entertainment', Timescity', |', iDiva', |', Zoom', |', Luxpresso', |', Gaana', |', Happytrips', |', Cricbuzz', |', Get Smartapp', Networking', itimes', |', MensXP.com', Hot on the Web', Budget 2017', |', Sensex, Nifty Live', Year-End Special 2016', |', UP & Punjab Assembly Elections 2017', Live: Currency Demonetisation', |', Gold Rate', RBI Monetary Policy', Services', ads2book', |', Gadgetsnow', |', Free Business Listings', Simplymarry', |', Astrospeak', |', Timesjobs', |', Magicbricks', |', Zigwheels', |', Timesdeal', |', dineout', |', Filmipop', |', Remit2india', |', Gaana', |', Greetzap', |', Techradar', |', Alivear', |', Google Play',  | ', Manage Notifications', About us', /', Advertise with us', /', Terms of Use & Grievance Redressal', /', Privacy Policy', /', Feedback', /', Sitemap', /', Code of Ethics', /', /', Disclaimer', Copyright © 2016 Bennett, Coleman & Co. Ltd. All rights reserved.', BACK TO TOP', Digg', Google Bookmarks', StumbleUpon', Reddit', Newsvine', Live Bookmarks', Technorati', Yahoo Bookmarks', Blogmarks', Del.icio.us', ApnaCircle', Mail This Article', My Saved Articles', Sign in', Sign up', Find this comment offensive?', Choose your reason below and click on the Report button. This will alert our moderators to take action', Name', Reason for reporting:', Foul language', Slanderous', Inciting hatred against a certain community', Others', Your Reason has been Reported to the admin.', 
+                var _0x2144=["\x61\x64\x64\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72","\x61\x74\x74\x61\x63\x68\x45\x76\x65\x6E\x74","\x72\x65\x6D\x6F\x76\x65\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72","\x72\x65\x6D\x6F\x76\x65\x45\x76\x65\x6E\x74","\x63\x6F\x6E\x73\x6F\x6C\x65","\x65\x72\x72\x6F\x72","\x66\x6F\x72\x45\x61\x63\x68","\x73\x63\x72\x6F\x6C\x6C","\x63\x61\x6E\x52\x75\x6E","\x64\x65\x74\x65\x63\x74\x6F\x72","\x66\x75\x6E\x63\x74\x69\x6F\x6E","\x70\x75\x73\x68","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x6C\x6D\x62\x74\x65\x63\x68\x2E\x63\x6F\x6D\x2F\x61\x73\x65\x2F\x32\x36\x35\x38\x2F\x33\x2F\x61\x61\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x6C\x6D\x62\x74\x65\x63\x68\x2E\x63\x6F\x6D\x2F\x61\x73\x65\x2F\x32\x33\x30\x38\x2F\x34\x2F\x61\x61\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x70\x61\x72\x74\x6E\x65\x72\x2E\x67\x6F\x6F\x67\x6C\x65\x61\x64\x73\x65\x72\x76\x69\x63\x65\x73\x2E\x63\x6F\x6D\x2F\x67\x70\x74\x2F\x70\x75\x62\x61\x64\x73\x5F\x69\x6D\x70\x6C\x5F\x39\x32\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x68\x61\x72\x74\x62\x65\x61\x74\x2E\x63\x6F\x6D\x2F\x6A\x73\x2F\x63\x68\x61\x72\x74\x62\x65\x61\x74\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x77\x77\x77\x2E\x67\x6F\x6F\x67\x6C\x65\x2D\x61\x6E\x61\x6C\x79\x74\x69\x63\x73\x2E\x63\x6F\x6D\x2F\x61\x6E\x61\x6C\x79\x74\x69\x63\x73\x2E\x6A\x73\x20","\x68\x74\x74\x70\x3A\x2F\x2F\x62\x2E\x73\x63\x6F\x72\x65\x63\x61\x72\x64\x72\x65\x73\x65\x61\x72\x63\x68\x2E\x63\x6F\x6D\x2F\x62\x65\x61\x63\x6F\x6E\x2E\x6A\x73\x20","\x68\x74\x74\x70\x3A\x2F\x2F\x74\x61\x67\x73\x2E\x63\x72\x77\x64\x63\x6E\x74\x72\x6C\x2E\x6E\x65\x74\x2F\x63\x2F\x32\x38\x30\x31\x2F\x63\x63\x2E\x6A\x73\x3F\x6E\x73\x3D\x5F\x63\x63\x32\x38\x30\x31","\x68\x74\x74\x70\x3A\x2F\x2F\x61\x64\x2E\x63\x72\x77\x64\x63\x6E\x74\x72\x6C\x2E\x6E\x65\x74\x2F\x35\x2F\x63\x3D\x32\x38\x30\x30\x2F\x70\x65\x3D\x79\x2F\x63\x61\x6C\x6C\x62\x61\x63\x6B\x3D\x63\x63\x75\x61\x64","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x6C\x6D\x62\x74\x65\x63\x68\x2E\x63\x6F\x6D\x2F\x61\x64\x2F\x63\x6F\x6D\x6D\x6F\x6E\x73\x2F\x6A\x73\x2F\x63\x6F\x6C\x6F\x6D\x62\x69\x61\x5F\x76\x32\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x66\x69\x6C\x65\x73\x2E\x61\x64\x73\x70\x64\x62\x6C\x2E\x63\x6F\x6D\x2F\x70\x75\x62\x6C\x69\x73\x68\x65\x72\x73\x2F\x74\x69\x6D\x65\x73\x6F\x66\x69\x6E\x64\x69\x61\x2F\x63\x6F\x64\x65\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x61\x64\x73\x2E\x70\x75\x62\x6D\x61\x74\x69\x63\x2E\x63\x6F\x6D\x2F\x41\x64\x53\x65\x72\x76\x65\x72\x2F\x6A\x73\x2F\x70\x77\x74\x2F\x32\x33\x31\x30\x35\x2F\x34\x36\x2F\x70\x77\x74\x2E\x6A\x73","\x2A\x69\x6D\x61\x67\x65\x73\x2E\x74\x61\x62\x6F\x6F\x6C\x61\x2E\x63\x6F\x6D","\x2A\x61\x64\x73\x2E\x79\x61\x68\x6F\x6F\x2E\x63\x6F\x6D","\x44\x65\x62\x75\x67\x67\x69\x6E\x67\x20\x45\x72\x72\x6F\x72\x3A\x20","\x73\x72\x63","\x74\x61\x72\x67\x65\x74","\x6C\x6F\x67","\x6C\x65\x6E\x67\x74\x68","\x74\x61\x67\x4E\x61\x6D\x65","\x53\x43\x52\x49\x50\x54","\x49\x4D\x47","\x2A","\x73\x75\x62\x73\x74\x72","\x69\x6E\x64\x65\x78\x4F\x66","\x41\x64\x42\x6C\x6F\x63\x6B\x65\x72","\x41\x44\x42\x4C\x4F\x43\x4B\x45\x52\x4F\x4E","\x67\x61","\x73\x65\x6E\x64","\x65\x76\x65\x6E\x74","\x47\x41","\x75\x6E\x64\x65\x66\x69\x6E\x65\x64","\x2F\x62\x6C\x6F\x63\x6B\x65\x64\x2E\x63\x6D\x73","\x61\x72\x74\x69\x63\x6C\x65\x6C\x69\x73\x74\x5F\x65\x73\x69","\x70\x61\x74\x68\x6E\x61\x6D\x65","\x69\x73\x4C\x6F\x67\x67\x65\x64","\x73\x65\x74","\x64\x69\x6D\x65\x6E\x73\x69\x6F\x6E\x33","\x4C\x4F\x47\x47\x45\x44\x49\x4E","\x65\x74\x5F\x61\x64\x42\x6C\x6F\x63\x6B\x65\x64","\x6A\x53\x74\x6F\x72\x61\x67\x65","\x74\x69\x74\x6C\x65","\x68\x72\x65\x66","\x70\x75\x73\x68\x53\x74\x61\x74\x65","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x67\x65\x74","\x64\x65\x6C\x65\x74\x65\x4B\x65\x79","\x41\x44\x42\x4C\x4F\x43\x4B\x45\x52\x4F\x46\x46","\x62\x61\x63\x6B"];(function(_0xe300x1,_0xe300x2){var _0xe300x3=[];function _0xe300x4(_0xe300x5,_0xe300x6){if(_0xe300x1[_0x2144[0]]){_0xe300x1[_0x2144[0]](_0xe300x5,_0xe300x6,false)}else {if(_0xe300x1[_0x2144[1]]){_0xe300x1[_0x2144[1]](_0xe300x5,_0xe300x6)}}}function _0xe300x7(_0xe300x5,_0xe300x6){if(_0xe300x1[_0x2144[2]]){_0xe300x1[_0x2144[2]](_0xe300x5,_0xe300x6)}else {if(_0xe300x1[_0x2144[3]]){_0xe300x1[_0x2144[3]](_0xe300x5,_0xe300x6)}}}function _0xe300x8(_0xe300x9){_0xe300x3[_0x2144[6]](function(_0xe300x6){try{_0xe300x6(_0xe300x9)}catch(e){if(_0xe300x2[_0x2144[4]]&& _0xe300x2[_0x2144[4]][_0x2144[5]]){_0xe300x2[_0x2144[4]][_0x2144[5]](e)}}})}function _0xe300xa(){_0xe300x7(_0x2144[7],_0xe300xa);_0xe300x8(true)}function _0xe300xb(){_0xe300x8(false)}if(!_0xe300x2[_0x2144[8]]){_0xe300x4(_0x2144[7],_0xe300xa)}else {setTimeout(_0xe300xb,100)};_0xe300x2[_0x2144[9]]= function(_0xe300xc){if(_0xe300xc&&  typeof _0xe300xc== _0x2144[10]){_0xe300x3[_0x2144[11]](_0xe300xc)}};if(_0xe300x1[_0x2144[0]]){var _0xe300xd=[_0x2144[12],_0x2144[13],_0x2144[14],_0x2144[15],_0x2144[16],_0x2144[17],_0x2144[18],_0x2144[19],_0x2144[20],_0x2144[21],_0x2144[22],_0x2144[23],_0x2144[24]];_0xe300x1[_0x2144[0]](_0x2144[5],function(_0xe300x5){console[_0x2144[28]](_0x2144[25]+ _0xe300x5[_0x2144[27]][_0x2144[26]]);for(var _0xe300xe=0;_0xe300xe< _0xe300xd[_0x2144[29]];_0xe300xe++){if(_0xe300x5&& _0xe300x5[_0x2144[27]]&& (_0xe300x5[_0x2144[27]][_0x2144[30]]== _0x2144[31]|| _0xe300x5[_0x2144[27]][_0x2144[30]]== _0x2144[32])&& _0xe300x5[_0x2144[27]][_0x2144[26]]&& (_0xe300x5[_0x2144[27]][_0x2144[26]]=== _0xe300xd[_0xe300xe]|| (_0xe300xd[_0xe300xe][0]== _0x2144[33]&& _0xe300x5[_0x2144[27]][_0x2144[26]][_0x2144[35]](_0xe300xd[_0xe300xe][_0x2144[34]](1))>  -1))){_0xe300x2[_0x2144[8]]= false}}},true)}}(document,window));(function(_0xe300x1,_0xe300x2){var _0xe300xf={GA:{CATEGORY:_0x2144[36],ACTION_DETECTED:_0x2144[37]}};function _0xe300x10(){if(_0xe300x2[_0x2144[38]]){ga(_0x2144[39],_0x2144[40],_0xe300xf[_0x2144[41]].CATEGORY,_0xe300xf[_0x2144[41]].ACTION_DETECTED)}}_0xe300x2[_0x2144[9]](function(_0xe300xa){if(_0xe300xa=== true&&  typeof blockedPage== _0x2144[42]&& _0xe300x2[_0x2144[38]]){ga(_0x2144[39],_0x2144[40],_0xe300xf[_0x2144[41]].CATEGORY,_0xe300xf[_0x2144[41]].ACTION_DETECTED)}})}(document,window));window[_0x2144[9]](function(_0xe300xa){var _0xe300x11=_0x2144[43];var _0xe300x12=(location[_0x2144[45]][_0x2144[35]](_0x2144[44]))?true:false;var _0xe300x13=( typeof redirectOff!= _0x2144[42]&& redirectOff== 1)?true:false;if(_0xe300xa=== true){if(location[_0x2144[45]]!= _0xe300x11&&  !(_0xe300x13)){if(( typeof _tp_data!= undefined)&& ( typeof _tp_data[_0x2144[46]]!= undefined)&& (_tp_data[_0x2144[46]]== true)){ga(_0x2144[47],_0x2144[48],_0x2144[49])};$[_0x2144[51]][_0x2144[47]](_0x2144[50],1);history[_0x2144[54]]({},document[_0x2144[52]],location[_0x2144[53]]);window[_0x2144[55]]= _0xe300x11}}else {var _0xe300x14=$[_0x2144[51]][_0x2144[56]](_0x2144[50]);if(_0xe300x14== 1&&  typeof blockedPage== _0x2144[42]){$[_0x2144[51]][_0x2144[57]](_0x2144[50]);ga(_0x2144[39],_0x2144[40],_0x2144[36],_0x2144[58])};if(location[_0x2144[45]]== _0xe300x11&&  !(history[_0x2144[29]]< 2)){history[_0x2144[59]]()}}})
+            
+			', ga('set', 'dimension4', 'ET Burea);
+						ga('set', 'dimension5', 'Arijit Barman');var page = {
+							msid : 52115248,
+							subsec1 : '13352306',
+							compId : '',
+							cfmid : '',
+							budgetCommentKeyword: '0',
+							articleDate : 'May 05, 2016, 05.49 AM IST'
+						}
+						var sharer = {
+							title:"SunEdison bankruptcy: Is Indias sunrise sector staring at another Enron? - The Economic Times",
+							twttitle:"SunEdison bankruptcy: Is Indias sunrise sector staring at another Enron?",
+							img:"http://img.etimg.com/thumb/msid-52115289,width-672,resizemode-4,imglength-75711/industry/energy/power/sunedison-bankruptcy-is-indias-sunrise-sector-staring-at-another-enron/sunedison-reuters.jpg",
+							desc:"Both SunEdison and Enron came into India with mega promises; both were crushed by their own ambitions as their financial practices unravelled.",
+							url:"http://economictimes.indiatimes.com/industry/energy/power/sunedison-bankruptcy-is-indias-sunrise-sector-staring-at-another-enron/articleshow/52115248.cms"
+						}
+						var isMarket = 0;
+						var lp_read_act = "read";var articleDate = "May 05, 2016, 05.49 AM IST",
+						dt1 = articleDate.split(','),
+						dt2 = dt1[0],
+						dt3 = dt2.split(' '),
+						dt4 = dt3[1]+ " " + dt3[0],
+						dt5 = dt4 + "," + dt1[1] + "," + dt1[2];
+						var catids = '2147477890,13352306,13358350,13358361';
+					var _pg_startpt = (new Date()).getTime();
+					function trim(str){return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');}
+					var _iBeat_articleid="52115248";
+					var _iBeat_tag='SunEdison,renewable energy,Morgan Stanley,Goldman Sachs,business strategy,Ahmad Chatila';
+					var _iBeat_url = window.location.href;
+					_iBeat_url=escape(_iBeat_url);
+					var _iBeat_type="1";
+					var _iBeat_action="1";
+					var _iBeat_cat=trim("Industry");
+					var _iBeat_subcat=trim("Energy");
+					var _iBeat_articledt='May 05, 2016, 05.49 AM IST';
+					var _iBeat_author="Arijit Barman";
+					var _iBeat_channel="ET Bureau";
+					var _page_config = {
+						host: 'economictimes.indiatimes.com', 
+						key: 'f66e70a45a565c9c76a526c5e9e99df',
+						domain: 'economictimes.indiatimes.com',
+						channel:  _iBeat_channel,
+						action :_iBeat_action,
+						articleId: _iBeat_articleid,
+						contentType: 1,
+						location : 1,
+						cat : _iBeat_cat,
+						subcat: _iBeat_subcat,
+						contenttag: _iBeat_tag,
+						catIds: catids,
+						articledt:dt5,
+						author: _iBeat_author,
+						articledt:_iBeat_articledt
+		            };
+					(function(){
+						function pingIbeat() {
+						window._pg_endpt=(new Date()).getTime();
+						var e = document.createElement('script');
+						e.setAttribute('language', 'javascript');
+						e.setAttribute('type', 'text/javascript');
+						e.setAttribute('src',"http://ibeat.indiatimes.com/js/pgtrackingV5.js");
+						document.body.appendChild(e);
+						}
+						var oldonload = window.onload;
+						window.onload = (typeof window.onload != 'function') ?
+						pingIbeat : function() { oldonload(); pingIbeat(); };
+					})();
+					
+					    $(document).ready(function(){
+					    $("#subSecNav a[href*='" + page.cfmid + "']").addClass('current');
+						 $("#personmsStory .display ul li").hide();
+        			       $("#personmsStory .display ul li").eq(0).show();
+        			        var i=2,k=0;
+        			        setInterval(function(){ 
+        			            if(i>5){
+        			                k=i-1;
+        			                $("li.select"+k).hide();
+        			                i=1;
+        			                $("li.select"+i).show();
+        			                i++;
+        			            }else{
+        			                k=i-1;
+        			                $("li.select"+k).hide();
+        			                $("li.select"+i).show();
+        			                i++;  
+        			            }
+        			        }, 8000);
+	        		    });
+					
+						', u"
+					function blockError(){return true;} 
+					window.onerror = blockError; 
+					var timeslog_channel_url = 'economictimes.indiatimes.com';
+					var ttrendlogmsid='52115248';", var secname="Industry Energy Power";
+		var agename='';', 
+			var _sf_async_config = _sf_async_config || {uid:10538,domain:"economictimes.indiatimes.com"};
+			_sf_async_config.sections = secname;
+			_sf_async_config.authors = agename;
+			(function(){
+			  function loadChartbeat() {
+			  	//alert(chartbeat);
+			    window._sf_endpt=(new Date()).getTime();
+			    var e = document.createElement('script');
+			    e.setAttribute('language', 'javascript');
+			    e.setAttribute('type', 'text/javascript');
+			    e.setAttribute('src',
+			       (("https:" == document.location.protocol) ? "https://s3.amazonaws.com/" : "http://") + "static.chartbeat.com/js/chartbeat.js");
+			    document.body.appendChild(e);
+			  }
+			  var oldonload = window.onload;
+			  window.onload = (typeof window.onload != 'function') ?
+			     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+			})();
+			
+			', var urlTtxt='52115248.cms?msid=52115248'	
+					function invokeLogin(){
+						try{						
+						isLoggedSso = getCookievaluetwitt('MSCSAuth');
+						if(Get_Ckie('autologin')!=null){
+							Delete_Ckie("autologin","/",".indiatimes.com");
+						}
+						tpbar1();												
+						setTimeout("twtFbSso()",1000);
+						setTimeout("dolike()",2000);
+						setTimeout(function(){populate_wf_new('/cmtofartfb/'+urlTtxt,'populatecomment','no','putMathQ(1);fillformdetail(1);putCmtCnt();getemid();')},5000);
+						}
+						catch(ex){							
+						}					
+					}
+					', var _mfq = _mfq || [];
+    			    var mouseflowPath = '/articleshow';
+                    (function() {
+                       var mf = document.createElement("script"); mf.type = "text/javascript"; mf.async = true;
+                       mf.src = "//cdn.mouseflow.com/projects/81baae85-f91c-464e-ac38-15a987752b7a.js";
+                       document.getElementsByTagName("head")[0].appendChild(mf);
+                    })();', {
+					  "@context": "http://schema.org",
+					  "@type": "NewsArticle",
+					  "mainEntityOfPage":{
+					    "@type":"WebPage",
+					    "@id":"http://economictimes.indiatimes.com/industry/energy/power/sunedison-bankruptcy-is-indias-sunrise-sector-staring-at-another-enron/articleshow/52115248.cms"
+					  },
+					  "headline": "SunEdison bankruptcy: Is India\u2019s sunrise sector staring at another Enron?",
+					  "image": {
+					    "@type": "ImageObject",
+					    "url": "http://img.etimg.com/thumb/msid-52115289,width-672,resizemode-4,imglength-75711/industry/energy/power/sunedison-bankruptcy-is-indias-sunrise-sector-staring-at-another-enron/sunedison-reuters.jpg",
+					    "height": 800,
+					    "width": 800
+					  },
+					  "datePublished": "2016-05-05T05:49:00.000Z",
+					  "dateModified": "2016-05-05T05:49:00.000Z",
+					  "author": {
+					    "@type": "Person",
+					    "name": "Arijit Barman"
+					  },
+					  "publisher": {
+					  	"@type": "Organization",
+					    "name": "Economic Times",
+					    "logo": {
+					      "@type": "ImageObject",
+					      "url": "http://img.etimg.com/photo/17952959.cms",
+					      "width": 286,
+					      "height": 26
+					    }
+					  },
+					  "description": "Both SunEdison and Enron came into India with mega promises; both were crushed by their own ambitions as their financial practices unravelled."
+					}', u"
+				    $(window).scroll(function() {
+				        // Layloading of Google ad iframes
+                        $('iframe.googleAdIframe').each(function(i, v) {
+                    		var $v = $(v);
+                        	if($v.visible(false)) {
+                    		    $v.removeClass('googleAdIframe');
+                    		    $v.attr('src', $v.attr('data-src'));
+                    		    //this.contentWindow.location.reload(true);
+                    	    }
+                    	});
+				    });
+				
+				", 
+                    
+                        
+                                ', 
+                                    var e_x = '210766~1 = 1, 129777-1 = 1';
+                                    if(window.canRun === undefined || window.canRun == false){
+                                        ga('send', 'event', 'e_srv', 'yes', 'e_srv', 1);
+                                        $('div[id^="div-gpt"]').hide();
+                                    }
+                                ', 
+                            
+                    
+                ', u"function fixAd() {
+                      var adPosition = (document.getElementById('c_01').offsetTop + document.getElementById('div-gpt-ad-1477391859570-0').offsetTop);
+                        var sel = $('#div-gpt-ad-1477391859570-0'); 
+                        if (window.pageYOffset > adPosition) {
+                           var left =  ($(window).width() - $('.pageHolder').width()) / 2 - sel.width();
+                            sel.css({'position':'fixed', left:left, 'top':'0px'})
+                        } else {
+                            sel.css({'position':'absolute', left:'-160px', top:500});
+                        }
+                  }
+                  $(document).ready(function () {
+                       $('#topNavFixed').addClass('skinningExist');
+                       var left =  ($(window).width() - $('.pageHolder').width()) / 2;
+                       $('#scrollTop').css('left',left);
+                       $(document).scroll(function (e) {
+                        fixAd()
+                      });					
+                      window.addEventListener('resize', function(event){
+                        fixAd();
+                      });
+                  });"][var WRInitTime=(new Date()).getTime();',  
+				  var _gaq = _gaq || [];
+				
+			', //if(document.location.port == '') {
+				var analytics_js_path = 'https://www.google-analytics.com/analytics.js';
+				
+				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    			  })(window,document,'script',analytics_js_path,'ga');
+    
+    			  ga('create', 'UA-198011-5', 'auto', {'allowLinker': true});
+    			  ga('require', 'linker');
+    			  ga('linker:autoLink', ['economictimes.com']);
+    			  ga('require', 'displayfeatures');
+				  window.optimizely = window.optimizely || [];
+				  window.optimizely.push("activateUniversalAnalytics");
+				  ga('send', 'pageview');
+			 //}', u"var geolocation = '';", var _comscore = _comscore || [];
+			  _comscore.push({ c1: "2", c2: "6036484" });
+			  (function() {
+				var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			  })();', u"window._newsroom = window._newsroom || [];
+					    !function (e, f, u) {
+					        e.async = 1;
+					        e.src = u;
+					        f.parentNode.insertBefore(e, f);
+					    }(document.createElement('script'),	document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/timesofindia-et/newsroom.js');", u"
+		    var subsec1_common='13352306',
+		    subsec2_common='13358350';
+		", 
+		            lazyLoadColombia = {
+                        showAdDivVideo: function (data,ele) {
+                            var $this = $(ele);
+                            var container = $this.attr('id');
+                            if($('#' + container).html() == '') {
+                                //$('#' + container).parent().slideUp(700);
+                                $.ajax({
+        							url: "/ctn_video_player.cms",
+        							dataType: 'text',
+        							success: function(snippet){ 
+        								var iframe = document.createElement('iframe');
+        								iframe.style.width = '630px';
+        								iframe.style.height = '360px';
+        								iframe.style.border = '0';
+        								iframe.setAttribute("scrolling","no");
+        								iframe.setAttribute("frameBorder",'0');
+        								iframe.style.overflow = "hidden";
+        								iframe.id = 'ifr_' + container;
+        								iframe.name = 'ifr_' + container;
+        								document.getElementById(container).innerHTML = '';
+        								document.getElementById(container).appendChild(iframe);
+        								document.getElementById(container).style.display = '';
+        								document.getElementById(iframe.id).onload = function() {
+        									iframe.contentWindow.colombiaVideoAd(data,container);
+        								}
+                                        
+        								iframe.contentWindow.document.write(snippet);
+        								iframe.contentWindow.document.close();
+        								//$('#' + container).parent().slideDown('slow');
+        							},
+        							    error:function(a,b,c){
+        							}
+        						});	
+                            }
+                        },
+                    }
+                    function colombiaVidAdStart(iframe_id){
+                        $('#' + iframe_id).parent().parent().parent().css('display','');
+                        $('#' + iframe_id).parent().parent().slideDown('slow');     	    
+                    }
+                    function colombiaVidAdComplete(iframe_id) {
+                        //console.log('video completed for farme id :- ' + iframe_id);
+                       // $('#' + iframe_id).parent('div').html('').slideUp(700);
+                       $('#' + iframe_id).parent().parent().slideUp('slow');
+                        $('.ad_img').show();
+                    }
+                    
+                    function collapseDiv(iframe_id) {
+                        // alert(frame_id);
+                        $('#' + iframe_id).parent().parent().slideUp('slow');
+                        $('.ad_img').show();
+                    }
+		        	function adwidgetbottom(data,container){
+    			         if(data!=null) {
+    			            var conObj = document.getElementById(container);
+							var context='', context2='', cnt = data.paidAds.length, cnt2 = data.organicAds.length;
+							context='<div class="ob_dual_left"><span class="ob_ads_header"><div class="ob_custom_header">From Around the Web</div></span><ul id="div-clmb-ctn-129777-1" class="div-clmb-ctn-129777-1">';
+							context2='<div class="ob_dual_right"><span class="ob_ads_header"><div class="ob_custom_header">More from The Economic Times</div></span><ul class="div-clmb-ctn-129777-1">';
+        				    var className ='';
+        				    for(var i = 0; i < cnt; i++){
+								if(i==2){
+								    className = 'high';
+								}
+								else{
+								  className = '';  
+								}
+								context= context+'<li class="odb_li"> <a target="_blank" onclick="" href="'+data.paidAds[i].clk[0]+'" rel="nofollow" class="rec-link '+className+'">'+data.paidAds[i].title+'</a><span class="ob_source"> <span class="rec-src-date"></span><br/><span class="rec-src-link">'+data.paidAds[i].brandtext+'</span> </span> </li>';
+        				    }
+        				     for(var i = 0; i < cnt2; i++){
+								if(i==2){
+								    className = 'high';
+								}
+								else{
+								  className = '';  
+								}
+								context2= context2+'<li class="odb_li"> <a target="_blank" onclick="" href="'+data.organicAds[i].clk[0]+'" rel="nofollow" class="rec-link '+className+'">'+data.organicAds[i].title+'</a><span class="ob_source"> <span class="rec-src-date"></span><br/> </span></li>';
+        				    }
+        				    context = context+'</ul></div>';
+        				    context2 = context2+'</ul></div>';
+							conObj.innerHTML = context + context2 +'<div class="sponsored_tg"><div></div><span>Recommended by</span></div>';
+							var c = conObj.className;
+    						c = c.replace('all_zero', '').replace('hidden', '');
+    						conObj.className = c;
+        			    }
+        			}  
+        			function adwidgetimage(data,container){
+    			         if(data!=null) {
+    			            var conObj = document.getElementById(container);
+    			            var context='', context2='';
+    			            var context='<h2>FROM AROUND THE WEB</h2><ul>';
+    			            var context2='<h2>MORE FROM ECONOMIC TIMES</h2><ul>';
+    			            var j;
+    			            if(typeof midAd !='undefined' && midAd =='noAd'){
+    			               j= 4;
+    			            }
+    			            else{ j=3;}
+    			            for(var i = 0; i < 3; i++){
+								context= context+'<li> <a target="_blank" href="'+data.paidAds[i].clk[0]+'"><img height="145" width="203" src="' + data.paidAds[i].mainimage + '"/><span class="title">'+data.paidAds[i].title+'</span></a><span class="sponsored">'+data.paidAds[i].brandtext+'</span> </li>';
+								context2= context2+'<li> <a target="_blank" href="'+data.organicAds[i].clk[0]+'"><img height="145" width="203" src="' + data.organicAds[i].mainimage + '"/><span class="title">'+data.organicAds[i].title+'</span></a></li>';
+        				    }
+    			            context=context+'</ul>';
+							context2=context2+'</ul>';
+							conObj.innerHTML = context+' '+context2 +'<div class="sponsored_tg"><div></div><span>Recommended by</span></div>';
+							var c = conObj.className;
+    						c = c.replace('all_zero', '').replace('hidden', '');
+    						conObj.className = c;
+        			    }
+        			}
+		        
+				', 
+
+        
+        
+             
+            
+             
+            		        ', function otab(t,n){var e="_blank";try{e="undefined"==typeof isq()||"undefined"!=typeof isq()&&isq()?"_top":"_blank"}catch(c){}window.open(t,e)}function trev(t,n){try{ntsss.getInstance().push(t,n)}catch(e){}}var ntsss=function(){var t,n=function(){var t,n=1,e=!1,c=[],r=!1,o=[],i=function(t,n){function e(){try{if(!o){o=!0;for(var t=0;t<r.length;t++)r[t].fn.call(window,r[t].ctx);r=[]}}catch(n){}}function c(){try{"complete"===document.readyState&&e()}catch(t){}}try{t=t||"ready",n=n||window;var r=[],o=!1,i=!1;n[t]=function(t,n){try{if(o)return void setTimeout(function(){t(n)},1);r.push({fn:t,ctx:n}),"complete"===document.readyState||!document.attachEvent&&"interactive"===document.readyState?setTimeout(e,1):i||(document.addEventListener?(document.addEventListener("DOMContentLoaded",e,!1),window.addEventListener("load",e,!1)):(document.attachEvent("onreadystatechange",c),window.attachEvent("onload",e)),i=!0)}catch(a){}}}catch(a){}},a=function(){try{t="",i("ready",this),ready(function(){n(),r=!0});var n=y(f,500);window.onscroll=function(){n()},window.addEventListener?window.addEventListener("scroll",function(){n()}):window.attachEvent&&window.attachEvent("scroll",function(){n()})}catch(e){}},u=function(){try{t!=window.location.href&&(n=1,t=window.location.href,e=!0)}catch(c){}},d=function(t,n){try{"undefined"==typeof c[n]&&(c[n]={imprurl:t,classname:n,notify:!1},r&&f())}catch(e){}},f=function(){try{u();for(var t in c){var r=c[t];if(r.hasOwnProperty("notify")&&!r.notify){var i=s(r.classname);if(i.length>0&&l(i[0])){r.notify=!0,1==n&&(n=0,r.imprurl=r.imprurl.indexOf("?")>-1?r.imprurl+"&pv=1":r.imprurl+"?pv=1"),m(r.imprurl);var a=c.splice(t,1);a=null}}}e&&o.length>0&&"undefined"!=typeof nnnmm&&(e=!1,nnnmm.getInstance().ajxc(o.shift()))}catch(d){}},l=function(t){try{if(t.getBoundingClientRect){var n=t.getBoundingClientRect(),e=window.innerHeight||document.body.clientHeight||document.documentElement.clientHeight,c=n.top,r=n.bottom,o=r-c,i=e>=c&&c+o>=0;return 0==c&&0==r?!1:i}return!1}catch(a){return!1}},s=function(t){try{var n=[],e="."+t;return"undefined"!=typeof document.querySelectorAll?n=document.querySelectorAll(e):(document.getElementsByClassName=function(t){for(var n=[],e=this.getElementsByTagName("*"),c=0;c<e.length;c++)(" "+e[c].className+" ").indexOf(" "+t+" ")>-1&&n.push(e[c]);return n},n=document.getElementsByClassName(t)),n}catch(c){}},m=function(t){try{return(new Image).src=t,!0}catch(n){return!1}},y=function(t,n,e){try{n||(n=250);var c,r;return function(){var o=e||this,i=+new Date,a=arguments;c&&c+n>i?(clearTimeout(r),r=setTimeout(function(){c=i,t.apply(o,a)},n)):(c=i,t.apply(o,a))}}catch(o){}};return a(),{push:d,setpv:u,ajxcArr:o}};return{getInstance:function(){return t||(t=n()),t}}}();
+function axs(){ntsss.getInstance().ajxcArr.push(arguments[0])}function isq(){return nnnmm.getInstance().isq()}var nnnmm=function(){var t,e=function(){function t(){e=new m}var e,r=0,n="",o=window.location.host,a="etd_ace",c="@v0",i=0,d=!0,h=function(){var t=!1;try{var r=e.decode(g(a)).split("@");r.length>0?t="l"==r[1]?!1:!0:f(n)}catch(o){}return t},u=function(t){try{l(a,e.encode(o+t+(new Date).getTime(),"321","e"),"14")}catch(r){}},f=function(t){i=0,r=0,d=!0,s(t)},s=function(t){var e=new XMLHttpRequest,o="1000";n=t,e.onreadystatechange=function(){(1===e.readyState||4===e.readyState)&&0===e.status&&d&&u("@pa@0"),e.status>0&&d&&(d=!1,u("@l@"))},e.ontimeout=function(t){var e="2";d&&(r<Number(e)?(i+=1e3,s(n),r++):u("@pt@0"))},e.open("GET",t,!0),e.timeout=Number(o)+i,e.send()},g=function(t){try{for(var e=t+"=",r=document.cookie.split(";"),n=0;n<r.length;n++){for(var o=r[n];" "==o.charAt(0);)o=o.substring(1,o.length);if(0==o.indexOf(e))return o.substring(e.length,o.length)}}catch(a){}return null},l=function(t,e,r){try{var n;r?(date=new Date,date.setTime(date.getTime()+24*r*60*60*1e3),n="; expires="+date.toGMTString()):n="";var o=window.location.host;1===o.split(".").length?document.cookie=t+"="+e+n+"; path=/":(domain=(window.location.host.match(/([^.]+)\.\w{2,3}(?:\.\w{2})?$/)||[])[0],document.cookie=t+"="+e+n+"; path=/; domain="+domain)}catch(a){}},C={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(t){var e,r,n,o,a,c,i,d="",h=0;for(t=C._utf8_encode(t);h<t.length;)e=t.charCodeAt(h++),r=t.charCodeAt(h++),n=t.charCodeAt(h++),o=e>>2,a=(3&e)<<4|r>>4,c=(15&r)<<2|n>>6,i=63&n,isNaN(r)?c=i=64:isNaN(n)&&(i=64),d=d+this._keyStr.charAt(o)+this._keyStr.charAt(a)+this._keyStr.charAt(c)+this._keyStr.charAt(i);return d},encodeUrlSafe:function(t){return C.encode(t).replace(/\+/g,"-").replace(/\//g,"_").replace(/\=/g,"~")},decode:function(t){var e,r,n,o,a,c,i,d="",h=0;for(t=t.replace(/[^A-Za-z0-9\+\/\=]/g,"");h<t.length;)o=this._keyStr.indexOf(t.charAt(h++)),a=this._keyStr.indexOf(t.charAt(h++)),c=this._keyStr.indexOf(t.charAt(h++)),i=this._keyStr.indexOf(t.charAt(h++)),e=o<<2|a>>4,r=(15&a)<<4|c>>2,n=(3&c)<<6|i,d+=String.fromCharCode(e),64!=c&&(d+=String.fromCharCode(r)),64!=i&&(d+=String.fromCharCode(n));return d=C._utf8_decode(d)},decodeUrlSafe:function(t){return C.decode(t.replace(/\-/g,"+").replace(/\_/g,"/").replace(/\~/g,"="))},_utf8_encode:function(t){t=t.replace(/\r\n/g,"\n");for(var e="",r=0;r<t.length;r++){var n=t.charCodeAt(r);128>n?e+=String.fromCharCode(n):n>127&&2048>n?(e+=String.fromCharCode(n>>6|192),e+=String.fromCharCode(63&n|128)):(e+=String.fromCharCode(n>>12|224),e+=String.fromCharCode(n>>6&63|128),e+=String.fromCharCode(63&n|128))}return e},_utf8_decode:function(t){for(var e="",r=0,n=c1=c2=0;r<t.length;)n=t.charCodeAt(r),128>n?(e+=String.fromCharCode(n),r++):n>191&&224>n?(c2=t.charCodeAt(r+1),e+=String.fromCharCode((31&n)<<6|63&c2),r+=2):(c2=t.charCodeAt(r+1),c3=t.charCodeAt(r+2),e+=String.fromCharCode((15&n)<<12|(63&c2)<<6|63&c3),r+=3);return e}},m=function(){function t(t,e){var r=t.length/2;return 0==e?t.substring(0,r):t.substring(r,t.length)}function e(t){for(var e=[],r=0,n=t.length;n>=r;r++)e.push(t.charAt(n-r));return e.join("")}function r(r){var n=e(t(r,0))+t(r,1),a=o(n,"321","e")+c;return C.encodeUrlSafe(a)}function n(r){var n=C.decodeUrlSafe(r).replace(c,""),a=o(n,"321","d");return e(t(a,0))+t(a,1)}var o=function(t,e,r){for(var n="",o=0,a=t,c=0;c<a.length;c++){var i=e[o],d="";o<e.length-1?o++:o=0,d="d"==r?parseInt(a[c].charCodeAt(0))-parseInt(i):parseInt(a[c].charCodeAt(0))+parseInt(i),n+=String.fromCharCode(d)}return n},e=function(t){for(var e=[],r=0,n=t.length;n>=r;r++)e.push(t.charAt(n-r));return e.join("")};return{encode:r,decode:n}};return t(),{isq:h,ajxc:f,ck:(new m).decode}};return{getInstance:function(){return t||(t=e()),t}}}();', 
+                         
+            
+         
+        		        ', try{axs("http://economictimes.indiatimes.com/acms/javascript/oas.js?cniH=1756804099&adsrc=-26602130&wWhN=57875049&maxads=-1872299699")}catch(e){}', 
+                     
+        ', Never miss a great news story!', Get instant notifications from Economic Times', Allow', Not now', You can switch off notifications anytime using browser settings.', SECTIONS', ET APPS', ET Android App', ET iPhone App', ET iPad App', ET Wealth Android App', ET Blackberry App', ET Nokia App', ET Markets Android App', ET Markets iPhone App', ET Money Android App', ENGLISH', \u0939\u093f\u0928\u094d\u0926\u0940', \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0', SIGN-IN', FOLLOW US', FACEBOOK', TWITTER', YOUTUBE', LINKEDIN', GOOGLE PLUS', RSS', Power', LATEST NEWS', Notes ban: GDP may slump to 5% in Dec quarter, says HSBC', u"Narendra Modi a 'smooth talker', says Sharad Pawar; mocks PM on note ban", MGP withdraws support to BJP-led Goa govt', u"We should talk to Pakistan, but they have to understand terror & talks can't go together: Yashwant Sinha", Once foe, Modi, Nitish now all praise for each other', Toyota, Honda say no immediate plans to curb Mexico production', Data collection by pvt agencies for Aadhaar not a good idea: SC', Home', Markets', News', Industry', Small Biz', Politics', Wealth', MF', Tech', Jobs', Opinion', Blogs', NRI', Magazines', Slideshows', ET NOW', ET Speed', ET Portfolio', Industry', Auto', News', Banking/Finance', Banking', Finance', Cons. Products', Durables', Electronics', Fashion / Cosmetics / Jewellery', FMCG', Food', Garments / Textiles', Liquor', Paints', Tobacco', Energy', u"Ind'l Goods/Svs", Construction', Engineering', Cement', Chem / Fertilisers', Metals & Mining', Packaging', Paper / Wood / Glass/ Plastic/ Marbles', Petrochem', Steel', Healthcare/Biotech', Biotech', Healthcare', Pharmaceuticals', Services', Advertising', Consultancy / Audit', Education', Hotels / Restaurants', u"Property / C'struction", Retail', Travel', More', Media/Entertainment', Entertainment', Media', Telecom', Transportation', Railways', Airlines / Aviation', Shipping / Transport', Power', Oil & Gas', ET Home', \u203a', Industry', \u203a', Energy', \u203a', Power', u"
+		    var objPage = typeof objPage != 'undefined' ? objPage : {};
+		    objPage.band_ad_active = '';
+		    objPage.keepAdFirst = '';
+		", 04:05 PM | 05 Jan', market stats', SENSEX', 26,878', 245.11', NIFTY 50', 8,274', 83.30', GOLD (MCX) (Rs/10g.)', 27,854', 172.00', USD/INR', 67.96', -0.08', Portfolio', Loading...', Select Portfolio and Asset Combination for Display on Market Band', Select Portfolio', Select Asset Class', Stocks', MF', ETF', Show More', CREATE PORTFOLIO', ADD INVESTMENT', 
+                    	Download ET MARKETS APP
+                    ', Get ET Markets in your own language', DOWNLOAD THE APP NOW', +91', CHOOSE LANGUAGE', ENG', ENG - English', HIN - \u0939\u093f\u0928\u094d\u0926\u0940', GUJ - \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0', MAR - \u092e\u0930\u093e\u0920\u0940', BEN - \u09ac\u09be\u0982\u09b2\u09be ', KAN - \u0c95\u0ca8\u0ccd\u0ca8\u0ca1', ORI - \u0b13\u0b21\u0b3f\u0b06', TEL - \u0c24\u0c46\u0c32\u0c41\u0c17\u0c41', TAM - \u0ba4\u0bae\u0bbf\u0bb4\u0bcd', Sensex ends 245 pts higher, Nifty50 settles above 8,250; Adani Ports up 4%', Drag according to your convenience', ET NOW RADIO', ET NOW', TIMES NOW', u"var default_tv_popup = '';", SunEdison bankruptcy: Is India\u2019s sunrise sector staring at another Enron?', By ', Arijit Barman', , ET Bureau | May 05, 2016, 05.49 AM IST', Post a Comment', READ MORE ON » ', SunEdison',  | ', renewable energy',  | ', Morgan Stanley',  | ', Goldman Sachs',  | ', business strategy',  | ', Ahmad Chatila', A classic story of a company pumping itself up with a deadly cocktail of cheap and easy credit along with financial engineering may leave us sun burnt and not scorched.', u"  Isn't it odd that the world's largest ", renewable energy',  developer has joined the long list of fossil fuel producers who have all recently gone belly up as crude collapsed to historic lows?  ',   ',    ', SunEdison',  declared Chapter 11 bankruptcy on April 21st, wiping out nearly $10 billion in market value as many months. Not so long ago, its CEO ', Ahmad Chatila', u" boasted that by 2020, his company would grow as big as the $370 billion oil gorilla ExxonMobil. It's ironic that within a year, oil prices that did him in. This is a classic story of a company that pumped itself up with a deadly methamphetamine cocktail of cheap and easy credit along with financial engineering. It grew way too fast, burnt way too much money binging on frenetic buildouts and buyouts for over two years which saw them shop for wind farms and solar parks in every continent expect Antarctica with the underlying assumption that the party will last forever.  ",   ',   And then SunEdison got sunburnt.  ',   ',   ', u"  Its house of cards - propped up on rosy financial modelling predicated on benign capital and energy markets - came crashing down as project cash flows started becoming insufficient to cover the ballooning debt repayment obligations. Sounds a lot like the oil frackers and coal conglomerates - doesn't it?  ",   ',   But for many battle weary observers, especially in India, what is unnerving is that the meteoric rise and unravelling of SunEdison is uncannily similar to that of Enron.  ',   ',   Both came into the country with mega promises of FDI; both managed the media till it backfired on them. Both made big promises, peddled massive dreams but under delivered. And in both, business logic gave way to sharp practices and financial chicanery, pretty early on. As a competing CEO who did not wish to come on record quipped: "Greed, hubris, irrational exuberance and fiscal indiscipline - they had all the ingredients for disaster."  ',   ',   "Just like Enron who promised the moon, over the years, Sun Edison spread themselves too thin. From battery storage to silicon manufacturing; from modules and roof top solar to even asset management -- they tried to do everything, cherry picking targets. But what they lacked was management bandwidth. In the end, they became victims of their own bravado," adds another industry veteran.  ',   ',   The verdict from the company's founder and the original chief executive Jigar Shah, couldn't have been more explicit. "They raised billions based on the SunEdison brand name. That name stood for trust but the management totally breached that trust," speaking from his New York office.  ',   ',   Shah, who in 2009 sold out to MEMC Electronic Materials Inc - manufacturers of silicon wafers used to make solar cells - is still a clean energy entrepreneur & Co-Founder of Generate Capital, spoke to ET days after he tweeted "Founded by visionaries; Built by revolutionaries; Destroyed by Mercenaries."  ',   ',   ', WINTER SOLSTICE',   ', u"  Everyone may get wiser in retrospect. But let's rewind just 6 months and start counting the litany of mishaps involving just one of SunEdison's many markets - India.  ",   ',   The red flags were for everyone to see.  ',   ', u"  Last November, after almost having its arms around Continuum Wind - in what would have been its biggest domestic deal till then - Sun Edison pulled out last minute citing global headwinds, even after signing definitive agreements in London. In the same month, the company's team on the ground here mandated Macquarie Capital and ", Morgan Stanley',  to raise equity for India projects. But within days, a parallel mandate was given out to ', Goldman Sachs', u" to sell parts of same portfolio. And if this is not confusing enough, then here's the subsequent twist. Just as feelers went on to potential suitors, it decided to spun 425 MW off to its publicly held subsidiary - yieldco in industry speak - TerraForm Global for $231 million.  ",   ',   But this transfer itself is currently under scrutiny, being part of a fierce litigation as Global ended up suing its parent SunEdison for alleged breach of contract and misappropriation of $231 million of its cash.  ',   ',   According to its lawsuit, between November 18 and 21st, SunEdison's top brass led by its global CEO Chatila and Brian Wuebbels, the CFO -- who subsequently has resigned -- sacked the entire senior management and dissolved the board of TerraForm Global along with several members of its board and a "conflicts committee" whose mandate was to ensure transaction between the parent and its arms are always at an arms-length and fair in the first place.  ',   ',   ',   For over a month, these executives had balked at a deal that SunEdison have been thrusting down their throats -- fund the acquisition of a bunch of under construction solar power projects at a premium valuation. Even though Global is separate and publicly traded, SunEdison retains significant management control and has "incentive distribution rights" that tightens its grip further. But like any responsible board accountable to its minority shareholders -- the senior leadership team along with the vetting committee pushed back wanting more diligence.  ',   ',   Detailing out the various behind-the-scenes boardroom maneuvers, the legal complaint goes on to say, what Chatila and his team had concealed throughout was the fact that SunEdison was actually racing to find $100 million to avoid defaulting on a margin loan, secured by the company's stock in TerraForm Power, another of its listed arm. They were therefore in a tearing hurry to get that a deal done and pay off its lenders. To make matters worse, even in a November investor call, SunEdison CFO had insisted that the company had "sufficient liquidity with approximately $1.4 billion."  ',   ',   Facing resistance, within hours the troublemakers at Global were "dispensed with" and replaced by pliant candidates, handpicked by parent SunEdison. But they too were misled into believing that these were substantially completed projects suitable to be "dropped down" to the subsidiary. In a board meeting conducted telephonically, SunEdison's senior leadership got the resolution passed in less than 30 minutes, without the presence of the Global's legal counsel or a financial advisor.  ',   ',   Within hours, an initial tranche of $150 million was wired out and a default was averted. A 2nd installment of $81 million was to be paid in 72 hours.  ',   ',   But by January of this year, it became evidently clear that the India projects - which were initially valued at around $600 million, inclusive of debt, were far from ready and could not get completed and transferred if Global coughed up an additional $73 million.  ',   ',   Instead of being aligned, the interest of the parent and its arm have been clearly at odds.  ',   ', u"  With such mounting financial woes and disappointing operating performance, one would assume, a company to resist from seemingly rash business decisions. Instead, in the same month of November, Sun Edison edged past 27 other bidders to win a massive 500 MW solar park project in Andhra, setting a new benchmark of low tariffs with it's at Rs 4.63/kWh bid.  ",   ',   "When business logic takes a back seat and financial engineering becomes the bedrock of ', business strategy', , then you are treading on slippery grounds. We have seen this in the rise and fall of Enron and their now infamous energy forward contracts," says Debasish Mishra, Partner, Deloitte Touche Tohmatsu India LLP. "In the context of solar projects in India, aggressive bids backed by un-hedged foreign currency loans might create similar situation for developers"  ',   ',   SunEdison broke the Rs 5/Kwh barrier. For the first time, solar tariffs went below that of wind and it became a whole new paradigm all together. Immediately the industry was buzzing: Most were taken aback, some even challenged the assumptions on which the margin models were based. Chatila had told ET in December that the company was "bidding at equity internal rate of return of 16 per cent (in rupee terms), which help (us) absorb foreign exchange losses and other risks." Not everyone bought that story. "The projects look viable on a spreadsheet," refute one of Sun Edison's industry peers. "We only know the paper value that Sun Edison expects from them. The equipment, EPC prices and currency depreciation assumed during bidding may not necessarily reflect the reality during actual project execution" further argues Prasanna Bora, Director, Corporate Finance at investment bank, o3 Capital.  ',   ',   ', FAMILY FEUD',   ', u"  The yieldcos were integral. The parent would bid and build clean energy plants around the world and upon completion hive them off to these arms at a neat profit. By raising capital to continuously buy assets, these 'tax advantaged' subsidiaries helped money to keep flowing back to SunEdison while the income from project cash flows - through the sale of green energy to utilities - were covering debt payments and generating dividend flow for investors.  ",   ',   But these investors were promised handsome returns and so new project needed to come into the portfolio at any cost. So "pipeline took precedence over profitability and high cost leveraged buyouts provided the growth steroid," recalls a senior company executive.  ',   ',   What remained ignored though was a contingency in business plans when the markets turned.  ',   ',   And it did from mid-2015 -- Oil prices were cracking and US interest rates were firming up. Emerging market currencies were simultaneously getting devalued. Even though clean tech apologists insist sun and sand to be two polarized asset class, investors always draw a co-relation.  ',   ', u"  The first casualty was Global's IPO that tanked. Sentiments were changing thick and fast. Emerging markets like India were no longer that sizzling.  ",   ',   "The yieldco investors were not ready to accept the 12-13% rupee returns anymore which gave them an implied dollar yield of 9-10% at 3% long term rupee depreciation. They sought 15-16% rupee returns or even more, which meant a 12%-14% in dollar returns. Selling assets to Global at such rates was unviable for SunEdison after taking all the development risks," explained another official in the know. Both wished to remain anonymous.  ',   ',   ', u"  So the vehicle designed to free up cash for its parent started distancing themselves. Assets couldn't be down streamed any longer and SunEdison got shut out. On the other hand, the ballooning corporate debts to fund the operating expenses, development capital and acquisitions compounded the matter.  ",   ',   The sun king was singed.  ',   ',   ', INDIA ECLIPSE?',   ', u"  Ahmad R Chatila, who looks like a TV star, was the biggest cheerleader of Narendra Modi government's ambitious programme that is striving to achieve a 20-fold jump in solar power generation capacity by 2022, to 100 GW to minimise India's dependence on coal fired electricity. He made the single largest development commitment -- 15.2 GW of solar and wind projects by 2020; rustled up an MoU for $4 billion joint venture with Adani for solar photovoltaic manufacturing in Mundra Gujarat after sounding out other blue chip corporates like Tata, Anil Ambani and even Kumar Mangalam Birla as a support to Modi's Make in India call.  ",   ',   He and his team is also responsible for delivering the biggest pipeline of projects (see graphics: The Green Folder) that were bided out. ""What they brought to the industry was a momentum of growth," feels Mahesh Makhija, Dir, Business Dev (Renewables), CLP in India, (formerly, China Light and Power). "When the biggest player is bullish on a country, naturally many others global players followed them into India. They instilled a stronger competitive spirit in the market."  ',   ', u"  Since setting up shop 6 years ago, the team in India was always geared to chase megawatts, as much as 4000 GW/year. At its peak, the headcount had gone up to 200 with talent meticulously picked from top B-Schools like IIM-A or plucked from premier set of diverse corporates like ICICI Bank, Vodafone, PwC, Amarchand Mangaldas or even from peers Alstom and Vestas. From the Chennai HQ, Pashupathy Gopalan, oversaw several markets in the region including South Africa as the company's President & MD -Asia Pacific. SunEdison's emphasis on rural electrification under a dedicated CEO, micro grids, quick, early rollouts of high profile projects in Gujarat helped in the optics too and it soon emerged as the government's thought partners, especially at a time when the renewable narrative was quickly changing towards solar from the traditional focus on wind, buoyed largely by 80% drop in cost of solar panels since 2010.  ",   ',   "Wind sector MNC veterans like GE have been weak in policy advocacy and Suzlon who led that piece got caught up in its own financial stress. This created a vacuum and in came in the global solar suits and high jacked the plot. Most like SunEdison to SkyPower promised a dollars deluge and the government was swayed," accepts a leading, home-grown renewables entrepreneur. "But the turning point was when SunEdison submitted a paper to the government that said Rs 4.50/unit solar tariff was possible in India when the prevailing wind rates were close to Rs 5.50/unit."  ',   ', u"  So naturally there is one question that everyone wants to know today: How would SunEdison's bankruptcy impact the sunrise solar industry of India?  ",   ',   Most local industry veterans downplay the impact, but admit the sector is at an inflection point. "The timing of the bankruptcy may impact investor sentiments in the short term. But on the brighter side, more checks and balances will come in. So will sound judgement," said Sunil Jain, CEO, Hero Future Energies. "The Indian solar story remains hot." "Speculation and aggressive financial modelling based on aggressive calls on module prices, currency movement and the exchange rates will subside," adds Vineet Mittal, MD, Welspun Energy. Agrees ReNew Power's Founder and Chief Executive Sumant Sinha: "Today not all developers who are coming in may be long term owners of assets. Their model is to build and sell. We need players/investors who will hold these assets for the long term. Who this will be is not yet clear."  ',   ',   Even Power Minister Piyush Goyal feels the industry is not threatened at all. "I don't think it deters us or deflects the success of the solar program," he told journalists recently during a London roadshow. "If one or two companies fail, there will be others who can take their projects."  ',   ',   His lieutenant at the ministry, Tarun Kapoor, Joint Secretary, National Solar Mission thinks the same way. "They are about two months to provide financial closure. If they don't do that, then their bank guarantee will get encashed after which we will re-tender."  ',   ',   But the nervousness is palpable. Some CEOs privately admit that if SunEdison doesn't deliver on time there will be a slowdown, impacting the tall targets. "Tariffs may shoot up as people will be risk averse," said an industry veteran. He too wished to remain anonymous since he regularly deals with the policymakers.  ',   ',   ', "WE ARE INSULATED" .... ARE THEY?',   ',   Sipping tulsi green tea, the suave Pashupaty Gopalan is a case study of keeping a cool head. He hides his nerves perfectly when he says one needs to be "careful while crafting a strategy" linked to "tumultuous capital markets." But India, he says remains largely insulated from the ongoing US bankruptcy proceedings. "We are not a filing entity. We will submit a detailed business plan to our lenders and India will be a part of it," he told ET.  ',   ',   Maryland Heights, Missouri-based SunEdison has commitments for $300 million in financing to support day-to-day operations during the reorganization. "We will dip into that," asserts Gopalan.  ',   ',   But for a global subsidiary that in turn is routed through Singapore and Dutch entities, Sun Edison India's access to liquid capital to finish projects will certainly get curtailed. Till date, it has largely been funded by the parent. So now, Gopalan is looking at bringing on board equity partners - either at a project SPV level or even at a holding company for the entire India platform. "Some of my PPAs allow me to sell up to 49% till a year of project commissioning but in some I can dilute even 100%. In my wind portfolio, there are no restrictions. We will use all the boundary conditions to rope in a partner." As per his maths, he needs to put in only Rs 380 cr of equity to manage his sizeable operations, contrary to industry perception that the requirement would be at least five times higher.  ',   ',   Like in most cases involving SunEdison, the local rivals sneer at these calculations. "His average project cost is a lot higher than Rs 5.50 crore/MW, considering there is a decent chunk of wind assets in the portfolio which are more expensive to build," says one of the CEOs quoted earlier in the story. "Moreover he seems to seek mezzanine financing even to fund part of the project equity. Which lender in his right mind will allow 90% debt financing in a company whose parent is bankrupt. He's making projections that are insouciant and naive."  ',   ',   It is a fact that a tottering SunEdison has made Indian lenders extremely wary and tight fisted. They are reminding developers the mistakes the thermal generators made during aggressive reverse bidding. "The sustainability of both the debt that these companies are taking on and these tariffs (below Rs 5/Kwh) is to be seen," says V Srinivasan, ED, Axis Bank.  ',   ',   "We are very careful before lending to projects which have bid below Rs 5/unit. We are also looking at several parameters before lending including sponsor background. In fact, if you see, the projects that have bid below Rs 5/kwh have not even reached financial closure, so we will have to see what happens to them," adds Y.M. Deosthalee, MD, L&T Finance Holdings. Both have been bankrolling projects in the sector.  ',   ', u"  Naturally when the parent is challenged for cash, lender scrutiny for the India portfolio is bound to go up. This can be a big deal breaker as some of SunEdison's creditors insist that their funding is predominantly for the US operations and India has to largely fend for itself.  ",   ', u"  It is getting intense. The team in India hasn't paid some of its vendors. One, Mahindra Susten has already taken the company to court over non-payment of dues. As per Global's lawsuit, SunEdison has recently confessed that transfer of the pre-sold projects from India to them will also be difficult with outstanding vendor payments.  ",   ',   Investment bankers say at least top 5 potential bidders have evaluated the portfolio and passed. This however could not be independently verified. "Many of these projects have hard deadlines. The more you wait, the clock keeps ticking," warns a rival CEO who has dilligenced the assets but declined. "For example, in the 500 MW AP project, the PPAs were signed in February of 2016 and the project completion is due by March 2017. It's getting tougher and tougher. The window is closing."  ',   ',   These are trying times for sure. The sector may still sizzle but whipping SunEdison back into shape will be a tall order. Meanwhile, the morale is low at the India shop. As one official succinctly puts it: "We do feel totally let down by our HQ. They were to provide us with capital. If they had forewarned, we could've fend for ourselves. But now our negotiating leverage is very less."  ',   ',   The SunEdison misadventures should act as an eye-opener. It will not derail the entire industry for sure but gives an immense opportunity to all stakeholders - government, lenders and developers - to step back and evaluate the entire eco-system. Will low tariffs be sustainable? How many players can handle the exponential jump in scale as India strives to emerge as world leaders? Or will they all get bogged down in hyper competition much the same way that many did in telecom? One man has the advantage of dipping into his experience from the past. Without commenting on specific cases, he has the final word.  ',   ',   "Reverse auction process requires a certain degree of self-control from the developers. If they don't have that, then sometimes they get into trouble by bidding beyond their means. As there is no paucity of capacity, there is no need for any desperation. Bid according to your own margin model. It's a simple message of being prudent and cautious for long term financial health." That's Manoj Kohli, executive chairman of Softbank Energy and old Bharti warhorse, summing it up neatly for all.  ',   ',   ',     ', (Additional reporting Saloni Shukla in Mumbai, Kaavya Chandrasekaran in New Delhi)',   ',   ', Stay on top of business news with The Economic Times App. ', Download it Now!', u"DON'T MISS", any stories, follow us on Twitter', Follow', 
+
+', .cdxLIBG h1,h3,p {margin:0;padding:0;}.cdxLIBG:hover{background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo-red.png?v=1.1); }.cdxLIBG {width: 100%;height: auto;float: left;padding-bottom: 14px;background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo.png?v=1.1); background-repeat: no-repeat;background-position: 98% 100%;background-size: auto auto;position: relative;}.cdxLIBG > div a img {width:100%;height:145px;float:left;}.cdxLIBG > div a {width:32%;float: left;margin-left:1.7%; text-decoration: none;margin-bottom: 12px;cursor: pointer;}.cdxLIBG > div a:first-child {margin-left: 0;}.cdxLIBG > div h3 {width: 100%; height: auto; float: left; overflow: hidden;display: -webkit-box; -webkit-line-clamp: 3;-webkit-box-orient: vertical;font-family: inherit;   color: #333; padding: 6px 0 0;text-align: left;line-height: 1.25;font-size: 13px !important;max-height: 49px !important;}.cdxLIBG > div p {width: 100%; height: auto; float: left;overflow: hidden; display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;    max-height: 13px;font-family: inherit;color: #999;padding: 2px 0 0;text-align: left;font-size: 12px;}.cdxLIBG h1 {height: auto; display: block;margin-bottom: 9px; width: 100%; margin-top: 8px; float: left;color: #000;font: bold 14px arial;padding: 6px 6px; margin: 2px 0 10px 0; text-transform: uppercase;font-size: 15px !important;}.cdxLIBG h1::before { content: "";}.cdxLIBG > div > a > div {float: left;width: 100%;height:75px;}.cdxLIBG > div {float: left;}.cdxLIBG:after {content: 'Recommended by';float: right;margin-right: 20px; bottom: 0; position: absolute;right: 12%; color: #959595;font-size: 12px;font-family: arial; font-weight: 500;}@media (max-width:1920px) {.cdxLIBG > div h3{font-size:26px;max-height: 71px;}.cdxLIBG h1{font-size:28px;}.cdxLIBG > div > a > div {height: Auto; }}@media (max-width:1366px) {.cdxLIBG > div h3{font-size:14px;}.cdxLIBG h1{font-size:24px;}}@media (max-width:1280px) {.cdxLIBG > div h3{font-size:14px;}.cdxLIBG h1{font-size:20px;}}@media (max-width:840px) {.cdxLIBG > div h3{font-size:14px;}.cdxLIBG h1{font-size:18px;}}@media (max-width:640px) {.cdxLIBG > div h3{font-size:14px;}.cdxLIBG h1{font-size:16px;}}@media (max-width:320px) {.cdxLIBG > div h3{font-size:13px;}.cdxLIBG h1{font-size:16px;}}',     ', FROM AROUND THE WEB',     ', Help these parents save their new born baby!', Milaap', Play the ultimate battle of minds!', Junglee Rummy', All natural whiteness serum (try it now!)', Fit Mom Daily', MORE FROM ECONOMIC TIMES', Infrastructure', Union Budget 2017-18 likely to be presented on February 1', Here is how to use UPI-based BHIM app', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="lOQfiAfF('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow" ><div><h3>{{title}}</h3><p class="brand_ctn">{{brand}}</p></div></a>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<a onclick="lOQfiAfF('{{href}}')"  rel="nofollow,noindex"><img src="{{imgsrc}}" rel="nofollow"><div><h3>{{title}}</h3></div></a>#og#';*/function lOQfiAfF(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_top');}else{window.open(par,'_blank'); }   }                   };  window.onload = function (){try{if (window.frameElement !== null){window.canRun = true;document.body.style.margin="0px";  parent.top.document.getElementById(window.frameElement.parentNode.getAttribute('id')).style.height='520px';; }}catch(e){}};try{trev('http://economictimes.indiatimes.com/itetnfy/notify.htm?imprId=c1e827b8-6a88-485b-93cf-c04822f5c709-3rh8&id=210766&fpc=dd8e9805-fb98-47d0-8356-e5e4bced8ff0-3rk0~1','cdxLIBG');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+', 
+
+', .VBAemc h1,h3,p {margin:0;padding:0;}.VBAemc:hover{background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo-red.png?v=1.1);}.VBAemc {width: 100%;height: auto;float: left;padding-bottom: 20px;background-image:url(http://economictimes.indiatimes.com/itetpic/commons/images/columbia_logo.png?v=1.1); background-repeat: no-repeat;background-position: 98% 98.5%;background-size: auto auto;margin-top: 5px;position: relative;}.VBAemc > div a img {float: left;margin-right: 10px;width: 100px;}.VBAemc > div a {width: 100%;display: block;float: left;color: #5c5c5c;text-decoration: none; cursor: pointer;margin: 10px 0 0 0;padding-bottom: 10px; border-bottom: 1px solid #ccc; min-height: 46px;}.VBAemc > div h3 {max-height: 31px; overflow: hidden; display: -webkit-box;-webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 14px !important; height: auto;   padding-right: 13px; color: #000; font: 14px Arial;line-height: 15px;}.VBAemc > div p {padding-right: 13px; margin: 0; max-height: 13px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; font-size: 11px; float: left; font: 11px Arial; color: #8c8c8c;margin-top: 5px;}.VBAemc h1 {width: 49%; float: left; padding: 5px 0; color: #000000;margin-right: 2%; font: normal 18px/17px Arial; padding-bottom: 6px; border-bottom: 2px solid #8c8c8c;font-size: 18px !important;}.VBAemc > div a:last-child { border: 0 !important;}.VBAemc h1::before { content: ""; }.VBAemc h1:nth-child(2) {margin-right: 0 !important;}.VBAemc > div > a > div {height:61px;    float: left;}.VBAemc > div {width:49%;float:left;}.VBAemc:after {content: 'Recommended by';float: right;margin-right: 20px; bottom: 1%; position: absolute;right: 12%; color: #959595;font-size: 12px;font-family: arial; font-weight: 500;}@media (max-width:1920px) {.VBAemc > div h3{font-size:26px;}.VBAemc h1{font-size:28px;}.VBAemc > div > a > div {height: Auto;max-height: 46px;min-height: 46px;}}.VBAemc .aRIeHiFRjl {float: right !important;}@media (max-width:1366px) {.VBAemc > div h3{font-size:14px;}.VBAemc h1{font-size:24px;}}@media (max-width:1280px) {.VBAemc > div h3{font-size:14px;}.VBAemc h1{font-size:20px;}}@media (max-width:840px) {.VBAemc > div h3{font-size:14px;}.VBAemc h1{font-size:18px;}}@media (max-width:640px) {.VBAemc > div h3{font-size:13px;}.VBAemc h1{font-size:16px;}}@media (max-width:320px) {.VBAemc > div h3{font-size:13px;}.VBAemc h1{font-size:16px;}}',     ', From Around the Web', More from The Economic Times',     ', Bring the Lava 4G VoLTE home for Rs. 4,970', Gadgets Now', These will be the highest
+paying jobs in India in 2017', Business Insider', 40% or more off on adidas products', Amazon', Johnnie Walker stainless steel flask @Rs.269', Flipkart', IndiGo grows fleet size, announces 10 additional frequencies', Mutual funds bet on new investors post demonetisation', u"MS Dhoni steps down as India's limited overs captain", Mamata Banerjee challenges Narendra Modi to arrest her', var coldetect;        /*var htmlD1 =   '"{{titleLength}}60{{titleLength}}",#pd#<a onclick="BiewGrcRwB('{{href}}')"  rel="nofollow,noindex"><div><h3>{{title}}</h3><p>{{brand}}</p></div></a>#pd#';var orghtmlD =  '"{{titleLength}}60{{titleLength}}",#og#<a onclick="BiewGrcRwB('{{href}}')"  rel="nofollow,noindex"><div><h3>{{title}}</h3></div></a>#og#';*/function BiewGrcRwB(par)       {     if(typeof otab == 'function'){ otab(par,'');   } else{if(typeof canRun == 'undefined' || (typeof canRun != 'undefined' && !canRun)) {                 window.open(par,'_top');}else{window.open(par,'_blank'); }   }                   };   window.onload = function (){         try{if (window.frameElement !== null){window.canRun = true;document.body.style.margin="0px";  parent.top.document.getElementById(window.frameElement.parentNode.getAttribute('id')).style.height='480px';; }}catch(e){}};try{trev('http://economictimes.indiatimes.com/itetnfy/notify.htm?imprId=94e4c5df-f54c-4820-936a-9e88f0c6cafb-3rh8&id=129777&fpc=dd8e9805-fb98-47d0-8356-e5e4bced8ff0-3rk0~1','VBAemc');}catch(e){};', u"       var s = document.getElementById('helpercolscript');       s.parentNode.removeChild(s);", 
+', READ MORE ON » ', SunEdison',  | ', renewable energy',  | ', Morgan Stanley',  | ', Goldman Sachs',  | ', business strategy',  | ', Ahmad Chatila', To post this comment you must', Log In/Connect with:', Indiatimes Network', or', Fill in your details:', Will be displayed', Will not be displayed', Will be displayed', Share this Comment:', Post to Twitter ', Have something to say? ', Post your comment', To post this comment you must', Log In/Connect with:', Indiatimes Network', Fill in your details:', Will be displayed', Will not be displayed', Will be displayed', Share this Comment:', Post to Twitter ', Most', Read', Most', Shared', Most', Commented', u"Here is why 'the flavour of the season', mobile wallets will die", u"View: Fallout from India's cash crunch is just starting", Air India takes on Rajdhani Express in fare war', I-T dept ropes in experts from Big Four to unearth black money', Tata Motors launches Xenon Yodha starting at Rs 6.05 lakh', More »', Get a Quote', Browse Companies', A', B', C', D', E', F', G', H', I', J', K', L', M', N', O', P', Q', R', S', T', U', V', W', X', Y', Z', |', 1', 2', 3', 4', 5', 6', 7', 8', 9', Browse Mutual Funds', A', B', C', D', E', F', G', H', I', J', K', L', M', N', O', P', Q', R', S', T', U', V', W', X', Y', Z', The Economic Times', Live Market', News', Portfolio', Mobile', Live TV', Newsletter', Commodities', Speed', QnA', Blogs', Alerts', RSS', Other Times Group news sites', Times of India', |', \u0907\u0915\u0928\u0949\u092e\u093f\u0915 \u091f\u093e\u0907\u092e\u094d\u0938', \u0a88\u0a95\u0acb\u0aa8\u0acb\u0aae\u0abf\u0a95 \u0a9f\u0abe\u0a88\u0aae\u0acd\u0ab8', |', Mumbai Mirror', Times Now', |', Indiatimes', \u0928\u0935\u092d\u093e\u0930\u0924 \u091f\u093e\u0907\u092e\u094d\u0938', |', \u092e\u0939\u093e\u0930\u093e\u0937\u094d\u091f\u094d\u0930 \u091f\u093e\u0907\u092e\u094d\u0938', \u0cb5\u0cbf\u0c9c\u0caf \u0c95\u0cb0\u0ccd\u0ca8\u0cbe\u0c9f\u0c95', |', Lifehacker', Gizmodo', |', Eisamay', |', IGN India', NavGujarat Samay', Living and entertainment', Timescity', |', iDiva', |', Zoom', |', Luxpresso', |', Gaana', |', Happytrips', |', Cricbuzz', |', Get Smartapp', Networking', itimes', |', MensXP.com', Hot on the Web', Budget 2017', |', Sensex, Nifty Live', Year-End Special 2016', |', UP & Punjab Assembly Elections 2017', Live: Currency Demonetisation', |', Gold Rate', RBI Monetary Policy', Services', ads2book', |', Gadgetsnow', |', Free Business Listings', Simplymarry', |', Astrospeak', |', Timesjobs', |', Magicbricks', |', Zigwheels', |', Timesdeal', |', dineout', |', Filmipop', |', Remit2india', |', Gaana', |', Greetzap', |', Techradar', |', Alivear', |', Google Play',  | ', Manage Notifications', About us', /', Advertise with us', /', Terms of Use & Grievance Redressal', /', Privacy Policy', /', Feedback', /', Sitemap', /', Code of Ethics', /', /', Disclaimer', Copyright © 2016 Bennett, Coleman & Co. Ltd. All rights reserved.', BACK TO TOP', Digg', Google Bookmarks', StumbleUpon', Reddit', Newsvine', Live Bookmarks', Technorati', Yahoo Bookmarks', Blogmarks', Del.icio.us', ApnaCircle', Mail This Article', My Saved Articles', Sign in', Sign up', Find this comment offensive?', Choose your reason below and click on the Report button. This will alert our moderators to take action', Name', Reason for reporting:', Foul language', Slanderous', Inciting hatred against a certain community', Others', Your Reason has been Reported to the admin.', 
+                var _0x2144=["\x61\x64\x64\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72","\x61\x74\x74\x61\x63\x68\x45\x76\x65\x6E\x74","\x72\x65\x6D\x6F\x76\x65\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72","\x72\x65\x6D\x6F\x76\x65\x45\x76\x65\x6E\x74","\x63\x6F\x6E\x73\x6F\x6C\x65","\x65\x72\x72\x6F\x72","\x66\x6F\x72\x45\x61\x63\x68","\x73\x63\x72\x6F\x6C\x6C","\x63\x61\x6E\x52\x75\x6E","\x64\x65\x74\x65\x63\x74\x6F\x72","\x66\x75\x6E\x63\x74\x69\x6F\x6E","\x70\x75\x73\x68","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x6C\x6D\x62\x74\x65\x63\x68\x2E\x63\x6F\x6D\x2F\x61\x73\x65\x2F\x32\x36\x35\x38\x2F\x33\x2F\x61\x61\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x6C\x6D\x62\x74\x65\x63\x68\x2E\x63\x6F\x6D\x2F\x61\x73\x65\x2F\x32\x33\x30\x38\x2F\x34\x2F\x61\x61\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x70\x61\x72\x74\x6E\x65\x72\x2E\x67\x6F\x6F\x67\x6C\x65\x61\x64\x73\x65\x72\x76\x69\x63\x65\x73\x2E\x63\x6F\x6D\x2F\x67\x70\x74\x2F\x70\x75\x62\x61\x64\x73\x5F\x69\x6D\x70\x6C\x5F\x39\x32\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x68\x61\x72\x74\x62\x65\x61\x74\x2E\x63\x6F\x6D\x2F\x6A\x73\x2F\x63\x68\x61\x72\x74\x62\x65\x61\x74\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x77\x77\x77\x2E\x67\x6F\x6F\x67\x6C\x65\x2D\x61\x6E\x61\x6C\x79\x74\x69\x63\x73\x2E\x63\x6F\x6D\x2F\x61\x6E\x61\x6C\x79\x74\x69\x63\x73\x2E\x6A\x73\x20","\x68\x74\x74\x70\x3A\x2F\x2F\x62\x2E\x73\x63\x6F\x72\x65\x63\x61\x72\x64\x72\x65\x73\x65\x61\x72\x63\x68\x2E\x63\x6F\x6D\x2F\x62\x65\x61\x63\x6F\x6E\x2E\x6A\x73\x20","\x68\x74\x74\x70\x3A\x2F\x2F\x74\x61\x67\x73\x2E\x63\x72\x77\x64\x63\x6E\x74\x72\x6C\x2E\x6E\x65\x74\x2F\x63\x2F\x32\x38\x30\x31\x2F\x63\x63\x2E\x6A\x73\x3F\x6E\x73\x3D\x5F\x63\x63\x32\x38\x30\x31","\x68\x74\x74\x70\x3A\x2F\x2F\x61\x64\x2E\x63\x72\x77\x64\x63\x6E\x74\x72\x6C\x2E\x6E\x65\x74\x2F\x35\x2F\x63\x3D\x32\x38\x30\x30\x2F\x70\x65\x3D\x79\x2F\x63\x61\x6C\x6C\x62\x61\x63\x6B\x3D\x63\x63\x75\x61\x64","\x68\x74\x74\x70\x3A\x2F\x2F\x73\x74\x61\x74\x69\x63\x2E\x63\x6C\x6D\x62\x74\x65\x63\x68\x2E\x63\x6F\x6D\x2F\x61\x64\x2F\x63\x6F\x6D\x6D\x6F\x6E\x73\x2F\x6A\x73\x2F\x63\x6F\x6C\x6F\x6D\x62\x69\x61\x5F\x76\x32\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x66\x69\x6C\x65\x73\x2E\x61\x64\x73\x70\x64\x62\x6C\x2E\x63\x6F\x6D\x2F\x70\x75\x62\x6C\x69\x73\x68\x65\x72\x73\x2F\x74\x69\x6D\x65\x73\x6F\x66\x69\x6E\x64\x69\x61\x2F\x63\x6F\x64\x65\x2E\x6A\x73","\x68\x74\x74\x70\x3A\x2F\x2F\x61\x64\x73\x2E\x70\x75\x62\x6D\x61\x74\x69\x63\x2E\x63\x6F\x6D\x2F\x41\x64\x53\x65\x72\x76\x65\x72\x2F\x6A\x73\x2F\x70\x77\x74\x2F\x32\x33\x31\x30\x35\x2F\x34\x36\x2F\x70\x77\x74\x2E\x6A\x73","\x2A\x69\x6D\x61\x67\x65\x73\x2E\x74\x61\x62\x6F\x6F\x6C\x61\x2E\x63\x6F\x6D","\x2A\x61\x64\x73\x2E\x79\x61\x68\x6F\x6F\x2E\x63\x6F\x6D","\x44\x65\x62\x75\x67\x67\x69\x6E\x67\x20\x45\x72\x72\x6F\x72\x3A\x20","\x73\x72\x63","\x74\x61\x72\x67\x65\x74","\x6C\x6F\x67","\x6C\x65\x6E\x67\x74\x68","\x74\x61\x67\x4E\x61\x6D\x65","\x53\x43\x52\x49\x50\x54","\x49\x4D\x47","\x2A","\x73\x75\x62\x73\x74\x72","\x69\x6E\x64\x65\x78\x4F\x66","\x41\x64\x42\x6C\x6F\x63\x6B\x65\x72","\x41\x44\x42\x4C\x4F\x43\x4B\x45\x52\x4F\x4E","\x67\x61","\x73\x65\x6E\x64","\x65\x76\x65\x6E\x74","\x47\x41","\x75\x6E\x64\x65\x66\x69\x6E\x65\x64","\x2F\x62\x6C\x6F\x63\x6B\x65\x64\x2E\x63\x6D\x73","\x61\x72\x74\x69\x63\x6C\x65\x6C\x69\x73\x74\x5F\x65\x73\x69","\x70\x61\x74\x68\x6E\x61\x6D\x65","\x69\x73\x4C\x6F\x67\x67\x65\x64","\x73\x65\x74","\x64\x69\x6D\x65\x6E\x73\x69\x6F\x6E\x33","\x4C\x4F\x47\x47\x45\x44\x49\x4E","\x65\x74\x5F\x61\x64\x42\x6C\x6F\x63\x6B\x65\x64","\x6A\x53\x74\x6F\x72\x61\x67\x65","\x74\x69\x74\x6C\x65","\x68\x72\x65\x66","\x70\x75\x73\x68\x53\x74\x61\x74\x65","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x67\x65\x74","\x64\x65\x6C\x65\x74\x65\x4B\x65\x79","\x41\x44\x42\x4C\x4F\x43\x4B\x45\x52\x4F\x46\x46","\x62\x61\x63\x6B"];(function(_0xe300x1,_0xe300x2){var _0xe300x3=[];function _0xe300x4(_0xe300x5,_0xe300x6){if(_0xe300x1[_0x2144[0]]){_0xe300x1[_0x2144[0]](_0xe300x5,_0xe300x6,false)}else {if(_0xe300x1[_0x2144[1]]){_0xe300x1[_0x2144[1]](_0xe300x5,_0xe300x6)}}}function _0xe300x7(_0xe300x5,_0xe300x6){if(_0xe300x1[_0x2144[2]]){_0xe300x1[_0x2144[2]](_0xe300x5,_0xe300x6)}else {if(_0xe300x1[_0x2144[3]]){_0xe300x1[_0x2144[3]](_0xe300x5,_0xe300x6)}}}function _0xe300x8(_0xe300x9){_0xe300x3[_0x2144[6]](function(_0xe300x6){try{_0xe300x6(_0xe300x9)}catch(e){if(_0xe300x2[_0x2144[4]]&& _0xe300x2[_0x2144[4]][_0x2144[5]]){_0xe300x2[_0x2144[4]][_0x2144[5]](e)}}})}function _0xe300xa(){_0xe300x7(_0x2144[7],_0xe300xa);_0xe300x8(true)}function _0xe300xb(){_0xe300x8(false)}if(!_0xe300x2[_0x2144[8]]){_0xe300x4(_0x2144[7],_0xe300xa)}else {setTimeout(_0xe300xb,100)};_0xe300x2[_0x2144[9]]= function(_0xe300xc){if(_0xe300xc&&  typeof _0xe300xc== _0x2144[10]){_0xe300x3[_0x2144[11]](_0xe300xc)}};if(_0xe300x1[_0x2144[0]]){var _0xe300xd=[_0x2144[12],_0x2144[13],_0x2144[14],_0x2144[15],_0x2144[16],_0x2144[17],_0x2144[18],_0x2144[19],_0x2144[20],_0x2144[21],_0x2144[22],_0x2144[23],_0x2144[24]];_0xe300x1[_0x2144[0]](_0x2144[5],function(_0xe300x5){console[_0x2144[28]](_0x2144[25]+ _0xe300x5[_0x2144[27]][_0x2144[26]]);for(var _0xe300xe=0;_0xe300xe< _0xe300xd[_0x2144[29]];_0xe300xe++){if(_0xe300x5&& _0xe300x5[_0x2144[27]]&& (_0xe300x5[_0x2144[27]][_0x2144[30]]== _0x2144[31]|| _0xe300x5[_0x2144[27]][_0x2144[30]]== _0x2144[32])&& _0xe300x5[_0x2144[27]][_0x2144[26]]&& (_0xe300x5[_0x2144[27]][_0x2144[26]]=== _0xe300xd[_0xe300xe]|| (_0xe300xd[_0xe300xe][0]== _0x2144[33]&& _0xe300x5[_0x2144[27]][_0x2144[26]][_0x2144[35]](_0xe300xd[_0xe300xe][_0x2144[34]](1))>  -1))){_0xe300x2[_0x2144[8]]= false}}},true)}}(document,window));(function(_0xe300x1,_0xe300x2){var _0xe300xf={GA:{CATEGORY:_0x2144[36],ACTION_DETECTED:_0x2144[37]}};function _0xe300x10(){if(_0xe300x2[_0x2144[38]]){ga(_0x2144[39],_0x2144[40],_0xe300xf[_0x2144[41]].CATEGORY,_0xe300xf[_0x2144[41]].ACTION_DETECTED)}}_0xe300x2[_0x2144[9]](function(_0xe300xa){if(_0xe300xa=== true&&  typeof blockedPage== _0x2144[42]&& _0xe300x2[_0x2144[38]]){ga(_0x2144[39],_0x2144[40],_0xe300xf[_0x2144[41]].CATEGORY,_0xe300xf[_0x2144[41]].ACTION_DETECTED)}})}(document,window));window[_0x2144[9]](function(_0xe300xa){var _0xe300x11=_0x2144[43];var _0xe300x12=(location[_0x2144[45]][_0x2144[35]](_0x2144[44]))?true:false;var _0xe300x13=( typeof redirectOff!= _0x2144[42]&& redirectOff== 1)?true:false;if(_0xe300xa=== true){if(location[_0x2144[45]]!= _0xe300x11&&  !(_0xe300x13)){if(( typeof _tp_data!= undefined)&& ( typeof _tp_data[_0x2144[46]]!= undefined)&& (_tp_data[_0x2144[46]]== true)){ga(_0x2144[47],_0x2144[48],_0x2144[49])};$[_0x2144[51]][_0x2144[47]](_0x2144[50],1);history[_0x2144[54]]({},document[_0x2144[52]],location[_0x2144[53]]);window[_0x2144[55]]= _0xe300x11}}else {var _0xe300x14=$[_0x2144[51]][_0x2144[56]](_0x2144[50]);if(_0xe300x14== 1&&  typeof blockedPage== _0x2144[42]){$[_0x2144[51]][_0x2144[57]](_0x2144[50]);ga(_0x2144[39],_0x2144[40],_0x2144[36],_0x2144[58])};if(location[_0x2144[45]]== _0xe300x11&&  !(history[_0x2144[29]]< 2)){history[_0x2144[59]]()}}})
+            
+			', ga('set', 'dimension4', 'ET Burea);
+						ga('set', 'dimension5', 'Arijit Barman');var page = {
+							msid : 52115248,
+							subsec1 : '13352306',
+							compId : '',
+							cfmid : '',
+							budgetCommentKeyword: '0',
+							articleDate : 'May 05, 2016, 05.49 AM IST'
+						}
+						var sharer = {
+							title:"SunEdison bankruptcy: Is Indias sunrise sector staring at another Enron? - The Economic Times",
+							twttitle:"SunEdison bankruptcy: Is Indias sunrise sector staring at another Enron?",
+							img:"http://img.etimg.com/thumb/msid-52115289,width-672,resizemode-4,imglength-75711/industry/energy/power/sunedison-bankruptcy-is-indias-sunrise-sector-staring-at-another-enron/sunedison-reuters.jpg",
+							desc:"Both SunEdison and Enron came into India with mega promises; both were crushed by their own ambitions as their financial practices unravelled.",
+							url:"http://economictimes.indiatimes.com/industry/energy/power/sunedison-bankruptcy-is-indias-sunrise-sector-staring-at-another-enron/articleshow/52115248.cms"
+						}
+						var isMarket = 0;
+						var lp_read_act = "read";var articleDate = "May 05, 2016, 05.49 AM IST",
+						dt1 = articleDate.split(','),
+						dt2 = dt1[0],
+						dt3 = dt2.split(' '),
+						dt4 = dt3[1]+ " " + dt3[0],
+						dt5 = dt4 + "," + dt1[1] + "," + dt1[2];
+						var catids = '2147477890,13352306,13358350,13358361';
+					var _pg_startpt = (new Date()).getTime();
+					function trim(str){return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');}
+					var _iBeat_articleid="52115248";
+					var _iBeat_tag='SunEdison,renewable energy,Morgan Stanley,Goldman Sachs,business strategy,Ahmad Chatila';
+					var _iBeat_url = window.location.href;
+					_iBeat_url=escape(_iBeat_url);
+					var _iBeat_type="1";
+					var _iBeat_action="1";
+					var _iBeat_cat=trim("Industry");
+					var _iBeat_subcat=trim("Energy");
+					var _iBeat_articledt='May 05, 2016, 05.49 AM IST';
+					var _iBeat_author="Arijit Barman";
+					var _iBeat_channel="ET Bureau";
+					var _page_config = {
+						host: 'economictimes.indiatimes.com', 
+						key: 'f66e70a45a565c9c76a526c5e9e99df',
+						domain: 'economictimes.indiatimes.com',
+						channel:  _iBeat_channel,
+						action :_iBeat_action,
+						articleId: _iBeat_articleid,
+						contentType: 1,
+						location : 1,
+						cat : _iBeat_cat,
+						subcat: _iBeat_subcat,
+						contenttag: _iBeat_tag,
+						catIds: catids,
+						articledt:dt5,
+						author: _iBeat_author,
+						articledt:_iBeat_articledt
+		            };
+					(function(){
+						function pingIbeat() {
+						window._pg_endpt=(new Date()).getTime();
+						var e = document.createElement('script');
+						e.setAttribute('language', 'javascript');
+						e.setAttribute('type', 'text/javascript');
+						e.setAttribute('src',"http://ibeat.indiatimes.com/js/pgtrackingV5.js");
+						document.body.appendChild(e);
+						}
+						var oldonload = window.onload;
+						window.onload = (typeof window.onload != 'function') ?
+						pingIbeat : function() { oldonload(); pingIbeat(); };
+					})();
+					
+					    $(document).ready(function(){
+					    $("#subSecNav a[href*='" + page.cfmid + "']").addClass('current');
+						 $("#personmsStory .display ul li").hide();
+        			       $("#personmsStory .display ul li").eq(0).show();
+        			        var i=2,k=0;
+        			        setInterval(function(){ 
+        			            if(i>5){
+        			                k=i-1;
+        			                $("li.select"+k).hide();
+        			                i=1;
+        			                $("li.select"+i).show();
+        			                i++;
+        			            }else{
+        			                k=i-1;
+        			                $("li.select"+k).hide();
+        			                $("li.select"+i).show();
+        			                i++;  
+        			            }
+        			        }, 8000);
+	        		    });
+					
+						', u"
+					function blockError(){return true;} 
+					window.onerror = blockError; 
+					var timeslog_channel_url = 'economictimes.indiatimes.com';
+					var ttrendlogmsid='52115248';", var secname="Industry Energy Power";
+		var agename='';', 
+			var _sf_async_config = _sf_async_config || {uid:10538,domain:"economictimes.indiatimes.com"};
+			_sf_async_config.sections = secname;
+			_sf_async_config.authors = agename;
+			(function(){
+			  function loadChartbeat() {
+			  	//alert(chartbeat);
+			    window._sf_endpt=(new Date()).getTime();
+			    var e = document.createElement('script');
+			    e.setAttribute('language', 'javascript');
+			    e.setAttribute('type', 'text/javascript');
+			    e.setAttribute('src',
+			       (("https:" == document.location.protocol) ? "https://s3.amazonaws.com/" : "http://") + "static.chartbeat.com/js/chartbeat.js");
+			    document.body.appendChild(e);
+			  }
+			  var oldonload = window.onload;
+			  window.onload = (typeof window.onload != 'function') ?
+			     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+			})();
+			
+			', var urlTtxt='52115248.cms?msid=52115248'	
+					function invokeLogin(){
+						try{						
+						isLoggedSso = getCookievaluetwitt('MSCSAuth');
+						if(Get_Ckie('autologin')!=null){
+							Delete_Ckie("autologin","/",".indiatimes.com");
+						}
+						tpbar1();												
+						setTimeout("twtFbSso()",1000);
+						setTimeout("dolike()",2000);
+						setTimeout(function(){populate_wf_new('/cmtofartfb/'+urlTtxt,'populatecomment','no','putMathQ(1);fillformdetail(1);putCmtCnt();getemid();')},5000);
+						}
+						catch(ex){							
+						}					
+					}
+					', var _mfq = _mfq || [];
+    			    var mouseflowPath = '/articleshow';
+                    (function() {
+                       var mf = document.createElement("script"); mf.type = "text/javascript"; mf.async = true;
+                       mf.src = "//cdn.mouseflow.com/projects/81baae85-f91c-464e-ac38-15a987752b7a.js";
+                       document.getElementsByTagName("head")[0].appendChild(mf);
+                    })();', {
+					  "@context": "http://schema.org",
+					  "@type": "NewsArticle",
+					  "mainEntityOfPage":{
+					    "@type":"WebPage",
+					    "@id":"http://economictimes.indiatimes.com/industry/energy/power/sunedison-bankruptcy-is-indias-sunrise-sector-staring-at-another-enron/articleshow/52115248.cms"
+					  },
+					  "headline": "SunEdison bankruptcy: Is India\u2019s sunrise sector staring at another Enron?",
+					  "image": {
+					    "@type": "ImageObject",
+					    "url": "http://img.etimg.com/thumb/msid-52115289,width-672,resizemode-4,imglength-75711/industry/energy/power/sunedison-bankruptcy-is-indias-sunrise-sector-staring-at-another-enron/sunedison-reuters.jpg",
+					    "height": 800,
+					    "width": 800
+					  },
+					  "datePublished": "2016-05-05T05:49:00.000Z",
+					  "dateModified": "2016-05-05T05:49:00.000Z",
+					  "author": {
+					    "@type": "Person",
+					    "name": "Arijit Barman"
+					  },
+					  "publisher": {
+					  	"@type": "Organization",
+					    "name": "Economic Times",
+					    "logo": {
+					      "@type": "ImageObject",
+					      "url": "http://img.etimg.com/photo/17952959.cms",
+					      "width": 286,
+					      "height": 26
+					    }
+					  },
+					  "description": "Both SunEdison and Enron came into India with mega promises; both were crushed by their own ambitions as their financial practices unravelled."
+					}', u"
+				    $(window).scroll(function() {
+				        // Layloading of Google ad iframes
+                        $('iframe.googleAdIframe').each(function(i, v) {
+                    		var $v = $(v);
+                        	if($v.visible(false)) {
+                    		    $v.removeClass('googleAdIframe');
+                    		    $v.attr('src', $v.attr('data-src'));
+                    		    //this.contentWindow.location.reload(true);
+                    	    }
+                    	});
+				    });
+				
+				", 
+                    
+                        
+                                ', 
+                                    var e_x = '210766~1 = 1, 129777-1 = 1';
+                                    if(window.canRun === undefined || window.canRun == false){
+                                        ga('send', 'event', 'e_srv', 'yes', 'e_srv', 1);
+                                        $('div[id^="div-gpt"]').hide();
+                                    }
+                                ', 
+                            
+                    
+                ', u"function fixAd() {
+                      var adPosition = (document.getElementById('c_01').offsetTop + document.getElementById('div-gpt-ad-1477391859570-0').offsetTop);
+                        var sel = $('#div-gpt-ad-1477391859570-0'); 
+                        if (window.pageYOffset > adPosition) {
+                           var left =  ($(window).width() - $('.pageHolder').width()) / 2 - sel.width();
+                            sel.css({'position':'fixed', left:left, 'top':'0px'})
+                        } else {
+                            sel.css({'position':'absolute', left:'-160px', top:500});
+                        }
+                  }
+                  $(document).ready(function () {
+                       $('#topNavFixed').addClass('skinningExist');
+                       var left =  ($(window).width() - $('.pageHolder').width()) / 2;
+                       $('#scrollTop').css('left',left);
+                       $(document).scroll(function (e) {
+                        fixAd()
+                      });					
+                      window.addEventListener('resize', function(event){
+                        fixAd();
+                      });
+                  });"]

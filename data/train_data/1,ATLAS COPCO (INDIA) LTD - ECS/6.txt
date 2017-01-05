@@ -1,0 +1,923 @@
+[
+		', 
+				', 
+			', 
+			', 
+								', 
+				', 
+					', 
+					
+					', 
+						', 
+					', 
+					', 
+						', 					', 
+					', 
+						', Home', 
+', About Us', 
+', Jobs', 
+', Contact Us', 
+', Visit Us', 
+', 
+', 
+  ', Share On', 
+  ', 
+    ', 
+    ', 
+    ', 
+  ', 
+', 
+
+					', 
+				', 
+				', 
+				', 
+
+',  
+
+', 
+', 
+', 
+$(document).ready(function(){
+	
+	
+$('#c1 #inpc1 input').focus(function(e){
+	$('#c2,#c3,#c4').show();
+});
+
+$(".tag").click(function(){
+	var x=$(this).next('input').val(); 
+	$(this).attr("id","cluster_loc");
+	$("form#searchBar").append('<input name="qcity" type="hidden" class="suggest m0 pr30" value="'+x+'">');
+	if(($("#Sug_kwdsugg").val())=="Enter your areas of expertise")
+	{
+		$("#Sug_kwdsugg").attr("value","dummyvar");
+		}
+		
+		$("form#searchBar").submit();
+
+	});
+});
+', 
+', 
+  ', 
+  ', 
+      ',  
+        ', 
+        $(function(){
+
+      			
+		})
+		
+        ', 
+        ', Keyskills, Designation', 
+        ', 
+        ', 
+          ', 
+		 ', 
+            ', 
+          ', 
+        ', 
+        ',  
+        ',  ', 
+      ', 
+        ', Desired Location', 
+        ', 
+        ', 
+          ', 
+	    ', 
+            ', 
+		', 
+          ', 
+        ', 
+        ',  
+        ',  ', 
+	
+      ',  
+        ', 
+       $(function(){ $("#ddExp option[value='']").attr("selected", true);                $("#ddExp").parent('span.text').find('.fwselect-text').text("Select");
+                $("#ddExp").trigger("change");
+                })
+        ', 
+        ', Experience', 
+        ', 
+	', 
+	    ',  ', 
+        	', 
+	    ', 
+	', 
+
+       ', 
+        ',  ', 
+            ',  
+        ', 
+        $(function(){$("#ddMinSal option[value=qmVar]").attr('selected', true);
+		$("#ddMinSal").parent('span.text').find('.fwselect-text').text("Min");
+		$("#ddMinSal").trigger("change");
+		})
+        ', 
+        ', Expected Salary', 
+        ', 
+	 ', 
+            ',  ', 
+                ', 
+            ', 
+        ', 
+', 
+        ', 
+	', 
+            ',  ', 
+                ', 
+            ', 
+        ', 
+', 
+        ',  ', 
+            ', 
+        ', 
+      ', 
+      ',  ', Please enter Keywords or Location to search.',  ', 
+    ', 
+    ', 
+  ', 
+', 
+',  
+
+
+      ', 
+
+$(document).ready(function(){
+
+$('#searchBar').submit(function(e)
+ {
+ domain = "http://companies.naukri.com/atlascopco-jobs/";
+ keyword= $.trim( $('#Sug_kwdsugg').val() );
+ if($('#cluster_loc').length>0){
+	 loc1=$.trim( $('#LocationTags').find("#cluster_loc span").text() );
+	 }
+	 else{
+ loc1= $.trim( $('#Sug_locsugg').val() );
+	 }
+ if(keyword=="Enter your areas of expertise")
+   {keyword="";}
+ if(loc1=="Where you wish to work")
+   {loc1="";}
+ if( $.trim( keyword )=="" && $.trim( loc1 )==""){
+  $(".error").show();
+  e.preventDefault();
+  }
+else{
+ newUrl = domain+ generateStaticURL(keyword,loc1);
+ $("#searchBar").attr('action',newUrl);
+}
+
+});
+
+function replaceAll(txt, replace, with_this) {
+  return txt.replace(new RegExp(replace, 'gi'),with_this);
+}
+function generateStaticURL(kw,loc)
+{
+ kw = kw.replace(/Enter your areas of expertise/ig,"").replace(/Type skills, designation or company name/ig,"").replace(/\s{2,}/g, ' ').replace(/dummyvar/ig,""); 
+ loc=loc.replace(/Where you wish to work/ig,"");
+  var Kwrd_Action_Str="";var Loc_Action_Str="";var action="";
+  var Spcl_Char_Arr= {"+":" plus " , "#":" sharp " , ".":" dot " , "-":" dash ",'"':" quotes ","'":" quotes ","/":" "};
+  if(kw != "" )
+  {
+    kw= kw.toLowerCase();
+    kw =kw.replace(/\s{2,}/g," ");
+    kw=kw.replace(/\bjobs in\b/gi,"");
+    kw=kw.replace(/\bjobs\b/gi,"");
+    kw=kw.replace(/\blimited\b/gi,"");
+    kw=kw.replace(/\bcorporation\b/gi,"");
+    kw=kw.replace(/\bcareers\b/gi,"");
+    while(kw.indexOf("c++ c++")!=-1 )
+      kw=kw.replace("c++ c++","c++");
+/*    for(i in stopwordArr)
+    {
+      kw=replaceAll(kw,"\\b"+stopwordArr[i].toLowerCase(),"");
+    } */
+    kw = replaceAll(kw,","," ");
+    kw=kw.replace(/[^.+#\-'" a-zA-Z0-9]/ig," ").replace(/and {1,}$/g,"");
+    var Tmp_Kwrd_Str = $.trim(kw).toLowerCase();
+    var Tmp_Kwrd_Str = kw;
+    Tmp_Kwrd_Arr = Tmp_Kwrd_Str.split(",");
+    for(i in Tmp_Kwrd_Arr){
+      for (key in Spcl_Char_Arr)
+        Tmp_Kwrd_Arr[i]=replaceAll(Tmp_Kwrd_Arr[i],"\\"+key,Spcl_Char_Arr[key]);
+      Tmp_Kwrd_Arr[i]=$.trim(replaceAll(Tmp_Kwrd_Arr[i],"\ \ "," "));
+      Tmp_Arr = Tmp_Kwrd_Arr[i].split(" ");
+    }
+    Kwrd_Action_Str = Tmp_Kwrd_Arr.join(" ");
+  }
+  if(loc != "")
+  {
+    loc=loc.replace(/\bjobs in\b/gi,"");
+    loc=loc.replace(/\bjobs\b/gi,"");
+    loc=loc.split("\\").join(" ");
+    loc=loc.split("/").join(" ");
+    loc=loc.replace(/[^, a-zA-Z]/ig,"").replace(/,{1,}$/g,"");;
+    loc = replaceAll($.trim(loc).toLowerCase(),"  "," ");
+/*    for(i in stopwordArr)
+    {
+      loc=replaceAll(loc,"\\b"+stopwordArr[i].toLowerCase()+"\\b","");
+    } */
+    Loc_Arr = loc.split(",");
+    Tmp_Str = Loc_Arr.join(" and ");
+    Tmp_Arr = Tmp_Str.split(" ");
+    Loc_Action_Str = Tmp_Arr.join(" ");
+  }
+  if(Kwrd_Action_Str == "" && Loc_Action_Str != "")
+    action = action + "jobs in " + Loc_Action_Str;
+  else if (Kwrd_Action_Str != "" && Loc_Action_Str =="")
+    action = action + Kwrd_Action_Str +  " jobs";
+  else if (Kwrd_Action_Str != "" && Loc_Action_Str !="")
+    action = action + Kwrd_Action_Str +  " jobs in " + Loc_Action_Str;
+  //finally replace all consecutive duplicate words
+  action=action.replace(/[\s]*plus[\s]+(plus[\s]*)+/gi,' + ');
+  action = action.replace(/-/g," ").replace(/\s{2,}/g, ' ');
+  do {
+    var newTemp = action;
+    var action = newTemp.replace(/\s(\w+\s)\1/, " $1");
+    action = action.replace(/^(\w+\s)\1/, "$1");
+    action = action.replace(/(\s\w+)\1$/, "$1")
+  } while (action.length != newTemp.length);
+  while(action.indexOf(" + ") != -1)
+    action=action.replace(" + "," plus plus ");
+    action= $.trim(action).replace(/\s/g,"-");
+    action= action.replace(/\s/g,"-");
+  if(action == "")
+    action = "jobs-in-india";
+
+  return action;
+}
+
+});
+      ', 
+', 
+  ',  Jobs ', (1-15 out of 23) ', 
+			', HR Officer/ Senior HR Officer', 
+			', 05 Jan', 
+			', 2 - 6 yrs.', 
+			', Pune', 
+			',  Job description/ Mission As Human Resources Officer, the person will be responsible for suppor...', view more', 
+			', 
+			', 
+			', Project Engineer- MDM (master Data Management)', 
+			', 04 Jan', 
+			', 3 - 8 yrs.', 
+			', Bengalur, 
+			',  Job description / Mission Mission:   Master data is key and essential for the development of t...', view more', 
+			', 
+			', 
+			', Sr. Sales Engineer / Territory Manager - Kolkata', 
+			', 04 Jan', 
+			', 3 - 7 yrs.', 
+			', Kolkata', 
+			', Job description/Mission We are looking for a dynamic person to shoulder the responsibility of Sr. Sa...', view more', 
+			', 
+			', 
+			', Service Engineer', 
+			', 22 Dec', 
+			', 2 - 4 yrs.', 
+			', Hyderabad', 
+			', Job description / Mission  MISSION: To maximize the customer satisfaction on our service quality and...', view more', 
+			', 
+			', 
+			', Service Engineer - Chennai', 
+			', 22 Dec', 
+			', 2 - 4 yrs.', 
+			', Chennai', 
+			',  Job description / Mission  MISSION: To maximize the customer satisfaction on our service quality an...', view more', 
+			', 
+			', 
+			', Parts Sales Engineer - Mumbai', 
+			', 20 Dec', 
+			', 3 - 5 yrs.', 
+			', Mumbai', 
+			', Job description/Mission You will be responsible for the development of assigned territory by develop...', view more', 
+			', 
+			', 
+			', Project Engineer', 
+			', 20 Dec', 
+			', 4 - 5 yrs.', 
+			', Pune', 
+			', Mission To process customer orders for the Compressors and dryers packages in Oil and Gas sector in ...', view more', 
+			', 
+			', 
+			', Sr. Sales Engineer /territory Manager', 
+			', 19 Dec', 
+			', 3 - 7 yrs.', 
+			', Raipur', 
+			', Job description/Mission  Will be responsible for sales of Hydraulic attachments within Construction ...', view more', 
+			', 
+			', 
+			', Service Engineer - Indore', 
+			', 19 Dec', 
+			', 3 - 5 yrs.', 
+			', Indore', 
+			', u"Job description.  - For providing high quality after sales service at Customers' site including main...", view more', 
+			', 
+			', 
+			', Service Engineer - Pune', 
+			', 19 Dec', 
+			', 3 - 5 yrs.', 
+			', Pune', 
+			', u"- For providing high quality after sales service at Customers' site including maintenance for our eq...", view more', 
+			', 
+			', 
+			', Quality Manager', 
+			', 19 Dec', 
+			', 15 - 17 yrs.', 
+			', Pune', 
+			', Job description/ Mission As a Quality Manager, you will be responsible for Developing, Establishing ...', view more', 
+			', 
+			', 
+			', Service Engineer', 
+			', 13 Dec', 
+			', 2 - 4 yrs.', 
+			', Hyderabad, Vijayawada', 
+			', Job description / Mission  MISSION: To maximize the customer satisfaction on our service quality and...', view more', 
+			', 
+			', 
+			', Team Leader  - Sourcing', 
+			', 09 Dec', 
+			', 5 - 8 yrs.', 
+			', Pune', 
+			', Job description/Mission  Some of the important responsibilities of this position are as under,   - T...', view more', 
+			', 
+			', 
+			', Credit Controller', 
+			', 08 Dec', 
+			', 4 - 5 yrs.', 
+			', Pune', 
+			',  Job description/Mission  As Credit Controller MR CC (Mining and Rock excavation technique), you wil...', view more', 
+			', 
+			', 
+			', Global Business Systems Support Team Leader - Pune', 
+			', 08 Dec', 
+			', 4 - 9 yrs.', 
+			', Pune', 
+			',  Job description / Mission The mission of the Global Business Systems Support Team Leader is to...', view more', 
+			', 
+			', Next »', 
+   ', Jobs by Location', 
+   ', Pune', 8', Bengalur, 3', Indore', 2', Vadodara', 2', Other National Locations', 2', Kolkata', 2', Hyderabad', 2', Ahmedabad', 2', Nasik', 1', Raipur', 1', Vijayawada', 1', Mumbai', 1', Chennai', 1', show more +3', 
+   ', Jobs by Role', 
+   ', Service/Maintenance Engineer', 5', Project Manager-Production/Manufacturing/Maintenance', 2', Quality Assurance/Quality Control Manager', 1', Sales Executive/Officer', 4', Sales/Business Development Manager', 4', Area / Territory Manager', 1', Team Leader ', 1', HR Executive', 1', Design Engineer', 1', Accounts Executive/Accountant', 1', Other', 1', Software Developer', 1', show more +2', 
+   ', Jobs by Functional Area', 
+   ', Sales, Retail, Business Development', 9', Production, Manufacturing, Maintenance', 8', Engineering Design, R&D', 1', Accounts, Finance, Tax, Company Secretary, Audit', 1', Other', 1', HR, Recruitment, Administration, IR', 1', IT Software - Application Programming, Maintenance', 1', ITES, BPO, KPO, LPO, Customer Service, Operations', 1', 
+   ', Jobs by Industry', 
+   ', Industrial Products / Heavy Machinery', 23',   ', 
+', 
+', 
+', 
+', 
+  ', 
+    ', Content provided by Atlas Copco (India) Ltd, Info Edge India Limited disclaims all warranties against infringement. ', 
+          Visit ', Security Guidelines',  and ', Terms and conditions',  for more comprehensive information in this regard.', 
+  ', 
+', Powered By ',   
+	
+', 
+',  
+
+',  #goToTop {position:absolute;bottom:0px;right:0}', 
+
+
+', u"
+$(document).ready( function(){
+var gotoTop = $('#goToTop');
+var func_gotoTop = function(){
+                if($(this).scrollTop() == 0){
+                                gotoTop.hide();                                                               
+                }
+                else{
+                                gotoTop.show();                             
+                }
+}
+
+
+
+func_gotoTop();
+
+$(window).scroll(func_gotoTop);
+
+//Click event to scroll to top
+
+$('#goToTop').click(function(){
+                $('html, body').animate({scrollTop : 0},500);
+                return false;
+}) });
+", 
+
+ ', 
+    ', 
+      ', 
+    ', 
+    ', 
+      ',         
+      ', 
+    ', 
+    ', 
+',  
+
+', 
+', 
+', 
+', 
+
+', 
+', 
+', 
+', 
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/companies.naukri.com\/atlascopco-jobs\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ..."};
+/* ]]> */
+', 
+', 
+', 
+', 
+jQuery(function($) {
+$('a[rel^="prettyPhoto"]').prettyPhoto();
+});
+', 
+', 
+', 
+',  ', 
+
+', 
+', 
+  var _comscore = _comscore || [];
+    _comscore.push({ c1: "2", c2: "6035313" });
+    (function() {
+          var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+              s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+              el.parentNode.insertBefore(s, el);
+                })();
+    ', 
+', 
+  ', 
+', 
+', 
+'][
+		', 
+				', 
+			', 
+			', 
+								', 
+				', 
+					', 
+					
+					', 
+						', 
+					', 
+					', 
+						', 					', 
+					', 
+						', Home', 
+', About Us', 
+', Jobs', 
+', Contact Us', 
+', Visit Us', 
+', 
+', 
+  ', Share On', 
+  ', 
+    ', 
+    ', 
+    ', 
+  ', 
+', 
+
+					', 
+				', 
+				', 
+				', 
+
+',  
+
+', 
+', 
+', 
+$(document).ready(function(){
+	
+	
+$('#c1 #inpc1 input').focus(function(e){
+	$('#c2,#c3,#c4').show();
+});
+
+$(".tag").click(function(){
+	var x=$(this).next('input').val(); 
+	$(this).attr("id","cluster_loc");
+	$("form#searchBar").append('<input name="qcity" type="hidden" class="suggest m0 pr30" value="'+x+'">');
+	if(($("#Sug_kwdsugg").val())=="Enter your areas of expertise")
+	{
+		$("#Sug_kwdsugg").attr("value","dummyvar");
+		}
+		
+		$("form#searchBar").submit();
+
+	});
+});
+', 
+', 
+  ', 
+  ', 
+      ',  
+        ', 
+        $(function(){
+
+      			
+		})
+		
+        ', 
+        ', Keyskills, Designation', 
+        ', 
+        ', 
+          ', 
+		 ', 
+            ', 
+          ', 
+        ', 
+        ',  
+        ',  ', 
+      ', 
+        ', Desired Location', 
+        ', 
+        ', 
+          ', 
+	    ', 
+            ', 
+		', 
+          ', 
+        ', 
+        ',  
+        ',  ', 
+	
+      ',  
+        ', 
+       $(function(){ $("#ddExp option[value='']").attr("selected", true);                $("#ddExp").parent('span.text').find('.fwselect-text').text("Select");
+                $("#ddExp").trigger("change");
+                })
+        ', 
+        ', Experience', 
+        ', 
+	', 
+	    ',  ', 
+        	', 
+	    ', 
+	', 
+
+       ', 
+        ',  ', 
+            ',  
+        ', 
+        $(function(){$("#ddMinSal option[value=qmVar]").attr('selected', true);
+		$("#ddMinSal").parent('span.text').find('.fwselect-text').text("Min");
+		$("#ddMinSal").trigger("change");
+		})
+        ', 
+        ', Expected Salary', 
+        ', 
+	 ', 
+            ',  ', 
+                ', 
+            ', 
+        ', 
+', 
+        ', 
+	', 
+            ',  ', 
+                ', 
+            ', 
+        ', 
+', 
+        ',  ', 
+            ', 
+        ', 
+      ', 
+      ',  ', Please enter Keywords or Location to search.',  ', 
+    ', 
+    ', 
+  ', 
+', 
+',  
+
+
+      ', 
+
+$(document).ready(function(){
+
+$('#searchBar').submit(function(e)
+ {
+ domain = "http://companies.naukri.com/atlascopco-jobs/";
+ keyword= $.trim( $('#Sug_kwdsugg').val() );
+ if($('#cluster_loc').length>0){
+	 loc1=$.trim( $('#LocationTags').find("#cluster_loc span").text() );
+	 }
+	 else{
+ loc1= $.trim( $('#Sug_locsugg').val() );
+	 }
+ if(keyword=="Enter your areas of expertise")
+   {keyword="";}
+ if(loc1=="Where you wish to work")
+   {loc1="";}
+ if( $.trim( keyword )=="" && $.trim( loc1 )==""){
+  $(".error").show();
+  e.preventDefault();
+  }
+else{
+ newUrl = domain+ generateStaticURL(keyword,loc1);
+ $("#searchBar").attr('action',newUrl);
+}
+
+});
+
+function replaceAll(txt, replace, with_this) {
+  return txt.replace(new RegExp(replace, 'gi'),with_this);
+}
+function generateStaticURL(kw,loc)
+{
+ kw = kw.replace(/Enter your areas of expertise/ig,"").replace(/Type skills, designation or company name/ig,"").replace(/\s{2,}/g, ' ').replace(/dummyvar/ig,""); 
+ loc=loc.replace(/Where you wish to work/ig,"");
+  var Kwrd_Action_Str="";var Loc_Action_Str="";var action="";
+  var Spcl_Char_Arr= {"+":" plus " , "#":" sharp " , ".":" dot " , "-":" dash ",'"':" quotes ","'":" quotes ","/":" "};
+  if(kw != "" )
+  {
+    kw= kw.toLowerCase();
+    kw =kw.replace(/\s{2,}/g," ");
+    kw=kw.replace(/\bjobs in\b/gi,"");
+    kw=kw.replace(/\bjobs\b/gi,"");
+    kw=kw.replace(/\blimited\b/gi,"");
+    kw=kw.replace(/\bcorporation\b/gi,"");
+    kw=kw.replace(/\bcareers\b/gi,"");
+    while(kw.indexOf("c++ c++")!=-1 )
+      kw=kw.replace("c++ c++","c++");
+/*    for(i in stopwordArr)
+    {
+      kw=replaceAll(kw,"\\b"+stopwordArr[i].toLowerCase(),"");
+    } */
+    kw = replaceAll(kw,","," ");
+    kw=kw.replace(/[^.+#\-'" a-zA-Z0-9]/ig," ").replace(/and {1,}$/g,"");
+    var Tmp_Kwrd_Str = $.trim(kw).toLowerCase();
+    var Tmp_Kwrd_Str = kw;
+    Tmp_Kwrd_Arr = Tmp_Kwrd_Str.split(",");
+    for(i in Tmp_Kwrd_Arr){
+      for (key in Spcl_Char_Arr)
+        Tmp_Kwrd_Arr[i]=replaceAll(Tmp_Kwrd_Arr[i],"\\"+key,Spcl_Char_Arr[key]);
+      Tmp_Kwrd_Arr[i]=$.trim(replaceAll(Tmp_Kwrd_Arr[i],"\ \ "," "));
+      Tmp_Arr = Tmp_Kwrd_Arr[i].split(" ");
+    }
+    Kwrd_Action_Str = Tmp_Kwrd_Arr.join(" ");
+  }
+  if(loc != "")
+  {
+    loc=loc.replace(/\bjobs in\b/gi,"");
+    loc=loc.replace(/\bjobs\b/gi,"");
+    loc=loc.split("\\").join(" ");
+    loc=loc.split("/").join(" ");
+    loc=loc.replace(/[^, a-zA-Z]/ig,"").replace(/,{1,}$/g,"");;
+    loc = replaceAll($.trim(loc).toLowerCase(),"  "," ");
+/*    for(i in stopwordArr)
+    {
+      loc=replaceAll(loc,"\\b"+stopwordArr[i].toLowerCase()+"\\b","");
+    } */
+    Loc_Arr = loc.split(",");
+    Tmp_Str = Loc_Arr.join(" and ");
+    Tmp_Arr = Tmp_Str.split(" ");
+    Loc_Action_Str = Tmp_Arr.join(" ");
+  }
+  if(Kwrd_Action_Str == "" && Loc_Action_Str != "")
+    action = action + "jobs in " + Loc_Action_Str;
+  else if (Kwrd_Action_Str != "" && Loc_Action_Str =="")
+    action = action + Kwrd_Action_Str +  " jobs";
+  else if (Kwrd_Action_Str != "" && Loc_Action_Str !="")
+    action = action + Kwrd_Action_Str +  " jobs in " + Loc_Action_Str;
+  //finally replace all consecutive duplicate words
+  action=action.replace(/[\s]*plus[\s]+(plus[\s]*)+/gi,' + ');
+  action = action.replace(/-/g," ").replace(/\s{2,}/g, ' ');
+  do {
+    var newTemp = action;
+    var action = newTemp.replace(/\s(\w+\s)\1/, " $1");
+    action = action.replace(/^(\w+\s)\1/, "$1");
+    action = action.replace(/(\s\w+)\1$/, "$1")
+  } while (action.length != newTemp.length);
+  while(action.indexOf(" + ") != -1)
+    action=action.replace(" + "," plus plus ");
+    action= $.trim(action).replace(/\s/g,"-");
+    action= action.replace(/\s/g,"-");
+  if(action == "")
+    action = "jobs-in-india";
+
+  return action;
+}
+
+});
+      ', 
+', 
+  ',  Jobs ', (1-15 out of 23) ', 
+			', HR Officer/ Senior HR Officer', 
+			', 05 Jan', 
+			', 2 - 6 yrs.', 
+			', Pune', 
+			',  Job description/ Mission As Human Resources Officer, the person will be responsible for suppor...', view more', 
+			', 
+			', 
+			', Project Engineer- MDM (master Data Management)', 
+			', 04 Jan', 
+			', 3 - 8 yrs.', 
+			', Bengalur, 
+			',  Job description / Mission Mission:   Master data is key and essential for the development of t...', view more', 
+			', 
+			', 
+			', Sr. Sales Engineer / Territory Manager - Kolkata', 
+			', 04 Jan', 
+			', 3 - 7 yrs.', 
+			', Kolkata', 
+			', Job description/Mission We are looking for a dynamic person to shoulder the responsibility of Sr. Sa...', view more', 
+			', 
+			', 
+			', Service Engineer', 
+			', 22 Dec', 
+			', 2 - 4 yrs.', 
+			', Hyderabad', 
+			', Job description / Mission  MISSION: To maximize the customer satisfaction on our service quality and...', view more', 
+			', 
+			', 
+			', Service Engineer - Chennai', 
+			', 22 Dec', 
+			', 2 - 4 yrs.', 
+			', Chennai', 
+			',  Job description / Mission  MISSION: To maximize the customer satisfaction on our service quality an...', view more', 
+			', 
+			', 
+			', Parts Sales Engineer - Mumbai', 
+			', 20 Dec', 
+			', 3 - 5 yrs.', 
+			', Mumbai', 
+			', Job description/Mission You will be responsible for the development of assigned territory by develop...', view more', 
+			', 
+			', 
+			', Project Engineer', 
+			', 20 Dec', 
+			', 4 - 5 yrs.', 
+			', Pune', 
+			', Mission To process customer orders for the Compressors and dryers packages in Oil and Gas sector in ...', view more', 
+			', 
+			', 
+			', Sr. Sales Engineer /territory Manager', 
+			', 19 Dec', 
+			', 3 - 7 yrs.', 
+			', Raipur', 
+			', Job description/Mission  Will be responsible for sales of Hydraulic attachments within Construction ...', view more', 
+			', 
+			', 
+			', Service Engineer - Indore', 
+			', 19 Dec', 
+			', 3 - 5 yrs.', 
+			', Indore', 
+			', u"Job description.  - For providing high quality after sales service at Customers' site including main...", view more', 
+			', 
+			', 
+			', Service Engineer - Pune', 
+			', 19 Dec', 
+			', 3 - 5 yrs.', 
+			', Pune', 
+			', u"- For providing high quality after sales service at Customers' site including maintenance for our eq...", view more', 
+			', 
+			', 
+			', Quality Manager', 
+			', 19 Dec', 
+			', 15 - 17 yrs.', 
+			', Pune', 
+			', Job description/ Mission As a Quality Manager, you will be responsible for Developing, Establishing ...', view more', 
+			', 
+			', 
+			', Service Engineer', 
+			', 13 Dec', 
+			', 2 - 4 yrs.', 
+			', Hyderabad, Vijayawada', 
+			', Job description / Mission  MISSION: To maximize the customer satisfaction on our service quality and...', view more', 
+			', 
+			', 
+			', Team Leader  - Sourcing', 
+			', 09 Dec', 
+			', 5 - 8 yrs.', 
+			', Pune', 
+			', Job description/Mission  Some of the important responsibilities of this position are as under,   - T...', view more', 
+			', 
+			', 
+			', Credit Controller', 
+			', 08 Dec', 
+			', 4 - 5 yrs.', 
+			', Pune', 
+			',  Job description/Mission  As Credit Controller MR CC (Mining and Rock excavation technique), you wil...', view more', 
+			', 
+			', 
+			', Global Business Systems Support Team Leader - Pune', 
+			', 08 Dec', 
+			', 4 - 9 yrs.', 
+			', Pune', 
+			',  Job description / Mission The mission of the Global Business Systems Support Team Leader is to...', view more', 
+			', 
+			', Next »', 
+   ', Jobs by Location', 
+   ', Pune', 8', Bengalur, 3', Indore', 2', Vadodara', 2', Other National Locations', 2', Kolkata', 2', Hyderabad', 2', Ahmedabad', 2', Nasik', 1', Raipur', 1', Vijayawada', 1', Mumbai', 1', Chennai', 1', show more +3', 
+   ', Jobs by Role', 
+   ', Service/Maintenance Engineer', 5', Project Manager-Production/Manufacturing/Maintenance', 2', Quality Assurance/Quality Control Manager', 1', Sales Executive/Officer', 4', Sales/Business Development Manager', 4', Area / Territory Manager', 1', Team Leader ', 1', HR Executive', 1', Design Engineer', 1', Accounts Executive/Accountant', 1', Other', 1', Software Developer', 1', show more +2', 
+   ', Jobs by Functional Area', 
+   ', Sales, Retail, Business Development', 9', Production, Manufacturing, Maintenance', 8', Engineering Design, R&D', 1', Accounts, Finance, Tax, Company Secretary, Audit', 1', Other', 1', HR, Recruitment, Administration, IR', 1', IT Software - Application Programming, Maintenance', 1', ITES, BPO, KPO, LPO, Customer Service, Operations', 1', 
+   ', Jobs by Industry', 
+   ', Industrial Products / Heavy Machinery', 23',   ', 
+', 
+', 
+', 
+', 
+  ', 
+    ', Content provided by Atlas Copco (India) Ltd, Info Edge India Limited disclaims all warranties against infringement. ', 
+          Visit ', Security Guidelines',  and ', Terms and conditions',  for more comprehensive information in this regard.', 
+  ', 
+', Powered By ',   
+	
+', 
+',  
+
+',  #goToTop {position:absolute;bottom:0px;right:0}', 
+
+
+', u"
+$(document).ready( function(){
+var gotoTop = $('#goToTop');
+var func_gotoTop = function(){
+                if($(this).scrollTop() == 0){
+                                gotoTop.hide();                                                               
+                }
+                else{
+                                gotoTop.show();                             
+                }
+}
+
+
+
+func_gotoTop();
+
+$(window).scroll(func_gotoTop);
+
+//Click event to scroll to top
+
+$('#goToTop').click(function(){
+                $('html, body').animate({scrollTop : 0},500);
+                return false;
+}) });
+", 
+
+ ', 
+    ', 
+      ', 
+    ', 
+    ', 
+      ',         
+      ', 
+    ', 
+    ', 
+',  
+
+', 
+', 
+', 
+', 
+
+', 
+', 
+', 
+', 
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/companies.naukri.com\/atlascopco-jobs\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ..."};
+/* ]]> */
+', 
+', 
+', 
+', 
+jQuery(function($) {
+$('a[rel^="prettyPhoto"]').prettyPhoto();
+});
+', 
+', 
+', 
+',  ', 
+
+', 
+', 
+  var _comscore = _comscore || [];
+    _comscore.push({ c1: "2", c2: "6035313" });
+    (function() {
+          var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+              s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+              el.parentNode.insertBefore(s, el);
+                })();
+    ', 
+', 
+  ', 
+', 
+', 
+']
