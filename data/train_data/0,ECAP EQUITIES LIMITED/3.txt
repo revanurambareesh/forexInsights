@@ -1,0 +1,1341 @@
+[
+
+	', 
+	', (function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/bg_BG/sdk.js#xfbml=1&version=v2.0";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));', 
+
+	', 
+  	', 
+      ', 
+        ', 
+          ', 
+            ', 
+              ', SeeNews //', 
+							', The corporate wire', 
+							', Renewables', 
+							', Competitive Intelligence', 
+							', Power market review', 
+							', Broker reports', 
+							', SEE Top 100', 
+			            ', 
+          ', 
+
+        ', 
+      ', 
+    ', 
+    ', 
+      ', 
+      	', 
+        	', 
+        ', 
+      ', 
+  	', 
+
+			', 
+      ', 
+        ', 
+          ', 
+        ', 
+        ', 
+          ', Home', 
+
+          
+	
+', 
+
+	', 
+		Solar	', 
+', 
+
+	
+', 
+
+	', 
+		Wind	', 
+', 
+
+	
+', 
+
+	', 
+		Biomass	', 
+', 
+
+	
+', 
+
+	', 
+		Hydro & Marine	', 
+', 
+
+	
+', 
+
+	', 
+		Geothermal	', 
+', 
+
+	
+', 
+
+	', 
+		Regulations	', 
+', 
+
+	
+', 
+
+	', 
+		Features	', 
+', 
+
+
+        ', 
+        ', 
+            ', About ', 
+            ',  Search ', 
+        ', 
+      ', 
+
+      ', 
+        ', 
+          ', 
+                                                      ', 
+				  ', Equity Markets', 
+                ', 
+                                                                        ', 
+				  ', Share Issue', 
+                ', 
+                                    ', 
+        ', 
+      ', 
+
+      ', 
+        ', 
+            ', 
+            ', 
+            ', 
+                ', Business news and intelligence for the renewable energy sector', 
+                ', Business news and intelligence for the renewable industry. The newswire goes beyond the familiar renewable markets of Western Europe and the US to encompass the potential of BRIC countries and emerging alternative energy stars in North Africa, Asia Pacific, Central and Eastern Europe.', 
+                ', Close', 
+                ', Learn more', 
+            ', 
+          ', 
+        ', 
+      ', 
+
+      ', 
+        ', 
+            ', 
+	            ', 
+	            ', What are you looking for?', 
+
+	            ', 
+
+	            ', 
+
+	                ', 
+	        			', 
+	                ', 
+
+					', 
+						', 
+					', 
+					', 
+						', 
+					', 
+
+	                ', 
+	                    ', 
+		                    ', All dates', 
+							', last day', 
+							', last week', 
+							', last month', 
+							', last 3 months', 
+							', last year', 
+							', select custom date...', 
+		                ', 
+						', 
+	                ', 
+
+	                ', Go', 
+	            ', 
+	            ', 
+	            ', 
+	            	', 
+	            ', 
+	            ', 
+	            	', 
+				', 
+	            ', 
+
+	            ', 
+	            	', 
+					', 
+						', 
+						', 
+					', 
+				', 
+
+              ', 
+            ', 
+          ', 
+        ', 
+    ', 
+
+', 
+	$(function() {
+
+		function save_code(name, id, container_id, hidden_container_id, input_name, input_id_prefix) {
+			if ($("#"+input_id_prefix+id).length == 0) {
+				var $li = $("<li/>").text(name).appendTo(container_id);
+				$("<input/>").attr('name', input_name).attr('value', name).attr('id', input_id_prefix+id).attr('type', 'hidden').appendTo(hidden_container_id);
+				$li.bind('click', function() {
+					$(this).remove();
+					$("#"+input_id_prefix+id).remove();
+				});
+			}
+		}
+
+		$("#select-country").autocomplete({
+			source: "/site/codes/country",
+			minLength: 0,
+			select: function( event, ui ) {
+				if (ui.item) {
+					save_code(ui.item.value, ui.item.id, "#selected-countries", '#code-hidden-inputs', 'countries['+ui.item.id+']', 'country_filter_');
+					$(this).val('');
+					return false;
+				}
+			}
+		}).click(function() {
+			$(this).autocomplete("search");
+		});
+
+		$("#select-topic").autocomplete({
+			source: "/site/codes/topic",
+			minLength: 0,
+			select: function( event, ui ) {
+				if (ui.item) {
+					save_code(ui.item.value, ui.item.id, "#selected-topics", '#code-hidden-inputs', 'topics['+ui.item.id+']', 'topic_filter_');
+					$(this).val('');
+					return false;
+				}
+			}
+		}).click(function() {
+			$(this).autocomplete("search");
+		});
+
+		var dates = $( "#input-date-from, #input-date-to" ).datepicker({
+			defaultDate: null,
+			dateFormat: "yy-mm-dd",
+			changeMonth: true,
+			numberOfMonths: 1,
+			firstDay: 1,
+			onSelect: function( selectedDate ) {
+				var option = this.id == "input-date-from" ? "minDate" : "maxDate",
+					instance = $( this ).data( "datepicker" ),
+					date = $.datepicker.parseDate(
+						instance.settings.dateFormat ||
+						$.datepicker._defaults.dateFormat,
+						selectedDate, instance.settings );
+				dates.not( this ).datepicker( "option", option, date );
+				$("#input-"+this.id).val(selectedDate);
+			}
+		});
+
+		$("#date-range").hide();
+
+		$("#select-date").change(function() {
+			if ($(this).val() == 'custom') {
+				$("#date-range").show();
+			} else {
+				$("#date-range").hide();
+			}
+		});
+
+				
+	});
+', 
+
+    ', 
+  ', 
+
+            ', 
+      ', 
+    	', 
+      	', 
+        	', 
+          	', 
+              ', 
+                ', u"India's Orient Green raises USD 38m through share issue", 
+
+                ', Sep 24, 2015 15:48 CEST', 
+                ', 
+                    by ', 
+						', Ivan Shumkov', 
+					', 
+                ', 
+
+                                                                      ', 
+                    ', 
+                                          Wind turbines in India. Featured Image: OlegD/Shutterstock.com                                      ', 
+                  
+                  ', September 24 (SeeNews) - Indian renewable energy firm Orient Green Power Co Ltd (BOM:533263) has raised INR 2.5 billion (USD 37.7m/EUR 33.4m) from existing promoters Shriram Venture Ltd and other financial investors.', Investment bank Equirus Capital announced the fundraise on Wednesday, saying that it served as exclusive advisors to Orient Green and Shriram Group.', \u201cThe investment will enable the company to augment its wind energy capacity and to reduce its interest outgo and outstanding debt,\u201d Orient Green\u2019s managing director S Venkatachalam commented. The firm operates 428 MW of wind farms and 106 MW of biomass power plants in India.', Including the latest transaction, Shriram Group has invested a total of INR 5.5 billion in the renewables venture over the last five years. Other participating investors include EW Special Opportunities Fund II Pte Ltd, Ecap Equities Ltd and Edelweiss Financial Services Ltd.', (INR 10 = USD 0.151/EUR 0.134)',                 
+                ', 
+                  Share this story
+
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                ', 
+
+              ', 
+            ', 
+
+            ', 
+            	', 
+                ', 
+                                      ', 
+                                  ', 
+                ', 
+                  ', by ', 
+                      Ivan Shumkov                    ', 
+                  ', 
+                  ', Ivan is the mergers and acquisitions expert in SeeNews Renewables with a passion for big deals and ambitious capacity plans.', 
+                ', 
+                ', 
+                	', Topics', 
+                                    ', 
+                                          ', Equity Markets', 
+                                          ', Share Issue', 
+                                      ', 
+                  
+                  ', Country', 
+                                    ', 
+                                          ', India', 
+                                      ', 
+                  
+                  ', Industry', 
+                                    ', 
+                                                              ', Biomass & Biofuels', 
+                      
+                                          ', Electricity Generation', 
+                      
+                                          ', Renewable Energy', 
+                      
+                                          ', Wind Power', 
+                      
+                                      ', 
+                  
+                ', 
+              ', 
+            ', 
+
+            ', 
+                                    ', 
+                        ', 
+                  ', 
+                    ', Previous',  EDF targets 50 GW renewable energy capacity by 2030 ', Sep 24, 2015 15:40 CEST', 
+                  ', 
+                ', 
+                      ', 
+                                          ', 
+                ', 
+                  ', 
+                    ', Next', u" INTERVIEW - Vaisala talks about challenges faced by Brazil's wind sector ", Sep 24, 2015 15:51 CEST', 
+                  ', 
+                  ', 
+                ', 
+              ', 
+                          ', 
+
+          ', 
+        ', 
+      ', 
+    ', 
+    ', 
+  
+
+  ', 
+  ', 
+      ', 
+        ', 
+                      ', 
+                    ', 
+            ', 
+              ', 
+                ', u"India's Orient Green raises USD 38m through share issue", 
+
+                ', Sep 24, 2015 15:48 CEST', 
+                ', 
+                    by ', 
+            ', Ivan Shumkov', 
+          ', 
+                ', 
+
+                                                                      ', 
+                    ', 
+                                          Wind turbines in India. Featured Image: OlegD/Shutterstock.com                                      ', 
+                  
+                  ', September 24 (SeeNews) - Indian renewable energy firm Orient Green Power Co Ltd (BOM:533263) has raised INR 2.5 billion (USD 37.7m/EUR 33.4m) from existing promoters Shriram Venture Ltd and other financial investors.', Investment bank Equirus Capital announced the fundraise on Wednesday, saying that it served as exclusive advisors to Orient Green and Shriram Group.', \u201cThe investment will enable the company to augment its wind energy capacity and to reduce its interest outgo and outstanding debt,\u201d Orient Green\u2019s managing director S Venkatachalam commented. The firm operates 428 MW of wind farms and 106 MW of biomass power plants in India.', Including the latest transaction, Shriram Group has invested a total of INR 5.5 billion in the renewables venture over the last five years. Other participating investors include EW Special Opportunities Fund II Pte Ltd, Ecap Equities Ltd and Edelweiss Financial Services Ltd.', (INR 10 = USD 0.151/EUR 0.134)',                 
+                ', 
+                  Share this story
+
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                ', 
+
+              ', 
+            ', 
+
+            ', 
+              ', 
+                ', 
+                                      ', 
+                                  ', 
+                ', 
+                  ', by ', 
+                      Ivan Shumkov                    ', 
+                  ', 
+                  ', Ivan is the mergers and acquisitions expert in SeeNews Renewables with a passion for big deals and ambitious capacity plans.', 
+                ', 
+                ', 
+                  ', Topics', 
+                                    ', 
+                                          ', Equity Markets', 
+                                          ', Share Issue', 
+                                      ', 
+                  
+                  ', Country', 
+                                    ', 
+                                          ', India', 
+                                      ', 
+                  
+                  ', Industry', 
+                                    ', 
+                                                              ', Biomass & Biofuels', 
+                      
+                                          ', Electricity Generation', 
+                      
+                                          ', Renewable Energy', 
+                      
+                                          ', Wind Power', 
+                      
+                                      ', 
+                  
+                ', 
+              ', 
+            ', 
+
+            ', 
+                                    ', 
+                        ', 
+                  ', 
+                    ', Previous',  EDF targets 50 GW renewable energy capacity by 2030 ', Sep 24, 2015 15:40 CEST', 
+                  ', 
+                ', 
+                      ', 
+                                          ', 
+                ', 
+                  ', 
+                    ', Next', u" INTERVIEW - Vaisala talks about challenges faced by Brazil's wind sector ", Sep 24, 2015 15:51 CEST', 
+                  ', 
+                  ', 
+                ', 
+              ', 
+                          ', 
+
+          ', 
+        ', 
+      ', 
+  ', 
+  ', 
+
+    ', 
+      ', 
+        ', 
+          ', 
+        ', 
+        ', 
+
+                      ', Get SeeNews Renewables in your inbox', 
+          
+          ', (Verification e-mail will be sent to this e-mail address)', 
+          ', 
+            ', 
+              ', 
+            ', 
+            ', 
+            ', Subscribe', 
+            ',  Close', 
+          ', 
+        ', 
+      ', 
+    ', 
+
+', 
+  $(document).ready(function () {
+    var industry = 'Biomass & Biofuels';
+    ga('set', 'contentGroup1', industry);
+
+    var first_time_here = 'yes';
+    if (first_time_here == 'yes'){
+      $(".sub-navigation").hide();
+      $(".show-about").parent().toggleClass("active");
+      $(".show-search").parent().removeClass("active");
+      $(".expanded-about").toggle();
+      $(".expanded-search").hide();
+    }
+
+    $(".newsletter").click(function(){
+      ga('send', 'event', 'Newsletter', 'Subscribe', {'nonInteraction': 1});
+    });
+
+    // START - advertising wallpaper links and events
+    var random = 2;
+    var rand = 92;
+    console.log("randomizer: "+rand);
+
+    if (random == 1) {
+      // console.log('view 1');
+      ga('send', 'event', 'REN E-newsletter Wallpaper', 'view', 'Inner Page', {'nonInteraction': 1});
+    } else if (random == 2) {
+      // console.log('view 2');
+      ga('send', 'event', 'RenNowHomepage', 'view', 'Inner Page', {'nonInteraction': 1});
+    } else if (random == 3) {
+      // console.log('view 3');
+      ga('send', 'event', 'MegawattWall', 'view', 'Inner Page', {'nonInteraction': 1});
+    }
+
+    $('.small-advertising-2').click(function(e){
+      if( e.target !== this ) return;
+      if (random == 2) {
+        ga('send', 'event', 'RenNowHomepage', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/new-branding-to-reflect-expanded-services','_blank');
+      }
+    });
+
+    $('.small-advertising-3').click(function(e){
+      if( e.target !== this ) return;
+      if (random == 3) {
+        ga('send', 'event', 'MegawattWall', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://www.megawatt-x.com/','_blank');
+      }
+    });
+
+    $('.adv-wallpaper').click(function(e){
+      if( e.target !== this ) return;
+      if (random == 1) {
+        ga('send', 'event', 'REN E-newsletter Wallpaper', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/paywall','_blank');
+      } else if (random == 2) {
+        ga('send', 'event', 'RenNowHomepage', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/new-branding-to-reflect-expanded-services','_blank');
+      } else if (random == 3) {
+        ga('send', 'event', 'MegawattWall', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://www.megawatt-x.com/','_blank');
+      }
+    });
+
+    $('#advertising-row').click(function(e){
+      if( e.target !== this ) return;
+      if (random == 1) {
+        ga('send', 'event', 'REN E-newsletter Wallpaper', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/paywall','_blank');
+      } else if (random == 2) {
+        ga('send', 'event', 'RenNowHomepage', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/new-branding-to-reflect-expanded-services','_blank');
+      } else if (random == 3) {
+        ga('send', 'event', 'MegawattWall', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://www.megawatt-x.com/','_blank');
+      }
+    });
+
+    $('#advertising-offset').click(function(e){
+      if( e.target !== this ) return;
+      if (random == 1) {
+        ga('send', 'event', 'REN E-newsletter Wallpaper', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/paywall','_blank');
+      } else if (random == 2) {
+        ga('send', 'event', 'RenNowHomepage', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/new-branding-to-reflect-expanded-services','_blank');
+      } else if (random == 3) {
+        ga('send', 'event', 'MegawattWall', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://www.megawatt-x.com/','_blank');
+      }
+    });
+
+    // END - advertising wallpaper links and events
+
+  });
+', 
+
+
+
+  ', 
+  	', 
+    	', 
+    	', 
+      	', 
+        	', About', 
+          ', SeeNews Renewables provides business news and intelligence for the renewable energy industry worldwide', 
+                    	', Read more', 
+                  ', 
+      	', 
+        	', Contact us', 
+          ', To send comments and suggestions about news coverage or to report errors that call for correction:', 
+				', renewables@seenews.com', 
+				+359 2 80 12 677', 
+                    ', 
+      	', 
+                    	', Advertising', 
+        	', To get information on', 
+			 our traffic, readers profile', 
+			  and prices, visit our ', 
+			  ', Advertising page', 
+			  or contact us at ', advertising@seenews.com', 
+            		', 
+      	', 
+      		', SeeNews sites', 
+			', 
+                                ', Competitive Intelligence', 
+                ', The corporate wire', 
+                ', Power market review', 
+                ', Renewables', 
+                            ', 
+        ', 
+      	', 
+        	', Follow us', 
+          ', 
+			',  Facebook', 
+			',  Twitter', 
+			',  LinkedIn', 
+			',  Google+', 
+			',  RSS Feed', 
+          ', 
+        ', 
+      ', 
+      ', 
+		  ', Disclaimer', 
+		  ', Terms & Conditions', 
+		  ', Privacy Policy', 
+		  ', Code of Ethics', 
+		  Copyright © 2017 SeeNews. All rights reserved.
+	  ', 
+    ', 
+  ', 
+
+	', 
+	', 
+	', 
+	', 
+	', 
+
+	', 
+	', 
+	', 
+		/* <![CDATA[ */
+		var google_conversion_id = 966408274;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	', 
+	', 
+	', 
+	', 
+		', 
+		', 
+		', 
+	', 
+
+	', 
+		$(document).ready(function () {
+	        if($(".subscribe").length > 0){
+	        	$(".subscribe").click(function(){
+		      		ga('send', 'event', 'SubscribeButton', 'Click', {'nonInteraction': 1});
+		    	});
+	        }
+		});
+	', 
+
+'][
+
+	', 
+	', (function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/bg_BG/sdk.js#xfbml=1&version=v2.0";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));', 
+
+	', 
+  	', 
+      ', 
+        ', 
+          ', 
+            ', 
+              ', SeeNews //', 
+							', The corporate wire', 
+							', Renewables', 
+							', Competitive Intelligence', 
+							', Power market review', 
+							', Broker reports', 
+							', SEE Top 100', 
+			            ', 
+          ', 
+
+        ', 
+      ', 
+    ', 
+    ', 
+      ', 
+      	', 
+        	', 
+        ', 
+      ', 
+  	', 
+
+			', 
+      ', 
+        ', 
+          ', 
+        ', 
+        ', 
+          ', Home', 
+
+          
+	
+', 
+
+	', 
+		Solar	', 
+', 
+
+	
+', 
+
+	', 
+		Wind	', 
+', 
+
+	
+', 
+
+	', 
+		Biomass	', 
+', 
+
+	
+', 
+
+	', 
+		Hydro & Marine	', 
+', 
+
+	
+', 
+
+	', 
+		Geothermal	', 
+', 
+
+	
+', 
+
+	', 
+		Regulations	', 
+', 
+
+	
+', 
+
+	', 
+		Features	', 
+', 
+
+
+        ', 
+        ', 
+            ', About ', 
+            ',  Search ', 
+        ', 
+      ', 
+
+      ', 
+        ', 
+          ', 
+                                                      ', 
+				  ', Equity Markets', 
+                ', 
+                                                                        ', 
+				  ', Share Issue', 
+                ', 
+                                    ', 
+        ', 
+      ', 
+
+      ', 
+        ', 
+            ', 
+            ', 
+            ', 
+                ', Business news and intelligence for the renewable energy sector', 
+                ', Business news and intelligence for the renewable industry. The newswire goes beyond the familiar renewable markets of Western Europe and the US to encompass the potential of BRIC countries and emerging alternative energy stars in North Africa, Asia Pacific, Central and Eastern Europe.', 
+                ', Close', 
+                ', Learn more', 
+            ', 
+          ', 
+        ', 
+      ', 
+
+      ', 
+        ', 
+            ', 
+	            ', 
+	            ', What are you looking for?', 
+
+	            ', 
+
+	            ', 
+
+	                ', 
+	        			', 
+	                ', 
+
+					', 
+						', 
+					', 
+					', 
+						', 
+					', 
+
+	                ', 
+	                    ', 
+		                    ', All dates', 
+							', last day', 
+							', last week', 
+							', last month', 
+							', last 3 months', 
+							', last year', 
+							', select custom date...', 
+		                ', 
+						', 
+	                ', 
+
+	                ', Go', 
+	            ', 
+	            ', 
+	            ', 
+	            	', 
+	            ', 
+	            ', 
+	            	', 
+				', 
+	            ', 
+
+	            ', 
+	            	', 
+					', 
+						', 
+						', 
+					', 
+				', 
+
+              ', 
+            ', 
+          ', 
+        ', 
+    ', 
+
+', 
+	$(function() {
+
+		function save_code(name, id, container_id, hidden_container_id, input_name, input_id_prefix) {
+			if ($("#"+input_id_prefix+id).length == 0) {
+				var $li = $("<li/>").text(name).appendTo(container_id);
+				$("<input/>").attr('name', input_name).attr('value', name).attr('id', input_id_prefix+id).attr('type', 'hidden').appendTo(hidden_container_id);
+				$li.bind('click', function() {
+					$(this).remove();
+					$("#"+input_id_prefix+id).remove();
+				});
+			}
+		}
+
+		$("#select-country").autocomplete({
+			source: "/site/codes/country",
+			minLength: 0,
+			select: function( event, ui ) {
+				if (ui.item) {
+					save_code(ui.item.value, ui.item.id, "#selected-countries", '#code-hidden-inputs', 'countries['+ui.item.id+']', 'country_filter_');
+					$(this).val('');
+					return false;
+				}
+			}
+		}).click(function() {
+			$(this).autocomplete("search");
+		});
+
+		$("#select-topic").autocomplete({
+			source: "/site/codes/topic",
+			minLength: 0,
+			select: function( event, ui ) {
+				if (ui.item) {
+					save_code(ui.item.value, ui.item.id, "#selected-topics", '#code-hidden-inputs', 'topics['+ui.item.id+']', 'topic_filter_');
+					$(this).val('');
+					return false;
+				}
+			}
+		}).click(function() {
+			$(this).autocomplete("search");
+		});
+
+		var dates = $( "#input-date-from, #input-date-to" ).datepicker({
+			defaultDate: null,
+			dateFormat: "yy-mm-dd",
+			changeMonth: true,
+			numberOfMonths: 1,
+			firstDay: 1,
+			onSelect: function( selectedDate ) {
+				var option = this.id == "input-date-from" ? "minDate" : "maxDate",
+					instance = $( this ).data( "datepicker" ),
+					date = $.datepicker.parseDate(
+						instance.settings.dateFormat ||
+						$.datepicker._defaults.dateFormat,
+						selectedDate, instance.settings );
+				dates.not( this ).datepicker( "option", option, date );
+				$("#input-"+this.id).val(selectedDate);
+			}
+		});
+
+		$("#date-range").hide();
+
+		$("#select-date").change(function() {
+			if ($(this).val() == 'custom') {
+				$("#date-range").show();
+			} else {
+				$("#date-range").hide();
+			}
+		});
+
+				
+	});
+', 
+
+    ', 
+  ', 
+
+            ', 
+      ', 
+    	', 
+      	', 
+        	', 
+          	', 
+              ', 
+                ', u"India's Orient Green raises USD 38m through share issue", 
+
+                ', Sep 24, 2015 15:48 CEST', 
+                ', 
+                    by ', 
+						', Ivan Shumkov', 
+					', 
+                ', 
+
+                                                                      ', 
+                    ', 
+                                          Wind turbines in India. Featured Image: OlegD/Shutterstock.com                                      ', 
+                  
+                  ', September 24 (SeeNews) - Indian renewable energy firm Orient Green Power Co Ltd (BOM:533263) has raised INR 2.5 billion (USD 37.7m/EUR 33.4m) from existing promoters Shriram Venture Ltd and other financial investors.', Investment bank Equirus Capital announced the fundraise on Wednesday, saying that it served as exclusive advisors to Orient Green and Shriram Group.', \u201cThe investment will enable the company to augment its wind energy capacity and to reduce its interest outgo and outstanding debt,\u201d Orient Green\u2019s managing director S Venkatachalam commented. The firm operates 428 MW of wind farms and 106 MW of biomass power plants in India.', Including the latest transaction, Shriram Group has invested a total of INR 5.5 billion in the renewables venture over the last five years. Other participating investors include EW Special Opportunities Fund II Pte Ltd, Ecap Equities Ltd and Edelweiss Financial Services Ltd.', (INR 10 = USD 0.151/EUR 0.134)',                 
+                ', 
+                  Share this story
+
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                ', 
+
+              ', 
+            ', 
+
+            ', 
+            	', 
+                ', 
+                                      ', 
+                                  ', 
+                ', 
+                  ', by ', 
+                      Ivan Shumkov                    ', 
+                  ', 
+                  ', Ivan is the mergers and acquisitions expert in SeeNews Renewables with a passion for big deals and ambitious capacity plans.', 
+                ', 
+                ', 
+                	', Topics', 
+                                    ', 
+                                          ', Equity Markets', 
+                                          ', Share Issue', 
+                                      ', 
+                  
+                  ', Country', 
+                                    ', 
+                                          ', India', 
+                                      ', 
+                  
+                  ', Industry', 
+                                    ', 
+                                                              ', Biomass & Biofuels', 
+                      
+                                          ', Electricity Generation', 
+                      
+                                          ', Renewable Energy', 
+                      
+                                          ', Wind Power', 
+                      
+                                      ', 
+                  
+                ', 
+              ', 
+            ', 
+
+            ', 
+                                    ', 
+                        ', 
+                  ', 
+                    ', Previous',  EDF targets 50 GW renewable energy capacity by 2030 ', Sep 24, 2015 15:40 CEST', 
+                  ', 
+                ', 
+                      ', 
+                                          ', 
+                ', 
+                  ', 
+                    ', Next', u" INTERVIEW - Vaisala talks about challenges faced by Brazil's wind sector ", Sep 24, 2015 15:51 CEST', 
+                  ', 
+                  ', 
+                ', 
+              ', 
+                          ', 
+
+          ', 
+        ', 
+      ', 
+    ', 
+    ', 
+  
+
+  ', 
+  ', 
+      ', 
+        ', 
+                      ', 
+                    ', 
+            ', 
+              ', 
+                ', u"India's Orient Green raises USD 38m through share issue", 
+
+                ', Sep 24, 2015 15:48 CEST', 
+                ', 
+                    by ', 
+            ', Ivan Shumkov', 
+          ', 
+                ', 
+
+                                                                      ', 
+                    ', 
+                                          Wind turbines in India. Featured Image: OlegD/Shutterstock.com                                      ', 
+                  
+                  ', September 24 (SeeNews) - Indian renewable energy firm Orient Green Power Co Ltd (BOM:533263) has raised INR 2.5 billion (USD 37.7m/EUR 33.4m) from existing promoters Shriram Venture Ltd and other financial investors.', Investment bank Equirus Capital announced the fundraise on Wednesday, saying that it served as exclusive advisors to Orient Green and Shriram Group.', \u201cThe investment will enable the company to augment its wind energy capacity and to reduce its interest outgo and outstanding debt,\u201d Orient Green\u2019s managing director S Venkatachalam commented. The firm operates 428 MW of wind farms and 106 MW of biomass power plants in India.', Including the latest transaction, Shriram Group has invested a total of INR 5.5 billion in the renewables venture over the last five years. Other participating investors include EW Special Opportunities Fund II Pte Ltd, Ecap Equities Ltd and Edelweiss Financial Services Ltd.', (INR 10 = USD 0.151/EUR 0.134)',                 
+                ', 
+                  Share this story
+
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                ', 
+
+              ', 
+            ', 
+
+            ', 
+              ', 
+                ', 
+                                      ', 
+                                  ', 
+                ', 
+                  ', by ', 
+                      Ivan Shumkov                    ', 
+                  ', 
+                  ', Ivan is the mergers and acquisitions expert in SeeNews Renewables with a passion for big deals and ambitious capacity plans.', 
+                ', 
+                ', 
+                  ', Topics', 
+                                    ', 
+                                          ', Equity Markets', 
+                                          ', Share Issue', 
+                                      ', 
+                  
+                  ', Country', 
+                                    ', 
+                                          ', India', 
+                                      ', 
+                  
+                  ', Industry', 
+                                    ', 
+                                                              ', Biomass & Biofuels', 
+                      
+                                          ', Electricity Generation', 
+                      
+                                          ', Renewable Energy', 
+                      
+                                          ', Wind Power', 
+                      
+                                      ', 
+                  
+                ', 
+              ', 
+            ', 
+
+            ', 
+                                    ', 
+                        ', 
+                  ', 
+                    ', Previous',  EDF targets 50 GW renewable energy capacity by 2030 ', Sep 24, 2015 15:40 CEST', 
+                  ', 
+                ', 
+                      ', 
+                                          ', 
+                ', 
+                  ', 
+                    ', Next', u" INTERVIEW - Vaisala talks about challenges faced by Brazil's wind sector ", Sep 24, 2015 15:51 CEST', 
+                  ', 
+                  ', 
+                ', 
+              ', 
+                          ', 
+
+          ', 
+        ', 
+      ', 
+  ', 
+  ', 
+
+    ', 
+      ', 
+        ', 
+          ', 
+        ', 
+        ', 
+
+                      ', Get SeeNews Renewables in your inbox', 
+          
+          ', (Verification e-mail will be sent to this e-mail address)', 
+          ', 
+            ', 
+              ', 
+            ', 
+            ', 
+            ', Subscribe', 
+            ',  Close', 
+          ', 
+        ', 
+      ', 
+    ', 
+
+', 
+  $(document).ready(function () {
+    var industry = 'Biomass & Biofuels';
+    ga('set', 'contentGroup1', industry);
+
+    var first_time_here = 'no';
+    if (first_time_here == 'yes'){
+      $(".sub-navigation").hide();
+      $(".show-about").parent().toggleClass("active");
+      $(".show-search").parent().removeClass("active");
+      $(".expanded-about").toggle();
+      $(".expanded-search").hide();
+    }
+
+    $(".newsletter").click(function(){
+      ga('send', 'event', 'Newsletter', 'Subscribe', {'nonInteraction': 1});
+    });
+
+    // START - advertising wallpaper links and events
+    var random = 2;
+    var rand = 78;
+    console.log("randomizer: "+rand);
+
+    if (random == 1) {
+      // console.log('view 1');
+      ga('send', 'event', 'REN E-newsletter Wallpaper', 'view', 'Inner Page', {'nonInteraction': 1});
+    } else if (random == 2) {
+      // console.log('view 2');
+      ga('send', 'event', 'RenNowHomepage', 'view', 'Inner Page', {'nonInteraction': 1});
+    } else if (random == 3) {
+      // console.log('view 3');
+      ga('send', 'event', 'MegawattWall', 'view', 'Inner Page', {'nonInteraction': 1});
+    }
+
+    $('.small-advertising-2').click(function(e){
+      if( e.target !== this ) return;
+      if (random == 2) {
+        ga('send', 'event', 'RenNowHomepage', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/new-branding-to-reflect-expanded-services','_blank');
+      }
+    });
+
+    $('.small-advertising-3').click(function(e){
+      if( e.target !== this ) return;
+      if (random == 3) {
+        ga('send', 'event', 'MegawattWall', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://www.megawatt-x.com/','_blank');
+      }
+    });
+
+    $('.adv-wallpaper').click(function(e){
+      if( e.target !== this ) return;
+      if (random == 1) {
+        ga('send', 'event', 'REN E-newsletter Wallpaper', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/paywall','_blank');
+      } else if (random == 2) {
+        ga('send', 'event', 'RenNowHomepage', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/new-branding-to-reflect-expanded-services','_blank');
+      } else if (random == 3) {
+        ga('send', 'event', 'MegawattWall', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://www.megawatt-x.com/','_blank');
+      }
+    });
+
+    $('#advertising-row').click(function(e){
+      if( e.target !== this ) return;
+      if (random == 1) {
+        ga('send', 'event', 'REN E-newsletter Wallpaper', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/paywall','_blank');
+      } else if (random == 2) {
+        ga('send', 'event', 'RenNowHomepage', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/new-branding-to-reflect-expanded-services','_blank');
+      } else if (random == 3) {
+        ga('send', 'event', 'MegawattWall', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://www.megawatt-x.com/','_blank');
+      }
+    });
+
+    $('#advertising-offset').click(function(e){
+      if( e.target !== this ) return;
+      if (random == 1) {
+        ga('send', 'event', 'REN E-newsletter Wallpaper', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/paywall','_blank');
+      } else if (random == 2) {
+        ga('send', 'event', 'RenNowHomepage', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://renewables.seenews.com/new-branding-to-reflect-expanded-services','_blank');
+      } else if (random == 3) {
+        ga('send', 'event', 'MegawattWall', 'click', 'Inner Page', {'nonInteraction': 1});
+        window.open('http://www.megawatt-x.com/','_blank');
+      }
+    });
+
+    // END - advertising wallpaper links and events
+
+  });
+', 
+
+
+
+  ', 
+  	', 
+    	', 
+    	', 
+      	', 
+        	', About', 
+          ', SeeNews Renewables provides business news and intelligence for the renewable energy industry worldwide', 
+                    	', Read more', 
+                  ', 
+      	', 
+        	', Contact us', 
+          ', To send comments and suggestions about news coverage or to report errors that call for correction:', 
+				', renewables@seenews.com', 
+				+359 2 80 12 677', 
+                    ', 
+      	', 
+                    	', Advertising', 
+        	', To get information on', 
+			 our traffic, readers profile', 
+			  and prices, visit our ', 
+			  ', Advertising page', 
+			  or contact us at ', advertising@seenews.com', 
+            		', 
+      	', 
+      		', SeeNews sites', 
+			', 
+                                ', Competitive Intelligence', 
+                ', The corporate wire', 
+                ', Power market review', 
+                ', Renewables', 
+                            ', 
+        ', 
+      	', 
+        	', Follow us', 
+          ', 
+			',  Facebook', 
+			',  Twitter', 
+			',  LinkedIn', 
+			',  Google+', 
+			',  RSS Feed', 
+          ', 
+        ', 
+      ', 
+      ', 
+		  ', Disclaimer', 
+		  ', Terms & Conditions', 
+		  ', Privacy Policy', 
+		  ', Code of Ethics', 
+		  Copyright © 2017 SeeNews. All rights reserved.
+	  ', 
+    ', 
+  ', 
+
+	', 
+	', 
+	', 
+	', 
+	', 
+
+	', 
+	', 
+	', 
+		/* <![CDATA[ */
+		var google_conversion_id = 966408274;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+	', 
+	', 
+	', 
+	', 
+		', 
+		', 
+		', 
+	', 
+
+	', 
+		$(document).ready(function () {
+	        if($(".subscribe").length > 0){
+	        	$(".subscribe").click(function(){
+		      		ga('send', 'event', 'SubscribeButton', 'Click', {'nonInteraction': 1});
+		    	});
+	        }
+		});
+	', 
+
+']

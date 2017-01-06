@@ -1,0 +1,1057 @@
+[
+
+        ', u"
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-75025041-1']);
+        _gaq.push(['_setDomainName', 'spsvisalia.com']);
+		_gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+        
+        (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+        ", 
+    
+	 ', 
+    	', 
+			', 
+            	', 
+                    ', 
+					', 
+				', 
+            ', 
+            ', 
+            	
+    ', 
+    	', 
+    	', 
+        	
+                ', 
+                	', About SPS', 
+                    
+', 
+', About SPS', 
+', u"Director's Message", 
+', Accreditation', 
+', History', 
+', Quick Facts', 
+', Board of Trustees', 
+', Contact Us', 
+', Blog', 
+', 
+
+                ', 
+                
+                ', 
+                	', Admissions', 
+                    
+', 
+', Admissions', 
+', Enroll Now!', 
+', FAQs', 
+', Tuition & Fees', 
+', Financial Aid', 
+', 
+
+                ', 
+                
+                ', 
+                	', Academics', 
+                    
+', 
+', Academics', 
+', Academic Principles', 
+', Early Childhood', 
+', K-5th Grade', 
+', 6th - 8th Grade', 
+', Enrichment', 
+', Library', 
+', Faculty Directory', 
+', 
+
+                ', 
+                
+                ', 
+                	', Campus Life', 
+                    
+', 
+', Campus Life', 
+', Quick Links', 
+', Hot Lunch', 
+', Calendar', 
+', Newsletters', 
+', Athletics', 
+', Extended Care', 
+', Faith Life & Chapel Calendar', 
+', Summer Program', 
+', 
+
+                ', 
+                
+                ', 
+                	', Get Involved', 
+                    
+', 
+', SupportSPS', 
+', Get Involved', 
+', Parents\u2019 Guild', 
+', Annual Events', 
+', Scrip', 
+', Spirit Store', 
+', 
+
+                ', 
+                
+                ', 
+                	', Support SPS', 
+                    
+', 
+', Support SPS', 
+', Annual Fund', 
+', Annual Fund Appeal', 
+', Ways To Give', 
+', Annual Fund FAQs', 
+', Donate Now', 
+', Donor Honor Roll', 
+', Spring Auction', 
+', u"Parents' Guild", 
+', SPS Merchandise', 
+', Contact Us', 
+', 
+
+                ', 
+                
+                ', 
+                	', Alumni', 
+                    
+', 
+', Alumni', 
+', Update Contact Information', 
+', Share a Story', 
+', 
+
+                ', 
+                
+        ', 
+    ', 
+
+            ', 
+			', 
+				', 
+					', 
+                    	', 
+						', 
+          				', 
+          				', 
+					', 
+					', 
+                    	', 
+                    	
+          					', 
+								',  
+							', 
+                        
+          					', 
+								',  
+							', 
+                        
+          					', 
+								',  
+							', 
+                        
+          					', 
+								',  
+							', 
+                        
+          					', 
+								',  
+							', 
+                        
+          					', 
+								',  
+							', 
+                        
+          					', 
+								',  
+							', 
+                        
+                        ', 
+        			', 
+				', 
+				', 
+					', 
+					', 
+				', 
+				', 
+                    
+                        ', 
+                            ', 
+                            ', Preschool', 
+                        ', 
+                    
+                        ', 
+                            ', 
+                            ', Elementary', 
+                        ', 
+                    
+                        ', 
+                            ', 
+                            ', Middle School', 
+                        ', 
+                    
+                        ', 
+                            ', 
+                            ', 
+                        ', 
+                    
+      			', 
+                ', 
+					', 
+                        
+							
+                        	', Stay Connected', 
+							', 
+								
+								', 
+	
+	',   
+	', 
+		var facebookIds = new Array();
+		//this function accepts parameters and outputs the feed to the homepage--->
+		function getSocialFeed(feedURL, pageID, feedToken, guestPostsAllowed, maxPosts, maxPostLength, dateFormat, moreLinkText, socialItems, showImages, detailID) {
+			//if this specific feed has already been called (legacy bug) dont run it again
+			if($.inArray(detailID, facebookIds) !== -1) return false;
+			facebookIds.push(detailID);
+			//by default only show the posts the page has posted unless told to include guest posts as well
+			var feedType = "posts";
+			//if guest posts are allowed use the feed endpoint instead to include those
+			if(guestPostsAllowed) feedType = "feed"; 
+			//construct the API endpoint URL and limit to the max posts in the URL
+			var apiURL = "https://graph.facebook.com/" + pageID + "/" + feedType + "?access_token=" + feedToken + "&limit=" + maxPosts;
+			//call the Facebook API to get the feed, returns post data or error message on fail;
+			$.get(apiURL, function(response) {
+				//get the array of posts from the response
+				var postArray = response.data;
+				console.log(postArray);
+				//loop over the array of posts
+				$(postArray).each(function() {
+					var post = this;
+					//init variables
+					var post_created_time = '';
+					var post_description = '';
+					var post_picture = '';
+					var post_title = '';
+					//set the post link to the facebook page by default
+					var post_link = feedURL;
+					var post_overflow = false;
+					var post_suffix = '';
+					var post_descriptionHTML = '';
+					var post_pictureHTML = '';
+					var post_titleHTML = '';
+					var post_dateHTML = '';
+
+					if(typeof post.actions != 'undefined') {
+						if(typeof post.actions[0].link != 'undefined') {
+							post_link = post.actions[0].link;  //get the link of the post 
+						}
+					} else {
+						//set to the old permalink structure
+						if(typeof post.id != 'undefined') {
+							//get the post id
+							var post_id = post.id;
+							post_id = post_id.split("_");
+							mypostid = post_id[1];
+							mypageid = post_id[0];
+							post_link = "https://www.facebook.com/permalink.php?story_fbid=" + mypostid + "&id=" + mypageid;
+						}
+					}
+					
+					//set post_create_time_format, this parses out from the timestamp and formats it to desired format
+					if(typeof post.create_time != 'undefined') {
+						post_created_time = post.created_time;
+						post_created_time = post_created_time.substr(0, post_created_time.indexOf('T'));
+						post_created_time = new Date(post_created_time.replace(/-/g, "/"));
+						post_created_time = post_created_time.format(dateFormat);
+						post_dateHTML = $('<p class="post-date"><a class="post-date-link" href="'+post_link+'">'+post_created_time+'</a></p>');
+					} else {
+						post_created_time = '';
+					}
+					//end time creation formatting
+
+					//get the post description
+					if(typeof post.message != 'undefined') { 
+						post_description = post.message;  //set it from the message field
+					} else {
+						if(typeof post.story != 'undefined') post_description = post.story; //set it to the story field
+					}
+					post_description = post_description.replace(/<(?:.|\n)*?>/gm, '');
+					if(post_description.length > maxPostLength) post_overflow = true;
+					post_description = post_description.substr(0,maxPostLength);
+					//add ellipse to the end of the description if cut off else add two spaces before the more link
+					if(post_overflow) {
+						post_suffix += ' ... ';
+					} else {
+						post_suffix += '  ';
+					}
+					//add the more button at the end of the post
+					post_suffix += '<a class="post-more" href="'+post_link+'" target="_blank">'+moreLinkText+'</a>';
+					//add the suffix to the description and wrap it in a paragraph
+					post_descriptionHTML = $('<p class="post-detail">' + post_description + post_suffix + '</p>');
+					//end post description parsing
+
+					//set picture HTML
+					if(typeof post.picture != 'undefined') post_picture = post.picture;  //gets the post picture
+					post_pictureHTML = $('<a class="soc-pic" href="'+post_link+'" target="_blank"><img src="'+post_picture+'" alt="fb_picture" /></a>');
+
+					//set post title HTML
+					if(typeof post.name != 'undefined') post_title = post.name;  //gets the post title
+					post_titleHTML = $('<h4 class="post-title"><a href="'+post_link+'" target="_blank">'+post_title+'</a></h4>');
+
+					//create a post container to throw the elements in
+					var post_div = $('<div class="social-post"></div>');
+
+					//convert social item list (posts, images, date, etc into an array) and loop over it
+					var item_array = socialItems.split(',');
+					$(item_array).each(function() {
+						switch(this.toString()) {
+							case 'image':
+								if(showImages && post_picture.length) {
+									//add a special class to specify that an image is present
+									$(post_div).addClass('hasimg');
+									//add the picture HTML to the post
+									$(post_pictureHTML).appendTo(post_div);
+								}
+								break;
+							case 'post_title':
+								//add post title HTML to the post
+								if(post_title.length) $(post_titleHTML).appendTo(post_div);
+								break;
+							case 'post':
+								//add post description HTML to the post
+								if(post_description.length) $(post_descriptionHTML).appendTo(post_div);
+								break;
+							case 'date':
+								//add post date HTML to the post
+								if(post_created_time.length) $(post_dateHTML).appendTo(post_div);
+								break;
+						}       
+					});
+					//add the post container to the overall feed.  This div is created at the top of this file
+					$(post_div).appendTo($('#social-feed-d' + detailID));
+					//when the facebook images are loaded remove and they are under 25px, remove them.
+					$('.facebook .soc-pic img').on('load', function() {
+						var img = $(this);
+						var theImage = new Image();
+						theImage.src = img.attr("src");
+						if(theImage.width < 25 || theImage.height < 25) {
+							$(this).parent().parent().removeClass('hasimg');
+							$(this).parent().remove();
+						}
+					});
+					facebookRan = true;
+				});
+			}).fail(function(error) {
+				//something bad happened here
+				console.log(error);
+				$('<p>Facebook feed is currently under maintenance. Please check back later.</p>').appendTo('#social-feed-d#' + detailID);
+			});
+			
+		}
+		//after document has loaded, load the feed
+		$(document).ready(function() {
+			//call the function using the cfvariables defined in social_stream_query
+			getSocialFeed("https://www.facebook.com/SPSVisalia", "SPSVisalia", "EAAHM0lHoaccBAIk1WlQgsP4r0OfA6RahUIwOgjXBQTPEeZBe117mk3BF86VgomO2V3lYVxdVSUvAaOuZCjGCygUH0rEzLGtWzIDcDHfN9ao1ZBOxxLM1UCbe1zuQVcG1AAuii3EjLhvsn56d1vNsF1a22vcI92OLGoV3LVSOAZDZD", 0, 2, 70, "mmmm d, yyyy", "more", "image,post_title,post,more_link", "1", 154253);
+		});
+	', 
+
+							', 
+                            ', View All', 
+        			', 
+					', 
+						
+							
+                            ', Upcoming Events', 
+                            ', 
+                            
+                                    ', 
+                                        ', 6', Jan', 
+                                        ', Friday ',  
+                                        ', Christmas Break', 
+                                        
+                                        
+                                    ', 
+                                
+                                    ', 
+                                        ', 9', Jan', 
+                                        ', Monday ',  
+                                        ', Staff/Students Return', 
+                                        
+                                        
+                                    ', 
+                                
+                                    ', 
+                                        ', 11', Jan', 
+                                        ', Wednesday ',  
+                                        ', Chapel', 
+                                        
+                                        
+                                            ', No student directed chapel. January birthday celebration.  ', details', 
+                                    ', 
+                                
+                            ', 
+                            ', View All', 
+					', 
+                    ', 
+                        
+							
+                            
+                                ', 
+                                ', Newsflash', 
+                                ', 2016-2017 SPS Calendar', 
+
+',  ', 
+
+', 2016 Summer School Catalog', 
+
+',  ', 
+
+', Enroll Now!', 
+
+',  ', 
+
+', Support SPS!', 
+
+',  ', 
+
+', Check out the ', Spirit Store',  and get your SPS gear!', 
+
+',  ', 
+
+',  ', 
+
+',  ', 
+
+',  ', 
+                                ', 
+                                
+					', 
+				', 
+			', 
+            ', 
+                ', 
+                    ', About SPS', Admissions', Academics', Campus Life', Get Involved', Support SPS', Alumni', 
+                    
+                    ',    
+                       ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', 
+                      ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                        ', St. Paul\u2019s School', 
+                        ', 6101 West Goshen Ave. ', |',  Visalia, CA ', |',  93291', 
+            Phone: 559.739.1619 ', |',  ', Email Us', 
+                    ', 
+                    ', 	
+                        ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+	',  
+	
+	', 
+	', 
+
+    ', 
+	$(document).ready(function() {
+		$('.slide').cycle({
+			slides:'>div'  ,
+			pager:'.pager',
+			pagerTemplate:'<li><a href="javascript:void(0);">{{slideNum}}</a></li>',
+			pagerActiveClass:'active',
+			next:'.right_arrow',
+			prev:'.left_arrow',
+			
+			   fx: 'fade',
+			   speed: 700,
+			   timeout: 5000
+			
+		});
+		$(".toggleMenu").click(function(){
+			$('ul ul').removeAttr('style');
+			$('span.expand').removeClass('toggle_minus');
+			$("#topnav").slideToggle(500);
+			$(this).toggleClass('actv');
+			return false;
+		});
+		$('#topnav li .expand').click(function(e){
+			e.preventDefault();
+			$(this).next('ul').slideToggle(500);
+			$(this).toggleClass('toggle_minus');
+			$(this).next('div').find('ul').slideToggle(500);
+		})
+		$('nav ul.nav li.has-children > a .expand').click(function(e) {
+			e.stopImmediatePropagation();
+			e.preventDefault();
+			$(this).parent('a').next().slideToggle();
+			$(this).toggleClass('actv');
+		});
+		$(window).resize(function(e) {
+			if($(window).width() > 941){
+			  $("#topnav").removeAttr("style");
+			  $('ul').removeAttr('style');
+			  $(".toggleMenu").removeClass('close');
+			}
+		});
+	});
+	',  
+'][
+
+        ', u"
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-75025041-1']);
+        _gaq.push(['_setDomainName', 'spsvisalia.com']);
+		_gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+        
+        (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+        ", 
+    
+	 ', 
+    	', 
+			', 
+            	', 
+                    ', 
+					', 
+				', 
+            ', 
+            ', 
+            	
+    ', 
+    	', 
+    	', 
+        	
+                ', 
+                	', About SPS', 
+                    
+', 
+', About SPS', 
+', u"Director's Message", 
+', Accreditation', 
+', History', 
+', Quick Facts', 
+', Board of Trustees', 
+', Contact Us', 
+', Blog', 
+', 
+
+                ', 
+                
+                ', 
+                	', Admissions', 
+                    
+', 
+', Admissions', 
+', Enroll Now!', 
+', FAQs', 
+', Tuition & Fees', 
+', Financial Aid', 
+', 
+
+                ', 
+                
+                ', 
+                	', Academics', 
+                    
+', 
+', Academics', 
+', Academic Principles', 
+', Early Childhood', 
+', K-5th Grade', 
+', 6th - 8th Grade', 
+', Enrichment', 
+', Library', 
+', Faculty Directory', 
+', 
+
+                ', 
+                
+                ', 
+                	', Campus Life', 
+                    
+', 
+', Campus Life', 
+', Quick Links', 
+', Hot Lunch', 
+', Calendar', 
+', Newsletters', 
+', Athletics', 
+', Extended Care', 
+', Faith Life & Chapel Calendar', 
+', Summer Program', 
+', 
+
+                ', 
+                
+                ', 
+                	', Get Involved', 
+                    
+', 
+', SupportSPS', 
+', Get Involved', 
+', Parents\u2019 Guild', 
+', Annual Events', 
+', Scrip', 
+', Spirit Store', 
+', 
+
+                ', 
+                
+                ', 
+                	', Support SPS', 
+                    
+', 
+', Support SPS', 
+', Annual Fund', 
+', Annual Fund Appeal', 
+', Ways To Give', 
+', Annual Fund FAQs', 
+', Donate Now', 
+', Donor Honor Roll', 
+', Spring Auction', 
+', u"Parents' Guild", 
+', SPS Merchandise', 
+', Contact Us', 
+', 
+
+                ', 
+                
+                ', 
+                	', Alumni', 
+                    
+', 
+', Alumni', 
+', Update Contact Information', 
+', Share a Story', 
+', 
+
+                ', 
+                
+        ', 
+    ', 
+
+            ', 
+			', 
+				', 
+					', 
+                    	', 
+						', 
+          				', 
+          				', 
+					', 
+					', 
+                    	', 
+                    	
+          					', 
+								',  
+							', 
+                        
+          					', 
+								',  
+							', 
+                        
+          					', 
+								',  
+							', 
+                        
+          					', 
+								',  
+							', 
+                        
+          					', 
+								',  
+							', 
+                        
+          					', 
+								',  
+							', 
+                        
+          					', 
+								',  
+							', 
+                        
+                        ', 
+        			', 
+				', 
+				', 
+					', 
+					', 
+				', 
+				', 
+                    
+                        ', 
+                            ', 
+                            ', Preschool', 
+                        ', 
+                    
+                        ', 
+                            ', 
+                            ', Elementary', 
+                        ', 
+                    
+                        ', 
+                            ', 
+                            ', Middle School', 
+                        ', 
+                    
+                        ', 
+                            ', 
+                            ', 
+                        ', 
+                    
+      			', 
+                ', 
+					', 
+                        
+							
+                        	', Stay Connected', 
+							', 
+								
+								', 
+	
+	',   
+	', 
+		var facebookIds = new Array();
+		//this function accepts parameters and outputs the feed to the homepage--->
+		function getSocialFeed(feedURL, pageID, feedToken, guestPostsAllowed, maxPosts, maxPostLength, dateFormat, moreLinkText, socialItems, showImages, detailID) {
+			//if this specific feed has already been called (legacy bug) dont run it again
+			if($.inArray(detailID, facebookIds) !== -1) return false;
+			facebookIds.push(detailID);
+			//by default only show the posts the page has posted unless told to include guest posts as well
+			var feedType = "posts";
+			//if guest posts are allowed use the feed endpoint instead to include those
+			if(guestPostsAllowed) feedType = "feed"; 
+			//construct the API endpoint URL and limit to the max posts in the URL
+			var apiURL = "https://graph.facebook.com/" + pageID + "/" + feedType + "?access_token=" + feedToken + "&limit=" + maxPosts;
+			//call the Facebook API to get the feed, returns post data or error message on fail;
+			$.get(apiURL, function(response) {
+				//get the array of posts from the response
+				var postArray = response.data;
+				console.log(postArray);
+				//loop over the array of posts
+				$(postArray).each(function() {
+					var post = this;
+					//init variables
+					var post_created_time = '';
+					var post_description = '';
+					var post_picture = '';
+					var post_title = '';
+					//set the post link to the facebook page by default
+					var post_link = feedURL;
+					var post_overflow = false;
+					var post_suffix = '';
+					var post_descriptionHTML = '';
+					var post_pictureHTML = '';
+					var post_titleHTML = '';
+					var post_dateHTML = '';
+
+					if(typeof post.actions != 'undefined') {
+						if(typeof post.actions[0].link != 'undefined') {
+							post_link = post.actions[0].link;  //get the link of the post 
+						}
+					} else {
+						//set to the old permalink structure
+						if(typeof post.id != 'undefined') {
+							//get the post id
+							var post_id = post.id;
+							post_id = post_id.split("_");
+							mypostid = post_id[1];
+							mypageid = post_id[0];
+							post_link = "https://www.facebook.com/permalink.php?story_fbid=" + mypostid + "&id=" + mypageid;
+						}
+					}
+					
+					//set post_create_time_format, this parses out from the timestamp and formats it to desired format
+					if(typeof post.create_time != 'undefined') {
+						post_created_time = post.created_time;
+						post_created_time = post_created_time.substr(0, post_created_time.indexOf('T'));
+						post_created_time = new Date(post_created_time.replace(/-/g, "/"));
+						post_created_time = post_created_time.format(dateFormat);
+						post_dateHTML = $('<p class="post-date"><a class="post-date-link" href="'+post_link+'">'+post_created_time+'</a></p>');
+					} else {
+						post_created_time = '';
+					}
+					//end time creation formatting
+
+					//get the post description
+					if(typeof post.message != 'undefined') { 
+						post_description = post.message;  //set it from the message field
+					} else {
+						if(typeof post.story != 'undefined') post_description = post.story; //set it to the story field
+					}
+					post_description = post_description.replace(/<(?:.|\n)*?>/gm, '');
+					if(post_description.length > maxPostLength) post_overflow = true;
+					post_description = post_description.substr(0,maxPostLength);
+					//add ellipse to the end of the description if cut off else add two spaces before the more link
+					if(post_overflow) {
+						post_suffix += ' ... ';
+					} else {
+						post_suffix += '  ';
+					}
+					//add the more button at the end of the post
+					post_suffix += '<a class="post-more" href="'+post_link+'" target="_blank">'+moreLinkText+'</a>';
+					//add the suffix to the description and wrap it in a paragraph
+					post_descriptionHTML = $('<p class="post-detail">' + post_description + post_suffix + '</p>');
+					//end post description parsing
+
+					//set picture HTML
+					if(typeof post.picture != 'undefined') post_picture = post.picture;  //gets the post picture
+					post_pictureHTML = $('<a class="soc-pic" href="'+post_link+'" target="_blank"><img src="'+post_picture+'" alt="fb_picture" /></a>');
+
+					//set post title HTML
+					if(typeof post.name != 'undefined') post_title = post.name;  //gets the post title
+					post_titleHTML = $('<h4 class="post-title"><a href="'+post_link+'" target="_blank">'+post_title+'</a></h4>');
+
+					//create a post container to throw the elements in
+					var post_div = $('<div class="social-post"></div>');
+
+					//convert social item list (posts, images, date, etc into an array) and loop over it
+					var item_array = socialItems.split(',');
+					$(item_array).each(function() {
+						switch(this.toString()) {
+							case 'image':
+								if(showImages && post_picture.length) {
+									//add a special class to specify that an image is present
+									$(post_div).addClass('hasimg');
+									//add the picture HTML to the post
+									$(post_pictureHTML).appendTo(post_div);
+								}
+								break;
+							case 'post_title':
+								//add post title HTML to the post
+								if(post_title.length) $(post_titleHTML).appendTo(post_div);
+								break;
+							case 'post':
+								//add post description HTML to the post
+								if(post_description.length) $(post_descriptionHTML).appendTo(post_div);
+								break;
+							case 'date':
+								//add post date HTML to the post
+								if(post_created_time.length) $(post_dateHTML).appendTo(post_div);
+								break;
+						}       
+					});
+					//add the post container to the overall feed.  This div is created at the top of this file
+					$(post_div).appendTo($('#social-feed-d' + detailID));
+					//when the facebook images are loaded remove and they are under 25px, remove them.
+					$('.facebook .soc-pic img').on('load', function() {
+						var img = $(this);
+						var theImage = new Image();
+						theImage.src = img.attr("src");
+						if(theImage.width < 25 || theImage.height < 25) {
+							$(this).parent().parent().removeClass('hasimg');
+							$(this).parent().remove();
+						}
+					});
+					facebookRan = true;
+				});
+			}).fail(function(error) {
+				//something bad happened here
+				console.log(error);
+				$('<p>Facebook feed is currently under maintenance. Please check back later.</p>').appendTo('#social-feed-d#' + detailID);
+			});
+			
+		}
+		//after document has loaded, load the feed
+		$(document).ready(function() {
+			//call the function using the cfvariables defined in social_stream_query
+			getSocialFeed("https://www.facebook.com/SPSVisalia", "SPSVisalia", "EAAHM0lHoaccBAIk1WlQgsP4r0OfA6RahUIwOgjXBQTPEeZBe117mk3BF86VgomO2V3lYVxdVSUvAaOuZCjGCygUH0rEzLGtWzIDcDHfN9ao1ZBOxxLM1UCbe1zuQVcG1AAuii3EjLhvsn56d1vNsF1a22vcI92OLGoV3LVSOAZDZD", 0, 2, 70, "mmmm d, yyyy", "more", "image,post_title,post,more_link", "1", 154253);
+		});
+	', 
+
+							', 
+                            ', View All', 
+        			', 
+					', 
+						
+							
+                            ', Upcoming Events', 
+                            ', 
+                            
+                                    ', 
+                                        ', 6', Jan', 
+                                        ', Friday ',  
+                                        ', Christmas Break', 
+                                        
+                                        
+                                    ', 
+                                
+                                    ', 
+                                        ', 9', Jan', 
+                                        ', Monday ',  
+                                        ', Staff/Students Return', 
+                                        
+                                        
+                                    ', 
+                                
+                                    ', 
+                                        ', 11', Jan', 
+                                        ', Wednesday ',  
+                                        ', Chapel', 
+                                        
+                                        
+                                            ', No student directed chapel. January birthday celebration.  ', details', 
+                                    ', 
+                                
+                            ', 
+                            ', View All', 
+					', 
+                    ', 
+                        
+							
+                            
+                                ', 
+                                ', Newsflash', 
+                                ', 2016-2017 SPS Calendar', 
+
+',  ', 
+
+', 2016 Summer School Catalog', 
+
+',  ', 
+
+', Enroll Now!', 
+
+',  ', 
+
+', Support SPS!', 
+
+',  ', 
+
+', Check out the ', Spirit Store',  and get your SPS gear!', 
+
+',  ', 
+
+',  ', 
+
+',  ', 
+
+',  ', 
+                                ', 
+                                
+					', 
+				', 
+			', 
+            ', 
+                ', 
+                    ', About SPS', Admissions', Academics', Campus Life', Get Involved', Support SPS', Alumni', 
+                    
+                    ',    
+                       ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', 
+                      ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                        ', St. Paul\u2019s School', 
+                        ', 6101 West Goshen Ave. ', |',  Visalia, CA ', |',  93291', 
+            Phone: 559.739.1619 ', |',  ', Email Us', 
+                    ', 
+                    ', 	
+                        ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+	',  
+	
+	', 
+	', 
+
+    ', 
+	$(document).ready(function() {
+		$('.slide').cycle({
+			slides:'>div'  ,
+			pager:'.pager',
+			pagerTemplate:'<li><a href="javascript:void(0);">{{slideNum}}</a></li>',
+			pagerActiveClass:'active',
+			next:'.right_arrow',
+			prev:'.left_arrow',
+			
+			   fx: 'fade',
+			   speed: 700,
+			   timeout: 5000
+			
+		});
+		$(".toggleMenu").click(function(){
+			$('ul ul').removeAttr('style');
+			$('span.expand').removeClass('toggle_minus');
+			$("#topnav").slideToggle(500);
+			$(this).toggleClass('actv');
+			return false;
+		});
+		$('#topnav li .expand').click(function(e){
+			e.preventDefault();
+			$(this).next('ul').slideToggle(500);
+			$(this).toggleClass('toggle_minus');
+			$(this).next('div').find('ul').slideToggle(500);
+		})
+		$('nav ul.nav li.has-children > a .expand').click(function(e) {
+			e.stopImmediatePropagation();
+			e.preventDefault();
+			$(this).parent('a').next().slideToggle();
+			$(this).toggleClass('actv');
+		});
+		$(window).resize(function(e) {
+			if($(window).width() > 941){
+			  $("#topnav").removeAttr("style");
+			  $('ul').removeAttr('style');
+			  $(".toggleMenu").removeClass('close');
+			}
+		});
+	});
+	',  
+']

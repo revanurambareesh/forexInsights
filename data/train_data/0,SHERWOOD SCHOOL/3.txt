@@ -1,0 +1,4387 @@
+[
+    ', 
+    ', 
+    ', 
+    ', 
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    ', 
+  
+
+
+  	  
+  
+  
+  
+    ', u"
+    
+    function toggleCat(el, cID){
+      //var name = el.identify();
+      var catItem = Ext.get(el);
+      var curVal = true;
+      if (catItem.checked != undefined)
+        curVal = catItem.checked;
+        
+      setTimeout(function(){
+        catItem.checked = !curVal;
+        catItem.dom.checked = !curVal;
+      }, 5);
+      if (curVal){
+        Ext.select('.cat_'+cID).addClass('hidden');
+      }else{
+        Ext.select('.cat_'+cID).removeClass('hidden');
+      }
+    }
+    //Ext.onReady(fixLinks);
+    var loadLastPage = function(){
+      return true;
+    };
+  ", 
+
+
+  ', 
+    .isNotMobile #pagerBar{
+      -webkit-transition: opacity 0.5s ease-in;
+      -moz-transition: opacity 0.5s ease-in;
+      -o-transition: opacity 0.5s ease-in;
+      transition: opacity 0.5s ease-in;
+      -webkit-transition: margin 0.5s ease-in;
+      -moz-transition: margin 0.5s ease-in;
+      -o-transition: margin 0.5s ease-in;
+      transition: margin 0.5s ease-in;
+    
+     }
+    .isNotMobile #pagerBar:hover{	
+      opacity:1.0;
+     }
+
+
+    
+    
+    .bigPrint1 .x-btn-text {font-weight: bold; font-size: 14px; height: 26px !important;}
+    .bigPrint2 .x-btn-text {font-size: 13px; height: 20px !important;}
+  ', 
+   
+   ', 
+    var lastLoggedInUserID = 0;
+    var lastLoggedInUserName = '';
+    var lastLoggedInDisplayName = '';
+    var lastLoggedInUserCN = '';
+    var lastLoggedInUserDomain = '';
+    
+      currentUser.username = '';
+      currentUser.displayname = '';
+      currentUser.email = '';
+    
+    var currentPageTitle = 'SherwoodSD R8';
+    var currentSchoolAlias = 'District';
+    
+      /*Ext.onReady(function(){
+        //setTimeout(checkMenus, 500);
+        var c = {};
+        var hideLoad = true;
+        var modData = Ext.data.Record.create([
+              {name: 'id', mapping: 'id'},
+              {name: 'title', mapping: 'title'},
+              {name: 'browser_title', mapping: 'browser_title'},
+              {name: 'data', mapping: 'data'}
+            ]);
+        var modReader = new Ext.data.XmlReader({
+              record: "content",
+              success: "success",
+              id: "id"
+            }, modData);
+
+        var myStore = new Ext.data.Store({
+              autoLoad: true,
+              reader: modReader,
+              url: '/ajax/proxy/module.cfm',
+              baseParams: {}, //c.storeParams
+              listeners: {
+                loadexception: function(m){
+                  //var errorButton = new Element('input', { 'type': 'button', style: 'float: right;', value: 'Send Error' });
+                  //errorButton.observe('click', function(){ sendError(c); });
+                  var errorText = new Element('span').update('Well, this is embarrassing.. this module is misbehaving!');
+                  var errorDiv = new Element('div', { });
+                  //errorDiv.appendChild(errorButton);
+                  errorDiv.appendChild(errorText);
+                  c.setTitle('Widget Error');
+                  c.body.dom.innerHTML = '';
+                  c.body.dom.appendChild(errorDiv);
+                },
+                load: function(s,r,o){
+                  if (c){
+                    if (hideLoad && r.length > 0){
+                      c.setTitle(r[0].data.title);
+                      c.body.dom.innerHTML = r[0].data.data;
+                    }else{
+                      if (c.body){
+                        c.setTitle("Loading...");
+                        c.body.dom.innerHTML = c.loadingText;
+                      }
+                      if (r.length > 0){
+                        setTimeout(function(){
+                          c.setTitle(r[0].data.title);
+                          c.body.dom.innerHTML = r[0].data.data;
+                        }, 500);
+                      }
+                    }
+                  }
+                }
+              }            
+            });
+      });
+    */
+      
+    var printBox;
+    var doPrint;
+    Ext.onReady(function(){
+      doPrint = function(link){
+        printBox = new Ext.Window({
+          title: 'Print',
+          modal: true,
+          resizable: false,
+          buttonAlign: 'center',
+          layout: 'border',
+          height: 170,
+          width: 400,
+          items: [
+                    {
+                      bodyStyle: 'padding: 10px; text-align: center; font-weight: bold',
+                      region: 'north',
+                      border: false,
+                      height: 30,
+                      html: 'What portion of the page would you like to print?'
+                    },{
+                      region: 'center',                    
+                      border: false,
+                      layout: {
+                                type:'vbox',
+                                padding:'5',
+                                align:'stretch'
+                              },
+                      items:[{
+                                  xtype:'button',
+                                  cls: 'bigPrint1',
+                                  text: 'Print Entire Page',
+                                  handler: function(){
+                                    printBox.close();
+                                    Ext.Msg.hide();
+                                    window.print();
+                                  }
+                              },{
+                                  xtype:'spacer',
+                                  flex: 1
+                              },{
+                                  xtype:'button',
+                                  cls: 'bigPrint2',
+                                  text: 'Print Content Only',
+                                  handler: function(){
+                                    printBox.close();
+                                    Ext.Msg.hide();
+                                    Ext.Msg.wait('Getting ready to print..','Please Wait...');
+                                    newLocation = link.href.replace('#','') + '&printview=1';
+                                    //newLocation = '/print'+lastLoadedURLRel;
+                                    console.info(newLocation);
+                                    setTimeout(function(){
+                                      var newWindow = window.open(newLocation, '_blank');
+                                      newWindow.focus();
+                                      Ext.Msg.hide();
+                                    }, 300);
+                                    
+                                  }
+                              }]
+                    }
+                ],
+
+          buttons: [
+                  {
+                    text: 'Cancel',
+                    handler: function(){ 
+                      printBox.close();
+                    }
+                  }
+                ]
+        
+        });
+        printBox.show(this);
+      }
+    });
+    
+
+    currentPage.storeParams = {
+      dataID: currentPageDataID, 
+      alias: currentPageAction, 
+      keyword: currentPageKeyword, 
+      curPage: currentPageNumber, 
+      id: currentPageModuleID, 
+      portletID: 0, 
+      portalID: 0
+    }; 
+    currentPage.values = {};
+  ', 
+  
+  
+  
+  ', 
+    ', u"
+  var siteNotice = false;
+  function dropSiteNotice(){
+    new Ajax.Request('/supressMessages.cfm?supress=false');
+    Effect.BlindDown('siteNoticeBoxHolder', { duration: 0.5 })
+    $('pagerBarToolAlertButton').addClassName('buttonOn');
+  }
+  function liftSiteNotice(){
+    new Ajax.Request('/supressMessages.cfm?supress=true');
+    Effect.BlindUp('siteNoticeBoxHolder', { duration: 0.25 })
+    $('pagerBarToolAlertButton').removeClassName('buttonOn');
+  }
+  function toggleSiteNotice(){ 
+    
+    if ($('pagerBarToolAlertButton').hasClassName('buttonOn')){
+      liftSiteNotice();
+    }else{
+      dropSiteNotice();
+    }
+  
+  }
+", 
+
+    ', 
+      ', 
+        
+        ', 
+        
+          ', 
+            ', Jump to Page Navigation', 
+            ', Jump to Page Content', 
+            ', Jump to Page Footer', 
+          ', 
+      ', 
+      ', 
+        ', 
+          ', 
+          ', 
+            ', 
+              ', 
+                ', 
+                ', 
+              ', 
+              
+      ', 
+        ', 
+          ', 
+          ', Search', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', Cancel', 
+          ', 
+        ', 
+      ', 
+      
+            ', 
+          ', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', 
+            
+      ', 
+        ', 
+          ', 
+          ', A-', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', A+', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', Sharing', 
+            ', 
+          ', 
+        ', 
+        ', 
+          
+          ', 
+            ', 
+              
+      ', 
+        ', 
+          ', 
+          ', Print Page', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', Share on Facebook', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', Share on Twitter', 
+          ', 
+        ', 
+      ', 
+      
+            ', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', Search', 
+          ', 
+        ', 
+      ', 
+      
+          ', 
+        ', 
+        
+        ', 
+          ', 
+            
+      ', 
+        ', 
+          ', 
+          ', Alert', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', Login', 
+          ', 
+        ', 
+      ', 
+      
+          ', 
+        ', 
+        
+      ', 
+      ', 
+    ', 
+  ', 
+      
+  ', 
+    
+    var searchBar;
+    function submitSearch(){
+      document.forms["searchForm"].submit();
+    }
+    function showSearchBar(){
+      Ext.get('searchHolder').removeClass('x-hidden');
+      Ext.get('toolsHolder').addClass('x-hidden');
+      resizePagerBar();
+      if (searchBar)
+        searchBar.focus();
+    }
+    function hideSearchBar(){
+      Ext.get('searchHolder').addClass('x-hidden');
+      Ext.get('toolsHolder').removeClass('x-hidden');
+      resizePagerBar();
+    }
+    function resizePagerBar(){
+      var srchBtn = Ext.get('searchButtonMain');
+      var srchCnclBtn = Ext.get('searchButtonCancel');
+      var logo = Ext.get('pagerBarToolLogo');
+      var item = Ext.get('pagerBar');
+      Ext.get('lilQ').setWidth(item.getWidth() - logo.getWidth() - srchBtn.getWidth() - srchCnclBtn.getWidth() - 20);
+      if (searchBar)
+        searchBar.setWidth(item.getWidth() - logo.getWidth() - srchBtn.getWidth() - srchCnclBtn.getWidth() - 20);
+    }
+    Ext.onReady(function(){
+      window.onresize = resizePagerBar;
+      resizePagerBar();
+      /*
+      var el = Ext.get('lilQ');
+      el.on('keydown', function(e){
+        window.location.href = "#!/"+ currentSchool.Alias + "/Search/" + this.dom.value;
+      }, el, {buffer: 300});
+      
+        
+      var ds = new Ext.data.Store({
+          url: '/ajax/search/searchSuggestion.cfm',
+          reader: new Ext.data.JsonReader({
+              root: 'results'
+          }, [
+              {name: 'title', mapping: 'title'}
+          ])
+      });
+
+      // Custom rendering Template
+      var resultTpl = new Ext.XTemplate(
+          '<tpl for="."><div class="search-item">',
+              '{title}',
+          '</div></tpl>'
+      );
+
+      searchBar = new Ext.form.ComboBox({
+        applyTo: 'lilQ',
+        autoShow: false,
+        //store: ds,
+        //mode: 'remote',
+        displayField:'title',
+        typeAhead: false,
+        loadingText: 'Getting Suggestions...',
+        hideTrigger:true,
+        tpl: resultTpl,
+        itemSelector: 'div.search-item',
+        onSelect: function(record){
+            window.location.href = "#!/"+ currentSchool.Alias + "/Search/" + record.get('title');
+        },
+        listeners: {
+          show: function(){
+            resizePagerBar();
+          }
+        }
+      });
+      searchBar.show();
+      var el = Ext.get('lilQ');
+      el.on('keydown', function(e){
+        window.location.href = "#!/"+ currentSchool.Alias + "/Search/" + this.dom.value;
+      }, el, {buffer: 300});*/
+    });
+  ', 
+
+    
+	', 
+    	', 
+        	', 
+                ', SherwoodSD R8', 
+                ', 
+                	', SherwoodSD R8 Home Page', 
+                ',  
+                ', 
+                ', 
+                ', 
+					
+', 
+  ', 
+    
+      ', 33300 S. Sherwood Drive', 
+        
+      ', Creighton', , 
+      ', Missouri',  
+      ', 64739', 
+    
+  ', 
+  
+  	', 
+   
+  ', 
+   
+    Phone: ', (660)499-2239', 
+      
+    Fax: ', (660)499-2624', 
+    
+  ', 
+', 
+
+            	', 
+      			', 
+					', 
+                  		
+      ', 
+     ', 
+     var _SlideshowTransitions = [];
+          
+  <!-- these transitions will be controlled form the site config. --->
+  var _SlideshowTransitions = [{$Duration:2000,$Zoom:1,$Rotate:0.1,$During:{$Left:[0.6,0.4],$Top:[0.6,0.4],$Zoom:[0.6,0.4],$Rotate:[0.6,0.4]},$FlyDirection:6,$Easing:{$Left:$JssorEasing$.$EaseInQuad,$Top:$JssorEasing$.$EaseInQuad,$Opacity:$JssorEasing$.$EaseLinear,$Rotate:$JssorEasing$.$EaseInQuad},$ScaleHorizontal:0.3,$ScaleVertical:0.5,$Opacity:2}];
+        jssor_slider1_starter = function (containerId) {
+            var jssor_slider1 = new $JssorSlider$(containerId, {
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $Idle: 4500,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+                $DragOrientation: 3,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $Cols is greater than 1, or parking position is not 0)
+                $PauseOnHover: 1,                             //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+                $SlideDuration:1500,
+                $FillMode: 2,
+                $BulletNavigatorOptions: {
+                $Class: $JssorBulletNavigator$,
+                $ChanceToShow: 2
+            },
+                $SlideshowOptions: {                                //[Optional] Options to specify and enable slideshow or not
+                    $Class: $JssorSlideshowRunner$,                 //[Required] Class to create instance of slideshow
+                    $Transitions: _SlideshowTransitions,            //[Required] An array of slideshow transitions to play slideshow
+                    $TransitionsOrder: 1,                           //[Optional] The way to choose transition to play slide, 1 Sequence, 0 Random
+                    $ShowLink: true                                 //[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
+                }
+            });
+//responsive code begin
+        //you can remove responsive code if you don't want the slider scales
+        //while window resizing
+        function ScaleSlider() {
+            var parentWidth = $('#slider1_container').parent().width();
+            if (parentWidth) {
+                jssor_slider1.$SetScaleWidth(parentWidth);
+            }
+            else
+                window.setTimeout(ScaleSlider, 30);
+        }
+        //Scale slider after document ready
+        ScaleSlider();
+                                        
+        //Scale slider while window load/resize/orientationchange.
+        $(window).bind("load", ScaleSlider);
+        $(window).bind("resize", ScaleSlider);
+        $(window).bind("orientationchange", ScaleSlider);
+        //responsive code end
+        };
+    
+     ', 
+
+       ', 
+          ', 
+         ', 
+            
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+          ', 
+          
+        ', 
+        
+        ', 
+            ', 
+            ', 
+        ', 
+        
+        ', 
+
+  
+          ', 
+          ', u"jssor_slider1_starter('slider1_container');", 
+        ', 
+
+      ', u"
+        
+        if (currentUser.canUseSlideShow){
+          Ext.onReady(function(){
+            Ext.get('slider1_container').on('dblclick', function(e){
+              e.stopEvent();
+              e.cancelBubble = true;
+              e.stopPropagation();
+              Ext.Msg.wait('Loading Slideshow Settings', 'Loading');
+              AlbumPickShared({gcdID:0, slideID: 'header', schoolID: 1}, true);
+            });
+          });
+        }
+      ", 
+      
+             		', 
+      			', 
+                ',  
+    ', 
+      ', Follow us', 
+      
+        ', 
+          ', 
+            ', 
+          ',         
+        ',  
+      
+        ', 
+          ', 
+            ', 
+          ',         
+        ',  
+      
+      ', 
+   ',  
+            ', 
+            ', 
+            	', 
+                    ',  
+                        
+          ', 
+            
+                  ', 
+                    
+                    ', Home ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Athletics ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Football', 
+                  
+                    ', 
+                      ', 
+                        
+                ', 
+                  
+                  ', Varsity Football Schedule', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Junior Varsity Football Schedule', 
+                  
+                ', 
+              
+                      ', 
+                    ', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Volleyball', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Cross Country', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Cheerleading', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Softball', 
+                  
+                    ', 
+                      ', 
+                        
+                ', 
+                  
+                  ', Softball Schedule', 
+                  
+                ', 
+              
+                      ', 
+                    ', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Basketball', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Wrestling', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Baseball', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Activities ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Facilities Usage Schedule', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Facilities Usage Request Form', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Vocal Music', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', FFA Chapter', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Band', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', FBLA', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Staff Links ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Campus Portal', 
+                  
+                    ', 
+                      ', 
+                        
+                ', 
+                  
+                  ', Campus Login', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Classroom Messenger', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Posting to Eligibility and Midterm', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Classroom Messenger Best Practice', 
+                  
+                ', 
+              
+                      ', 
+                    ', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Destiny', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Accelerated Reader', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Online Classroom', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Technology Service Request', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Maintenance Service Request', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', School Bus Request', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Smarter Balance Digital Library', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Safe Schools Training', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Parent Links ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Accelerated Reader', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Accelerated Home', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Parent Portal', 
+                  
+                    ', 
+                      ', 
+                        
+                ', 
+                  
+                  ', Parent Portal Login', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', How to use the Parent Portal', 
+                  
+                ', 
+              
+                      ', 
+                    ', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Vocational Survey', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Student Links ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Britannica Online', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Destiny', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Menus', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Follett eBook Shelf', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Student Portal', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Accelerated Reader', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Missouri Connections', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Tutorials', 
+                  
+                    ', 
+                      ', 
+                        
+                ', 
+                  
+                  ', Middle School Mathematics', 
+                  
+                ', 
+              
+                      ', 
+                    ', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', District Calendars ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', 2016-2017 District Calendar', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', District Info ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Notice of Non-Discrimination', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Board Agendas and Minutes', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Board Policy', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Board Members', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Certified Staff Roster', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Salary Schedule 2016-17', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+            
+          ', 
+        
+                    ', 
+                ', 
+            ', 
+            ', 
+				', 
+                    ',  
+                         
+                         ', 
+                          
+                            ',  
+                              ', 
+                                ', 
+                                  ', 
+                                  ', 
+                                ', 
+                                ', District Calendars', 
+                              ', 
+                            ', 
+                          
+                            ',  
+                              ', 
+                                ', 
+                                  ', 
+                                  ', 
+                                ', 
+                                ', Sherwood Mail', 
+                              ', 
+                            ', 
+                          
+                            ',  
+                              ', 
+                                ', 
+                                  ', 
+                                  ', 
+                                ', 
+                                ', Employment Opportunities', 
+                              ', 
+                            ', 
+                          
+                            ',  
+                              ', 
+                                ', 
+                                  ', 
+                                  ', 
+                                ', 
+                                ', All Sports Schedules', 
+                              ', 
+                            ', 
+                          
+                            ',  
+                              ', 
+                                ', 
+                                  ', 
+                                  ', 
+                                ', 
+                                ', Men, 
+                              ', 
+                            ', 
+                          ', 
+                         ', 
+                         
+                    ', 
+                    ', 
+                        
+      ', 
+        
+                ', 
+                  ', 
+                    ', Schools', 
+                    
+          ', 
+            
+                  ', 
+                    
+                    ', High School ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', HS MS Media Center', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Middle School ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', MS_LAB_Checkout', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', HS MS Media Center', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Elementary School ', 
+                    
+                  ', 
+                
+            
+          ', 
+        
+                  ', 
+                ', 
+              
+                ', 
+                  ', 
+                    ', Central Office', 
+                    
+          ', 
+            
+                  ', 
+                    
+                    ', Central Office Staff ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Superintendent of Schools ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Blog', 
+                  
+                    ', 
+                      ', 
+                        
+                ', 
+                  
+                  ', Current Blogs', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Archived Blogs', 
+                  
+                ', 
+              
+                      ', 
+                    ', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Food Service ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', School Nurses ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Technology ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Documents ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', District Newsletters ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', News Section ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Current News', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Archived News', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+            
+          ', 
+        
+                  ', 
+                ', 
+              
+      ', 
+    
+                      ', 
+												
+                        ', 
+                          ', 
+	                          ', 
+	', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+
+                          ', 
+                           
+                        ', 
+                      ', 
+                    
+                      ', 
+                        ', 
+                          ', 
+	                          Some files on this web site may require Adobe Acrobat Reader - download free', 
+	                          ', 
+	                          ', 
+	                          ', 
+                          ', 
+                        ', 
+                      ', 
+                    
+                    ', 
+            	', 
+                ', 
+                    ', 
+                        ', u"
+  var siteNotice = false;
+  function dropSiteNotice(){
+    new Ajax.Request('/supressMessages.cfm?supress=false');
+    Effect.BlindDown('siteNoticeBoxHolder', { duration: 0.5 })
+    $('pagerBarToolAlertButton').addClassName('buttonOn');
+  }
+  function liftSiteNotice(){
+    new Ajax.Request('/supressMessages.cfm?supress=true');
+    Effect.BlindUp('siteNoticeBoxHolder', { duration: 0.25 })
+    $('pagerBarToolAlertButton').removeClassName('buttonOn');
+  }
+  function toggleSiteNotice(){ 
+    
+    if ($('pagerBarToolAlertButton').hasClassName('buttonOn')){
+      liftSiteNotice();
+    }else{
+      dropSiteNotice();
+    }
+  
+  }
+", 
+
+                        ', 
+                            
+                        ', 
+                        ', 
+                            ', 
+                                ', 
+    
+    
+
+    changePage = function(widget, page){
+      var el = Ext.getCmp(widget);
+      el.storeParams.curPage = page;
+      el.storeFN(el, true);
+    }
+    
+    var currentPortalID = 1;
+    portalLoader = function(){
+    if(Ext.get('loaderPortal'))
+      Ext.get('loaderPortal').remove();
+      
+      var columns = [];
+      columns[0] = [];
+      columns[1] = [];
+      columns[2] = [];
+      columns[3] = [];
+      
+        
+        
+        var myParams = {
+                        cmpID: 'widget_4_151_1',
+                        moduleValues: {
+                          
+                        },
+                        storeParams: {
+                            myLayout: 'edgeless', 
+                            myOpacity: '100', 
+                            dataID: '1226', 
+                            alias: 'Page', 
+                            keyword: 'page', 
+                            curPage: 1, 
+                            id: '4', 
+                            portletID: '151', 
+                            systemID: '5', 
+                            portalID: '1'
+                          
+                        }
+                      };
+        columns[0].push({
+            title: 'Loading Page...',
+            
+              xtype: 'cfcportlet',
+              JSMode: false,
+            
+              tools: [],
+              draggable:false,
+              collapsible:false,
+            
+            cls:'x-portlet x-portlet-edgeless x-portlet-edgeless-100',
+            titleEl : 'widgetPrerenderTitle_4_151_1',
+            contentEl : 'widgetPrerender_4_151_1',
+            id: 'widget_4_151_1',
+            //moduleParams: {}, REMOVE
+            storeParams: {
+              myLayout: 'edgeless', 
+              myOpacity: '100', 
+              dataID: '1226', 
+              alias: 'Page', 
+              keyword: 'page', 
+              curPage: 1, 
+              id: '4', 
+              portletID: '151', 
+              systemID: '5', 
+              portalID: '1'
+            
+            },
+
+            values: {}
+          });
+      
+        
+        
+        var myParams = {
+                        cmpID: 'widget_4_160_1',
+                        moduleValues: {
+                          
+                        },
+                        storeParams: {
+                            myLayout: 'plain', 
+                            myOpacity: '25', 
+                            dataID: '1247', 
+                            alias: 'Page', 
+                            keyword: 'page', 
+                            curPage: 1, 
+                            id: '4', 
+                            portletID: '160', 
+                            systemID: '5', 
+                            portalID: '1'
+                          
+                        }
+                      };
+        columns[1].push({
+            title: 'Loading Page...',
+            
+              xtype: 'cfcportlet',
+              JSMode: false,
+            
+              tools: [],
+              draggable:false,
+              collapsible:false,
+            
+            cls:'x-portlet x-portlet-plain x-portlet-plain-25',
+            titleEl : 'widgetPrerenderTitle_4_160_1',
+            contentEl : 'widgetPrerender_4_160_1',
+            id: 'widget_4_160_1',
+            //moduleParams: {}, REMOVE
+            storeParams: {
+              myLayout: 'plain', 
+              myOpacity: '25', 
+              dataID: '1247', 
+              alias: 'Page', 
+              keyword: 'page', 
+              curPage: 1, 
+              id: '4', 
+              portletID: '160', 
+              systemID: '5', 
+              portalID: '1'
+            
+            },
+
+            values: {}
+          });
+      
+        
+        
+        var myParams = {
+                        cmpID: 'widget_35_162_1',
+                        moduleValues: {
+                          layout: 'default', set_height: 600, url: 'https://www.google.com/calendar/embed?mode=AGENDA&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=sherwoodk12.net_ai3e8nu3shso0epk0970mg5f30%40group.calendar.google.com&amp;color=%23333333&amp;ctz=America%2FChicago', __alias: 'Upcoming Events'
+                        },
+                        storeParams: {
+                            myLayout: 'titleless', 
+                            myOpacity: '75', 
+                            dataID: '', 
+                            alias: 'IFrame', 
+                            keyword: 'iframe', 
+                            curPage: 1, 
+                            id: '35', 
+                            portletID: '162', 
+                            systemID: '31', 
+                            portalID: '1'
+                          
+                        }
+                      };
+        columns[2].push({
+            title: 'Loading IFrame...',
+            
+              xtype: 'cfcportlet',
+              JSMode: false,
+            
+              tools: [],
+              draggable:false,
+              collapsible:false,
+            
+            cls:'x-portlet x-portlet-titleless x-portlet-titleless-75',
+            titleEl : 'widgetPrerenderTitle_35_162_1',
+            contentEl : 'widgetPrerender_35_162_1',
+            id: 'widget_35_162_1',
+            //moduleParams: {}, REMOVE
+            storeParams: {
+              myLayout: 'titleless', 
+              myOpacity: '75', 
+              dataID: '', 
+              alias: 'IFrame', 
+              keyword: 'iframe', 
+              curPage: 1, 
+              id: '35', 
+              portletID: '162', 
+              systemID: '31', 
+              portalID: '1'
+            
+            },
+
+            values: {layout: 'default', set_height: 600, url: 'https://www.google.com/calendar/embed?mode=AGENDA&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=sherwoodk12.net_ai3e8nu3shso0epk0970mg5f30%40group.calendar.google.com&amp;color=%23333333&amp;ctz=America%2FChicago', __alias: 'Upcoming Events'}
+          });
+      
+        
+        
+        var myParams = {
+                        cmpID: 'widget_56_225_1',
+                        moduleValues: {
+                          facebookURL: 'https://www.facebook.com/sherwoodcass65/', layout: '', twitter_oauthConsumerKey: '', twitter_oauthConsumerSecret: '', twitter_oauthToken: '', twitter_oauthTokenSecret: '', twitter_userId: '', __alias: 'Social Networks'
+                        },
+                        storeParams: {
+                            myLayout: 'custom1', 
+                            myOpacity: '75', 
+                            dataID: '', 
+                            alias: 'Social Networks', 
+                            keyword: 'socialNet', 
+                            curPage: 1, 
+                            id: '56', 
+                            portletID: '225', 
+                            systemID: '49', 
+                            portalID: '1'
+                          
+                        }
+                      };
+        columns[2].push({
+            title: 'Loading Social Networks...',
+            
+              items: new SocialPortlet(myParams),
+              xtype: 'portlet',
+              JSMode: true,
+            
+              tools: [],
+              draggable:false,
+              collapsible:false,
+            
+            cls:'x-portlet x-portlet-custom1 x-portlet-custom1-75',
+            titleEl : 'widgetPrerenderTitle_56_225_1',
+            contentEl : 'widgetPrerender_56_225_1',
+            id: 'widget_56_225_1',
+            //moduleParams: {}, REMOVE
+            storeParams: {
+              myLayout: 'custom1', 
+              myOpacity: '75', 
+              dataID: '', 
+              alias: 'Social Networks', 
+              keyword: 'socialNet', 
+              curPage: 1, 
+              id: '56', 
+              portletID: '225', 
+              systemID: '49', 
+              portalID: '1'
+            
+            },
+
+            values: {facebookURL: 'https://www.facebook.com/sherwoodcass65/', layout: '', twitter_oauthConsumerKey: '', twitter_oauthConsumerSecret: '', twitter_oauthToken: '', twitter_oauthTokenSecret: '', twitter_userId: '', __alias: 'Social Networks'}
+          });
+      
+        
+        
+        var myParams = {
+                        cmpID: 'widget_36_168_1',
+                        moduleValues: {
+                          
+                        },
+                        storeParams: {
+                            myLayout: 'boxless', 
+                            myOpacity: '75', 
+                            dataID: '', 
+                            alias: 'Amber Alert', 
+                            keyword: 'amberalert', 
+                            curPage: 1, 
+                            id: '36', 
+                            portletID: '168', 
+                            systemID: '32', 
+                            portalID: '1'
+                          
+                        }
+                      };
+        columns[2].push({
+            title: 'Loading Amber Alert...',
+            
+              xtype: 'cfcportlet',
+              JSMode: false,
+            
+              tools: [],
+              draggable:false,
+              collapsible:false,
+            
+            cls:'x-portlet x-portlet-boxless x-portlet-boxless-75',
+            titleEl : 'widgetPrerenderTitle_36_168_1',
+            contentEl : 'widgetPrerender_36_168_1',
+            id: 'widget_36_168_1',
+            //moduleParams: {}, REMOVE
+            storeParams: {
+              myLayout: 'boxless', 
+              myOpacity: '75', 
+              dataID: '', 
+              alias: 'Amber Alert', 
+              keyword: 'amberalert', 
+              curPage: 1, 
+              id: '36', 
+              portletID: '168', 
+              systemID: '32', 
+              portalID: '1'
+            
+            },
+
+            values: {}
+          });
+      
+        
+        
+        var myParams = {
+                        cmpID: 'widget_4_203_1',
+                        moduleValues: {
+                          
+                        },
+                        storeParams: {
+                            myLayout: 'titleless', 
+                            myOpacity: '75', 
+                            dataID: '1312', 
+                            alias: 'Page', 
+                            keyword: 'page', 
+                            curPage: 1, 
+                            id: '4', 
+                            portletID: '203', 
+                            systemID: '5', 
+                            portalID: '1'
+                          
+                        }
+                      };
+        columns[2].push({
+            title: 'Loading Page...',
+            
+              xtype: 'cfcportlet',
+              JSMode: false,
+            
+              tools: [],
+              draggable:false,
+              collapsible:false,
+            
+            cls:'x-portlet x-portlet-titleless x-portlet-titleless-75',
+            titleEl : 'widgetPrerenderTitle_4_203_1',
+            contentEl : 'widgetPrerender_4_203_1',
+            id: 'widget_4_203_1',
+            //moduleParams: {}, REMOVE
+            storeParams: {
+              myLayout: 'titleless', 
+              myOpacity: '75', 
+              dataID: '1312', 
+              alias: 'Page', 
+              keyword: 'page', 
+              curPage: 1, 
+              id: '4', 
+              portletID: '203', 
+              systemID: '5', 
+              portalID: '1'
+            
+            },
+
+            values: {}
+          });
+      
+
+
+      //console.info(columns);
+      var portals = [];
+      
+      function serializePortals(){
+        var columns = [];
+        var columnOrders = [];
+        var columnOrderQry = [];
+        Ext.each(portals,function(portal){
+          Ext.each(portal.items.items,function(column,index){
+            columns.push(column);
+            columnOrders.push([])
+          });        
+        });
+        //alert(columns.toSource());
+        
+        Ext.each(columns,function(col, index){
+          Ext.each(col.items.items,function(colItem){
+            columnOrders[index].push(colItem.storeParams.portletID);
+            columnOrderQry.push(index+"_"+colItem.storeParams.portletID);
+          });
+        });
+        //columnOrders.each(function(colOrd, index){
+        //  columnOrderQry.push(columnOrders[index].toString());
+        //});
+                
+        Ext.Msg.wait('Please wait...', 'Saving Portal Position');
+        Ext.Ajax.request({
+           url: '/ajax/portals/setOrder.cfm',
+           method: 'GET',
+           params: {id: currentPortalID, s: currentSchool.id, portlets: columnOrderQry.join(',')},
+           reader : new Ext.data.JsonReader({
+            success : '@success'
+           }),
+           success: function(response, opts) {
+              var obj = Ext.decode(response.responseText);
+              if (obj.success){
+                Ext.Msg.hide();
+              }else{
+                Ext.Msg.alert('Error Saving Portal Position', 'This portal could not be moved. You may need to refresh and please try again.');
+              }
+           },
+           failure: function(response, opts) {
+            Ext.Msg.alert('Error Saving Portal Position', 'There was a problem communicating with the server. Please check your internet connection and try again.');
+           }
+        });
+      }
+      
+      portalCount = 0;
+      colCount = 0;    
+    
+      portals[portalCount] = new Ext.ux.Portal({
+          xtype:'portal_widgets',
+          border: false,
+          layout: 'column',
+          renderTo: 'portalTop',              
+          items: makeSingleColumn(columns[colCount], .99, 'margin:0 0 0 10px'),
+          listeners: {
+            drop: function(e){
+              serializePortals();
+            }
+          }
+      });
+      portalCount++;
+      colCount++;
+    
+        colWidth1 = .66;
+        colWidth2 = .33;
+        midCols = makeTwoColumns(columns[colCount], colWidth1, columns[colCount+1], colWidth2, 'margin:0 0 0 10px');
+        colCount += 2;
+      
+      portals[portalCount] = new Ext.ux.Portal({
+          xtype:'portal_widgets',
+          border: false,
+          layout: 'column',
+          renderTo: 'portalMid',
+          items: midCols,
+          listeners: {
+            drop: function(e){
+              serializePortals();
+            }
+          }
+      });
+      portalCount++;
+    
+    }  
+  
+  
+    var currentPortalID = "1";
+    var currentPortalLayout = "143";
+  
+
+', 
+', 
+  
+  ', Loading Content...', 
+  ', 
+    ',  ',  
+  ', 
+', 
+
+', 
+', 
+
+
+  ', 
+    Mission Statement 
+  ',   
+  
+  ', 
+    ',  
+', 
+  
+    ', 
+      ', 
+        ', 
+	', District Mission Statement', 
+', 
+	', Our mission is to prepare young men and women to become productive responsible citizens in a global society.  In a partnership with parents and the community, the school seeks to develop the whole child, academically, physically, emotionally, socially and spiritually', .', 
+', 
+', 
+	', 
+
+      ', 
+    ', 
+    ', 
+    ', 
+      
+        ', 
+          a.btn.btn-lrg.btn-primary {
+            text-decoration: none;
+          }
+        ', 
+        
+    ', 
+  
+  ', 
+',  
+  ', 
+
+
+  ', 
+    Sherwood Cass R-8 
+  ',   
+  
+  ', 
+    ',  
+', 
+  
+    ', 
+      ', 
+        ', 
+	', Para Professional Needed', 
+', 
+	', in ', Preschool', 
+', 
+	(click image to apply)', 
+', 
+	', 
+	', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	', ________________________________________________________', 
+', 
+	 ', 
+', 
+	', Notice Of School Board Filing', 
+', 
+	', Click here for more information.', 
+', 
+	__________________________________________________________________', 
+', 
+	 ', 
+', 
+	', State Requirements on Immunizations', 
+', 
+	', Click here to find out more information about how', 
+', 
+	', these new requirements affect your child.', 
+', 
+	 ', 
+', 
+', 
+	', Wellness Program Information', 
+', 
+	', 
+
+      ', 
+    ', 
+    ', 
+    ', 
+      
+        ', 
+          a.btn.btn-lrg.btn-primary {
+            text-decoration: none;
+          }
+        ', 
+        
+    ', 
+  
+  ', 
+',  
+  ', 
+
+
+  ', 
+    
+      Loading...
+    
+  ',   
+  
+  ', 
+    
+        ', Loading Data', 
+      
+  ', 
+
+
+  ', 
+    Social Networks 
+  ',   
+  
+  ', 
+    
+  ', 
+
+
+  ', 
+    
+      Loading...
+    
+  ',   
+  
+  ', 
+    
+        ', Loading Data', 
+      
+  ', 
+
+
+  ', 
+    Bullying 
+  ',   
+  
+  ', 
+    ',  
+', 
+  
+    ', 
+      ', 
+        ', 
+	', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+
+      ', 
+    ', 
+    ', 
+    ', 
+      
+        ', 
+          a.btn.btn-lrg.btn-primary {
+            text-decoration: none;
+          }
+        ', 
+        
+    ', 
+  
+  ', 
+',  
+  ', 
+
+', 
+
+      ', For technical questions and comments regarding this website, please contact the ', Webmaster', .', 
+   
+                                ', Back to Top', 
+                            ', 
+                        ', 
+                     ', 
+                ',  ', 
+            ',  
+			', 
+            	', 
+                	', 
+                		', SherwoodSD R8', 
+                    ', 
+                ', 
+                ', 
+                	', 
+						
+                                ', u"currentZip = '64739';", 
+                                    ', 
+                                    ', 
+                                      ', 
+                                        
+                                          ', 33300 S. Sherwood Drive', 
+                                          ', Creighton', , 
+                                          ', Missouri',  
+                                          ', 64739', 
+                                        
+                                      ',  
+                                      ',  
+                                        ', Phone:',  ', (660)499-2239',   
+                                        ', Fax:',  ', (660)499-2624', 
+                                      ', 
+                                    ', 
+                                    ', 
+                            
+                	', 
+                ', 
+			', 
+		', 
+        
+        ', 
+			
+                ', 
+                    ', 
+	', 
+		', 
+			', 
+				', 
+			', 
+				', 
+		', 
+	', 
+', 
+', 
+	 ', 
+
+                ', 
+            
+     		', 
+            	
+                ', 
+                    
+                        ', Legal Information',  | 
+                            ', Privacy Policy',  | 
+                            ', Site Map',   
+                    
+                ', 
+                ', 
+                        IES-WEB-V2-2 Copyright © 2001-2017. All Rights Reserved. 
+                        ', Web Development by Cyberschool &',  
+                        ', IES, Inc.',  
+               ', 
+        	', 
+		', 
+	', 
+
+        ', 
+       
+    ', Please wait...', 
+    ', Loading...', 
+    ', Loading Failed', 
+    
+    
+    ',   
+      if (printView)
+        window.print();
+    
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    ', 
+    
+    
+    ', 
+      try {
+        var pageTracker = _gat._getTracker("");
+        pageTracker._trackPageview();
+      } catch(err) {}
+    ', 
+    
+    
+
+
+'][
+    ', 
+    ', 
+    ', 
+    ', 
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    ', 
+  
+
+
+  	  
+  
+  
+  
+    ', u"
+    
+    function toggleCat(el, cID){
+      //var name = el.identify();
+      var catItem = Ext.get(el);
+      var curVal = true;
+      if (catItem.checked != undefined)
+        curVal = catItem.checked;
+        
+      setTimeout(function(){
+        catItem.checked = !curVal;
+        catItem.dom.checked = !curVal;
+      }, 5);
+      if (curVal){
+        Ext.select('.cat_'+cID).addClass('hidden');
+      }else{
+        Ext.select('.cat_'+cID).removeClass('hidden');
+      }
+    }
+    //Ext.onReady(fixLinks);
+    var loadLastPage = function(){
+      return true;
+    };
+  ", 
+
+
+  ', 
+    .isNotMobile #pagerBar{
+      -webkit-transition: opacity 0.5s ease-in;
+      -moz-transition: opacity 0.5s ease-in;
+      -o-transition: opacity 0.5s ease-in;
+      transition: opacity 0.5s ease-in;
+      -webkit-transition: margin 0.5s ease-in;
+      -moz-transition: margin 0.5s ease-in;
+      -o-transition: margin 0.5s ease-in;
+      transition: margin 0.5s ease-in;
+    
+     }
+    .isNotMobile #pagerBar:hover{	
+      opacity:1.0;
+     }
+
+
+    
+    
+    .bigPrint1 .x-btn-text {font-weight: bold; font-size: 14px; height: 26px !important;}
+    .bigPrint2 .x-btn-text {font-size: 13px; height: 20px !important;}
+  ', 
+   
+   ', 
+    var lastLoggedInUserID = 0;
+    var lastLoggedInUserName = '';
+    var lastLoggedInDisplayName = '';
+    var lastLoggedInUserCN = '';
+    var lastLoggedInUserDomain = '';
+    
+      currentUser.username = '';
+      currentUser.displayname = '';
+      currentUser.email = '';
+    
+    var currentPageTitle = 'SherwoodSD R8';
+    var currentSchoolAlias = 'District';
+    
+      /*Ext.onReady(function(){
+        //setTimeout(checkMenus, 500);
+        var c = {};
+        var hideLoad = true;
+        var modData = Ext.data.Record.create([
+              {name: 'id', mapping: 'id'},
+              {name: 'title', mapping: 'title'},
+              {name: 'browser_title', mapping: 'browser_title'},
+              {name: 'data', mapping: 'data'}
+            ]);
+        var modReader = new Ext.data.XmlReader({
+              record: "content",
+              success: "success",
+              id: "id"
+            }, modData);
+
+        var myStore = new Ext.data.Store({
+              autoLoad: true,
+              reader: modReader,
+              url: '/ajax/proxy/module.cfm',
+              baseParams: {}, //c.storeParams
+              listeners: {
+                loadexception: function(m){
+                  //var errorButton = new Element('input', { 'type': 'button', style: 'float: right;', value: 'Send Error' });
+                  //errorButton.observe('click', function(){ sendError(c); });
+                  var errorText = new Element('span').update('Well, this is embarrassing.. this module is misbehaving!');
+                  var errorDiv = new Element('div', { });
+                  //errorDiv.appendChild(errorButton);
+                  errorDiv.appendChild(errorText);
+                  c.setTitle('Widget Error');
+                  c.body.dom.innerHTML = '';
+                  c.body.dom.appendChild(errorDiv);
+                },
+                load: function(s,r,o){
+                  if (c){
+                    if (hideLoad && r.length > 0){
+                      c.setTitle(r[0].data.title);
+                      c.body.dom.innerHTML = r[0].data.data;
+                    }else{
+                      if (c.body){
+                        c.setTitle("Loading...");
+                        c.body.dom.innerHTML = c.loadingText;
+                      }
+                      if (r.length > 0){
+                        setTimeout(function(){
+                          c.setTitle(r[0].data.title);
+                          c.body.dom.innerHTML = r[0].data.data;
+                        }, 500);
+                      }
+                    }
+                  }
+                }
+              }            
+            });
+      });
+    */
+      
+    var printBox;
+    var doPrint;
+    Ext.onReady(function(){
+      doPrint = function(link){
+        printBox = new Ext.Window({
+          title: 'Print',
+          modal: true,
+          resizable: false,
+          buttonAlign: 'center',
+          layout: 'border',
+          height: 170,
+          width: 400,
+          items: [
+                    {
+                      bodyStyle: 'padding: 10px; text-align: center; font-weight: bold',
+                      region: 'north',
+                      border: false,
+                      height: 30,
+                      html: 'What portion of the page would you like to print?'
+                    },{
+                      region: 'center',                    
+                      border: false,
+                      layout: {
+                                type:'vbox',
+                                padding:'5',
+                                align:'stretch'
+                              },
+                      items:[{
+                                  xtype:'button',
+                                  cls: 'bigPrint1',
+                                  text: 'Print Entire Page',
+                                  handler: function(){
+                                    printBox.close();
+                                    Ext.Msg.hide();
+                                    window.print();
+                                  }
+                              },{
+                                  xtype:'spacer',
+                                  flex: 1
+                              },{
+                                  xtype:'button',
+                                  cls: 'bigPrint2',
+                                  text: 'Print Content Only',
+                                  handler: function(){
+                                    printBox.close();
+                                    Ext.Msg.hide();
+                                    Ext.Msg.wait('Getting ready to print..','Please Wait...');
+                                    newLocation = link.href.replace('#','') + '&printview=1';
+                                    //newLocation = '/print'+lastLoadedURLRel;
+                                    console.info(newLocation);
+                                    setTimeout(function(){
+                                      var newWindow = window.open(newLocation, '_blank');
+                                      newWindow.focus();
+                                      Ext.Msg.hide();
+                                    }, 300);
+                                    
+                                  }
+                              }]
+                    }
+                ],
+
+          buttons: [
+                  {
+                    text: 'Cancel',
+                    handler: function(){ 
+                      printBox.close();
+                    }
+                  }
+                ]
+        
+        });
+        printBox.show(this);
+      }
+    });
+    
+
+    currentPage.storeParams = {
+      dataID: currentPageDataID, 
+      alias: currentPageAction, 
+      keyword: currentPageKeyword, 
+      curPage: currentPageNumber, 
+      id: currentPageModuleID, 
+      portletID: 0, 
+      portalID: 0
+    }; 
+    currentPage.values = {};
+  ', 
+  
+  
+  
+  ', 
+    ', u"
+  var siteNotice = false;
+  function dropSiteNotice(){
+    new Ajax.Request('/supressMessages.cfm?supress=false');
+    Effect.BlindDown('siteNoticeBoxHolder', { duration: 0.5 })
+    $('pagerBarToolAlertButton').addClassName('buttonOn');
+  }
+  function liftSiteNotice(){
+    new Ajax.Request('/supressMessages.cfm?supress=true');
+    Effect.BlindUp('siteNoticeBoxHolder', { duration: 0.25 })
+    $('pagerBarToolAlertButton').removeClassName('buttonOn');
+  }
+  function toggleSiteNotice(){ 
+    
+    if ($('pagerBarToolAlertButton').hasClassName('buttonOn')){
+      liftSiteNotice();
+    }else{
+      dropSiteNotice();
+    }
+  
+  }
+", 
+
+    ', 
+      ', 
+        
+        ', 
+        
+          ', 
+            ', Jump to Page Navigation', 
+            ', Jump to Page Content', 
+            ', Jump to Page Footer', 
+          ', 
+      ', 
+      ', 
+        ', 
+          ', 
+          ', 
+            ', 
+              ', 
+                ', 
+                ', 
+              ', 
+              
+      ', 
+        ', 
+          ', 
+          ', Search', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', Cancel', 
+          ', 
+        ', 
+      ', 
+      
+            ', 
+          ', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', 
+            
+      ', 
+        ', 
+          ', 
+          ', A-', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', A+', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', Sharing', 
+            ', 
+          ', 
+        ', 
+        ', 
+          
+          ', 
+            ', 
+              
+      ', 
+        ', 
+          ', 
+          ', Print Page', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', Share on Facebook', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', Share on Twitter', 
+          ', 
+        ', 
+      ', 
+      
+            ', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', Search', 
+          ', 
+        ', 
+      ', 
+      
+          ', 
+        ', 
+        
+        ', 
+          ', 
+            
+      ', 
+        ', 
+          ', 
+          ', Alert', 
+          ', 
+        ', 
+      ', 
+      
+      ', 
+        ', 
+          ', 
+          ', Login', 
+          ', 
+        ', 
+      ', 
+      
+          ', 
+        ', 
+        
+      ', 
+      ', 
+    ', 
+  ', 
+      
+  ', 
+    
+    var searchBar;
+    function submitSearch(){
+      document.forms["searchForm"].submit();
+    }
+    function showSearchBar(){
+      Ext.get('searchHolder').removeClass('x-hidden');
+      Ext.get('toolsHolder').addClass('x-hidden');
+      resizePagerBar();
+      if (searchBar)
+        searchBar.focus();
+    }
+    function hideSearchBar(){
+      Ext.get('searchHolder').addClass('x-hidden');
+      Ext.get('toolsHolder').removeClass('x-hidden');
+      resizePagerBar();
+    }
+    function resizePagerBar(){
+      var srchBtn = Ext.get('searchButtonMain');
+      var srchCnclBtn = Ext.get('searchButtonCancel');
+      var logo = Ext.get('pagerBarToolLogo');
+      var item = Ext.get('pagerBar');
+      Ext.get('lilQ').setWidth(item.getWidth() - logo.getWidth() - srchBtn.getWidth() - srchCnclBtn.getWidth() - 20);
+      if (searchBar)
+        searchBar.setWidth(item.getWidth() - logo.getWidth() - srchBtn.getWidth() - srchCnclBtn.getWidth() - 20);
+    }
+    Ext.onReady(function(){
+      window.onresize = resizePagerBar;
+      resizePagerBar();
+      /*
+      var el = Ext.get('lilQ');
+      el.on('keydown', function(e){
+        window.location.href = "#!/"+ currentSchool.Alias + "/Search/" + this.dom.value;
+      }, el, {buffer: 300});
+      
+        
+      var ds = new Ext.data.Store({
+          url: '/ajax/search/searchSuggestion.cfm',
+          reader: new Ext.data.JsonReader({
+              root: 'results'
+          }, [
+              {name: 'title', mapping: 'title'}
+          ])
+      });
+
+      // Custom rendering Template
+      var resultTpl = new Ext.XTemplate(
+          '<tpl for="."><div class="search-item">',
+              '{title}',
+          '</div></tpl>'
+      );
+
+      searchBar = new Ext.form.ComboBox({
+        applyTo: 'lilQ',
+        autoShow: false,
+        //store: ds,
+        //mode: 'remote',
+        displayField:'title',
+        typeAhead: false,
+        loadingText: 'Getting Suggestions...',
+        hideTrigger:true,
+        tpl: resultTpl,
+        itemSelector: 'div.search-item',
+        onSelect: function(record){
+            window.location.href = "#!/"+ currentSchool.Alias + "/Search/" + record.get('title');
+        },
+        listeners: {
+          show: function(){
+            resizePagerBar();
+          }
+        }
+      });
+      searchBar.show();
+      var el = Ext.get('lilQ');
+      el.on('keydown', function(e){
+        window.location.href = "#!/"+ currentSchool.Alias + "/Search/" + this.dom.value;
+      }, el, {buffer: 300});*/
+    });
+  ', 
+
+    
+	', 
+    	', 
+        	', 
+                ', SherwoodSD R8', 
+                ', 
+                	', SherwoodSD R8 Home Page', 
+                ',  
+                ', 
+                ', 
+                ', 
+					
+', 
+  ', 
+    
+      ', 33300 S. Sherwood Drive', 
+        
+      ', Creighton', , 
+      ', Missouri',  
+      ', 64739', 
+    
+  ', 
+  
+  	', 
+   
+  ', 
+   
+    Phone: ', (660)499-2239', 
+      
+    Fax: ', (660)499-2624', 
+    
+  ', 
+', 
+
+            	', 
+      			', 
+					', 
+                  		
+      ', 
+     ', 
+     var _SlideshowTransitions = [];
+          
+  <!-- these transitions will be controlled form the site config. --->
+  var _SlideshowTransitions = [{$Duration:2000,$Zoom:1,$Rotate:0.1,$During:{$Left:[0.6,0.4],$Top:[0.6,0.4],$Zoom:[0.6,0.4],$Rotate:[0.6,0.4]},$FlyDirection:6,$Easing:{$Left:$JssorEasing$.$EaseInQuad,$Top:$JssorEasing$.$EaseInQuad,$Opacity:$JssorEasing$.$EaseLinear,$Rotate:$JssorEasing$.$EaseInQuad},$ScaleHorizontal:0.3,$ScaleVertical:0.5,$Opacity:2}];
+        jssor_slider1_starter = function (containerId) {
+            var jssor_slider1 = new $JssorSlider$(containerId, {
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $Idle: 4500,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+                $DragOrientation: 3,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $Cols is greater than 1, or parking position is not 0)
+                $PauseOnHover: 1,                             //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+                $SlideDuration:1500,
+                $FillMode: 2,
+                $BulletNavigatorOptions: {
+                $Class: $JssorBulletNavigator$,
+                $ChanceToShow: 2
+            },
+                $SlideshowOptions: {                                //[Optional] Options to specify and enable slideshow or not
+                    $Class: $JssorSlideshowRunner$,                 //[Required] Class to create instance of slideshow
+                    $Transitions: _SlideshowTransitions,            //[Required] An array of slideshow transitions to play slideshow
+                    $TransitionsOrder: 1,                           //[Optional] The way to choose transition to play slide, 1 Sequence, 0 Random
+                    $ShowLink: true                                 //[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
+                }
+            });
+//responsive code begin
+        //you can remove responsive code if you don't want the slider scales
+        //while window resizing
+        function ScaleSlider() {
+            var parentWidth = $('#slider1_container').parent().width();
+            if (parentWidth) {
+                jssor_slider1.$SetScaleWidth(parentWidth);
+            }
+            else
+                window.setTimeout(ScaleSlider, 30);
+        }
+        //Scale slider after document ready
+        ScaleSlider();
+                                        
+        //Scale slider while window load/resize/orientationchange.
+        $(window).bind("load", ScaleSlider);
+        $(window).bind("resize", ScaleSlider);
+        $(window).bind("orientationchange", ScaleSlider);
+        //responsive code end
+        };
+    
+     ', 
+
+       ', 
+          ', 
+         ', 
+            
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+                      ', 
+
+                        
+                           ', 
+                        
+                        ', 
+                  
+          ', 
+          
+        ', 
+        
+        ', 
+            ', 
+            ', 
+        ', 
+        
+        ', 
+
+  
+          ', 
+          ', u"jssor_slider1_starter('slider1_container');", 
+        ', 
+
+      ', u"
+        
+        if (currentUser.canUseSlideShow){
+          Ext.onReady(function(){
+            Ext.get('slider1_container').on('dblclick', function(e){
+              e.stopEvent();
+              e.cancelBubble = true;
+              e.stopPropagation();
+              Ext.Msg.wait('Loading Slideshow Settings', 'Loading');
+              AlbumPickShared({gcdID:0, slideID: 'header', schoolID: 1}, true);
+            });
+          });
+        }
+      ", 
+      
+             		', 
+      			', 
+                ',  
+    ', 
+      ', Follow us', 
+      
+        ', 
+          ', 
+            ', 
+          ',         
+        ',  
+      
+        ', 
+          ', 
+            ', 
+          ',         
+        ',  
+      
+      ', 
+   ',  
+            ', 
+            ', 
+            	', 
+                    ',  
+                        
+          ', 
+            
+                  ', 
+                    
+                    ', Home ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Athletics ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Football', 
+                  
+                    ', 
+                      ', 
+                        
+                ', 
+                  
+                  ', Varsity Football Schedule', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Junior Varsity Football Schedule', 
+                  
+                ', 
+              
+                      ', 
+                    ', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Volleyball', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Cross Country', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Cheerleading', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Softball', 
+                  
+                    ', 
+                      ', 
+                        
+                ', 
+                  
+                  ', Softball Schedule', 
+                  
+                ', 
+              
+                      ', 
+                    ', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Basketball', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Wrestling', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Baseball', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Activities ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Facilities Usage Schedule', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Facilities Usage Request Form', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Vocal Music', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', FFA Chapter', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Band', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', FBLA', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Staff Links ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Campus Portal', 
+                  
+                    ', 
+                      ', 
+                        
+                ', 
+                  
+                  ', Campus Login', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Classroom Messenger', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Posting to Eligibility and Midterm', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Classroom Messenger Best Practice', 
+                  
+                ', 
+              
+                      ', 
+                    ', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Destiny', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Accelerated Reader', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Online Classroom', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Technology Service Request', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Maintenance Service Request', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', School Bus Request', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Smarter Balance Digital Library', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Safe Schools Training', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Parent Links ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Accelerated Reader', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Accelerated Home', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Parent Portal', 
+                  
+                    ', 
+                      ', 
+                        
+                ', 
+                  
+                  ', Parent Portal Login', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', How to use the Parent Portal', 
+                  
+                ', 
+              
+                      ', 
+                    ', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Vocational Survey', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Student Links ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Britannica Online', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Destiny', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Menus', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Follett eBook Shelf', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Student Portal', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Accelerated Reader', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Missouri Connections', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Tutorials', 
+                  
+                    ', 
+                      ', 
+                        
+                ', 
+                  
+                  ', Middle School Mathematics', 
+                  
+                ', 
+              
+                      ', 
+                    ', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', District Calendars ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', 2016-2017 District Calendar', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', District Info ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Notice of Non-Discrimination', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Board Agendas and Minutes', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Board Policy', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Board Members', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Certified Staff Roster', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Salary Schedule 2016-17', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+            
+          ', 
+        
+                    ', 
+                ', 
+            ', 
+            ', 
+				', 
+                    ',  
+                         
+                         ', 
+                          
+                            ',  
+                              ', 
+                                ', 
+                                  ', 
+                                  ', 
+                                ', 
+                                ', District Calendars', 
+                              ', 
+                            ', 
+                          
+                            ',  
+                              ', 
+                                ', 
+                                  ', 
+                                  ', 
+                                ', 
+                                ', Sherwood Mail', 
+                              ', 
+                            ', 
+                          
+                            ',  
+                              ', 
+                                ', 
+                                  ', 
+                                  ', 
+                                ', 
+                                ', Employment Opportunities', 
+                              ', 
+                            ', 
+                          
+                            ',  
+                              ', 
+                                ', 
+                                  ', 
+                                  ', 
+                                ', 
+                                ', All Sports Schedules', 
+                              ', 
+                            ', 
+                          
+                            ',  
+                              ', 
+                                ', 
+                                  ', 
+                                  ', 
+                                ', 
+                                ', Men, 
+                              ', 
+                            ', 
+                          ', 
+                         ', 
+                         
+                    ', 
+                    ', 
+                        
+      ', 
+        
+                ', 
+                  ', 
+                    ', Schools', 
+                    
+          ', 
+            
+                  ', 
+                    
+                    ', High School ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', HS MS Media Center', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Middle School ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', MS_LAB_Checkout', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', HS MS Media Center', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Elementary School ', 
+                    
+                  ', 
+                
+            
+          ', 
+        
+                  ', 
+                ', 
+              
+                ', 
+                  ', 
+                    ', Central Office', 
+                    
+          ', 
+            
+                  ', 
+                    
+                    ', Central Office Staff ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Superintendent of Schools ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Blog', 
+                  
+                    ', 
+                      ', 
+                        
+                ', 
+                  
+                  ', Current Blogs', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Archived Blogs', 
+                  
+                ', 
+              
+                      ', 
+                    ', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Food Service ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', School Nurses ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Technology ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', Documents ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', District Newsletters ', 
+                    
+                  ', 
+                
+                  ', 
+                    
+                    ', News Section ', 
+                    
+                      ', 
+                        ', 
+                          
+                ', 
+                  
+                  ', Current News', 
+                  
+                ', 
+              
+                ', 
+                  
+                  ', Archived News', 
+                  
+                ', 
+              
+                        ', 
+                      ', 
+                    
+                  ', 
+                
+            
+          ', 
+        
+                  ', 
+                ', 
+              
+      ', 
+    
+                      ', 
+												
+                        ', 
+                          ', 
+	                          ', 
+	', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+
+                          ', 
+                           
+                        ', 
+                      ', 
+                    
+                      ', 
+                        ', 
+                          ', 
+	                          Some files on this web site may require Adobe Acrobat Reader - download free', 
+	                          ', 
+	                          ', 
+	                          ', 
+                          ', 
+                        ', 
+                      ', 
+                    
+                    ', 
+            	', 
+                ', 
+                    ', 
+                        ', u"
+  var siteNotice = false;
+  function dropSiteNotice(){
+    new Ajax.Request('/supressMessages.cfm?supress=false');
+    Effect.BlindDown('siteNoticeBoxHolder', { duration: 0.5 })
+    $('pagerBarToolAlertButton').addClassName('buttonOn');
+  }
+  function liftSiteNotice(){
+    new Ajax.Request('/supressMessages.cfm?supress=true');
+    Effect.BlindUp('siteNoticeBoxHolder', { duration: 0.25 })
+    $('pagerBarToolAlertButton').removeClassName('buttonOn');
+  }
+  function toggleSiteNotice(){ 
+    
+    if ($('pagerBarToolAlertButton').hasClassName('buttonOn')){
+      liftSiteNotice();
+    }else{
+      dropSiteNotice();
+    }
+  
+  }
+", 
+
+                        ', 
+                            
+                        ', 
+                        ', 
+                            ', 
+                                ', 
+    
+    
+
+    changePage = function(widget, page){
+      var el = Ext.getCmp(widget);
+      el.storeParams.curPage = page;
+      el.storeFN(el, true);
+    }
+    
+    var currentPortalID = 1;
+    portalLoader = function(){
+    if(Ext.get('loaderPortal'))
+      Ext.get('loaderPortal').remove();
+      
+      var columns = [];
+      columns[0] = [];
+      columns[1] = [];
+      columns[2] = [];
+      columns[3] = [];
+      
+        
+        
+        var myParams = {
+                        cmpID: 'widget_4_151_1',
+                        moduleValues: {
+                          
+                        },
+                        storeParams: {
+                            myLayout: 'edgeless', 
+                            myOpacity: '100', 
+                            dataID: '1226', 
+                            alias: 'Page', 
+                            keyword: 'page', 
+                            curPage: 1, 
+                            id: '4', 
+                            portletID: '151', 
+                            systemID: '5', 
+                            portalID: '1'
+                          
+                        }
+                      };
+        columns[0].push({
+            title: 'Loading Page...',
+            
+              xtype: 'cfcportlet',
+              JSMode: false,
+            
+              tools: [],
+              draggable:false,
+              collapsible:false,
+            
+            cls:'x-portlet x-portlet-edgeless x-portlet-edgeless-100',
+            titleEl : 'widgetPrerenderTitle_4_151_1',
+            contentEl : 'widgetPrerender_4_151_1',
+            id: 'widget_4_151_1',
+            //moduleParams: {}, REMOVE
+            storeParams: {
+              myLayout: 'edgeless', 
+              myOpacity: '100', 
+              dataID: '1226', 
+              alias: 'Page', 
+              keyword: 'page', 
+              curPage: 1, 
+              id: '4', 
+              portletID: '151', 
+              systemID: '5', 
+              portalID: '1'
+            
+            },
+
+            values: {}
+          });
+      
+        
+        
+        var myParams = {
+                        cmpID: 'widget_4_160_1',
+                        moduleValues: {
+                          
+                        },
+                        storeParams: {
+                            myLayout: 'plain', 
+                            myOpacity: '25', 
+                            dataID: '1247', 
+                            alias: 'Page', 
+                            keyword: 'page', 
+                            curPage: 1, 
+                            id: '4', 
+                            portletID: '160', 
+                            systemID: '5', 
+                            portalID: '1'
+                          
+                        }
+                      };
+        columns[1].push({
+            title: 'Loading Page...',
+            
+              xtype: 'cfcportlet',
+              JSMode: false,
+            
+              tools: [],
+              draggable:false,
+              collapsible:false,
+            
+            cls:'x-portlet x-portlet-plain x-portlet-plain-25',
+            titleEl : 'widgetPrerenderTitle_4_160_1',
+            contentEl : 'widgetPrerender_4_160_1',
+            id: 'widget_4_160_1',
+            //moduleParams: {}, REMOVE
+            storeParams: {
+              myLayout: 'plain', 
+              myOpacity: '25', 
+              dataID: '1247', 
+              alias: 'Page', 
+              keyword: 'page', 
+              curPage: 1, 
+              id: '4', 
+              portletID: '160', 
+              systemID: '5', 
+              portalID: '1'
+            
+            },
+
+            values: {}
+          });
+      
+        
+        
+        var myParams = {
+                        cmpID: 'widget_35_162_1',
+                        moduleValues: {
+                          layout: 'default', set_height: 600, url: 'https://www.google.com/calendar/embed?mode=AGENDA&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=sherwoodk12.net_ai3e8nu3shso0epk0970mg5f30%40group.calendar.google.com&amp;color=%23333333&amp;ctz=America%2FChicago', __alias: 'Upcoming Events'
+                        },
+                        storeParams: {
+                            myLayout: 'titleless', 
+                            myOpacity: '75', 
+                            dataID: '', 
+                            alias: 'IFrame', 
+                            keyword: 'iframe', 
+                            curPage: 1, 
+                            id: '35', 
+                            portletID: '162', 
+                            systemID: '31', 
+                            portalID: '1'
+                          
+                        }
+                      };
+        columns[2].push({
+            title: 'Loading IFrame...',
+            
+              xtype: 'cfcportlet',
+              JSMode: false,
+            
+              tools: [],
+              draggable:false,
+              collapsible:false,
+            
+            cls:'x-portlet x-portlet-titleless x-portlet-titleless-75',
+            titleEl : 'widgetPrerenderTitle_35_162_1',
+            contentEl : 'widgetPrerender_35_162_1',
+            id: 'widget_35_162_1',
+            //moduleParams: {}, REMOVE
+            storeParams: {
+              myLayout: 'titleless', 
+              myOpacity: '75', 
+              dataID: '', 
+              alias: 'IFrame', 
+              keyword: 'iframe', 
+              curPage: 1, 
+              id: '35', 
+              portletID: '162', 
+              systemID: '31', 
+              portalID: '1'
+            
+            },
+
+            values: {layout: 'default', set_height: 600, url: 'https://www.google.com/calendar/embed?mode=AGENDA&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=sherwoodk12.net_ai3e8nu3shso0epk0970mg5f30%40group.calendar.google.com&amp;color=%23333333&amp;ctz=America%2FChicago', __alias: 'Upcoming Events'}
+          });
+      
+        
+        
+        var myParams = {
+                        cmpID: 'widget_56_225_1',
+                        moduleValues: {
+                          facebookURL: 'https://www.facebook.com/sherwoodcass65/', layout: '', twitter_oauthConsumerKey: '', twitter_oauthConsumerSecret: '', twitter_oauthToken: '', twitter_oauthTokenSecret: '', twitter_userId: '', __alias: 'Social Networks'
+                        },
+                        storeParams: {
+                            myLayout: 'custom1', 
+                            myOpacity: '75', 
+                            dataID: '', 
+                            alias: 'Social Networks', 
+                            keyword: 'socialNet', 
+                            curPage: 1, 
+                            id: '56', 
+                            portletID: '225', 
+                            systemID: '49', 
+                            portalID: '1'
+                          
+                        }
+                      };
+        columns[2].push({
+            title: 'Loading Social Networks...',
+            
+              items: new SocialPortlet(myParams),
+              xtype: 'portlet',
+              JSMode: true,
+            
+              tools: [],
+              draggable:false,
+              collapsible:false,
+            
+            cls:'x-portlet x-portlet-custom1 x-portlet-custom1-75',
+            titleEl : 'widgetPrerenderTitle_56_225_1',
+            contentEl : 'widgetPrerender_56_225_1',
+            id: 'widget_56_225_1',
+            //moduleParams: {}, REMOVE
+            storeParams: {
+              myLayout: 'custom1', 
+              myOpacity: '75', 
+              dataID: '', 
+              alias: 'Social Networks', 
+              keyword: 'socialNet', 
+              curPage: 1, 
+              id: '56', 
+              portletID: '225', 
+              systemID: '49', 
+              portalID: '1'
+            
+            },
+
+            values: {facebookURL: 'https://www.facebook.com/sherwoodcass65/', layout: '', twitter_oauthConsumerKey: '', twitter_oauthConsumerSecret: '', twitter_oauthToken: '', twitter_oauthTokenSecret: '', twitter_userId: '', __alias: 'Social Networks'}
+          });
+      
+        
+        
+        var myParams = {
+                        cmpID: 'widget_36_168_1',
+                        moduleValues: {
+                          
+                        },
+                        storeParams: {
+                            myLayout: 'boxless', 
+                            myOpacity: '75', 
+                            dataID: '', 
+                            alias: 'Amber Alert', 
+                            keyword: 'amberalert', 
+                            curPage: 1, 
+                            id: '36', 
+                            portletID: '168', 
+                            systemID: '32', 
+                            portalID: '1'
+                          
+                        }
+                      };
+        columns[2].push({
+            title: 'Loading Amber Alert...',
+            
+              xtype: 'cfcportlet',
+              JSMode: false,
+            
+              tools: [],
+              draggable:false,
+              collapsible:false,
+            
+            cls:'x-portlet x-portlet-boxless x-portlet-boxless-75',
+            titleEl : 'widgetPrerenderTitle_36_168_1',
+            contentEl : 'widgetPrerender_36_168_1',
+            id: 'widget_36_168_1',
+            //moduleParams: {}, REMOVE
+            storeParams: {
+              myLayout: 'boxless', 
+              myOpacity: '75', 
+              dataID: '', 
+              alias: 'Amber Alert', 
+              keyword: 'amberalert', 
+              curPage: 1, 
+              id: '36', 
+              portletID: '168', 
+              systemID: '32', 
+              portalID: '1'
+            
+            },
+
+            values: {}
+          });
+      
+        
+        
+        var myParams = {
+                        cmpID: 'widget_4_203_1',
+                        moduleValues: {
+                          
+                        },
+                        storeParams: {
+                            myLayout: 'titleless', 
+                            myOpacity: '75', 
+                            dataID: '1312', 
+                            alias: 'Page', 
+                            keyword: 'page', 
+                            curPage: 1, 
+                            id: '4', 
+                            portletID: '203', 
+                            systemID: '5', 
+                            portalID: '1'
+                          
+                        }
+                      };
+        columns[2].push({
+            title: 'Loading Page...',
+            
+              xtype: 'cfcportlet',
+              JSMode: false,
+            
+              tools: [],
+              draggable:false,
+              collapsible:false,
+            
+            cls:'x-portlet x-portlet-titleless x-portlet-titleless-75',
+            titleEl : 'widgetPrerenderTitle_4_203_1',
+            contentEl : 'widgetPrerender_4_203_1',
+            id: 'widget_4_203_1',
+            //moduleParams: {}, REMOVE
+            storeParams: {
+              myLayout: 'titleless', 
+              myOpacity: '75', 
+              dataID: '1312', 
+              alias: 'Page', 
+              keyword: 'page', 
+              curPage: 1, 
+              id: '4', 
+              portletID: '203', 
+              systemID: '5', 
+              portalID: '1'
+            
+            },
+
+            values: {}
+          });
+      
+
+
+      //console.info(columns);
+      var portals = [];
+      
+      function serializePortals(){
+        var columns = [];
+        var columnOrders = [];
+        var columnOrderQry = [];
+        Ext.each(portals,function(portal){
+          Ext.each(portal.items.items,function(column,index){
+            columns.push(column);
+            columnOrders.push([])
+          });        
+        });
+        //alert(columns.toSource());
+        
+        Ext.each(columns,function(col, index){
+          Ext.each(col.items.items,function(colItem){
+            columnOrders[index].push(colItem.storeParams.portletID);
+            columnOrderQry.push(index+"_"+colItem.storeParams.portletID);
+          });
+        });
+        //columnOrders.each(function(colOrd, index){
+        //  columnOrderQry.push(columnOrders[index].toString());
+        //});
+                
+        Ext.Msg.wait('Please wait...', 'Saving Portal Position');
+        Ext.Ajax.request({
+           url: '/ajax/portals/setOrder.cfm',
+           method: 'GET',
+           params: {id: currentPortalID, s: currentSchool.id, portlets: columnOrderQry.join(',')},
+           reader : new Ext.data.JsonReader({
+            success : '@success'
+           }),
+           success: function(response, opts) {
+              var obj = Ext.decode(response.responseText);
+              if (obj.success){
+                Ext.Msg.hide();
+              }else{
+                Ext.Msg.alert('Error Saving Portal Position', 'This portal could not be moved. You may need to refresh and please try again.');
+              }
+           },
+           failure: function(response, opts) {
+            Ext.Msg.alert('Error Saving Portal Position', 'There was a problem communicating with the server. Please check your internet connection and try again.');
+           }
+        });
+      }
+      
+      portalCount = 0;
+      colCount = 0;    
+    
+      portals[portalCount] = new Ext.ux.Portal({
+          xtype:'portal_widgets',
+          border: false,
+          layout: 'column',
+          renderTo: 'portalTop',              
+          items: makeSingleColumn(columns[colCount], .99, 'margin:0 0 0 10px'),
+          listeners: {
+            drop: function(e){
+              serializePortals();
+            }
+          }
+      });
+      portalCount++;
+      colCount++;
+    
+        colWidth1 = .66;
+        colWidth2 = .33;
+        midCols = makeTwoColumns(columns[colCount], colWidth1, columns[colCount+1], colWidth2, 'margin:0 0 0 10px');
+        colCount += 2;
+      
+      portals[portalCount] = new Ext.ux.Portal({
+          xtype:'portal_widgets',
+          border: false,
+          layout: 'column',
+          renderTo: 'portalMid',
+          items: midCols,
+          listeners: {
+            drop: function(e){
+              serializePortals();
+            }
+          }
+      });
+      portalCount++;
+    
+    }  
+  
+  
+    var currentPortalID = "1";
+    var currentPortalLayout = "143";
+  
+
+', 
+', 
+  
+  ', Loading Content...', 
+  ', 
+    ',  ',  
+  ', 
+', 
+
+', 
+', 
+
+
+  ', 
+    Mission Statement 
+  ',   
+  
+  ', 
+    ',  
+', 
+  
+    ', 
+      ', 
+        ', 
+	', District Mission Statement', 
+', 
+	', Our mission is to prepare young men and women to become productive responsible citizens in a global society.  In a partnership with parents and the community, the school seeks to develop the whole child, academically, physically, emotionally, socially and spiritually', .', 
+', 
+', 
+	', 
+
+      ', 
+    ', 
+    ', 
+    ', 
+      
+        ', 
+          a.btn.btn-lrg.btn-primary {
+            text-decoration: none;
+          }
+        ', 
+        
+    ', 
+  
+  ', 
+',  
+  ', 
+
+
+  ', 
+    Sherwood Cass R-8 
+  ',   
+  
+  ', 
+    ',  
+', 
+  
+    ', 
+      ', 
+        ', 
+	', Para Professional Needed', 
+', 
+	', in ', Preschool', 
+', 
+	(click image to apply)', 
+', 
+	', 
+	', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	', ________________________________________________________', 
+', 
+	 ', 
+', 
+	', Notice Of School Board Filing', 
+', 
+	', Click here for more information.', 
+', 
+	__________________________________________________________________', 
+', 
+	 ', 
+', 
+	', State Requirements on Immunizations', 
+', 
+	', Click here to find out more information about how', 
+', 
+	', these new requirements affect your child.', 
+', 
+	 ', 
+', 
+', 
+	', Wellness Program Information', 
+', 
+	', 
+
+      ', 
+    ', 
+    ', 
+    ', 
+      
+        ', 
+          a.btn.btn-lrg.btn-primary {
+            text-decoration: none;
+          }
+        ', 
+        
+    ', 
+  
+  ', 
+',  
+  ', 
+
+
+  ', 
+    
+      Loading...
+    
+  ',   
+  
+  ', 
+    
+        ', Loading Data', 
+      
+  ', 
+
+
+  ', 
+    Social Networks 
+  ',   
+  
+  ', 
+    
+  ', 
+
+
+  ', 
+    
+      Loading...
+    
+  ',   
+  
+  ', 
+    
+        ', Loading Data', 
+      
+  ', 
+
+
+  ', 
+    Bullying 
+  ',   
+  
+  ', 
+    ',  
+', 
+  
+    ', 
+      ', 
+        ', 
+	', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+', 
+	 ', 
+
+      ', 
+    ', 
+    ', 
+    ', 
+      
+        ', 
+          a.btn.btn-lrg.btn-primary {
+            text-decoration: none;
+          }
+        ', 
+        
+    ', 
+  
+  ', 
+',  
+  ', 
+
+', 
+
+      ', For technical questions and comments regarding this website, please contact the ', Webmaster', .', 
+   
+                                ', Back to Top', 
+                            ', 
+                        ', 
+                     ', 
+                ',  ', 
+            ',  
+			', 
+            	', 
+                	', 
+                		', SherwoodSD R8', 
+                    ', 
+                ', 
+                ', 
+                	', 
+						
+                                ', u"currentZip = '64739';", 
+                                    ', 
+                                    ', 
+                                      ', 
+                                        
+                                          ', 33300 S. Sherwood Drive', 
+                                          ', Creighton', , 
+                                          ', Missouri',  
+                                          ', 64739', 
+                                        
+                                      ',  
+                                      ',  
+                                        ', Phone:',  ', (660)499-2239',   
+                                        ', Fax:',  ', (660)499-2624', 
+                                      ', 
+                                    ', 
+                                    ', 
+                            
+                	', 
+                ', 
+			', 
+		', 
+        
+        ', 
+			
+                ', 
+                    ', 
+	', 
+		', 
+			', 
+				', 
+			', 
+				', 
+		', 
+	', 
+', 
+', 
+	 ', 
+
+                ', 
+            
+     		', 
+            	
+                ', 
+                    
+                        ', Legal Information',  | 
+                            ', Privacy Policy',  | 
+                            ', Site Map',   
+                    
+                ', 
+                ', 
+                        IES-WEB-V2-2 Copyright © 2001-2017. All Rights Reserved. 
+                        ', Web Development by Cyberschool &',  
+                        ', IES, Inc.',  
+               ', 
+        	', 
+		', 
+	', 
+
+        ', 
+       
+    ', Please wait...', 
+    ', Loading...', 
+    ', Loading Failed', 
+    
+    
+    ',   
+      if (printView)
+        window.print();
+    
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    ', 
+    
+    
+    ', 
+      try {
+        var pageTracker = _gat._getTracker("");
+        pageTracker._trackPageview();
+      } catch(err) {}
+    ', 
+    
+    
+
+
+']

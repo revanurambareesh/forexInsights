@@ -1,0 +1,1275 @@
+[
+    ', 
+', 
+
+', 
+', 
+        ', 
+            ', 
+            
+
+
+
+
+', 
+
+    function ValidateForm() {
+        var sMsg = '';
+        if (document.getElementById('ctl00_CtrlHeader1_txtSearch1').value == '' || document.getElementById('ctl00_CtrlHeader1_txtSearch1').value == 'Search...')
+            sMsg += 'Search' + ', ';
+
+        if (sMsg.length > 0) {
+            sMsg = "Please enter " + sMsg;
+            sMsg = sMsg.substring(0, sMsg.length - 2);
+            var Loc = sMsg.lastIndexOf(",");
+            var sMsg1;
+            sMsg1 = sMsg.substring(0, sMsg.length - 2);
+
+            if (sMsg.lastIndexOf(",") > -1) {
+                sMsg = sMsg.substring(0, sMsg.lastIndexOf(",")) + " and" + sMsg.substring(1 + sMsg.lastIndexOf(","), sMsg1.length + 2);
+                sMsg += ".";
+            }
+            else {
+                sMsg += ".";
+            }
+            alert(sMsg);
+
+            return false;
+        }
+    }
+    function get_name(value, id, field_value) {
+
+        if (value == "") {
+            document.getElementById(id).value = field_value;
+        }
+        return false;
+    }
+
+    function NameBlank(id) {
+        document.getElementById(id).value = "";
+    }
+
+    function EnterEvent(e) {
+        if (e.keyCode == 13) {
+            __doPostBack('ctl00$CtrlHeader1$imgSearch', "");
+        }
+    }
+
+
+', 
+
+', 
+    ', 
+        ', 
+        ', 
+            ', Toggle navigation',  ', 
+            ', 
+                ',  ', 
+                    ', 
+        ', 
+        ', 
+
+        ', 
+            ', 
+                
+            ', 
+            ', Other Group Sites', Other Group Sites', Group Corporate', Housing Finance', Health Insurance', Retail Broking', Capital Markets', Wealth Management', 
+            ', 
+                ', 
+                ', 
+                ', 
+                
+            ', 
+        ', 
+        ', About Us', About Religare Finvest', About Religare Enterprises', Leadership Team', Our Journey', Vision and Values', Board of Directors', Fair Practice Code', Product', Unsecured SME working capital loans', Secured SME Business Expansion loans', Short Term Trade Finance', Capital Market loans', Others', Investors', Prospectus', Half Yearly And Annual Results', Annual Reports', Trustee Details', Corporate Information', Policies', Unpaid Unclaimed amounts', Disclosures', Code of Conduct', Financial Statements', Disclosures related to debt securities of RFL', Contacts for Investor Grievances', Media Room', Careers', Contact Us', New',  Pay EMI',  ', Just Buy', 
+        ', 
+    ', 
+    ', 
+', 
+
+            ', 
+            
+', 
+    
+                        ', 
+
+
+', 
+
+            ', 
+            ', 
+        
+            
+
+    
+
+    ', 
+        function GetXmlHttpObject(handler) {
+            var objXmlHttp = null
+            if (navigator.userAgent.indexOf("MSIE") >= 0) {
+                var strName = "Msxml2.XMLHTTP"
+                if (navigator.appVersion.indexOf("MSIE 5.5") >= 0) {
+                    strName = "Microsoft.XMLHTTP"
+                }
+                try {
+                    objXmlHttp = new ActiveXObject(strName)
+                    objXmlHttp.onreadystatechange = handler
+                    return objXmlHttp
+                }
+                catch (e) {
+                    alert("Error. Scripting for ActiveX might be disabled")
+                    return
+                }
+            }
+            if (navigator.userAgent.indexOf("Mozilla") >= 0) {
+                objXmlHttp = new XMLHttpRequest()
+                objXmlHttp.onload = handler
+                objXmlHttp.onerror = handler
+                return objXmlHttp
+            }
+        }
+
+        function GetCityDetails() {
+
+            var id = document.getElementById('ctl00_ContentPlaceHolder1_ddlCity');
+
+            if (id.value != '') {
+                var url = "AjaxPage/Ajax_CityDetails.aspx?Id=" + id.value;
+               // alert(url);
+                xmlHttp = GetXmlHttpObject(stateChanged);
+                xmlHttp.open("GET", url, true);
+                xmlHttp.send(null);
+            }
+            return false;
+        } // End Of Function
+
+        function stateChanged() {
+            if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+                var ss = xmlHttp.responseText;
+                var divId = document.getElementById('ctl00_ContentPlaceHolder1_permission_div');
+                divId.innerHTML = ss;
+                //alert(ss);
+                //            if (ss == 1) {
+                //                alert('Mob Number Updated');
+                //                return false;
+                //            }
+                //            else {
+                //                //alert('Facility Does Not Exist ');
+                //            }
+            }
+        }
+
+
+
+    ', 
+
+    ', 
+
+        ', 
+            ', 
+                ', 
+
+                    ', 
+                        ', 
+                            ', 
+                                ', Home',  ', 
+                                ', Contact Us', 
+                            ', 
+                        ', 
+                    ', 
+
+
+                    ', 
+
+                    ', 
+
+                        ', 
+                            ', 
+                                ', 
+                                    ', Grievance Redressal', 
+                                ', 
+                                    ', Customer Center', 
+
+                            ', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Contact Us', 
+
+
+                            ', 
+                                ', SMS:', 
+                                    ', LOANS To 575758', 
+                                ', Call Us:', 1860-3000-4111', 
+                                ', Call Us:',  ',   
+                                    (toll free)', 
+                                ', Email Us:',  ', 
+                                    ', customerservice@religare.com', 
+                                ', 
+                            ', 
+
+
+                            ', 
+                                ', 
+                                    ', Write to Us at:', 
+                                    ', Religare Finvest Limited', , A-3-4-5, GYS Global, 1st Floor, ', Tower A, Sector 125,', Noida, UP- 201301', 
+                                ', 
+                                ', 
+                                    ', Our Registered Office', 
+                                    ', Religare Finvest Limited', 2nd Floor, Rajlok Building, 24, ', Nehru Place, New Delhi 110019', Corporate Office :', Religare Finvest limited', Paras Twin Towers,Tower B, ', 9th Floor,Golf Course Road, ', Sector 54, Gurgaon - 122002', 
+                                ', 
+                                ', 
+                                    ', Service Locator', 
+                                    ', 
+															<!--
+    var content = new Array(
+                                "415/11, Opp. Gujrati School,<br /> Kutchery Road,<br /> Ajmer -305001 (Rajasthan).", //ajmer
+                                "1st Floor, Shital Varsha Building,<br /> Near Vijay Cross Road,<br /> Opp. Manan Auto Link,<br /> Drive-in Road, Navrangpura,<br /> Ahmedabad - 380 009.", //ahmedabad
+                                "No.48/26,<br /> 9th Floor ,The Estate,<br />  121 , Dickenson Road,<br /> Bangalore-560042.", //Bangalore
+                                "Grover complex,<br /> Near Hanuman chowk,<br /> Bathinda-151001.", //Bhatinda
+                                "Shop No 305,<br /> 2nd Floor,Khichariya Complex,<br /> Nehru Nagar Square,<br /> Bhilai, Chattishgarh - 490020.", //Bhillai
+                                "4th Floor,<br /> Radhika Complex,<br /> Cuttack-Puri Road,<br /> Bhubaneswar-751006.", //Bhubaneswar
+                                "No: 202,<br /> FF - VR Plaza, Link Road,<br /> Bilaspur (Chattisgarh).", //Bilaspur
+                                "SCO: 3019-3020,<br /> 1st Floor, Sector- 22D,<br /> Chandigarh.", //Chandigarh
+                                "The Oval,<br /> 5th Floor, No.10 & 12,<br /> Venkatnarayana Road,<br /> T.Nagar, Chennai - 600017.", //Chennai
+                                "City Centre 2nd Floor 14/15,<br /> East Arokiaswamy Road,<br /> 2nd Floor, R S Puram,<br /> Opp to Annapoorna Hotel,<br /> Coimbatore - 641002.", //Coimbatore
+                                "Shop No.BS-5,<br /> BS-7, BS-8 & BS-9, 4-B, B-4,<br /> PLS Plaza, Raja Road,<br /> Dehradun \u2013 248001, Uttaranchal.", //Dehradun
+                                "Mamta Building,<br /> B-4, NU-10B, Shakti Nagar,<br /> Opp. Radhasoami Satsang Hall,<br /> Gandhidham. Kutch - 370201.", //Gandhidham
+                                "Flat No.205-208,<br /> G. S. Chambers,<br /> Above Reebok Showroom,<br /> Nagarjuna Circle,<br /> Panjagutta, Hyderabad - 500034.", //Hyderabad
+                                "1st Floor,<br /> Above Yes Bank,<br /> 9/1/1 M.G. Road,<br /> Indore - 452001.", //Indore
+                                "290-C Napier Town,<br /> Near Bhanwartal Park,<br /> Jabalpur- 482001.", //Jabalpur
+                                "903-909, 7th Floor,<br /> Anchor Mall,<br /> Ajmer Road,<br /> Jaipur-302006 (Rajasthan).", //Jaipur
+                                "The axis & precincts,<br /> BMC chowk,<br /> Jalandhar-144001.", //Jalandhar
+                                "1st Floor,<br /> Narayanam Compex,<br /> Upper Chopasani Road,<br /> Jodhpur - 342001(Rajasthan).", //Jodhpur
+                                "SCO: 354,<br /> 1st Floor,<br /> Mugal Canal, Karnal.", //Karnal
+                                "50A, Sarat Bose Road,<br /> Kolkata -700020.", //Kolkata
+                                "15 ICC,<br /> 2nd Floor Ashoka Complex,<br /> T. P. Nagar, Korba,<br /> Chattisgarh.", //Korba
+                                "3rd floor,<br /> Jandu tower,<br /> Miller Ganj,<br /> Ludhiana-141003.", //Ludhiana
+                                "1st Floor,<br /> GYS Infinity, Subhash Road,<br /> Paranjpe B Scheme,<br /> Vile Parle (E), Mumbai 400057.", //Mumbai
+                                "Shriyash Heights,<br /> 3rd Floor,<br /> Block No. 301 & 302,<br /> 95, East High Court Road (Vip Rosd) Ramdaspeth,<br /> Nagpur 440010.", //Nagpur
+                                "Matru Mandir,<br /> Ground Floor,<br /> Prasad Circle,<br /> Gangapur Road,<br /> Nashik - 4220013.", //Nashik
+                                "5th Floor,<br /> Gys Global,<br /> A-3, 4, 5, Plot No - 11,<br /> Sector -125,<br /> Noida, UP - 201301.", //Noida
+                                "D3, P3B, District Centre,<br /> Saket, New Delhi -110017,<br /> T : +91-11-3912-5000,<br /> F : +91-11-3912-6050.", //New Delhi
+                                "SCO-43, 2nd floor,<br /> New Leela Bhawan,<br /> Patiala-147001.", //Patiala
+                                "7th floor, Vascon Matrix,<br /> Next to Shopper Stop,<br /> Wakdewadi, Shivaji Nagar,<br /> Pune 1-41005.", //Pune
+                                "A Block, SF 03, 2nd Floor,<br />  Maruti Business Park,<br /> G.E Road,  Raipur ( C.G) 492001.", //Raipur
+                                "301-305 3rd Floor,<br /> Siddhi Vinayak Complex,<br /> Opp.Ramkrushna Ashram,<br /> Dr.Yagnik Road, Rajkot - 360 001.", //Rajkot
+                                "No: 50/1, Nelson Towers,<br /> Rajaji Road,<br /> Opp to Hotel Windsor Castle,<br /> Salem - 636 007.", //Salem
+                                "4th Floor GeetPrabha Enterprise,<br /> Nr.kadiwala School,<br />  Ring Road,<br />  Surat - 395002.", //Surat
+                                "2nd Floor,<br /> B Tanishq Tower,<br /> 25 Residency Road,<br /> Sardarpura,<br /> Udaipur-303 001 (Rajasthan)." //Udaipur
+                              );
+    function update() {
+        document.getElementById("permission_div").innerHTML = content[document.getElementById("permission_select").value];
+    }
+    //-->
+                                    ', 
+                                   
+                                        ', 
+                                            ', 
+	', Ahmedabad', 
+	', Ajmer', 
+	', Bangalore', 
+	', Baroda', 
+	', Bhatinda', 
+	', Bhillai', 
+	', Bhubaneswar', 
+	', Bilaspur', 
+	', Chandigarh ', 
+	', Chennai', 
+	', Coimbatore', 
+	', Delhi', 
+	', Gandhi Dham', 
+	', Gurgaon', 
+	', Hyderabad', 
+	', Indore', 
+	', Jabalpur', 
+	', Jaipur', 
+	', Jalandhar', 
+	', Jodhpur ', 
+	', Karnal', 
+	', Kolkata', 
+	', Ludhiana', 
+	', Mumbai', 
+	', Nagpur', 
+	', Nashik', 
+	', Navi Mumbai', 
+	', Panipat', 
+	', Patiala', 
+	', Pune', 
+	', Raipur', 
+	', Rajkot', 
+	', Salem', 
+	', Surat', 
+	', Udaipur', 
+	', Uttam nagar', 
+	', Vadodara', 
+	', Vapi', 
+	', Yamunanagar (RFL)', 
+
+', 
+                                        ', 
+                                        ', 1st Floor, Shital Varsha Building, Near Vijay Cross Road, Opp. Manan Auto Link, Drive-in Road, Navrangpura, AHMEDABAD GUJARAT 380009', 
+                                  
+                                ', 
+
+                            ', 
+
+
+                            
+                        ', 
+                      
+                        
+                        ',  
+                    ', 
+                                ', Valuation data for Index Linked Debentures', 
+                                ', RBI Circular to Replace Existing Set of PDC\u2019s', 
+                                ', Procedure for claiming Tax Deduction at Source', 
+                            ', 
+                          
+                    ', 
+                    ', 
+                  
+
+                ', 
+            ', 
+        ', 
+    ', 
+
+            ', 
+            ', 
+            
+
+
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+                    ', KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.), you need not undergo the same process again when you approach another intermediary.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp "No need to issue cheques by investors while subscribing to IPO. Just write the bank account number and sign in the application form to authorise your bank to make payment in case of allotment. No worries for refund as the money remains in investor's account.', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+
+
+', 
+    ', Important',  Notification',  ', New', Prevent Unauthorized Transactions in your demat account  --> Update your Mobile Number with your Depository Participant. Receive alerts on your Regist...', Read more ',  ', New', In accordance with the Notification No. 27/2016-ST dated 26th May 2016 issued by the Ministry of Finance, Service Tax applicable on all charges levied...', Read more ',  ', New', RFL shall not be levying pre-payment charges in respect to the customer whose loans are recalled at the option of RFL...', Read more ',  ', New', KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.),...', Read more ', 
+', 
+
+', ×', Important Notification :', Prevent Unauthorized Transactions in your demat account  --> Update your Mobile Number with your Depository Participant. Receive alerts on your Registered Mobile for  all debit and other important transactions  in your demat account directly from  CDSL  on the same day......................issued in the interest of investors.', ×', Important Notification :', In accordance with the Notification No. 27/2016-ST dated 26th May 2016 issued by the Ministry of Finance, Service Tax applicable on all charges levied by Religare Finvest Limited is being revised from 14.5% to 15% to include 0.5% for the purpose of Krishi Kalyan Cess. The new service tax will be applicable from 1st June 2016.
+', ×', Important Notification :', RFL shall not be levying pre-payment charges in respect to the customer whose loans are recalled at the option of RFL.', ×', Important Notification :', KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.), you need not undergo the same process again when you approach another intermediary.', 
+        ', 
+        ', 
+        
+', 
+', 
+    $(document).ready(function () {
+        //Examples of how to assign the ColorBox event to elements
+        $(".exampleCreditRating").colorbox({ width: "615px", inline: true, href: "#inline_exampleCreditRating" });
+        //Example of preserving a JavaScript event for inline calls.
+    });
+', 
+
+
+
+', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', ABOUT US', 
+            ', About Religare Finvest', About Religare Enterprises', Leadership Team', Our Journey', Vision and Values', Board of Directors', Fair Practice Code', 
+          
+        ', 
+        ', 
+          ', important links', 
+           ', Pay EMI',  ', Corporate Governance', Sitemap',  ', Privacy Policy', Disclaimer', 
+        ', 
+        ', 
+          ', Contact Us', 
+          ', 
+            ', 
+              ', Religare Finvest Limited', 2nd Floor, Rajlok Building, 24, ', Nehru Place, New Delhi 110019', Corporate Office :', Religare Finvest limited', Paras Twin Towers,Tower B, ', 9th Floor,Golf Course Road, ', Sector 54, Gurgaon - 122002',  ', SMS : LOANS To 575758',  ', Call Us : 1860-3000-4111',  ', Email Us : ', customerservice@religare.com', 
+            ', 
+            ', 
+              ', 
+                ', 
+              ', 
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+  ', 
+    ', 
+      ', 
+        ', ISO Certification - Religare Finvest Limited has successfully secured  ISO 9001:2008 certification for its customer centric processes.', "Reserve Bank of India does not accept any responsibility or guarantee about the present position as to the financial soundness of the Company or the correctness of any of the statements or representations made or opinions expressed by the Company and for discharge of liability by the Company".', "Neither is there any provision in law to keep , nor does the Company keep any part of the deposits with the Reserve Bank of India and by issuing the Certificate of Registration to the Company, the Reserve Bank neither accepts any responsibility nor guarantee for the payment of the deposit amount of any depositor"', 
+      ', 
+    ', 
+  ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', © Copyright 2010 ', Religare',  is a registered trademark of RHC Holding Private Limited used under license by Religare Enterprises Limited and its subsidiaries. Trademarks are the property of their respective owners. All rights reserved. ', 
+             
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+', 
+
+', 
+    ', 
+     ', 
+        ', 
+        ', 
+        ', 
+        ', 
+    ', 
+   ', 
+
+', 
+  ',  
+    
+    ', 
+    ', 
+      ', 
+        ', ×', 
+        ', 
+      ', 
+      ', 
+        
+        ', Rating Type', Rating Agency', Status as on 15 Nov 2013', Rating', Amount (Rs Cr.)', Commercial Paper', India Ratings', IND A1+', 3,000', Long Term Debentures', India Ratings', IND AA - (Stable)', 1,500', Bank Term Loan', India Ratings', IND AA - (Stable)', 10,000', Short Term Bank Loans', India Ratings', IND A1+', 3,000', Tier II Subordinate Debt', India Ratings', IND AA - (Stable)', 750', Commercial Paper', ICRA', ICRA A1+', 2,700', Short term Debt', ICRA', ICRA A1+', 1,000', Long Term Debt', ICRA', ICRA AA- (Stable)', 3,400', Short term Bank Loans', ICRA', ICRA A1+', 600', Long Term Bank Loans', ICRA', ICRA AA- (Stable)', 11,400', Pref Share', ICRA', ICRA A+ (Stable)', 125', Market Linked Debentures', ICRA', pp-MLD[ICRA] AA-', 100', Long Term Debt (Dual Rating)', CARE', CARE AA-', 1,400', 
+      ', 
+     
+    ', 
+  ', 
+', 
+
+
+
+
+
+
+
+        ', 
+    ', 
+',  ',  ', 
+',  
+',  
+',  
+',  
+
+
+
+
+
+', u"
+    $(document.body).bind('mousedown keyup touchstart', function (event) {
+    	console.log('');
+	});
+", 
+
+
+
+	
+	
+	
+	
+	
+	
+', 
+    $(document).ready(function () {
+
+		if ($(window).width() < 767) {				 
+			 $("li.dropdown > a").click(function(){
+				//alert('hello');
+			$('li.dropdown').not(this).find('ul').hide();
+			$(this).next("ul.dropdown-menu").toggle();
+			});
+			$(".dropdown a.dropdown-toggle").click(function(e) {
+			return false;
+			});			
+			return;
+				}
+				else {
+					// my function
+				}
+		
+        $('#myTab li').click(function () {
+            $('#myTab li.active').removeClass('active');
+            $(this).closest('li').addClass('active');
+        });
+
+        $('#hotdealsTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        })
+
+        // hide #back-top first
+        $("#back-top").hide();
+
+        // fade in #back-top
+        $(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#back-top').fadeIn();
+                } else {
+                    $('#back-top').fadeOut();
+                }
+            });
+
+            // scroll body to 0px on click
+            $('#back-top a').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+            $('a.link').click(function () {
+                $('html, body').animate({
+                    scrollTop: $($.attr(this, 'href')).offset().top - 144
+                }, 500);
+                return false;
+            });
+        });
+
+        $(".dropdown-menu li a").click(function () {
+            $(this).parents(".dropdown").find('.dropdown-toggle span').text($(this).text());
+            $(this).parents(".dropdown").find('.dropdown-toggle span').val($(this).data('value'));
+        });
+
+    });
+			',  
+
+',  
+', 
+    $(document).ready(function () {
+        $("#testimonials").owlCarousel({
+            navigation: true,
+            slideSpeed: 300,
+            pagination: false,
+            items: 3,
+            itemsDesktop: [1199, 4],
+            itemsDesktopSmall: [980, 3],
+            itemsTablet: [768, 2],
+            itemsTabletSmall: false,
+            itemsMobile: [479, 1],
+            singleItem: false,
+            itemsScaleUp: false,
+            autoPlay: true,
+            stopOnHover: true,
+        });
+    });
+		',  
+',  
+', 
+    new WOW().init();
+        ',  
+',  
+', 
+    $(document).ready(function () {
+
+        //.parallax(xPosition, speedFactor, outerHeight) options:
+        //xPosition - Horizontal position of the element
+        //inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+        //outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+        $('.whywaveBox').parallax("50%", 0.4);
+        $('.bannerCntr-inner').parallax("50%", 0.4);
+        $('.request-form').parallax("50%", 0.4);
+        $('.bg').parallax("50%", 0.4);
+        $('#third').parallax("50%", 0.3);
+
+    })
+			',  
+    ', 
+', 
+', 
+    $(document).ready(function () {
+    
+        $('.search_btn').click(function (e) {
+            $('.header_searchbox').toggle(300)
+            e.preventDefault();
+        });
+
+        $(".exampleEmi").colorbox();
+        $(".exampleBranch").colorbox();
+        $(".exampleFaq").colorbox();
+        $(".exampleApply").colorbox();
+
+        $(".exampleGriev").colorbox();
+        $(".exampleCust").colorbox();
+
+        var navItems = $('.admin-menu li > a');
+        var navListItems = $('.admin-menu li');
+        var allWells = $('.admin-content');
+        var allWellsExceptFirst = $('.admin-content:not(:first)');
+
+        allWellsExceptFirst.hide();
+        navItems.click(function (e) {
+            e.preventDefault();
+            navListItems.removeClass('active');
+            $(this).closest('li').addClass('active');
+
+            allWells.hide();
+            var target = $(this).attr('data-target-id');
+            $('#' + target).show();
+        });
+
+        $('.inn_cat').click(function (e) {
+            $('#accordion').slideToggle(300)
+        });
+		
+		
+		
+			
+		
+    });
+    ', 
+', 
+'][
+    ', 
+', 
+
+', 
+', 
+        ', 
+            ', 
+            
+
+
+
+
+', 
+
+    function ValidateForm() {
+        var sMsg = '';
+        if (document.getElementById('ctl00_CtrlHeader1_txtSearch1').value == '' || document.getElementById('ctl00_CtrlHeader1_txtSearch1').value == 'Search...')
+            sMsg += 'Search' + ', ';
+
+        if (sMsg.length > 0) {
+            sMsg = "Please enter " + sMsg;
+            sMsg = sMsg.substring(0, sMsg.length - 2);
+            var Loc = sMsg.lastIndexOf(",");
+            var sMsg1;
+            sMsg1 = sMsg.substring(0, sMsg.length - 2);
+
+            if (sMsg.lastIndexOf(",") > -1) {
+                sMsg = sMsg.substring(0, sMsg.lastIndexOf(",")) + " and" + sMsg.substring(1 + sMsg.lastIndexOf(","), sMsg1.length + 2);
+                sMsg += ".";
+            }
+            else {
+                sMsg += ".";
+            }
+            alert(sMsg);
+
+            return false;
+        }
+    }
+    function get_name(value, id, field_value) {
+
+        if (value == "") {
+            document.getElementById(id).value = field_value;
+        }
+        return false;
+    }
+
+    function NameBlank(id) {
+        document.getElementById(id).value = "";
+    }
+
+    function EnterEvent(e) {
+        if (e.keyCode == 13) {
+            __doPostBack('ctl00$CtrlHeader1$imgSearch', "");
+        }
+    }
+
+
+', 
+
+', 
+    ', 
+        ', 
+        ', 
+            ', Toggle navigation',  ', 
+            ', 
+                ',  ', 
+                    ', 
+        ', 
+        ', 
+
+        ', 
+            ', 
+                
+            ', 
+            ', Other Group Sites', Other Group Sites', Group Corporate', Housing Finance', Health Insurance', Retail Broking', Capital Markets', Wealth Management', 
+            ', 
+                ', 
+                ', 
+                ', 
+                
+            ', 
+        ', 
+        ', About Us', About Religare Finvest', About Religare Enterprises', Leadership Team', Our Journey', Vision and Values', Board of Directors', Fair Practice Code', Product', Unsecured SME working capital loans', Secured SME Business Expansion loans', Short Term Trade Finance', Capital Market loans', Others', Investors', Prospectus', Half Yearly And Annual Results', Annual Reports', Trustee Details', Corporate Information', Policies', Unpaid Unclaimed amounts', Disclosures', Code of Conduct', Financial Statements', Disclosures related to debt securities of RFL', Contacts for Investor Grievances', Media Room', Careers', Contact Us', New',  Pay EMI',  ', Just Buy', 
+        ', 
+    ', 
+    ', 
+', 
+
+            ', 
+            
+', 
+    
+                        ', 
+
+
+', 
+
+            ', 
+            ', 
+        
+            
+
+    
+
+    ', 
+        function GetXmlHttpObject(handler) {
+            var objXmlHttp = null
+            if (navigator.userAgent.indexOf("MSIE") >= 0) {
+                var strName = "Msxml2.XMLHTTP"
+                if (navigator.appVersion.indexOf("MSIE 5.5") >= 0) {
+                    strName = "Microsoft.XMLHTTP"
+                }
+                try {
+                    objXmlHttp = new ActiveXObject(strName)
+                    objXmlHttp.onreadystatechange = handler
+                    return objXmlHttp
+                }
+                catch (e) {
+                    alert("Error. Scripting for ActiveX might be disabled")
+                    return
+                }
+            }
+            if (navigator.userAgent.indexOf("Mozilla") >= 0) {
+                objXmlHttp = new XMLHttpRequest()
+                objXmlHttp.onload = handler
+                objXmlHttp.onerror = handler
+                return objXmlHttp
+            }
+        }
+
+        function GetCityDetails() {
+
+            var id = document.getElementById('ctl00_ContentPlaceHolder1_ddlCity');
+
+            if (id.value != '') {
+                var url = "AjaxPage/Ajax_CityDetails.aspx?Id=" + id.value;
+               // alert(url);
+                xmlHttp = GetXmlHttpObject(stateChanged);
+                xmlHttp.open("GET", url, true);
+                xmlHttp.send(null);
+            }
+            return false;
+        } // End Of Function
+
+        function stateChanged() {
+            if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+                var ss = xmlHttp.responseText;
+                var divId = document.getElementById('ctl00_ContentPlaceHolder1_permission_div');
+                divId.innerHTML = ss;
+                //alert(ss);
+                //            if (ss == 1) {
+                //                alert('Mob Number Updated');
+                //                return false;
+                //            }
+                //            else {
+                //                //alert('Facility Does Not Exist ');
+                //            }
+            }
+        }
+
+
+
+    ', 
+
+    ', 
+
+        ', 
+            ', 
+                ', 
+
+                    ', 
+                        ', 
+                            ', 
+                                ', Home',  ', 
+                                ', Contact Us', 
+                            ', 
+                        ', 
+                    ', 
+
+
+                    ', 
+
+                    ', 
+
+                        ', 
+                            ', 
+                                ', 
+                                    ', Grievance Redressal', 
+                                ', 
+                                    ', Customer Center', 
+
+                            ', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Contact Us', 
+
+
+                            ', 
+                                ', SMS:', 
+                                    ', LOANS To 575758', 
+                                ', Call Us:', 1860-3000-4111', 
+                                ', Call Us:',  ',   
+                                    (toll free)', 
+                                ', Email Us:',  ', 
+                                    ', customerservice@religare.com', 
+                                ', 
+                            ', 
+
+
+                            ', 
+                                ', 
+                                    ', Write to Us at:', 
+                                    ', Religare Finvest Limited', , A-3-4-5, GYS Global, 1st Floor, ', Tower A, Sector 125,', Noida, UP- 201301', 
+                                ', 
+                                ', 
+                                    ', Our Registered Office', 
+                                    ', Religare Finvest Limited', 2nd Floor, Rajlok Building, 24, ', Nehru Place, New Delhi 110019', Corporate Office :', Religare Finvest limited', Paras Twin Towers,Tower B, ', 9th Floor,Golf Course Road, ', Sector 54, Gurgaon - 122002', 
+                                ', 
+                                ', 
+                                    ', Service Locator', 
+                                    ', 
+															<!--
+    var content = new Array(
+                                "415/11, Opp. Gujrati School,<br /> Kutchery Road,<br /> Ajmer -305001 (Rajasthan).", //ajmer
+                                "1st Floor, Shital Varsha Building,<br /> Near Vijay Cross Road,<br /> Opp. Manan Auto Link,<br /> Drive-in Road, Navrangpura,<br /> Ahmedabad - 380 009.", //ahmedabad
+                                "No.48/26,<br /> 9th Floor ,The Estate,<br />  121 , Dickenson Road,<br /> Bangalore-560042.", //Bangalore
+                                "Grover complex,<br /> Near Hanuman chowk,<br /> Bathinda-151001.", //Bhatinda
+                                "Shop No 305,<br /> 2nd Floor,Khichariya Complex,<br /> Nehru Nagar Square,<br /> Bhilai, Chattishgarh - 490020.", //Bhillai
+                                "4th Floor,<br /> Radhika Complex,<br /> Cuttack-Puri Road,<br /> Bhubaneswar-751006.", //Bhubaneswar
+                                "No: 202,<br /> FF - VR Plaza, Link Road,<br /> Bilaspur (Chattisgarh).", //Bilaspur
+                                "SCO: 3019-3020,<br /> 1st Floor, Sector- 22D,<br /> Chandigarh.", //Chandigarh
+                                "The Oval,<br /> 5th Floor, No.10 & 12,<br /> Venkatnarayana Road,<br /> T.Nagar, Chennai - 600017.", //Chennai
+                                "City Centre 2nd Floor 14/15,<br /> East Arokiaswamy Road,<br /> 2nd Floor, R S Puram,<br /> Opp to Annapoorna Hotel,<br /> Coimbatore - 641002.", //Coimbatore
+                                "Shop No.BS-5,<br /> BS-7, BS-8 & BS-9, 4-B, B-4,<br /> PLS Plaza, Raja Road,<br /> Dehradun \u2013 248001, Uttaranchal.", //Dehradun
+                                "Mamta Building,<br /> B-4, NU-10B, Shakti Nagar,<br /> Opp. Radhasoami Satsang Hall,<br /> Gandhidham. Kutch - 370201.", //Gandhidham
+                                "Flat No.205-208,<br /> G. S. Chambers,<br /> Above Reebok Showroom,<br /> Nagarjuna Circle,<br /> Panjagutta, Hyderabad - 500034.", //Hyderabad
+                                "1st Floor,<br /> Above Yes Bank,<br /> 9/1/1 M.G. Road,<br /> Indore - 452001.", //Indore
+                                "290-C Napier Town,<br /> Near Bhanwartal Park,<br /> Jabalpur- 482001.", //Jabalpur
+                                "903-909, 7th Floor,<br /> Anchor Mall,<br /> Ajmer Road,<br /> Jaipur-302006 (Rajasthan).", //Jaipur
+                                "The axis & precincts,<br /> BMC chowk,<br /> Jalandhar-144001.", //Jalandhar
+                                "1st Floor,<br /> Narayanam Compex,<br /> Upper Chopasani Road,<br /> Jodhpur - 342001(Rajasthan).", //Jodhpur
+                                "SCO: 354,<br /> 1st Floor,<br /> Mugal Canal, Karnal.", //Karnal
+                                "50A, Sarat Bose Road,<br /> Kolkata -700020.", //Kolkata
+                                "15 ICC,<br /> 2nd Floor Ashoka Complex,<br /> T. P. Nagar, Korba,<br /> Chattisgarh.", //Korba
+                                "3rd floor,<br /> Jandu tower,<br /> Miller Ganj,<br /> Ludhiana-141003.", //Ludhiana
+                                "1st Floor,<br /> GYS Infinity, Subhash Road,<br /> Paranjpe B Scheme,<br /> Vile Parle (E), Mumbai 400057.", //Mumbai
+                                "Shriyash Heights,<br /> 3rd Floor,<br /> Block No. 301 & 302,<br /> 95, East High Court Road (Vip Rosd) Ramdaspeth,<br /> Nagpur 440010.", //Nagpur
+                                "Matru Mandir,<br /> Ground Floor,<br /> Prasad Circle,<br /> Gangapur Road,<br /> Nashik - 4220013.", //Nashik
+                                "5th Floor,<br /> Gys Global,<br /> A-3, 4, 5, Plot No - 11,<br /> Sector -125,<br /> Noida, UP - 201301.", //Noida
+                                "D3, P3B, District Centre,<br /> Saket, New Delhi -110017,<br /> T : +91-11-3912-5000,<br /> F : +91-11-3912-6050.", //New Delhi
+                                "SCO-43, 2nd floor,<br /> New Leela Bhawan,<br /> Patiala-147001.", //Patiala
+                                "7th floor, Vascon Matrix,<br /> Next to Shopper Stop,<br /> Wakdewadi, Shivaji Nagar,<br /> Pune 1-41005.", //Pune
+                                "A Block, SF 03, 2nd Floor,<br />  Maruti Business Park,<br /> G.E Road,  Raipur ( C.G) 492001.", //Raipur
+                                "301-305 3rd Floor,<br /> Siddhi Vinayak Complex,<br /> Opp.Ramkrushna Ashram,<br /> Dr.Yagnik Road, Rajkot - 360 001.", //Rajkot
+                                "No: 50/1, Nelson Towers,<br /> Rajaji Road,<br /> Opp to Hotel Windsor Castle,<br /> Salem - 636 007.", //Salem
+                                "4th Floor GeetPrabha Enterprise,<br /> Nr.kadiwala School,<br />  Ring Road,<br />  Surat - 395002.", //Surat
+                                "2nd Floor,<br /> B Tanishq Tower,<br /> 25 Residency Road,<br /> Sardarpura,<br /> Udaipur-303 001 (Rajasthan)." //Udaipur
+                              );
+    function update() {
+        document.getElementById("permission_div").innerHTML = content[document.getElementById("permission_select").value];
+    }
+    //-->
+                                    ', 
+                                   
+                                        ', 
+                                            ', 
+	', Ahmedabad', 
+	', Ajmer', 
+	', Bangalore', 
+	', Baroda', 
+	', Bhatinda', 
+	', Bhillai', 
+	', Bhubaneswar', 
+	', Bilaspur', 
+	', Chandigarh ', 
+	', Chennai', 
+	', Coimbatore', 
+	', Delhi', 
+	', Gandhi Dham', 
+	', Gurgaon', 
+	', Hyderabad', 
+	', Indore', 
+	', Jabalpur', 
+	', Jaipur', 
+	', Jalandhar', 
+	', Jodhpur ', 
+	', Karnal', 
+	', Kolkata', 
+	', Ludhiana', 
+	', Mumbai', 
+	', Nagpur', 
+	', Nashik', 
+	', Navi Mumbai', 
+	', Panipat', 
+	', Patiala', 
+	', Pune', 
+	', Raipur', 
+	', Rajkot', 
+	', Salem', 
+	', Surat', 
+	', Udaipur', 
+	', Uttam nagar', 
+	', Vadodara', 
+	', Vapi', 
+	', Yamunanagar (RFL)', 
+
+', 
+                                        ', 
+                                        ', 1st Floor, Shital Varsha Building, Near Vijay Cross Road, Opp. Manan Auto Link, Drive-in Road, Navrangpura, AHMEDABAD GUJARAT 380009', 
+                                  
+                                ', 
+
+                            ', 
+
+
+                            
+                        ', 
+                      
+                        
+                        ',  
+                    ', 
+                                ', Valuation data for Index Linked Debentures', 
+                                ', RBI Circular to Replace Existing Set of PDC\u2019s', 
+                                ', Procedure for claiming Tax Deduction at Source', 
+                            ', 
+                          
+                    ', 
+                    ', 
+                  
+
+                ', 
+            ', 
+        ', 
+    ', 
+
+            ', 
+            ', 
+            
+
+
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+                    ', KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.), you need not undergo the same process again when you approach another intermediary.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp "No need to issue cheques by investors while subscribing to IPO. Just write the bank account number and sign in the application form to authorise your bank to make payment in case of allotment. No worries for refund as the money remains in investor's account.', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+
+
+', 
+    ', Important',  Notification',  ', New', Prevent Unauthorized Transactions in your demat account  --> Update your Mobile Number with your Depository Participant. Receive alerts on your Regist...', Read more ',  ', New', In accordance with the Notification No. 27/2016-ST dated 26th May 2016 issued by the Ministry of Finance, Service Tax applicable on all charges levied...', Read more ',  ', New', RFL shall not be levying pre-payment charges in respect to the customer whose loans are recalled at the option of RFL...', Read more ',  ', New', KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.),...', Read more ', 
+', 
+
+', ×', Important Notification :', Prevent Unauthorized Transactions in your demat account  --> Update your Mobile Number with your Depository Participant. Receive alerts on your Registered Mobile for  all debit and other important transactions  in your demat account directly from  CDSL  on the same day......................issued in the interest of investors.', ×', Important Notification :', In accordance with the Notification No. 27/2016-ST dated 26th May 2016 issued by the Ministry of Finance, Service Tax applicable on all charges levied by Religare Finvest Limited is being revised from 14.5% to 15% to include 0.5% for the purpose of Krishi Kalyan Cess. The new service tax will be applicable from 1st June 2016.
+', ×', Important Notification :', RFL shall not be levying pre-payment charges in respect to the customer whose loans are recalled at the option of RFL.', ×', Important Notification :', KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.), you need not undergo the same process again when you approach another intermediary.', 
+        ', 
+        ', 
+        
+', 
+', 
+    $(document).ready(function () {
+        //Examples of how to assign the ColorBox event to elements
+        $(".exampleCreditRating").colorbox({ width: "615px", inline: true, href: "#inline_exampleCreditRating" });
+        //Example of preserving a JavaScript event for inline calls.
+    });
+', 
+
+
+
+', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', ABOUT US', 
+            ', About Religare Finvest', About Religare Enterprises', Leadership Team', Our Journey', Vision and Values', Board of Directors', Fair Practice Code', 
+          
+        ', 
+        ', 
+          ', important links', 
+           ', Pay EMI',  ', Corporate Governance', Sitemap',  ', Privacy Policy', Disclaimer', 
+        ', 
+        ', 
+          ', Contact Us', 
+          ', 
+            ', 
+              ', Religare Finvest Limited', 2nd Floor, Rajlok Building, 24, ', Nehru Place, New Delhi 110019', Corporate Office :', Religare Finvest limited', Paras Twin Towers,Tower B, ', 9th Floor,Golf Course Road, ', Sector 54, Gurgaon - 122002',  ', SMS : LOANS To 575758',  ', Call Us : 1860-3000-4111',  ', Email Us : ', customerservice@religare.com', 
+            ', 
+            ', 
+              ', 
+                ', 
+              ', 
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+  ', 
+    ', 
+      ', 
+        ', ISO Certification - Religare Finvest Limited has successfully secured  ISO 9001:2008 certification for its customer centric processes.', "Reserve Bank of India does not accept any responsibility or guarantee about the present position as to the financial soundness of the Company or the correctness of any of the statements or representations made or opinions expressed by the Company and for discharge of liability by the Company".', "Neither is there any provision in law to keep , nor does the Company keep any part of the deposits with the Reserve Bank of India and by issuing the Certificate of Registration to the Company, the Reserve Bank neither accepts any responsibility nor guarantee for the payment of the deposit amount of any depositor"', 
+      ', 
+    ', 
+  ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', © Copyright 2010 ', Religare',  is a registered trademark of RHC Holding Private Limited used under license by Religare Enterprises Limited and its subsidiaries. Trademarks are the property of their respective owners. All rights reserved. ', 
+             
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+', 
+
+', 
+    ', 
+     ', 
+        ', 
+        ', 
+        ', 
+        ', 
+    ', 
+   ', 
+
+', 
+  ',  
+    
+    ', 
+    ', 
+      ', 
+        ', ×', 
+        ', 
+      ', 
+      ', 
+        
+        ', Rating Type', Rating Agency', Status as on 15 Nov 2013', Rating', Amount (Rs Cr.)', Commercial Paper', India Ratings', IND A1+', 3,000', Long Term Debentures', India Ratings', IND AA - (Stable)', 1,500', Bank Term Loan', India Ratings', IND AA - (Stable)', 10,000', Short Term Bank Loans', India Ratings', IND A1+', 3,000', Tier II Subordinate Debt', India Ratings', IND AA - (Stable)', 750', Commercial Paper', ICRA', ICRA A1+', 2,700', Short term Debt', ICRA', ICRA A1+', 1,000', Long Term Debt', ICRA', ICRA AA- (Stable)', 3,400', Short term Bank Loans', ICRA', ICRA A1+', 600', Long Term Bank Loans', ICRA', ICRA AA- (Stable)', 11,400', Pref Share', ICRA', ICRA A+ (Stable)', 125', Market Linked Debentures', ICRA', pp-MLD[ICRA] AA-', 100', Long Term Debt (Dual Rating)', CARE', CARE AA-', 1,400', 
+      ', 
+     
+    ', 
+  ', 
+', 
+
+
+
+
+
+
+
+        ', 
+    ', 
+',  ',  ', 
+',  
+',  
+',  
+',  
+
+
+
+
+
+', u"
+    $(document.body).bind('mousedown keyup touchstart', function (event) {
+    	console.log('');
+	});
+", 
+
+
+
+	
+	
+	
+	
+	
+	
+', 
+    $(document).ready(function () {
+
+		if ($(window).width() < 767) {				 
+			 $("li.dropdown > a").click(function(){
+				//alert('hello');
+			$('li.dropdown').not(this).find('ul').hide();
+			$(this).next("ul.dropdown-menu").toggle();
+			});
+			$(".dropdown a.dropdown-toggle").click(function(e) {
+			return false;
+			});			
+			return;
+				}
+				else {
+					// my function
+				}
+		
+        $('#myTab li').click(function () {
+            $('#myTab li.active').removeClass('active');
+            $(this).closest('li').addClass('active');
+        });
+
+        $('#hotdealsTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        })
+
+        // hide #back-top first
+        $("#back-top").hide();
+
+        // fade in #back-top
+        $(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#back-top').fadeIn();
+                } else {
+                    $('#back-top').fadeOut();
+                }
+            });
+
+            // scroll body to 0px on click
+            $('#back-top a').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+            $('a.link').click(function () {
+                $('html, body').animate({
+                    scrollTop: $($.attr(this, 'href')).offset().top - 144
+                }, 500);
+                return false;
+            });
+        });
+
+        $(".dropdown-menu li a").click(function () {
+            $(this).parents(".dropdown").find('.dropdown-toggle span').text($(this).text());
+            $(this).parents(".dropdown").find('.dropdown-toggle span').val($(this).data('value'));
+        });
+
+    });
+			',  
+
+',  
+', 
+    $(document).ready(function () {
+        $("#testimonials").owlCarousel({
+            navigation: true,
+            slideSpeed: 300,
+            pagination: false,
+            items: 3,
+            itemsDesktop: [1199, 4],
+            itemsDesktopSmall: [980, 3],
+            itemsTablet: [768, 2],
+            itemsTabletSmall: false,
+            itemsMobile: [479, 1],
+            singleItem: false,
+            itemsScaleUp: false,
+            autoPlay: true,
+            stopOnHover: true,
+        });
+    });
+		',  
+',  
+', 
+    new WOW().init();
+        ',  
+',  
+', 
+    $(document).ready(function () {
+
+        //.parallax(xPosition, speedFactor, outerHeight) options:
+        //xPosition - Horizontal position of the element
+        //inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+        //outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+        $('.whywaveBox').parallax("50%", 0.4);
+        $('.bannerCntr-inner').parallax("50%", 0.4);
+        $('.request-form').parallax("50%", 0.4);
+        $('.bg').parallax("50%", 0.4);
+        $('#third').parallax("50%", 0.3);
+
+    })
+			',  
+    ', 
+', 
+', 
+    $(document).ready(function () {
+    
+        $('.search_btn').click(function (e) {
+            $('.header_searchbox').toggle(300)
+            e.preventDefault();
+        });
+
+        $(".exampleEmi").colorbox();
+        $(".exampleBranch").colorbox();
+        $(".exampleFaq").colorbox();
+        $(".exampleApply").colorbox();
+
+        $(".exampleGriev").colorbox();
+        $(".exampleCust").colorbox();
+
+        var navItems = $('.admin-menu li > a');
+        var navListItems = $('.admin-menu li');
+        var allWells = $('.admin-content');
+        var allWellsExceptFirst = $('.admin-content:not(:first)');
+
+        allWellsExceptFirst.hide();
+        navItems.click(function (e) {
+            e.preventDefault();
+            navListItems.removeClass('active');
+            $(this).closest('li').addClass('active');
+
+            allWells.hide();
+            var target = $(this).attr('data-target-id');
+            $('#' + target).show();
+        });
+
+        $('.inn_cat').click(function (e) {
+            $('#accordion').slideToggle(300)
+        });
+		
+		
+		
+			
+		
+    });
+    ', 
+', 
+']

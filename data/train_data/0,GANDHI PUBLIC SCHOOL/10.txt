@@ -1,0 +1,3431 @@
+[Skip to main content',  
+
+    
+
+    
+       
+
+    ', 
+
+        
+        
+        ', 
+', 
+', 
+', 
+', 
+', 
+
+        ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+//<![CDATA[
+var MSOWebPartPageFormName = 'aspnetForm';
+var g_presenceEnabled = false;
+var g_wsaEnabled = false;
+var g_wsaQoSEnabled = false;
+var g_wsaQoSDataPoints = [];
+var g_wsaLCID = 1033;
+var g_wsaListTemplateId = 850;
+var g_wsaSiteTemplateId = 'SCHOLANTISPUBLISHING#11';
+var _fV4UI=true;var _spPageContextInfo = {webServerRelativeUrl: "\u002fschool\u002fgandatsetiagon", webAbsoluteUrl: "http:\u002f\u002fwww.ddsb.ca\u002fschool\u002fgandatsetiagon", siteAbsoluteUrl: "http:\u002f\u002fwww.ddsb.ca\u002fschool\u002fgandatsetiagon", serverRequestPath: "\u002fschool\u002fgandatsetiagon\u002fPages\u002fdefault.aspx", layoutsUrl: "_layouts\u002f15", webTitle: "Gandatsetiagon Public School", webTemplate: "2010", tenantAppVersion: "0", isAppWeb: false, webLogoUrl: "_layouts\u002f15\u002fimages\u002fsiteicon.png", webLanguage: 1033, currentLanguage: 1033, currentUICultureName: "en-US", currentCultureName: "en-US", clientServerTimeDelta: new Date("2017-01-06T14:58:03.3463008Z") - new Date(), siteClientTag: "8$$15.0.4823.1003", crossDomainPhotosEnabled:false, webUIVersion:15, webPermMasks:{High:16,Low:200801},pageListId:"{a14a1606-b57f-4a64-9fb6-07b0f821541a}",pageItemId:1, pagePersonalizationScope:1, alertsEnabled:true, siteServerRelativeUrl: "\u002fschool\u002fgandatsetiagon", allowSilverlightPrompt:'True'};document.onreadystatechange=fnRemoveAllStatus; function fnRemoveAllStatus(){removeAllStatus(true)};var _spWebPartComponents = new Object();_spWebPartComponents["WebPartWPQ5"] = new Object();_spWebPartComponents["WebPartWPQ5"].firstTabId = "Ribbon.Read";_spWebPartComponents["WebPartWPQ5"].contextualGroupCommands = ["LibraryContextualGroup"];_spWebPartComponents["WebPartWPQ5"].hasNonPromotedContextualGroups = true;_spWebPartComponents["WebPartWPQ5"].isDefaultWebPart = false;_spWebPartComponents["WebPartWPQ5"].pageComponentId = "WebPartWPQ5";_spWebPartComponents["WebPartWPQ5"].storageId="bfdffe55-6f5e-4f1a-aaf2-e91ede485d07";//]]>
+', 
+
+', 
+', u"
+//<![CDATA[
+(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() 
+        {
+          ExecuteOrDelayUntilScriptLoaded(
+            function()
+            {
+              var pairs = SP.ScriptHelpers.getDocumentQueryPairs();
+              var followDoc, itemId, listId, docName;
+              for (var key in pairs)
+              {
+                if(key.toLowerCase() == 'followdocument') 
+                  followDoc = pairs[key];
+                else if(key.toLowerCase() == 'itemid') 
+                  itemId = pairs[key];
+                else if(key.toLowerCase() == 'listid') 
+                  listId = pairs[key];
+                else if(key.toLowerCase() == 'docname') 
+                  docName = decodeURI(pairs[key]);
+              } 
+
+              if(followDoc != null && followDoc == '1' && listId!=null && itemId != null && docName != null)
+              {
+                SP.SOD.executeFunc('followingcommon.js', 'FollowDocumentFromEmail', function() 
+                { 
+                  FollowDocumentFromEmail(itemId, listId, docName);
+                });
+              }
+
+            }, 'SP.init.js');
+
+        });
+    })();(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() {
+
+            if (typeof(SPClientTemplates) === 'undefined' || SPClientTemplates === null || (typeof(APD_InAssetPicker) === 'function' && APD_InAssetPicker())) {
+                return;
+            }
+
+            var renderFollowFooter = function(renderCtx,  calloutActionMenu)
+            {
+                if (renderCtx.ListTemplateType == 700) 
+                    myDocsActionsMenuPopulator(renderCtx, calloutActionMenu);
+                else
+                    CalloutOnPostRenderTemplate(renderCtx, calloutActionMenu);
+
+                var listItem = renderCtx.CurrentItem;
+                if (typeof(listItem) === 'undefined' || listItem === null) {
+                    return;
+                }
+                if (listItem.FSObjType == 0) {
+                    calloutActionMenu.addAction(new CalloutAction({
+                        text: Strings.STS.L_CalloutFollowAction,
+                        tooltip: Strings.STS.L_CalloutFollowAction_Tooltip,
+                        onClickCallback: function (calloutActionClickEvent, calloutAction) {
+                            var callout = GetCalloutFromRenderCtx(renderCtx);
+                            if (!(typeof(callout) === 'undefined' || callout === null))
+                                callout.close();
+                            SP.SOD.executeFunc('followingcommon.js', 'FollowSelectedDocument', function() { FollowSelectedDocument(renderCtx); });
+                        }
+                    }));
+                }
+            };
+
+            var registerOverride = function(id) {
+                var followingOverridePostRenderCtx = {};
+                followingOverridePostRenderCtx.BaseViewID = 'Callout';
+                followingOverridePostRenderCtx.ListTemplateType = id;
+                followingOverridePostRenderCtx.Templates = {};
+                followingOverridePostRenderCtx.Templates.Footer = function(renderCtx) {
+                    var  renderECB;
+                    if (typeof(isSharedWithMeView) === 'undefined' || isSharedWithMeView === null) {
+                        renderECB = true;
+                    } else {
+                        var viewCtx = getViewCtxFromCalloutCtx(renderCtx);
+                        renderECB = !isSharedWithMeView(viewCtx);
+                    }
+                    return CalloutRenderFooterTemplate(renderCtx, renderFollowFooter, renderECB);
+                };
+                SPClientTemplates.TemplateManager.RegisterTemplateOverrides(followingOverridePostRenderCtx);
+            }
+            registerOverride(101);
+            registerOverride(700);
+        });
+    })();if (typeof(DeferWebFormInitCallback) == 'function') DeferWebFormInitCallback();//]]>
+", 
+
+', 
+', 
+
+            
+            ',  var submitHook = function () { return false; }; theForm._spOldSubmit = theForm.submit; theForm.submit = function () { if (!submitHook()) { this._spOldSubmit(); } }; ', 
+
+            
+			
+               
+            
+            
+
+            
+            
+
+
+
+
+			
+				', 
+
+			
+
+            
+            ', 
+                ', 
+                    
+                    ', 
+                        ', 
+                            ', 
+                                ', District Home', Staff Portal', Student Mobile Campus', 
+                            ', 
+                                
+
+                            
+                            ', u"
+                                function googleTranslateElementInit() {
+                                    new google.translate.TranslateElement(
+                                    { pageLanguage: 'en' }
+                                    , 'google_translate_element');
+                                }
+                            ", 
+                            ', 
+							', 
+
+									
+                                
+                            ',                                 
+                                    ', 
+                                                                                
+                                    ',                    
+								        
+									        
+										        
+											        ', 
+	', It looks like your browser does not have JavaScript enabled. Please turn on JavaScript and try again.', 
+
+	', 
+', 
+										        
+									        
+								                                        
+                                    ', 
+							    
+                            ',                              
+
+                        ', 
+                    ', 
+
+                    
+                    ', 
+                        
+
+                        
+                        ', 
+                                
+                            ', 
+							    ', 
+								    
+									    ', 
+								    
+							    ', 
+                            ', 
+
+                            
+                                ', 
+                                    ', 
+										Gandatsetiagon Public School
+                                    ', 
+                                    ', 
+                                        Academics, Arts, Athletics, Attitude.
+                                    ', 
+                                    ', 
+                                        
+                                    ', 
+                                ', 
+
+
+                                ', 
+							        ', 
+                                        ', FB', tw', 
+                                    ', 
+							    ', 
+                            						
+							
+                        ', 
+                        
+                        ', 
+                        ',   
+                                                        
+							
+								', 
+	', 
+		', Home', Currently selected', School Information', 
+			', About Our School', Character Education', Community Use of Schools', Digital Citizenship', Health & Safety', Registration', Ski & Snowboard Club', The Green Team', 
+		', Learning Commons', 
+			', Forest Of Reading', 
+				', Blue Spruce Program', Silver Birch Express', 
+			', I Can Read', Inquiry', 
+		', Teacher Pages', Parent Information', 
+			', Co-Curricular', 
+				', Sports', 
+			', Gandy Health & Wellness', Kiss and Ride', Parents as Partners', SCC', Tech Talk for Parents', Volunteers', 
+		', Contact Us', 
+	', 
+', 
+							          
+                        ', 
+                    ', 
+
+                    
+                    ', 
+					', 
+
+                    
+                    ',                               
+                                              
+						
+						
+
+                        
+						
+
+                                                   
+						', 
+                            
+						', 
+                  
+                        
+                        ', 
+
+                            
+                            ', 
+                                ', 
+									
+                                    ', 
+                                        
+                                    ', 
+									', 
+									', 
+										
+									', 
+									', // <![CDATA[ 
+
+
+										_spBodyOnLoadFunctionNames.push("setupPageDescriptionCallout");
+									// ]]>
+', 
+
+
+                                ', 
+                            ', 
+							', 
+                                
+                                
+                                
+
+', 
+
+	', 
+	', 
+		', 
+			', var ctx = new ContextInfo();ctx.listName = "{e4a59f91-c4ce-4044-8147-ce43b83b10a0}";ctx.NavigateForFormsPages = false;g_ctxDict['clv-ctx_e4a59f91-c4ce-4044-8147-ce43b83b10a0'] = ctx;', 
+	', u"
+		$(document).ready(function () {	
+			$('#g_5d56d2f6_96f9_4d53_950a_3591c7d8b906.sl-SpecialAnnouncementsSummary .sl-Items').magnificPopup({  
+				type:'inline',
+				midClick: true,
+				mainClass: 'mfp-fade',
+				delegate: '.sl-saTitle', 
+				removalDelay: 300,
+			});				
+		});
+	", 
+	
+	
+	', 
+		', 
+	', 
+', 
+
+ 
+
+	', 
+		', 
+	', 
+		', 
+			', 
+				
+
+
+			
+
+
+
+
+', 
+
+   ', 
+       $(document).ready(function () {
+           var hasControlNav = true;
+           if (5 > 5) {
+               hasControlNav = false;
+           }
+
+            $('.featured-slideshowContainer').flexslider({
+               reverse: false,
+               pauseOnAction: true,
+               pauseOnHover: true,
+               multipleKeyboard: true,
+               selector: ".slideshow_ctl00_SPWebPartManager1_g_4711658b_76cc_45b3_bb10_2400fac055da > .featured-item",
+               controlsContainer: "#ctl00_SPWebPartManager1_g_4711658b_76cc_45b3_bb10_2400fac055da .featured-controls",
+               controlNav: hasControlNav,
+
+               animation: "slide",
+               animationLoop: true,
+               easing: "swing",
+               direction: "horizontal",
+               slideshowSpeed: 7000,
+               animationSpeed: 600,
+               minItems: 0,
+               maxItems: 0,
+			   after: function(slider) {
+					slider.find(".featured-item a").each(function () {
+						$(this).attr("tabindex", -1);
+					});
+					slider.find(".featured-item.flex-active-slide .entry-title-container a, .featured-item.flex-active-slide .featured-entry.expended a").each(function () {
+						$(this).attr("tabindex", 0);
+					});
+			   }
+            }).find(".featured-item a").each(function () {
+				$(this).attr("tabindex", -1);
+            });
+       });
+    ', 
+    
+
+    
+    
+    ', 
+        ', 
+
+            
+                    ',  
+                        ', 
+                            
+                            ', 
+                                ', 
+                                    ',  
+                                    ',  
+                                ',        
+                            ',                          
+
+                            ', 
+                                ', 
+                                
+                                
+                                
+
+                                ', 
+
+                                
+
+                                ', 
+                                    ', Read more', 
+                                ',   
+                            ',   
+                        
+                            ',      
+                        ',                                             
+                    ', 
+                
+                    ',  
+                        ', 
+                            
+                            ', 
+                                ', 
+                                    ',  
+                                    ',  
+                                ',        
+                            ',                          
+
+                            ', 
+                                ', 
+                                
+                                
+                                
+
+                                ', 
+
+                                
+
+                                ', 
+                                    ', Read more', 
+                                ',   
+                            ',   
+                        
+                            ',      
+                        ',                                             
+                    ', 
+                
+                    ',  
+                        ', 
+                            
+                            ', 
+                                ', 
+                                    ',  
+                                    ',  
+                                ',        
+                            ',                          
+
+                            ', 
+                                ', 
+                                ', Homework Help', 
+                                
+                                ', Read More', 
+
+                                ', 
+
+                                ', 
+                                    ',  ', \u200bAll eligible Durham DSB Grade 7 to 10 Math students have obtained individual account access to the Independent Learning Centre\u2019s online math tutoring',  . ',  Ontario certified subject specific teachers provide one-on-one, confidential tutoring support to students from Sunday through Thursday, 5:30 to 9:30 p.m. There are interactive discussion rooms for each grade where students can view a current lesson, watch tutors draw on a whiteboard and then type their own questions for clarification. ', Go to Homework Help',  ',                          
+                                ', 
+
+                                  
+                            ',   
+                        
+                            ',      
+                        ',                                             
+                    ', 
+                
+                    ',  
+                        ', 
+                            
+                            ', 
+                                ', 
+                                    ',  
+                                    ',  
+                                ',        
+                            ',                          
+
+                            ', 
+                                ', 
+                                
+                                
+                                
+
+                                ', 
+
+                                
+
+                                  
+                            ',   
+                        
+                            ',      
+                        ',                                             
+                    ', 
+                
+                    ',  
+                        ', 
+                            
+                            ', 
+                                ', 
+                                    ',  
+                                    ',  
+                                ',        
+                            ',                          
+
+                            ', 
+                                ', 
+                                
+                                
+                                
+
+                                ', 
+
+                                
+
+                                ', 
+                                    ', Read more', 
+                                ',   
+                            ',   
+                        
+                            ',      
+                        ',                                             
+                    ', 
+                
+        ', 
+
+    ', 
+
+    ', 
+   
+    ', 
+
+    
+
+', 
+
+
+			', 
+		', 
+	', 
+', 
+	', 
+    
+	', 
+		', 
+	', 
+
+	', 
+', 
+		', 
+	', 
+
+    ', 
+		', 
+		', 
+	', 
+
+    ', 
+        ', 
+		', 
+	', 
+
+	', 
+		', 
+	', 
+		', 
+			', var ctx = new ContextInfo();ctx.listName = "{83a0ae0a-a546-4b3a-8280-4fd30edc8a18}";ctx.NavigateForFormsPages = false;g_ctxDict['clv-ctx_83a0ae0a-a546-4b3a-8280-4fd30edc8a18'] = ctx;', 
+          ', News & Announcements', 
+          ', 
+           ', There are currently no announcements.',  ', 
+
+          ', 
+          ', View Announcements', 
+          
+          ',  
+          
+          ', 
+		', 
+	', 
+		', 
+			', 
+				', 
+', 
+
+',       
+    $(document).ready(function () {
+        var $wp = $("#ctl00_SPWebPartManager1_g_0f3ed0c8_4396_4da4_8a8e_0781f0e313a5");
+
+        //tweet emoji
+        if (typeof (twemoji) !== "undefined") {
+            $wp.find(".sl-Tweet").each(function () {
+                var $this = $(this);
+                $this.html(twemoji.parse($this.html()));
+            });
+        }
+
+        //tweet media lightbox
+        $wp.find(".sl-Tweet a[data-photo]").each(function () {
+            var $this = $(this);
+            $this.attr("href", $this.attr("data-photo")).attr("data-lightbox", "Tweet");
+        });
+
+        $wp.find('.sl-Twitter .sl-Date').each(function () {
+            var nowTime = moment($(this).html()).fromNow();
+            $(this).html(nowTime);
+        });
+        
+        //twitter flexslider 
+         
+            $wp.find(".sl-Twitter").flexslider({
+                animation: "slide",
+                animationLoop: false,
+                easing: "swing",
+                direction: "horizontal",
+                slideshow: false,
+                slideshowSpeed: 7000,
+                animationSpeed: 600,
+                touch: false,
+                controlNav: false,
+                selector: ".Twitter_ctl00_SPWebPartManager1_g_0f3ed0c8_4396_4da4_8a8e_0781f0e313a5 > li",
+                controlsContainer: "#ctl00_SPWebPartManager1_g_0f3ed0c8_4396_4da4_8a8e_0781f0e313a5 .sl-TwitterSliderControl",
+                itemWidth: 0,
+                itemMargin: 0,
+                minItems: 0,
+                maxItems: 0,
+            }).find(".popup").click(function(event) {
+                var width  = 575,
+                    height = 400,
+                    left   = ($(window).width()  - width)  / 2,
+                    top    = ($(window).height() - height) / 2,
+                    url    = this.href,
+                    opts   = 'status=1' +
+                                ',width='  + width  +
+                                ',height=' + height +
+                                ',top='    + top    +
+                                ',left='   + left;
+
+                window.open(url, 'twitte', opts);
+
+                return false;
+            });
+         
+    });
+', 
+
+', 
+
+    ', Follow Gandy On Twitter', 
+    
+    
+        ', 
+    ', 
+        ', 
+    
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 12/16/2016 11:01:46 AM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', u"
+                            Gandy Gives to Herizon House! Thanks Mrs. Marshall & her grade 3's for organizing and our generous community support ", pic.twitter.com/3eM6KialyI', 
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 12/15/2016 12:47:35 PM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            Thanks for your support. Sold out of cookies!
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 12/14/2016 9:29:17 AM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            Thanks for your contributions to our food and toiletries drive for Herizon House. Accepting donations until Friday. ', pic.twitter.com/iIb9vUIzs, 
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 11/23/2016 2:41:44 PM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            Social media, Online Safety and Cyberbullying Parent workshop tonight at Pine Ridge S.S. Begins at 7 pm.
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 11/22/2016 3:18:06 PM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            Please see important letter that is coming home today. Look for the yellow sheet. Thanks.
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 11/15/2016 1:12:10 PM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            Excited as we are setting up our Book Fair! Thank you Mrs. Shaw and her student library helpers. ', pic.twitter.com/esB1qNy7JL', 
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 11/14/2016 7:12:34 AM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            Picture re-take day. Bring on the smiles.
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 11/11/2016 9:02:05 AM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            We remember. ', pic.twitter.com/YIDt1tLff9', 
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+    ', 
+    ', 
+
+    ',  
+        
+        
+    ', 
+
+', 
+
+			', 
+		', 
+	', 
+		', 
+			', 
+				',  ', Bell Times', 
+			', 8:50 am', 
+', \u200bEntry Bell', 
+', 10:05 - 10:20 am\u200b', 
+', AM Recess\u200b', 
+', 11:40 - 12:40 pm', 
+', \u200bLunch', 
+', 2:05 - 2:20 pm', 
+', \u200bPM Recess', 
+', \u200b3:30 pm', 
+', \u200bDismissal', 
+\u200b', 
+		', 
+	', 
+', 
+		', 
+	', 
+		', 
+			', var ctx = new ContextInfo();ctx.listName = "{5d7c6a90-188c-4f4f-bd53-cf089f39a8a5}";ctx.NavigateForFormsPages = false;g_ctxDict['clv-ctx_5d7c6a90-188c-4f4f-bd53-cf089f39a8a5'] = ctx;', u"
+	$(document).ready(function () {       
+		$('#g_1a47d560_ea6f_4e25_ab02_9c489276135f.sl-EventsSummary').find('.sl-Items').magnificPopup({  
+			type:'inline',
+			midClick: true,
+			mainClass: 'mfp-fade',
+			delegate: '.sl-Title a', 
+			removalDelay: 300,
+			gallery:{
+				enabled:true
+			  }		
+		});
+	});
+", 
+
+', 
+          ', Events Calendar', 
+          ',  
+          ', 
+	', 
+		$(document).ready(function () {
+			var startDate = new Date("12/27/2016 12:00:00 AM");
+			var endDate = new Date("1/6/2017 11:59:00 PM");
+			var type = "all";
+			startDate = startDate.toISOString().replace(/\-|\:|\.000/g, '');
+			endDate = endDate.toISOString().replace(/\-|\:|\.000/g, '');
+			
+			if (type == "all") {
+				startDate = startDate.substring(0, startDate.indexOf('T'));
+				endDate = endDate.substring(0, endDate.indexOf('T'));
+			}
+			$("#5d7c6a90-188c-4f4f-bd53-cf089f39a8a5497 .sl-IconGoogle").attr("href", "http://www.google.com/calendar/event?action=TEMPLATE&text=December+Vacation+%e2%80%94+December+26-January+6&dates="+ startDate +"/"+ endDate +"&details=Schools+closed+-+December+26-January+6&location=&trp=false&sprop=&sprop=name:");
+		});		
+	',   
+
+
+	', December Vacation \u2014 December 26-January 6', 
+	', Dec 27, 2016 - Jan 06, 2017', 
+	', Schools closed - December 26-January 6', 
+		  
+	', 
+		  			
+	
+		', December Vacation \u2014 December 26-January 6', 	 
+		', Dec 27, 2016 - Jan 06, 2017', 	
+		', All Day',  
+		', 		
+		',  ', 				
+		', Schools closed - December 26-January 6', 
+		', 
+		
+		', 
+			', 
+			', 
+			',    
+			',  
+			', 
+			', 			       
+		', 				
+	', 			  
+', 
+	', 
+		$(document).ready(function () {
+			var startDate = new Date("1/9/2017 8:50:00 AM");
+			var endDate = new Date("1/9/2017 9:50:00 AM");
+			var type = "time";
+			startDate = startDate.toISOString().replace(/\-|\:|\.000/g, '');
+			endDate = endDate.toISOString().replace(/\-|\:|\.000/g, '');
+			
+			if (type == "all") {
+				startDate = startDate.substring(0, startDate.indexOf('T'));
+				endDate = endDate.substring(0, endDate.indexOf('T'));
+			}
+			$("#5d7c6a90-188c-4f4f-bd53-cf089f39a8a5545 .sl-IconGoogle").attr("href", "http://www.google.com/calendar/event?action=TEMPLATE&text=Welcome+Back!&dates="+ startDate +"/"+ endDate +"&details=%3cdiv%3e%3c%2fdiv%3e&location=&trp=false&sprop=&sprop=name:");
+		});		
+	',   
+
+
+	', Welcome Back!', 
+	', Jan 09, 2017 08:50 AM', 
+	',   ', 
+		  
+	', 
+		  			
+	
+		', Welcome Back!', 	 
+		', Jan 09, 2017 ', 	
+		', 08:50 AM -  09:50 AM', 
+		', 		
+		',  ', 				
+		', 
+		', 
+		
+		', 
+			', 
+			', 
+			',    
+			',  
+			', 
+			', 			       
+		', 				
+	', 			  
+', 
+	', 
+		$(document).ready(function () {
+			var startDate = new Date("1/12/2017 9:00:00 AM");
+			var endDate = new Date("1/12/2017 10:00:00 AM");
+			var type = "time";
+			startDate = startDate.toISOString().replace(/\-|\:|\.000/g, '');
+			endDate = endDate.toISOString().replace(/\-|\:|\.000/g, '');
+			
+			if (type == "all") {
+				startDate = startDate.substring(0, startDate.indexOf('T'));
+				endDate = endDate.substring(0, endDate.indexOf('T'));
+			}
+			$("#5d7c6a90-188c-4f4f-bd53-cf089f39a8a5546 .sl-IconGoogle").attr("href", "http://www.google.com/calendar/event?action=TEMPLATE&text=Grade+8%27s+to+Dunbarton+(a.m.)&dates="+ startDate +"/"+ endDate +"&details=%3cdiv%3e%3c%2fdiv%3e&location=&trp=false&sprop=&sprop=name:");
+		});		
+	',   
+
+
+	', u"Grade 8's to Dunbarton (a.m.)", 
+	', Jan 12, 2017 09:00 AM', 
+	',   ', 
+		  
+	', 
+		  			
+	
+		', u"Grade 8's to Dunbarton (a.m.)", 	 
+		', Jan 12, 2017 ', 	
+		', 09:00 AM -  10:00 AM', 
+		', 		
+		',  ', 				
+		', 
+		', 
+		
+		', 
+			', 
+			', 
+			',    
+			',  
+			', 
+			', 			       
+		', 				
+	', 			  
+', 
+	', 
+		$(document).ready(function () {
+			var startDate = new Date("1/17/2017 9:30:00 AM");
+			var endDate = new Date("1/17/2017 3:30:00 PM");
+			var type = "time";
+			startDate = startDate.toISOString().replace(/\-|\:|\.000/g, '');
+			endDate = endDate.toISOString().replace(/\-|\:|\.000/g, '');
+			
+			if (type == "all") {
+				startDate = startDate.substring(0, startDate.indexOf('T'));
+				endDate = endDate.substring(0, endDate.indexOf('T'));
+			}
+			$("#5d7c6a90-188c-4f4f-bd53-cf089f39a8a5559 .sl-IconGoogle").attr("href", "http://www.google.com/calendar/event?action=TEMPLATE&text=Jr%2fSr+Kindergarten+Telephone+Pre-registration&dates="+ startDate +"/"+ endDate +"&details=Jr%2fSr+Kindergarten+Pre-registration+begins+via+telephone+at+9%26%2358%3b30+a.m.+Please+call+your+child%27s+local+elementary+school.&location=&trp=false&sprop=&sprop=name:");
+		});		
+	',   
+
+
+	', Jr/Sr Kindergarten Telephone Pre-registration', 
+	', Jan 17, 2017 09:30 AM', 
+	', u"Jr/Sr Kindergarten Pre-registration begins via telephone at 9:30 a.m. Please call your child's local elementary school.", 
+		  
+	', 
+		  			
+	
+		', Jr/Sr Kindergarten Telephone Pre-registration', 	 
+		', Jan 17, 2017 ', 	
+		', 09:30 AM -  03:30 PM', 
+		', 		
+		',  ', 				
+		', u"Jr/Sr Kindergarten Pre-registration begins via telephone at 9:30 a.m. Please call your child's local elementary school.", 
+		', 
+		
+		', 
+			', 
+			', 
+			',    
+			',  
+			', 
+			', 			       
+		', 				
+	', 			  
+', 
+	', 
+		$(document).ready(function () {
+			var startDate = new Date("1/19/2017 10:00:00 AM");
+			var endDate = new Date("1/19/2017 11:00:00 AM");
+			var type = "time";
+			startDate = startDate.toISOString().replace(/\-|\:|\.000/g, '');
+			endDate = endDate.toISOString().replace(/\-|\:|\.000/g, '');
+			
+			if (type == "all") {
+				startDate = startDate.substring(0, startDate.indexOf('T'));
+				endDate = endDate.substring(0, endDate.indexOf('T'));
+			}
+			$("#5d7c6a90-188c-4f4f-bd53-cf089f39a8a5547 .sl-IconGoogle").attr("href", "http://www.google.com/calendar/event?action=TEMPLATE&text=Intermediate+Immunizations&dates="+ startDate +"/"+ endDate +"&details=%3cdiv%3e%3c%2fdiv%3e&location=&trp=false&sprop=&sprop=name:");
+		});		
+	',   
+
+
+	', Intermediate Immunizations', 
+	', Jan 19, 2017 10:00 AM', 
+	',   ', 
+		  
+	', 
+		  			
+	
+		', Intermediate Immunizations', 	 
+		', Jan 19, 2017 ', 	
+		', 10:00 AM -  11:00 AM', 
+		', 		
+		',  ', 				
+		', 
+		', 
+		
+		', 
+			', 
+			', 
+			',    
+			',  
+			', 
+			', 			       
+		', 				
+	', 			  
+', 
+          
+          ', 
+          ', View Calendar', 
+          
+          
+          
+          ', 
+          
+          ', 
+		', 
+	', 
+		', 
+			', 
+ ', 
+', To view a list of religious dates', of significance, ', click here', .', 
+		', 
+	', 
+', 
+	    ', 
+	', 
+		', 
+			', 
+				',  ', School Newsletters', 
+			', Type',  ',  ', Name',  ',  ', Herizon House.docx',  ',  ', DecemberNews2016',  ',  ', NovemberNews2016',  ',  ', View in Web Browser', /school/gandatsetiagon/_layouts/15/VisioWebAccess/VisioWebAccess.aspx?listguid={ListId}&itemid={ItemId}&DefaultItemOpen=1', 0x0', 0x1', FileType', vdw', 255', View in Web Browser', /school/gandatsetiagon/_layouts/15/VisioWebAccess/VisioWebAccess.aspx?listguid={ListId}&itemid={ItemId}&DefaultItemOpen=1', 0x0', 0x1', FileType', vsdx', 255', View in Web Browser', /school/gandatsetiagon/_layouts/15/VisioWebAccess/VisioWebAccess.aspx?listguid={ListId}&itemid={ItemId}&DefaultItemOpen=1', 0x0', 0x1', FileType', vsdm', 255', Compliance Details', u"javascript:commonShowModalDialog('{SiteUrl}'+ 
+            '/_layouts/15/itemexpiration.aspx' 
+            +'?ID={ItemId}&List={ListId}', 'center:1;dialogHeight:500px;dialogWidth:500px;resizable:yes;status:no;location:no;menubar:no;help:no', function GotoPageAfterClose(pageid){if(pageid == 'hold') {STSNavigate(unescape(decodeURI('{SiteUrl}'))+ 
+            '/_layouts/15/hold.aspx' 
+            +'?ID={ItemId}&List={ListId}');  return false;} if(pageid == 'audit') {STSNavigate(unescape(decodeURI('{SiteUrl}'))+
+            '/_layouts/15/Reporting.aspx'
+            +'?Category=Auditing&backtype=item&ID={ItemId}&List={ListId}'); return false;} if(pageid == 'config') {STSNavigate(unescape(decodeURI('{SiteUrl}'))+
+            '/_layouts/15/expirationconfig.aspx'
+            +'?ID={ItemId}&List={ListId}'); return false;}}, null);", 0x0', 0x1', ContentType', 0x01', 898', Edit in Browser', /_layouts/15/images/icxddoc.gif?rev=23', /school/gandatsetiagon/_layouts/15/formserver.aspx?XsnLocation={ItemUrl}&OpenIn=Browser&Source={Source}', 0x0', 0x1', FileType', xsn', 255', Edit in Browser', /_layouts/15/images/icxddoc.gif?rev=23', /school/gandatsetiagon/_layouts/15/formserver.aspx?XmlLocation={ItemUrl}&OpenIn=Browser&Source={Source}', 0x0', 0x1', ProgId', InfoPath.Document', 255', Edit in Browser', /_layouts/15/images/icxddoc.gif?rev=23', /school/gandatsetiagon/_layouts/15/formserver.aspx?XmlLocation={ItemUrl}&OpenIn=Browser&Source={Source}', 0x0', 0x1', ProgId', InfoPath.Document.2', 255', Edit in Browser', /_layouts/15/images/icxddoc.gif?rev=23', /school/gandatsetiagon/_layouts/15/formserver.aspx?XmlLocation={ItemUrl}&OpenIn=Browser&Source={Source}', 0x0', 0x1', ProgId', InfoPath.Document.3', 255', Edit in Browser', /_layouts/15/images/icxddoc.gif?rev=23', /school/gandatsetiagon/_layouts/15/formserver.aspx?XmlLocation={ItemUrl}&OpenIn=Browser&Source={Source}', 0x0', 0x1', ProgId', InfoPath.Document.4', 255', Document Set Version History', /_layouts/15/images/versions.gif?rev=23', u"javascript:SP.UI.ModalDialog.ShowPopupDialog('{SiteUrl}'+ 
+                '/_layouts/15/DocSetVersions.aspx'
+                + '?List={ListId}&ID={ItemId}')", 0x0', 0x0', ContentType', 0x0120D520', 330', Send To other location', /_layouts/15/images/sendOtherLoc.gif?rev=23', u"javascript:GoToPage('{SiteUrl}' +
+                '/_layouts/15/docsetsend.aspx' 
+                + '?List={ListId}&ID={ItemId}')", 0x0', 0x0', ContentType', 0x0120D520', 350', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', ODS', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', XLS', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', XLSB', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', XLSM', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', XLSX', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', ODS', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', XLSB', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', XLSM', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', XLSX', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', ProgId', OneNote.Notebook', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', ONE', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', ONETOC2', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', ProgId', OneNote.Notebook', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', ONE', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', ONETOC2', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', ODP', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', POT', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', POTM', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', POTX', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', PPS', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', PPSM', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', PPSX', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', PPT', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', PPTM', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', PPTX', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', ODP', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', PPSX', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', PPTX', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', DOC', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', DOCM', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', DOCX', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', DOT', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', DOTM', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', DOTX', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', ODT', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', DOCM', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', DOCX', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', ODT', 255', 
+		', 
+	', 
+		', 
+			', 
+				',  ', Quick Links', 
+			', var ctx = new ContextInfo();ctx.listName = "{7ddb37cf-c08e-4696-85b8-8efc96dc3ea9}";ctx.NavigateForFormsPages = false;g_ctxDict['clv-ctx_7ddb37cf-c08e-4696-85b8-8efc96dc3ea9'] = ctx;', 
+          ', 
+          ', Safe and Accepting Schools', 
+          ', 
+          ', Gandy TLLP', 
+          ', 
+          ', Kindergarten', 
+          ', 
+          ', School Calendar', 
+          ', 
+          ', Child Care', 
+          ', 
+          ', Aboriginal Education', 
+          ', 
+          ', Durham Student Transporation', 
+          ', 
+          ', Durham Health ', 
+          ', 
+          ', City of Pickering ', 
+          ', 
+          ', Ontario Curriculum', 
+          ', 
+          
+          ', 
+          
+          ',          
+          ', 
+		', 
+	', 
+		', 
+			', var ctx = new ContextInfo();ctx.listName = "{025515d9-19b6-49fc-8908-4498cd083aac}";ctx.NavigateForFormsPages = false;g_ctxDict['clv-ctx_025515d9-19b6-49fc-8908-4498cd083aac'] = ctx;', 
+          ', DDSB News', 
+          ', 
+          ', 
+          ', Inclement Weather:  School Bus Cancellation/Delays Reminder', 
+          ',   A reminder to families from Durham Student Transportation Services (DSTS) of important information regarding school bus and inclement weather cancellations. DSTS provides bus service to...', 
+', 
+          ', Diversity is our Strength; Diversity is our Future', 
+          ',   \u200bThe Durham District School Board (DDSB) is embarking upon new initiatives to continue to support equity, diversity and inclusive practices.  Director of Education Lisa Millar...', 
+', 
+
+          ', 
+          ', View Announcements', 
+          ',  
+          
+          ', 
+		', 
+	', 
+		', 
+			', 
+				', The current browser does not support Web pages that contain the IFRAME element. To use this Web Part, you must use a browser that supports this element, such as Internet Explorer 7.0 or later.', 
+			', 
+		', 
+	', 
+		', 
+			', 
+				', The current browser does not support Web pages that contain the IFRAME element. To use this Web Part, you must use a browser that supports this element, such as Internet Explorer 7.0 or later.', 
+			', 
+		', 
+	', 
+		', 
+			', 
+
+
+', 
+#wrapper{
+	float:left;
+	margin:0;
+	padding:0;
+	
+}
+.disclaimerwindow {
+	OVERFLOW: hidden; 
+	BORDER-TOP: #000000 3px solid; 
+	HEIGHT: 225px; 
+	BORDER-RIGHT: #000000 3px solid; 
+	WIDTH: 280px; 
+	BORDER-BOTTOM: #000000 3px solid; 
+	POSITION: absolute; 
+	BORDER-LEFT: #000000 3px solid; 
+	Z-INDEX: 1002; 
+	MARGIN-TOP: -250px; 
+	DISPLAY: none; 
+	BACKGROUND-COLOR: #c7DA30;
+	padding:5px;
+	color:black;
+	text-align:left;
+
+}
+.disclaimertitle{
+	background-color:#809722;
+}
+
+a:link{
+	text-decoration:none;
+	
+}
+a:visited{
+	text-decoration:none;
+}
+a:hover{
+	font-weight:bold;
+	text-decoration:none;
+}
+a:actice{
+	text-decoration:none;
+}
+
+
+
+', 
+
+
+
+
+
+
+', 
+', 
+	', 
+', 
+', Disclaimer', 	
+
+', 
+	', Close [X]', 
+
+', Disclaimer', u"
+KEV Group, under a Confidentiality Agreement with the DDSB, will collect and use information provided by your child's school (such as student name and number) for the purpose of school, classroom and program administration and as required by law. Please contact your school administrator if you have any questions.", 
+
+', 
+
+', 
+
+
+', 
+		', 
+	', 
+', 
+    ', 
+
+	', 
+		', 
+		', 
+	    ', 
+    ', 
+
+	', 
+		', 
+		', 
+        ', 
+	    ', 
+    ', 
+
+    ', 
+		', 
+	', 
+		', 
+			', 
+ ', 
+', Principal:',   ', K.Ovenden ', |',  ', Vice Principal:',  ', C.Killeen',  ', |',  ', Superintendent:',  ', A. Laginski ', |',  ', Trustees:',   ', Chris Braney', , ', Paul Crawford', 
+		', 
+	', 
+', 
+	', 
+
+    ', 
+	', 
+		', 
+	', 
+    ', 
+
+	', 
+		', 
+		', 
+	', 
+
+           
+
+', 
+
+
+', 
+                            ', 
+                        ', 
+                    ', 
+                    
+
+                    ', 
+                            
+
+                        ', 
+                            
+     
+                                ',      
+                                    
+                                    ', 
+                                        ', Contact', 
+                                        
+								        ', 
+                                    ',            
+
+                                    ', Gandatsetiagon Public School', 
+                                        
+                                    ', 
+
+                                        1868 Parkside Drive, 
+										', 
+										Pickering, 
+										ON',  
+										L1V 3R2 
+										Canada', 
+                                        
+										
+                                            
+
+                                    ', 
+								    ', 
+                                        ', Phone: ', 905-831-1868', 
+										', Fax: ', 905-831-9633', 
+										
+										', 
+										gandatsetiagonps@ddsb.ca', 
+										
+											
+                                    ', 
+                                ', 
+                                 
+                                
+                            ', 
+							    
+	
+    ', 
+	', 
+		', 
+			', 
+				
+
+', 
+    ', 
+        
+        ', 
+            ', Sign up for our newsletter', 
+            ', Sign up for our newsletter & keep in touch', 
+        ',  
+        ', 
+            ', 
+                ', 
+                ', 
+                
+                
+                ', 
+            ',            
+            ', 
+                ', 
+            ', 
+            
+        ', 
+    ', 
+', 
+
+			', 
+		', 
+	', 
+		', 
+			', $(document).ready(function(){$("table[summary*='Publications']").find("tr:first").hide()});', 
+		', 
+	', 
+', 
+
+                            ',  
+                                                                                                            
+                        ', 
+
+                        ', 
+							
+									', Sign In', 
+								
+                            
+
+                            ', Utility links', 
+
+                            ', 
+                                ', District Home', Staff Portal', Student Mobile Campus', 
+                                ', Contact Us', 
+							    
+                                        ', Sign In', 
+                                                                    
+                            ',  
+
+						', 
+
+                        ', 
+							', 
+								© Durham District School Board, 2013
+							', 
+						',                               
+                          
+                    ', 
+                ', 
+                
+            ', 
+            
+
+            
+
+            
+			
+				', u"//<![CDATA[
+        var formDigestElement = document.getElementsByName('__REQUESTDIGEST')[0];
+        if (!((formDigestElement == null) || (formDigestElement.tagName.toLowerCase() != 'input') || (formDigestElement.type.toLowerCase() != 'hidden') ||
+            (formDigestElement.value == null) || (formDigestElement.value.length <= 0)))
+        {
+            formDigestElement.value = '0xDAAD64B797A0BAD406BCCE9AF7543F7F584B995CC32599D24C1DBF38198E8650A1010800C4C0AA466635F9FDB90D330686D563A8CFBA09776B5329E6857184A3,06 Jan 2017 14:58:04 -0000';
+            g_updateFormDigestPageLoaded = new Date();
+        }
+        //]]>
+        ", 
+			
+
+            
+            
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+        
+
+', 
+//<![CDATA[
+var _spFormDigestRefreshInterval = 1440000;window.g_updateFormDigestPageLoaded = new Date(); window.g_updateFormDigestPageLoaded.setDate(window.g_updateFormDigestPageLoaded.getDate() -5);
+if (typeof(_spBodyOnLoadFunctionNames) != "undefined") {
+if (_spBodyOnLoadFunctionNames != null) {
+_spBodyOnLoadFunctionNames.push("ExpDataViewGroupOnPageLoad");
+}
+}var _fV4UI = true;
+function _RegisterWebPartPageCUI()
+{
+    var initInfo = {editable: false,isEditMode: false,allowWebPartAdder: false,listId: "{a14a1606-b57f-4a64-9fb6-07b0f821541a}",itemId: 1,recycleBinEnabled: true,enableMinorVersioning: true,enableModeration: false,forceCheckout: true,rootFolderUrl: "\u002fschool\u002fgandatsetiagon\u002fPages",itemPermissions:{High:16,Low:200801}};
+    SP.Ribbon.WebPartComponent.registerWithPageManager(initInfo);
+    var wpcomp = SP.Ribbon.WebPartComponent.get_instance();
+    var hid;
+    hid = document.getElementById("_wpSelected");
+    if (hid != null)
+    {
+        var wpid = hid.value;
+        if (wpid.length > 0)
+        {
+            var zc = document.getElementById(wpid);
+            if (zc != null)
+                wpcomp.selectWebPart(zc, false);
+        }
+    }
+    hid = document.getElementById("_wzSelected");
+    if (hid != null)
+    {
+        var wzid = hid.value;
+        if (wzid.length > 0)
+        {
+            wpcomp.selectWebPartZone(null, wzid);
+        }
+    }
+};
+function __RegisterWebPartPageCUI() {
+ExecuteOrDelayUntilScriptLoaded(_RegisterWebPartPageCUI, "sp.ribbon.js");}
+_spBodyOnLoadFunctionNames.push("__RegisterWebPartPageCUI");var __wpmExportWarning='This Web Part Page has been personalized. As a result, one or more Web Part properties may contain confidential information. Make sure the properties contain information that is safe for others to read. After exporting this Web Part, view properties in the Web Part description file (.WebPart) by using a text editor such as Microsoft Notepad.';var __wpmCloseProviderWarning='You are about to close this Web Part.  It is currently providing data to other Web Parts, and these connections will be deleted if this Web Part is closed.  To close this Web Part, click OK.  To keep this Web Part, click Cancel.';var __wpmDeleteWarning='You are about to permanently delete this Web Part.  Are you sure you want to do this?  To delete this Web Part, click OK.  To keep this Web Part, click Cancel.';var offlineBtnText = '';var offlineBtnImg = '';ExecuteOrDelayUntilScriptLoaded(function() {var objStsSync = GetStssyncData('documents','Client', '', '/_layouts/15/images/men);
+if(objStsSync){ offlineBtnText = objStsSync.BtnText;
+offlineBtnImg = objStsSync.BtnImagePath;
+}}, 'strings.js');
+window.CoreJsApiPresent = true;
+window.ExecuteOrDelayUntilScriptLoaded && ExecuteOrDelayUntilScriptLoaded(function()
+{
+    var fnReg = JsApi.ExtensibilityManager._RegisterFilesForNamespace;
+    var ns = 'SP.SPGantt.InstrumentedApi'; var api = 'GanttSharedApi.generated.js'; var shim = 'GanttApiShim.generated.js';
+    RegisterSodDep(shim, api);
+                                  
+    fnReg(ns, api, ns + '.ClientApi', 1);
+    fnReg(ns, shim, ns + '.ShimPlaceholder', 2);
+}, 
+                             'JsApiExtensibilityManager.js');Type.registerNamespace('SP.SPGantt.InstrumentedApi');
+              SP.SPGantt.InstrumentedApi.ExecuteWithJsApiLoaded = function(fn) { var fnEx = window.ExecuteOrDelayUntilScriptLoaded && ExecuteOrDelayUntilScriptLoaded; fnEx && fnEx(function() { JsApi.ExtensibilityManager.ExecuteWithJsApisInNamespaceLoaded('SP.SPGantt.InstrumentedApi', fn); }, 'JsApiExtensibilityManager.js'); };if(typeof g_spPreFetchKeys != 'undefined'){ g_spPreFetchKeys.push('DragDrop.js'); _spBodyOnLoadFunctionNames.push('WPQRegisterDragDropUpload'); g_spDragDropUpload['WebPartWPQ5'] = new SPDragUploadInfo('WebPartWPQ5','http:\u002f\u002fwww.ddsb.ca','\u002fschool\u002fgandatsetiagon','{6FD4A548-02A6-4BA1-AB0A-A769D4F4A90F}','\u002fPublications', false, false, null, null, null, null);}
+            ExecuteOrDelayUntilScriptLoaded(
+                function() 
+                {                    
+                    Srch.ScriptApplicationManager.get_current().states = {"webUILanguageName":"en-US","webDefaultLanguageName":"en-US","contextUrl":"http://www.ddsb.ca/school/gandatsetiagon","contextTitle":"Gandatsetiagon Public School","supportedLanguages":[{"id":1025,"label":"Arabic"},{"id":1093,"label":"Bengali"},{"id":1026,"label":"Bulgarian"},{"id":1027,"label":"Catalan"},{"id":2052,"label":"Chinese (Simplified)"},{"id":1028,"label":"Chinese (Traditional)"},{"id":1050,"label":"Croatian"},{"id":1029,"label":"Czech"},{"id":1030,"label":"Danish"},{"id":1043,"label":"Dutch"},{"id":1033,"label":"English"},{"id":1035,"label":"Finnish"},{"id":1036,"label":"French"},{"id":1031,"label":"German"},{"id":1032,"label":"Greek"},{"id":1095,"label":"Gujarati"},{"id":1037,"label":"Hebrew"},{"id":1081,"label":"Hindi"},{"id":1038,"label":"Hungarian"},{"id":1039,"label":"Icelandic"},{"id":1057,"label":"Indonesian"},{"id":1040,"label":"Italian"},{"id":1041,"label":"Japanese"},{"id":1099,"label":"Kannada"},{"id":1042,"label":"Korean"},{"id":1062,"label":"Latvian"},{"id":1063,"label":"Lithuanian"},{"id":1086,"label":"Malay"},{"id":1100,"label":"Malayalam"},{"id":1102,"label":"Marathi"},{"id":1044,"label":"Norwegian"},{"id":1045,"label":"Polish"},{"id":1046,"label":"Portuguese (Brazil)"},{"id":2070,"label":"Portuguese (Portugal)"},{"id":1094,"label":"Punjabi"},{"id":1048,"label":"Romanian"},{"id":1049,"label":"Russian"},{"id":3098,"label":"Serbian (Cyrillic)"},{"id":2074,"label":"Serbian (Latin)"},{"id":1051,"label":"Slovak"},{"id":1060,"label":"Slovenian"},{"id":3082,"label":"Spanish (Spain)"},{"id":2058,"label":"Spanish (Mexico)"},{"id":1053,"label":"Swedish"},{"id":1097,"label":"Tamil"},{"id":1098,"label":"Telugu"},{"id":1054,"label":"Thai"},{"id":1055,"label":"Turkish"},{"id":1058,"label":"Ukrainian"},{"id":1056,"label":"Urdu"},{"id":1066,"label":"Vietnamese"}],"navigationNodes":[{"id":1001,"name":"Everything","url":"{searchcenterurl}/results.aspx","promptString":"Search everything"},{"id":1002,"name":"People","url":"{searchcenterurl}/peopleresults.aspx","promptString":"Search people"},{"id":1003,"name":"Conversations","url":"{searchcenterurl}/conversationresults.aspx","promptString":"Search conversations"},{"id":0,"name":"This Site","url":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","promptString":"Search this site"}],"searchCenterUrl":"http://www2.ddsb.ca/school/gandatsetiagon/Search/Pages","showAdminDetails":false,"defaultPagesListName":"Pages","isSPFSKU":false,"userAdvancedLanguageSettingsUrl":"https://portal.ddsb.ca:443/my/_layouts/15/EditProfile.aspx?Section=LanguageAndRegion\u0026UserSettingsProvider=234bf0ed%2D70db%2D4158%2Da332%2D4dfd683b4148\u0026ReturnUrl=http%3A%2F%2Fwww%2Eddsb%2Eca%2Fschool%2Fgandatsetiagon%2FPages%2Fdefault%2Easpx\u0026ShowAdvLang=1","defaultQueryProperties":{"culture":1033,"uiLanguage":1033,"summaryLength":180,"desiredSnippetLength":90,"enableStemming":true,"enablePhonetic":false,"enableNicknames":false,"trimDuplicates":true,"bypassResultTypes":false,"enableInterleaving":true,"enableQueryRules":true,"processBestBets":true,"enableOrderingHitHighlightedProperty":false,"hitHighlightedMultivaluePropertyLimit":-1,"processPersonalFavorites":true},"showSuggestions":true,"showPersonalResults":true,"openDocumentsInClient":false};
+                    Srch.U.trace(null, 'SerializeToClient', 'ScriptApplicationManager state initialized.');
+                }, 'Search.ClientControls.js');var g_clientIdDeltaPlaceHolderMain = "DeltaPlaceHolderMain";
+var g_clientIdDeltaPlaceHolderPageTitleInTitleArea = "DeltaPlaceHolderPageTitleInTitleArea";
+
+                    ExecuteOrDelayUntilScriptLoaded(
+                        function() 
+                        {
+                            if ($isNull($find('ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr')))
+                            {
+                                var sb = $create(Srch.SearchBox, {"delayLoadTemplateScripts":true,"messages":[],"queryGroupNames":["Default"],"renderTemplateId":"~sitecollection/_catalogs/masterpage/Display Templates/Search/Control_SearchBox.js","resultsPageAddress":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","serverInitialRender":true,"showDataErrors":true,"states":{},"tryInplaceQuery":false}, null, null, $get("ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr"));
+                                sb.activate('Search...', 'ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr_sbox', 'ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr_sboxdiv', 'ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr_NavButton', 'ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr_AutoCompList', 'ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr_NavDropdownList', 'ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr_SearchLink', 'ms-srch-sbprogress', 'ms-srch-sb-prompt ms-helperText');
+                            }
+                        }, 'Search.ClientControls.js');g_QuickLaunchControlIds.push("zz1_TopNavigationMenu");_spBodyOnLoadFunctionNames.push('QuickLaunchInitDroppable'); var g_zz1_TopNavigationMenu = null; function init_zz1_TopNavigationMenu() { if (g_zz1_TopNavigationMenu == null) g_zz1_TopNavigationMenu = $create(SP.UI.AspMenu, null, null, null, $get('zz1_TopNavigationMen)); } ExecuteOrDelayUntilScriptLoaded(init_zz1_TopNavigationMenu, 'SP.Core.js');
+function _initTRAWebPartWPQ5()
+{var toolbarData = new Object();toolbarData['ToolbarData'] = "[{'Command':'OpenWithExplorer','ClickScript':'CoreInvoke\\u0028\\u0027NavigateHttpFolder\\u0027,\\u0027http:\\\\u002f\\\\u002fwww.ddsb.ca\\\\u002fschool\\\\u002fgandatsetiagon\\\\u002fPublications\\u0027, \\u0027_blank\\u0027\\u0029;','HiddenScript':'!\\u0028SupportsNavigateHttpFolder\\u0028\\u0029\\u0029','LabelText':'Open with Windows Explorer','Description':'Drag and drop files into this library.'},{'Command':'ConnectToClient','ClickScript':'javaScript:ExportHailStorm\\u0028\\u0027documents\\u0027,\\u0027http:\\\\u002f\\\\u002fwww.ddsb.ca\\\\u002fschool\\\\u002fgandatsetiagon\\u0027,\\u0027{6fd4a548-02a6-4ba1-ab0a-a769d4f4a90f}\\u0027,\\u0027Gandatsetiagon Public School\\u0027,\\u0027Publications\\u0027,\\u0027\\\\u002fschool\\\\u002fgandatsetiagon\\\\u002fPublications\\u0027,\\u0027\\u0027,\\u0027\\\\u002fschool\\\\u002fgandatsetiagon\\\\u002fPublications\\u0027\\u0029;','HiddenScript':'!offlineBtnText','Description':'Synchronize items and make them available offline.'},{'Command':'ExportToSpreadsheet','ClickScript':'javaScript:ExportList\\u0028\\u0027\\\\u002fschool\\\\u002fgandatsetiagon\\\\u002f_vti_bin\\\\u002fowssvr.dll?CS=65001\\\\u0026Using=_layouts\\\\u002f15\\\\u002fquery.iqy\\\\u0026List=\\\\u00257B6FD4A548\\\\u00252D02A6\\\\u00252D4BA1\\\\u00252DAB0A\\\\u00252DA769D4F4A90F\\\\u00257D\\\\u0026View=\\\\u00257BBFDFFE55\\\\u00252D6F5E\\\\u00252D4F1A\\\\u00252DAAF2\\\\u00252DE91EDE485D07\\\\u00257D\\\\u0026RootFolder=\\\\u00252Fschool\\\\u00252Fgandatsetiagon\\\\u00252FPublications\\\\u0026CacheControl=1\\u0027\\u0029','LabelText':'Export to Spreadsheet','Description':'Analyze items with a spreadsheet application.'},{'Command':'ViewRSSFeed','ClickScript':'STSNavigate2\\u0028event,\\u0027\\\\u002fschool\\\\u002fgandatsetiagon\\\\u002f_layouts\\\\u002f15\\\\u002flistfeed.aspx?List=\\\\u00257B6FD4A548\\\\u00252D02A6\\\\u00252D4BA1\\\\u00252DAB0A\\\\u00252DA769D4F4A90F\\\\u00257D\\\\u0026Source=http\\\\u00253A\\\\u00252F\\\\u00252Fwww\\\\u00252Eddsb\\\\u00252Eca\\\\u00252Fschool\\\\u00252Fgandatsetiagon\\\\u00252FPages\\\\u00252Fdefault\\\\u00252Easpx\\u0027\\u0029;','LabelText':'View RSS Feed','Description':'Syndicate items with an RSS reader.'}]";
+toolbarData['ViewDropDownOptions']="{showRepairView : false, showMergeView : false, showEditView: false, showCreateView: false, showApproverView:  false, listId: '{6FD4A548-02A6-4BA1-AB0A-A769D4F4A90F}', viewId: '{BFDFFE55-6F5E-4F1A-AAF2-E91EDE485D07}', viewParameters: ''}";
+toolbarData['ViewId']='bfdffe55-6f5e-4f1a-aaf2-e91ede485d07';
+toolbarData['ViewName']='';
+toolbarData['ViewReadOnly']='false';
+toolbarData['BaseViewId']='1';
+toolbarData['ListId']='6fd4a548-02a6-4ba1-ab0a-a769d4f4a90f';
+toolbarData['ListEnableAttachments']='False';
+toolbarData['ListBaseType']='1';
+toolbarData['ListTemplateType']='101';
+toolbarData['ListPermissions']='{High:16,Low:200801}';
+toolbarData['ListFolderPermissions']='{High:16,Low:200801}';
+toolbarData['ListHasExternalDataSource']='False';
+toolbarData['ServerRelativeWebUrl']='\u002fschool\u002fgandatsetiagon';
+toolbarData['IsAppWeb']=false;
+SP.Ribbon.PageManager.get_instance().addPageComponent(new SP.Ribbon.DocLibWebPartPageComponent('WebPartWPQ5',toolbarData));
+}
+ExecuteOrDelayUntilScriptLoaded(_initTRAWebPartWPQ5, "sp.ribbon.js");
+          ctx = new ContextInfo();
+          ctx.wpq= "WPQ5";
+          ctx.Templates = {};
+          ctx.ListData = null;
+          ctx.ListSchema = null;
+          ctx.BaseViewID = 1;
+          ctx.ListTemplateType = 101;
+          
+          ctx.existingServerFilterHash = ajaxNavigate.getParam("ServerFilter");
+          if (null != ctx.existingServerFilterHash) {
+            ctx.existingServerFilterHash = ctx.existingServerFilterHash.replace(/-/g, '&').replace(/&&/g, '-');
+            var serverFilterRootFolder = GetUrlKeyValue("RootFolder", true,ctx.existingServerFilterHash);
+            var currentRootFolder = GetUrlKeyValue("RootFolder", true);
+            if("" == serverFilterRootFolder && "" != currentRootFolder)
+            {
+              ctx.existingServerFilterHash += "&RootFolder=" + currentRootFolder;
+            }
+            var uri=new URI(ajaxNavigate.get_href());
+            uri.setFragment("");
+            uri.setQuery(ctx.existingServerFilterHash);
+            STSNavigate(uri.getString());
+          }
+          
+              ctx.listBaseType = 1;
+          
+            ctx.noGroupCollapse = true;
+          
+          ctx.NavigateForFormsPages = false;
+          ctx.BasePermissions = {ManageLists: false, ManagePersonalViews: false, OpenItems: true};
+          ctx.CurrentUserIsSiteAdmin = false;
+          ctx.IsAppWeb = false;
+          ctx.AllowGridMode = false;
+          ctx.inGridMode = false;
+          ctx.listTemplate = "101";
+          ctx.listName = "{6FD4A548-02A6-4BA1-AB0A-A769D4F4A90F}";
+          ctx.rootFolder = "";
+          ctx.view = "{BFDFFE55-6F5E-4F1A-AAF2-E91EDE485D07}";
+          ctx.viewTitle = "";
+          ctx.listUrlDir = "/school/gandatsetiagon/Publications";
+          ctx.HttpPath = "http://www.ddsb.ca/school/gandatsetiagon/_vti_bin/owssvr.dll?CS=65001";
+          ctx.HttpRoot = "http://www.ddsb.ca/school/gandatsetiagon";
+          ctx.imagesPath = "/_layouts/15/images/";
+          ctx.PortalUrl = "";
+          ctx.SendToLocationName = "";
+          ctx.SendToLocationUrl = "";
+          
+              ctx.RecycleBinEnabled = 1;
+            
+          ctx.OfficialFileName = "";
+          ctx.OfficialFileNames = "";
+          ctx.WriteSecurity = "1";
+          ctx.SiteTitle = "Gandatsetiagon Public School";
+          ctx.ListTitle = "Publications";
+          if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+          ctx.displayFormUrl = "http://www.ddsb.ca/school/gandatsetiagon/_layouts/15/listform.aspx?PageType=4&ListId=%7B6FD4A548%2D02A6%2D4BA1%2DAB0A%2DA769D4F4A90F%7D";
+          ctx.newFormUrl = "http://www.ddsb.ca/school/gandatsetiagon/_layouts/15/listform.aspx?PageType=8&ListId=%7B6FD4A548%2D02A6%2D4BA1%2DAB0A%2DA769D4F4A90F%7D&RootFolder=";
+          ctx.editFormUrl = "http://www.ddsb.ca/school/gandatsetiagon/_layouts/15/listform.aspx?PageType=6&ListId=%7B6FD4A548%2D02A6%2D4BA1%2DAB0A%2DA769D4F4A90F%7D";
+          ctx.isWebEditorPreview = 0;
+          ctx.ctxId = 2;
+          ctx.isXslView = true;
+          
+                  ctx.FolderRight_AddListItems = "0";
+                
+          if (g_ViewIdToViewCounterMap["{BFDFFE55-6F5E-4F1A-AAF2-E91EDE485D07}"] == null)
+              g_ViewIdToViewCounterMap["{BFDFFE55-6F5E-4F1A-AAF2-E91EDE485D07}"]= 2;
+          ctx.CurrentUserId = -1;
+          
+          ctx.RegionalSettingsTimeZoneBias = "300";
+          
+            ctx.AllowCreateFolder = true;
+          
+          ctx2 = ctx;
+          g_ctxDict['ctx2'] = ctx;
+      
+        function IsSharePointOpenDocuments( test )
+        {
+          if (test instanceof Array)
+            return false;
+          else
+            return (test != null) && typeof(test) == 'object';
+        }
+        var EditDocumentButton = [];
+        try {EditDocumentButton = new CreateObject("SharePoint.OpenDocuments.3");}
+        catch(err){}
+        if (IsSharePointOpenDocuments(EditDocumentButton))
+          fNewDoc3 = true;
+        else
+        {
+          try {EditDocumentButton = new CreateObject("SharePoint.OpenDocuments.2");}
+          catch(err){}
+          if (IsSharePointOpenDocuments(EditDocumentButton))
+            fNewDoc2 = true;
+          else
+          {
+            try {EditDocumentButton = new CreateObject("SharePoint.OpenDocuments.1");}
+            catch(err){}
+          }
+        }
+        fNewDoc = IsSharePointOpenDocuments(EditDocumentButton);
+      //]]>
+', 
+', 
+
+
+		
+
+
+    ', 
+
+    '][Skip to main content',  
+
+    
+
+    
+       
+
+    ', 
+
+        
+        
+        ', 
+', 
+', 
+', 
+', 
+', 
+
+        ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+//<![CDATA[
+var MSOWebPartPageFormName = 'aspnetForm';
+var g_presenceEnabled = false;
+var g_wsaEnabled = false;
+var g_wsaQoSEnabled = false;
+var g_wsaQoSDataPoints = [];
+var g_wsaLCID = 1033;
+var g_wsaListTemplateId = 850;
+var g_wsaSiteTemplateId = 'SCHOLANTISPUBLISHING#11';
+var _fV4UI=true;var _spPageContextInfo = {webServerRelativeUrl: "\u002fschool\u002fgandatsetiagon", webAbsoluteUrl: "http:\u002f\u002fwww.ddsb.ca\u002fschool\u002fgandatsetiagon", siteAbsoluteUrl: "http:\u002f\u002fwww.ddsb.ca\u002fschool\u002fgandatsetiagon", serverRequestPath: "\u002fschool\u002fgandatsetiagon\u002fPages\u002fdefault.aspx", layoutsUrl: "_layouts\u002f15", webTitle: "Gandatsetiagon Public School", webTemplate: "2010", tenantAppVersion: "0", isAppWeb: false, webLogoUrl: "_layouts\u002f15\u002fimages\u002fsiteicon.png", webLanguage: 1033, currentLanguage: 1033, currentUICultureName: "en-US", currentCultureName: "en-US", clientServerTimeDelta: new Date("2017-01-06T14:58:03.3463008Z") - new Date(), siteClientTag: "8$$15.0.4823.1003", crossDomainPhotosEnabled:false, webUIVersion:15, webPermMasks:{High:16,Low:200801},pageListId:"{a14a1606-b57f-4a64-9fb6-07b0f821541a}",pageItemId:1, pagePersonalizationScope:1, alertsEnabled:true, siteServerRelativeUrl: "\u002fschool\u002fgandatsetiagon", allowSilverlightPrompt:'True'};document.onreadystatechange=fnRemoveAllStatus; function fnRemoveAllStatus(){removeAllStatus(true)};var _spWebPartComponents = new Object();_spWebPartComponents["WebPartWPQ5"] = new Object();_spWebPartComponents["WebPartWPQ5"].firstTabId = "Ribbon.Read";_spWebPartComponents["WebPartWPQ5"].contextualGroupCommands = ["LibraryContextualGroup"];_spWebPartComponents["WebPartWPQ5"].hasNonPromotedContextualGroups = true;_spWebPartComponents["WebPartWPQ5"].isDefaultWebPart = false;_spWebPartComponents["WebPartWPQ5"].pageComponentId = "WebPartWPQ5";_spWebPartComponents["WebPartWPQ5"].storageId="bfdffe55-6f5e-4f1a-aaf2-e91ede485d07";//]]>
+', 
+
+', 
+', u"
+//<![CDATA[
+(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() 
+        {
+          ExecuteOrDelayUntilScriptLoaded(
+            function()
+            {
+              var pairs = SP.ScriptHelpers.getDocumentQueryPairs();
+              var followDoc, itemId, listId, docName;
+              for (var key in pairs)
+              {
+                if(key.toLowerCase() == 'followdocument') 
+                  followDoc = pairs[key];
+                else if(key.toLowerCase() == 'itemid') 
+                  itemId = pairs[key];
+                else if(key.toLowerCase() == 'listid') 
+                  listId = pairs[key];
+                else if(key.toLowerCase() == 'docname') 
+                  docName = decodeURI(pairs[key]);
+              } 
+
+              if(followDoc != null && followDoc == '1' && listId!=null && itemId != null && docName != null)
+              {
+                SP.SOD.executeFunc('followingcommon.js', 'FollowDocumentFromEmail', function() 
+                { 
+                  FollowDocumentFromEmail(itemId, listId, docName);
+                });
+              }
+
+            }, 'SP.init.js');
+
+        });
+    })();(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() {
+
+            if (typeof(SPClientTemplates) === 'undefined' || SPClientTemplates === null || (typeof(APD_InAssetPicker) === 'function' && APD_InAssetPicker())) {
+                return;
+            }
+
+            var renderFollowFooter = function(renderCtx,  calloutActionMenu)
+            {
+                if (renderCtx.ListTemplateType == 700) 
+                    myDocsActionsMenuPopulator(renderCtx, calloutActionMenu);
+                else
+                    CalloutOnPostRenderTemplate(renderCtx, calloutActionMenu);
+
+                var listItem = renderCtx.CurrentItem;
+                if (typeof(listItem) === 'undefined' || listItem === null) {
+                    return;
+                }
+                if (listItem.FSObjType == 0) {
+                    calloutActionMenu.addAction(new CalloutAction({
+                        text: Strings.STS.L_CalloutFollowAction,
+                        tooltip: Strings.STS.L_CalloutFollowAction_Tooltip,
+                        onClickCallback: function (calloutActionClickEvent, calloutAction) {
+                            var callout = GetCalloutFromRenderCtx(renderCtx);
+                            if (!(typeof(callout) === 'undefined' || callout === null))
+                                callout.close();
+                            SP.SOD.executeFunc('followingcommon.js', 'FollowSelectedDocument', function() { FollowSelectedDocument(renderCtx); });
+                        }
+                    }));
+                }
+            };
+
+            var registerOverride = function(id) {
+                var followingOverridePostRenderCtx = {};
+                followingOverridePostRenderCtx.BaseViewID = 'Callout';
+                followingOverridePostRenderCtx.ListTemplateType = id;
+                followingOverridePostRenderCtx.Templates = {};
+                followingOverridePostRenderCtx.Templates.Footer = function(renderCtx) {
+                    var  renderECB;
+                    if (typeof(isSharedWithMeView) === 'undefined' || isSharedWithMeView === null) {
+                        renderECB = true;
+                    } else {
+                        var viewCtx = getViewCtxFromCalloutCtx(renderCtx);
+                        renderECB = !isSharedWithMeView(viewCtx);
+                    }
+                    return CalloutRenderFooterTemplate(renderCtx, renderFollowFooter, renderECB);
+                };
+                SPClientTemplates.TemplateManager.RegisterTemplateOverrides(followingOverridePostRenderCtx);
+            }
+            registerOverride(101);
+            registerOverride(700);
+        });
+    })();if (typeof(DeferWebFormInitCallback) == 'function') DeferWebFormInitCallback();//]]>
+", 
+
+', 
+', 
+
+            
+            ',  var submitHook = function () { return false; }; theForm._spOldSubmit = theForm.submit; theForm.submit = function () { if (!submitHook()) { this._spOldSubmit(); } }; ', 
+
+            
+			
+               
+            
+            
+
+            
+            
+
+
+
+
+			
+				', 
+
+			
+
+            
+            ', 
+                ', 
+                    
+                    ', 
+                        ', 
+                            ', 
+                                ', District Home', Staff Portal', Student Mobile Campus', 
+                            ', 
+                                
+
+                            
+                            ', u"
+                                function googleTranslateElementInit() {
+                                    new google.translate.TranslateElement(
+                                    { pageLanguage: 'en' }
+                                    , 'google_translate_element');
+                                }
+                            ", 
+                            ', 
+							', 
+
+									
+                                
+                            ',                                 
+                                    ', 
+                                                                                
+                                    ',                    
+								        
+									        
+										        
+											        ', 
+	', It looks like your browser does not have JavaScript enabled. Please turn on JavaScript and try again.', 
+
+	', 
+', 
+										        
+									        
+								                                        
+                                    ', 
+							    
+                            ',                              
+
+                        ', 
+                    ', 
+
+                    
+                    ', 
+                        
+
+                        
+                        ', 
+                                
+                            ', 
+							    ', 
+								    
+									    ', 
+								    
+							    ', 
+                            ', 
+
+                            
+                                ', 
+                                    ', 
+										Gandatsetiagon Public School
+                                    ', 
+                                    ', 
+                                        Academics, Arts, Athletics, Attitude.
+                                    ', 
+                                    ', 
+                                        
+                                    ', 
+                                ', 
+
+
+                                ', 
+							        ', 
+                                        ', FB', tw', 
+                                    ', 
+							    ', 
+                            						
+							
+                        ', 
+                        
+                        ', 
+                        ',   
+                                                        
+							
+								', 
+	', 
+		', Home', Currently selected', School Information', 
+			', About Our School', Character Education', Community Use of Schools', Digital Citizenship', Health & Safety', Registration', Ski & Snowboard Club', The Green Team', 
+		', Learning Commons', 
+			', Forest Of Reading', 
+				', Blue Spruce Program', Silver Birch Express', 
+			', I Can Read', Inquiry', 
+		', Teacher Pages', Parent Information', 
+			', Co-Curricular', 
+				', Sports', 
+			', Gandy Health & Wellness', Kiss and Ride', Parents as Partners', SCC', Tech Talk for Parents', Volunteers', 
+		', Contact Us', 
+	', 
+', 
+							          
+                        ', 
+                    ', 
+
+                    
+                    ', 
+					', 
+
+                    
+                    ',                               
+                                              
+						
+						
+
+                        
+						
+
+                                                   
+						', 
+                            
+						', 
+                  
+                        
+                        ', 
+
+                            
+                            ', 
+                                ', 
+									
+                                    ', 
+                                        
+                                    ', 
+									', 
+									', 
+										
+									', 
+									', // <![CDATA[ 
+
+
+										_spBodyOnLoadFunctionNames.push("setupPageDescriptionCallout");
+									// ]]>
+', 
+
+
+                                ', 
+                            ', 
+							', 
+                                
+                                
+                                
+
+', 
+
+	', 
+	', 
+		', 
+			', var ctx = new ContextInfo();ctx.listName = "{e4a59f91-c4ce-4044-8147-ce43b83b10a0}";ctx.NavigateForFormsPages = false;g_ctxDict['clv-ctx_e4a59f91-c4ce-4044-8147-ce43b83b10a0'] = ctx;', 
+	', u"
+		$(document).ready(function () {	
+			$('#g_5d56d2f6_96f9_4d53_950a_3591c7d8b906.sl-SpecialAnnouncementsSummary .sl-Items').magnificPopup({  
+				type:'inline',
+				midClick: true,
+				mainClass: 'mfp-fade',
+				delegate: '.sl-saTitle', 
+				removalDelay: 300,
+			});				
+		});
+	", 
+	
+	
+	', 
+		', 
+	', 
+', 
+
+ 
+
+	', 
+		', 
+	', 
+		', 
+			', 
+				
+
+
+			
+
+
+
+
+', 
+
+   ', 
+       $(document).ready(function () {
+           var hasControlNav = true;
+           if (5 > 5) {
+               hasControlNav = false;
+           }
+
+            $('.featured-slideshowContainer').flexslider({
+               reverse: false,
+               pauseOnAction: true,
+               pauseOnHover: true,
+               multipleKeyboard: true,
+               selector: ".slideshow_ctl00_SPWebPartManager1_g_4711658b_76cc_45b3_bb10_2400fac055da > .featured-item",
+               controlsContainer: "#ctl00_SPWebPartManager1_g_4711658b_76cc_45b3_bb10_2400fac055da .featured-controls",
+               controlNav: hasControlNav,
+
+               animation: "slide",
+               animationLoop: true,
+               easing: "swing",
+               direction: "horizontal",
+               slideshowSpeed: 7000,
+               animationSpeed: 600,
+               minItems: 0,
+               maxItems: 0,
+			   after: function(slider) {
+					slider.find(".featured-item a").each(function () {
+						$(this).attr("tabindex", -1);
+					});
+					slider.find(".featured-item.flex-active-slide .entry-title-container a, .featured-item.flex-active-slide .featured-entry.expended a").each(function () {
+						$(this).attr("tabindex", 0);
+					});
+			   }
+            }).find(".featured-item a").each(function () {
+				$(this).attr("tabindex", -1);
+            });
+       });
+    ', 
+    
+
+    
+    
+    ', 
+        ', 
+
+            
+                    ',  
+                        ', 
+                            
+                            ', 
+                                ', 
+                                    ',  
+                                    ',  
+                                ',        
+                            ',                          
+
+                            ', 
+                                ', 
+                                
+                                
+                                
+
+                                ', 
+
+                                
+
+                                ', 
+                                    ', Read more', 
+                                ',   
+                            ',   
+                        
+                            ',      
+                        ',                                             
+                    ', 
+                
+                    ',  
+                        ', 
+                            
+                            ', 
+                                ', 
+                                    ',  
+                                    ',  
+                                ',        
+                            ',                          
+
+                            ', 
+                                ', 
+                                
+                                
+                                
+
+                                ', 
+
+                                
+
+                                ', 
+                                    ', Read more', 
+                                ',   
+                            ',   
+                        
+                            ',      
+                        ',                                             
+                    ', 
+                
+                    ',  
+                        ', 
+                            
+                            ', 
+                                ', 
+                                    ',  
+                                    ',  
+                                ',        
+                            ',                          
+
+                            ', 
+                                ', 
+                                ', Homework Help', 
+                                
+                                ', Read More', 
+
+                                ', 
+
+                                ', 
+                                    ',  ', \u200bAll eligible Durham DSB Grade 7 to 10 Math students have obtained individual account access to the Independent Learning Centre\u2019s online math tutoring',  . ',  Ontario certified subject specific teachers provide one-on-one, confidential tutoring support to students from Sunday through Thursday, 5:30 to 9:30 p.m. There are interactive discussion rooms for each grade where students can view a current lesson, watch tutors draw on a whiteboard and then type their own questions for clarification. ', Go to Homework Help',  ',                          
+                                ', 
+
+                                  
+                            ',   
+                        
+                            ',      
+                        ',                                             
+                    ', 
+                
+                    ',  
+                        ', 
+                            
+                            ', 
+                                ', 
+                                    ',  
+                                    ',  
+                                ',        
+                            ',                          
+
+                            ', 
+                                ', 
+                                
+                                
+                                
+
+                                ', 
+
+                                
+
+                                  
+                            ',   
+                        
+                            ',      
+                        ',                                             
+                    ', 
+                
+                    ',  
+                        ', 
+                            
+                            ', 
+                                ', 
+                                    ',  
+                                    ',  
+                                ',        
+                            ',                          
+
+                            ', 
+                                ', 
+                                
+                                
+                                
+
+                                ', 
+
+                                
+
+                                ', 
+                                    ', Read more', 
+                                ',   
+                            ',   
+                        
+                            ',      
+                        ',                                             
+                    ', 
+                
+        ', 
+
+    ', 
+
+    ', 
+   
+    ', 
+
+    
+
+', 
+
+
+			', 
+		', 
+	', 
+', 
+	', 
+    
+	', 
+		', 
+	', 
+
+	', 
+', 
+		', 
+	', 
+
+    ', 
+		', 
+		', 
+	', 
+
+    ', 
+        ', 
+		', 
+	', 
+
+	', 
+		', 
+	', 
+		', 
+			', var ctx = new ContextInfo();ctx.listName = "{83a0ae0a-a546-4b3a-8280-4fd30edc8a18}";ctx.NavigateForFormsPages = false;g_ctxDict['clv-ctx_83a0ae0a-a546-4b3a-8280-4fd30edc8a18'] = ctx;', 
+          ', News & Announcements', 
+          ', 
+           ', There are currently no announcements.',  ', 
+
+          ', 
+          ', View Announcements', 
+          
+          ',  
+          
+          ', 
+		', 
+	', 
+		', 
+			', 
+				', 
+', 
+
+',       
+    $(document).ready(function () {
+        var $wp = $("#ctl00_SPWebPartManager1_g_0f3ed0c8_4396_4da4_8a8e_0781f0e313a5");
+
+        //tweet emoji
+        if (typeof (twemoji) !== "undefined") {
+            $wp.find(".sl-Tweet").each(function () {
+                var $this = $(this);
+                $this.html(twemoji.parse($this.html()));
+            });
+        }
+
+        //tweet media lightbox
+        $wp.find(".sl-Tweet a[data-photo]").each(function () {
+            var $this = $(this);
+            $this.attr("href", $this.attr("data-photo")).attr("data-lightbox", "Tweet");
+        });
+
+        $wp.find('.sl-Twitter .sl-Date').each(function () {
+            var nowTime = moment($(this).html()).fromNow();
+            $(this).html(nowTime);
+        });
+        
+        //twitter flexslider 
+         
+            $wp.find(".sl-Twitter").flexslider({
+                animation: "slide",
+                animationLoop: false,
+                easing: "swing",
+                direction: "horizontal",
+                slideshow: false,
+                slideshowSpeed: 7000,
+                animationSpeed: 600,
+                touch: false,
+                controlNav: false,
+                selector: ".Twitter_ctl00_SPWebPartManager1_g_0f3ed0c8_4396_4da4_8a8e_0781f0e313a5 > li",
+                controlsContainer: "#ctl00_SPWebPartManager1_g_0f3ed0c8_4396_4da4_8a8e_0781f0e313a5 .sl-TwitterSliderControl",
+                itemWidth: 0,
+                itemMargin: 0,
+                minItems: 0,
+                maxItems: 0,
+            }).find(".popup").click(function(event) {
+                var width  = 575,
+                    height = 400,
+                    left   = ($(window).width()  - width)  / 2,
+                    top    = ($(window).height() - height) / 2,
+                    url    = this.href,
+                    opts   = 'status=1' +
+                                ',width='  + width  +
+                                ',height=' + height +
+                                ',top='    + top    +
+                                ',left='   + left;
+
+                window.open(url, 'twitte', opts);
+
+                return false;
+            });
+         
+    });
+', 
+
+', 
+
+    ', Follow Gandy On Twitter', 
+    
+    
+        ', 
+    ', 
+        ', 
+    
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 12/16/2016 11:01:46 AM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', u"
+                            Gandy Gives to Herizon House! Thanks Mrs. Marshall & her grade 3's for organizing and our generous community support ", pic.twitter.com/3eM6KialyI', 
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 12/15/2016 12:47:35 PM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            Thanks for your support. Sold out of cookies!
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 12/14/2016 9:29:17 AM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            Thanks for your contributions to our food and toiletries drive for Herizon House. Accepting donations until Friday. ', pic.twitter.com/iIb9vUIzs, 
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 11/23/2016 2:41:44 PM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            Social media, Online Safety and Cyberbullying Parent workshop tonight at Pine Ridge S.S. Begins at 7 pm.
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 11/22/2016 3:18:06 PM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            Please see important letter that is coming home today. Look for the yellow sheet. Thanks.
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 11/15/2016 1:12:10 PM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            Excited as we are setting up our Book Fair! Thank you Mrs. Shaw and her student library helpers. ', pic.twitter.com/esB1qNy7JL', 
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 11/14/2016 7:12:34 AM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            Picture re-take day. Bring on the smiles.
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+            ', 
+                ',          
+                    ',        
+                	', Gandatsetiagon PS',  
+					', 11/11/2016 9:02:05 AM', 
+                ',                 
+                ',                     
+                    ', 
+                        ', 
+                            We remember. ', pic.twitter.com/YIDt1tLff9', 
+                            
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', Reply', 
+                        ', Retweet', 
+                        ', Favourite', 
+                        ', Follow',                         
+                    ', 
+                ', 
+            ', 
+        
+    ', 
+    ', 
+
+    ',  
+        
+        
+    ', 
+
+', 
+
+			', 
+		', 
+	', 
+		', 
+			', 
+				',  ', Bell Times', 
+			', 8:50 am', 
+', \u200bEntry Bell', 
+', 10:05 - 10:20 am\u200b', 
+', AM Recess\u200b', 
+', 11:40 - 12:40 pm', 
+', \u200bLunch', 
+', 2:05 - 2:20 pm', 
+', \u200bPM Recess', 
+', \u200b3:30 pm', 
+', \u200bDismissal', 
+\u200b', 
+		', 
+	', 
+', 
+		', 
+	', 
+		', 
+			', var ctx = new ContextInfo();ctx.listName = "{5d7c6a90-188c-4f4f-bd53-cf089f39a8a5}";ctx.NavigateForFormsPages = false;g_ctxDict['clv-ctx_5d7c6a90-188c-4f4f-bd53-cf089f39a8a5'] = ctx;', u"
+	$(document).ready(function () {       
+		$('#g_1a47d560_ea6f_4e25_ab02_9c489276135f.sl-EventsSummary').find('.sl-Items').magnificPopup({  
+			type:'inline',
+			midClick: true,
+			mainClass: 'mfp-fade',
+			delegate: '.sl-Title a', 
+			removalDelay: 300,
+			gallery:{
+				enabled:true
+			  }		
+		});
+	});
+", 
+
+', 
+          ', Events Calendar', 
+          ',  
+          ', 
+	', 
+		$(document).ready(function () {
+			var startDate = new Date("12/27/2016 12:00:00 AM");
+			var endDate = new Date("1/6/2017 11:59:00 PM");
+			var type = "all";
+			startDate = startDate.toISOString().replace(/\-|\:|\.000/g, '');
+			endDate = endDate.toISOString().replace(/\-|\:|\.000/g, '');
+			
+			if (type == "all") {
+				startDate = startDate.substring(0, startDate.indexOf('T'));
+				endDate = endDate.substring(0, endDate.indexOf('T'));
+			}
+			$("#5d7c6a90-188c-4f4f-bd53-cf089f39a8a5497 .sl-IconGoogle").attr("href", "http://www.google.com/calendar/event?action=TEMPLATE&text=December+Vacation+%e2%80%94+December+26-January+6&dates="+ startDate +"/"+ endDate +"&details=Schools+closed+-+December+26-January+6&location=&trp=false&sprop=&sprop=name:");
+		});		
+	',   
+
+
+	', December Vacation \u2014 December 26-January 6', 
+	', Dec 27, 2016 - Jan 06, 2017', 
+	', Schools closed - December 26-January 6', 
+		  
+	', 
+		  			
+	
+		', December Vacation \u2014 December 26-January 6', 	 
+		', Dec 27, 2016 - Jan 06, 2017', 	
+		', All Day',  
+		', 		
+		',  ', 				
+		', Schools closed - December 26-January 6', 
+		', 
+		
+		', 
+			', 
+			', 
+			',    
+			',  
+			', 
+			', 			       
+		', 				
+	', 			  
+', 
+	', 
+		$(document).ready(function () {
+			var startDate = new Date("1/9/2017 8:50:00 AM");
+			var endDate = new Date("1/9/2017 9:50:00 AM");
+			var type = "time";
+			startDate = startDate.toISOString().replace(/\-|\:|\.000/g, '');
+			endDate = endDate.toISOString().replace(/\-|\:|\.000/g, '');
+			
+			if (type == "all") {
+				startDate = startDate.substring(0, startDate.indexOf('T'));
+				endDate = endDate.substring(0, endDate.indexOf('T'));
+			}
+			$("#5d7c6a90-188c-4f4f-bd53-cf089f39a8a5545 .sl-IconGoogle").attr("href", "http://www.google.com/calendar/event?action=TEMPLATE&text=Welcome+Back!&dates="+ startDate +"/"+ endDate +"&details=%3cdiv%3e%3c%2fdiv%3e&location=&trp=false&sprop=&sprop=name:");
+		});		
+	',   
+
+
+	', Welcome Back!', 
+	', Jan 09, 2017 08:50 AM', 
+	',   ', 
+		  
+	', 
+		  			
+	
+		', Welcome Back!', 	 
+		', Jan 09, 2017 ', 	
+		', 08:50 AM -  09:50 AM', 
+		', 		
+		',  ', 				
+		', 
+		', 
+		
+		', 
+			', 
+			', 
+			',    
+			',  
+			', 
+			', 			       
+		', 				
+	', 			  
+', 
+	', 
+		$(document).ready(function () {
+			var startDate = new Date("1/12/2017 9:00:00 AM");
+			var endDate = new Date("1/12/2017 10:00:00 AM");
+			var type = "time";
+			startDate = startDate.toISOString().replace(/\-|\:|\.000/g, '');
+			endDate = endDate.toISOString().replace(/\-|\:|\.000/g, '');
+			
+			if (type == "all") {
+				startDate = startDate.substring(0, startDate.indexOf('T'));
+				endDate = endDate.substring(0, endDate.indexOf('T'));
+			}
+			$("#5d7c6a90-188c-4f4f-bd53-cf089f39a8a5546 .sl-IconGoogle").attr("href", "http://www.google.com/calendar/event?action=TEMPLATE&text=Grade+8%27s+to+Dunbarton+(a.m.)&dates="+ startDate +"/"+ endDate +"&details=%3cdiv%3e%3c%2fdiv%3e&location=&trp=false&sprop=&sprop=name:");
+		});		
+	',   
+
+
+	', u"Grade 8's to Dunbarton (a.m.)", 
+	', Jan 12, 2017 09:00 AM', 
+	',   ', 
+		  
+	', 
+		  			
+	
+		', u"Grade 8's to Dunbarton (a.m.)", 	 
+		', Jan 12, 2017 ', 	
+		', 09:00 AM -  10:00 AM', 
+		', 		
+		',  ', 				
+		', 
+		', 
+		
+		', 
+			', 
+			', 
+			',    
+			',  
+			', 
+			', 			       
+		', 				
+	', 			  
+', 
+	', 
+		$(document).ready(function () {
+			var startDate = new Date("1/17/2017 9:30:00 AM");
+			var endDate = new Date("1/17/2017 3:30:00 PM");
+			var type = "time";
+			startDate = startDate.toISOString().replace(/\-|\:|\.000/g, '');
+			endDate = endDate.toISOString().replace(/\-|\:|\.000/g, '');
+			
+			if (type == "all") {
+				startDate = startDate.substring(0, startDate.indexOf('T'));
+				endDate = endDate.substring(0, endDate.indexOf('T'));
+			}
+			$("#5d7c6a90-188c-4f4f-bd53-cf089f39a8a5559 .sl-IconGoogle").attr("href", "http://www.google.com/calendar/event?action=TEMPLATE&text=Jr%2fSr+Kindergarten+Telephone+Pre-registration&dates="+ startDate +"/"+ endDate +"&details=Jr%2fSr+Kindergarten+Pre-registration+begins+via+telephone+at+9%26%2358%3b30+a.m.+Please+call+your+child%27s+local+elementary+school.&location=&trp=false&sprop=&sprop=name:");
+		});		
+	',   
+
+
+	', Jr/Sr Kindergarten Telephone Pre-registration', 
+	', Jan 17, 2017 09:30 AM', 
+	', u"Jr/Sr Kindergarten Pre-registration begins via telephone at 9:30 a.m. Please call your child's local elementary school.", 
+		  
+	', 
+		  			
+	
+		', Jr/Sr Kindergarten Telephone Pre-registration', 	 
+		', Jan 17, 2017 ', 	
+		', 09:30 AM -  03:30 PM', 
+		', 		
+		',  ', 				
+		', u"Jr/Sr Kindergarten Pre-registration begins via telephone at 9:30 a.m. Please call your child's local elementary school.", 
+		', 
+		
+		', 
+			', 
+			', 
+			',    
+			',  
+			', 
+			', 			       
+		', 				
+	', 			  
+', 
+	', 
+		$(document).ready(function () {
+			var startDate = new Date("1/19/2017 10:00:00 AM");
+			var endDate = new Date("1/19/2017 11:00:00 AM");
+			var type = "time";
+			startDate = startDate.toISOString().replace(/\-|\:|\.000/g, '');
+			endDate = endDate.toISOString().replace(/\-|\:|\.000/g, '');
+			
+			if (type == "all") {
+				startDate = startDate.substring(0, startDate.indexOf('T'));
+				endDate = endDate.substring(0, endDate.indexOf('T'));
+			}
+			$("#5d7c6a90-188c-4f4f-bd53-cf089f39a8a5547 .sl-IconGoogle").attr("href", "http://www.google.com/calendar/event?action=TEMPLATE&text=Intermediate+Immunizations&dates="+ startDate +"/"+ endDate +"&details=%3cdiv%3e%3c%2fdiv%3e&location=&trp=false&sprop=&sprop=name:");
+		});		
+	',   
+
+
+	', Intermediate Immunizations', 
+	', Jan 19, 2017 10:00 AM', 
+	',   ', 
+		  
+	', 
+		  			
+	
+		', Intermediate Immunizations', 	 
+		', Jan 19, 2017 ', 	
+		', 10:00 AM -  11:00 AM', 
+		', 		
+		',  ', 				
+		', 
+		', 
+		
+		', 
+			', 
+			', 
+			',    
+			',  
+			', 
+			', 			       
+		', 				
+	', 			  
+', 
+          
+          ', 
+          ', View Calendar', 
+          
+          
+          
+          ', 
+          
+          ', 
+		', 
+	', 
+		', 
+			', 
+ ', 
+', To view a list of religious dates', of significance, ', click here', .', 
+		', 
+	', 
+', 
+	    ', 
+	', 
+		', 
+			', 
+				',  ', School Newsletters', 
+			', Type',  ',  ', Name',  ',  ', Herizon House.docx',  ',  ', DecemberNews2016',  ',  ', NovemberNews2016',  ',  ', View in Web Browser', /school/gandatsetiagon/_layouts/15/VisioWebAccess/VisioWebAccess.aspx?listguid={ListId}&itemid={ItemId}&DefaultItemOpen=1', 0x0', 0x1', FileType', vdw', 255', View in Web Browser', /school/gandatsetiagon/_layouts/15/VisioWebAccess/VisioWebAccess.aspx?listguid={ListId}&itemid={ItemId}&DefaultItemOpen=1', 0x0', 0x1', FileType', vsdx', 255', View in Web Browser', /school/gandatsetiagon/_layouts/15/VisioWebAccess/VisioWebAccess.aspx?listguid={ListId}&itemid={ItemId}&DefaultItemOpen=1', 0x0', 0x1', FileType', vsdm', 255', Compliance Details', u"javascript:commonShowModalDialog('{SiteUrl}'+ 
+            '/_layouts/15/itemexpiration.aspx' 
+            +'?ID={ItemId}&List={ListId}', 'center:1;dialogHeight:500px;dialogWidth:500px;resizable:yes;status:no;location:no;menubar:no;help:no', function GotoPageAfterClose(pageid){if(pageid == 'hold') {STSNavigate(unescape(decodeURI('{SiteUrl}'))+ 
+            '/_layouts/15/hold.aspx' 
+            +'?ID={ItemId}&List={ListId}');  return false;} if(pageid == 'audit') {STSNavigate(unescape(decodeURI('{SiteUrl}'))+
+            '/_layouts/15/Reporting.aspx'
+            +'?Category=Auditing&backtype=item&ID={ItemId}&List={ListId}'); return false;} if(pageid == 'config') {STSNavigate(unescape(decodeURI('{SiteUrl}'))+
+            '/_layouts/15/expirationconfig.aspx'
+            +'?ID={ItemId}&List={ListId}'); return false;}}, null);", 0x0', 0x1', ContentType', 0x01', 898', Edit in Browser', /_layouts/15/images/icxddoc.gif?rev=23', /school/gandatsetiagon/_layouts/15/formserver.aspx?XsnLocation={ItemUrl}&OpenIn=Browser&Source={Source}', 0x0', 0x1', FileType', xsn', 255', Edit in Browser', /_layouts/15/images/icxddoc.gif?rev=23', /school/gandatsetiagon/_layouts/15/formserver.aspx?XmlLocation={ItemUrl}&OpenIn=Browser&Source={Source}', 0x0', 0x1', ProgId', InfoPath.Document', 255', Edit in Browser', /_layouts/15/images/icxddoc.gif?rev=23', /school/gandatsetiagon/_layouts/15/formserver.aspx?XmlLocation={ItemUrl}&OpenIn=Browser&Source={Source}', 0x0', 0x1', ProgId', InfoPath.Document.2', 255', Edit in Browser', /_layouts/15/images/icxddoc.gif?rev=23', /school/gandatsetiagon/_layouts/15/formserver.aspx?XmlLocation={ItemUrl}&OpenIn=Browser&Source={Source}', 0x0', 0x1', ProgId', InfoPath.Document.3', 255', Edit in Browser', /_layouts/15/images/icxddoc.gif?rev=23', /school/gandatsetiagon/_layouts/15/formserver.aspx?XmlLocation={ItemUrl}&OpenIn=Browser&Source={Source}', 0x0', 0x1', ProgId', InfoPath.Document.4', 255', Document Set Version History', /_layouts/15/images/versions.gif?rev=23', u"javascript:SP.UI.ModalDialog.ShowPopupDialog('{SiteUrl}'+ 
+                '/_layouts/15/DocSetVersions.aspx'
+                + '?List={ListId}&ID={ItemId}')", 0x0', 0x0', ContentType', 0x0120D520', 330', Send To other location', /_layouts/15/images/sendOtherLoc.gif?rev=23', u"javascript:GoToPage('{SiteUrl}' +
+                '/_layouts/15/docsetsend.aspx' 
+                + '?List={ListId}&ID={ItemId}')", 0x0', 0x0', ContentType', 0x0120D520', 350', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', ODS', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', XLS', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', XLSB', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', XLSM', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', XLSX', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', ODS', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', XLSB', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', XLSM', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', XLSX', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', ProgId', OneNote.Notebook', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', ONE', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', ONETOC2', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', ProgId', OneNote.Notebook', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', ONE', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', ONETOC2', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', ODP', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', POT', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', POTM', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', POTX', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', PPS', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', PPSM', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', PPSX', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', PPT', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', PPTM', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', PPTX', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', ODP', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', PPSX', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', PPTX', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', DOC', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', DOCM', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', DOCX', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', DOT', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', DOTM', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', DOTX', 255', View in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=view&source={Source}', 0x0', 0x1', FileType', ODT', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', DOCM', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', DOCX', 255', Edit in Browser', {SiteUrl}/_layouts/15/WopiFrame.aspx?sourcedoc={ItemUrl}&action=edit&source={Source}', 0x0', 0x24', FileType', ODT', 255', 
+		', 
+	', 
+		', 
+			', 
+				',  ', Quick Links', 
+			', var ctx = new ContextInfo();ctx.listName = "{7ddb37cf-c08e-4696-85b8-8efc96dc3ea9}";ctx.NavigateForFormsPages = false;g_ctxDict['clv-ctx_7ddb37cf-c08e-4696-85b8-8efc96dc3ea9'] = ctx;', 
+          ', 
+          ', Safe and Accepting Schools', 
+          ', 
+          ', Gandy TLLP', 
+          ', 
+          ', Kindergarten', 
+          ', 
+          ', School Calendar', 
+          ', 
+          ', Child Care', 
+          ', 
+          ', Aboriginal Education', 
+          ', 
+          ', Durham Student Transporation', 
+          ', 
+          ', Durham Health ', 
+          ', 
+          ', City of Pickering ', 
+          ', 
+          ', Ontario Curriculum', 
+          ', 
+          
+          ', 
+          
+          ',          
+          ', 
+		', 
+	', 
+		', 
+			', var ctx = new ContextInfo();ctx.listName = "{025515d9-19b6-49fc-8908-4498cd083aac}";ctx.NavigateForFormsPages = false;g_ctxDict['clv-ctx_025515d9-19b6-49fc-8908-4498cd083aac'] = ctx;', 
+          ', DDSB News', 
+          ', 
+          ', 
+          ', Inclement Weather:  School Bus Cancellation/Delays Reminder', 
+          ',   A reminder to families from Durham Student Transportation Services (DSTS) of important information regarding school bus and inclement weather cancellations. DSTS provides bus service to...', 
+', 
+          ', Diversity is our Strength; Diversity is our Future', 
+          ',   \u200bThe Durham District School Board (DDSB) is embarking upon new initiatives to continue to support equity, diversity and inclusive practices.  Director of Education Lisa Millar...', 
+', 
+
+          ', 
+          ', View Announcements', 
+          ',  
+          
+          ', 
+		', 
+	', 
+		', 
+			', 
+				', The current browser does not support Web pages that contain the IFRAME element. To use this Web Part, you must use a browser that supports this element, such as Internet Explorer 7.0 or later.', 
+			', 
+		', 
+	', 
+		', 
+			', 
+				', The current browser does not support Web pages that contain the IFRAME element. To use this Web Part, you must use a browser that supports this element, such as Internet Explorer 7.0 or later.', 
+			', 
+		', 
+	', 
+		', 
+			', 
+
+
+', 
+#wrapper{
+	float:left;
+	margin:0;
+	padding:0;
+	
+}
+.disclaimerwindow {
+	OVERFLOW: hidden; 
+	BORDER-TOP: #000000 3px solid; 
+	HEIGHT: 225px; 
+	BORDER-RIGHT: #000000 3px solid; 
+	WIDTH: 280px; 
+	BORDER-BOTTOM: #000000 3px solid; 
+	POSITION: absolute; 
+	BORDER-LEFT: #000000 3px solid; 
+	Z-INDEX: 1002; 
+	MARGIN-TOP: -250px; 
+	DISPLAY: none; 
+	BACKGROUND-COLOR: #c7DA30;
+	padding:5px;
+	color:black;
+	text-align:left;
+
+}
+.disclaimertitle{
+	background-color:#809722;
+}
+
+a:link{
+	text-decoration:none;
+	
+}
+a:visited{
+	text-decoration:none;
+}
+a:hover{
+	font-weight:bold;
+	text-decoration:none;
+}
+a:actice{
+	text-decoration:none;
+}
+
+
+
+', 
+
+
+
+
+
+
+', 
+', 
+	', 
+', 
+', Disclaimer', 	
+
+', 
+	', Close [X]', 
+
+', Disclaimer', u"
+KEV Group, under a Confidentiality Agreement with the DDSB, will collect and use information provided by your child's school (such as student name and number) for the purpose of school, classroom and program administration and as required by law. Please contact your school administrator if you have any questions.", 
+
+', 
+
+', 
+
+
+', 
+		', 
+	', 
+', 
+    ', 
+
+	', 
+		', 
+		', 
+	    ', 
+    ', 
+
+	', 
+		', 
+		', 
+        ', 
+	    ', 
+    ', 
+
+    ', 
+		', 
+	', 
+		', 
+			', 
+ ', 
+', Principal:',   ', K.Ovenden ', |',  ', Vice Principal:',  ', C.Killeen',  ', |',  ', Superintendent:',  ', A. Laginski ', |',  ', Trustees:',   ', Chris Braney', , ', Paul Crawford', 
+		', 
+	', 
+', 
+	', 
+
+    ', 
+	', 
+		', 
+	', 
+    ', 
+
+	', 
+		', 
+		', 
+	', 
+
+           
+
+', 
+
+
+', 
+                            ', 
+                        ', 
+                    ', 
+                    
+
+                    ', 
+                            
+
+                        ', 
+                            
+     
+                                ',      
+                                    
+                                    ', 
+                                        ', Contact', 
+                                        
+								        ', 
+                                    ',            
+
+                                    ', Gandatsetiagon Public School', 
+                                        
+                                    ', 
+
+                                        1868 Parkside Drive, 
+										', 
+										Pickering, 
+										ON',  
+										L1V 3R2 
+										Canada', 
+                                        
+										
+                                            
+
+                                    ', 
+								    ', 
+                                        ', Phone: ', 905-831-1868', 
+										', Fax: ', 905-831-9633', 
+										
+										', 
+										gandatsetiagonps@ddsb.ca', 
+										
+											
+                                    ', 
+                                ', 
+                                 
+                                
+                            ', 
+							    
+	
+    ', 
+	', 
+		', 
+			', 
+				
+
+', 
+    ', 
+        
+        ', 
+            ', Sign up for our newsletter', 
+            ', Sign up for our newsletter & keep in touch', 
+        ',  
+        ', 
+            ', 
+                ', 
+                ', 
+                
+                
+                ', 
+            ',            
+            ', 
+                ', 
+            ', 
+            
+        ', 
+    ', 
+', 
+
+			', 
+		', 
+	', 
+		', 
+			', $(document).ready(function(){$("table[summary*='Publications']").find("tr:first").hide()});', 
+		', 
+	', 
+', 
+
+                            ',  
+                                                                                                            
+                        ', 
+
+                        ', 
+							
+									', Sign In', 
+								
+                            
+
+                            ', Utility links', 
+
+                            ', 
+                                ', District Home', Staff Portal', Student Mobile Campus', 
+                                ', Contact Us', 
+							    
+                                        ', Sign In', 
+                                                                    
+                            ',  
+
+						', 
+
+                        ', 
+							', 
+								© Durham District School Board, 2013
+							', 
+						',                               
+                          
+                    ', 
+                ', 
+                
+            ', 
+            
+
+            
+
+            
+			
+				', u"//<![CDATA[
+        var formDigestElement = document.getElementsByName('__REQUESTDIGEST')[0];
+        if (!((formDigestElement == null) || (formDigestElement.tagName.toLowerCase() != 'input') || (formDigestElement.type.toLowerCase() != 'hidden') ||
+            (formDigestElement.value == null) || (formDigestElement.value.length <= 0)))
+        {
+            formDigestElement.value = '0x471FCA935CF838509DB255814C32CEF3B1FA52E3876E39EC071CE4575C641BAD6AC87611F66A22462A7CBF2F44B50CA225A3E888A71DBD88DAF92D414261D5E4,06 Jan 2017 14:58:07 -0000';
+            g_updateFormDigestPageLoaded = new Date();
+        }
+        //]]>
+        ", 
+			
+
+            
+            
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+        
+
+', 
+//<![CDATA[
+var _spFormDigestRefreshInterval = 1440000;window.g_updateFormDigestPageLoaded = new Date(); window.g_updateFormDigestPageLoaded.setDate(window.g_updateFormDigestPageLoaded.getDate() -5);
+if (typeof(_spBodyOnLoadFunctionNames) != "undefined") {
+if (_spBodyOnLoadFunctionNames != null) {
+_spBodyOnLoadFunctionNames.push("ExpDataViewGroupOnPageLoad");
+}
+}var _fV4UI = true;
+function _RegisterWebPartPageCUI()
+{
+    var initInfo = {editable: false,isEditMode: false,allowWebPartAdder: false,listId: "{a14a1606-b57f-4a64-9fb6-07b0f821541a}",itemId: 1,recycleBinEnabled: true,enableMinorVersioning: true,enableModeration: false,forceCheckout: true,rootFolderUrl: "\u002fschool\u002fgandatsetiagon\u002fPages",itemPermissions:{High:16,Low:200801}};
+    SP.Ribbon.WebPartComponent.registerWithPageManager(initInfo);
+    var wpcomp = SP.Ribbon.WebPartComponent.get_instance();
+    var hid;
+    hid = document.getElementById("_wpSelected");
+    if (hid != null)
+    {
+        var wpid = hid.value;
+        if (wpid.length > 0)
+        {
+            var zc = document.getElementById(wpid);
+            if (zc != null)
+                wpcomp.selectWebPart(zc, false);
+        }
+    }
+    hid = document.getElementById("_wzSelected");
+    if (hid != null)
+    {
+        var wzid = hid.value;
+        if (wzid.length > 0)
+        {
+            wpcomp.selectWebPartZone(null, wzid);
+        }
+    }
+};
+function __RegisterWebPartPageCUI() {
+ExecuteOrDelayUntilScriptLoaded(_RegisterWebPartPageCUI, "sp.ribbon.js");}
+_spBodyOnLoadFunctionNames.push("__RegisterWebPartPageCUI");var __wpmExportWarning='This Web Part Page has been personalized. As a result, one or more Web Part properties may contain confidential information. Make sure the properties contain information that is safe for others to read. After exporting this Web Part, view properties in the Web Part description file (.WebPart) by using a text editor such as Microsoft Notepad.';var __wpmCloseProviderWarning='You are about to close this Web Part.  It is currently providing data to other Web Parts, and these connections will be deleted if this Web Part is closed.  To close this Web Part, click OK.  To keep this Web Part, click Cancel.';var __wpmDeleteWarning='You are about to permanently delete this Web Part.  Are you sure you want to do this?  To delete this Web Part, click OK.  To keep this Web Part, click Cancel.';var offlineBtnText = '';var offlineBtnImg = '';ExecuteOrDelayUntilScriptLoaded(function() {var objStsSync = GetStssyncData('documents','Client', '', '/_layouts/15/images/men);
+if(objStsSync){ offlineBtnText = objStsSync.BtnText;
+offlineBtnImg = objStsSync.BtnImagePath;
+}}, 'strings.js');
+window.CoreJsApiPresent = true;
+window.ExecuteOrDelayUntilScriptLoaded && ExecuteOrDelayUntilScriptLoaded(function()
+{
+    var fnReg = JsApi.ExtensibilityManager._RegisterFilesForNamespace;
+    var ns = 'SP.SPGantt.InstrumentedApi'; var api = 'GanttSharedApi.generated.js'; var shim = 'GanttApiShim.generated.js';
+    RegisterSodDep(shim, api);
+                                  
+    fnReg(ns, api, ns + '.ClientApi', 1);
+    fnReg(ns, shim, ns + '.ShimPlaceholder', 2);
+}, 
+                             'JsApiExtensibilityManager.js');Type.registerNamespace('SP.SPGantt.InstrumentedApi');
+              SP.SPGantt.InstrumentedApi.ExecuteWithJsApiLoaded = function(fn) { var fnEx = window.ExecuteOrDelayUntilScriptLoaded && ExecuteOrDelayUntilScriptLoaded; fnEx && fnEx(function() { JsApi.ExtensibilityManager.ExecuteWithJsApisInNamespaceLoaded('SP.SPGantt.InstrumentedApi', fn); }, 'JsApiExtensibilityManager.js'); };if(typeof g_spPreFetchKeys != 'undefined'){ g_spPreFetchKeys.push('DragDrop.js'); _spBodyOnLoadFunctionNames.push('WPQRegisterDragDropUpload'); g_spDragDropUpload['WebPartWPQ5'] = new SPDragUploadInfo('WebPartWPQ5','http:\u002f\u002fwww.ddsb.ca','\u002fschool\u002fgandatsetiagon','{6FD4A548-02A6-4BA1-AB0A-A769D4F4A90F}','\u002fPublications', false, false, null, null, null, null);}
+            ExecuteOrDelayUntilScriptLoaded(
+                function() 
+                {                    
+                    Srch.ScriptApplicationManager.get_current().states = {"webUILanguageName":"en-US","webDefaultLanguageName":"en-US","contextUrl":"http://www.ddsb.ca/school/gandatsetiagon","contextTitle":"Gandatsetiagon Public School","supportedLanguages":[{"id":1025,"label":"Arabic"},{"id":1093,"label":"Bengali"},{"id":1026,"label":"Bulgarian"},{"id":1027,"label":"Catalan"},{"id":2052,"label":"Chinese (Simplified)"},{"id":1028,"label":"Chinese (Traditional)"},{"id":1050,"label":"Croatian"},{"id":1029,"label":"Czech"},{"id":1030,"label":"Danish"},{"id":1043,"label":"Dutch"},{"id":1033,"label":"English"},{"id":1035,"label":"Finnish"},{"id":1036,"label":"French"},{"id":1031,"label":"German"},{"id":1032,"label":"Greek"},{"id":1095,"label":"Gujarati"},{"id":1037,"label":"Hebrew"},{"id":1081,"label":"Hindi"},{"id":1038,"label":"Hungarian"},{"id":1039,"label":"Icelandic"},{"id":1057,"label":"Indonesian"},{"id":1040,"label":"Italian"},{"id":1041,"label":"Japanese"},{"id":1099,"label":"Kannada"},{"id":1042,"label":"Korean"},{"id":1062,"label":"Latvian"},{"id":1063,"label":"Lithuanian"},{"id":1086,"label":"Malay"},{"id":1100,"label":"Malayalam"},{"id":1102,"label":"Marathi"},{"id":1044,"label":"Norwegian"},{"id":1045,"label":"Polish"},{"id":1046,"label":"Portuguese (Brazil)"},{"id":2070,"label":"Portuguese (Portugal)"},{"id":1094,"label":"Punjabi"},{"id":1048,"label":"Romanian"},{"id":1049,"label":"Russian"},{"id":3098,"label":"Serbian (Cyrillic)"},{"id":2074,"label":"Serbian (Latin)"},{"id":1051,"label":"Slovak"},{"id":1060,"label":"Slovenian"},{"id":3082,"label":"Spanish (Spain)"},{"id":2058,"label":"Spanish (Mexico)"},{"id":1053,"label":"Swedish"},{"id":1097,"label":"Tamil"},{"id":1098,"label":"Telugu"},{"id":1054,"label":"Thai"},{"id":1055,"label":"Turkish"},{"id":1058,"label":"Ukrainian"},{"id":1056,"label":"Urdu"},{"id":1066,"label":"Vietnamese"}],"navigationNodes":[{"id":1001,"name":"Everything","url":"{searchcenterurl}/results.aspx","promptString":"Search everything"},{"id":1002,"name":"People","url":"{searchcenterurl}/peopleresults.aspx","promptString":"Search people"},{"id":1003,"name":"Conversations","url":"{searchcenterurl}/conversationresults.aspx","promptString":"Search conversations"},{"id":0,"name":"This Site","url":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","promptString":"Search this site"}],"searchCenterUrl":"http://www2.ddsb.ca/school/gandatsetiagon/Search/Pages","showAdminDetails":false,"defaultPagesListName":"Pages","isSPFSKU":false,"userAdvancedLanguageSettingsUrl":"https://portal.ddsb.ca:443/my/_layouts/15/EditProfile.aspx?Section=LanguageAndRegion\u0026UserSettingsProvider=234bf0ed%2D70db%2D4158%2Da332%2D4dfd683b4148\u0026ReturnUrl=http%3A%2F%2Fwww%2Eddsb%2Eca%2Fschool%2Fgandatsetiagon%2FPages%2Fdefault%2Easpx\u0026ShowAdvLang=1","defaultQueryProperties":{"culture":1033,"uiLanguage":1033,"summaryLength":180,"desiredSnippetLength":90,"enableStemming":true,"enablePhonetic":false,"enableNicknames":false,"trimDuplicates":true,"bypassResultTypes":false,"enableInterleaving":true,"enableQueryRules":true,"processBestBets":true,"enableOrderingHitHighlightedProperty":false,"hitHighlightedMultivaluePropertyLimit":-1,"processPersonalFavorites":true},"showSuggestions":true,"showPersonalResults":true,"openDocumentsInClient":false};
+                    Srch.U.trace(null, 'SerializeToClient', 'ScriptApplicationManager state initialized.');
+                }, 'Search.ClientControls.js');var g_clientIdDeltaPlaceHolderMain = "DeltaPlaceHolderMain";
+var g_clientIdDeltaPlaceHolderPageTitleInTitleArea = "DeltaPlaceHolderPageTitleInTitleArea";
+
+                    ExecuteOrDelayUntilScriptLoaded(
+                        function() 
+                        {
+                            if ($isNull($find('ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr')))
+                            {
+                                var sb = $create(Srch.SearchBox, {"delayLoadTemplateScripts":true,"messages":[],"queryGroupNames":["Default"],"renderTemplateId":"~sitecollection/_catalogs/masterpage/Display Templates/Search/Control_SearchBox.js","resultsPageAddress":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","serverInitialRender":true,"showDataErrors":true,"states":{},"tryInplaceQuery":false}, null, null, $get("ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr"));
+                                sb.activate('Search...', 'ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr_sbox', 'ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr_sboxdiv', 'ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr_NavButton', 'ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr_AutoCompList', 'ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr_NavDropdownList', 'ctl00_PlaceHolderSearchAreaCustom_PlaceHolderSearchArea_SearchBoxScriptWebPart_csr_SearchLink', 'ms-srch-sbprogress', 'ms-srch-sb-prompt ms-helperText');
+                            }
+                        }, 'Search.ClientControls.js');g_QuickLaunchControlIds.push("zz1_TopNavigationMenu");_spBodyOnLoadFunctionNames.push('QuickLaunchInitDroppable'); var g_zz1_TopNavigationMenu = null; function init_zz1_TopNavigationMenu() { if (g_zz1_TopNavigationMenu == null) g_zz1_TopNavigationMenu = $create(SP.UI.AspMenu, null, null, null, $get('zz1_TopNavigationMen)); } ExecuteOrDelayUntilScriptLoaded(init_zz1_TopNavigationMenu, 'SP.Core.js');
+function _initTRAWebPartWPQ5()
+{var toolbarData = new Object();toolbarData['ToolbarData'] = "[{'Command':'OpenWithExplorer','ClickScript':'CoreInvoke\\u0028\\u0027NavigateHttpFolder\\u0027,\\u0027http:\\\\u002f\\\\u002fwww.ddsb.ca\\\\u002fschool\\\\u002fgandatsetiagon\\\\u002fPublications\\u0027, \\u0027_blank\\u0027\\u0029;','HiddenScript':'!\\u0028SupportsNavigateHttpFolder\\u0028\\u0029\\u0029','LabelText':'Open with Windows Explorer','Description':'Drag and drop files into this library.'},{'Command':'ConnectToClient','ClickScript':'javaScript:ExportHailStorm\\u0028\\u0027documents\\u0027,\\u0027http:\\\\u002f\\\\u002fwww.ddsb.ca\\\\u002fschool\\\\u002fgandatsetiagon\\u0027,\\u0027{6fd4a548-02a6-4ba1-ab0a-a769d4f4a90f}\\u0027,\\u0027Gandatsetiagon Public School\\u0027,\\u0027Publications\\u0027,\\u0027\\\\u002fschool\\\\u002fgandatsetiagon\\\\u002fPublications\\u0027,\\u0027\\u0027,\\u0027\\\\u002fschool\\\\u002fgandatsetiagon\\\\u002fPublications\\u0027\\u0029;','HiddenScript':'!offlineBtnText','Description':'Synchronize items and make them available offline.'},{'Command':'ExportToSpreadsheet','ClickScript':'javaScript:ExportList\\u0028\\u0027\\\\u002fschool\\\\u002fgandatsetiagon\\\\u002f_vti_bin\\\\u002fowssvr.dll?CS=65001\\\\u0026Using=_layouts\\\\u002f15\\\\u002fquery.iqy\\\\u0026List=\\\\u00257B6FD4A548\\\\u00252D02A6\\\\u00252D4BA1\\\\u00252DAB0A\\\\u00252DA769D4F4A90F\\\\u00257D\\\\u0026View=\\\\u00257BBFDFFE55\\\\u00252D6F5E\\\\u00252D4F1A\\\\u00252DAAF2\\\\u00252DE91EDE485D07\\\\u00257D\\\\u0026RootFolder=\\\\u00252Fschool\\\\u00252Fgandatsetiagon\\\\u00252FPublications\\\\u0026CacheControl=1\\u0027\\u0029','LabelText':'Export to Spreadsheet','Description':'Analyze items with a spreadsheet application.'},{'Command':'ViewRSSFeed','ClickScript':'STSNavigate2\\u0028event,\\u0027\\\\u002fschool\\\\u002fgandatsetiagon\\\\u002f_layouts\\\\u002f15\\\\u002flistfeed.aspx?List=\\\\u00257B6FD4A548\\\\u00252D02A6\\\\u00252D4BA1\\\\u00252DAB0A\\\\u00252DA769D4F4A90F\\\\u00257D\\\\u0026Source=http\\\\u00253A\\\\u00252F\\\\u00252Fwww\\\\u00252Eddsb\\\\u00252Eca\\\\u00252Fschool\\\\u00252Fgandatsetiagon\\\\u00252FPages\\\\u00252Fdefault\\\\u00252Easpx\\u0027\\u0029;','LabelText':'View RSS Feed','Description':'Syndicate items with an RSS reader.'}]";
+toolbarData['ViewDropDownOptions']="{showRepairView : false, showMergeView : false, showEditView: false, showCreateView: false, showApproverView:  false, listId: '{6FD4A548-02A6-4BA1-AB0A-A769D4F4A90F}', viewId: '{BFDFFE55-6F5E-4F1A-AAF2-E91EDE485D07}', viewParameters: ''}";
+toolbarData['ViewId']='bfdffe55-6f5e-4f1a-aaf2-e91ede485d07';
+toolbarData['ViewName']='';
+toolbarData['ViewReadOnly']='false';
+toolbarData['BaseViewId']='1';
+toolbarData['ListId']='6fd4a548-02a6-4ba1-ab0a-a769d4f4a90f';
+toolbarData['ListEnableAttachments']='False';
+toolbarData['ListBaseType']='1';
+toolbarData['ListTemplateType']='101';
+toolbarData['ListPermissions']='{High:16,Low:200801}';
+toolbarData['ListFolderPermissions']='{High:16,Low:200801}';
+toolbarData['ListHasExternalDataSource']='False';
+toolbarData['ServerRelativeWebUrl']='\u002fschool\u002fgandatsetiagon';
+toolbarData['IsAppWeb']=false;
+SP.Ribbon.PageManager.get_instance().addPageComponent(new SP.Ribbon.DocLibWebPartPageComponent('WebPartWPQ5',toolbarData));
+}
+ExecuteOrDelayUntilScriptLoaded(_initTRAWebPartWPQ5, "sp.ribbon.js");
+          ctx = new ContextInfo();
+          ctx.wpq= "WPQ5";
+          ctx.Templates = {};
+          ctx.ListData = null;
+          ctx.ListSchema = null;
+          ctx.BaseViewID = 1;
+          ctx.ListTemplateType = 101;
+          
+          ctx.existingServerFilterHash = ajaxNavigate.getParam("ServerFilter");
+          if (null != ctx.existingServerFilterHash) {
+            ctx.existingServerFilterHash = ctx.existingServerFilterHash.replace(/-/g, '&').replace(/&&/g, '-');
+            var serverFilterRootFolder = GetUrlKeyValue("RootFolder", true,ctx.existingServerFilterHash);
+            var currentRootFolder = GetUrlKeyValue("RootFolder", true);
+            if("" == serverFilterRootFolder && "" != currentRootFolder)
+            {
+              ctx.existingServerFilterHash += "&RootFolder=" + currentRootFolder;
+            }
+            var uri=new URI(ajaxNavigate.get_href());
+            uri.setFragment("");
+            uri.setQuery(ctx.existingServerFilterHash);
+            STSNavigate(uri.getString());
+          }
+          
+              ctx.listBaseType = 1;
+          
+            ctx.noGroupCollapse = true;
+          
+          ctx.NavigateForFormsPages = false;
+          ctx.BasePermissions = {ManageLists: false, ManagePersonalViews: false, OpenItems: true};
+          ctx.CurrentUserIsSiteAdmin = false;
+          ctx.IsAppWeb = false;
+          ctx.AllowGridMode = false;
+          ctx.inGridMode = false;
+          ctx.listTemplate = "101";
+          ctx.listName = "{6FD4A548-02A6-4BA1-AB0A-A769D4F4A90F}";
+          ctx.rootFolder = "";
+          ctx.view = "{BFDFFE55-6F5E-4F1A-AAF2-E91EDE485D07}";
+          ctx.viewTitle = "";
+          ctx.listUrlDir = "/school/gandatsetiagon/Publications";
+          ctx.HttpPath = "http://www.ddsb.ca/school/gandatsetiagon/_vti_bin/owssvr.dll?CS=65001";
+          ctx.HttpRoot = "http://www.ddsb.ca/school/gandatsetiagon";
+          ctx.imagesPath = "/_layouts/15/images/";
+          ctx.PortalUrl = "";
+          ctx.SendToLocationName = "";
+          ctx.SendToLocationUrl = "";
+          
+              ctx.RecycleBinEnabled = 1;
+            
+          ctx.OfficialFileName = "";
+          ctx.OfficialFileNames = "";
+          ctx.WriteSecurity = "1";
+          ctx.SiteTitle = "Gandatsetiagon Public School";
+          ctx.ListTitle = "Publications";
+          if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+          ctx.displayFormUrl = "http://www.ddsb.ca/school/gandatsetiagon/_layouts/15/listform.aspx?PageType=4&ListId=%7B6FD4A548%2D02A6%2D4BA1%2DAB0A%2DA769D4F4A90F%7D";
+          ctx.newFormUrl = "http://www.ddsb.ca/school/gandatsetiagon/_layouts/15/listform.aspx?PageType=8&ListId=%7B6FD4A548%2D02A6%2D4BA1%2DAB0A%2DA769D4F4A90F%7D&RootFolder=";
+          ctx.editFormUrl = "http://www.ddsb.ca/school/gandatsetiagon/_layouts/15/listform.aspx?PageType=6&ListId=%7B6FD4A548%2D02A6%2D4BA1%2DAB0A%2DA769D4F4A90F%7D";
+          ctx.isWebEditorPreview = 0;
+          ctx.ctxId = 2;
+          ctx.isXslView = true;
+          
+                  ctx.FolderRight_AddListItems = "0";
+                
+          if (g_ViewIdToViewCounterMap["{BFDFFE55-6F5E-4F1A-AAF2-E91EDE485D07}"] == null)
+              g_ViewIdToViewCounterMap["{BFDFFE55-6F5E-4F1A-AAF2-E91EDE485D07}"]= 2;
+          ctx.CurrentUserId = -1;
+          
+          ctx.RegionalSettingsTimeZoneBias = "300";
+          
+            ctx.AllowCreateFolder = true;
+          
+          ctx2 = ctx;
+          g_ctxDict['ctx2'] = ctx;
+      
+        function IsSharePointOpenDocuments( test )
+        {
+          if (test instanceof Array)
+            return false;
+          else
+            return (test != null) && typeof(test) == 'object';
+        }
+        var EditDocumentButton = [];
+        try {EditDocumentButton = new CreateObject("SharePoint.OpenDocuments.3");}
+        catch(err){}
+        if (IsSharePointOpenDocuments(EditDocumentButton))
+          fNewDoc3 = true;
+        else
+        {
+          try {EditDocumentButton = new CreateObject("SharePoint.OpenDocuments.2");}
+          catch(err){}
+          if (IsSharePointOpenDocuments(EditDocumentButton))
+            fNewDoc2 = true;
+          else
+          {
+            try {EditDocumentButton = new CreateObject("SharePoint.OpenDocuments.1");}
+            catch(err){}
+          }
+        }
+        fNewDoc = IsSharePointOpenDocuments(EditDocumentButton);
+      //]]>
+', 
+', 
+
+
+		
+
+
+    ', 
+
+    ']

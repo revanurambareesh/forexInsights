@@ -1,0 +1,1 @@
+This folder contains directories and temporary files that are generated intermidiately while generating insights for a company. It contains scraped data, and dataset, ... etc required for analysing company moves.

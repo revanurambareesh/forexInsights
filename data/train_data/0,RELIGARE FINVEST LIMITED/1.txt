@@ -1,0 +1,1955 @@
+[
+    ', 
+', 
+
+', 
+', 
+                
+
+
+
+
+', 
+
+    function ValidateForm() {
+        var sMsg = '';
+        if (document.getElementById('ctl00_CtrlHeader1_txtSearch1').value == '' || document.getElementById('ctl00_CtrlHeader1_txtSearch1').value == 'Search...')
+            sMsg += 'Search' + ', ';
+
+        if (sMsg.length > 0) {
+            sMsg = "Please enter " + sMsg;
+            sMsg = sMsg.substring(0, sMsg.length - 2);
+            var Loc = sMsg.lastIndexOf(",");
+            var sMsg1;
+            sMsg1 = sMsg.substring(0, sMsg.length - 2);
+
+            if (sMsg.lastIndexOf(",") > -1) {
+                sMsg = sMsg.substring(0, sMsg.lastIndexOf(",")) + " and" + sMsg.substring(1 + sMsg.lastIndexOf(","), sMsg1.length + 2);
+                sMsg += ".";
+            }
+            else {
+                sMsg += ".";
+            }
+            alert(sMsg);
+
+            return false;
+        }
+    }
+    function get_name(value, id, field_value) {
+
+        if (value == "") {
+            document.getElementById(id).value = field_value;
+        }
+        return false;
+    }
+
+    function NameBlank(id) {
+        document.getElementById(id).value = "";
+    }
+
+    function EnterEvent(e) {
+        if (e.keyCode == 13) {
+            __doPostBack('ctl00$CtrlHeader1$imgSearch', "");
+        }
+    }
+
+
+', 
+
+', 
+    ', 
+        ', 
+        ', 
+            ', Toggle navigation',  ', 
+            ', 
+                ',  ', 
+                    ', 
+        ', 
+        ', 
+
+        ', 
+            ', 
+                
+            ', 
+            ', Other Group Sites', Other Group Sites', Group Corporate', Housing Finance', Health Insurance', Retail Broking', Capital Markets', Wealth Management', 
+            ', 
+                ', 
+                ', 
+                ', 
+                
+            ', 
+        ', 
+        ', About Us', About Religare Finvest', About Religare Enterprises', Leadership Team', Our Journey', Vision and Values', Board of Directors', Fair Practice Code', Product', Unsecured SME working capital loans', Secured SME Business Expansion loans', Short Term Trade Finance', Capital Market loans', Others', Investors', Prospectus', Half Yearly And Annual Results', Annual Reports', Trustee Details', Corporate Information', Policies', Unpaid Unclaimed amounts', Disclosures', Code of Conduct', Financial Statements', Disclosures related to debt securities of RFL', Contacts for Investor Grievances', Media Room', Careers', Contact Us', New',  Pay EMI',  ', Just Buy', 
+        ', 
+    ', 
+    ', 
+', 
+
+                ', 
+                
+', 
+', 
+', 
+
+                ', 
+                
+
+
+', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', Enabling ', SMEs',  Think Big ',  ', 
+          ', 
+        ', 
+      ', 
+    ', 
+    
+    ', 
+    ', Unsecured SME working capital loans', Read More ', Secured SME Business Expansion loans', Read More ', Short Term Trade Finance', Read More ', 
+    ',  
+    
+  ', 
+', 
+
+                ', 
+                    
+    ', 
+
+
+
+
+    ', u"
+        function LinkCheckedExisting() {
+            document.getElementById('ctl00_ContentPlaceHolder1_hiddenTypeLink').value = 'Existing';
+            document.getElementById('TRCustLoanTypeExiting').style.display = '';
+            document.getElementById('TRCustInquiryTypeExiting').style.display = '';
+            document.getElementById('TRCustLoanTypeNew').style.display = 'none';
+            document.getElementById('TRCustInquiryTypeNew').style.display = 'none';
+
+
+        }
+
+        function LinkCheckedNew() {
+            document.getElementById('ctl00_ContentPlaceHolder1_hiddenTypeLink').value = 'New';
+            document.getElementById('TRCustLoanTypeExiting').style.display = 'none';
+            document.getElementById('TRCustInquiryTypeExiting').style.display = 'none';
+            document.getElementById('TRCustLoanTypeNew').style.display = '';
+            document.getElementById('TRCustInquiryTypeNew').style.display = '';
+
+        }
+        function DefaultCheckCustomerType() {
+            if (document.getElementById('ctl00_ContentPlaceHolder1_rdbExisting').checked == true) {
+                LinkCheckedExisting();
+            }
+            if (document.getElementById('ctl00_ContentPlaceHolder1_rdbNew').checked == true) {
+                LinkCheckedNew();
+            }
+
+        }
+    ", 
+
+    ', 
+        function ValidateForm() {
+            var sMsg = '';
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtname').value == '')
+                sMsg += 'Name' + ', ';
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtemail').value == "") {
+                sMsg += "Email" + ', ';
+            }
+            else {
+                if (isemail(document.getElementById('ctl00_ContentPlaceHolder1_txtemail').value) == true) {
+                    alert("Email invalid.");
+                    document.getElementById('ctl00_ContentPlaceHolder1_txtemail').focus();
+                    return false;
+                }
+            }
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtmobileno').value == '')
+                sMsg += 'Mobile No' + ', ';
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtstate').value == '')
+                sMsg += 'State' + ', ';
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtcity').value == '')
+                sMsg += 'City' + ', ';
+
+            if (document.getElementById('ctl00_ContentPlaceHolder1_hiddenTypeLink').value == 'Existing') {
+                if (document.getElementById('ctl00_ContentPlaceHolder1_ddlloantype').value == '0')
+                    sMsg += 'Product Type' + ', ';
+                if (document.getElementById('ctl00_ContentPlaceHolder1_ddlinquirytytpe').value == '0')
+                    sMsg += 'Enquiry Type' + ', ';
+
+                if (document.getElementById('ctl00_ContentPlaceHolder1_txtloanacountno').value == '')
+                    sMsg += 'Loan Account No' + ', ';
+
+                if (document.getElementById('ctl00_ContentPlaceHolder1_txtloanappId').value == '')
+                    sMsg += 'Loan Application ID' + ', ';
+            }
+
+            if (document.getElementById('ctl00_ContentPlaceHolder1_hiddenTypeLink').value == 'New') {
+                if (document.getElementById('ctl00_ContentPlaceHolder1_ddlloantypeNew').value == '0')
+                    sMsg += 'Product Type' + ', ';
+                if (document.getElementById('ctl00_ContentPlaceHolder1_ddlinquirytytpeNew').value == '0')
+                    sMsg += 'Enquiry Type' + ', ';
+            }
+
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtdetails').value == '')
+                sMsg += 'Query Details' + ', ';
+
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtCaptcha').value == 'Enter Shown Code')
+                sMsg += 'Verification Code' + ', ';
+
+            if (sMsg.length > 0) {
+                sMsg = "Please enter " + sMsg;
+                sMsg = sMsg.substring(0, sMsg.length - 2);
+                var Loc = sMsg.lastIndexOf(",");
+                var sMsg1;
+                sMsg1 = sMsg.substring(0, sMsg.length - 2);
+                if (sMsg.lastIndexOf(",") > -1) {
+                    sMsg = sMsg.substring(0, sMsg.lastIndexOf(",")) + " and" + sMsg.substring(1 + sMsg.lastIndexOf(","), sMsg1.length + 2);
+                    sMsg += ".";
+                }
+                else {
+                    sMsg += ".";
+                }
+                alert(sMsg);
+                return false;
+            }
+
+
+        }
+    ', 
+
+    ', 
+        ', 
+
+            ', 
+                ', 
+                    ', Our ', Ethos', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', u"Our reason for existence lies in the materialization of your dreams. 
+ At Religare Finvest Limited, we believe, 'In our customers success lies our success', which propels us to offer 
+ SME focused customized solutions to cater to your every financial need. Our customers lie at the heart of our vision 
+ and we thank you for letting us partner with you in your journey to growth!", 
+
+                            
+                        ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Our TV Commercial', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Service Locator', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Feedback', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+    ', 
+
+
+    ', 
+        ', 
+        ', 
+
+            ', 
+                ', 
+                    ', Service ', Request Form', 
+                    ', 
+                ', 
+            ', 
+
+
+            ', 
+                ', 
+                    ', 
+                        ', Customer Type :', 
+                        ', 
+                            ', Existing', 
+
+                        ', 
+                            ', New', 
+
+
+                        ', u"
+                            var d = document;
+                            var safari = (navigator.userAgent.toLowerCase().indexOf('safari') != -1) ? true : false;
+                            var gebtn = function (parEl, child) { return parEl.getElementsByTagName(child); };
+                            onload = function () {
+
+                                var body = gebtn(d, 'body')[0];
+                                body.className = body.className && body.className != '' ? body.className + ' has-js' : 'has-js';
+
+                                if (!d.getElementById || !d.createTextNode) return;
+                                var ls = gebtn(d, 'label');
+                                for (var i = 0; i < ls.length; i++) {
+                                    var l = ls[i];
+                                    if (l.className.indexOf('label_') == -1) continue;
+                                    var inp = gebtn(l, 'input')[0];
+                                    if (l.className == 'label_check') {
+                                        l.className = (safari && inp.checked == true || inp.checked) ? 'label_check c_on' : 'label_check c_off';
+                                        l.onclick = check_it;
+                                    };
+                                    if (l.className == 'label_radio') {
+                                        l.className = (safari && inp.checked == true || inp.checked) ? 'label_radio r_on' : 'label_radio r_off';
+                                        l.onclick = turn_radio;
+                                    };
+                                };
+                            };
+                            var check_it = function () {
+                                var inp = gebtn(this, 'input')[0];
+                                if (this.className == 'label_check c_off' || (!safari && inp.checked)) {
+                                    this.className = 'label_check c_on';
+                                    if (safari) inp.click();
+                                } else {
+                                    this.className = 'label_check c_off';
+                                    if (safari) inp.click();
+                                };
+                            };
+                            var turn_radio = function () {
+                                var inp = gebtn(this, 'input')[0];
+                                if (this.className == 'label_radio r_off' || inp.checked) {
+                                    var ls = gebtn(this.parentNode, 'label');
+                                    for (var i = 0; i < ls.length; i++) {
+                                        var l = ls[i];
+                                        if (l.className.indexOf('label_radio') == -1) continue;
+                                        l.className = 'label_radio r_off';
+                                    };
+                                    this.className = 'label_radio r_on';
+                                    if (safari) inp.click();
+                                } else {
+                                    this.className = 'label_radio r_off';
+                                    if (safari) inp.click();
+                                };
+                            };
+                        ", 
+                    ', 
+                ', 
+            ', 
+
+
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', Name', *', :', 
+                                    ', 
+                                ', 
+
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                                ', 
+	', Mr.', 
+	', Mrs.', 
+	', M/s', 
+
+', 
+
+                                            ', 
+                                        ', 
+                                    ', 
+
+                                    ', 
+                                        ', 
+                                    ', 
+
+                                ', 
+
+
+                            ', 
+                            ', 
+                                ', Email ID', *', :', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Mobile Number', *', :', 
+                                ', 
+
+                            ', 
+                            ', 
+                                ', Landline Number :', 
+                                ', 
+                            ', 
+                            ', 
+                                ', State', *', :', 
+                                ', 
+                            ', 
+                            ', 
+                                ', City', *', :', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Product Type', *', :', 
+                                ', 
+                                    ', 
+	', Please Select', 
+	', Auto Lease', 
+	', SME Working Capital Loan', 
+	', SME Commercial Assets Loan', 
+	', SME Mortgage Loan', 
+	', Personal Loan', 
+	', Loan Against Marketable Securities', 
+
+', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Query Type ', *', :', 
+                                ', 
+                                    ', 
+	', Please Select', 
+	', Change In Address Details', 
+	', Change In Contact Details', 
+	', EMI Related', 
+	', Product & Services Information', 
+	', Repayment Schedule & Charges', 
+	', Status Enquiry', 
+	', Suggestion and Comments', 
+	', Others', 
+
+', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Product Type', *', :', 
+                                ', 
+
+                                    ', 
+	', Please Select', 
+	', SME Working Capital Loan', 
+	', SME Commercial Assets Loan', 
+	', SME Mortgage Loan', 
+	', Loan Against Marketable Securities', 
+
+', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Query Type', *', :', 
+                                ', 
+
+                                    ', 
+	', Please Select', 
+	', Product Service Information', 
+	', Status Enquiry', 
+	', Suggestion and Comments', 
+	', Others', 
+
+', 
+                                ', 
+                            ', 
+                        ', 
+                    ', 
+
+
+
+
+                ', 
+            ', 
+
+
+            ', 
+                ', 
+                    ', 
+                        ', 
+                        ', 
+                            ', Proceed ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+
+
+        ', 
+    ', 
+    ', 
+    ', 
+        ', 
+            ', 
+                
+', 
+
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', u"RBI Circular to Replace Existing Set of PDC's
+                                ", 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Procedure for claiming Tax Deduction at Source', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+    ', 
+
+    
+    ', 
+
+    
+
+    ', 
+        $(document).ready(function () {
+            $("a[rel^='prettyPhoto']").prettyPhoto();
+           
+        });
+    ', 
+
+
+                ', 
+                ', 
+                
+
+
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+                    ', KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.), you need not undergo the same process again when you approach another intermediary.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp "No need to issue cheques by investors while subscribing to IPO. Just write the bank account number and sign in the application form to authorise your bank to make payment in case of allotment. No worries for refund as the money remains in investor's account.', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+
+
+', 
+    ', Important',  Notification',  ', New', Prevent Unauthorized Transactions in your demat account  --> Update your Mobile Number with your Depository Participant. Receive alerts on your Regist...', Read more ',  ', New', In accordance with the Notification No. 27/2016-ST dated 26th May 2016 issued by the Ministry of Finance, Service Tax applicable on all charges levied...', Read more ',  ', New', RFL shall not be levying pre-payment charges in respect to the customer whose loans are recalled at the option of RFL...', Read more ',  ', New', KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.),...', Read more ', 
+', 
+
+', ×', Important Notification :', Prevent Unauthorized Transactions in your demat account  --> Update your Mobile Number with your Depository Participant. Receive alerts on your Registered Mobile for  all debit and other important transactions  in your demat account directly from  CDSL  on the same day......................issued in the interest of investors.', ×', Important Notification :', In accordance with the Notification No. 27/2016-ST dated 26th May 2016 issued by the Ministry of Finance, Service Tax applicable on all charges levied by Religare Finvest Limited is being revised from 14.5% to 15% to include 0.5% for the purpose of Krishi Kalyan Cess. The new service tax will be applicable from 1st June 2016.
+', ×', Important Notification :', RFL shall not be levying pre-payment charges in respect to the customer whose loans are recalled at the option of RFL.', ×', Important Notification :', KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.), you need not undergo the same process again when you approach another intermediary.', 
+                
+', 
+  ', 
+    ', 
+      ', 
+        ', Success stories ', from our Partners', 
+        ', 
+      ', 
+    ', 
+    ', 
+      ', 
+        ', 
+          ', 
+          ',  ', 
+            ',  ',  ',  ', 
+              ', 
+                ', 
+                  ', Sunil Sethi', 
+                  ', 
+                 ', To say that Religare has very good service levels will be an understatement. It has some excellent products especially Loan Against Property that I availed.', 
+                  ',  Read their story ',  ', 
+                ', 
+              ', 
+            ', 
+            ',  ', 
+          ',  
+          
+          ', 
+          ',  ', 
+            ',  ',  ',  ', 
+              ', 
+                ', 
+                  ', Praveen Maniktala', 
+                  ', 
+                  ',  Lots of thanks to Religare Finvest for helping us by accepting request to fore close our loan and doing the complete job in a single visit, which was a very short span of time.', 
+                  ',  Read their story ',  ', 
+                ', 
+              ', 
+            ', 
+            ',  ', 
+          ',  
+		  
+		  
+		   
+          ', 
+          ',  ', 
+            ',  ',  ',  ', 
+              ', 
+                ', 
+                  ', Digvijay Purohit', 
+                  ', 
+                  ', It was really nice interacting with Religare Finvest team, quick response and action was taken, which is really commendable.', 
+                  ',  Read their story ',  ', 
+                ', 
+              ', 
+            ', 
+            ',  ', 
+          ',  
+		  
+		  
+		   
+          ', 
+          ',  ', 
+            ',  ',  ',  ', 
+              ', 
+                ', 
+                  ', Mukesh Miglani', 
+                  ', 
+                  ', Wish to thank you for all your help in getting the charge removed. Appreciate all your effort and co-ordination in getting things resolved. Thanks', 
+                  ',  Read their story ',  ', 
+                ', 
+              ', 
+            ', 
+            ',  ', 
+          ',  
+		  
+		  
+		   
+          ', 
+          ',  ', 
+            ',  ',  ',  ', 
+              ', 
+                ', 
+                  ', Jinesh Aggarwal', 
+                  ', 
+                  ', We share this humble note of appreciation for the outstanding customer service provided by Religare team. They were extremely helpful and they listened to all our concerns with the great...', 
+                  ',  Read their story ',  ', 
+                ', 
+              ', 
+            ', 
+            ',  ', 
+          ',  
+		  
+          
+         
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+            ', 
+            
+', 
+', 
+    $(document).ready(function () {
+        //Examples of how to assign the ColorBox event to elements
+        $(".exampleCreditRating").colorbox({ width: "615px", inline: true, href: "#inline_exampleCreditRating" });
+        //Example of preserving a JavaScript event for inline calls.
+    });
+', 
+
+
+
+', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', ABOUT US', 
+            ', About Religare Finvest', About Religare Enterprises', Leadership Team', Our Journey', Vision and Values', Board of Directors', Fair Practice Code', 
+          
+        ', 
+        ', 
+          ', important links', 
+           ', Pay EMI',  ', Corporate Governance', Sitemap',  ', Privacy Policy', Disclaimer', 
+        ', 
+        ', 
+          ', Contact Us', 
+          ', 
+            ', 
+              ', Religare Finvest Limited', 2nd Floor, Rajlok Building, 24, ', Nehru Place, New Delhi 110019', Corporate Office :', Religare Finvest limited', Paras Twin Towers,Tower B, ', 9th Floor,Golf Course Road, ', Sector 54, Gurgaon - 122002',  ', SMS : LOANS To 575758',  ', Call Us : 1860-3000-4111',  ', Email Us : ', customerservice@religare.com', 
+            ', 
+            ', 
+              ', 
+                ', 
+              ', 
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+  ', 
+    ', 
+      ', 
+        ', ISO Certification - Religare Finvest Limited has successfully secured  ISO 9001:2008 certification for its customer centric processes.', "Reserve Bank of India does not accept any responsibility or guarantee about the present position as to the financial soundness of the Company or the correctness of any of the statements or representations made or opinions expressed by the Company and for discharge of liability by the Company".', "Neither is there any provision in law to keep , nor does the Company keep any part of the deposits with the Reserve Bank of India and by issuing the Certificate of Registration to the Company, the Reserve Bank neither accepts any responsibility nor guarantee for the payment of the deposit amount of any depositor"', 
+      ', 
+    ', 
+  ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', © Copyright 2010 ', Religare',  is a registered trademark of RHC Holding Private Limited used under license by Religare Enterprises Limited and its subsidiaries. Trademarks are the property of their respective owners. All rights reserved. ', 
+             ', Religare Finvest Limited Credit Ratings', 
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+', 
+
+', 
+    ', 
+     ', 
+        ', 
+        ', 
+        ', 
+        ', 
+    ', 
+   ', 
+
+', 
+  ',  
+    
+    ', 
+    ', 
+      ', 
+        ', ×', 
+        ', 
+      ', 
+      ', 
+        
+        ', Rating Type', Rating Agency', Status as on 15 Nov 2013', Rating', Amount (Rs Cr.)', Commercial Paper', India Ratings', IND A1+', 3,000', Long Term Debentures', India Ratings', IND AA - (Stable)', 1,500', Bank Term Loan', India Ratings', IND AA - (Stable)', 10,000', Short Term Bank Loans', India Ratings', IND A1+', 3,000', Tier II Subordinate Debt', India Ratings', IND AA - (Stable)', 750', Commercial Paper', ICRA', ICRA A1+', 2,700', Short term Debt', ICRA', ICRA A1+', 1,000', Long Term Debt', ICRA', ICRA AA- (Stable)', 3,400', Short term Bank Loans', ICRA', ICRA A1+', 600', Long Term Bank Loans', ICRA', ICRA AA- (Stable)', 11,400', Pref Share', ICRA', ICRA A+ (Stable)', 125', Market Linked Debentures', ICRA', pp-MLD[ICRA] AA-', 100', Long Term Debt (Dual Rating)', CARE', CARE AA-', 1,400', 
+      ', 
+     
+    ', 
+  ', 
+', 
+
+
+
+
+
+
+
+    ', 
+
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+
+
+
+
+', u"
+    $(document.body).bind('mousedown keyup touchstart', function (event) {
+    	console.log('');
+	});
+", 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', 
+    $(document).ready(function () {
+
+			
+			if ($(window).width() < 767) {				 
+			 $("li.dropdown > a").click(function(){
+				//alert('hello');
+			$('li.dropdown').not(this).find('ul').hide();	
+			$(this).next("ul.dropdown-menu").toggle();
+			});
+			$(".dropdown a.dropdown-toggle").click(function(e) {
+			return false;
+			});			
+			return;
+				}
+				else {
+					// my function
+				}
+					
+	
+
+	    $('#myTab li').click(function () {
+            $('#myTab li.active').removeClass('active');
+            $(this).closest('li').addClass('active');
+        });
+
+        $('#hotdealsTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        })
+
+        // hide #back-top first
+        $("#back-top").hide();
+
+        // fade in #back-top
+        $(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#back-top').fadeIn();
+                } else {
+                    $('#back-top').fadeOut();
+                }
+            });
+
+            // scroll body to 0px on click
+            $('#back-top a').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+            $('a.link').click(function () {
+                $('html, body').animate({
+                    scrollTop: $($.attr(this, 'href')).offset().top - 144
+                }, 500);
+                return false;
+            });
+        });
+
+        $(".dropdown-menu li a").click(function () {
+            $(this).parents(".dropdown").find('.dropdown-toggle span').text($(this).text());
+            $(this).parents(".dropdown").find('.dropdown-toggle span').val($(this).data('value'));
+        });
+
+    });
+			',  
+',  
+', 
+    $(function () {
+        $(".rslides").responsiveSlides({
+            auto: true,             // Boolean: Animate automatically, true or false
+            speed: 1500,            // Integer: Speed of the transition, in milliseconds
+            timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+            pager: false,           // Boolean: Show pager, true or false
+            nav: true,             // Boolean: Show navigation, true or false
+            random: false,          // Boolean: Randomize the order of the slides, true or false
+            pause: false,           // Boolean: Pause on hover, true or false
+            pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+            prevText: "Previous",   // String: Text for the "previous" button
+            nextText: "Next",       // String: Text for the "next" button
+            maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+            navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+            manualControls: "",     // Selector: Declare custom pager navigation
+            namespace: "rslides",   // String: Change the default namespace used
+            before: function () { },   // Function: Before callback
+            after: function () { }     // Function: After callback
+        });
+    });
+		',  
+',  
+', 
+    $(document).ready(function () {
+        $("#testimonials").owlCarousel({
+            navigation: true,
+            slideSpeed: 300,
+            pagination: false,
+            items: 3,
+            itemsDesktop: [1199, 4],
+            itemsDesktopSmall: [980, 3],
+            itemsTablet: [768, 2],
+            itemsTabletSmall: false,
+            itemsMobile: [479, 1],
+            singleItem: false,
+            itemsScaleUp: false,
+            autoPlay: true,
+            stopOnHover: true,
+        });
+    });
+		',  
+',  
+', 
+    new WOW().init();
+        ',  
+',  
+    
+', 
+    $(document).ready(function () {
+
+        //.parallax(xPosition, speedFactor, outerHeight) options:
+        //xPosition - Horizontal position of the element
+        //inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+        //outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+        $('.whywaveBox').parallax("50%", 0.4);
+        $('.bannerCntr-inner').parallax("50%", 0.4);
+       // $('.request-form').parallax("50%", 0.4);
+        $('.bg').parallax("50%", 0.4);
+        $('#third').parallax("50%", 0.3);
+
+    })
+			',  
+
+', 
+    ', 
+        $(document).ready(function(e){
+           
+		$('.search_btn').click(function (e) {
+            $('.header_searchbox').toggle(300)
+            e.preventDefault();
+        });
+
+
+		   $(".exampleBranch").colorbox();
+           $(".exampleCust").colorbox();
+				
+			
+			
+
+			
+		});
+		
+    ', 
+	
+	
+'][
+    ', 
+', 
+
+', 
+', 
+                
+
+
+
+
+', 
+
+    function ValidateForm() {
+        var sMsg = '';
+        if (document.getElementById('ctl00_CtrlHeader1_txtSearch1').value == '' || document.getElementById('ctl00_CtrlHeader1_txtSearch1').value == 'Search...')
+            sMsg += 'Search' + ', ';
+
+        if (sMsg.length > 0) {
+            sMsg = "Please enter " + sMsg;
+            sMsg = sMsg.substring(0, sMsg.length - 2);
+            var Loc = sMsg.lastIndexOf(",");
+            var sMsg1;
+            sMsg1 = sMsg.substring(0, sMsg.length - 2);
+
+            if (sMsg.lastIndexOf(",") > -1) {
+                sMsg = sMsg.substring(0, sMsg.lastIndexOf(",")) + " and" + sMsg.substring(1 + sMsg.lastIndexOf(","), sMsg1.length + 2);
+                sMsg += ".";
+            }
+            else {
+                sMsg += ".";
+            }
+            alert(sMsg);
+
+            return false;
+        }
+    }
+    function get_name(value, id, field_value) {
+
+        if (value == "") {
+            document.getElementById(id).value = field_value;
+        }
+        return false;
+    }
+
+    function NameBlank(id) {
+        document.getElementById(id).value = "";
+    }
+
+    function EnterEvent(e) {
+        if (e.keyCode == 13) {
+            __doPostBack('ctl00$CtrlHeader1$imgSearch', "");
+        }
+    }
+
+
+', 
+
+', 
+    ', 
+        ', 
+        ', 
+            ', Toggle navigation',  ', 
+            ', 
+                ',  ', 
+                    ', 
+        ', 
+        ', 
+
+        ', 
+            ', 
+                
+            ', 
+            ', Other Group Sites', Other Group Sites', Group Corporate', Housing Finance', Health Insurance', Retail Broking', Capital Markets', Wealth Management', 
+            ', 
+                ', 
+                ', 
+                ', 
+                
+            ', 
+        ', 
+        ', About Us', About Religare Finvest', About Religare Enterprises', Leadership Team', Our Journey', Vision and Values', Board of Directors', Fair Practice Code', Product', Unsecured SME working capital loans', Secured SME Business Expansion loans', Short Term Trade Finance', Capital Market loans', Others', Investors', Prospectus', Half Yearly And Annual Results', Annual Reports', Trustee Details', Corporate Information', Policies', Unpaid Unclaimed amounts', Disclosures', Code of Conduct', Financial Statements', Disclosures related to debt securities of RFL', Contacts for Investor Grievances', Media Room', Careers', Contact Us', New',  Pay EMI',  ', Just Buy', 
+        ', 
+    ', 
+    ', 
+', 
+
+                ', 
+                
+', 
+', 
+', 
+
+                ', 
+                
+
+
+', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', Enabling ', SMEs',  Think Big ',  ', 
+          ', 
+        ', 
+      ', 
+    ', 
+    
+    ', 
+    ', Unsecured SME working capital loans', Read More ', Secured SME Business Expansion loans', Read More ', Short Term Trade Finance', Read More ', 
+    ',  
+    
+  ', 
+', 
+
+                ', 
+                    
+    ', 
+
+
+
+
+    ', u"
+        function LinkCheckedExisting() {
+            document.getElementById('ctl00_ContentPlaceHolder1_hiddenTypeLink').value = 'Existing';
+            document.getElementById('TRCustLoanTypeExiting').style.display = '';
+            document.getElementById('TRCustInquiryTypeExiting').style.display = '';
+            document.getElementById('TRCustLoanTypeNew').style.display = 'none';
+            document.getElementById('TRCustInquiryTypeNew').style.display = 'none';
+
+
+        }
+
+        function LinkCheckedNew() {
+            document.getElementById('ctl00_ContentPlaceHolder1_hiddenTypeLink').value = 'New';
+            document.getElementById('TRCustLoanTypeExiting').style.display = 'none';
+            document.getElementById('TRCustInquiryTypeExiting').style.display = 'none';
+            document.getElementById('TRCustLoanTypeNew').style.display = '';
+            document.getElementById('TRCustInquiryTypeNew').style.display = '';
+
+        }
+        function DefaultCheckCustomerType() {
+            if (document.getElementById('ctl00_ContentPlaceHolder1_rdbExisting').checked == true) {
+                LinkCheckedExisting();
+            }
+            if (document.getElementById('ctl00_ContentPlaceHolder1_rdbNew').checked == true) {
+                LinkCheckedNew();
+            }
+
+        }
+    ", 
+
+    ', 
+        function ValidateForm() {
+            var sMsg = '';
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtname').value == '')
+                sMsg += 'Name' + ', ';
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtemail').value == "") {
+                sMsg += "Email" + ', ';
+            }
+            else {
+                if (isemail(document.getElementById('ctl00_ContentPlaceHolder1_txtemail').value) == true) {
+                    alert("Email invalid.");
+                    document.getElementById('ctl00_ContentPlaceHolder1_txtemail').focus();
+                    return false;
+                }
+            }
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtmobileno').value == '')
+                sMsg += 'Mobile No' + ', ';
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtstate').value == '')
+                sMsg += 'State' + ', ';
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtcity').value == '')
+                sMsg += 'City' + ', ';
+
+            if (document.getElementById('ctl00_ContentPlaceHolder1_hiddenTypeLink').value == 'Existing') {
+                if (document.getElementById('ctl00_ContentPlaceHolder1_ddlloantype').value == '0')
+                    sMsg += 'Product Type' + ', ';
+                if (document.getElementById('ctl00_ContentPlaceHolder1_ddlinquirytytpe').value == '0')
+                    sMsg += 'Enquiry Type' + ', ';
+
+                if (document.getElementById('ctl00_ContentPlaceHolder1_txtloanacountno').value == '')
+                    sMsg += 'Loan Account No' + ', ';
+
+                if (document.getElementById('ctl00_ContentPlaceHolder1_txtloanappId').value == '')
+                    sMsg += 'Loan Application ID' + ', ';
+            }
+
+            if (document.getElementById('ctl00_ContentPlaceHolder1_hiddenTypeLink').value == 'New') {
+                if (document.getElementById('ctl00_ContentPlaceHolder1_ddlloantypeNew').value == '0')
+                    sMsg += 'Product Type' + ', ';
+                if (document.getElementById('ctl00_ContentPlaceHolder1_ddlinquirytytpeNew').value == '0')
+                    sMsg += 'Enquiry Type' + ', ';
+            }
+
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtdetails').value == '')
+                sMsg += 'Query Details' + ', ';
+
+            if (document.getElementById('ctl00_ContentPlaceHolder1_txtCaptcha').value == 'Enter Shown Code')
+                sMsg += 'Verification Code' + ', ';
+
+            if (sMsg.length > 0) {
+                sMsg = "Please enter " + sMsg;
+                sMsg = sMsg.substring(0, sMsg.length - 2);
+                var Loc = sMsg.lastIndexOf(",");
+                var sMsg1;
+                sMsg1 = sMsg.substring(0, sMsg.length - 2);
+                if (sMsg.lastIndexOf(",") > -1) {
+                    sMsg = sMsg.substring(0, sMsg.lastIndexOf(",")) + " and" + sMsg.substring(1 + sMsg.lastIndexOf(","), sMsg1.length + 2);
+                    sMsg += ".";
+                }
+                else {
+                    sMsg += ".";
+                }
+                alert(sMsg);
+                return false;
+            }
+
+
+        }
+    ', 
+
+    ', 
+        ', 
+
+            ', 
+                ', 
+                    ', Our ', Ethos', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', u"Our reason for existence lies in the materialization of your dreams. 
+ At Religare Finvest Limited, we believe, 'In our customers success lies our success', which propels us to offer 
+ SME focused customized solutions to cater to your every financial need. Our customers lie at the heart of our vision 
+ and we thank you for letting us partner with you in your journey to growth!", 
+
+                            
+                        ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Our TV Commercial', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Service Locator', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Feedback', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+    ', 
+
+
+    ', 
+        ', 
+        ', 
+
+            ', 
+                ', 
+                    ', Service ', Request Form', 
+                    ', 
+                ', 
+            ', 
+
+
+            ', 
+                ', 
+                    ', 
+                        ', Customer Type :', 
+                        ', 
+                            ', Existing', 
+
+                        ', 
+                            ', New', 
+
+
+                        ', u"
+                            var d = document;
+                            var safari = (navigator.userAgent.toLowerCase().indexOf('safari') != -1) ? true : false;
+                            var gebtn = function (parEl, child) { return parEl.getElementsByTagName(child); };
+                            onload = function () {
+
+                                var body = gebtn(d, 'body')[0];
+                                body.className = body.className && body.className != '' ? body.className + ' has-js' : 'has-js';
+
+                                if (!d.getElementById || !d.createTextNode) return;
+                                var ls = gebtn(d, 'label');
+                                for (var i = 0; i < ls.length; i++) {
+                                    var l = ls[i];
+                                    if (l.className.indexOf('label_') == -1) continue;
+                                    var inp = gebtn(l, 'input')[0];
+                                    if (l.className == 'label_check') {
+                                        l.className = (safari && inp.checked == true || inp.checked) ? 'label_check c_on' : 'label_check c_off';
+                                        l.onclick = check_it;
+                                    };
+                                    if (l.className == 'label_radio') {
+                                        l.className = (safari && inp.checked == true || inp.checked) ? 'label_radio r_on' : 'label_radio r_off';
+                                        l.onclick = turn_radio;
+                                    };
+                                };
+                            };
+                            var check_it = function () {
+                                var inp = gebtn(this, 'input')[0];
+                                if (this.className == 'label_check c_off' || (!safari && inp.checked)) {
+                                    this.className = 'label_check c_on';
+                                    if (safari) inp.click();
+                                } else {
+                                    this.className = 'label_check c_off';
+                                    if (safari) inp.click();
+                                };
+                            };
+                            var turn_radio = function () {
+                                var inp = gebtn(this, 'input')[0];
+                                if (this.className == 'label_radio r_off' || inp.checked) {
+                                    var ls = gebtn(this.parentNode, 'label');
+                                    for (var i = 0; i < ls.length; i++) {
+                                        var l = ls[i];
+                                        if (l.className.indexOf('label_radio') == -1) continue;
+                                        l.className = 'label_radio r_off';
+                                    };
+                                    this.className = 'label_radio r_on';
+                                    if (safari) inp.click();
+                                } else {
+                                    this.className = 'label_radio r_off';
+                                    if (safari) inp.click();
+                                };
+                            };
+                        ", 
+                    ', 
+                ', 
+            ', 
+
+
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', Name', *', :', 
+                                    ', 
+                                ', 
+
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                                ', 
+	', Mr.', 
+	', Mrs.', 
+	', M/s', 
+
+', 
+
+                                            ', 
+                                        ', 
+                                    ', 
+
+                                    ', 
+                                        ', 
+                                    ', 
+
+                                ', 
+
+
+                            ', 
+                            ', 
+                                ', Email ID', *', :', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Mobile Number', *', :', 
+                                ', 
+
+                            ', 
+                            ', 
+                                ', Landline Number :', 
+                                ', 
+                            ', 
+                            ', 
+                                ', State', *', :', 
+                                ', 
+                            ', 
+                            ', 
+                                ', City', *', :', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Product Type', *', :', 
+                                ', 
+                                    ', 
+	', Please Select', 
+	', Auto Lease', 
+	', SME Working Capital Loan', 
+	', SME Commercial Assets Loan', 
+	', SME Mortgage Loan', 
+	', Personal Loan', 
+	', Loan Against Marketable Securities', 
+
+', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Query Type ', *', :', 
+                                ', 
+                                    ', 
+	', Please Select', 
+	', Change In Address Details', 
+	', Change In Contact Details', 
+	', EMI Related', 
+	', Product & Services Information', 
+	', Repayment Schedule & Charges', 
+	', Status Enquiry', 
+	', Suggestion and Comments', 
+	', Others', 
+
+', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Product Type', *', :', 
+                                ', 
+
+                                    ', 
+	', Please Select', 
+	', SME Working Capital Loan', 
+	', SME Commercial Assets Loan', 
+	', SME Mortgage Loan', 
+	', Loan Against Marketable Securities', 
+
+', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Query Type', *', :', 
+                                ', 
+
+                                    ', 
+	', Please Select', 
+	', Product Service Information', 
+	', Status Enquiry', 
+	', Suggestion and Comments', 
+	', Others', 
+
+', 
+                                ', 
+                            ', 
+                        ', 
+                    ', 
+
+
+
+
+                ', 
+            ', 
+
+
+            ', 
+                ', 
+                    ', 
+                        ', 
+                        ', 
+                            ', Proceed ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+
+
+        ', 
+    ', 
+    ', 
+    ', 
+        ', 
+            ', 
+                
+', 
+
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', u"RBI Circular to Replace Existing Set of PDC's
+                                ", 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Procedure for claiming Tax Deduction at Source', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+    ', 
+
+    
+    ', 
+
+    
+
+    ', 
+        $(document).ready(function () {
+            $("a[rel^='prettyPhoto']").prettyPhoto();
+           
+        });
+    ', 
+
+
+                ', 
+                ', 
+                
+
+
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+                    ', KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.), you need not undergo the same process again when you approach another intermediary.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp "No need to issue cheques by investors while subscribing to IPO. Just write the bank account number and sign in the application form to authorise your bank to make payment in case of allotment. No worries for refund as the money remains in investor's account.', 
+                ', 
+            ', 
+        ', 
+    ', 
+', 
+
+
+', 
+    ', Important',  Notification',  ', New', Prevent Unauthorized Transactions in your demat account  --> Update your Mobile Number with your Depository Participant. Receive alerts on your Regist...', Read more ',  ', New', In accordance with the Notification No. 27/2016-ST dated 26th May 2016 issued by the Ministry of Finance, Service Tax applicable on all charges levied...', Read more ',  ', New', RFL shall not be levying pre-payment charges in respect to the customer whose loans are recalled at the option of RFL...', Read more ',  ', New', KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.),...', Read more ', 
+', 
+
+', ×', Important Notification :', Prevent Unauthorized Transactions in your demat account  --> Update your Mobile Number with your Depository Participant. Receive alerts on your Registered Mobile for  all debit and other important transactions  in your demat account directly from  CDSL  on the same day......................issued in the interest of investors.', ×', Important Notification :', In accordance with the Notification No. 27/2016-ST dated 26th May 2016 issued by the Ministry of Finance, Service Tax applicable on all charges levied by Religare Finvest Limited is being revised from 14.5% to 15% to include 0.5% for the purpose of Krishi Kalyan Cess. The new service tax will be applicable from 1st June 2016.
+', ×', Important Notification :', RFL shall not be levying pre-payment charges in respect to the customer whose loans are recalled at the option of RFL.', ×', Important Notification :', KYC is one time exercise while dealing in securities markets - once KYC is done through a SEBI registered intermediary (broker, DP, Mutual Fund etc.), you need not undergo the same process again when you approach another intermediary.', 
+                
+', 
+  ', 
+    ', 
+      ', 
+        ', Success stories ', from our Partners', 
+        ', 
+      ', 
+    ', 
+    ', 
+      ', 
+        ', 
+          ', 
+          ',  ', 
+            ',  ',  ',  ', 
+              ', 
+                ', 
+                  ', Sunil Sethi', 
+                  ', 
+                 ', To say that Religare has very good service levels will be an understatement. It has some excellent products especially Loan Against Property that I availed.', 
+                  ',  Read their story ',  ', 
+                ', 
+              ', 
+            ', 
+            ',  ', 
+          ',  
+          
+          ', 
+          ',  ', 
+            ',  ',  ',  ', 
+              ', 
+                ', 
+                  ', Praveen Maniktala', 
+                  ', 
+                  ',  Lots of thanks to Religare Finvest for helping us by accepting request to fore close our loan and doing the complete job in a single visit, which was a very short span of time.', 
+                  ',  Read their story ',  ', 
+                ', 
+              ', 
+            ', 
+            ',  ', 
+          ',  
+		  
+		  
+		   
+          ', 
+          ',  ', 
+            ',  ',  ',  ', 
+              ', 
+                ', 
+                  ', Digvijay Purohit', 
+                  ', 
+                  ', It was really nice interacting with Religare Finvest team, quick response and action was taken, which is really commendable.', 
+                  ',  Read their story ',  ', 
+                ', 
+              ', 
+            ', 
+            ',  ', 
+          ',  
+		  
+		  
+		   
+          ', 
+          ',  ', 
+            ',  ',  ',  ', 
+              ', 
+                ', 
+                  ', Mukesh Miglani', 
+                  ', 
+                  ', Wish to thank you for all your help in getting the charge removed. Appreciate all your effort and co-ordination in getting things resolved. Thanks', 
+                  ',  Read their story ',  ', 
+                ', 
+              ', 
+            ', 
+            ',  ', 
+          ',  
+		  
+		  
+		   
+          ', 
+          ',  ', 
+            ',  ',  ',  ', 
+              ', 
+                ', 
+                  ', Jinesh Aggarwal', 
+                  ', 
+                  ', We share this humble note of appreciation for the outstanding customer service provided by Religare team. They were extremely helpful and they listened to all our concerns with the great...', 
+                  ',  Read their story ',  ', 
+                ', 
+              ', 
+            ', 
+            ',  ', 
+          ',  
+		  
+          
+         
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+            ', 
+            
+', 
+', 
+    $(document).ready(function () {
+        //Examples of how to assign the ColorBox event to elements
+        $(".exampleCreditRating").colorbox({ width: "615px", inline: true, href: "#inline_exampleCreditRating" });
+        //Example of preserving a JavaScript event for inline calls.
+    });
+', 
+
+
+
+', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', ABOUT US', 
+            ', About Religare Finvest', About Religare Enterprises', Leadership Team', Our Journey', Vision and Values', Board of Directors', Fair Practice Code', 
+          
+        ', 
+        ', 
+          ', important links', 
+           ', Pay EMI',  ', Corporate Governance', Sitemap',  ', Privacy Policy', Disclaimer', 
+        ', 
+        ', 
+          ', Contact Us', 
+          ', 
+            ', 
+              ', Religare Finvest Limited', 2nd Floor, Rajlok Building, 24, ', Nehru Place, New Delhi 110019', Corporate Office :', Religare Finvest limited', Paras Twin Towers,Tower B, ', 9th Floor,Golf Course Road, ', Sector 54, Gurgaon - 122002',  ', SMS : LOANS To 575758',  ', Call Us : 1860-3000-4111',  ', Email Us : ', customerservice@religare.com', 
+            ', 
+            ', 
+              ', 
+                ', 
+              ', 
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+  ', 
+    ', 
+      ', 
+        ', ISO Certification - Religare Finvest Limited has successfully secured  ISO 9001:2008 certification for its customer centric processes.', "Reserve Bank of India does not accept any responsibility or guarantee about the present position as to the financial soundness of the Company or the correctness of any of the statements or representations made or opinions expressed by the Company and for discharge of liability by the Company".', "Neither is there any provision in law to keep , nor does the Company keep any part of the deposits with the Reserve Bank of India and by issuing the Certificate of Registration to the Company, the Reserve Bank neither accepts any responsibility nor guarantee for the payment of the deposit amount of any depositor"', 
+      ', 
+    ', 
+  ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', © Copyright 2010 ', Religare',  is a registered trademark of RHC Holding Private Limited used under license by Religare Enterprises Limited and its subsidiaries. Trademarks are the property of their respective owners. All rights reserved. ', 
+             ', Religare Finvest Limited Credit Ratings', 
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+', 
+
+', 
+    ', 
+     ', 
+        ', 
+        ', 
+        ', 
+        ', 
+    ', 
+   ', 
+
+', 
+  ',  
+    
+    ', 
+    ', 
+      ', 
+        ', ×', 
+        ', 
+      ', 
+      ', 
+        
+        ', Rating Type', Rating Agency', Status as on 15 Nov 2013', Rating', Amount (Rs Cr.)', Commercial Paper', India Ratings', IND A1+', 3,000', Long Term Debentures', India Ratings', IND AA - (Stable)', 1,500', Bank Term Loan', India Ratings', IND AA - (Stable)', 10,000', Short Term Bank Loans', India Ratings', IND A1+', 3,000', Tier II Subordinate Debt', India Ratings', IND AA - (Stable)', 750', Commercial Paper', ICRA', ICRA A1+', 2,700', Short term Debt', ICRA', ICRA A1+', 1,000', Long Term Debt', ICRA', ICRA AA- (Stable)', 3,400', Short term Bank Loans', ICRA', ICRA A1+', 600', Long Term Bank Loans', ICRA', ICRA AA- (Stable)', 11,400', Pref Share', ICRA', ICRA A+ (Stable)', 125', Market Linked Debentures', ICRA', pp-MLD[ICRA] AA-', 100', Long Term Debt (Dual Rating)', CARE', CARE AA-', 1,400', 
+      ', 
+     
+    ', 
+  ', 
+', 
+
+
+
+
+
+
+
+    ', 
+
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+
+
+
+
+', u"
+    $(document.body).bind('mousedown keyup touchstart', function (event) {
+    	console.log('');
+	});
+", 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', 
+    $(document).ready(function () {
+
+			
+			if ($(window).width() < 767) {				 
+			 $("li.dropdown > a").click(function(){
+				//alert('hello');
+			$('li.dropdown').not(this).find('ul').hide();	
+			$(this).next("ul.dropdown-menu").toggle();
+			});
+			$(".dropdown a.dropdown-toggle").click(function(e) {
+			return false;
+			});			
+			return;
+				}
+				else {
+					// my function
+				}
+					
+	
+
+	    $('#myTab li').click(function () {
+            $('#myTab li.active').removeClass('active');
+            $(this).closest('li').addClass('active');
+        });
+
+        $('#hotdealsTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        })
+
+        // hide #back-top first
+        $("#back-top").hide();
+
+        // fade in #back-top
+        $(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#back-top').fadeIn();
+                } else {
+                    $('#back-top').fadeOut();
+                }
+            });
+
+            // scroll body to 0px on click
+            $('#back-top a').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+            $('a.link').click(function () {
+                $('html, body').animate({
+                    scrollTop: $($.attr(this, 'href')).offset().top - 144
+                }, 500);
+                return false;
+            });
+        });
+
+        $(".dropdown-menu li a").click(function () {
+            $(this).parents(".dropdown").find('.dropdown-toggle span').text($(this).text());
+            $(this).parents(".dropdown").find('.dropdown-toggle span').val($(this).data('value'));
+        });
+
+    });
+			',  
+',  
+', 
+    $(function () {
+        $(".rslides").responsiveSlides({
+            auto: true,             // Boolean: Animate automatically, true or false
+            speed: 1500,            // Integer: Speed of the transition, in milliseconds
+            timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+            pager: false,           // Boolean: Show pager, true or false
+            nav: true,             // Boolean: Show navigation, true or false
+            random: false,          // Boolean: Randomize the order of the slides, true or false
+            pause: false,           // Boolean: Pause on hover, true or false
+            pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+            prevText: "Previous",   // String: Text for the "previous" button
+            nextText: "Next",       // String: Text for the "next" button
+            maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+            navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+            manualControls: "",     // Selector: Declare custom pager navigation
+            namespace: "rslides",   // String: Change the default namespace used
+            before: function () { },   // Function: Before callback
+            after: function () { }     // Function: After callback
+        });
+    });
+		',  
+',  
+', 
+    $(document).ready(function () {
+        $("#testimonials").owlCarousel({
+            navigation: true,
+            slideSpeed: 300,
+            pagination: false,
+            items: 3,
+            itemsDesktop: [1199, 4],
+            itemsDesktopSmall: [980, 3],
+            itemsTablet: [768, 2],
+            itemsTabletSmall: false,
+            itemsMobile: [479, 1],
+            singleItem: false,
+            itemsScaleUp: false,
+            autoPlay: true,
+            stopOnHover: true,
+        });
+    });
+		',  
+',  
+', 
+    new WOW().init();
+        ',  
+',  
+    
+', 
+    $(document).ready(function () {
+
+        //.parallax(xPosition, speedFactor, outerHeight) options:
+        //xPosition - Horizontal position of the element
+        //inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+        //outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+        $('.whywaveBox').parallax("50%", 0.4);
+        $('.bannerCntr-inner').parallax("50%", 0.4);
+       // $('.request-form').parallax("50%", 0.4);
+        $('.bg').parallax("50%", 0.4);
+        $('#third').parallax("50%", 0.3);
+
+    })
+			',  
+
+', 
+    ', 
+        $(document).ready(function(e){
+           
+		$('.search_btn').click(function (e) {
+            $('.header_searchbox').toggle(300)
+            e.preventDefault();
+        });
+
+
+		   $(".exampleBranch").colorbox();
+           $(".exampleCust").colorbox();
+				
+			
+			
+
+			
+		});
+		
+    ', 
+	
+	
+']

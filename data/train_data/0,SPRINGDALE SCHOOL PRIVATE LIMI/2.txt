@@ -1,0 +1,3909 @@
+[
+', u"
+  dataLayer.push(gon.data_layer_hash);
+
+  (function() {
+    var gaCookie = {};
+    var cval = $.cookie('GATracking');
+    if (!(_.isEmpty(cval))) {
+      try {
+        gaCookie = JSON.parse(cval);
+      } catch (e) {
+        GS.util.log('Error parsing GA tracking cookie');
+      }
+    }
+    if (gaCookie.events) {
+      $.each(gaCookie.events, function(_, event) {
+        if (event.category && event.action) {
+          var gaEvent = {
+            'event': 'analyticsEvent',
+            'eventCategory': event.category,
+            'eventAction': event.action,
+            'eventLabel': event.label,
+            'eventValue': event.value,
+            'eventNonInt': event.non_interactive
+          };
+          dataLayer.push(gaEvent);
+        }
+      });
+    }
+
+    $.removeCookie('GATracking', {domain: '.greatschools.org', path: '/'});
+    $.removeCookie('GATracking', {path: '/'});
+  })();
+", 
+', 
+
+', 
+  ', 
+  ', 
+  ', u"(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-KBSN4P');", 
+  ', 
+
+', 
+   .un .clearfix:after {
+    content: " "; /* Older browser do not support empty content */
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+  }
+
+  .un div.dn {
+    display: none;
+  }
+
+  .un .visible-xs {
+    display: none !important;
+  }
+
+  .un {
+    font-family: "opensans-semibold", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    display: table;
+    margin: auto;
+    max-width: 1200px;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    line-height: 28px;
+    color: #585859;
+  }
+
+  .un ul {
+    letter-spacing: normal;
+  }
+
+   .un .dt-desktop {
+    display: table;
+     width: 100%;
+  }
+
+  .un .tr {
+    display: table-row;
+  }
+
+  .un .tc {
+    display: table-cell;
+  }
+
+  .un .logo {
+    /*background-color: #00FF00;*/
+    padding: 10px;
+    display: table-cell;
+  }
+
+   .un .logo_size {
+     width: 112px;
+     height: 47px;
+   }
+
+  .un .search_bar {
+    width: 100%;
+    /*background-color: #0000FF;*/
+    padding: 2px 20px;
+    vertical-align: middle;
+  }
+
+  .un .navigation {
+    display: table-cell;
+    /*background-color: #FF0000;*/
+    padding: 0px 20px;
+    vertical-align: middle;
+  }
+
+  .un .menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+  }
+
+  .un .menu_hide_mobile {
+    display: block;
+  }
+
+  .un .search_hide_mobile {
+    display: table-cell;
+  }
+
+  .un ul.menu li {
+    margin: 0px;
+    display: inline;
+  }
+
+  .un ul.menu li.dn {
+    display: none;
+  }
+
+  .un ul.menu li.featured_visible_mobile {
+    display: none;
+  }
+
+  .un ul.menu li a {
+    text-decoration: none;
+  }
+
+  .un ul.featured li a {
+    font-size: 13px;
+    padding-top: 14px;
+    color: #26abe2;
+    font-family: "opensans-semibold", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    padding-right: 20px;
+  }
+
+  .un ul.featured li a:hover {
+    color: #666666;
+  }
+
+  .un ul.featured {
+    margin-left: 162px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+  }
+
+  .un ul.featured .title {
+    padding-left: 10px;
+    font-size: 12px;
+    padding-top: 17px;
+    padding-right: 20px;
+  }
+
+  .un .search_form_field {
+    height: 46px;
+    font: normal 14px/20px 'opensans-regular', Arial, Helvetica, sans-serif;
+    color: #666;
+    padding-left: 8px;
+    vertical-align: middle;
+    border: 1px solid #b8b8b8;
+    border-left: none;
+  }
+
+  .un .search_form_button {
+    height: 44px;
+    vertical-align: middle;
+    color: white;
+    background-color: #26abe2;
+    border-color: #26abe2;;
+    border-bottom-width: 3px;
+    border-top: #26abe2;;
+    border-right: #26abe2;;
+    border-left: #26abe2;;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    font-family: "opensans-bold", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+    padding: 8px 20px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -webkit-user-select: none;
+  }
+
+  .un .toggle, [id^=drop] {
+    display: none;
+  }
+
+   .header_un {
+    width: 100%;
+    background-color: #FFFFFF;
+  }
+
+  /* menu */
+
+   .header_un .menu {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+  }
+
+  /* menu icon */
+
+   .header_un .menu-icon {
+    cursor: pointer;
+    /*display: inline-block;*/
+    /*float: right;*/
+    padding: 0px;
+    vertical-align: middle;
+    position: absolute;
+    user-select: none;
+    height: 20px;
+    width: 20px;
+    top: 12px;
+  }
+
+   .header_un .menu-icon .navicon {
+    background: #333;
+    display: block;
+    height: 2px;
+    position: absolute;
+    transition: background .2s ease-out;
+    width: 18px;
+    top: 10px;
+  }
+
+   .header_un .menu-icon .navicon:before,
+   .header_un .menu-icon .navicon:after {
+    background: #333;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+  }
+
+   .header_un .menu-icon .navicon:before {
+    top: 5px;
+  }
+
+   .header_un .menu-icon .navicon:after {
+    top: -5px;
+  }
+
+  /* menu btn */
+   .header_un .menu-btn {
+    display: none;
+  }
+
+   .header_un .menu-btn:checked ~ .menu {
+    max-height: 240px;
+  }
+
+   .header_un .menu-btn:checked ~ .menu-icon .navicon {
+    background: transparent;
+  }
+
+   .header_un .menu-btn:checked ~ .menu-icon .navicon:before {
+    transform: rotate(-45deg);
+  }
+
+   .header_un .menu-btn:checked ~ .menu-icon .navicon:after {
+    transform: rotate(45deg);
+  }
+
+   .header_un .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+   .header_un .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+    top: 0;
+  }
+
+  .un .search_bar_size {
+    width: 100%;
+  }
+
+  .un .search_icon {
+    display: none;
+  }
+
+   .un nav {
+    margin: 0;
+    padding: 0;
+    /*background-color: #FFFFFF;*/
+  }
+
+   .un nav:after {
+    content: "";
+    /*display: table;*/
+    clear: both;
+  }
+
+   .un nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    width: 470px;
+
+  }
+
+   .un nav ul li {
+    margin: 0px;
+    display: inline-block;
+    float: left;
+    /*background-color: #FFFFFF;*/
+  }
+
+   .un nav a {
+    font-family: "opensans-semibold", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    display: block;
+    padding: 0px 20px;
+    color: #585859;
+    font-size: 14px;
+    line-height: 28px;
+    text-decoration: none;
+  }
+
+   .un nav a:hover {
+    background-color: #EEEEEE;
+  }
+
+  li > label {
+    margin-bottom: 0px;
+  }
+
+   .un li > a:after {
+    content: ' \25BC';
+    font-size: 8px;
+    color: #666;
+    vertical-align: middle;
+  }
+   .un li > a:hover:after {
+    color: #167ba5;
+  }
+
+   .un li li > a:after {
+    content: ' \203A';
+    font-size: 24px;
+    float: right;
+    color: #CCCCDD;
+  }
+
+   .un li.open li > a:hover:after {
+    font-size: 24px;
+    float: right;
+    color: #167ba5;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+
+   .un nav > ul > li > a {
+    padding: 5px 16px;
+    text-transform: uppercase;
+  }
+
+   .un li > label:after {
+    content: ' \203A';
+    font-size: 24px;
+    float: right;
+    color: #CCCCDD;
+  }
+
+
+  .un label.open:after {
+    font-size: 24px;
+    float: right;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+
+
+   .un li > a:only-child:after {
+    content: '';
+  }
+
+   .un nav ul li ul li:hover {
+    background: #FFFFFF;
+  }
+
+   .un nav ul ul {
+    display: none;
+    position: absolute;
+    border: 1px solid #EEEEEE;
+    background-color: #FFFFFF;
+    width: 150px;
+     z-index: 5;
+    /*border-bottom: none;*/
+  }
+
+   .un nav ul ul a {
+    font-family: "opensans-regular", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    padding: 5px 10px;
+  }
+
+   .un nav ul li:hover > ul {
+    display: inherit;
+  }
+
+   .un nav ul ul li {
+    width: 150px;
+    float: none;
+    display: list-item;
+    position: relative;
+    border-bottom: 1px solid #0000DD;
+  }
+
+   .un nav ul ul ul {
+    position: absolute;
+    /*background-color: #FFFFFF;*/
+    top: -39px;
+    left: 148px;
+    width: 180px;
+  }
+
+   .un nav ul ul ul li:hover {
+    background-color: #0000FF;
+    /*position: relative;*/
+    /*top: -60px;*/
+    /*left: 135px;*/
+  }
+
+  .un .search_bar_size {
+    display: table-cell;
+  }
+
+  .un .search_bar_button {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .un .mobile-toggle-button {
+    display: inline-block;
+    width: 50%;
+    height: 46px;
+    border: solid #b8b8b8;
+    border-width: 1px 1px 0px 0px;
+    background-color: white;
+    color: darkgrey;
+    padding: 10px 0px;
+    border-top-right-radius: 4px;
+  }
+
+  .un .mobile-toggle-button:first-of-type {
+    border-left: 1px solid grey;
+    border-top-right-radius: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 0;
+  }
+
+  .un .mobile-toggle-button:last-of-type {
+    border-bottom-right-radius: 0px;
+  }
+
+  .un .mobile-toggle-button.active {
+    background-color: #1e77a7;
+    color: white;
+  }
+
+  .un .desktop-search-toggle {
+    vertical-align: middle;
+    padding: 0 10px;
+    position: relative;
+    border-right: 1px solid #b8b8b8;
+    border-left: 1px solid #b8b8b8;
+    border-top: 1px solid #b8b8b8;
+    border-bottom: 1px solid #b8b8b8;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    min-width: 100px;
+    cursor: pointer;
+  }
+
+  .un .desktop-search-toggle a,
+  .un .desktop-search-toggle a:hover {
+    font-family: "opensans-semibold", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    text-decoration: none;
+    color: #585859;
+  }
+
+  .un .desktop-search-toggle:hover .desktop-search-menu{
+    display: inherit;
+    border-top: 0px;
+    }
+
+  .un .desktop-search-toggle:hover {
+    border-bottom-left-radius: 0;
+  }
+
+  .un .desktop-toggle-search-arrow {
+    font-size: 8px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  .un .desktop-search-menu  {
+    display: none;
+    position: absolute;
+    top: 44px;
+    left: -1px;
+    z-index: 1000;
+    float: left;
+    min-width: 100px;
+    padding: 9px 0;
+    margin: 0 0;
+    height: 40px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #b8b8b8;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  .un .desktop-search-menu:hover {
+    background-color: #eee;
+  }
+
+  .un .dropdown-item {
+    text-decoration: none; 
+    display: block;
+    width: 100%;
+    padding: 0 10px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: inherit;
+    white-space: nowrap;
+    background: 0 0;
+    border: 0;
+  }
+
+   .un .logo_size {
+     width: 95px;
+     height: 40px;
+   }
+
+  /* Media Queries
+  --------------------------------------------- */
+
+  @media all and (max-width: 767px) {
+    .un {
+      display: block;
+    }
+
+    .un .logo_size {
+      width: 60px;
+      height: 25px;
+    }
+
+    .un .tr {
+      display: block;
+    }
+
+    .un .tc {
+      display: block;
+    }
+
+    .un .menu_hide_mobile {
+      display: none;
+    }
+
+    .un .menu_layout_mobile {
+      padding-left: 10px;
+      width: 30px;
+      height: 5px;
+      text-align: left;
+      vertical-align: middle;
+      display: table-cell
+    }
+    .un .search_hide_mobile {
+      display: none;
+    }
+
+    .un .navigation {
+      /*float:left;*/
+      padding: 0px;
+      width: 100%;
+    }
+
+    .un .search_icon {
+      display: table-cell;
+      text-align: right;
+      padding-right: 10px;
+      padding-top: 10px;
+      vertical-align: middle;
+    }
+
+    .un nav {
+      margin: 0;
+      /*clear:both;*/
+    }
+
+    .un .toggle + a {
+      display: none;
+    }
+
+    .un .toggle {
+      display: block;
+      /*background-color: #FFFFFF;*/
+      padding: 5px 17px;
+      color: #585859;
+      font-size: 14px;
+      line-height: 28px;
+      text-decoration: none;
+      /*width: 100%;*/
+    }
+
+    .un nav .toggle:hover {
+      background-color: #EEEEEE;
+      color: #167ba5;
+    }
+
+    .un nav .toggle:hover:after {
+      color: #167ba5;
+    }
+
+    .un [id^=drop]:checked + ul {
+      display: block;
+    }
+
+    .un nav ul {
+      width: 100%;
+    }
+
+    .un nav ul li {
+      display: block;
+      width: 100%;
+      font: 13px "opensans-regular", Arial, "Helvetica Neue", Helvetica, sans-serif;
+      position: relative;
+      border-top: 1px solid #EEEEEE;
+    }
+    .un nav ul li:last-of-type {
+      border-bottom: 1px solid #EEEEEE;
+    }
+
+    .un nav ul ul .toggle,
+    .un nav ul ul a {
+      padding: 5px 20px 5px 40px;
+      width: 100%;
+    }
+
+    .un nav ul ul ul a {
+      background-color: #FFFFFF;
+      padding: 0 60px;
+    }
+
+    .un nav ul ul ul a:hover {
+      background-color: #fff;
+    }
+
+    .un nav ul li ul li .toggle,
+    .un nav ul ul a {
+      background-color: #FFFFFF;
+      position: relative;
+    }
+
+    .un nav ul ul {
+      float: none;
+      top: 0px;
+      border: none;
+      color: #ffffff;
+      position: relative;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .un nav ul ul li:hover > ul,
+    .un nav ul li:hover > ul {
+      display: none;
+    }
+
+    .un nav ul ul li {
+      display: block;
+      width: 100%;
+      position: relative;
+    }
+
+    .un nav ul ul ul li {
+      /*position: static;*/
+      position: relative;
+
+    }
+
+    .un nav ul ul ul {
+      position: relative;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 48em) {
+    .header_un .menu-icon {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .nav-padding {
+      padding-top: 49px;
+    }
+
+    .un .visible-xs {
+      display: block !important;
+    }
+
+    .un .hidden-xs {
+      display: none !important;
+    }
+
+    /*.search_bar{width:auto; margin-bottom: 10px}*/
+    .un .search_form_field {
+      /*width:80%;*/
+
+    }
+
+    .header_un {
+      position: fixed;
+      background: #ffffff;
+      z-index: 4;
+      border-bottom: solid 1px #EEEEEE;
+    }
+
+    .un .search_bar {
+      width: auto;
+      padding-bottom: 10px;
+    }
+
+    .un ul.menu li.featured_visible_mobile {
+      display: inline;
+    }
+
+    .un .logo {
+      width: 100%;
+      text-align: center;
+      padding-left: 30px;
+    }
+
+    .un .search_form_field {
+      border: 1px solid #b8b8b8;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 4px;
+    }
+
+    .un .search_form_button {
+      border-top-right-radius: 0px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    .un .hidden-sm {
+      display: none !important;
+    }
+    .un nav ul {
+      width: 270px;
+    }
+    .un nav > ul > li > ul {
+      margin-left:-25px;
+      width: 145px;
+    }
+    .un nav > ul ul ul {
+      width: 145px;
+      left: 143px;
+    }
+
+    .un .search_form_field {
+      /*width:200px;*/
+
+    }
+  }
+
+  @media (min-width: 768px) {
+    .un .mobile-toggle-button {
+      display: none;
+    }
+
+    .un .search_bar_tc {
+      display: table-cell;
+    }
+  }
+
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .un .hidden-md {
+      display: none !important;
+    }
+
+    .un .search_form_field {
+      /*width:300px;*/
+
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .un .hidden-lg {
+      display: none !important;
+    }
+  }
+
+  .un .search_icon_image {
+    cursor: pointer;
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAnNwAAJzcBVAXW8gAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAHwSURBVEiJrdSxalRREAbgbzeboCSkUImNCViFDSSgKJhGbexVhDyAIBb6AIKt6BNYSKo0NoKIdcBWU0REdE1lEZCwqxKIcYVktTjnsmf33ru7YP5q5t45/8z5Z85U5DGBK7iIOUxjHzvYxDp+FpzLodLnn8MdnBxw5g9e4NUw8rHEvob7mOyL2cN4UkgNSziNd4PIa0nFt1GNfhNraGAXx3AWK1iIMZfxHc8HVT6Bh0nFb/EIXwUJ4AAtvIn2Yvw+j41YQA5VXNXVuImn+F16V17GArLz18sCq7iQ+GtDiDOsohPt83p710M+l/iNEYgJMnyL9nHMlJFPR3tPiXYl2E7sqTLy/WhPClMxKk4ldmlDd6JdEcZtFNQwG+1skgrJNxN/ZUTym8IIwwfd5ubI13XneQE3hhDX+2JelwWOoR0zL8Vvi8IEfUqSEqS4hbu6o9cRHlahLOniuic86QwdYdy2hebN6kqRoo3H+FxUeYaNWN18TFoRxvQMTvTFdvQusmXhjfTcoP9lfYxJpmK148m/A7zHM0GKZd3FlyX4IqwQ5Pd5f+KZmGg3VpVORR0P9L6NNp4I/SreCRF/hVf7A7+in6IlSFF0gy00B5GPgpYgxaWCBI3/JSdovCV/g/pRkJclODwq8ixBQ2j0IVb/Af8qaEu81sm3AAAAAElFTkSuQmCC);
+  }
+
+  .un .search_icon_image_white {
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 4px;
+    width: 22px;
+    height: 22px;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAGbSURBVDiNrdPPKwRxGMfxz3dDLeIqchAHxc1hD0qJXJWLvwD/AKf9H7i5uLk5UA5KEi6ShJtcuMjPQmxYZN4OO7t999mZ3Sk+t2fmeV49M98ZKSLAKLAMXAJ5IADugG1gBkhHzYWzAioudgE71M41MJ4IBjLAUwLUT7YqDHTHoB/AAbAL3Mbg09XgvQhwFmgqDgRB4IAx4Nz0vgNdFTCFg7LoYJXDaQWOzcxSFLxsmubiUG+4B/jyZnJAg4UvzGM11oJDYMUsNODDKUkdXv+pc+49CSxp39S+o5Skeq9+S4hKUt7UZU+akvTg1X1BELiEcK+pH8oqCr+pn5FaIpAGrryZAGgJ75UOb8bAZ8WmKvC8mdn07pXgNHBjGo+A7phNF6jMiIVdWExIWjXOt6R1FU4/H77TSUltpu9L0pBz7rAI222yEZskzQuQKXsVBp+i8JMkyWcUHgmHeCewGDba/AAbwHCI2J4SHvvNAnWS+iW1S2qWdC/pxDmX83oykrYk+V/Rq6SxODdxYjZ//jMcg6/9C+zhj8A60PQLjXJp3pMHoJgAAAAASUVORK5CYII=);
+  }
+
+
+', 
+', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+          ', 
+        ', 
+        ', 
+          ', 
+            ', 
+
+         ', 
+        ', 
+          ', 
+        ', 
+        ', 
+          ', 
+            ', 
+              Schools
+            ', 
+              Parenting Topics
+            ', 
+            ', 
+              ',  Schools ', 
+              ', \u25bc', 
+              ', 
+                ', Parenting', 
+              ', 
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                    ', 
+                ', 
+              ', 
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                    ', 
+                ', 
+              ', 
+            ', 
+          ', 
+        ', 
+        ', 
+          ', 
+            ', 
+
+              ', 
+                ', 
+                ', Parenting ', 
+                ', Parenting ', 
+                ', 
+                ', 
+                  ', 
+                    ', Raising kids ', 
+                    ', Raising kids ', 
+                    ', 
+                    ', 
+                      ', Parenting dilemmas', 
+                      ', Emotional smarts', 
+                      ', Health & development', 
+                      ', Smart strategies', 
+                      ', Early learning', 
+                    ', 
+                  ', 
+
+                  ', 
+                    ', Smart strategies ', 
+                    ', School life', 
+                    ', 
+                    ', 
+                      ', Finding the right school', 
+                      ', Education trends', 
+                      ', Road to college', 
+                    ', 
+                  ', 
+                  ', 
+                    ', Academics ', 
+                    ', Academics ', 
+                    ', 
+                    ', 
+                      ', Reading', 
+                      ', Math', 
+                      ', Writing', 
+                      ', Science', 
+                      ', Arts', 
+                      ', STEM', 
+                      ', Social studies', 
+                      ', Milestones', 
+                      ', State Test Guide', 
+                    ', 
+                  ', 
+
+                  ', 
+                    ', Learning issues ', 
+                    ', Learning issues ', 
+                    ', 
+                    ', 
+                      ', Learning disabilities', 
+                      ', Gifted', 
+                      ', Attention disorders', 
+                      ', Reading disorders', 
+                      ', Special needs', 
+                    ', 
+                  ', 
+                  ', Book lists', 
+                  ', Worksheets', 
+                ', 
+              ', 
+              ', 
+                ', Donate', 
+              ', 
+              ', En Español', 
+              ', Sign in', 
+              ', 
+                ', My account ', 
+                ', My account ', 
+                ', 
+                ', 
+                  ', Account settings', 
+                  ', Sign out', 
+                ', 
+              ', 
+              ', 
+                ', Featured',  ', 
+                ', Featured ', 
+                ', 
+                ', 
+                  ', Building character', 
+                  ', Road to college', 
+                  ', Parenting Cue Cards', 
+                  ', Emotional smarts', 
+                  ', Worksheets', 
+                ', 
+              ', 
+            ', 
+          ', 
+      ', 
+        ', 
+      ', 
+    ', 
+
+  ', 
+  ', 
+    ', 
+      ', 
+        ', FEATURED', 
+        ', Building character', 
+        ', Road to college', 
+        ', Parenting Cue Cards', 
+        ', Emotional smarts', 
+        ', Worksheets', 
+      ', 
+    ', 
+  ', 
+', 
+', 
+', 
+
+  function hasClass(el, className) {
+    if (el.classList)
+      return el.classList.contains(className)
+    else
+      return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
+  }
+
+  function addClass(el, className) {
+    if (el.classList)
+      el.classList.add(className)
+    else if (!hasClass(el, className)) el.className += " " + className
+  }
+
+  function removeClass(el, className) {
+    if (el.classList)
+      el.classList.remove(className)
+    else if (hasClass(el, className)) {
+      var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
+      el.className = el.className.replace(reg, ' ')
+    }
+  }
+  function toggleClass(el, className) {
+    if (el.classList) {
+      el.classList.toggle(className);
+    }
+  }
+  function toggleSearch(evt) {
+    console.log('here');
+    var menu = document.getElementsByClassName('search_bar');
+    var arrayLength = menu.length;
+    for (var i = 0; i < arrayLength; i++) {
+      console.log('loop ' + i);
+      if (hasClass(menu[i], 'search_hide_mobile')) {
+        console.log('if remove class');
+        removeClass(menu[i], 'search_hide_mobile')
+      }
+      else {
+        console.log('if add class');
+        addClass(menu[i], 'search_hide_mobile')
+      }
+    }
+  }
+  ;
+  function toggleNav(evt) {
+    var menu = document.getElementsByClassName('men);
+    var arrayLength = menu.length;
+    for (var i = 0; i < arrayLength; i++) {
+      console.log('loop ' + i);
+      if (hasClass(menu[i], 'menu_hide_mobile')) {
+        console.log('if remove class');
+        removeClass(menu[i], 'menu_hide_mobile')
+      } else {
+        console.log('if add class');
+        addClass(menu[i], 'menu_hide_mobile')
+      }
+    }
+  }
+  ;
+
+  GS = GS || {};
+
+  GS.navSearchBar = GS.navSearchBar || (function(){
+
+    var desktopSearchToggle = document.getElementsByClassName("js-desktop-search-toggle")[0];
+    var desktopSearchMenu = document.getElementsByClassName('js-desktop-search-men)[0];
+    var desktopSearchDropdownItem = document.getElementsByClassName("js-desktop-search-dropdown-item")[0];
+
+    var schoolSearchSelector = 'js-school-search';
+    var contentSearchSelector = 'js-content-search';
+
+    var toggleLink = document.getElementsByClassName('js-desktop-search-toggle-link')[0];
+    var dropdownItem = document.getElementsByClassName('js-desktop-search-dropdown-item')[0];
+    var schoolSearchForm = document.getElementsByClassName('js-nav-school-search-from')[0];
+    var contentSearchForm = document.getElementsByClassName('js-nav-content-search-form')[0];
+
+
+    var contentSearchInput = document.querySelector('.js-nav-content-search-input');
+    var schoolSearchMobileButton = document.getElementsByClassName('js-choose-school-search')[0];
+    var contentSearchMobileButton = document.getElementsByClassName('js-choose-content-search')[0];
+
+    var displaySearch = function(searchTypeSelector) {
+      var alternateSearchTypeSelector = getAlternateSearchTypeSelector(searchTypeSelector);
+      removeClass(toggleLink, alternateSearchTypeSelector);
+      addClass(toggleLink, searchTypeSelector);
+      toggleLinkAndDropdownItemText();
+      activateMobileSearchButton(searchTypeSelector);
+      toggleSearchForm(searchTypeSelector);
+    };
+
+    var toggleLinkAndDropdownItemText = function() {
+      var toggleText = toggleLink.innerHTML;
+      var dropdownItemText = dropdownItem.innerHTML;
+      toggleLink.innerHTML = dropdownItemText;
+      dropdownItem.innerHTML = toggleText;
+    };
+
+    var toggleSearchForm = function(searchTypeSelector) {
+      if(searchTypeSelector == schoolSearchSelector) {
+//          removeClass(schoolSearchForm, 'dn');
+//          addClass(contentSearchForm, 'dn');
+        ///////////////////////////////////////////////////////////////////
+        removeClass(contentSearchForm, 'search_bar_tc');
+          addClass(contentSearchForm, 'dn');
+        removeClass(schoolSearchForm, 'dn');
+        addClass(schoolSearchForm, 'search_bar_tc');
+      } else {
+          removeClass(contentSearchForm, 'dn');
+        addClass(contentSearchForm, 'search_bar_tc');
+        removeClass(schoolSearchForm, 'search_bar_tc');
+          addClass(schoolSearchForm, 'dn');
+      }
+    };
+
+    var activateMobileSearchButton = function(searchTypeSelector) {
+      deactivateMobileSearchButtons();
+      if(searchTypeSelector === schoolSearchSelector) {
+        addClass(schoolSearchMobileButton, 'active');
+      } else {
+        addClass(contentSearchMobileButton, 'active');
+      }
+    };
+
+    var getAlternateSearchTypeSelector = function(searchTypeSelector) {
+      if(searchTypeSelector === schoolSearchSelector) {
+        return contentSearchSelector;
+      } else {
+        return schoolSearchSelector;
+      }
+    };
+
+    var deactivateMobileSearchButtons = function() {
+      removeClass(schoolSearchMobileButton, 'active');
+      removeClass(contentSearchMobileButton, 'active');
+    };
+
+    var toggleDesktopSearchMenu = function(evt) {
+      if (hasClass(desktopSearchMenu, 'dn')) {
+        removeClass(desktopSearchMenu, 'dn');
+      } else {
+        addClass(desktopSearchMenu, 'dn');
+      }
+    };
+
+    var toggleSearchBar= function(evt) {
+      if (hasClass(toggleLink, 'js-school-search')) {
+        displaySearch(contentSearchSelector);
+      } else {
+        displaySearch(schoolSearchSelector);
+      }
+    };
+
+    var setDesktopSearchToggleMenuHandler = function() {
+      desktopSearchToggle.addEventListener("click", toggleDesktopSearchMenu, false);
+    };
+
+    var setDesktopSearchBarToggleHandler = function() {
+      desktopSearchDropdownItem.addEventListener("click", toggleSearchBar, false);
+    };
+
+    var setMobileChooseSearchButtonHandler = function() {
+      schoolSearchMobileButton.addEventListener("click", toggleSearchBar, false);
+    };
+
+    var setMobileChooseContentButtonHandler = function() {
+      contentSearchMobileButton.addEventListener("click", toggleSearchBar, false);
+    };
+
+   var initializeSearchBar = function() {
+        var pathName = window.location.pathname;
+        if ( shouldDisplayContentSearch(pathName) ) {
+          displaySearch(contentSearchSelector);
+        }
+    };
+
+   var shouldDisplayContentSearch = function(pathName) {
+     var gkRegex = /\/gk\//;
+     var homePage= '/';
+     var contentSearchDefaultPages = [
+          gkRegex,
+          homePage
+        ];
+
+        return contentSearchDefaultPages.some(function(arrVal) {
+          if (typeof(arrVal) === 'string') {
+            return arrVal === pathName;
+          } else {
+          return arrVal.test(pathName);
+          }
+        });
+    };
+
+    var setContentSearchBarSubmitHandler = function () {
+      contentSearchForm.addEventListener("submit", submitContentSearch, false);
+    };
+
+    var submitContentSearch = function (e) {
+      e.preventDefault();
+      var contentSearchText = contentSearchInput.value;
+      var sanitizedSearch = sanitizeString(contentSearchText);
+      window.location.href = '/gk/?s='+ sanitizedSearch;
+    };
+
+    var sanitizeString = function (string) {
+      var searchQuery = string;
+      var searchQueryTokenized = searchQuery.split(' ');
+      var sanitizedTokens = [];
+      for (var i = 0; i < searchQueryTokenized.length; i++) {
+        var tokenString = searchQueryTokenized[i];
+        sanitizedTokens.push(relevanssiRemovePunct(tokenString));
+      }
+      return sanitizedTokens.join('+');
+    };
+
+    var relevanssiRemovePunct  = function (contentSearchString) {
+
+      var searchString = contentSearchString;
+      searchString = searchString.replace(/<[^>]*>/, ' ');
+      searchString = searchString.replace("\r", '');    // --- replace with empty space
+      searchString = searchString.replace("\n", ' ');   // --- replace with space
+      searchString = searchString.replace("\t", ' ');   // --- replace with space
+      searchString = searchString.replace(/\\/g, '');   // --- replace backslash with nothing
+
+      searchString = searchString.replace('ß', 'ss');
+      searchString = searchString.replace("·", '');
+      searchString = searchString.replace("\u2026", '');
+      searchString = searchString.replace("\u20ac", '');
+      searchString = searchString.replace("&shy;", '');
+      searchString = searchString.replace("&nbsp;", ' ');
+      searchString = searchString.replace('&#8217;', ' ');
+      searchString = searchString.replace("'", '');
+      searchString = searchString.replace("\u2019", ' ');
+      searchString = searchString.replace("\u2018", ' ');
+      searchString = searchString.replace("\u201d", ' ');
+      searchString = searchString.replace("\u201c", ' ');
+      searchString = searchString.replace("\u201e", ' ');
+      searchString = searchString.replace("´", ' ');
+      searchString = searchString.replace("\u2014", ' ');
+      searchString = searchString.replace("\u2013", ' ');
+      searchString = searchString.replace("×", ' ');
+      searchString = searchString.replace("×", ' ');
+      searchString = searchString.replace(/[!"\#$%&'()*+\-./:;\[\\\]^_`{|}~]+/,""); // remove punctuation as best to mimic relevanssi punct
+      searchString = searchString.replace(/[ \t\r\n\v\f]/, " ");
+      searchString = searchString.trim();
+
+      return searchString;
+    };
+
+    var init = function() {
+      setDesktopSearchToggleMenuHandler();
+      setDesktopSearchBarToggleHandler();
+      setMobileChooseContentButtonHandler();
+      setMobileChooseSearchButtonHandler();
+      setContentSearchBarSubmitHandler();
+      initializeSearchBar();
+    };
+
+    return {
+      init: init
+    }
+
+  })()
+  ;
+
+  GS.navSearchBar.init();
+
+var mobileNavMenu = document.getElementsByClassName("menu-btn");
+mobileNavMenu[0].addEventListener("click", toggleNav, false);
+var mobileNavSearch = document.getElementsByClassName("search_icon_image");
+mobileNavSearch[0].addEventListener("click", toggleSearch, false);
+
+(function() {
+  menuItems = document.querySelectorAll('nav > ul li label');
+    numberOfItems = menuItems.length;
+    for(var i = 0; i < numberOfItems; i++) {
+      menuItems[i].onclick = function(e) {
+        var item = e.target;
+        toggleClass(item, 'open');
+      }
+    }
+  })();
+
+  function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+
+  var isSignedIn = function () {
+    return readCookie('community_www') != null || readCookie('community_dev') != null;
+  };
+
+  (function() {
+    if (isSignedIn()) {
+      var accountNavSignedIn = document.getElementsByClassName('account_nav_in')[0];
+      var accountNavSignedOut = document.getElementsByClassName('account_nav_out')[0];
+      removeClass(accountNavSignedIn, 'dn');
+      addClass(accountNavSignedOut, 'dn');
+    }
+
+  })();
+
+  (function() {
+    var featuredSection = document.querySelector('.js-featured');
+    var pathsWithoutNavSearch = ['/'];
+    var i = pathsWithoutNavSearch.length;
+    var matchesAnyPaths = false;
+    while(i--) {
+      if (pathsWithoutNavSearch[i] == window.location.pathname) {
+        matchesAnyPaths = true;
+      }
+    }
+    if(matchesAnyPaths == false) {
+      removeClass(featuredSection, 'dn');
+    }
+  })();
+
+  var getQueryParam = function(key, uri) {
+      var href = uri ? uri : window.location.href;
+      var reg = new RegExp( '[?&]' + key + '=([^&#]*)', 'i' );
+      var string = reg.exec(href);
+      return string ? string[1] : null;
+  };
+
+  // Add / Update a key-value pair in the URL query parameters
+  function updateUrlParameter(uri, key, value) {
+    // remove the hash part before operating on the uri
+    var i = uri.indexOf('#');
+    var hash = i === -1 ? ''  : uri.substr(i);
+    uri = i === -1 ? uri : uri.substr(0, i);
+
+    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+
+    if (!value) {
+      // remove key-value pair if value is empty
+      uri = uri.replace(new RegExp("([&]?)" + key + "=.*?(&|$)", "i"), '');
+      if (uri.slice(-1) === '?') {
+        uri = uri.slice(0, -1);
+      }
+    } else if (uri.match(re)) {
+      uri = uri.replace(re, '$1' + key + "=" + value + '$2');
+    } else {
+      uri = uri + separator + key + "=" + value;
+    }
+    return uri + hash;
+  }
+
+  var initLanguageLinkListener = function() {
+    var changeLanguageLink = document.querySelector('.jsChangeLanguageLink');
+    var lang = getQueryParam('lang');
+    if(lang == null || lang == 'en') {
+      changeLanguageLink.innerHTML = 'En Español';
+    } else {
+      changeLanguageLink.innerHTML = 'In English';
+    }
+
+    changeLanguageLink.onclick = function(e) {
+      var lang = getQueryParam('lang');
+      if(lang == null || lang == 'en') {
+        changeLanguageLink.href = updateUrlParameter(window.location.href, 'lang', 'es');
+      } else {
+        changeLanguageLink.href = updateUrlParameter(window.location.href, 'lang', '');
+      }
+      window.open(full_uri, '_self');
+    }
+  };
+  initLanguageLinkListener();
+
+  (function addLangToLinks() {
+    var navAnchors = document.querySelectorAll('body>.un a[href]');
+    var i = navAnchors.length;
+    while(i--) {
+      var anchor = navAnchors[i];
+      var href = anchor.href;
+      if(href != '#') {
+        var currentLangParam = getQueryParam('lang');
+        if (currentLangParam != null && currentLangParam != '' && currentLangParam != 'en') {
+          anchor.href = updateUrlParameter(href, 'lang', getQueryParam('lang'));
+        }
+      }
+    }
+  })();
+
+', 
+
+', 
+  
+', 
+', 
+  $(document).ready(function(){
+    $("#js-top-notification-bar").slideDown("slow");
+  });
+', 
+
+  ', 
+      <div class="flash_notice alert alert-{{bootstrapType}} alert-dismissable mbm">
+    {{message}}<button type="button" class="close" aria-hidden="true">×</button>
+  </div>
+
+  ', 
+
+
+', 
+    #js-top-notification-bar {
+        position: fixed;
+        top: 66px;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+', 
+
+
+', 
+  
+', 
+
+
+
+', 
+    ', 
+    ', 
+        
+          ', 
+            ', Arkansas', 
+          ', 
+         / 
+          ', Springdale', 
+    ', 
+  ', 
+
+  ', Springdale Schools', 
+
+
+  ', 
+
+    ', 
+      ', 
+        ', 
+          ', 
+            ', 5', out of 10', 
+            ', 
+              ', GreatSchools', 
+              ', City rating', 
+            ', 
+          ', 
+        ', 
+      ', 
+      ', u"
+        This city's rating is based on its schools' test results.
+        ", Learn more »', 
+      ', 
+
+      ', 
+        ', 
+          ', Browse schools in ', Springdale', 
+          ', 
+            ', 
+              ', Preschools', 
+            ', 
+            ', 
+              ', Elementary schools', 
+            ', 
+            ', 
+              ', Middle schools', 
+            ', 
+            ', 
+              ', High schools', 
+            ', 
+          ', 
+          ', 
+            ', 
+              ', 
+              ', Public district schools', 
+            ', 
+            ', 
+              ', Private schools', 
+            ', 
+            ', 
+              ', Public charter schools', 
+            ', 
+          ', 
+        ', 
+
+        ', 
+          ', 
+            ', View all schools', 
+',         ', 
+      ', 
+    ', 
+      ', 
+        ', 
+          
+
+
+
+     ', 
+', 
+  ', 
+      ', 
+  ', 
+        ', 
+        ', 
+            ADVERTISEMENT
+        ', 
+    ', 
+
+', 
+
+          
+
+
+
+     ', 
+', 
+  ', 
+      ', 
+  ', 
+        ', 
+        ', 
+            ADVERTISEMENT
+        ', 
+    ', 
+
+', 
+
+        ', 
+      ', 
+  ', 
+
+
+  
+
+
+  ', 
+    ', 
+      ', 
+      ', 
+          ', Top rated schools in ', Springdale', 
+      ', 
+    ', 
+      ', 
+            ', 
+              ', 
+    ', 
+      ', 
+        
+', 
+  ', 
+    ', 
+      10
+    ', 
+  ', 
+', 
+
+        ', 
+          ', Bernice Young Elementary School', 
+          ', 
+            ',  Springdale, AR', 
+            ', Public', 
+            ', |', 
+            ', K-5', 
+          ', 
+        ', 
+      ', 
+    ', 
+', 
+',             ', 
+              ', 
+    ', 
+      ', 
+        
+', 
+  ', 
+    ', 
+      9
+    ', 
+  ', 
+', 
+
+        ', 
+          ', Hellstern Middle School', 
+          ', 
+            ',  Springdale, AR', 
+            ', Public', 
+            ', |', 
+            ', 6-7', 
+          ', 
+        ', 
+      ', 
+    ', 
+', 
+',             ', 
+              ', 
+    ', 
+      ', 
+        
+', 
+  ', 
+    ', 
+      9
+    ', 
+  ', 
+', 
+
+        ', 
+          ', Central Junior High School', 
+          ', 
+            ',  Springdale, AR', 
+            ', Public', 
+            ', |', 
+            ', 8-9', 
+          ', 
+        ', 
+      ', 
+    ', 
+', 
+',             ', 
+              ', 
+    ', 
+      ', 
+        
+', 
+  ', 
+    ', 
+      9
+    ', 
+  ', 
+', 
+
+        ', 
+          ', Hunt Elementary School', 
+          ', 
+            ',  Springdale, AR', 
+            ', Public', 
+            ', |', 
+            ', PK-5', 
+          ', 
+        ', 
+      ', 
+    ', 
+', 
+',       ', 
+  ', 
+
+
+
+      ', 
+        
+
+
+
+     ', 
+', 
+  ', 
+      ', 
+  ', 
+        ', 
+        ', 
+            ADVERTISEMENT
+        ', 
+    ', 
+
+', 
+
+        
+
+
+
+     ', 
+', 
+  ', 
+      ', 
+  ', 
+        ', 
+        ', 
+            ADVERTISEMENT
+        ', 
+    ', 
+
+', 
+
+      ', 
+
+
+  ', 
+
+        ', 
+      ', 
+        ', Largest Districts in ', Springdale', 
+            ', 
+              ', 
+              ', 
+              ', 
+                ', Springdale School District', 
+                ', Springdale, AR',  | 26 schools
+              ', 
+            ', 
+      ', 
+    ', 
+
+
+    ', 
+      ', Nearby homes for sale', 
+           
+     
+     
+
+
+     ', 
+        ', u" Your browser doesn't support frames. Please visit ", Zillow Home Page',  to see this content.
+        ', 
+        ', 
+            ', Browse on Zillow', 
+            ', 
+        ', 
+    ', 
+', 
+', u"
+    (function() {
+        var gs_isOverIFrame = false;
+        function processMouseOut() {
+            gs_isOverIFrame = false;
+        }
+        function processMouseOver() {
+            gs_isOverIFrame = true;
+        }
+        function processIFrameClick() {
+            if(gs_isOverIFrame) {
+                if (typeof(window.s) !== 'undefined' && s.tl) {
+                    s.tl(true, 'o', 'Zillow_Widget_'+gon.pagename);
+                }
+            }
+        }
+        var element = jQuery('#js-zillow').find('iframe');
+        element.on('mouseover', processMouseOver);
+        element.on('mouseout', processMouseOut);
+        if (typeof window.attachEvent != 'undefined') {
+            top.attachEvent('onblur', processIFrameClick);
+        }
+        else if (typeof window.addEventListener != 'undefined') {
+            top.addEventListener('blur', processIFrameClick, false);
+        }
+    })();
+", 
+
+    ', 
+  ', 
+
+  ', 
+    ', 
+        ', 
+          
+
+
+
+     ', 
+', 
+  ', 
+      ', 
+  ', 
+        ', 
+        ', 
+            ADVERTISEMENT
+        ', 
+    ', 
+
+', 
+
+          
+
+
+
+     ', 
+', 
+  ', 
+      ', 
+  ', 
+        ', 
+        ', 
+            ADVERTISEMENT
+        ', 
+    ', 
+
+', 
+
+        ', 
+    ', 
+  ', 
+
+
+
+
+  
+
+  ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+              ', Get our best articles, worksheets, and more delivered weekly to your inbox', 
+              ', Sign up', 
+          ', 
+        ', 
+      ', 
+    ', 
+    ', 
+      ', 
+        ', Sign up for email updates', 
+        ', 
+          ', Sign up', 
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+
+', 
+
+
+', 
+  ', 
+', 
+
+', Top', 
+
+', 
+  ', 
+    ', 
+      ', 
+        ', Empowering parents', 
+        ', GreatSchools is the leading national nonprofit empowering parents to unlock educational opportunities for their children. We provide school information and parenting resources to help millions of American families choose the right school, support learning at home, and guide their children to great futures.', 
+        ', 
+        ', Support GreatSchools in this effort! ', Donate Now!', 
+      ', 
+      ', 
+        ', 
+          ', 
+            ', Join us', 
+            ', 
+                ', 
+                  ', Supporters', 
+                ', 
+                ', 
+                  ', Licensing', 
+                ', 
+                ', 
+                  ', Sponsorship', 
+                ', 
+                ', 
+                  ', Advertising', 
+                ', 
+                ', 
+                  ', Careers', 
+                ', 
+            ', 
+          ', 
+          ', 
+            ', Learn more', 
+            ', 
+              ', Newsletter', 
+                ', 
+                  ', Privacy policy', 
+                ', 
+                ', 
+                  ', Terms of use', 
+                ', 
+                ', 
+                  ', About us', 
+                ', 
+                ', 
+                  ', Contact us', 
+                ', 
+            ', 
+          ', 
+          ', 
+            ', Connect', 
+            ', 
+                ', 
+                  ', 
+                    ', Facebook', 
+',                 ', 
+                ', 
+                  ', 
+                    ', Twitter', 
+',                 ', 
+                ', 
+                  ', 
+                    ', Pinterest', 
+',                 ', 
+                ', 
+                  ', 
+                    ', YouTube', 
+',                 ', 
+                ', 
+                  ', 
+                    ', Instagram', 
+',                 ', 
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+  ', 
+    ', 
+  ', ©1998-2017 GreatSchools.org All Rights Reserved. GreatSchools is a 501(c)(3) not-for-profit organization
+       | ', Ad Choices ', 
+  ', 
+', 
+
+  ', 
+', 
+
+
+', 
+', 
+'][
+', u"
+  dataLayer.push(gon.data_layer_hash);
+
+  (function() {
+    var gaCookie = {};
+    var cval = $.cookie('GATracking');
+    if (!(_.isEmpty(cval))) {
+      try {
+        gaCookie = JSON.parse(cval);
+      } catch (e) {
+        GS.util.log('Error parsing GA tracking cookie');
+      }
+    }
+    if (gaCookie.events) {
+      $.each(gaCookie.events, function(_, event) {
+        if (event.category && event.action) {
+          var gaEvent = {
+            'event': 'analyticsEvent',
+            'eventCategory': event.category,
+            'eventAction': event.action,
+            'eventLabel': event.label,
+            'eventValue': event.value,
+            'eventNonInt': event.non_interactive
+          };
+          dataLayer.push(gaEvent);
+        }
+      });
+    }
+
+    $.removeCookie('GATracking', {domain: '.greatschools.org', path: '/'});
+    $.removeCookie('GATracking', {path: '/'});
+  })();
+", 
+', 
+
+', 
+  ', 
+  ', 
+  ', u"(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-KBSN4P');", 
+  ', 
+
+', 
+   .un .clearfix:after {
+    content: " "; /* Older browser do not support empty content */
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+  }
+
+  .un div.dn {
+    display: none;
+  }
+
+  .un .visible-xs {
+    display: none !important;
+  }
+
+  .un {
+    font-family: "opensans-semibold", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    display: table;
+    margin: auto;
+    max-width: 1200px;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    line-height: 28px;
+    color: #585859;
+  }
+
+  .un ul {
+    letter-spacing: normal;
+  }
+
+   .un .dt-desktop {
+    display: table;
+     width: 100%;
+  }
+
+  .un .tr {
+    display: table-row;
+  }
+
+  .un .tc {
+    display: table-cell;
+  }
+
+  .un .logo {
+    /*background-color: #00FF00;*/
+    padding: 10px;
+    display: table-cell;
+  }
+
+   .un .logo_size {
+     width: 112px;
+     height: 47px;
+   }
+
+  .un .search_bar {
+    width: 100%;
+    /*background-color: #0000FF;*/
+    padding: 2px 20px;
+    vertical-align: middle;
+  }
+
+  .un .navigation {
+    display: table-cell;
+    /*background-color: #FF0000;*/
+    padding: 0px 20px;
+    vertical-align: middle;
+  }
+
+  .un .menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+  }
+
+  .un .menu_hide_mobile {
+    display: block;
+  }
+
+  .un .search_hide_mobile {
+    display: table-cell;
+  }
+
+  .un ul.menu li {
+    margin: 0px;
+    display: inline;
+  }
+
+  .un ul.menu li.dn {
+    display: none;
+  }
+
+  .un ul.menu li.featured_visible_mobile {
+    display: none;
+  }
+
+  .un ul.menu li a {
+    text-decoration: none;
+  }
+
+  .un ul.featured li a {
+    font-size: 13px;
+    padding-top: 14px;
+    color: #26abe2;
+    font-family: "opensans-semibold", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    padding-right: 20px;
+  }
+
+  .un ul.featured li a:hover {
+    color: #666666;
+  }
+
+  .un ul.featured {
+    margin-left: 162px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+  }
+
+  .un ul.featured .title {
+    padding-left: 10px;
+    font-size: 12px;
+    padding-top: 17px;
+    padding-right: 20px;
+  }
+
+  .un .search_form_field {
+    height: 46px;
+    font: normal 14px/20px 'opensans-regular', Arial, Helvetica, sans-serif;
+    color: #666;
+    padding-left: 8px;
+    vertical-align: middle;
+    border: 1px solid #b8b8b8;
+    border-left: none;
+  }
+
+  .un .search_form_button {
+    height: 44px;
+    vertical-align: middle;
+    color: white;
+    background-color: #26abe2;
+    border-color: #26abe2;;
+    border-bottom-width: 3px;
+    border-top: #26abe2;;
+    border-right: #26abe2;;
+    border-left: #26abe2;;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    font-family: "opensans-bold", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+    padding: 8px 20px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -webkit-user-select: none;
+  }
+
+  .un .toggle, [id^=drop] {
+    display: none;
+  }
+
+   .header_un {
+    width: 100%;
+    background-color: #FFFFFF;
+  }
+
+  /* menu */
+
+   .header_un .menu {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+  }
+
+  /* menu icon */
+
+   .header_un .menu-icon {
+    cursor: pointer;
+    /*display: inline-block;*/
+    /*float: right;*/
+    padding: 0px;
+    vertical-align: middle;
+    position: absolute;
+    user-select: none;
+    height: 20px;
+    width: 20px;
+    top: 12px;
+  }
+
+   .header_un .menu-icon .navicon {
+    background: #333;
+    display: block;
+    height: 2px;
+    position: absolute;
+    transition: background .2s ease-out;
+    width: 18px;
+    top: 10px;
+  }
+
+   .header_un .menu-icon .navicon:before,
+   .header_un .menu-icon .navicon:after {
+    background: #333;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+  }
+
+   .header_un .menu-icon .navicon:before {
+    top: 5px;
+  }
+
+   .header_un .menu-icon .navicon:after {
+    top: -5px;
+  }
+
+  /* menu btn */
+   .header_un .menu-btn {
+    display: none;
+  }
+
+   .header_un .menu-btn:checked ~ .menu {
+    max-height: 240px;
+  }
+
+   .header_un .menu-btn:checked ~ .menu-icon .navicon {
+    background: transparent;
+  }
+
+   .header_un .menu-btn:checked ~ .menu-icon .navicon:before {
+    transform: rotate(-45deg);
+  }
+
+   .header_un .menu-btn:checked ~ .menu-icon .navicon:after {
+    transform: rotate(45deg);
+  }
+
+   .header_un .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+   .header_un .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+    top: 0;
+  }
+
+  .un .search_bar_size {
+    width: 100%;
+  }
+
+  .un .search_icon {
+    display: none;
+  }
+
+   .un nav {
+    margin: 0;
+    padding: 0;
+    /*background-color: #FFFFFF;*/
+  }
+
+   .un nav:after {
+    content: "";
+    /*display: table;*/
+    clear: both;
+  }
+
+   .un nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    width: 470px;
+
+  }
+
+   .un nav ul li {
+    margin: 0px;
+    display: inline-block;
+    float: left;
+    /*background-color: #FFFFFF;*/
+  }
+
+   .un nav a {
+    font-family: "opensans-semibold", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    display: block;
+    padding: 0px 20px;
+    color: #585859;
+    font-size: 14px;
+    line-height: 28px;
+    text-decoration: none;
+  }
+
+   .un nav a:hover {
+    background-color: #EEEEEE;
+  }
+
+  li > label {
+    margin-bottom: 0px;
+  }
+
+   .un li > a:after {
+    content: ' \25BC';
+    font-size: 8px;
+    color: #666;
+    vertical-align: middle;
+  }
+   .un li > a:hover:after {
+    color: #167ba5;
+  }
+
+   .un li li > a:after {
+    content: ' \203A';
+    font-size: 24px;
+    float: right;
+    color: #CCCCDD;
+  }
+
+   .un li.open li > a:hover:after {
+    font-size: 24px;
+    float: right;
+    color: #167ba5;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+
+   .un nav > ul > li > a {
+    padding: 5px 16px;
+    text-transform: uppercase;
+  }
+
+   .un li > label:after {
+    content: ' \203A';
+    font-size: 24px;
+    float: right;
+    color: #CCCCDD;
+  }
+
+
+  .un label.open:after {
+    font-size: 24px;
+    float: right;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+
+
+   .un li > a:only-child:after {
+    content: '';
+  }
+
+   .un nav ul li ul li:hover {
+    background: #FFFFFF;
+  }
+
+   .un nav ul ul {
+    display: none;
+    position: absolute;
+    border: 1px solid #EEEEEE;
+    background-color: #FFFFFF;
+    width: 150px;
+     z-index: 5;
+    /*border-bottom: none;*/
+  }
+
+   .un nav ul ul a {
+    font-family: "opensans-regular", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    padding: 5px 10px;
+  }
+
+   .un nav ul li:hover > ul {
+    display: inherit;
+  }
+
+   .un nav ul ul li {
+    width: 150px;
+    float: none;
+    display: list-item;
+    position: relative;
+    border-bottom: 1px solid #0000DD;
+  }
+
+   .un nav ul ul ul {
+    position: absolute;
+    /*background-color: #FFFFFF;*/
+    top: -39px;
+    left: 148px;
+    width: 180px;
+  }
+
+   .un nav ul ul ul li:hover {
+    background-color: #0000FF;
+    /*position: relative;*/
+    /*top: -60px;*/
+    /*left: 135px;*/
+  }
+
+  .un .search_bar_size {
+    display: table-cell;
+  }
+
+  .un .search_bar_button {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .un .mobile-toggle-button {
+    display: inline-block;
+    width: 50%;
+    height: 46px;
+    border: solid #b8b8b8;
+    border-width: 1px 1px 0px 0px;
+    background-color: white;
+    color: darkgrey;
+    padding: 10px 0px;
+    border-top-right-radius: 4px;
+  }
+
+  .un .mobile-toggle-button:first-of-type {
+    border-left: 1px solid grey;
+    border-top-right-radius: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 0;
+  }
+
+  .un .mobile-toggle-button:last-of-type {
+    border-bottom-right-radius: 0px;
+  }
+
+  .un .mobile-toggle-button.active {
+    background-color: #1e77a7;
+    color: white;
+  }
+
+  .un .desktop-search-toggle {
+    vertical-align: middle;
+    padding: 0 10px;
+    position: relative;
+    border-right: 1px solid #b8b8b8;
+    border-left: 1px solid #b8b8b8;
+    border-top: 1px solid #b8b8b8;
+    border-bottom: 1px solid #b8b8b8;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    min-width: 100px;
+    cursor: pointer;
+  }
+
+  .un .desktop-search-toggle a,
+  .un .desktop-search-toggle a:hover {
+    font-family: "opensans-semibold", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    text-decoration: none;
+    color: #585859;
+  }
+
+  .un .desktop-search-toggle:hover .desktop-search-menu{
+    display: inherit;
+    border-top: 0px;
+    }
+
+  .un .desktop-search-toggle:hover {
+    border-bottom-left-radius: 0;
+  }
+
+  .un .desktop-toggle-search-arrow {
+    font-size: 8px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  .un .desktop-search-menu  {
+    display: none;
+    position: absolute;
+    top: 44px;
+    left: -1px;
+    z-index: 1000;
+    float: left;
+    min-width: 100px;
+    padding: 9px 0;
+    margin: 0 0;
+    height: 40px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #b8b8b8;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  .un .desktop-search-menu:hover {
+    background-color: #eee;
+  }
+
+  .un .dropdown-item {
+    text-decoration: none; 
+    display: block;
+    width: 100%;
+    padding: 0 10px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: inherit;
+    white-space: nowrap;
+    background: 0 0;
+    border: 0;
+  }
+
+   .un .logo_size {
+     width: 95px;
+     height: 40px;
+   }
+
+  /* Media Queries
+  --------------------------------------------- */
+
+  @media all and (max-width: 767px) {
+    .un {
+      display: block;
+    }
+
+    .un .logo_size {
+      width: 60px;
+      height: 25px;
+    }
+
+    .un .tr {
+      display: block;
+    }
+
+    .un .tc {
+      display: block;
+    }
+
+    .un .menu_hide_mobile {
+      display: none;
+    }
+
+    .un .menu_layout_mobile {
+      padding-left: 10px;
+      width: 30px;
+      height: 5px;
+      text-align: left;
+      vertical-align: middle;
+      display: table-cell
+    }
+    .un .search_hide_mobile {
+      display: none;
+    }
+
+    .un .navigation {
+      /*float:left;*/
+      padding: 0px;
+      width: 100%;
+    }
+
+    .un .search_icon {
+      display: table-cell;
+      text-align: right;
+      padding-right: 10px;
+      padding-top: 10px;
+      vertical-align: middle;
+    }
+
+    .un nav {
+      margin: 0;
+      /*clear:both;*/
+    }
+
+    .un .toggle + a {
+      display: none;
+    }
+
+    .un .toggle {
+      display: block;
+      /*background-color: #FFFFFF;*/
+      padding: 5px 17px;
+      color: #585859;
+      font-size: 14px;
+      line-height: 28px;
+      text-decoration: none;
+      /*width: 100%;*/
+    }
+
+    .un nav .toggle:hover {
+      background-color: #EEEEEE;
+      color: #167ba5;
+    }
+
+    .un nav .toggle:hover:after {
+      color: #167ba5;
+    }
+
+    .un [id^=drop]:checked + ul {
+      display: block;
+    }
+
+    .un nav ul {
+      width: 100%;
+    }
+
+    .un nav ul li {
+      display: block;
+      width: 100%;
+      font: 13px "opensans-regular", Arial, "Helvetica Neue", Helvetica, sans-serif;
+      position: relative;
+      border-top: 1px solid #EEEEEE;
+    }
+    .un nav ul li:last-of-type {
+      border-bottom: 1px solid #EEEEEE;
+    }
+
+    .un nav ul ul .toggle,
+    .un nav ul ul a {
+      padding: 5px 20px 5px 40px;
+      width: 100%;
+    }
+
+    .un nav ul ul ul a {
+      background-color: #FFFFFF;
+      padding: 0 60px;
+    }
+
+    .un nav ul ul ul a:hover {
+      background-color: #fff;
+    }
+
+    .un nav ul li ul li .toggle,
+    .un nav ul ul a {
+      background-color: #FFFFFF;
+      position: relative;
+    }
+
+    .un nav ul ul {
+      float: none;
+      top: 0px;
+      border: none;
+      color: #ffffff;
+      position: relative;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .un nav ul ul li:hover > ul,
+    .un nav ul li:hover > ul {
+      display: none;
+    }
+
+    .un nav ul ul li {
+      display: block;
+      width: 100%;
+      position: relative;
+    }
+
+    .un nav ul ul ul li {
+      /*position: static;*/
+      position: relative;
+
+    }
+
+    .un nav ul ul ul {
+      position: relative;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 48em) {
+    .header_un .menu-icon {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .nav-padding {
+      padding-top: 49px;
+    }
+
+    .un .visible-xs {
+      display: block !important;
+    }
+
+    .un .hidden-xs {
+      display: none !important;
+    }
+
+    /*.search_bar{width:auto; margin-bottom: 10px}*/
+    .un .search_form_field {
+      /*width:80%;*/
+
+    }
+
+    .header_un {
+      position: fixed;
+      background: #ffffff;
+      z-index: 4;
+      border-bottom: solid 1px #EEEEEE;
+    }
+
+    .un .search_bar {
+      width: auto;
+      padding-bottom: 10px;
+    }
+
+    .un ul.menu li.featured_visible_mobile {
+      display: inline;
+    }
+
+    .un .logo {
+      width: 100%;
+      text-align: center;
+      padding-left: 30px;
+    }
+
+    .un .search_form_field {
+      border: 1px solid #b8b8b8;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 4px;
+    }
+
+    .un .search_form_button {
+      border-top-right-radius: 0px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    .un .hidden-sm {
+      display: none !important;
+    }
+    .un nav ul {
+      width: 270px;
+    }
+    .un nav > ul > li > ul {
+      margin-left:-25px;
+      width: 145px;
+    }
+    .un nav > ul ul ul {
+      width: 145px;
+      left: 143px;
+    }
+
+    .un .search_form_field {
+      /*width:200px;*/
+
+    }
+  }
+
+  @media (min-width: 768px) {
+    .un .mobile-toggle-button {
+      display: none;
+    }
+
+    .un .search_bar_tc {
+      display: table-cell;
+    }
+  }
+
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .un .hidden-md {
+      display: none !important;
+    }
+
+    .un .search_form_field {
+      /*width:300px;*/
+
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .un .hidden-lg {
+      display: none !important;
+    }
+  }
+
+  .un .search_icon_image {
+    cursor: pointer;
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAnNwAAJzcBVAXW8gAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAHwSURBVEiJrdSxalRREAbgbzeboCSkUImNCViFDSSgKJhGbexVhDyAIBb6AIKt6BNYSKo0NoKIdcBWU0REdE1lEZCwqxKIcYVktTjnsmf33ru7YP5q5t45/8z5Z85U5DGBK7iIOUxjHzvYxDp+FpzLodLnn8MdnBxw5g9e4NUw8rHEvob7mOyL2cN4UkgNSziNd4PIa0nFt1GNfhNraGAXx3AWK1iIMZfxHc8HVT6Bh0nFb/EIXwUJ4AAtvIn2Yvw+j41YQA5VXNXVuImn+F16V17GArLz18sCq7iQ+GtDiDOsohPt83p710M+l/iNEYgJMnyL9nHMlJFPR3tPiXYl2E7sqTLy/WhPClMxKk4ldmlDd6JdEcZtFNQwG+1skgrJNxN/ZUTym8IIwwfd5ubI13XneQE3hhDX+2JelwWOoR0zL8Vvi8IEfUqSEqS4hbu6o9cRHlahLOniuic86QwdYdy2hebN6kqRoo3H+FxUeYaNWN18TFoRxvQMTvTFdvQusmXhjfTcoP9lfYxJpmK148m/A7zHM0GKZd3FlyX4IqwQ5Pd5f+KZmGg3VpVORR0P9L6NNp4I/SreCRF/hVf7A7+in6IlSFF0gy00B5GPgpYgxaWCBI3/JSdovCV/g/pRkJclODwq8ixBQ2j0IVb/Af8qaEu81sm3AAAAAElFTkSuQmCC);
+  }
+
+  .un .search_icon_image_white {
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 4px;
+    width: 22px;
+    height: 22px;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAGbSURBVDiNrdPPKwRxGMfxz3dDLeIqchAHxc1hD0qJXJWLvwD/AKf9H7i5uLk5UA5KEi6ShJtcuMjPQmxYZN4OO7t999mZ3Sk+t2fmeV49M98ZKSLAKLAMXAJ5IADugG1gBkhHzYWzAioudgE71M41MJ4IBjLAUwLUT7YqDHTHoB/AAbAL3Mbg09XgvQhwFmgqDgRB4IAx4Nz0vgNdFTCFg7LoYJXDaQWOzcxSFLxsmubiUG+4B/jyZnJAg4UvzGM11oJDYMUsNODDKUkdXv+pc+49CSxp39S+o5Skeq9+S4hKUt7UZU+akvTg1X1BELiEcK+pH8oqCr+pn5FaIpAGrryZAGgJ75UOb8bAZ8WmKvC8mdn07pXgNHBjGo+A7phNF6jMiIVdWExIWjXOt6R1FU4/H77TSUltpu9L0pBz7rAI222yEZskzQuQKXsVBp+i8JMkyWcUHgmHeCewGDba/AAbwHCI2J4SHvvNAnWS+iW1S2qWdC/pxDmX83oykrYk+V/Rq6SxODdxYjZ//jMcg6/9C+zhj8A60PQLjXJp3pMHoJgAAAAASUVORK5CYII=);
+  }
+
+
+', 
+', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+          ', 
+        ', 
+        ', 
+          ', 
+            ', 
+
+         ', 
+        ', 
+          ', 
+        ', 
+        ', 
+          ', 
+            ', 
+              Schools
+            ', 
+              Parenting Topics
+            ', 
+            ', 
+              ',  Schools ', 
+              ', \u25bc', 
+              ', 
+                ', Parenting', 
+              ', 
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                    ', 
+                ', 
+              ', 
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                    ', 
+                ', 
+              ', 
+            ', 
+          ', 
+        ', 
+        ', 
+          ', 
+            ', 
+
+              ', 
+                ', 
+                ', Parenting ', 
+                ', Parenting ', 
+                ', 
+                ', 
+                  ', 
+                    ', Raising kids ', 
+                    ', Raising kids ', 
+                    ', 
+                    ', 
+                      ', Parenting dilemmas', 
+                      ', Emotional smarts', 
+                      ', Health & development', 
+                      ', Smart strategies', 
+                      ', Early learning', 
+                    ', 
+                  ', 
+
+                  ', 
+                    ', Smart strategies ', 
+                    ', School life', 
+                    ', 
+                    ', 
+                      ', Finding the right school', 
+                      ', Education trends', 
+                      ', Road to college', 
+                    ', 
+                  ', 
+                  ', 
+                    ', Academics ', 
+                    ', Academics ', 
+                    ', 
+                    ', 
+                      ', Reading', 
+                      ', Math', 
+                      ', Writing', 
+                      ', Science', 
+                      ', Arts', 
+                      ', STEM', 
+                      ', Social studies', 
+                      ', Milestones', 
+                      ', State Test Guide', 
+                    ', 
+                  ', 
+
+                  ', 
+                    ', Learning issues ', 
+                    ', Learning issues ', 
+                    ', 
+                    ', 
+                      ', Learning disabilities', 
+                      ', Gifted', 
+                      ', Attention disorders', 
+                      ', Reading disorders', 
+                      ', Special needs', 
+                    ', 
+                  ', 
+                  ', Book lists', 
+                  ', Worksheets', 
+                ', 
+              ', 
+              ', 
+                ', Donate', 
+              ', 
+              ', En Español', 
+              ', Sign in', 
+              ', 
+                ', My account ', 
+                ', My account ', 
+                ', 
+                ', 
+                  ', Account settings', 
+                  ', Sign out', 
+                ', 
+              ', 
+              ', 
+                ', Featured',  ', 
+                ', Featured ', 
+                ', 
+                ', 
+                  ', Building character', 
+                  ', Road to college', 
+                  ', Parenting Cue Cards', 
+                  ', Emotional smarts', 
+                  ', Worksheets', 
+                ', 
+              ', 
+            ', 
+          ', 
+      ', 
+        ', 
+      ', 
+    ', 
+
+  ', 
+  ', 
+    ', 
+      ', 
+        ', FEATURED', 
+        ', Building character', 
+        ', Road to college', 
+        ', Parenting Cue Cards', 
+        ', Emotional smarts', 
+        ', Worksheets', 
+      ', 
+    ', 
+  ', 
+', 
+', 
+', 
+
+  function hasClass(el, className) {
+    if (el.classList)
+      return el.classList.contains(className)
+    else
+      return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
+  }
+
+  function addClass(el, className) {
+    if (el.classList)
+      el.classList.add(className)
+    else if (!hasClass(el, className)) el.className += " " + className
+  }
+
+  function removeClass(el, className) {
+    if (el.classList)
+      el.classList.remove(className)
+    else if (hasClass(el, className)) {
+      var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
+      el.className = el.className.replace(reg, ' ')
+    }
+  }
+  function toggleClass(el, className) {
+    if (el.classList) {
+      el.classList.toggle(className);
+    }
+  }
+  function toggleSearch(evt) {
+    console.log('here');
+    var menu = document.getElementsByClassName('search_bar');
+    var arrayLength = menu.length;
+    for (var i = 0; i < arrayLength; i++) {
+      console.log('loop ' + i);
+      if (hasClass(menu[i], 'search_hide_mobile')) {
+        console.log('if remove class');
+        removeClass(menu[i], 'search_hide_mobile')
+      }
+      else {
+        console.log('if add class');
+        addClass(menu[i], 'search_hide_mobile')
+      }
+    }
+  }
+  ;
+  function toggleNav(evt) {
+    var menu = document.getElementsByClassName('men);
+    var arrayLength = menu.length;
+    for (var i = 0; i < arrayLength; i++) {
+      console.log('loop ' + i);
+      if (hasClass(menu[i], 'menu_hide_mobile')) {
+        console.log('if remove class');
+        removeClass(menu[i], 'menu_hide_mobile')
+      } else {
+        console.log('if add class');
+        addClass(menu[i], 'menu_hide_mobile')
+      }
+    }
+  }
+  ;
+
+  GS = GS || {};
+
+  GS.navSearchBar = GS.navSearchBar || (function(){
+
+    var desktopSearchToggle = document.getElementsByClassName("js-desktop-search-toggle")[0];
+    var desktopSearchMenu = document.getElementsByClassName('js-desktop-search-men)[0];
+    var desktopSearchDropdownItem = document.getElementsByClassName("js-desktop-search-dropdown-item")[0];
+
+    var schoolSearchSelector = 'js-school-search';
+    var contentSearchSelector = 'js-content-search';
+
+    var toggleLink = document.getElementsByClassName('js-desktop-search-toggle-link')[0];
+    var dropdownItem = document.getElementsByClassName('js-desktop-search-dropdown-item')[0];
+    var schoolSearchForm = document.getElementsByClassName('js-nav-school-search-from')[0];
+    var contentSearchForm = document.getElementsByClassName('js-nav-content-search-form')[0];
+
+
+    var contentSearchInput = document.querySelector('.js-nav-content-search-input');
+    var schoolSearchMobileButton = document.getElementsByClassName('js-choose-school-search')[0];
+    var contentSearchMobileButton = document.getElementsByClassName('js-choose-content-search')[0];
+
+    var displaySearch = function(searchTypeSelector) {
+      var alternateSearchTypeSelector = getAlternateSearchTypeSelector(searchTypeSelector);
+      removeClass(toggleLink, alternateSearchTypeSelector);
+      addClass(toggleLink, searchTypeSelector);
+      toggleLinkAndDropdownItemText();
+      activateMobileSearchButton(searchTypeSelector);
+      toggleSearchForm(searchTypeSelector);
+    };
+
+    var toggleLinkAndDropdownItemText = function() {
+      var toggleText = toggleLink.innerHTML;
+      var dropdownItemText = dropdownItem.innerHTML;
+      toggleLink.innerHTML = dropdownItemText;
+      dropdownItem.innerHTML = toggleText;
+    };
+
+    var toggleSearchForm = function(searchTypeSelector) {
+      if(searchTypeSelector == schoolSearchSelector) {
+//          removeClass(schoolSearchForm, 'dn');
+//          addClass(contentSearchForm, 'dn');
+        ///////////////////////////////////////////////////////////////////
+        removeClass(contentSearchForm, 'search_bar_tc');
+          addClass(contentSearchForm, 'dn');
+        removeClass(schoolSearchForm, 'dn');
+        addClass(schoolSearchForm, 'search_bar_tc');
+      } else {
+          removeClass(contentSearchForm, 'dn');
+        addClass(contentSearchForm, 'search_bar_tc');
+        removeClass(schoolSearchForm, 'search_bar_tc');
+          addClass(schoolSearchForm, 'dn');
+      }
+    };
+
+    var activateMobileSearchButton = function(searchTypeSelector) {
+      deactivateMobileSearchButtons();
+      if(searchTypeSelector === schoolSearchSelector) {
+        addClass(schoolSearchMobileButton, 'active');
+      } else {
+        addClass(contentSearchMobileButton, 'active');
+      }
+    };
+
+    var getAlternateSearchTypeSelector = function(searchTypeSelector) {
+      if(searchTypeSelector === schoolSearchSelector) {
+        return contentSearchSelector;
+      } else {
+        return schoolSearchSelector;
+      }
+    };
+
+    var deactivateMobileSearchButtons = function() {
+      removeClass(schoolSearchMobileButton, 'active');
+      removeClass(contentSearchMobileButton, 'active');
+    };
+
+    var toggleDesktopSearchMenu = function(evt) {
+      if (hasClass(desktopSearchMenu, 'dn')) {
+        removeClass(desktopSearchMenu, 'dn');
+      } else {
+        addClass(desktopSearchMenu, 'dn');
+      }
+    };
+
+    var toggleSearchBar= function(evt) {
+      if (hasClass(toggleLink, 'js-school-search')) {
+        displaySearch(contentSearchSelector);
+      } else {
+        displaySearch(schoolSearchSelector);
+      }
+    };
+
+    var setDesktopSearchToggleMenuHandler = function() {
+      desktopSearchToggle.addEventListener("click", toggleDesktopSearchMenu, false);
+    };
+
+    var setDesktopSearchBarToggleHandler = function() {
+      desktopSearchDropdownItem.addEventListener("click", toggleSearchBar, false);
+    };
+
+    var setMobileChooseSearchButtonHandler = function() {
+      schoolSearchMobileButton.addEventListener("click", toggleSearchBar, false);
+    };
+
+    var setMobileChooseContentButtonHandler = function() {
+      contentSearchMobileButton.addEventListener("click", toggleSearchBar, false);
+    };
+
+   var initializeSearchBar = function() {
+        var pathName = window.location.pathname;
+        if ( shouldDisplayContentSearch(pathName) ) {
+          displaySearch(contentSearchSelector);
+        }
+    };
+
+   var shouldDisplayContentSearch = function(pathName) {
+     var gkRegex = /\/gk\//;
+     var homePage= '/';
+     var contentSearchDefaultPages = [
+          gkRegex,
+          homePage
+        ];
+
+        return contentSearchDefaultPages.some(function(arrVal) {
+          if (typeof(arrVal) === 'string') {
+            return arrVal === pathName;
+          } else {
+          return arrVal.test(pathName);
+          }
+        });
+    };
+
+    var setContentSearchBarSubmitHandler = function () {
+      contentSearchForm.addEventListener("submit", submitContentSearch, false);
+    };
+
+    var submitContentSearch = function (e) {
+      e.preventDefault();
+      var contentSearchText = contentSearchInput.value;
+      var sanitizedSearch = sanitizeString(contentSearchText);
+      window.location.href = '/gk/?s='+ sanitizedSearch;
+    };
+
+    var sanitizeString = function (string) {
+      var searchQuery = string;
+      var searchQueryTokenized = searchQuery.split(' ');
+      var sanitizedTokens = [];
+      for (var i = 0; i < searchQueryTokenized.length; i++) {
+        var tokenString = searchQueryTokenized[i];
+        sanitizedTokens.push(relevanssiRemovePunct(tokenString));
+      }
+      return sanitizedTokens.join('+');
+    };
+
+    var relevanssiRemovePunct  = function (contentSearchString) {
+
+      var searchString = contentSearchString;
+      searchString = searchString.replace(/<[^>]*>/, ' ');
+      searchString = searchString.replace("\r", '');    // --- replace with empty space
+      searchString = searchString.replace("\n", ' ');   // --- replace with space
+      searchString = searchString.replace("\t", ' ');   // --- replace with space
+      searchString = searchString.replace(/\\/g, '');   // --- replace backslash with nothing
+
+      searchString = searchString.replace('ß', 'ss');
+      searchString = searchString.replace("·", '');
+      searchString = searchString.replace("\u2026", '');
+      searchString = searchString.replace("\u20ac", '');
+      searchString = searchString.replace("&shy;", '');
+      searchString = searchString.replace("&nbsp;", ' ');
+      searchString = searchString.replace('&#8217;', ' ');
+      searchString = searchString.replace("'", '');
+      searchString = searchString.replace("\u2019", ' ');
+      searchString = searchString.replace("\u2018", ' ');
+      searchString = searchString.replace("\u201d", ' ');
+      searchString = searchString.replace("\u201c", ' ');
+      searchString = searchString.replace("\u201e", ' ');
+      searchString = searchString.replace("´", ' ');
+      searchString = searchString.replace("\u2014", ' ');
+      searchString = searchString.replace("\u2013", ' ');
+      searchString = searchString.replace("×", ' ');
+      searchString = searchString.replace("×", ' ');
+      searchString = searchString.replace(/[!"\#$%&'()*+\-./:;\[\\\]^_`{|}~]+/,""); // remove punctuation as best to mimic relevanssi punct
+      searchString = searchString.replace(/[ \t\r\n\v\f]/, " ");
+      searchString = searchString.trim();
+
+      return searchString;
+    };
+
+    var init = function() {
+      setDesktopSearchToggleMenuHandler();
+      setDesktopSearchBarToggleHandler();
+      setMobileChooseContentButtonHandler();
+      setMobileChooseSearchButtonHandler();
+      setContentSearchBarSubmitHandler();
+      initializeSearchBar();
+    };
+
+    return {
+      init: init
+    }
+
+  })()
+  ;
+
+  GS.navSearchBar.init();
+
+var mobileNavMenu = document.getElementsByClassName("menu-btn");
+mobileNavMenu[0].addEventListener("click", toggleNav, false);
+var mobileNavSearch = document.getElementsByClassName("search_icon_image");
+mobileNavSearch[0].addEventListener("click", toggleSearch, false);
+
+(function() {
+  menuItems = document.querySelectorAll('nav > ul li label');
+    numberOfItems = menuItems.length;
+    for(var i = 0; i < numberOfItems; i++) {
+      menuItems[i].onclick = function(e) {
+        var item = e.target;
+        toggleClass(item, 'open');
+      }
+    }
+  })();
+
+  function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+
+  var isSignedIn = function () {
+    return readCookie('community_www') != null || readCookie('community_dev') != null;
+  };
+
+  (function() {
+    if (isSignedIn()) {
+      var accountNavSignedIn = document.getElementsByClassName('account_nav_in')[0];
+      var accountNavSignedOut = document.getElementsByClassName('account_nav_out')[0];
+      removeClass(accountNavSignedIn, 'dn');
+      addClass(accountNavSignedOut, 'dn');
+    }
+
+  })();
+
+  (function() {
+    var featuredSection = document.querySelector('.js-featured');
+    var pathsWithoutNavSearch = ['/'];
+    var i = pathsWithoutNavSearch.length;
+    var matchesAnyPaths = false;
+    while(i--) {
+      if (pathsWithoutNavSearch[i] == window.location.pathname) {
+        matchesAnyPaths = true;
+      }
+    }
+    if(matchesAnyPaths == false) {
+      removeClass(featuredSection, 'dn');
+    }
+  })();
+
+  var getQueryParam = function(key, uri) {
+      var href = uri ? uri : window.location.href;
+      var reg = new RegExp( '[?&]' + key + '=([^&#]*)', 'i' );
+      var string = reg.exec(href);
+      return string ? string[1] : null;
+  };
+
+  // Add / Update a key-value pair in the URL query parameters
+  function updateUrlParameter(uri, key, value) {
+    // remove the hash part before operating on the uri
+    var i = uri.indexOf('#');
+    var hash = i === -1 ? ''  : uri.substr(i);
+    uri = i === -1 ? uri : uri.substr(0, i);
+
+    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+
+    if (!value) {
+      // remove key-value pair if value is empty
+      uri = uri.replace(new RegExp("([&]?)" + key + "=.*?(&|$)", "i"), '');
+      if (uri.slice(-1) === '?') {
+        uri = uri.slice(0, -1);
+      }
+    } else if (uri.match(re)) {
+      uri = uri.replace(re, '$1' + key + "=" + value + '$2');
+    } else {
+      uri = uri + separator + key + "=" + value;
+    }
+    return uri + hash;
+  }
+
+  var initLanguageLinkListener = function() {
+    var changeLanguageLink = document.querySelector('.jsChangeLanguageLink');
+    var lang = getQueryParam('lang');
+    if(lang == null || lang == 'en') {
+      changeLanguageLink.innerHTML = 'En Español';
+    } else {
+      changeLanguageLink.innerHTML = 'In English';
+    }
+
+    changeLanguageLink.onclick = function(e) {
+      var lang = getQueryParam('lang');
+      if(lang == null || lang == 'en') {
+        changeLanguageLink.href = updateUrlParameter(window.location.href, 'lang', 'es');
+      } else {
+        changeLanguageLink.href = updateUrlParameter(window.location.href, 'lang', '');
+      }
+      window.open(full_uri, '_self');
+    }
+  };
+  initLanguageLinkListener();
+
+  (function addLangToLinks() {
+    var navAnchors = document.querySelectorAll('body>.un a[href]');
+    var i = navAnchors.length;
+    while(i--) {
+      var anchor = navAnchors[i];
+      var href = anchor.href;
+      if(href != '#') {
+        var currentLangParam = getQueryParam('lang');
+        if (currentLangParam != null && currentLangParam != '' && currentLangParam != 'en') {
+          anchor.href = updateUrlParameter(href, 'lang', getQueryParam('lang'));
+        }
+      }
+    }
+  })();
+
+', 
+
+', 
+  
+', 
+', 
+  $(document).ready(function(){
+    $("#js-top-notification-bar").slideDown("slow");
+  });
+', 
+
+  ', 
+      <div class="flash_notice alert alert-{{bootstrapType}} alert-dismissable mbm">
+    {{message}}<button type="button" class="close" aria-hidden="true">×</button>
+  </div>
+
+  ', 
+
+
+', 
+    #js-top-notification-bar {
+        position: fixed;
+        top: 66px;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+', 
+
+
+', 
+  
+', 
+
+
+
+', 
+    ', 
+    ', 
+        
+          ', 
+            ', Arkansas', 
+          ', 
+         / 
+          ', Springdale', 
+    ', 
+  ', 
+
+  ', Springdale Schools', 
+
+
+  ', 
+
+    ', 
+      ', 
+        ', 
+          ', 
+            ', 5', out of 10', 
+            ', 
+              ', GreatSchools', 
+              ', City rating', 
+            ', 
+          ', 
+        ', 
+      ', 
+      ', u"
+        This city's rating is based on its schools' test results.
+        ", Learn more »', 
+      ', 
+
+      ', 
+        ', 
+          ', Browse schools in ', Springdale', 
+          ', 
+            ', 
+              ', Preschools', 
+            ', 
+            ', 
+              ', Elementary schools', 
+            ', 
+            ', 
+              ', Middle schools', 
+            ', 
+            ', 
+              ', High schools', 
+            ', 
+          ', 
+          ', 
+            ', 
+              ', 
+              ', Public district schools', 
+            ', 
+            ', 
+              ', Private schools', 
+            ', 
+            ', 
+              ', Public charter schools', 
+            ', 
+          ', 
+        ', 
+
+        ', 
+          ', 
+            ', View all schools', 
+',         ', 
+      ', 
+    ', 
+      ', 
+        ', 
+          
+
+
+
+     ', 
+', 
+  ', 
+      ', 
+  ', 
+        ', 
+        ', 
+            ADVERTISEMENT
+        ', 
+    ', 
+
+', 
+
+          
+
+
+
+     ', 
+', 
+  ', 
+      ', 
+  ', 
+        ', 
+        ', 
+            ADVERTISEMENT
+        ', 
+    ', 
+
+', 
+
+        ', 
+      ', 
+  ', 
+
+
+  
+
+
+  ', 
+    ', 
+      ', 
+      ', 
+          ', Top rated schools in ', Springdale', 
+      ', 
+    ', 
+      ', 
+            ', 
+              ', 
+    ', 
+      ', 
+        
+', 
+  ', 
+    ', 
+      10
+    ', 
+  ', 
+', 
+
+        ', 
+          ', Bernice Young Elementary School', 
+          ', 
+            ',  Springdale, AR', 
+            ', Public', 
+            ', |', 
+            ', K-5', 
+          ', 
+        ', 
+      ', 
+    ', 
+', 
+',             ', 
+              ', 
+    ', 
+      ', 
+        
+', 
+  ', 
+    ', 
+      9
+    ', 
+  ', 
+', 
+
+        ', 
+          ', Hellstern Middle School', 
+          ', 
+            ',  Springdale, AR', 
+            ', Public', 
+            ', |', 
+            ', 6-7', 
+          ', 
+        ', 
+      ', 
+    ', 
+', 
+',             ', 
+              ', 
+    ', 
+      ', 
+        
+', 
+  ', 
+    ', 
+      9
+    ', 
+  ', 
+', 
+
+        ', 
+          ', Central Junior High School', 
+          ', 
+            ',  Springdale, AR', 
+            ', Public', 
+            ', |', 
+            ', 8-9', 
+          ', 
+        ', 
+      ', 
+    ', 
+', 
+',             ', 
+              ', 
+    ', 
+      ', 
+        
+', 
+  ', 
+    ', 
+      9
+    ', 
+  ', 
+', 
+
+        ', 
+          ', Hunt Elementary School', 
+          ', 
+            ',  Springdale, AR', 
+            ', Public', 
+            ', |', 
+            ', PK-5', 
+          ', 
+        ', 
+      ', 
+    ', 
+', 
+',       ', 
+  ', 
+
+
+
+      ', 
+        
+
+
+
+     ', 
+', 
+  ', 
+      ', 
+  ', 
+        ', 
+        ', 
+            ADVERTISEMENT
+        ', 
+    ', 
+
+', 
+
+        
+
+
+
+     ', 
+', 
+  ', 
+      ', 
+  ', 
+        ', 
+        ', 
+            ADVERTISEMENT
+        ', 
+    ', 
+
+', 
+
+      ', 
+
+
+  ', 
+
+        ', 
+      ', 
+        ', Largest Districts in ', Springdale', 
+            ', 
+              ', 
+              ', 
+              ', 
+                ', Springdale School District', 
+                ', Springdale, AR',  | 26 schools
+              ', 
+            ', 
+      ', 
+    ', 
+
+
+    ', 
+      ', Nearby homes for sale', 
+           
+     
+     
+
+
+     ', 
+        ', u" Your browser doesn't support frames. Please visit ", Zillow Home Page',  to see this content.
+        ', 
+        ', 
+            ', Browse on Zillow', 
+            ', 
+        ', 
+    ', 
+', 
+', u"
+    (function() {
+        var gs_isOverIFrame = false;
+        function processMouseOut() {
+            gs_isOverIFrame = false;
+        }
+        function processMouseOver() {
+            gs_isOverIFrame = true;
+        }
+        function processIFrameClick() {
+            if(gs_isOverIFrame) {
+                if (typeof(window.s) !== 'undefined' && s.tl) {
+                    s.tl(true, 'o', 'Zillow_Widget_'+gon.pagename);
+                }
+            }
+        }
+        var element = jQuery('#js-zillow').find('iframe');
+        element.on('mouseover', processMouseOver);
+        element.on('mouseout', processMouseOut);
+        if (typeof window.attachEvent != 'undefined') {
+            top.attachEvent('onblur', processIFrameClick);
+        }
+        else if (typeof window.addEventListener != 'undefined') {
+            top.addEventListener('blur', processIFrameClick, false);
+        }
+    })();
+", 
+
+    ', 
+  ', 
+
+  ', 
+    ', 
+        ', 
+          
+
+
+
+     ', 
+', 
+  ', 
+      ', 
+  ', 
+        ', 
+        ', 
+            ADVERTISEMENT
+        ', 
+    ', 
+
+', 
+
+          
+
+
+
+     ', 
+', 
+  ', 
+      ', 
+  ', 
+        ', 
+        ', 
+            ADVERTISEMENT
+        ', 
+    ', 
+
+', 
+
+        ', 
+    ', 
+  ', 
+
+
+
+
+  
+
+  ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+              ', Get our best articles, worksheets, and more delivered weekly to your inbox', 
+              ', Sign up', 
+          ', 
+        ', 
+      ', 
+    ', 
+    ', 
+      ', 
+        ', Sign up for email updates', 
+        ', 
+          ', Sign up', 
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+
+', 
+
+
+', 
+  ', 
+', 
+
+', Top', 
+
+', 
+  ', 
+    ', 
+      ', 
+        ', Empowering parents', 
+        ', GreatSchools is the leading national nonprofit empowering parents to unlock educational opportunities for their children. We provide school information and parenting resources to help millions of American families choose the right school, support learning at home, and guide their children to great futures.', 
+        ', 
+        ', Support GreatSchools in this effort! ', Donate Now!', 
+      ', 
+      ', 
+        ', 
+          ', 
+            ', Join us', 
+            ', 
+                ', 
+                  ', Supporters', 
+                ', 
+                ', 
+                  ', Licensing', 
+                ', 
+                ', 
+                  ', Sponsorship', 
+                ', 
+                ', 
+                  ', Advertising', 
+                ', 
+                ', 
+                  ', Careers', 
+                ', 
+            ', 
+          ', 
+          ', 
+            ', Learn more', 
+            ', 
+              ', Newsletter', 
+                ', 
+                  ', Privacy policy', 
+                ', 
+                ', 
+                  ', Terms of use', 
+                ', 
+                ', 
+                  ', About us', 
+                ', 
+                ', 
+                  ', Contact us', 
+                ', 
+            ', 
+          ', 
+          ', 
+            ', Connect', 
+            ', 
+                ', 
+                  ', 
+                    ', Facebook', 
+',                 ', 
+                ', 
+                  ', 
+                    ', Twitter', 
+',                 ', 
+                ', 
+                  ', 
+                    ', Pinterest', 
+',                 ', 
+                ', 
+                  ', 
+                    ', YouTube', 
+',                 ', 
+                ', 
+                  ', 
+                    ', Instagram', 
+',                 ', 
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+  ', 
+    ', 
+  ', ©1998-2017 GreatSchools.org All Rights Reserved. GreatSchools is a 501(c)(3) not-for-profit organization
+       | ', Ad Choices ', 
+  ', 
+', 
+
+  ', 
+', 
+
+
+', 
+', 
+']

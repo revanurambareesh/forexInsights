@@ -1,0 +1,5083 @@
+[
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+
+        
+        ', 
+        
+        ', 
+        ', 
+        ', 
+
+', u"
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64601621-1', 'auto');
+  ga('send', 'pageview');
+", 
+        ', 
+        ', 
+
+
+            $('body').on('click', 'div.control-contactus ul.nav.nav-tabs>li>a', function () {
+            //$('div.control-contactus ul.nav.nav-tabs>li>a').click(function () {
+                var showContainer = $(this).attr('class');
+                $(this).closest('div.control-contactus').find('div.tab-content div.tab-pane').removeClass('active in');
+                $('div#' + showContainer).addClass('active in');
+                $(this).closest('ul.nav.nav-tabs').find('li').removeClass('active');
+                $(this).closest('li').addClass('active');
+
+                if ($(window).width() < 752) {
+                    if ($(this).attr('class') == 'tab3default')
+                        $('div.fix-contact-inbottom').css('height', '248px');
+                    else
+                        $('div.fix-contact-inbottom').css('height', '180px');
+                }
+                /*alert('div#tab3default=' + $('div#tab3default').attr('class'));
+                $('div#tab3default').hasClass('active') ? $('div.fix-contact-inbottom').css('height', '200px'): $('div.fix-contact-inbottom').css('height', '150px')*/
+            });
+
+            /*Infrasofttech commented: PLZ UNCOMMENT*/
+              $(document).ready(function () {
+      
+                
+                  if($("div:[id*='_applyNow']").length>0)
+                  {
+                      if(window.location.href.toLowerCase().indexOf('our-solutions/mortgage-solutions.aspx')
+              >-1 || window.location.href.toLowerCase().indexOf('our-solutions/mortgage-solutions/loan-against-property.aspx')
+              >-1 || window.location.href.toLowerCase().indexOf('our-solutions/mortgage-solutions/commercial-property-purchase-loan.aspx')
+              >-1)
+                      {
+                          $("div:[id*='_applyNow'] a").attr('target','_blank');
+                          $("div:[id*='_applyNow'] a").attr('href','https://apply.adityabirlafinance.com/loan-against-property');	
+                      }
+                  }
+      
+                  //Added By Vinay on 10-Aug-2016 -- Canonical Tags -- Begin
+                  $("LINK[href*=':80'][rel='canonical']").remove();
+                  //Added By Vinay on 10-Aug-2016 -- Canonical Tags -- End
+
+      
+                  }); 
+        ', 
+        ', 
+
+
+            /*Toggle Search Bar*/
+            function Toggle_Search() {
+
+                if (!$('#iSearchPlaceholder').hasClass('hidden-xs')) {
+
+                    $('#iSearchPlaceholder').addClass('hidden-xs');
+                }
+                else {
+
+                    $('#iSearchPlaceholder').removeClass('hidden-xs');
+                }
+            }
+            /*Toggle Search Bar End*/
+
+            /* Show/hide Menu for mobile devices*/
+            function toggle_menuvisibility() {
+                var MenuSize = $(window).width() * 0.8;
+                //alert(MenuSize);
+
+                if (!$('.menunav').hasClass('hidden-xs')) {
+                    $('.dvSocialIcon').animate({ 'width': '0' }, 400);
+                    $('#topNav').animate({ 'width': '0' }, 400, function () {
+                        $('.menunav').addClass('hidden-xs');
+                    });
+                }
+                else {
+                    $('.menunav').removeClass('hidden-xs');
+                    $('.dvSocialIcon').animate({ 'width': MenuSize }, 400);
+                    $('#topNav').animate({ 'width': MenuSize }, 400);
+                }
+            }
+
+            $('body').click(function (e) {
+                var target = $(e.target);
+                if (!target.is("#imgToggleMenu") && !target.is("#topNav")) {
+                    //alert('body click');
+                    if (!$('.menunav').hasClass('hidden-xs')) {
+                        $('.dvSocialIcon').animate({ 'width': '0' }, 400);                     
+                        $('#topNav').animate({ 'width': '0' }, 400, function () {
+                            $('.menunav').addClass('hidden-xs');
+                        });
+                    }
+                }
+            });
+
+            /* End Show/hide Menu */
+
+            /* Contact US : fixed for mobile devices */
+            $(function () {
+                //make contact us fix in bottom for mobile devices 
+
+                var filename = window.location.href.substr(window.location.href.lastIndexOf("/") + 1);
+                $(window).resize(function () {
+                    //alert('calling from ABFL.master - fix contact us bottom');
+
+                    if ($(window).width() < 752 && filename.toLowerCase() != 'home.aspx') {
+                        $('div.control-contactus').addClass('fix-contact-inbottom');
+                        $('div.control-contactus>a.btn-showcontactus').find('span').html('<b>Connect</b>');
+                    } else {
+                        $('div.control-contactus').removeClass('fix-contact-inbottom');
+                        $('div.control-contactus>a.btn-showcontactus').find('span').html('Contact Us');
+                        if ($(window).width() < 752) {
+                            $('div.control-contactus>a.btn-showcontactus').find('span').html('<b>Connect</b>');
+                            $('div.#iTrackApp').removeClass('hidden-xs');
+                        }
+                    }
+                });
+
+                $('body').on('click', 'div.fix-contact-inbottom>a.btn-showcontactus', function () {
+                //$('div.fix-contact-inbottom>a.btn-showcontactus').click(function () {
+                    if (!$(this).hasClass('contactus-active')) {
+                        $(this).addClass('contactus-active');
+                        $(this).closest('div.fix-contact-inbottom').animate({ 'bottom': '0' }, 400);
+                    } else {
+                        $(this).removeClass('contactus-active');
+                        if ($(this).closest('div.fix-contact-inbottom').find('ul.nav.nav-tabs>li.active>a').attr('class') == 'tab3default')
+                            $(this).closest('div.fix-contact-inbottom').animate({ 'bottom': '-200px' }, 400);
+                        else
+                            $(this).closest('div.fix-contact-inbottom').animate({ 'bottom': '-145px' }, 400);
+                    }
+                });
+
+                //new script show/hide collapse panel
+
+            });
+            function showHidePanelNew(id) {
+                alert($(this).attr('onclick'));
+                if (!$('#' + id).hasClass('widget-active')) {
+                    $('#' + id).addClass('widget-active').slideDown();
+                    $(this).find('span.mT5').addClass('minus_icon').removeClass('plus_icon');
+                } else {
+                    $('#' + id).removeClass('widget-active').slideUp();
+                    $(this).find('span.mT5').removeClass('minus_icon').addClass('plus_icon');
+                }
+            };
+            //$(document).ready(function () { showHidePanel('finDict'); });
+
+            //home page button 
+            $('body').on('click', '#header_main_link', function () {
+            //$('#header_main_link').click(function () {
+                if (!$(this).hasClass('header-menu-active')) {
+                    $(this).addClass('header-menu-active');
+                    $('div.header_link_list').slideDown();
+                } else {
+                    $(this).removeClass('header-menu-active');
+                    $('div.header_link_list').slideUp();
+                }
+            });
+            $('body').on('mouseleave', 'div.header_link_list', function () {
+            //$('div.header_link_list').mouseleave( function () {
+                $('#header_main_link').removeClass('header-menu-active');
+                $('div.header_link_list').slideUp();
+            });
+            $(window).resize(function () {
+                if ($(window).width() >= 752)
+                    $('div.control-contactus').removeAttr('style');
+            });
+        ', 
+        ', 
+            function showTestimonialPage() {
+                window.location.href = "/pages/Testimonial.aspx";
+            }
+        ', 
+        ', 
+            /*\u2013Hide Quick Launch \u2013*/
+            #s4-leftpanel {
+                display: none;
+            }
+
+            .s4-ca {
+                margin-left: 0px;
+            }
+
+            .feedback {
+                position: fixed;
+                right: 3px;
+                top: 250px;
+                z-index: 10000;
+            }
+            /*footer for mobile */
+            .smfooter {
+                height: 50px;
+            }
+
+                .smfooter a {
+                    padding-right: 20px;
+                    color: #808080;
+                }
+            /* Contact US : fixed for mobile devices */
+            .fix-contact-inbottom {
+                position: fixed;
+                height: 172px;
+                bottom: -145px;
+                left: 0;
+                right: 0;
+                z-index: 110;
+            }
+
+                .fix-contact-inbottom .btn-showcontactus {
+                    display: block;
+                    text-align: center;
+                    margin: 0 auto;
+                }
+        ', 
+        ', 
+            function myFunction() {
+
+                window.WebForm_OnSubmit = function ()
+                { return true; };
+            }
+
+
+        ', 
+        ', 
+            /*Sys.Application.initialize();
+    
+            Sys.Application.add_init(appl_init);
+    
+            function appl_init() {
+                var pgRegMgr = Sys.WebForms.PageRequestManager.getInstance();
+                pgRegMgr.add_beginRequest(StartHandler);
+                pgRegMgr.add_endRequest(EndHandler);
+            }*/
+
+            function StartHandler() {
+                //$('.scroll').jScrollPane();
+
+            }
+
+            function EndHandler() {
+                //$('.scroll').jScrollPane();
+
+            }
+            /*function LikeURLFB() {
+    
+                var str = document.URL;
+               
+                var str1 = encodeURIComponent(str);
+                document.getElementById("LikeFB").setAttribute("href", "https://www.facebook.com/plugins/like.php?href=" + str1);
+            }
+    
+            function shareFB() {
+                var str = document.URL;
+              
+                var str1 = encodeURIComponent(str);
+                document.getElementById("FLTshareFB").setAttribute("href", "http://www.facebook.com/sharer.php?s=100&p[url]=" + str1 + "&p[images][0]=/SiteCollectionImages/Aditya_Birla_Finance.jpg");
+            }*/
+
+        ', 
+        ', 
+            .hoverLayerPos1 {
+                right: 0;
+                top: 22px;
+            }
+
+            .hoverLayerPos12 {
+                right: 0;
+                top: 22px;
+            }
+
+            .hoverLayerPos3 {
+                right: 0;
+                top: 50px;
+            }
+
+            .hoverLayerPos30 {
+                right: 0;
+                top: 50px;
+            }
+
+            .posRel, #bodyContainer, .bdrR {
+                position: relative;
+            }
+
+            .posAbs {
+                position: absolute;
+            }
+
+            .w130 {
+                width: 150px !important;
+            }
+
+            .style1 {
+                color: #CC0000;
+            }
+        ', 
+        ', 
+            .tickerbg {
+                background: url(/_layouts/15/AB/HL/Images/grey-bg.png) repeat-x;
+            }
+
+            .textcolor {
+                color: #9c0831;
+                font-size: 12px;
+            }
+        ', 
+        ', 
+
+    
+
+        
+        ', 
+', 
+', 
+
+        ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+//<![CDATA[
+var MSOWebPartPageFormName = 'aspnetForm';
+var g_presenceEnabled = true;
+var g_wsaEnabled = false;
+var g_wsaQoSEnabled = false;
+var g_wsaQoSDataPoints = [];
+var g_wsaLCID = 1033;
+var g_wsaListTemplateId = 850;
+var g_wsaSiteTemplateId = 'BLANKINTERNET#0';
+var _fV4UI=true;var _spPageContextInfo = {webServerRelativeUrl: "\u002f", webAbsoluteUrl: "http:\u002f\u002fadityabirlahomeloans.com", siteAbsoluteUrl: "http:\u002f\u002fadityabirlahomeloans.com", serverRequestPath: "\u002fpages\u002fhome.aspx", layoutsUrl: "_layouts\u002f15", webTitle: "Aditya Birla Housing Finance Limited", webTemplate: "53", tenantAppVersion: "0", isAppWeb: false, webLogoUrl: "_layouts\u002f15\u002fimages\u002fsiteicon.png", webLanguage: 1033, currentLanguage: 1033, currentUICultureName: "en-US", currentCultureName: "en-US", clientServerTimeDelta: new Date("2017-01-06T14:53:00.6874054Z") - new Date(), siteClientTag: "28$$15.0.4701.1000", crossDomainPhotosEnabled:false, webUIVersion:15, webPermMasks:{High:16,Low:196673},pageListId:"{96552efe-c27a-4367-b64b-f89bff947784}",pageItemId:3, pagePersonalizationScope:1, alertsEnabled:false, siteServerRelativeUrl: "\u002f", allowSilverlightPrompt:'True'};document.onreadystatechange=fnRemoveAllStatus; function fnRemoveAllStatus(){removeAllStatus(true)};var _spWebPartComponents = new Object();//]]>
+', 
+
+', 
+', u"
+//<![CDATA[
+(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() 
+        {
+          ExecuteOrDelayUntilScriptLoaded(
+            function()
+            {
+              var pairs = SP.ScriptHelpers.getDocumentQueryPairs();
+              var followDoc, itemId, listId, docName;
+              for (var key in pairs)
+              {
+                if(key.toLowerCase() == 'followdocument') 
+                  followDoc = pairs[key];
+                else if(key.toLowerCase() == 'itemid') 
+                  itemId = pairs[key];
+                else if(key.toLowerCase() == 'listid') 
+                  listId = pairs[key];
+                else if(key.toLowerCase() == 'docname') 
+                  docName = decodeURI(pairs[key]);
+              } 
+
+              if(followDoc != null && followDoc == '1' && listId!=null && itemId != null && docName != null)
+              {
+                SP.SOD.executeFunc('followingcommon.js', 'FollowDocumentFromEmail', function() 
+                { 
+                  FollowDocumentFromEmail(itemId, listId, docName);
+                });
+              }
+
+            }, 'SP.init.js');
+
+        });
+    })();(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() {
+
+            if (typeof(SPClientTemplates) === 'undefined' || SPClientTemplates === null || (typeof(APD_InAssetPicker) === 'function' && APD_InAssetPicker())) {
+                return;
+            }
+
+            var renderFollowFooter = function(renderCtx,  calloutActionMenu)
+            {
+                if (renderCtx.ListTemplateType == 700) 
+                    myDocsActionsMenuPopulator(renderCtx, calloutActionMenu);
+                else
+                    CalloutOnPostRenderTemplate(renderCtx, calloutActionMenu);
+
+                var listItem = renderCtx.CurrentItem;
+                if (typeof(listItem) === 'undefined' || listItem === null) {
+                    return;
+                }
+                if (listItem.FSObjType == 0) {
+                    calloutActionMenu.addAction(new CalloutAction({
+                        text: Strings.STS.L_CalloutFollowAction,
+                        tooltip: Strings.STS.L_CalloutFollowAction_Tooltip,
+                        onClickCallback: function (calloutActionClickEvent, calloutAction) {
+                            var callout = GetCalloutFromRenderCtx(renderCtx);
+                            if (!(typeof(callout) === 'undefined' || callout === null))
+                                callout.close();
+                            SP.SOD.executeFunc('followingcommon.js', 'FollowSelectedDocument', function() { FollowSelectedDocument(renderCtx); });
+                        }
+                    }));
+                }
+            };
+
+            var registerOverride = function(id) {
+                var followingOverridePostRenderCtx = {};
+                followingOverridePostRenderCtx.BaseViewID = 'Callout';
+                followingOverridePostRenderCtx.ListTemplateType = id;
+                followingOverridePostRenderCtx.Templates = {};
+                followingOverridePostRenderCtx.Templates.Footer = function(renderCtx) {
+                    var  renderECB;
+                    if (typeof(isSharedWithMeView) === 'undefined' || isSharedWithMeView === null) {
+                        renderECB = true;
+                    } else {
+                        var viewCtx = getViewCtxFromCalloutCtx(renderCtx);
+                        renderECB = !isSharedWithMeView(viewCtx);
+                    }
+                    return CalloutRenderFooterTemplate(renderCtx, renderFollowFooter, renderECB);
+                };
+                SPClientTemplates.TemplateManager.RegisterTemplateOverrides(followingOverridePostRenderCtx);
+            }
+            registerOverride(101);
+            registerOverride(700);
+        });
+    })();if (typeof(DeferWebFormInitCallback) == 'function') DeferWebFormInitCallback();//]]>
+", 
+
+', 
+', 
+            
+
+            
+
+            
+
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+
+                                                ', 
+
+                                                ', 
+                                                    ', 
+                                                        ', 
+                                                            ', 
+                                                        ', 
+                                                    ', 
+                                                ', 
+                                                ', 
+
+                                            ', 
+                                            ', 
+
+                                                ', 
+                                                    ', 
+                                                        ', Login ', 
+                                                    ', 
+                                                    ', 
+                                                        ', Customer - Connect', 
+                                                        ', Channel Partner - Engage', 
+                                                        ', 
+                                                    ', 
+                                                ', 
+                                                ', 
+                                                ', 
+                                                    ', 
+                                                ', 
+                                                ', 
+                                                ', 
+                                                ', 
+                                                    ', 
+                                                        ', 
+                                                    ', 
+                                                    ', 
+                                                    ', 
+
+                                                        ', 
+                                                            ', Aditya Birla Finance', 
+                                                                ', 
+                                                                    ', \u2014 ', NBFC', 
+                                                                    ', \u2014 ', Project & Structured Finance', 
+                                                                ', 
+                                                            ', 
+                                                            ', Aditya Birla Insurance Brokers', 
+                                                            ', Aditya Birla Money', 
+                                                                ', 
+                                                                    ', \u2014 ', Broking', 
+                                                                    ', \u2014 ', Online Money Management', 
+                                                                    ', \u2014 ', Wealth Management &', 
+                                                                            Distribution', 
+                                                                ', 
+                                                            ', 
+                                                            ', Aditya Birla Private Equity', 
+                                                            ', Birla Sun Life Asset Management', 
+                                                                ', 
+                                                                    ', \u2014 ', Mutual Fund', 
+                                                                    ', \u2014 ', Portfolio Management Services', 
+                                                                    ', \u2014 ', Real Estate Investment', 
+                                                                            Advisory', 
+                                                                ', 
+                                                            ', 
+                                                            ', Birla Sun Life Insurance', 
+                                                            ', Aditya Birla Housing Finance', 
+                                                        ', 
+                                                    ', 
+                                                ', 
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                                    ', 
+                                                        ', 
+                                                    ', 
+                                                ', 
+
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                            ', 
+
+                            ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                    ', 
+
+                                    ', 
+                                        ', 
+                                        ', 
+
+                                            ', 
+                                                ', 
+	', It looks like your browser does not have JavaScript enabled. Please turn on JavaScript and try again.', 
+
+	', 
+', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                    ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                                ', Customer - Connect', 
+                                            ', 
+                                            ', 
+                                                ', Channel Partner - Engage', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+
+                                        ', 
+                                    ', 
+
+                                ', 
+                            ', 
+                            ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        
+', 
+', 
+
+    function AppendSubMenu(link) {
+
+        if ($(window).width() < 752) {
+
+            var selectedText = $('#topNav ul li.sel a').text().trim();
+
+            if (selectedText.indexOf(link.trim()) != -1 && link.trim() != "") {
+                if ($('#topNav ul li.sel ul').css("display") == "none") {
+
+                    $('#topNav ul li.sel ul').css("display", "block");
+                    $('#topNav ul li.sel ul').css("background", "#800328");
+
+                    $('#topNav ul li.sel ul li a').css("border-bottom", "0.5px solid #5A0000");
+                    $('#topNav ul li.sel ul li a').css("padding-left", "20px");
+                }
+                else {
+                    $('#topNav ul li.sel ul').css("background", "#800328");
+                    $('#topNav ul li.sel ul').css("border-bottom", "none");
+                    $('#topNav ul li.sel ul').css("display", "none");
+
+                }
+
+                return false;
+            }
+        }
+    }
+
+
+
+
+    $(document).ready(function () {
+
+        $(window).resize(function () {
+
+            if ($(window).width() < 752) {
+
+                $('#topNav ul li.sel').append($('#subMenu ul'));
+                $('#topNav').append($('.dvSocialIcon'));
+                $('.dvSocialIcon').css("display", "block");
+
+            }
+            else {
+                $('#subMen).append($('#topNav ul li.sel ul'));
+                $('.dvSocialIcon').css("display", "none");
+            }
+        });
+    });
+
+    function ShowHideMenu(flag) {
+        if ($(window).width() < 752) {
+            if (flag)
+                $('.menunav').removeClass('hidden-xs');
+
+            else
+                $('.menunav').addClass('hidden-xs');
+        }
+    }
+
+
+', 
+
+',     
+     .breadcrumb {
+       width:120.8%;
+       margin-bottom: 0px;
+       margin-top: 37px;
+       border-radius: 0 !important;
+    }
+
+    .secNav ul {
+        width :99.9%;
+    }
+     .secNav {
+        width:120.9%;
+    }
+
+    .breadcrumb > li + li:before {
+        content: ">";
+    }
+', 
+ 
+
+', 
+', 
+       ',              
+        
+                            ', 
+                            ', 
+                                ',   
+                            ',  
+                        
+                            ', 
+                            ', 
+                                ', Our Solutions',   
+                            ', 
+                        
+                            ', 
+                            ', 
+                                ', About Us',   
+                            ',  
+                        
+                            ', 
+                            ', 
+                                ', Tools and Knowledge',   
+                            ', 
+                        
+                            ', 
+                            ', 
+                                ', Forms & Downloads',   
+                            ',  
+                        
+                            ', 
+                            ', 
+                                ', Careers',   
+                            ', 
+                        
+                            ', 
+                            ', 
+                                ', Login',   
+                            ',  
+                        
+    ', 
+
+', 
+
+
+', 
+', 
+      
+', 
+    
+    
+ ',  
+
+
+', 
+    ', 
+    
+    ', 
+    ',        
+', 
+', 
+
+
+
+
+ 
+', 
+    ', Home', 
+    ', 
+        ', 
+    ', 
+        ', 
+    ', 
+        ', 
+', 
+
+ 
+
+
+                                    ', 
+
+                                    ', 
+
+                                        ', 
+                                            ', 
+                                                ', 
+	
+                                                    
+                                                        ', 
+                                                            ', 
+		', It looks like your browser does not have JavaScript enabled. Please turn on JavaScript and try again.', 
+
+		', 
+	', 
+                                                        ', 
+                                                    
+                                                
+', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                                ', 
+                                ', 
+                                    ', 
+                                        ', 
+	
+
+', 
+.tickerbg
+{
+    background:url(/_layouts/15/AB/HL/Images/grey-bg.png) repeat-x;
+    height: 30px;
+    }
+.textcolor
+{
+    color:#9c0831;
+    font-size:12px;
+    padding:0;
+    margin:0;
+}
+', 
+', 
+', 
+', 
+
+', 
+    ', Important : ', 
+', 
+', 
+    ', 
+    ', Loans originated, booked and serviced by Aditya Birla Housing Finance Limited and all loans at the sole discretion of Aditya Birla Housing Finance Limited.', 
+    ', 
+', 
+', 
+', 
+', 
+
+', 
+                                    ', 
+                                ', 
+                            ', 
+                            ', 
+
+                            ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                                    ', 
+                                                        ', 
+                                                            
+	
+			', 
+       ', 
+	 ', 
+            ', 
+	', 
+		', 
+			', 
+				
+
+
+', 
+    function CallPopup(URl) {
+
+        tb_show('Img', URl + '?TB_iframe=true&amp;height=390&amp;width=570&amp;modal=true', false);
+    }
+    //S:Infrasoft
+    //jQuery(document).ready(function ($) {
+    //    var _SlideshowTransitions = [
+    //    //Fade Fly in R
+    //        {$Duration: 1200, x: -0.3, $During: { $Left: [0.3, 0.7] }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true }
+    //    //Fade Fly out L
+    //        , { $Duration: 1200, x: 0.3, $SlideOut: true, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true }
+    //        ];
+    //    var _CaptionTransitions = [];
+    //    _CaptionTransitions["L"] = { $Duration: 800, x: 0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["R"] = { $Duration: 800, x: -0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["T"] = { $Duration: 800, y: 0.6, $Easing: { $Top: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["B"] = { $Duration: 800, y: -0.6, $Easing: { $Top: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["TL"] = { $Duration: 800, x: 0.6, y: 0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine, $Top: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["TR"] = { $Duration: 800, x: -0.6, y: 0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine, $Top: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["BL"] = { $Duration: 800, x: 0.6, y: -0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine, $Top: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["BR"] = { $Duration: 800, x: -0.6, y: -0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine, $Top: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+
+    //    _CaptionTransitions["CLIP|LR"] = { $Duration: 600, $Clip: 3, $Easing: $JssorEasing$.$EaseInOutCubic };
+    //    _CaptionTransitions["MCLIP|L"] = { $Duration: 600, $Clip: 1, $Move: true, $Easing: $JssorEasing$.$EaseInOutCubic };
+    //    _CaptionTransitions["LISTH|L"] = { $Duration: 1000, x: 0.8, $Clip: 1, $Easing: $JssorEasing$.$EaseInOutCubic, $ScaleClip: 0.8, $Opacity: 2, $During: { $Left: [0.4, 0.6], $Clip: [0, 0.4], $Opacity: [0.4, 0.6]} };
+    //    _CaptionTransitions["WAVE|L"] = { $Duration: 1300, x: 0.6, y: 0.3, $Easing: { $Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseInWave }, $Opacity: 2, $Round: { $Top: 2.5} };
+    //    _CaptionTransitions["JUMPDN|R"] = { $Duration: 1000, x: -0.6, y: 0.4, $Easing: { $Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseOutJump }, $Round: { $Top: 1.5} };
+    //    _CaptionTransitions["DDG|TR"] = { $Duration: 1200, x: -0.3, y: 0.3, $Zoom: 1, $Easing: { $Left: $JssorEasing$.$EaseInJump, $Top: $JssorEasing$.$EaseInJump }, $Opacity: 2, $During: { $Left: [0, 0.8], $Top: [0, 0.8] }, $Round: { $Left: 0.8, $Top: 0.8} };
+    //    _CaptionTransitions["DODGEDANCE|L"] = { $Duration: 1200, x: 0.3, y: -0.3, $Zoom: 1, $Easing: { $Left: $JssorEasing$.$EaseInJump, $Top: $JssorEasing$.$EaseInJump, $Zoom: $JssorEasing$.$EaseOutQuad }, $Opacity: 2, $During: { $Left: [0, 0.8], $Top: [0, 0.8] }, $Round: { $Left: 0.8, $Top: 2.5} };
+    //    _CaptionTransitions["FLUTTER|L"] = { $Duration: 600, x: 0.2, y: -0.1, $Easing: { $Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseInWave }, $Opacity: 2, $Round: { $Top: 1.3} };
+    //    _CaptionTransitions["TORTUOUS|VB"] = { $Duration: 1200, y: -0.2, $Zoom: 1, $Easing: { $Top: $JssorEasing$.$EaseOutWave, $Zoom: $JssorEasing$.$EaseOutCubic }, $Opacity: 2, $During: { $Top: [0, 0.7] }, $Round: { $Top: 1.3} };
+    //    _CaptionTransitions["FADE"] = { $Duration: 600, $Opacity: 2 };
+    //    _CaptionTransitions["ZMF|10"] = { $Duration: 600, $Zoom: 11, $Easing: { $Zoom: $JssorEasing$.$EaseInExpo, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 };
+    //    _CaptionTransitions["RTT|10"] = { $Duration: 600, $Zoom: 11, $Rotate: 1, $Easing: { $Zoom: $JssorEasing$.$EaseInExpo, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInExpo }, $Opacity: 2, $Round: { $Rotate: 0.8} };
+    //    _CaptionTransitions["RTTL|BR"] = { $Duration: 600, x: -0.6, y: -0.6, $Zoom: 11, $Rotate: 1, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Top: $JssorEasing$.$EaseInCubic, $Zoom: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInCubic }, $Opacity: 2, $Round: { $Rotate: 0.8} };
+
+    //    var options = {
+    //        $FillMode: 2,                                       //[Optional] The way to fill image in slide, 0 stretch, 1 contain (keep aspect ratio and put all inside slide), 2 cover (keep aspect ratio and cover whole slide), 4 actual size, 5 contain for large image, actual size for small image, default value is 0
+    //        $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+    //        $AutoPlayInterval: 4000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+    //        $PauseOnHover: 1,                                   //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+
+    //        $ArrowKeyNavigation: true,   			            //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
+    //        $SlideEasing: $JssorEasing$.$EaseOutQuint,          //[Optional] Specifies easing for right to left animation, default value is $JssorEasing$.$EaseOutQuad
+    //        $SlideDuration: 800,                               //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+    //        $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
+    //        //$SlideWidth: 600,                                 //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+    //        //$SlideHeight: 300,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+    //        $SlideSpacing: 0, 					                //[Optional] Space between each slide in pixels, default value is 0
+    //        $DisplayPieces: 1,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+    //        $ParkingPosition: 0,                                //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+    //        $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
+    //        $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+    //        $DragOrientation: 1,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+    //        $SlideshowOptions: {                                //[Optional] Options to specify and enable slideshow or not
+    //            $Class: $JssorSlideshowRunner$,                 //[Required] Class to create instance of slideshow
+    //            $Transitions: _SlideshowTransitions,            //[Required] An array of slideshow transitions to play slideshow
+    //            $TransitionsOrder: 1,                           //[Optional] The way to choose transition to play slide, 1 Sequence, 0 Random
+    //            $ShowLink: true                                    //[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
+    //        },
+
+    //        $CaptionSliderOptions: {                            //[Optional] Options which specifies how to animate caption
+    //            $Class: $JssorCaptionSlider$,                   //[Required] Class to create instance to animate caption
+    //            $CaptionTransitions: _CaptionTransitions,       //[Required] An array of caption transitions to play caption, see caption transition section at jssor slideshow transition builder
+    //            $PlayInMode: 1,                                 //[Optional] 0 None (no play), 1 Chain (goes after main slide), 3 Chain Flatten (goes after main slide and flatten all caption animations), default value is 1
+    //            $PlayOutMode: 3                                 //[Optional] 0 None (no play), 1 Chain (goes before main slide), 3 Chain Flatten (goes before main slide and flatten all caption animations), default value is 1
+    //        },
+
+    //        $BulletNavigatorOptions: {                          //[Optional] Options to specify and enable navigator or not
+    //            $Class: $JssorBulletNavigator$,                 //[Required] Class to create navigator instance
+    //            $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+    //            $AutoCenter: 1,                                 //[Optional] Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+    //            $Steps: 1,                                      //[Optional] Steps to go for each navigation request, default value is 1
+    //            $Lanes: 1,                                      //[Optional] Specify lanes to arrange items, default value is 1
+    //            $SpacingX: 8,                                   //[Optional] Horizontal space between each item in pixel, default value is 0
+    //            $SpacingY: 8,                                   //[Optional] Vertical space between each item in pixel, default value is 0
+    //            $Orientation: 1                                 //[Optional] The orientation of the navigator, 1 horizontal, 2 vertical, default value is 1
+    //        },
+
+    //        $ArrowNavigatorOptions: {                           //[Optional] Options to specify and enable arrow navigator or not
+    //            $Class: $JssorArrowNavigator$,                  //[Requried] Class to create arrow navigator instance
+    //            $ChanceToShow: 0,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+    //            $AutoCenter: 2,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+    //            $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+    //        }
+
+    //    };
+
+    //    var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+
+    //    //responsive code begin
+    //    //you can remove responsive code if you don't want the slider scales while window resizes
+    //    /*
+    //    function ScaleSlider() {
+    //    var bodyWidth = document.body.clientWidth;
+    //    if (bodyWidth)
+    //    jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 1920));
+    //    else
+    //    window.setTimeout(ScaleSlider, 30);
+    //    }
+
+    //    ScaleSlider();
+
+    //    if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+    //    $(window).bind('resize', ScaleSlider);
+    //    }
+    //    */
+
+    //    //if (navigator.userAgent.match(/(iPhone|iPod|iPad)/)) {
+    //    //    $(window).bind("orientationchange", ScaleSlider);
+    //    //}
+    //    //responsive code end
+    //});
+    //E:Infrasoft
+
+', 
+', 
+', 
+', 
+', 
+    .share-icon
+    {
+        display: inline-block;
+        float: left;
+        margin: 4px;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        vertical-align: middle;
+        background-image: url(/_layouts/15/AB/HL/Images/Slider/share-icons.png);
+    }
+    
+    .share-facebook
+    {
+        background-position: 0px 0px;
+    }
+    
+    .share-facebook:hover
+    {
+        background-position: 0px -40px;
+    }
+    
+    .share-twitter
+    {
+        background-position: -40px 0px;
+    }
+    
+    .share-twitter:hover
+    {
+        background-position: -40px -40px;
+    }
+    
+    .share-pinterest
+    {
+        background-position: -80px 0px;
+    }
+    
+    .share-pinterest:hover
+    {
+        background-position: -80px -40px;
+    }
+    
+    .share-linkedin
+    {
+        background-position: -240px 0px;
+    }
+    
+    .share-linkedin:hover
+    {
+        background-position: -240px -40px;
+    }
+    
+    
+    .share-googleplus
+    {
+        background-position: -120px 0px;
+    }
+    
+    .share-googleplus:hover
+    {
+        background-position: -120px -40px;
+    }
+    
+    
+    .share-stumbleupon
+    {
+        background-position: -360px 0px;
+    }
+    
+    .share-stumbleupon:hover
+    {
+        background-position: -360px -40px;
+    }
+    
+    .share-email
+    {
+        background-position: -320px 0px;
+    }
+    
+    .share-email:hover
+    {
+        background-position: -320px -40px;
+    }
+', 
+', 
+
+
+', 
+    .sliderBorder 
+{
+        background:#fff;
+        border-top:2px solid #fcc600;
+        padding:10px 2px 5px 2px;
+        box-shadow:0px 0px 2px 2px #C3C3C3;
+        border-radius:4px 4px 4px 4px;
+}
+
+ol.carousel-indicators li 
+{
+        background: #fff;
+        border: 3px solid #fff;
+        margin-left: 8px;
+        width: 11px;
+        height: 11px;
+        border-radius: 100%;
+}
+
+ol.carousel-indicators li.active 
+{
+        background: #000;
+        border: 3px solid rgba(0, 0, 0, 0.1);
+        margin-left: 8px;
+        width: 12px;
+        height: 12px;
+}
+
+ol.carousel-indicators li:hover 
+{
+        background: #000;
+        border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+
+', 
+', 
+', 
+
+    ', 
+    ', 
+      ', 
+      ', 
+        
+        
+        
+      ', 
+
+      ', 
+      ', 
+    ', 
+', 
+', 
+
+
+
+
+', 
+', 
+
+', 
+
+
+', 
+    var myCarousel = $('div.carousel');
+    //myCarousel.append("<ol class='carousel-indicators'></ol>");
+    var indicators = myCarousel.find('ol.carousel-indicators');
+    //console.log('no of items = ' + myCarousel.find('.carousel-inner').children('.item').length);
+    myCarousel.find(".carousel-inner").children(".item").each(function (index) {
+        (index === 0) ?
+        indicators.append('<li data-target="#home-page-banner" data-slide-to="' + index + '" class="active"></li>\n') :
+        indicators.append('<li data-target="#home-page-banner" data-slide-to="' + index + '"></li>');
+    });
+', 
+
+			', 
+		', 
+	', 
+', 
+        ',     
+        ', 
+        ', 
+         ', 
+	', 
+		', 
+			', 
+				
+', 
+', 
+    $(document).ready(function () {
+        $('.solnBoxContent').find('.rtBorder').last().css('display', 'none');
+    });
+
+    var sliderpostion = 1;
+    var firstElement;
+    var secondElement;
+    var thirdElement;
+
+    $(document).ready(function () {
+
+        // if (screen.width < 800) {
+        //var windowsize = $(window).width();
+        //if (windowsize < 800) {
+        //    $('.contContainer-os').bxSlider({
+        //        slideWidth: 300,
+        //        minSlides: 2,
+        //        maxSlides: 6,
+        //        slideMargin: 10,
+        //        pager: false,
+        //    });
+        //    $('.featureDescContent').children().remove();
+
+        //}
+        //scrollerBox();
+        //alert(document.getElementById(sliderpostion));
+        //alert($('#1'));
+    });
+
+
+    function HideElement(id) {
+        $(id).addClass('hidden-xs');
+        $(id).addClass('hidden-sm');
+    }
+
+    function UnhideElement(id) {
+        $(id).removeClass('hidden-xs');
+        $(id).removeClass('hidden-sm');
+    }
+
+    function scrollerBox() {
+        var itemLen = $('div#contentSliderBox').find('div.containerslider').length;
+        //console.log(itemLen);
+        $('div#contentSliderHome div#contentSliderBox').width(itemLen * 115 + 'px');
+    }
+
+    $(window).resize(function () {
+
+        //alert($(window).width()); 763
+
+        firstElement = '#' + sliderpostion;
+        secondElement = '#' + (sliderpostion + 1);
+
+        //unhide 1st & 2nd element
+        UnhideElement(firstElement);
+        UnhideElement(secondElement);
+
+        if ($(window).width() < 992 && $(window).width() > 500) {
+            thirdElement = '#' + (sliderpostion + 2);
+            UnhideElement(thirdElement);
+        } else {
+            thirdElement = '#' + (sliderpostion + 2);
+            HideElement(thirdElement);
+        }
+
+        //alert($(window).width());
+        if ($(window).width() < 1200 && $(window).width() > 992) {
+            document.getElementById('leftarrow').style.visibility = "hidden";
+            document.getElementById('rightarrow').style.visibility = "hidden";
+        }
+        else {
+            //  document.getElementById('leftarrow').style.visibility = "visible";
+            document.getElementById('leftarrow').style.visibility = "hidden";
+            document.getElementById('rightarrow').style.visibility = "visible";
+        }
+        //scrollerBox();
+    });
+
+    function SlideLeft() {
+        //alert(sliderpostion);
+        if (sliderpostion <= 1) {
+            document.getElementById('leftarrow').style.visibility = "hidden";
+            document.getElementById('rightarrow').style.visibility = "visible";
+            return;
+        }
+        else {
+            document.getElementById('leftarrow').style.visibility = "visible";
+            document.getElementById('rightarrow').style.visibility = "visible";
+        }
+        if ($(window).width() < 992 && $(window).width() > 500)
+            HideElement(thirdElement);
+        else
+            HideElement(secondElement);
+
+        sliderpostion = sliderpostion - 1;
+
+        firstElement = '#' + sliderpostion;
+        secondElement = '#' + (sliderpostion + 1);
+
+        if ($(window).width() < 992 && $(window).width() > 500)
+            thirdElement = '#' + (sliderpostion + 2);
+
+
+        UnhideElement(firstElement);
+    }
+
+
+    function SlideRight() {
+        //alert(sliderpostion);
+        if (sliderpostion >= 4) {
+            document.getElementById('rightarrow').style.visibility = "hidden";
+            document.getElementById('leftarrow').style.visibility = "visible";
+            return;
+        }
+        else {
+            document.getElementById('rightarrow').style.visibility = "visible";
+            document.getElementById('leftarrow').style.visibility = "visible";
+        }
+
+        HideElement(firstElement);
+        //HideElement(secondElement);
+
+        sliderpostion = sliderpostion + 1;
+
+        firstElement = '#' + sliderpostion;
+        secondElement = '#' + (sliderpostion + 1);
+
+        if ($(window).width() < 992 && $(window).width() > 500)
+            thirdElement = '#' + (sliderpostion + 2);
+
+
+        if ($(window).width() < 992 && $(window).width() > 500)
+            UnhideElement(thirdElement);
+        else
+            UnhideElement(secondElement);
+    }
+
+', 
+
+
+', 
+   
+        Our Solutions
+   
+', 
+
+
+', 
+    ', 
+        ', 
+        ', 
+            
+                    ', 
+                        ', 
+                            ', 
+
+    Home Loans',  
+        
+    ', 
+                            ', 
+                            ', 
+                            ', 
+                                
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                
+                    ', 
+                        ', 
+                            ', 
+
+    Loan Against Property',  
+        
+    ', 
+                            ', 
+                            ', 
+                            ', 
+                                
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                
+                    ', 
+                        ', 
+                            ', 
+
+    Lease Rental Discounting',  
+        
+    ', 
+                            ', 
+                            ', 
+                            ', 
+                                
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                
+                    ', 
+                        ', 
+                            ', 
+
+    Construction Finance',  
+        
+    ', 
+                            ', 
+                            ', 
+                            ', 
+                                
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                
+                    ', 
+                        ', 
+                            ', 
+
+    Commercial Property Purchase',  
+        
+    ', 
+                            ', 
+                            ', 
+                            ', 
+                                
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                
+            ', 
+            ', 
+        ', 
+        ', 
+    ', 
+    ', 
+', 
+
+
+
+', 
+', 
+
+
+			', 
+		', 
+	', 
+', 
+        
+        ',  
+          ', 
+
+        ', 
+         ', 
+	', 
+		', 
+			', 
+				
+
+', u"
+    $(document).ready(function () {
+
+        $('.rtBorder').last().css('display', 'none');
+    });
+", 
+', 
+					
+', 
+    ', 
+         ', 
+            ', 
+               
+                        ', 
+                           ', SME Loans',          
+                        ', 
+                     
+                        ', 
+                           ', ESOP Financing',          
+                        ', 
+                     
+                        ', 
+                           ', Loan Against Property',          
+                        ', 
+                     
+                        ', 
+                           ', Loan Against Securities',          
+                        ', 
+                      
+            ',  
+            ', 
+         ', 
+        ', 
+            ', 
+                
+                    ', 
+                    ', 
+                       ', To truly succeed in business, you need a reliable partner to support your every move. ', 
+', Aditya Birla Finance offers Business Loans to fund your business needs...', 
+', Learn More', 
+',                        
+                       ', 
+                    ', 
+                    ', 
+                
+                    ', 
+                    ', 
+                       ', You have got the cake! Now you can eat it too!  ', 
+', Avail of your hard earned ESOPs with ease...', 
+', Learn More', \u200b',                        
+                       ', 
+                    ', 
+                    ', 
+                
+                    ', 
+                    ', 
+                       ', Your Property is your best asset. ', 
+', u"Don't keep it ideal! ", 
+', With our Commercial Real Estate & Mortgage solutions get additional funds to grow your business\u2026', 
+', Learn More', 
+',                        
+                       ', 
+                    ', 
+                    ', 
+                
+                    ', 
+                    ', 
+                       ', Your investment in shares and securities hold great hidden potential.',  ', 
+', Have you discovered it yet?', ... ', 
+', Learn More', 
+',                        
+                       ', 
+                    ', 
+                    ', 
+                 
+            ', 
+            ',  
+            
+        ', 
+        ', 
+        ',  
+        ', 
+    ', 
+    
+				', 
+
+
+			', 
+		', 
+	', 
+', 
+        ',    
+         		
+
+                                                        ', 
+                                                        ', 
+                                                            ', 
+                                                                
+                                                                ', 
+	', 
+
+	', 
+', 
+                                                            ', 
+
+                                                        ', 
+                                                    ', 
+
+                                                    ', 
+
+
+                                                        ', 
+                                                            
+	
+
+                                                            ', 
+                                                                ', 
+
+
+                                                                    ', 
+	
+', 
+', 
+
+        /*Infrasoft*/
+    /*.navWrapper
+    {
+        display: block;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        color: #363636;
+        margin: 0px;
+        padding: 5px 1px 0px 1px;
+        text-align: center;
+        width: 48px;
+    }
+    .portletNav_ContLink li.selNav .navWrapper
+    {
+        display: block;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        color: #363636;
+        margin: 3px 0px 0px 0px;
+        padding: 1px 0px 3px 0px;
+        text-align: center;
+        border-top: 1px solid #C1C1C1;
+        border-right: 1px solid #C1C1C1;
+        border-left: 1px solid #C1C1C1;
+        background: #fff;
+        width: 48px;
+    }*/
+
+
+      .modal iframe {
+    width: 100%;
+    /*min-height: 270px;*/
+    height:350px;
+}
+
+', 
+', 
+    function OpenLocation(pageUrl, StateID, CityID) {
+
+        var State;
+        var City;
+        //State
+        var dropdown = document.getElementById(StateID);
+        var index = dropdown.selectedIndex
+        var StateselectedValue = dropdown.options[index].text
+        //City
+        var dropdown = document.getElementById(CityID);
+        var index = dropdown.selectedIndex
+        var CityselectedValue = dropdown.options[index].text
+
+        
+        
+        //Modified by Vinay Karalkar on 12-May-2015 ... Branch locator      - Begin
+        //        var redirectUrl = pageUrl + "?State=" + StateselectedValue + "&City=" + CityselectedValue + "&TB_iframe=true&height=500&width=715&modal=true";
+        var redirectUrl = pageUrl + "?State=" + StateselectedValue + "&City=" + CityselectedValue;
+        //        tb_show('', redirectUrl, false);
+        window.open(redirectUrl, "_blank");
+        //Modified by Vinay Karalkar on 12-May-2015 ... Branch locator      - End
+    }
+
+    function SendAdvisiorEmail(pageUrl) {
+        var redirectUrl;
+
+        redirectUrl = pageUrl + "?TB_iframe=true&height=500&width=715&modal=true";
+        tb_show('', redirectUrl, false);
+    }
+    $(document).ready(function () {
+        $('.close span').css("float", "right");
+       
+    });
+', 
+
+
+
+ ', 
+            ', 
+                ', Contact Us', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                  ', 
+                                    ', 
+                                  ', 
+                                    ', Call
+                                ', 
+                            ', 
+                        ', 
+
+                        ', 
+                                    ', 
+                         ', 
+                                    ', 
+                                  ', 
+                                    ', Email', 
+
+                        ', 
+                                    ', 
+                         ', 
+                                    ', 
+                                  ', 
+                                    ', Locator', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                           ', For queries call us at', Phone+91 84259 55555', 
+                             ', For queries call us at ', +91 84259 55555', 
+                            ', 
+                            
+                            ', 
+                            ', 
+                            ', Request a meeting', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                            ', Send an Email', 
+                        ', 
+                        ', 
+                            Choose your nearest location
+                                
+                              
+
+                                        
+                                                ', 
+                                                   
+                                            ',  
+                                                Select State:
+                                                ', 
+		', Telangana', 
+		', Delhi', 
+		', Maharashtra', 
+		', Haryana', 
+		', Rajasthan', 
+		', Gujarat', 
+		', Punjab', 
+		', Uttar Pradesh', 
+		', Orissa', 
+		', Chhattisgarh', 
+		', Karnataka', 
+		', Tamil Nad, 
+		', West Bengal', 
+		', Madhya Pradesh', 
+		', Uttarakhand', 
+		', Andra Pradesh', 
+		', Gujarat - Reg. Off.', 
+
+	', 
+
+                                            ', 
+                                                ', 
+                                    ', 
+		
+                                                ', 
+                                                   
+                                                    ', 
+                                                        Select Location:
+                                                        ', 
+			', Hyderabad', 
+
+		', 
+
+                                                    ', 
+                                                ', 
+
+                                            
+	', 
+                                 
+                                    ', 
+                                        ', 
+                                        ', Locate Us', 
+                                    ', 
+
+
+                              
+                        ', 
+                    ', 
+                ', 
+            ', 
+      
+    ', 
+
+
+', 
+', 
+  ', 
+    ', 
+      ', 
+          ', 
+        ', ×', 
+       ', 
+      ', 
+      ', 
+             
+       
+      ', 
+    
+    ', 
+  ', 
+', 
+
+
+', 
+
+    //$('document').ready(function () {
+    //    jQuery.noConflict();
+    //    window.closeModal = function () {
+    //        $('#mdModal').modal('hide');
+            
+    //    };
+    //});
+
+    function CallPage(clickedBtn) {
+        var pgsrc;
+        var title;
+        if (clickedBtn == 'srm') {
+            pgsrc = 'FLUI_SendRelationshipManager';
+            title = "Request a meeting";
+        }
+        else {
+            
+            pgsrc = 'FLUI_SendEmail';
+            title = "Email";
+        }
+        document.getElementById('dvbody').innerHTML = '<iframe class="if-req-meeting" src="/_layouts/15/AB.HL/' + pgsrc + '.aspx" />';
+        $('#myModalLabel').html(title);
+
+    }
+
+    
+   
+    
+    //$(function () {
+    //    $('#A1').click(function () {
+    //        alert('Hi');
+    //        //console.log(1);
+    //        //$('#myModalInviteDestination').modal('hide');
+    //    });
+    //});
+    
+', 
+
+
+
+
+', 
+
+                                                                ', 
+
+
+                                                                ', 
+
+                                                                ', 
+                                                                ', 
+                                                                    ', 
+                                                                        ', 
+                                                                        ', 
+                                                                        ', 
+                                                                        ', 
+                                                                        ', 
+                                                                    ', 
+                                                                ', 
+                                                                ', 
+                                                                    ', TRACK YOUR APPLICATION STATUS', 
+                                                                    ', 
+                                                                ', 
+
+
+                                                                ', 
+	
+', 
+
+', 
+   .btnmenu_wrapper {
+	width: 217px;
+	float: left;
+	padding-top: 5px;
+}
+.btnEMI_bg {
+	background: url(/_layouts/15/AB/HL/Images/EMI_C_bg.jpg) no-repeat top left;
+	width: 200px;
+	height: 36px;
+	float: left;
+	margin-bottom: 6px;
+}
+.btnEMI_bg_text a {
+	padding: 18px 0px 0px 59px;
+	float: left;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #ffffff;
+	text-decoration:none;
+}
+.btnInst_bg {
+	background: url(/_layouts/15/AB/HL/Images/Instant_App.jpg) no-repeat top left;
+	width: 200px;
+	height: 36px;
+	float: left;
+	margin-bottom: 6px;
+}
+.app_form_bg {
+	background: url(/_layouts/15/AB/HL/Images/app_form_bg.jpg) no-repeat top left;
+	width: 200px;
+	height: 37px;
+	float: left;
+	margin-bottom: 6px;
+}
+/* Modified by Vinay on 18-Jun-2015 --- Image Change Begin */
+/*.call_you_bg {
+	background: url(/_layouts/15/AB/HL/Images/call_you_bg.jpg) no-repeat top left;
+	width: 200px;
+	height: 37px;
+	float: left;
+	margin-bottom: 6px;
+}*/
+    .call_you_bg
+    {
+        background: url(/_layouts/15/AB/HL/Images/WantToCall/Click-to-connect.png) no-repeat top left;
+        width: 200px;
+        float: left;
+        margin-bottom: 6px;
+    }
+/* Modified by Vinay on 18-Jun-2015 --- Image Change End */
+
+/* Added by Vinay on 14-Jul-2015 --- Web Call back design changes ---- Begin */
+.droppop {
+  width: 179px;
+  background-color: #fecd67;
+  float: right;
+}    
+ .droppopcall a {
+	width: 179px;
+	padding: 8px 0px 10px 0px;
+	background-color: #fecd67;
+	border-bottom: #f7f9f8 solid 1px;
+	color: #c71d2a;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	float: right;
+	text-align: center; text-decoration:none;
+}
+/* Added by Vinay on 14-Jul-2015 --- Web Call back design changes ---- End */
+
+/* Added by Vinay on 28-Jan-2016 --- DP2464 : Customer Application Tracking in ABHFL public site ---- Begin */
+    .btn_AppTracker
+    {
+    width: 217px;
+    float: left;
+    margin-bottom: 6px;
+    background: url(/_layouts/15/AB/HL/Images/app_status_red_bar.jpg) no-repeat top left;
+    padding: 8px 0px 8px 0px;
+    text-align:center;
+    }
+/* Added by Vinay on 28-Jan-2016 --- DP2464 : Customer Application Tracking in ABHFL public site ---- End */
+
+', 
+
+', 
+
+    function SendAdvisiorEmail(pageUrl) {
+        var redirectUrl;
+
+        redirectUrl = pageUrl + "?TB_iframe=true&height=500&width=715&modal=true";
+        tb_show('', redirectUrl, false);
+    }
+    
+    /*Added by Vinay on 17-Jun-2015 --Want Us To Call changes -- Begin*/
+    function showWantUsToCall(pageUrl) {
+        var redirectUrl;
+
+        redirectUrl = pageUrl + "&TB_iframe=true&height=633&width=328&modal=true";
+        tb_show('', redirectUrl, false);
+    }
+
+    
+
+    function ShowThankYouPage() {
+        var redirectUrl;
+        var pageUrl = "/_layouts/15/AB.HL/Thanku.html";
+        redirectUrl = pageUrl + "?TB_iframe=true&height=150&width=260&modal=true";
+        tb_show('', redirectUrl, false);
+    }
+    /*Added by Vinay on 17-Jun-2015 --Want Us To Call changes -- End*/
+
+    /*Added by Vinay on 14-Jul-2015 --Want Us To Call changes -- Begin*/
+    function showhide() {
+        if (document.getElementById('divCall').style.display == 'block') {
+            document.getElementById('divCall').style.display = 'none';
+        }
+        else {
+            document.getElementById('divCall').style.display = 'block';
+        }
+    }
+    /*Added by Vinay on 14-Jul-2015 --Want Us To Call changes -- End*/
+', 
+
+', 
+
+', 
+', 
+  ', TRACK YOUR APPLICATION STATUS',         
+    ', 
+    
+', 
+
+      ', 
+        ', EMI CALCULATOR', 
+      ', 
+      ', 
+        ', 
+        ', INSTANT APPROVAL', 
+        
+        ', 
+      ', 
+      ', 
+        ', APPLICATION FORM', 
+            
+        ', 
+      ', 
+      ', 
+        ', 
+            ', 
+        ', 
+            ', 
+
+            ', 
+              ', 
+                ', Call Me Now', 
+                 ', Call Me Later', 
+              ', 
+            ', 
+            
+        ', 
+      ', 
+    ', 
+
+
+
+
+
+
+
+', 
+                                                                ', 
+                                                                ', 
+                                                                ', 
+                                                                    ', 
+                                                                        Pre-Approved Property
+                                                                    ', 
+                                                                    ', 
+                                                                        ', 
+                                                                    ', 
+                                                                ', 
+                                                                ', 
+                                                                    ', 
+                                                                        ', 
+                                                                            ', 
+                                                                        ', 
+                                                                    ', 
+                                                                ', 
+
+                                                                ', 
+                                                                ', 
+                                                                ', 
+                                                                    ', 
+                                                                        Quick Links
+                                                                    ', 
+                                                                ', 
+                                                                ', 
+                                                                    ', 
+                                                                        ', 
+
+                                                                            ', Schedule of Charges and Interest Rates', 
+                                                                            ', Need funds to grow your business?', 
+                                                                            
+                                                                            ', Debenture Trustee', 
+                                                                            ', Annual Report 2015-16', 
+                                                                            ', Grievance Redressal Mechanism', 
+                                                                            ', Interest Rate', 
+                                                                            ', Audited Financial Results for the period ended 30th September 2016', 
+                                                                            ', Notice of EGM to be held on November 21, 2016', 
+
+                                                                        ', 
+                                                                    ', 
+                                                                ', 
+
+
+
+                                                                ', 
+                                                            ', 
+                                                            ', 
+                                                        ', 
+                                                    ', 
+                                                ', 
+                                                ', 
+                                                ', 
+                                                ', 
+                                                    ', 
+                                                        
+		', 
+	', 
+		', 
+			', 
+', 
+
+
+', 
+    $(document).ready(function () {
+
+
+        /* $("#show").click(function () {*/
+        $("#MaskedDiv").show();
+        $("#I_shop_popup").fadeIn();
+        /*});*/
+        $(".popup-close").click(function (e) {
+            $("#I_shop_popup").fadeOut();
+            $("#MaskedDiv").fadeOut();
+        });
+        $(".cont-btn").click(function (e) {
+            $("#I_shop_popup").fadeOut();
+            $("#MaskedDiv").fadeOut();
+        });
+        if ($(window).width() >= 752) checkCookie();                
+    });
+', 
+', 
+
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toGMTString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i].trim();
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+
+    function checkCookie() {
+
+
+        var user = getCookie("HL_overlay");
+
+        if (user != "") {
+
+        }
+        else {
+
+
+            setCookie("HL_overlay", "Home_Loans", 7);
+            openInlinePopUp('UpadteContact_p', 'UpadteContact');
+
+        }
+    }
+    function playVideo() {
+        $("#divTWOverlay").hide();
+        $("#ifrTWVideo").show();
+    }
+', 
+
+', 
+    ', 
+        ', 
+        ', 
+            ', 
+                ', 
+        ', 
+        ', 
+        ', 
+
+    ', 
+', 
+', 
+    .shop_popup {
+       
+        left: 50%;
+        top: 50%;
+        margin-left: -305px;
+        margin-top: -275px;
+        position: fixed;
+        display: none;
+        z-index: 1000;
+        background: white !important;
+        padding: 15px;
+    }
+', 
+', 
+		', 
+	', 
+', 
+
+                                                        ', 
+                                                    ', 
+                                                    ', 
+                                                ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                    
+                                ', 
+                                
+                                ', 
+                                    ', 
+                                        ', 
+                                            
+', 
+    .tblFooter td
+    {
+        vertical-align: top;
+    }
+    .divColumn H3
+    {
+        font-weight: bold;
+        font-family:verdana, arial, helvetica, sans-serif;
+    }
+    .divColumn a:hover 
+    {
+        color: #6C7F85;
+        text-decoration: none;
+    }    
+	.divColumn
+    {
+	    float:left;
+	    width:320px;
+    }
+', 
+', 
+', Site Map', 
+', 
+             ', 
+    
+            ', Home', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                ', 
+            ',   
+             ', 
+        
+            ', Forms & Downloads', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                            ', 
+                                ', Forms',  
+                            ', 
+                        
+                ', 
+            ',   
+             ', 
+        
+            ', Copyright & Usage', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                            ', 
+                                ', Website User Policy',  
+                            ', 
+                        
+                            ', 
+                                ', Privacy Policy',  
+                            ', 
+                        
+                            ', 
+                                ', Disclaimers',  
+                            ', 
+                        
+                            ', 
+                                ', Interest Rate Model',  
+                            ', 
+                        
+                            ', 
+                                ', Fair Practices Code',  
+                            ', 
+                        
+                            ', 
+                                ', Most Important Terms & Conditions',  
+                            ', 
+                        
+                            ', 
+                                ', Misselling Policy',  
+                            ', 
+                        
+                            ', 
+                                ', Whistle Blower Policy',  
+                            ', 
+                        
+                            ', 
+                                ', Appointment letter of Independent Director',  
+                            ', 
+                        
+                            ', 
+                                ', Code of conduct',  
+                            ', 
+                        
+                            ', 
+                                ', Resignation of Director',  
+                            ', 
+                        
+                ', 
+            ',   
+             ', 
+        
+                ', 
+                ', 
+    
+            ', Our Solutions', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                            ', 
+                                ', Home Loans',  
+                            ', 
+                        
+                            ', 
+                                ', Loan Against Property',  
+                            ', 
+                        
+                            ', 
+                                ', Lease Rental Discounting',  
+                            ', 
+                        
+                            ', 
+                                ', Construction Finance',  
+                            ', 
+                        
+                            ', 
+                                ', Commercial Property Purchase',  
+                            ', 
+                        
+                ', 
+            ',   
+             ', 
+        
+            ', About Us', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                            ', 
+                                ', Overview',  
+                            ', 
+                        
+                            ', 
+                                ', Company Profile',  
+                            ', 
+                        
+                            ', 
+                                ', Our People',  
+                            ', 
+                        
+                            ', 
+                                ', Press & Media',  
+                            ', 
+                        
+                ', 
+            ',   
+             ', 
+        
+                ', 
+                ', 
+    
+            ', Tools and Knowledge', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                            ', 
+                                ', Calculator',  
+                            ', 
+                        
+                            ', 
+                                ', Risk Factors and FAQs',  
+                            ', 
+                        
+                            ', 
+                                ', Financial Reports',  
+                            ', 
+                        
+                ', 
+            ',   
+             ', 
+        
+            ', Careers', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                            ', 
+                                ', Post Your Resume',  
+                            ', 
+                        
+                ', 
+            ',   
+             ', 
+        
+', 	
+    ', 
+    ', 
+   
+    ', 
+    ', 
+', 
+
+
+                                        ', 
+                                    ', 
+                                ', 
+
+                                ', 
+
+                                    ', 
+
+                                        ', 
+
+                                            ', 
+
+                                                ', Home', 
+
+                                                ', Sitemap', 
+
+                                            ', 
+                                            ', 
+
+                                        ', 
+
+                                    ', 
+                                    ', 
+
+                                ', 
+                                ', 
+                            ', 
+
+
+                        ', 
+                    ', 
+                    ', 
+	
+                        
+                            ', u"//<![CDATA[
+        var formDigestElement = document.getElementsByName('__REQUESTDIGEST')[0];
+        if (!((formDigestElement == null) || (formDigestElement.tagName.toLowerCase() != 'input') || (formDigestElement.type.toLowerCase() != 'hidden') ||
+            (formDigestElement.value == null) || (formDigestElement.value.length <= 0)))
+        {
+            formDigestElement.value = '0xA7907605EBB01A23C156E5A51AA5A5EB0DA86E9147EA55CCAB28AAC74C10DEEC941B8ED0F1BA991D337312129C67B8AA127B38123A58E08DA977D244D1B45C5C,06 Jan 2017 14:53:09 -0000';
+            g_updateFormDigestPageLoaded = new Date();
+        }
+        //]]>
+        ", 
+                        
+                    
+', 
+                ', 
+            ', 
+        
+
+', 
+//<![CDATA[
+var _spFormDigestRefreshInterval = 1440000;window.g_updateFormDigestPageLoaded = new Date(); window.g_updateFormDigestPageLoaded.setDate(window.g_updateFormDigestPageLoaded.getDate() -5);var _fV4UI = true;
+function _RegisterWebPartPageCUI()
+{
+    var initInfo = {editable: false,isEditMode: false,allowWebPartAdder: false,listId: "{96552efe-c27a-4367-b64b-f89bff947784}",itemId: 3,recycleBinEnabled: true,enableMinorVersioning: true,enableModeration: true,forceCheckout: true,rootFolderUrl: "\u002fPages",itemPermissions:{High:16,Low:196673}};
+    SP.Ribbon.WebPartComponent.registerWithPageManager(initInfo);
+    var wpcomp = SP.Ribbon.WebPartComponent.get_instance();
+    var hid;
+    hid = document.getElementById("_wpSelected");
+    if (hid != null)
+    {
+        var wpid = hid.value;
+        if (wpid.length > 0)
+        {
+            var zc = document.getElementById(wpid);
+            if (zc != null)
+                wpcomp.selectWebPart(zc, false);
+        }
+    }
+    hid = document.getElementById("_wzSelected");
+    if (hid != null)
+    {
+        var wzid = hid.value;
+        if (wzid.length > 0)
+        {
+            wpcomp.selectWebPartZone(null, wzid);
+        }
+    }
+};
+function __RegisterWebPartPageCUI() {
+ExecuteOrDelayUntilScriptLoaded(_RegisterWebPartPageCUI, "sp.ribbon.js");}
+_spBodyOnLoadFunctionNames.push("__RegisterWebPartPageCUI");var __wpmExportWarning='This Web Part Page has been personalized. As a result, one or more Web Part properties may contain confidential information. Make sure the properties contain information that is safe for others to read. After exporting this Web Part, view properties in the Web Part description file (.WebPart) by using a text editor such as Microsoft Notepad.';var __wpmCloseProviderWarning='You are about to close this Web Part.  It is currently providing data to other Web Parts, and these connections will be deleted if this Web Part is closed.  To close this Web Part, click OK.  To keep this Web Part, click Cancel.';var __wpmDeleteWarning='You are about to permanently delete this Web Part.  Are you sure you want to do this?  To delete this Web Part, click OK.  To keep this Web Part, click Cancel.';__defaultFired = false;__defaultFired = false;__defaultFired = false;__defaultFired = false;__defaultFired = false;__defaultFired = false;__defaultFired = false;__defaultFired = false;
+            ExecuteOrDelayUntilScriptLoaded(
+                function() 
+                {                    
+                    Srch.ScriptApplicationManager.get_current().states = {"webUILanguageName":"en-US","webDefaultLanguageName":"en-US","contextUrl":"http://adityabirlahomeloans.com","contextTitle":"Aditya Birla Housing Finance Limited","supportedLanguages":[{"id":1025,"label":"Arabic"},{"id":1093,"label":"Bengali"},{"id":1026,"label":"Bulgarian"},{"id":1027,"label":"Catalan"},{"id":2052,"label":"Chinese (Simplified)"},{"id":1028,"label":"Chinese (Traditional)"},{"id":1050,"label":"Croatian"},{"id":1029,"label":"Czech"},{"id":1030,"label":"Danish"},{"id":1043,"label":"Dutch"},{"id":1033,"label":"English"},{"id":1035,"label":"Finnish"},{"id":1036,"label":"French"},{"id":1031,"label":"German"},{"id":1032,"label":"Greek"},{"id":1095,"label":"Gujarati"},{"id":1037,"label":"Hebrew"},{"id":1081,"label":"Hindi"},{"id":1038,"label":"Hungarian"},{"id":1039,"label":"Icelandic"},{"id":1057,"label":"Indonesian"},{"id":1040,"label":"Italian"},{"id":1041,"label":"Japanese"},{"id":1099,"label":"Kannada"},{"id":1042,"label":"Korean"},{"id":1062,"label":"Latvian"},{"id":1063,"label":"Lithuanian"},{"id":1086,"label":"Malay"},{"id":1100,"label":"Malayalam"},{"id":1102,"label":"Marathi"},{"id":1044,"label":"Norwegian"},{"id":1045,"label":"Polish"},{"id":1046,"label":"Portuguese (Brazil)"},{"id":2070,"label":"Portuguese (Portugal)"},{"id":1094,"label":"Punjabi"},{"id":1048,"label":"Romanian"},{"id":1049,"label":"Russian"},{"id":3098,"label":"Serbian (Cyrillic)"},{"id":2074,"label":"Serbian (Latin)"},{"id":1051,"label":"Slovak"},{"id":1060,"label":"Slovenian"},{"id":3082,"label":"Spanish (Spain)"},{"id":2058,"label":"Spanish (Mexico)"},{"id":1053,"label":"Swedish"},{"id":1097,"label":"Tamil"},{"id":1098,"label":"Telugu"},{"id":1054,"label":"Thai"},{"id":1055,"label":"Turkish"},{"id":1058,"label":"Ukrainian"},{"id":1056,"label":"Urdu"},{"id":1066,"label":"Vietnamese"}],"navigationNodes":[{"id":1001,"name":"Everything","url":"{searchcenterurl}/results.aspx","promptString":"Search everything"},{"id":1002,"name":"People","url":"{searchcenterurl}/peopleresults.aspx","promptString":"Search people"},{"id":1003,"name":"Conversations","url":"{searchcenterurl}/conversationresults.aspx","promptString":"Search conversations"},{"id":0,"name":"This Site","url":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","promptString":"Search this site"}],"searchCenterUrl":"/SearchCenter/","showAdminDetails":false,"defaultPagesListName":"Pages","isSPFSKU":false,"userAdvancedLanguageSettingsUrl":"http://abfltclwebapp01:80/my/_layouts/15/EditProfile.aspx?Section=LanguageAndRegion\u0026UserSettingsProvider=234bf0ed%2D70db%2D4158%2Da332%2D4dfd683b4148\u0026ReturnUrl=http%3A%2F%2Fadityabirlahomeloans%2Ecom%2Fpages%2Fhome%2Easpx\u0026ShowAdvLang=1","defaultQueryProperties":{"culture":1033,"uiLanguage":1033,"summaryLength":180,"desiredSnippetLength":90,"enableStemming":true,"enablePhonetic":false,"enableNicknames":false,"trimDuplicates":true,"bypassResultTypes":false,"enableInterleaving":true,"enableQueryRules":true,"processBestBets":true,"enableOrderingHitHighlightedProperty":false,"hitHighlightedMultivaluePropertyLimit":-1,"processPersonalFavorites":true}};
+                    Srch.U.trace(null, 'SerializeToClient', 'ScriptApplicationManager state initialized.');
+                }, 'Search.ClientControls.js');var g_clientIdDeltaPlaceHolderMain = "DeltaPlaceHolderMain";
+var g_clientIdDeltaPlaceHolderUtilityContent = "DeltaPlaceHolderUtilityContent";
+
+                    ExecuteOrDelayUntilScriptLoaded(
+                        function() 
+                        {
+                            if ($isNull($find('ctl00_SmallSearchInputBox1_csr')))
+                            {
+                                var sb = $create(Srch.SearchBox, {"delayLoadTemplateScripts":true,"messages":[],"queryGroupNames":["MasterPage"],"renderTemplateId":"~sitecollection/_catalogs/masterpage/Display Templates/Search/Control_SearchBox_Compact.js","resultsPageAddress":"/pages/search.aspx","serverInitialRender":true,"showDataErrors":true,"states":{},"tryInplaceQuery":false}, null, null, $get("ctl00_SmallSearchInputBox1_csr"));
+                                sb.activate('Search...', 'ctl00_SmallSearchInputBox1_csr_sbox', 'ctl00_SmallSearchInputBox1_csr_sboxdiv', 'ctl00_SmallSearchInputBox1_csr_NavButton', 'ctl00_SmallSearchInputBox1_csr_AutoCompList', 'ctl00_SmallSearchInputBox1_csr_NavDropdownList', 'ctl00_SmallSearchInputBox1_csr_SearchLink', 'ms-srch-sbprogress', 'ms-srch-sb-prompt ms-helperText');
+                            }
+                        }, 'Search.ClientControls.js');
+                    ExecuteOrDelayUntilScriptLoaded(
+                        function() 
+                        {
+                            if ($isNull($find('ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr')))
+                            {
+                                var sb = $create(Srch.SearchBox, {"delayLoadTemplateScripts":true,"messages":[],"queryGroupNames":["MasterPage"],"renderTemplateId":"~sitecollection/_catalogs/masterpage/Display Templates/Search/Control_SearchBox_Compact.js","resultsPageAddress":"/pages/search.aspx","serverInitialRender":true,"states":{},"tryInplaceQuery":false}, null, null, $get("ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr"));
+                                sb.activate('Search...', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_sbox', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_sboxdiv', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_NavButton', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_AutoCompList', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_NavDropdownList', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_SearchLink', 'ms-srch-sbprogress', 'ms-srch-sb-prompt ms-helperText');
+                            }
+                        }, 'Search.ClientControls.js');//]]>
+', 
+', 
+        ', 
+            
+        ', 
+        
+        
+        
+                
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+
+    
+'][
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+        ', 
+
+        
+        ', 
+        
+        ', 
+        ', 
+        ', 
+
+', u"
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64601621-1', 'auto');
+  ga('send', 'pageview');
+", 
+        ', 
+        ', 
+
+
+            $('body').on('click', 'div.control-contactus ul.nav.nav-tabs>li>a', function () {
+            //$('div.control-contactus ul.nav.nav-tabs>li>a').click(function () {
+                var showContainer = $(this).attr('class');
+                $(this).closest('div.control-contactus').find('div.tab-content div.tab-pane').removeClass('active in');
+                $('div#' + showContainer).addClass('active in');
+                $(this).closest('ul.nav.nav-tabs').find('li').removeClass('active');
+                $(this).closest('li').addClass('active');
+
+                if ($(window).width() < 752) {
+                    if ($(this).attr('class') == 'tab3default')
+                        $('div.fix-contact-inbottom').css('height', '248px');
+                    else
+                        $('div.fix-contact-inbottom').css('height', '180px');
+                }
+                /*alert('div#tab3default=' + $('div#tab3default').attr('class'));
+                $('div#tab3default').hasClass('active') ? $('div.fix-contact-inbottom').css('height', '200px'): $('div.fix-contact-inbottom').css('height', '150px')*/
+            });
+
+            /*Infrasofttech commented: PLZ UNCOMMENT*/
+              $(document).ready(function () {
+      
+                
+                  if($("div:[id*='_applyNow']").length>0)
+                  {
+                      if(window.location.href.toLowerCase().indexOf('our-solutions/mortgage-solutions.aspx')
+              >-1 || window.location.href.toLowerCase().indexOf('our-solutions/mortgage-solutions/loan-against-property.aspx')
+              >-1 || window.location.href.toLowerCase().indexOf('our-solutions/mortgage-solutions/commercial-property-purchase-loan.aspx')
+              >-1)
+                      {
+                          $("div:[id*='_applyNow'] a").attr('target','_blank');
+                          $("div:[id*='_applyNow'] a").attr('href','https://apply.adityabirlafinance.com/loan-against-property');	
+                      }
+                  }
+      
+                  //Added By Vinay on 10-Aug-2016 -- Canonical Tags -- Begin
+                  $("LINK[href*=':80'][rel='canonical']").remove();
+                  //Added By Vinay on 10-Aug-2016 -- Canonical Tags -- End
+
+      
+                  }); 
+        ', 
+        ', 
+
+
+            /*Toggle Search Bar*/
+            function Toggle_Search() {
+
+                if (!$('#iSearchPlaceholder').hasClass('hidden-xs')) {
+
+                    $('#iSearchPlaceholder').addClass('hidden-xs');
+                }
+                else {
+
+                    $('#iSearchPlaceholder').removeClass('hidden-xs');
+                }
+            }
+            /*Toggle Search Bar End*/
+
+            /* Show/hide Menu for mobile devices*/
+            function toggle_menuvisibility() {
+                var MenuSize = $(window).width() * 0.8;
+                //alert(MenuSize);
+
+                if (!$('.menunav').hasClass('hidden-xs')) {
+                    $('.dvSocialIcon').animate({ 'width': '0' }, 400);
+                    $('#topNav').animate({ 'width': '0' }, 400, function () {
+                        $('.menunav').addClass('hidden-xs');
+                    });
+                }
+                else {
+                    $('.menunav').removeClass('hidden-xs');
+                    $('.dvSocialIcon').animate({ 'width': MenuSize }, 400);
+                    $('#topNav').animate({ 'width': MenuSize }, 400);
+                }
+            }
+
+            $('body').click(function (e) {
+                var target = $(e.target);
+                if (!target.is("#imgToggleMenu") && !target.is("#topNav")) {
+                    //alert('body click');
+                    if (!$('.menunav').hasClass('hidden-xs')) {
+                        $('.dvSocialIcon').animate({ 'width': '0' }, 400);                     
+                        $('#topNav').animate({ 'width': '0' }, 400, function () {
+                            $('.menunav').addClass('hidden-xs');
+                        });
+                    }
+                }
+            });
+
+            /* End Show/hide Menu */
+
+            /* Contact US : fixed for mobile devices */
+            $(function () {
+                //make contact us fix in bottom for mobile devices 
+
+                var filename = window.location.href.substr(window.location.href.lastIndexOf("/") + 1);
+                $(window).resize(function () {
+                    //alert('calling from ABFL.master - fix contact us bottom');
+
+                    if ($(window).width() < 752 && filename.toLowerCase() != 'home.aspx') {
+                        $('div.control-contactus').addClass('fix-contact-inbottom');
+                        $('div.control-contactus>a.btn-showcontactus').find('span').html('<b>Connect</b>');
+                    } else {
+                        $('div.control-contactus').removeClass('fix-contact-inbottom');
+                        $('div.control-contactus>a.btn-showcontactus').find('span').html('Contact Us');
+                        if ($(window).width() < 752) {
+                            $('div.control-contactus>a.btn-showcontactus').find('span').html('<b>Connect</b>');
+                            $('div.#iTrackApp').removeClass('hidden-xs');
+                        }
+                    }
+                });
+
+                $('body').on('click', 'div.fix-contact-inbottom>a.btn-showcontactus', function () {
+                //$('div.fix-contact-inbottom>a.btn-showcontactus').click(function () {
+                    if (!$(this).hasClass('contactus-active')) {
+                        $(this).addClass('contactus-active');
+                        $(this).closest('div.fix-contact-inbottom').animate({ 'bottom': '0' }, 400);
+                    } else {
+                        $(this).removeClass('contactus-active');
+                        if ($(this).closest('div.fix-contact-inbottom').find('ul.nav.nav-tabs>li.active>a').attr('class') == 'tab3default')
+                            $(this).closest('div.fix-contact-inbottom').animate({ 'bottom': '-200px' }, 400);
+                        else
+                            $(this).closest('div.fix-contact-inbottom').animate({ 'bottom': '-145px' }, 400);
+                    }
+                });
+
+                //new script show/hide collapse panel
+
+            });
+            function showHidePanelNew(id) {
+                alert($(this).attr('onclick'));
+                if (!$('#' + id).hasClass('widget-active')) {
+                    $('#' + id).addClass('widget-active').slideDown();
+                    $(this).find('span.mT5').addClass('minus_icon').removeClass('plus_icon');
+                } else {
+                    $('#' + id).removeClass('widget-active').slideUp();
+                    $(this).find('span.mT5').removeClass('minus_icon').addClass('plus_icon');
+                }
+            };
+            //$(document).ready(function () { showHidePanel('finDict'); });
+
+            //home page button 
+            $('body').on('click', '#header_main_link', function () {
+            //$('#header_main_link').click(function () {
+                if (!$(this).hasClass('header-menu-active')) {
+                    $(this).addClass('header-menu-active');
+                    $('div.header_link_list').slideDown();
+                } else {
+                    $(this).removeClass('header-menu-active');
+                    $('div.header_link_list').slideUp();
+                }
+            });
+            $('body').on('mouseleave', 'div.header_link_list', function () {
+            //$('div.header_link_list').mouseleave( function () {
+                $('#header_main_link').removeClass('header-menu-active');
+                $('div.header_link_list').slideUp();
+            });
+            $(window).resize(function () {
+                if ($(window).width() >= 752)
+                    $('div.control-contactus').removeAttr('style');
+            });
+        ', 
+        ', 
+            function showTestimonialPage() {
+                window.location.href = "/pages/Testimonial.aspx";
+            }
+        ', 
+        ', 
+            /*\u2013Hide Quick Launch \u2013*/
+            #s4-leftpanel {
+                display: none;
+            }
+
+            .s4-ca {
+                margin-left: 0px;
+            }
+
+            .feedback {
+                position: fixed;
+                right: 3px;
+                top: 250px;
+                z-index: 10000;
+            }
+            /*footer for mobile */
+            .smfooter {
+                height: 50px;
+            }
+
+                .smfooter a {
+                    padding-right: 20px;
+                    color: #808080;
+                }
+            /* Contact US : fixed for mobile devices */
+            .fix-contact-inbottom {
+                position: fixed;
+                height: 172px;
+                bottom: -145px;
+                left: 0;
+                right: 0;
+                z-index: 110;
+            }
+
+                .fix-contact-inbottom .btn-showcontactus {
+                    display: block;
+                    text-align: center;
+                    margin: 0 auto;
+                }
+        ', 
+        ', 
+            function myFunction() {
+
+                window.WebForm_OnSubmit = function ()
+                { return true; };
+            }
+
+
+        ', 
+        ', 
+            /*Sys.Application.initialize();
+    
+            Sys.Application.add_init(appl_init);
+    
+            function appl_init() {
+                var pgRegMgr = Sys.WebForms.PageRequestManager.getInstance();
+                pgRegMgr.add_beginRequest(StartHandler);
+                pgRegMgr.add_endRequest(EndHandler);
+            }*/
+
+            function StartHandler() {
+                //$('.scroll').jScrollPane();
+
+            }
+
+            function EndHandler() {
+                //$('.scroll').jScrollPane();
+
+            }
+            /*function LikeURLFB() {
+    
+                var str = document.URL;
+               
+                var str1 = encodeURIComponent(str);
+                document.getElementById("LikeFB").setAttribute("href", "https://www.facebook.com/plugins/like.php?href=" + str1);
+            }
+    
+            function shareFB() {
+                var str = document.URL;
+              
+                var str1 = encodeURIComponent(str);
+                document.getElementById("FLTshareFB").setAttribute("href", "http://www.facebook.com/sharer.php?s=100&p[url]=" + str1 + "&p[images][0]=/SiteCollectionImages/Aditya_Birla_Finance.jpg");
+            }*/
+
+        ', 
+        ', 
+            .hoverLayerPos1 {
+                right: 0;
+                top: 22px;
+            }
+
+            .hoverLayerPos12 {
+                right: 0;
+                top: 22px;
+            }
+
+            .hoverLayerPos3 {
+                right: 0;
+                top: 50px;
+            }
+
+            .hoverLayerPos30 {
+                right: 0;
+                top: 50px;
+            }
+
+            .posRel, #bodyContainer, .bdrR {
+                position: relative;
+            }
+
+            .posAbs {
+                position: absolute;
+            }
+
+            .w130 {
+                width: 150px !important;
+            }
+
+            .style1 {
+                color: #CC0000;
+            }
+        ', 
+        ', 
+            .tickerbg {
+                background: url(/_layouts/15/AB/HL/Images/grey-bg.png) repeat-x;
+            }
+
+            .textcolor {
+                color: #9c0831;
+                font-size: 12px;
+            }
+        ', 
+        ', 
+
+    
+
+        
+        ', 
+', 
+', 
+
+        ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+//<![CDATA[
+var MSOWebPartPageFormName = 'aspnetForm';
+var g_presenceEnabled = true;
+var g_wsaEnabled = false;
+var g_wsaQoSEnabled = false;
+var g_wsaQoSDataPoints = [];
+var g_wsaLCID = 1033;
+var g_wsaListTemplateId = 850;
+var g_wsaSiteTemplateId = 'BLANKINTERNET#0';
+var _fV4UI=true;var _spPageContextInfo = {webServerRelativeUrl: "\u002f", webAbsoluteUrl: "http:\u002f\u002fadityabirlahomeloans.com", siteAbsoluteUrl: "http:\u002f\u002fadityabirlahomeloans.com", serverRequestPath: "\u002fpages\u002fhome.aspx", layoutsUrl: "_layouts\u002f15", webTitle: "Aditya Birla Housing Finance Limited", webTemplate: "53", tenantAppVersion: "0", isAppWeb: false, webLogoUrl: "_layouts\u002f15\u002fimages\u002fsiteicon.png", webLanguage: 1033, currentLanguage: 1033, currentUICultureName: "en-US", currentCultureName: "en-US", clientServerTimeDelta: new Date("2017-01-06T14:53:11.7341717Z") - new Date(), siteClientTag: "28$$15.0.4701.1000", crossDomainPhotosEnabled:false, webUIVersion:15, webPermMasks:{High:16,Low:196673},pageListId:"{96552efe-c27a-4367-b64b-f89bff947784}",pageItemId:3, pagePersonalizationScope:1, alertsEnabled:false, siteServerRelativeUrl: "\u002f", allowSilverlightPrompt:'True'};document.onreadystatechange=fnRemoveAllStatus; function fnRemoveAllStatus(){removeAllStatus(true)};var _spWebPartComponents = new Object();//]]>
+', 
+
+', 
+', u"
+//<![CDATA[
+(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() 
+        {
+          ExecuteOrDelayUntilScriptLoaded(
+            function()
+            {
+              var pairs = SP.ScriptHelpers.getDocumentQueryPairs();
+              var followDoc, itemId, listId, docName;
+              for (var key in pairs)
+              {
+                if(key.toLowerCase() == 'followdocument') 
+                  followDoc = pairs[key];
+                else if(key.toLowerCase() == 'itemid') 
+                  itemId = pairs[key];
+                else if(key.toLowerCase() == 'listid') 
+                  listId = pairs[key];
+                else if(key.toLowerCase() == 'docname') 
+                  docName = decodeURI(pairs[key]);
+              } 
+
+              if(followDoc != null && followDoc == '1' && listId!=null && itemId != null && docName != null)
+              {
+                SP.SOD.executeFunc('followingcommon.js', 'FollowDocumentFromEmail', function() 
+                { 
+                  FollowDocumentFromEmail(itemId, listId, docName);
+                });
+              }
+
+            }, 'SP.init.js');
+
+        });
+    })();(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() {
+
+            if (typeof(SPClientTemplates) === 'undefined' || SPClientTemplates === null || (typeof(APD_InAssetPicker) === 'function' && APD_InAssetPicker())) {
+                return;
+            }
+
+            var renderFollowFooter = function(renderCtx,  calloutActionMenu)
+            {
+                if (renderCtx.ListTemplateType == 700) 
+                    myDocsActionsMenuPopulator(renderCtx, calloutActionMenu);
+                else
+                    CalloutOnPostRenderTemplate(renderCtx, calloutActionMenu);
+
+                var listItem = renderCtx.CurrentItem;
+                if (typeof(listItem) === 'undefined' || listItem === null) {
+                    return;
+                }
+                if (listItem.FSObjType == 0) {
+                    calloutActionMenu.addAction(new CalloutAction({
+                        text: Strings.STS.L_CalloutFollowAction,
+                        tooltip: Strings.STS.L_CalloutFollowAction_Tooltip,
+                        onClickCallback: function (calloutActionClickEvent, calloutAction) {
+                            var callout = GetCalloutFromRenderCtx(renderCtx);
+                            if (!(typeof(callout) === 'undefined' || callout === null))
+                                callout.close();
+                            SP.SOD.executeFunc('followingcommon.js', 'FollowSelectedDocument', function() { FollowSelectedDocument(renderCtx); });
+                        }
+                    }));
+                }
+            };
+
+            var registerOverride = function(id) {
+                var followingOverridePostRenderCtx = {};
+                followingOverridePostRenderCtx.BaseViewID = 'Callout';
+                followingOverridePostRenderCtx.ListTemplateType = id;
+                followingOverridePostRenderCtx.Templates = {};
+                followingOverridePostRenderCtx.Templates.Footer = function(renderCtx) {
+                    var  renderECB;
+                    if (typeof(isSharedWithMeView) === 'undefined' || isSharedWithMeView === null) {
+                        renderECB = true;
+                    } else {
+                        var viewCtx = getViewCtxFromCalloutCtx(renderCtx);
+                        renderECB = !isSharedWithMeView(viewCtx);
+                    }
+                    return CalloutRenderFooterTemplate(renderCtx, renderFollowFooter, renderECB);
+                };
+                SPClientTemplates.TemplateManager.RegisterTemplateOverrides(followingOverridePostRenderCtx);
+            }
+            registerOverride(101);
+            registerOverride(700);
+        });
+    })();if (typeof(DeferWebFormInitCallback) == 'function') DeferWebFormInitCallback();//]]>
+", 
+
+', 
+', 
+            
+
+            
+
+            
+
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+
+                                                ', 
+
+                                                ', 
+                                                    ', 
+                                                        ', 
+                                                            ', 
+                                                        ', 
+                                                    ', 
+                                                ', 
+                                                ', 
+
+                                            ', 
+                                            ', 
+
+                                                ', 
+                                                    ', 
+                                                        ', Login ', 
+                                                    ', 
+                                                    ', 
+                                                        ', Customer - Connect', 
+                                                        ', Channel Partner - Engage', 
+                                                        ', 
+                                                    ', 
+                                                ', 
+                                                ', 
+                                                ', 
+                                                    ', 
+                                                ', 
+                                                ', 
+                                                ', 
+                                                ', 
+                                                    ', 
+                                                        ', 
+                                                    ', 
+                                                    ', 
+                                                    ', 
+
+                                                        ', 
+                                                            ', Aditya Birla Finance', 
+                                                                ', 
+                                                                    ', \u2014 ', NBFC', 
+                                                                    ', \u2014 ', Project & Structured Finance', 
+                                                                ', 
+                                                            ', 
+                                                            ', Aditya Birla Insurance Brokers', 
+                                                            ', Aditya Birla Money', 
+                                                                ', 
+                                                                    ', \u2014 ', Broking', 
+                                                                    ', \u2014 ', Online Money Management', 
+                                                                    ', \u2014 ', Wealth Management &', 
+                                                                            Distribution', 
+                                                                ', 
+                                                            ', 
+                                                            ', Aditya Birla Private Equity', 
+                                                            ', Birla Sun Life Asset Management', 
+                                                                ', 
+                                                                    ', \u2014 ', Mutual Fund', 
+                                                                    ', \u2014 ', Portfolio Management Services', 
+                                                                    ', \u2014 ', Real Estate Investment', 
+                                                                            Advisory', 
+                                                                ', 
+                                                            ', 
+                                                            ', Birla Sun Life Insurance', 
+                                                            ', Aditya Birla Housing Finance', 
+                                                        ', 
+                                                    ', 
+                                                ', 
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                                    ', 
+                                                        ', 
+                                                    ', 
+                                                ', 
+
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                            ', 
+
+                            ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                    ', 
+
+                                    ', 
+                                        ', 
+                                        ', 
+
+                                            ', 
+                                                ', 
+	', It looks like your browser does not have JavaScript enabled. Please turn on JavaScript and try again.', 
+
+	', 
+', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                    ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                                ', Customer - Connect', 
+                                            ', 
+                                            ', 
+                                                ', Channel Partner - Engage', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+
+                                        ', 
+                                    ', 
+
+                                ', 
+                            ', 
+                            ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        
+', 
+', 
+
+    function AppendSubMenu(link) {
+
+        if ($(window).width() < 752) {
+
+            var selectedText = $('#topNav ul li.sel a').text().trim();
+
+            if (selectedText.indexOf(link.trim()) != -1 && link.trim() != "") {
+                if ($('#topNav ul li.sel ul').css("display") == "none") {
+
+                    $('#topNav ul li.sel ul').css("display", "block");
+                    $('#topNav ul li.sel ul').css("background", "#800328");
+
+                    $('#topNav ul li.sel ul li a').css("border-bottom", "0.5px solid #5A0000");
+                    $('#topNav ul li.sel ul li a').css("padding-left", "20px");
+                }
+                else {
+                    $('#topNav ul li.sel ul').css("background", "#800328");
+                    $('#topNav ul li.sel ul').css("border-bottom", "none");
+                    $('#topNav ul li.sel ul').css("display", "none");
+
+                }
+
+                return false;
+            }
+        }
+    }
+
+
+
+
+    $(document).ready(function () {
+
+        $(window).resize(function () {
+
+            if ($(window).width() < 752) {
+
+                $('#topNav ul li.sel').append($('#subMenu ul'));
+                $('#topNav').append($('.dvSocialIcon'));
+                $('.dvSocialIcon').css("display", "block");
+
+            }
+            else {
+                $('#subMen).append($('#topNav ul li.sel ul'));
+                $('.dvSocialIcon').css("display", "none");
+            }
+        });
+    });
+
+    function ShowHideMenu(flag) {
+        if ($(window).width() < 752) {
+            if (flag)
+                $('.menunav').removeClass('hidden-xs');
+
+            else
+                $('.menunav').addClass('hidden-xs');
+        }
+    }
+
+
+', 
+
+',     
+     .breadcrumb {
+       width:120.8%;
+       margin-bottom: 0px;
+       margin-top: 37px;
+       border-radius: 0 !important;
+    }
+
+    .secNav ul {
+        width :99.9%;
+    }
+     .secNav {
+        width:120.9%;
+    }
+
+    .breadcrumb > li + li:before {
+        content: ">";
+    }
+', 
+ 
+
+', 
+', 
+       ',              
+        
+                            ', 
+                            ', 
+                                ',   
+                            ',  
+                        
+                            ', 
+                            ', 
+                                ', Our Solutions',   
+                            ', 
+                        
+                            ', 
+                            ', 
+                                ', About Us',   
+                            ',  
+                        
+                            ', 
+                            ', 
+                                ', Tools and Knowledge',   
+                            ', 
+                        
+                            ', 
+                            ', 
+                                ', Forms & Downloads',   
+                            ',  
+                        
+                            ', 
+                            ', 
+                                ', Careers',   
+                            ', 
+                        
+                            ', 
+                            ', 
+                                ', Login',   
+                            ',  
+                        
+    ', 
+
+', 
+
+
+', 
+', 
+      
+', 
+    
+    
+ ',  
+
+
+', 
+    ', 
+    
+    ', 
+    ',        
+', 
+', 
+
+
+
+
+ 
+', 
+    ', Home', 
+    ', 
+        ', 
+    ', 
+        ', 
+    ', 
+        ', 
+', 
+
+ 
+
+
+                                    ', 
+
+                                    ', 
+
+                                        ', 
+                                            ', 
+                                                ', 
+	
+                                                    
+                                                        ', 
+                                                            ', 
+		', It looks like your browser does not have JavaScript enabled. Please turn on JavaScript and try again.', 
+
+		', 
+	', 
+                                                        ', 
+                                                    
+                                                
+', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                                ', 
+                                ', 
+                                    ', 
+                                        ', 
+	
+
+', 
+.tickerbg
+{
+    background:url(/_layouts/15/AB/HL/Images/grey-bg.png) repeat-x;
+    height: 30px;
+    }
+.textcolor
+{
+    color:#9c0831;
+    font-size:12px;
+    padding:0;
+    margin:0;
+}
+', 
+', 
+', 
+', 
+
+', 
+    ', Important : ', 
+', 
+', 
+    ', 
+    ', Loans originated, booked and serviced by Aditya Birla Housing Finance Limited and all loans at the sole discretion of Aditya Birla Housing Finance Limited.', 
+    ', 
+', 
+', 
+', 
+', 
+
+', 
+                                    ', 
+                                ', 
+                            ', 
+                            ', 
+
+                            ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                                    ', 
+                                                        ', 
+                                                            
+	
+			', 
+       ', 
+	 ', 
+            ', 
+	', 
+		', 
+			', 
+				
+
+
+', 
+    function CallPopup(URl) {
+
+        tb_show('Img', URl + '?TB_iframe=true&amp;height=390&amp;width=570&amp;modal=true', false);
+    }
+    //S:Infrasoft
+    //jQuery(document).ready(function ($) {
+    //    var _SlideshowTransitions = [
+    //    //Fade Fly in R
+    //        {$Duration: 1200, x: -0.3, $During: { $Left: [0.3, 0.7] }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true }
+    //    //Fade Fly out L
+    //        , { $Duration: 1200, x: 0.3, $SlideOut: true, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true }
+    //        ];
+    //    var _CaptionTransitions = [];
+    //    _CaptionTransitions["L"] = { $Duration: 800, x: 0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["R"] = { $Duration: 800, x: -0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["T"] = { $Duration: 800, y: 0.6, $Easing: { $Top: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["B"] = { $Duration: 800, y: -0.6, $Easing: { $Top: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["TL"] = { $Duration: 800, x: 0.6, y: 0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine, $Top: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["TR"] = { $Duration: 800, x: -0.6, y: 0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine, $Top: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["BL"] = { $Duration: 800, x: 0.6, y: -0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine, $Top: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+    //    _CaptionTransitions["BR"] = { $Duration: 800, x: -0.6, y: -0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine, $Top: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+
+    //    _CaptionTransitions["CLIP|LR"] = { $Duration: 600, $Clip: 3, $Easing: $JssorEasing$.$EaseInOutCubic };
+    //    _CaptionTransitions["MCLIP|L"] = { $Duration: 600, $Clip: 1, $Move: true, $Easing: $JssorEasing$.$EaseInOutCubic };
+    //    _CaptionTransitions["LISTH|L"] = { $Duration: 1000, x: 0.8, $Clip: 1, $Easing: $JssorEasing$.$EaseInOutCubic, $ScaleClip: 0.8, $Opacity: 2, $During: { $Left: [0.4, 0.6], $Clip: [0, 0.4], $Opacity: [0.4, 0.6]} };
+    //    _CaptionTransitions["WAVE|L"] = { $Duration: 1300, x: 0.6, y: 0.3, $Easing: { $Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseInWave }, $Opacity: 2, $Round: { $Top: 2.5} };
+    //    _CaptionTransitions["JUMPDN|R"] = { $Duration: 1000, x: -0.6, y: 0.4, $Easing: { $Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseOutJump }, $Round: { $Top: 1.5} };
+    //    _CaptionTransitions["DDG|TR"] = { $Duration: 1200, x: -0.3, y: 0.3, $Zoom: 1, $Easing: { $Left: $JssorEasing$.$EaseInJump, $Top: $JssorEasing$.$EaseInJump }, $Opacity: 2, $During: { $Left: [0, 0.8], $Top: [0, 0.8] }, $Round: { $Left: 0.8, $Top: 0.8} };
+    //    _CaptionTransitions["DODGEDANCE|L"] = { $Duration: 1200, x: 0.3, y: -0.3, $Zoom: 1, $Easing: { $Left: $JssorEasing$.$EaseInJump, $Top: $JssorEasing$.$EaseInJump, $Zoom: $JssorEasing$.$EaseOutQuad }, $Opacity: 2, $During: { $Left: [0, 0.8], $Top: [0, 0.8] }, $Round: { $Left: 0.8, $Top: 2.5} };
+    //    _CaptionTransitions["FLUTTER|L"] = { $Duration: 600, x: 0.2, y: -0.1, $Easing: { $Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseInWave }, $Opacity: 2, $Round: { $Top: 1.3} };
+    //    _CaptionTransitions["TORTUOUS|VB"] = { $Duration: 1200, y: -0.2, $Zoom: 1, $Easing: { $Top: $JssorEasing$.$EaseOutWave, $Zoom: $JssorEasing$.$EaseOutCubic }, $Opacity: 2, $During: { $Top: [0, 0.7] }, $Round: { $Top: 1.3} };
+    //    _CaptionTransitions["FADE"] = { $Duration: 600, $Opacity: 2 };
+    //    _CaptionTransitions["ZMF|10"] = { $Duration: 600, $Zoom: 11, $Easing: { $Zoom: $JssorEasing$.$EaseInExpo, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 };
+    //    _CaptionTransitions["RTT|10"] = { $Duration: 600, $Zoom: 11, $Rotate: 1, $Easing: { $Zoom: $JssorEasing$.$EaseInExpo, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInExpo }, $Opacity: 2, $Round: { $Rotate: 0.8} };
+    //    _CaptionTransitions["RTTL|BR"] = { $Duration: 600, x: -0.6, y: -0.6, $Zoom: 11, $Rotate: 1, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Top: $JssorEasing$.$EaseInCubic, $Zoom: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInCubic }, $Opacity: 2, $Round: { $Rotate: 0.8} };
+
+    //    var options = {
+    //        $FillMode: 2,                                       //[Optional] The way to fill image in slide, 0 stretch, 1 contain (keep aspect ratio and put all inside slide), 2 cover (keep aspect ratio and cover whole slide), 4 actual size, 5 contain for large image, actual size for small image, default value is 0
+    //        $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+    //        $AutoPlayInterval: 4000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+    //        $PauseOnHover: 1,                                   //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+
+    //        $ArrowKeyNavigation: true,   			            //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
+    //        $SlideEasing: $JssorEasing$.$EaseOutQuint,          //[Optional] Specifies easing for right to left animation, default value is $JssorEasing$.$EaseOutQuad
+    //        $SlideDuration: 800,                               //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+    //        $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
+    //        //$SlideWidth: 600,                                 //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+    //        //$SlideHeight: 300,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+    //        $SlideSpacing: 0, 					                //[Optional] Space between each slide in pixels, default value is 0
+    //        $DisplayPieces: 1,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+    //        $ParkingPosition: 0,                                //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+    //        $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
+    //        $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+    //        $DragOrientation: 1,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+    //        $SlideshowOptions: {                                //[Optional] Options to specify and enable slideshow or not
+    //            $Class: $JssorSlideshowRunner$,                 //[Required] Class to create instance of slideshow
+    //            $Transitions: _SlideshowTransitions,            //[Required] An array of slideshow transitions to play slideshow
+    //            $TransitionsOrder: 1,                           //[Optional] The way to choose transition to play slide, 1 Sequence, 0 Random
+    //            $ShowLink: true                                    //[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
+    //        },
+
+    //        $CaptionSliderOptions: {                            //[Optional] Options which specifies how to animate caption
+    //            $Class: $JssorCaptionSlider$,                   //[Required] Class to create instance to animate caption
+    //            $CaptionTransitions: _CaptionTransitions,       //[Required] An array of caption transitions to play caption, see caption transition section at jssor slideshow transition builder
+    //            $PlayInMode: 1,                                 //[Optional] 0 None (no play), 1 Chain (goes after main slide), 3 Chain Flatten (goes after main slide and flatten all caption animations), default value is 1
+    //            $PlayOutMode: 3                                 //[Optional] 0 None (no play), 1 Chain (goes before main slide), 3 Chain Flatten (goes before main slide and flatten all caption animations), default value is 1
+    //        },
+
+    //        $BulletNavigatorOptions: {                          //[Optional] Options to specify and enable navigator or not
+    //            $Class: $JssorBulletNavigator$,                 //[Required] Class to create navigator instance
+    //            $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+    //            $AutoCenter: 1,                                 //[Optional] Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+    //            $Steps: 1,                                      //[Optional] Steps to go for each navigation request, default value is 1
+    //            $Lanes: 1,                                      //[Optional] Specify lanes to arrange items, default value is 1
+    //            $SpacingX: 8,                                   //[Optional] Horizontal space between each item in pixel, default value is 0
+    //            $SpacingY: 8,                                   //[Optional] Vertical space between each item in pixel, default value is 0
+    //            $Orientation: 1                                 //[Optional] The orientation of the navigator, 1 horizontal, 2 vertical, default value is 1
+    //        },
+
+    //        $ArrowNavigatorOptions: {                           //[Optional] Options to specify and enable arrow navigator or not
+    //            $Class: $JssorArrowNavigator$,                  //[Requried] Class to create arrow navigator instance
+    //            $ChanceToShow: 0,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+    //            $AutoCenter: 2,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+    //            $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+    //        }
+
+    //    };
+
+    //    var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+
+    //    //responsive code begin
+    //    //you can remove responsive code if you don't want the slider scales while window resizes
+    //    /*
+    //    function ScaleSlider() {
+    //    var bodyWidth = document.body.clientWidth;
+    //    if (bodyWidth)
+    //    jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 1920));
+    //    else
+    //    window.setTimeout(ScaleSlider, 30);
+    //    }
+
+    //    ScaleSlider();
+
+    //    if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+    //    $(window).bind('resize', ScaleSlider);
+    //    }
+    //    */
+
+    //    //if (navigator.userAgent.match(/(iPhone|iPod|iPad)/)) {
+    //    //    $(window).bind("orientationchange", ScaleSlider);
+    //    //}
+    //    //responsive code end
+    //});
+    //E:Infrasoft
+
+', 
+', 
+', 
+', 
+', 
+    .share-icon
+    {
+        display: inline-block;
+        float: left;
+        margin: 4px;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        vertical-align: middle;
+        background-image: url(/_layouts/15/AB/HL/Images/Slider/share-icons.png);
+    }
+    
+    .share-facebook
+    {
+        background-position: 0px 0px;
+    }
+    
+    .share-facebook:hover
+    {
+        background-position: 0px -40px;
+    }
+    
+    .share-twitter
+    {
+        background-position: -40px 0px;
+    }
+    
+    .share-twitter:hover
+    {
+        background-position: -40px -40px;
+    }
+    
+    .share-pinterest
+    {
+        background-position: -80px 0px;
+    }
+    
+    .share-pinterest:hover
+    {
+        background-position: -80px -40px;
+    }
+    
+    .share-linkedin
+    {
+        background-position: -240px 0px;
+    }
+    
+    .share-linkedin:hover
+    {
+        background-position: -240px -40px;
+    }
+    
+    
+    .share-googleplus
+    {
+        background-position: -120px 0px;
+    }
+    
+    .share-googleplus:hover
+    {
+        background-position: -120px -40px;
+    }
+    
+    
+    .share-stumbleupon
+    {
+        background-position: -360px 0px;
+    }
+    
+    .share-stumbleupon:hover
+    {
+        background-position: -360px -40px;
+    }
+    
+    .share-email
+    {
+        background-position: -320px 0px;
+    }
+    
+    .share-email:hover
+    {
+        background-position: -320px -40px;
+    }
+', 
+', 
+
+
+', 
+    .sliderBorder 
+{
+        background:#fff;
+        border-top:2px solid #fcc600;
+        padding:10px 2px 5px 2px;
+        box-shadow:0px 0px 2px 2px #C3C3C3;
+        border-radius:4px 4px 4px 4px;
+}
+
+ol.carousel-indicators li 
+{
+        background: #fff;
+        border: 3px solid #fff;
+        margin-left: 8px;
+        width: 11px;
+        height: 11px;
+        border-radius: 100%;
+}
+
+ol.carousel-indicators li.active 
+{
+        background: #000;
+        border: 3px solid rgba(0, 0, 0, 0.1);
+        margin-left: 8px;
+        width: 12px;
+        height: 12px;
+}
+
+ol.carousel-indicators li:hover 
+{
+        background: #000;
+        border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+
+', 
+', 
+', 
+
+    ', 
+    ', 
+      ', 
+      ', 
+        
+        
+        
+      ', 
+
+      ', 
+      ', 
+    ', 
+', 
+', 
+
+
+
+
+', 
+', 
+
+', 
+
+
+', 
+    var myCarousel = $('div.carousel');
+    //myCarousel.append("<ol class='carousel-indicators'></ol>");
+    var indicators = myCarousel.find('ol.carousel-indicators');
+    //console.log('no of items = ' + myCarousel.find('.carousel-inner').children('.item').length);
+    myCarousel.find(".carousel-inner").children(".item").each(function (index) {
+        (index === 0) ?
+        indicators.append('<li data-target="#home-page-banner" data-slide-to="' + index + '" class="active"></li>\n') :
+        indicators.append('<li data-target="#home-page-banner" data-slide-to="' + index + '"></li>');
+    });
+', 
+
+			', 
+		', 
+	', 
+', 
+        ',     
+        ', 
+        ', 
+         ', 
+	', 
+		', 
+			', 
+				
+', 
+', 
+    $(document).ready(function () {
+        $('.solnBoxContent').find('.rtBorder').last().css('display', 'none');
+    });
+
+    var sliderpostion = 1;
+    var firstElement;
+    var secondElement;
+    var thirdElement;
+
+    $(document).ready(function () {
+
+        // if (screen.width < 800) {
+        //var windowsize = $(window).width();
+        //if (windowsize < 800) {
+        //    $('.contContainer-os').bxSlider({
+        //        slideWidth: 300,
+        //        minSlides: 2,
+        //        maxSlides: 6,
+        //        slideMargin: 10,
+        //        pager: false,
+        //    });
+        //    $('.featureDescContent').children().remove();
+
+        //}
+        //scrollerBox();
+        //alert(document.getElementById(sliderpostion));
+        //alert($('#1'));
+    });
+
+
+    function HideElement(id) {
+        $(id).addClass('hidden-xs');
+        $(id).addClass('hidden-sm');
+    }
+
+    function UnhideElement(id) {
+        $(id).removeClass('hidden-xs');
+        $(id).removeClass('hidden-sm');
+    }
+
+    function scrollerBox() {
+        var itemLen = $('div#contentSliderBox').find('div.containerslider').length;
+        //console.log(itemLen);
+        $('div#contentSliderHome div#contentSliderBox').width(itemLen * 115 + 'px');
+    }
+
+    $(window).resize(function () {
+
+        //alert($(window).width()); 763
+
+        firstElement = '#' + sliderpostion;
+        secondElement = '#' + (sliderpostion + 1);
+
+        //unhide 1st & 2nd element
+        UnhideElement(firstElement);
+        UnhideElement(secondElement);
+
+        if ($(window).width() < 992 && $(window).width() > 500) {
+            thirdElement = '#' + (sliderpostion + 2);
+            UnhideElement(thirdElement);
+        } else {
+            thirdElement = '#' + (sliderpostion + 2);
+            HideElement(thirdElement);
+        }
+
+        //alert($(window).width());
+        if ($(window).width() < 1200 && $(window).width() > 992) {
+            document.getElementById('leftarrow').style.visibility = "hidden";
+            document.getElementById('rightarrow').style.visibility = "hidden";
+        }
+        else {
+            //  document.getElementById('leftarrow').style.visibility = "visible";
+            document.getElementById('leftarrow').style.visibility = "hidden";
+            document.getElementById('rightarrow').style.visibility = "visible";
+        }
+        //scrollerBox();
+    });
+
+    function SlideLeft() {
+        //alert(sliderpostion);
+        if (sliderpostion <= 1) {
+            document.getElementById('leftarrow').style.visibility = "hidden";
+            document.getElementById('rightarrow').style.visibility = "visible";
+            return;
+        }
+        else {
+            document.getElementById('leftarrow').style.visibility = "visible";
+            document.getElementById('rightarrow').style.visibility = "visible";
+        }
+        if ($(window).width() < 992 && $(window).width() > 500)
+            HideElement(thirdElement);
+        else
+            HideElement(secondElement);
+
+        sliderpostion = sliderpostion - 1;
+
+        firstElement = '#' + sliderpostion;
+        secondElement = '#' + (sliderpostion + 1);
+
+        if ($(window).width() < 992 && $(window).width() > 500)
+            thirdElement = '#' + (sliderpostion + 2);
+
+
+        UnhideElement(firstElement);
+    }
+
+
+    function SlideRight() {
+        //alert(sliderpostion);
+        if (sliderpostion >= 4) {
+            document.getElementById('rightarrow').style.visibility = "hidden";
+            document.getElementById('leftarrow').style.visibility = "visible";
+            return;
+        }
+        else {
+            document.getElementById('rightarrow').style.visibility = "visible";
+            document.getElementById('leftarrow').style.visibility = "visible";
+        }
+
+        HideElement(firstElement);
+        //HideElement(secondElement);
+
+        sliderpostion = sliderpostion + 1;
+
+        firstElement = '#' + sliderpostion;
+        secondElement = '#' + (sliderpostion + 1);
+
+        if ($(window).width() < 992 && $(window).width() > 500)
+            thirdElement = '#' + (sliderpostion + 2);
+
+
+        if ($(window).width() < 992 && $(window).width() > 500)
+            UnhideElement(thirdElement);
+        else
+            UnhideElement(secondElement);
+    }
+
+', 
+
+
+', 
+   
+        Our Solutions
+   
+', 
+
+
+', 
+    ', 
+        ', 
+        ', 
+            
+                    ', 
+                        ', 
+                            ', 
+
+    Home Loans',  
+        
+    ', 
+                            ', 
+                            ', 
+                            ', 
+                                
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                
+                    ', 
+                        ', 
+                            ', 
+
+    Loan Against Property',  
+        
+    ', 
+                            ', 
+                            ', 
+                            ', 
+                                
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                
+                    ', 
+                        ', 
+                            ', 
+
+    Lease Rental Discounting',  
+        
+    ', 
+                            ', 
+                            ', 
+                            ', 
+                                
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                
+                    ', 
+                        ', 
+                            ', 
+
+    Construction Finance',  
+        
+    ', 
+                            ', 
+                            ', 
+                            ', 
+                                
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                
+                    ', 
+                        ', 
+                            ', 
+
+    Commercial Property Purchase',  
+        
+    ', 
+                            ', 
+                            ', 
+                            ', 
+                                
+                            ', 
+                        ', 
+                        ', 
+                        ', 
+                    ', 
+                
+            ', 
+            ', 
+        ', 
+        ', 
+    ', 
+    ', 
+', 
+
+
+
+', 
+', 
+
+
+			', 
+		', 
+	', 
+', 
+        
+        ',  
+          ', 
+
+        ', 
+         ', 
+	', 
+		', 
+			', 
+				
+
+', u"
+    $(document).ready(function () {
+
+        $('.rtBorder').last().css('display', 'none');
+    });
+", 
+', 
+					
+', 
+    ', 
+         ', 
+            ', 
+               
+                        ', 
+                           ', SME Loans',          
+                        ', 
+                     
+                        ', 
+                           ', ESOP Financing',          
+                        ', 
+                     
+                        ', 
+                           ', Loan Against Property',          
+                        ', 
+                     
+                        ', 
+                           ', Loan Against Securities',          
+                        ', 
+                      
+            ',  
+            ', 
+         ', 
+        ', 
+            ', 
+                
+                    ', 
+                    ', 
+                       ', To truly succeed in business, you need a reliable partner to support your every move. ', 
+', Aditya Birla Finance offers Business Loans to fund your business needs...', 
+', Learn More', 
+',                        
+                       ', 
+                    ', 
+                    ', 
+                
+                    ', 
+                    ', 
+                       ', You have got the cake! Now you can eat it too!  ', 
+', Avail of your hard earned ESOPs with ease...', 
+', Learn More', \u200b',                        
+                       ', 
+                    ', 
+                    ', 
+                
+                    ', 
+                    ', 
+                       ', Your Property is your best asset. ', 
+', u"Don't keep it ideal! ", 
+', With our Commercial Real Estate & Mortgage solutions get additional funds to grow your business\u2026', 
+', Learn More', 
+',                        
+                       ', 
+                    ', 
+                    ', 
+                
+                    ', 
+                    ', 
+                       ', Your investment in shares and securities hold great hidden potential.',  ', 
+', Have you discovered it yet?', ... ', 
+', Learn More', 
+',                        
+                       ', 
+                    ', 
+                    ', 
+                 
+            ', 
+            ',  
+            
+        ', 
+        ', 
+        ',  
+        ', 
+    ', 
+    
+				', 
+
+
+			', 
+		', 
+	', 
+', 
+        ',    
+         		
+
+                                                        ', 
+                                                        ', 
+                                                            ', 
+                                                                
+                                                                ', 
+	', 
+
+	', 
+', 
+                                                            ', 
+
+                                                        ', 
+                                                    ', 
+
+                                                    ', 
+
+
+                                                        ', 
+                                                            
+	
+
+                                                            ', 
+                                                                ', 
+
+
+                                                                    ', 
+	
+', 
+', 
+
+        /*Infrasoft*/
+    /*.navWrapper
+    {
+        display: block;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        color: #363636;
+        margin: 0px;
+        padding: 5px 1px 0px 1px;
+        text-align: center;
+        width: 48px;
+    }
+    .portletNav_ContLink li.selNav .navWrapper
+    {
+        display: block;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        color: #363636;
+        margin: 3px 0px 0px 0px;
+        padding: 1px 0px 3px 0px;
+        text-align: center;
+        border-top: 1px solid #C1C1C1;
+        border-right: 1px solid #C1C1C1;
+        border-left: 1px solid #C1C1C1;
+        background: #fff;
+        width: 48px;
+    }*/
+
+
+      .modal iframe {
+    width: 100%;
+    /*min-height: 270px;*/
+    height:350px;
+}
+
+', 
+', 
+    function OpenLocation(pageUrl, StateID, CityID) {
+
+        var State;
+        var City;
+        //State
+        var dropdown = document.getElementById(StateID);
+        var index = dropdown.selectedIndex
+        var StateselectedValue = dropdown.options[index].text
+        //City
+        var dropdown = document.getElementById(CityID);
+        var index = dropdown.selectedIndex
+        var CityselectedValue = dropdown.options[index].text
+
+        
+        
+        //Modified by Vinay Karalkar on 12-May-2015 ... Branch locator      - Begin
+        //        var redirectUrl = pageUrl + "?State=" + StateselectedValue + "&City=" + CityselectedValue + "&TB_iframe=true&height=500&width=715&modal=true";
+        var redirectUrl = pageUrl + "?State=" + StateselectedValue + "&City=" + CityselectedValue;
+        //        tb_show('', redirectUrl, false);
+        window.open(redirectUrl, "_blank");
+        //Modified by Vinay Karalkar on 12-May-2015 ... Branch locator      - End
+    }
+
+    function SendAdvisiorEmail(pageUrl) {
+        var redirectUrl;
+
+        redirectUrl = pageUrl + "?TB_iframe=true&height=500&width=715&modal=true";
+        tb_show('', redirectUrl, false);
+    }
+    $(document).ready(function () {
+        $('.close span').css("float", "right");
+       
+    });
+', 
+
+
+
+ ', 
+            ', 
+                ', Contact Us', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                  ', 
+                                    ', 
+                                  ', 
+                                    ', Call
+                                ', 
+                            ', 
+                        ', 
+
+                        ', 
+                                    ', 
+                         ', 
+                                    ', 
+                                  ', 
+                                    ', Email', 
+
+                        ', 
+                                    ', 
+                         ', 
+                                    ', 
+                                  ', 
+                                    ', Locator', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                           ', For queries call us at', Phone+91 84259 55555', 
+                             ', For queries call us at ', +91 84259 55555', 
+                            ', 
+                            
+                            ', 
+                            ', 
+                            ', Request a meeting', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                            ', Send an Email', 
+                        ', 
+                        ', 
+                            Choose your nearest location
+                                
+                              
+
+                                        
+                                                ', 
+                                                   
+                                            ',  
+                                                Select State:
+                                                ', 
+		', Telangana', 
+		', Delhi', 
+		', Maharashtra', 
+		', Haryana', 
+		', Rajasthan', 
+		', Gujarat', 
+		', Punjab', 
+		', Uttar Pradesh', 
+		', Orissa', 
+		', Chhattisgarh', 
+		', Karnataka', 
+		', Tamil Nad, 
+		', West Bengal', 
+		', Madhya Pradesh', 
+		', Uttarakhand', 
+		', Andra Pradesh', 
+		', Gujarat - Reg. Off.', 
+
+	', 
+
+                                            ', 
+                                                ', 
+                                    ', 
+		
+                                                ', 
+                                                   
+                                                    ', 
+                                                        Select Location:
+                                                        ', 
+			', Hyderabad', 
+
+		', 
+
+                                                    ', 
+                                                ', 
+
+                                            
+	', 
+                                 
+                                    ', 
+                                        ', 
+                                        ', Locate Us', 
+                                    ', 
+
+
+                              
+                        ', 
+                    ', 
+                ', 
+            ', 
+      
+    ', 
+
+
+', 
+', 
+  ', 
+    ', 
+      ', 
+          ', 
+        ', ×', 
+       ', 
+      ', 
+      ', 
+             
+       
+      ', 
+    
+    ', 
+  ', 
+', 
+
+
+', 
+
+    //$('document').ready(function () {
+    //    jQuery.noConflict();
+    //    window.closeModal = function () {
+    //        $('#mdModal').modal('hide');
+            
+    //    };
+    //});
+
+    function CallPage(clickedBtn) {
+        var pgsrc;
+        var title;
+        if (clickedBtn == 'srm') {
+            pgsrc = 'FLUI_SendRelationshipManager';
+            title = "Request a meeting";
+        }
+        else {
+            
+            pgsrc = 'FLUI_SendEmail';
+            title = "Email";
+        }
+        document.getElementById('dvbody').innerHTML = '<iframe class="if-req-meeting" src="/_layouts/15/AB.HL/' + pgsrc + '.aspx" />';
+        $('#myModalLabel').html(title);
+
+    }
+
+    
+   
+    
+    //$(function () {
+    //    $('#A1').click(function () {
+    //        alert('Hi');
+    //        //console.log(1);
+    //        //$('#myModalInviteDestination').modal('hide');
+    //    });
+    //});
+    
+', 
+
+
+
+
+', 
+
+                                                                ', 
+
+
+                                                                ', 
+
+                                                                ', 
+                                                                ', 
+                                                                    ', 
+                                                                        ', 
+                                                                        ', 
+                                                                        ', 
+                                                                        ', 
+                                                                        ', 
+                                                                    ', 
+                                                                ', 
+                                                                ', 
+                                                                    ', TRACK YOUR APPLICATION STATUS', 
+                                                                    ', 
+                                                                ', 
+
+
+                                                                ', 
+	
+', 
+
+', 
+   .btnmenu_wrapper {
+	width: 217px;
+	float: left;
+	padding-top: 5px;
+}
+.btnEMI_bg {
+	background: url(/_layouts/15/AB/HL/Images/EMI_C_bg.jpg) no-repeat top left;
+	width: 200px;
+	height: 36px;
+	float: left;
+	margin-bottom: 6px;
+}
+.btnEMI_bg_text a {
+	padding: 18px 0px 0px 59px;
+	float: left;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #ffffff;
+	text-decoration:none;
+}
+.btnInst_bg {
+	background: url(/_layouts/15/AB/HL/Images/Instant_App.jpg) no-repeat top left;
+	width: 200px;
+	height: 36px;
+	float: left;
+	margin-bottom: 6px;
+}
+.app_form_bg {
+	background: url(/_layouts/15/AB/HL/Images/app_form_bg.jpg) no-repeat top left;
+	width: 200px;
+	height: 37px;
+	float: left;
+	margin-bottom: 6px;
+}
+/* Modified by Vinay on 18-Jun-2015 --- Image Change Begin */
+/*.call_you_bg {
+	background: url(/_layouts/15/AB/HL/Images/call_you_bg.jpg) no-repeat top left;
+	width: 200px;
+	height: 37px;
+	float: left;
+	margin-bottom: 6px;
+}*/
+    .call_you_bg
+    {
+        background: url(/_layouts/15/AB/HL/Images/WantToCall/Click-to-connect.png) no-repeat top left;
+        width: 200px;
+        float: left;
+        margin-bottom: 6px;
+    }
+/* Modified by Vinay on 18-Jun-2015 --- Image Change End */
+
+/* Added by Vinay on 14-Jul-2015 --- Web Call back design changes ---- Begin */
+.droppop {
+  width: 179px;
+  background-color: #fecd67;
+  float: right;
+}    
+ .droppopcall a {
+	width: 179px;
+	padding: 8px 0px 10px 0px;
+	background-color: #fecd67;
+	border-bottom: #f7f9f8 solid 1px;
+	color: #c71d2a;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	float: right;
+	text-align: center; text-decoration:none;
+}
+/* Added by Vinay on 14-Jul-2015 --- Web Call back design changes ---- End */
+
+/* Added by Vinay on 28-Jan-2016 --- DP2464 : Customer Application Tracking in ABHFL public site ---- Begin */
+    .btn_AppTracker
+    {
+    width: 217px;
+    float: left;
+    margin-bottom: 6px;
+    background: url(/_layouts/15/AB/HL/Images/app_status_red_bar.jpg) no-repeat top left;
+    padding: 8px 0px 8px 0px;
+    text-align:center;
+    }
+/* Added by Vinay on 28-Jan-2016 --- DP2464 : Customer Application Tracking in ABHFL public site ---- End */
+
+', 
+
+', 
+
+    function SendAdvisiorEmail(pageUrl) {
+        var redirectUrl;
+
+        redirectUrl = pageUrl + "?TB_iframe=true&height=500&width=715&modal=true";
+        tb_show('', redirectUrl, false);
+    }
+    
+    /*Added by Vinay on 17-Jun-2015 --Want Us To Call changes -- Begin*/
+    function showWantUsToCall(pageUrl) {
+        var redirectUrl;
+
+        redirectUrl = pageUrl + "&TB_iframe=true&height=633&width=328&modal=true";
+        tb_show('', redirectUrl, false);
+    }
+
+    
+
+    function ShowThankYouPage() {
+        var redirectUrl;
+        var pageUrl = "/_layouts/15/AB.HL/Thanku.html";
+        redirectUrl = pageUrl + "?TB_iframe=true&height=150&width=260&modal=true";
+        tb_show('', redirectUrl, false);
+    }
+    /*Added by Vinay on 17-Jun-2015 --Want Us To Call changes -- End*/
+
+    /*Added by Vinay on 14-Jul-2015 --Want Us To Call changes -- Begin*/
+    function showhide() {
+        if (document.getElementById('divCall').style.display == 'block') {
+            document.getElementById('divCall').style.display = 'none';
+        }
+        else {
+            document.getElementById('divCall').style.display = 'block';
+        }
+    }
+    /*Added by Vinay on 14-Jul-2015 --Want Us To Call changes -- End*/
+', 
+
+', 
+
+', 
+', 
+  ', TRACK YOUR APPLICATION STATUS',         
+    ', 
+    
+', 
+
+      ', 
+        ', EMI CALCULATOR', 
+      ', 
+      ', 
+        ', 
+        ', INSTANT APPROVAL', 
+        
+        ', 
+      ', 
+      ', 
+        ', APPLICATION FORM', 
+            
+        ', 
+      ', 
+      ', 
+        ', 
+            ', 
+        ', 
+            ', 
+
+            ', 
+              ', 
+                ', Call Me Now', 
+                 ', Call Me Later', 
+              ', 
+            ', 
+            
+        ', 
+      ', 
+    ', 
+
+
+
+
+
+
+
+', 
+                                                                ', 
+                                                                ', 
+                                                                ', 
+                                                                    ', 
+                                                                        Pre-Approved Property
+                                                                    ', 
+                                                                    ', 
+                                                                        ', 
+                                                                    ', 
+                                                                ', 
+                                                                ', 
+                                                                    ', 
+                                                                        ', 
+                                                                            ', 
+                                                                        ', 
+                                                                    ', 
+                                                                ', 
+
+                                                                ', 
+                                                                ', 
+                                                                ', 
+                                                                    ', 
+                                                                        Quick Links
+                                                                    ', 
+                                                                ', 
+                                                                ', 
+                                                                    ', 
+                                                                        ', 
+
+                                                                            ', Schedule of Charges and Interest Rates', 
+                                                                            ', Need funds to grow your business?', 
+                                                                            
+                                                                            ', Debenture Trustee', 
+                                                                            ', Annual Report 2015-16', 
+                                                                            ', Grievance Redressal Mechanism', 
+                                                                            ', Interest Rate', 
+                                                                            ', Audited Financial Results for the period ended 30th September 2016', 
+                                                                            ', Notice of EGM to be held on November 21, 2016', 
+
+                                                                        ', 
+                                                                    ', 
+                                                                ', 
+
+
+
+                                                                ', 
+                                                            ', 
+                                                            ', 
+                                                        ', 
+                                                    ', 
+                                                ', 
+                                                ', 
+                                                ', 
+                                                ', 
+                                                    ', 
+                                                        
+		', 
+	', 
+		', 
+			', 
+', 
+
+
+', 
+    $(document).ready(function () {
+
+
+        /* $("#show").click(function () {*/
+        $("#MaskedDiv").show();
+        $("#I_shop_popup").fadeIn();
+        /*});*/
+        $(".popup-close").click(function (e) {
+            $("#I_shop_popup").fadeOut();
+            $("#MaskedDiv").fadeOut();
+        });
+        $(".cont-btn").click(function (e) {
+            $("#I_shop_popup").fadeOut();
+            $("#MaskedDiv").fadeOut();
+        });
+        if ($(window).width() >= 752) checkCookie();                
+    });
+', 
+', 
+
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toGMTString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i].trim();
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+
+    function checkCookie() {
+
+
+        var user = getCookie("HL_overlay");
+
+        if (user != "") {
+
+        }
+        else {
+
+
+            setCookie("HL_overlay", "Home_Loans", 7);
+            openInlinePopUp('UpadteContact_p', 'UpadteContact');
+
+        }
+    }
+    function playVideo() {
+        $("#divTWOverlay").hide();
+        $("#ifrTWVideo").show();
+    }
+', 
+
+', 
+    ', 
+        ', 
+        ', 
+            ', 
+                ', 
+        ', 
+        ', 
+        ', 
+
+    ', 
+', 
+', 
+    .shop_popup {
+       
+        left: 50%;
+        top: 50%;
+        margin-left: -305px;
+        margin-top: -275px;
+        position: fixed;
+        display: none;
+        z-index: 1000;
+        background: white !important;
+        padding: 15px;
+    }
+', 
+', 
+		', 
+	', 
+', 
+
+                                                        ', 
+                                                    ', 
+                                                    ', 
+                                                ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                    
+                                ', 
+                                
+                                ', 
+                                    ', 
+                                        ', 
+                                            
+', 
+    .tblFooter td
+    {
+        vertical-align: top;
+    }
+    .divColumn H3
+    {
+        font-weight: bold;
+        font-family:verdana, arial, helvetica, sans-serif;
+    }
+    .divColumn a:hover 
+    {
+        color: #6C7F85;
+        text-decoration: none;
+    }    
+	.divColumn
+    {
+	    float:left;
+	    width:320px;
+    }
+', 
+', 
+', Site Map', 
+', 
+             ', 
+    
+            ', Home', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                ', 
+            ',   
+             ', 
+        
+            ', Forms & Downloads', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                            ', 
+                                ', Forms',  
+                            ', 
+                        
+                ', 
+            ',   
+             ', 
+        
+            ', Copyright & Usage', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                            ', 
+                                ', Website User Policy',  
+                            ', 
+                        
+                            ', 
+                                ', Privacy Policy',  
+                            ', 
+                        
+                            ', 
+                                ', Disclaimers',  
+                            ', 
+                        
+                            ', 
+                                ', Interest Rate Model',  
+                            ', 
+                        
+                            ', 
+                                ', Fair Practices Code',  
+                            ', 
+                        
+                            ', 
+                                ', Most Important Terms & Conditions',  
+                            ', 
+                        
+                            ', 
+                                ', Misselling Policy',  
+                            ', 
+                        
+                            ', 
+                                ', Whistle Blower Policy',  
+                            ', 
+                        
+                            ', 
+                                ', Appointment letter of Independent Director',  
+                            ', 
+                        
+                            ', 
+                                ', Code of conduct',  
+                            ', 
+                        
+                            ', 
+                                ', Resignation of Director',  
+                            ', 
+                        
+                ', 
+            ',   
+             ', 
+        
+                ', 
+                ', 
+    
+            ', Our Solutions', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                            ', 
+                                ', Home Loans',  
+                            ', 
+                        
+                            ', 
+                                ', Loan Against Property',  
+                            ', 
+                        
+                            ', 
+                                ', Lease Rental Discounting',  
+                            ', 
+                        
+                            ', 
+                                ', Construction Finance',  
+                            ', 
+                        
+                            ', 
+                                ', Commercial Property Purchase',  
+                            ', 
+                        
+                ', 
+            ',   
+             ', 
+        
+            ', About Us', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                            ', 
+                                ', Overview',  
+                            ', 
+                        
+                            ', 
+                                ', Company Profile',  
+                            ', 
+                        
+                            ', 
+                                ', Our People',  
+                            ', 
+                        
+                            ', 
+                                ', Press & Media',  
+                            ', 
+                        
+                ', 
+            ',   
+             ', 
+        
+                ', 
+                ', 
+    
+            ', Tools and Knowledge', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                            ', 
+                                ', Calculator',  
+                            ', 
+                        
+                            ', 
+                                ', Risk Factors and FAQs',  
+                            ', 
+                        
+                            ', 
+                                ', Financial Reports',  
+                            ', 
+                        
+                ', 
+            ',   
+             ', 
+        
+            ', Careers', 
+             ', 
+            ', 
+                ', 
+                    ', 
+                    
+                            ', 
+                                ', Post Your Resume',  
+                            ', 
+                        
+                ', 
+            ',   
+             ', 
+        
+', 	
+    ', 
+    ', 
+   
+    ', 
+    ', 
+', 
+
+
+                                        ', 
+                                    ', 
+                                ', 
+
+                                ', 
+
+                                    ', 
+
+                                        ', 
+
+                                            ', 
+
+                                                ', Home', 
+
+                                                ', Sitemap', 
+
+                                            ', 
+                                            ', 
+
+                                        ', 
+
+                                    ', 
+                                    ', 
+
+                                ', 
+                                ', 
+                            ', 
+
+
+                        ', 
+                    ', 
+                    ', 
+	
+                        
+                            ', u"//<![CDATA[
+        var formDigestElement = document.getElementsByName('__REQUESTDIGEST')[0];
+        if (!((formDigestElement == null) || (formDigestElement.tagName.toLowerCase() != 'input') || (formDigestElement.type.toLowerCase() != 'hidden') ||
+            (formDigestElement.value == null) || (formDigestElement.value.length <= 0)))
+        {
+            formDigestElement.value = '0x6ACD9A3CEA58A71046A4CA5DAEFBEC2BD5FA0A2F857528DBD7ACBF795A89438DEEE68C5BD4E46A38D88D42049A11A51AE9FB486DF38C35567FC7E164835A6227,06 Jan 2017 14:53:21 -0000';
+            g_updateFormDigestPageLoaded = new Date();
+        }
+        //]]>
+        ", 
+                        
+                    
+', 
+                ', 
+            ', 
+        
+
+', 
+//<![CDATA[
+var _spFormDigestRefreshInterval = 1440000;window.g_updateFormDigestPageLoaded = new Date(); window.g_updateFormDigestPageLoaded.setDate(window.g_updateFormDigestPageLoaded.getDate() -5);var _fV4UI = true;
+function _RegisterWebPartPageCUI()
+{
+    var initInfo = {editable: false,isEditMode: false,allowWebPartAdder: false,listId: "{96552efe-c27a-4367-b64b-f89bff947784}",itemId: 3,recycleBinEnabled: true,enableMinorVersioning: true,enableModeration: true,forceCheckout: true,rootFolderUrl: "\u002fPages",itemPermissions:{High:16,Low:196673}};
+    SP.Ribbon.WebPartComponent.registerWithPageManager(initInfo);
+    var wpcomp = SP.Ribbon.WebPartComponent.get_instance();
+    var hid;
+    hid = document.getElementById("_wpSelected");
+    if (hid != null)
+    {
+        var wpid = hid.value;
+        if (wpid.length > 0)
+        {
+            var zc = document.getElementById(wpid);
+            if (zc != null)
+                wpcomp.selectWebPart(zc, false);
+        }
+    }
+    hid = document.getElementById("_wzSelected");
+    if (hid != null)
+    {
+        var wzid = hid.value;
+        if (wzid.length > 0)
+        {
+            wpcomp.selectWebPartZone(null, wzid);
+        }
+    }
+};
+function __RegisterWebPartPageCUI() {
+ExecuteOrDelayUntilScriptLoaded(_RegisterWebPartPageCUI, "sp.ribbon.js");}
+_spBodyOnLoadFunctionNames.push("__RegisterWebPartPageCUI");var __wpmExportWarning='This Web Part Page has been personalized. As a result, one or more Web Part properties may contain confidential information. Make sure the properties contain information that is safe for others to read. After exporting this Web Part, view properties in the Web Part description file (.WebPart) by using a text editor such as Microsoft Notepad.';var __wpmCloseProviderWarning='You are about to close this Web Part.  It is currently providing data to other Web Parts, and these connections will be deleted if this Web Part is closed.  To close this Web Part, click OK.  To keep this Web Part, click Cancel.';var __wpmDeleteWarning='You are about to permanently delete this Web Part.  Are you sure you want to do this?  To delete this Web Part, click OK.  To keep this Web Part, click Cancel.';__defaultFired = false;__defaultFired = false;__defaultFired = false;__defaultFired = false;__defaultFired = false;__defaultFired = false;__defaultFired = false;__defaultFired = false;
+            ExecuteOrDelayUntilScriptLoaded(
+                function() 
+                {                    
+                    Srch.ScriptApplicationManager.get_current().states = {"webUILanguageName":"en-US","webDefaultLanguageName":"en-US","contextUrl":"http://adityabirlahomeloans.com","contextTitle":"Aditya Birla Housing Finance Limited","supportedLanguages":[{"id":1025,"label":"Arabic"},{"id":1093,"label":"Bengali"},{"id":1026,"label":"Bulgarian"},{"id":1027,"label":"Catalan"},{"id":2052,"label":"Chinese (Simplified)"},{"id":1028,"label":"Chinese (Traditional)"},{"id":1050,"label":"Croatian"},{"id":1029,"label":"Czech"},{"id":1030,"label":"Danish"},{"id":1043,"label":"Dutch"},{"id":1033,"label":"English"},{"id":1035,"label":"Finnish"},{"id":1036,"label":"French"},{"id":1031,"label":"German"},{"id":1032,"label":"Greek"},{"id":1095,"label":"Gujarati"},{"id":1037,"label":"Hebrew"},{"id":1081,"label":"Hindi"},{"id":1038,"label":"Hungarian"},{"id":1039,"label":"Icelandic"},{"id":1057,"label":"Indonesian"},{"id":1040,"label":"Italian"},{"id":1041,"label":"Japanese"},{"id":1099,"label":"Kannada"},{"id":1042,"label":"Korean"},{"id":1062,"label":"Latvian"},{"id":1063,"label":"Lithuanian"},{"id":1086,"label":"Malay"},{"id":1100,"label":"Malayalam"},{"id":1102,"label":"Marathi"},{"id":1044,"label":"Norwegian"},{"id":1045,"label":"Polish"},{"id":1046,"label":"Portuguese (Brazil)"},{"id":2070,"label":"Portuguese (Portugal)"},{"id":1094,"label":"Punjabi"},{"id":1048,"label":"Romanian"},{"id":1049,"label":"Russian"},{"id":3098,"label":"Serbian (Cyrillic)"},{"id":2074,"label":"Serbian (Latin)"},{"id":1051,"label":"Slovak"},{"id":1060,"label":"Slovenian"},{"id":3082,"label":"Spanish (Spain)"},{"id":2058,"label":"Spanish (Mexico)"},{"id":1053,"label":"Swedish"},{"id":1097,"label":"Tamil"},{"id":1098,"label":"Telugu"},{"id":1054,"label":"Thai"},{"id":1055,"label":"Turkish"},{"id":1058,"label":"Ukrainian"},{"id":1056,"label":"Urdu"},{"id":1066,"label":"Vietnamese"}],"navigationNodes":[{"id":1001,"name":"Everything","url":"{searchcenterurl}/results.aspx","promptString":"Search everything"},{"id":1002,"name":"People","url":"{searchcenterurl}/peopleresults.aspx","promptString":"Search people"},{"id":1003,"name":"Conversations","url":"{searchcenterurl}/conversationresults.aspx","promptString":"Search conversations"},{"id":0,"name":"This Site","url":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","promptString":"Search this site"}],"searchCenterUrl":"/SearchCenter/","showAdminDetails":false,"defaultPagesListName":"Pages","isSPFSKU":false,"userAdvancedLanguageSettingsUrl":"http://abfltclwebapp01:80/my/_layouts/15/EditProfile.aspx?Section=LanguageAndRegion\u0026UserSettingsProvider=234bf0ed%2D70db%2D4158%2Da332%2D4dfd683b4148\u0026ReturnUrl=http%3A%2F%2Fadityabirlahomeloans%2Ecom%2Fpages%2Fhome%2Easpx\u0026ShowAdvLang=1","defaultQueryProperties":{"culture":1033,"uiLanguage":1033,"summaryLength":180,"desiredSnippetLength":90,"enableStemming":true,"enablePhonetic":false,"enableNicknames":false,"trimDuplicates":true,"bypassResultTypes":false,"enableInterleaving":true,"enableQueryRules":true,"processBestBets":true,"enableOrderingHitHighlightedProperty":false,"hitHighlightedMultivaluePropertyLimit":-1,"processPersonalFavorites":true}};
+                    Srch.U.trace(null, 'SerializeToClient', 'ScriptApplicationManager state initialized.');
+                }, 'Search.ClientControls.js');var g_clientIdDeltaPlaceHolderMain = "DeltaPlaceHolderMain";
+var g_clientIdDeltaPlaceHolderUtilityContent = "DeltaPlaceHolderUtilityContent";
+
+                    ExecuteOrDelayUntilScriptLoaded(
+                        function() 
+                        {
+                            if ($isNull($find('ctl00_SmallSearchInputBox1_csr')))
+                            {
+                                var sb = $create(Srch.SearchBox, {"delayLoadTemplateScripts":true,"messages":[],"queryGroupNames":["MasterPage"],"renderTemplateId":"~sitecollection/_catalogs/masterpage/Display Templates/Search/Control_SearchBox_Compact.js","resultsPageAddress":"/pages/search.aspx","serverInitialRender":true,"showDataErrors":true,"states":{},"tryInplaceQuery":false}, null, null, $get("ctl00_SmallSearchInputBox1_csr"));
+                                sb.activate('Search...', 'ctl00_SmallSearchInputBox1_csr_sbox', 'ctl00_SmallSearchInputBox1_csr_sboxdiv', 'ctl00_SmallSearchInputBox1_csr_NavButton', 'ctl00_SmallSearchInputBox1_csr_AutoCompList', 'ctl00_SmallSearchInputBox1_csr_NavDropdownList', 'ctl00_SmallSearchInputBox1_csr_SearchLink', 'ms-srch-sbprogress', 'ms-srch-sb-prompt ms-helperText');
+                            }
+                        }, 'Search.ClientControls.js');
+                    ExecuteOrDelayUntilScriptLoaded(
+                        function() 
+                        {
+                            if ($isNull($find('ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr')))
+                            {
+                                var sb = $create(Srch.SearchBox, {"delayLoadTemplateScripts":true,"messages":[],"queryGroupNames":["MasterPage"],"renderTemplateId":"~sitecollection/_catalogs/masterpage/Display Templates/Search/Control_SearchBox_Compact.js","resultsPageAddress":"/pages/search.aspx","serverInitialRender":true,"states":{},"tryInplaceQuery":false}, null, null, $get("ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr"));
+                                sb.activate('Search...', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_sbox', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_sboxdiv', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_NavButton', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_AutoCompList', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_NavDropdownList', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_SearchLink', 'ms-srch-sbprogress', 'ms-srch-sb-prompt ms-helperText');
+                            }
+                        }, 'Search.ClientControls.js');//]]>
+', 
+', 
+        ', 
+            
+        ', 
+        
+        
+        
+                
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+
+    
+']

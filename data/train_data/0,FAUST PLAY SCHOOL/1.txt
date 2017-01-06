@@ -1,0 +1,3221 @@
+[
+
+    ', 
+    ', 
+    ', 
+    ', 
+
+    ', 
+    ', 
+    ', 
+
+    ', 
+    ', 
+        ', Skip to Main Content', 
+    ', 
+
+    ', 
+    
+    ', 
+
+    ', 
+    
+
+    
+
+', u"
+	/* SPECIAL MODE BAR */
+	div.sw-special-mode-bar {
+		background: #FBC243 url('http://www.erboe.net/Static/V2_16_01//GlobalAssets/Images/special-mode-bar-background.png') no-repeat;
+		height: 30px;
+		text-align: left;
+		font-size: 12px;
+		position: relative;
+		z-index: 10000;
+	}
+	div.sw-special-mode-bar > div {
+		padding: 8px 0 0 55px;
+		font-weight: bold;
+	}
+	div.sw-special-mode-bar > div > a {
+		margin-left: 20px;
+		background: #A0803D;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		color: #fff;
+		padding: 4px 6px 4px 6px;
+		font-size: 11px;
+	}
+	
+	body.blue div.sw-special-mode-bar, body.green div.sw-special-mode-bar, body.red div.sw-special-mode-bar {
+	    display: none;
+	}
+
+	/* END SPECIAL MODE BAR */
+", 
+
+', 
+	
+	function SWEndPreviewMode() { 
+		var data = "{}";
+		var success = "window.location='';";
+		var failure = "CallControllerFailure(result[0].errormessage);";
+		CallController("http://www.erboe.net/site/SiteController.aspx/EndPreviewMode", data, success, failure);
+	}
+	
+	function SWEndEmulationMode() {
+		SetUnescapedCookie('UserID', GetCookie('SourceEmulationUserID'));
+		DeleteCookie('SourceEmulationUserID');
+		window.location = 'http://www.erboe.net/ums/Users/Users.aspx';
+	}
+
+	function SWEndPreviewConfigMode() {
+	    var data = "{}";
+	    var success = "window.location='';";
+	    var failure = "CallControllerFailure(result[0].errormessage);";
+	    CallController("http://www.erboe.net/site/SiteController.aspx/EndPreviewConfigMode", data, success, failure);
+	}
+', 
+            
+
+    ', 
+', 
+', 
+', 
+', District Home', 
+', 
+', 
+', Select a School...', 
+', 
+', Select a School', 
+', 
+', McKenzie School', 
+', A. S. Faust School', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Sign In', 
+', Register', 
+', 
+', 
+$(document).ready(function() {
+    $('#sw-search-input').keyup(function(e) {        if (e.keyCode == 13) {
+            SWGoToSearchResultsPageswsearchinput();
+        }
+    });
+    $('#sw-search-input').val($('#swsearch-hid-word').val())});
+function SWGoToSearchResultsPageswsearchinput() {
+window.location.href="http://www.erboe.net/site/Default.aspx?PageType=6&SiteID=9&SearchString=" + $('#sw-search-input').val();
+}
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+	', 
+		', 
+		', 
+			', 
+				', 
+				', 
+					', A. S. Faust School', 
+					', All Children Can Succeed', 
+				', 
+			', 
+			', 
+		', 
+		', 
+	', 
+	', 
+		', 
+			', 
+			', 
+		', 
+		', 
+', 
+', Home', 
+', 
+', 
+', Our School', 
+', 
+', Notices', 
+', u"Principal's Message", 
+', Guidance', 
+', Media Center', 
+', Music Dept.', 
+', Faust School  Program of Studies 2016-2017', 
+', 
+', 
+', 
+', For Families', 
+', 
+', Emergency Closings', 
+', Student Handbook', 
+', Food Services', 
+', Genesis', 
+', Parent Resources', 
+', Student Resources', 
+', Community Updates', 
+', 
+', 
+', 
+', For Staff', 
+', 
+', E-mail', 
+', Genesis', 
+', OnCourse', 
+', Source 4 Teachers', 
+', Resources', 
+', Technology Help Desk', 
+', Staff Portal', 
+', Maintenance Repair Ticket', 
+', 
+', 
+', 
+', PTA', 
+', 
+', 
+', Teacher Webpages', 
+', Calendar', 
+', 
+', 
+
+
+
+', 
+    $(document).ready(function() {
+        channelHoverIE();
+        channelTouch();
+    });
+
+    function channelTouch() {
+        // this will change the dropdown behavior when it is touched vs clicked.
+        // channels will be clickable on second click. first click simply opens the menu.
+        $('#channel-navigation > .sw-channel-item > a').on({
+            'touchstart': function (e) {
+                
+                // see if has menu
+                if ($(this).siblings('ul.sw-channel-dropdown').length > 0) {
+                    var button = $(this);
+
+                    // add href as property if not already set
+                    // then remove href attribute
+                    if (!button.prop('linkHref')) {
+                        button.prop('linkHref', button.attr('href'));
+                        button.removeAttr('href');
+                    }
+
+                    // check to see if menu is already open
+                    if ($(this).siblings('ul.sw-channel-dropdown').is(':visible')) {
+                        // if open go to link
+                        window.location.href = button.prop('linkHref');
+                    } 
+
+                } 
+            }
+        });
+    }
+
+
+    
+    function channelHoverIE(){
+		// set z-index for IE7
+		var parentZindex = $('#channel-navigation').parents('div:first').css('z-index');
+		var zindex = (parentZindex > 0 ? parentZindex : 8000);
+		$(".sw-channel-item").each(function(ind) {
+			$(this).css('z-index', zindex - ind);
+			zindex --;
+		});
+	    $(".sw-channel-item").hover(function(){
+	        var subList = $(this).children('ul');
+	        if ($.trim(subList.html()) !== "") {
+		        subList.show();
+		    }
+		    $(this).addClass("hover");
+	    }, function(){
+		    $(".sw-channel-dropdown").hide();
+		    $(this).removeClass("hover");
+	    });
+    }
+
+', 
+
+ 
+		', 
+		', 
+			', 
+			', 
+				', 
+					', 
+', 
+', 
+', 
+var photoGallery166= {"Album": {"title":"Photo Gallery - 768 X 374","description":"","transitiondelay":"6","fadestyle":"NO","gallerywidth":"768","backgroundaudio":"/cms/lib8/NJ01912659/Centricity/ModuleInstance/167/","loopaudio":"False","lgpath":"/cms/lib8/NJ01912659/Centricity/ModuleInstance/167/large/","tnpath":"/cms/lib8/NJ01912659/Centricity/ModuleInstance/167/thumbs/","Images": [{"photoname":"Faust School","src":"faust.jpg?rnd=0.304061945203721","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Red Ribbon Week","src":"Red Ribbon Week.jpg?rnd=0.244601354116854","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust students compete in STEAM/Robotic competition","src":"Faust students compete in STEAM Robotic competition.jpg?rnd=0.0680341683644961","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Cheerleaders","src":"Faust Cheerleaders.jpg?rnd=0.414736489958473","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Technology at Faust","src":"Technology at Faust.jpg?rnd=0.632883800954038","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Veterans Day Visit","src":"Veterans Day Visit.jpg?rnd=0.0404770286010937","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Cheerleaders 2016","src":"Faust Cheerleaders 2016.jpg?rnd=0.609567746803894","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Band","src":"Faust Band.png?rnd=0.433278501701205","caption":"","pause":"","link":"","target":"_self"},{"photoname":"E. Rutherford Veterans","src":"E. Rutherford Veterans.jpg?rnd=0.798145386296392","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Students","src":"Faust Students.jpg?rnd=0.264481576748417","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Marching Band","src":"Faust Marching Band.jpg?rnd=0.0987493750167775","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Marching  Band","src":"Marching  Band.jpg?rnd=0.959243852160519","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Winter Concert","src":"Faust Winter Concert.jpg?rnd=0.832258770164223","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Winter Concert Choir","src":"Faust Winter Concert Choir.jpg?rnd=0.612430421455032","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Band ","src":"Faust Band 1.jpg?rnd=0.906388581686834","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust 8th Grade Volleyball Game","src":"Faust 8th Grade Volleyball Game.JPG?rnd=0.223210652928432","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Winter Concert","src":"6K1A6863.jpg?rnd=0.742161546248087","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Marching Band","src":"Faust Marching Band.JPG?rnd=0.909012937410275","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Band","src":"Faust Band.jpg?rnd=0.528520591803137","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Halloween Fun","src":"Halloween Fun.JPG?rnd=0.541220130650895","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Winter Concert","src":"6K1A6899.jpg?rnd=0.648413464263274","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Student Council","src":"Faust Student Council.JPG?rnd=0.591002098559869","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Cheerleaders","src":"Faust Cheerleaders.jpg?rnd=0.431128668799591","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Fall Fun","src":"Fall Fun.JPG?rnd=0.765763165785821","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Red Ribbon Week","src":"Red Ribbon Week.JPG?rnd=0.306015369624838","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust March Band","src":"Faust March Band.jpg?rnd=0.224443983391134","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Volleyball Game Teachers","src":"Faust Volleyball Game Teachers.JPG?rnd=0.0577667607263507","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Shows Respect","src":"Faust Shows Respect.jpg?rnd=0.218442378201728","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Red Ribbon Week","src":"Red Ribbon 6.jpg?rnd=0.125456948823043","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Band","src":"Faust Band.JPG?rnd=0.917143208867471","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Band National Anthem Assembly","src":"9 12.jpg?rnd=0.299711504159361","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Wildcat Mural","src":"DSCN3111.JPG?rnd=0.226137315028411","caption":"","pause":"","link":"","target":"_self"}]}}
+', 
+', 
+', 
+', 
+', 
+				', 
+				', 
+					', 
+', 
+', 
+	', Quick Links', 
+	', 
+		', 
+', Parent Questions', 
+', 
+', ABCD Block Calendar Schedule', 
+', 
+', East Rutherford Mobile App Information', 
+', 
+', Website Registration Information', 
+', 
+',  School Closing, Early Dismissal and Delayed Opening Procedures', 
+', 
+', District Calendar 2016-2017', 
+', 
+', Food Services Menu/Information', 
+', 
+',  Lunch Program-On-line Pay for It ', 
+', 
+', 
+', 
+', 
+	', 
+	', 
+	', 
+', 
+', 
+', 
+				', 
+				', 
+					', 
+
+
+
+', 
+    ', 
+        $(document).ready(function() {
+            var DomainID = '9';
+            var PageID = '11';
+            var RenderLoc = '0';
+            var MIID = '25';
+
+            //added to check to make sure moderated content doesn't bleed through the dialog
+            if ($('#dialog-overlay-WindowLargeModal-body.moderateContent').length > 0) {
+                $("#module-content-" + MIID).find(".ui-widget-detail").find(".ui-article").append("<p>&nbsp;</p>");
+            }
+        });
+    ', 
+
+    ', u"$(document).ready(function() {CheckScript('ModuleView');CheckScript('Mustache');
+ });", 
+    
+    ', 
+', 
+	', 
+		', Welcome', 
+	', 
+	
+	', 
+		', 
+', 
+	', 
+		', 
+        	', 
+', Alfred S. Faust School', 
+', Mrs. Regina Barrale, Principal ', 100 Uhland Street ', East Rutherford, NJ 07073 ', 201-804-3100', 
+', Fax # 201-804-7669', 
+', ________________________________________________________________________', 
+', Dear Parents / Guardians:', 
+', It is with great pleasure that I am able to serve you and your children as the educational leader of Alfred S. Faust Intermediate School. On behalf of the administration, faculty, and professional support staff, I want to take this opportunity to welcome you to our web page.', 
+', At Faust School, our primary focus is to provide our students with a high quality education in a positive learning environment. We encourage our students to always try their best in order to succeed in our world today and in their future endeavors.', 
+', Besides teaching essential instructional skills that align with the Common Core State Standards (CCSS), we are also building their confidence by having them practice technology skills to help them do well in the State of New Jersey\u2019s new mandated standardized test called Partnership for Assessment of Readiness for College and Careers (PARCC).', 
+', Our dedicated and experienced teaching staff uses an educational approach that is data-driven and tailored to the needs of every student. Our teachers use a variety of assessments to regularly monitor their students\u2019 progress in order to differentiate instruction for every child. Listed below are some of our main goals that our teachers and professional support staff members strive for at Alfred S. Faust School:', 
+', 1. Provide a curriculum that is conducive to learning, relevant, challenging, integrative, and exploratory for middle school students.', 2. Instill school spirit and pride that involves all of the stakeholders in our community.', 3. Develop positive relationships with parents in order to support their child\u2019s education.', 4. Continue to take professional development courses that use instructional methods to prepare our teachers and support staff members in meeting the challenges that our students encounter.', 
+', Parent involvement is also extremely important to us and we encourage you to play a major role in being proactive in your child\u2019s education. As the principal of the school, I want parents to feel comfortable in expressing their ideas and concerns that help make a positive contribution towards student achievement.', 
+', Always feel free to explore our website and spend some time looking over our student handbook, curriculum, program of study and teacher\u2019s web pages. You may also monitor your child\u2019s progress by accessing the Genesis Parent Portal, which gives you up to date information on homework and a view into the teacher\u2019s grade book. The Genesis Parent Access Link and Parent Portal User Manual are now easily accessible at the bottom of our homepage.', 
+', u"Please don\u2019t hesitate to contact me at any time. I frequently check my e-mails and voice mail messages and am always visible throughout the school. My door is always open and I look forward to working with you in your child's education.", 
+', Warmest regards,', 
+', Mrs. Regina Barrale', 
+', Alfred S. Faust School Principal', 
+', Click here to email me.', 
+', (201) 804-3100 Ext. 3003', 
+',  ', 
+', 
+        ', 
+		', 
+	', 
+', 
+', 
+', 
+	', 
+		
+			
+		
+		', 
+	', 
+', 
+', 
+$(document).ready(function (){
+});
+function LoadGroupedData(container, MIID, PMI, groupYear, groupMonth, groupBy, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://www.erboe.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=9&PageID=11&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&EnableQuirksMode=0&ViewID=' + viewToUse + '&Tag=' + tag, container, 2, 'chkSidebar();');
+}
+function LoadData(container, MIID, PMI, flexDataID, groupYear, groupMonth, groupBy, targetView, tag) {
+  if(targetView !== undefined || targetView.Length() == 0){
+  //targetView looks at the hidden Detail View defined in the Builder View.
+      targetView = $('#hid-'+MIID+'-DetailView').val();
+   }
+  GetContent('http://www.erboe.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=9&PageID=11&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&FlexDataID=' + flexDataID + '&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&RenderLoc=0&FromRenderLoc=0&EnableQuirksMode=0&Tag=' + tag + '&ViewID=' + targetView, container, 2, 'chkSidebar();');
+}
+function LoadTaggedData(container, MIID, PMI, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://www.erboe.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=9&PageID=11&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&Tag=' + tag + '&EnableQuirksMode=0&ViewID='+viewToUse, container, 2, 'chkSidebar();');
+}
+', 
+', 
+
+', 
+', 
+				', 
+				', 
+					', 
+
+
+
+', 
+    ', 
+        $(document).ready(function() {
+            var DomainID = '9';
+            var PageID = '11';
+            var RenderLoc = '0';
+            var MIID = '22';
+
+            //added to check to make sure moderated content doesn't bleed through the dialog
+            if ($('#dialog-overlay-WindowLargeModal-body.moderateContent').length > 0) {
+                $("#module-content-" + MIID).find(".ui-widget-detail").find(".ui-article").append("<p>&nbsp;</p>");
+            }
+        });
+    ', 
+
+    ', u"$(document).ready(function() {CheckScript('ModuleView');CheckScript('Mustache');
+ });", 
+    
+    ', 
+', 
+	', 
+		', Announcements', 
+	', 
+	
+	', 
+		', 
+', 
+    ', 
+		', 
+			', Faust Monthly Calendar January 2017', 
+', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+    ', 
+		', 
+			', Faust Winter Concert Choir Video', 
+', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+    ', 
+		', 
+			', Faust Winter Concert Instrumental Video', 
+', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+    ', 
+		', 
+			', Faust Student Handbook 2016-2017', 
+', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+    ', 
+		', 
+			', Becton High School Students Accepted into Top Colleges', 
+', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+    ', 
+		', 
+			', ABR District and School Report Grade 2015', 
+', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+', 
+	', 
+		
+		',  
+		', 
+	', 
+', 
+', 
+$(document).ready(function (){
+});
+function LoadGroupedData(container, MIID, PMI, groupYear, groupMonth, groupBy, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://www.erboe.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=9&PageID=11&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&EnableQuirksMode=0&ViewID=' + viewToUse + '&Tag=' + tag, container, 2, 'chkSidebar();');
+}
+function LoadData(container, MIID, PMI, flexDataID, groupYear, groupMonth, groupBy, targetView, tag) {
+  if(targetView !== undefined || targetView.Length() == 0){
+  //targetView looks at the hidden Detail View defined in the Builder View.
+      targetView = $('#hid-'+MIID+'-DetailView').val();
+   }
+  GetContent('http://www.erboe.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=9&PageID=11&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&FlexDataID=' + flexDataID + '&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&RenderLoc=0&FromRenderLoc=0&EnableQuirksMode=0&Tag=' + tag + '&ViewID=' + targetView, container, 2, 'chkSidebar();');
+}
+function LoadTaggedData(container, MIID, PMI, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://www.erboe.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=9&PageID=11&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&Tag=' + tag + '&EnableQuirksMode=0&ViewID='+viewToUse, container, 2, 'chkSidebar();');
+}
+', 
+', 
+
+', 
+', 
+', 
+ ', 
+     ', Upcoming Events', 
+ ', 
+ ', 
+		', 
+', 
+', 
+     ', January 16, 2017', 
+     ', 
+         ', Martin Luther King Day Schools Closed', 
+     ', 
+', 
+', 
+', 
+', 
+     ', January 19, 2017', 
+     ', 
+         ', 7:00 PM - 8:00 PM', 
+         ', Board of Education Meeting Faust School 7 PM', 
+     ', 
+', 
+', 
+', 
+', 
+     ', January 27, 2017', 
+     ', 
+         ', One Session Day for Students-PD for Teachers', 
+     ', 
+', 
+', 
+', 
+', 
+     ', February 16, 2017', 
+     ', 
+         ', 7:00 PM - 8:00 PM', 
+         ', Board of Education Meeting Faust School 7 PM', 
+     ', 
+', 
+', 
+', 
+', 
+     ', February 17, 2017', 
+     ', 
+         ', u"Presidents' Day Recess Schools Closed", 
+     ', 
+', 
+', 
+', 
+', 
+     ', February 20, 2017', 
+     ', 
+         ', u"Presidents' Day Recess Schools Closed", 
+     ', 
+', 
+', 
+	', 
+', View Calendar', 
+ ', 
+ ', 
+ ', 
+', 
+', 
+', 
+', 
+				', 
+			', 
+			', 
+		', 
+		', 
+			', 
+			', 
+				', 
+					', 100 Uhland Street', 	
+					', East Rutherford, NJ 07073', 
+					', Site Map',  
+	
+				', 
+				', 
+					', 201-804-3100', 
+					', 
+				', 
+				', 
+					', 
+						', 
+					', 
+					', 
+						', 
+							', Questions or Feedback?', 
+							', |', 
+							', Privacy Policy', 
+							', |', 
+							', Terms of Use', 
+						', 
+						', 
+							', Copyright © 2002-', var currYear = new Date();document.write(currYear.getFullYear());',  Schoolwires, Inc. All rights reserved.', 
+						', 
+					', 
+				', 
+			', 
+			', 
+		', 
+	', 
+	', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Questions or Feedback?',  | ', 
+', Blackboard Web Community Manager Privacy Policy (Updated)',  | ', 
+', Terms of Use', 
+', 
+', 
+', Copyright © 2002-2017 Blackboard, Inc. All rights reserved.', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"
+   $(document).ready(function(){
+      var beaconURL='http://analytics.schoolwires.com/analytics.asmx/Insert?AccountNumber=uLD3LmlyaQFO2%2bqVSHo9og%3d%3d&SessionID=a3498768-2920-4a6a-9365-86c6692913b5&SiteID=9&ChannelID=0&SectionID=9&PageID=11&HitDate=1%2f6%2f2017+9%3a53%3a51+AM&Browser=Unknown+0.0&OS=Unknown&IPAddress=117.192.222.209';
+      try {
+         $.getJSON(beaconURL + '&jsonp=?', function(myData) {});
+      } catch(err) { 
+         // prevent site error for analytics
+      }
+   });
+", 
+
+    ', 
+
+    
+    
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowMedium-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowSmall-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowLarge-base').appendTo('body');
+ 		
+		
+    });
+", 
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowMediumModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowSmallModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowLargeModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowXLargeModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-MyAccountSubscriptionOverlay-base').appendTo('body');
+ 		
+		
+    });
+", 
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-InsertOverlay-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-InsertOverlay2-base').appendTo('body');
+ 		
+		
+    });
+", 
+    
+    ', 
+    #videowrapper {
+        position: fixed;
+        z-index: 20000;
+        background: rgba(0, 0, 0, 0.5) none repeat scroll 0% 0%;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+    #videodialog {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        right: 50px;
+        background: #FFF none repeat scroll 0% 0%;
+        z-index: 30000;
+        box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.65);
+        box-sizing: border-box;
+        border: 8px solid #FFF;
+    }
+
+    #videodialog .close-btn {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: 0px 25px 0px 0px;
+        color: #666;
+        line-height: 1;
+        font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    #videodialog .close-btn::after {
+        content: "X";
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 50%;
+        right: 0px;
+        margin-top: -8px;
+        background: #999 none repeat scroll 0% 0%;
+        border-radius: 9px;
+        color: #FFF;
+        font-weight: bold;
+        line-height: 16px;
+        font-size: 9px;
+        text-align: center;
+    }
+        #videodialog-video {
+            margin-top:25px;
+        }
+    ', 
+    ', 
+        function resizeVideoIframe() {
+            $("#videodialog-video iframe").css({ "width": "auto", "height": "auto" });
+            var screenWidth = $(window).width();
+            var screenHeight = $(window).height();
+            //alert('screen width =' + screenWidth + '  screen height=' + screenHeight);
+            var initVidW = 800, initVidH = 600;
+            var vidRatio = initVidH / initVidW;
+            var vidWidth = $("#videodialog-video").width();
+            //alert('videoWidth = ' +vidWidth);
+            var vidHeight = vidWidth * vidRatio;
+
+            if ((vidHeight + 100) > screenHeight) {
+                vidHeight = screenHeight - 140;
+            }
+
+            $("#videodialog-video").css({ "height": (vidHeight) });
+            $("#videodialog-video iframe").css({ "width": vidWidth, "height": vidHeight }); 
+        }
+
+        function resizeVideo() {
+            $("#videodialog-video video").css({ "width": "auto", "height": "auto" });
+            var screenWidth = $(window).width();
+            var screenHeight = $(window).height();
+            //alert('screen width =' + screenWidth + '  screen height=' + screenHeight);
+            var initVidW = 800, initVidH = 600;
+            var vidRatio = initVidH / initVidW;
+            var vidWidth = $("#videodialog-video").width();
+            //alert('videoWidth = ' +vidWidth);
+            var vidHeight = vidWidth * vidRatio;
+
+            if ((vidHeight + 100) > screenHeight) {
+                vidHeight = screenHeight - 140;
+            }
+
+            $("#videodialog-video").css({ "height": (vidHeight) });
+            $("#videodialog-video video").css({ "width": vidWidth, "height": vidHeight });
+            //$(".videoControl").css({ "bottom": $("#videodialog-video video").bottom() + 5, "width": 100 });
+        }
+
+        function closeVideoDialog() {
+            $('#videowrapper').addClass('ui-helper-hidden');
+            $('#videodialog-video').html('');
+            $(window).resize(function () { });
+        }
+    ', 
+    ', 
+        ', 
+            ', CLOSE', 
+            ', 
+        ', 
+    ', 
+    ', 
+
+        $(document).ready(function () {
+
+            removeBrokenImages();
+            checkSidebar();
+            RemoveCookie();
+
+            $('.navigation li.collapsible').each(function () {
+                if ($(this).find('ul').length == 0) {
+                    $(this).removeClass('collapsible');
+                }
+            });
+
+            // find page nav state cookie and add open chevron
+            var arrValues = GetCookie('SWPageNavState').split('~');
+
+            $.each(arrValues, function () {
+                if (this != '') {
+                    $('#' + this).addClass('collapsible').prepend("<div class='bullet collapsible' />");
+                }
+            });
+
+            // find remaining sub menus and add closed chevron and close menu
+            $('.navigation li > ul').each(function () {
+                var list = $(this);
+
+                if (list.parent().hasClass('active') && !list.parent().hasClass('collapsible')) {
+                    // open sub for currently selected page                    
+                    list.parent().addClass('collapsible').prepend("<div class='bullet collapsible' />");
+                } else {
+                    if (list.parent().hasClass('collapsible') && !list.siblings('div').hasClass('collapsible')) {
+                        // open sub for page with auto expand
+                        list.siblings('div.expandable').remove();
+                        list.parent().prepend("<div class='bullet collapsible' />");
+                    }
+                }
+
+                if (!list.siblings('div').hasClass('collapsible')) {
+                    // keep all closed that aren't already set to open
+                    list.parent().addClass('expandable').prepend("<div class='bullet expandable' />");
+                    ClosePageSubMenu(list.parent());
+                } else {
+                    OpenPageSubMenu(list.parent());
+                }
+            });
+
+            // remove bullet from hierarchy if no-bullet set
+            $('.navigation li.collapsible').each(function () {
+                if ($(this).hasClass('no-bullet')) {
+                    if (!$(this).hasClass('navigationgroup')) { $(this).removeClass('collapsible'); }
+                    $(this).children('div.collapsible').remove();
+                }
+            });
+
+            $('.navigation li.expandable').each(function () {
+                if ($(this).hasClass('no-bullet')) {
+                    if (!$(this).hasClass('navigationgroup')) { $(this).removeClass('expandable'); }
+                    $(this).children('div.expandable').remove();
+                }
+            });
+
+            $('.navigation li:not(.collapsible,.expandable,.no-bullet)').each(function () {
+                $(this).prepend("<div class='bullet' />");
+            });
+
+            $('.navigation li.active').parents('ul').each(function () {
+                if (!$(this).hasClass('page-navigation')) {
+                    OpenPageSubMenu($(this).parent());
+                }
+            });
+
+            // set click event for chevron
+            $(document).on('click', '.navigation div.collapsible', function () {
+                ClosePageSubMenu($(this).parent());
+            });
+
+            $(document).on('click', '.navigation div.expandable', function () {
+                OpenPageSubMenu($(this).parent());
+            });
+
+            // set navigation grouping links
+            $(document).on('click', '.navigationgroup.collapsible > a', function () {
+                ClosePageSubMenu($(this).parent());
+            });
+
+            $(document).on('click', '.navigationgroup.expandable > a', function () {
+                OpenPageSubMenu($(this).parent());
+            });
+
+            //SW MYSTART DROPDOWNS
+            $(document).on('click', '.sw-mystart-dropdown', function () {
+                $(this).children(".sw-dropdown").css("display", "block");
+            });
+
+            $(".sw-mystart-dropdown").hover(function () { }, function () {
+                $(this).children(".sw-dropdown").hide();
+                $(this).blur();
+            });
+
+            //SW ACCOUNT DROPDOWN
+            $(document).on('click', '#sw-mystart-account', function () {
+                $(this).children("#sw-myaccount-list").show();
+                $(this).addClass("clicked-state");
+            });
+
+            $("#sw-mystart-account, #sw-myaccount-list").hover(function () { }, function () {
+                $(this).children("#sw-myaccount-list").hide();
+                $(this).removeClass("clicked-state");
+                $("#sw-myaccount").blur();
+            });
+
+            // set hover class for page and section navigation
+            $('.ui-widget.app.pagenavigation, .ui-widget.app.sectionnavigation').find('li > a').hover(function () {
+                $(this).addClass('hover');
+            }, function () {
+                $(this).removeClass('hover');
+            });
+
+            // set active class on channel and section
+            var activeChannelNavType = $('input#hidActiveChannelNavType').val();
+            if (activeChannelNavType == -1) {
+                // homepage is active
+                $('#navc-HP').addClass('active');
+            } else if (activeChannelNavType == 1) {
+                // calendar page is active
+                $('#navc-CA').addClass('active');
+            } else {
+                // channel is active
+                var activeSelectorID = $('input#hidActiveChannel').val();
+                $('#navc-' + activeSelectorID).addClass('active');
+                activeSelectorID = $('input#hidActiveSection').val();
+                $('#navs-' + activeSelectorID).addClass('active');
+            }
+        }); // end document ready
+
+        function OpenPageSubMenu(li) {
+            if (li.prop('tagName').toLowerCase() == "li") {
+                if (li.hasClass('expandable')) {
+                    li.removeClass('expandable').addClass('collapsible');
+                }
+                if (li.find('div:first').hasClass('expandable')) {
+                    li.find('div:first').removeClass('expandable').addClass('collapsible');
+                }
+                li.find('ul:first').show();
+
+                PageNavigationStateCookie();
+            }
+        }
+
+        function ClosePageSubMenu(li) {
+            if (li.prop('tagName').toLowerCase() == "li") {
+                li.removeClass('collapsible').addClass('expandable');
+                li.find('div:first').removeClass('collapsible').addClass('expandable');
+                li.find('ul:first').hide();
+
+                PageNavigationStateCookie();
+            }
+        }
+
+        function PageNavigationStateCookie() {
+            var strCookie = "";
+
+            $('.pagenavigation li > ul').each(function () {
+                var item = $(this).parent('li');
+                if (item.hasClass('collapsible') && !item.hasClass('no-bullet')) {
+                    strCookie += $(this).parent().attr('id') + '~';
+                }
+            });
+
+            SetCookie('SWPageNavState', strCookie);
+        }
+
+        function checkSidebar() {
+            $(".ui-widget-sidebar").each(function () {
+                if ($.trim($(this).html()) != "") {
+                    $(this).show();
+                    $(this).siblings(".ui-widget-detail").addClass("with-sidebar");
+                }
+            });
+        }
+
+        function removeBrokenImages() {
+            //REMOVES ANY BROKEN IMAGES
+            $("span.img img").each(function () {
+                if ($(this).attr("src") !== undefined) {
+                    $(this).parent().parent().show();
+                    $(this).parent().parent().siblings().addClass("has-thumb");
+                }
+            });
+        }
+
+        function LoadEventDetailUE(moduleInstanceID, eventDateID, userRegID, isEdit) {
+            (userRegID === undefined ? userRegID = 0 : '');
+            (isEdit === undefined ? isEdit = false : '');
+            OpenDialogOverlay("WindowMediumModal", { LoadType: "U", LoadURL: "http://www.erboe.net//site/UserControls/Calendar/EventDetailWrapper.aspx?ModuleInstanceID=" + moduleInstanceID + "&EventDateID=" + eventDateID + "&UserRegID=" + userRegID + "&IsEdit=" + isEdit });
+        }
+
+        function RemoveCookie() {
+            // There are no sub page            
+            if ($('.pagenavigation li li').length == 0) {
+                //return false;
+                PageNavigationStateCookie();
+            }
+        }
+    ', 
+
+    ', 
+
+        function AddOffCanvasMenuHeightForSiteNav() {
+            var sitenavulHeight = 0;
+
+            if ($('#sw-pg-sitenav-ul').length > 0) {
+                sitenavulHeight = parseInt($("#sw-pg-sitenav-ul").height());
+            }
+
+            var swinnerwrapHeight = 0;
+
+            if ($('#sw-inner-wrap').length > 0) {
+                swinnerwrapHeight = parseInt($("#sw-inner-wrap").height());
+            }
+
+            // 360px is abount 5 li height
+            if (sitenavulHeight + 360 >= swinnerwrapHeight) {
+                $("#sw-inner-wrap").height(sitenavulHeight + 360);
+            }
+        }
+
+        function AddOffCanvasMenuHeightForSelectSchool() {
+            var selectschoolulHeight = 0;
+
+            if ($('#sw-pg-selectschool-ul').length > 0) {
+                selectschoolulHeight = parseInt($("#sw-pg-selectschool-ul").height());
+            }
+
+            var swinnerwrapHeight = 0;
+
+            if ($('#sw-inner-wrap').length > 0) {
+                swinnerwrapHeight = parseInt($("#sw-inner-wrap").height());
+            }
+
+            // 360px is abount 5 li height
+            if (selectschoolulHeight + 360 >= swinnerwrapHeight) {
+                $("#sw-inner-wrap").height(selectschoolulHeight + 360);
+            }
+        }
+
+        $(document).ready(function () {
+            if ($("#sw-pg-sitenav-a").length > 0) {
+                $(document).on('click', '#sw-pg-sitenav-a', function () {
+                    if ($("#sw-pg-sitenav-ul").hasClass('sw-pgmenu-closed')) {
+                        AddOffCanvasMenuHeightForSiteNav();
+
+                        $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+                        $("#sw-pg-sitenav-ul").removeClass('sw-pgmenu-closed');
+                        $("#sw-pg-sitenav-ul").addClass('sw-pgmenu-open');
+                    } else {
+                        $("#sw-pg-sitenav-ul").removeClass('sw-pgmenu-open');
+                        $("#sw-pg-sitenav-ul").addClass('sw-pgmenu-closed');
+                    }
+                });
+
+                $(document).on('click', '#sw-pg-selectschool-a', function () {
+                    if ($("#sw-pg-selectschool-ul").hasClass('sw-pgmenu-closed')) {
+                        AddOffCanvasMenuHeightForSelectSchool();
+
+                        $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+                        $("#sw-pg-selectschool-ul").removeClass('sw-pgmenu-closed');
+                        $("#sw-pg-selectschool-ul").addClass('sw-pgmenu-open');
+                    } else {
+                        $("#sw-pg-selectschool-ul").removeClass('sw-pgmenu-open');
+                        $("#sw-pg-selectschool-ul").addClass('sw-pgmenu-closed');
+                    }
+                });
+
+                $(document).on('click', '#sw-pg-myaccount-a', function () {
+                    if ($("#sw-pg-myaccount-ul").hasClass('sw-pgmenu-closed')) {
+                        $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+                        $("#sw-pg-myaccount-ul").removeClass('sw-pgmenu-closed');
+                        $("#sw-pg-myaccount-ul").addClass('sw-pgmenu-open');
+                    } else {
+                        $("#sw-pg-myaccount-ul").removeClass('sw-pgmenu-open');
+                        $("#sw-pg-myaccount-ul").addClass('sw-pgmenu-closed');
+                    }
+                });
+
+                $(document).on('click', '.pg-list-bullet', function () {
+                    $(this).prev().toggle();
+
+                    if ($(this).hasClass('closed')) {
+                        AddOffCanvasMenuHeightForSiteNav();
+
+                        $(this).removeClass('closed');
+                        $(this).addClass('open');
+                    } else {
+                        $(this).removeClass('open');
+                        $(this).addClass('closed');
+                    }
+                });
+
+                $(document).on('mouseover', '#sw-pg-selectschool', function () {
+                    $("#sw-pg-selectschool-firstli").removeClass('sw-pg-selectschool-firstli-mouseout').addClass('sw-pg-selectschool-firstli-mouseover');
+                    $("#sw-pg-selectschool-firstli a").addClass('sw-pg-selectschool-firstli-a-mouseover').removeClass('sw-pg-selectschool-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-selectschool', function () {
+                    $("#sw-pg-selectschool-firstli").removeClass('sw-pg-selectschool-firstli-mouseover').addClass('sw-pg-selectschool-firstli-mouseout');
+                    $("#sw-pg-selectschool-firstli a").addClass('sw-pg-selectschool-firstli-a-mouseout').removeClass('sw-pg-selectschool-firstli-a-mouseover');
+                });
+
+                $(document).on('mouseover', '#sw-pg-myaccount', function () {
+                    $("#sw-pg-myaccount-firstli").removeClass('sw-pg-myaccount-firstli-mouseout').addClass('sw-pg-myaccount-firstli-mouseover');
+                    $("#sw-pg-myaccount-firstli a").addClass('sw-pg-myaccount-firstli-a-mouseover').removeClass('sw-pg-myaccount-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-myaccount', function () {
+                    $("#sw-pg-myaccount-firstli").removeClass('sw-pg-myaccount-firstli-mouseover').addClass('sw-pg-myaccount-firstli-mouseout');
+                    $("#sw-pg-myaccount-firstli a").addClass('sw-pg-myaccount-firstli-a-mouseout').removeClass('sw-pg-myaccount-firstli-a-mouseover');
+                });
+
+                $(document).on('mouseover', '#sw-pg-sitenav', function () {
+                    $("#sw-pg-sitenav-firstli").removeClass('sw-pg-sitenav-firstli-mouseout').addClass('sw-pg-sitenav-firstli-mouseover');
+                    $("#sw-pg-sitenav-firstli a").addClass('sw-pg-sitenav-firstli-a-mouseover').removeClass('sw-pg-sitenav-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-sitenav', function () {
+                    $("#sw-pg-sitenav-firstli").removeClass('sw-pg-sitenav-firstli-mouseover').addClass('sw-pg-sitenav-firstli-mouseout');
+                    $("#sw-pg-sitenav-firstli a").addClass('sw-pg-sitenav-firstli-a-mouseout').removeClass('sw-pg-sitenav-firstli-a-mouseover');
+                });
+
+                $(document).on('mouseover', '#sw-pg-district', function () {
+                    $("#sw-pg-district-firstli").removeClass('sw-pg-district-firstli-mouseout').addClass('sw-pg-district-firstli-mouseover');
+                    $("#sw-pg-district-firstli a").addClass('sw-pg-district-firstli-a-mouseover').removeClass('sw-pg-district-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-district', function () {
+                    $("#sw-pg-district-firstli").removeClass('sw-pg-district-firstli-mouseover').addClass('sw-pg-district-firstli-mouseout');
+                    $("#sw-pg-district-firstli a").addClass('sw-pg-district-firstli-a-mouseout').removeClass('sw-pg-district-firstli-a-mouseover');
+                });
+            }
+        });
+
+
+    ', 
+    
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+
+    ', 
+  ', 
+  ', 
+', 
+
+
+    ', 
+
+    
+        ', 
+        ', 
+            $(document).ready(function () {
+                $.smartbanner({
+                    title: 'East Rutherford School District', // Title of the app - CHANGE FOR BRANDED APP ONLY
+                    author: 'Schoolwires, Inc', // Author Name Blackboard, Inc.
+                    price: 'FREE', // Price
+                    appStoreLanguage: 'us', // Language code for App Store
+                    inAppStore: 'On the App Store', // Text after price for iOS
+                    inGooglePlay: 'In Google Play', // Text after price for Android
+                    inAmazonAppStore: 'In the Amazon Appstore',
+                    inWindowsStore: 'In the Windows Store', //Text of price for Windows
+                    GooglePlayParams: null, // Aditional parameters for the market
+                    icon: 'http://www.erboe.net/GlobalAssets/Images/MobileNative/sw_app_logo.png', // The URL of the icon - SET THIS TO THE iOS APP STORE ICON 
+			    iconGloss: false, // Force gloss effect
+			    button: 'VIEW', // Text for the install button
+			    url: null, // The URL for the button. Keep null if you want the button to link to the app store.
+			    scale: 'auto', // Scale based on viewport size (set to 1 to disable)
+			    speedIn: 300, // Show animation speed of the banner
+			    speedOut: 400, // Close animation speed of the banner
+			    daysHidden: 1, // Duration to hide the banner after being closed (0 = always show banner)
+			    daysReminder: 30, // Duration to hide the banner after "VIEW" is clicked *separate from when the close button is clicked* (0 = always show banner)
+			    force: null, // Choose 'ios' or 'android'. Don't do a browser check, just always show this banner
+			    hideOnInstall: true, // Hide the banner after "VIEW" is clicked.
+			    layer: false, // Display as overlay layer or slide down the page
+			    iOSUniversalApp: true, // If the iOS App is a universal app for both iPad and iPhone, display Smart Banner to iPad users, too.
+			    appendToSelector: 'body', //Append the banner to a specific selector
+			    pushSelector: 'html' // What element is going to push the site content down; this is where the banner append animation will start.
+                });
+            });
+
+        // DO NOT EDIT BELOW THIS LINE
+
+        /*!
+ * jQuery Smart Banner
+ * Copyright (c) 2012 Arnold Daniels <arnold@jasny.net>
+ * Based on 'jQuery Smart Web App Banner' by Kurt Zenisek @ kzeni.com
+ */
+        !function ($) {
+            var SmartBanner = function (options) {
+                this.origHtmlMargin = parseFloat($('html').css('margin-top')) // Get the original margin-top of the HTML element so we can take that into account
+                this.options = $.extend({}, $.smartbanner.defaults, options)
+
+                var standalone = navigator.standalone // Check if it's already a standalone web app or running within a webui view of an app (not mobile safari)
+                  , UA = navigator.userAgent
+
+                // Detect banner type (iOS or Android)
+                if (this.options.force) {
+                    this.type = this.options.force
+                } else if (UA.match(/Windows Phone 8/i) != null && UA.match(/Touch/i) !== null) {
+                    this.type = 'windows'
+                } else if (UA.match(/iPhone|iPod/i) != null || (UA.match(/iPad/) && this.options.iOSUniversalApp)) {
+                    if (UA.match(/Safari/i) != null &&
+                       (UA.match(/CriOS/i) != null ||
+                       window.Number(UA.substr(UA.indexOf('OS ') + 3, 3).replace('_', '.')) < 6)) this.type = 'ios' // Check webview and native smart banner support (iOS 6+)
+                } else if (UA.match(/\bSilk\/(.*\bMobile Safari\b)?/) || UA.match(/\bKF\w/) || UA.match('Kindle Fire')) {
+                    this.type = 'kindle'
+                } else if (UA.match(/Android/i) != null) {
+                    this.type = 'android'
+                }
+
+                // Don't show banner if device isn't iOS or Android, website is loaded in app or user dismissed banner
+                if (!this.type || standalone || this.getCookie('sb-closed') || this.getCookie('sb-installed')) {
+                    return
+                }
+
+                // Calculate scale
+                this.scale = this.options.scale == 'auto' ? $(window).width() / window.screen.width : this.options.scale
+                if (this.scale < 1) this.scale = 1
+
+                // Get info from meta data
+                var meta = $(this.type == 'android' ? 'meta[name="google-play-app"]' :
+                    this.type == 'ios' ? 'meta[name="apple-itunes-app"]' :
+                    this.type == 'kindle' ? 'meta[name="kindle-fire-app"]' : 'meta[name="msApplication-ID"]');
+                if (meta.length == 0) return
+
+                // For Windows Store apps, get the PackageFamilyName for protocol launch
+                if (this.type == 'windows') {
+                    this.appId = $('meta[name="msApplication-PackageFamilyName"]').attr('content');
+                } else {
+                    // Try to pull the appId out of the meta tag and store the result
+                    var parsedMetaContent = /app-id=([^\s,]+)/.exec(meta.attr('content'));
+
+                    if (parsedMetaContent) {
+                        this.appId = parsedMetaContent[1];
+                    } else {
+                        return;
+                    }
+                }
+
+                this.title = this.options.title ? this.options.title : meta.data('title') || $('title').text().replace(/\s*[|\-·].*$/, '')
+                this.author = this.options.author ? this.options.author : meta.data('author') || ($('meta[name="author"]').length ? $('meta[name="author"]').attr('content') : window.location.hostname)
+                this.iconUrl = meta.data('icon-url');
+                this.price = meta.data('price');
+
+                // Create banner
+                this.create()
+                this.show()
+                this.listen()
+            }
+
+            SmartBanner.prototype = {
+
+                constructor: SmartBanner
+
+              , create: function () {
+                  var iconURL
+                    , link = (this.options.url ? this.options.url : (this.type == 'windows' ? 'ms-windows-store:navigate?appid=' : (this.type == 'android' ? 'market://details?id=' : (this.type == 'kindle' ? 'amzn://apps/android?asin=' : 'https://itunes.apple.com/' + this.options.appStoreLanguage + '/app/id'))) + this.appId)
+                    , price = this.price || this.options.price
+                    , inStore = price ? price + ' - ' + (this.type == 'android' ? this.options.inGooglePlay : this.type == 'kindle' ? this.options.inAmazonAppStore : this.type == 'ios' ? this.options.inAppStore : this.options.inWindowsStore) : ''
+                    , gloss = this.options.iconGloss === null ? (this.type == 'ios') : this.options.iconGloss
+
+                  if (this.type == 'android' && this.options.GooglePlayParams) {
+                      link = link + '&referrer=' + this.options.GooglePlayParams;
+                  }
+
+                  var banner = '<div id="smartbanner" class="' + this.type + '"><div class="sb-container"><a href="#" class="sb-close">&times;</a><span class="sb-icon"></span><div class="sb-info"><strong>' + this.title + '</strong><span>' + this.author + '</span><span>' + inStore + '</span></div><a href="' + link + '" class="sb-button"><span>' + this.options.button + '</span></a></div></div>';
+                  (this.options.layer) ? $(this.options.appendToSelector).append(banner) : $(this.options.appendToSelector).prepend(banner);
+
+                  if (this.options.icon) {
+                      iconURL = this.options.icon
+                  } else if (this.iconUrl) {
+                      iconURL = this.iconUrl;
+                  } else if ($('link[rel="apple-touch-icon-precomposed"]').length > 0) {
+                      iconURL = $('link[rel="apple-touch-icon-precomposed"]').attr('href')
+                      if (this.options.iconGloss === null) gloss = false
+                  } else if ($('link[rel="apple-touch-icon"]').length > 0) {
+                      iconURL = $('link[rel="apple-touch-icon"]').attr('href')
+                  } else if ($('meta[name="msApplication-TileImage"]').length > 0) {
+                      iconURL = $('meta[name="msApplication-TileImage"]').attr('content')
+                  } else if ($('meta[name="msapplication-TileImage"]').length > 0) { /* redundant because ms docs show two case usages */
+                      iconURL = $('meta[name="msapplication-TileImage"]').attr('content')
+                  }
+
+                  if (iconURL) {
+                      $('#smartbanner .sb-icon').css('background-image', 'url(' + iconURL + ')')
+                      if (gloss) $('#smartbanner .sb-icon').addClass('gloss')
+                  } else {
+                      $('#smartbanner').addClass('no-icon')
+                  }
+
+                  this.bannerHeight = $('#smartbanner').outerHeight() + 2
+
+                  if (this.scale > 1) {
+                      $('#smartbanner')
+                          .css('top', parseFloat($('#smartbanner').css('top')) * this.scale)
+                          .css('height', parseFloat($('#smartbanner').css('height')) * this.scale)
+                          .hide()
+                      $('#smartbanner .sb-container')
+                          .css('-webkit-transform', 'scale(' + this.scale + ')')
+                          .css('-msie-transform', 'scale(' + this.scale + ')')
+                          .css('-moz-transform', 'scale(' + this.scale + ')')
+                          .css('width', $(window).width() / this.scale)
+                  }
+                  if(this.options.layer==false){
+                      $('#smartbanner').css('position', 'static');
+                      if (this.type == 'android') {
+                          $('#smartbanner').css({'position':'relative','top':'0px','left':'0px'});
+                      }
+                  }else{
+                      $('#smartbanner').css('position', 'absolute');
+                  }
+              }
+
+              , listen: function () {
+                  $('#smartbanner .sb-close').on('click', $.proxy(this.close, this))
+                  $('#smartbanner .sb-button').on('click', $.proxy(this.install, this))
+              }
+
+              , show: function (callback) {
+                  var banner = $('#smartbanner');
+                  banner.stop();
+
+                  if (this.options.layer) {
+                      banner.animate({ top: 0, display: 'block' }, this.options.speedIn).addClass('shown').show();
+                      $(this.pushSelector).animate({ paddingTop: this.origHtmlMargin + (this.bannerHeight * this.scale) }, this.options.speedIn, 'swing', callback);
+                  } else {
+                      if ($.support.transition) {
+                          banner.animate({ top: 0 }, this.options.speedIn).addClass('shown');
+                          var transitionCallback = function () {
+                              $('html').removeClass('sb-animation');
+                              if (callback) {
+                                  callback();
+                              }
+                          };
+                          $(this.pushSelector).addClass('sb-animation').one($.support.transition.end, transitionCallback).emulateTransitionEnd(this.options.speedIn).css('margin-top', this.origHtmlMargin + (this.bannerHeight * this.scale));
+                      } else {
+                          banner.slideDown(this.options.speedIn).addClass('shown');
+                      }
+                  }
+              }
+
+              , hide: function (callback) {
+                  var banner = $('#smartbanner');
+                  banner.stop();
+
+                  if (this.options.layer) {
+                      banner.animate({ top: -1 * this.bannerHeight * this.scale, display: 'block' }, this.options.speedIn).removeClass('shown');
+                      $(this.pushSelector).animate({ paddingTop: this.origHtmlMargin }, this.options.speedIn, 'swing', callback);
+                  } else {
+                      if ($.support.transition) {
+                          if (this.type !== 'android')
+                              banner.css('top', -1 * this.bannerHeight * this.scale).removeClass('shown');
+                          else
+                              banner.css({ display: 'none' }).removeClass('shown');
+                          var transitionCallback = function () {
+                              $('html').removeClass('sb-animation');
+                              if (callback) {
+                                  callback();
+                              }
+                          };
+                          $(this.pushSelector).addClass('sb-animation').one($.support.transition.end, transitionCallback).emulateTransitionEnd(this.options.speedOut).css('margin-top', this.origHtmlMargin);
+                      } else {
+                          banner.slideUp(this.options.speedOut).removeClass('shown');
+                      }
+                  }
+              }
+
+              , close: function (e) {
+                  e.preventDefault()
+                  this.hide()
+                  this.setCookie('sb-closed', 'true', this.options.daysHidden);
+              }
+
+              , install: function (e) {
+                  if (this.options.hideOnInstall) {
+                      this.hide()
+                  }
+                  this.setCookie('sb-installed', 'true', this.options.daysReminder)
+              }
+
+              , setCookie: function (name, value, exdays) {
+                  var exdate = new Date()
+                  exdate.setDate(exdate.getDate() + exdays)
+                  value = encodeURI(value) + ((exdays == null) ? '' : '; expires=' + exdate.toUTCString())
+                  document.cookie = name + '=' + value + '; path=/;'
+              }
+
+              , getCookie: function (name) {
+                  var i, x, y, ARRcookies = document.cookie.split(";")
+                  for (i = 0; i < ARRcookies.length; i++) {
+                      x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="))
+                      y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1)
+                      x = x.replace(/^\s+|\s+$/g, "")
+                      if (x == name) {
+                          return decodeURI(y)
+                      }
+                  }
+                  return null
+              }
+
+                // Demo only
+              , switchType: function () {
+                  var that = this
+
+                  this.hide(function () {
+                      that.type = that.type == 'android' ? 'ios' : 'android'
+                      var meta = $(that.type == 'android' ? 'meta[name="google-play-app"]' : 'meta[name="apple-itunes-app"]').attr('content')
+                      that.appId = /app-id=([^\s,]+)/.exec(meta)[1]
+
+                      $('#smartbanner').detach()
+                      that.create()
+                      that.show()
+                  })
+              }
+            }
+
+            $.smartbanner = function (option) {
+                var $window = $(window)
+                , data = $window.data('smartbanner')
+                , options = typeof option == 'object' && option
+                if (!data) $window.data('smartbanner', (data = new SmartBanner(options)))
+                if (typeof option == 'string') data[option]()
+            }
+
+            // override these globally if you like (they are all optional)
+            $.smartbanner.defaults = {
+                title: null, // What the title of the app should be in the banner (defaults to <title>)
+                author: null, // What the author of the app should be in the banner (defaults to <meta name="author"> or hostname)
+                price: 'FREE', // Price of the app
+                appStoreLanguage: 'us', // Language code for App Store
+                inAppStore: 'On the App Store', // Text of price for iOS
+                inGooglePlay: 'In Google Play', // Text of price for Android
+                inAmazonAppStore: 'In the Amazon Appstore',
+                inWindowsStore: 'In the Windows Store', //Text of price for Windows
+                GooglePlayParams: null, // Aditional parameters for the market
+                icon: null, // The URL of the icon (defaults to <meta name="apple-touch-icon">)
+                iconGloss: null, // Force gloss effect for iOS even for precomposed
+                button: 'VIEW', // Text for the install button
+                url: null, // The URL for the button. Keep null if you want the button to link to the app store.
+                scale: 'auto', // Scale based on viewport size (set to 1 to disable)
+                speedIn: 300, // Show animation speed of the banner
+                speedOut: 400, // Close animation speed of the banner
+                daysHidden: 15, // Duration to hide the banner after being closed (0 = always show banner)
+                daysReminder: 90, // Duration to hide the banner after "VIEW" is clicked *separate from when the close button is clicked* (0 = always show banner)
+                force: null, // Choose 'ios', 'android' or 'windows'. Don't do a browser check, just always show this banner
+                hideOnInstall: true, // Hide the banner after "VIEW" is clicked.
+                layer: false, // Display as overlay layer or slide down the page
+                iOSUniversalApp: true, // If the iOS App is a universal app for both iPad and iPhone, display Smart Banner to iPad users, too.
+                appendToSelector: 'body', //Append the banner to a specific selector
+                pushSelector: 'html' // What element is going to push the site content down; this is where the banner append animation will start.
+            }
+
+            $.smartbanner.Constructor = SmartBanner;
+
+
+            // ============================================================
+            // Bootstrap transition
+            // Copyright 2011-2014 Twitter, Inc.
+            // Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+
+            function transitionEnd() {
+                var el = document.createElement('smartbanner')
+
+                var transEndEventNames = {
+                    WebkitTransition: 'webkitTransitionEnd',
+                    MozTransition: 'transitionend',
+                    OTransition: 'oTransitionEnd otransitionend',
+                    transition: 'transitionend'
+                }
+
+                for (var name in transEndEventNames) {
+                    if (el.style[name] !== undefined) {
+                        return { end: transEndEventNames[name] }
+                    }
+                }
+
+                return false // explicit for ie8 (  ._.)
+            }
+
+            if ($.support.transition !== undefined)
+                return  // Prevent conflict with Twitter Bootstrap
+
+            // http://blog.alexmaccaw.com/css-transitions
+            $.fn.emulateTransitionEnd = function (duration) {
+                var called = false, $el = this
+                $(this).one($.support.transition.end, function () {
+                    called = true
+                })
+                var callback = function () {
+                    if (!called) $($el).trigger($.support.transition.end)
+                }
+                setTimeout(callback, duration)
+                return this
+            }
+
+            $(function () {
+                $.support.transition = transitionEnd()
+            })
+            // ============================================================
+
+        }(window.jQuery);
+
+        ', 
+
+        ', 
+    
+
+    ', 
+    
+
+'][
+
+    ', 
+    ', 
+    ', 
+    ', 
+
+    ', 
+    ', 
+    ', 
+
+    ', 
+    ', 
+        ', Skip to Main Content', 
+    ', 
+
+    ', 
+    
+    ', 
+
+    ', 
+    
+
+    
+
+', u"
+	/* SPECIAL MODE BAR */
+	div.sw-special-mode-bar {
+		background: #FBC243 url('http://www.erboe.net/Static/V2_16_01//GlobalAssets/Images/special-mode-bar-background.png') no-repeat;
+		height: 30px;
+		text-align: left;
+		font-size: 12px;
+		position: relative;
+		z-index: 10000;
+	}
+	div.sw-special-mode-bar > div {
+		padding: 8px 0 0 55px;
+		font-weight: bold;
+	}
+	div.sw-special-mode-bar > div > a {
+		margin-left: 20px;
+		background: #A0803D;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		color: #fff;
+		padding: 4px 6px 4px 6px;
+		font-size: 11px;
+	}
+	
+	body.blue div.sw-special-mode-bar, body.green div.sw-special-mode-bar, body.red div.sw-special-mode-bar {
+	    display: none;
+	}
+
+	/* END SPECIAL MODE BAR */
+", 
+
+', 
+	
+	function SWEndPreviewMode() { 
+		var data = "{}";
+		var success = "window.location='';";
+		var failure = "CallControllerFailure(result[0].errormessage);";
+		CallController("http://www.erboe.net/site/SiteController.aspx/EndPreviewMode", data, success, failure);
+	}
+	
+	function SWEndEmulationMode() {
+		SetUnescapedCookie('UserID', GetCookie('SourceEmulationUserID'));
+		DeleteCookie('SourceEmulationUserID');
+		window.location = 'http://www.erboe.net/ums/Users/Users.aspx';
+	}
+
+	function SWEndPreviewConfigMode() {
+	    var data = "{}";
+	    var success = "window.location='';";
+	    var failure = "CallControllerFailure(result[0].errormessage);";
+	    CallController("http://www.erboe.net/site/SiteController.aspx/EndPreviewConfigMode", data, success, failure);
+	}
+', 
+            
+
+    ', 
+', 
+', 
+', 
+', District Home', 
+', 
+', 
+', Select a School...', 
+', 
+', Select a School', 
+', 
+', McKenzie School', 
+', A. S. Faust School', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Sign In', 
+', Register', 
+', 
+', 
+$(document).ready(function() {
+    $('#sw-search-input').keyup(function(e) {        if (e.keyCode == 13) {
+            SWGoToSearchResultsPageswsearchinput();
+        }
+    });
+    $('#sw-search-input').val($('#swsearch-hid-word').val())});
+function SWGoToSearchResultsPageswsearchinput() {
+window.location.href="http://www.erboe.net/site/Default.aspx?PageType=6&SiteID=9&SearchString=" + $('#sw-search-input').val();
+}
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+	', 
+		', 
+		', 
+			', 
+				', 
+				', 
+					', A. S. Faust School', 
+					', All Children Can Succeed', 
+				', 
+			', 
+			', 
+		', 
+		', 
+	', 
+	', 
+		', 
+			', 
+			', 
+		', 
+		', 
+', 
+', Home', 
+', 
+', 
+', Our School', 
+', 
+', Notices', 
+', u"Principal's Message", 
+', Guidance', 
+', Media Center', 
+', Music Dept.', 
+', Faust School  Program of Studies 2016-2017', 
+', 
+', 
+', 
+', For Families', 
+', 
+', Emergency Closings', 
+', Student Handbook', 
+', Food Services', 
+', Genesis', 
+', Parent Resources', 
+', Student Resources', 
+', Community Updates', 
+', 
+', 
+', 
+', For Staff', 
+', 
+', E-mail', 
+', Genesis', 
+', OnCourse', 
+', Source 4 Teachers', 
+', Resources', 
+', Technology Help Desk', 
+', Staff Portal', 
+', Maintenance Repair Ticket', 
+', 
+', 
+', 
+', PTA', 
+', 
+', 
+', Teacher Webpages', 
+', Calendar', 
+', 
+', 
+
+
+
+', 
+    $(document).ready(function() {
+        channelHoverIE();
+        channelTouch();
+    });
+
+    function channelTouch() {
+        // this will change the dropdown behavior when it is touched vs clicked.
+        // channels will be clickable on second click. first click simply opens the menu.
+        $('#channel-navigation > .sw-channel-item > a').on({
+            'touchstart': function (e) {
+                
+                // see if has menu
+                if ($(this).siblings('ul.sw-channel-dropdown').length > 0) {
+                    var button = $(this);
+
+                    // add href as property if not already set
+                    // then remove href attribute
+                    if (!button.prop('linkHref')) {
+                        button.prop('linkHref', button.attr('href'));
+                        button.removeAttr('href');
+                    }
+
+                    // check to see if menu is already open
+                    if ($(this).siblings('ul.sw-channel-dropdown').is(':visible')) {
+                        // if open go to link
+                        window.location.href = button.prop('linkHref');
+                    } 
+
+                } 
+            }
+        });
+    }
+
+
+    
+    function channelHoverIE(){
+		// set z-index for IE7
+		var parentZindex = $('#channel-navigation').parents('div:first').css('z-index');
+		var zindex = (parentZindex > 0 ? parentZindex : 8000);
+		$(".sw-channel-item").each(function(ind) {
+			$(this).css('z-index', zindex - ind);
+			zindex --;
+		});
+	    $(".sw-channel-item").hover(function(){
+	        var subList = $(this).children('ul');
+	        if ($.trim(subList.html()) !== "") {
+		        subList.show();
+		    }
+		    $(this).addClass("hover");
+	    }, function(){
+		    $(".sw-channel-dropdown").hide();
+		    $(this).removeClass("hover");
+	    });
+    }
+
+', 
+
+ 
+		', 
+		', 
+			', 
+			', 
+				', 
+					', 
+', 
+', 
+', 
+var photoGallery166= {"Album": {"title":"Photo Gallery - 768 X 374","description":"","transitiondelay":"6","fadestyle":"NO","gallerywidth":"768","backgroundaudio":"/cms/lib8/NJ01912659/Centricity/ModuleInstance/167/","loopaudio":"False","lgpath":"/cms/lib8/NJ01912659/Centricity/ModuleInstance/167/large/","tnpath":"/cms/lib8/NJ01912659/Centricity/ModuleInstance/167/thumbs/","Images": [{"photoname":"Faust School","src":"faust.jpg?rnd=0.304061945203721","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Red Ribbon Week","src":"Red Ribbon Week.jpg?rnd=0.244601354116854","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust students compete in STEAM/Robotic competition","src":"Faust students compete in STEAM Robotic competition.jpg?rnd=0.0680341683644961","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Cheerleaders","src":"Faust Cheerleaders.jpg?rnd=0.414736489958473","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Technology at Faust","src":"Technology at Faust.jpg?rnd=0.632883800954038","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Veterans Day Visit","src":"Veterans Day Visit.jpg?rnd=0.0404770286010937","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Cheerleaders 2016","src":"Faust Cheerleaders 2016.jpg?rnd=0.609567746803894","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Band","src":"Faust Band.png?rnd=0.433278501701205","caption":"","pause":"","link":"","target":"_self"},{"photoname":"E. Rutherford Veterans","src":"E. Rutherford Veterans.jpg?rnd=0.798145386296392","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Students","src":"Faust Students.jpg?rnd=0.264481576748417","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Marching Band","src":"Faust Marching Band.jpg?rnd=0.0987493750167775","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Marching  Band","src":"Marching  Band.jpg?rnd=0.959243852160519","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Winter Concert","src":"Faust Winter Concert.jpg?rnd=0.832258770164223","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Winter Concert Choir","src":"Faust Winter Concert Choir.jpg?rnd=0.612430421455032","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Band ","src":"Faust Band 1.jpg?rnd=0.906388581686834","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust 8th Grade Volleyball Game","src":"Faust 8th Grade Volleyball Game.JPG?rnd=0.223210652928432","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Winter Concert","src":"6K1A6863.jpg?rnd=0.742161546248087","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Marching Band","src":"Faust Marching Band.JPG?rnd=0.909012937410275","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Band","src":"Faust Band.jpg?rnd=0.528520591803137","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Halloween Fun","src":"Halloween Fun.JPG?rnd=0.541220130650895","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Winter Concert","src":"6K1A6899.jpg?rnd=0.648413464263274","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Student Council","src":"Faust Student Council.JPG?rnd=0.591002098559869","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Cheerleaders","src":"Faust Cheerleaders.jpg?rnd=0.431128668799591","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Fall Fun","src":"Fall Fun.JPG?rnd=0.765763165785821","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Red Ribbon Week","src":"Red Ribbon Week.JPG?rnd=0.306015369624838","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust March Band","src":"Faust March Band.jpg?rnd=0.224443983391134","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Volleyball Game Teachers","src":"Faust Volleyball Game Teachers.JPG?rnd=0.0577667607263507","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Shows Respect","src":"Faust Shows Respect.jpg?rnd=0.218442378201728","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Red Ribbon Week","src":"Red Ribbon 6.jpg?rnd=0.125456948823043","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Band","src":"Faust Band.JPG?rnd=0.917143208867471","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Faust Band National Anthem Assembly","src":"9 12.jpg?rnd=0.299711504159361","caption":"","pause":"","link":"","target":"_self"},{"photoname":"Wildcat Mural","src":"DSCN3111.JPG?rnd=0.226137315028411","caption":"","pause":"","link":"","target":"_self"}]}}
+', 
+', 
+', 
+', 
+', 
+				', 
+				', 
+					', 
+', 
+', 
+	', Quick Links', 
+	', 
+		', 
+', Parent Questions', 
+', 
+', ABCD Block Calendar Schedule', 
+', 
+', East Rutherford Mobile App Information', 
+', 
+', Website Registration Information', 
+', 
+',  School Closing, Early Dismissal and Delayed Opening Procedures', 
+', 
+', District Calendar 2016-2017', 
+', 
+', Food Services Menu/Information', 
+', 
+',  Lunch Program-On-line Pay for It ', 
+', 
+', 
+', 
+', 
+	', 
+	', 
+	', 
+', 
+', 
+', 
+				', 
+				', 
+					', 
+
+
+
+', 
+    ', 
+        $(document).ready(function() {
+            var DomainID = '9';
+            var PageID = '11';
+            var RenderLoc = '0';
+            var MIID = '25';
+
+            //added to check to make sure moderated content doesn't bleed through the dialog
+            if ($('#dialog-overlay-WindowLargeModal-body.moderateContent').length > 0) {
+                $("#module-content-" + MIID).find(".ui-widget-detail").find(".ui-article").append("<p>&nbsp;</p>");
+            }
+        });
+    ', 
+
+    ', u"$(document).ready(function() {CheckScript('ModuleView');CheckScript('Mustache');
+ });", 
+    
+    ', 
+', 
+	', 
+		', Welcome', 
+	', 
+	
+	', 
+		', 
+', 
+	', 
+		', 
+        	', 
+', Alfred S. Faust School', 
+', Mrs. Regina Barrale, Principal ', 100 Uhland Street ', East Rutherford, NJ 07073 ', 201-804-3100', 
+', Fax # 201-804-7669', 
+', ________________________________________________________________________', 
+', Dear Parents / Guardians:', 
+', It is with great pleasure that I am able to serve you and your children as the educational leader of Alfred S. Faust Intermediate School. On behalf of the administration, faculty, and professional support staff, I want to take this opportunity to welcome you to our web page.', 
+', At Faust School, our primary focus is to provide our students with a high quality education in a positive learning environment. We encourage our students to always try their best in order to succeed in our world today and in their future endeavors.', 
+', Besides teaching essential instructional skills that align with the Common Core State Standards (CCSS), we are also building their confidence by having them practice technology skills to help them do well in the State of New Jersey\u2019s new mandated standardized test called Partnership for Assessment of Readiness for College and Careers (PARCC).', 
+', Our dedicated and experienced teaching staff uses an educational approach that is data-driven and tailored to the needs of every student. Our teachers use a variety of assessments to regularly monitor their students\u2019 progress in order to differentiate instruction for every child. Listed below are some of our main goals that our teachers and professional support staff members strive for at Alfred S. Faust School:', 
+', 1. Provide a curriculum that is conducive to learning, relevant, challenging, integrative, and exploratory for middle school students.', 2. Instill school spirit and pride that involves all of the stakeholders in our community.', 3. Develop positive relationships with parents in order to support their child\u2019s education.', 4. Continue to take professional development courses that use instructional methods to prepare our teachers and support staff members in meeting the challenges that our students encounter.', 
+', Parent involvement is also extremely important to us and we encourage you to play a major role in being proactive in your child\u2019s education. As the principal of the school, I want parents to feel comfortable in expressing their ideas and concerns that help make a positive contribution towards student achievement.', 
+', Always feel free to explore our website and spend some time looking over our student handbook, curriculum, program of study and teacher\u2019s web pages. You may also monitor your child\u2019s progress by accessing the Genesis Parent Portal, which gives you up to date information on homework and a view into the teacher\u2019s grade book. The Genesis Parent Access Link and Parent Portal User Manual are now easily accessible at the bottom of our homepage.', 
+', u"Please don\u2019t hesitate to contact me at any time. I frequently check my e-mails and voice mail messages and am always visible throughout the school. My door is always open and I look forward to working with you in your child's education.", 
+', Warmest regards,', 
+', Mrs. Regina Barrale', 
+', Alfred S. Faust School Principal', 
+', Click here to email me.', 
+', (201) 804-3100 Ext. 3003', 
+',  ', 
+', 
+        ', 
+		', 
+	', 
+', 
+', 
+', 
+	', 
+		
+			
+		
+		', 
+	', 
+', 
+', 
+$(document).ready(function (){
+});
+function LoadGroupedData(container, MIID, PMI, groupYear, groupMonth, groupBy, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://www.erboe.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=9&PageID=11&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&EnableQuirksMode=0&ViewID=' + viewToUse + '&Tag=' + tag, container, 2, 'chkSidebar();');
+}
+function LoadData(container, MIID, PMI, flexDataID, groupYear, groupMonth, groupBy, targetView, tag) {
+  if(targetView !== undefined || targetView.Length() == 0){
+  //targetView looks at the hidden Detail View defined in the Builder View.
+      targetView = $('#hid-'+MIID+'-DetailView').val();
+   }
+  GetContent('http://www.erboe.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=9&PageID=11&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&FlexDataID=' + flexDataID + '&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&RenderLoc=0&FromRenderLoc=0&EnableQuirksMode=0&Tag=' + tag + '&ViewID=' + targetView, container, 2, 'chkSidebar();');
+}
+function LoadTaggedData(container, MIID, PMI, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://www.erboe.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=9&PageID=11&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&Tag=' + tag + '&EnableQuirksMode=0&ViewID='+viewToUse, container, 2, 'chkSidebar();');
+}
+', 
+', 
+
+', 
+', 
+				', 
+				', 
+					', 
+
+
+
+', 
+    ', 
+        $(document).ready(function() {
+            var DomainID = '9';
+            var PageID = '11';
+            var RenderLoc = '0';
+            var MIID = '22';
+
+            //added to check to make sure moderated content doesn't bleed through the dialog
+            if ($('#dialog-overlay-WindowLargeModal-body.moderateContent').length > 0) {
+                $("#module-content-" + MIID).find(".ui-widget-detail").find(".ui-article").append("<p>&nbsp;</p>");
+            }
+        });
+    ', 
+
+    ', u"$(document).ready(function() {CheckScript('ModuleView');CheckScript('Mustache');
+ });", 
+    
+    ', 
+', 
+	', 
+		', Announcements', 
+	', 
+	
+	', 
+		', 
+', 
+    ', 
+		', 
+			', Faust Monthly Calendar January 2017', 
+', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+    ', 
+		', 
+			', Faust Winter Concert Choir Video', 
+', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+    ', 
+		', 
+			', Faust Winter Concert Instrumental Video', 
+', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+    ', 
+		', 
+			', Faust Student Handbook 2016-2017', 
+', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+    ', 
+		', 
+			', Becton High School Students Accepted into Top Colleges', 
+', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+    ', 
+		', 
+			', ABR District and School Report Grade 2015', 
+', 
+		', 
+		', 
+        	', Comments (-1)', 
+			
+		', 
+		', 
+	', 
+', 
+', 
+', 
+	', 
+		
+		',  
+		', 
+	', 
+', 
+', 
+$(document).ready(function (){
+});
+function LoadGroupedData(container, MIID, PMI, groupYear, groupMonth, groupBy, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://www.erboe.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=9&PageID=11&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&EnableQuirksMode=0&ViewID=' + viewToUse + '&Tag=' + tag, container, 2, 'chkSidebar();');
+}
+function LoadData(container, MIID, PMI, flexDataID, groupYear, groupMonth, groupBy, targetView, tag) {
+  if(targetView !== undefined || targetView.Length() == 0){
+  //targetView looks at the hidden Detail View defined in the Builder View.
+      targetView = $('#hid-'+MIID+'-DetailView').val();
+   }
+  GetContent('http://www.erboe.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=9&PageID=11&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&FlexDataID=' + flexDataID + '&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&RenderLoc=0&FromRenderLoc=0&EnableQuirksMode=0&Tag=' + tag + '&ViewID=' + targetView, container, 2, 'chkSidebar();');
+}
+function LoadTaggedData(container, MIID, PMI, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://www.erboe.net//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=9&PageID=11&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&Tag=' + tag + '&EnableQuirksMode=0&ViewID='+viewToUse, container, 2, 'chkSidebar();');
+}
+', 
+', 
+
+', 
+', 
+', 
+ ', 
+     ', Upcoming Events', 
+ ', 
+ ', 
+		', 
+', 
+', 
+     ', January 16, 2017', 
+     ', 
+         ', Martin Luther King Day Schools Closed', 
+     ', 
+', 
+', 
+', 
+', 
+     ', January 19, 2017', 
+     ', 
+         ', 7:00 PM - 8:00 PM', 
+         ', Board of Education Meeting Faust School 7 PM', 
+     ', 
+', 
+', 
+', 
+', 
+     ', January 27, 2017', 
+     ', 
+         ', One Session Day for Students-PD for Teachers', 
+     ', 
+', 
+', 
+', 
+', 
+     ', February 16, 2017', 
+     ', 
+         ', 7:00 PM - 8:00 PM', 
+         ', Board of Education Meeting Faust School 7 PM', 
+     ', 
+', 
+', 
+', 
+', 
+     ', February 17, 2017', 
+     ', 
+         ', u"Presidents' Day Recess Schools Closed", 
+     ', 
+', 
+', 
+', 
+', 
+     ', February 20, 2017', 
+     ', 
+         ', u"Presidents' Day Recess Schools Closed", 
+     ', 
+', 
+', 
+	', 
+', View Calendar', 
+ ', 
+ ', 
+ ', 
+', 
+', 
+', 
+', 
+				', 
+			', 
+			', 
+		', 
+		', 
+			', 
+			', 
+				', 
+					', 100 Uhland Street', 	
+					', East Rutherford, NJ 07073', 
+					', Site Map',  
+	
+				', 
+				', 
+					', 201-804-3100', 
+					', 
+				', 
+				', 
+					', 
+						', 
+					', 
+					', 
+						', 
+							', Questions or Feedback?', 
+							', |', 
+							', Privacy Policy', 
+							', |', 
+							', Terms of Use', 
+						', 
+						', 
+							', Copyright © 2002-', var currYear = new Date();document.write(currYear.getFullYear());',  Schoolwires, Inc. All rights reserved.', 
+						', 
+					', 
+				', 
+			', 
+			', 
+		', 
+	', 
+	', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Questions or Feedback?',  | ', 
+', Blackboard Web Community Manager Privacy Policy (Updated)',  | ', 
+', Terms of Use', 
+', 
+', 
+', Copyright © 2002-2017 Blackboard, Inc. All rights reserved.', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"
+   $(document).ready(function(){
+      var beaconURL='http://analytics.schoolwires.com/analytics.asmx/Insert?AccountNumber=uLD3LmlyaQFO2%2bqVSHo9og%3d%3d&SessionID=a3498768-2920-4a6a-9365-86c6692913b5&SiteID=9&ChannelID=0&SectionID=9&PageID=11&HitDate=1%2f6%2f2017+9%3a53%3a55+AM&Browser=Unknown+0.0&OS=Unknown&IPAddress=117.192.222.209';
+      try {
+         $.getJSON(beaconURL + '&jsonp=?', function(myData) {});
+      } catch(err) { 
+         // prevent site error for analytics
+      }
+   });
+", 
+
+    ', 
+
+    
+    
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowMedium-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowSmall-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowLarge-base').appendTo('body');
+ 		
+		
+    });
+", 
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowMediumModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowSmallModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowLargeModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowXLargeModal-base').appendTo('body');
+ 		
+		
+    });
+", 
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-MyAccountSubscriptionOverlay-base').appendTo('body');
+ 		
+		
+    });
+", 
+
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-InsertOverlay-base').appendTo('body');
+ 		
+		
+    });
+", 
+    ', 
+
+', u"
+    $(document).ready(function() {
+        $('#dialog-overlay-InsertOverlay2-base').appendTo('body');
+ 		
+		
+    });
+", 
+    
+    ', 
+    #videowrapper {
+        position: fixed;
+        z-index: 20000;
+        background: rgba(0, 0, 0, 0.5) none repeat scroll 0% 0%;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+    #videodialog {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        right: 50px;
+        background: #FFF none repeat scroll 0% 0%;
+        z-index: 30000;
+        box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.65);
+        box-sizing: border-box;
+        border: 8px solid #FFF;
+    }
+
+    #videodialog .close-btn {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: 0px 25px 0px 0px;
+        color: #666;
+        line-height: 1;
+        font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    #videodialog .close-btn::after {
+        content: "X";
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 50%;
+        right: 0px;
+        margin-top: -8px;
+        background: #999 none repeat scroll 0% 0%;
+        border-radius: 9px;
+        color: #FFF;
+        font-weight: bold;
+        line-height: 16px;
+        font-size: 9px;
+        text-align: center;
+    }
+        #videodialog-video {
+            margin-top:25px;
+        }
+    ', 
+    ', 
+        function resizeVideoIframe() {
+            $("#videodialog-video iframe").css({ "width": "auto", "height": "auto" });
+            var screenWidth = $(window).width();
+            var screenHeight = $(window).height();
+            //alert('screen width =' + screenWidth + '  screen height=' + screenHeight);
+            var initVidW = 800, initVidH = 600;
+            var vidRatio = initVidH / initVidW;
+            var vidWidth = $("#videodialog-video").width();
+            //alert('videoWidth = ' +vidWidth);
+            var vidHeight = vidWidth * vidRatio;
+
+            if ((vidHeight + 100) > screenHeight) {
+                vidHeight = screenHeight - 140;
+            }
+
+            $("#videodialog-video").css({ "height": (vidHeight) });
+            $("#videodialog-video iframe").css({ "width": vidWidth, "height": vidHeight }); 
+        }
+
+        function resizeVideo() {
+            $("#videodialog-video video").css({ "width": "auto", "height": "auto" });
+            var screenWidth = $(window).width();
+            var screenHeight = $(window).height();
+            //alert('screen width =' + screenWidth + '  screen height=' + screenHeight);
+            var initVidW = 800, initVidH = 600;
+            var vidRatio = initVidH / initVidW;
+            var vidWidth = $("#videodialog-video").width();
+            //alert('videoWidth = ' +vidWidth);
+            var vidHeight = vidWidth * vidRatio;
+
+            if ((vidHeight + 100) > screenHeight) {
+                vidHeight = screenHeight - 140;
+            }
+
+            $("#videodialog-video").css({ "height": (vidHeight) });
+            $("#videodialog-video video").css({ "width": vidWidth, "height": vidHeight });
+            //$(".videoControl").css({ "bottom": $("#videodialog-video video").bottom() + 5, "width": 100 });
+        }
+
+        function closeVideoDialog() {
+            $('#videowrapper').addClass('ui-helper-hidden');
+            $('#videodialog-video').html('');
+            $(window).resize(function () { });
+        }
+    ', 
+    ', 
+        ', 
+            ', CLOSE', 
+            ', 
+        ', 
+    ', 
+    ', 
+
+        $(document).ready(function () {
+
+            removeBrokenImages();
+            checkSidebar();
+            RemoveCookie();
+
+            $('.navigation li.collapsible').each(function () {
+                if ($(this).find('ul').length == 0) {
+                    $(this).removeClass('collapsible');
+                }
+            });
+
+            // find page nav state cookie and add open chevron
+            var arrValues = GetCookie('SWPageNavState').split('~');
+
+            $.each(arrValues, function () {
+                if (this != '') {
+                    $('#' + this).addClass('collapsible').prepend("<div class='bullet collapsible' />");
+                }
+            });
+
+            // find remaining sub menus and add closed chevron and close menu
+            $('.navigation li > ul').each(function () {
+                var list = $(this);
+
+                if (list.parent().hasClass('active') && !list.parent().hasClass('collapsible')) {
+                    // open sub for currently selected page                    
+                    list.parent().addClass('collapsible').prepend("<div class='bullet collapsible' />");
+                } else {
+                    if (list.parent().hasClass('collapsible') && !list.siblings('div').hasClass('collapsible')) {
+                        // open sub for page with auto expand
+                        list.siblings('div.expandable').remove();
+                        list.parent().prepend("<div class='bullet collapsible' />");
+                    }
+                }
+
+                if (!list.siblings('div').hasClass('collapsible')) {
+                    // keep all closed that aren't already set to open
+                    list.parent().addClass('expandable').prepend("<div class='bullet expandable' />");
+                    ClosePageSubMenu(list.parent());
+                } else {
+                    OpenPageSubMenu(list.parent());
+                }
+            });
+
+            // remove bullet from hierarchy if no-bullet set
+            $('.navigation li.collapsible').each(function () {
+                if ($(this).hasClass('no-bullet')) {
+                    if (!$(this).hasClass('navigationgroup')) { $(this).removeClass('collapsible'); }
+                    $(this).children('div.collapsible').remove();
+                }
+            });
+
+            $('.navigation li.expandable').each(function () {
+                if ($(this).hasClass('no-bullet')) {
+                    if (!$(this).hasClass('navigationgroup')) { $(this).removeClass('expandable'); }
+                    $(this).children('div.expandable').remove();
+                }
+            });
+
+            $('.navigation li:not(.collapsible,.expandable,.no-bullet)').each(function () {
+                $(this).prepend("<div class='bullet' />");
+            });
+
+            $('.navigation li.active').parents('ul').each(function () {
+                if (!$(this).hasClass('page-navigation')) {
+                    OpenPageSubMenu($(this).parent());
+                }
+            });
+
+            // set click event for chevron
+            $(document).on('click', '.navigation div.collapsible', function () {
+                ClosePageSubMenu($(this).parent());
+            });
+
+            $(document).on('click', '.navigation div.expandable', function () {
+                OpenPageSubMenu($(this).parent());
+            });
+
+            // set navigation grouping links
+            $(document).on('click', '.navigationgroup.collapsible > a', function () {
+                ClosePageSubMenu($(this).parent());
+            });
+
+            $(document).on('click', '.navigationgroup.expandable > a', function () {
+                OpenPageSubMenu($(this).parent());
+            });
+
+            //SW MYSTART DROPDOWNS
+            $(document).on('click', '.sw-mystart-dropdown', function () {
+                $(this).children(".sw-dropdown").css("display", "block");
+            });
+
+            $(".sw-mystart-dropdown").hover(function () { }, function () {
+                $(this).children(".sw-dropdown").hide();
+                $(this).blur();
+            });
+
+            //SW ACCOUNT DROPDOWN
+            $(document).on('click', '#sw-mystart-account', function () {
+                $(this).children("#sw-myaccount-list").show();
+                $(this).addClass("clicked-state");
+            });
+
+            $("#sw-mystart-account, #sw-myaccount-list").hover(function () { }, function () {
+                $(this).children("#sw-myaccount-list").hide();
+                $(this).removeClass("clicked-state");
+                $("#sw-myaccount").blur();
+            });
+
+            // set hover class for page and section navigation
+            $('.ui-widget.app.pagenavigation, .ui-widget.app.sectionnavigation').find('li > a').hover(function () {
+                $(this).addClass('hover');
+            }, function () {
+                $(this).removeClass('hover');
+            });
+
+            // set active class on channel and section
+            var activeChannelNavType = $('input#hidActiveChannelNavType').val();
+            if (activeChannelNavType == -1) {
+                // homepage is active
+                $('#navc-HP').addClass('active');
+            } else if (activeChannelNavType == 1) {
+                // calendar page is active
+                $('#navc-CA').addClass('active');
+            } else {
+                // channel is active
+                var activeSelectorID = $('input#hidActiveChannel').val();
+                $('#navc-' + activeSelectorID).addClass('active');
+                activeSelectorID = $('input#hidActiveSection').val();
+                $('#navs-' + activeSelectorID).addClass('active');
+            }
+        }); // end document ready
+
+        function OpenPageSubMenu(li) {
+            if (li.prop('tagName').toLowerCase() == "li") {
+                if (li.hasClass('expandable')) {
+                    li.removeClass('expandable').addClass('collapsible');
+                }
+                if (li.find('div:first').hasClass('expandable')) {
+                    li.find('div:first').removeClass('expandable').addClass('collapsible');
+                }
+                li.find('ul:first').show();
+
+                PageNavigationStateCookie();
+            }
+        }
+
+        function ClosePageSubMenu(li) {
+            if (li.prop('tagName').toLowerCase() == "li") {
+                li.removeClass('collapsible').addClass('expandable');
+                li.find('div:first').removeClass('collapsible').addClass('expandable');
+                li.find('ul:first').hide();
+
+                PageNavigationStateCookie();
+            }
+        }
+
+        function PageNavigationStateCookie() {
+            var strCookie = "";
+
+            $('.pagenavigation li > ul').each(function () {
+                var item = $(this).parent('li');
+                if (item.hasClass('collapsible') && !item.hasClass('no-bullet')) {
+                    strCookie += $(this).parent().attr('id') + '~';
+                }
+            });
+
+            SetCookie('SWPageNavState', strCookie);
+        }
+
+        function checkSidebar() {
+            $(".ui-widget-sidebar").each(function () {
+                if ($.trim($(this).html()) != "") {
+                    $(this).show();
+                    $(this).siblings(".ui-widget-detail").addClass("with-sidebar");
+                }
+            });
+        }
+
+        function removeBrokenImages() {
+            //REMOVES ANY BROKEN IMAGES
+            $("span.img img").each(function () {
+                if ($(this).attr("src") !== undefined) {
+                    $(this).parent().parent().show();
+                    $(this).parent().parent().siblings().addClass("has-thumb");
+                }
+            });
+        }
+
+        function LoadEventDetailUE(moduleInstanceID, eventDateID, userRegID, isEdit) {
+            (userRegID === undefined ? userRegID = 0 : '');
+            (isEdit === undefined ? isEdit = false : '');
+            OpenDialogOverlay("WindowMediumModal", { LoadType: "U", LoadURL: "http://www.erboe.net//site/UserControls/Calendar/EventDetailWrapper.aspx?ModuleInstanceID=" + moduleInstanceID + "&EventDateID=" + eventDateID + "&UserRegID=" + userRegID + "&IsEdit=" + isEdit });
+        }
+
+        function RemoveCookie() {
+            // There are no sub page            
+            if ($('.pagenavigation li li').length == 0) {
+                //return false;
+                PageNavigationStateCookie();
+            }
+        }
+    ', 
+
+    ', 
+
+        function AddOffCanvasMenuHeightForSiteNav() {
+            var sitenavulHeight = 0;
+
+            if ($('#sw-pg-sitenav-ul').length > 0) {
+                sitenavulHeight = parseInt($("#sw-pg-sitenav-ul").height());
+            }
+
+            var swinnerwrapHeight = 0;
+
+            if ($('#sw-inner-wrap').length > 0) {
+                swinnerwrapHeight = parseInt($("#sw-inner-wrap").height());
+            }
+
+            // 360px is abount 5 li height
+            if (sitenavulHeight + 360 >= swinnerwrapHeight) {
+                $("#sw-inner-wrap").height(sitenavulHeight + 360);
+            }
+        }
+
+        function AddOffCanvasMenuHeightForSelectSchool() {
+            var selectschoolulHeight = 0;
+
+            if ($('#sw-pg-selectschool-ul').length > 0) {
+                selectschoolulHeight = parseInt($("#sw-pg-selectschool-ul").height());
+            }
+
+            var swinnerwrapHeight = 0;
+
+            if ($('#sw-inner-wrap').length > 0) {
+                swinnerwrapHeight = parseInt($("#sw-inner-wrap").height());
+            }
+
+            // 360px is abount 5 li height
+            if (selectschoolulHeight + 360 >= swinnerwrapHeight) {
+                $("#sw-inner-wrap").height(selectschoolulHeight + 360);
+            }
+        }
+
+        $(document).ready(function () {
+            if ($("#sw-pg-sitenav-a").length > 0) {
+                $(document).on('click', '#sw-pg-sitenav-a', function () {
+                    if ($("#sw-pg-sitenav-ul").hasClass('sw-pgmenu-closed')) {
+                        AddOffCanvasMenuHeightForSiteNav();
+
+                        $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+                        $("#sw-pg-sitenav-ul").removeClass('sw-pgmenu-closed');
+                        $("#sw-pg-sitenav-ul").addClass('sw-pgmenu-open');
+                    } else {
+                        $("#sw-pg-sitenav-ul").removeClass('sw-pgmenu-open');
+                        $("#sw-pg-sitenav-ul").addClass('sw-pgmenu-closed');
+                    }
+                });
+
+                $(document).on('click', '#sw-pg-selectschool-a', function () {
+                    if ($("#sw-pg-selectschool-ul").hasClass('sw-pgmenu-closed')) {
+                        AddOffCanvasMenuHeightForSelectSchool();
+
+                        $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+                        $("#sw-pg-selectschool-ul").removeClass('sw-pgmenu-closed');
+                        $("#sw-pg-selectschool-ul").addClass('sw-pgmenu-open');
+                    } else {
+                        $("#sw-pg-selectschool-ul").removeClass('sw-pgmenu-open');
+                        $("#sw-pg-selectschool-ul").addClass('sw-pgmenu-closed');
+                    }
+                });
+
+                $(document).on('click', '#sw-pg-myaccount-a', function () {
+                    if ($("#sw-pg-myaccount-ul").hasClass('sw-pgmenu-closed')) {
+                        $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+                        $("#sw-pg-myaccount-ul").removeClass('sw-pgmenu-closed');
+                        $("#sw-pg-myaccount-ul").addClass('sw-pgmenu-open');
+                    } else {
+                        $("#sw-pg-myaccount-ul").removeClass('sw-pgmenu-open');
+                        $("#sw-pg-myaccount-ul").addClass('sw-pgmenu-closed');
+                    }
+                });
+
+                $(document).on('click', '.pg-list-bullet', function () {
+                    $(this).prev().toggle();
+
+                    if ($(this).hasClass('closed')) {
+                        AddOffCanvasMenuHeightForSiteNav();
+
+                        $(this).removeClass('closed');
+                        $(this).addClass('open');
+                    } else {
+                        $(this).removeClass('open');
+                        $(this).addClass('closed');
+                    }
+                });
+
+                $(document).on('mouseover', '#sw-pg-selectschool', function () {
+                    $("#sw-pg-selectschool-firstli").removeClass('sw-pg-selectschool-firstli-mouseout').addClass('sw-pg-selectschool-firstli-mouseover');
+                    $("#sw-pg-selectschool-firstli a").addClass('sw-pg-selectschool-firstli-a-mouseover').removeClass('sw-pg-selectschool-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-selectschool', function () {
+                    $("#sw-pg-selectschool-firstli").removeClass('sw-pg-selectschool-firstli-mouseover').addClass('sw-pg-selectschool-firstli-mouseout');
+                    $("#sw-pg-selectschool-firstli a").addClass('sw-pg-selectschool-firstli-a-mouseout').removeClass('sw-pg-selectschool-firstli-a-mouseover');
+                });
+
+                $(document).on('mouseover', '#sw-pg-myaccount', function () {
+                    $("#sw-pg-myaccount-firstli").removeClass('sw-pg-myaccount-firstli-mouseout').addClass('sw-pg-myaccount-firstli-mouseover');
+                    $("#sw-pg-myaccount-firstli a").addClass('sw-pg-myaccount-firstli-a-mouseover').removeClass('sw-pg-myaccount-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-myaccount', function () {
+                    $("#sw-pg-myaccount-firstli").removeClass('sw-pg-myaccount-firstli-mouseover').addClass('sw-pg-myaccount-firstli-mouseout');
+                    $("#sw-pg-myaccount-firstli a").addClass('sw-pg-myaccount-firstli-a-mouseout').removeClass('sw-pg-myaccount-firstli-a-mouseover');
+                });
+
+                $(document).on('mouseover', '#sw-pg-sitenav', function () {
+                    $("#sw-pg-sitenav-firstli").removeClass('sw-pg-sitenav-firstli-mouseout').addClass('sw-pg-sitenav-firstli-mouseover');
+                    $("#sw-pg-sitenav-firstli a").addClass('sw-pg-sitenav-firstli-a-mouseover').removeClass('sw-pg-sitenav-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-sitenav', function () {
+                    $("#sw-pg-sitenav-firstli").removeClass('sw-pg-sitenav-firstli-mouseover').addClass('sw-pg-sitenav-firstli-mouseout');
+                    $("#sw-pg-sitenav-firstli a").addClass('sw-pg-sitenav-firstli-a-mouseout').removeClass('sw-pg-sitenav-firstli-a-mouseover');
+                });
+
+                $(document).on('mouseover', '#sw-pg-district', function () {
+                    $("#sw-pg-district-firstli").removeClass('sw-pg-district-firstli-mouseout').addClass('sw-pg-district-firstli-mouseover');
+                    $("#sw-pg-district-firstli a").addClass('sw-pg-district-firstli-a-mouseover').removeClass('sw-pg-district-firstli-a-mouseout');
+                });
+
+                $(document).on('mouseout', '#sw-pg-district', function () {
+                    $("#sw-pg-district-firstli").removeClass('sw-pg-district-firstli-mouseover').addClass('sw-pg-district-firstli-mouseout');
+                    $("#sw-pg-district-firstli a").addClass('sw-pg-district-firstli-a-mouseout').removeClass('sw-pg-district-firstli-a-mouseover');
+                });
+            }
+        });
+
+
+    ', 
+    
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+    ', 
+
+    ', 
+  ', 
+  ', 
+', 
+
+
+    ', 
+
+    
+        ', 
+        ', 
+            $(document).ready(function () {
+                $.smartbanner({
+                    title: 'East Rutherford School District', // Title of the app - CHANGE FOR BRANDED APP ONLY
+                    author: 'Schoolwires, Inc', // Author Name Blackboard, Inc.
+                    price: 'FREE', // Price
+                    appStoreLanguage: 'us', // Language code for App Store
+                    inAppStore: 'On the App Store', // Text after price for iOS
+                    inGooglePlay: 'In Google Play', // Text after price for Android
+                    inAmazonAppStore: 'In the Amazon Appstore',
+                    inWindowsStore: 'In the Windows Store', //Text of price for Windows
+                    GooglePlayParams: null, // Aditional parameters for the market
+                    icon: 'http://www.erboe.net/GlobalAssets/Images/MobileNative/sw_app_logo.png', // The URL of the icon - SET THIS TO THE iOS APP STORE ICON 
+			    iconGloss: false, // Force gloss effect
+			    button: 'VIEW', // Text for the install button
+			    url: null, // The URL for the button. Keep null if you want the button to link to the app store.
+			    scale: 'auto', // Scale based on viewport size (set to 1 to disable)
+			    speedIn: 300, // Show animation speed of the banner
+			    speedOut: 400, // Close animation speed of the banner
+			    daysHidden: 1, // Duration to hide the banner after being closed (0 = always show banner)
+			    daysReminder: 30, // Duration to hide the banner after "VIEW" is clicked *separate from when the close button is clicked* (0 = always show banner)
+			    force: null, // Choose 'ios' or 'android'. Don't do a browser check, just always show this banner
+			    hideOnInstall: true, // Hide the banner after "VIEW" is clicked.
+			    layer: false, // Display as overlay layer or slide down the page
+			    iOSUniversalApp: true, // If the iOS App is a universal app for both iPad and iPhone, display Smart Banner to iPad users, too.
+			    appendToSelector: 'body', //Append the banner to a specific selector
+			    pushSelector: 'html' // What element is going to push the site content down; this is where the banner append animation will start.
+                });
+            });
+
+        // DO NOT EDIT BELOW THIS LINE
+
+        /*!
+ * jQuery Smart Banner
+ * Copyright (c) 2012 Arnold Daniels <arnold@jasny.net>
+ * Based on 'jQuery Smart Web App Banner' by Kurt Zenisek @ kzeni.com
+ */
+        !function ($) {
+            var SmartBanner = function (options) {
+                this.origHtmlMargin = parseFloat($('html').css('margin-top')) // Get the original margin-top of the HTML element so we can take that into account
+                this.options = $.extend({}, $.smartbanner.defaults, options)
+
+                var standalone = navigator.standalone // Check if it's already a standalone web app or running within a webui view of an app (not mobile safari)
+                  , UA = navigator.userAgent
+
+                // Detect banner type (iOS or Android)
+                if (this.options.force) {
+                    this.type = this.options.force
+                } else if (UA.match(/Windows Phone 8/i) != null && UA.match(/Touch/i) !== null) {
+                    this.type = 'windows'
+                } else if (UA.match(/iPhone|iPod/i) != null || (UA.match(/iPad/) && this.options.iOSUniversalApp)) {
+                    if (UA.match(/Safari/i) != null &&
+                       (UA.match(/CriOS/i) != null ||
+                       window.Number(UA.substr(UA.indexOf('OS ') + 3, 3).replace('_', '.')) < 6)) this.type = 'ios' // Check webview and native smart banner support (iOS 6+)
+                } else if (UA.match(/\bSilk\/(.*\bMobile Safari\b)?/) || UA.match(/\bKF\w/) || UA.match('Kindle Fire')) {
+                    this.type = 'kindle'
+                } else if (UA.match(/Android/i) != null) {
+                    this.type = 'android'
+                }
+
+                // Don't show banner if device isn't iOS or Android, website is loaded in app or user dismissed banner
+                if (!this.type || standalone || this.getCookie('sb-closed') || this.getCookie('sb-installed')) {
+                    return
+                }
+
+                // Calculate scale
+                this.scale = this.options.scale == 'auto' ? $(window).width() / window.screen.width : this.options.scale
+                if (this.scale < 1) this.scale = 1
+
+                // Get info from meta data
+                var meta = $(this.type == 'android' ? 'meta[name="google-play-app"]' :
+                    this.type == 'ios' ? 'meta[name="apple-itunes-app"]' :
+                    this.type == 'kindle' ? 'meta[name="kindle-fire-app"]' : 'meta[name="msApplication-ID"]');
+                if (meta.length == 0) return
+
+                // For Windows Store apps, get the PackageFamilyName for protocol launch
+                if (this.type == 'windows') {
+                    this.appId = $('meta[name="msApplication-PackageFamilyName"]').attr('content');
+                } else {
+                    // Try to pull the appId out of the meta tag and store the result
+                    var parsedMetaContent = /app-id=([^\s,]+)/.exec(meta.attr('content'));
+
+                    if (parsedMetaContent) {
+                        this.appId = parsedMetaContent[1];
+                    } else {
+                        return;
+                    }
+                }
+
+                this.title = this.options.title ? this.options.title : meta.data('title') || $('title').text().replace(/\s*[|\-·].*$/, '')
+                this.author = this.options.author ? this.options.author : meta.data('author') || ($('meta[name="author"]').length ? $('meta[name="author"]').attr('content') : window.location.hostname)
+                this.iconUrl = meta.data('icon-url');
+                this.price = meta.data('price');
+
+                // Create banner
+                this.create()
+                this.show()
+                this.listen()
+            }
+
+            SmartBanner.prototype = {
+
+                constructor: SmartBanner
+
+              , create: function () {
+                  var iconURL
+                    , link = (this.options.url ? this.options.url : (this.type == 'windows' ? 'ms-windows-store:navigate?appid=' : (this.type == 'android' ? 'market://details?id=' : (this.type == 'kindle' ? 'amzn://apps/android?asin=' : 'https://itunes.apple.com/' + this.options.appStoreLanguage + '/app/id'))) + this.appId)
+                    , price = this.price || this.options.price
+                    , inStore = price ? price + ' - ' + (this.type == 'android' ? this.options.inGooglePlay : this.type == 'kindle' ? this.options.inAmazonAppStore : this.type == 'ios' ? this.options.inAppStore : this.options.inWindowsStore) : ''
+                    , gloss = this.options.iconGloss === null ? (this.type == 'ios') : this.options.iconGloss
+
+                  if (this.type == 'android' && this.options.GooglePlayParams) {
+                      link = link + '&referrer=' + this.options.GooglePlayParams;
+                  }
+
+                  var banner = '<div id="smartbanner" class="' + this.type + '"><div class="sb-container"><a href="#" class="sb-close">&times;</a><span class="sb-icon"></span><div class="sb-info"><strong>' + this.title + '</strong><span>' + this.author + '</span><span>' + inStore + '</span></div><a href="' + link + '" class="sb-button"><span>' + this.options.button + '</span></a></div></div>';
+                  (this.options.layer) ? $(this.options.appendToSelector).append(banner) : $(this.options.appendToSelector).prepend(banner);
+
+                  if (this.options.icon) {
+                      iconURL = this.options.icon
+                  } else if (this.iconUrl) {
+                      iconURL = this.iconUrl;
+                  } else if ($('link[rel="apple-touch-icon-precomposed"]').length > 0) {
+                      iconURL = $('link[rel="apple-touch-icon-precomposed"]').attr('href')
+                      if (this.options.iconGloss === null) gloss = false
+                  } else if ($('link[rel="apple-touch-icon"]').length > 0) {
+                      iconURL = $('link[rel="apple-touch-icon"]').attr('href')
+                  } else if ($('meta[name="msApplication-TileImage"]').length > 0) {
+                      iconURL = $('meta[name="msApplication-TileImage"]').attr('content')
+                  } else if ($('meta[name="msapplication-TileImage"]').length > 0) { /* redundant because ms docs show two case usages */
+                      iconURL = $('meta[name="msapplication-TileImage"]').attr('content')
+                  }
+
+                  if (iconURL) {
+                      $('#smartbanner .sb-icon').css('background-image', 'url(' + iconURL + ')')
+                      if (gloss) $('#smartbanner .sb-icon').addClass('gloss')
+                  } else {
+                      $('#smartbanner').addClass('no-icon')
+                  }
+
+                  this.bannerHeight = $('#smartbanner').outerHeight() + 2
+
+                  if (this.scale > 1) {
+                      $('#smartbanner')
+                          .css('top', parseFloat($('#smartbanner').css('top')) * this.scale)
+                          .css('height', parseFloat($('#smartbanner').css('height')) * this.scale)
+                          .hide()
+                      $('#smartbanner .sb-container')
+                          .css('-webkit-transform', 'scale(' + this.scale + ')')
+                          .css('-msie-transform', 'scale(' + this.scale + ')')
+                          .css('-moz-transform', 'scale(' + this.scale + ')')
+                          .css('width', $(window).width() / this.scale)
+                  }
+                  if(this.options.layer==false){
+                      $('#smartbanner').css('position', 'static');
+                      if (this.type == 'android') {
+                          $('#smartbanner').css({'position':'relative','top':'0px','left':'0px'});
+                      }
+                  }else{
+                      $('#smartbanner').css('position', 'absolute');
+                  }
+              }
+
+              , listen: function () {
+                  $('#smartbanner .sb-close').on('click', $.proxy(this.close, this))
+                  $('#smartbanner .sb-button').on('click', $.proxy(this.install, this))
+              }
+
+              , show: function (callback) {
+                  var banner = $('#smartbanner');
+                  banner.stop();
+
+                  if (this.options.layer) {
+                      banner.animate({ top: 0, display: 'block' }, this.options.speedIn).addClass('shown').show();
+                      $(this.pushSelector).animate({ paddingTop: this.origHtmlMargin + (this.bannerHeight * this.scale) }, this.options.speedIn, 'swing', callback);
+                  } else {
+                      if ($.support.transition) {
+                          banner.animate({ top: 0 }, this.options.speedIn).addClass('shown');
+                          var transitionCallback = function () {
+                              $('html').removeClass('sb-animation');
+                              if (callback) {
+                                  callback();
+                              }
+                          };
+                          $(this.pushSelector).addClass('sb-animation').one($.support.transition.end, transitionCallback).emulateTransitionEnd(this.options.speedIn).css('margin-top', this.origHtmlMargin + (this.bannerHeight * this.scale));
+                      } else {
+                          banner.slideDown(this.options.speedIn).addClass('shown');
+                      }
+                  }
+              }
+
+              , hide: function (callback) {
+                  var banner = $('#smartbanner');
+                  banner.stop();
+
+                  if (this.options.layer) {
+                      banner.animate({ top: -1 * this.bannerHeight * this.scale, display: 'block' }, this.options.speedIn).removeClass('shown');
+                      $(this.pushSelector).animate({ paddingTop: this.origHtmlMargin }, this.options.speedIn, 'swing', callback);
+                  } else {
+                      if ($.support.transition) {
+                          if (this.type !== 'android')
+                              banner.css('top', -1 * this.bannerHeight * this.scale).removeClass('shown');
+                          else
+                              banner.css({ display: 'none' }).removeClass('shown');
+                          var transitionCallback = function () {
+                              $('html').removeClass('sb-animation');
+                              if (callback) {
+                                  callback();
+                              }
+                          };
+                          $(this.pushSelector).addClass('sb-animation').one($.support.transition.end, transitionCallback).emulateTransitionEnd(this.options.speedOut).css('margin-top', this.origHtmlMargin);
+                      } else {
+                          banner.slideUp(this.options.speedOut).removeClass('shown');
+                      }
+                  }
+              }
+
+              , close: function (e) {
+                  e.preventDefault()
+                  this.hide()
+                  this.setCookie('sb-closed', 'true', this.options.daysHidden);
+              }
+
+              , install: function (e) {
+                  if (this.options.hideOnInstall) {
+                      this.hide()
+                  }
+                  this.setCookie('sb-installed', 'true', this.options.daysReminder)
+              }
+
+              , setCookie: function (name, value, exdays) {
+                  var exdate = new Date()
+                  exdate.setDate(exdate.getDate() + exdays)
+                  value = encodeURI(value) + ((exdays == null) ? '' : '; expires=' + exdate.toUTCString())
+                  document.cookie = name + '=' + value + '; path=/;'
+              }
+
+              , getCookie: function (name) {
+                  var i, x, y, ARRcookies = document.cookie.split(";")
+                  for (i = 0; i < ARRcookies.length; i++) {
+                      x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="))
+                      y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1)
+                      x = x.replace(/^\s+|\s+$/g, "")
+                      if (x == name) {
+                          return decodeURI(y)
+                      }
+                  }
+                  return null
+              }
+
+                // Demo only
+              , switchType: function () {
+                  var that = this
+
+                  this.hide(function () {
+                      that.type = that.type == 'android' ? 'ios' : 'android'
+                      var meta = $(that.type == 'android' ? 'meta[name="google-play-app"]' : 'meta[name="apple-itunes-app"]').attr('content')
+                      that.appId = /app-id=([^\s,]+)/.exec(meta)[1]
+
+                      $('#smartbanner').detach()
+                      that.create()
+                      that.show()
+                  })
+              }
+            }
+
+            $.smartbanner = function (option) {
+                var $window = $(window)
+                , data = $window.data('smartbanner')
+                , options = typeof option == 'object' && option
+                if (!data) $window.data('smartbanner', (data = new SmartBanner(options)))
+                if (typeof option == 'string') data[option]()
+            }
+
+            // override these globally if you like (they are all optional)
+            $.smartbanner.defaults = {
+                title: null, // What the title of the app should be in the banner (defaults to <title>)
+                author: null, // What the author of the app should be in the banner (defaults to <meta name="author"> or hostname)
+                price: 'FREE', // Price of the app
+                appStoreLanguage: 'us', // Language code for App Store
+                inAppStore: 'On the App Store', // Text of price for iOS
+                inGooglePlay: 'In Google Play', // Text of price for Android
+                inAmazonAppStore: 'In the Amazon Appstore',
+                inWindowsStore: 'In the Windows Store', //Text of price for Windows
+                GooglePlayParams: null, // Aditional parameters for the market
+                icon: null, // The URL of the icon (defaults to <meta name="apple-touch-icon">)
+                iconGloss: null, // Force gloss effect for iOS even for precomposed
+                button: 'VIEW', // Text for the install button
+                url: null, // The URL for the button. Keep null if you want the button to link to the app store.
+                scale: 'auto', // Scale based on viewport size (set to 1 to disable)
+                speedIn: 300, // Show animation speed of the banner
+                speedOut: 400, // Close animation speed of the banner
+                daysHidden: 15, // Duration to hide the banner after being closed (0 = always show banner)
+                daysReminder: 90, // Duration to hide the banner after "VIEW" is clicked *separate from when the close button is clicked* (0 = always show banner)
+                force: null, // Choose 'ios', 'android' or 'windows'. Don't do a browser check, just always show this banner
+                hideOnInstall: true, // Hide the banner after "VIEW" is clicked.
+                layer: false, // Display as overlay layer or slide down the page
+                iOSUniversalApp: true, // If the iOS App is a universal app for both iPad and iPhone, display Smart Banner to iPad users, too.
+                appendToSelector: 'body', //Append the banner to a specific selector
+                pushSelector: 'html' // What element is going to push the site content down; this is where the banner append animation will start.
+            }
+
+            $.smartbanner.Constructor = SmartBanner;
+
+
+            // ============================================================
+            // Bootstrap transition
+            // Copyright 2011-2014 Twitter, Inc.
+            // Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+
+            function transitionEnd() {
+                var el = document.createElement('smartbanner')
+
+                var transEndEventNames = {
+                    WebkitTransition: 'webkitTransitionEnd',
+                    MozTransition: 'transitionend',
+                    OTransition: 'oTransitionEnd otransitionend',
+                    transition: 'transitionend'
+                }
+
+                for (var name in transEndEventNames) {
+                    if (el.style[name] !== undefined) {
+                        return { end: transEndEventNames[name] }
+                    }
+                }
+
+                return false // explicit for ie8 (  ._.)
+            }
+
+            if ($.support.transition !== undefined)
+                return  // Prevent conflict with Twitter Bootstrap
+
+            // http://blog.alexmaccaw.com/css-transitions
+            $.fn.emulateTransitionEnd = function (duration) {
+                var called = false, $el = this
+                $(this).one($.support.transition.end, function () {
+                    called = true
+                })
+                var callback = function () {
+                    if (!called) $($el).trigger($.support.transition.end)
+                }
+                setTimeout(callback, duration)
+                return this
+            }
+
+            $(function () {
+                $.support.transition = transitionEnd()
+            })
+            // ============================================================
+
+        }(window.jQuery);
+
+        ', 
+
+        ', 
+    
+
+    ', 
+    
+
+']

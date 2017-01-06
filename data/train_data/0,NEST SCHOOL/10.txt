@@ -1,0 +1,1869 @@
+[
+            
+        ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+//<![CDATA[
+var MSOWebPartPageFormName = 'aspnetForm';
+var g_presenceEnabled = true;
+var g_wsaEnabled = false;
+var g_wsaQoSEnabled = false;
+var g_wsaQoSDataPoints = [];
+var g_wsaLCID = 1033;
+var g_wsaListTemplateId = 850;
+var g_wsaSiteTemplateId = 'CHARMECKSCHOOL#0';
+var _fV4UI=true;var _spPageContextInfo = {webServerRelativeUrl: "\u002fhornetsnestES", webAbsoluteUrl: "http:\u002f\u002fschools.cms.k12.nc.us\u002fhornetsnestES", siteAbsoluteUrl: "http:\u002f\u002fschools.cms.k12.nc.us", serverRequestPath: "\u002fhornetsnestES\u002fPages\u002fDefault.aspx", layoutsUrl: "_layouts\u002f15", webTitle: "Hornets Nest Elementary", webTemplate: "10003", tenantAppVersion: "0", isAppWeb: false, webLogoUrl: "\u002f_layouts\u002fimages\u002ftitlegraphic.gif", webLanguage: 1033, currentLanguage: 1033, currentUICultureName: "en-US", currentCultureName: "en-US", clientServerTimeDelta: new Date("2017-01-06T15:49:44.3306411Z") - new Date(), siteClientTag: "136$$15.0.4763.1000", crossDomainPhotosEnabled:false, webUIVersion:15, webPermMasks:{High:16,Low:200769},pageListId:"{58460dba-ed44-4545-8567-10c15b04dc43}",pageItemId:1, pagePersonalizationScope:1, alertsEnabled:true, siteServerRelativeUrl: "\u002f", allowSilverlightPrompt:'True'};document.onreadystatechange=fnRemoveAllStatus; function fnRemoveAllStatus(){removeAllStatus(true)};var dlc_fvsi = {"DefaultViews":[],"ViewUrls":[],"WebUrl":"\/hornetsnestES"};
+function _spNavigateHierarchy(nodeDiv, dataSourceId, dataPath, url, listInContext, type) {
+
+    CoreInvoke('ProcessDefaultNavigateHierarchy', nodeDiv, dataSourceId, dataPath, url, listInContext, type, document.forms.aspnetForm, "", "\u002fhornetsnestES\u002fPages\u002fDefault.aspx");
+
+}
+var _spWebPartComponents = new Object();//]]>
+', 
+
+', 
+', u"
+//<![CDATA[
+(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() 
+        {
+          ExecuteOrDelayUntilScriptLoaded(
+            function()
+            {
+              var pairs = SP.ScriptHelpers.getDocumentQueryPairs();
+              var followDoc, itemId, listId, docName;
+              for (var key in pairs)
+              {
+                if(key.toLowerCase() == 'followdocument') 
+                  followDoc = pairs[key];
+                else if(key.toLowerCase() == 'itemid') 
+                  itemId = pairs[key];
+                else if(key.toLowerCase() == 'listid') 
+                  listId = pairs[key];
+                else if(key.toLowerCase() == 'docname') 
+                  docName = decodeURI(pairs[key]);
+              } 
+
+              if(followDoc != null && followDoc == '1' && listId!=null && itemId != null && docName != null)
+              {
+                SP.SOD.executeFunc('followingcommon.js', 'FollowDocumentFromEmail', function() 
+                { 
+                  FollowDocumentFromEmail(itemId, listId, docName);
+                });
+              }
+
+            }, 'SP.init.js');
+
+        });
+    })();(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() {
+
+            if (typeof(SPClientTemplates) === 'undefined' || SPClientTemplates === null || (typeof(APD_InAssetPicker) === 'function' && APD_InAssetPicker())) {
+                return;
+            }
+
+            var renderFollowFooter = function(renderCtx,  calloutActionMenu)
+            {
+                if (renderCtx.ListTemplateType == 700) 
+                    myDocsActionsMenuPopulator(renderCtx, calloutActionMenu);
+                else
+                    CalloutOnPostRenderTemplate(renderCtx, calloutActionMenu);
+
+                var listItem = renderCtx.CurrentItem;
+                if (typeof(listItem) === 'undefined' || listItem === null) {
+                    return;
+                }
+                if (listItem.FSObjType == 0) {
+                    calloutActionMenu.addAction(new CalloutAction({
+                        text: Strings.STS.L_CalloutFollowAction,
+                        tooltip: Strings.STS.L_CalloutFollowAction_Tooltip,
+                        onClickCallback: function (calloutActionClickEvent, calloutAction) {
+                            var callout = GetCalloutFromRenderCtx(renderCtx);
+                            if (!(typeof(callout) === 'undefined' || callout === null))
+                                callout.close();
+                            SP.SOD.executeFunc('followingcommon.js', 'FollowSelectedDocument', function() { FollowSelectedDocument(renderCtx); });
+                        }
+                    }));
+                }
+            };
+
+            var registerOverride = function(id) {
+                var followingOverridePostRenderCtx = {};
+                followingOverridePostRenderCtx.BaseViewID = 'Callout';
+                followingOverridePostRenderCtx.ListTemplateType = id;
+                followingOverridePostRenderCtx.Templates = {};
+                followingOverridePostRenderCtx.Templates.Footer = function(renderCtx) {
+                    var  renderECB;
+                    if (typeof(isSharedWithMeView) === 'undefined' || isSharedWithMeView === null) {
+                        renderECB = true;
+                    } else {
+                        var viewCtx = getViewCtxFromCalloutCtx(renderCtx);
+                        renderECB = !isSharedWithMeView(viewCtx);
+                    }
+                    return CalloutRenderFooterTemplate(renderCtx, renderFollowFooter, renderECB);
+                };
+                SPClientTemplates.TemplateManager.RegisterTemplateOverrides(followingOverridePostRenderCtx);
+            }
+            registerOverride(101);
+            registerOverride(700);
+        });
+    })();if (typeof(DeferWebFormInitCallback) == 'function') DeferWebFormInitCallback();//]]>
+", 
+
+', 
+        ', 
+            
+            
+            
+            
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                        Thank you for visiting the
+                        
+                            
+                            
+                            
+                            
+                                
+                                ', 
+
+
+
+
+
+
+                        Charlotte-Mecklenburg Schools Website.
+                                                                                                                                                                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                        You must have javascript enabled in your browser to view this site.
+                        
+                            
+                            
+                            
+                            
+                                
+                                ', 
+                                ', 
+
+
+
+
+
+
+                        Please enable javascript and refresh the page to continue viewing the site.
+                                                                                                                                                                                                        ', 
+                                ', 
+                                ', Click here 
+                            
+                            
+                            
+                            
+                                
+                                ', 
+
+
+
+
+
+to learn
+                        how to enable javascript in your browser.
+                                                                                                                                                                            ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', //<![CDATA[
+            .myBody2
+            {
+                background: silver;
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                bottom: 0px;
+                right: 0px;
+                z-index: 100; /* IE 8 */
+                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; /* IE 5-7 */
+                filter: alpha(opacity=80); /* Netscape */
+                -moz-opacity: 0.8; /* Safari 1.x */
+                -khtml-opacity: 0.8; /* Good browsers */
+                opacity: 0.8;
+            }
+            .msgDiv
+            {
+                position: absolute;
+                background: white;
+                width: 50%;
+                border: 3px black solid;
+                z-index: 110;
+                text-align: center;
+                vertical-align: middle;
+                margin-left: 25%;
+                margin-top: 20%;
+                padding-left: 20px;
+                padding-right: 20px; /* IE 8 */
+                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; /* IE 5-7 */
+                filter: alpha(opacity=100); /* Netscape */
+                -moz-opacity: 1.0; /* Safari 1.x */
+                -khtml-opacity: 1.0; /* Good browsers */
+                opacity: 1.0;
+            }
+        
+                    
+                    
+                    
+                    
+                    
+                    
+                        
+                        //]]>', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        
+                                        
+                                        ', 
+	', It looks like your browser does not have JavaScript enabled. Please turn on JavaScript and try again.', 
+		
+                                            
+                                        
+	', 
+', 
+                                        
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', CMS Home
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Parents
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Get Involved
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Schools
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Careers
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Board of Education
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Departments
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                                    
+                                                    
+                                                    
+                                                    ', 
+                                                        ', 
+	
+                                                            
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                ', 
+		
+                                                                    
+                                                                    ', 
+			', 
+				', Hornets Nest Elementary', Currently selected', About Our School', Contact Us', u"Principal's Corner", Faculty & Staff', 2016-17 Supply Lists', Team Hornets (PTA)', Hornets Nest Essential 7', Character Education', School Leadership Team', Title 1 Information', Título 1 Información', Sites', 
+			', 
+		', 
+                                                                
+	', 
+                                                                
+                                                            
+                                                        
+', 
+                                                    ', 
+                                                    
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                                ', 
+                                
+                                
+                                ', 
+                                    
+', 
+	', 
+		', 
+	', 
+', 
+', 
+', 
+	', 
+		', 
+			', 
+		', 
+			',   ', ASEP',   ', CMS District Calendars',   ', Common Sense Media',   ', Magnet Programs',   ', Menus',   ', Parent University',   ', PayPams',   ', PowerSchool Parent Portal',   ', School Donations',   ', School Progress Reports',   ', Student Assignment Survey',   ', Task Force Community Input',   ', Title IX', 
+		', 
+			', 
+		', 
+	', 
+', 
+
+                                ', 
+                                
+                            ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                                ', 
+                                                    
+                                                    
+                                                    ', 
+                                                        
+', 
+	', 
+
+	', 
+',  
+
+                                                    ', 
+                                                    
+                                                ', 
+                                                ', 
+                                                ', 
+                                                    
+                                                    
+                                                    ', 
+                                                        
+                        ', 
+	', 
+		', 
+			', 
+		', 
+			', 
+				', 
+					', Hornets Nest', Elementary', 
+				', 
+			', 
+				', 
+					', 
+						', School Information:', 6700 Beatties Ford Road', Charlotte, NC 28216', Courier #  ', 416', P:',  980-343-6110 | ', F:',  980-343-6148', 
+					', 
+						', Principal: ', Susan Wilson',  ', LC:',  ', North Learning Community', Bell Schedule: ', 8:45 AM - 3:45 PM', Grades: ',  K-5', 
+					', 
+						',  ', Email School', 
+					', 
+				', 
+			', 
+		', 
+	', 
+', 
+
+                                                    ', 
+                                                    
+                                                ', 
+                                                ', 
+                                                    ', 
+                                                        
+                                                        
+                                                            ', CMS School Web Sites',  > ', Hornets Nest Elementary', 
+                                                        
+                                                        
+                                                    ', 
+                                                ', 
+                                                ', 
+                                                    
+                                                    
+                                                    ', 
+                                                        
+			
+
+                                                    ', 
+                                                    
+                                                ', 
+                                                ', 
+                                                    ', 
+                                                        
+                                                        
+                                                        ', 
+                                                            
+', 
+				', 
+								', 								
+								 ', 
+                                 ', 
+	', 
+		', 
+			', 
+				', 
+					', 
+						', 
+							', Our Mission', 
+						', To actively engage students, parents and staff in a safe, supportive, enriched environment that prepares students for the 21st century and promotes lifelong learning.', 
+					', 
+				', 
+			', 
+		', 
+	', 
+', 
+								', 
+								', 
+								 ', 
+                                 ', 
+	', 
+		', 
+			', 
+				', 
+					', 
+						', 
+							', 
+								', 
+									', School Announcements', 
+								', 
+							', 
+						', 
+							', 
+								', 
+									', There are currently no announcements to display.', 
+								', 
+							', 
+						', 
+							', View Archive', 
+						', 
+					', 
+				', 
+			', 
+		', 
+	', 
+', 
+								 ', 
+                                 ', 
+	', 
+		', 
+			', 
+				', 
+					', 
+						', 
+							', 
+								', 
+									', Current Calendar Events', 
+								', 
+							', 
+						', 
+							', 
+								', 
+									', 
+										', 
+											', Jan 13', Early Release Day at 12:45 pm', 
+										', 
+											', Jan 16', Martin Luther King, Jr. Holiday: NO SCHOOL', 
+										', 
+											', Jan 17 - Feb 3', MAP Testing Window Opened for Winter', 
+										', 
+											', Jan 24', NO SCHOOL: Optional Teacher Workday', 
+										', 
+											', Feb 8', Classroom Group Pictures', 
+										', 
+											', Feb 17', NO SCHOOL: Optional Teacher Workday', 
+										', 
+											', Feb 20', NO SCHOOL: Optional Teacher Workday', 
+										', 
+											', Mar 1', Early Release Day at 12:45 pm', 
+										', 
+									', 
+								', 
+							', 
+						', 
+							', View Full Calendar', 
+								', 
+									', 
+								', 
+
+								', 
+							', 
+						', 
+					', 
+				', 
+			', 
+		', 
+	', 
+', 
+								', 
+				', 
+	', 
+
+', 
+				', 
+				    ', 
+				        ', Page Content', 
+',  Scholastic Book Fair Online Shopping Link:', Click HERE!',  ', Hornets Nest Essential 7  ', 
+', 1.',       ', Always keep your eyes on the person that is speaking.', 
+',  ', 
+', 2.',       ', Always respond appropriately to others by saying thank you, speaking when spoken to, and talking in complete sentences. It is not respectful to smack your teeth, walk away, roll your eyes, or shrug your shoulders.', 
+',  ', 
+', 3.',       ', Cheer on others who do something well.', 
+',  ', 
+', 4.',       ', Surprise others with random acts of kindness and do not ask for a reward.', 
+',  ', 
+', 5.',       ', Accept that everyone will make mistakes and bad choices-learn from them. Do not laugh or stare when others make mistakes or bad choices.', 
+',  ', 
+', 6.',       ', You must complete homework every day and make every effort to be organized.', 
+',  ', 
+', 7.',       ', Always be the best you can be.',  ',  ', 
+',  ', 
+
+', 
+				    ', 
+				', 
+				', if(typeof(MSOLayout_MakeInvisibleIfEmpty) == "function") {MSOLayout_MakeInvisibleIfEmpty();}', 
+		', 
+', 
+	', 
+
+	', 
+', 
+                                                        ', 
+                                                        
+                                                    ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', Board of Education 
+                                
+                                
+                                
+                                
+                                    
+                                    ', 
+                                ', 
+                                ', 
+                                    ', Superintendent 
+                                
+                                
+                                
+                                
+                                    
+                                    ', 
+                                ', 
+                                ', 
+                                    ', Calendars/Schedules
+                                
+                                
+                                
+                                
+                                
+                                    
+                                    ', 
+                                ', 
+                                ', 
+                                    ', School Safety
+                                
+                                
+                                
+                                
+                                
+                                    
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', CMS Home 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Parents 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Newcomers 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Schools 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Volunteers
+                                            and Partners 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Media Room 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Jobs 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                            ', 
+                            ', 
+                            ', Charlotte-Mecklenburg Schools
+                            
+                                ', 
+
+                            P.O. Box 30035, Charlotte, NC 28202                                                                                                                                                         ', 
+                            ', 
+                                ', 
+                            ', 
+                            ', u"
+                            In compliance with Federal Law, Charlotte-Mecklenburg Schools administers all education programs, 
+                            employment activities and admissions without discrimination against any person on the basis of gender, 
+                            race, color, religion, national origin, age, or disability. Inquiries regarding compliance with Title IX 
+                            of the Education Amendments of 1972, which prohibits discrimination on the basis of sex in education 
+                            programs or activities, may be referred to the District's Title IX Coordinator at titleixcoordinator@cms.k12.nc.us 
+                            or to the Office for Civil Rights, United States Department of Education.                                                                                                                                                     
+                            ", 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', u"//<![CDATA[
+        var formDigestElement = document.getElementsByName('__REQUESTDIGEST')[0];
+        if (!((formDigestElement == null) || (formDigestElement.tagName.toLowerCase() != 'input') || (formDigestElement.type.toLowerCase() != 'hidden') ||
+            (formDigestElement.value == null) || (formDigestElement.value.length <= 0)))
+        {
+            formDigestElement.value = '0x4CC81882CE3614910B5BA0CE74B6F90167C8E1364964F25D3E4D13904256C8A14CE2AA4AF192A88A211E5BF183023A88FFB68D1854C5605CE1244D377A66DE86,06 Jan 2017 15:49:44 -0000';
+            g_updateFormDigestPageLoaded = new Date();
+        }
+        //]]>
+        ", 
+', 
+
+', 
+//<![CDATA[
+var _spFormDigestRefreshInterval = 1440000;window.g_updateFormDigestPageLoaded = new Date(); window.g_updateFormDigestPageLoaded.setDate(window.g_updateFormDigestPageLoaded.getDate() -5);function loadMDN2() { EnsureScript('MDN.js', typeof(loadFilterFn), null); }
+function loadMDN1() { ExecuteOrDelayUntilScriptLoaded(loadMDN2, 'sp.ribbon.js'); }
+_spBodyOnLoadFunctionNames.push('loadMDN1');
+function _spNavigateHierarchyEx(nodeDiv, dataSourceId, dataPath, url, listInContext, type, additionalQString) {
+    CoreInvoke('SetAdditionalNavigateHierarchyQString', additionalQString);
+    g_originalSPNavigateFunc(nodeDiv, dataSourceId, dataPath, url, listInContext, type);
+}
+
+g_originalSPNavigateFunc = _spNavigateHierarchy;
+_spNavigateHierarchy = _spNavigateHierarchyEx;
+var _fV4UI = true;
+function _RegisterWebPartPageCUI()
+{
+    var initInfo = {editable: false,isEditMode: false,allowWebPartAdder: false,listId: "{58460dba-ed44-4545-8567-10c15b04dc43}",itemId: 1,recycleBinEnabled: true,enableMinorVersioning: true,enableModeration: false,forceCheckout: true,rootFolderUrl: "\u002fhornetsnestES\u002fPages",itemPermissions:{High:16,Low:200769}};
+    SP.Ribbon.WebPartComponent.registerWithPageManager(initInfo);
+    var wpcomp = SP.Ribbon.WebPartComponent.get_instance();
+    var hid;
+    hid = document.getElementById("_wpSelected");
+    if (hid != null)
+    {
+        var wpid = hid.value;
+        if (wpid.length > 0)
+        {
+            var zc = document.getElementById(wpid);
+            if (zc != null)
+                wpcomp.selectWebPart(zc, false);
+        }
+    }
+    hid = document.getElementById("_wzSelected");
+    if (hid != null)
+    {
+        var wzid = hid.value;
+        if (wzid.length > 0)
+        {
+            wpcomp.selectWebPartZone(null, wzid);
+        }
+    }
+};
+function __RegisterWebPartPageCUI() {
+ExecuteOrDelayUntilScriptLoaded(_RegisterWebPartPageCUI, "sp.ribbon.js");}
+_spBodyOnLoadFunctionNames.push("__RegisterWebPartPageCUI");var __wpmExportWarning='This Web Part Page has been personalized. As a result, one or more Web Part properties may contain confidential information. Make sure the properties contain information that is safe for others to read. After exporting this Web Part, view properties in the Web Part description file (.WebPart) by using a text editor such as Microsoft Notepad.';var __wpmCloseProviderWarning='You are about to close this Web Part.  It is currently providing data to other Web Parts, and these connections will be deleted if this Web Part is closed.  To close this Web Part, click OK.  To keep this Web Part, click Cancel.';var __wpmDeleteWarning='You are about to permanently delete this Web Part.  Are you sure you want to do this?  To delete this Web Part, click OK.  To keep this Web Part, click Cancel.';
+            ExecuteOrDelayUntilScriptLoaded(
+                function() 
+                {                    
+                    Srch.ScriptApplicationManager.get_current().states = {"webUILanguageName":"en-US","webDefaultLanguageName":"en-US","contextUrl":"http://schools.cms.k12.nc.us/hornetsnestES","contextTitle":"Hornets Nest Elementary","supportedLanguages":[{"id":1025,"label":"Arabic"},{"id":1093,"label":"Bengali"},{"id":1026,"label":"Bulgarian"},{"id":1027,"label":"Catalan"},{"id":2052,"label":"Chinese (Simplified)"},{"id":1028,"label":"Chinese (Traditional)"},{"id":1050,"label":"Croatian"},{"id":1029,"label":"Czech"},{"id":1030,"label":"Danish"},{"id":1043,"label":"Dutch"},{"id":1033,"label":"English"},{"id":1035,"label":"Finnish"},{"id":1036,"label":"French"},{"id":1031,"label":"German"},{"id":1032,"label":"Greek"},{"id":1095,"label":"Gujarati"},{"id":1037,"label":"Hebrew"},{"id":1081,"label":"Hindi"},{"id":1038,"label":"Hungarian"},{"id":1039,"label":"Icelandic"},{"id":1057,"label":"Indonesian"},{"id":1040,"label":"Italian"},{"id":1041,"label":"Japanese"},{"id":1099,"label":"Kannada"},{"id":1042,"label":"Korean"},{"id":1062,"label":"Latvian"},{"id":1063,"label":"Lithuanian"},{"id":1086,"label":"Malay"},{"id":1100,"label":"Malayalam"},{"id":1102,"label":"Marathi"},{"id":1044,"label":"Norwegian"},{"id":1045,"label":"Polish"},{"id":1046,"label":"Portuguese (Brazil)"},{"id":2070,"label":"Portuguese (Portugal)"},{"id":1094,"label":"Punjabi"},{"id":1048,"label":"Romanian"},{"id":1049,"label":"Russian"},{"id":3098,"label":"Serbian (Cyrillic)"},{"id":2074,"label":"Serbian (Latin)"},{"id":1051,"label":"Slovak"},{"id":1060,"label":"Slovenian"},{"id":3082,"label":"Spanish (Spain)"},{"id":2058,"label":"Spanish (Mexico)"},{"id":1053,"label":"Swedish"},{"id":1097,"label":"Tamil"},{"id":1098,"label":"Telugu"},{"id":1054,"label":"Thai"},{"id":1055,"label":"Turkish"},{"id":1058,"label":"Ukrainian"},{"id":1056,"label":"Urdu"},{"id":1066,"label":"Vietnamese"}],"navigationNodes":[{"id":1001,"name":"Everything","url":"{searchcenterurl}/results.aspx","promptString":"Search everything"},{"id":1002,"name":"People","url":"{searchcenterurl}/peopleresults.aspx","promptString":"Search people"},{"id":1003,"name":"Conversations","url":"{searchcenterurl}/conversationresults.aspx","promptString":"Search conversations"},{"id":0,"name":"This Site","url":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","promptString":"Search this site"}],"searchCenterUrl":"/Search/","showAdminDetails":false,"defaultPagesListName":"Pages","isSPFSKU":false,"userAdvancedLanguageSettingsUrl":"?ShowAdvLang=1","defaultQueryProperties":{"culture":1033,"uiLanguage":1033,"summaryLength":180,"desiredSnippetLength":90,"enableStemming":true,"enablePhonetic":false,"enableNicknames":false,"trimDuplicates":true,"bypassResultTypes":false,"enableInterleaving":true,"enableQueryRules":true,"processBestBets":true,"enableOrderingHitHighlightedProperty":false,"hitHighlightedMultivaluePropertyLimit":-1,"processPersonalFavorites":true}};
+                    Srch.U.trace(null, 'SerializeToClient', 'ScriptApplicationManager state initialized.');
+                }, 'Search.ClientControls.js');var g_clientIdDeltaPlaceHolderMain = "DeltaPlaceHolderMain";
+var g_clientIdDeltaPlaceHolderUtilityContent = "DeltaPlaceHolderUtilityContent";
+
+                    ExecuteOrDelayUntilScriptLoaded(
+                        function() 
+                        {
+                            if ($isNull($find('ctl00_ctl48_csr')))
+                            {
+                                var sb = $create(Srch.SearchBox, {"delayLoadTemplateScripts":true,"initialPrompt":"Search this site","messages":[],"navigationNodes":[{"id":1001,"name":"Everything","url":"{searchcenterurl}/results.aspx","promptString":"Search everything"},{"id":1002,"name":"People","url":"{searchcenterurl}/peopleresults.aspx","promptString":"Search people"},{"id":1003,"name":"Conversations","url":"{searchcenterurl}/conversationresults.aspx","promptString":"Search conversations"},{"id":0,"name":"This Site","url":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","promptString":"Search this site"}],"queryGroupNames":["Default"],"renderTemplateId":"~sitecollection/_catalogs/masterpage/Display Templates/Search/Control_SearchBox.js","resultsPageAddress":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","serverInitialRender":true,"showDataErrors":true,"showNavigation":true,"showQuerySuggestions":false,"states":{},"tryInplaceQuery":false}, null, null, $get("ctl00_ctl48_csr"));
+                                sb.activate('Search this site', 'ctl00_ctl48_csr_sbox', 'ctl00_ctl48_csr_sboxdiv', 'ctl00_ctl48_csr_NavButton', 'ctl00_ctl48_csr_AutoCompList', 'ctl00_ctl48_csr_NavDropdownList', 'ctl00_ctl48_csr_SearchLink', 'ms-srch-sbprogress', 'ms-srch-sb-prompt ms-helperText');
+                            }
+                        }, 'Search.ClientControls.js');g_QuickLaunchControlIds.push("zz1_V4QuickLaunchMenu");_spBodyOnLoadFunctionNames.push('QuickLaunchInitDroppable'); var g_zz1_V4QuickLaunchMenu = null; function init_zz1_V4QuickLaunchMenu() { if (g_zz1_V4QuickLaunchMenu == null) g_zz1_V4QuickLaunchMenu = $create(SP.UI.AspMenu, null, null, null, $get('zz1_V4QuickLaunchMen)); } ExecuteOrDelayUntilScriptLoaded(init_zz1_V4QuickLaunchMenu, 'SP.Core.js');
+//]]>
+', 
+', 
+'][
+            
+        ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+
+', 
+//<![CDATA[
+var MSOWebPartPageFormName = 'aspnetForm';
+var g_presenceEnabled = true;
+var g_wsaEnabled = false;
+var g_wsaQoSEnabled = false;
+var g_wsaQoSDataPoints = [];
+var g_wsaLCID = 1033;
+var g_wsaListTemplateId = 850;
+var g_wsaSiteTemplateId = 'CHARMECKSCHOOL#0';
+var _fV4UI=true;var _spPageContextInfo = {webServerRelativeUrl: "\u002fhornetsnestES", webAbsoluteUrl: "http:\u002f\u002fschools.cms.k12.nc.us\u002fhornetsnestES", siteAbsoluteUrl: "http:\u002f\u002fschools.cms.k12.nc.us", serverRequestPath: "\u002fhornetsnestES\u002fPages\u002fDefault.aspx", layoutsUrl: "_layouts\u002f15", webTitle: "Hornets Nest Elementary", webTemplate: "10003", tenantAppVersion: "0", isAppWeb: false, webLogoUrl: "\u002f_layouts\u002fimages\u002ftitlegraphic.gif", webLanguage: 1033, currentLanguage: 1033, currentUICultureName: "en-US", currentCultureName: "en-US", clientServerTimeDelta: new Date("2017-01-06T15:49:45.6119820Z") - new Date(), siteClientTag: "136$$15.0.4763.1000", crossDomainPhotosEnabled:false, webUIVersion:15, webPermMasks:{High:16,Low:200769},pageListId:"{58460dba-ed44-4545-8567-10c15b04dc43}",pageItemId:1, pagePersonalizationScope:1, alertsEnabled:true, siteServerRelativeUrl: "\u002f", allowSilverlightPrompt:'True'};document.onreadystatechange=fnRemoveAllStatus; function fnRemoveAllStatus(){removeAllStatus(true)};var dlc_fvsi = {"DefaultViews":[],"ViewUrls":[],"WebUrl":"\/hornetsnestES"};
+function _spNavigateHierarchy(nodeDiv, dataSourceId, dataPath, url, listInContext, type) {
+
+    CoreInvoke('ProcessDefaultNavigateHierarchy', nodeDiv, dataSourceId, dataPath, url, listInContext, type, document.forms.aspnetForm, "", "\u002fhornetsnestES\u002fPages\u002fDefault.aspx");
+
+}
+var _spWebPartComponents = new Object();//]]>
+', 
+
+', 
+', u"
+//<![CDATA[
+(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() 
+        {
+          ExecuteOrDelayUntilScriptLoaded(
+            function()
+            {
+              var pairs = SP.ScriptHelpers.getDocumentQueryPairs();
+              var followDoc, itemId, listId, docName;
+              for (var key in pairs)
+              {
+                if(key.toLowerCase() == 'followdocument') 
+                  followDoc = pairs[key];
+                else if(key.toLowerCase() == 'itemid') 
+                  itemId = pairs[key];
+                else if(key.toLowerCase() == 'listid') 
+                  listId = pairs[key];
+                else if(key.toLowerCase() == 'docname') 
+                  docName = decodeURI(pairs[key]);
+              } 
+
+              if(followDoc != null && followDoc == '1' && listId!=null && itemId != null && docName != null)
+              {
+                SP.SOD.executeFunc('followingcommon.js', 'FollowDocumentFromEmail', function() 
+                { 
+                  FollowDocumentFromEmail(itemId, listId, docName);
+                });
+              }
+
+            }, 'SP.init.js');
+
+        });
+    })();(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() {
+
+            if (typeof(SPClientTemplates) === 'undefined' || SPClientTemplates === null || (typeof(APD_InAssetPicker) === 'function' && APD_InAssetPicker())) {
+                return;
+            }
+
+            var renderFollowFooter = function(renderCtx,  calloutActionMenu)
+            {
+                if (renderCtx.ListTemplateType == 700) 
+                    myDocsActionsMenuPopulator(renderCtx, calloutActionMenu);
+                else
+                    CalloutOnPostRenderTemplate(renderCtx, calloutActionMenu);
+
+                var listItem = renderCtx.CurrentItem;
+                if (typeof(listItem) === 'undefined' || listItem === null) {
+                    return;
+                }
+                if (listItem.FSObjType == 0) {
+                    calloutActionMenu.addAction(new CalloutAction({
+                        text: Strings.STS.L_CalloutFollowAction,
+                        tooltip: Strings.STS.L_CalloutFollowAction_Tooltip,
+                        onClickCallback: function (calloutActionClickEvent, calloutAction) {
+                            var callout = GetCalloutFromRenderCtx(renderCtx);
+                            if (!(typeof(callout) === 'undefined' || callout === null))
+                                callout.close();
+                            SP.SOD.executeFunc('followingcommon.js', 'FollowSelectedDocument', function() { FollowSelectedDocument(renderCtx); });
+                        }
+                    }));
+                }
+            };
+
+            var registerOverride = function(id) {
+                var followingOverridePostRenderCtx = {};
+                followingOverridePostRenderCtx.BaseViewID = 'Callout';
+                followingOverridePostRenderCtx.ListTemplateType = id;
+                followingOverridePostRenderCtx.Templates = {};
+                followingOverridePostRenderCtx.Templates.Footer = function(renderCtx) {
+                    var  renderECB;
+                    if (typeof(isSharedWithMeView) === 'undefined' || isSharedWithMeView === null) {
+                        renderECB = true;
+                    } else {
+                        var viewCtx = getViewCtxFromCalloutCtx(renderCtx);
+                        renderECB = !isSharedWithMeView(viewCtx);
+                    }
+                    return CalloutRenderFooterTemplate(renderCtx, renderFollowFooter, renderECB);
+                };
+                SPClientTemplates.TemplateManager.RegisterTemplateOverrides(followingOverridePostRenderCtx);
+            }
+            registerOverride(101);
+            registerOverride(700);
+        });
+    })();if (typeof(DeferWebFormInitCallback) == 'function') DeferWebFormInitCallback();//]]>
+", 
+
+', 
+        ', 
+            
+            
+            
+            
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                        Thank you for visiting the
+                        
+                            
+                            
+                            
+                            
+                                
+                                ', 
+
+
+
+
+
+
+                        Charlotte-Mecklenburg Schools Website.
+                                                                                                                                                                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                        You must have javascript enabled in your browser to view this site.
+                        
+                            
+                            
+                            
+                            
+                                
+                                ', 
+                                ', 
+
+
+
+
+
+
+                        Please enable javascript and refresh the page to continue viewing the site.
+                                                                                                                                                                                                        ', 
+                                ', 
+                                ', Click here 
+                            
+                            
+                            
+                            
+                                
+                                ', 
+
+
+
+
+
+to learn
+                        how to enable javascript in your browser.
+                                                                                                                                                                            ', 
+                        ', 
+                        ', 
+                        ', 
+                        ', //<![CDATA[
+            .myBody2
+            {
+                background: silver;
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                bottom: 0px;
+                right: 0px;
+                z-index: 100; /* IE 8 */
+                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; /* IE 5-7 */
+                filter: alpha(opacity=80); /* Netscape */
+                -moz-opacity: 0.8; /* Safari 1.x */
+                -khtml-opacity: 0.8; /* Good browsers */
+                opacity: 0.8;
+            }
+            .msgDiv
+            {
+                position: absolute;
+                background: white;
+                width: 50%;
+                border: 3px black solid;
+                z-index: 110;
+                text-align: center;
+                vertical-align: middle;
+                margin-left: 25%;
+                margin-top: 20%;
+                padding-left: 20px;
+                padding-right: 20px; /* IE 8 */
+                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; /* IE 5-7 */
+                filter: alpha(opacity=100); /* Netscape */
+                -moz-opacity: 1.0; /* Safari 1.x */
+                -khtml-opacity: 1.0; /* Good browsers */
+                opacity: 1.0;
+            }
+        
+                    
+                    
+                    
+                    
+                    
+                    
+                        
+                        //]]>', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                ', 
+                            ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        
+                                        
+                                        ', 
+	', It looks like your browser does not have JavaScript enabled. Please turn on JavaScript and try again.', 
+		
+                                            
+                                        
+	', 
+', 
+                                        
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', CMS Home
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Parents
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Get Involved
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Schools
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Careers
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Board of Education
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Departments
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                                    
+                                                    
+                                                    
+                                                    ', 
+                                                        ', 
+	
+                                                            
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                ', 
+		
+                                                                    
+                                                                    ', 
+			', 
+				', Hornets Nest Elementary', Currently selected', About Our School', Contact Us', u"Principal's Corner", Faculty & Staff', 2016-17 Supply Lists', Team Hornets (PTA)', Hornets Nest Essential 7', Character Education', School Leadership Team', Title 1 Information', Título 1 Información', Sites', 
+			', 
+		', 
+                                                                
+	', 
+                                                                
+                                                            
+                                                        
+', 
+                                                    ', 
+                                                    
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                            ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                                ', 
+                                
+                                
+                                ', 
+                                    
+', 
+	', 
+		', 
+	', 
+', 
+', 
+', 
+	', 
+		', 
+			', 
+		', 
+			',   ', ASEP',   ', CMS District Calendars',   ', Common Sense Media',   ', Magnet Programs',   ', Menus',   ', Parent University',   ', PayPams',   ', PowerSchool Parent Portal',   ', School Donations',   ', School Progress Reports',   ', Student Assignment Survey',   ', Task Force Community Input',   ', Title IX', 
+		', 
+			', 
+		', 
+	', 
+', 
+
+                                ', 
+                                
+                            ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                                ', 
+                                                ', 
+                                                    
+                                                    
+                                                    ', 
+                                                        
+', 
+	', 
+
+	', 
+',  
+
+                                                    ', 
+                                                    
+                                                ', 
+                                                ', 
+                                                ', 
+                                                    
+                                                    
+                                                    ', 
+                                                        
+                        ', 
+	', 
+		', 
+			', 
+		', 
+			', 
+				', 
+					', Hornets Nest', Elementary', 
+				', 
+			', 
+				', 
+					', 
+						', School Information:', 6700 Beatties Ford Road', Charlotte, NC 28216', Courier #  ', 416', P:',  980-343-6110 | ', F:',  980-343-6148', 
+					', 
+						', Principal: ', Susan Wilson',  ', LC:',  ', North Learning Community', Bell Schedule: ', 8:45 AM - 3:45 PM', Grades: ',  K-5', 
+					', 
+						',  ', Email School', 
+					', 
+				', 
+			', 
+		', 
+	', 
+', 
+
+                                                    ', 
+                                                    
+                                                ', 
+                                                ', 
+                                                    ', 
+                                                        
+                                                        
+                                                            ', CMS School Web Sites',  > ', Hornets Nest Elementary', 
+                                                        
+                                                        
+                                                    ', 
+                                                ', 
+                                                ', 
+                                                    
+                                                    
+                                                    ', 
+                                                        
+			
+
+                                                    ', 
+                                                    
+                                                ', 
+                                                ', 
+                                                    ', 
+                                                        
+                                                        
+                                                        ', 
+                                                            
+', 
+				', 
+								', 								
+								 ', 
+                                 ', 
+	', 
+		', 
+			', 
+				', 
+					', 
+						', 
+							', Our Mission', 
+						', To actively engage students, parents and staff in a safe, supportive, enriched environment that prepares students for the 21st century and promotes lifelong learning.', 
+					', 
+				', 
+			', 
+		', 
+	', 
+', 
+								', 
+								', 
+								 ', 
+                                 ', 
+	', 
+		', 
+			', 
+				', 
+					', 
+						', 
+							', 
+								', 
+									', School Announcements', 
+								', 
+							', 
+						', 
+							', 
+								', 
+									', There are currently no announcements to display.', 
+								', 
+							', 
+						', 
+							', View Archive', 
+						', 
+					', 
+				', 
+			', 
+		', 
+	', 
+', 
+								 ', 
+                                 ', 
+	', 
+		', 
+			', 
+				', 
+					', 
+						', 
+							', 
+								', 
+									', Current Calendar Events', 
+								', 
+							', 
+						', 
+							', 
+								', 
+									', 
+										', 
+											', Jan 13', Early Release Day at 12:45 pm', 
+										', 
+											', Jan 16', Martin Luther King, Jr. Holiday: NO SCHOOL', 
+										', 
+											', Jan 17 - Feb 3', MAP Testing Window Opened for Winter', 
+										', 
+											', Jan 24', NO SCHOOL: Optional Teacher Workday', 
+										', 
+											', Feb 8', Classroom Group Pictures', 
+										', 
+											', Feb 17', NO SCHOOL: Optional Teacher Workday', 
+										', 
+											', Feb 20', NO SCHOOL: Optional Teacher Workday', 
+										', 
+											', Mar 1', Early Release Day at 12:45 pm', 
+										', 
+									', 
+								', 
+							', 
+						', 
+							', View Full Calendar', 
+								', 
+									', 
+								', 
+
+								', 
+							', 
+						', 
+					', 
+				', 
+			', 
+		', 
+	', 
+', 
+								', 
+				', 
+	', 
+
+', 
+				', 
+				    ', 
+				        ', Page Content', 
+',  Scholastic Book Fair Online Shopping Link:', Click HERE!',  ', Hornets Nest Essential 7  ', 
+', 1.',       ', Always keep your eyes on the person that is speaking.', 
+',  ', 
+', 2.',       ', Always respond appropriately to others by saying thank you, speaking when spoken to, and talking in complete sentences. It is not respectful to smack your teeth, walk away, roll your eyes, or shrug your shoulders.', 
+',  ', 
+', 3.',       ', Cheer on others who do something well.', 
+',  ', 
+', 4.',       ', Surprise others with random acts of kindness and do not ask for a reward.', 
+',  ', 
+', 5.',       ', Accept that everyone will make mistakes and bad choices-learn from them. Do not laugh or stare when others make mistakes or bad choices.', 
+',  ', 
+', 6.',       ', You must complete homework every day and make every effort to be organized.', 
+',  ', 
+', 7.',       ', Always be the best you can be.',  ',  ', 
+',  ', 
+
+', 
+				    ', 
+				', 
+				', if(typeof(MSOLayout_MakeInvisibleIfEmpty) == "function") {MSOLayout_MakeInvisibleIfEmpty();}', 
+		', 
+', 
+	', 
+
+	', 
+', 
+                                                        ', 
+                                                        
+                                                    ', 
+                                                ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                    ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', Board of Education 
+                                
+                                
+                                
+                                
+                                    
+                                    ', 
+                                ', 
+                                ', 
+                                    ', Superintendent 
+                                
+                                
+                                
+                                
+                                    
+                                    ', 
+                                ', 
+                                ', 
+                                    ', Calendars/Schedules
+                                
+                                
+                                
+                                
+                                
+                                    
+                                    ', 
+                                ', 
+                                ', 
+                                    ', School Safety
+                                
+                                
+                                
+                                
+                                
+                                    
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        ', 
+                                            ', CMS Home 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Parents 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Newcomers 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Schools 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Volunteers
+                                            and Partners 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Media Room 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                            ', 
+                                        ', 
+                                        ', 
+                                            ', Jobs 
+                                        
+                                        
+                                        
+                                        
+                                            
+                                            ', 
+                                        ', 
+                                    ', 
+                                ', 
+                            ', 
+                            ', 
+                            ', Charlotte-Mecklenburg Schools
+                            
+                                ', 
+
+                            P.O. Box 30035, Charlotte, NC 28202                                                                                                                                                         ', 
+                            ', 
+                                ', 
+                            ', 
+                            ', u"
+                            In compliance with Federal Law, Charlotte-Mecklenburg Schools administers all education programs, 
+                            employment activities and admissions without discrimination against any person on the basis of gender, 
+                            race, color, religion, national origin, age, or disability. Inquiries regarding compliance with Title IX 
+                            of the Education Amendments of 1972, which prohibits discrimination on the basis of sex in education 
+                            programs or activities, may be referred to the District's Title IX Coordinator at titleixcoordinator@cms.k12.nc.us 
+                            or to the Office for Civil Rights, United States Department of Education.                                                                                                                                                     
+                            ", 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+', u"//<![CDATA[
+        var formDigestElement = document.getElementsByName('__REQUESTDIGEST')[0];
+        if (!((formDigestElement == null) || (formDigestElement.tagName.toLowerCase() != 'input') || (formDigestElement.type.toLowerCase() != 'hidden') ||
+            (formDigestElement.value == null) || (formDigestElement.value.length <= 0)))
+        {
+            formDigestElement.value = '0x4C99134658C56BE1AD08EC186FEB1C266E53A14B4D8798562E72CDB0700E2D6CE6484F74A55D97C6E54BE8D0D9BCD29C87677A2FD7AFD391CFBA675150FEEEDE,06 Jan 2017 15:49:45 -0000';
+            g_updateFormDigestPageLoaded = new Date();
+        }
+        //]]>
+        ", 
+', 
+
+', 
+//<![CDATA[
+var _spFormDigestRefreshInterval = 1440000;window.g_updateFormDigestPageLoaded = new Date(); window.g_updateFormDigestPageLoaded.setDate(window.g_updateFormDigestPageLoaded.getDate() -5);function loadMDN2() { EnsureScript('MDN.js', typeof(loadFilterFn), null); }
+function loadMDN1() { ExecuteOrDelayUntilScriptLoaded(loadMDN2, 'sp.ribbon.js'); }
+_spBodyOnLoadFunctionNames.push('loadMDN1');
+function _spNavigateHierarchyEx(nodeDiv, dataSourceId, dataPath, url, listInContext, type, additionalQString) {
+    CoreInvoke('SetAdditionalNavigateHierarchyQString', additionalQString);
+    g_originalSPNavigateFunc(nodeDiv, dataSourceId, dataPath, url, listInContext, type);
+}
+
+g_originalSPNavigateFunc = _spNavigateHierarchy;
+_spNavigateHierarchy = _spNavigateHierarchyEx;
+var _fV4UI = true;
+function _RegisterWebPartPageCUI()
+{
+    var initInfo = {editable: false,isEditMode: false,allowWebPartAdder: false,listId: "{58460dba-ed44-4545-8567-10c15b04dc43}",itemId: 1,recycleBinEnabled: true,enableMinorVersioning: true,enableModeration: false,forceCheckout: true,rootFolderUrl: "\u002fhornetsnestES\u002fPages",itemPermissions:{High:16,Low:200769}};
+    SP.Ribbon.WebPartComponent.registerWithPageManager(initInfo);
+    var wpcomp = SP.Ribbon.WebPartComponent.get_instance();
+    var hid;
+    hid = document.getElementById("_wpSelected");
+    if (hid != null)
+    {
+        var wpid = hid.value;
+        if (wpid.length > 0)
+        {
+            var zc = document.getElementById(wpid);
+            if (zc != null)
+                wpcomp.selectWebPart(zc, false);
+        }
+    }
+    hid = document.getElementById("_wzSelected");
+    if (hid != null)
+    {
+        var wzid = hid.value;
+        if (wzid.length > 0)
+        {
+            wpcomp.selectWebPartZone(null, wzid);
+        }
+    }
+};
+function __RegisterWebPartPageCUI() {
+ExecuteOrDelayUntilScriptLoaded(_RegisterWebPartPageCUI, "sp.ribbon.js");}
+_spBodyOnLoadFunctionNames.push("__RegisterWebPartPageCUI");var __wpmExportWarning='This Web Part Page has been personalized. As a result, one or more Web Part properties may contain confidential information. Make sure the properties contain information that is safe for others to read. After exporting this Web Part, view properties in the Web Part description file (.WebPart) by using a text editor such as Microsoft Notepad.';var __wpmCloseProviderWarning='You are about to close this Web Part.  It is currently providing data to other Web Parts, and these connections will be deleted if this Web Part is closed.  To close this Web Part, click OK.  To keep this Web Part, click Cancel.';var __wpmDeleteWarning='You are about to permanently delete this Web Part.  Are you sure you want to do this?  To delete this Web Part, click OK.  To keep this Web Part, click Cancel.';
+            ExecuteOrDelayUntilScriptLoaded(
+                function() 
+                {                    
+                    Srch.ScriptApplicationManager.get_current().states = {"webUILanguageName":"en-US","webDefaultLanguageName":"en-US","contextUrl":"http://schools.cms.k12.nc.us/hornetsnestES","contextTitle":"Hornets Nest Elementary","supportedLanguages":[{"id":1025,"label":"Arabic"},{"id":1093,"label":"Bengali"},{"id":1026,"label":"Bulgarian"},{"id":1027,"label":"Catalan"},{"id":2052,"label":"Chinese (Simplified)"},{"id":1028,"label":"Chinese (Traditional)"},{"id":1050,"label":"Croatian"},{"id":1029,"label":"Czech"},{"id":1030,"label":"Danish"},{"id":1043,"label":"Dutch"},{"id":1033,"label":"English"},{"id":1035,"label":"Finnish"},{"id":1036,"label":"French"},{"id":1031,"label":"German"},{"id":1032,"label":"Greek"},{"id":1095,"label":"Gujarati"},{"id":1037,"label":"Hebrew"},{"id":1081,"label":"Hindi"},{"id":1038,"label":"Hungarian"},{"id":1039,"label":"Icelandic"},{"id":1057,"label":"Indonesian"},{"id":1040,"label":"Italian"},{"id":1041,"label":"Japanese"},{"id":1099,"label":"Kannada"},{"id":1042,"label":"Korean"},{"id":1062,"label":"Latvian"},{"id":1063,"label":"Lithuanian"},{"id":1086,"label":"Malay"},{"id":1100,"label":"Malayalam"},{"id":1102,"label":"Marathi"},{"id":1044,"label":"Norwegian"},{"id":1045,"label":"Polish"},{"id":1046,"label":"Portuguese (Brazil)"},{"id":2070,"label":"Portuguese (Portugal)"},{"id":1094,"label":"Punjabi"},{"id":1048,"label":"Romanian"},{"id":1049,"label":"Russian"},{"id":3098,"label":"Serbian (Cyrillic)"},{"id":2074,"label":"Serbian (Latin)"},{"id":1051,"label":"Slovak"},{"id":1060,"label":"Slovenian"},{"id":3082,"label":"Spanish (Spain)"},{"id":2058,"label":"Spanish (Mexico)"},{"id":1053,"label":"Swedish"},{"id":1097,"label":"Tamil"},{"id":1098,"label":"Telugu"},{"id":1054,"label":"Thai"},{"id":1055,"label":"Turkish"},{"id":1058,"label":"Ukrainian"},{"id":1056,"label":"Urdu"},{"id":1066,"label":"Vietnamese"}],"navigationNodes":[{"id":1001,"name":"Everything","url":"{searchcenterurl}/results.aspx","promptString":"Search everything"},{"id":1002,"name":"People","url":"{searchcenterurl}/peopleresults.aspx","promptString":"Search people"},{"id":1003,"name":"Conversations","url":"{searchcenterurl}/conversationresults.aspx","promptString":"Search conversations"},{"id":0,"name":"This Site","url":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","promptString":"Search this site"}],"searchCenterUrl":"/Search/","showAdminDetails":false,"defaultPagesListName":"Pages","isSPFSKU":false,"userAdvancedLanguageSettingsUrl":"?ShowAdvLang=1","defaultQueryProperties":{"culture":1033,"uiLanguage":1033,"summaryLength":180,"desiredSnippetLength":90,"enableStemming":true,"enablePhonetic":false,"enableNicknames":false,"trimDuplicates":true,"bypassResultTypes":false,"enableInterleaving":true,"enableQueryRules":true,"processBestBets":true,"enableOrderingHitHighlightedProperty":false,"hitHighlightedMultivaluePropertyLimit":-1,"processPersonalFavorites":true}};
+                    Srch.U.trace(null, 'SerializeToClient', 'ScriptApplicationManager state initialized.');
+                }, 'Search.ClientControls.js');var g_clientIdDeltaPlaceHolderMain = "DeltaPlaceHolderMain";
+var g_clientIdDeltaPlaceHolderUtilityContent = "DeltaPlaceHolderUtilityContent";
+
+                    ExecuteOrDelayUntilScriptLoaded(
+                        function() 
+                        {
+                            if ($isNull($find('ctl00_ctl48_csr')))
+                            {
+                                var sb = $create(Srch.SearchBox, {"delayLoadTemplateScripts":true,"initialPrompt":"Search this site","messages":[],"navigationNodes":[{"id":1001,"name":"Everything","url":"{searchcenterurl}/results.aspx","promptString":"Search everything"},{"id":1002,"name":"People","url":"{searchcenterurl}/peopleresults.aspx","promptString":"Search people"},{"id":1003,"name":"Conversations","url":"{searchcenterurl}/conversationresults.aspx","promptString":"Search conversations"},{"id":0,"name":"This Site","url":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","promptString":"Search this site"}],"queryGroupNames":["Default"],"renderTemplateId":"~sitecollection/_catalogs/masterpage/Display Templates/Search/Control_SearchBox.js","resultsPageAddress":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","serverInitialRender":true,"showDataErrors":true,"showNavigation":true,"showQuerySuggestions":false,"states":{},"tryInplaceQuery":false}, null, null, $get("ctl00_ctl48_csr"));
+                                sb.activate('Search this site', 'ctl00_ctl48_csr_sbox', 'ctl00_ctl48_csr_sboxdiv', 'ctl00_ctl48_csr_NavButton', 'ctl00_ctl48_csr_AutoCompList', 'ctl00_ctl48_csr_NavDropdownList', 'ctl00_ctl48_csr_SearchLink', 'ms-srch-sbprogress', 'ms-srch-sb-prompt ms-helperText');
+                            }
+                        }, 'Search.ClientControls.js');g_QuickLaunchControlIds.push("zz1_V4QuickLaunchMenu");_spBodyOnLoadFunctionNames.push('QuickLaunchInitDroppable'); var g_zz1_V4QuickLaunchMenu = null; function init_zz1_V4QuickLaunchMenu() { if (g_zz1_V4QuickLaunchMenu == null) g_zz1_V4QuickLaunchMenu = $create(SP.UI.AspMenu, null, null, null, $get('zz1_V4QuickLaunchMen)); } ExecuteOrDelayUntilScriptLoaded(init_zz1_V4QuickLaunchMenu, 'SP.Core.js');
+//]]>
+', 
+', 
+']

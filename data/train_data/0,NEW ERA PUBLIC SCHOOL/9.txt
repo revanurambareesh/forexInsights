@@ -1,0 +1,1137 @@
+[ ', <% if ( typeof sponsorship !== "undefined" && _.isObject(sponsorship.sponsor) &&  typeof sponsorship.sponsor.sponsor_name !== "undefined" ) { %>
+		<div class="module-story" data-sponsor="<%= sponsorship.sponsor.sponsor_name %>" data-uid="<%= uid %>">
+		<% } else { %>
+		<div class="module-story" data-uid="<%= uid %>">
+		<% } %>
+			<a href="<%= url %>" class="module-story--link link" title="<%= _.escape(title) %>">
+				<div class="module-story--image">
+					<div class="module-story--image-inner">
+												<% if ( typeof images !== "undefined" ) { %>
+																<% var imageCuts = "";
+									_.each( images, function( value, key ) {
+										if ( key === _.keys( images )[0] ) {
+											imageCuts += "data-src=" + value.url + " data-cut=" + key;
+										}
+										imageCuts += " data-img" + key + "=" + value.url;
+									} );
+								%>
+								<img class="lazy-image swap-image" nopin="nopin" <%= imageCuts %> />
+						<% } else { %>
+							<% if ( image ) { %>
+								<% if ( typeof image !== "undefined" ) { %>
+									<img src="<%= image %>" nopin="nopin" />
+								<% } else if ( typeof type !== "undefined" ) { %>
+									<% if ( type == "gallery" ) { %>
+										<!-- content type icon start -->
+
+	<i class="icon link-icon icon-gallery module-story--icon"></i>
+<!-- content type icon end -->
+									<% } else { %>
+										<!-- content type icon start -->
+
+	<i class="icon link-icon icon-article module-story--icon"></i>
+<!-- content type icon end -->
+									<% } %>
+								<% } %>
+							<% } else { %>
+								<div class="nav-feed--image-inner no-image">
+																	<i class="icon icon-article module-story--icon link-icon"></i>
+																</div>
+							<% } %>
+						<% } %>
+					</div>
+				</div>
+
+				<div class="module-story--inner">
+					<div class="module-story--text">
+						<span class="module-story--title link-txt">
+						<% if ( typeof truncation !== "undefined" && ! truncation ) { %>
+							<%= title %>
+						<% } else { %>
+							<%= ( title.length > 50 ) ? title.substring(0, 50) + "&hellip;" : title %>
+						<% } %>
+						<% if ( typeof sponsorship !== "undefined" && _.isObject(sponsorship.sponsor) &&  typeof sponsorship.sponsor.sponsor_name !== "undefined" ) { %>
+							<% if ( sponsorship.sponsor_type == 1 ) { %>
+								<div class="module-story--sponsor link-txt">Esquire + <%= sponsorship.sponsor.sponsor_name %><div>
+							<% } else if ( sponsorship.sponsor_type == 3 ) { %>
+								<div class="module-story--sponsor link-txt">Created by <%= sponsorship.sponsor.sponsor_name %></div>
+							<% } else if ( sponsorship.sponsor_type == 5 ) { %>
+								<div class="module-story--sponsor link-txt">Created by Esquire for <%= sponsorship.sponsor.sponsor_name %></div>
+							<% } %>
+						<% } %>
+					</div>
+				</div>
+			</a>
+			<% if ( typeof sponsorship !== "undefined" && _.isObject(sponsorship.sponsor) && typeof sponsorship.sponsor.tracking_pixel !== "undefined" ) { %>
+				<img width="1" height="1" nopin="nopin" style="position:absolute;display:none" data-src="<%= sponsorship.sponsor.tracking_pixel %>"/>
+			<% } %>
+		</div>',  ', 
+', 
+', Type to Search', 
+', Entertainment', 
+', Entertainment', TV', Movies', Books', Music', 
+', Style', 
+', Style', Fashion', Grooming', Accessories', 
+', Food', 
+', Food', Restaurants', Recipes', 
+', Drinks', 
+', Drinks', Bars', Cocktail Recipes', 
+', Sports', 
+', Lifestyle', 
+', Lifestyle', Sex & Relationships', Cars & Tech', Fitness & Health', Money & Career', 
+', Women', 
+', Women', Sexiest Woman Alive', Sexy Videos', 
+', News & Politics', 
+', News & Politics', Charles P. Pierce', 
+', The Code', 
+', EsquireTV', 
+', Subscribe', 
+', Subscribe', Print Edition', Digital Edition', Give a Gift', 
+', Archive', 
+', Newsletter', 
+', Follow', 
+', Follow', 
+', 
+', 
+', facebook', 
+', 
+', 
+', 
+', twitter', 
+', 
+', 
+', 
+', google+', 
+', 
+', 
+', 
+', pinterest', 
+', 
+', 
+', 
+', tumblr', 
+', 
+', 
+', 
+', instagram', 
+', 
+', 
+', 
+', youtube', 
+', Promotions', Win', 
+', 
+', 
+Like Us On Facebook', 
+Follow Us On Twitter', 
+', Esquire',  ', u"!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');",  ', 
+Follow Us On Pinterest
+', Esquire', 
+', 
+', 
+', 
+', Group', 
+', Created with Sketch.', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Style', 
+', News', 
+', Politics', 
+', Culture', 
+', Food & Drink', 
+', Follow', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Subscribe', 
+', Give A Gift', 
+', Digital Edition', 
+', 
+', 
+', 
+', 
+Breaking News!
+', 
+', 
+', 
+', 
+', 
+', 
+', Pharrell Williams Is Ready to Question Everything', 
+', 
+', 
+', 
+', u"Obviously Bernie's Poster Protest Got Meme'd", 
+', 
+', 
+', 
+', u"Check Out Kendrick Lamar's Latest Rebook Collab", 
+', 
+', 
+', 
+', u"How to Make the 'Pulp Fiction' Big Kahuna Burger", 
+', 
+', 
+', 
+', Why Go to the Gym When You Could Watch Gym Fails?', 
+',  ', <div class="shop-title"><%= headline %>
+	<% if ( shopSource === "bazaar") { %>
+		<span class="shop-icon--bazaar"></span>
+	<% } %>
+	</div>
+	<!-- single-shop -->
+	<% if ( products.length === 1 ) {
+		var product = products[0]; %>
+		<a href="<%= product.href %>" class="shop-item--wrap" target="_blank">
+			<% if ( product.image ) { %>
+				<div class="shop-item-image-wrap">
+					<div class="shop-item--image" href="" target="_blank">
+						<img src="<%= product.image %>" data-large="<%=product.largeImage%>" class="lazy-image" />
+					</div>
+				</div>
+			<% } %>
+
+			<div class="shop-item--detail-wrap">
+				<% if ( product.name ) { %>
+					<div class="shop-item--name"><%= product.name %></div>
+				<% } %>
+
+				<% if ( product.price ) { %>
+					<div class="shop-item--price"><%= product.price %></div>
+				<% } %>
+
+				<div class="shop-item--button" class="<%= ( product.status === 'out_of_stock') ? 'sold-out' : ''%> ">
+					<i class="icon icon-cart"></i>
+					<span><%= product.buttonLabel %></span>
+				</div>
+			</div>
+		</a>
+		<% if ( product.hasReviews ) { %>
+			<div class="js-modal-show" data-modal-id="modal-reviews" data-review-href="<%= product.reviewsHref %>">
+				<%= product.reviewsLabel %>
+			</div>
+		<% } %>
+
+	<% } else if ( products.length > 1 ) { %>
+	<!-- multi-shop -->
+		<ul class="shop-products">
+			<% _.forEach(products, function(product) { %>
+			<li class="shop-products--results" data-id="<%= product.count %>">
+				<a href="<%= product.href %>"
+				   class="shop-item--wrap"
+				   data-product-name="<%= product.name %>"
+				   target="_blank"
+				>
+					<div class="shop-item">
+						<% if ( product.image ) { %>
+							<div class="shop-item--image" href="" target="_blank">
+								<img src="<%= product.image %>" data-large="<%=product.largeImage%>" class="lazy-image" />
+							</div>
+						<% } %>
+					</div>
+					<div class="shop-item--controls">
+						<div class="shop-item--button-wrap">
+							<div class="shop-item--button" class="<%= ( product.status === 'out_of_stock') ? 'sold-out' : ''%> ">
+								<i class="icon icon-cart"></i>
+								<span><%= product.buttonLabel %></span>
+							</div>
+
+						<% var productBrandName = (product.brand || product.name) %>
+						<% if (productBrandName) { %>
+							<div class="shop-item--designer"><%= productBrandName %></div>
+						<% } %>
+
+						</div>
+
+					</div>
+				</a>
+			</li>
+			<% }); %>
+		</ul>
+	<% } %>',  ', 
+', 
+', 
+', 
+', 
+', 
+',  ', <div class="modal-shop--product-image">
+		<div class="modal-shop--product-image-inner">
+			<% if ( typeof largeImage !== "undefined") { %>
+				<img src="<%=largeImage%>">
+			<% } else { %>
+				<img src="<%=image%>">
+			<% } %>
+		</div>
+	</div>
+	<div class="modal-shop--product-name">
+		<span><%=name%></span>
+	</div>
+	<div class="modal-shop--button-wrap">
+		<a href="<%=href%>"
+		   target="_blank"
+		   data-product-name="<%= name %>"
+		>
+			<div class="modal-shop--product-button">
+				<span><%= buttonLabel %></span>
+			</div>
+		</a>
+	</div>',  ', Hey NYC Baseball Fans, Public School and New Era Have Your New Hat', u"A nice little consolation prize in case you don't make the playoffs", .', 
+', 
+Most Popular', 
+', 
+', 
+', 
+', 
+', 
+', New Era x Public School', 
+', 
+', 
+', 
+By
+', Scott Christian', 
+', 
+', 
+Sep 22, 2016
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 			', 
+', 
+', 
+', 
+', u"Given that baseball caps are such a staple of the street style scene, it's surprising that it's taken this long for a baseball team and a street-style brand to collaborate on a hat. But, thanks to Public School and New Era, the day has finally arrived.", u"Designers Dao-Yi Chow and Maxwell Osborne have teamed up with the MLB's official hat supplier to create four new caps for the Yankees and Mets. Two of the caps are Fit 9FIFTY snapbacks, and feature the team logos interlocking with Public School's WNL logo.", Advertisement - Continue Reading Below', 
+', 
+', 
+', 
+', 
+', 
+', New Era x Public School', The other two caps are 9TWENTY Dad Caps, with small team logos beside "PS" in raised embroidery. Each cap also has custom "Public School" and "Where New York Lives" labels lining the interior.', 
+Most Popular', 
+', 
+', 
+', 
+', 
+', 
+', New Era x Public School', "We grew up diehard Yanks and Mets fans respectively" said designers Chow and Osborne of the collaboration. "We idolized the players, the teams, but more than anything the logos were unwavering symbols for the city we loved. So when this opportunity came up, it was a dream come true."', 
+', 
+', 
+', 
+', 
+', And since Mets and Yankees caps are pretty damn ubiquitous in New York City, these will be a great way to stand out from the crowd. At the very least, they should inspire some serious cap envy during those long 7 and 4 train rides to the stadiums.', The Public School x New Era limited edition caps, which will retail at $75, will be sold exclusively from September 29', to September 30 at a pop-up shop in New York City, and for a limited time at ', publicschoolnyc.com', .', More from Esquire:', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 			', 
+', 
+', 
+', 
+', More From', Style', 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"Kendrick Lamar's New Reebok Collab Addresses Our Divided Society", 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Dammit, Matt Lauer', 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"Adidas' Latest Collaboration Is Not to Be Missed", 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', The Right Way to Get a Great Shave', 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"Kevin Hart's Glorious Beard Stars in Nike's Hilarious New Ad Campaign", 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Turns Out Being John Malkovich Means Being a Surprisingly Good Menswear Designer', 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', The 10 Best Wardrobe Upgrades of the Week', 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Sir, Please Step Away from the Choker Necklace', 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"The One Thing That Would Make Ryan Gosling's Tux Even Better", 
+', 
+', 
+', 
+', Fashion', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', The Foolproof Guide to Dressing for the Gym', 
+', 
+Style				', 
+', Your First Look at Public School Spring/Summer 2013', 
+', The Minds Behind Public School Are the New Creative Directors of DKNY', 
+', MLB to Baseball Teams: Stop Celebrating in Public', 
+', NYFW: Public School FW13', 
+', The Woolmark Prize Introduces a Menswear Prize, Public School Takes it Home', 
+', Public School Fall/Winter 2013', 
+', 
+', 
+', More From Style', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Group', 
+', Created with Sketch.', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Newsletter', Digital Editions', About Us', Media Kit', Press Room', Contact Us', Community Guidelines', Advertise Online', About Our Ads', Customer Service', Subscribe', Other Hearst Subscriptions', Give a Gift', Events & Promotions', BestProducts', Giveaways', Being Green', Why Did I Get This Ad?', A Part of Hearst Digital Media', ©2017 Hearst Communications, Inc. All Rights Reserved.', Privacy Policy', Your California Privacy Rights', Terms of Use', Site Map',  ', var JS_BASE_TRANSLATIONS = {"locales":{"locale":"en_US","fallbackLocales":"en_US"},"en_US":{"translation":{"LANG_TYPE_TO_SEARCH":"Type to Search","LANG_PRESS_ENTER_TO_SEARCH":"Press enter to search","LANG_PRESS_ENTER_OR_SELECT_ONE_OF_THE_SUGGESTIONS_BELOW_TO_SEARCH":"Press enter or select one of the suggestions below to search","LANG_LOAD_MORE_STORIES":"Load more stories","LANG_LOADING_MORE_STORIES":"Loading more stories","LANG_JOIN_THE_CONVERSATION":"Join the Conversation!","LANG_SEE_THE_CONVERSATION":"See the Conversation!","LANG_HIDE_THE_CONVERSATION":"Hide the Conversation","LANG_MOST_POPULAR":"Most Popular"}}};',  '][ ', <% if ( typeof sponsorship !== "undefined" && _.isObject(sponsorship.sponsor) &&  typeof sponsorship.sponsor.sponsor_name !== "undefined" ) { %>
+		<div class="module-story" data-sponsor="<%= sponsorship.sponsor.sponsor_name %>" data-uid="<%= uid %>">
+		<% } else { %>
+		<div class="module-story" data-uid="<%= uid %>">
+		<% } %>
+			<a href="<%= url %>" class="module-story--link link" title="<%= _.escape(title) %>">
+				<div class="module-story--image">
+					<div class="module-story--image-inner">
+												<% if ( typeof images !== "undefined" ) { %>
+																<% var imageCuts = "";
+									_.each( images, function( value, key ) {
+										if ( key === _.keys( images )[0] ) {
+											imageCuts += "data-src=" + value.url + " data-cut=" + key;
+										}
+										imageCuts += " data-img" + key + "=" + value.url;
+									} );
+								%>
+								<img class="lazy-image swap-image" nopin="nopin" <%= imageCuts %> />
+						<% } else { %>
+							<% if ( image ) { %>
+								<% if ( typeof image !== "undefined" ) { %>
+									<img src="<%= image %>" nopin="nopin" />
+								<% } else if ( typeof type !== "undefined" ) { %>
+									<% if ( type == "gallery" ) { %>
+										<!-- content type icon start -->
+
+	<i class="icon link-icon icon-gallery module-story--icon"></i>
+<!-- content type icon end -->
+									<% } else { %>
+										<!-- content type icon start -->
+
+	<i class="icon link-icon icon-article module-story--icon"></i>
+<!-- content type icon end -->
+									<% } %>
+								<% } %>
+							<% } else { %>
+								<div class="nav-feed--image-inner no-image">
+																	<i class="icon icon-article module-story--icon link-icon"></i>
+																</div>
+							<% } %>
+						<% } %>
+					</div>
+				</div>
+
+				<div class="module-story--inner">
+					<div class="module-story--text">
+						<span class="module-story--title link-txt">
+						<% if ( typeof truncation !== "undefined" && ! truncation ) { %>
+							<%= title %>
+						<% } else { %>
+							<%= ( title.length > 50 ) ? title.substring(0, 50) + "&hellip;" : title %>
+						<% } %>
+						<% if ( typeof sponsorship !== "undefined" && _.isObject(sponsorship.sponsor) &&  typeof sponsorship.sponsor.sponsor_name !== "undefined" ) { %>
+							<% if ( sponsorship.sponsor_type == 1 ) { %>
+								<div class="module-story--sponsor link-txt">Esquire + <%= sponsorship.sponsor.sponsor_name %><div>
+							<% } else if ( sponsorship.sponsor_type == 3 ) { %>
+								<div class="module-story--sponsor link-txt">Created by <%= sponsorship.sponsor.sponsor_name %></div>
+							<% } else if ( sponsorship.sponsor_type == 5 ) { %>
+								<div class="module-story--sponsor link-txt">Created by Esquire for <%= sponsorship.sponsor.sponsor_name %></div>
+							<% } %>
+						<% } %>
+					</div>
+				</div>
+			</a>
+			<% if ( typeof sponsorship !== "undefined" && _.isObject(sponsorship.sponsor) && typeof sponsorship.sponsor.tracking_pixel !== "undefined" ) { %>
+				<img width="1" height="1" nopin="nopin" style="position:absolute;display:none" data-src="<%= sponsorship.sponsor.tracking_pixel %>"/>
+			<% } %>
+		</div>',  ', 
+', 
+', Type to Search', 
+', Entertainment', 
+', Entertainment', TV', Movies', Books', Music', 
+', Style', 
+', Style', Fashion', Grooming', Accessories', 
+', Food', 
+', Food', Restaurants', Recipes', 
+', Drinks', 
+', Drinks', Bars', Cocktail Recipes', 
+', Sports', 
+', Lifestyle', 
+', Lifestyle', Sex & Relationships', Cars & Tech', Fitness & Health', Money & Career', 
+', Women', 
+', Women', Sexiest Woman Alive', Sexy Videos', 
+', News & Politics', 
+', News & Politics', Charles P. Pierce', 
+', The Code', 
+', EsquireTV', 
+', Subscribe', 
+', Subscribe', Print Edition', Digital Edition', Give a Gift', 
+', Archive', 
+', Newsletter', 
+', Follow', 
+', Follow', 
+', 
+', 
+', facebook', 
+', 
+', 
+', 
+', twitter', 
+', 
+', 
+', 
+', google+', 
+', 
+', 
+', 
+', pinterest', 
+', 
+', 
+', 
+', tumblr', 
+', 
+', 
+', 
+', instagram', 
+', 
+', 
+', 
+', youtube', 
+', Promotions', Win', 
+', 
+', 
+Like Us On Facebook', 
+Follow Us On Twitter', 
+', Esquire',  ', u"!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');",  ', 
+Follow Us On Pinterest
+', Esquire', 
+', 
+', 
+', 
+', Group', 
+', Created with Sketch.', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Style', 
+', News', 
+', Politics', 
+', Culture', 
+', Food & Drink', 
+', Follow', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Subscribe', 
+', Give A Gift', 
+', Digital Edition', 
+', 
+', 
+', 
+', 
+Breaking News!
+', 
+', 
+', 
+', 
+', 
+', 
+', Pharrell Williams Is Ready to Question Everything', 
+', 
+', 
+', 
+', u"Obviously Bernie's Poster Protest Got Meme'd", 
+', 
+', 
+', 
+', u"Check Out Kendrick Lamar's Latest Rebook Collab", 
+', 
+', 
+', 
+', u"How to Make the 'Pulp Fiction' Big Kahuna Burger", 
+', 
+', 
+', 
+', Why Go to the Gym When You Could Watch Gym Fails?', 
+',  ', <div class="shop-title"><%= headline %>
+	<% if ( shopSource === "bazaar") { %>
+		<span class="shop-icon--bazaar"></span>
+	<% } %>
+	</div>
+	<!-- single-shop -->
+	<% if ( products.length === 1 ) {
+		var product = products[0]; %>
+		<a href="<%= product.href %>" class="shop-item--wrap" target="_blank">
+			<% if ( product.image ) { %>
+				<div class="shop-item-image-wrap">
+					<div class="shop-item--image" href="" target="_blank">
+						<img src="<%= product.image %>" data-large="<%=product.largeImage%>" class="lazy-image" />
+					</div>
+				</div>
+			<% } %>
+
+			<div class="shop-item--detail-wrap">
+				<% if ( product.name ) { %>
+					<div class="shop-item--name"><%= product.name %></div>
+				<% } %>
+
+				<% if ( product.price ) { %>
+					<div class="shop-item--price"><%= product.price %></div>
+				<% } %>
+
+				<div class="shop-item--button" class="<%= ( product.status === 'out_of_stock') ? 'sold-out' : ''%> ">
+					<i class="icon icon-cart"></i>
+					<span><%= product.buttonLabel %></span>
+				</div>
+			</div>
+		</a>
+		<% if ( product.hasReviews ) { %>
+			<div class="js-modal-show" data-modal-id="modal-reviews" data-review-href="<%= product.reviewsHref %>">
+				<%= product.reviewsLabel %>
+			</div>
+		<% } %>
+
+	<% } else if ( products.length > 1 ) { %>
+	<!-- multi-shop -->
+		<ul class="shop-products">
+			<% _.forEach(products, function(product) { %>
+			<li class="shop-products--results" data-id="<%= product.count %>">
+				<a href="<%= product.href %>"
+				   class="shop-item--wrap"
+				   data-product-name="<%= product.name %>"
+				   target="_blank"
+				>
+					<div class="shop-item">
+						<% if ( product.image ) { %>
+							<div class="shop-item--image" href="" target="_blank">
+								<img src="<%= product.image %>" data-large="<%=product.largeImage%>" class="lazy-image" />
+							</div>
+						<% } %>
+					</div>
+					<div class="shop-item--controls">
+						<div class="shop-item--button-wrap">
+							<div class="shop-item--button" class="<%= ( product.status === 'out_of_stock') ? 'sold-out' : ''%> ">
+								<i class="icon icon-cart"></i>
+								<span><%= product.buttonLabel %></span>
+							</div>
+
+						<% var productBrandName = (product.brand || product.name) %>
+						<% if (productBrandName) { %>
+							<div class="shop-item--designer"><%= productBrandName %></div>
+						<% } %>
+
+						</div>
+
+					</div>
+				</a>
+			</li>
+			<% }); %>
+		</ul>
+	<% } %>',  ', 
+', 
+', 
+', 
+', 
+', 
+',  ', <div class="modal-shop--product-image">
+		<div class="modal-shop--product-image-inner">
+			<% if ( typeof largeImage !== "undefined") { %>
+				<img src="<%=largeImage%>">
+			<% } else { %>
+				<img src="<%=image%>">
+			<% } %>
+		</div>
+	</div>
+	<div class="modal-shop--product-name">
+		<span><%=name%></span>
+	</div>
+	<div class="modal-shop--button-wrap">
+		<a href="<%=href%>"
+		   target="_blank"
+		   data-product-name="<%= name %>"
+		>
+			<div class="modal-shop--product-button">
+				<span><%= buttonLabel %></span>
+			</div>
+		</a>
+	</div>',  ', Hey NYC Baseball Fans, Public School and New Era Have Your New Hat', u"A nice little consolation prize in case you don't make the playoffs", .', 
+', 
+Most Popular', 
+', 
+', 
+', 
+', 
+', 
+', New Era x Public School', 
+', 
+', 
+', 
+By
+', Scott Christian', 
+', 
+', 
+Sep 22, 2016
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 			', 
+', 
+', 
+', 
+', u"Given that baseball caps are such a staple of the street style scene, it's surprising that it's taken this long for a baseball team and a street-style brand to collaborate on a hat. But, thanks to Public School and New Era, the day has finally arrived.", u"Designers Dao-Yi Chow and Maxwell Osborne have teamed up with the MLB's official hat supplier to create four new caps for the Yankees and Mets. Two of the caps are Fit 9FIFTY snapbacks, and feature the team logos interlocking with Public School's WNL logo.", Advertisement - Continue Reading Below', 
+', 
+', 
+', 
+', 
+', 
+', New Era x Public School', The other two caps are 9TWENTY Dad Caps, with small team logos beside "PS" in raised embroidery. Each cap also has custom "Public School" and "Where New York Lives" labels lining the interior.', 
+Most Popular', 
+', 
+', 
+', 
+', 
+', 
+', New Era x Public School', "We grew up diehard Yanks and Mets fans respectively" said designers Chow and Osborne of the collaboration. "We idolized the players, the teams, but more than anything the logos were unwavering symbols for the city we loved. So when this opportunity came up, it was a dream come true."', 
+', 
+', 
+', 
+', 
+', And since Mets and Yankees caps are pretty damn ubiquitous in New York City, these will be a great way to stand out from the crowd. At the very least, they should inspire some serious cap envy during those long 7 and 4 train rides to the stadiums.', The Public School x New Era limited edition caps, which will retail at $75, will be sold exclusively from September 29', to September 30 at a pop-up shop in New York City, and for a limited time at ', publicschoolnyc.com', .', More from Esquire:', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 			', 
+', 
+', 
+', 
+', More From', Style', 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"Kendrick Lamar's New Reebok Collab Addresses Our Divided Society", 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Dammit, Matt Lauer', 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"Adidas' Latest Collaboration Is Not to Be Missed", 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', The Right Way to Get a Great Shave', 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"Kevin Hart's Glorious Beard Stars in Nike's Hilarious New Ad Campaign", 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Turns Out Being John Malkovich Means Being a Surprisingly Good Menswear Designer', 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', The 10 Best Wardrobe Upgrades of the Week', 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Sir, Please Step Away from the Choker Necklace', 
+', 
+', 
+', Style', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', u"The One Thing That Would Make Ryan Gosling's Tux Even Better", 
+', 
+', 
+', 
+', Fashion', 
+', 
+', Share', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', The Foolproof Guide to Dressing for the Gym', 
+', 
+Style				', 
+', Your First Look at Public School Spring/Summer 2013', 
+', The Minds Behind Public School Are the New Creative Directors of DKNY', 
+', MLB to Baseball Teams: Stop Celebrating in Public', 
+', NYFW: Public School FW13', 
+', The Woolmark Prize Introduces a Menswear Prize, Public School Takes it Home', 
+', Public School Fall/Winter 2013', 
+', 
+', 
+', More From Style', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Group', 
+', Created with Sketch.', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Newsletter', Digital Editions', About Us', Media Kit', Press Room', Contact Us', Community Guidelines', Advertise Online', About Our Ads', Customer Service', Subscribe', Other Hearst Subscriptions', Give a Gift', Events & Promotions', BestProducts', Giveaways', Being Green', Why Did I Get This Ad?', A Part of Hearst Digital Media', ©2017 Hearst Communications, Inc. All Rights Reserved.', Privacy Policy', Your California Privacy Rights', Terms of Use', Site Map',  ', var JS_BASE_TRANSLATIONS = {"locales":{"locale":"en_US","fallbackLocales":"en_US"},"en_US":{"translation":{"LANG_TYPE_TO_SEARCH":"Type to Search","LANG_PRESS_ENTER_TO_SEARCH":"Press enter to search","LANG_PRESS_ENTER_OR_SELECT_ONE_OF_THE_SUGGESTIONS_BELOW_TO_SEARCH":"Press enter or select one of the suggestions below to search","LANG_LOAD_MORE_STORIES":"Load more stories","LANG_LOADING_MORE_STORIES":"Loading more stories","LANG_JOIN_THE_CONVERSATION":"Join the Conversation!","LANG_SEE_THE_CONVERSATION":"See the Conversation!","LANG_HIDE_THE_CONVERSATION":"Hide the Conversation","LANG_MOST_POPULAR":"Most Popular"}}};',  ']

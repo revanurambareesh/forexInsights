@@ -1,5 +1,6 @@
 import numpy as np
 import csv
+import json
 import os
 from methods import folderFileInfo
 from sklearn.naive_bayes import GaussianNB
@@ -89,6 +90,10 @@ def makeDataSet():
 		print 'y=',company,'\nX:',Xvector, '\n'
 		# label
 		yVal = ord(company[0])-ord('0')
+
+		with open(os.getcwd()+'\data\model\dataset_X-y\\'+company+'.json', "w") as jsonF:
+			jsonF.write(json.dumps(Xvector))
+			#similarly to read Xvector, Xvector=json.loads('txt_from_json')
 
 		X.append(Xvector)
 		y.append(yVal)

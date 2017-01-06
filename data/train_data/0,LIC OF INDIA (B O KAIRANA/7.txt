@@ -1,0 +1,2997 @@
+[
+', 
+', FB', 
+', Twitter', 
+', LinkedIn', 
+', YouTube', 
+', Google+', 
+', 
+', /*<![CDATA[*/!function(a){a.skdslider=function(m,g){var e={delay:2000,animationSpeed:500,showNav:!0,autoSlide:!0,showNextPrev:!1,pauseOnHover:!1,numericNav:!1,stopSlidingAfter:!1,showPlayButton:!1,animationType:"fading"};g&&a.extend(e,g),e.touch=!0;var j=("ontouchstart" in window||window.DocumentTouch&&document instanceof DocumentTouch,window.navigator.userAgent),b=j.indexOf("MSIE ");if(b>0){var f=parseInt(j.substring(b+5,j.indexOf(".",b)));e.touch=f>8?!0:!1}a(m).wrap('<div class="skdslider"></div>');var h=a(m).closest("div.skdslider");h.find("ul").addClass("slides");var p=h.find("ul.slides li"),c=0;if(e.currentSlide=0,e.currentState="pause",e.running=!1,e.stopSlidingAfter&&("all"==e.stopSlidingAfter&&(e.stopSlidingAfter=p.length),e.stopSlidingAfter-=1),"fading"==e.animationType&&p.each(function(){a(this).css({position:"absolute",left:"0",top:"0",bottom:"0",right:"0"})}),"sliding"==e.animationType){p.each(function(){a(this).css({"float":"left",display:"block",position:"relative"})});var k=h.outerWidth()*p.size();h.find("ul.slides").css({position:"absolute",left:"0",width:k}),p.css({width:h.outerWidth(),height:h.outerHeight()}),a(window).resize(function(){var d=h.outerWidth()*p.size();h.find("ul.slides").css({position:"absolute",left:"0",width:d}),p.css({width:h.outerWidth(),height:h.outerHeight()})})}e.touch&&a.skdslider.enableTouch(h,p,e),a.skdslider.createNav(h,p,e),p.eq(c).show(),1==e.autoSlide&&(e.currentState="play",e.interval=setTimeout(function(){a.skdslider.playSlide(h,p,e)},e.delay)),1==e.pauseOnHover&&p.hover(function(){1==e.autoSlide&&(e.currentState="pause",clearTimeout(e.interval))},function(){1==e.autoSlide&&(e.currentState="play",1==e.autoSlide&&a.skdslider.playSlide(h,p,e))})},a.skdslider.createNav=function(e,k,c){var g='<ul class="slide-navs">';for(i=0;i<k.length;i++){var b="";1==c.numericNav&&(b=i+1),g+=0==i?'<li class="current-slide slide-nav-'+i+'"><a>'+b+"</a></li>":'<li class="slide-nav-'+i+'"><a>'+b+"</a></li>"}if(g+="</ul>",1==c.showNav){e.append(g);var j=e.find(".slide-navs")[0].offsetWidth;j=parseInt(j/2),j=-1*j,e.find(".slide-navs").css("margin-left",j),e.find(".slide-navs li").click(function(){return index=e.find(".slide-navs li").index(this),targetSlide=index,clearTimeout(c.interval),c.currentState="play",c.running=!1,a.skdslider.playSlide(e,k,c,targetSlide),!1})}if(1==c.showNextPrev){var f='<a class="prev"></a>';f+='<a class="next"></a>',e.append(f),e.find("a.prev").click(function(){a.skdslider.prev(e,k,c)}),e.find("a.next").click(function(){a.skdslider.next(e,k,c)})}if(1==c.showPlayButton){var h="play"==c.currentState||1==c.autoSlide?'<a class="play-control pause"></a>':'<a class="play-control play"></a>';e.append(h),e.hover(function(){e.find("a.play-control").css("display","block")},function(){e.find("a.play-control").css("display","none")}),e.find("a.play-control").click(function(){return 1==c.autoSlide?(clearTimeout(c.interval),c.autoSlide=!1,c.currentState="pause",a(this).addClass("play"),a(this).removeClass("pause")):(c.currentState="play",c.autoSlide=!0,a(this).addClass("pause"),a(this).removeClass("play"),c.currentSlide+1==k.length?targetSlide=0:targetSlide=c.currentSlide+1,clearTimeout(c.interval),a.skdslider.playSlide(e,k,c,targetSlide)),!1})}},a.skdslider.next=function(c,b,d){return d.currentSlide+1==b.length?targetSlide=0:targetSlide=d.currentSlide+1,clearTimeout(d.interval),d.currentState="play",a.skdslider.playSlide(c,b,d,targetSlide),!1},a.skdslider.prev=function(c,b,d){return 0==d.currentSlide?targetSlide=b.length-1:targetSlide=d.currentSlide-1,clearTimeout(d.interval),d.currentState="play",d.running=!1,a.skdslider.playSlide(c,b,d,targetSlide),!0},a.skdslider.prev=function(c,b,d){return 0==d.currentSlide?targetSlide=b.length-1:targetSlide=d.currentSlide-1,clearTimeout(d.interval),d.currentState="play",d.running=!1,a.skdslider.playSlide(c,b,d,targetSlide),!0},a.skdslider.playSlide=function(d,c,f,b){if("play"==f.currentState&&0==f.running){if(d.find(".slide-navs li").removeClass("current-slide"),"undefined"==typeof b&&(b=f.currentSlide+1==c.length?0:f.currentSlide+1),"fading"==f.animationType&&(f.running=!0,c.eq(f.currentSlide).fadeOut(f.animationSpeed),c.eq(b).fadeIn(f.animationSpeed,function(){a.skdslider.removeIEFilter(a(this)[0]),f.running=!1})),"sliding"==f.animationType){var e=b*d.outerWidth()*-1;f.running=!0,d.find("ul.slides").animate({left:e},f.animationSpeed,function(){f.running=!1})}d.find(".slide-navs li").eq(b).addClass("current-slide"),f.currentSlide=b}f.stopSlidingAfter&&f.stopSlidingAfter==f.currentSlide&&(clearTimeout(f.interval),f.autoSlide=!1,f.currentState="pause",d.find("a.play-control").addClass("play"),d.find("a.play-control").removeClass("pause")),1==f.autoSlide&&"play"==f.currentState&&(f.interval=setTimeout(function(){a.skdslider.playSlide(d,c,f)},f.delay))},a.skdslider.enableTouch=function(m,g,e){function j(d){h=d.touches[0].pageX,p=d.touches[0].pageY,m[0].addEventListener("touchmove",b,!1),m[0].addEventListener("touchend",f,!1)}function b(n){n.preventDefault();var l=n.touches[0].pageX,d=n.touches[0].pageY;c=h-l,k=p-d}function f(d){m[0].removeEventListener("touchmove",b,!1),c>0?a.skdslider.next(m,g,e):a.skdslider.prev(m,g,e),m[0].removeEventListener("touchend",f,!1)}m[0].addEventListener("touchstart",j,!1);var h,p,c,k},a.skdslider.removeIEFilter=function(b){b.style.removeAttribute&&b.style.removeAttribute("filter")},a.fn.skdslider=function(b){return this.each(function(){new a.skdslider(this,b)})}}(jQuery),jQuery(document).ready(function(){jQuery("#slide").skdslider({delay:12000,animationSpeed:1000,showNextPrev:!0,showPlayButton:!1,autoSlide:!0,animationType:"fading"}),jQuery("#responsive").change(function(){$("#responsive_wrapper").width(jQuery(this).val())})});/*]]>*/', 
+
+
+', 
+', 
+
+
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+', 
+',  ', 
+',  ', 
+', 
+', 
+', Existing Policyholder? ', Click',  to speed up your Online
+Term purchase!', 
+', 
+', 
+', 
+', 
+', Toll Free: 1800 200 5577 | 1800 200 3383 (For Online Plans)', 
+', 
+', Login', 
+', 
+', 
+', 
+', Customer', 
+', Agent', 
+', 
+', 
+', 
+', Enjoy a host of benefits, generate statements, view policy details, pay on-line, log a request and much
+more.', 
+', Individual policy
+holder', 
+', 
+', 
+', Login to your agent portal to generate statements, view policy details, product news, policy servicing and
+much more.', 
+', Agent Portal', 
+', 
+', 
+', 
+', /*<![CDATA[*/var googleSearchIframeName="cse-search-results";var googleSearchFormName="cse-search-box";var googleSearchFrameWidth=600;var googleSearchDomain="www.google.com";var googleSearchPath="/cse";function Open_Search_H(){location.href="/search.aspx?cx=001939761212425525467:yh7n13o7bye&cof=FORID%3A10%3BNB%3A1&ie=UTF-8&q="+document.getElementById("txt").value+"&as_q=more%3AHTML"}/*]]>*/', 
+', 
+', 
+', 
+', 
+', 
+', About Us', 
+',  Knowledge Centre', 
+', NRIs Insurance', 
+', Careers', 
+', Public Disclosures', 
+', Become An Agent', 
+', Become an IMF', 
+', Contact Us', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', New Customers', 
+', 
+', 
+', Online Term Plan', 
+',  Insurance Plans', 
+', 
+', 
+', 
+', 
+', 
+', Online Term Plan', 
+', 
+', Basic Life Cover', 
+', Life Cover + Monthly Income', 
+', Life Cover + Increasing Monthly Income', 
+', 
+',  Read More', 
+', Explore', 
+', 
+', How Term Plan can help', 
+', Benefits of buying Life Insurance Online', 
+', 
+',  View more', 
+', Protection Plans', 
+', 
+', Max Life Cancer Insurance Plan', 
+', Max Life Super Term Plan', 
+', 
+',  Read More', 
+', Explore', 
+', 
+', How to choose a Term Plan', 
+', Why you need a Protection Plan', 
+', 
+', 
+', Child Plans', 
+', 
+', Max Life Future Genius Education Plan', 
+', Max life Shiksha Plus Super', 
+', 
+', Explore', 
+', 
+', How To Choose A Child Plan', 
+', Why invest in a Child Plan', 
+', 
+', 
+', Retirement Plans', 
+', 
+', Max Life Forever Young Pension Plan', 
+', Max Life Guaranteed Lifetime Income Plan', 
+', Max Life Life Perfect Partner Super', 
+', 
+',  Read More', 
+', Explore', 
+', 
+', Qualifying Recognised Overseas Pension Scheme', 
+', How To Choose A Retirement Plan', 
+', 
+',  View more', 
+', Growth Plans', 
+', 
+', Max Life Fast Track Super Plan', 
+', Max Life Platinum Wealth Plan', 
+', 
+',  Read More', 
+', Explore', 
+', 
+', How To Choose A Growth Plan', 
+', Why invest in a Growth Plan', 
+', 
+',  View more', 
+', Savings Plans', 
+', 
+', Max Life Monthly Income Advantage Plan', 
+', Max Life Guaranteed Income Plan', 
+', Max Life Whole Life Super', 
+', 
+',  Read More', 
+', Explore', 
+', 
+', How To Choose A Savings Plan', 
+', Why life insurance is good for long term savings', 
+', 
+', 
+', Group Plans', 
+', 
+', Max Life Group Gratuity Premier Plan', 
+', Max Life Group Super Life Premier in lieu of EDLI', 
+', Max Life Group Super Life Premier', 
+', 
+',  Read More', 
+', 
+', 
+', 
+', 
+', 
+', 
+',  Why Max', 
+Life Insurance', 
+', 
+', 
+', 
+', Existing Customers', 
+', 
+',  Premium', 
+Payment Option', 
+', Claims', 
+', 
+',  ', 
+', 
+', 
+', Understanding Claims', 
+', Documents Required', 
+', Claims Forms', 
+', Important to Know', 
+', Claims FAQs', 
+', Contact Us - Claims', 
+', 
+', 
+',  ', 
+', 
+', 
+', Fund Performance', 
+', 
+',  ', 
+', 
+', 
+', NAV Performance', 
+', Performance Summary', 
+', Performance Over Benchmark', 
+', Fund Portfolio', 
+', Portfolio Summary', 
+', Market Review', 
+', Invest Track Newsletter', 
+', 
+', 
+',  ', 
+', 
+', 
+', Customer Service', 
+', 
+',  ', 
+', 
+', 
+', Premium Payment Options', 
+',  Pay Online', 
+', Electronic Insurance Account', 
+', IVR Flow Chart', 
+', Escalation Matrix', 
+', FAQs', 
+', Get SMS Updates', 
+', Download Premium Receipt', 
+', Download Policy Pack', 
+', Withdrawn Plans', 
+', Protect your Policy', 
+', Unclaimed Amount', 
+', 
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', The plan is to live the perfect life together', Get a ', #BackupPlan',  so life can go on being beautiful', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Rs.1 Cr.',  Life Cover', @just ', Rs.576/month*', 
+', 
+', 
+', 
+', Buy Now', 
+', 
+', 
+', ARN: HPbanner/Propaganda/Oct 2016', 
+', 
+', Max Life Online Term Plan Plus (UIN - 104N092V01). *for 28 year old male, non smoker, policy term of 30 years. Disclaimer', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',      ', 
+', &nbsp', 
+', 
+', 
+
+', Beware of fraud calls & emails', 
+',  Pay your policy premium only to YOUR POLICY ACCOUNT.', 
+Cheque payments should be in the name of ', "Max Life Insurance Company Ltd. < followed by your 9 digit policy no. >"', 
+For NEFT payments, please transfer only to ', "HSBC Bank a/c no.
+1165.
+< followed by your 9 digit policy no. > " ', 
+Max Life does not collect premium in any other account. ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',  ', 
+', 
+', 
+', 
+
+', 
+', TIMELY CANCER', 
+', TREATMENT CAN SAVE', 
+', LIFE. BUT IT CAN COST', 
+', u"AN ENTIRE LIFE'S SAVINGS", 
+', 
+', KNOW MORE', 
+', 
+', 
+', BUY NOW', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',      ', 
+', &nbsp', 
+', 
+', 
+
+', 
+', u"
+4 Moneybacks During Your Child's Graduation Year", 
+', Additional Benefits In Case Of Death', 
+', \u2022',  Lump sum payout to take care of immediate finacial needs', *', 
+', \u2022',  Regular Income for 135 months', #', 
+', \u2022',  Waiver of all future premiums', 
+', 
+', 
+', 
+', 
+', KNOW MORE', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Insurance is proud to announce a', 
+', claim settlement ratio of', 
+', 
+', 96.23%', *', 
+', 
+', 
+',  ', *', Max Life Insurance Audited Financials and Public Disclosures 2016', 
+', 
+', ARN: MLI/CR/WB/0816/1', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+', 
+    $(document).ready(function () {
+        $(".GenderBox input").click(function () {
+            $(".txtGender").val($(this).val());
+            $(".GenderBox").next().find(".error").hide();
+        });
+
+        $(".TabaccoBox input").click(function () {
+            $(".txtTabacco").val($(this).val());
+            $(".TabaccoBox").next().find(".error").hide();
+        });
+        
+    });
+
+    ////////Proper date valdation/////
+    // Declaring valid date character, minimum year and maximum year
+    var dtCh = "-";
+    var minYear = 1900;
+    var maxYear = 2100;
+
+    function fnDateValidation(sender, args) {       
+        var err = 1;
+        var DD = 0;
+        var MM = 0;
+        var YY = 0;
+
+        var birth = document.getElementById('PremiumEstimation1_txtUserDOB').value;
+        if (birth == '') {
+            args.IsValid = false;
+            return;
+        }
+
+        var pieces = birth.split('-');
+        DD = pieces[0];
+        MM = pieces[1];
+        YY = pieces[2];
+        if (typeof DD == 'undefined' || DD == null || typeof MM == 'undefined' || MM == null || typeof YY == 'undefined' || YY == null) {
+            args.IsValid = false;
+            return;
+        } 
+        var flag = false;
+        //console.log(DD +' >>'+MM +' >>'+YY)
+        if ((DD.indexOf("D") < 0) && (MM.indexOf("M") < 0) && (YY.indexOf("Y") < 0)) {
+            flag = true;
+        }
+
+        //console.log(DD.indexOf("D") + ' >>' + MM.indexOf("M") + ' >>' + YY.indexOf("Y") + '>>' + flag)
+
+        if (flag) {
+            try {
+                var ca = DD + "-" + MM + "-" + YY;
+                err = isDate(ca) ? 0 : 1;
+            }
+            catch (e) {
+                err = 1;
+            }
+        }
+
+        args.IsValid = (err == 1) ? false : true;
+
+        sender.innerHTML = 'Please enter valid date of birth';
+        if (args.IsValid) {
+            if (meetsMinimumAge(new Date(YY, MM, DD), 18) && meetsMaximumAge(new Date(YY, MM, DD), 60)) {
+                // is OK, do something
+                //alert('Ok');
+                args.IsValid = true;
+            } else {
+                // too young - error
+               // alert('too young');
+                sender.innerHTML = 'Age should be between 18 to 60 years';
+                args.IsValid = false;              
+            }
+        }
+    }
+
+    function meetsMinimumAge(birthDate, minAge) {
+        var tempDate = new Date(birthDate.getFullYear() + minAge, birthDate.getMonth() - 1, birthDate.getDate());    
+        return (tempDate <= new Date());
+    }
+
+    function meetsMaximumAge(birthDate, maxAge) {
+        var tempDate = new Date(birthDate.getFullYear() + maxAge, birthDate.getMonth() - 1, birthDate.getDate());
+        var dt = new Date();
+        var newtempDate = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
+        //console.log(tempDate + '>><<' + dt);
+        return (tempDate >= newtempDate);
+    }
+
+    function daysInFebruary(year) {
+        // February has 29 days in any year evenly divisible by four,
+        // EXCEPT for centurial years which are not also divisible by 400.
+        return (((year % 4 == 0) && ((!(year % 100 == 0)) || (year % 400 == 0))) ? 29 : 28);
+    }
+    function DaysArray(n) {
+        for (var i = 1; i <= n; i++) {
+            this[i] = 31
+            if (i == 4 || i == 6 || i == 9 || i == 11) { this[i] = 30 }
+            if (i == 2) { this[i] = 29 }
+        }
+        return this
+    }
+
+    function isDate(dtStr) {
+        var daysInMonth = DaysArray(12)
+        var pos1 = dtStr.indexOf(dtCh)
+        var pos2 = dtStr.indexOf(dtCh, pos1 + 1)
+        var strDay = dtStr.substring(0, pos1)
+        var strMonth = dtStr.substring(pos1 + 1, pos2)
+        var strYear = dtStr.substring(pos2 + 1)
+        strYr = strYear
+        if (strDay.charAt(0) == "0" && strDay.length > 1) strDay = strDay.substring(1)
+        if (strMonth.charAt(0) == "0" && strMonth.length > 1) strMonth = strMonth.substring(1)
+        for (var i = 1; i <= 3; i++) {
+            if (strYr.charAt(0) == "0" && strYr.length > 1) strYr = strYr.substring(1)
+        }
+        month = parseInt(strMonth)
+        day = parseInt(strDay)
+        year = parseInt(strYr)
+        if (pos1 == -1 || pos2 == -1) {
+            return false
+        }
+        if (strMonth.length < 1 || month < 1 || month > 12) {
+            return false
+        }
+        if (strDay.length < 1 || day < 1 || day > 31 || (month == 2 && day > daysInFebruary(year)) || day > daysInMonth[month]) {
+            return false
+        }
+        if (strYear.length != 4 || year == 0 || year < minYear || year > maxYear) {
+            return false
+        }
+        return true
+    }
+',  
+', 
+    $(document).ready(function () {
+        $("#PremiumEstimation1_txtUserDOB").bind('change keyup paste mouseup', function () {
+            fnFillCalculateYears();
+        });
+        $(".QuestionPopup").hover(function () {
+            $(this).parents(".field_name , .select_bg").find(".FieldPopup").show();
+        }, function () {
+            $(this).parents(".field_name , .select_bg").find(".FieldPopup").hide();
+        })
+
+
+        $("#PremiumEstimation1_txtAmtlifeCover").live("keyup", function () {
+            var Num = $(this).val().replace(/,/g, '');
+            // console.log(Num);
+            if (Num > 9999999999999) $(this).val(Num.substring(0, 1) + "," + Num.substring(1, 3) + "," + Num.substring(3, 5) + "," + Num.substring(5, 7) + "," + Num.substring(7, 9) + "," + Num.substring(9, 11)+ "," + Num.substring(11));
+            else if (Num > 999999999999) $(this).val(Num.substring(0, 2) + "," + Num.substring(2, 4) + "," + Num.substring(4, 6) + "," + Num.substring(6,8) + "," + Num.substring(7, 9) + "," + Num.substring(10));
+            else if (Num > 99999999999) $(this).val(Num.substring(0, 1) + "," + Num.substring(1, 3) + "," + Num.substring(3, 5) + "," + Num.substring(5, 7) + "," + Num.substring(7, 9) + "," + Num.substring(9));
+            else if (Num > 9999999999) $(this).val(Num.substring(0, 2) + "," + Num.substring(2, 4) + "," + Num.substring(4, 6) + "," + Num.substring(6, 8) + "," + Num.substring(8));
+            else if (Num > 999999999) $(this).val(Num.substring(0, 1) + "," + Num.substring(1, 3) + "," + Num.substring(3, 5) + "," + Num.substring(5, 7) + "," + Num.substring(7));
+            else if (Num > 99999999) $(this).val(Num.substring(0, 2) + "," + Num.substring(2, 4) + "," + Num.substring(4, 6) + "," + Num.substring(6));
+            else if (Num > 9999999) $(this).val(Num.substring(0, 1) + "," + Num.substring(1, 3) + "," + Num.substring(3, 5) + "," + Num.substring(5));
+            else if (Num > 999999) $(this).val(Num.substring(0, 2) + "," + Num.substring(2, 4) + "," + Num.substring(4));
+            else if (Num > 99999) $(this).val(Num.substring(0, 1) + "," + Num.substring(1, 3) + "," + Num.substring(3));
+            else if (Num > 9999) $(this).val(Num.substring(0, 2) + "," + Num.substring(2));
+            else if (Num > 999) $(this).val(Num.substring(0, 1) + "," + Num.substring(1));
+        });
+    })
+
+
+    function fnAmountValidation(sender, args) {
+        var Amt = document.getElementById('PremiumEstimation1_txtAmtlifeCover').value;
+        Amt = Amt.replace(/,/g, '');
+        var MinimumValue = 2500000, MaximumValue = 100000000; 
+        if((Amt >= MinimumValue) && (Amt <= MaximumValue)){
+            args.IsValid = true;
+        } else {
+            args.IsValid = false;
+        }
+    }
+
+
+    function fnDurationValidation(sender, args) {
+        var Amt = document.getElementById('PremiumEstimation1_txtDurLifeCover').value;
+        var MinimumValue = 10, MaximumValue = 40;
+        if ((Amt >= MinimumValue) && (Amt <= MaximumValue)) {
+            args.IsValid = true;
+        } else {
+            args.IsValid = false;
+        }
+    }
+
+    function fnFillCalculateYears() {
+
+        var age = '';
+
+        document.getElementById('PremiumEstimation1_txtDurLifeCover').value = '';
+
+        var d = 'DD';
+        var m = 'MM';
+        var y = 'YYYY';
+
+        var birth = document.getElementById('PremiumEstimation1_txtUserDOB').value;
+        //            alert(birth);
+        if (birth == '') {
+            return;
+        }
+        if (birth.toString().length < 10) {
+            return;
+        }
+        var pieces = birth.split('-');
+        d = pieces[0];
+        m = pieces[1];
+        y = pieces[2];
+        //var birth='18/01/2011';
+
+        if (d != 'DD' && d != '' && m != 'MM' && m != '' && y != 'YYYY' && y != '') {
+            if (d * 1 == 0 || m * 1 == 0 || y * 1 == 0) {
+                return;
+            }
+
+            if ((y * 1).toString().length != 4) {
+                return;
+            }
+
+            var err = 1;
+            try {
+                var ca = d + "-" + m + "-" + y;
+                err = isDate(ca) ? 0 : 1;
+            }
+            catch (e) {
+                err = 1;
+            }
+
+            if (err == 1) {
+                return;
+            }
+
+            if (!meetsMinimumAge(new Date(y, m, d), 18) || !meetsMaximumAge(new Date(y, m, d), 60)) {
+                return;
+            }
+
+            var birth = d + '/' + m + '/' + y;
+
+            var today = new Date();
+            var curr_date = today.getDate();
+            var curr_month = today.getMonth() + 1;
+            var curr_year = today.getFullYear();
+
+            var pieces = birth.split('/');
+            var birth_date = pieces[0];
+            var birth_month = pieces[1];
+            var birth_year = pieces[2];
+
+            if (curr_month == birth_month && curr_date >= birth_date) {
+                age = (parseInt(curr_year - birth_year));
+            }
+            else if (curr_month == birth_month && curr_date < birth_date) {
+                age = (parseInt(curr_year - birth_year - 1));
+            }
+            else if (curr_month > birth_month) {
+                age = (parseInt(curr_year - birth_year));
+            }
+            else if (curr_month < birth_month) {
+                age = (parseInt(curr_year - birth_year - 1));
+            }
+
+            if (age != 'NaN') {
+                var tobeShownYear = '';
+                if (age >= 18 && age <= 35) {
+                    tobeShownYear = 40;
+                }
+                else if (age >= 36 && age <= 60) {
+                    if (age == 36) {
+                        tobeShownYear = 39;
+                    }
+                    else if (age == 37) {
+                        tobeShownYear = 38;
+                    }
+                    else if (age == 38) {
+                        tobeShownYear = 37;
+                    }
+                    else if (age == 39) {
+                        tobeShownYear = 36;
+                    }
+                    else if (age == 40) {
+                        tobeShownYear = 35;
+                    }
+                    else if (age >= 41 && age <= 60) {
+                        var tempT = age - 40;
+                        tobeShownYear = 35 - tempT;
+                    }
+                }
+                //            else if(age>=36 && age<=49)
+                //            {
+                //                age=age-30;                
+                //                tobeShownYear=30-age;
+                //            }
+                //            else if(age>=50 && age<=60)
+                //            {                               
+                //                tobeShownYear=10;
+                //            }
+                document.getElementById('PremiumEstimation1_txtDurLifeCover').value = tobeShownYear;
+            }
+
+        }
+
+    }
+    
+', 
+
+', 
+
+', 
+', 
+
+', 
+
+    var datepickerFinder = setInterval(function () {
+        //console.log("lenght: "+ $("[id$=txtDOB]").length+" "+$(".error:visible").length)
+
+        if ($("[id$=txtUserDOB]").length && $("#ui-datepicker-div:visible").length == 0) {
+
+            $("[id$=txtUserDOB]").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0",
+                dateFormat: 'dd-mm-yy',
+                maxDate: "-18y",
+                minDate: "-60y",
+                autoClose: true
+            });
+
+            //clearInterval(datepickerFinder);
+        } else {
+            // repeat process
+        }
+
+    }, 1000);
+', 
+', 
+', 
+', 
+    ', 
+        ', 
+            Get Quote and Buy Now', 
+        ', 
+            Free premium estimate in just 30 seconds', 
+            
+        
+        ', 
+            ', 
+                ',  
+                    Select  
+                ', 
+                ', 
+	', Choose Cover Option', 
+	', Basic Life Cover', 
+	', Life Cover + Monthly Income', 
+	', Life Cover + Increasing Monthly Income', 
+
+', 
+                ', 
+                    
+                ', 
+                
+                ', 
+                ', 
+                   ',  We advise you to choose an option as per your need. Do go through the basic features of all the three options before making a final decision. ', 
+                   ', 
+              ', 
+              
+            ', 
+        ', 
+        ', 
+            ',  Gender ', 
+              ', 
+                   ',  Your gender is an important factor in deciding the life insurance premium as it is directly related to life expectancy ', 
+                   ', 
+              ', 
+            ', 
+            ', 
+                ', 
+                    ',                    
+                    ', 
+                        ', 
+                        
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ',  Date of Birth ',  
+              ', 
+                   ',  You must be between 18 - 60 years of age to be eligible for this policy. Please enter your correct date of birth in order to get an accurate premium amount. ', 
+                   ', 
+              ', 
+            ', 
+            ', 
+        ', 
+        
+                                             
+                          ', 
+                                                                    
+                      ',   
+             ', 
+        ', 
+        ', 
+            ',  Tobacco Consumption ',  
+              ', 
+                   ',  Choose yes if, in the last three years, you have consumed any Tobacco/Nicotine products which include Cigarette, Beedi, Cigar, Gutka, Flavoured Pan Masala, Khaini, etc. If not then you are classified as a non smoker ', 
+                   ', 
+              ', 
+            ', 
+            ', 
+                ', 
+                    ', Yes', No', 
+
+                     ', 
+                        ', 
+                        
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ',  Amount of Life Cover ',  
+              ', 
+                   ',  ', Life Cover:', 
+Life cover is the amount payable in case of the unfortunate death of the policyholder. ', 
+', Amount:', u"
+The amount of life cover required depends on an individual but take into account how much of your financial responsibilities you want paid if anything were to happen to you e.g. your mortgage, cost of sustaining your family's lifestyle, cost of bringing up and educating your children, etc. ", 
+                   ', 
+              ', 
+            ', 
+            ', 
+                ', 
+                ', 
+                    
+                    
+                ', 
+                ', 
+                                    
+                ', 
+            ', 
+        ', 
+        ', 
+            ',  Duration of Life Cover ', 
+              ', 
+                   ',  The duration for which life cover is required depends on the individual. It should be chosen keeping in mind the number of years you expect your financial responsibilities towards your family to continue ', 
+                   ', 
+              ', 
+            ', 
+            ', 
+                ', 
+                ', 
+                    
+                    
+                ', 
+                
+
+                ', 
+                                    
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+            
+            
+   
+        ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Insurance Plans', 
+',  ', 
+', 
+', Online Term Plan', 
+', Protection Plans', 
+', Child Plans', 
+', Retirement Plans', 
+', Growth Plans', 
+', Savings Plans', 
+', Group Plans', 
+',  Plan Finder ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Online Plans', 
+',  ', 
+', 
+',  ', 
+', 
+', 
+', 
+', Max Life Online Term Plan Plus', 
+', Basic Life Cover', 
+', Affordable protection with Sum Assured as Lumpsum.', 
+', Buy Now', 
+', Learn more', 
+', Life Cover + Monthly Income', 
+', Lump sum with monthly income to take care of any liability and provide a steady income to family.', 
+', Buy Now', 
+', Learn more', 
+', Life Cover + Increasing Monthly Income', 
+', Lump sum with increasing monthly income to handle any liability and take care of increasing living costs and expenses.', 
+', Buy Now', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Protection Plans', 
+',  ', 
+', 
+', 
+', 
+', 
+', Request an Agent', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Cancer Insurance Plan', 
+', A Comprehensive cancer insurance plan covering all stages of cancer...', 
+', Buy Now', 
+', Learn more', 
+', Max Life Super Term Plan', 
+', In an increasingly uncertain world, it is your top priority to ensure that your family ...', 
+', Learn more', 
+', Max Life Premium Return Protection Plan', 
+', Provide your family with the best of everything, from education to marriage to healthcare and financial support for...', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Child Plans', 
+',  ', 
+', 
+', 
+', 
+', 
+', Request an Agent', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Future Genius Education Plan', 
+', As parents, you want to provide the best education to your children.', 
+', Learn more', 
+', Max Shiksha plus Super Plan', 
+', As parents, you want to provide the best education to your children.', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Retirement Plans', 
+',  ', 
+', 
+', 
+', 
+', 
+', Request an Agent', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Forever Young Pension Plan', 
+', Today, in the prime years of your life...', 
+', Buy Now', 
+', Learn more', 
+', Max Life Guaranteed Lifetime Income Plan', 
+', Max Life Guaranteed Lifetime Income Plan is a powerful...', 
+', Learn more', 
+', Max Life Life Perfect Partner Super Plan', 
+', Maturity benefits, life cover and money ...', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Growth Plans', 
+',  ', 
+', 
+', 
+', 
+', 
+', Request an Agent', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Fast Track Super Plan', 
+', The faster way to plan your financial goals, while your life keeps you busy...', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Savings Plans', 
+',  ', 
+', 
+', 
+', 
+', 
+', Request an Agent', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Guaranteed Income Plan', 
+', A plan that takes care of your worries related to volatility...', 
+', Learn more', 
+', Max Life Whole Life Super', 
+', A plan that helps you meet unforeseen needs with a loan facility...', 
+', Learn more', 
+', Max Life Life Gain Premier', 
+', A plan that is ideal for saving money for a specific purpose...', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Group Plans', 
+',  ', 
+', 
+', 
+', 
+', 
+', Request an Agent', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Group Gratuity Premier Plan', 
+', Max Life Group Gratuity Premier Plan facilitates the employers to fund their gratuity liability in the most effective manner.', 
+', Learn more', 
+', Max Life Group Super Life Premier in lieu of EDLI', 
+', u"For all employees who are covered under the Employees' Provident Fund and Miscellaneous Act, 1952, it is mandatory for you as an employer....", 
+', Learn more', 
+', Max Life Group Super Life Premier', 
+', In all sectors of the economy, whether organized or unorganized, employees of an organization are its most critical and important asset.', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Manage Your Policy', 
+',  ', 
+', 
+',  Pay your Premium Online ', 
+',  Get Premium Receipt', 
+',  Register a Service Request', 
+', Get NAV', 
+', Download Service Forms', 
+', 
+', 
+', 
+', 
+', Tools and Calculators', 
+',  ', 
+', 
+', Use our range of handy tools to help you optimise your finances towards realising your life goals. ', 
+',  Explore Now ', 
+', 
+', 
+', 
+', WHY YOU SHOULD CHOOSE MAX LIFE INSURANCE OVER OTHERS', 
+', 
+', 
+', 
+', 
+', FINANCIAL STRENGTH AND STABILITY', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', SERVICE EXCELLENCE', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', PRESENCE IN 136 CITIES WITH 206 BRANCH OFFICES', 
+', Locate the nearest branch ', 
+', 
+', 
+', 
+', 
+', 
+', AWARDS & RECOGNITIONS', 
+',  ', 
+', 
+', 
+', 
+', Know more about Max Life Insurance', 
+', 
+', 
+', 
+', 
+	
+', 
+.innerContent{ display:none;}
+ul.socialIcon{ padding: 0 20px;}
+ul.socialIcon li{background: url(../images/socailShareIcon.png) no-repeat left top; float:left; margin:30px 45px 0 0;}
+.overlay_content .white_content_overlay ul.socialIcon li a{ width:50px; height:50px; float:left; padding:0;}
+ul.socialIcon li.twitter{ background-position: -97px 0;}
+ul.socialIcon li.linkIn{background-position: -193px 0;}
+ul.socialIcon li.gPlus{background-position: 0 -77px;}
+ul.socialIcon li.mail{background-position: -94px -77px;}
+ul.socialIcon li.last{ margin-right:0;}
+.innerContent textarea{ width:158px;}
+', 
+', 
+', 
+    function validateSenderName(source, args)
+    {
+        var txtName = document.getElementById('MyBriefCase3_txtSenderName').value;
+        if (((txtName.indexOf('.') == 0 || txtName.indexOf('.') == txtName.length-1)) || ((txtName.indexOf("'") == 0 || 
+
+txtName.indexOf("'") == txtName.length-1)) || txtName.indexOf("..") != -1 || txtName.indexOf("''") != -1 || 
+
+txtName.indexOf(".'") != -1 || txtName.indexOf("'.") != -1)
+        {
+               args.IsValid = false;
+        }
+        else
+        {
+                args.IsValid = true;
+        }
+    }
+    function validateReceiverName(source, args)
+    {
+        var txtName = document.getElementById('MyBriefCase3_txtReceiverName').value;
+        if (((txtName.indexOf('.') == 0 || txtName.indexOf('.') == txtName.length-1)) || ((txtName.indexOf("'") == 0 || 
+
+txtName.indexOf("'") == txtName.length-1)) || txtName.indexOf("..") != -1 || txtName.indexOf("''") != -1 || 
+
+txtName.indexOf(".'") != -1 || txtName.indexOf("'.") != -1)
+        {
+               args.IsValid = false;
+        }
+        else
+        {
+                args.IsValid = true;
+        }
+    }
+
+//////////////////////Start Real Time Fill Data in Briefcase ////////////////////////////////
+    $(document).ready(function() {
+        $(".myLink").click(function() {
+            var templink = $(this).parent().children(":first-child").attr('href');
+			
+			
+            var CookieName = "MyBriefcase";
+            var data = readCookie(CookieName);
+	    	
+            var temp = data.split("@#@");
+            for (var i = 1; i < temp.length; i++) {
+                var temp1 = temp[i].split("#@#");
+                if (temp1[0] == templink) {
+                    var replaceFrom = '@#@' + temp[i];
+                    var temp2 = data.replace(replaceFrom, "");
+                    eraseCookie(CookieName);
+                    createCookie(CookieName, temp2, 365);
+                    $(this).parent().remove();
+                    
+                    var d = $(".mybriefcase").children(":first-child").html();
+                    var c = d.split("/script");
+                    var b = d.split("My Favourites [");
+                    var snum;
+                    var tnum;
+                    if (c.length > 1) {
+                        var a = c[1].substr(1).replace("]", "");
+                        snum = jQuery.trim(a);
+                        tnum = snum - 1;
+                    } else {
+                        var a = b[1].substr(1).replace("]", "");
+                        snum = jQuery.trim(a);
+                        tnum = snum - 1;
+                    }
+                    var BriefData = "My Favourites [ " + tnum + " ]";
+                    $(".mybriefcase").children(":first-child").html(BriefData);
+                    break;
+                }
+            }
+        });
+    });
+    ////////////////////////End Real Time Fill Data in Briefcase////////////////////////////////////
+	
+    //////////////////////Show Share BriefCase Section//////////////////////////////////////
+    function ShowShare(Num) {
+        $(".details_overlay").css({"position" : "fixed"})
+        $(".details_overlay").css({ "z-index": "100001" })
+        $(".details_overlay").show();
+		$(".innerContent").eq(0).show();
+		$(".innerContent").eq(1).hide();
+        $(".login_black_overlay").show();
+        $(".errormsg").hide();
+		
+		$(".sShare").click(function(){
+		 $(".details_overlay, .login_black_overlay").hide();	
+		});	
+		
+		$(".mail").click(function(){
+		$(".innerContent").eq(0).hide();
+		$(".innerContent").eq(1).show();
+		});
+
+        if (Num == 1) { $(".inner_overlay h3").html("Share Favourites"); }
+        else { $(".inner_overlay h3").html("Share this page"); }
+    }
+
+    function HideShare() {
+        $(".details_overlay").hide();
+        $(".login_black_overlay").hide(); 
+    }
+    ////////////////////////End Share BriefCase Section////////////////////////////////////
+', 
+
+', 
+
+
+
+
+
+', 
+	
+    ', 
+        ', 
+            
+            ', 
+                ', Share Favourites', 
+                ', 
+              ', 
+               ', 
+                 ', 
+                 ', 
+                 ', 
+                 ', 
+                 ', 
+                ', 
+              ', 
+              ', 
+                ', u"Sender's name *", 
+                ', 
+                    ', 
+                    
+                    
+                    
+                ', 
+                ', u"Sender's Email *", 
+                ', 
+                    ', 
+                    
+                    
+                    
+                ', 
+                ', u"Receiver's name *", 
+                ', 
+                    ', 
+                    
+                    
+                    
+                ', 
+                ', u"Receiver's email *", 
+                ', 
+                    ', 
+                    
+                    
+                    
+                    
+                    
+                ', 
+                ', 
+                ', Comments', 
+                ', 
+                    ', 
+                    
+                    
+                ', 
+                ', 
+              ', 
+            ', 
+            ', 
+            ', 
+        ', 
+        ', 
+    ', 
+
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', Do Not Disturb', 
+', Privacy Policy', 
+', Disclaimer', 
+', Grievance Redressal Policy', 
+', Escalation Matrix', 
+', Key Persons', 
+', Unclaimed amount of Policy Holders', 
+', 
+', 
+', Life Insurance
+Council', 
+', IRDAI Consumer
+Education Website', 
+', IRDAI Public
+Notice on Spurious Calls', 
+', Agents Suspended and Terminated', 
+', Write To Us', 
+', Insurance Ombudsman', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Buy an Insurance Plan', 
+', 1800 200 5577,', 
+1800 200 3383 (For Online Term Plan)', 
+', ONLINE@MAXLIFEINSURANCE.COM', 
+', u"SMS 'LIFE' to 54242", 
+', REQUEST A CALL BACK', 
+', 
+', 
+', 
+', 
+', Customer Service', 
+', 1800 200 5577', 
+', SERVICE.HELPDESK@MAXLIFEINSURANCE.COM', 
+', SMS QUERY to 5424243', 
+', Have complex query/feedback?', 
+Please ', Write to Us', 
+', Locate An Office/Drop-box', 
+', 
+', 
+', 
+', 
+', NRI Helpdesk', 
+', 91-124-3812932', 
+', NRI.HELPDESK@MAXLIFEINSURANCE.COM', 
+', Write to
+Us',  to request a', 
+Call back from our expert Agents.', 
+',  ', 
+', 
+', 
+', 
+', 
+', Connect with us:', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Group Sites:', 
+', MAX INDIA',  | ', 
+', MAX HEALTHCARE',  | ', 
+', MAX BUPA',  | ', 
+', MAX SPECIALITY',  | ', 
+', MAX INDIA FOUNDATION',  | ', 
+', ANTARA SENIOR LIVING',  | ', 
+', IGENIUS', 
+', 
+', PROPOSED MERGER:',  In case of queries related to the proposed merger of HDFC Standard Life Insurance Co. Ltd. and Max Life Insurance Co. Ltd., you can contact us at 18002005577 or write to us at ',  service.helpdesk@maxlifeinsurance.com', 
+',  ', 
+', Copyright @2013 Max Life insurance Co. Ltd. All Rights Reserved. An ISO 9001:2008
+Certified Company.', 
+Max Life Insurance Co. Ltd. is a joint venture between Max Financial Services Limited and Mitsui Sumitomo Insurance Co. Ltd.', 
+Registered Office: 419, Bhai Mohan Singh Nagar, Railmajra, Tehsil Balachaur, District Nawanshahr, Punjab -144 533. Corporate Office: Max Life
+Insurance Co. Ltd., 3rd, 11th and 12th Floor, DLF Square Building, Jacaranda Marg, DLF City Phase II, Gurugram (Haryana) -
+122002. Operation Center: Max Life Insurance Co. Ltd, Plot No. 90-A Udyog Vihar, Sector 18, Gurugram (Haryana) - 122015. Toll
+Free Helpline: 1800 200 5577. Online Term Plan
+Helpline: 1800 200 3383.', 
+Fax Number: 0124-4159397. Email Ids: ', service.helpdesk@maxlifeinsurance.com', ; ', online@maxlifeinsurance.com', . Insurance is the subject matter
+of solicitation.', 
+', 
+', 
+', Beware of spurious phone calls and fictitious/fraudulent offers', 
+', IRDAI clarifies to public that', 
+', 
+', IRDAI or its officials do not involve in activities like sale of any kind of
+insurance or financial products nor invest premiums.', 
+', IRDAI does not announce any bonus', 
+', 
+
+', Public receiving such phone calls are requested to lodge a police complaint along with details of phone
+call number.', 
+', 
+', IRDAI - Registration No. 104', . ARN/Web/01. Corporate Identity
+Number (CIN):U74899PB2000PLC045626. Trade logos displayed above belong to Max Financial Services Limited and Mitsui Sumitomo
+Insurance Co. Ltd. respectively and are used by Max Life Insurance Co Ltd under a license. ', 
+', 
+', 
+', 
+', 
+', 
+', $(document).ready(function(){$(".divRecentlyVisited").hide();$(".dpdwn_inner li.mybriefcase a").click(function(a){a.preventDefault();$(".divRecentlyVisited").slideDown("slow")})});function CloseBreifcase(){$(".divRecentlyVisited").slideUp("slow")}function closeLightbox(){$(".black_overlay1, .how_lightbox").hide()}', 
+', 
+', 
+', 
+', 
+
+', 
+', Recently Visited', 
+', (0)', 
+', 
+', 
+
+', 
+', Locate an Office', 
+', Insurance Plans', 
+', Tools & Calculators', 
+', Write to Us', 
+', Downloads', 
+', FAQs', 
+', Sitemap', 
+', 
+', 
+', 
+', 
+',  ', 
+', 
+
+
+', 
+//<![CDATA[
+Sys.Application.initialize();
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"FilterMode":2,"InvalidChars":"\u003c\u003eABCEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&*()_+{}:\"\u003c\u003e?,./;\u0027[]\\=`","id":"PremiumEstimation1_ftbetxtDD"}, null, null, $get("PremiumEstimation1_txtUserDOB"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"ValidChars":"0123456789,","id":"PremiumEstimation1_ftbtxtAmtlifeCover"}, null, null, $get("PremiumEstimation1_txtAmtlifeCover"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"ValidChars":"0123456789","id":"PremiumEstimation1_ftbtxtDurLifeCover"}, null, null, $get("PremiumEstimation1_txtDurLifeCover"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"FilterType":13,"ValidChars":".\u0027 ","id":"MyBriefCase3_FilteredTextBoxExtender1"}, null, null, $get("MyBriefCase3_txtSenderName"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"FilterMode":2,"InvalidChars":"\u003c\u003e/?,\u0027;\"\\}{][+=)(*%$#!~`","id":"MyBriefCase3_FilteredTextBoxExtender2"}, null, null, $get("MyBriefCase3_txtSenderEmail"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"FilterType":13,"ValidChars":".\u0027 ","id":"MyBriefCase3_FilteredTextBoxExtender5"}, null, null, $get("MyBriefCase3_txtReceiverName"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"FilterMode":2,"InvalidChars":"\u003c\u003e/?,\u0027;\"\\}{][+=)(*%$#!~`","id":"MyBriefCase3_FilteredTextBoxExtender6"}, null, null, $get("MyBriefCase3_txtReceiverEmail"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"FilterMode":2,"InvalidChars":"\u003c\u003e","id":"MyBriefCase3_FilteredTextBoxExtender10"}, null, null, $get("MyBriefCase3_txtComments"));
+});
+//]]>
+', 
+', 
+
+
+'][
+', 
+', FB', 
+', Twitter', 
+', LinkedIn', 
+', YouTube', 
+', Google+', 
+', 
+', /*<![CDATA[*/!function(a){a.skdslider=function(m,g){var e={delay:2000,animationSpeed:500,showNav:!0,autoSlide:!0,showNextPrev:!1,pauseOnHover:!1,numericNav:!1,stopSlidingAfter:!1,showPlayButton:!1,animationType:"fading"};g&&a.extend(e,g),e.touch=!0;var j=("ontouchstart" in window||window.DocumentTouch&&document instanceof DocumentTouch,window.navigator.userAgent),b=j.indexOf("MSIE ");if(b>0){var f=parseInt(j.substring(b+5,j.indexOf(".",b)));e.touch=f>8?!0:!1}a(m).wrap('<div class="skdslider"></div>');var h=a(m).closest("div.skdslider");h.find("ul").addClass("slides");var p=h.find("ul.slides li"),c=0;if(e.currentSlide=0,e.currentState="pause",e.running=!1,e.stopSlidingAfter&&("all"==e.stopSlidingAfter&&(e.stopSlidingAfter=p.length),e.stopSlidingAfter-=1),"fading"==e.animationType&&p.each(function(){a(this).css({position:"absolute",left:"0",top:"0",bottom:"0",right:"0"})}),"sliding"==e.animationType){p.each(function(){a(this).css({"float":"left",display:"block",position:"relative"})});var k=h.outerWidth()*p.size();h.find("ul.slides").css({position:"absolute",left:"0",width:k}),p.css({width:h.outerWidth(),height:h.outerHeight()}),a(window).resize(function(){var d=h.outerWidth()*p.size();h.find("ul.slides").css({position:"absolute",left:"0",width:d}),p.css({width:h.outerWidth(),height:h.outerHeight()})})}e.touch&&a.skdslider.enableTouch(h,p,e),a.skdslider.createNav(h,p,e),p.eq(c).show(),1==e.autoSlide&&(e.currentState="play",e.interval=setTimeout(function(){a.skdslider.playSlide(h,p,e)},e.delay)),1==e.pauseOnHover&&p.hover(function(){1==e.autoSlide&&(e.currentState="pause",clearTimeout(e.interval))},function(){1==e.autoSlide&&(e.currentState="play",1==e.autoSlide&&a.skdslider.playSlide(h,p,e))})},a.skdslider.createNav=function(e,k,c){var g='<ul class="slide-navs">';for(i=0;i<k.length;i++){var b="";1==c.numericNav&&(b=i+1),g+=0==i?'<li class="current-slide slide-nav-'+i+'"><a>'+b+"</a></li>":'<li class="slide-nav-'+i+'"><a>'+b+"</a></li>"}if(g+="</ul>",1==c.showNav){e.append(g);var j=e.find(".slide-navs")[0].offsetWidth;j=parseInt(j/2),j=-1*j,e.find(".slide-navs").css("margin-left",j),e.find(".slide-navs li").click(function(){return index=e.find(".slide-navs li").index(this),targetSlide=index,clearTimeout(c.interval),c.currentState="play",c.running=!1,a.skdslider.playSlide(e,k,c,targetSlide),!1})}if(1==c.showNextPrev){var f='<a class="prev"></a>';f+='<a class="next"></a>',e.append(f),e.find("a.prev").click(function(){a.skdslider.prev(e,k,c)}),e.find("a.next").click(function(){a.skdslider.next(e,k,c)})}if(1==c.showPlayButton){var h="play"==c.currentState||1==c.autoSlide?'<a class="play-control pause"></a>':'<a class="play-control play"></a>';e.append(h),e.hover(function(){e.find("a.play-control").css("display","block")},function(){e.find("a.play-control").css("display","none")}),e.find("a.play-control").click(function(){return 1==c.autoSlide?(clearTimeout(c.interval),c.autoSlide=!1,c.currentState="pause",a(this).addClass("play"),a(this).removeClass("pause")):(c.currentState="play",c.autoSlide=!0,a(this).addClass("pause"),a(this).removeClass("play"),c.currentSlide+1==k.length?targetSlide=0:targetSlide=c.currentSlide+1,clearTimeout(c.interval),a.skdslider.playSlide(e,k,c,targetSlide)),!1})}},a.skdslider.next=function(c,b,d){return d.currentSlide+1==b.length?targetSlide=0:targetSlide=d.currentSlide+1,clearTimeout(d.interval),d.currentState="play",a.skdslider.playSlide(c,b,d,targetSlide),!1},a.skdslider.prev=function(c,b,d){return 0==d.currentSlide?targetSlide=b.length-1:targetSlide=d.currentSlide-1,clearTimeout(d.interval),d.currentState="play",d.running=!1,a.skdslider.playSlide(c,b,d,targetSlide),!0},a.skdslider.prev=function(c,b,d){return 0==d.currentSlide?targetSlide=b.length-1:targetSlide=d.currentSlide-1,clearTimeout(d.interval),d.currentState="play",d.running=!1,a.skdslider.playSlide(c,b,d,targetSlide),!0},a.skdslider.playSlide=function(d,c,f,b){if("play"==f.currentState&&0==f.running){if(d.find(".slide-navs li").removeClass("current-slide"),"undefined"==typeof b&&(b=f.currentSlide+1==c.length?0:f.currentSlide+1),"fading"==f.animationType&&(f.running=!0,c.eq(f.currentSlide).fadeOut(f.animationSpeed),c.eq(b).fadeIn(f.animationSpeed,function(){a.skdslider.removeIEFilter(a(this)[0]),f.running=!1})),"sliding"==f.animationType){var e=b*d.outerWidth()*-1;f.running=!0,d.find("ul.slides").animate({left:e},f.animationSpeed,function(){f.running=!1})}d.find(".slide-navs li").eq(b).addClass("current-slide"),f.currentSlide=b}f.stopSlidingAfter&&f.stopSlidingAfter==f.currentSlide&&(clearTimeout(f.interval),f.autoSlide=!1,f.currentState="pause",d.find("a.play-control").addClass("play"),d.find("a.play-control").removeClass("pause")),1==f.autoSlide&&"play"==f.currentState&&(f.interval=setTimeout(function(){a.skdslider.playSlide(d,c,f)},f.delay))},a.skdslider.enableTouch=function(m,g,e){function j(d){h=d.touches[0].pageX,p=d.touches[0].pageY,m[0].addEventListener("touchmove",b,!1),m[0].addEventListener("touchend",f,!1)}function b(n){n.preventDefault();var l=n.touches[0].pageX,d=n.touches[0].pageY;c=h-l,k=p-d}function f(d){m[0].removeEventListener("touchmove",b,!1),c>0?a.skdslider.next(m,g,e):a.skdslider.prev(m,g,e),m[0].removeEventListener("touchend",f,!1)}m[0].addEventListener("touchstart",j,!1);var h,p,c,k},a.skdslider.removeIEFilter=function(b){b.style.removeAttribute&&b.style.removeAttribute("filter")},a.fn.skdslider=function(b){return this.each(function(){new a.skdslider(this,b)})}}(jQuery),jQuery(document).ready(function(){jQuery("#slide").skdslider({delay:12000,animationSpeed:1000,showNextPrev:!0,showPlayButton:!1,autoSlide:!0,animationType:"fading"}),jQuery("#responsive").change(function(){$("#responsive_wrapper").width(jQuery(this).val())})});/*]]>*/', 
+
+
+', 
+', 
+
+
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+', 
+',  ', 
+',  ', 
+', 
+', 
+', Existing Policyholder? ', Click',  to speed up your Online
+Term purchase!', 
+', 
+', 
+', 
+', 
+', Toll Free: 1800 200 5577 | 1800 200 3383 (For Online Plans)', 
+', 
+', Login', 
+', 
+', 
+', 
+', Customer', 
+', Agent', 
+', 
+', 
+', 
+', Enjoy a host of benefits, generate statements, view policy details, pay on-line, log a request and much
+more.', 
+', Individual policy
+holder', 
+', 
+', 
+', Login to your agent portal to generate statements, view policy details, product news, policy servicing and
+much more.', 
+', Agent Portal', 
+', 
+', 
+', 
+', /*<![CDATA[*/var googleSearchIframeName="cse-search-results";var googleSearchFormName="cse-search-box";var googleSearchFrameWidth=600;var googleSearchDomain="www.google.com";var googleSearchPath="/cse";function Open_Search_H(){location.href="/search.aspx?cx=001939761212425525467:yh7n13o7bye&cof=FORID%3A10%3BNB%3A1&ie=UTF-8&q="+document.getElementById("txt").value+"&as_q=more%3AHTML"}/*]]>*/', 
+', 
+', 
+', 
+', 
+', 
+', About Us', 
+',  Knowledge Centre', 
+', NRIs Insurance', 
+', Careers', 
+', Public Disclosures', 
+', Become An Agent', 
+', Become an IMF', 
+', Contact Us', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', New Customers', 
+', 
+', 
+', Online Term Plan', 
+',  Insurance Plans', 
+', 
+', 
+', 
+', 
+', 
+', Online Term Plan', 
+', 
+', Basic Life Cover', 
+', Life Cover + Monthly Income', 
+', Life Cover + Increasing Monthly Income', 
+', 
+',  Read More', 
+', Explore', 
+', 
+', How Term Plan can help', 
+', Benefits of buying Life Insurance Online', 
+', 
+',  View more', 
+', Protection Plans', 
+', 
+', Max Life Cancer Insurance Plan', 
+', Max Life Super Term Plan', 
+', 
+',  Read More', 
+', Explore', 
+', 
+', How to choose a Term Plan', 
+', Why you need a Protection Plan', 
+', 
+', 
+', Child Plans', 
+', 
+', Max Life Future Genius Education Plan', 
+', Max life Shiksha Plus Super', 
+', 
+', Explore', 
+', 
+', How To Choose A Child Plan', 
+', Why invest in a Child Plan', 
+', 
+', 
+', Retirement Plans', 
+', 
+', Max Life Forever Young Pension Plan', 
+', Max Life Guaranteed Lifetime Income Plan', 
+', Max Life Life Perfect Partner Super', 
+', 
+',  Read More', 
+', Explore', 
+', 
+', Qualifying Recognised Overseas Pension Scheme', 
+', How To Choose A Retirement Plan', 
+', 
+',  View more', 
+', Growth Plans', 
+', 
+', Max Life Fast Track Super Plan', 
+', Max Life Platinum Wealth Plan', 
+', 
+',  Read More', 
+', Explore', 
+', 
+', How To Choose A Growth Plan', 
+', Why invest in a Growth Plan', 
+', 
+',  View more', 
+', Savings Plans', 
+', 
+', Max Life Monthly Income Advantage Plan', 
+', Max Life Guaranteed Income Plan', 
+', Max Life Whole Life Super', 
+', 
+',  Read More', 
+', Explore', 
+', 
+', How To Choose A Savings Plan', 
+', Why life insurance is good for long term savings', 
+', 
+', 
+', Group Plans', 
+', 
+', Max Life Group Gratuity Premier Plan', 
+', Max Life Group Super Life Premier in lieu of EDLI', 
+', Max Life Group Super Life Premier', 
+', 
+',  Read More', 
+', 
+', 
+', 
+', 
+', 
+', 
+',  Why Max', 
+Life Insurance', 
+', 
+', 
+', 
+', Existing Customers', 
+', 
+',  Premium', 
+Payment Option', 
+', Claims', 
+', 
+',  ', 
+', 
+', 
+', Understanding Claims', 
+', Documents Required', 
+', Claims Forms', 
+', Important to Know', 
+', Claims FAQs', 
+', Contact Us - Claims', 
+', 
+', 
+',  ', 
+', 
+', 
+', Fund Performance', 
+', 
+',  ', 
+', 
+', 
+', NAV Performance', 
+', Performance Summary', 
+', Performance Over Benchmark', 
+', Fund Portfolio', 
+', Portfolio Summary', 
+', Market Review', 
+', Invest Track Newsletter', 
+', 
+', 
+',  ', 
+', 
+', 
+', Customer Service', 
+', 
+',  ', 
+', 
+', 
+', Premium Payment Options', 
+',  Pay Online', 
+', Electronic Insurance Account', 
+', IVR Flow Chart', 
+', Escalation Matrix', 
+', FAQs', 
+', Get SMS Updates', 
+', Download Premium Receipt', 
+', Download Policy Pack', 
+', Withdrawn Plans', 
+', Protect your Policy', 
+', Unclaimed Amount', 
+', 
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', The plan is to live the perfect life together', Get a ', #BackupPlan',  so life can go on being beautiful', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Rs.1 Cr.',  Life Cover', @just ', Rs.576/month*', 
+', 
+', 
+', 
+', Buy Now', 
+', 
+', 
+', ARN: HPbanner/Propaganda/Oct 2016', 
+', 
+', Max Life Online Term Plan Plus (UIN - 104N092V01). *for 28 year old male, non smoker, policy term of 30 years. Disclaimer', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',      ', 
+', &nbsp', 
+', 
+', 
+
+', Beware of fraud calls & emails', 
+',  Pay your policy premium only to YOUR POLICY ACCOUNT.', 
+Cheque payments should be in the name of ', "Max Life Insurance Company Ltd. < followed by your 9 digit policy no. >"', 
+For NEFT payments, please transfer only to ', "HSBC Bank a/c no.
+1165.
+< followed by your 9 digit policy no. > " ', 
+Max Life does not collect premium in any other account. ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',  ', 
+', 
+', 
+', 
+
+', 
+', TIMELY CANCER', 
+', TREATMENT CAN SAVE', 
+', LIFE. BUT IT CAN COST', 
+', u"AN ENTIRE LIFE'S SAVINGS", 
+', 
+', KNOW MORE', 
+', 
+', 
+', BUY NOW', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',      ', 
+', &nbsp', 
+', 
+', 
+
+', 
+', u"
+4 Moneybacks During Your Child's Graduation Year", 
+', Additional Benefits In Case Of Death', 
+', \u2022',  Lump sum payout to take care of immediate finacial needs', *', 
+', \u2022',  Regular Income for 135 months', #', 
+', \u2022',  Waiver of all future premiums', 
+', 
+', 
+', 
+', 
+', KNOW MORE', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Insurance is proud to announce a', 
+', claim settlement ratio of', 
+', 
+', 96.23%', *', 
+', 
+', 
+',  ', *', Max Life Insurance Audited Financials and Public Disclosures 2016', 
+', 
+', ARN: MLI/CR/WB/0816/1', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+', 
+    $(document).ready(function () {
+        $(".GenderBox input").click(function () {
+            $(".txtGender").val($(this).val());
+            $(".GenderBox").next().find(".error").hide();
+        });
+
+        $(".TabaccoBox input").click(function () {
+            $(".txtTabacco").val($(this).val());
+            $(".TabaccoBox").next().find(".error").hide();
+        });
+        
+    });
+
+    ////////Proper date valdation/////
+    // Declaring valid date character, minimum year and maximum year
+    var dtCh = "-";
+    var minYear = 1900;
+    var maxYear = 2100;
+
+    function fnDateValidation(sender, args) {       
+        var err = 1;
+        var DD = 0;
+        var MM = 0;
+        var YY = 0;
+
+        var birth = document.getElementById('PremiumEstimation1_txtUserDOB').value;
+        if (birth == '') {
+            args.IsValid = false;
+            return;
+        }
+
+        var pieces = birth.split('-');
+        DD = pieces[0];
+        MM = pieces[1];
+        YY = pieces[2];
+        if (typeof DD == 'undefined' || DD == null || typeof MM == 'undefined' || MM == null || typeof YY == 'undefined' || YY == null) {
+            args.IsValid = false;
+            return;
+        } 
+        var flag = false;
+        //console.log(DD +' >>'+MM +' >>'+YY)
+        if ((DD.indexOf("D") < 0) && (MM.indexOf("M") < 0) && (YY.indexOf("Y") < 0)) {
+            flag = true;
+        }
+
+        //console.log(DD.indexOf("D") + ' >>' + MM.indexOf("M") + ' >>' + YY.indexOf("Y") + '>>' + flag)
+
+        if (flag) {
+            try {
+                var ca = DD + "-" + MM + "-" + YY;
+                err = isDate(ca) ? 0 : 1;
+            }
+            catch (e) {
+                err = 1;
+            }
+        }
+
+        args.IsValid = (err == 1) ? false : true;
+
+        sender.innerHTML = 'Please enter valid date of birth';
+        if (args.IsValid) {
+            if (meetsMinimumAge(new Date(YY, MM, DD), 18) && meetsMaximumAge(new Date(YY, MM, DD), 60)) {
+                // is OK, do something
+                //alert('Ok');
+                args.IsValid = true;
+            } else {
+                // too young - error
+               // alert('too young');
+                sender.innerHTML = 'Age should be between 18 to 60 years';
+                args.IsValid = false;              
+            }
+        }
+    }
+
+    function meetsMinimumAge(birthDate, minAge) {
+        var tempDate = new Date(birthDate.getFullYear() + minAge, birthDate.getMonth() - 1, birthDate.getDate());    
+        return (tempDate <= new Date());
+    }
+
+    function meetsMaximumAge(birthDate, maxAge) {
+        var tempDate = new Date(birthDate.getFullYear() + maxAge, birthDate.getMonth() - 1, birthDate.getDate());
+        var dt = new Date();
+        var newtempDate = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
+        //console.log(tempDate + '>><<' + dt);
+        return (tempDate >= newtempDate);
+    }
+
+    function daysInFebruary(year) {
+        // February has 29 days in any year evenly divisible by four,
+        // EXCEPT for centurial years which are not also divisible by 400.
+        return (((year % 4 == 0) && ((!(year % 100 == 0)) || (year % 400 == 0))) ? 29 : 28);
+    }
+    function DaysArray(n) {
+        for (var i = 1; i <= n; i++) {
+            this[i] = 31
+            if (i == 4 || i == 6 || i == 9 || i == 11) { this[i] = 30 }
+            if (i == 2) { this[i] = 29 }
+        }
+        return this
+    }
+
+    function isDate(dtStr) {
+        var daysInMonth = DaysArray(12)
+        var pos1 = dtStr.indexOf(dtCh)
+        var pos2 = dtStr.indexOf(dtCh, pos1 + 1)
+        var strDay = dtStr.substring(0, pos1)
+        var strMonth = dtStr.substring(pos1 + 1, pos2)
+        var strYear = dtStr.substring(pos2 + 1)
+        strYr = strYear
+        if (strDay.charAt(0) == "0" && strDay.length > 1) strDay = strDay.substring(1)
+        if (strMonth.charAt(0) == "0" && strMonth.length > 1) strMonth = strMonth.substring(1)
+        for (var i = 1; i <= 3; i++) {
+            if (strYr.charAt(0) == "0" && strYr.length > 1) strYr = strYr.substring(1)
+        }
+        month = parseInt(strMonth)
+        day = parseInt(strDay)
+        year = parseInt(strYr)
+        if (pos1 == -1 || pos2 == -1) {
+            return false
+        }
+        if (strMonth.length < 1 || month < 1 || month > 12) {
+            return false
+        }
+        if (strDay.length < 1 || day < 1 || day > 31 || (month == 2 && day > daysInFebruary(year)) || day > daysInMonth[month]) {
+            return false
+        }
+        if (strYear.length != 4 || year == 0 || year < minYear || year > maxYear) {
+            return false
+        }
+        return true
+    }
+',  
+', 
+    $(document).ready(function () {
+        $("#PremiumEstimation1_txtUserDOB").bind('change keyup paste mouseup', function () {
+            fnFillCalculateYears();
+        });
+        $(".QuestionPopup").hover(function () {
+            $(this).parents(".field_name , .select_bg").find(".FieldPopup").show();
+        }, function () {
+            $(this).parents(".field_name , .select_bg").find(".FieldPopup").hide();
+        })
+
+
+        $("#PremiumEstimation1_txtAmtlifeCover").live("keyup", function () {
+            var Num = $(this).val().replace(/,/g, '');
+            // console.log(Num);
+            if (Num > 9999999999999) $(this).val(Num.substring(0, 1) + "," + Num.substring(1, 3) + "," + Num.substring(3, 5) + "," + Num.substring(5, 7) + "," + Num.substring(7, 9) + "," + Num.substring(9, 11)+ "," + Num.substring(11));
+            else if (Num > 999999999999) $(this).val(Num.substring(0, 2) + "," + Num.substring(2, 4) + "," + Num.substring(4, 6) + "," + Num.substring(6,8) + "," + Num.substring(7, 9) + "," + Num.substring(10));
+            else if (Num > 99999999999) $(this).val(Num.substring(0, 1) + "," + Num.substring(1, 3) + "," + Num.substring(3, 5) + "," + Num.substring(5, 7) + "," + Num.substring(7, 9) + "," + Num.substring(9));
+            else if (Num > 9999999999) $(this).val(Num.substring(0, 2) + "," + Num.substring(2, 4) + "," + Num.substring(4, 6) + "," + Num.substring(6, 8) + "," + Num.substring(8));
+            else if (Num > 999999999) $(this).val(Num.substring(0, 1) + "," + Num.substring(1, 3) + "," + Num.substring(3, 5) + "," + Num.substring(5, 7) + "," + Num.substring(7));
+            else if (Num > 99999999) $(this).val(Num.substring(0, 2) + "," + Num.substring(2, 4) + "," + Num.substring(4, 6) + "," + Num.substring(6));
+            else if (Num > 9999999) $(this).val(Num.substring(0, 1) + "," + Num.substring(1, 3) + "," + Num.substring(3, 5) + "," + Num.substring(5));
+            else if (Num > 999999) $(this).val(Num.substring(0, 2) + "," + Num.substring(2, 4) + "," + Num.substring(4));
+            else if (Num > 99999) $(this).val(Num.substring(0, 1) + "," + Num.substring(1, 3) + "," + Num.substring(3));
+            else if (Num > 9999) $(this).val(Num.substring(0, 2) + "," + Num.substring(2));
+            else if (Num > 999) $(this).val(Num.substring(0, 1) + "," + Num.substring(1));
+        });
+    })
+
+
+    function fnAmountValidation(sender, args) {
+        var Amt = document.getElementById('PremiumEstimation1_txtAmtlifeCover').value;
+        Amt = Amt.replace(/,/g, '');
+        var MinimumValue = 2500000, MaximumValue = 100000000; 
+        if((Amt >= MinimumValue) && (Amt <= MaximumValue)){
+            args.IsValid = true;
+        } else {
+            args.IsValid = false;
+        }
+    }
+
+
+    function fnDurationValidation(sender, args) {
+        var Amt = document.getElementById('PremiumEstimation1_txtDurLifeCover').value;
+        var MinimumValue = 10, MaximumValue = 40;
+        if ((Amt >= MinimumValue) && (Amt <= MaximumValue)) {
+            args.IsValid = true;
+        } else {
+            args.IsValid = false;
+        }
+    }
+
+    function fnFillCalculateYears() {
+
+        var age = '';
+
+        document.getElementById('PremiumEstimation1_txtDurLifeCover').value = '';
+
+        var d = 'DD';
+        var m = 'MM';
+        var y = 'YYYY';
+
+        var birth = document.getElementById('PremiumEstimation1_txtUserDOB').value;
+        //            alert(birth);
+        if (birth == '') {
+            return;
+        }
+        if (birth.toString().length < 10) {
+            return;
+        }
+        var pieces = birth.split('-');
+        d = pieces[0];
+        m = pieces[1];
+        y = pieces[2];
+        //var birth='18/01/2011';
+
+        if (d != 'DD' && d != '' && m != 'MM' && m != '' && y != 'YYYY' && y != '') {
+            if (d * 1 == 0 || m * 1 == 0 || y * 1 == 0) {
+                return;
+            }
+
+            if ((y * 1).toString().length != 4) {
+                return;
+            }
+
+            var err = 1;
+            try {
+                var ca = d + "-" + m + "-" + y;
+                err = isDate(ca) ? 0 : 1;
+            }
+            catch (e) {
+                err = 1;
+            }
+
+            if (err == 1) {
+                return;
+            }
+
+            if (!meetsMinimumAge(new Date(y, m, d), 18) || !meetsMaximumAge(new Date(y, m, d), 60)) {
+                return;
+            }
+
+            var birth = d + '/' + m + '/' + y;
+
+            var today = new Date();
+            var curr_date = today.getDate();
+            var curr_month = today.getMonth() + 1;
+            var curr_year = today.getFullYear();
+
+            var pieces = birth.split('/');
+            var birth_date = pieces[0];
+            var birth_month = pieces[1];
+            var birth_year = pieces[2];
+
+            if (curr_month == birth_month && curr_date >= birth_date) {
+                age = (parseInt(curr_year - birth_year));
+            }
+            else if (curr_month == birth_month && curr_date < birth_date) {
+                age = (parseInt(curr_year - birth_year - 1));
+            }
+            else if (curr_month > birth_month) {
+                age = (parseInt(curr_year - birth_year));
+            }
+            else if (curr_month < birth_month) {
+                age = (parseInt(curr_year - birth_year - 1));
+            }
+
+            if (age != 'NaN') {
+                var tobeShownYear = '';
+                if (age >= 18 && age <= 35) {
+                    tobeShownYear = 40;
+                }
+                else if (age >= 36 && age <= 60) {
+                    if (age == 36) {
+                        tobeShownYear = 39;
+                    }
+                    else if (age == 37) {
+                        tobeShownYear = 38;
+                    }
+                    else if (age == 38) {
+                        tobeShownYear = 37;
+                    }
+                    else if (age == 39) {
+                        tobeShownYear = 36;
+                    }
+                    else if (age == 40) {
+                        tobeShownYear = 35;
+                    }
+                    else if (age >= 41 && age <= 60) {
+                        var tempT = age - 40;
+                        tobeShownYear = 35 - tempT;
+                    }
+                }
+                //            else if(age>=36 && age<=49)
+                //            {
+                //                age=age-30;                
+                //                tobeShownYear=30-age;
+                //            }
+                //            else if(age>=50 && age<=60)
+                //            {                               
+                //                tobeShownYear=10;
+                //            }
+                document.getElementById('PremiumEstimation1_txtDurLifeCover').value = tobeShownYear;
+            }
+
+        }
+
+    }
+    
+', 
+
+', 
+
+', 
+', 
+
+', 
+
+    var datepickerFinder = setInterval(function () {
+        //console.log("lenght: "+ $("[id$=txtDOB]").length+" "+$(".error:visible").length)
+
+        if ($("[id$=txtUserDOB]").length && $("#ui-datepicker-div:visible").length == 0) {
+
+            $("[id$=txtUserDOB]").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0",
+                dateFormat: 'dd-mm-yy',
+                maxDate: "-18y",
+                minDate: "-60y",
+                autoClose: true
+            });
+
+            //clearInterval(datepickerFinder);
+        } else {
+            // repeat process
+        }
+
+    }, 1000);
+', 
+', 
+', 
+', 
+    ', 
+        ', 
+            Get Quote and Buy Now', 
+        ', 
+            Free premium estimate in just 30 seconds', 
+            
+        
+        ', 
+            ', 
+                ',  
+                    Select  
+                ', 
+                ', 
+	', Choose Cover Option', 
+	', Basic Life Cover', 
+	', Life Cover + Monthly Income', 
+	', Life Cover + Increasing Monthly Income', 
+
+', 
+                ', 
+                    
+                ', 
+                
+                ', 
+                ', 
+                   ',  We advise you to choose an option as per your need. Do go through the basic features of all the three options before making a final decision. ', 
+                   ', 
+              ', 
+              
+            ', 
+        ', 
+        ', 
+            ',  Gender ', 
+              ', 
+                   ',  Your gender is an important factor in deciding the life insurance premium as it is directly related to life expectancy ', 
+                   ', 
+              ', 
+            ', 
+            ', 
+                ', 
+                    ',                    
+                    ', 
+                        ', 
+                        
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ',  Date of Birth ',  
+              ', 
+                   ',  You must be between 18 - 60 years of age to be eligible for this policy. Please enter your correct date of birth in order to get an accurate premium amount. ', 
+                   ', 
+              ', 
+            ', 
+            ', 
+        ', 
+        
+                                             
+                          ', 
+                                                                    
+                      ',   
+             ', 
+        ', 
+        ', 
+            ',  Tobacco Consumption ',  
+              ', 
+                   ',  Choose yes if, in the last three years, you have consumed any Tobacco/Nicotine products which include Cigarette, Beedi, Cigar, Gutka, Flavoured Pan Masala, Khaini, etc. If not then you are classified as a non smoker ', 
+                   ', 
+              ', 
+            ', 
+            ', 
+                ', 
+                    ', Yes', No', 
+
+                     ', 
+                        ', 
+                        
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+            ',  Amount of Life Cover ',  
+              ', 
+                   ',  ', Life Cover:', 
+Life cover is the amount payable in case of the unfortunate death of the policyholder. ', 
+', Amount:', u"
+The amount of life cover required depends on an individual but take into account how much of your financial responsibilities you want paid if anything were to happen to you e.g. your mortgage, cost of sustaining your family's lifestyle, cost of bringing up and educating your children, etc. ", 
+                   ', 
+              ', 
+            ', 
+            ', 
+                ', 
+                ', 
+                    
+                    
+                ', 
+                ', 
+                                    
+                ', 
+            ', 
+        ', 
+        ', 
+            ',  Duration of Life Cover ', 
+              ', 
+                   ',  The duration for which life cover is required depends on the individual. It should be chosen keeping in mind the number of years you expect your financial responsibilities towards your family to continue ', 
+                   ', 
+              ', 
+            ', 
+            ', 
+                ', 
+                ', 
+                    
+                    
+                ', 
+                
+
+                ', 
+                                    
+                ', 
+            ', 
+        ', 
+        ', 
+            ', 
+            
+            
+   
+        ', 
+    ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Insurance Plans', 
+',  ', 
+', 
+', Online Term Plan', 
+', Protection Plans', 
+', Child Plans', 
+', Retirement Plans', 
+', Growth Plans', 
+', Savings Plans', 
+', Group Plans', 
+',  Plan Finder ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Online Plans', 
+',  ', 
+', 
+',  ', 
+', 
+', 
+', 
+', Max Life Online Term Plan Plus', 
+', Basic Life Cover', 
+', Affordable protection with Sum Assured as Lumpsum.', 
+', Buy Now', 
+', Learn more', 
+', Life Cover + Monthly Income', 
+', Lump sum with monthly income to take care of any liability and provide a steady income to family.', 
+', Buy Now', 
+', Learn more', 
+', Life Cover + Increasing Monthly Income', 
+', Lump sum with increasing monthly income to handle any liability and take care of increasing living costs and expenses.', 
+', Buy Now', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Protection Plans', 
+',  ', 
+', 
+', 
+', 
+', 
+', Request an Agent', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Cancer Insurance Plan', 
+', A Comprehensive cancer insurance plan covering all stages of cancer...', 
+', Buy Now', 
+', Learn more', 
+', Max Life Super Term Plan', 
+', In an increasingly uncertain world, it is your top priority to ensure that your family ...', 
+', Learn more', 
+', Max Life Premium Return Protection Plan', 
+', Provide your family with the best of everything, from education to marriage to healthcare and financial support for...', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Child Plans', 
+',  ', 
+', 
+', 
+', 
+', 
+', Request an Agent', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Future Genius Education Plan', 
+', As parents, you want to provide the best education to your children.', 
+', Learn more', 
+', Max Shiksha plus Super Plan', 
+', As parents, you want to provide the best education to your children.', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Retirement Plans', 
+',  ', 
+', 
+', 
+', 
+', 
+', Request an Agent', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Forever Young Pension Plan', 
+', Today, in the prime years of your life...', 
+', Buy Now', 
+', Learn more', 
+', Max Life Guaranteed Lifetime Income Plan', 
+', Max Life Guaranteed Lifetime Income Plan is a powerful...', 
+', Learn more', 
+', Max Life Life Perfect Partner Super Plan', 
+', Maturity benefits, life cover and money ...', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Growth Plans', 
+',  ', 
+', 
+', 
+', 
+', 
+', Request an Agent', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Fast Track Super Plan', 
+', The faster way to plan your financial goals, while your life keeps you busy...', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Savings Plans', 
+',  ', 
+', 
+', 
+', 
+', 
+', Request an Agent', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Guaranteed Income Plan', 
+', A plan that takes care of your worries related to volatility...', 
+', Learn more', 
+', Max Life Whole Life Super', 
+', A plan that helps you meet unforeseen needs with a loan facility...', 
+', Learn more', 
+', Max Life Life Gain Premier', 
+', A plan that is ideal for saving money for a specific purpose...', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Group Plans', 
+',  ', 
+', 
+', 
+', 
+', 
+', Request an Agent', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Max Life Group Gratuity Premier Plan', 
+', Max Life Group Gratuity Premier Plan facilitates the employers to fund their gratuity liability in the most effective manner.', 
+', Learn more', 
+', Max Life Group Super Life Premier in lieu of EDLI', 
+', u"For all employees who are covered under the Employees' Provident Fund and Miscellaneous Act, 1952, it is mandatory for you as an employer....", 
+', Learn more', 
+', Max Life Group Super Life Premier', 
+', In all sectors of the economy, whether organized or unorganized, employees of an organization are its most critical and important asset.', 
+', Learn more', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Manage Your Policy', 
+',  ', 
+', 
+',  Pay your Premium Online ', 
+',  Get Premium Receipt', 
+',  Register a Service Request', 
+', Get NAV', 
+', Download Service Forms', 
+', 
+', 
+', 
+', 
+', Tools and Calculators', 
+',  ', 
+', 
+', Use our range of handy tools to help you optimise your finances towards realising your life goals. ', 
+',  Explore Now ', 
+', 
+', 
+', 
+', WHY YOU SHOULD CHOOSE MAX LIFE INSURANCE OVER OTHERS', 
+', 
+', 
+', 
+', 
+', FINANCIAL STRENGTH AND STABILITY', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', SERVICE EXCELLENCE', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', PRESENCE IN 136 CITIES WITH 206 BRANCH OFFICES', 
+', Locate the nearest branch ', 
+', 
+', 
+', 
+', 
+', 
+', AWARDS & RECOGNITIONS', 
+',  ', 
+', 
+', 
+', 
+', Know more about Max Life Insurance', 
+', 
+', 
+', 
+', 
+	
+', 
+.innerContent{ display:none;}
+ul.socialIcon{ padding: 0 20px;}
+ul.socialIcon li{background: url(../images/socailShareIcon.png) no-repeat left top; float:left; margin:30px 45px 0 0;}
+.overlay_content .white_content_overlay ul.socialIcon li a{ width:50px; height:50px; float:left; padding:0;}
+ul.socialIcon li.twitter{ background-position: -97px 0;}
+ul.socialIcon li.linkIn{background-position: -193px 0;}
+ul.socialIcon li.gPlus{background-position: 0 -77px;}
+ul.socialIcon li.mail{background-position: -94px -77px;}
+ul.socialIcon li.last{ margin-right:0;}
+.innerContent textarea{ width:158px;}
+', 
+', 
+', 
+    function validateSenderName(source, args)
+    {
+        var txtName = document.getElementById('MyBriefCase3_txtSenderName').value;
+        if (((txtName.indexOf('.') == 0 || txtName.indexOf('.') == txtName.length-1)) || ((txtName.indexOf("'") == 0 || 
+
+txtName.indexOf("'") == txtName.length-1)) || txtName.indexOf("..") != -1 || txtName.indexOf("''") != -1 || 
+
+txtName.indexOf(".'") != -1 || txtName.indexOf("'.") != -1)
+        {
+               args.IsValid = false;
+        }
+        else
+        {
+                args.IsValid = true;
+        }
+    }
+    function validateReceiverName(source, args)
+    {
+        var txtName = document.getElementById('MyBriefCase3_txtReceiverName').value;
+        if (((txtName.indexOf('.') == 0 || txtName.indexOf('.') == txtName.length-1)) || ((txtName.indexOf("'") == 0 || 
+
+txtName.indexOf("'") == txtName.length-1)) || txtName.indexOf("..") != -1 || txtName.indexOf("''") != -1 || 
+
+txtName.indexOf(".'") != -1 || txtName.indexOf("'.") != -1)
+        {
+               args.IsValid = false;
+        }
+        else
+        {
+                args.IsValid = true;
+        }
+    }
+
+//////////////////////Start Real Time Fill Data in Briefcase ////////////////////////////////
+    $(document).ready(function() {
+        $(".myLink").click(function() {
+            var templink = $(this).parent().children(":first-child").attr('href');
+			
+			
+            var CookieName = "MyBriefcase";
+            var data = readCookie(CookieName);
+	    	
+            var temp = data.split("@#@");
+            for (var i = 1; i < temp.length; i++) {
+                var temp1 = temp[i].split("#@#");
+                if (temp1[0] == templink) {
+                    var replaceFrom = '@#@' + temp[i];
+                    var temp2 = data.replace(replaceFrom, "");
+                    eraseCookie(CookieName);
+                    createCookie(CookieName, temp2, 365);
+                    $(this).parent().remove();
+                    
+                    var d = $(".mybriefcase").children(":first-child").html();
+                    var c = d.split("/script");
+                    var b = d.split("My Favourites [");
+                    var snum;
+                    var tnum;
+                    if (c.length > 1) {
+                        var a = c[1].substr(1).replace("]", "");
+                        snum = jQuery.trim(a);
+                        tnum = snum - 1;
+                    } else {
+                        var a = b[1].substr(1).replace("]", "");
+                        snum = jQuery.trim(a);
+                        tnum = snum - 1;
+                    }
+                    var BriefData = "My Favourites [ " + tnum + " ]";
+                    $(".mybriefcase").children(":first-child").html(BriefData);
+                    break;
+                }
+            }
+        });
+    });
+    ////////////////////////End Real Time Fill Data in Briefcase////////////////////////////////////
+	
+    //////////////////////Show Share BriefCase Section//////////////////////////////////////
+    function ShowShare(Num) {
+        $(".details_overlay").css({"position" : "fixed"})
+        $(".details_overlay").css({ "z-index": "100001" })
+        $(".details_overlay").show();
+		$(".innerContent").eq(0).show();
+		$(".innerContent").eq(1).hide();
+        $(".login_black_overlay").show();
+        $(".errormsg").hide();
+		
+		$(".sShare").click(function(){
+		 $(".details_overlay, .login_black_overlay").hide();	
+		});	
+		
+		$(".mail").click(function(){
+		$(".innerContent").eq(0).hide();
+		$(".innerContent").eq(1).show();
+		});
+
+        if (Num == 1) { $(".inner_overlay h3").html("Share Favourites"); }
+        else { $(".inner_overlay h3").html("Share this page"); }
+    }
+
+    function HideShare() {
+        $(".details_overlay").hide();
+        $(".login_black_overlay").hide(); 
+    }
+    ////////////////////////End Share BriefCase Section////////////////////////////////////
+', 
+
+', 
+
+
+
+
+
+', 
+	
+    ', 
+        ', 
+            
+            ', 
+                ', Share Favourites', 
+                ', 
+              ', 
+               ', 
+                 ', 
+                 ', 
+                 ', 
+                 ', 
+                 ', 
+                ', 
+              ', 
+              ', 
+                ', u"Sender's name *", 
+                ', 
+                    ', 
+                    
+                    
+                    
+                ', 
+                ', u"Sender's Email *", 
+                ', 
+                    ', 
+                    
+                    
+                    
+                ', 
+                ', u"Receiver's name *", 
+                ', 
+                    ', 
+                    
+                    
+                    
+                ', 
+                ', u"Receiver's email *", 
+                ', 
+                    ', 
+                    
+                    
+                    
+                    
+                    
+                ', 
+                ', 
+                ', Comments', 
+                ', 
+                    ', 
+                    
+                    
+                ', 
+                ', 
+              ', 
+            ', 
+            ', 
+            ', 
+        ', 
+        ', 
+    ', 
+
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', Do Not Disturb', 
+', Privacy Policy', 
+', Disclaimer', 
+', Grievance Redressal Policy', 
+', Escalation Matrix', 
+', Key Persons', 
+', Unclaimed amount of Policy Holders', 
+', 
+', 
+', Life Insurance
+Council', 
+', IRDAI Consumer
+Education Website', 
+', IRDAI Public
+Notice on Spurious Calls', 
+', Agents Suspended and Terminated', 
+', Write To Us', 
+', Insurance Ombudsman', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Buy an Insurance Plan', 
+', 1800 200 5577,', 
+1800 200 3383 (For Online Term Plan)', 
+', ONLINE@MAXLIFEINSURANCE.COM', 
+', u"SMS 'LIFE' to 54242", 
+', REQUEST A CALL BACK', 
+', 
+', 
+', 
+', 
+', Customer Service', 
+', 1800 200 5577', 
+', SERVICE.HELPDESK@MAXLIFEINSURANCE.COM', 
+', SMS QUERY to 5424243', 
+', Have complex query/feedback?', 
+Please ', Write to Us', 
+', Locate An Office/Drop-box', 
+', 
+', 
+', 
+', 
+', NRI Helpdesk', 
+', 91-124-3812932', 
+', NRI.HELPDESK@MAXLIFEINSURANCE.COM', 
+', Write to
+Us',  to request a', 
+Call back from our expert Agents.', 
+',  ', 
+', 
+', 
+', 
+', 
+', Connect with us:', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Group Sites:', 
+', MAX INDIA',  | ', 
+', MAX HEALTHCARE',  | ', 
+', MAX BUPA',  | ', 
+', MAX SPECIALITY',  | ', 
+', MAX INDIA FOUNDATION',  | ', 
+', ANTARA SENIOR LIVING',  | ', 
+', IGENIUS', 
+', 
+', PROPOSED MERGER:',  In case of queries related to the proposed merger of HDFC Standard Life Insurance Co. Ltd. and Max Life Insurance Co. Ltd., you can contact us at 18002005577 or write to us at ',  service.helpdesk@maxlifeinsurance.com', 
+',  ', 
+', Copyright @2013 Max Life insurance Co. Ltd. All Rights Reserved. An ISO 9001:2008
+Certified Company.', 
+Max Life Insurance Co. Ltd. is a joint venture between Max Financial Services Limited and Mitsui Sumitomo Insurance Co. Ltd.', 
+Registered Office: 419, Bhai Mohan Singh Nagar, Railmajra, Tehsil Balachaur, District Nawanshahr, Punjab -144 533. Corporate Office: Max Life
+Insurance Co. Ltd., 3rd, 11th and 12th Floor, DLF Square Building, Jacaranda Marg, DLF City Phase II, Gurugram (Haryana) -
+122002. Operation Center: Max Life Insurance Co. Ltd, Plot No. 90-A Udyog Vihar, Sector 18, Gurugram (Haryana) - 122015. Toll
+Free Helpline: 1800 200 5577. Online Term Plan
+Helpline: 1800 200 3383.', 
+Fax Number: 0124-4159397. Email Ids: ', service.helpdesk@maxlifeinsurance.com', ; ', online@maxlifeinsurance.com', . Insurance is the subject matter
+of solicitation.', 
+', 
+', 
+', Beware of spurious phone calls and fictitious/fraudulent offers', 
+', IRDAI clarifies to public that', 
+', 
+', IRDAI or its officials do not involve in activities like sale of any kind of
+insurance or financial products nor invest premiums.', 
+', IRDAI does not announce any bonus', 
+', 
+
+', Public receiving such phone calls are requested to lodge a police complaint along with details of phone
+call number.', 
+', 
+', IRDAI - Registration No. 104', . ARN/Web/01. Corporate Identity
+Number (CIN):U74899PB2000PLC045626. Trade logos displayed above belong to Max Financial Services Limited and Mitsui Sumitomo
+Insurance Co. Ltd. respectively and are used by Max Life Insurance Co Ltd under a license. ', 
+', 
+', 
+', 
+', 
+', 
+', $(document).ready(function(){$(".divRecentlyVisited").hide();$(".dpdwn_inner li.mybriefcase a").click(function(a){a.preventDefault();$(".divRecentlyVisited").slideDown("slow")})});function CloseBreifcase(){$(".divRecentlyVisited").slideUp("slow")}function closeLightbox(){$(".black_overlay1, .how_lightbox").hide()}', 
+', 
+', 
+', 
+', 
+
+', 
+', Recently Visited', 
+', (0)', 
+', 
+', 
+
+', 
+', Locate an Office', 
+', Insurance Plans', 
+', Tools & Calculators', 
+', Write to Us', 
+', Downloads', 
+', FAQs', 
+', Sitemap', 
+', 
+', 
+', 
+', 
+',  ', 
+', 
+
+
+', 
+//<![CDATA[
+Sys.Application.initialize();
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"FilterMode":2,"InvalidChars":"\u003c\u003eABCEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&*()_+{}:\"\u003c\u003e?,./;\u0027[]\\=`","id":"PremiumEstimation1_ftbetxtDD"}, null, null, $get("PremiumEstimation1_txtUserDOB"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"ValidChars":"0123456789,","id":"PremiumEstimation1_ftbtxtAmtlifeCover"}, null, null, $get("PremiumEstimation1_txtAmtlifeCover"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"ValidChars":"0123456789","id":"PremiumEstimation1_ftbtxtDurLifeCover"}, null, null, $get("PremiumEstimation1_txtDurLifeCover"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"FilterType":13,"ValidChars":".\u0027 ","id":"MyBriefCase3_FilteredTextBoxExtender1"}, null, null, $get("MyBriefCase3_txtSenderName"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"FilterMode":2,"InvalidChars":"\u003c\u003e/?,\u0027;\"\\}{][+=)(*%$#!~`","id":"MyBriefCase3_FilteredTextBoxExtender2"}, null, null, $get("MyBriefCase3_txtSenderEmail"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"FilterType":13,"ValidChars":".\u0027 ","id":"MyBriefCase3_FilteredTextBoxExtender5"}, null, null, $get("MyBriefCase3_txtReceiverName"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"FilterMode":2,"InvalidChars":"\u003c\u003e/?,\u0027;\"\\}{][+=)(*%$#!~`","id":"MyBriefCase3_FilteredTextBoxExtender6"}, null, null, $get("MyBriefCase3_txtReceiverEmail"));
+});
+Sys.Application.add_init(function() {
+    $create(AjaxControlToolkit.FilteredTextBoxBehavior, {"FilterMode":2,"InvalidChars":"\u003c\u003e","id":"MyBriefCase3_FilteredTextBoxExtender10"}, null, null, $get("MyBriefCase3_txtComments"));
+});
+//]]>
+', 
+', 
+
+
+']

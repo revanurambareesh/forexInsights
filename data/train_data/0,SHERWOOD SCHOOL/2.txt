@@ -1,0 +1,6957 @@
+[
+
+    
+
+    ', 
+         
+    ', 
+
+    
+
+
+    
+
+    
+
+    
+    ', Skip to Content', 
+
+    
+    ', 
+
+        
+
+
+        ', 
+            ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+
+                         
+
+                        ', 
+
+                         
+
+                        ', 
+
+                    ', 
+                ', 
+
+                    
+                    ', 
+                        ', 
+                              
+                            ', 
+                            ', All locations', 
+                             
+                            ', 
+                        ', 
+                    ', 
+
+                    
+                    ', 
+                        ', 
+                        ', 
+                    ', 
+
+
+            ', 
+        ', 
+
+
+        ', 
+            ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                          
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                        ', 
+                              
+                            ', 
+                            ', Change in all locations', 
+                             
+                            ', 
+                        ', 
+                ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+
+
+    ', 
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+
+', 
+
+', 
+', 
+
+
+
+/* MOVED FUNCTION TO BOTTOM */
+function addHtmlAttribute(element, attributeName, attributeValue)
+{
+    var tempVar = "";
+    if (element.hasAttribute(attributeName) == true)
+    {
+       tempVar = element.getAttribute(attributeName);
+    }
+    element.setAttribute(attributeName, attributeValue + tempVar);
+}
+
+    var menuWidth = 200;
+    var menuBarWidth = 600;
+    var ajaxRequestEntid = "";
+    var globalMenuItem;
+    var itemDescrArray = new Array();
+    var itemNameArray = new Array();
+    var itemTypeArray = new Array();
+    var itemUrlArray = new Array();
+    var itemTargetArray = new Array();
+    var itemIconClassArray = new Array();
+    var itemHasItemsArray = new Array();
+    var urlsPerEntidArray = new Array();
+    var descrsPerEntidArray = new Array();
+    var overflowAdjustedDivsArray = new Array();
+    var menuNamesArray = new Array();
+    var navLinkClicked = false;
+    var ua = navigator.userAgent;
+    var isMSIE = ua.indexOf ('MSIE') != -1;
+    var nbIsIE9 = ua.indexOf ('MSIE 9') != -1;
+    var isFirefox = ua.indexOf ('Firefox') != -1;
+    var isMacFirefox = (ua.indexOf ('Macintosh') != -1) && (isFirefox);
+    var nbIsChrome = ua.indexOf ('Chrome') != -1;
+    var previousEntid = "";
+    var previousTime = new Date();
+    var timeOfPageLoad = new Date();
+    var overrideMenuHiding = false;
+    var nbGlobalTopBorderStyle = "";
+    var nbIsWorldUser = false;
+    var nbShowAjaxErrorsToWorldUsers = false;
+    var nbFolderGroupTypeString = "Folder";
+    var nbWebPageGroupTypeString = "Web Page";
+    var nbHomeLinkId = "root-x5719295708249737122--sep--Sherwood_Elementary_SchoolhomeLink";
+    var nbBreadcrumbStripDropDownMenuFetchDelayMs = 450;
+    var nbHomeAndBreadcrumbDropDownSubmenuFetchDelayMs = 50;
+    var homeLinkElem = document.getElementById('edlHomeLink');
+    if (  (homeLinkElem != null) && (homeLinkElem != undefined)  )
+    {
+        homeLinkElem.id = "root-x5719295708249737122--sep--Sherwood_Elementary_SchoolhomeLink";
+        homeLinkElem.className = "breadcrumbLink";
+    }
+    
+    var onloadFnName = "nbnNavigationBarOnload";
+    
+    var pageBody = document.body;
+    var func = onloadFnName + "('false')";
+    
+    if (pageBody.attachEvent!=undefined) // attachEvent is a deprecated IE method
+    {
+        pageBody.onload = appendToFunction(pageBody.onload, func);
+    } else {
+        addHtmlAttribute(pageBody, "onload", func +";");
+    }
+
+function appendToFunction(func, str)
+{
+    var nfs = "";
+    if (func != null){
+        var ofs = func.toString();
+        var fcb = ofs.indexOf("{");
+        var lcb = ofs.indexOf("}",fcb+1);
+        var oss = ofs.substring(fcb + 1, lcb);
+        //alert('h3=' + ofs + '||||\n' + oss);
+        nfs = nbStripLeadingSemicolons(oss);
+    }
+	var s = nbStripLeadingSemicolons(nfs + ";" + str);
+    var f = new Function(s);
+    return f;
+}
+function nbStripLeadingSemicolons(s){
+	while (s.substr(0,1) == ';' && s.length>1) {
+    	s = s.substr(1);
+    }
+	return s;
+}
+', 
+
+
+        ', 
+
+    ', 
+
+
+        ', 
+            ', 
+                
+
+                ', 
+
+                    ', 
+
+                    
+                    
+
+
+
+
+
+
+
+
+', 
+', 
+<!--
+
+    var CLICK_OK_BUTTON_DURATION = 60;
+    var CONFIRM_MSG_SECS = 1200 - CLICK_OK_BUTTON_DURATION - 30;
+    var secsTilMsg = CONFIRM_MSG_SECS;
+    function openInfoPopupWindowIfNeeded()
+    {
+        
+
+        return false;
+    }
+  
+    var HAS_DEFAULT_ENTER_KEY  =  false;
+    var DEFAULT_ENTER_KEY_NAME = "";
+    var HAS_PAGE_VALIDATION    =  false;
+    var PAGE_VALIDATION        = "()";
+
+
+
+    function adjustIFrameSize (iframeWindow) {
+
+      if (iframeWindow.document.height) {
+        var iframeElement = parent.document.getElementById (iframeWindow.name);
+        iframeElement.style.height = iframeWindow.document.height + 'px';
+
+        iframeElement.style.width = iframeWindow.document.width + 'px';
+      }
+      else if (document.all) {
+        var iframeElement = parent.document.all[iframeWindow.name];
+        if (iframeWindow.document.compatMode &&
+            iframeWindow.document.compatMode != 'BackCompat')
+        {
+          iframeElement.style.height =
+            iframeWindow.document.documentElement.scrollHeight + 5 + 'px';
+
+          iframeElement.style.width =
+            iframeWindow.document.documentElement.scrollWidth + 5 + 'px';
+        }
+        else {
+          iframeElement.style.height =
+            iframeWindow.document.body.scrollHeight + 5 + 'px';
+          iframeElement.style.width =
+            iframeWindow.document.body.scrollWidth + 5 + 'px';
+        }
+      }
+    }
+
+    
+    function checkStale()
+    {
+        
+        if (document.cookie.search(/pgt=c1483721388317t/i) == null)
+        {
+            document.location.reload();
+        }
+    }
+//-->
+', 
+', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+
+
+
+', 
+
+', 
+ ', 
+', 
+
+', 
+ ', 
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+    $(function(){
+
+    
+
+        hcOnDocumentReady();
+        
+    });//document ready
+
+
+
+
+
+function hcLogin()
+{
+    aefhLogin(false);
+}
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+    ', 
+    ', 
+    ', 
+  ', 
+', 
+
+
+
+', 
+
+', 
+    hcMyEdlineXmlDataJQueryObj = $("#edlMenuXmlData");
+
+    
+        hcMyEdlineBackCompatXmlDataJQueryObj = hcMyEdlineXmlDataJQueryObj;
+    
+
+', 
+
+
+
+
+
+
+
+
+', 
+
+
+    function translateMenuOver(pEvent)
+    {
+        overrideMenuHiding = true;
+        showTranslateMenu(pEvent);
+    }
+
+
+    function translateMenuOut(pEvent)
+    {
+    }
+
+
+    function showTranslateMenu(pEvent)
+    {
+      // Hide the navbar menus if they are open:
+      hdrHideAllDropDownMenus();
+
+      var linkElem = document.getElementById("edlLangLink");
+      var linkElemOffset = $("#edlLangLink").offset();
+      var linkLeftEdge = linkElemOffset.left;
+      var linkBottomEdge = linkElemOffset.top + linkElem.offsetHeight;
+
+      translateMenu.moveTo(linkLeftEdge, linkBottomEdge + 1);
+      translateMenu.show();
+    }
+
+    function switchLang(lang)
+    {
+        if (translationDisabledMessage())
+        {
+            return;
+        }
+
+        submitEvent('language', 'TCNK=headerComponent;language='+lang);
+    }
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Choose How To View This Page', 
+                      ', 
+                        ', 
+                          ', Standard View', 
+                          ', List View', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Want to translate this page?', 
+                      ', 
+                        ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Share This Page', 
+                      ', 
+                        ', 
+                          ', 
+                          ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', HELP', 
+                  ', 
+                  ', 
+                  ', 
+                    ',  ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', SIGN IN', 
+                  ', 
+                  ', 
+                ', 
+                ', 
+              ', 
+            ', 
+
+
+
+
+
+
+
+
+
+
+  ', 
+    ', 
+    ', 
+  ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+function initForms()
+{
+	var frm = window.document.authenticationEntryFormForHeader;
+	frm.kclq.value = "";
+	frm.ajaxSupported.value = isAjaxSupported();
+}
+
+
+
+function debounceEnterKey(frm, eventNm)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function debounceEnterKeyToEntid(frm, eventNm, entid)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.targetEntid.value = entid;
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function handleSubmitOnEnter(e)
+{
+    
+    if (window.ghKeyPressHandler != null)
+    {
+        if ( typeof(ghKeyPressHandler == "function") )
+        {
+            ghKeyPressHandler(e);
+        }
+    }
+    
+    var keyPressed = '';
+
+    var isMSIE = navigator.userAgent.indexOf('MSIE') != -1;
+
+    if (isMSIE)
+        keyPressed = String.fromCharCode(window.event.keyCode);
+    else
+        keyPressed = String.fromCharCode(e.which);
+
+    if (keyPressed == "\r" || keyPressed == "\n")
+    {
+        
+        var authenticationFormToUse = null;
+
+        if (document.authenticationEntryFormForHeader && !document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryFormForHeader;
+        }
+        else if (!document.authenticationEntryFormForHeader && document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryForm;
+        }
+
+        if (authenticationFormToUse == null)
+        {
+            var headerFieldsFilledIn = 0;
+            if (document.authenticationEntryFormForHeader)
+            {
+                if (typeof(document.authenticationEntryFormForHeader.screenName) != "undefined"
+                    && document.authenticationEntryFormForHeader.screenName.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryFormForHeader.kclq) != "undefined"
+                    && document.authenticationEntryFormForHeader.kclq.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+            }
+
+            var bodyFieldsFilledIn = 0;
+            if (document.authenticationEntryForm)
+            {
+                if (typeof(document.authenticationEntryForm.screenName) != "undefined"
+                    && document.authenticationEntryForm.screenName.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryForm.kclq) != "undefined"
+                    && document.authenticationEntryForm.kclq.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+            }
+
+            if (headerFieldsFilledIn > bodyFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryFormForHeader;
+            }
+
+            if (bodyFieldsFilledIn > headerFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryForm;
+            }
+        }
+
+        // If no form or a search is being performed
+        if ( authenticationFormToUse == null || (typeof searchCtlr !== "undefined" && searchCtlr && document.forms["hcSearchForm"].token.value != '') )
+        {
+            window.document.onkeypress = doNothing;
+        }
+        else
+        {
+            if (authenticationFormToUse.kclq.value == "")
+            {   
+                authenticationFormToUse.kclq.focus();
+            }
+            else
+            {
+                authenticationFormToUse.submitButton.click();
+    
+                window.document.onkeypress = doNothing;
+            }
+        }
+
+
+        return false;
+    }
+
+    return true;
+}
+
+
+    if (window.document.captureEvents != null){
+        window.document.captureEvents(Event.KEYPRESS);
+    }
+    window.document.onkeypress = handleSubmitOnEnter;
+
+
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+
+function aefhCancelLogin()
+{
+    var elem = document.getElementById('edlHeaderControlsLoginPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        aefhRestoreBreadcrumbBorder();
+        elem.style.display = "none";
+    }
+}
+
+
+function aefhSaveAndClearBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        nbGlobalTopBorderStyle = elem.style.borderTop;
+        elem.style.borderTop = "";
+    }
+}
+
+
+function aefhRestoreBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        elem.style.borderTop = nbGlobalTopBorderStyle;
+    }
+}
+
+
+<!--
+function checkBrowserTime()
+{
+    var edlineDateString       = "Friday, January 6, 2017 10:49AM CST";
+    var edlineTimeInMillis     = 1483721388488;
+    var browserTimeInMillis    = (new Date()).getTime();
+    var timeDifferenceInMillis = (edlineTimeInMillis  - browserTimeInMillis);
+    var timeDifferenceInDays   = timeDifferenceInMillis / 86400000;
+
+    if ((timeDifferenceInDays < -2) || (timeDifferenceInDays > 2))
+    {
+        alert("Your computer clock reads " + (new Date()).toLocaleString() + " \r\nwhich is off by more than 24 hours. Please correct your computer clock.");
+
+    }
+}
+
+
+checkBrowserTime();
+
+//-->
+', 
+
+
+', 
+        ',    
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+
+    ', 
+
+        ', 
+            ', 
+                ', 
+                  ', Screen Name:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                  
+            ', 
+            ', 
+                ', 
+                    ', Click here if you forgot your screen name or password', 
+                ', 
+            ', 
+        ', 
+        
+        ', 
+            ', 
+                ', 
+                  ', Password:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+
+            ', 
+                ',     
+            ', 
+
+            ', 
+                  
+            ', 
+
+            ', 
+                ', 
+                    ', Click here to Sign Up', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+        ', 
+
+        
+', 
+
+
+
+', 
+window.document.cookie="bpcc=tu";
+
+  var frm = window.document.authenticationEntryFormForHeader;
+  frm.bscv.value = window.document.cookie;
+  frm.bscf.value = (window.document.cookie.indexOf("bpcc=tu") >= 0)
+    ? "1" : "0";
+
+
+
+
+try
+{
+  
+  if (frm.screenName.offsetWidth > 0)
+  {
+	  frm.screenName.focus();
+      frm.screenName.select();
+  }
+}
+catch(e)
+{
+
+}                                             
+', 
+
+
+', 
+
+
+
+
+
+', 
+
+
+    
+        
+            
+                
+                
+                ', 
+            
+        
+
+        
+
+', 
+
+', 
+
+    
+
+    if (typeof suTrimLeadingTrailingSpace != "undefined")
+    {
+        var headerAreaQuery = $("#edlHeaderArea");
+
+        if (suTrimLeadingTrailingSpace(headerAreaQuery.html() ).length == 0)
+        {
+            headerAreaQuery.hide();//css("display","none");
+        }
+    }
+
+', 
+
+
+
+
+
+
+  ', 
+    var ga_analytics_data = {
+  "furl": "/pages/Sherwood_Elem_School",
+  "ids": [
+    "UA-35374842-1",
+    "UA-26720103-1",
+    "UA-35367438-1",
+    "UA-35381027-1",
+    "UA-26719008-1",
+    "UA-35375639-1",
+    "UA-35369532-1",
+    "UA-26697143-2",
+    "UA-35378735-1",
+    "UA-35371927-1",
+    "UA-26711654-1"
+  ],
+  "role": "Guest",
+  "wmids": ["UA-19625889-3"]
+};
+  ', 
+  ', 
+  ', 
+
+
+', 
+    function translationDisabledMessage()
+    {
+
+        return false;
+
+    }
+
+
+
+', 
+
+
+                    
+
+                        ', 
+                            ', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("6301386108113517794.folder", "");
+
+    
+
+    
+    ghLocallyFilledFolderPlaceholdersAddContentElementSpec["6301386108113517794.folder"] = "5719295857349267810.folder";
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+
+', 
+
+    
+
+    
+
+    
+
+        ', 
+
+    
+
+', 
+
+
+
+', 
+', 
+
+
+
+
+', 
+', 
+
+', 
+', 
+
+', 
+    Please wait ... retrieving data from server
+', 
+
+
+
+
+', 
+    
+    
+    var ghMenuInfo = new GhMenuInfo('6301386108113517794',
+                                    "Shortcuts",
+                                    'edlElement_6301386108113517794_folder',
+                                    'false',
+                                    'fmMenuBar_6301386108113517794_PlaceHolderDiv',
+                                    'false',
+                                    'false',
+                                    'true',
+                                    'White',
+                                    '666666',
+                                    'edlThemeHeaderZoneFrame',
+                                    'edlThemeHeaderZoneContent',
+                                    'false',
+                                    '5719295857349267810'
+                                    );
+    ghMenusToLoad['6301386108113517794'] = ghMenuInfo;
+
+', 
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("5719296843340219474.folder", "");
+    ghPinnedSlideShows["5719296843340219474"] = true;
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+', 
+
+
+
+    
+    ', Website Images June 2013', 
+    
+
+            
+
+            
+
+
+
+
+
+
+  ', 
+
+  
+
+  
+
+
+
+
+
+    ', 
+
+    
+
+        .ed-slider-controlbar a {
+            display: block;
+            position: absolute;
+            text-decoration: none;
+            text-indent: -999em;
+            overflow: hidden;
+            background: transparent url('/images/SlideShowControlButtonsSprite16x16.png') no-repeat 0 0;
+            height: 16px;
+            width: 16px;
+        /*	left: 0;*/
+            left: 50%;
+            top: 50%;
+            margin: -8px 0 0 -8px;
+        }
+        /*sprites begin*/
+        /*a.ed-slider-prev {
+            background-position:-10px -10px;
+        }
+
+        a.ed-slider-prev:hover {
+            background-position:-40px -10px;
+        }
+
+        a.ed-slider-prev:active {
+            background-position:-70px -10px;
+        }*/
+
+        a.ed-slider-play {
+            background-position:-10px -100px;
+        }
+
+        a.ed-slider-play.selected {
+            display: none;
+        }
+
+        a.ed-slider-play:hover {
+            background-position:-40px -100px;
+        }
+
+        a.ed-slider-play:active {
+            background-position:-70px -100px;
+        }
+
+        a.ed-slider-pause {
+            background-position:-10px -70px;
+        }
+
+        a.ed-slider-pause.selected {
+            display: none;
+        }
+
+        a.ed-slider-pause:hover {
+            background-position:-40px -70px;
+        }
+
+        a.ed-slider-pause:active {
+            background-position:-70px -70px;
+        }
+
+        /*a.ed-slider-next {
+            background-position:-10px -40px;
+            left: 32px;
+        }
+
+        a.ed-slider-next:hover {
+            background-position:-40px -40px;
+        }
+
+        a.ed-slider-next:active {
+            background-position:-70px -40px;
+        }*/
+
+        a.ed-slider-fullscreen {
+            background-position:-10px -130px;
+        }
+
+        a.ed-slider-fullscreen:hover {
+            background-position:-40px -130px;
+        }
+
+        a.ed-slider-fullscreen:active {
+            background-position:-70px -130px;
+        }
+        /*sprites end*/
+        .ed-slider-prevNext {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat -100% -100%;
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .ed-slider-prevNext a {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 100%;
+            text-indent: -999em;
+            overflow: hidden;
+            outline: none;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next {
+            left: auto;
+            right: 0;
+            width: 80%;
+        }
+
+        .ed-slider-prevNext div {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext span {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat 0 0;
+            display: block;
+            width: 25px;
+            height: 47px;
+            text-indent: -999em;
+            overflow: hidden;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            margin: -23px 0 0;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext a.ed-slider-prev:hover span,
+        a.ed-slider-prev div.hover span {
+            background-position: 0 -60px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next span {
+            background-position: right 0;
+            left: auto;
+            right: 10px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next:hover span,
+        a.ed-slider-next div.hover span {
+            background-position: right -60px;
+        }
+
+        /*caption-controlbar container begin*/
+        ul .ed-slider-image-caption-controlbar-container {
+            display: none;
+        }
+
+        .ed-slider-image-caption-controlbar-container.ext {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 85px;
+            color: #fff;
+            z-index: 10;
+            vertical-align:bottom;
+        }
+
+        .ed-slider-image-caption,
+        .ed-slider-image-caption-summary,
+        .ed-slider-image-caption-title-has-summary,
+        .ed-slider-image-caption-title-no-summary
+        {
+            color: #fff;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption .ed-slider-countinfo,
+        .ed-slider-image-caption-controlbar-container.hasCaption .prevNext,
+        .ed-slider-image-caption-controlbar-container.hasCaption .fullscreen {
+            background-image: none;
+        }
+
+        /*caption-controlbar container end*/
+        /*caption begin*/
+        .ed-slider-image-caption-controlbar-container.hasCaption {
+            width: 100%;
+            min-height: 30px;
+            height: auto;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption  .captionHolder {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+            float: left;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        
+        /*caption end*/
+        
+        /*controlbar begin*/
+        .ed-slider-controlbar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            min-height:31px;
+            width:105px;
+        }
+
+
+        /*.ed-slider-controlbar div{*/
+             /*padding-top:4px;*/
+             /*padding-right:2px;*/
+             /*padding-left:2px;*/
+        /*}*/
+
+        .ed-slider-controlbar .fullscreen, .ed-slider-controlbar .playPause {
+            float: right;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+        }
+
+        .ed-slider-controlbar.hasNoCaption, .ed-slider-controlbar.captionHidden {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+        }
+        
+        .ed-slider-controlbar .ed-slider-countinfo {
+        	float: right;
+            padding: 8px 10px 0 6px;
+            height: 20px;
+            font-weight: bold;
+            font-size: 12px;  
+        }
+
+        /*.ed-slider-controlbar .prevNext {*/
+            /*position: absolute;*/
+            /*right: 20px;*/
+            /*width: 48px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .playPause {*/
+            /*position: absolute;*/
+            /*right: 30px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 11;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .fullscreen {*/
+            /*position: absolute;*/
+            /*right: 4px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+        /*controlbar end*/    
+         .ed-slider-cached-image
+        {
+            display:none;
+        }
+
+        /**********************/
+        /* thumbnail controls */
+        /**********************/
+        .ncWrap {
+            float: left;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        /* round button look */
+        .ncWrap a.prev, .ncWrap a.next {
+            background: transparent url("/images/thumbnailControls.png") no-repeat 0 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -18px;
+            width: 32px;
+            height: 36px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prev { left: 0; margin-left: 5px;}
+        .ncWrap a.prev:hover { background-position: 0 -40px; }
+        .ncWrap a.prev:active { background-position: 0 -80px; }
+
+        .ncWrap a.next { background-position: -40px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.next:hover { background-position: -40px -40px; }
+        .ncWrap a.next:active { background-position: -40px -80px; }
+        /* end round button look */
+
+        /* small round button look */
+        .ncWrap a.prevSmall, .ncWrap a.nextSmall {
+            background: transparent url("/images/thumbnailControls.png") no-repeat -160px 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prevSmall { left: 0; margin-left: 5px;}
+        .ncWrap a.prevSmall:hover { background-position: -160px -40px; }
+        .ncWrap a.prevSmall:active { background-position: -160px -80px; }
+
+        .ncWrap a.nextSmall { background-position: -200px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.nextSmall:hover { background-position: -200px -40px; }
+        .ncWrap a.nextSmall:active { background-position: -200px -80px; }
+        /* end small round button look */
+
+        .carouselContainer {
+            position: relative;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            margin: 0 0 0 30px;
+        }
+
+        .carousel {
+            width: 99999px;/* huge width prior to js set width */
+        }
+
+        .carousel li {
+            float: left;
+            margin: 0 5px;
+            background-color: #fff;
+            border: 1px solid #e3e3e3;
+            opacity: .4;
+            width: auto !important;
+            height: auto !important;
+            position: relative;
+            filter: alpha(opacity = 40);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+            -webkit-transition: all .4s linear;
+            -moz-transition: all .4s linear;
+            -o-transition: all .4s linear;
+            -ms-transition: all .4s linear;
+            transition: all .4s linear;
+        }
+
+        /* ie8 */
+        .ie8 .carousel li img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        }
+
+        .carousel li a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+
+        .carousel li.selected, .carousel li:hover {
+            opacity: 1;
+            filter: alpha(opacity = 100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        /* ie8 */
+        .ie8 .carousel li.selected img, .ie8 .carousel li:hover img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        .carousel li img {
+            position: relative;
+        }
+        /**************************/
+        /* end thumbnail controls */
+        /**************************/
+    ', 
+    ', 
+        .ed-slider-image-caption-title-no-summary-9b503d1189 {
+            font-weight:bold;
+            font-size:16px;
+        }
+
+        .ed-slider-image-caption-title-has-summary-9b503d1189 {
+            font-weight:bold;
+            font-size:16px;
+            padding-bottom: 2px;
+        }
+
+        .ed-slider-image-caption-summary-9b503d1189 {
+            font-weight:bold;
+            font-size:10px;
+        }
+        .ed-slider-image-caption-9b503d1189,
+        .ed-slider-image-caption-summary-9b503d1189,
+        .ed-slider-image-caption-title-has-summary-9b503d1189 ,
+        .ed-slider-image-caption-title-no-summary-9b503d1189
+        {
+            color: #fff;
+        }
+
+       #ed-slider-gallery-loading-9b503d1189
+       {
+           width:630px;
+           height:331px;
+           position: absolute;
+           z-index: 999;
+       }
+
+       #ed-slider-wrap-9b503d1189
+       {
+           overflow:hidden;
+
+           
+           width:630px;
+           height:331px;
+           position:relative;
+           
+
+           font-family:Arial, Helvetica, sans-serif;
+
+
+
+
+       }
+
+        #ed-slider-wrap-9b503d1189 .galleryWrap {
+            width: 630px;
+            height: 331px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+
+       #ed-slider-wrap-9b503d1189 ul {
+           float: left;
+           width: 630px;
+           height: 331px;
+           overflow: hidden;
+       }
+
+
+       #ed-slider-wrap-9b503d1189 ul li
+       {
+           list-style-type:none;
+           overflow: hidden;
+           width: 630px;
+           height: 331px;
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-9b503d1189 .group .block {
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-9b503d1189 .group .block.imgTransition {
+           background-color: transparent;
+       }
+
+       .ed-slider-image-caption-controlbar-container .captionHolder .ed-slider-image-caption-9b503d1189 {
+            float: left;
+            min-height: 15px;
+            padding: 8px 8px 8px 10px;
+            position: relative;
+            width: 514px;
+        }
+
+        #ed-slider-wrap-9b503d1189 .ed-slider-prevNext {
+            height: 331px;
+        }
+   ', 
+
+    ', 
+        ', 
+
+    
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HHCgJ_/10f952fd447601a13745a49013852ec4/butterfly.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIpO_/db65def9471556fb3745a49013852ec4/Check.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIlX_/68735da229dce0cc3745a49013852ec4/crazy_face_-_first.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIa4_/3e0bb2af82f5c4c73745a49013852ec4/Flowers.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIZO_/0d4fe35580f7e9d23745a49013852ec4/Group.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HHCd5_/a44442d19fbf66033745a49013852ec4/Ice_Skating_Party.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJILs_/82efa5205dabf0553745a49013852ec4/music.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIXc_/9530ee94c679b0073745a49013852ec4/School.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIVb_/13a6b0c2bc00a48f3745a49013852ec4/Singers.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HHCaP_/b59a63f2c43906b73745a49013852ec4/Mr._Walker_as_Bruno_Mars.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIOI_/1f579fb43cbc14aa3745a49013852ec4/Thanksgiving_Play.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIdK_/fd440f255a6b16043745a49013852ec4/Thumbs_Up.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+
+        ', 
+        ', 
+            
+            ', 
+               ', 
+            ', 
+            
+        ', 
+    ', 
+', 
+	', 
+    ', 
+
+	', u"
+
+        $(document).ready(function()
+        {
+            fssbOnload('9b503d1189',
+                    5000,
+                    'hover',
+                    true,
+                    'fade',
+                    'None',
+                    'small',
+                    false,
+                    'hover',
+                    '5719296843340219474',
+                    'edlElement_5719296843340219474_folderContents',
+                    'edlElement_5719296843340219474_folder',
+                    false
+            );
+		});
+
+	", 
+
+
+
+
+  
+
+  
+
+    ', 
+
+    
+
+', 
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("links.box", "");
+
+    
+
+', 
+
+
+', 
+
+
+
+    
+
+        ', Links', 
+        
+        ', 
+', 
+', 
+', Links', 
+', 
+
+
+        
+
+    
+
+
+  ', 
+      
+      
+      
+
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', Virtual Backpack', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', Sherwood PTO Registration Website', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', 112 Education Foundation', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', Required Health Forms', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', Enrollment and Registration', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', Infinite Campus - Parent Portal', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', NWEA - MAP Test', 
+
+
+
+
+        ', 
+
+        
+
+        
+
+        
+
+    ', 
+    
+    
+    
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x4F5F07782A7CD824/1":{"renderer":"image","mimeType":"image/png"},"0x4F5F07782A7CD824/2":{"renderer":"image","mimeType":"image/png"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', social media', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc5719298264474114084";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "5719298264474114084",
+            "5719298264474114084",
+            "iFrame_edlElement_5719298264474114084_document",
+            'iFrame_edlElement_5719298264474114084_document',
+            '*',
+            'edlThemeControlZoneFrame',
+            40,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            0,
+            '#ffffff',
+            false,
+            true,
+            false,
+            false,
+            '208',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Twitter', 
+        
+
+                ', 
+', 
+', 
+', Twitter', 
+', 
+
+
+
+                
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc5719298438567494068";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "5719298438567494068",
+            "5719298438567494068",
+            "iFrame_edlElement_5719298438567494068_document",
+            'iFrame_edlElement_5719298438567494068_document',
+            '380',
+            'edlThemeMainZoneFrame',
+            60,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            450,
+            '#ffffff',
+            false,
+            false,
+            true,
+            false,
+            '304',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("news.box", "");
+
+    
+
+', 
+
+
+', 
+
+
+
+    
+
+            ', News', 
+            
+            ', 
+', 
+', 
+', News', 
+', 
+
+
+            
+
+
+    
+
+  ', 
+      
+      
+      
+
+      
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', News for the Week of Jan. 2nd at Sherwood', 
+        ', 
+
+        
+             ', u"Week of January 2nd at Sherwood : M onday = No School. Last Day of Winter Break! Tuesday = School Resumes After Winter Break. Food Day \u2013 Potbelly\u2019s... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', News for the Week of January 9th at Sherwood', 
+        ', 
+
+        
+             ', u"Week of January 9th at Sherwood : M onday = New York Slices at Lunchtime. Battle of the Books During Lunch. Sherwood Singers During Recess. iRead... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', 12/9 Sherwood Times in English', 
+        ', 
+
+        
+             ', 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', 12/9 Sherwood Times in Spanish', 
+        ', 
+
+        
+             ', 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Dual Language Kindergarten Registration for 2017-2018', 
+        ', 
+
+        
+             ', u"Dual Language Applications for Kindergarten are now available and can be found on the District website or at any of our schools. Save the date for... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Interventions Letter to Parents in English and Spanish', 
+        ', 
+
+        
+             ', 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Book Character Pumpkin Decorating Contest Virtual Tour', 
+        ', 
+
+        
+             ', Take a virtual tour of all the pumpkins entered in the book character pumpkin decorating contest at Sherwood', 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Open House Video in English and Spanish', 
+        ', 
+
+        
+             ', u"Here is the link to the Open House video in English in case you missed it. It contains information about changes in curriculum this year and... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Lice Bags for Sale Letter - English', 
+        ', 
+
+        
+             ', 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Lice Bags for Sale Letter - Spanish', 
+        ', 
+
+        
+             ', 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+      ', 
+          
+              ', 
+          
+              ', More News...', 
+          ', 
+      ', 
+    
+    ', 
+    
+    
+    
+', 
+
+    
+
+
+       
+
+       ', 
+
+           .edlNewsItemThumbDiv {
+               
+               
+               display: none;
+               
+               width: 80.0px;
+               float: left;
+               margin-right: 8px;
+           }
+
+           .edlEmptyThumb {
+               height: 45.0px;
+           }
+
+           .edlNewsItemThumbImg {
+               width: 80.0px;
+               
+               
+               display: inline;
+           }
+
+           .edlNewsItemNonThumbDiv {
+               float: left;
+               max-width: 236px;
+           }
+
+           .edlNewsItemClearer {
+               clear: both;
+           }
+
+       ', 
+
+           ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("calendar.box", "");
+
+    
+
+', 
+
+
+', 
+
+
+
+    
+        ', Sherwood Calendar', 
+        
+        ', 
+', 
+', 
+', Sherwood Calendar', 
+', 
+
+
+        
+
+    
+
+  ', 
+  
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+    
+
+  ', 
+
+      
+
+  
+   
+
+    ', 
+    
+      ', 01/06/17 Fri', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', u"Food Day - Piero's Calzones", 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/06/17 Fri', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', Happy Sherwood Spirit Day!', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/07/17 Sat', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', iRead Read a Thon Kick Off at HP Library from 9:00-2:45', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/08/17 Sun', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', PTO Skating Party', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+', 3:00pm - 5:00pm', 
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/09/17 Mon', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', New York Slices at Lunchtime - 5th Grade Fundraiser', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/10/17 Tue', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', 5th Grade CoGAT Testing', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/10/17 Tue', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', Food Day - Noodles and Co.', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/11/17 Wed', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', 2017-2018 Dual Kdg. Information Night at District Office at 6:30 PM', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/11/17 Wed', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', Food Day - Once Upon a Bagel', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/12/17 Th, 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', u"Food Day - Little Louie's", 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+
+      
+    ', 
+
+    
+
+    
+    ', 
+            ', 
+                ', 
+                    
+                        More Events...
+                    
+                ', 
+            ', 
+        ', 
+    
+
+', 
+', 
+
+  
+        
+      
+      
+  ', 
+    
+    
+    
+', 
+    ', 
+  ', 
+', 
+',   ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("6301386108132649298.folder", "");
+
+    
+
+    
+    ghLocallyFilledFolderPlaceholdersAddContentElementSpec["6301386108132649298.folder"] = "5719295857307591906.folder";
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+
+', 
+
+    
+
+    
+
+    
+
+        ', 
+
+    
+
+', 
+
+
+
+', 
+', 
+
+
+
+
+', 
+', 
+
+', 
+', 
+
+', 
+    Please wait ... retrieving data from server
+', 
+
+
+
+
+', 
+    
+    
+    var ghMenuInfo = new GhMenuInfo('6301386108132649298',
+                                    "Footer",
+                                    'edlElement_6301386108132649298_folder',
+                                    'false',
+                                    'fmMenuBar_6301386108132649298_PlaceHolderDiv',
+                                    'true',
+                                    'false',
+                                    'true',
+                                    'White',
+                                    '666666',
+                                    'edlThemeBottomsectionZoneFrame',
+                                    'edlThemeBottomsectionZoneContent',
+                                    'false',
+                                    '5719295857307591906'
+                                    );
+    ghMenusToLoad['6301386108132649298'] = ghMenuInfo;
+
+', 
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+
+                        ', 
+
+                    
+
+
+    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+    ', 
+
+    ', 
+
+    
+    ', translate monitor', 
+
+    '][
+
+    
+
+    ', 
+         
+    ', 
+
+    
+
+
+    
+
+    
+
+    
+    ', Skip to Content', 
+
+    
+    ', 
+
+        
+
+
+        ', 
+            ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+
+                         
+
+                        ', 
+
+                         
+
+                        ', 
+
+                    ', 
+                ', 
+
+                    
+                    ', 
+                        ', 
+                              
+                            ', 
+                            ', All locations', 
+                             
+                            ', 
+                        ', 
+                    ', 
+
+                    
+                    ', 
+                        ', 
+                        ', 
+                    ', 
+
+
+            ', 
+        ', 
+
+
+        ', 
+            ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                          
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                        ', 
+                              
+                            ', 
+                            ', Change in all locations', 
+                             
+                            ', 
+                        ', 
+                ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+
+
+    ', 
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+
+', 
+
+', 
+', 
+
+
+
+/* MOVED FUNCTION TO BOTTOM */
+function addHtmlAttribute(element, attributeName, attributeValue)
+{
+    var tempVar = "";
+    if (element.hasAttribute(attributeName) == true)
+    {
+       tempVar = element.getAttribute(attributeName);
+    }
+    element.setAttribute(attributeName, attributeValue + tempVar);
+}
+
+    var menuWidth = 200;
+    var menuBarWidth = 600;
+    var ajaxRequestEntid = "";
+    var globalMenuItem;
+    var itemDescrArray = new Array();
+    var itemNameArray = new Array();
+    var itemTypeArray = new Array();
+    var itemUrlArray = new Array();
+    var itemTargetArray = new Array();
+    var itemIconClassArray = new Array();
+    var itemHasItemsArray = new Array();
+    var urlsPerEntidArray = new Array();
+    var descrsPerEntidArray = new Array();
+    var overflowAdjustedDivsArray = new Array();
+    var menuNamesArray = new Array();
+    var navLinkClicked = false;
+    var ua = navigator.userAgent;
+    var isMSIE = ua.indexOf ('MSIE') != -1;
+    var nbIsIE9 = ua.indexOf ('MSIE 9') != -1;
+    var isFirefox = ua.indexOf ('Firefox') != -1;
+    var isMacFirefox = (ua.indexOf ('Macintosh') != -1) && (isFirefox);
+    var nbIsChrome = ua.indexOf ('Chrome') != -1;
+    var previousEntid = "";
+    var previousTime = new Date();
+    var timeOfPageLoad = new Date();
+    var overrideMenuHiding = false;
+    var nbGlobalTopBorderStyle = "";
+    var nbIsWorldUser = false;
+    var nbShowAjaxErrorsToWorldUsers = false;
+    var nbFolderGroupTypeString = "Folder";
+    var nbWebPageGroupTypeString = "Web Page";
+    var nbHomeLinkId = "root-x5719295708249737122--sep--Sherwood_Elementary_SchoolhomeLink";
+    var nbBreadcrumbStripDropDownMenuFetchDelayMs = 450;
+    var nbHomeAndBreadcrumbDropDownSubmenuFetchDelayMs = 50;
+    var homeLinkElem = document.getElementById('edlHomeLink');
+    if (  (homeLinkElem != null) && (homeLinkElem != undefined)  )
+    {
+        homeLinkElem.id = "root-x5719295708249737122--sep--Sherwood_Elementary_SchoolhomeLink";
+        homeLinkElem.className = "breadcrumbLink";
+    }
+    
+    var onloadFnName = "nbnNavigationBarOnload";
+    
+    var pageBody = document.body;
+    var func = onloadFnName + "('false')";
+    
+    if (pageBody.attachEvent!=undefined) // attachEvent is a deprecated IE method
+    {
+        pageBody.onload = appendToFunction(pageBody.onload, func);
+    } else {
+        addHtmlAttribute(pageBody, "onload", func +";");
+    }
+
+function appendToFunction(func, str)
+{
+    var nfs = "";
+    if (func != null){
+        var ofs = func.toString();
+        var fcb = ofs.indexOf("{");
+        var lcb = ofs.indexOf("}",fcb+1);
+        var oss = ofs.substring(fcb + 1, lcb);
+        //alert('h3=' + ofs + '||||\n' + oss);
+        nfs = nbStripLeadingSemicolons(oss);
+    }
+	var s = nbStripLeadingSemicolons(nfs + ";" + str);
+    var f = new Function(s);
+    return f;
+}
+function nbStripLeadingSemicolons(s){
+	while (s.substr(0,1) == ';' && s.length>1) {
+    	s = s.substr(1);
+    }
+	return s;
+}
+', 
+
+
+        ', 
+
+    ', 
+
+
+        ', 
+            ', 
+                
+
+                ', 
+
+                    ', 
+
+                    
+                    
+
+
+
+
+
+
+
+
+', 
+', 
+<!--
+
+    var CLICK_OK_BUTTON_DURATION = 60;
+    var CONFIRM_MSG_SECS = 1200 - CLICK_OK_BUTTON_DURATION - 30;
+    var secsTilMsg = CONFIRM_MSG_SECS;
+    function openInfoPopupWindowIfNeeded()
+    {
+        
+
+        return false;
+    }
+  
+    var HAS_DEFAULT_ENTER_KEY  =  false;
+    var DEFAULT_ENTER_KEY_NAME = "";
+    var HAS_PAGE_VALIDATION    =  false;
+    var PAGE_VALIDATION        = "()";
+
+
+
+    function adjustIFrameSize (iframeWindow) {
+
+      if (iframeWindow.document.height) {
+        var iframeElement = parent.document.getElementById (iframeWindow.name);
+        iframeElement.style.height = iframeWindow.document.height + 'px';
+
+        iframeElement.style.width = iframeWindow.document.width + 'px';
+      }
+      else if (document.all) {
+        var iframeElement = parent.document.all[iframeWindow.name];
+        if (iframeWindow.document.compatMode &&
+            iframeWindow.document.compatMode != 'BackCompat')
+        {
+          iframeElement.style.height =
+            iframeWindow.document.documentElement.scrollHeight + 5 + 'px';
+
+          iframeElement.style.width =
+            iframeWindow.document.documentElement.scrollWidth + 5 + 'px';
+        }
+        else {
+          iframeElement.style.height =
+            iframeWindow.document.body.scrollHeight + 5 + 'px';
+          iframeElement.style.width =
+            iframeWindow.document.body.scrollWidth + 5 + 'px';
+        }
+      }
+    }
+
+    
+    function checkStale()
+    {
+        
+        if (document.cookie.search(/pgt=c1483721391448t/i) == null)
+        {
+            document.location.reload();
+        }
+    }
+//-->
+', 
+', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+
+
+
+', 
+
+', 
+ ', 
+', 
+
+', 
+ ', 
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+    $(function(){
+
+    
+
+        hcOnDocumentReady();
+        
+    });//document ready
+
+
+
+
+
+function hcLogin()
+{
+    aefhLogin(false);
+}
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+    ', 
+    ', 
+    ', 
+  ', 
+', 
+
+
+
+', 
+
+', 
+    hcMyEdlineXmlDataJQueryObj = $("#edlMenuXmlData");
+
+    
+        hcMyEdlineBackCompatXmlDataJQueryObj = hcMyEdlineXmlDataJQueryObj;
+    
+
+', 
+
+
+
+
+
+
+
+
+', 
+
+
+    function translateMenuOver(pEvent)
+    {
+        overrideMenuHiding = true;
+        showTranslateMenu(pEvent);
+    }
+
+
+    function translateMenuOut(pEvent)
+    {
+    }
+
+
+    function showTranslateMenu(pEvent)
+    {
+      // Hide the navbar menus if they are open:
+      hdrHideAllDropDownMenus();
+
+      var linkElem = document.getElementById("edlLangLink");
+      var linkElemOffset = $("#edlLangLink").offset();
+      var linkLeftEdge = linkElemOffset.left;
+      var linkBottomEdge = linkElemOffset.top + linkElem.offsetHeight;
+
+      translateMenu.moveTo(linkLeftEdge, linkBottomEdge + 1);
+      translateMenu.show();
+    }
+
+    function switchLang(lang)
+    {
+        if (translationDisabledMessage())
+        {
+            return;
+        }
+
+        submitEvent('language', 'TCNK=headerComponent;language='+lang);
+    }
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Choose How To View This Page', 
+                      ', 
+                        ', 
+                          ', Standard View', 
+                          ', List View', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Want to translate this page?', 
+                      ', 
+                        ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Share This Page', 
+                      ', 
+                        ', 
+                          ', 
+                          ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', HELP', 
+                  ', 
+                  ', 
+                  ', 
+                    ',  ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', SIGN IN', 
+                  ', 
+                  ', 
+                ', 
+                ', 
+              ', 
+            ', 
+
+
+
+
+
+
+
+
+
+
+  ', 
+    ', 
+    ', 
+  ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+function initForms()
+{
+	var frm = window.document.authenticationEntryFormForHeader;
+	frm.kclq.value = "";
+	frm.ajaxSupported.value = isAjaxSupported();
+}
+
+
+
+function debounceEnterKey(frm, eventNm)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function debounceEnterKeyToEntid(frm, eventNm, entid)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.targetEntid.value = entid;
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function handleSubmitOnEnter(e)
+{
+    
+    if (window.ghKeyPressHandler != null)
+    {
+        if ( typeof(ghKeyPressHandler == "function") )
+        {
+            ghKeyPressHandler(e);
+        }
+    }
+    
+    var keyPressed = '';
+
+    var isMSIE = navigator.userAgent.indexOf('MSIE') != -1;
+
+    if (isMSIE)
+        keyPressed = String.fromCharCode(window.event.keyCode);
+    else
+        keyPressed = String.fromCharCode(e.which);
+
+    if (keyPressed == "\r" || keyPressed == "\n")
+    {
+        
+        var authenticationFormToUse = null;
+
+        if (document.authenticationEntryFormForHeader && !document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryFormForHeader;
+        }
+        else if (!document.authenticationEntryFormForHeader && document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryForm;
+        }
+
+        if (authenticationFormToUse == null)
+        {
+            var headerFieldsFilledIn = 0;
+            if (document.authenticationEntryFormForHeader)
+            {
+                if (typeof(document.authenticationEntryFormForHeader.screenName) != "undefined"
+                    && document.authenticationEntryFormForHeader.screenName.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryFormForHeader.kclq) != "undefined"
+                    && document.authenticationEntryFormForHeader.kclq.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+            }
+
+            var bodyFieldsFilledIn = 0;
+            if (document.authenticationEntryForm)
+            {
+                if (typeof(document.authenticationEntryForm.screenName) != "undefined"
+                    && document.authenticationEntryForm.screenName.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryForm.kclq) != "undefined"
+                    && document.authenticationEntryForm.kclq.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+            }
+
+            if (headerFieldsFilledIn > bodyFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryFormForHeader;
+            }
+
+            if (bodyFieldsFilledIn > headerFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryForm;
+            }
+        }
+
+        // If no form or a search is being performed
+        if ( authenticationFormToUse == null || (typeof searchCtlr !== "undefined" && searchCtlr && document.forms["hcSearchForm"].token.value != '') )
+        {
+            window.document.onkeypress = doNothing;
+        }
+        else
+        {
+            if (authenticationFormToUse.kclq.value == "")
+            {   
+                authenticationFormToUse.kclq.focus();
+            }
+            else
+            {
+                authenticationFormToUse.submitButton.click();
+    
+                window.document.onkeypress = doNothing;
+            }
+        }
+
+
+        return false;
+    }
+
+    return true;
+}
+
+
+    if (window.document.captureEvents != null){
+        window.document.captureEvents(Event.KEYPRESS);
+    }
+    window.document.onkeypress = handleSubmitOnEnter;
+
+
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+
+function aefhCancelLogin()
+{
+    var elem = document.getElementById('edlHeaderControlsLoginPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        aefhRestoreBreadcrumbBorder();
+        elem.style.display = "none";
+    }
+}
+
+
+function aefhSaveAndClearBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        nbGlobalTopBorderStyle = elem.style.borderTop;
+        elem.style.borderTop = "";
+    }
+}
+
+
+function aefhRestoreBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        elem.style.borderTop = nbGlobalTopBorderStyle;
+    }
+}
+
+
+<!--
+function checkBrowserTime()
+{
+    var edlineDateString       = "Friday, January 6, 2017 10:49AM CST";
+    var edlineTimeInMillis     = 1483721391458;
+    var browserTimeInMillis    = (new Date()).getTime();
+    var timeDifferenceInMillis = (edlineTimeInMillis  - browserTimeInMillis);
+    var timeDifferenceInDays   = timeDifferenceInMillis / 86400000;
+
+    if ((timeDifferenceInDays < -2) || (timeDifferenceInDays > 2))
+    {
+        alert("Your computer clock reads " + (new Date()).toLocaleString() + " \r\nwhich is off by more than 24 hours. Please correct your computer clock.");
+
+    }
+}
+
+
+checkBrowserTime();
+
+//-->
+', 
+
+
+', 
+        ',    
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+
+    ', 
+
+        ', 
+            ', 
+                ', 
+                  ', Screen Name:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                  
+            ', 
+            ', 
+                ', 
+                    ', Click here if you forgot your screen name or password', 
+                ', 
+            ', 
+        ', 
+        
+        ', 
+            ', 
+                ', 
+                  ', Password:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+
+            ', 
+                ',     
+            ', 
+
+            ', 
+                  
+            ', 
+
+            ', 
+                ', 
+                    ', Click here to Sign Up', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+        ', 
+
+        
+', 
+
+
+
+', 
+window.document.cookie="bpcc=tu";
+
+  var frm = window.document.authenticationEntryFormForHeader;
+  frm.bscv.value = window.document.cookie;
+  frm.bscf.value = (window.document.cookie.indexOf("bpcc=tu") >= 0)
+    ? "1" : "0";
+
+
+
+
+try
+{
+  
+  if (frm.screenName.offsetWidth > 0)
+  {
+	  frm.screenName.focus();
+      frm.screenName.select();
+  }
+}
+catch(e)
+{
+
+}                                             
+', 
+
+
+', 
+
+
+
+
+
+', 
+
+
+    
+        
+            
+                
+                
+                ', 
+            
+        
+
+        
+
+', 
+
+', 
+
+    
+
+    if (typeof suTrimLeadingTrailingSpace != "undefined")
+    {
+        var headerAreaQuery = $("#edlHeaderArea");
+
+        if (suTrimLeadingTrailingSpace(headerAreaQuery.html() ).length == 0)
+        {
+            headerAreaQuery.hide();//css("display","none");
+        }
+    }
+
+', 
+
+
+
+
+
+
+  ', 
+    var ga_analytics_data = {
+  "furl": "/pages/Sherwood_Elem_School",
+  "ids": [
+    "UA-35374842-1",
+    "UA-26720103-1",
+    "UA-35367438-1",
+    "UA-35381027-1",
+    "UA-26719008-1",
+    "UA-35375639-1",
+    "UA-35369532-1",
+    "UA-26697143-2",
+    "UA-35378735-1",
+    "UA-35371927-1",
+    "UA-26711654-1"
+  ],
+  "role": "Guest",
+  "wmids": ["UA-19625889-3"]
+};
+  ', 
+  ', 
+  ', 
+
+
+', 
+    function translationDisabledMessage()
+    {
+
+        return false;
+
+    }
+
+
+
+', 
+
+
+                    
+
+                        ', 
+                            ', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("6301386108113517794.folder", "");
+
+    
+
+    
+    ghLocallyFilledFolderPlaceholdersAddContentElementSpec["6301386108113517794.folder"] = "5719295857349267810.folder";
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+
+', 
+
+    
+
+    
+
+    
+
+        ', 
+
+    
+
+', 
+
+
+
+', 
+', 
+
+
+
+
+', 
+', 
+
+', 
+', 
+
+', 
+    Please wait ... retrieving data from server
+', 
+
+
+
+
+', 
+    
+    
+    var ghMenuInfo = new GhMenuInfo('6301386108113517794',
+                                    "Shortcuts",
+                                    'edlElement_6301386108113517794_folder',
+                                    'false',
+                                    'fmMenuBar_6301386108113517794_PlaceHolderDiv',
+                                    'false',
+                                    'false',
+                                    'true',
+                                    'White',
+                                    '666666',
+                                    'edlThemeHeaderZoneFrame',
+                                    'edlThemeHeaderZoneContent',
+                                    'false',
+                                    '5719295857349267810'
+                                    );
+    ghMenusToLoad['6301386108113517794'] = ghMenuInfo;
+
+', 
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("5719296843340219474.folder", "");
+    ghPinnedSlideShows["5719296843340219474"] = true;
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+', 
+
+
+
+    
+    ', Website Images June 2013', 
+    
+
+            
+
+            
+
+
+
+
+
+
+  ', 
+
+  
+
+  
+
+
+
+
+
+    ', 
+
+    
+
+        .ed-slider-controlbar a {
+            display: block;
+            position: absolute;
+            text-decoration: none;
+            text-indent: -999em;
+            overflow: hidden;
+            background: transparent url('/images/SlideShowControlButtonsSprite16x16.png') no-repeat 0 0;
+            height: 16px;
+            width: 16px;
+        /*	left: 0;*/
+            left: 50%;
+            top: 50%;
+            margin: -8px 0 0 -8px;
+        }
+        /*sprites begin*/
+        /*a.ed-slider-prev {
+            background-position:-10px -10px;
+        }
+
+        a.ed-slider-prev:hover {
+            background-position:-40px -10px;
+        }
+
+        a.ed-slider-prev:active {
+            background-position:-70px -10px;
+        }*/
+
+        a.ed-slider-play {
+            background-position:-10px -100px;
+        }
+
+        a.ed-slider-play.selected {
+            display: none;
+        }
+
+        a.ed-slider-play:hover {
+            background-position:-40px -100px;
+        }
+
+        a.ed-slider-play:active {
+            background-position:-70px -100px;
+        }
+
+        a.ed-slider-pause {
+            background-position:-10px -70px;
+        }
+
+        a.ed-slider-pause.selected {
+            display: none;
+        }
+
+        a.ed-slider-pause:hover {
+            background-position:-40px -70px;
+        }
+
+        a.ed-slider-pause:active {
+            background-position:-70px -70px;
+        }
+
+        /*a.ed-slider-next {
+            background-position:-10px -40px;
+            left: 32px;
+        }
+
+        a.ed-slider-next:hover {
+            background-position:-40px -40px;
+        }
+
+        a.ed-slider-next:active {
+            background-position:-70px -40px;
+        }*/
+
+        a.ed-slider-fullscreen {
+            background-position:-10px -130px;
+        }
+
+        a.ed-slider-fullscreen:hover {
+            background-position:-40px -130px;
+        }
+
+        a.ed-slider-fullscreen:active {
+            background-position:-70px -130px;
+        }
+        /*sprites end*/
+        .ed-slider-prevNext {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat -100% -100%;
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .ed-slider-prevNext a {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 100%;
+            text-indent: -999em;
+            overflow: hidden;
+            outline: none;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next {
+            left: auto;
+            right: 0;
+            width: 80%;
+        }
+
+        .ed-slider-prevNext div {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext span {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat 0 0;
+            display: block;
+            width: 25px;
+            height: 47px;
+            text-indent: -999em;
+            overflow: hidden;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            margin: -23px 0 0;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext a.ed-slider-prev:hover span,
+        a.ed-slider-prev div.hover span {
+            background-position: 0 -60px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next span {
+            background-position: right 0;
+            left: auto;
+            right: 10px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next:hover span,
+        a.ed-slider-next div.hover span {
+            background-position: right -60px;
+        }
+
+        /*caption-controlbar container begin*/
+        ul .ed-slider-image-caption-controlbar-container {
+            display: none;
+        }
+
+        .ed-slider-image-caption-controlbar-container.ext {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 85px;
+            color: #fff;
+            z-index: 10;
+            vertical-align:bottom;
+        }
+
+        .ed-slider-image-caption,
+        .ed-slider-image-caption-summary,
+        .ed-slider-image-caption-title-has-summary,
+        .ed-slider-image-caption-title-no-summary
+        {
+            color: #fff;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption .ed-slider-countinfo,
+        .ed-slider-image-caption-controlbar-container.hasCaption .prevNext,
+        .ed-slider-image-caption-controlbar-container.hasCaption .fullscreen {
+            background-image: none;
+        }
+
+        /*caption-controlbar container end*/
+        /*caption begin*/
+        .ed-slider-image-caption-controlbar-container.hasCaption {
+            width: 100%;
+            min-height: 30px;
+            height: auto;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption  .captionHolder {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+            float: left;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        
+        /*caption end*/
+        
+        /*controlbar begin*/
+        .ed-slider-controlbar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            min-height:31px;
+            width:105px;
+        }
+
+
+        /*.ed-slider-controlbar div{*/
+             /*padding-top:4px;*/
+             /*padding-right:2px;*/
+             /*padding-left:2px;*/
+        /*}*/
+
+        .ed-slider-controlbar .fullscreen, .ed-slider-controlbar .playPause {
+            float: right;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+        }
+
+        .ed-slider-controlbar.hasNoCaption, .ed-slider-controlbar.captionHidden {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+        }
+        
+        .ed-slider-controlbar .ed-slider-countinfo {
+        	float: right;
+            padding: 8px 10px 0 6px;
+            height: 20px;
+            font-weight: bold;
+            font-size: 12px;  
+        }
+
+        /*.ed-slider-controlbar .prevNext {*/
+            /*position: absolute;*/
+            /*right: 20px;*/
+            /*width: 48px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .playPause {*/
+            /*position: absolute;*/
+            /*right: 30px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 11;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .fullscreen {*/
+            /*position: absolute;*/
+            /*right: 4px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+        /*controlbar end*/    
+         .ed-slider-cached-image
+        {
+            display:none;
+        }
+
+        /**********************/
+        /* thumbnail controls */
+        /**********************/
+        .ncWrap {
+            float: left;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        /* round button look */
+        .ncWrap a.prev, .ncWrap a.next {
+            background: transparent url("/images/thumbnailControls.png") no-repeat 0 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -18px;
+            width: 32px;
+            height: 36px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prev { left: 0; margin-left: 5px;}
+        .ncWrap a.prev:hover { background-position: 0 -40px; }
+        .ncWrap a.prev:active { background-position: 0 -80px; }
+
+        .ncWrap a.next { background-position: -40px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.next:hover { background-position: -40px -40px; }
+        .ncWrap a.next:active { background-position: -40px -80px; }
+        /* end round button look */
+
+        /* small round button look */
+        .ncWrap a.prevSmall, .ncWrap a.nextSmall {
+            background: transparent url("/images/thumbnailControls.png") no-repeat -160px 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prevSmall { left: 0; margin-left: 5px;}
+        .ncWrap a.prevSmall:hover { background-position: -160px -40px; }
+        .ncWrap a.prevSmall:active { background-position: -160px -80px; }
+
+        .ncWrap a.nextSmall { background-position: -200px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.nextSmall:hover { background-position: -200px -40px; }
+        .ncWrap a.nextSmall:active { background-position: -200px -80px; }
+        /* end small round button look */
+
+        .carouselContainer {
+            position: relative;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            margin: 0 0 0 30px;
+        }
+
+        .carousel {
+            width: 99999px;/* huge width prior to js set width */
+        }
+
+        .carousel li {
+            float: left;
+            margin: 0 5px;
+            background-color: #fff;
+            border: 1px solid #e3e3e3;
+            opacity: .4;
+            width: auto !important;
+            height: auto !important;
+            position: relative;
+            filter: alpha(opacity = 40);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+            -webkit-transition: all .4s linear;
+            -moz-transition: all .4s linear;
+            -o-transition: all .4s linear;
+            -ms-transition: all .4s linear;
+            transition: all .4s linear;
+        }
+
+        /* ie8 */
+        .ie8 .carousel li img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        }
+
+        .carousel li a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+
+        .carousel li.selected, .carousel li:hover {
+            opacity: 1;
+            filter: alpha(opacity = 100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        /* ie8 */
+        .ie8 .carousel li.selected img, .ie8 .carousel li:hover img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        .carousel li img {
+            position: relative;
+        }
+        /**************************/
+        /* end thumbnail controls */
+        /**************************/
+    ', 
+    ', 
+        .ed-slider-image-caption-title-no-summary-284a54481a {
+            font-weight:bold;
+            font-size:16px;
+        }
+
+        .ed-slider-image-caption-title-has-summary-284a54481a {
+            font-weight:bold;
+            font-size:16px;
+            padding-bottom: 2px;
+        }
+
+        .ed-slider-image-caption-summary-284a54481a {
+            font-weight:bold;
+            font-size:10px;
+        }
+        .ed-slider-image-caption-284a54481a,
+        .ed-slider-image-caption-summary-284a54481a,
+        .ed-slider-image-caption-title-has-summary-284a54481a ,
+        .ed-slider-image-caption-title-no-summary-284a54481a
+        {
+            color: #fff;
+        }
+
+       #ed-slider-gallery-loading-284a54481a
+       {
+           width:630px;
+           height:331px;
+           position: absolute;
+           z-index: 999;
+       }
+
+       #ed-slider-wrap-284a54481a
+       {
+           overflow:hidden;
+
+           
+           width:630px;
+           height:331px;
+           position:relative;
+           
+
+           font-family:Arial, Helvetica, sans-serif;
+
+
+
+
+       }
+
+        #ed-slider-wrap-284a54481a .galleryWrap {
+            width: 630px;
+            height: 331px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+
+       #ed-slider-wrap-284a54481a ul {
+           float: left;
+           width: 630px;
+           height: 331px;
+           overflow: hidden;
+       }
+
+
+       #ed-slider-wrap-284a54481a ul li
+       {
+           list-style-type:none;
+           overflow: hidden;
+           width: 630px;
+           height: 331px;
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-284a54481a .group .block {
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-284a54481a .group .block.imgTransition {
+           background-color: transparent;
+       }
+
+       .ed-slider-image-caption-controlbar-container .captionHolder .ed-slider-image-caption-284a54481a {
+            float: left;
+            min-height: 15px;
+            padding: 8px 8px 8px 10px;
+            position: relative;
+            width: 514px;
+        }
+
+        #ed-slider-wrap-284a54481a .ed-slider-prevNext {
+            height: 331px;
+        }
+   ', 
+
+    ', 
+        ', 
+
+    
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HHCgJ_/10f952fd447601a13745a49013852ec4/butterfly.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIpO_/db65def9471556fb3745a49013852ec4/Check.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIlX_/68735da229dce0cc3745a49013852ec4/crazy_face_-_first.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIa4_/3e0bb2af82f5c4c73745a49013852ec4/Flowers.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIZO_/0d4fe35580f7e9d23745a49013852ec4/Group.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HHCd5_/a44442d19fbf66033745a49013852ec4/Ice_Skating_Party.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJILs_/82efa5205dabf0553745a49013852ec4/music.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIXc_/9530ee94c679b0073745a49013852ec4/School.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIVb_/13a6b0c2bc00a48f3745a49013852ec4/Singers.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HHCaP_/b59a63f2c43906b73745a49013852ec4/Mr._Walker_as_Bruno_Mars.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIOI_/1f579fb43cbc14aa3745a49013852ec4/Thanksgiving_Play.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                    ', 
+                    ', 
+                        /files/_HJIdK_/fd440f255a6b16043745a49013852ec4/Thumbs_Up.jpeg?isPlacedWithSiteDesigner=true
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+
+        ', 
+        ', 
+            
+            ', 
+               ', 
+            ', 
+            
+        ', 
+    ', 
+', 
+	', 
+    ', 
+
+	', u"
+
+        $(document).ready(function()
+        {
+            fssbOnload('284a54481a',
+                    5000,
+                    'hover',
+                    true,
+                    'fade',
+                    'None',
+                    'small',
+                    false,
+                    'hover',
+                    '5719296843340219474',
+                    'edlElement_5719296843340219474_folderContents',
+                    'edlElement_5719296843340219474_folder',
+                    false
+            );
+		});
+
+	", 
+
+
+
+
+  
+
+  
+
+    ', 
+
+    
+
+', 
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("links.box", "");
+
+    
+
+', 
+
+
+', 
+
+
+
+    
+
+        ', Links', 
+        
+        ', 
+', 
+', 
+', Links', 
+', 
+
+
+        
+
+    
+
+
+  ', 
+      
+      
+      
+
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', Virtual Backpack', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', Sherwood PTO Registration Website', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', 112 Education Foundation', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', Required Health Forms', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', Enrollment and Registration', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', Infinite Campus - Parent Portal', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', NWEA - MAP Test', 
+
+
+
+
+        ', 
+
+        
+
+        
+
+        
+
+    ', 
+    
+    
+    
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x4F5F07782A7CD824/1":{"renderer":"image","mimeType":"image/png"},"0x4F5F07782A7CD824/2":{"renderer":"image","mimeType":"image/png"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', social media', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc5719298264474114084";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "5719298264474114084",
+            "5719298264474114084",
+            "iFrame_edlElement_5719298264474114084_document",
+            'iFrame_edlElement_5719298264474114084_document',
+            '*',
+            'edlThemeControlZoneFrame',
+            40,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            0,
+            '#ffffff',
+            false,
+            true,
+            false,
+            false,
+            '208',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Twitter', 
+        
+
+                ', 
+', 
+', 
+', Twitter', 
+', 
+
+
+
+                
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc5719298438567494068";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "5719298438567494068",
+            "5719298438567494068",
+            "iFrame_edlElement_5719298438567494068_document",
+            'iFrame_edlElement_5719298438567494068_document',
+            '380',
+            'edlThemeMainZoneFrame',
+            60,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            450,
+            '#ffffff',
+            false,
+            false,
+            true,
+            false,
+            '304',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("news.box", "");
+
+    
+
+', 
+
+
+', 
+
+
+
+    
+
+            ', News', 
+            
+            ', 
+', 
+', 
+', News', 
+', 
+
+
+            
+
+
+    
+
+  ', 
+      
+      
+      
+
+      
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', News for the Week of Jan. 2nd at Sherwood', 
+        ', 
+
+        
+             ', u"Week of January 2nd at Sherwood : M onday = No School. Last Day of Winter Break! Tuesday = School Resumes After Winter Break. Food Day \u2013 Potbelly\u2019s... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', News for the Week of January 9th at Sherwood', 
+        ', 
+
+        
+             ', u"Week of January 9th at Sherwood : M onday = New York Slices at Lunchtime. Battle of the Books During Lunch. Sherwood Singers During Recess. iRead... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', 12/9 Sherwood Times in English', 
+        ', 
+
+        
+             ', 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', 12/9 Sherwood Times in Spanish', 
+        ', 
+
+        
+             ', 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Dual Language Kindergarten Registration for 2017-2018', 
+        ', 
+
+        
+             ', u"Dual Language Applications for Kindergarten are now available and can be found on the District website or at any of our schools. Save the date for... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Interventions Letter to Parents in English and Spanish', 
+        ', 
+
+        
+             ', 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Book Character Pumpkin Decorating Contest Virtual Tour', 
+        ', 
+
+        
+             ', Take a virtual tour of all the pumpkins entered in the book character pumpkin decorating contest at Sherwood', 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Open House Video in English and Spanish', 
+        ', 
+
+        
+             ', u"Here is the link to the Open House video in English in case you missed it. It contains information about changes in curriculum this year and... (cont'd)", 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Lice Bags for Sale Letter - English', 
+        ', 
+
+        
+             ', 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+    ', 
+  
+
+        ', 
+            ', 
+                ', 
+            ', 
+        ', 
+
+        
+
+        ', 
+
+      ', 
+
+          
+
+        ', Lice Bags for Sale Letter - Spanish', 
+        ', 
+
+        
+             ', 
+        
+        ', 
+        ', 
+    ', 
+
+      
+
+  
+      ', 
+          
+              ', 
+          
+              ', More News...', 
+          ', 
+      ', 
+    
+    ', 
+    
+    
+    
+', 
+
+    
+
+
+       
+
+       ', 
+
+           .edlNewsItemThumbDiv {
+               
+               
+               display: none;
+               
+               width: 80.0px;
+               float: left;
+               margin-right: 8px;
+           }
+
+           .edlEmptyThumb {
+               height: 45.0px;
+           }
+
+           .edlNewsItemThumbImg {
+               width: 80.0px;
+               
+               
+               display: inline;
+           }
+
+           .edlNewsItemNonThumbDiv {
+               float: left;
+               max-width: 236px;
+           }
+
+           .edlNewsItemClearer {
+               clear: both;
+           }
+
+       ', 
+
+           ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("calendar.box", "");
+
+    
+
+', 
+
+
+', 
+
+
+
+    
+        ', Sherwood Calendar', 
+        
+        ', 
+', 
+', 
+', Sherwood Calendar', 
+', 
+
+
+        
+
+    
+
+  ', 
+  
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+    
+
+  ', 
+
+      
+
+  
+   
+
+    ', 
+    
+      ', 01/06/17 Fri', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', u"Food Day - Piero's Calzones", 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/06/17 Fri', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', Happy Sherwood Spirit Day!', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/07/17 Sat', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', iRead Read a Thon Kick Off at HP Library from 9:00-2:45', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/08/17 Sun', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', PTO Skating Party', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+', 3:00pm - 5:00pm', 
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/09/17 Mon', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', New York Slices at Lunchtime - 5th Grade Fundraiser', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/10/17 Tue', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', 5th Grade CoGAT Testing', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/10/17 Tue', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', Food Day - Noodles and Co.', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/11/17 Wed', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', 2017-2018 Dual Kdg. Information Night at District Office at 6:30 PM', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/11/17 Wed', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', Food Day - Once Upon a Bagel', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/12/17 Th, 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', u"Food Day - Little Louie's", 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+
+      
+    ', 
+
+    
+
+    
+    ', 
+            ', 
+                ', 
+                    
+                        More Events...
+                    
+                ', 
+            ', 
+        ', 
+    
+
+', 
+', 
+
+  
+        
+      
+      
+  ', 
+    
+    
+    
+', 
+    ', 
+  ', 
+', 
+',   ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("6301386108132649298.folder", "");
+
+    
+
+    
+    ghLocallyFilledFolderPlaceholdersAddContentElementSpec["6301386108132649298.folder"] = "5719295857307591906.folder";
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+
+', 
+
+    
+
+    
+
+    
+
+        ', 
+
+    
+
+', 
+
+
+
+', 
+', 
+
+
+
+
+', 
+', 
+
+', 
+', 
+
+', 
+    Please wait ... retrieving data from server
+', 
+
+
+
+
+', 
+    
+    
+    var ghMenuInfo = new GhMenuInfo('6301386108132649298',
+                                    "Footer",
+                                    'edlElement_6301386108132649298_folder',
+                                    'false',
+                                    'fmMenuBar_6301386108132649298_PlaceHolderDiv',
+                                    'true',
+                                    'false',
+                                    'true',
+                                    'White',
+                                    '666666',
+                                    'edlThemeBottomsectionZoneFrame',
+                                    'edlThemeBottomsectionZoneContent',
+                                    'false',
+                                    '5719295857307591906'
+                                    );
+    ghMenusToLoad['6301386108132649298'] = ghMenuInfo;
+
+', 
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+
+                        ', 
+
+                    
+
+
+    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+    ', 
+
+    ', 
+
+    
+    ', translate monitor', 
+
+    ']

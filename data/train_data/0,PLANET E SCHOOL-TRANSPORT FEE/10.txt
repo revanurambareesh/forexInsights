@@ -1,0 +1,2165 @@
+[
+		        
+', 
+    ', 
+        ', 
+    ', Categories', 
+    ', Categories', 
+    ', 
+        ', 
+            ', 	', Filled Designs', 
+	
+	', 	', All Appliques', 
+	
+	', 	', Free Appliques', 
+	
+	', 	', Applique Alphabets', 
+	
+	', 	', Embroidery Fonts', 
+	
+	', 	', Appliques By Skill', 
+	', 	', Beginner Appliques', 
+	
+	', 	', Moderate Appliques', 
+	
+	', 	', Advanced Appliques', 
+	
+	', 
+	', 	', Holiday Appliques', 
+	', 	', Valentine Appliques', 
+	
+	', 	', Mardi Gras Appliques', 
+	
+	', 	', St Patricks Appliques', 
+	
+	', 	', Easter Appliques', 
+	
+	', 	', Mothers Day Appliques', 
+	
+	', 	', Fathers Day Appliques', 
+	
+	', 	', July 4th Appliques', 
+	
+	', 	', Back to School Appliques', 
+	
+	', 	', Halloween Appliques', 
+	
+	', 	', Thanksgiving Appliques', 
+	
+	', 	', Hanukkah Appliques', 
+	
+	', 	', Christmas Appliques', 
+	
+	', 
+	', 	', Appliques By Season', 
+	', 	', Spring Appliques', 
+	
+	', 	', Summer Appliques', 
+	
+	', 	', Fall Appliques', 
+	
+	', 	', Winter Appliques', 
+	
+	', 
+	', 	', Animal Appliques', 
+	
+	', 	', Birthday Appliques', 
+	
+	', 	', Food Appliques', 
+	
+	', 	', For Boys', 
+	
+	', 	', For Girls', 
+	
+	', 	', Miscellaneous Appliques', 
+	
+	', 	', Occupations', 
+	
+	', 	', People Appliques', 
+	
+	', 	', Sibling Appliques', 
+	
+	', 	', Sports Appliques', 
+	
+	', 	', Transportation Appliques', 
+	
+	', 	', Patches Appliques', 
+	
+	', 	', Word Appliques', 
+	
+	', 	', In the Hoop Designs', 
+	
+	', 
+        ', 
+        ', Share Your Project', 
+    ', 
+', 
+        ', 
+        ', 
+        ', 
+    ', Additional Information', 
+    ', Additional Information', 
+    ', 
+        ', 
+            ', Home', 
+            ', 
+                
+            ', 
+        ', 
+        ', 
+		', 
+		', Alphabet and Font Sizes', 
+		
+	', 	', 
+		', November 2016 Winners', 
+		
+	', 	', 
+		', About Us', 
+		
+	', 	', 
+		', Contact Us', 
+		
+	', 	', 
+		', FAQ', 
+		', 
+	', Understanding Planet Points', Access Old Orders', Where Are My Old Orders?', Using Store Credit', Information For Existing Customers', Login Problems', How to Download', How to Get Freebies', Unable to Complete Transaction', Gift Certificate Redemption', Sewing Issues', 
+', 
+	', 	', 
+		', Satisfaction Guarantee', 
+		
+	', 	', 
+		', Privacy Policy', 
+		
+	', 	', 
+		', Terms and Conditions', 
+		
+	', 	', 
+		', Blog', 
+		
+	', 
+', 
+    ', 
+', 
+        ', 
+    ', Account Navigation', 
+    ', Account Navigation', 
+    ', 
+        ', 
+            ', 
+                ', My Account', 
+            ', 
+        ', 
+    ', 
+',  
+        ', 
+    ', Currency - All prices are in AUD', 
+    ', Currency - All prices are in AUD', 
+    ',  
+        ', Change Currency', 
+         ', 
+            ', 
+                ', 
+            ', 
+         ', 
+     ', 
+',  
+    ', 
+', 
+', 
+//<![CDATA[ 
+	$().ready(function(){
+		if($('#GiftCertificatesMen).get(0)){
+			var liItem = $('#GiftCertificatesMen).clone();
+			$(liItem).find('a').attr('class', 'fa fa-tag');
+			
+			var spanItem = $('<span />', { text: $(liItem).find('a').text() });
+			$(liItem).find('a').html(spanItem);
+			
+			$(liItem).appendTo('#SideAccountNavigationList');
+		}
+		
+		if($('#LoginOrLogoutText').get(0)){
+			var LoginOrLogoutTextCss = $('#LoginOrLogoutText').css('display');
+			LoginOrLogoutTextCss = LoginOrLogoutTextCss.replace('inline-', '');
+			$('#LoginOrLogoutText div a').each(function(){
+				var linkItem = $(this).clone();
+				
+				if($(this).text().toLowerCase()=='sign in'){
+					$(linkItem).attr('class', 'fa fa-sign-in');
+				}
+				else if($(this).text().toLowerCase()=='create an account'){
+					$(linkItem).attr('class', 'fa fa-plus-square');
+				}
+				else if($(this).text().toLowerCase()=='sign out'){
+					$(linkItem).attr('class', 'fa fa-sign-out');
+				}
+				
+				var spanItem = $('<span />', { text: $(linkItem).text() });
+				$(linkItem).html(spanItem);
+				
+				var liItem = $('<li />', {html: linkItem});
+				$(liItem).css('display', LoginOrLogoutTextCss);
+				var dynamicClass = $(this).text().replace(/ /g,'');
+				$(liItem).attr('class', dynamicClass);
+				
+				$(liItem).appendTo('#SideAccountNavigationList');
+			});
+		}
+		
+		if($('#StorePhoneNumber').get(0)){
+			var StorePhoneNumberCss = $('#StorePhoneNumber').css('display');
+			StorePhoneNumberCss = StorePhoneNumberCss.replace('inline-', '');
+			var StorePhoneNumber = $('#StorePhoneNumber div span').html();
+			if($('#StorePhoneNumber div span a').get(0)){
+				StorePhoneNumber = $('#StorePhoneNumber div span a').html();
+			}
+			var spanItem = $('<span />', { text: 'Call '+StorePhoneNumber });
+			
+			var linkItem = $('<a />',{
+				html: spanItem,
+				href: 'tel:'+StorePhoneNumber,
+				class: 'fa fa-phone'
+			});
+			
+			var liItem = $('<li />', {html: linkItem});
+			$(liItem).css('display', StorePhoneNumberCss);
+			
+			$(liItem).appendTo('#SideAccountNavigationList');
+		}
+		
+		if($('.expandable a').hasClass('selected')) {
+			var MenuSelected = $('a.selected');
+			var ParentsLi = $('a.selected').parent('li');
+			var ParentSpanSelected = ParentsLi.parentsUntil( "li.RootLi" ).siblings('span');
+			MenuSelected.siblings('span').removeClass('subcat-expand');
+			MenuSelected.siblings('ul').addClass('expanded');
+			ParentsLi.parentsUntil( "li.RootLi" ).siblings('span').removeClass('subcat-expand');
+			ParentSpanSelected.siblings('ul').addClass('expanded');
+		}
+		
+		$('#SideAdditionalInformation .pages-menu li').each(function(){
+			var Url = window.location.href;
+			Url = stripQueryStringAndHashFromPath(Url);
+			if($(this).children('a').attr('href') == Url) {
+				$(this).children('a').addClass('selected');
+				if($(this).children('span').attr('class') != undefined) {
+					var SpanObj = $(this).children('span');
+					$(this).children('span').removeClass('subcat-expand');
+					SpanObj.siblings('ul').addClass('expanded');
+				}
+				$(this).parentsUntil( "li.HasSubMenu" ).first('ul').addClass('expanded');
+				var UlObj = $(this).parentsUntil( "li.HasSubMenu" ).first('ul');
+				UlObj.prev('span').removeClass('subcat-expand');
+			}
+		});
+		
+		$('.CurrencySelectorMobile h5').html('Currency - '+$('#currencyPrices').html().replace('are',''));
+		$('#SideCurrencySelectorMobile > div > div > .CurrencyList').html($('#SideCurrencySelectorDesktop > div > div >.CurrencyList').html());
+		if ($('#SideCurrencySelectorDesktop > div > div >.CurrencyList > .ChooseCurrencyBox').size() == 1 ) {
+   			$('#SideCurrencySelectorMobile .changeCurr').hide();
+   		}
+	});
+//]]>
+', 
+
+', 
+			', 
+  ', 
+    ', 
+      ',  ',  Loading... Please wait... ', 
+    ', 
+    
+        
+', 
+    ', 
+        ', 
+        ', 
+            ', 
+                ', Call us on ', 
+            ', 
+            ', 
+                
+            ', 
+            ', 
+                ',  ',  My Account', 
+            ', 
+            ', Gift Certificates', 
+            ', 
+               ',  ', Sign in',  or ', Create an account', 
+            ',    
+               
+               ', Legacy Orders', 
+            
+        
+        
+    ', 
+', 
+
+    ', 
+      ', 
+        ', 
+        ', 
+          ',  ', 
+ ', 
+        ', 
+        ', 
+          ', 
+    ', 
+        ', Search', 
+      ', 
+        
+        ', 
+                ',  
+        ', 
+        
+        
+        ', 
+    ', 
+', 
+
+', 
+    var QuickSearchAlignment = 'right';
+    var QuickSearchWidth = '390px';
+    lang.EmptySmallSearch = "You forgot to enter some search keywords.";
+    $(document).ajaxComplete(function() {
+        $('input[type=checkbox], select').not('.UniApplied').uniform();
+    });
+',   ', 
+          ', 
+    ', 
+        ', Search', 
+      ', 
+        
+        ', 
+                ',  
+        ', 
+        
+        
+        ', 
+    ', 
+', 
+
+', 
+    var QuickSearchAlignment = 'right';
+    var QuickSearchWidth = '390px';
+    lang.EmptySmallSearch = "You forgot to enter some search keywords.";
+    $(document).ajaxComplete(function() {
+        $('input[type=checkbox], select').not('.UniApplied').uniform();
+    });
+',   ', 
+          ', 
+            ',  ',  ', 
+          ', 
+          ',  ',  ',  ', 
+        ', 
+      ', 
+    ', 
+    ',  ', 
+ ', 
+  ', 
+', 
+', u"
+window.sloyalty = window.sloyalty || {};
+window.sloyalty.shop = 'planetapplique.com';
+window.sloyalty.key = '6742512a-8218-454b-83b7-c6fb8f2aa0d2';
+window.sloyalty.customer_id = '';
+window.sloyalty.customer_email = '';
+", 
+
+', 
+
+
+
+
+
+', 
+
+
+
+
+', 
+
+
+
+
+', 
+
+
+
+
+', 
+
+
+
+            ', 
+', 
+    $(window).load(function() {
+        $('.slide-show').flexslider({
+            slideshowSpeed: $('.slide-show').attr('data-swap-frequency') * 1000,
+            animation: "slide",
+            pauseOnHover: true,
+            controlNav: true,
+            directionNav: true
+        });
+    });
+', 
+            ', 
+	', 
+		', 
+	', 
+		', 
+			
+				', 
+					', 
+				', 
+                	', 
+					', 
+					', 
+					', Shop Valentines', 
+				', 
+		', 
+	', 
+', 
+	', 
+		', 
+			
+				', 
+					', 
+				', 
+                	', 
+					', 
+					', 
+					', 
+				', 
+		', 
+	', 
+', 
+	', 
+', 
+', 
+			', 
+				', 
+					', 
+    ', Planet Points Available to All Customers', LEARN MORE', 
+', 
+', 
+                    ', 
+                          ', 
+    ', Categories', 
+    ', Categories', 
+    ', 
+        ', 
+            ', 	', Filled Designs', 
+	
+	', 	', All Appliques', 
+	
+	', 	', Free Appliques', 
+	
+	', 	', Applique Alphabets', 
+	
+	', 	', Embroidery Fonts', 
+	
+	', 	', Appliques By Skill', 
+	', 	', Beginner Appliques', 
+	
+	', 	', Moderate Appliques', 
+	
+	', 	', Advanced Appliques', 
+	
+	', 
+	', 	', Holiday Appliques', 
+	', 	', Valentine Appliques', 
+	
+	', 	', Mardi Gras Appliques', 
+	
+	', 	', St Patricks Appliques', 
+	
+	', 	', Easter Appliques', 
+	
+	', 	', Mothers Day Appliques', 
+	
+	', 	', Fathers Day Appliques', 
+	
+	', 	', July 4th Appliques', 
+	
+	', 	', Back to School Appliques', 
+	
+	', 	', Halloween Appliques', 
+	
+	', 	', Thanksgiving Appliques', 
+	
+	', 	', Hanukkah Appliques', 
+	
+	', 	', Christmas Appliques', 
+	
+	', 
+	', 	', Appliques By Season', 
+	', 	', Spring Appliques', 
+	
+	', 	', Summer Appliques', 
+	
+	', 	', Fall Appliques', 
+	
+	', 	', Winter Appliques', 
+	
+	', 
+	', 	', Animal Appliques', 
+	
+	', 	', Birthday Appliques', 
+	
+	', 	', Food Appliques', 
+	
+	', 	', For Boys', 
+	
+	', 	', For Girls', 
+	
+	', 	', Miscellaneous Appliques', 
+	
+	', 	', Occupations', 
+	
+	', 	', People Appliques', 
+	
+	', 	', Sibling Appliques', 
+	
+	', 	', Sports Appliques', 
+	
+	', 	', Transportation Appliques', 
+	
+	', 	', Patches Appliques', 
+	
+	', 	', Word Appliques', 
+	
+	', 	', In the Hoop Designs', 
+	
+	', 
+        ', 
+        ', Share Your Project', 
+    ', 
+', 
+                          ', 
+                    ', 
+					', 
+						', 
+	', 
+		', 
+	', 
+		', 
+			
+				', 
+					', 
+				', 
+                	', 
+					', 
+					', 
+					', Shop Valentines', 
+				', 
+		', 
+	', 
+', 
+	', 
+		', 
+			
+				', 
+					', 
+				', 
+                	', 
+					', 
+					', 
+					', 
+				', 
+		', 
+	', 
+', 
+	', 
+', 
+', 
+						
+						
+						', 
+    ', Featured Products', 
+    ', 
+        ', 
+            ', 
+	', 
+		', 
+	', 
+	', 
+		', Birthday Dog Numbers', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', My First Christmas 2', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Wonderland Alpha', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Nice with a Touch of Naughty', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Lauren Font ', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Jersey Font', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Snowman Monogram Alpha', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Floral Arrow Applique', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Elf Feet Patch Applique', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Christmas Tree Crane', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Buck Silhouette Applique', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Floral Wreath Alpha', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Love Penguin Applique', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Royal Monogram Font', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Elf Laundry Applique', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Mr and Mrs Applique Set', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Laurel Alpha', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Penguin 2 Alpha', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Sled Alpha', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Santas Laundry Applique', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+
+        ', 
+        ', 
+    ', 
+    ', 
+', 
+						', 
+						', 
+                        
+					', 
+                  
+				', 
+			', 
+			', 
+    ', 
+
+        
+', 
+    ', 
+    ', 
+        ', 
+                
+                ', Newsletter signup', 
+                 
+                 ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Name', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Email', 
+                                ', 
+                            ', 
+                            ', 
+                                
+                                ', 
+                                
+                            ', 
+                        ',     
+                    ', 
+        ', 
+        
+    ', 
+', 
+', 
+', 
+// <!--
+	$('#subscribe_form').submit(function() {
+		if($('#nl_first_name').val() == '') {
+			alert('You forgot to type in your first name.');
+			$('#nl_first_name').focus();
+			return false;
+		}
+
+		if($('#nl_email').val() == '') {
+			alert('You forgot to type in your email address.');
+			$('#nl_email').focus();
+			return false;
+		}
+
+		if($('#nl_email').val().indexOf('@') == -1 || $('#nl_email').val().indexOf('.') == -1) {
+			alert('Please enter a valid email address, such as john@example.com.');
+			$('#nl_email').focus();
+			$('#nl_email').select();
+			return false;
+		}
+
+		// Set the action of the form to stop spammers
+		$('#subscribe_form').append("<input type=\"hidden\" name=\"check\" value=\"1\" \/>");
+		return true;
+
+	});
+// -->
+', 
+
+
+
+        ', 
+            ', 
+                ', 
+                    ', More Info', 
+		', 
+		', Alphabet and Font Sizes', 
+		
+	', 	', 
+		', November 2016 Winners', 
+		
+	', 	', 
+		', About Us', 
+		
+	', 	', 
+		', Contact Us', 
+		
+	', 	', 
+		', FAQ', 
+		', 
+	', Understanding Planet Points', Access Old Orders', Where Are My Old Orders?', Using Store Credit', Information For Existing Customers', Login Problems', How to Download', How to Get Freebies', Unable to Complete Transaction', Gift Certificate Redemption', Sewing Issues', 
+', 
+	', 	', 
+		', Satisfaction Guarantee', 
+		
+	', 	', 
+		', Privacy Policy', 
+		
+	', 	', 
+		', Terms and Conditions', 
+		
+	', 	', 
+		', Blog', 
+		
+	', 
+', 
+                    ', Becca Lowder', Designer', 
+                    ', 
+                    ', 
+	', Connect with us', 
+	', 
+		', Facebook', Pinterest', YouTube', 
+	', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+                    ', 
+                ', 
+            ', 
+        ', 
+
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', All prices are in ', USD', .',  ', © 2009-2017 Planet Applique Inc',  ', |',  ', Sitemap', 
+
+                    ', 
+                    
+                ', 
+                
+            ', 
+        ', 
+
+    ', 
+', 
+
+', 
+  //<![CDATA[
+   $(document).ready(function(){
+        $('.footer-columns div.one-quarter').each(function(){
+         if($(this).find('ul.sf-menu>li>a').length > 10) {
+            var obj = $(this).find('ul.sf-men);
+            $('<strong><a href="javascript:void(0);" class="ToggleList">Show all</a></strong>').insertAfter(obj);
+         }
+         var i = 0;
+         $(this).find('ul.sf-menu>li>a,ul.treeview>li>a').each(function(){
+            if(i >= 10) {
+                $(this).closest('li').css('display','none');
+            }
+            i++;
+         });
+        });
+
+        $('.footer-columns .ToggleList').on('click',function() {
+            $(this).parent().siblings('ul').children('li:gt(9)').slideToggle('fast');
+            $(this).text($(this).text() == 'Show all' ? 'Show less' : 'Show all');
+        });
+
+   });
+  //]]>
+', 
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+
+', 
+$(document).ready(function() {
+	// attach fast cart event to all 'add to cart' link
+	$(".ProductActionAdd a[href*='cart.php?action=add']").click(function(event) {
+		fastCartAction($(this).attr('href'));
+		return false;
+	});
+});
+', 
+
+
+		
+	'][
+		        
+', 
+    ', 
+        ', 
+    ', Categories', 
+    ', Categories', 
+    ', 
+        ', 
+            ', 	', Filled Designs', 
+	
+	', 	', All Appliques', 
+	
+	', 	', Free Appliques', 
+	
+	', 	', Applique Alphabets', 
+	
+	', 	', Embroidery Fonts', 
+	
+	', 	', Appliques By Skill', 
+	', 	', Beginner Appliques', 
+	
+	', 	', Moderate Appliques', 
+	
+	', 	', Advanced Appliques', 
+	
+	', 
+	', 	', Holiday Appliques', 
+	', 	', Valentine Appliques', 
+	
+	', 	', Mardi Gras Appliques', 
+	
+	', 	', St Patricks Appliques', 
+	
+	', 	', Easter Appliques', 
+	
+	', 	', Mothers Day Appliques', 
+	
+	', 	', Fathers Day Appliques', 
+	
+	', 	', July 4th Appliques', 
+	
+	', 	', Back to School Appliques', 
+	
+	', 	', Halloween Appliques', 
+	
+	', 	', Thanksgiving Appliques', 
+	
+	', 	', Hanukkah Appliques', 
+	
+	', 	', Christmas Appliques', 
+	
+	', 
+	', 	', Appliques By Season', 
+	', 	', Spring Appliques', 
+	
+	', 	', Summer Appliques', 
+	
+	', 	', Fall Appliques', 
+	
+	', 	', Winter Appliques', 
+	
+	', 
+	', 	', Animal Appliques', 
+	
+	', 	', Birthday Appliques', 
+	
+	', 	', Food Appliques', 
+	
+	', 	', For Boys', 
+	
+	', 	', For Girls', 
+	
+	', 	', Miscellaneous Appliques', 
+	
+	', 	', Occupations', 
+	
+	', 	', People Appliques', 
+	
+	', 	', Sibling Appliques', 
+	
+	', 	', Sports Appliques', 
+	
+	', 	', Transportation Appliques', 
+	
+	', 	', Patches Appliques', 
+	
+	', 	', Word Appliques', 
+	
+	', 	', In the Hoop Designs', 
+	
+	', 
+        ', 
+        ', Share Your Project', 
+    ', 
+', 
+        ', 
+        ', 
+        ', 
+    ', Additional Information', 
+    ', Additional Information', 
+    ', 
+        ', 
+            ', Home', 
+            ', 
+                
+            ', 
+        ', 
+        ', 
+		', 
+		', Alphabet and Font Sizes', 
+		
+	', 	', 
+		', November 2016 Winners', 
+		
+	', 	', 
+		', About Us', 
+		
+	', 	', 
+		', Contact Us', 
+		
+	', 	', 
+		', FAQ', 
+		', 
+	', Understanding Planet Points', Access Old Orders', Where Are My Old Orders?', Using Store Credit', Information For Existing Customers', Login Problems', How to Download', How to Get Freebies', Unable to Complete Transaction', Gift Certificate Redemption', Sewing Issues', 
+', 
+	', 	', 
+		', Satisfaction Guarantee', 
+		
+	', 	', 
+		', Privacy Policy', 
+		
+	', 	', 
+		', Terms and Conditions', 
+		
+	', 	', 
+		', Blog', 
+		
+	', 
+', 
+    ', 
+', 
+        ', 
+    ', Account Navigation', 
+    ', Account Navigation', 
+    ', 
+        ', 
+            ', 
+                ', My Account', 
+            ', 
+        ', 
+    ', 
+',  
+        ', 
+    ', Currency - All prices are in AUD', 
+    ', Currency - All prices are in AUD', 
+    ',  
+        ', Change Currency', 
+         ', 
+            ', 
+                ', 
+            ', 
+         ', 
+     ', 
+',  
+    ', 
+', 
+', 
+//<![CDATA[ 
+	$().ready(function(){
+		if($('#GiftCertificatesMen).get(0)){
+			var liItem = $('#GiftCertificatesMen).clone();
+			$(liItem).find('a').attr('class', 'fa fa-tag');
+			
+			var spanItem = $('<span />', { text: $(liItem).find('a').text() });
+			$(liItem).find('a').html(spanItem);
+			
+			$(liItem).appendTo('#SideAccountNavigationList');
+		}
+		
+		if($('#LoginOrLogoutText').get(0)){
+			var LoginOrLogoutTextCss = $('#LoginOrLogoutText').css('display');
+			LoginOrLogoutTextCss = LoginOrLogoutTextCss.replace('inline-', '');
+			$('#LoginOrLogoutText div a').each(function(){
+				var linkItem = $(this).clone();
+				
+				if($(this).text().toLowerCase()=='sign in'){
+					$(linkItem).attr('class', 'fa fa-sign-in');
+				}
+				else if($(this).text().toLowerCase()=='create an account'){
+					$(linkItem).attr('class', 'fa fa-plus-square');
+				}
+				else if($(this).text().toLowerCase()=='sign out'){
+					$(linkItem).attr('class', 'fa fa-sign-out');
+				}
+				
+				var spanItem = $('<span />', { text: $(linkItem).text() });
+				$(linkItem).html(spanItem);
+				
+				var liItem = $('<li />', {html: linkItem});
+				$(liItem).css('display', LoginOrLogoutTextCss);
+				var dynamicClass = $(this).text().replace(/ /g,'');
+				$(liItem).attr('class', dynamicClass);
+				
+				$(liItem).appendTo('#SideAccountNavigationList');
+			});
+		}
+		
+		if($('#StorePhoneNumber').get(0)){
+			var StorePhoneNumberCss = $('#StorePhoneNumber').css('display');
+			StorePhoneNumberCss = StorePhoneNumberCss.replace('inline-', '');
+			var StorePhoneNumber = $('#StorePhoneNumber div span').html();
+			if($('#StorePhoneNumber div span a').get(0)){
+				StorePhoneNumber = $('#StorePhoneNumber div span a').html();
+			}
+			var spanItem = $('<span />', { text: 'Call '+StorePhoneNumber });
+			
+			var linkItem = $('<a />',{
+				html: spanItem,
+				href: 'tel:'+StorePhoneNumber,
+				class: 'fa fa-phone'
+			});
+			
+			var liItem = $('<li />', {html: linkItem});
+			$(liItem).css('display', StorePhoneNumberCss);
+			
+			$(liItem).appendTo('#SideAccountNavigationList');
+		}
+		
+		if($('.expandable a').hasClass('selected')) {
+			var MenuSelected = $('a.selected');
+			var ParentsLi = $('a.selected').parent('li');
+			var ParentSpanSelected = ParentsLi.parentsUntil( "li.RootLi" ).siblings('span');
+			MenuSelected.siblings('span').removeClass('subcat-expand');
+			MenuSelected.siblings('ul').addClass('expanded');
+			ParentsLi.parentsUntil( "li.RootLi" ).siblings('span').removeClass('subcat-expand');
+			ParentSpanSelected.siblings('ul').addClass('expanded');
+		}
+		
+		$('#SideAdditionalInformation .pages-menu li').each(function(){
+			var Url = window.location.href;
+			Url = stripQueryStringAndHashFromPath(Url);
+			if($(this).children('a').attr('href') == Url) {
+				$(this).children('a').addClass('selected');
+				if($(this).children('span').attr('class') != undefined) {
+					var SpanObj = $(this).children('span');
+					$(this).children('span').removeClass('subcat-expand');
+					SpanObj.siblings('ul').addClass('expanded');
+				}
+				$(this).parentsUntil( "li.HasSubMenu" ).first('ul').addClass('expanded');
+				var UlObj = $(this).parentsUntil( "li.HasSubMenu" ).first('ul');
+				UlObj.prev('span').removeClass('subcat-expand');
+			}
+		});
+		
+		$('.CurrencySelectorMobile h5').html('Currency - '+$('#currencyPrices').html().replace('are',''));
+		$('#SideCurrencySelectorMobile > div > div > .CurrencyList').html($('#SideCurrencySelectorDesktop > div > div >.CurrencyList').html());
+		if ($('#SideCurrencySelectorDesktop > div > div >.CurrencyList > .ChooseCurrencyBox').size() == 1 ) {
+   			$('#SideCurrencySelectorMobile .changeCurr').hide();
+   		}
+	});
+//]]>
+', 
+
+', 
+			', 
+  ', 
+    ', 
+      ',  ',  Loading... Please wait... ', 
+    ', 
+    
+        
+', 
+    ', 
+        ', 
+        ', 
+            ', 
+                ', Call us on ', 
+            ', 
+            ', 
+                
+            ', 
+            ', 
+                ',  ',  My Account', 
+            ', 
+            ', Gift Certificates', 
+            ', 
+               ',  ', Sign in',  or ', Create an account', 
+            ',    
+               
+               ', Legacy Orders', 
+            
+        
+        
+    ', 
+', 
+
+    ', 
+      ', 
+        ', 
+        ', 
+          ',  ', 
+ ', 
+        ', 
+        ', 
+          ', 
+    ', 
+        ', Search', 
+      ', 
+        
+        ', 
+                ',  
+        ', 
+        
+        
+        ', 
+    ', 
+', 
+
+', 
+    var QuickSearchAlignment = 'right';
+    var QuickSearchWidth = '390px';
+    lang.EmptySmallSearch = "You forgot to enter some search keywords.";
+    $(document).ajaxComplete(function() {
+        $('input[type=checkbox], select').not('.UniApplied').uniform();
+    });
+',   ', 
+          ', 
+    ', 
+        ', Search', 
+      ', 
+        
+        ', 
+                ',  
+        ', 
+        
+        
+        ', 
+    ', 
+', 
+
+', 
+    var QuickSearchAlignment = 'right';
+    var QuickSearchWidth = '390px';
+    lang.EmptySmallSearch = "You forgot to enter some search keywords.";
+    $(document).ajaxComplete(function() {
+        $('input[type=checkbox], select').not('.UniApplied').uniform();
+    });
+',   ', 
+          ', 
+            ',  ',  ', 
+          ', 
+          ',  ',  ',  ', 
+        ', 
+      ', 
+    ', 
+    ',  ', 
+ ', 
+  ', 
+', 
+', u"
+window.sloyalty = window.sloyalty || {};
+window.sloyalty.shop = 'planetapplique.com';
+window.sloyalty.key = '6742512a-8218-454b-83b7-c6fb8f2aa0d2';
+window.sloyalty.customer_id = '';
+window.sloyalty.customer_email = '';
+", 
+
+', 
+
+
+
+
+
+', 
+
+
+
+
+', 
+
+
+
+
+', 
+
+
+
+
+', 
+
+
+
+            ', 
+', 
+    $(window).load(function() {
+        $('.slide-show').flexslider({
+            slideshowSpeed: $('.slide-show').attr('data-swap-frequency') * 1000,
+            animation: "slide",
+            pauseOnHover: true,
+            controlNav: true,
+            directionNav: true
+        });
+    });
+', 
+            ', 
+	', 
+		', 
+	', 
+		', 
+			
+				', 
+					', 
+				', 
+                	', 
+					', 
+					', 
+					', Shop Valentines', 
+				', 
+		', 
+	', 
+', 
+	', 
+		', 
+			
+				', 
+					', 
+				', 
+                	', 
+					', 
+					', 
+					', 
+				', 
+		', 
+	', 
+', 
+	', 
+', 
+', 
+			', 
+				', 
+					', 
+    ', Planet Points Available to All Customers', LEARN MORE', 
+', 
+', 
+                    ', 
+                          ', 
+    ', Categories', 
+    ', Categories', 
+    ', 
+        ', 
+            ', 	', Filled Designs', 
+	
+	', 	', All Appliques', 
+	
+	', 	', Free Appliques', 
+	
+	', 	', Applique Alphabets', 
+	
+	', 	', Embroidery Fonts', 
+	
+	', 	', Appliques By Skill', 
+	', 	', Beginner Appliques', 
+	
+	', 	', Moderate Appliques', 
+	
+	', 	', Advanced Appliques', 
+	
+	', 
+	', 	', Holiday Appliques', 
+	', 	', Valentine Appliques', 
+	
+	', 	', Mardi Gras Appliques', 
+	
+	', 	', St Patricks Appliques', 
+	
+	', 	', Easter Appliques', 
+	
+	', 	', Mothers Day Appliques', 
+	
+	', 	', Fathers Day Appliques', 
+	
+	', 	', July 4th Appliques', 
+	
+	', 	', Back to School Appliques', 
+	
+	', 	', Halloween Appliques', 
+	
+	', 	', Thanksgiving Appliques', 
+	
+	', 	', Hanukkah Appliques', 
+	
+	', 	', Christmas Appliques', 
+	
+	', 
+	', 	', Appliques By Season', 
+	', 	', Spring Appliques', 
+	
+	', 	', Summer Appliques', 
+	
+	', 	', Fall Appliques', 
+	
+	', 	', Winter Appliques', 
+	
+	', 
+	', 	', Animal Appliques', 
+	
+	', 	', Birthday Appliques', 
+	
+	', 	', Food Appliques', 
+	
+	', 	', For Boys', 
+	
+	', 	', For Girls', 
+	
+	', 	', Miscellaneous Appliques', 
+	
+	', 	', Occupations', 
+	
+	', 	', People Appliques', 
+	
+	', 	', Sibling Appliques', 
+	
+	', 	', Sports Appliques', 
+	
+	', 	', Transportation Appliques', 
+	
+	', 	', Patches Appliques', 
+	
+	', 	', Word Appliques', 
+	
+	', 	', In the Hoop Designs', 
+	
+	', 
+        ', 
+        ', Share Your Project', 
+    ', 
+', 
+                          ', 
+                    ', 
+					', 
+						', 
+	', 
+		', 
+	', 
+		', 
+			
+				', 
+					', 
+				', 
+                	', 
+					', 
+					', 
+					', Shop Valentines', 
+				', 
+		', 
+	', 
+', 
+	', 
+		', 
+			
+				', 
+					', 
+				', 
+                	', 
+					', 
+					', 
+					', 
+				', 
+		', 
+	', 
+', 
+	', 
+', 
+', 
+						
+						
+						', 
+    ', Featured Products', 
+    ', 
+        ', 
+            ', 
+	', 
+		', 
+	', 
+	', 
+		', Birthday Dog Numbers', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', My First Christmas 2', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Wonderland Alpha', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Nice with a Touch of Naughty', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Lauren Font ', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Jersey Font', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Snowman Monogram Alpha', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Floral Arrow Applique', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Elf Feet Patch Applique', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Christmas Tree Crane', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Buck Silhouette Applique', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Floral Wreath Alpha', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Love Penguin Applique', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Royal Monogram Font', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Elf Laundry Applique', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Mr and Mrs Applique Set', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Laurel Alpha', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Penguin 2 Alpha', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Sled Alpha', 
+	', 
+	', $17.00',  ', $8.00', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+', 
+	', 
+		', 
+	', 
+	', 
+		', Santas Laundry Applique', 
+	', 
+	', $3.49',  ', $1.50', 
+	', 
+		', 
+	', 
+	', 
+		', Add To Cart', 
+	', 
+', 
+
+        ', 
+        ', 
+    ', 
+    ', 
+', 
+						', 
+						', 
+                        
+					', 
+                  
+				', 
+			', 
+			', 
+    ', 
+
+        
+', 
+    ', 
+    ', 
+        ', 
+                
+                ', Newsletter signup', 
+                 
+                 ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Name', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Email', 
+                                ', 
+                            ', 
+                            ', 
+                                
+                                ', 
+                                
+                            ', 
+                        ',     
+                    ', 
+        ', 
+        
+    ', 
+', 
+', 
+', 
+// <!--
+	$('#subscribe_form').submit(function() {
+		if($('#nl_first_name').val() == '') {
+			alert('You forgot to type in your first name.');
+			$('#nl_first_name').focus();
+			return false;
+		}
+
+		if($('#nl_email').val() == '') {
+			alert('You forgot to type in your email address.');
+			$('#nl_email').focus();
+			return false;
+		}
+
+		if($('#nl_email').val().indexOf('@') == -1 || $('#nl_email').val().indexOf('.') == -1) {
+			alert('Please enter a valid email address, such as john@example.com.');
+			$('#nl_email').focus();
+			$('#nl_email').select();
+			return false;
+		}
+
+		// Set the action of the form to stop spammers
+		$('#subscribe_form').append("<input type=\"hidden\" name=\"check\" value=\"1\" \/>");
+		return true;
+
+	});
+// -->
+', 
+
+
+
+        ', 
+            ', 
+                ', 
+                    ', More Info', 
+		', 
+		', Alphabet and Font Sizes', 
+		
+	', 	', 
+		', November 2016 Winners', 
+		
+	', 	', 
+		', About Us', 
+		
+	', 	', 
+		', Contact Us', 
+		
+	', 	', 
+		', FAQ', 
+		', 
+	', Understanding Planet Points', Access Old Orders', Where Are My Old Orders?', Using Store Credit', Information For Existing Customers', Login Problems', How to Download', How to Get Freebies', Unable to Complete Transaction', Gift Certificate Redemption', Sewing Issues', 
+', 
+	', 	', 
+		', Satisfaction Guarantee', 
+		
+	', 	', 
+		', Privacy Policy', 
+		
+	', 	', 
+		', Terms and Conditions', 
+		
+	', 	', 
+		', Blog', 
+		
+	', 
+', 
+                    ', Becca Lowder', Designer', 
+                    ', 
+                    ', 
+	', Connect with us', 
+	', 
+		', Facebook', Pinterest', YouTube', 
+	', 
+', 
+', 
+', 
+', 
+', 
+', 
+
+                    ', 
+                ', 
+            ', 
+        ', 
+
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', All prices are in ', USD', .',  ', © 2009-2017 Planet Applique Inc',  ', |',  ', Sitemap', 
+
+                    ', 
+                    
+                ', 
+                
+            ', 
+        ', 
+
+    ', 
+', 
+
+', 
+  //<![CDATA[
+   $(document).ready(function(){
+        $('.footer-columns div.one-quarter').each(function(){
+         if($(this).find('ul.sf-menu>li>a').length > 10) {
+            var obj = $(this).find('ul.sf-men);
+            $('<strong><a href="javascript:void(0);" class="ToggleList">Show all</a></strong>').insertAfter(obj);
+         }
+         var i = 0;
+         $(this).find('ul.sf-menu>li>a,ul.treeview>li>a').each(function(){
+            if(i >= 10) {
+                $(this).closest('li').css('display','none');
+            }
+            i++;
+         });
+        });
+
+        $('.footer-columns .ToggleList').on('click',function() {
+            $(this).parent().siblings('ul').children('li:gt(9)').slideToggle('fast');
+            $(this).text($(this).text() == 'Show all' ? 'Show less' : 'Show all');
+        });
+
+   });
+  //]]>
+', 
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+
+', 
+$(document).ready(function() {
+	// attach fast cart event to all 'add to cart' link
+	$(".ProductActionAdd a[href*='cart.php?action=add']").click(function(event) {
+		fastCartAction($(this).attr('href'));
+		return false;
+	});
+});
+', 
+
+
+		
+	']
