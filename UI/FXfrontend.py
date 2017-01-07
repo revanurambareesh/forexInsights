@@ -36,7 +36,7 @@ class Ui_Dialog(object):
         Dialog.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         Dialog.setMouseTracking(True)
         self.plainTextEdit_git = QtGui.QPlainTextEdit(Dialog)
-        self.plainTextEdit_git.setGeometry(QtCore.QRect(310, 420, 271, 21))
+        self.plainTextEdit_git.setGeometry(QtCore.QRect(340, 420, 271, 21))
         self.plainTextEdit_git.setObjectName(_fromUtf8("plainTextEdit_git"))
         self.pushButtonTrain = QtGui.QPushButton(Dialog)
         self.pushButtonTrain.setGeometry(QtCore.QRect(20, 230, 111, 41))
@@ -51,7 +51,7 @@ class Ui_Dialog(object):
         self.pushButton_stage1.setGeometry(QtCore.QRect(90, 420, 91, 23))
         self.pushButton_stage1.setObjectName(_fromUtf8("pushButton_stage1"))
         self.label_team = QtGui.QLabel(Dialog)
-        self.label_team.setGeometry(QtCore.QRect(120, 0, 131, 16))
+        self.label_team.setGeometry(QtCore.QRect(430, 0, 131, 16))
         self.label_team.setObjectName(_fromUtf8("label_team"))
         self.label_name = QtGui.QLabel(Dialog)
         self.label_name.setGeometry(QtCore.QRect(0, 0, 121, 16))
@@ -61,10 +61,11 @@ class Ui_Dialog(object):
         self.progressBar.setProperty("value", 24)
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
         self.label_status = QtGui.QLabel(Dialog)
-        self.label_status.setGeometry(QtCore.QRect(400, 100, 46, 13))
+        self.label_status.setGeometry(QtCore.QRect(325, 100, 191, 20))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_status.setFont(font)
+        self.label_status.setAlignment(QtCore.Qt.AlignCenter)
         self.label_status.setObjectName(_fromUtf8("label_status"))
         self.textBrowserInsights = QtGui.QTextBrowser(Dialog)
         self.textBrowserInsights.setGeometry(QtCore.QRect(310, 180, 231, 192))
@@ -81,13 +82,26 @@ class Ui_Dialog(object):
         self.label_status_desc = QtGui.QLabel(Dialog)
         self.label_status_desc.setGeometry(QtCore.QRect(320, 150, 221, 16))
         self.label_status_desc.setObjectName(_fromUtf8("label_status_desc"))
+        self.line = QtGui.QFrame(Dialog)
+        self.line.setGeometry(QtCore.QRect(-3, 30, 571, 20))
+        self.line.setFrameShape(QtGui.QFrame.HLine)
+        self.line.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line.setObjectName(_fromUtf8("line"))
+        self.line_2 = QtGui.QFrame(Dialog)
+        self.line_2.setGeometry(QtCore.QRect(-10, 70, 571, 20))
+        self.line_2.setFrameShape(QtGui.QFrame.HLine)
+        self.line_2.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line_2.setObjectName(_fromUtf8("line_2"))
+        self.pushButton_Stop = QtGui.QPushButton(Dialog)
+        self.pushButton_Stop.setGeometry(QtCore.QRect(150, 240, 111, 23))
+        self.pushButton_Stop.setObjectName(_fromUtf8("pushButton_Stop"))
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(_translate("Dialog", "Forex Insights", None))
-        self.plainTextEdit_git.setPlainText(_translate("Dialog", "Hosted on Git: @revanurambareesh/forexInsights", None))
+        self.plainTextEdit_git.setPlainText(_translate("Dialog", "github: @revanurambareesh/forexInsights", None))
         self.pushButtonTrain.setText(_translate("Dialog", "Train model with \n"
 "scraped data", None))
         self.pushButtonTest.setText(_translate("Dialog", "Get insights for\n"
@@ -112,7 +126,8 @@ class Ui_Dialog(object):
         self.label_csvData.setText(_translate("Dialog", "Info:\n"
 "Dataset: Found data/dataset.csv\n"
 "Model: Found at data/model/naiveBayes.pkl", None))
-        self.label_status_desc.setText(_translate("Dialog", "Status Descriptiion", None))
+        self.label_status_desc.setText(_translate("Dialog", "Status Description", None))
+        self.pushButton_Stop.setText(_translate("Dialog", "Stop Thread", None))
 
 
 if __name__ == "__main__":

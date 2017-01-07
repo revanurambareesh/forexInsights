@@ -7,9 +7,11 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.externals import joblib
 import datetime
 import time
+from PyQt4 import QtGui
+from PyQt4 import QtCore
 
-X=[]
-y=[]
+X = []
+y = []
 
 '''
 --Usage--
@@ -42,83 +44,107 @@ GaussianNB(priors=None)
 
 '''
 
+
 def keywordPresenceTester(company, keyword):
-	numOfFiles = folderFileInfo.numOfFiles(company)
-	listOfFiles = folderFileInfo.getNonEmptyFiles(company)	
-	
-	#print company
-	#print keyword[0]
+    numOfFiles = folderFileInfo.numOfFiles(company)
+    listOfFiles = folderFileInfo.getNonEmptyFiles(company)
 
-	frequency=0
-	for scrapedFile in listOfFiles:
-		#print scrapedFile
-		scrapedData=''
-		with open(scrapedFile, 'rb') as f:
-			scrapedData=f.read()
-		if keyword[0] in scrapedData:
-			frequency+=1
-	if 10 * frequency >= numOfFiles:
-		return True
-	else:
-		return False
+    # print company
+    # print keyword[0]
 
-def makeDataSet():
-	homeList = os.listdir(os.getcwd() + '\data\\train_data\\')
-	keywordFile = 'data\\definitions\\oriList.csv'
-	keywordList=[]
-	
-	with open(keywordFile, 'rb') as f:
-				reader = csv.reader(f)
-				keywordList = list(reader)
+    frequency = 0
+    for scrapedFile in listOfFiles:
+        # print scrapedFile
+        scrapedData = ''
+        with open(scrapedFile, 'rb') as f:
+            scrapedData = f.read()
+        if keyword[0] in scrapedData:
+            frequency += 1
+    if 10 * frequency >= numOfFiles:
+        return True
+    else:
+        return False
 
-	i=0
-	for company in homeList:
-		print 'count: ', i
-		i+=1	
-		#i+=1
-		#if i>5:
-		#	break
 
-		# X vector for each of the company
-		Xvector=[]
-		for key in keywordList:
-			if keywordPresenceTester(company, key):
-				Xvector.append(1)
-			else:
-				Xvector.append(0)
+def makeDataSet(UIobject):
+    homeList = os.listdir(os.getcwd() + '\data\\train_data\\')
+    keywordFile = 'data\\definitions\\oriList.csv'
+    keywordList = []
 
-		print 'y=',company,'\nX:',Xvector, '\n'
-		# label
-		yVal = ord(company[0])-ord('0')
+    with open(keywordFile, 'rb') as f:
+        reader = csv.reader(f)
+        keywordList = list(reader)
 
-		with open(os.getcwd()+'\data\model\dataset_X-y\\'+company+'.json', "w") as jsonF:
-			jsonF.write(json.dumps(Xvector))
-			#similarly to read Xvector, Xvector=json.loads('txt_from_json')
+    i = 0
 
-		X.append(Xvector)
-		y.append(yVal)
+    for company in homeList:
+        print 'count: ', i
+        i += 1
+        # i+=1
+        # if i>5:
+        #	break
 
-def trainMLmodel():
-	makeDataSet()
-	DataSetX = np.array(X)
-	DataSety = np.array(y)
+        # X vector for each of the company
+        Xvector = []
+        for key in keywordList:
+            if keywordPresenceTester(company, key):
+                Xvector.append(1)
+            else:
+                Xvector.append(0)
 
-	clf = GaussianNB()
-	clf.fit(DataSetX, DataSety)
+        print 'y=', company, '\nX:', Xvector, '\n'
+        # label
+        yVal = ord(company[0]) - ord('0')
 
-	
-	if os.path.exists('data\\model\\naiveBayes.pkl'):
-		print 'Old model detected .. Safely archiving it at..'
-		print os.getcwd() + "\data\\model\\archive_model\\model_"+time.strftime("%Y%m%d%H%M%S")+'.pkl'
-		os.rename(os.getcwd() + "\data\\model\\naiveBayes.pkl", os.getcwd() + "\data\\model\\archive_model\\model_"+time.strftime("%Y%m%d%H%M%S")+'.pkl')
+        with open(os.getcwd() + '\data\model\dataset_X-y\\' + company + '.json', "w") as jsonF:
+            jsonF.write(json.dumps(Xvector))
+        # similarly to read Xvector, Xvector=json.loads('txt_from_json')
 
-	joblib.dump(clf, 'data\\model\\naiveBayes.pkl')
-	
-	print 'Model saved at ', 'data\\model\\naiveBayes.pkl'
+        ### 80% contrib
+        stat = 'y='+ company
+        UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), int((float(i) / len(homeList)) * 80))
+        UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
-	#print DataSety
+        X.append(Xvector)
+        y.append(yVal)
+
+
+def trainMLmodel(UIobject):
+    makeDataSet(UIobject)
+
+    ### 20% contrib
+    stat = 'Training Model'
+    # UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), int((float(i) / endIndex) * 80))
+    UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
+
+    DataSetX = np.array(X)
+    DataSety = np.array(y)
+
+    clf = GaussianNB()
+    clf.fit(DataSetX, DataSety)
+
+    stat = 'Backing up previous model ...'
+    UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 95)
+    UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
+
+    if os.path.exists('data\\model\\naiveBayes.pkl'):
+        print 'Old model detected .. Safely archiving it at..'
+        print os.getcwd() + "\data\\model\\archive_model\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl'
+        os.rename(os.getcwd() + "\data\\model\\naiveBayes.pkl",
+                  os.getcwd() + "\data\\model\\archive_model\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
+
+    joblib.dump(clf, 'data\\model\\naiveBayes.pkl')
+
+    print 'Model saved at ', 'data\\model\\naiveBayes.pkl'
+
+    stat = 'Model Trained'
+    UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 100)
+    UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
+
+
+# print DataSety
 
 if __name__ == '__main__':
-	trainMLmodel()	
-	print 'DatasetX:',X
-	print 'Label:',y
+    trainMLmodel()
+    print 'DatasetX:', X
+    print 'Label:', y

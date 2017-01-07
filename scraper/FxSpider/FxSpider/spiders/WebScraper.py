@@ -2,6 +2,8 @@ import scrapy
 from twisted.internet import reactor, defer
 from scrapy.utils.log import configure_logging
 from scrapy.crawler import CrawlerRunner
+from PyQt4 import QtGui
+from PyQt4 import QtCore
 
 '''
 SAMPLE data for __main__
@@ -53,39 +55,61 @@ class MySpider(scrapy.Spider):
             yield scrapy.Request(response.urljoin(next_page_url), self.parse)
 
 @defer.inlineCallbacks
-def crawl(univList, runner):
-    for link2D in univList: 
+def crawl(univList, runner, UIobject):
+    i=0
+    init_prog_val = UIobject.progressBar.value()
+    #75% contribution
+
+    for link2D in univList:
+        stat = 'scraping '+ link2D[0][0]
+        UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), int(init_prog_val+(float(i)/len(univList))*75))
+        UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
+        
         print 'link getting scraped is: ', link2D[0][0]
         print 'Filename is: ', link2D[1]
         yield runner.crawl(MySpider, link2D[0][0], link2D[1])
+
+        i += 1
+
+    stat = 'Completed Scraping from Web!'
+    UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 100)
+    UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
+    
     reactor.stop()
 
-def startReactor(univList):
+def startReactor(univList, UIobject):
     configure_logging()
     runner = CrawlerRunner()
-    crawl(univList, runner)
+    crawl(univList, runner, UIobject)
     reactor.run()
 
 @defer.inlineCallbacks
 def crawl_dep(urlList, FileList, runner):
-	i=0
-	for urlLink in urlList:
-		print 'VALUE OF i IS: ', str(i)		
-		print 'Filename is: ', FileList[i]
-		yield runner.crawl(MySpider, urlLink, FileList[i])
-		i=i+1
-	reactor.stop()
+    i=0
+    for urlLink in urlList:
+        print 'VALUE OF i IS: ', str(i)
+        print 'Filename is: ', FileList[i]
+        yield runner.crawl(MySpider, urlLink, FileList[i])
+        i=i+1
+    reactor.stop()
 
 def startReactor_dep(UrlL, FileL):
-	configure_logging()
-	runner = CrawlerRunner()
-	crawl_dep(UrlL, FileL, runner)
-	reactor.run()
+    configure_logging()
+    runner = CrawlerRunner()
+    crawl_dep(UrlL, FileL, runner)
+    reactor.run()
 
 if __name__ == '__main__':
-	j=0
-	for urlLink in UrlL:
-		FileL.append('data\sample.info.old\\'+str(j)+'.txt')
-		j=j+1
-	startReactor_dep(UrlL, FileL)
+    j=0
+    for urlLink in UrlL:
+        FileL.append('data\sample.info.old\\'+str(j)+'.txt')
+        j=j+1
+    startReactor_dep(UrlL, FileL)
 
+def informStatus(UIobject, stat):
+    i=0
+    while 1:
+       UIobject.sleep(2)
+       UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), i)
+       UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
+       i=i+1

@@ -94,6 +94,7 @@ Built in QtDesigner and saved as *.ui file
 https://www.youtube.com/watch?v=ivcxZSHL7jM   ---PyQt Progress bar with Thread: YouTube video
 
 PATH to UI file >> Path..\Anaconda2\Lib\site-packages\PyQt4\pyuic4.bat -x FXfrontend.ui -o FXfront.py
+C:\Users\Ambareesh\Anaconda2\Lib\site-packages\PyQt4\pyuic4.bat -x FXfrontend.ui -o FXfrontend.py
 
 ### Changing Paths
 os.chdir("/path/to/change/to") #relative-- "/name" OR ".."
