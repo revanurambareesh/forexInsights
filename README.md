@@ -3,7 +3,7 @@ Scraping and providing *insights* for your business using NLP
 
 **(WORK IN PROGRESS!! This project is by no means complete or error free just as yet.)**
 
-*Data collected is about 100MB. Since Data is uploaded here, the repository is large and is downloadable as zip file with 20MB*
+*Data scraped from web is about 450MB. Since Data is uploaded here, the repository is large and is downloadable as zip file of about 90MB*
 
 Author: **Ambareesh Revanur**  ([more](https://in.linkedin.com/in/ambareeshr))
 *Innovation hack!*
