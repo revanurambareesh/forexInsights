@@ -1,0 +1,5237 @@
+[
+', 
+   ', 
+   ', 
+   ', 
+	var urlArray = ["/article/", "/content/", "/budget/"];
+	var blockThisUrl = false;
+	for (checkedUrl = 0; checkedUrl < urlArray.length; checkedUrl++) { 
+		if(document.location.pathname.indexOf(urlArray[checkedUrl]) !== -1){
+			blockThisUrl = true;
+		}
+	}
+	var subs_pw = getCookie('_pw');
+	if((typeof adsLoaded != 'undefined')  == false && (subs_pw == null || subs_pw != 't') && blockThisUrl){
+		console.log("adBlocker");
+		$("#main-warp").hide();
+		$("body").load("/adBlocker.html");
+		$("head").html("");
+		$("body").addClass("mainbg");
+	}
+	', 
+      ', 
+	        ', 
+		', 
+		', 
+    ', 
+              ', 
+        ', 
+          ', 
+          	', 
+			', Home', Markets', Companies', Opinion', Politics', Technology', Specials', PF', Portfolio', My Page', Budget 2017', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', North', East', West', South', Election', News', Mobiles & Tablets', Apps', People', Computers', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017',            	', 
+
+          ', 
+          ', 
+            ', BS APPS
+            ', 
+           ', 
+                ', iPad', 
+                ', iPhone', 
+                ', Android', 
+                ', Wap', 
+              ', 
+            ', 
+
+            ', 
+           ', BS PRODUCTS
+           ', 
+           ', 
+				', Smart Investor', 
+				', BS Hindi', 
+			    ', BS Motoring', 
+			    ', BS Books', 		    
+			    ', u"Today's Paper", 			    
+			    ', 
+			    ', Economy & Industry', 
+              ', 
+            ', 
+
+            ', 
+           ', BS SPECIALS
+           ', 
+           ', 
+                ', B2B Connect', 
+                ', Power & Energy', 
+                ', SME', 
+              ', 
+            ', 
+			
+		   ', 
+			', BS E-Paper', 
+           ', 
+
+          ', 
+           ', 
+        ', 
+
+          ', 
+          ', 
+        		.displayNone{display: none !important;}
+          ', 
+          ', 
+          				', 
+			', Hi', , ', 
+			', 
+				', 
+	                	                ', Change Password', 
+	                            			', Subscribe', 
+			 			                ',  Sign out', 
+              ', 
+			 ', 
+	                ', Change Password',             		
+					', Manage My Account', 
+					', 
+	                ',  Sign out', 
+              ', 
+			', 
+			            ', SIGN IN', 
+            ', Subscribe', 
+			          ', 
+          ', 
+          	function getLoginCookie(cname) {
+	      	    var name = cname + "=";
+	      	    var ca = document.cookie.split(';');
+	      	    for(var i=0; i<ca.length; i++) {
+	      	        var c = ca[i];
+	      	        while (c.charAt(0)==' ') c = c.substring(1);
+	      	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+	      	    }
+	      	    return "";
+      		}
+      		var usrLoginCookie = getLoginCookie('_userLoggedIn');
+          	if(usrLoginCookie == ''){
+				$(".userNotLoggedIn").removeClass('displayNone');
+            }else{
+            	$(".userLoggedIn").removeClass('displayNone');
+            	var usrObj = decodeURIComponent(usrLoginCookie);			
+				usrObj = JSON.parse(usrObj);				
+				usrObj.ufname = usrObj.ufname.replace(/\+/g, ' ');
+            	$(".ucnameSpan").html(decodeURIComponent(usrObj.ufname));	
+            	if(usrObj.s == 't'){
+                	$(".usrSubcribe a").html('Manage My Account');
+					$(".usrSubcribe a").attr("href", "/subscription-cart/manage");					
+                }else{                	
+					var subExp = getLoginCookie('_sub_exp');					
+                    if(subExp!=''){                    	
+						var timestamp = Math.floor(Date.now() / 1000);						
+						if((timestamp.toString().length == subExp.length) && (subExp<timestamp) ){
+							$(".manageMyAccount").show();
+							$(".usrSubcribe a").html('Subscribe');
+						}else{
+							$(".usrSubcribe a").html('Manage My Account');
+							$(".usrSubcribe a").attr("href", "/subscription-cart/manage");		
+						}
+                    }else{
+                		$(".usrSubcribe a").html('Subscribe');						
+						$(".manageMyAccount").show();
+                    }
+                }
+
+                if(usrObj.r == "f"){
+                	$(".siteSignout a").click(function(){
+                		FB.logout();
+                    });
+                }else if(usrObj.r == "t"){
+                	$(".siteSignout a").click(function(){
+                		twttr.anywhere.signOut();
+                    });
+                }
+            }
+          ', 
+          ', 
+            ', 
+                   ', 
+					',  ', 
+					',  ', 
+                    ',  ', 
+					',  ', 
+					',  ', 
+					',  ', 
+					',  ', 
+            		                   ', 
+                   ', 
+               ', 
+          ', 
+           ', 
+        ', 
+         ', 
+        ', 
+         ', 
+   ', 
+        ', 
+		', 
+						', 
+			', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/Web_chat_175x60_left', [175, 60], 'div-gpt-ad-1480487618894-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1480487618894-0'); });
+", 
+', 			', 
+					', 
+		', 
+						', 
+			', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/webchat_earpanel_175x60', [175, 60], 'div-gpt-ad-1479738033184-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479738033184-0'); });
+", 
+', 			', 
+					', 
+		', 
+        ', 
+            ', 
+            ', 
+                    ', 
+        ', 
+
+		', 
+		', 
+    ', 
+
+
+
+   ', 
+    ', 
+        ', 
+        ', 
+      ', 
+      ', 
+		.second-menu-panel{z-index:9999999 !important;}
+		.top-menu{z-index:10000000 !important;}
+      	.fancybox-overlay,#fancybox-overlay{z-index:10000001 !important;}
+		#overlay{z-index:10000002 !important;}
+		.popup,#fancybox-wrap{z-index:10000003 !important;}
+		#fancybox-content{min-height: 380px;min-width:600px;}
+		#fancybox-wrap{min-width: 640px;}
+		#menu li.drop{padding: 8px 10px 8px 2px;}
+      ', 
+   
+   ', 
+   ', 
+      ', 
+      ',  ', Company',  ',  Science & Technology',  ',  ',       ', 
+      ', 
+       ', 
+      ', 
+          ', 
+          ', 
+          ', 
+            ', 
+               ', News', 
+				', Stock Quote', 
+				', Authors', 
+            ', 
+            ', 
+             ', 
+
+          ', 
+          ', 
+          ', 
+          ', 
+
+          ', 
+	         
+	          $("#select_type").change(function(){
+	          	document.cookie="selectType=" + $(this).val();
+           	  });
+	           getCookieAndSetDefault("selectType");
+	         
+	          
+	          function getCookieAndSetDefault(c_name){
+					var c_value = document.cookie;console.log(c_value);
+					var c_start = c_value.indexOf(" " + c_name + "=");
+					if (c_start == -1){
+						c_start = c_value.indexOf(c_name + "=");
+					}
+					if (c_start == -1){
+						c_value = null;
+					}
+					else{
+						c_start = c_value.indexOf("=", c_start) + 1;
+						var c_end = c_value.indexOf(";", c_start);
+					if (c_end == -1){
+						c_end = c_value.length;
+					}
+					c_value = unescape(c_value.substring(c_start,c_end));
+					}
+
+					if(c_value != 'null' && c_value != null){
+						$("#select_type").val(c_value);
+					}
+	         }
+	          
+          ', 
+		  
+    ', 
+	var companyJsonFile = "";
+	
+	function getCompaniesJson() {
+		var o = $("#head-suggest");
+		objHiddenValField = "";
+		if (objHiddenValField == undefined || objHiddenValField == "") {
+			objHiddenValField = $("#company_code");
+		}
+
+		$.ajax({
+			url : "/api-handler/article/get-company-json",
+			cache : true,
+			success : function(data) {
+				var jsonObj = eval(data);
+				companyFileLoaded = true;
+				companyJsonFile = jsonObj;
+
+				
+				$(o).autocomplete({
+					source: function (request, response) {
+				            var term = $.ui.autocomplete.escapeRegex(request.term)
+				                , startsWithMatcher = new RegExp("^"+ term, "i")
+				                , startsWith = $.grep(companyJsonFile, function(value) {
+				                    return (startsWithMatcher.test(value.value) || (startsWithMatcher.test(value.compSym)));
+				                })
+				                
+				                , containsMatcher = new RegExp(term, "i")
+				                , contains = $.grep(companyJsonFile, function (value) {
+				                    return $.inArray(value, startsWith) < 0 &&
+				                        (containsMatcher.test(value.value) || (containsMatcher.test(value.compSym)));
+				                });
+				            response(startsWith.concat(contains));
+				        },
+					minLength : 3,
+					autoFocus : true,
+					disabled : false,
+					select : function(event, ui) {
+						$(objHiddenValField).val(ui.item.compId);
+						$(o).val(ui.item.compFormatted);
+						$objForm = $(o).closest("form");
+						if ($objForm.attr("name") != "frm_equity") {
+							$objForm.submit();
+						}
+					},
+					open : function() {
+						$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+					},
+					close : function() {
+						$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+					}
+				}).data("autocomplete")._renderItem = function(ul, item) {
+					var result = String(item.label).replace(new RegExp(this.term, "gi"),"<b>$&</b>");
+					return $( "<li></li>" )
+	                      .data( "item.autocomplete", item )
+	                      .append($( "<a></a>" ).html(result))
+	                      .appendTo( ul );
+
+				};
+
+			}
+		});
+	}
+	', 
+
+
+		', 
+		$("#select_type").change(function(){
+			var itemVal = $(this).val();
+			if(itemVal == 'news'){
+				$("#radio_news").attr("checked","checked");
+				$("#radio_news").trigger("click");
+			}else if(itemVal == 'stocks'){
+				$("#radio_stock").attr("checked","checked");
+				$("#radio_stock").trigger("click");
+			}else if(itemVal == 'authors'){
+				$("#radio_authors").attr("checked","checked");
+				$("#radio_authors").trigger("click");
+			}
+		});
+		$(document).ready(function(){
+			var itemVal = $('#select_type').val();
+			if(itemVal == 'news'){
+				$("#radio_news").attr("checked","checked");
+				$("#radio_news").trigger("click");
+			}else if(itemVal == 'stocks'){
+				$("#radio_stock").attr("checked","checked");
+				$("#radio_stock").trigger("click");
+			}else if(itemVal == 'authors'){
+				$("#radio_authors").attr("checked","checked");
+				$("#radio_authors").trigger("click");
+			}
+		});
+		$("#search_btn").click(function(){
+			$("#search_box_text").val($("#head-suggest").val());
+			$("#frm_search").submit();
+		});
+
+		$("#head-suggest").keypress(function(e){
+			if(e.charCode == 13){
+				$("#frm_search").submit();
+			}
+		});
+		', 
+
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		',  News', 
+		',  
+		', 
+		',  Stock Quote', 
+		',  
+		', 
+		',  Authors', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+
+      ', 
+      ', 
+
+      ', 
+
+   ', 
+     ', 
+    ',     ', 
+    
+     ', 
+			', u"
+		<!--
+		.breadcrum{ padding:5px 0 5px 10px; margin-bottom:-5px;  font-family: 'Open Sans', sans-serif; font-weight:400; color:#888; border-bottom: 1px solid #c4c6c8;}
+		.breadcrum a{ font-size:13px;} 
+		.breadcrum a:hover{ color:#c31316; text-decoration:underline;}
+		.breadcrum a.bact{color:#c31316; text-decoration:none;}
+		.breadcrum a {text-transform: none;}
+		-->
+		", 
+		',  You are here: ', Home',  » ', Companies',  » ', News',     ', 
+    ', 
+    ', 
+', 
+	$(document).ready(function(){
+		 $(".iframe").fancybox({
+		     maxWidth	: 600,
+			 maxHeight	: 580,
+			fitToView	: false,
+			autoSize	: false,
+			closeClick	: false,
+			href		: '/core/request-handler/sign-in-content',
+			openEffect	: 'none',
+			closeEffect	: 'none'
+	
+		});
+	$('.fancybox').fancybox();
+	});
+', 
+', 
+
+', 
+//Bs New Menu 
+   	$("#newMenuNavigationSecond").html($("#newMenuNavigationSecondHide").html());
+   	$("#newMenuNavigationSecondHide").html("");
+		$('.select_sub').first().removeClass('default-disp');
+		var mid = '287';
+		var rel = $('#nav_menu_' + mid).attr('rel');
+		if (rel != undefined && rel != '') {
+			$('#nav_menu_' + rel).addClass('activelink');
+			$('#nav_menu_' + mid).addClass('activelink');
+			$('#nav_menu_' + rel).parent().find('.select_sub').addClass('default-disp');		
+			$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+		} else {
+			$('#nav_menu_' + mid).addClass('activelink');
+			if($('#nav_menu_' + mid).parent().find('.select_sub').length==0){
+				$(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+				$(".nav-outer-repeat").css("height","62px");
+			}else{
+				$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+				$(".nav-outer-repeat").css("height","62px");
+			}
+		}
+		$('.select').mouseenter(function() {
+			
+			 $( ".select" ).each(function() { 
+				 if(($(this).find('.activelink').length>0)){
+					 $(this).find('.select_sub').removeClass('default-disp');
+					 $(this).find('li').removeClass('activelink');
+				 }
+				 
+		    });
+		      if(!($(this).find('.select_sub').length>0)){
+		    	     $(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+		    	     $(".nav-outer-repeat").css("height","62px");
+			  }else{ 
+				    $(".nav-new").find('.select:first').find('.select_sub').removeClass('default-disp');
+				 	$(".nav-outer-repeat").css("height","62px");
+			  }
+	     });
+		 
+		 $('.nav-outer').mouseleave(function() {
+			 if (rel != undefined && rel != '') {
+					$('#nav_menu_' + rel).addClass('activelink');
+					$('#nav_menu_' + mid).addClass('activelink');
+					$('#nav_menu_' + rel).parent().find('.select_sub').addClass('default-disp');		
+					$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+					$(".nav-outer-repeat").css("height","62px");
+				}else{
+					if($('#nav_menu_' + mid).parent().find('.select_sub').length==0){
+						$(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+						$(".nav-outer-repeat").css("height","62px");
+					}else{
+						$(".nav-new").find('.select:first').find('.select_sub').removeClass('default-disp');
+						$('#nav_menu_' + mid).addClass('activelink');
+						$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+						$(".nav-outer-repeat").css("height","62px");
+					}
+					
+			 }
+	    }); 
+		 
+		  $('.activelink').mouseenter(function() {
+	       $('.activelink').first().addClass('nolink');
+	    }); 
+	', 
+
+
+', 
+', 		', 
+
+		', 
+	    ', 
+', u"
+ var googletag = googletag || {};
+ googletag.cmd = googletag.cmd || [];
+ (function() {
+   var gads = document.createElement('script');
+   gads.async = true;
+   gads.type = 'text/javascript';
+   var useSSL = 'https:' == document.location.protocol;
+   gads.src = (useSSL ? 'https:' : 'http:') +
+     '//www.googletagservices.com/tag/js/gpt.js';
+   var node = document.getElementsByTagName('script')[0];
+   node.parentNode.insertBefore(gads, node);
+ })();
+", 
+
+', 
+
+', 
+span.p-content{font-family: 'Open Sans',sans-serif;font-size: 15px;line-height: 24px;}
+span.p-content a{color: #2591dc; text-decoration: none;}
+.bBorder1{border-bottom:1px solid #c4c6c8!important;}
+li.size16 .bB1:last-child{border-bottom: 0px !important;}
+.colL_MktColumn1.panel-left .banner240-180 div[style="float: left;"] div[style="float: left; clear: both; font-style:italic; padding: 10px 10px 10px 0px; width:620px;"]{
+width:100% !important;
+}
+/** CSS Changes for follow Columnist **/ 
+.unlock_bg {padding: 8px 15px;height: 44px;background: #EEE none repeat scroll 0% 0%;border-width: 1px 1px 1px 4px;border-style: solid;border-color: #FFF #FFF #FFF #AC2122; box-shadow: 0px 0px 10px 0px #D6D6D6;font-family: "Open Sans",sans-serif; font-size: 16px;color: #1D1D1D;font-weight: 600;width: 640px;}
+.unlock_bg ul{margin:0px; padding:0px;}
+.unlock_bg ul li{list-style-type:none; float:left;}
+.unlock_bg .unlock{padding:3px 0px 0px 10px; vertical-align:middle;}
+.unlock_bg .unlock a{text-decoration:none; color:#1d1d1d;}
+.unlock_bg .circle {width: 22px;height: 22px;background-color:#ac2122;-moz-border-radius: 70px;-webkit-border-radius: 70px;border-radius: 70px;text-align:center; color:#fff;margin-left:45px; margin-top:3px;}
+.unlock_bg .article{padding:3px 0px 0px 10px; vertical-align:middle; color:#017e22;}
+.unlock_bg .article a{text-decoration:none; color:#017e22;}
+.columnist{ padding:6px 10px; border:0; display:block; background:#4d5557; color:#fff; font-size:14px;cursor:pointer;}
+.modal {opacity: 0;visibility: hidden;position: fixed;top: 0;right: 0;bottom: 0;left: 0;text-align: left;transition: opacity .25s ease; z-index:999; position:relative;}
+.modal__bg {position: relative;  top: 0;right: 0;bottom: 0;left: 0;cursor: pointer;}
+.modal-state {display: none;}
+.modal-state:checked + .modal {opacity: 1;visibility: visible;}
+.modal-state:checked + .modal .modal__inner {top: 0px;}
+.modal__inner {transition: top .25s ease;position: relative;top: 0px;right: 0;bottom: 0;left: 0px;width:640px;margin: auto;overflow: auto;background: #eeeeee;padding:10px 15px;height:70px;
+  border-top:1px solid #fff;border-right:1px solid #fff;border-bottom:1px solid #fff;border-left:4px solid #ac2122;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(214,214,214,1);-moz-box-shadow: 0px 0px 10px 0px rgba(214,214,214,1);
+  box-shadow: 0px 0px 10px 0px rgba(214,214,214,1);font-family: 'Open Sans', sans-serif;  font-size:15px; color:#1d1d1d; line-height:22px;
+}
+.modal__inner_left {width:70%; float:left;}
+.modal__inner_right {width:30%; float:right;}
+.modal__close {position: absolute;right: 10px;top: 20px;width: 70px;height: 24px;cursor: pointer;background-color: #AC2122; font-size:13px; font-weight:normal;border-radius:2px; text-align:center; color:#fff;}
+.modal__proceed {position: absolute;right: 90px;top: 20px;width: 70px;height: 24px;cursor: pointer;background-color: #0a6d02; font-size:13px; font-weight:normal;border-radius:2px; text-align:center; color:#fff;}
+
+
+/** MEDIA **/
+
+@media (max-width: 768px) { 
+
+.modal__inner {width: 692px;}
+.floatR{float:right!important;}
+.unlock_bg { width: 692px;}
+}
+', 
+
+', 
+
+', 
+	', 
+		', 
+			', 
+				', Coal India to increase coal production to 1,000 mn tonnes in 4 years', 
+				', 
+			', 
+		', 
+		', 
+	', 
+	', 
+		', 
+			', 
+				', BackOffice Associates opens GDCs in Hyderabad, Bengalur, 
+				', 
+			', 
+		', 
+		', 
+	', 
+', 
+
+
+	  						', 
+			', 
+	        	', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1474961759587-0'); });
+", 
+', 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="95"; var zflag_sid="0"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14"; 
+', 
+', 
+
+', document.write("<!--"); if(isUserBanner=="fis") document.write("-->"); ',  ', $("#id_3_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_fis-1480077568.png"); ', document.write("<!--"); if(isUserBanner=="kotak") document.write("-->"); ',  ', $("#id_4_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_kotak-1480077568.jpg"); ', document.write("<!--"); if(isUserBanner=="capgemini") document.write("-->"); ',  ', $("#id_5_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_capgemini-1480077568.jpg"); ', 	       		', 
+		
+	  	   		  		    		', Business Standard', 
+  		
+	', 
+    ', 
+		', 
+        	   
+	   ', 
+	   ', 
+	   
+        ', 
+      	', 
+      	        ', 
+			', 
+	        	', 
+	          	', 
+					  					  
+					 ', u"
+					 					 India Power Corporation to acquire Meenakshi Energy's 89% net worth					 ", 
+				  					   		', IPC will be buying the 89% stake held by France-based Engie', 
+				   	
+					', 
+					', 
+						  ', 
+							  ', 
+								  								  ', BS Reporter',  								  								  | 
+								  								  								  ', Kolkata',  							  ', 
+							  							  ', 
+							  ', February 25, 2016							  Last Updated at 14:42 IST', 
+							  						', 
+					  	
+
+											      ', 
+					   
+					   																   
+					', 
+					', 
+					
+					
+					', 
+					 	', 
+						', 
+							', 
+																', 
+								 	', 
+								', 
+								', 
+								 	', 
+								', 
+								', 
+									', 
+								', 
+								', 
+									', 
+								', 
+							', 
+						', 
+						', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+            ', 
+            ', email this article', 
+
+         	', 
+            	', 
+                    ', 
+                    	', Message:', 
+			            ', 
+			            ', u"Recipients' Email:", 
+			            ', 
+					        ', Type address separated by commas', 
+         			', 
+			   		', 
+			   			', Your Email:', 
+			   			', 
+			   			', Enter the characters shown in the image.', 
+			   			', 
+			   		', 
+			   		', 
+			   			', Send me a copy:
+			   			  ', 
+			            ', 
+			   		', 
+			   		', 
+				    	',  ', 
+			       		', 
+			       		', 
+			       		', 
+			       		  ', 
+			   		', 
+       	       	', 
+            ', 
+         	', 
+', 
+
+', 
+', 
+$(document).ready(function(){
+	$("#email_formarticle").validationEngine({promptPosition : "topRight:-100"});
+	$(".reload_image_captcha").click(function(){
+		var _id = this.id;
+		$.ajax({
+			"type"		:	"POST",
+			"url"		:	"/request-handler/reload-captcha",
+			"success"	:	function(data){
+				if(data!=undefined){
+					try{
+						var _res = eval(data);
+						if(_res.err!=undefined && _res.id!=undefined && _res.msg!=undefined){
+							if(_res.err=='0'){
+								var captchaId = "#captcha_id_"+_id;
+								var imgCaptchaBox = "#image_captcha_box_"+_id;
+								$(captchaId).val(_res.id);
+								$(imgCaptchaBox).html(_res.msg);
+							}else{
+								alert(_res.msg);
+							}
+						}
+					}catch(e){}
+				}
+			}
+		});
+		return false;
+	});
+	$(".at-svc-email").one("click", function(){
+		$( ".reload_image_captcha" ).trigger( "click");
+	});
+});
+', 
+', 						', 
+					', 
+										 ', 
+							', http://mybs.in/2TCLCLC', 
+							', 
+														', 
+												', 
+					', 
+					function copyTinyUrl(){
+						var text = $("#tiny_dialog p")[0];
+						if ($.browser.msie) {
+							var range = document.body.createTextRange();
+							range.moveToElementText(text);
+							range.select();
+						} else {
+							var selection = window.getSelection();
+							var range = document.createRange();
+							range.selectNodeContents(text);
+							selection.removeAllRanges();
+							selection.addRange(range);
+						}
+						document.execCommand("copy");
+					}
+					$(function() {
+						$("#tiny_dialog").dialog({
+							autoOpen: false
+						});
+						$("#tiny_bbtn").on("click", function() {
+							$("#tiny_dialog").dialog("open");
+						});
+					});
+					', 
+					 				', 
+
+
+		       	', 
+								', 
+					', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+ 
+ ', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/640x90_ad', [640, 60], 'div-gpt-ad-1479277932687-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+ 
+
+ 
+  
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479277932687-0'); });
+", 
+', 
+
+ 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+ 
+ ', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/640x90_ad', [640, 60], 'div-gpt-ad-1479277932687-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+ 
+
+ 
+  
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479277932687-0'); });
+", 
+', 
+
+ 
+
+', 
+				
+
+        ', 
+ 				
+					', 
+  					
+				', 
+				
+  								
+
+	            ', 
+				    				      	', 
+With its eye on raising its power generation capacity in excess of 1,500 MW by 2017, India Power Corporation (IPC) is in the process of acquiring the entire stake held by France-based Engie in Meenakshi Energy.
+
+	The acquisition, which is subject to necessary regulatory and IPC's shareholders' approval, will turn Meenakshi Energy into a subsidiary of the former. The transfer of shares will be funded from IPC's own internal accruals as well as external debt in case it is required.
+
+	"After requisite determination of all the liabilities, the value of the deal will be ...', 
+				    	            ', 
+	            
+												  				     ', 
+/*CSS Subscription*/
+div.subscription-tooltip{display: none;width: 320px;padding: 10px 20px;margin-top: 0;margin-left: 150px;margin-bottom: 10px;z-index: 10;position: relative;font-family: Arial;font-size: 12px;font-style: normal;border-radius: 3px;box-shadow: 2px 2px 2px 2px #999;-webkit-transition-property: opacity, margin-top, visibility, margin-left;-webkit-transition-duration: 0.4s, 0.3s, 0.4s, 0.3s;-webkit-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;transition-property: opacity, margin-top, visibility, margin-left;transition-duration: 0.4s, 0.3s, 0.4s, 0.3s;transition-timing-function:ease-in-out, ease-in-out, ease-in-out, ease-in-out;color: #000000;background: #FBF5E6;background: -webkit-linear-gradient(top, #FBF5E6, #FFFFFF);background: linear-gradient(top, #FBF5E6, #FFFFFF);border: 1px solid #CFB57C;}
+
+div.subscription-tooltip b{background: #FBF5E6;border-top: 1px solid #CFB57C;border-right: 1px solid #CFB57C;width: 15px;height: 15px;margin-left: 130px;margin-top: -19px;display: block;position: absolute;-webkit-transform: rotate(-45deg);-moz-transform: rotate(-45deg);-o-transform: rotate(-45deg);transform: rotate(-45deg);-webkit-box-shadow: inset -1px 1px 0 #fff;-moz-box-shadow: inset 0 1px 0 #fff;-o-box-shadow: inset 0 1px 0 #fff;box-shadow: inset 0 1px 0 #fff;display: none\0/;*display: none;}
+
+div.subscription-wsj-premium-tooltip, div.subscription-wsj-special-tooltip{display: none;width: 250px;padding: 10px 20px;margin-top: 15px;margin-left: 50px;margin-bottom: 0px;z-index: 10;position: relative;font-family: Arial;font-size: 12px;font-style: normal;border-radius: 3px;box-shadow: 2px 2px 2px 2px #999;-webkit-transition-property: opacity, margin-top, visibility, margin-left;-webkit-transition-duration: 0.4s, 0.3s, 0.4s, 0.3s;-webkit-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;transition-property: opacity, margin-top, visibility, margin-left;transition-duration: 0.4s, 0.3s, 0.4s, 0.3s;transition-timing-function:ease-in-out, ease-in-out, ease-in-out, ease-in-out;color: #000000;background: #FBF5E6;background: -webkit-linear-gradient(top, #FBF5E6, #FFFFFF);background: linear-gradient(top, #FBF5E6, #FFFFFF);border: 1px solid #CFB57C;}
+
+div.subscription-wsj-premium-tooltip b,div.subscription-wsj-special-tooltip b{background: #FBF5E6;border-top: 1px solid #CFB57C;border-right: 1px solid #CFB57C;width: 15px;height: 15px;margin-left: 90px;margin-top: -19px;display: block;position: absolute;-webkit-transform: rotate(-45deg);-moz-transform: rotate(-45deg);-o-transform: rotate(-45deg);transform: rotate(-45deg);-webkit-box-shadow: inset -1px 1px 0 #fff;-moz-box-shadow: inset 0 1px 0 #fff;-o-box-shadow: inset 0 1px 0 #fff;box-shadow: inset 0 1px 0 #fff;display: none\0/;*display: none;}
+
+.mob_delete{right: -4px;top: -4px;}
+
+.price-list_section{ padding:10px; margin:0;}
+.price-list{ width:50%; float:left;}
+.price-list-box{ margin: 5px 0 30px 0;}
+
+.ac-custom { padding: 0; margin: 0 auto;}
+.ac-custom h2 { font-size: 3em; font-weight: 300; padding: 0 0 0.5em; margin: 0 0 30px;}
+.ac-custom ul, .ac-custom ol { list-style: none; padding: 0; margin: 0 auto; }
+.ac-custom li { margin: 0 auto; padding: 0; position: relative;}
+.ac-custom label { display: inline-block; position: relative; font-size: 2em; vertical-align: top;	color: #000; cursor: pointer; -webkit-transition: color 0.3s; transition: color 0.3s; background:#fff; left:50px; border:2px solid #000; width:83%; padding:0px; height:170px; }
+.ac-custom input[type="checkbox"], .ac-custom input[type="radio"], .ac-custom label::before { width: 35px; height: 35px; top: 50%; left: -48px;	margin-top: -20px; position: absolute; cursor: pointer;}
+.ac-custom label h3{ padding:5px 0; margin:0; font-family: 'Oswald', sans-serif; font-size:18px;}
+.ac-custom label span{ font-size:12px; text-transform:uppercase;  }
+.ac-custom label h4{ font-size:12px; text-transform:uppercase; font-family:Arial, Georgia, "Times New Roman"; }
+.ac-custom label p{ font-size:12px; padding:0; margin:0;}
+.ac-custom input[type="checkbox"], .ac-custom input[type="radio"] {	opacity: 0;	-webkit-appearance: none; display: inline-block;	vertical-align: middle;	z-index: 100; left:0px;}
+.ac-custom label::before { content: '';	border: 2px solid #000; -webkit-transition: opacity 0.3s; transition: opacity 0.3s; border-radius: 50%;}
+.ac-custom input[type="checkbox"]:checked + label, .ac-custom input[type="radio"]:checked + label { color: #000; border:2px solid #b72d27; background:none; width:83%; background:#fff;}
+.ac-custom input[type="checkbox"]:checked + label::before, .ac-custom input[type="radio"]:checked + label::before { opacity: 0.8; border:2px solid #b72d27;}
+
+/* General SVG and path styles */
+.ac-custom svg { position: absolute; width: 22px; height: 22px; top: 50%;margin-top: -13px; left: 9px; pointer-events: none;}
+.ac-custom svg path { stroke: #ac2122; stroke-width: 13px; stroke-linecap: round; stroke-linejoin: round; fill: none;}
+
+/* Specific input, SVG and path styles */
+/* Circle */
+.ac-circle input[type="checkbox"], .ac-circle input[type="radio"], .ac-circle label::before { width: 30px; height: 30px; margin-top: -15px;	left: 10px;	position: absolute;}
+.ac-circle label::before { background-color: #fff; border: none;}
+.ac-circle svg { width: 70px; height: 70px; margin-top: -35px; left: -10px;}
+.ac-circle svg path { stroke-width: 5px;}
+.read-more{ margin:0; padding:10px 0; text-align:right;}
+.read-more a{ font-size:14px; color:#464646; text-transform:uppercase;}
+/* Box Fill */
+.ac-boxfill svg path { stroke-width: 8px;}
+
+/* Swirl */
+.ac-swirl svg path { stroke-width: 8px;}
+
+.offer-box{ padding:5px 0 15px 0; width:49%; float:left; }
+.offer-box h3.title-2{ font-size:18x; text-transform:uppercase; border:none; font-family:Arial, Georgia, "Times New Roman"; font-weight:600;}
+.offer-box h3 span{ font-size:18px; color:#000; padding:5px 0 0 15px;}
+.offer-box ul{ list-style-type:none; margin:0; padding:0;}
+.offer-box li{ display:block; padding: 10px 0 8px 24px; font-family:open-sans, Arial; background:url(http://bsmedia.business-standard.com/include/_mod/site/html5/images/bullet_list.png) no-repeat 0px 14px; font-size:12px; line-height:20px; }
+
+/* List */
+.ac-list ol { list-style: decimal; list-style-position: inside;}
+.ac-list ol li { font-size: 2em; padding: 1em 1em 0 2em; text-indent: -40px;}
+.ac-list ol li label { font-size: 1em; text-indent: 0; padding-left: 30px;}
+.ac-list label::before { display: none;}
+.ac-list svg { width: 100%; height: 80px; left: 0; top: 1.2em; margin-top: 0px;}
+.ac-list svg path { stroke-width: 4px;}
+
+.custom_pad{ padding: 40px 30px;}
+.custom_pad_2{ padding: 20px 10px;}
+.custom_pad_3{ padding: 0; margin-bottom: 7px;}
+.plus_pane{ padding:15px 0; text-align:center; padding-left:50px;}
+.strip{ background:#ac2122; padding:2px 0; color:#fff; text-align:center; font-family:'Open Sans', sans-serif; font-size:14px; font-weight:500;}
+.india_business_img{margin: 20px 0 0 16px;}
+.special-offer_img{ margin:10px; }
+
+.amount-cal{ padding:10px 0; border-bottom:1px dashed #636466; border-top:1px dashed #636466; margin-top:15px; overflow:hidden; }
+.amount_txt{ font-family: 'Oswald', sans-serif; font-size:24px; font-weight:300;}
+.amount_price{ font-family: 'Oswald', sans-serif; font-size:24px; font-weight:700;}
+.btn_submit{ margin:0 auto; text-align:center;  padding:10px;}
+.btn_submit input[type="button"]{ background:#ac2122; text-align:center; color:#fff; font-size:20px; text-transform:uppercase; border:0; padding:5px; width:150px; cursor:pointer; -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;   }
+
+.note-section { position: relative; width:100%; margin:0 auto;  padding:0 20px}
+.note-txt{ font-family: 'Open Sans', sans-serif; font-style:italic; color:#707070; font-size:12px; padding:15px 0; border-top:1px dashed #636466;}
+.price-list .caption{margin:5px 0 0 15px;}		
+.bsp_box h2 { font-weight: normal;  margin: 0; padding: 0;font-family: 'Oswald', sans-serif;}		
+.bsp_box p {font-family: 'Open Sans', sans-serif;font-weight: 400;padding-top: 5px;}		
+.bsp_box {width: 48%;float: left; margin: 5px 0 0 10px;padding: 25px 15px;}
+', 
+
+', 
+    ', TO READ THE FULL STORY, ', SUBSCRIBE NOW',  AT JUST Rs 149 A MONTH  ', 
+', 
+
+', 
+   ', 
+	', 
+		', 
+		', 
+			', Key stories on business-standard.com are available to premium subscribers only.', 
+			',  Already a premium subscriber? ', LOGIN NOW ', 
+			', 
+		', 
+		', 
+			', LOGIN', 
+			', 
+				', 
+					', 
+						', EMAIL / USER NAME', 
+						', 
+						', 
+					', 
+					', 
+						', PASSWORD', 
+						', 
+						', 
+					', 
+					', 
+	               				', 
+	               				', REMEMBER ME', 
+						',  Forgot password?', 
+						', 
+					', 
+					', 
+	               				', 
+	               					', LOGIN', 
+	               				', 
+	               				', 
+					', 
+					', 
+				', 
+			', 
+			', 
+				', Not a member yet ? ',  Resister Now ',  ', 
+				', 
+					', 
+				', 
+				', Connect using any below ', 
+				', 
+					', 
+						',  ', LOGIN WITH FACEBOOK', 
+						', 
+					', 
+					', 
+						',  ', LOGIN WITH GOOGLE', 
+						', 
+					', 
+					', 
+				', 
+			', 
+			', 
+		', 
+		', 
+			', 
+				', 
+				', 
+					', 
+						', 
+							', 
+								', 
+									', 
+									', 
+										', 
+									', 
+								', 
+							', 
+							', 
+								', 
+									', 
+								', 
+								', 
+									', 
+									', 
+										', 
+										', 
+									', 
+								', 
+							', 
+							', 
+								', 
+									', 
+										', 
+										', u"Don't lose the opportunity of saving $26.77 per month", 
+										', 
+									', 
+								', 
+							', 
+						', 
+					', 
+				', 
+			', 
+			', 
+				', 
+					', 
+						', 
+							', 
+								', 
+								', 
+									', 
+								', 
+							', 
+							', 
+								', 
+								', 
+									', 
+									', 
+										', 
+										',  
+									', 
+								', 
+							', 
+							', 
+								', 
+									', 
+										', 
+										', u"Don't lose the opportunity of saving $26.77 per month", 
+										', 
+									', 
+								', 
+							', 
+						', 
+					', 
+				', 
+			', 
+			', 			
+			var packId = getCookie('_pack_id');
+			if( packId != '' && packId != null && (packId == 3 || packId==5)){
+				$('#special_offer_li').hide();
+			}
+			var countryCode = getCookie('country_code');//console.info( 'COUNTRY--' ); console.info( countryCode );
+			if( countryCode != '' && countryCode != null && countryCode == 'US'){
+				//$('#special_offer_li').html('');
+				//$('#toggleText1').html('');
+				//$('#toggleText').html('');
+				//$('#special_offer_li').hide();
+				//$('#toggleText1').hide();
+				//$('#toggleText').hide();
+				priceList = $('.price-list_section').find('.price-list');		
+				$(priceList[1]).html("");		
+				reqHtml = '<h2>Business Standard Premium</h2><p>Get an across device access to behind the pay wall quality content </p>';		
+				$(priceList[1]).html(reqHtml).addClass('bsp_box').removeClass('price-list');		
+				toggle = $(priceList[0]).find('div[data-type="toggle"]');		
+				$(toggle).remove();		
+				tooltip = $(priceList[0]).find('div[data-type="tooltip"]');		
+				$(tooltip).remove();
+			}
+			if( countryCode != '' && countryCode != null && countryCode != 'IN' && countryCode != 'US'){
+				//$('#special_offer_li').html('');
+				//$('#toggleText1').html('');
+				//$('#special_offer_li').hide();
+				//$('#toggleText1').hide();
+				priceList = $('.price-list_section').find('.price-list');		
+				$(priceList[1]).html("");		
+			    reqHtml = '<div class="caption" style="margin:5px 0 0 15px;"><img src="http://bsmedia.business-standard.com/include/_mod/site/images/subscription/299_mini.png" style="height:170px;width:288px" alt=""></div>';		
+				$(priceList[1]).html(reqHtml);		
+				toggle = $(priceList[0]).find('div[data-type="toggle"]');
+			}
+			var isUserLoggedIn = getCookie('_userLoggedIn');
+			console.log('isUserLoggedInstr');
+			console.log(isUserLoggedIn);
+			console.log('isUserLoggedInend');
+			if( isUserLoggedIn != '' && isUserLoggedIn != null && isUserLoggedIn != undefined){
+				$('.subs_box_login_now').html('');
+				$('.subs_box_login_now').hide();
+			}
+			', 
+			', 
+			', 
+			', 
+				', Total Amount', 
+				', Rs.',  ', 0.00', 
+			', 
+			', 
+				', 
+					', 
+					', 
+					', 
+					', 
+					', 
+				', 
+			', 
+			', 
+				', 
+				', To proceed, kindly select a subscription package', 
+			', 
+			', 
+			', WHAT YOU GET', 
+			', 
+			', 
+				', On Business Standard Digital ', 
+				', 
+					', Access your subscription from anywhere.  Be it your computer, tablet or smartphone using a browser or the App, Your Choice.', 
+					', Access to exclusive content, features, opinions and comment, hand-picked by our editors, just for you.', 
+					', Pick your 5 favourite companies. Get all the news upates at the end of each day through E-Mail.', 
+					', Pick the industry that you want to track. And get a daily news letter specific to that industry. Cut out the clutter.', 
+					', And stay on top of your investments. Track stock prices in your portfolio', 
+					', Access 18 years of archival data', 
+				', 
+			', 
+			', 
+				', On ',  Digital', 
+				', 
+				', 
+					', Seamless access to WSJ.com with your Business Standard digital account.', 
+	                ', u"Experience the best of the Journal's reporting, video and interactive features.", 
+	                ', Read about the people and events shaping business, finance, technology, politics, technology and culture.', 
+	                ', Stay informed with newsletters - an easy way to get WSJ content straight to your inbox - making life easier on your busiest days.', 
+	           		', More business executives read the Journal globally than any other publication.', 
+				', 
+			', 
+		', 
+		', 
+		', 
+			', 
+				*Note :', American Express® is proud to be associated with this initiative and will contribute Rs 100 x 6 months thereafter, standard rate of Rs 149 will be charged.', Offer valid for Indian residents only', Requires you to share personal information like PAN, Date of Birth, and Income.', *Annual saving on WSJ subscription price of US$ 347.88 (12 months @ US$ 28.99 per month)', * 1US$ = 67.50 INR.', *Please note that this offer is not valid if you are/were a registered/existing user on  WSJ Digital 
+			', 
+			', 		
+    			*Note :', 		
+        		Please note that this offer is not valid if you are/were a registered/existing user on WSJ Digital.		
+    		', 
+		', 
+		', 
+
+		', 
+			', LOGIN', 
+			', Already registered ?', 
+			', 
+		', 
+		', 
+
+	', 
+
+	', 
+	var isUserLoggedIn = getCookie('_userLoggedIn');
+	if( isUserLoggedIn != '' && isUserLoggedIn != null && isUserLoggedIn != undefined){
+		$('.subs_box_login_now').html('');
+		$('.subs_box_login_now').hide();
+	}
+	function setPriceFinalValue(){
+	$(".error_msg_subs").html('');
+	$("#subs-final-amount").html('0.00');
+	var premiumPrice = Number($("#premium-price").val());
+	var digitalSubscribe = Number($("#digital-subscribe").val());
+	var specialOffer = Number($("#special-offer").val());
+	var digitalSubscribe1 = Number($("#digital-subscribe_1").val());
+	var subsFinalAmount = 0;
+	if($("#premium-price").is(":checked") || $("#special-offer").is(":checked")){
+		if($("#premium-price").is(":checked"))subsFinalAmount = parseInt(subsFinalAmount + premiumPrice);
+		if($("#digital-subscribe").is(":checked"))subsFinalAmount = parseInt(subsFinalAmount + digitalSubscribe);
+		if($("#special-offer").is(":checked"))subsFinalAmount = parseInt(subsFinalAmount + specialOffer);
+		if($("#digital-subscribe_1").is(":checked"))subsFinalAmount = parseInt(subsFinalAmount + digitalSubscribe1);
+	}
+	$("#value_pack_price").val(subsFinalAmount);
+	subsFinalAmount=subsFinalAmount.toFixed(2);
+	$("#subs-final-amount").html(subsFinalAmount);
+	}
+	function saveValuePack(){
+	var amount = $("#value_pack_price").val();
+	if(amount=='' || amount=='0'){
+		//$(".error_msg_subs").html('<div class="user_emailformError parentFormregistration_form formError ajaxed" style="opacity: 0.87; position: absolute;top: auto;"><div class="formErrorContent">* Please select subscription package.</div><div class="formErrorArrow"><div class="line10"><!-- --></div><div class="line9"><!-- --></div><div class="line8"><!-- --></div><div class="line7"><!-- --></div><div class="line6"><!-- --></div><div class="line5"><!-- --></div><div class="line4"><!-- --></div><div class="line3"><!-- --></div><div class="line2"><!-- --></div><div class="line1"><!-- --></div></div></div>');
+		$('html, body').animate({
+			scrollTop: $("#subscription-scroll-location").offset().top
+		}, 2000);
+		$(".subscription-tooltip").show();
+		//window.location.hash = '#show-msg';
+		return false;
+	}else{
+		$("#value_pack_form").submit();
+	}
+	}
+
+	function resetValuePack(packid){
+	if(packid==2){
+		$('#premium-price').trigger('click');
+		$('#toggleText').show();
+		$('#digital-subscribe').attr('checked',false);
+		$('#value_pack_price').val($('#subs-final-amount').html());
+	}
+	if(packid==4){
+		$('#premium-price').trigger('click');
+		$('#toggleText').show();
+		$('#digital-subscribe').trigger('click');
+		$('#value_pack_price').val($('#subs-final-amount').html());
+	}
+	if(packid==3){
+		$('#special-offer').trigger('click');
+		$('#toggleText1').show();
+		$('#digital-subscribe_1').attr('checked',false);
+		$('#value_pack_price').val($('#subs-final-amount').html());
+	}
+	if(packid==5){
+		$('#special-offer').trigger('click');
+		$('#toggleText1').show();
+		$('#digital-subscribe_1').trigger('click');
+		$('#value_pack_price').val($('#subs-final-amount').html());
+	}
+	}
+	', 
+
+	', 
+
+	', 
+	//var idPaidArticle= true;
+	$(document).ready(function() {
+
+	$("#value_pack_form").validationEngine();
+	resetValuePack('');
+
+	$("#premium-price").on('change', function(){
+		$("#toggleText1").slideUp();
+		$("#special-offer").attr('checked', false);
+		$('#digital-subscribe_1').attr('checked', false);
+		$('#special-offer').parent().find('svg').empty();
+		$("#toggleText").slideToggle();
+		$(".subscription-wsj-special-tooltip").hide();
+
+		$('#digital-subscribe').trigger('click');
+
+		if($(this).is(':checked') == false) {
+			$('#digital-subscribe').attr('checked', false);
+			$(".subscription-wsj-premium-tooltip").hide();
+		}
+	});
+
+	$("#digital-subscribe").on('change', function() {
+		if($(this).is(':checked') == false) {
+			$(".subscription-wsj-premium-tooltip").show();
+		}else{
+			$(".subscription-wsj-premium-tooltip").hide();
+		}
+	});
+
+	$("#special-offer").on('change', function() {
+		$("#toggleText").slideUp();
+		$("#premium-price").attr('checked', false);
+		$('#digital-subscribe').attr('checked', false);
+		$('#premium-price').parent().find('svg').empty();
+		$(".subscription-wsj-premium-tooltip").hide();
+
+		$("#toggleText1").slideToggle();
+
+		$('#digital-subscribe_1').trigger('click');
+
+		if($(this).is(':checked') == false) {
+			$('#digital-subscribe_1').attr('checked', false);
+			$(".subscription-wsj-special-tooltip").hide();
+		}
+
+	});
+
+	$("#digital-subscribe_1").on('change', function() {
+		if($(this).is(':checked') == false) {
+			$(".subscription-wsj-special-tooltip").show();
+		}else{
+			$(".subscription-wsj-special-tooltip").hide();
+		}
+	});
+
+	$("#lnkbtn").click(function() {
+		if ($('#divreg').is(":hidden")){
+			$('#divreg').show(500);
+			document.getElementById('lnkbtn').innerHTML = "LOGIN NOW";
+		} else {
+			$("#divreg").hide(500);
+			document.getElementById('lnkbtn').innerHTML="LOGIN NOW";
+		}
+	});
+
+	$(".bs_subscription_price").click(function(){
+		$("div.subscription-tooltip").hide();
+	});
+
+	$("#tooltip-hide-special").click(function(){
+		$(".subscription-wsj-special-tooltip").hide();
+	});
+
+	$("#tooltip-hide-premium").click(function(){
+		$(".subscription-wsj-premium-tooltip").hide();
+	});
+	});
+
+	if(countryCode !='IN' && countryCode != 'US'){		
+		$(".offer-box").css('width','100%');		
+		$('.note-txt').each(function(){		
+			if($(this).attr('data-country')=='GLOBAL'){		
+				$(this).show();			
+			}else{		
+				$(this).hide();		
+			}		
+		});		
+				
+	}		
+	if(countryCode == 'US'){		
+		$(".offer-box").css('width','100%');		
+		$('.note-section').hide();		
+		$($(".offer-box")[1]).html('');		
+	}
+	$(document).ready(function() {
+		$("#premium-price").prop("disabled", false);
+		$('#special-offer').prop("disabled", false);
+	});
+	', 
+', 				  								
+            ', 
+            	            ', 
+          ', 
+                  ', 
+
+        ', 
+        ', 
+           ', 
+             ', Read More On', 
+             ', India Power Corporation',  ',  | ',  ', Meenakshi Energy',  ',  | ',  ', Hemant Kanoria',  ',  | ',  ', Engie', 
+           ', 
+        ', 
+        ', 
+        
+        	 	
+        ', 
+			', 
+			   ', 
+			      ', 
+			         ', 
+			            ', 
+			               ', PREVIOUS STORY', 
+			            ', 
+			            ', 
+			               ', NEXT STORY', 
+			            ', 
+			            ', 
+			         ', 
+			         ',   ', 
+			         ', 
+				            ', 
+				               ', 
+				                  ', 
+				               ', 
+				               ', 
+				            ', 
+			         ', 
+			         ', 
+			      ', 
+			   ', 
+			', 
+       ', 
+
+
+', 
+', 
+
+      ', 
+            	', 
+		', 
+', RECOMMENDED FOR YOU', 
+', 
+', 
+', 
+', 
+(adsbygoogle = window.adsbygoogle || []).push({});
+', 
+',        ', 
+	  
+ ', 
+         ', 
+	    ', 
+', 
+', Advertisements', 
+', 
+', 
+', New to the stock market? Take your FirstStep', Plan now with just Rs.3000 p.m. Know more', Learn the Art of Investing through Sharekhan', Open Free Demat A/c with low brokerage fee', Yet to open a Sharekhan Account?', 
+', 
+', 
+     ', 
+        
+    ', 
+      ', 
+      		', 
+				', 
+				', 
+				',  
+		', 
+		      ', 
+      
+		', 
+		', 
+			', 
+			  ', 
+			  ', u"India Power Corporation to acquire Meenakshi Energy's 89% net worth", 
+			  ', IPC will be buying the 89% stake held by France-based Engie', 
+			  ', IPC will be buying the 89% stake held by France-based Engie', 
+			  					', 
+With its eye on raising its power generation capacity in excess of 1,500 MW by 2017, India Power Corporation (IPC) is in the process of acquiring the entire stake held by France-based Engie in Meenakshi Energy.
+
+	The acquisition, which is subject to necessary regulatory and IPC's shareholders' approval, will turn Meenakshi Energy into a subsidiary of the former. The transfer of shares will be funded from IPC's own internal accruals as well as external debt in case it is required.
+
+	"After requisite determination of all the liabilities, the value of the deal will be ...', 
+			  			  ', 
+			   ', 
+      				', BS Reporter', 
+ 			  ', 
+			  ', 
+			     ', Business Standard', 
+			     ', 
+			       ', http://bsmedia.business-standard.com/_media/bs/wap/images/bs_logo_amp.png', 
+			       ', 177', 
+			       ', 22', 
+			     ', 
+ 			 ', 
+ 			 ', 
+			 ', 
+			', 
+		', 
+		', 
+
+      ', 
+       ', 
+            ', 
+        		      		      		      		      		      		', 
+				', 
+				var cmtIframe = $("#article-comment-frame");
+				var cmtIframeOffset = cmtIframe.offset();
+				var iframeDivhgt = cmtIframeOffset.top;
+				iframeDivhgt = iframeDivhgt - 600;
+				var iframeDistanceTop = iframeDivhgt;
+				var iframeLoaded = false;
+				$(function() {
+					$(window).scroll(function() {
+						if ($(window).scrollTop() > iframeDistanceTop) {
+							if(iframeLoaded == false){
+								$("#article-comment-frame").attr("src",$("#article-comment-frame").attr("data-original"));
+								iframeLoaded = true;
+							}
+						}
+					});
+				});
+				', 
+	      		      	            ', 
+          ', 
+
+         ', 
+        ', 
+      ', 
+
+
+     	', 
+  		', 
+        ', 
+       ', 
+
+      
+      ', 
+		  		  ', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1474961759587-10'); });
+", 
+', 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="95"; var zflag_sid="0"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="30"; 
+', 
+', 
+
+', document.write("<!--"); if(isUserBanner=="fis") document.write("-->"); ',  ', $("#id_3_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_fis-1479188012.png"); ', document.write("<!--"); if(isUserBanner=="kotak") document.write("-->"); ',  ', $("#id_4_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_kotak-1479188012.jpg"); ', document.write("<!--"); if(isUserBanner=="capgemini") document.write("-->"); ',  ', $("#id_5_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_capgemini-1479188012.jpg"); ', 
+		  ', 
+		      ', 
+
+', 
+var idPaidArticle = true;
+', 
+
+
+', 
+
+$.ajax({
+    url : '/request-handler/get-latest-articles/catId/101/cache-control/1800',
+    async: true,
+    success : function(data){
+        $("#next-prev").html(data);
+        var owl = $("#next-prev");
+        if(data != ''){
+        	var checkIdExists = $(".more-stories-pagination.disNone div").hasClass("latestArticleId-116022500472");
+        	if(checkIdExists){
+        		$(".latestArticleId-116022500472").remove();
+            }else{
+            	$(".latestArticleLastId").remove();
+            }
+        	$(".more-stories-pagination.disNone").show();
+        }
+        owl.owlCarousel({
+        items : 2, //10 items above 1000px browser width
+        itemsDesktop : [980,2], //5 items between 1000px and 901px
+        itemsDesktopSmall : [900,2], // 3 items betweem 900px and 601px
+        itemsTablet: [360,2], //2 items between 600 and 0;
+        itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+        });
+
+        // Custom Navigation Events
+        $(".next").click(function(){
+          owl.trigger('owl.next');
+        });
+        $(".prev").click(function(){
+          owl.trigger('owl.prev');
+        });
+        $(".play").click(function(){
+          owl.trigger('owl.play',1000);
+        });
+        $(".stop").click(function(){
+          owl.trigger('owl.stop');
+        });
+    }
+});
+
+function unFollowColumnist(){
+	var author_id = '0';
+	var userInfo = decodeURIComponent(getCookie('_userLoggedIn'));
+	var isPaidUser="N";
+	if(userInfo !=null && userInfo!= 'undefined'){
+		var userType = JSON.parse(userInfo);
+		if(userType !=null && userType!= 'undefined' && userType.s != 'undefined' && userType.s == 't'){
+			isPaidUser="Y";
+		}else{
+			isPaidUser="N";
+		}
+	}
+	
+	
+	if(author_id != ''){
+		if(confirm("Are you sure to unfollow this columnist!")==true){
+	        $.ajax({
+	            url : '/request-handler/article/unmap-user-columnist',
+	            type : 'post',
+	            data: {
+					'authorId'	: author_id,'isPaidUser':isPaidUser
+				},
+	            success : function(msg){
+	                if(msg == 'success'){
+	                	location.reload(); return false();
+	                }else{
+	                    message = 'Please try again';
+	                    alert(message); return false();
+	                }
+	            }
+	        });
+		}
+    }else{
+       alert("Invalid columnist request!");
+       return false();
+    }
+
+}
+
+function followColumnist(){
+  var author_id = '0';
+  var userInfo = decodeURIComponent(getCookie('_userLoggedIn'));
+	var isPaidUser="N";
+	var isLoggedIn = "N";
+	if(userInfo !=null && userInfo!= 'undefined'){
+		var userType = JSON.parse(userInfo);
+		if(userType !=null && userType!= 'undefined' && userType.s != 'undefined' && userType.s == 't'){
+			isPaidUser="Y";
+			isLoggedIn = "Y";
+		}else if(userType !=null && userType!= 'undefined'){
+			isPaidUser="N";
+			isLoggedIn = "Y";
+		}
+	}
+
+	  if(isLoggedIn=="Y"){
+		 
+			  if(author_id != ''){
+			    $.ajax({
+			         url : '/request-handler/article/map-user-columnist',
+			         type : 'post',
+			         data: {
+							'authorId'	: author_id,'isPaidUser':isPaidUser
+					 },
+			         success : function(msg){
+			                if(msg == 'success'){
+			                	location.reload(); return false();
+			         }else{
+			        	 customLogin();
+						}
+			        }
+			       });
+			    }else{
+			       alert("Invalid columnist request!");
+			       return false();
+			    }
+		  
+	  }else if(isLoggedIn=="N"){
+		   customLogin();
+	  }
+}
+
+function unLockArticle(){
+	  var article_id = '116022500472';
+	  var userInfo = decodeURIComponent(getCookie('_userLoggedIn'));
+	  var isPaidUser="N";
+	  if(userInfo !=null && userInfo!= 'undefined'){
+			var userType = JSON.parse(userInfo);
+			if(userType !=null && userType!= 'undefined' && userType.s != 'undefined' && userType.s == 't'){
+				isPaidUser="Y";
+			}else{
+				isPaidUser="N";
+			}
+	  }
+		
+		if(article_id != ''){
+	        $.ajax({
+	            url : '/request-handler/article/unlock-article',
+	            type : 'post',
+	            data: {
+					'article_id'	: article_id,'isPaidUser':isPaidUser
+				},
+	            success : function(msg){console.log(msg);
+	                if(msg == 'success'){
+	                	location.reload(); return false();
+	                }else{
+	                    $(".iframe").trigger('click');
+	                }
+	            }
+	        });
+	    }else{
+	       alert("Invalid columnist request!");
+	       return false();
+	    }
+
+}
+
+function customLogin(){
+	var author_id = '0';
+	var articleId = '116022500472';
+	var parentUrl = window.location.href;
+
+	if (parentUrl.indexOf("?")>-1){
+		parentUrl = parentUrl.substr(0,parentUrl.indexOf("?"));
+	}
+	
+	$("#sign_in").fancybox({
+	    maxWidth	: 600,
+		maxHeight	: 580,
+		fitToView	: false,
+		autoSize	: false,
+		closeClick	: false,
+		href		: '/core/request-handler/sign-in-content?ref='+parentUrl+'&fc='+author_id+'&articleId='+articleId,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+
+	});
+	$('.fancybox').fancybox();
+	$("#sign_in").trigger('click');
+	
+} 
+
+function showhide()
+{
+      var div = document.getElementById("follow");
+	  if(div.style.display !== "block") {
+		   div.style.display = "block";
+	  }
+      else {
+		   div.style.display = "none";
+	  }
+}
+
+
+$(document).ready(function(){
+	$('.articleCompanyStockInfo').hide();
+	$('.bsNewArticleCompanyStockInfo').show();
+});
+', 
+
+', 
+.articleCompanyStockInfo{display: none;}
+.bsNewArticleCompanyStockInfo{display: block;}
+#article-chart-_article_ft{
+	margin-bottom: 40px;
+	display: block;
+	padding: 5px 30px;
+}
+});
+', 
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1454577991396-0'); });
+", 
+', 
+
+', 
+', 
+', 
+    ', 
+    ', 
+	', u"India Power Corporation to acquire Meenakshi Energy's 89% net worth", 
+			', IPC will be buying the 89% stake held by France-based Engie', 
+		', 
+	', 
+	 		', 
+With its eye on raising its power generation capacity in excess of 1,500 MW by 2017, India Power Corporation (IPC) is in the process of acquiring the entire stake held by France-based Engie in Meenakshi Energy.
+
+	The acquisition, which is subject to necessary regulatory and IPC's shareholders' approval, will turn Meenakshi Energy into a subsidiary of the former. The transfer of shares will be funded from IPC's own internal accruals as well as external debt in case it is required.
+
+	"After requisite determination of all the liabilities, the value of the deal will be ...', 
+		', 
+	', 
+      		', BS Reporter', 
+ 	', 
+	', 
+		', Business Standard', 
+		', 
+			', http://bsmedia.business-standard.com/_media/bs/wap/images/bs_logo_amp.png', 
+			', 177', 
+			', 22', 
+		', 
+	
+ ', 
+ ', 
+ ', 
+', 
+$( document ).ready(function() {
+	var _id = 116022500472;
+	$.ajax({
+		"type"		:	"POST",
+		"url"		:	"http://bsapi.business-standard.com/request-handler/article/article-update-count.php",
+		data: { 'articleId': _id  },
+		"success"	:	function(data){
+			if(data!=undefined){
+				try{
+				 //$(_id).html(data);
+				}catch(e){}
+			}
+		}
+	});
+	return false;	
+});
+', 
+', 
+', 
+', 
+$( ".activator" ).click(function() { 
+ ids = this.id;
+ var $this = $("#"+ids);
+ var searchText = $this.html();
+ str = searchText.replace(/\s+/g, '+');
+	$.ajax({
+		type: 'GET',
+		url: '/ajax-search?type=news&q='+str+'&artId=116022500472',
+		contentType: "text/html",
+		success: function(data)
+		{	//$('#'+ids)
+			$('.overlay3').remove();
+			$('.box').remove();
+			$(data).insertAfter($("#readMoreSpanAjx"));
+		},
+		error: function(e)
+		{
+		   alert(e.message);
+		}
+	});
+});
+',  ', 
+	    ', 
+
+	    ', 
+	    ', 
+	    ', 
+#moreOnMarkets{
+	display: block !important;
+}
+', 
+', 
+    ', 
+    	', 
+    		', MORE ON MARKETS:', 
+    		', 
+    		',   
+    			', 
+    				', Quick Links ',  
+    				', 						
+						', Stock Market Live', 
+                        ', Portfolio ', 
+                        ', Commodity Market', 
+                        ', Upcoming IPO', 
+                        ', Personal Finance', 
+                       					
+    				', 
+    				', 						
+						', Stock Market News', 
+    					', Derivatives', 
+    					', Mutual Funds', 
+    					', Gold Price', 
+    					', Sensex', 
+    				', 
+    			', 
+    		',  
+    		', 
+    		',  
+    			', 
+    				', Browse STOCK Companies',  
+                    ', 
+                        ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E',  
+                        ', F', 
+                        ', G', 
+                        ', H',  
+                        ', I', 
+                        ', J', 
+                        ', K', 
+                        ', L', 
+                        ', M', 
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V', 
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 1', 
+                        ', 2', 
+                        ', 3', 
+                        ', 4', 
+                        ', 5',  
+                        ', 6', 
+                        ', 7', 
+                        ', 8',  
+                        ', 9',  
+                        ', 
+    				', 
+    			', 
+    			', 
+    				', Browse Mutual Funds',  
+    				', 
+                        ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E',  
+                        ', F', 
+                        ', G', 
+                        ', H',  
+                        ', I', 
+                        ', J', 
+                        ', K', 
+                        ', L', 
+                        ', M', 
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V', 
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                        ', 
+    				',   
+    			', 
+    			',  
+    		',      
+    		',   
+    		',  
+    	', 
+    	', 
+        	',  
+        		', 
+        			', Index Stocks', 
+        			', 
+        				',  ACC ', 
+        				',  Adani Ports ', 
+        				',  Ambuja Cem. ', 
+        				',  Asian Paints ', 
+        				',  Aurobindo Pharma ', 
+        				',  Axis Bank ', 
+        				',  B H E L ', 
+        				',  B P C L ', 
+        				',  Bajaj Auto ', 
+        				',  Bank of Baroda ', 
+        				',  Bharti Airtel ', 
+        				',  Bharti Infra. ', 
+        				',  Bosch ', 
+        				',  Cipla ', 
+        				',  Coal India ', 
+        				', u" Dr Reddy's Labs ", 
+        				',  Eicher Motors ', 
+        				',  GAIL (India) ', 
+        				',  Grasim Inds ', 
+        				',  H D F C ', 
+        				',  HCL Technologies ', 
+        				',  HDFC Bank ', 
+        				',  Hero Motocorp ', 
+        				',  Hind. Unilever ', 
+        				',  Hindalco Inds. ', 
+        				',  ICICI Bank ', 
+        				',  Idea Cellular ', 
+        				',  IndusInd Bank ', 
+        				',  Infosys ', 
+        				',  ITC ', 
+        				',  Kotak Mah. Bank ', 
+        				',  Larsen & Toubro ', 
+        				',  Lupin ', 
+        				',  M & M ', 
+        				',  Maruri Suzuki ', 
+        				',  NTPC ', 
+        				',  O N G C ', 
+        				',  Power Grid Corpn ', 
+        				',  Reliance Inds. ', 
+        				',  St Bk of India ', 
+        				',  Sun Pharma. Inds. ', 
+        				',  Tata Motors ', 
+        				',  Tata Motors-DVR ', 
+        				',  Tata Power Co. ', 
+        				',  Tata Steel ', 
+        				',  TCS ', 
+        				',  Tech Mahindra ', 
+        				',  UltraTech Cement Ltd ', 
+        				',  Wipro ', 
+        				',  Yes Bank ', 
+        				',  Zee Entertainment ', 
+        				', 
+        			', 
+        		', 
+        		',  
+        	',      
+        	',   
+        	',  
+        ', 
+    ', 
+', 
+
+', 
+', 
+  ', 
+     ', 
+     ', 
+     ', Copyrights © 2017 Business Standard Private Ltd. All rights reserved.', 
+     ', 
+  ', 
+
+  ', 
+     ', 
+          ', 
+             ', 
+                ', 
+               ', From BS Website', 
+               ', Home', 
+               ', Companies', 
+               ', Markets', 
+               ', Opinion', 
+               ', Politics', 
+               ', Technology', 
+               ', Specials', 
+               ', Personal Finance', 
+               ', Budget', 
+               ', Latest News', 
+               ', u"Today's Paper", 
+              ',  
+               ', RBI Policy', 
+               ', General News', 
+               ', General Videos', 
+               ', General Photo Gallery', 
+               ', Events', 
+               ', Authors', 
+              ', 
+              ', 
+              ', 
+                 ', 
+               ', About us', 
+               ', About Us', 
+               ', Code of Conduct', 
+               ', Terms & Conditions', 
+               ', Cookie Policy', 
+               ', Disclaimer', 
+               ', Investor Communication', 
+              ', 
+
+              ', 
+
+                 ', 
+               ', Support & Contact', 
+               ', Partner with Us', 
+               ', Careers', 
+               ', Advertise with Us', 
+               ', Contact Us', 
+               ', Feedback', 
+               ', Browser Support', 
+               ', Sitemap', 
+               ', 
+              ', 
+
+              ', 
+                 ', 
+               ', Subscribe', 
+               ', E-Paper', 
+               ', BS Magazines', 
+               ', Portfolio Tracker', 
+              ', 
+
+              ', 
+
+                 ', 
+               ', BS Products', 
+			   ', Smart Investor', 
+               ', BS Hindi', 
+               ', BS Motoring', 
+               ', BS Books', 
+               ', B2B Connect', 
+               ', iPhone', 
+               ', iPad', 
+               ', android', 
+               ', wap', 
+               ', BS Banking Round Table 2016', 
+               ', BS Fund Cafe 2016', 
+              ', 
+              ', 
+          ', 
+          ', 
+     ', 
+
+     ', 
+	 ', 
+                            ', Budget 2017', 
+                            ', Budget 2017', 
+                            ', Budget News', 
+                            ', Budget', 
+						', 
+						', 
+     	', 
+      		', Connect with BS', 
+        	', 
+            	', Facebook',   
+                ', Google+',  
+                ', Linkedin',  
+                ', Twitter', 
+                ', Youtube', 
+                ', RSS',   
+                ',   
+            ', 
+     	', 
+     ', 
+  ', 
+  ', 
+  ', 
+', 
+', 
+', 
+    .notification_error_div {
+        position: fixed;
+        z-index:100;
+        bottom: 0;
+        right: 0;
+        width: 350px;
+        background-color: #FFFFF0;
+        border: 1px solid black;
+
+        padding: 15px;
+        margin: 10px;
+
+        text-align: center;
+        font-size : 14px;
+        font-family: Tahoma,Arial,Georgia;
+    }
+', 
+', 
+    .notification_error_div {
+        position: fixed;
+        z-index:100;
+        bottom: 0;
+        right: 0;
+        width: 350px;
+        background-color: #FFFFF0;
+        border: 1px solid black;
+
+        padding: 15px;
+        margin: 10px;
+
+        text-align: center;
+        font-size : 14px;
+        font-family: Tahoma,Arial,Georgia;
+    }
+
+/** Free User Notification Popup **/
+.subscription-notification-popup{color: #000;padding: 0px !important;margin: 0px !important;}
+.free_user_notification_popup{padding: 10px;display: none;background: #fff;}
+.btn-maroon{padding: 5px 10px;margin: 0;border: 0;background: #ac2122;color: #fff;font-size: 16px;cursor: pointer;}
+.fis_user_notification_popup{padding: 10px;display: none;background: #fff;}
+', 
+', 
+    ', 
+       ', 
+          ', 
+             ', 
+                ', 
+                   ', 
+                   ', Upgrade To Premium Services', 
+                ', 
+             ', 
+             ', 
+                ', 
+                   ', 
+                ', 
+             ', 
+          ', 
+          ', 
+             ', Welcome ', User', 
+             ', 
+          ', 
+          ',  Business Standard is happy to inform you of the launch of "Business Standard Premium Services"', 
+          ', As a premium subscriber you get an across device unfettered access to a range of services which include:', 
+          ', 
+             ', Access Exclusive content - articles, features & opinion pieces', 
+             ', Weekly Industry/Genre specific newsletters - Choose multiple industries/genres', 
+             ', Access to 17 plus years of content archives', 
+             ', Set Stock price alerts for your portfolio and watch list and get them delivered to your e-mail box', 
+             ', End of day news alerts on 5 companies (via email)', 
+             ', NEW', : Get seamless access to WSJ.com at a great price. No additional sign-up required.', 
+          ', 
+          ', 
+             ', 
+                ',  ', 
+             ', 
+             ', 
+                ', 
+             ', 
+          ', 
+          ', 
+       ', 
+    ', 
+', 
+
+', 
+', 
+   ', 
+      ', 
+         ', 
+            ', 
+               ', 
+               ', Premium Services ', 
+               ', In Partnership with ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ',  ', 
+         ', 
+         ', 
+            ', 
+            ', Dear ', Guest', ,', 
+            ', 
+         ', 
+         ', 
+            ',  ', 
+         ', 
+      ', 
+      ', Welcome to the premium services of Business Standard brought to you courtesy FIS.', 
+         Kindly visit the ', Manage my subscription page',  to discover the benefits of this programme.', 
+         ', 
+         Enjoy Reading!', 
+         Team Business Standard
+      ', 
+      ', 
+         ', 
+            ',  ', 
+         ', 
+      ', 
+      ', 
+   ', 
+', 
+', 
+', 
+function getCookie(name) {		
+    var value = "; " + document.cookie;		
+    var parts = value.split("; " + name + "=");		
+    if (parts.length == 2)		
+        return parts.pop().split(";").shift();		
+}
+$('#head-suggest_ftr').focus(function(){
+	  $(this).attr('placeholder','');
+	});
+	$('#head-suggest_ftr').focusout(function(){
+	  $(this).attr('placeholder','Enter the first three letters of the company');
+});
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+function setCookieNoti(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+$(document).ready(function() {
+	if($('.breadcrum').find('a').size() != null && $('.breadcrum').find('a').size() == 3){
+		var lc = 1;
+		$('.breadcrum').find('a').each(function() {
+			if(lc == 2){ $(this).attr('class','bact'); }
+		    lc++;
+		});
+	}
+});
+//-->
+', 
+
+', 
+', 
+function setCookieNoti(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+
+$(document).ready(function(){//free-username-popup
+	var usrLoginCookie = getLoginCookie('_userLoggedIn');
+	if(isUserBanner=='fis'){
+		var usrObj = JSON.parse(decodeURIComponent(usrLoginCookie));
+    	if(usrObj.ufname != ''){
+        	var uId = usrObj.uId;
+        	var uName = usrObj.ufname;
+			var ckVal = getLoginCookie('_chkFisUserNotificationPopup');
+			var isCkSet = ckVal.indexOf(uId);
+			if(ckVal == '' || ckVal == 'undefined'){
+				//cookie is not set
+				$("#fis-username-popup").html(uName);
+				$.fancybox({
+					href		:	"#fis_user_notification_popup",
+				    maxWidth	:	600,
+					maxHeight	:	500,
+					fitToView	:	false,
+					autoSize	:	false,
+					closeClick	:	false,
+					openEffect	:	'none',
+					closeEffect	:	'none'
+				});
+		    	setCookieNoti("_chkFisUserNotificationPopup",uId,130);
+			}else{
+				if(isCkSet == -1){
+					//cookie for current user is not set
+					$("#fis-username-popup").html(uName);
+					$.fancybox({
+						href		:	"#fis_user_notification_popup",
+					    maxWidth	:	600,
+						maxHeight	:	500,
+						fitToView	:	false,
+						autoSize	:	false,
+						closeClick	:	false,
+						openEffect	:	'none',
+						closeEffect	:	'none'
+					});
+			    	ckVal += ","+uId;
+			    	setCookieNoti("_chkFisUserNotificationPopup",ckVal,130);
+				}else{
+					//cookie is already set, no need to show popup
+				}
+			}
+    	}
+	}
+  	if(usrLoginCookie != '' && false){
+    	var usrObj = JSON.parse(decodeURIComponent(usrLoginCookie));
+    	if(usrObj.s == 'f'){
+        	var uId = usrObj.uId;
+        	var uName = usrObj.ufname;
+			var ckVal = getLoginCookie('_chkFreeUserNotificationPopup');
+			var isCkSet = ckVal.indexOf(uId);
+			if(ckVal == '' || ckVal == 'undefined'){
+				//cookie is not set
+				$("#free-username-popup").html(uName);
+				$.fancybox({
+					href		:	"#free_user_notification_popup",
+				    maxWidth	:	600,
+					maxHeight	:	500,
+					fitToView	:	false,
+					autoSize	:	false,
+					closeClick	:	false,
+					openEffect	:	'none',
+					closeEffect	:	'none'
+				});
+		    	setCookieNoti("_chkFreeUserNotificationPopup",uId,30);
+			}else{
+				if(isCkSet == -1){
+					//cookie for current user is not set
+					$("#free-username-popup").html(uName);
+					$.fancybox({
+						href		:	"#free_user_notification_popup",
+					    maxWidth	:	600,
+						maxHeight	:	500,
+						fitToView	:	false,
+						autoSize	:	false,
+						closeClick	:	false,
+						openEffect	:	'none',
+						closeEffect	:	'none'
+					});
+			    	ckVal += ","+uId;
+			    	setCookieNoti("_chkFreeUserNotificationPopup",ckVal,30);
+				}else{
+					//cookie is already set, no need to show popup
+				}
+			}
+    	}
+  	}
+});
+
+$(document).ready(function(){
+	var loginCookie = getCookie('_userLoggedIn');
+	if( loginCookie == '' || loginCookie == 'undefined' ){
+		//Do Nothing
+	}else{
+		var loginParamObj = JSON.parse(decodeURIComponent(loginCookie));
+		if( loginParamObj.uId > 0 ){
+			var pwCookie = getCookie('_pw');
+			if( pwCookie == 't' ){
+				//Do Nothing
+			}else{
+				var subExpCookie = getCookie('_sub_exp');
+				if( (subExpCookie > 0) ){
+					var currentTimestamp = Math.floor(Date.now() / 1000);
+					
+					//Expiry Notification Logic
+					var neverShowNotificaitonCookie = getCookie('_nsn');
+					if(neverShowNotificaitonCookie == '' || neverShowNotificaitonCookie == 'undefined' || neverShowNotificaitonCookie == null){
+						var lastReminderCookie = getCookie('_ler'+loginParamObj.uId);//last expiry reminder
+						if( (lastReminderCookie == "") || (lastReminderCookie == "undefined") || (lastReminderCookie == null) ){
+							$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+						}else{
+							if(lastReminderCookie < currentTimestamp){
+								$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+							}
+						}
+					}else{
+						var isCkSet = neverShowNotificaitonCookie.indexOf(loginParamObj.uId);
+						if(isCkSet == -1){
+							//cookie for current user is not set
+							var lastReminderCookie = getCookie('_ler'+loginParamObj.uId);//last expiry reminder
+							if( (lastReminderCookie == "") || (lastReminderCookie == "undefined") || (lastReminderCookie == null) ){
+								$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+							}else{
+								if(lastReminderCookie < currentTimestamp){
+									$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+});
+
+function remindNotificationLater(userId){
+	var currentTimestamp = Math.floor(Date.now() / 1000);
+	var tempTime = new Date(currentTimestamp*1000);
+	var lastExpNotification = Math.floor(tempTime.setMinutes(tempTime.getMinutes() + 60) / 1000);//+60 mins
+	//Set Cookie
+    var d = new Date();
+    d.setTime(d.getTime() + (60*60*1000));//60 min
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "_ler"+userId+"=" + lastExpNotification + "; " + expires + "; path=/";
+	$('#endSubscriptionNotification').remove();
+}
+
+function closeNotificationForever(userId){
+	var neverShowNotificaitonCookie = getCookie('_nsn');
+	neverShowNotificaitonCookie += ","+userId;
+	//Set Cookie
+    var d = new Date();
+    d.setTime(d.getTime() + (30*24*60*60*1000));//30 days
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "_nsn=" + neverShowNotificaitonCookie + "; " + expires + "; path=/";
+	
+	$('#endSubscriptionNotification').remove();
+}
+', 
+
+', 
+$.browser.chrome = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()); 
+if($.browser.chrome){
+	setTimeout(showChromeNotification,1000);
+}
+', 
+
+
+	    ', 
+      ', 
+         ', 
+', 
+
+    	', 
+
+function show(target) {
+    document.getElementById(target).style.display = 'block';
+}
+
+function hide(target) {
+   document.getElementById(target).style.display = 'none';
+    notifyCookie =  decodeURIComponent(getCookie('_notifyCookie'));
+    if(notifyCookie !=null && notifyCookie != 'undefined'){
+        var notifyValues = JSON.parse(notifyCookie);
+	if(notifyValues !=null && notifyValues != 'undefined' ){
+	  notifyValues.nty="Y";
+	  notifyValues.cnty="Y";
+	  notifyValues.rTime= (new Date().getTime()+ 24*60*60*1000) /1000|0;
+	  notifyValues=JSON.stringify(notifyValues);
+	  notifyValues = encodeURIComponent(notifyValues);
+	  setCookieColumn('_notifyCookie',notifyValues,2);
+	}
+   }
+}
+function setCookieColumn(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+', 
+
+
+
+
+
+
+
+', 
+var userCookie = decodeURIComponent(getCookie('_userLoggedIn'));
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-3333643-1', 'auto');
+if(userCookie !=null && userCookie!= 'undefined'){
+	 var userInfo = JSON.parse(userCookie);
+	 ga('set', '&uid', userInfo.uId);
+}
+if(isBannerActive == false){
+	if(userCookie !=null && userCookie!= 'undefined'){
+		var userInfo = JSON.parse(userCookie);
+		if(userInfo !=null && userInfo!= 'undefined' && userInfo.s != 'undefined' && userInfo.s == 't'){
+			ga('set', 'dimension1', 'Paid adblocker!!!');
+		}else{
+			ga('set', 'dimension1', 'Free adblocker!!!');
+		}
+	}else{
+		ga('set', 'dimension1', 'Anonymous adblocker!!!');
+	}
+}
+
+
+if(idPaidArticle == true){
+	   var url = window.location.href; var articleUrl = " ";
+	       if(url.indexOf('?') != -1)
+	         articleUrl = url.split('?')[0] ;
+	       else
+	         articleUrl = url;
+	    if(articleUrl !=null && articleUrl!= 'undefined'){
+	   
+	    	ga('set', 'dimension2', articleUrl);
+	    }
+}
+
+
+ga('send', 'pageview');
+', 
+', 
+', 
+', var _comscore=_comscore||[];_comscore.push({c1:"2",c2:"8021726"});(function(){var b=document.createElement("script"),a=document.getElementsByTagName("script")[0];b.async=true;b.src=(document.location.protocol=="https:"?"https://sb":"http://b")+".scorecardresearch.com/beacon.js";a.parentNode.insertBefore(b,a)})();', 
+', 
+', 
+', 
+', 
+var AKSB=AKSB||{};AKSB.q=[];AKSB.mark=function(b,a){AKSB.q.push(["mark",b,a||(new Date).getTime()])};AKSB.measure=function(b,a,c){AKSB.q.push(["measure",b,a,c||(new Date).getTime()])};AKSB.done=function(b){AKSB.q.push(["done",b])};AKSB.mark("firstbyte",(new Date).getTime());
+AKSB.prof={custid:"356860",beaconrate:20};
+(function(b){var a=document.createElement("iframe");a.src="javascript:false";(a.frameElement||a).style.cssText="width: 0; height: 0; border: 0; display: none";var c=document.getElementsByTagName("script"),c=c[c.length-1];c.parentNode.insertBefore(a,c);a=a.contentWindow.document;a.open().write("<body onload=\"var js = document.createElement('script');js.id = 'aksb-ifr';js.src = '"+b+"';document.body.appendChild(js);\">");a.close()})(("https:"===document.location.protocol?"https:":"http:")+"//ds-aksb-a.akamaihd.net/356860/aksb-a/aksb.min.js");
+', 
+', 
+', 
+var addthis_config = {"data_track_addressbar":false, "services_exclude":'print, email','recommended' : {}, 'thankyo : false};
+addthis_config.pubid = 'bsorg08';
+var addthisScript = document.createElement('script');
+addthisScript.setAttribute('src', '//s7.addthis.com/js/300/addthis_widget.js#domready=1');
+document.body.appendChild(addthisScript);
+', 
+', 
+#at4-thankyou{display:none !important;}
+', 
+', u"
+var subs_pw = getCookie('_pw');
+if( subs_pw != null && subs_pw == 't'){
+	$('.paid_article_key').hide();
+}else{
+	$('.paid_article_key').show();
+}
+", 
+'][
+', 
+   ', 
+   ', 
+   ', 
+	var urlArray = ["/article/", "/content/", "/budget/"];
+	var blockThisUrl = false;
+	for (checkedUrl = 0; checkedUrl < urlArray.length; checkedUrl++) { 
+		if(document.location.pathname.indexOf(urlArray[checkedUrl]) !== -1){
+			blockThisUrl = true;
+		}
+	}
+	var subs_pw = getCookie('_pw');
+	if((typeof adsLoaded != 'undefined')  == false && (subs_pw == null || subs_pw != 't') && blockThisUrl){
+		console.log("adBlocker");
+		$("#main-warp").hide();
+		$("body").load("/adBlocker.html");
+		$("head").html("");
+		$("body").addClass("mainbg");
+	}
+	', 
+      ', 
+	        ', 
+		', 
+		', 
+    ', 
+              ', 
+        ', 
+          ', 
+          	', 
+			', Home', Markets', Companies', Opinion', Politics', Technology', Specials', PF', Portfolio', My Page', Budget 2017', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', North', East', West', South', Election', News', Mobiles & Tablets', Apps', People', Computers', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017', Home', u"Today's Paper", Latest News', Economy', Finance', Current Affairs', International', Management', The Strategist', Weekend', Data Stories', Chat', Markets', News', Stocks', Commodities', IPOs', Mutual Funds', Mutual Fund Tools', Derivatives', BS Fund Manager', Companies', News', Results', Auto', Engineering', Financials', Infra', IT', Oil & Gas', Telecom', Services', All Sectors', Opinion', Editorial Comment', Columnists', Financial X-Ray', Business Law & Tax', Lunch', Poll', Politics', North', East', West', South', Election', Technology', News', Mobiles & Tablets', Apps', People', Computers', Specials', Weekend', Digital Consumer', PE/VC', Brand World', SME', Start-ups', Defence', B2B Connect', Power & Energy', Sponsored Content', PF', News', Features', Investments', Loans & Credit Cards', Tax', Insurance', Financial Tools', Portfolio', My Page', Budget 2017',            	', 
+
+          ', 
+          ', 
+            ', BS APPS
+            ', 
+           ', 
+                ', iPad', 
+                ', iPhone', 
+                ', Android', 
+                ', Wap', 
+              ', 
+            ', 
+
+            ', 
+           ', BS PRODUCTS
+           ', 
+           ', 
+				', Smart Investor', 
+				', BS Hindi', 
+			    ', BS Motoring', 
+			    ', BS Books', 		    
+			    ', u"Today's Paper", 			    
+			    ', 
+			    ', Economy & Industry', 
+              ', 
+            ', 
+
+            ', 
+           ', BS SPECIALS
+           ', 
+           ', 
+                ', B2B Connect', 
+                ', Power & Energy', 
+                ', SME', 
+              ', 
+            ', 
+			
+		   ', 
+			', BS E-Paper', 
+           ', 
+
+          ', 
+           ', 
+        ', 
+
+          ', 
+          ', 
+        		.displayNone{display: none !important;}
+          ', 
+          ', 
+          				', 
+			', Hi', , ', 
+			', 
+				', 
+	                	                ', Change Password', 
+	                            			', Subscribe', 
+			 			                ',  Sign out', 
+              ', 
+			 ', 
+	                ', Change Password',             		
+					', Manage My Account', 
+					', 
+	                ',  Sign out', 
+              ', 
+			', 
+			            ', SIGN IN', 
+            ', Subscribe', 
+			          ', 
+          ', 
+          	function getLoginCookie(cname) {
+	      	    var name = cname + "=";
+	      	    var ca = document.cookie.split(';');
+	      	    for(var i=0; i<ca.length; i++) {
+	      	        var c = ca[i];
+	      	        while (c.charAt(0)==' ') c = c.substring(1);
+	      	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+	      	    }
+	      	    return "";
+      		}
+      		var usrLoginCookie = getLoginCookie('_userLoggedIn');
+          	if(usrLoginCookie == ''){
+				$(".userNotLoggedIn").removeClass('displayNone');
+            }else{
+            	$(".userLoggedIn").removeClass('displayNone');
+            	var usrObj = decodeURIComponent(usrLoginCookie);			
+				usrObj = JSON.parse(usrObj);				
+				usrObj.ufname = usrObj.ufname.replace(/\+/g, ' ');
+            	$(".ucnameSpan").html(decodeURIComponent(usrObj.ufname));	
+            	if(usrObj.s == 't'){
+                	$(".usrSubcribe a").html('Manage My Account');
+					$(".usrSubcribe a").attr("href", "/subscription-cart/manage");					
+                }else{                	
+					var subExp = getLoginCookie('_sub_exp');					
+                    if(subExp!=''){                    	
+						var timestamp = Math.floor(Date.now() / 1000);						
+						if((timestamp.toString().length == subExp.length) && (subExp<timestamp) ){
+							$(".manageMyAccount").show();
+							$(".usrSubcribe a").html('Subscribe');
+						}else{
+							$(".usrSubcribe a").html('Manage My Account');
+							$(".usrSubcribe a").attr("href", "/subscription-cart/manage");		
+						}
+                    }else{
+                		$(".usrSubcribe a").html('Subscribe');						
+						$(".manageMyAccount").show();
+                    }
+                }
+
+                if(usrObj.r == "f"){
+                	$(".siteSignout a").click(function(){
+                		FB.logout();
+                    });
+                }else if(usrObj.r == "t"){
+                	$(".siteSignout a").click(function(){
+                		twttr.anywhere.signOut();
+                    });
+                }
+            }
+          ', 
+          ', 
+            ', 
+                   ', 
+					',  ', 
+					',  ', 
+                    ',  ', 
+					',  ', 
+					',  ', 
+					',  ', 
+					',  ', 
+            		                   ', 
+                   ', 
+               ', 
+          ', 
+           ', 
+        ', 
+         ', 
+        ', 
+         ', 
+   ', 
+        ', 
+		', 
+						', 
+			', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/Web_chat_175x60_left', [175, 60], 'div-gpt-ad-1480487618894-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1480487618894-0'); });
+", 
+', 			', 
+					', 
+		', 
+						', 
+			', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/webchat_earpanel_175x60', [175, 60], 'div-gpt-ad-1479738033184-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479738033184-0'); });
+", 
+', 			', 
+					', 
+		', 
+        ', 
+            ', 
+            ', 
+                    ', 
+        ', 
+
+		', 
+		', 
+    ', 
+
+
+
+   ', 
+    ', 
+        ', 
+        ', 
+      ', 
+      ', 
+		.second-menu-panel{z-index:9999999 !important;}
+		.top-menu{z-index:10000000 !important;}
+      	.fancybox-overlay,#fancybox-overlay{z-index:10000001 !important;}
+		#overlay{z-index:10000002 !important;}
+		.popup,#fancybox-wrap{z-index:10000003 !important;}
+		#fancybox-content{min-height: 380px;min-width:600px;}
+		#fancybox-wrap{min-width: 640px;}
+		#menu li.drop{padding: 8px 10px 8px 2px;}
+      ', 
+   
+   ', 
+   ', 
+      ', 
+      ',  ', Company',  ',  Science & Technology',  ',  ',       ', 
+      ', 
+       ', 
+      ', 
+          ', 
+          ', 
+          ', 
+            ', 
+               ', News', 
+				', Stock Quote', 
+				', Authors', 
+            ', 
+            ', 
+             ', 
+
+          ', 
+          ', 
+          ', 
+          ', 
+
+          ', 
+	         
+	          $("#select_type").change(function(){
+	          	document.cookie="selectType=" + $(this).val();
+           	  });
+	           getCookieAndSetDefault("selectType");
+	         
+	          
+	          function getCookieAndSetDefault(c_name){
+					var c_value = document.cookie;console.log(c_value);
+					var c_start = c_value.indexOf(" " + c_name + "=");
+					if (c_start == -1){
+						c_start = c_value.indexOf(c_name + "=");
+					}
+					if (c_start == -1){
+						c_value = null;
+					}
+					else{
+						c_start = c_value.indexOf("=", c_start) + 1;
+						var c_end = c_value.indexOf(";", c_start);
+					if (c_end == -1){
+						c_end = c_value.length;
+					}
+					c_value = unescape(c_value.substring(c_start,c_end));
+					}
+
+					if(c_value != 'null' && c_value != null){
+						$("#select_type").val(c_value);
+					}
+	         }
+	          
+          ', 
+		  
+    ', 
+	var companyJsonFile = "";
+	
+	function getCompaniesJson() {
+		var o = $("#head-suggest");
+		objHiddenValField = "";
+		if (objHiddenValField == undefined || objHiddenValField == "") {
+			objHiddenValField = $("#company_code");
+		}
+
+		$.ajax({
+			url : "/api-handler/article/get-company-json",
+			cache : true,
+			success : function(data) {
+				var jsonObj = eval(data);
+				companyFileLoaded = true;
+				companyJsonFile = jsonObj;
+
+				
+				$(o).autocomplete({
+					source: function (request, response) {
+				            var term = $.ui.autocomplete.escapeRegex(request.term)
+				                , startsWithMatcher = new RegExp("^"+ term, "i")
+				                , startsWith = $.grep(companyJsonFile, function(value) {
+				                    return (startsWithMatcher.test(value.value) || (startsWithMatcher.test(value.compSym)));
+				                })
+				                
+				                , containsMatcher = new RegExp(term, "i")
+				                , contains = $.grep(companyJsonFile, function (value) {
+				                    return $.inArray(value, startsWith) < 0 &&
+				                        (containsMatcher.test(value.value) || (containsMatcher.test(value.compSym)));
+				                });
+				            response(startsWith.concat(contains));
+				        },
+					minLength : 3,
+					autoFocus : true,
+					disabled : false,
+					select : function(event, ui) {
+						$(objHiddenValField).val(ui.item.compId);
+						$(o).val(ui.item.compFormatted);
+						$objForm = $(o).closest("form");
+						if ($objForm.attr("name") != "frm_equity") {
+							$objForm.submit();
+						}
+					},
+					open : function() {
+						$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+					},
+					close : function() {
+						$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+					}
+				}).data("autocomplete")._renderItem = function(ul, item) {
+					var result = String(item.label).replace(new RegExp(this.term, "gi"),"<b>$&</b>");
+					return $( "<li></li>" )
+	                      .data( "item.autocomplete", item )
+	                      .append($( "<a></a>" ).html(result))
+	                      .appendTo( ul );
+
+				};
+
+			}
+		});
+	}
+	', 
+
+
+		', 
+		$("#select_type").change(function(){
+			var itemVal = $(this).val();
+			if(itemVal == 'news'){
+				$("#radio_news").attr("checked","checked");
+				$("#radio_news").trigger("click");
+			}else if(itemVal == 'stocks'){
+				$("#radio_stock").attr("checked","checked");
+				$("#radio_stock").trigger("click");
+			}else if(itemVal == 'authors'){
+				$("#radio_authors").attr("checked","checked");
+				$("#radio_authors").trigger("click");
+			}
+		});
+		$(document).ready(function(){
+			var itemVal = $('#select_type').val();
+			if(itemVal == 'news'){
+				$("#radio_news").attr("checked","checked");
+				$("#radio_news").trigger("click");
+			}else if(itemVal == 'stocks'){
+				$("#radio_stock").attr("checked","checked");
+				$("#radio_stock").trigger("click");
+			}else if(itemVal == 'authors'){
+				$("#radio_authors").attr("checked","checked");
+				$("#radio_authors").trigger("click");
+			}
+		});
+		$("#search_btn").click(function(){
+			$("#search_box_text").val($("#head-suggest").val());
+			$("#frm_search").submit();
+		});
+
+		$("#head-suggest").keypress(function(e){
+			if(e.charCode == 13){
+				$("#frm_search").submit();
+			}
+		});
+		', 
+
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		',  News', 
+		',  
+		', 
+		',  Stock Quote', 
+		',  
+		', 
+		',  Authors', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+
+      ', 
+      ', 
+
+      ', 
+
+   ', 
+     ', 
+    ',     ', 
+    
+     ', 
+			', u"
+		<!--
+		.breadcrum{ padding:5px 0 5px 10px; margin-bottom:-5px;  font-family: 'Open Sans', sans-serif; font-weight:400; color:#888; border-bottom: 1px solid #c4c6c8;}
+		.breadcrum a{ font-size:13px;} 
+		.breadcrum a:hover{ color:#c31316; text-decoration:underline;}
+		.breadcrum a.bact{color:#c31316; text-decoration:none;}
+		.breadcrum a {text-transform: none;}
+		-->
+		", 
+		',  You are here: ', Home',  » ', Companies',  » ', News',     ', 
+    ', 
+    ', 
+', 
+	$(document).ready(function(){
+		 $(".iframe").fancybox({
+		     maxWidth	: 600,
+			 maxHeight	: 580,
+			fitToView	: false,
+			autoSize	: false,
+			closeClick	: false,
+			href		: '/core/request-handler/sign-in-content',
+			openEffect	: 'none',
+			closeEffect	: 'none'
+	
+		});
+	$('.fancybox').fancybox();
+	});
+', 
+', 
+
+', 
+//Bs New Menu 
+   	$("#newMenuNavigationSecond").html($("#newMenuNavigationSecondHide").html());
+   	$("#newMenuNavigationSecondHide").html("");
+		$('.select_sub').first().removeClass('default-disp');
+		var mid = '287';
+		var rel = $('#nav_menu_' + mid).attr('rel');
+		if (rel != undefined && rel != '') {
+			$('#nav_menu_' + rel).addClass('activelink');
+			$('#nav_menu_' + mid).addClass('activelink');
+			$('#nav_menu_' + rel).parent().find('.select_sub').addClass('default-disp');		
+			$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+		} else {
+			$('#nav_menu_' + mid).addClass('activelink');
+			if($('#nav_menu_' + mid).parent().find('.select_sub').length==0){
+				$(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+				$(".nav-outer-repeat").css("height","62px");
+			}else{
+				$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+				$(".nav-outer-repeat").css("height","62px");
+			}
+		}
+		$('.select').mouseenter(function() {
+			
+			 $( ".select" ).each(function() { 
+				 if(($(this).find('.activelink').length>0)){
+					 $(this).find('.select_sub').removeClass('default-disp');
+					 $(this).find('li').removeClass('activelink');
+				 }
+				 
+		    });
+		      if(!($(this).find('.select_sub').length>0)){
+		    	     $(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+		    	     $(".nav-outer-repeat").css("height","62px");
+			  }else{ 
+				    $(".nav-new").find('.select:first').find('.select_sub').removeClass('default-disp');
+				 	$(".nav-outer-repeat").css("height","62px");
+			  }
+	     });
+		 
+		 $('.nav-outer').mouseleave(function() {
+			 if (rel != undefined && rel != '') {
+					$('#nav_menu_' + rel).addClass('activelink');
+					$('#nav_menu_' + mid).addClass('activelink');
+					$('#nav_menu_' + rel).parent().find('.select_sub').addClass('default-disp');		
+					$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+					$(".nav-outer-repeat").css("height","62px");
+				}else{
+					if($('#nav_menu_' + mid).parent().find('.select_sub').length==0){
+						$(".nav-new").find('.select:first').find('.select_sub').addClass('default-disp');
+						$(".nav-outer-repeat").css("height","62px");
+					}else{
+						$(".nav-new").find('.select:first').find('.select_sub').removeClass('default-disp');
+						$('#nav_menu_' + mid).addClass('activelink');
+						$('#nav_menu_' + mid).parent().find('.select_sub').addClass('default-disp');
+						$(".nav-outer-repeat").css("height","62px");
+					}
+					
+			 }
+	    }); 
+		 
+		  $('.activelink').mouseenter(function() {
+	       $('.activelink').first().addClass('nolink');
+	    }); 
+	', 
+
+
+', 
+', 		', 
+
+		', 
+	    ', 
+', u"
+ var googletag = googletag || {};
+ googletag.cmd = googletag.cmd || [];
+ (function() {
+   var gads = document.createElement('script');
+   gads.async = true;
+   gads.type = 'text/javascript';
+   var useSSL = 'https:' == document.location.protocol;
+   gads.src = (useSSL ? 'https:' : 'http:') +
+     '//www.googletagservices.com/tag/js/gpt.js';
+   var node = document.getElementsByTagName('script')[0];
+   node.parentNode.insertBefore(gads, node);
+ })();
+", 
+
+', 
+
+', 
+span.p-content{font-family: 'Open Sans',sans-serif;font-size: 15px;line-height: 24px;}
+span.p-content a{color: #2591dc; text-decoration: none;}
+.bBorder1{border-bottom:1px solid #c4c6c8!important;}
+li.size16 .bB1:last-child{border-bottom: 0px !important;}
+.colL_MktColumn1.panel-left .banner240-180 div[style="float: left;"] div[style="float: left; clear: both; font-style:italic; padding: 10px 10px 10px 0px; width:620px;"]{
+width:100% !important;
+}
+/** CSS Changes for follow Columnist **/ 
+.unlock_bg {padding: 8px 15px;height: 44px;background: #EEE none repeat scroll 0% 0%;border-width: 1px 1px 1px 4px;border-style: solid;border-color: #FFF #FFF #FFF #AC2122; box-shadow: 0px 0px 10px 0px #D6D6D6;font-family: "Open Sans",sans-serif; font-size: 16px;color: #1D1D1D;font-weight: 600;width: 640px;}
+.unlock_bg ul{margin:0px; padding:0px;}
+.unlock_bg ul li{list-style-type:none; float:left;}
+.unlock_bg .unlock{padding:3px 0px 0px 10px; vertical-align:middle;}
+.unlock_bg .unlock a{text-decoration:none; color:#1d1d1d;}
+.unlock_bg .circle {width: 22px;height: 22px;background-color:#ac2122;-moz-border-radius: 70px;-webkit-border-radius: 70px;border-radius: 70px;text-align:center; color:#fff;margin-left:45px; margin-top:3px;}
+.unlock_bg .article{padding:3px 0px 0px 10px; vertical-align:middle; color:#017e22;}
+.unlock_bg .article a{text-decoration:none; color:#017e22;}
+.columnist{ padding:6px 10px; border:0; display:block; background:#4d5557; color:#fff; font-size:14px;cursor:pointer;}
+.modal {opacity: 0;visibility: hidden;position: fixed;top: 0;right: 0;bottom: 0;left: 0;text-align: left;transition: opacity .25s ease; z-index:999; position:relative;}
+.modal__bg {position: relative;  top: 0;right: 0;bottom: 0;left: 0;cursor: pointer;}
+.modal-state {display: none;}
+.modal-state:checked + .modal {opacity: 1;visibility: visible;}
+.modal-state:checked + .modal .modal__inner {top: 0px;}
+.modal__inner {transition: top .25s ease;position: relative;top: 0px;right: 0;bottom: 0;left: 0px;width:640px;margin: auto;overflow: auto;background: #eeeeee;padding:10px 15px;height:70px;
+  border-top:1px solid #fff;border-right:1px solid #fff;border-bottom:1px solid #fff;border-left:4px solid #ac2122;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(214,214,214,1);-moz-box-shadow: 0px 0px 10px 0px rgba(214,214,214,1);
+  box-shadow: 0px 0px 10px 0px rgba(214,214,214,1);font-family: 'Open Sans', sans-serif;  font-size:15px; color:#1d1d1d; line-height:22px;
+}
+.modal__inner_left {width:70%; float:left;}
+.modal__inner_right {width:30%; float:right;}
+.modal__close {position: absolute;right: 10px;top: 20px;width: 70px;height: 24px;cursor: pointer;background-color: #AC2122; font-size:13px; font-weight:normal;border-radius:2px; text-align:center; color:#fff;}
+.modal__proceed {position: absolute;right: 90px;top: 20px;width: 70px;height: 24px;cursor: pointer;background-color: #0a6d02; font-size:13px; font-weight:normal;border-radius:2px; text-align:center; color:#fff;}
+
+
+/** MEDIA **/
+
+@media (max-width: 768px) { 
+
+.modal__inner {width: 692px;}
+.floatR{float:right!important;}
+.unlock_bg { width: 692px;}
+}
+', 
+
+', 
+
+', 
+	', 
+		', 
+			', 
+				', Coal India to increase coal production to 1,000 mn tonnes in 4 years', 
+				', 
+			', 
+		', 
+		', 
+	', 
+	', 
+		', 
+			', 
+				', BackOffice Associates opens GDCs in Hyderabad, Bengalur, 
+				', 
+			', 
+		', 
+		', 
+	', 
+', 
+
+
+	  						', 
+			', 
+	        	', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1474961759587-0'); });
+", 
+', 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="95"; var zflag_sid="0"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14"; 
+', 
+', 
+
+', document.write("<!--"); if(isUserBanner=="fis") document.write("-->"); ',  ', $("#id_3_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_fis-1480077568.png"); ', document.write("<!--"); if(isUserBanner=="kotak") document.write("-->"); ',  ', $("#id_4_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_kotak-1480077568.jpg"); ', document.write("<!--"); if(isUserBanner=="capgemini") document.write("-->"); ',  ', $("#id_5_1480077568").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/Companies_super_728x90_inside_capgemini-1480077568.jpg"); ', 	       		', 
+		
+	  	   		  		    		', Business Standard', 
+  		
+	', 
+    ', 
+		', 
+        	   
+	   ', 
+	   ', 
+	   
+        ', 
+      	', 
+      	        ', 
+			', 
+	        	', 
+	          	', 
+					  					  
+					 ', u"
+					 					 India Power Corporation to acquire Meenakshi Energy's 89% net worth					 ", 
+				  					   		', IPC will be buying the 89% stake held by France-based Engie', 
+				   	
+					', 
+					', 
+						  ', 
+							  ', 
+								  								  ', BS Reporter',  								  								  | 
+								  								  								  ', Kolkata',  							  ', 
+							  							  ', 
+							  ', February 25, 2016							  Last Updated at 14:42 IST', 
+							  						', 
+					  	
+
+											      ', 
+					   
+					   																   
+					', 
+					', 
+					
+					
+					', 
+					 	', 
+						', 
+							', 
+																', 
+								 	', 
+								', 
+								', 
+								 	', 
+								', 
+								', 
+									', 
+								', 
+								', 
+									', 
+								', 
+							', 
+						', 
+						', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+            ', 
+            ', email this article', 
+
+         	', 
+            	', 
+                    ', 
+                    	', Message:', 
+			            ', 
+			            ', u"Recipients' Email:", 
+			            ', 
+					        ', Type address separated by commas', 
+         			', 
+			   		', 
+			   			', Your Email:', 
+			   			', 
+			   			', Enter the characters shown in the image.', 
+			   			', 
+			   		', 
+			   		', 
+			   			', Send me a copy:
+			   			  ', 
+			            ', 
+			   		', 
+			   		', 
+				    	',  ', 
+			       		', 
+			       		', 
+			       		', 
+			       		  ', 
+			   		', 
+       	       	', 
+            ', 
+         	', 
+', 
+
+', 
+', 
+$(document).ready(function(){
+	$("#email_formarticle").validationEngine({promptPosition : "topRight:-100"});
+	$(".reload_image_captcha").click(function(){
+		var _id = this.id;
+		$.ajax({
+			"type"		:	"POST",
+			"url"		:	"/request-handler/reload-captcha",
+			"success"	:	function(data){
+				if(data!=undefined){
+					try{
+						var _res = eval(data);
+						if(_res.err!=undefined && _res.id!=undefined && _res.msg!=undefined){
+							if(_res.err=='0'){
+								var captchaId = "#captcha_id_"+_id;
+								var imgCaptchaBox = "#image_captcha_box_"+_id;
+								$(captchaId).val(_res.id);
+								$(imgCaptchaBox).html(_res.msg);
+							}else{
+								alert(_res.msg);
+							}
+						}
+					}catch(e){}
+				}
+			}
+		});
+		return false;
+	});
+	$(".at-svc-email").one("click", function(){
+		$( ".reload_image_captcha" ).trigger( "click");
+	});
+});
+', 
+', 						', 
+					', 
+										 ', 
+							', http://mybs.in/2TCLCLC', 
+							', 
+														', 
+												', 
+					', 
+					function copyTinyUrl(){
+						var text = $("#tiny_dialog p")[0];
+						if ($.browser.msie) {
+							var range = document.body.createTextRange();
+							range.moveToElementText(text);
+							range.select();
+						} else {
+							var selection = window.getSelection();
+							var range = document.createRange();
+							range.selectNodeContents(text);
+							selection.removeAllRanges();
+							selection.addRange(range);
+						}
+						document.execCommand("copy");
+					}
+					$(function() {
+						$("#tiny_dialog").dialog({
+							autoOpen: false
+						});
+						$("#tiny_bbtn").on("click", function() {
+							$("#tiny_dialog").dialog("open");
+						});
+					});
+					', 
+					 				', 
+
+
+		       	', 
+								', 
+					', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+ 
+ ', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/640x90_ad', [640, 60], 'div-gpt-ad-1479277932687-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+ 
+
+ 
+  
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479277932687-0'); });
+", 
+', 
+
+ 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+ 
+ ', 
+  (function() {
+    var useSSL = 'https:' == document.location.protocol;
+    var src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+    document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+', 
+
+', u"
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/6516239/640x90_ad', [640, 60], 'div-gpt-ad-1479277932687-0').addService(googletag.pubads());
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+  });
+", 
+ 
+
+ 
+  
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1479277932687-0'); });
+", 
+', 
+
+ 
+
+', 
+				
+
+        ', 
+ 				
+					', 
+  					
+				', 
+				
+  								
+
+	            ', 
+				    				      	', 
+With its eye on raising its power generation capacity in excess of 1,500 MW by 2017, India Power Corporation (IPC) is in the process of acquiring the entire stake held by France-based Engie in Meenakshi Energy.
+
+	The acquisition, which is subject to necessary regulatory and IPC's shareholders' approval, will turn Meenakshi Energy into a subsidiary of the former. The transfer of shares will be funded from IPC's own internal accruals as well as external debt in case it is required.
+
+	"After requisite determination of all the liabilities, the value of the deal will be ...', 
+				    	            ', 
+	            
+												  				     ', 
+/*CSS Subscription*/
+div.subscription-tooltip{display: none;width: 320px;padding: 10px 20px;margin-top: 0;margin-left: 150px;margin-bottom: 10px;z-index: 10;position: relative;font-family: Arial;font-size: 12px;font-style: normal;border-radius: 3px;box-shadow: 2px 2px 2px 2px #999;-webkit-transition-property: opacity, margin-top, visibility, margin-left;-webkit-transition-duration: 0.4s, 0.3s, 0.4s, 0.3s;-webkit-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;transition-property: opacity, margin-top, visibility, margin-left;transition-duration: 0.4s, 0.3s, 0.4s, 0.3s;transition-timing-function:ease-in-out, ease-in-out, ease-in-out, ease-in-out;color: #000000;background: #FBF5E6;background: -webkit-linear-gradient(top, #FBF5E6, #FFFFFF);background: linear-gradient(top, #FBF5E6, #FFFFFF);border: 1px solid #CFB57C;}
+
+div.subscription-tooltip b{background: #FBF5E6;border-top: 1px solid #CFB57C;border-right: 1px solid #CFB57C;width: 15px;height: 15px;margin-left: 130px;margin-top: -19px;display: block;position: absolute;-webkit-transform: rotate(-45deg);-moz-transform: rotate(-45deg);-o-transform: rotate(-45deg);transform: rotate(-45deg);-webkit-box-shadow: inset -1px 1px 0 #fff;-moz-box-shadow: inset 0 1px 0 #fff;-o-box-shadow: inset 0 1px 0 #fff;box-shadow: inset 0 1px 0 #fff;display: none\0/;*display: none;}
+
+div.subscription-wsj-premium-tooltip, div.subscription-wsj-special-tooltip{display: none;width: 250px;padding: 10px 20px;margin-top: 15px;margin-left: 50px;margin-bottom: 0px;z-index: 10;position: relative;font-family: Arial;font-size: 12px;font-style: normal;border-radius: 3px;box-shadow: 2px 2px 2px 2px #999;-webkit-transition-property: opacity, margin-top, visibility, margin-left;-webkit-transition-duration: 0.4s, 0.3s, 0.4s, 0.3s;-webkit-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;transition-property: opacity, margin-top, visibility, margin-left;transition-duration: 0.4s, 0.3s, 0.4s, 0.3s;transition-timing-function:ease-in-out, ease-in-out, ease-in-out, ease-in-out;color: #000000;background: #FBF5E6;background: -webkit-linear-gradient(top, #FBF5E6, #FFFFFF);background: linear-gradient(top, #FBF5E6, #FFFFFF);border: 1px solid #CFB57C;}
+
+div.subscription-wsj-premium-tooltip b,div.subscription-wsj-special-tooltip b{background: #FBF5E6;border-top: 1px solid #CFB57C;border-right: 1px solid #CFB57C;width: 15px;height: 15px;margin-left: 90px;margin-top: -19px;display: block;position: absolute;-webkit-transform: rotate(-45deg);-moz-transform: rotate(-45deg);-o-transform: rotate(-45deg);transform: rotate(-45deg);-webkit-box-shadow: inset -1px 1px 0 #fff;-moz-box-shadow: inset 0 1px 0 #fff;-o-box-shadow: inset 0 1px 0 #fff;box-shadow: inset 0 1px 0 #fff;display: none\0/;*display: none;}
+
+.mob_delete{right: -4px;top: -4px;}
+
+.price-list_section{ padding:10px; margin:0;}
+.price-list{ width:50%; float:left;}
+.price-list-box{ margin: 5px 0 30px 0;}
+
+.ac-custom { padding: 0; margin: 0 auto;}
+.ac-custom h2 { font-size: 3em; font-weight: 300; padding: 0 0 0.5em; margin: 0 0 30px;}
+.ac-custom ul, .ac-custom ol { list-style: none; padding: 0; margin: 0 auto; }
+.ac-custom li { margin: 0 auto; padding: 0; position: relative;}
+.ac-custom label { display: inline-block; position: relative; font-size: 2em; vertical-align: top;	color: #000; cursor: pointer; -webkit-transition: color 0.3s; transition: color 0.3s; background:#fff; left:50px; border:2px solid #000; width:83%; padding:0px; height:170px; }
+.ac-custom input[type="checkbox"], .ac-custom input[type="radio"], .ac-custom label::before { width: 35px; height: 35px; top: 50%; left: -48px;	margin-top: -20px; position: absolute; cursor: pointer;}
+.ac-custom label h3{ padding:5px 0; margin:0; font-family: 'Oswald', sans-serif; font-size:18px;}
+.ac-custom label span{ font-size:12px; text-transform:uppercase;  }
+.ac-custom label h4{ font-size:12px; text-transform:uppercase; font-family:Arial, Georgia, "Times New Roman"; }
+.ac-custom label p{ font-size:12px; padding:0; margin:0;}
+.ac-custom input[type="checkbox"], .ac-custom input[type="radio"] {	opacity: 0;	-webkit-appearance: none; display: inline-block;	vertical-align: middle;	z-index: 100; left:0px;}
+.ac-custom label::before { content: '';	border: 2px solid #000; -webkit-transition: opacity 0.3s; transition: opacity 0.3s; border-radius: 50%;}
+.ac-custom input[type="checkbox"]:checked + label, .ac-custom input[type="radio"]:checked + label { color: #000; border:2px solid #b72d27; background:none; width:83%; background:#fff;}
+.ac-custom input[type="checkbox"]:checked + label::before, .ac-custom input[type="radio"]:checked + label::before { opacity: 0.8; border:2px solid #b72d27;}
+
+/* General SVG and path styles */
+.ac-custom svg { position: absolute; width: 22px; height: 22px; top: 50%;margin-top: -13px; left: 9px; pointer-events: none;}
+.ac-custom svg path { stroke: #ac2122; stroke-width: 13px; stroke-linecap: round; stroke-linejoin: round; fill: none;}
+
+/* Specific input, SVG and path styles */
+/* Circle */
+.ac-circle input[type="checkbox"], .ac-circle input[type="radio"], .ac-circle label::before { width: 30px; height: 30px; margin-top: -15px;	left: 10px;	position: absolute;}
+.ac-circle label::before { background-color: #fff; border: none;}
+.ac-circle svg { width: 70px; height: 70px; margin-top: -35px; left: -10px;}
+.ac-circle svg path { stroke-width: 5px;}
+.read-more{ margin:0; padding:10px 0; text-align:right;}
+.read-more a{ font-size:14px; color:#464646; text-transform:uppercase;}
+/* Box Fill */
+.ac-boxfill svg path { stroke-width: 8px;}
+
+/* Swirl */
+.ac-swirl svg path { stroke-width: 8px;}
+
+.offer-box{ padding:5px 0 15px 0; width:49%; float:left; }
+.offer-box h3.title-2{ font-size:18x; text-transform:uppercase; border:none; font-family:Arial, Georgia, "Times New Roman"; font-weight:600;}
+.offer-box h3 span{ font-size:18px; color:#000; padding:5px 0 0 15px;}
+.offer-box ul{ list-style-type:none; margin:0; padding:0;}
+.offer-box li{ display:block; padding: 10px 0 8px 24px; font-family:open-sans, Arial; background:url(http://bsmedia.business-standard.com/include/_mod/site/html5/images/bullet_list.png) no-repeat 0px 14px; font-size:12px; line-height:20px; }
+
+/* List */
+.ac-list ol { list-style: decimal; list-style-position: inside;}
+.ac-list ol li { font-size: 2em; padding: 1em 1em 0 2em; text-indent: -40px;}
+.ac-list ol li label { font-size: 1em; text-indent: 0; padding-left: 30px;}
+.ac-list label::before { display: none;}
+.ac-list svg { width: 100%; height: 80px; left: 0; top: 1.2em; margin-top: 0px;}
+.ac-list svg path { stroke-width: 4px;}
+
+.custom_pad{ padding: 40px 30px;}
+.custom_pad_2{ padding: 20px 10px;}
+.custom_pad_3{ padding: 0; margin-bottom: 7px;}
+.plus_pane{ padding:15px 0; text-align:center; padding-left:50px;}
+.strip{ background:#ac2122; padding:2px 0; color:#fff; text-align:center; font-family:'Open Sans', sans-serif; font-size:14px; font-weight:500;}
+.india_business_img{margin: 20px 0 0 16px;}
+.special-offer_img{ margin:10px; }
+
+.amount-cal{ padding:10px 0; border-bottom:1px dashed #636466; border-top:1px dashed #636466; margin-top:15px; overflow:hidden; }
+.amount_txt{ font-family: 'Oswald', sans-serif; font-size:24px; font-weight:300;}
+.amount_price{ font-family: 'Oswald', sans-serif; font-size:24px; font-weight:700;}
+.btn_submit{ margin:0 auto; text-align:center;  padding:10px;}
+.btn_submit input[type="button"]{ background:#ac2122; text-align:center; color:#fff; font-size:20px; text-transform:uppercase; border:0; padding:5px; width:150px; cursor:pointer; -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;   }
+
+.note-section { position: relative; width:100%; margin:0 auto;  padding:0 20px}
+.note-txt{ font-family: 'Open Sans', sans-serif; font-style:italic; color:#707070; font-size:12px; padding:15px 0; border-top:1px dashed #636466;}
+.price-list .caption{margin:5px 0 0 15px;}		
+.bsp_box h2 { font-weight: normal;  margin: 0; padding: 0;font-family: 'Oswald', sans-serif;}		
+.bsp_box p {font-family: 'Open Sans', sans-serif;font-weight: 400;padding-top: 5px;}		
+.bsp_box {width: 48%;float: left; margin: 5px 0 0 10px;padding: 25px 15px;}
+', 
+
+', 
+    ', TO READ THE FULL STORY, ', SUBSCRIBE NOW',  AT JUST Rs 149 A MONTH  ', 
+', 
+
+', 
+   ', 
+	', 
+		', 
+		', 
+			', Key stories on business-standard.com are available to premium subscribers only.', 
+			',  Already a premium subscriber? ', LOGIN NOW ', 
+			', 
+		', 
+		', 
+			', LOGIN', 
+			', 
+				', 
+					', 
+						', EMAIL / USER NAME', 
+						', 
+						', 
+					', 
+					', 
+						', PASSWORD', 
+						', 
+						', 
+					', 
+					', 
+	               				', 
+	               				', REMEMBER ME', 
+						',  Forgot password?', 
+						', 
+					', 
+					', 
+	               				', 
+	               					', LOGIN', 
+	               				', 
+	               				', 
+					', 
+					', 
+				', 
+			', 
+			', 
+				', Not a member yet ? ',  Resister Now ',  ', 
+				', 
+					', 
+				', 
+				', Connect using any below ', 
+				', 
+					', 
+						',  ', LOGIN WITH FACEBOOK', 
+						', 
+					', 
+					', 
+						',  ', LOGIN WITH GOOGLE', 
+						', 
+					', 
+					', 
+				', 
+			', 
+			', 
+		', 
+		', 
+			', 
+				', 
+				', 
+					', 
+						', 
+							', 
+								', 
+									', 
+									', 
+										', 
+									', 
+								', 
+							', 
+							', 
+								', 
+									', 
+								', 
+								', 
+									', 
+									', 
+										', 
+										', 
+									', 
+								', 
+							', 
+							', 
+								', 
+									', 
+										', 
+										', u"Don't lose the opportunity of saving $26.77 per month", 
+										', 
+									', 
+								', 
+							', 
+						', 
+					', 
+				', 
+			', 
+			', 
+				', 
+					', 
+						', 
+							', 
+								', 
+								', 
+									', 
+								', 
+							', 
+							', 
+								', 
+								', 
+									', 
+									', 
+										', 
+										',  
+									', 
+								', 
+							', 
+							', 
+								', 
+									', 
+										', 
+										', u"Don't lose the opportunity of saving $26.77 per month", 
+										', 
+									', 
+								', 
+							', 
+						', 
+					', 
+				', 
+			', 
+			', 			
+			var packId = getCookie('_pack_id');
+			if( packId != '' && packId != null && (packId == 3 || packId==5)){
+				$('#special_offer_li').hide();
+			}
+			var countryCode = getCookie('country_code');//console.info( 'COUNTRY--' ); console.info( countryCode );
+			if( countryCode != '' && countryCode != null && countryCode == 'US'){
+				//$('#special_offer_li').html('');
+				//$('#toggleText1').html('');
+				//$('#toggleText').html('');
+				//$('#special_offer_li').hide();
+				//$('#toggleText1').hide();
+				//$('#toggleText').hide();
+				priceList = $('.price-list_section').find('.price-list');		
+				$(priceList[1]).html("");		
+				reqHtml = '<h2>Business Standard Premium</h2><p>Get an across device access to behind the pay wall quality content </p>';		
+				$(priceList[1]).html(reqHtml).addClass('bsp_box').removeClass('price-list');		
+				toggle = $(priceList[0]).find('div[data-type="toggle"]');		
+				$(toggle).remove();		
+				tooltip = $(priceList[0]).find('div[data-type="tooltip"]');		
+				$(tooltip).remove();
+			}
+			if( countryCode != '' && countryCode != null && countryCode != 'IN' && countryCode != 'US'){
+				//$('#special_offer_li').html('');
+				//$('#toggleText1').html('');
+				//$('#special_offer_li').hide();
+				//$('#toggleText1').hide();
+				priceList = $('.price-list_section').find('.price-list');		
+				$(priceList[1]).html("");		
+			    reqHtml = '<div class="caption" style="margin:5px 0 0 15px;"><img src="http://bsmedia.business-standard.com/include/_mod/site/images/subscription/299_mini.png" style="height:170px;width:288px" alt=""></div>';		
+				$(priceList[1]).html(reqHtml);		
+				toggle = $(priceList[0]).find('div[data-type="toggle"]');
+			}
+			var isUserLoggedIn = getCookie('_userLoggedIn');
+			console.log('isUserLoggedInstr');
+			console.log(isUserLoggedIn);
+			console.log('isUserLoggedInend');
+			if( isUserLoggedIn != '' && isUserLoggedIn != null && isUserLoggedIn != undefined){
+				$('.subs_box_login_now').html('');
+				$('.subs_box_login_now').hide();
+			}
+			', 
+			', 
+			', 
+			', 
+				', Total Amount', 
+				', Rs.',  ', 0.00', 
+			', 
+			', 
+				', 
+					', 
+					', 
+					', 
+					', 
+					', 
+				', 
+			', 
+			', 
+				', 
+				', To proceed, kindly select a subscription package', 
+			', 
+			', 
+			', WHAT YOU GET', 
+			', 
+			', 
+				', On Business Standard Digital ', 
+				', 
+					', Access your subscription from anywhere.  Be it your computer, tablet or smartphone using a browser or the App, Your Choice.', 
+					', Access to exclusive content, features, opinions and comment, hand-picked by our editors, just for you.', 
+					', Pick your 5 favourite companies. Get all the news upates at the end of each day through E-Mail.', 
+					', Pick the industry that you want to track. And get a daily news letter specific to that industry. Cut out the clutter.', 
+					', And stay on top of your investments. Track stock prices in your portfolio', 
+					', Access 18 years of archival data', 
+				', 
+			', 
+			', 
+				', On ',  Digital', 
+				', 
+				', 
+					', Seamless access to WSJ.com with your Business Standard digital account.', 
+	                ', u"Experience the best of the Journal's reporting, video and interactive features.", 
+	                ', Read about the people and events shaping business, finance, technology, politics, technology and culture.', 
+	                ', Stay informed with newsletters - an easy way to get WSJ content straight to your inbox - making life easier on your busiest days.', 
+	           		', More business executives read the Journal globally than any other publication.', 
+				', 
+			', 
+		', 
+		', 
+		', 
+			', 
+				*Note :', American Express® is proud to be associated with this initiative and will contribute Rs 100 x 6 months thereafter, standard rate of Rs 149 will be charged.', Offer valid for Indian residents only', Requires you to share personal information like PAN, Date of Birth, and Income.', *Annual saving on WSJ subscription price of US$ 347.88 (12 months @ US$ 28.99 per month)', * 1US$ = 67.50 INR.', *Please note that this offer is not valid if you are/were a registered/existing user on  WSJ Digital 
+			', 
+			', 		
+    			*Note :', 		
+        		Please note that this offer is not valid if you are/were a registered/existing user on WSJ Digital.		
+    		', 
+		', 
+		', 
+
+		', 
+			', LOGIN', 
+			', Already registered ?', 
+			', 
+		', 
+		', 
+
+	', 
+
+	', 
+	var isUserLoggedIn = getCookie('_userLoggedIn');
+	if( isUserLoggedIn != '' && isUserLoggedIn != null && isUserLoggedIn != undefined){
+		$('.subs_box_login_now').html('');
+		$('.subs_box_login_now').hide();
+	}
+	function setPriceFinalValue(){
+	$(".error_msg_subs").html('');
+	$("#subs-final-amount").html('0.00');
+	var premiumPrice = Number($("#premium-price").val());
+	var digitalSubscribe = Number($("#digital-subscribe").val());
+	var specialOffer = Number($("#special-offer").val());
+	var digitalSubscribe1 = Number($("#digital-subscribe_1").val());
+	var subsFinalAmount = 0;
+	if($("#premium-price").is(":checked") || $("#special-offer").is(":checked")){
+		if($("#premium-price").is(":checked"))subsFinalAmount = parseInt(subsFinalAmount + premiumPrice);
+		if($("#digital-subscribe").is(":checked"))subsFinalAmount = parseInt(subsFinalAmount + digitalSubscribe);
+		if($("#special-offer").is(":checked"))subsFinalAmount = parseInt(subsFinalAmount + specialOffer);
+		if($("#digital-subscribe_1").is(":checked"))subsFinalAmount = parseInt(subsFinalAmount + digitalSubscribe1);
+	}
+	$("#value_pack_price").val(subsFinalAmount);
+	subsFinalAmount=subsFinalAmount.toFixed(2);
+	$("#subs-final-amount").html(subsFinalAmount);
+	}
+	function saveValuePack(){
+	var amount = $("#value_pack_price").val();
+	if(amount=='' || amount=='0'){
+		//$(".error_msg_subs").html('<div class="user_emailformError parentFormregistration_form formError ajaxed" style="opacity: 0.87; position: absolute;top: auto;"><div class="formErrorContent">* Please select subscription package.</div><div class="formErrorArrow"><div class="line10"><!-- --></div><div class="line9"><!-- --></div><div class="line8"><!-- --></div><div class="line7"><!-- --></div><div class="line6"><!-- --></div><div class="line5"><!-- --></div><div class="line4"><!-- --></div><div class="line3"><!-- --></div><div class="line2"><!-- --></div><div class="line1"><!-- --></div></div></div>');
+		$('html, body').animate({
+			scrollTop: $("#subscription-scroll-location").offset().top
+		}, 2000);
+		$(".subscription-tooltip").show();
+		//window.location.hash = '#show-msg';
+		return false;
+	}else{
+		$("#value_pack_form").submit();
+	}
+	}
+
+	function resetValuePack(packid){
+	if(packid==2){
+		$('#premium-price').trigger('click');
+		$('#toggleText').show();
+		$('#digital-subscribe').attr('checked',false);
+		$('#value_pack_price').val($('#subs-final-amount').html());
+	}
+	if(packid==4){
+		$('#premium-price').trigger('click');
+		$('#toggleText').show();
+		$('#digital-subscribe').trigger('click');
+		$('#value_pack_price').val($('#subs-final-amount').html());
+	}
+	if(packid==3){
+		$('#special-offer').trigger('click');
+		$('#toggleText1').show();
+		$('#digital-subscribe_1').attr('checked',false);
+		$('#value_pack_price').val($('#subs-final-amount').html());
+	}
+	if(packid==5){
+		$('#special-offer').trigger('click');
+		$('#toggleText1').show();
+		$('#digital-subscribe_1').trigger('click');
+		$('#value_pack_price').val($('#subs-final-amount').html());
+	}
+	}
+	', 
+
+	', 
+
+	', 
+	//var idPaidArticle= true;
+	$(document).ready(function() {
+
+	$("#value_pack_form").validationEngine();
+	resetValuePack('');
+
+	$("#premium-price").on('change', function(){
+		$("#toggleText1").slideUp();
+		$("#special-offer").attr('checked', false);
+		$('#digital-subscribe_1').attr('checked', false);
+		$('#special-offer').parent().find('svg').empty();
+		$("#toggleText").slideToggle();
+		$(".subscription-wsj-special-tooltip").hide();
+
+		$('#digital-subscribe').trigger('click');
+
+		if($(this).is(':checked') == false) {
+			$('#digital-subscribe').attr('checked', false);
+			$(".subscription-wsj-premium-tooltip").hide();
+		}
+	});
+
+	$("#digital-subscribe").on('change', function() {
+		if($(this).is(':checked') == false) {
+			$(".subscription-wsj-premium-tooltip").show();
+		}else{
+			$(".subscription-wsj-premium-tooltip").hide();
+		}
+	});
+
+	$("#special-offer").on('change', function() {
+		$("#toggleText").slideUp();
+		$("#premium-price").attr('checked', false);
+		$('#digital-subscribe').attr('checked', false);
+		$('#premium-price').parent().find('svg').empty();
+		$(".subscription-wsj-premium-tooltip").hide();
+
+		$("#toggleText1").slideToggle();
+
+		$('#digital-subscribe_1').trigger('click');
+
+		if($(this).is(':checked') == false) {
+			$('#digital-subscribe_1').attr('checked', false);
+			$(".subscription-wsj-special-tooltip").hide();
+		}
+
+	});
+
+	$("#digital-subscribe_1").on('change', function() {
+		if($(this).is(':checked') == false) {
+			$(".subscription-wsj-special-tooltip").show();
+		}else{
+			$(".subscription-wsj-special-tooltip").hide();
+		}
+	});
+
+	$("#lnkbtn").click(function() {
+		if ($('#divreg').is(":hidden")){
+			$('#divreg').show(500);
+			document.getElementById('lnkbtn').innerHTML = "LOGIN NOW";
+		} else {
+			$("#divreg").hide(500);
+			document.getElementById('lnkbtn').innerHTML="LOGIN NOW";
+		}
+	});
+
+	$(".bs_subscription_price").click(function(){
+		$("div.subscription-tooltip").hide();
+	});
+
+	$("#tooltip-hide-special").click(function(){
+		$(".subscription-wsj-special-tooltip").hide();
+	});
+
+	$("#tooltip-hide-premium").click(function(){
+		$(".subscription-wsj-premium-tooltip").hide();
+	});
+	});
+
+	if(countryCode !='IN' && countryCode != 'US'){		
+		$(".offer-box").css('width','100%');		
+		$('.note-txt').each(function(){		
+			if($(this).attr('data-country')=='GLOBAL'){		
+				$(this).show();			
+			}else{		
+				$(this).hide();		
+			}		
+		});		
+				
+	}		
+	if(countryCode == 'US'){		
+		$(".offer-box").css('width','100%');		
+		$('.note-section').hide();		
+		$($(".offer-box")[1]).html('');		
+	}
+	$(document).ready(function() {
+		$("#premium-price").prop("disabled", false);
+		$('#special-offer').prop("disabled", false);
+	});
+	', 
+', 				  								
+            ', 
+            	            ', 
+          ', 
+                  ', 
+
+        ', 
+        ', 
+           ', 
+             ', Read More On', 
+             ', India Power Corporation',  ',  | ',  ', Meenakshi Energy',  ',  | ',  ', Hemant Kanoria',  ',  | ',  ', Engie', 
+           ', 
+        ', 
+        ', 
+        
+        	 	
+        ', 
+			', 
+			   ', 
+			      ', 
+			         ', 
+			            ', 
+			               ', PREVIOUS STORY', 
+			            ', 
+			            ', 
+			               ', NEXT STORY', 
+			            ', 
+			            ', 
+			         ', 
+			         ',   ', 
+			         ', 
+				            ', 
+				               ', 
+				                  ', 
+				               ', 
+				               ', 
+				            ', 
+			         ', 
+			         ', 
+			      ', 
+			   ', 
+			', 
+       ', 
+
+
+', 
+', 
+
+      ', 
+            	', 
+		', 
+', RECOMMENDED FOR YOU', 
+', 
+', 
+', 
+', 
+(adsbygoogle = window.adsbygoogle || []).push({});
+', 
+',        ', 
+	  
+ ', 
+         ', 
+	    ', 
+', 
+', Advertisements', 
+', 
+', 
+', New to the stock market? Take your FirstStep', Plan now with just Rs.3000 p.m. Know more', Learn the Art of Investing through Sharekhan', Open Free Demat A/c with low brokerage fee', Yet to open a Sharekhan Account?', 
+', 
+', 
+     ', 
+        
+    ', 
+      ', 
+      		', 
+				', 
+				', 
+				',  
+		', 
+		      ', 
+      
+		', 
+		', 
+			', 
+			  ', 
+			  ', u"India Power Corporation to acquire Meenakshi Energy's 89% net worth", 
+			  ', IPC will be buying the 89% stake held by France-based Engie', 
+			  ', IPC will be buying the 89% stake held by France-based Engie', 
+			  					', 
+With its eye on raising its power generation capacity in excess of 1,500 MW by 2017, India Power Corporation (IPC) is in the process of acquiring the entire stake held by France-based Engie in Meenakshi Energy.
+
+	The acquisition, which is subject to necessary regulatory and IPC's shareholders' approval, will turn Meenakshi Energy into a subsidiary of the former. The transfer of shares will be funded from IPC's own internal accruals as well as external debt in case it is required.
+
+	"After requisite determination of all the liabilities, the value of the deal will be ...', 
+			  			  ', 
+			   ', 
+      				', BS Reporter', 
+ 			  ', 
+			  ', 
+			     ', Business Standard', 
+			     ', 
+			       ', http://bsmedia.business-standard.com/_media/bs/wap/images/bs_logo_amp.png', 
+			       ', 177', 
+			       ', 22', 
+			     ', 
+ 			 ', 
+ 			 ', 
+			 ', 
+			', 
+		', 
+		', 
+
+      ', 
+       ', 
+            ', 
+        		      		      		      		      		      		', 
+				', 
+				var cmtIframe = $("#article-comment-frame");
+				var cmtIframeOffset = cmtIframe.offset();
+				var iframeDivhgt = cmtIframeOffset.top;
+				iframeDivhgt = iframeDivhgt - 600;
+				var iframeDistanceTop = iframeDivhgt;
+				var iframeLoaded = false;
+				$(function() {
+					$(window).scroll(function() {
+						if ($(window).scrollTop() > iframeDistanceTop) {
+							if(iframeLoaded == false){
+								$("#article-comment-frame").attr("src",$("#article-comment-frame").attr("data-original"));
+								iframeLoaded = true;
+							}
+						}
+					});
+				});
+				', 
+	      		      	            ', 
+          ', 
+
+         ', 
+        ', 
+      ', 
+
+
+     	', 
+  		', 
+        ', 
+       ', 
+
+      
+      ', 
+		  		  ', document.write("<!--"); if(isUserBanner=="free") document.write("-->"); ', 
+
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1474961759587-10'); });
+", 
+', 
+', document.write("<!--"); if(isUserBanner=="paid") document.write("-->"); ', 
+
+', 
+var zflag_nid="1429"; var zflag_cid="95"; var zflag_sid="0"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="30"; 
+', 
+', 
+
+', document.write("<!--"); if(isUserBanner=="fis") document.write("-->"); ',  ', $("#id_3_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_fis-1479188012.png"); ', document.write("<!--"); if(isUserBanner=="kotak") document.write("-->"); ',  ', $("#id_4_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_kotak-1479188012.jpg"); ', document.write("<!--"); if(isUserBanner=="capgemini") document.write("-->"); ',  ', $("#id_5_1479188012").attr("src","http://bsmedia.business-standard.com/_media/bs/img/banner/2016-11/thumb/company_728x90_footer_capgemini-1479188012.jpg"); ', 
+		  ', 
+		      ', 
+
+', 
+var idPaidArticle = true;
+', 
+
+
+', 
+
+$.ajax({
+    url : '/request-handler/get-latest-articles/catId/101/cache-control/1800',
+    async: true,
+    success : function(data){
+        $("#next-prev").html(data);
+        var owl = $("#next-prev");
+        if(data != ''){
+        	var checkIdExists = $(".more-stories-pagination.disNone div").hasClass("latestArticleId-116022500472");
+        	if(checkIdExists){
+        		$(".latestArticleId-116022500472").remove();
+            }else{
+            	$(".latestArticleLastId").remove();
+            }
+        	$(".more-stories-pagination.disNone").show();
+        }
+        owl.owlCarousel({
+        items : 2, //10 items above 1000px browser width
+        itemsDesktop : [980,2], //5 items between 1000px and 901px
+        itemsDesktopSmall : [900,2], // 3 items betweem 900px and 601px
+        itemsTablet: [360,2], //2 items between 600 and 0;
+        itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+        });
+
+        // Custom Navigation Events
+        $(".next").click(function(){
+          owl.trigger('owl.next');
+        });
+        $(".prev").click(function(){
+          owl.trigger('owl.prev');
+        });
+        $(".play").click(function(){
+          owl.trigger('owl.play',1000);
+        });
+        $(".stop").click(function(){
+          owl.trigger('owl.stop');
+        });
+    }
+});
+
+function unFollowColumnist(){
+	var author_id = '0';
+	var userInfo = decodeURIComponent(getCookie('_userLoggedIn'));
+	var isPaidUser="N";
+	if(userInfo !=null && userInfo!= 'undefined'){
+		var userType = JSON.parse(userInfo);
+		if(userType !=null && userType!= 'undefined' && userType.s != 'undefined' && userType.s == 't'){
+			isPaidUser="Y";
+		}else{
+			isPaidUser="N";
+		}
+	}
+	
+	
+	if(author_id != ''){
+		if(confirm("Are you sure to unfollow this columnist!")==true){
+	        $.ajax({
+	            url : '/request-handler/article/unmap-user-columnist',
+	            type : 'post',
+	            data: {
+					'authorId'	: author_id,'isPaidUser':isPaidUser
+				},
+	            success : function(msg){
+	                if(msg == 'success'){
+	                	location.reload(); return false();
+	                }else{
+	                    message = 'Please try again';
+	                    alert(message); return false();
+	                }
+	            }
+	        });
+		}
+    }else{
+       alert("Invalid columnist request!");
+       return false();
+    }
+
+}
+
+function followColumnist(){
+  var author_id = '0';
+  var userInfo = decodeURIComponent(getCookie('_userLoggedIn'));
+	var isPaidUser="N";
+	var isLoggedIn = "N";
+	if(userInfo !=null && userInfo!= 'undefined'){
+		var userType = JSON.parse(userInfo);
+		if(userType !=null && userType!= 'undefined' && userType.s != 'undefined' && userType.s == 't'){
+			isPaidUser="Y";
+			isLoggedIn = "Y";
+		}else if(userType !=null && userType!= 'undefined'){
+			isPaidUser="N";
+			isLoggedIn = "Y";
+		}
+	}
+
+	  if(isLoggedIn=="Y"){
+		 
+			  if(author_id != ''){
+			    $.ajax({
+			         url : '/request-handler/article/map-user-columnist',
+			         type : 'post',
+			         data: {
+							'authorId'	: author_id,'isPaidUser':isPaidUser
+					 },
+			         success : function(msg){
+			                if(msg == 'success'){
+			                	location.reload(); return false();
+			         }else{
+			        	 customLogin();
+						}
+			        }
+			       });
+			    }else{
+			       alert("Invalid columnist request!");
+			       return false();
+			    }
+		  
+	  }else if(isLoggedIn=="N"){
+		   customLogin();
+	  }
+}
+
+function unLockArticle(){
+	  var article_id = '116022500472';
+	  var userInfo = decodeURIComponent(getCookie('_userLoggedIn'));
+	  var isPaidUser="N";
+	  if(userInfo !=null && userInfo!= 'undefined'){
+			var userType = JSON.parse(userInfo);
+			if(userType !=null && userType!= 'undefined' && userType.s != 'undefined' && userType.s == 't'){
+				isPaidUser="Y";
+			}else{
+				isPaidUser="N";
+			}
+	  }
+		
+		if(article_id != ''){
+	        $.ajax({
+	            url : '/request-handler/article/unlock-article',
+	            type : 'post',
+	            data: {
+					'article_id'	: article_id,'isPaidUser':isPaidUser
+				},
+	            success : function(msg){console.log(msg);
+	                if(msg == 'success'){
+	                	location.reload(); return false();
+	                }else{
+	                    $(".iframe").trigger('click');
+	                }
+	            }
+	        });
+	    }else{
+	       alert("Invalid columnist request!");
+	       return false();
+	    }
+
+}
+
+function customLogin(){
+	var author_id = '0';
+	var articleId = '116022500472';
+	var parentUrl = window.location.href;
+
+	if (parentUrl.indexOf("?")>-1){
+		parentUrl = parentUrl.substr(0,parentUrl.indexOf("?"));
+	}
+	
+	$("#sign_in").fancybox({
+	    maxWidth	: 600,
+		maxHeight	: 580,
+		fitToView	: false,
+		autoSize	: false,
+		closeClick	: false,
+		href		: '/core/request-handler/sign-in-content?ref='+parentUrl+'&fc='+author_id+'&articleId='+articleId,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+
+	});
+	$('.fancybox').fancybox();
+	$("#sign_in").trigger('click');
+	
+} 
+
+function showhide()
+{
+      var div = document.getElementById("follow");
+	  if(div.style.display !== "block") {
+		   div.style.display = "block";
+	  }
+      else {
+		   div.style.display = "none";
+	  }
+}
+
+
+$(document).ready(function(){
+	$('.articleCompanyStockInfo').hide();
+	$('.bsNewArticleCompanyStockInfo').show();
+});
+', 
+
+', 
+.articleCompanyStockInfo{display: none;}
+.bsNewArticleCompanyStockInfo{display: block;}
+#article-chart-_article_ft{
+	margin-bottom: 40px;
+	display: block;
+	padding: 5px 30px;
+}
+});
+', 
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1454577991396-0'); });
+", 
+', 
+
+', 
+', 
+', 
+    ', 
+    ', 
+	', u"India Power Corporation to acquire Meenakshi Energy's 89% net worth", 
+			', IPC will be buying the 89% stake held by France-based Engie', 
+		', 
+	', 
+	 		', 
+With its eye on raising its power generation capacity in excess of 1,500 MW by 2017, India Power Corporation (IPC) is in the process of acquiring the entire stake held by France-based Engie in Meenakshi Energy.
+
+	The acquisition, which is subject to necessary regulatory and IPC's shareholders' approval, will turn Meenakshi Energy into a subsidiary of the former. The transfer of shares will be funded from IPC's own internal accruals as well as external debt in case it is required.
+
+	"After requisite determination of all the liabilities, the value of the deal will be ...', 
+		', 
+	', 
+      		', BS Reporter', 
+ 	', 
+	', 
+		', Business Standard', 
+		', 
+			', http://bsmedia.business-standard.com/_media/bs/wap/images/bs_logo_amp.png', 
+			', 177', 
+			', 22', 
+		', 
+	
+ ', 
+ ', 
+ ', 
+', 
+$( document ).ready(function() {
+	var _id = 116022500472;
+	$.ajax({
+		"type"		:	"POST",
+		"url"		:	"http://bsapi.business-standard.com/request-handler/article/article-update-count.php",
+		data: { 'articleId': _id  },
+		"success"	:	function(data){
+			if(data!=undefined){
+				try{
+				 //$(_id).html(data);
+				}catch(e){}
+			}
+		}
+	});
+	return false;	
+});
+', 
+', 
+', 
+', 
+$( ".activator" ).click(function() { 
+ ids = this.id;
+ var $this = $("#"+ids);
+ var searchText = $this.html();
+ str = searchText.replace(/\s+/g, '+');
+	$.ajax({
+		type: 'GET',
+		url: '/ajax-search?type=news&q='+str+'&artId=116022500472',
+		contentType: "text/html",
+		success: function(data)
+		{	//$('#'+ids)
+			$('.overlay3').remove();
+			$('.box').remove();
+			$(data).insertAfter($("#readMoreSpanAjx"));
+		},
+		error: function(e)
+		{
+		   alert(e.message);
+		}
+	});
+});
+',  ', 
+	    ', 
+
+	    ', 
+	    ', 
+	    ', 
+#moreOnMarkets{
+	display: block !important;
+}
+', 
+', 
+    ', 
+    	', 
+    		', MORE ON MARKETS:', 
+    		', 
+    		',   
+    			', 
+    				', Quick Links ',  
+    				', 						
+						', Stock Market Live', 
+                        ', Portfolio ', 
+                        ', Commodity Market', 
+                        ', Upcoming IPO', 
+                        ', Personal Finance', 
+                       					
+    				', 
+    				', 						
+						', Stock Market News', 
+    					', Derivatives', 
+    					', Mutual Funds', 
+    					', Gold Price', 
+    					', Sensex', 
+    				', 
+    			', 
+    		',  
+    		', 
+    		',  
+    			', 
+    				', Browse STOCK Companies',  
+                    ', 
+                        ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E',  
+                        ', F', 
+                        ', G', 
+                        ', H',  
+                        ', I', 
+                        ', J', 
+                        ', K', 
+                        ', L', 
+                        ', M', 
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V', 
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 1', 
+                        ', 2', 
+                        ', 3', 
+                        ', 4', 
+                        ', 5',  
+                        ', 6', 
+                        ', 7', 
+                        ', 8',  
+                        ', 9',  
+                        ', 
+    				', 
+    			', 
+    			', 
+    				', Browse Mutual Funds',  
+    				', 
+                        ', A', 
+                        ', B', 
+                        ', C', 
+                        ', D', 
+                        ', E',  
+                        ', F', 
+                        ', G', 
+                        ', H',  
+                        ', I', 
+                        ', J', 
+                        ', K', 
+                        ', L', 
+                        ', M', 
+                        ', N', 
+                        ', O', 
+                        ', P', 
+                        ', Q', 
+                        ', R', 
+                        ', S', 
+                        ', T', 
+                        ', U', 
+                        ', V', 
+                        ', W', 
+                        ', X', 
+                        ', Y', 
+                        ', Z', 
+                        ', 
+    				',   
+    			', 
+    			',  
+    		',      
+    		',   
+    		',  
+    	', 
+    	', 
+        	',  
+        		', 
+        			', Index Stocks', 
+        			', 
+        				',  ACC ', 
+        				',  Adani Ports ', 
+        				',  Ambuja Cem. ', 
+        				',  Asian Paints ', 
+        				',  Aurobindo Pharma ', 
+        				',  Axis Bank ', 
+        				',  B H E L ', 
+        				',  B P C L ', 
+        				',  Bajaj Auto ', 
+        				',  Bank of Baroda ', 
+        				',  Bharti Airtel ', 
+        				',  Bharti Infra. ', 
+        				',  Bosch ', 
+        				',  Cipla ', 
+        				',  Coal India ', 
+        				', u" Dr Reddy's Labs ", 
+        				',  Eicher Motors ', 
+        				',  GAIL (India) ', 
+        				',  Grasim Inds ', 
+        				',  H D F C ', 
+        				',  HCL Technologies ', 
+        				',  HDFC Bank ', 
+        				',  Hero Motocorp ', 
+        				',  Hind. Unilever ', 
+        				',  Hindalco Inds. ', 
+        				',  ICICI Bank ', 
+        				',  Idea Cellular ', 
+        				',  IndusInd Bank ', 
+        				',  Infosys ', 
+        				',  ITC ', 
+        				',  Kotak Mah. Bank ', 
+        				',  Larsen & Toubro ', 
+        				',  Lupin ', 
+        				',  M & M ', 
+        				',  Maruri Suzuki ', 
+        				',  NTPC ', 
+        				',  O N G C ', 
+        				',  Power Grid Corpn ', 
+        				',  Reliance Inds. ', 
+        				',  St Bk of India ', 
+        				',  Sun Pharma. Inds. ', 
+        				',  Tata Motors ', 
+        				',  Tata Motors-DVR ', 
+        				',  Tata Power Co. ', 
+        				',  Tata Steel ', 
+        				',  TCS ', 
+        				',  Tech Mahindra ', 
+        				',  UltraTech Cement Ltd ', 
+        				',  Wipro ', 
+        				',  Yes Bank ', 
+        				',  Zee Entertainment ', 
+        				', 
+        			', 
+        		', 
+        		',  
+        	',      
+        	',   
+        	',  
+        ', 
+    ', 
+', 
+
+', 
+', 
+  ', 
+     ', 
+     ', 
+     ', Copyrights © 2017 Business Standard Private Ltd. All rights reserved.', 
+     ', 
+  ', 
+
+  ', 
+     ', 
+          ', 
+             ', 
+                ', 
+               ', From BS Website', 
+               ', Home', 
+               ', Companies', 
+               ', Markets', 
+               ', Opinion', 
+               ', Politics', 
+               ', Technology', 
+               ', Specials', 
+               ', Personal Finance', 
+               ', Budget', 
+               ', Latest News', 
+               ', u"Today's Paper", 
+              ',  
+               ', RBI Policy', 
+               ', General News', 
+               ', General Videos', 
+               ', General Photo Gallery', 
+               ', Events', 
+               ', Authors', 
+              ', 
+              ', 
+              ', 
+                 ', 
+               ', About us', 
+               ', About Us', 
+               ', Code of Conduct', 
+               ', Terms & Conditions', 
+               ', Cookie Policy', 
+               ', Disclaimer', 
+               ', Investor Communication', 
+              ', 
+
+              ', 
+
+                 ', 
+               ', Support & Contact', 
+               ', Partner with Us', 
+               ', Careers', 
+               ', Advertise with Us', 
+               ', Contact Us', 
+               ', Feedback', 
+               ', Browser Support', 
+               ', Sitemap', 
+               ', 
+              ', 
+
+              ', 
+                 ', 
+               ', Subscribe', 
+               ', E-Paper', 
+               ', BS Magazines', 
+               ', Portfolio Tracker', 
+              ', 
+
+              ', 
+
+                 ', 
+               ', BS Products', 
+			   ', Smart Investor', 
+               ', BS Hindi', 
+               ', BS Motoring', 
+               ', BS Books', 
+               ', B2B Connect', 
+               ', iPhone', 
+               ', iPad', 
+               ', android', 
+               ', wap', 
+               ', BS Banking Round Table 2016', 
+               ', BS Fund Cafe 2016', 
+              ', 
+              ', 
+          ', 
+          ', 
+     ', 
+
+     ', 
+	 ', 
+                            ', Budget 2017', 
+                            ', Budget 2017', 
+                            ', Budget News', 
+                            ', Budget', 
+						', 
+						', 
+     	', 
+      		', Connect with BS', 
+        	', 
+            	', Facebook',   
+                ', Google+',  
+                ', Linkedin',  
+                ', Twitter', 
+                ', Youtube', 
+                ', RSS',   
+                ',   
+            ', 
+     	', 
+     ', 
+  ', 
+  ', 
+  ', 
+', 
+', 
+', 
+    .notification_error_div {
+        position: fixed;
+        z-index:100;
+        bottom: 0;
+        right: 0;
+        width: 350px;
+        background-color: #FFFFF0;
+        border: 1px solid black;
+
+        padding: 15px;
+        margin: 10px;
+
+        text-align: center;
+        font-size : 14px;
+        font-family: Tahoma,Arial,Georgia;
+    }
+', 
+', 
+    .notification_error_div {
+        position: fixed;
+        z-index:100;
+        bottom: 0;
+        right: 0;
+        width: 350px;
+        background-color: #FFFFF0;
+        border: 1px solid black;
+
+        padding: 15px;
+        margin: 10px;
+
+        text-align: center;
+        font-size : 14px;
+        font-family: Tahoma,Arial,Georgia;
+    }
+
+/** Free User Notification Popup **/
+.subscription-notification-popup{color: #000;padding: 0px !important;margin: 0px !important;}
+.free_user_notification_popup{padding: 10px;display: none;background: #fff;}
+.btn-maroon{padding: 5px 10px;margin: 0;border: 0;background: #ac2122;color: #fff;font-size: 16px;cursor: pointer;}
+.fis_user_notification_popup{padding: 10px;display: none;background: #fff;}
+', 
+', 
+    ', 
+       ', 
+          ', 
+             ', 
+                ', 
+                   ', 
+                   ', Upgrade To Premium Services', 
+                ', 
+             ', 
+             ', 
+                ', 
+                   ', 
+                ', 
+             ', 
+          ', 
+          ', 
+             ', Welcome ', User', 
+             ', 
+          ', 
+          ',  Business Standard is happy to inform you of the launch of "Business Standard Premium Services"', 
+          ', As a premium subscriber you get an across device unfettered access to a range of services which include:', 
+          ', 
+             ', Access Exclusive content - articles, features & opinion pieces', 
+             ', Weekly Industry/Genre specific newsletters - Choose multiple industries/genres', 
+             ', Access to 17 plus years of content archives', 
+             ', Set Stock price alerts for your portfolio and watch list and get them delivered to your e-mail box', 
+             ', End of day news alerts on 5 companies (via email)', 
+             ', NEW', : Get seamless access to WSJ.com at a great price. No additional sign-up required.', 
+          ', 
+          ', 
+             ', 
+                ',  ', 
+             ', 
+             ', 
+                ', 
+             ', 
+          ', 
+          ', 
+       ', 
+    ', 
+', 
+
+', 
+', 
+   ', 
+      ', 
+         ', 
+            ', 
+               ', 
+               ', Premium Services ', 
+               ', In Partnership with ', 
+            ', 
+         ', 
+         ', 
+            ', 
+               ', 
+            ', 
+         ', 
+         ', 
+            ',  ', 
+         ', 
+         ', 
+            ', 
+            ', Dear ', Guest', ,', 
+            ', 
+         ', 
+         ', 
+            ',  ', 
+         ', 
+      ', 
+      ', Welcome to the premium services of Business Standard brought to you courtesy FIS.', 
+         Kindly visit the ', Manage my subscription page',  to discover the benefits of this programme.', 
+         ', 
+         Enjoy Reading!', 
+         Team Business Standard
+      ', 
+      ', 
+         ', 
+            ',  ', 
+         ', 
+      ', 
+      ', 
+   ', 
+', 
+', 
+', 
+function getCookie(name) {		
+    var value = "; " + document.cookie;		
+    var parts = value.split("; " + name + "=");		
+    if (parts.length == 2)		
+        return parts.pop().split(";").shift();		
+}
+$('#head-suggest_ftr').focus(function(){
+	  $(this).attr('placeholder','');
+	});
+	$('#head-suggest_ftr').focusout(function(){
+	  $(this).attr('placeholder','Enter the first three letters of the company');
+});
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+function setCookieNoti(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+$(document).ready(function() {
+	if($('.breadcrum').find('a').size() != null && $('.breadcrum').find('a').size() == 3){
+		var lc = 1;
+		$('.breadcrum').find('a').each(function() {
+			if(lc == 2){ $(this).attr('class','bact'); }
+		    lc++;
+		});
+	}
+});
+//-->
+', 
+
+', 
+', 
+function setCookieNoti(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+
+$(document).ready(function(){//free-username-popup
+	var usrLoginCookie = getLoginCookie('_userLoggedIn');
+	if(isUserBanner=='fis'){
+		var usrObj = JSON.parse(decodeURIComponent(usrLoginCookie));
+    	if(usrObj.ufname != ''){
+        	var uId = usrObj.uId;
+        	var uName = usrObj.ufname;
+			var ckVal = getLoginCookie('_chkFisUserNotificationPopup');
+			var isCkSet = ckVal.indexOf(uId);
+			if(ckVal == '' || ckVal == 'undefined'){
+				//cookie is not set
+				$("#fis-username-popup").html(uName);
+				$.fancybox({
+					href		:	"#fis_user_notification_popup",
+				    maxWidth	:	600,
+					maxHeight	:	500,
+					fitToView	:	false,
+					autoSize	:	false,
+					closeClick	:	false,
+					openEffect	:	'none',
+					closeEffect	:	'none'
+				});
+		    	setCookieNoti("_chkFisUserNotificationPopup",uId,130);
+			}else{
+				if(isCkSet == -1){
+					//cookie for current user is not set
+					$("#fis-username-popup").html(uName);
+					$.fancybox({
+						href		:	"#fis_user_notification_popup",
+					    maxWidth	:	600,
+						maxHeight	:	500,
+						fitToView	:	false,
+						autoSize	:	false,
+						closeClick	:	false,
+						openEffect	:	'none',
+						closeEffect	:	'none'
+					});
+			    	ckVal += ","+uId;
+			    	setCookieNoti("_chkFisUserNotificationPopup",ckVal,130);
+				}else{
+					//cookie is already set, no need to show popup
+				}
+			}
+    	}
+	}
+  	if(usrLoginCookie != '' && false){
+    	var usrObj = JSON.parse(decodeURIComponent(usrLoginCookie));
+    	if(usrObj.s == 'f'){
+        	var uId = usrObj.uId;
+        	var uName = usrObj.ufname;
+			var ckVal = getLoginCookie('_chkFreeUserNotificationPopup');
+			var isCkSet = ckVal.indexOf(uId);
+			if(ckVal == '' || ckVal == 'undefined'){
+				//cookie is not set
+				$("#free-username-popup").html(uName);
+				$.fancybox({
+					href		:	"#free_user_notification_popup",
+				    maxWidth	:	600,
+					maxHeight	:	500,
+					fitToView	:	false,
+					autoSize	:	false,
+					closeClick	:	false,
+					openEffect	:	'none',
+					closeEffect	:	'none'
+				});
+		    	setCookieNoti("_chkFreeUserNotificationPopup",uId,30);
+			}else{
+				if(isCkSet == -1){
+					//cookie for current user is not set
+					$("#free-username-popup").html(uName);
+					$.fancybox({
+						href		:	"#free_user_notification_popup",
+					    maxWidth	:	600,
+						maxHeight	:	500,
+						fitToView	:	false,
+						autoSize	:	false,
+						closeClick	:	false,
+						openEffect	:	'none',
+						closeEffect	:	'none'
+					});
+			    	ckVal += ","+uId;
+			    	setCookieNoti("_chkFreeUserNotificationPopup",ckVal,30);
+				}else{
+					//cookie is already set, no need to show popup
+				}
+			}
+    	}
+  	}
+});
+
+$(document).ready(function(){
+	var loginCookie = getCookie('_userLoggedIn');
+	if( loginCookie == '' || loginCookie == 'undefined' ){
+		//Do Nothing
+	}else{
+		var loginParamObj = JSON.parse(decodeURIComponent(loginCookie));
+		if( loginParamObj.uId > 0 ){
+			var pwCookie = getCookie('_pw');
+			if( pwCookie == 't' ){
+				//Do Nothing
+			}else{
+				var subExpCookie = getCookie('_sub_exp');
+				if( (subExpCookie > 0) ){
+					var currentTimestamp = Math.floor(Date.now() / 1000);
+					
+					//Expiry Notification Logic
+					var neverShowNotificaitonCookie = getCookie('_nsn');
+					if(neverShowNotificaitonCookie == '' || neverShowNotificaitonCookie == 'undefined' || neverShowNotificaitonCookie == null){
+						var lastReminderCookie = getCookie('_ler'+loginParamObj.uId);//last expiry reminder
+						if( (lastReminderCookie == "") || (lastReminderCookie == "undefined") || (lastReminderCookie == null) ){
+							$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+						}else{
+							if(lastReminderCookie < currentTimestamp){
+								$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+							}
+						}
+					}else{
+						var isCkSet = neverShowNotificaitonCookie.indexOf(loginParamObj.uId);
+						if(isCkSet == -1){
+							//cookie for current user is not set
+							var lastReminderCookie = getCookie('_ler'+loginParamObj.uId);//last expiry reminder
+							if( (lastReminderCookie == "") || (lastReminderCookie == "undefined") || (lastReminderCookie == null) ){
+								$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+							}else{
+								if(lastReminderCookie < currentTimestamp){
+									$('body').prepend('<div id="endSubscriptionNotification" class="end_subscription"><div class="close_panel"><a href="javascript:closeNotificationForever('+loginParamObj.uId+');"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/noti-close.png"></a></div><div class="fL mR10 pT5"><img src="http://bsmedia.business-standard.com/include/_mod/site/html5/images/notification.png"></div><h3>Important Notification</h3><p style="clear:both;">Your subscription - access to premium <br>content has expired.<br>Kindly <span class="maroonlink"><a href="/subscription-cart/manage">Click Here</a></span> to renew.</p><div class="fL mT10 uppertext maroonlink"><a href="javascript:remindNotificationLater('+loginParamObj.uId+');">Remind me later</a></div></div>');
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+});
+
+function remindNotificationLater(userId){
+	var currentTimestamp = Math.floor(Date.now() / 1000);
+	var tempTime = new Date(currentTimestamp*1000);
+	var lastExpNotification = Math.floor(tempTime.setMinutes(tempTime.getMinutes() + 60) / 1000);//+60 mins
+	//Set Cookie
+    var d = new Date();
+    d.setTime(d.getTime() + (60*60*1000));//60 min
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "_ler"+userId+"=" + lastExpNotification + "; " + expires + "; path=/";
+	$('#endSubscriptionNotification').remove();
+}
+
+function closeNotificationForever(userId){
+	var neverShowNotificaitonCookie = getCookie('_nsn');
+	neverShowNotificaitonCookie += ","+userId;
+	//Set Cookie
+    var d = new Date();
+    d.setTime(d.getTime() + (30*24*60*60*1000));//30 days
+    var expires = "expires="+d.toUTCString();
+    document.cookie = "_nsn=" + neverShowNotificaitonCookie + "; " + expires + "; path=/";
+	
+	$('#endSubscriptionNotification').remove();
+}
+', 
+
+', 
+$.browser.chrome = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()); 
+if($.browser.chrome){
+	setTimeout(showChromeNotification,1000);
+}
+', 
+
+
+	    ', 
+      ', 
+         ', 
+', 
+
+    	', 
+
+function show(target) {
+    document.getElementById(target).style.display = 'block';
+}
+
+function hide(target) {
+   document.getElementById(target).style.display = 'none';
+    notifyCookie =  decodeURIComponent(getCookie('_notifyCookie'));
+    if(notifyCookie !=null && notifyCookie != 'undefined'){
+        var notifyValues = JSON.parse(notifyCookie);
+	if(notifyValues !=null && notifyValues != 'undefined' ){
+	  notifyValues.nty="Y";
+	  notifyValues.cnty="Y";
+	  notifyValues.rTime= (new Date().getTime()+ 24*60*60*1000) /1000|0;
+	  notifyValues=JSON.stringify(notifyValues);
+	  notifyValues = encodeURIComponent(notifyValues);
+	  setCookieColumn('_notifyCookie',notifyValues,2);
+	}
+   }
+}
+function setCookieColumn(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+}
+', 
+
+
+
+
+
+
+
+', 
+var userCookie = decodeURIComponent(getCookie('_userLoggedIn'));
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-3333643-1', 'auto');
+if(userCookie !=null && userCookie!= 'undefined'){
+	 var userInfo = JSON.parse(userCookie);
+	 ga('set', '&uid', userInfo.uId);
+}
+if(isBannerActive == false){
+	if(userCookie !=null && userCookie!= 'undefined'){
+		var userInfo = JSON.parse(userCookie);
+		if(userInfo !=null && userInfo!= 'undefined' && userInfo.s != 'undefined' && userInfo.s == 't'){
+			ga('set', 'dimension1', 'Paid adblocker!!!');
+		}else{
+			ga('set', 'dimension1', 'Free adblocker!!!');
+		}
+	}else{
+		ga('set', 'dimension1', 'Anonymous adblocker!!!');
+	}
+}
+
+
+if(idPaidArticle == true){
+	   var url = window.location.href; var articleUrl = " ";
+	       if(url.indexOf('?') != -1)
+	         articleUrl = url.split('?')[0] ;
+	       else
+	         articleUrl = url;
+	    if(articleUrl !=null && articleUrl!= 'undefined'){
+	   
+	    	ga('set', 'dimension2', articleUrl);
+	    }
+}
+
+
+ga('send', 'pageview');
+', 
+', 
+', 
+', var _comscore=_comscore||[];_comscore.push({c1:"2",c2:"8021726"});(function(){var b=document.createElement("script"),a=document.getElementsByTagName("script")[0];b.async=true;b.src=(document.location.protocol=="https:"?"https://sb":"http://b")+".scorecardresearch.com/beacon.js";a.parentNode.insertBefore(b,a)})();', 
+', 
+', 
+', 
+', 
+var AKSB=AKSB||{};AKSB.q=[];AKSB.mark=function(b,a){AKSB.q.push(["mark",b,a||(new Date).getTime()])};AKSB.measure=function(b,a,c){AKSB.q.push(["measure",b,a,c||(new Date).getTime()])};AKSB.done=function(b){AKSB.q.push(["done",b])};AKSB.mark("firstbyte",(new Date).getTime());
+AKSB.prof={custid:"356860",beaconrate:20};
+(function(b){var a=document.createElement("iframe");a.src="javascript:false";(a.frameElement||a).style.cssText="width: 0; height: 0; border: 0; display: none";var c=document.getElementsByTagName("script"),c=c[c.length-1];c.parentNode.insertBefore(a,c);a=a.contentWindow.document;a.open().write("<body onload=\"var js = document.createElement('script');js.id = 'aksb-ifr';js.src = '"+b+"';document.body.appendChild(js);\">");a.close()})(("https:"===document.location.protocol?"https:":"http:")+"//ds-aksb-a.akamaihd.net/356860/aksb-a/aksb.min.js");
+', 
+', 
+', 
+var addthis_config = {"data_track_addressbar":false, "services_exclude":'print, email','recommended' : {}, 'thankyo : false};
+addthis_config.pubid = 'bsorg08';
+var addthisScript = document.createElement('script');
+addthisScript.setAttribute('src', '//s7.addthis.com/js/300/addthis_widget.js#domready=1');
+document.body.appendChild(addthisScript);
+', 
+', 
+#at4-thankyou{display:none !important;}
+', 
+', u"
+var subs_pw = getCookie('_pw');
+if( subs_pw != null && subs_pw == 't'){
+	$('.paid_article_key').hide();
+}else{
+	$('.paid_article_key').show();
+}
+", 
+']

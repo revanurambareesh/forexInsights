@@ -1,0 +1,2815 @@
+[
+					', 		', 
+', 
+', u"(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PD4KM6');", 
+', 
+
+		', 
+			', 
+			', 
+							', 
+		            ', 
+    ', 
+    ', 
+			', 
+		', 
+		Search	', 
+', 
+    ', 
+', 
+					
+					', 
+
+    ', 
+    ', 	
+		        	', 
+    ', 
+    ', 
+		', 
+		Buyer Solutions	', 
+', 
+', 
+		', 
+		Supplier Solutions	', 
+', 
+', 
+		', 
+		Customers	', 
+', 
+', 
+		', 
+		About	', 
+', 
+', 
+		', 
+		Contact Us	', 
+', 
+    ', 
+        
+        ', TradeNet', 
+    ', 
+     
+            ', 
+                ', Sign in', 
+        ', 
+        ', 
+', 
+', 
+				', 
+					', 
+		', 
+		', 
+/*if no second lev navigation, we need to add this class for somw wp pages (contact us, legal pages)*/
+section.hero, section.intro.darkGrey {
+    top: 0;
+}
+', 
+		', 
+			', 
+				', 
+', 
+<!--
+var isLoggedIn = false;
+
+var user = [];
+user.name = '';
+user.id = '';
+var getProfileRecId = '23318223';
+
+var supplierTnid = 66490;
+$(document).ready(function() {
+	var cnt = 0;
+	$('body').ajaxStart(function(){
+		cnt ++;
+		$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+	});
+
+	$('body').ajaxStop(function(){
+		if(cnt == 2){
+			$(".content_body").html('');
+		}
+	});
+
+    $('.cHelp').hover(function(e){
+		$(e.target).find('.tooltip').show();
+	}, function(e){
+		$(e.target).find('.tooltip').hide();
+	});
+
+	if (jQuery.url.attr("anchor") == 'catalogue')
+	{
+			}
+
+	// ALL THIS CODE NEEDS TO BE ON THIS PAGE AS IT PULLS INFO FROM THE PHP ARRAY
+	// This JS is for the Catalogue Side Nav
+
+	function openFile (file)
+	{
+		$.get('/supplier/catalogue/format/html/',
+		{
+			catId: (file),
+			itemStart: 0,
+			itemRows: 50
+		},
+		function(data){
+			$(".content_body").html('');
+			$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+			$(".content_body").html(data);
+		});
+		$(".file").removeClass('expanded_file').addClass('collapsed');
+		$("#"+(file)).removeClass('collapsed').addClass('expanded_file');
+	};
+
+	var anchor = jQuery.url.attr("anchor");
+
+	if (anchor != 'catalogue') {
+
+		$('#sidebar_nav').fileTree({
+			root: '',
+			script: "/supplier/list/format/html/tnid/66490/catId/''",
+			folderEvent: 'click',
+			expandSpeed: 750,
+			collapseSpeed: 750,
+			multiFolder: false,
+			loadMessage: "Loading..." },
+			function(file) {
+				openFile(file);
+			});
+	}
+
+	$("#query").keypress(function(e) {
+	    if(e.which == 13) {
+	        $('#magnifer').click();
+	    }
+	});
+
+	// This JS is for the Enquiry Basket Cookie
+
+	$('#sendEnquiryButton').live('click', function() {
+		var tnid = '66490';
+		var o = $.JSONCookie('SS_TNID_BASKET');
+
+		if (o)
+		{
+			var suppliers = o.suppliers, i = 0;
+			for (s in suppliers) {
+				i++;
+			}
+
+			if (i == 1 && suppliers[tnid] != '') {
+				return true;
+			}
+
+			return confirm('You currently have other suppliers selected. Click OK to clear this list and send an individual RFQ to this supplier, or Cancel to continue browsing');
+		}
+
+		return true;
+	});
+
+	$(".sidewidget input:checkbox").live('click',function() {
+		var o = $.JSONCookie('SS_TNID_BASKET');
+		if (this.checked) {
+			if (o == null || !o.suppliers) {
+				o.suppliers = new Object();
+			}
+
+			var tnid = this.id;
+
+			o.suppliers[tnid] = $("#tnid-name-" + tnid).val();
+		} else {
+			var tnid = this.id;
+			delete o.suppliers[tnid];
+		}
+
+		$.JSONCookie('SS_TNID_BASKET', o, { domain: 'www.shipserv.com',
+																		path: '/' });
+	});
+
+	// This JS is for the Catalogue Page Turner
+
+	$("a.page").live('click', function(e) {
+		e.preventDefault();
+		$('.content_body').html('');
+		$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+		$('html, body').animate({scrollTop: '0px'}, 300);
+		var query = $('input#query').attr('value');
+		if (query =='' || query=='browse' || query=='?dir' || query=='Search Catalogue')
+		{
+			var itemstart = $(this).attr('rel');
+			var catId = $(this).attr('id');
+			$.get('/supplier/catalogue/format/html/',
+			{
+			catId:catId,
+			folderId:'',
+			tnid:66490,
+			itemStart:itemstart,
+			itemRows: 50
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+		} else {
+			var query = $('input#query').attr('value');
+			var itemstart = $(this).attr('rel');
+			var catId = $(this).attr('id');
+			$.get('/supplier/catalogue-search/format/html/', {
+				query:query,
+				catId:catId,
+				folderId:'',
+				tnid:66490,
+				itemStart:itemstart,
+				itemRows: 50
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+		}
+	});
+
+	$("a.next").live('click', function(e) {
+		e.preventDefault();
+		$('.content_body').html('');
+		$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+		$('html, body').animate({scrollTop: '0px'}, 300);
+		var query = $('input#query').attr('value');
+		if (query =='' || query=='browse' || query=='?dir' || query=='Search Catalogue')
+		{
+			var itemstart = $(this).attr('rel');
+			var catId = $(this).attr('id');
+			$.get('/supplier/catalogue/format/html/',
+			{
+			catId:catId,
+			folderId:'',
+			tnid:66490,
+			itemStart:itemstart,
+			itemRows: 50
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+
+		} else {
+			var query = $('input#query').attr('value');
+			var itemstart = $(this).attr('rel');
+			var catId = $(this).attr('id');
+			$.get('/supplier/catalogue-search/format/html/', {
+				query:query,
+				catId:catId,
+				folderId:'',
+				tnid:66490,
+				itemStart:itemstart,
+				itemRows: 50
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+		}
+	});
+
+	$("a.prev").live('click', function(e) {
+		e.preventDefault();
+		$('.content_body').html('');
+		$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+		$('html, body').animate({scrollTop: '0px'}, 300);
+		$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+		var query = $('input#query').attr('value');
+		if (query =='' || query=='browse' || query=='?dir' || query=='Search Catalogue')
+		{
+			var itemstart = $(this).attr('rel');
+			var catId = $(this).attr('id');
+			$.get('/supplier/catalogue/format/html/',
+			{
+			catId:catId,
+			folderId:'',
+			tnid:66490,
+			itemStart:itemstart,
+			itemRows: 50
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+		} else {
+			var query = $('input#query').attr('value');
+			var itemstart = $(this).attr('rel');
+			var catId = $(this).attr('id');
+			$.get('/supplier/catalogue-search/format/html/', {
+				query:query,
+				catId:catId,
+				folderId:'',
+				tnid:66490,
+				itemStart:itemstart,
+				itemRows: 50
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+		}
+	});
+
+	// This JS is for the Catalogue Search
+
+	$("a.clear_search").live('click', function(e) {
+		  e.preventDefault();
+		  cnt = 1;
+		  $('input#query').val('');
+		  $('input#query').focus();
+		  $('a.clear_search').hide();
+		  $(".content_body").html('');
+			$('#sidebar_nav').html('');
+	      	$('#sidebar_nav').fileTree(
+				{ root: '',
+				  script: "/supplier/list/format/html/tnid/66490/catId/''",
+				  folderEvent: 'click',
+				  expandSpeed: 750,
+				  collapseSpeed: 750,
+				  multiFolder: false,
+				  loadMessage: "Loading..." },
+				  function(file) {
+					openFile(file);
+				}
+			);
+	});
+
+	$("input.magnifer").live('click', function(e) {
+		$('#profile').hide();
+		$('#contact_content').hide();
+		$('#reputation_box').hide();
+		$('#map_box').hide();
+		$('#catalogue').show();
+
+		if($('input#query').val() == "" || $('input#query').val() == "Search Catalogue")
+		{
+			$('a.clear_search').hide();
+		}
+		else {
+			$('a.clear_search').show();
+		}
+		$('#catalogue_box').show();
+		$('.content_body').html('');
+		$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+		$('li#catalogue_toggle').removeClass('off').addClass('on');
+		$('li#profile_toggle').removeClass('on').addClass('off');
+		$('li#contact_toggle').removeClass('on').addClass('off');
+		$('li#reviews_toggle').removeClass('on').addClass('off');
+		$('li#map_toggle').removeClass('on').addClass('off');
+		var query = $('input#query').attr('value');
+		if (query=='Search Catalogue') query = "";
+		$.get('/supplier/catalogue-search/format/html/',
+		{
+			catId:"66490",
+			tnid:"66490",
+			folderId:"''",
+			itemStart: 0,
+			itemRows: 50,
+			query: query
+		},
+		function(data){
+			$(".content_body").html(data);
+		});
+
+		function openFile (file)
+		{
+			$.get('/supplier/catalogue-search/format/html/',
+			{
+				catId: (file),
+				itemStart: 0,
+				itemRows: 50,
+				query: query
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+			$(".file").removeClass('expanded_file').addClass('collapsed');
+			$("#"+(file)).removeClass('collapsed').addClass('expanded_file');
+		};
+
+		if (query!='')
+		{
+			$('#sidebar_nav').html('');
+			$('#sidebar_nav').fileTree(
+				{ root: '',
+				  script: "/supplier/list-search/format/html/tnid/66490/catId/''/?query="+query,
+				  folderEvent: 'click',
+				  expandSpeed: 750,
+				  collapseSpeed: 750,
+				  multiFolder: false,
+				  loadMessage: "Loading..." },
+				  function(file) {
+					openFile(file);
+				}
+			);
+		}
+		else
+		{
+			$('#sidebar_nav').html('');
+			$('#sidebar_nav').fileTree(
+				{ root: '',
+				  script: "/supplier/list/format/html/tnid/66490/catId/''",
+				  folderEvent: 'click',
+				  expandSpeed: 750,
+				  collapseSpeed: 750,
+				  multiFolder: false,
+				  loadMessage: "Loading..." },
+				  function(file) {
+					openFile(file);
+				}
+			);
+		}
+	});
+
+	$("input#query").click(function() {
+			if (this.value == 'Search Catalogue') {
+				$(this).val('');
+			}
+		})
+		.blur(function() {
+			if (this.value == '') {
+				$(this).val('Search Catalogue');
+			}
+		});
+
+	$('input#query').keypress(function(e) {
+	    if (e.which == 13 && jQuery.browser.msie == false) {
+			$('#profile').hide();
+			$('#contact_content').hide();
+			$('#reputation_box').hide();
+			$('#map_box').hide();
+			$('#catalogue').show();
+			$('a.clear_search').show();
+			$('#catalogue_box').show();
+			$('.content_body').html('');
+			$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+			$('li#catalogue_toggle').removeClass('off').addClass('on');
+			$('li#profile_toggle').removeClass('on').addClass('off');
+			$('li#contact_toggle').removeClass('on').addClass('off');
+			$('li#reviews_toggle').removeClass('on').addClass('off');
+			$('li#map_toggle').removeClass('on').addClass('off');
+			var query = $('input#query').attr('value');
+			if (query=='Search Catalogue') query = "";
+			$.get('/supplier/catalogue-search/format/html/',
+			{
+				catId:"66490",
+				tnid:"66490",
+				folderId:"''",
+				itemStart: 0,
+				itemRows: 50,
+				query: query
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+
+			function openFile (file)
+			{
+				$.get('/supplier/catalogue-search/format/html/',
+				{
+					catId: (file),
+					itemStart: 0,
+					itemRows: 50,
+					query: query
+				},
+				function(data){
+					$(".content_body").html(data);
+				});
+				$(".file").removeClass('expanded_file').addClass('collapsed');
+				$("#"+(file)).removeClass('collapsed').addClass('expanded_file');
+			};
+
+			if (query!='')
+			{
+				$('#sidebar_nav').html('');
+				$('#sidebar_nav').fileTree(
+					{ root: '',
+					  script: "/supplier/list-search/format/html/tnid/66490/catId/''/?query="+query,
+					  folderEvent: 'click',
+					  expandSpeed: 750,
+					  collapseSpeed: 750,
+					  multiFolder: false,
+				  loadMessage: "Loading..." },
+					  function(file) {
+						openFile(file);
+					}
+				);
+			}
+			else
+			{
+				$('#sidebar_nav').html('');
+				$('#sidebar_nav').fileTree(
+					{ root: '',
+					  script: "/supplier/list/format/html/tnid/66490/catId/''",
+					  folderEvent: 'click',
+					  expandSpeed: 750,
+					  collapseSpeed: 750,
+					  multiFolder: false,
+				  	  loadMessage: "Loading..." },
+					  function(file) {
+						openFile(file);
+					}
+				);
+			}
+	    }
+	});
+
+	function catSearch ()
+	{
+		$('a.clear_search').show();
+		var query = $('input#query').attr('value');
+		if (query=='Search Catalogue') query = "";
+
+		$.get('/supplier/catalogue-search/format/html/', {
+			catId:"66490",
+			tnid:"66490",
+			folderId:"''",
+			itemStart: 0,
+			itemRows: 50,
+			query: query
+		}, function(data){
+			$(".content_body").html(data);
+		});
+
+
+		function openFile (file) {
+			$.get('/supplier/catalogue-search/format/html/', {
+				catId: (file),
+				itemStart: 0,
+				itemRows: 50,
+				query: query
+			}, function(data){
+				$(".content_body").html(data);
+			});
+			$(".file").removeClass('expanded_file').addClass('collapsed');
+			$("#"+(file)).removeClass('collapsed').addClass('expanded_file');
+		};
+
+		if (query != '') {
+			$('#sidebar_nav').html('');
+			$('#sidebar_nav').fileTree(
+				{ root: '',
+				  script: "/supplier/list-search/format/html/tnid/66490/catId/''/?query="+query,
+				  folderEvent: 'click',
+				  expandSpeed: 750,
+				  collapseSpeed: 750,
+				  multiFolder: false,
+				  loadMessage: "Loading..." },
+				  function(file) {
+					openFile(file);
+				}
+			);
+		} else {
+			$('#sidebar_nav').html('');
+			$('#sidebar_nav').fileTree(
+				{ root: '',
+				  script: "/supplier/list/format/html/tnid/66490/catId/''",
+				  folderEvent: 'click',
+				  expandSpeed: 750,
+				  collapseSpeed: 750,
+				  multiFolder: false,
+				  loadMessage: "Loading..." },
+				  function(file) {
+					openFile(file);
+				}
+			);
+		}
+	}
+
+	});
+//-->
+', 
+
+', 
+
+', 
+
+    ', 
+			',  marine suppliers', 
+			', Search for', 
+            
+			', Located in', 
+		
+	', 
+
+		', 
+		', 
+        ', 
+
+		', 
+			', 
+				', 
+			', 
+							', 
+					', 
+				', 
+				
+			', 
+
+						', 
+		', 
+
+	', 
+', 
+
+', 
+	', You are here:', 
+	', 
+					', 
+								', ShipServ Pages', 							', 
+						', 
+				', 				', Search Results', 							', 
+						', 
+				', Electric Engineering Ltd.			', 
+				', 
+', 
+	', 
+
+	', 
+
+		
+		', 
+
+			
+			', Electric Engineering Ltd.', 
+
+			', 
+				Ilyichevsk, Odessa, Ukraine			', 
+
+			', 
+
+		', 
+		', 
+			', 
+				', Profile', 
+				', Contact Supplier', 
+				', Reviews', 
+							', 
+
+					', 
+
+		', 
+
+			', 
+			', 
+               	', 
+        ', 
+                    ', 
+                
+        ',  
+
+        ',             
+            ', 
+            ', 
+        ',        
+    ', 
+    ', 
+    ', 
+', 									', 
+					', Smart Supplier', 
+					
+									', 
+			', 
+
+			', 
+				
+									', 
+					* Supply, service and repair of ships lifesaving, fire-fighting and radio-navigation equipment * General ship supply * Ship repair * Supply of spare parts for main and auxiliary engines, compressors, pumps, purifiers, etc. * Supply, service and repairs of yacht and boat equipment * Manufacturing of life rafts / life boats  launching appliances * Examinations and test of life rafts / life boats launching appliances				', 
+
+									', 
+
+					', 
+
+					', 
+						', 
+																', 
+															', 
+					', 
+
+					
+					', 
+						$(function() {
+							$(".ma-attachments").jCarouselLite({
+																visible: 2
+							});
+						});
+					', 
+						', 
+		', Trading History', 
+	', 
+	', 
+		', 
+					
+			This supplier has traded with 3			companies on TradeNet. Here are the most recent:
+			', 
+			', 
+					', 
+				
+		', 
+							', 
+					SIEM Ship Management				', 
+								', 
+					Univan Ship Management Limited				', 
+							
+		', 
+		', Click here for more details and more customers of Electric Engineering Ltd.', 
+			', 
+						', 
+						', Categories', 
+					', 
+					', 
+						', 
+															', Alarms Systems', 
+																', Auxiliary Engine Spares', 
+																', Auxiliary Engines', 
+																', Bearings', 
+																', Bonded Stores', 
+																', Cabins and Public Areas', 
+																', Ship Chandlery', 
+																', Charts', 
+																', Chemicals', 
+																', Cleaning Supplies & Equipment', 
+																', Clothing', 
+																', Complete Auxiliary Engine Systems', 
+																', Complete Main Engine Systems', 
+																', Compressors', 
+																', Crane & Hydraulic Repair', 
+																', Cranes, Winches & Lifting', 
+																', Davits', 
+																', Diving Equipment', 
+																', Electric Motors', 
+																', Electrical Repair Services', 
+																', Electrical Supplies', 
+																', Electronics', 
+																', Engine Fuel Injection Systems', 
+																', Engine Room Repair Services', 
+																', Engine Spares Reconditioning', 
+																', Engine Systems & Spares', 
+																', Filters', 
+																', Fire & Gas Systems Inspection & Repair', 
+																', Firefighting Equipment', 
+																', Fuel Analysis Services', 
+																', GMDSS & Radio Survey Services', 
+																', Gas Detection', 
+																', Gases & Refrigerants', 
+																', Gearboxes', 
+																', Generators & Alternators', 
+																', Grating', 
+																', Hardware', 
+																', Hatch Covers', 
+																', Hydraulic Systems', 
+																', Inspection Services', 
+																', Laundry Supplies & Equipment', 
+																', Lifeboat & Life Raft Repair Services', 
+																', Lubrication Equipment', 
+																', Main Engine Spares', 
+																', Main Engines', 
+																', Marine Medical Supplies', 
+																', Metal, Steel & Rubber Supplies', 
+																', Mooring, Ropes, Wires & Cables', 
+																', Navigation Equipment', 
+																', Nozzles', 
+																', Nuts & Bolts', 
+																', Paint & Protective Coatings', 
+																', Paint Spraying Equipment', 
+																', Pipe Repair Products', 
+																', Pipes & Tubes', 
+																', Power Supplies', 
+																', Provisions', 
+																', Publications', 
+																', Pumps', 
+																', Purifiers & Separators', 
+																', Radar Repair Services', 
+																', Radio Repair Services', 
+																', Reconditioned and Second-Hand Equipment & Parts', 
+																', Refrigeration Repair Services', 
+																', Rescue & Survival', 
+																', Safety', 
+																', Seals, Gaskets & Packings', 
+																', Ship Repair Services', 
+																', Signs', 
+																', Tools', 
+																', Turbines', 
+																', Turbochargers', 
+																', VDR Inspection Services', 
+																', Valves', 
+														', 
+					', 
+
+							', 
+			', 
+				', 
+				', 
+			', 
+			', Authorized Agent or Distributor for:', 
+		', 
+			', 
+			', 
+				', 
+				', Verified by manufacturer', 
+				', 
+					', The supplier has been verified by the manufacturer as an authorised agent or official distributor for these brands.', 
+				', 
+			', 
+			', 
+			', 
+		', 
+		', 
+			', 
+									', 
+						', Mitsubishi', 
+						(Authorised Agent, Authorised Installer/Repairer)
+					', 
+										', 
+						', Yokogawa', 
+						(Authorised Agent, Authorised Installer/Repairer)
+					', 
+								', 
+		', 
+
+		',  ', Self reported by this supplier', The supplier claims to be an authorised agent or official distributor for these brands but the manufacturer has not verified this.', 		', 
+			', 
+									', 
+						', ACR Electronics',  (Certified Genuine/Original Spares, Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', Atlantic Air E.E.B.D.',  (Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', CSM',  (Authorised Installer/Repairer, Authorised Agent)
+											', 
+										', 
+						', DSB',  (Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Eurovinil',  (Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', Fujikura',  (Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Jotron',  (Certified Genuine/Original Spares, Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', JRC',  (Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Kannad',  (Certified Genuine/Original Spares, Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', KVH',  (Certified Genuine/Original Spares, Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Lalizas',  (Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Master Lock',  (Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', Racal Decca',  (Certified Genuine/Original Spares, Authorised Installer/Repairer)
+											', 
+										', 
+						', RFD',  (Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', SAILOR',  (Certified Genuine/Original Spares, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Seaman Safety',  (Authorised Installer/Repairer, Authorised Agent)
+						 ', 					', 
+										', 
+						', Skanti',  (Certified Genuine/Original Spares, Authorised Installer/Repairer)
+											', 
+										', 
+						', Sperry',  (Certified Genuine/Original Spares, Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', Sumitomo',  (Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', Thrane & Thrane',  (Certified Genuine/Original Spares, Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', Tokugawa',  (Certified Genuine/Original Spares, Authorised Installer/Repairer, Authorised Agent)
+											', 
+										', 
+						', Toyo Marine & Industrial',  (Authorised Installer/Repairer)
+											', 
+										', 
+						', Unitor',  (Authorised Installer/Repairer, Authorised Agent)
+											', 
+										', 
+						', Viking Life-Saving',  (Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Youlong Rubber',  (Authorised Installer/Repairer, Authorised Agent)
+											', 
+										', 
+						', Zhenjiang Marine',  (Authorised Agent, Authorised Installer/Repairer)
+											', 
+								', 
+		', 
+					', Other Brands Supplied', 
+				', 
+			', 
+				', Supplier claims to supply following brands but not as an authorised agent', 
+				', 
+					', The supplier claims to be able to supply products of these brands but not in an authorised capacity. Click the brand name to find alternative suppliers.', 
+				', 
+			', 
+			', 
+		', 
+		', 
+			', 
+									', 
+						', Furuno', 
+						
+					', 
+										', 
+						', Yanmar', 
+						
+					', 
+								', 
+		', 
+						', 
+						', 
+							', 
+							', 
+						', 
+						', Memberships', 
+					', 
+										', 
+						', Verified as Member of', 
+						', 
+					', 
+					', 
+						', 
+															', ISSA', 
+														', 
+					', 
+					
+					', 
+										', 
+						', Certifications', 
+					', 
+										', 
+						', 
+															', ISO 9001								', 
+																', DNV Approved								', 
+																', u"Lloyd's Approved								", 
+																', BV Approved								', 
+																', ABS Approved								', 
+																', NK Approved								', 
+																', GL Approved								', 
+														', 
+					', 
+					
+					', 
+								', 
+
+			', 
+				', 
+                                        ', 
+
+                                        ', 
+
+                                            ', 
+                                        ', 
+                                        ', 
+				', 
+				', 
+											', 
+										', 
+				', 
+					Electric Engineering Ltd.', 
+P.O. Box 583, 15 Pobeda Str.', 
+Ilyichevsk, Odessa', 
+68001', 
+Ukraine', 
+', 
+				', 
+				', 
+					', 
+						Contact this Supplier
+					', 
+				', 
+				', 
+					View TradeNet ID number
+				', 
+				', 
+				', 
+					', Find Us', 
+				', 
+
+				', 
+
+								
+									', 
+						', Other Ports Served', 
+					', 
+	
+					', 
+																					', Berdyansk, UA', 
+																												', Feodosiya, UA', 
+																												', u"Illichivs'k, UA", 
+																												', Izmail, UA', 
+																												', Kerch, UA', 
+																												', Kherson, UA', 
+																												', Kiev, UA', 
+																												', Kiliya, UA', 
+																												', Mariupol (ex Zhdanov), UA', 
+																												', Nikolayev, UA', 
+																												', Odessa, UA', 
+																												', Reni, UA', 
+																												', Sevastopol, UA', 
+																												', Yuzhnyy, UA', 
+																												', Belgorod-Dnestrovskiy, UA', 
+																												', Worldwide', 
+																		', 
+								
+									', 
+						', Documents', 
+					', 
+					
+				', 
+											', Activities of the Company', 
+												', Service station for radio and navigational equipment', 
+										', 
+
+			', 
+
+			', 
+
+			
+			', 
+
+				', 
+					', 
+						', 
+							', 
+								', 
+									', Send RFQ or Enquiry', 
+								', 
+							', 
+							', 
+								', 
+									', TradeNet ID number', 
+								', 
+							', 
+							', 
+								', 
+									', View other contact details', 
+								', 
+							', 
+						', 
+											', 
+
+					', 
+						', 
+															', 
+														', 
+
+						', 
+							Electric Engineering Ltd.', 
+P.O. Box 583, 15 Pobeda Str.', 
+Ilyichevsk, Odessa', 
+68001', 
+Ukraine', 
+', 
+						', 
+						', 
+							', Find us', 
+						', 
+						', 
+													', 
+								', Ports Served', 
+							', 
+
+							', 
+																	', Berdyansk, UA', 
+																		', Feodosiya, UA', 
+																		', u"Illichivs'k, UA", 
+																		', Izmail, UA', 
+																		', Kerch, UA', 
+																		', Kherson, UA', 
+																		', Kiev, UA', 
+																		', Kiliya, UA', 
+																		', Mariupol (ex Zhdanov), UA', 
+																		', Nikolayev, UA', 
+																		', Odessa, UA', 
+																		', Reni, UA', 
+																		', Sevastopol, UA', 
+																		', Yuzhnyy, UA', 
+																		', Belgorod-Dnestrovskiy, UA', 
+																', 
+												', 
+					', 
+
+					
+				', 
+
+            ', u"
+                <!--
+                $(document).ready(function(){
+                    $('#closeMapButton').click(function (e) {
+                        e.preventDefault();
+                        $('#mask').hide();
+                        $('#map_tooltip').hide();
+                    });
+                    $('#mask').click(function (e) {
+                        e.preventDefault();
+                        $('#map_tooltip').hide();
+                    });
+
+                });
+                //-->
+            ", 
+            ', 
+                ', 
+                        ', 
+                        ', 
+                ', 
+                ', 
+                    ', 
+                        ', Map', 
+                    ', 
+                    ', 
+                        ', 
+
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                                Electric Engineering Ltd.', 
+P.O. Box 583, 15 Pobeda Str.', 
+Ilyichevsk, Odessa', 
+68001', 
+Ukraine', 
+', 
+                                ', » Email this supplier or send them an Enquiry or RFQ', 
+                            ', 
+
+                            ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+
+			', 
+
+			', 
+				', 
+					', Catalogue', 
+					', 
+						', Clear Search', 
+					', 
+				', 
+				', 
+				', 
+			', 
+
+		    ', 
+
+			', 
+
+		', 
+
+		', 
+					', 
+
+	', 
+	', 
+	', 
+	', 
+
+', 
+
+	', 
+		', 
+		', 
+	', ADVERTISEMENTS', 
+	', <!--
+GA_googleFillSlot("TargetedOrGeneralAdSlot1"); //-->
+', <!--
+GA_googleFillSlot("TargetedOrGeneralAdSlot2"); //-->
+', <!--
+GA_googleFillSlot("TargetedOrGeneralAdSlot3"); //-->
+', <!--
+GA_googleFillSlot("TargetedOrGeneralAdSlot4"); //-->
+', 
+		', 
+			', <!--
+GA_googleFillSlot("TargetedOrGeneralAdSlot5"); //-->
+', 			', 
+		', 
+		', 
+
+', 
+	$(document).ready(
+		function(){
+			if( $("#fifthSlot").length>0 && $('#15').length > 0 ){
+			$("#fifthSlot")
+				.css("position", 'absolute')
+				.css("top",  ($("#15").position().top - 23 ) + 'px');
+			}
+		}	
+	);
+', 
+	', 
+
+', 
+
+', 
+', 
+    ', Close', 
+    ', 
+', 
+', 
+	$(document).ready(function(){
+		$('input[name=searchWhat]').autoComplete({
+			backwardsCompatible: true,
+			ajax: '/search/autocomplete/what/format/json/',
+			useCache: false,
+			minChars: 3,
+			preventEnterSubmit: true,
+			tabToNext: 'input[name=searchText]',
+			leftAdjustment: -8,
+			width: 325,
+			onSelect: function(data, $li){
+				$('#searchWhat').val(data.code);
+				$('#searchType').val(data.type);
+
+				if( data.url ){
+					location.href = data.url;
+				}
+
+			}
+		});
+
+		$('input[name=searchText]').autoComplete({
+			backwardsCompatible: true,
+			ajax: '/search/autocomplete/portsAndCountries/format/json/',
+			useCache: false,
+			minChars: 3,
+			preventEnterSubmit: true,
+			width: 325,
+			leftAdjustment: -8,
+			onSelect: function(data, $li){
+				$('#searchWhere').val(data.code);
+				$('input[name=searchText]').val(data.value);
+			}
+		});
+
+		$('#searchWhat').keypress(function(e) {
+			if (e.which == '13') {
+				$('#anonSearch').submit();
+			}
+		});
+
+		$('#searchText').keypress(function(e) {
+			if (e.which == '13') {
+				$('#anonSearch').submit();
+			}
+		});
+
+		$('#anonSearch').live('submit', function(e) {
+			e.preventDefault();
+			var self = this;
+			if (!$('#search_box') || !$('#search_box').hasClass('zone_search_box')) {
+				$('a.search-button').html('<img src="/images/buttons/search-button-animated-whitebg.gif" alt="" />');
+			}
+			if ($('#search_box') && $('#search_box').hasClass('zone_search_box')) {
+				$('a.search-button').html('<div id="animitedSearchButtonIcon"></div>');
+			}
+
+			window.setTimeout(function() {
+				self.submit();
+			}, 100);
+		});
+
+		$('#searchButton').live('click', function(e) {
+			e.preventDefault();
+			if( typeof window.searchIsOngoing == 'undefined' )
+			{
+				$(this).attr('disabled', 'disabled');
+				window.searchIsOngoing = true;
+				$('#anonSearch').submit();
+			}
+	    });
+	});
+', 
+
+', 
+	var map1,
+		map2,
+		map3,
+		marker1,
+		marker2,
+		marker3;
+
+	function initMaps() {
+					geocoder =  new google.maps.Geocoder();
+		    geocoder.geocode( { 'address': 'P.O. Box 583, 15 Pobeda Str., Ilyichevsk, Odessa, 68001, Ukraine, '}, function(results, status) {
+		    	if (status == google.maps.GeocoderStatus.OK) {
+		    		var mapOptions = {
+		    			zoom: 13,
+		    			center: results[0].geometry.location
+		    		}
+
+		      		map1 = new google.maps.Map(document.getElementById("map1"), mapOptions);
+
+		        	marker1 = new google.maps.Marker({
+		            	map: map1,
+		            	position: results[0].geometry.location,
+		            	title: 'Electric Engineering Ltd., Ilyichevsk, Ukraine | ShipServ.com'
+		            });
+
+		            map2 = new google.maps.Map(document.getElementById("map2"), mapOptions);
+
+		        	marker2 = new google.maps.Marker({
+		            	map: map2,
+		            	position: results[0].geometry.location,
+		            	title: 'Electric Engineering Ltd., Ilyichevsk, Ukraine | ShipServ.com'
+		            });
+
+		            map3 = new google.maps.Map(document.getElementById("map3"), mapOptions);
+
+		            marker3 = new google.maps.Marker({
+		            	map: map3,
+		            	position: results[0].geometry.location,
+		            	title: 'Electric Engineering Ltd., Ilyichevsk, Ukraine | ShipServ.com'
+		            });
+
+		        }
+		        else {
+		        	$('.findUs,#map1,#map2,#map3').hide();
+		        }
+		    });
+  			}
+
+	initMaps();
+', 
+			', 
+			', 
+	', 
+		', 
+			', 
+				', 
+			', 
+			', 
+				', 
+					', 
+					', 
+					', 
+				', 
+			',  
+			', 
+		', 
+		', 
+			', 
+				', About us', 
+				', 
+					', About ShipServ', 
+					', Contact Us', 
+					', Store', 
+					', Support', 
+					', Buyer Solutions', 
+					', Supplier Solutions', 
+				', 
+			', 
+			', 
+				', Search Suppliers', 
+				', 
+					', By category', 
+					', By brand', 
+					', By country', 
+					', Supplier A-Z', 
+				', 
+			', 
+			', 
+				', Important Legal Matters', 
+				', 
+					', Pages - Terms of Use', 
+					', Pages - Service Conditions', 
+					', Pages - Service Guidelines', 
+					', Privacy Policy', 
+					', Cookie Policy', 
+					', Other ShipServ conditions', 
+					', ShipServ Membership terms', 
+				', 
+			', 
+		', 
+		', 
+			', Copyright © 2016 ShipServ Limited. All rights reserved.', 
+		', 
+	', 
+', 		', 
+		', 
+	'][
+					', 		', 
+', 
+', u"(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PD4KM6');", 
+', 
+
+		', 
+			', 
+			', 
+							', 
+		            ', 
+    ', 
+    ', 
+			', 
+		', 
+		Search	', 
+', 
+    ', 
+', 
+					
+					', 
+
+    ', 
+    ', 	
+		        	', 
+    ', 
+    ', 
+		', 
+		Buyer Solutions	', 
+', 
+', 
+		', 
+		Supplier Solutions	', 
+', 
+', 
+		', 
+		Customers	', 
+', 
+', 
+		', 
+		About	', 
+', 
+', 
+		', 
+		Contact Us	', 
+', 
+    ', 
+        
+        ', TradeNet', 
+    ', 
+     
+            ', 
+                ', Sign in', 
+        ', 
+        ', 
+', 
+', 
+				', 
+					', 
+		', 
+		', 
+/*if no second lev navigation, we need to add this class for somw wp pages (contact us, legal pages)*/
+section.hero, section.intro.darkGrey {
+    top: 0;
+}
+', 
+		', 
+			', 
+				', 
+', 
+<!--
+var isLoggedIn = false;
+
+var user = [];
+user.name = '';
+user.id = '';
+var getProfileRecId = '23318223';
+
+var supplierTnid = 66490;
+$(document).ready(function() {
+	var cnt = 0;
+	$('body').ajaxStart(function(){
+		cnt ++;
+		$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+	});
+
+	$('body').ajaxStop(function(){
+		if(cnt == 2){
+			$(".content_body").html('');
+		}
+	});
+
+    $('.cHelp').hover(function(e){
+		$(e.target).find('.tooltip').show();
+	}, function(e){
+		$(e.target).find('.tooltip').hide();
+	});
+
+	if (jQuery.url.attr("anchor") == 'catalogue')
+	{
+			}
+
+	// ALL THIS CODE NEEDS TO BE ON THIS PAGE AS IT PULLS INFO FROM THE PHP ARRAY
+	// This JS is for the Catalogue Side Nav
+
+	function openFile (file)
+	{
+		$.get('/supplier/catalogue/format/html/',
+		{
+			catId: (file),
+			itemStart: 0,
+			itemRows: 50
+		},
+		function(data){
+			$(".content_body").html('');
+			$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+			$(".content_body").html(data);
+		});
+		$(".file").removeClass('expanded_file').addClass('collapsed');
+		$("#"+(file)).removeClass('collapsed').addClass('expanded_file');
+	};
+
+	var anchor = jQuery.url.attr("anchor");
+
+	if (anchor != 'catalogue') {
+
+		$('#sidebar_nav').fileTree({
+			root: '',
+			script: "/supplier/list/format/html/tnid/66490/catId/''",
+			folderEvent: 'click',
+			expandSpeed: 750,
+			collapseSpeed: 750,
+			multiFolder: false,
+			loadMessage: "Loading..." },
+			function(file) {
+				openFile(file);
+			});
+	}
+
+	$("#query").keypress(function(e) {
+	    if(e.which == 13) {
+	        $('#magnifer').click();
+	    }
+	});
+
+	// This JS is for the Enquiry Basket Cookie
+
+	$('#sendEnquiryButton').live('click', function() {
+		var tnid = '66490';
+		var o = $.JSONCookie('SS_TNID_BASKET');
+
+		if (o)
+		{
+			var suppliers = o.suppliers, i = 0;
+			for (s in suppliers) {
+				i++;
+			}
+
+			if (i == 1 && suppliers[tnid] != '') {
+				return true;
+			}
+
+			return confirm('You currently have other suppliers selected. Click OK to clear this list and send an individual RFQ to this supplier, or Cancel to continue browsing');
+		}
+
+		return true;
+	});
+
+	$(".sidewidget input:checkbox").live('click',function() {
+		var o = $.JSONCookie('SS_TNID_BASKET');
+		if (this.checked) {
+			if (o == null || !o.suppliers) {
+				o.suppliers = new Object();
+			}
+
+			var tnid = this.id;
+
+			o.suppliers[tnid] = $("#tnid-name-" + tnid).val();
+		} else {
+			var tnid = this.id;
+			delete o.suppliers[tnid];
+		}
+
+		$.JSONCookie('SS_TNID_BASKET', o, { domain: 'www.shipserv.com',
+																		path: '/' });
+	});
+
+	// This JS is for the Catalogue Page Turner
+
+	$("a.page").live('click', function(e) {
+		e.preventDefault();
+		$('.content_body').html('');
+		$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+		$('html, body').animate({scrollTop: '0px'}, 300);
+		var query = $('input#query').attr('value');
+		if (query =='' || query=='browse' || query=='?dir' || query=='Search Catalogue')
+		{
+			var itemstart = $(this).attr('rel');
+			var catId = $(this).attr('id');
+			$.get('/supplier/catalogue/format/html/',
+			{
+			catId:catId,
+			folderId:'',
+			tnid:66490,
+			itemStart:itemstart,
+			itemRows: 50
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+		} else {
+			var query = $('input#query').attr('value');
+			var itemstart = $(this).attr('rel');
+			var catId = $(this).attr('id');
+			$.get('/supplier/catalogue-search/format/html/', {
+				query:query,
+				catId:catId,
+				folderId:'',
+				tnid:66490,
+				itemStart:itemstart,
+				itemRows: 50
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+		}
+	});
+
+	$("a.next").live('click', function(e) {
+		e.preventDefault();
+		$('.content_body').html('');
+		$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+		$('html, body').animate({scrollTop: '0px'}, 300);
+		var query = $('input#query').attr('value');
+		if (query =='' || query=='browse' || query=='?dir' || query=='Search Catalogue')
+		{
+			var itemstart = $(this).attr('rel');
+			var catId = $(this).attr('id');
+			$.get('/supplier/catalogue/format/html/',
+			{
+			catId:catId,
+			folderId:'',
+			tnid:66490,
+			itemStart:itemstart,
+			itemRows: 50
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+
+		} else {
+			var query = $('input#query').attr('value');
+			var itemstart = $(this).attr('rel');
+			var catId = $(this).attr('id');
+			$.get('/supplier/catalogue-search/format/html/', {
+				query:query,
+				catId:catId,
+				folderId:'',
+				tnid:66490,
+				itemStart:itemstart,
+				itemRows: 50
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+		}
+	});
+
+	$("a.prev").live('click', function(e) {
+		e.preventDefault();
+		$('.content_body').html('');
+		$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+		$('html, body').animate({scrollTop: '0px'}, 300);
+		$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+		var query = $('input#query').attr('value');
+		if (query =='' || query=='browse' || query=='?dir' || query=='Search Catalogue')
+		{
+			var itemstart = $(this).attr('rel');
+			var catId = $(this).attr('id');
+			$.get('/supplier/catalogue/format/html/',
+			{
+			catId:catId,
+			folderId:'',
+			tnid:66490,
+			itemStart:itemstart,
+			itemRows: 50
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+		} else {
+			var query = $('input#query').attr('value');
+			var itemstart = $(this).attr('rel');
+			var catId = $(this).attr('id');
+			$.get('/supplier/catalogue-search/format/html/', {
+				query:query,
+				catId:catId,
+				folderId:'',
+				tnid:66490,
+				itemStart:itemstart,
+				itemRows: 50
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+		}
+	});
+
+	// This JS is for the Catalogue Search
+
+	$("a.clear_search").live('click', function(e) {
+		  e.preventDefault();
+		  cnt = 1;
+		  $('input#query').val('');
+		  $('input#query').focus();
+		  $('a.clear_search').hide();
+		  $(".content_body").html('');
+			$('#sidebar_nav').html('');
+	      	$('#sidebar_nav').fileTree(
+				{ root: '',
+				  script: "/supplier/list/format/html/tnid/66490/catId/''",
+				  folderEvent: 'click',
+				  expandSpeed: 750,
+				  collapseSpeed: 750,
+				  multiFolder: false,
+				  loadMessage: "Loading..." },
+				  function(file) {
+					openFile(file);
+				}
+			);
+	});
+
+	$("input.magnifer").live('click', function(e) {
+		$('#profile').hide();
+		$('#contact_content').hide();
+		$('#reputation_box').hide();
+		$('#map_box').hide();
+		$('#catalogue').show();
+
+		if($('input#query').val() == "" || $('input#query').val() == "Search Catalogue")
+		{
+			$('a.clear_search').hide();
+		}
+		else {
+			$('a.clear_search').show();
+		}
+		$('#catalogue_box').show();
+		$('.content_body').html('');
+		$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+		$('li#catalogue_toggle').removeClass('off').addClass('on');
+		$('li#profile_toggle').removeClass('on').addClass('off');
+		$('li#contact_toggle').removeClass('on').addClass('off');
+		$('li#reviews_toggle').removeClass('on').addClass('off');
+		$('li#map_toggle').removeClass('on').addClass('off');
+		var query = $('input#query').attr('value');
+		if (query=='Search Catalogue') query = "";
+		$.get('/supplier/catalogue-search/format/html/',
+		{
+			catId:"66490",
+			tnid:"66490",
+			folderId:"''",
+			itemStart: 0,
+			itemRows: 50,
+			query: query
+		},
+		function(data){
+			$(".content_body").html(data);
+		});
+
+		function openFile (file)
+		{
+			$.get('/supplier/catalogue-search/format/html/',
+			{
+				catId: (file),
+				itemStart: 0,
+				itemRows: 50,
+				query: query
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+			$(".file").removeClass('expanded_file').addClass('collapsed');
+			$("#"+(file)).removeClass('collapsed').addClass('expanded_file');
+		};
+
+		if (query!='')
+		{
+			$('#sidebar_nav').html('');
+			$('#sidebar_nav').fileTree(
+				{ root: '',
+				  script: "/supplier/list-search/format/html/tnid/66490/catId/''/?query="+query,
+				  folderEvent: 'click',
+				  expandSpeed: 750,
+				  collapseSpeed: 750,
+				  multiFolder: false,
+				  loadMessage: "Loading..." },
+				  function(file) {
+					openFile(file);
+				}
+			);
+		}
+		else
+		{
+			$('#sidebar_nav').html('');
+			$('#sidebar_nav').fileTree(
+				{ root: '',
+				  script: "/supplier/list/format/html/tnid/66490/catId/''",
+				  folderEvent: 'click',
+				  expandSpeed: 750,
+				  collapseSpeed: 750,
+				  multiFolder: false,
+				  loadMessage: "Loading..." },
+				  function(file) {
+					openFile(file);
+				}
+			);
+		}
+	});
+
+	$("input#query").click(function() {
+			if (this.value == 'Search Catalogue') {
+				$(this).val('');
+			}
+		})
+		.blur(function() {
+			if (this.value == '') {
+				$(this).val('Search Catalogue');
+			}
+		});
+
+	$('input#query').keypress(function(e) {
+	    if (e.which == 13 && jQuery.browser.msie == false) {
+			$('#profile').hide();
+			$('#contact_content').hide();
+			$('#reputation_box').hide();
+			$('#map_box').hide();
+			$('#catalogue').show();
+			$('a.clear_search').show();
+			$('#catalogue_box').show();
+			$('.content_body').html('');
+			$(".content_body").html('<div style="margin:100px;"><img src="/images/longloader.gif"/></div>');
+			$('li#catalogue_toggle').removeClass('off').addClass('on');
+			$('li#profile_toggle').removeClass('on').addClass('off');
+			$('li#contact_toggle').removeClass('on').addClass('off');
+			$('li#reviews_toggle').removeClass('on').addClass('off');
+			$('li#map_toggle').removeClass('on').addClass('off');
+			var query = $('input#query').attr('value');
+			if (query=='Search Catalogue') query = "";
+			$.get('/supplier/catalogue-search/format/html/',
+			{
+				catId:"66490",
+				tnid:"66490",
+				folderId:"''",
+				itemStart: 0,
+				itemRows: 50,
+				query: query
+			},
+			function(data){
+				$(".content_body").html(data);
+			});
+
+			function openFile (file)
+			{
+				$.get('/supplier/catalogue-search/format/html/',
+				{
+					catId: (file),
+					itemStart: 0,
+					itemRows: 50,
+					query: query
+				},
+				function(data){
+					$(".content_body").html(data);
+				});
+				$(".file").removeClass('expanded_file').addClass('collapsed');
+				$("#"+(file)).removeClass('collapsed').addClass('expanded_file');
+			};
+
+			if (query!='')
+			{
+				$('#sidebar_nav').html('');
+				$('#sidebar_nav').fileTree(
+					{ root: '',
+					  script: "/supplier/list-search/format/html/tnid/66490/catId/''/?query="+query,
+					  folderEvent: 'click',
+					  expandSpeed: 750,
+					  collapseSpeed: 750,
+					  multiFolder: false,
+				  loadMessage: "Loading..." },
+					  function(file) {
+						openFile(file);
+					}
+				);
+			}
+			else
+			{
+				$('#sidebar_nav').html('');
+				$('#sidebar_nav').fileTree(
+					{ root: '',
+					  script: "/supplier/list/format/html/tnid/66490/catId/''",
+					  folderEvent: 'click',
+					  expandSpeed: 750,
+					  collapseSpeed: 750,
+					  multiFolder: false,
+				  	  loadMessage: "Loading..." },
+					  function(file) {
+						openFile(file);
+					}
+				);
+			}
+	    }
+	});
+
+	function catSearch ()
+	{
+		$('a.clear_search').show();
+		var query = $('input#query').attr('value');
+		if (query=='Search Catalogue') query = "";
+
+		$.get('/supplier/catalogue-search/format/html/', {
+			catId:"66490",
+			tnid:"66490",
+			folderId:"''",
+			itemStart: 0,
+			itemRows: 50,
+			query: query
+		}, function(data){
+			$(".content_body").html(data);
+		});
+
+
+		function openFile (file) {
+			$.get('/supplier/catalogue-search/format/html/', {
+				catId: (file),
+				itemStart: 0,
+				itemRows: 50,
+				query: query
+			}, function(data){
+				$(".content_body").html(data);
+			});
+			$(".file").removeClass('expanded_file').addClass('collapsed');
+			$("#"+(file)).removeClass('collapsed').addClass('expanded_file');
+		};
+
+		if (query != '') {
+			$('#sidebar_nav').html('');
+			$('#sidebar_nav').fileTree(
+				{ root: '',
+				  script: "/supplier/list-search/format/html/tnid/66490/catId/''/?query="+query,
+				  folderEvent: 'click',
+				  expandSpeed: 750,
+				  collapseSpeed: 750,
+				  multiFolder: false,
+				  loadMessage: "Loading..." },
+				  function(file) {
+					openFile(file);
+				}
+			);
+		} else {
+			$('#sidebar_nav').html('');
+			$('#sidebar_nav').fileTree(
+				{ root: '',
+				  script: "/supplier/list/format/html/tnid/66490/catId/''",
+				  folderEvent: 'click',
+				  expandSpeed: 750,
+				  collapseSpeed: 750,
+				  multiFolder: false,
+				  loadMessage: "Loading..." },
+				  function(file) {
+					openFile(file);
+				}
+			);
+		}
+	}
+
+	});
+//-->
+', 
+
+', 
+
+', 
+
+    ', 
+			',  marine suppliers', 
+			', Search for', 
+            
+			', Located in', 
+		
+	', 
+
+		', 
+		', 
+        ', 
+
+		', 
+			', 
+				', 
+			', 
+							', 
+					', 
+				', 
+				
+			', 
+
+						', 
+		', 
+
+	', 
+', 
+
+', 
+	', You are here:', 
+	', 
+					', 
+								', ShipServ Pages', 							', 
+						', 
+				', 				', Search Results', 							', 
+						', 
+				', Electric Engineering Ltd.			', 
+				', 
+', 
+	', 
+
+	', 
+
+		
+		', 
+
+			
+			', Electric Engineering Ltd.', 
+
+			', 
+				Ilyichevsk, Odessa, Ukraine			', 
+
+			', 
+
+		', 
+		', 
+			', 
+				', Profile', 
+				', Contact Supplier', 
+				', Reviews', 
+							', 
+
+					', 
+
+		', 
+
+			', 
+			', 
+               	', 
+        ', 
+                    ', 
+                
+        ',  
+
+        ',             
+            ', 
+            ', 
+        ',        
+    ', 
+    ', 
+    ', 
+', 									', 
+					', Smart Supplier', 
+					
+									', 
+			', 
+
+			', 
+				
+									', 
+					* Supply, service and repair of ships lifesaving, fire-fighting and radio-navigation equipment * General ship supply * Ship repair * Supply of spare parts for main and auxiliary engines, compressors, pumps, purifiers, etc. * Supply, service and repairs of yacht and boat equipment * Manufacturing of life rafts / life boats  launching appliances * Examinations and test of life rafts / life boats launching appliances				', 
+
+									', 
+
+					', 
+
+					', 
+						', 
+																', 
+															', 
+					', 
+
+					
+					', 
+						$(function() {
+							$(".ma-attachments").jCarouselLite({
+																visible: 2
+							});
+						});
+					', 
+						', 
+		', Trading History', 
+	', 
+	', 
+		', 
+					
+			This supplier has traded with 3			companies on TradeNet. Here are the most recent:
+			', 
+			', 
+					', 
+				
+		', 
+							', 
+					SIEM Ship Management				', 
+								', 
+					Univan Ship Management Limited				', 
+							
+		', 
+		', Click here for more details and more customers of Electric Engineering Ltd.', 
+			', 
+						', 
+						', Categories', 
+					', 
+					', 
+						', 
+															', Alarms Systems', 
+																', Auxiliary Engine Spares', 
+																', Auxiliary Engines', 
+																', Bearings', 
+																', Bonded Stores', 
+																', Cabins and Public Areas', 
+																', Ship Chandlery', 
+																', Charts', 
+																', Chemicals', 
+																', Cleaning Supplies & Equipment', 
+																', Clothing', 
+																', Complete Auxiliary Engine Systems', 
+																', Complete Main Engine Systems', 
+																', Compressors', 
+																', Crane & Hydraulic Repair', 
+																', Cranes, Winches & Lifting', 
+																', Davits', 
+																', Diving Equipment', 
+																', Electric Motors', 
+																', Electrical Repair Services', 
+																', Electrical Supplies', 
+																', Electronics', 
+																', Engine Fuel Injection Systems', 
+																', Engine Room Repair Services', 
+																', Engine Spares Reconditioning', 
+																', Engine Systems & Spares', 
+																', Filters', 
+																', Fire & Gas Systems Inspection & Repair', 
+																', Firefighting Equipment', 
+																', Fuel Analysis Services', 
+																', GMDSS & Radio Survey Services', 
+																', Gas Detection', 
+																', Gases & Refrigerants', 
+																', Gearboxes', 
+																', Generators & Alternators', 
+																', Grating', 
+																', Hardware', 
+																', Hatch Covers', 
+																', Hydraulic Systems', 
+																', Inspection Services', 
+																', Laundry Supplies & Equipment', 
+																', Lifeboat & Life Raft Repair Services', 
+																', Lubrication Equipment', 
+																', Main Engine Spares', 
+																', Main Engines', 
+																', Marine Medical Supplies', 
+																', Metal, Steel & Rubber Supplies', 
+																', Mooring, Ropes, Wires & Cables', 
+																', Navigation Equipment', 
+																', Nozzles', 
+																', Nuts & Bolts', 
+																', Paint & Protective Coatings', 
+																', Paint Spraying Equipment', 
+																', Pipe Repair Products', 
+																', Pipes & Tubes', 
+																', Power Supplies', 
+																', Provisions', 
+																', Publications', 
+																', Pumps', 
+																', Purifiers & Separators', 
+																', Radar Repair Services', 
+																', Radio Repair Services', 
+																', Reconditioned and Second-Hand Equipment & Parts', 
+																', Refrigeration Repair Services', 
+																', Rescue & Survival', 
+																', Safety', 
+																', Seals, Gaskets & Packings', 
+																', Ship Repair Services', 
+																', Signs', 
+																', Tools', 
+																', Turbines', 
+																', Turbochargers', 
+																', VDR Inspection Services', 
+																', Valves', 
+														', 
+					', 
+
+							', 
+			', 
+				', 
+				', 
+			', 
+			', Authorized Agent or Distributor for:', 
+		', 
+			', 
+			', 
+				', 
+				', Verified by manufacturer', 
+				', 
+					', The supplier has been verified by the manufacturer as an authorised agent or official distributor for these brands.', 
+				', 
+			', 
+			', 
+			', 
+		', 
+		', 
+			', 
+									', 
+						', Mitsubishi', 
+						(Authorised Agent, Authorised Installer/Repairer)
+					', 
+										', 
+						', Yokogawa', 
+						(Authorised Agent, Authorised Installer/Repairer)
+					', 
+								', 
+		', 
+
+		',  ', Self reported by this supplier', The supplier claims to be an authorised agent or official distributor for these brands but the manufacturer has not verified this.', 		', 
+			', 
+									', 
+						', ACR Electronics',  (Certified Genuine/Original Spares, Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', Atlantic Air E.E.B.D.',  (Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', CSM',  (Authorised Installer/Repairer, Authorised Agent)
+											', 
+										', 
+						', DSB',  (Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Eurovinil',  (Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', Fujikura',  (Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Jotron',  (Certified Genuine/Original Spares, Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', JRC',  (Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Kannad',  (Certified Genuine/Original Spares, Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', KVH',  (Certified Genuine/Original Spares, Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Lalizas',  (Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Master Lock',  (Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', Racal Decca',  (Certified Genuine/Original Spares, Authorised Installer/Repairer)
+											', 
+										', 
+						', RFD',  (Authorised Agent, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', SAILOR',  (Certified Genuine/Original Spares, Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Seaman Safety',  (Authorised Installer/Repairer, Authorised Agent)
+						 ', 					', 
+										', 
+						', Skanti',  (Certified Genuine/Original Spares, Authorised Installer/Repairer)
+											', 
+										', 
+						', Sperry',  (Certified Genuine/Original Spares, Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', Sumitomo',  (Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', Thrane & Thrane',  (Certified Genuine/Original Spares, Authorised Agent, Authorised Installer/Repairer)
+											', 
+										', 
+						', Tokugawa',  (Certified Genuine/Original Spares, Authorised Installer/Repairer, Authorised Agent)
+											', 
+										', 
+						', Toyo Marine & Industrial',  (Authorised Installer/Repairer)
+											', 
+										', 
+						', Unitor',  (Authorised Installer/Repairer, Authorised Agent)
+											', 
+										', 
+						', Viking Life-Saving',  (Authorised Installer/Repairer)
+						 ', 					', 
+										', 
+						', Youlong Rubber',  (Authorised Installer/Repairer, Authorised Agent)
+											', 
+										', 
+						', Zhenjiang Marine',  (Authorised Agent, Authorised Installer/Repairer)
+											', 
+								', 
+		', 
+					', Other Brands Supplied', 
+				', 
+			', 
+				', Supplier claims to supply following brands but not as an authorised agent', 
+				', 
+					', The supplier claims to be able to supply products of these brands but not in an authorised capacity. Click the brand name to find alternative suppliers.', 
+				', 
+			', 
+			', 
+		', 
+		', 
+			', 
+									', 
+						', Furuno', 
+						
+					', 
+										', 
+						', Yanmar', 
+						
+					', 
+								', 
+		', 
+						', 
+						', 
+							', 
+							', 
+						', 
+						', Memberships', 
+					', 
+										', 
+						', Verified as Member of', 
+						', 
+					', 
+					', 
+						', 
+															', ISSA', 
+														', 
+					', 
+					
+					', 
+										', 
+						', Certifications', 
+					', 
+										', 
+						', 
+															', ISO 9001								', 
+																', DNV Approved								', 
+																', u"Lloyd's Approved								", 
+																', BV Approved								', 
+																', ABS Approved								', 
+																', NK Approved								', 
+																', GL Approved								', 
+														', 
+					', 
+					
+					', 
+								', 
+
+			', 
+				', 
+                                        ', 
+
+                                        ', 
+
+                                            ', 
+                                        ', 
+                                        ', 
+				', 
+				', 
+											', 
+										', 
+				', 
+					Electric Engineering Ltd.', 
+P.O. Box 583, 15 Pobeda Str.', 
+Ilyichevsk, Odessa', 
+68001', 
+Ukraine', 
+', 
+				', 
+				', 
+					', 
+						Contact this Supplier
+					', 
+				', 
+				', 
+					View TradeNet ID number
+				', 
+				', 
+				', 
+					', Find Us', 
+				', 
+
+				', 
+
+								
+									', 
+						', Other Ports Served', 
+					', 
+	
+					', 
+																					', Berdyansk, UA', 
+																												', Feodosiya, UA', 
+																												', u"Illichivs'k, UA", 
+																												', Izmail, UA', 
+																												', Kerch, UA', 
+																												', Kherson, UA', 
+																												', Kiev, UA', 
+																												', Kiliya, UA', 
+																												', Mariupol (ex Zhdanov), UA', 
+																												', Nikolayev, UA', 
+																												', Odessa, UA', 
+																												', Reni, UA', 
+																												', Sevastopol, UA', 
+																												', Yuzhnyy, UA', 
+																												', Belgorod-Dnestrovskiy, UA', 
+																												', Worldwide', 
+																		', 
+								
+									', 
+						', Documents', 
+					', 
+					
+				', 
+											', Activities of the Company', 
+												', Service station for radio and navigational equipment', 
+										', 
+
+			', 
+
+			', 
+
+			
+			', 
+
+				', 
+					', 
+						', 
+							', 
+								', 
+									', Send RFQ or Enquiry', 
+								', 
+							', 
+							', 
+								', 
+									', TradeNet ID number', 
+								', 
+							', 
+							', 
+								', 
+									', View other contact details', 
+								', 
+							', 
+						', 
+											', 
+
+					', 
+						', 
+															', 
+														', 
+
+						', 
+							Electric Engineering Ltd.', 
+P.O. Box 583, 15 Pobeda Str.', 
+Ilyichevsk, Odessa', 
+68001', 
+Ukraine', 
+', 
+						', 
+						', 
+							', Find us', 
+						', 
+						', 
+													', 
+								', Ports Served', 
+							', 
+
+							', 
+																	', Berdyansk, UA', 
+																		', Feodosiya, UA', 
+																		', u"Illichivs'k, UA", 
+																		', Izmail, UA', 
+																		', Kerch, UA', 
+																		', Kherson, UA', 
+																		', Kiev, UA', 
+																		', Kiliya, UA', 
+																		', Mariupol (ex Zhdanov), UA', 
+																		', Nikolayev, UA', 
+																		', Odessa, UA', 
+																		', Reni, UA', 
+																		', Sevastopol, UA', 
+																		', Yuzhnyy, UA', 
+																		', Belgorod-Dnestrovskiy, UA', 
+																', 
+												', 
+					', 
+
+					
+				', 
+
+            ', u"
+                <!--
+                $(document).ready(function(){
+                    $('#closeMapButton').click(function (e) {
+                        e.preventDefault();
+                        $('#mask').hide();
+                        $('#map_tooltip').hide();
+                    });
+                    $('#mask').click(function (e) {
+                        e.preventDefault();
+                        $('#map_tooltip').hide();
+                    });
+
+                });
+                //-->
+            ", 
+            ', 
+                ', 
+                        ', 
+                        ', 
+                ', 
+                ', 
+                    ', 
+                        ', Map', 
+                    ', 
+                    ', 
+                        ', 
+
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                                Electric Engineering Ltd.', 
+P.O. Box 583, 15 Pobeda Str.', 
+Ilyichevsk, Odessa', 
+68001', 
+Ukraine', 
+', 
+                                ', » Email this supplier or send them an Enquiry or RFQ', 
+                            ', 
+
+                            ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+
+			', 
+
+			', 
+				', 
+					', Catalogue', 
+					', 
+						', Clear Search', 
+					', 
+				', 
+				', 
+				', 
+			', 
+
+		    ', 
+
+			', 
+
+		', 
+
+		', 
+					', 
+
+	', 
+	', 
+	', 
+	', 
+
+', 
+
+	', 
+		', 
+		', 
+	', ADVERTISEMENTS', 
+	', <!--
+GA_googleFillSlot("TargetedOrGeneralAdSlot1"); //-->
+', <!--
+GA_googleFillSlot("TargetedOrGeneralAdSlot2"); //-->
+', <!--
+GA_googleFillSlot("TargetedOrGeneralAdSlot3"); //-->
+', <!--
+GA_googleFillSlot("TargetedOrGeneralAdSlot4"); //-->
+', 
+		', 
+			', <!--
+GA_googleFillSlot("TargetedOrGeneralAdSlot5"); //-->
+', 			', 
+		', 
+		', 
+
+', 
+	$(document).ready(
+		function(){
+			if( $("#fifthSlot").length>0 && $('#15').length > 0 ){
+			$("#fifthSlot")
+				.css("position", 'absolute')
+				.css("top",  ($("#15").position().top - 23 ) + 'px');
+			}
+		}	
+	);
+', 
+	', 
+
+', 
+
+', 
+', 
+    ', Close', 
+    ', 
+', 
+', 
+	$(document).ready(function(){
+		$('input[name=searchWhat]').autoComplete({
+			backwardsCompatible: true,
+			ajax: '/search/autocomplete/what/format/json/',
+			useCache: false,
+			minChars: 3,
+			preventEnterSubmit: true,
+			tabToNext: 'input[name=searchText]',
+			leftAdjustment: -8,
+			width: 325,
+			onSelect: function(data, $li){
+				$('#searchWhat').val(data.code);
+				$('#searchType').val(data.type);
+
+				if( data.url ){
+					location.href = data.url;
+				}
+
+			}
+		});
+
+		$('input[name=searchText]').autoComplete({
+			backwardsCompatible: true,
+			ajax: '/search/autocomplete/portsAndCountries/format/json/',
+			useCache: false,
+			minChars: 3,
+			preventEnterSubmit: true,
+			width: 325,
+			leftAdjustment: -8,
+			onSelect: function(data, $li){
+				$('#searchWhere').val(data.code);
+				$('input[name=searchText]').val(data.value);
+			}
+		});
+
+		$('#searchWhat').keypress(function(e) {
+			if (e.which == '13') {
+				$('#anonSearch').submit();
+			}
+		});
+
+		$('#searchText').keypress(function(e) {
+			if (e.which == '13') {
+				$('#anonSearch').submit();
+			}
+		});
+
+		$('#anonSearch').live('submit', function(e) {
+			e.preventDefault();
+			var self = this;
+			if (!$('#search_box') || !$('#search_box').hasClass('zone_search_box')) {
+				$('a.search-button').html('<img src="/images/buttons/search-button-animated-whitebg.gif" alt="" />');
+			}
+			if ($('#search_box') && $('#search_box').hasClass('zone_search_box')) {
+				$('a.search-button').html('<div id="animitedSearchButtonIcon"></div>');
+			}
+
+			window.setTimeout(function() {
+				self.submit();
+			}, 100);
+		});
+
+		$('#searchButton').live('click', function(e) {
+			e.preventDefault();
+			if( typeof window.searchIsOngoing == 'undefined' )
+			{
+				$(this).attr('disabled', 'disabled');
+				window.searchIsOngoing = true;
+				$('#anonSearch').submit();
+			}
+	    });
+	});
+', 
+
+', 
+	var map1,
+		map2,
+		map3,
+		marker1,
+		marker2,
+		marker3;
+
+	function initMaps() {
+					geocoder =  new google.maps.Geocoder();
+		    geocoder.geocode( { 'address': 'P.O. Box 583, 15 Pobeda Str., Ilyichevsk, Odessa, 68001, Ukraine, '}, function(results, status) {
+		    	if (status == google.maps.GeocoderStatus.OK) {
+		    		var mapOptions = {
+		    			zoom: 13,
+		    			center: results[0].geometry.location
+		    		}
+
+		      		map1 = new google.maps.Map(document.getElementById("map1"), mapOptions);
+
+		        	marker1 = new google.maps.Marker({
+		            	map: map1,
+		            	position: results[0].geometry.location,
+		            	title: 'Electric Engineering Ltd., Ilyichevsk, Ukraine | ShipServ.com'
+		            });
+
+		            map2 = new google.maps.Map(document.getElementById("map2"), mapOptions);
+
+		        	marker2 = new google.maps.Marker({
+		            	map: map2,
+		            	position: results[0].geometry.location,
+		            	title: 'Electric Engineering Ltd., Ilyichevsk, Ukraine | ShipServ.com'
+		            });
+
+		            map3 = new google.maps.Map(document.getElementById("map3"), mapOptions);
+
+		            marker3 = new google.maps.Marker({
+		            	map: map3,
+		            	position: results[0].geometry.location,
+		            	title: 'Electric Engineering Ltd., Ilyichevsk, Ukraine | ShipServ.com'
+		            });
+
+		        }
+		        else {
+		        	$('.findUs,#map1,#map2,#map3').hide();
+		        }
+		    });
+  			}
+
+	initMaps();
+', 
+			', 
+			', 
+	', 
+		', 
+			', 
+				', 
+			', 
+			', 
+				', 
+					', 
+					', 
+					', 
+				', 
+			',  
+			', 
+		', 
+		', 
+			', 
+				', About us', 
+				', 
+					', About ShipServ', 
+					', Contact Us', 
+					', Store', 
+					', Support', 
+					', Buyer Solutions', 
+					', Supplier Solutions', 
+				', 
+			', 
+			', 
+				', Search Suppliers', 
+				', 
+					', By category', 
+					', By brand', 
+					', By country', 
+					', Supplier A-Z', 
+				', 
+			', 
+			', 
+				', Important Legal Matters', 
+				', 
+					', Pages - Terms of Use', 
+					', Pages - Service Conditions', 
+					', Pages - Service Guidelines', 
+					', Privacy Policy', 
+					', Cookie Policy', 
+					', Other ShipServ conditions', 
+					', ShipServ Membership terms', 
+				', 
+			', 
+		', 
+		', 
+			', Copyright © 2016 ShipServ Limited. All rights reserved.', 
+		', 
+	', 
+', 		', 
+		', 
+	']

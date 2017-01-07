@@ -1,0 +1,1893 @@
+[ ', 
+', 
+', u"(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N3H9NS');", 
+', 
+', 
+', (function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+', 
+',  ', 
+', 
+', 
+', 
+', Multimedia', 
+', u"Today's Paper", 
+', Topics', 
+', ePaper', 
+', WealthCheck', 
+', 	',  ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="66/56"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14"; ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', SEARCH', 
+', 
+', 
+', 
+', 
+', 	', 
+', 
+', Follow', 
+', 
+', !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");', 
+', 
+', 
+', 
+', u"
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/platform.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+", 
+', 
+lang: en_US
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',  ', Home', 
+', News', 
+', Markets', 
+', Companies', 
+', Money & Banking', 
+', Economy', 
+', Info-tech', 
+', Opinion', 
+', Specials', 
+', Portfolio', 
+', Catalyst', 
+', BLink', 
+', 
+', 
+', 
+', 
+', 
+//this function will clear only the default text of input field
+function clearText(thefield) {
+if (thefield.defaultValue == thefield.value)
+thefield.value = ""
+}
+$(document).ready(function() {
+// get the input field
+$.get('http://www.thehindubusinessline.com/template/1-0-1/javascript/blcategory.xml',
+function parseXML(xml) {
+var results = [];
+$(xml).find('category').each(function() {
+var name = $.trim($(this).find('name').text());
+var sourceid = $.trim($(this).find('sourceid').text());
+results[results.length] = {'result': sourceid, 'value': name
+};
+});
+var input = $('input#categoryFinder');
+input.autocomplete(results, {
+delay:10,
+minChars:2,
+matchSubset:1,
+matchContains:1,
+scroll: false,
+cacheLength:10,
+formatItem: function(data) {
+return $(data).val();
+}
+}).result(function(event, data) {
+var companyUrlName = data.value;
+companyUrlName = companyUrlName.replace(/[^a-zA-Z0-9 ]+/g, "");
+companyUrlName = companyUrlName.replace(/[^a-zA-Z0-9]+/g, "-");
+location.href = 'http://www.thehindubusinessline.com/companies/data/' + companyUrlName + "/quotes/" + $(data).attr('result') + "/";
+//location.href = 'http://bleceweb.thehindu.co.in/companies/?data=true&categoryId='+ $(data).attr('result');
+});
+});
+});
+', 
+', 
+Find Company: ', 
+', 2', 3', a', b', c', d', e', f', g', h', i', j', k', l', m', n', o', p', q', r', s', t', , v', w', x', y', z', 
+', 
+', 
+', 
+',  ', 
+', DPSC merges with India Power Corp', 
+', 
+var addthis_pub = "businessline";
+', 
+', Our Burea, 
+', 
+', 
+', 
+  ·  
+', print', 
+  ·   ', 
+var min=8;
+var max=18;
+var min1=18;
+var max1=24; /* set cookie functions */
+function setCookie (name,value,days) {
+if (days)
+{
+var date = new Date();
+date.setTime(date.getTime()+(days*24*60*60*1000));
+var expires = "; expires="+date.toGMTString();
+}
+else var expires = "";
+document.cookie = name+"="+value+expires+"; path=/";
+}
+function getCookie (name) {
+var nameEQ = name + "=";
+var ca = document.cookie.split(';');
+for(var i=0;i < ca.length;i++)
+{
+var c = ca[i];
+while (c.charAt(0)==' ') c = c.substring(1,c.length);
+if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+}
+return null;
+}
+function increaseFontSize() {
+var temp=document.getElementById('inc').innerHTML
+if(temp=="T-")
+decreaseFontSize();
+else
+{
+var p = document.getElementsByTagName('p');
+for(i=0;i<p.length;i++) {
+if(p[i].style.fontSize) {
+var s = parseInt(p[i].style.fontSize.replace("px",""));
+} else {
+var s = 18;
+}
+if(s!=max) {
+s = 18;
+}
+if(p[i].style.lineHeight) {
+var t = parseInt(p[i].style.lineHeight.replace("px","")); } else {
+var t = 24; }
+if(t!=max1) {
+t = 24; } p[i].style.fontSize = s+"px"
+p[i].style.lineHeight = t+"px"
+}
+document.getElementById('inc').innerHTML="T-";
+}
+// save the font size in a cookie for one day
+setCookie('fontsize', s, 1);
+setCookie('lineheight', t, 1);
+}
+function decreaseFontSize() {
+var p = document.getElementsByTagName('p');
+for(i=0;i<p.length;i++) {
+if(p[i].style.fontSize) {
+var s = parseInt(p[i].style.fontSize.replace("px",""));
+} else {
+var s = 14;
+}
+if(s!=min) {
+s =14;
+}
+if(p[i].style.lineHeight) {
+var t = parseInt(p[i].style.lineHeight.replace("px","")); } else {
+var t = 18; }
+if(t!=min1) {
+t = 18; } p[i].style.lineHeight = t+"px"
+p[i].style.fontSize = s+"px"
+} document.getElementById('inc').innerHTML="T+";
+// save the font size in a cookie for one day
+setCookie('fontsize', s, 1);
+setCookie('lineheight', t, 1);
+}
+window.onload = function() {
+// if the cookie exists, restore the variable
+var fontsize = getCookie('fontsize');
+var lineheight = getCookie('lineheight'); if (fontsize) {
+var p = document.getElementsByTagName('p');
+for(i=0;i<p.length;i++) {
+document.getElementsByTagName('p')[i].style.fontSize = fontsize + 'px' }
+}
+if (lineheight) {
+var p = document.getElementsByTagName('p');
+for(i=0;i<p.length;i++) {
+document.getElementsByTagName('p')[i].style.lineHeight = lineheight + 'px' }
+}
+}
+if(getCookie('fontsize') == "18")
+{
+<!--
+document.write('<a href="#" onclick="javascript:increaseFontSize();" title="Change Text Size" id="inc">T-</a>&nbsp;&nbsp;');
+-->
+}
+else
+{
+<!--
+document.write('<a href="#" onclick="javascript:increaseFontSize();" title="Change Text Size" id="inc">T+</a>&nbsp;&nbsp;');
+-->
+}
+', 
+', 
+', T+',   ·   ', T-', 
+',  ',  ', 
+', 
+function toggle() {
+var ele = document.getElementById("topShare");
+var text = document.getElementById("click");
+if(ele.style.display == "block") {
+ele.style.display = "none";
+text.innerHTML = "Share";
+}
+else {
+ele.style.display = "block";
+text.innerHTML = "Share"; }
+}
+', 
+', 
+',  ', 
+',  ', 
+', Tweet', 
+', 
+', 
+',  lang: en_US', 
+', 
+', 
+', 	', 
+var addthis_config = {
+"data_track_clickback":true, ui_click: true,
+services_compact: 'email, favorites, gmail, hotmail, blogger, instapaper, wordpress, more',
+services_exclude: 'facebook,twitter'
+}
+', 
+', 	', 	', 	', 	', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="641"; var zflag_sid="2"; var zflag_width="640"; var zflag_height="65"; var zflag_sz="33"; ', 
+', 
+', 
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+Kolkata, Sept 2:  
+', 
+', 
+', 
+SREI Group on Monday announced amalgamation of its listed power distribution arm DPSC with group outfit India Power Corporation. The integrated entity will be named as India Power. ', 
+', 
+DPSC Ltd distributes 250 MW electricity in Asansol, West Bengal. This apart, the company was recently awarded with distribution rights for Gaya in Bihar. DPSC shares closed at Rs 15.45, up by 2.66 per cent, on the NSE on Monday.
+', 
+', 
+According to Arun Kedia, Chief Financial Officer, India Power, the company is currently, implementing a 450-MW generation facility entailing an investment of Rs 2,650 crore at Haldia in West Bengal. The company also has electricity distribution rights in Asansol in West Bengal and Gaya in Bihar. The franchise for Gaya was awarded recently. India Power\u2019s current generation capacity includes around 100 MW of renewable energy and 12 MW of thermal power. ', 
+', 
+Following the merger, the new entity will have a revenue of Rs 650 crore as on March 31, 2013, and an asset size of Rs 1,400 crore. ', 
+', 
+India Power, meanwhile, is on the look out for coal assets in Africa for its upcoming power projects. The company is carrying out exploration in South Africa, Botswana and Tanzania. ', 
+', 
+\u201cWe are actively looking for coal assets in Africa. Exploration work in the area has begun,\u201d Hemant Kanoria, Chairman, India Power, told reporters here. He, however, did not reveal details about the expected size of the mine or the investments that are being made by India Power. ', 
+', 
+', pratim.bose@thehindu.co.in ', 
+', 
+', 
+', abhishek.l@thehindu.co.in ', 
+', 
+', 
+(This article was published on September 2, 2013) ', 
+', 
+',  ', 
+', Related', 
+', 
+', NEWS', 
+', SREI Group scouting for projects in power, road sectors',  ', SREI arm\u2019s Haldia project delayed, but no cost push up',  ', 
+', 
+', TOPICS', 
+', 
+company information ', |',  ', 
+restructuring and recapitalisation ', |', 
+', 
+', 	', u"
+ul.cmlinks li{display: inline-block;margin:2px 1px 2px 0;border: solid 1px #bbb;padding: 2px 1px 2px 1px;background-color:#eee; font-family: Arial, sans-serif; font-size:12px; text-align: center;}
+ul.cmlinks li a{font-family: Arial, sans-serif; font-size:12px; text-align: center;}
+.cNameHeading{	background-color: #2899D3; padding: 6px 0 6px 4px; text-transform: none; font-size: 18px; font-weight: bold; color: #fff; margin-bottom: 0; font-family: Georgia, 'Times New Roman', Times, serif;}
+li.cm-qt, li.cm-qr {width:101px;}
+li.cm-ss, li.cm-fr {width:94px;}
+li.cm-bg,li.cm-shp {width:131px;}
+li.cm-bod,li.cm-sb {width:106px;}
+li.cm-bs, li.cm-mf {width:87px;}
+li.cm-pl,li.cm-ns {width:74px;}
+li.cm-bs {padding: 2px;}
+.cNameH3{background-color:#F7F8E3;padding:5px;margin-bottom:0;font-weight: bold;font-family: arial;font-size: 20px;}
+.bseH4{margin-bottom: 0;padding: 3px;color: #fff;font-weight: bold;}
+.bseH4bg{background-color: #548593;}
+.nseH4bg{background-color: #4F799D;}
+.cmSize{float:left; width:318px;}
+.mr-5{margin-right:5px;}
+.tradedDate{padding: 5px 0; background-color: #eee; font-family: arial;}
+.tableMarketData table{border-collapse: collapse;width:100%;font-size:12px}
+.tableMarketData table td{padding: 4px 0 4px 4px;} .tableMarketData table tr:nth-child(odd){font-weight: bold;background-color: #d6dce4;}
+.tableMarketData table tr:nth-child(even){font-size: 14px;height:30px;}
+", 
+', 
+', 
+', Companies',   » 
+', D P S C Limited', 
+', 
+', 
+', Quotes', 
+', Snapshot', 
+', Company Background', 
+', Board of Directors', 
+', Balance Sheet', 
+', Profit & Loss', 
+', Quarterly Results', 
+', Financial Ratios', 
+', Share Holding Pattern', 
+', Score Board', 
+', MF Holdings', 
+', News', 
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+',  ', Get',  more of your ', favourite news ',  delivered to your',  inbox', 
+', 
+', 
+', 
+', SEND MY NEWS', 
+', 
+', 
+', 
+', 
+', Please enter your email. Thank You. ', 
+', Newsletter has been successfully subscribed. ', 
+', 
+', 
+', 	', 
+', 
+', 	', 
+', 
+var url = 'http://dmweb.elasticbeanstalk.com/api/articles/get/';
+DatomataApi.MainSourceUrls = true;
+DatomataApi.CustomCSS = false;
+DatomataApi.NoDatomataBranding = true;
+DatomataApi.TenantId = "S6eeFeRynhIQ5tcDt3yI";
+DatomataApi.Context = "interest";
+DatomataApi.ArticleId = "article5085819.ece";
+DatomataApi.DomControlName = 'recWidget';
+DatomataApi.renderWidget("MORE FROM BUSINESS LINE", 3, 1, false);
+', 
+', 	',  ', 
+', 
+',  ', 
+', 	', Tweet', 
+', 
+', 	', 
+', 
+',  lang: en_US', 
+', 
+', 
+', 	', 
+var addthis_config = {
+"data_track_clickback":true, ui_click: true,
+services_compact: 'email, favorites, gmail, hotmail, blogger, instapaper, wordpress, more',
+services_exclude: 'facebook,twitter'
+}
+', 
+', 	', 	', 	', 
+', 
+', 
+', 
+', u"
+$(document).ready(function(){
+$('#article-carousel .mycarousel').show().jcarousel({scroll: 1,visible: 1});
+});	", 
+', #article-carousel .mycarousel{ display: block; }', 	', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="722"; var zflag_sid="2"; var zflag_width="640"; var zflag_height="250"; var zflag_sz="77"; ', 
+', 
+', 
+', 
+', 
+', 
+', Please Wait while comments are loading...', 
+', u"var VUUKLE_STORIES_TIME = 168; create_vuukle_platform('d1a4a16d-cfaf-4ad2-8f9b-ddf5a1b257d2','5085819','1','companies','DPSC merges with India Power Corp');", 
+', 
+This article is closed for comments.', Please ', Email the Editor',  ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="428"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="81"; ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="173"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="194"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; var zflag_ct ="LAudience:";
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="68/56"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="180"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9";
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="402"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; ', 
+', 
+', 
+', 
+', 
+', VIDEO', 	', 	',  ', 	', 
+', u"Video: The Mystery Behind Mistry's Exit", 
+', 
+', 
+', 
+', more videos', »', 
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', MOST POPULAR', 
+', MOST COMMENTED', 
+', 
+', 
+', 
+', 
+',  Pawah steps down as MD of Harley-Davidson India', 
+',  ', 
+', Tata Motors bets on new cars to drive up sales ', 
+',  ', 
+', IRB biggest beneficiary of Ministry\u2019s arbitration reform', 
+',  ', 
+', Daikin takes pole position in AC sales, garners 15% share of home segment', 
+',  ', 
+', Suzlon bags 105 MW order from Axis Energy Group', 
+',  ', 
+', Tata Sons\u2019 Feb 6 EGM to seal Mistry\u2019s fate', 
+',  ', 
+', Pokarna to supply quartz surfaces to IKEA', 
+',  ', 
+', Tata Sons counters Mistry in reply filed with NCLT', 
+',  ', 
+', Dr Reddy\u2019s helps women get back on the career beat', 
+',  ', 
+', Piramal Enterprises to enter housing finance segment ', 
+',  ',  ', 
+', 
+', $(function(){mostcom("http://vuukle.com/api.asmx/getRecentMostCommentedByHostByTime?bizId=d1a4a16d-cfaf-4ad2-8f9b-ddf5a1b257d2&host=thehindubusinessline.com&tag=companies&hours=360&count=10",10,"");});', 	', 
+', 
+', 
+', 
+', DATA BANK', 	', 
+', 
+Cross Currency Rate', 
+',  ', 
+', 
+', Indian Rupees', 
+', Australian Dollar', 
+', Canadian Dollar', 
+', Danish Kroner', 
+', Euro', 
+', Hong Kong Dollar', 
+', Indonesian Rupiah', 
+', Japanese Yen', 
+', New Zealand Dollar', 
+', Norwegian Kroner', 
+', Pound Sterling', 
+', Singapore Dollar', 
+', South Korean Won', 
+', Swadish Kroner', 
+', Swiss Franc', 
+', Thai Baht', 
+', US Dollar', 
+', Chinese Yuan', 
+', Arab Emirates Dirham', 
+', 
+', 
+', u"
+$(function() {
+$('.crcrrate_select').change(function() {
+document.location = this.value;
+});
+});
+", 
+', 
+', Exchange Rate', 
+', 
+', 
+', Dollar Spot Forward Rate', 
+', 
+', 
+', Open-Ended Mutual Funds', 
+', 
+', 
+', MCX-SX Currency Futures', 
+', 
+', 
+', NSE Currency Futures', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', LATEST NEWS', 
+',  ', 
+', 
+', Aurobindo Pharma gets USFDA nod for anti-epileptic drug ', 
+', 7 min. ago', 
+',  ', 
+', Aurobindo Pharma to buy Portugal\u2019s Generis for Rs 969 cr', 
+', 16 min. ago', 
+',  ', 
+', Apple cuts Tim Cook\u2019s pay as iPhone sales fall ', 
+', 26 min. ago', 
+',  ', 
+', China\u2019s 4G users touch 730 million ', 
+', 47 min. ago', 
+',  ', 
+', NRIs, PIOs urged to take up socially relevant projects', 
+', 1 hr. 7 min. ago', 
+',  ', 
+', More »', 
+', 
+', 
+', 
+', From Business Wire', 
+', 
+', 
+', WNS to release fiscal 2017 third quarter financial and operating results on January 19, 2017', 
+', 
+', 
+', KW Group unveils luxurious high street shopping destinations - "KW Blue Pearl" shopping mall in Karol Bagh, New Delhi and "KW Delhi-6" in Rajnagar Extension, Ghaziabad', 
+', 
+', 
+', u"Kick-start the New Year with Sanyo's 'Blockbuster Deal of 2017'", 
+', 
+', 
+', Indian regional round of the 1st China (Shenzhen) Innovation & Entrepreneurship International Competition launched', 
+', 
+', 
+', Mobmerry launches walk-in cashback vouchers to incentivize in-store shopping', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="252"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="91";
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="404"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; ', 
+', 
+', 
+', 
+', 
+', 
+$(document).ready(function(){
+$("#ad1.right-tout").find("#zzblankad").parent().css({"margin": "0px"})
+//$('.right #lnews').before('<img src="http://www.thehindubusinessline.com/multimedia/archive/02324/budgetpeople_2324802a.jpg" alt="" title=""/>')
+});
+', 
+', article.menu-art .title{height:30px;}
+.twit {height:24px;overflow:hidden;}
+body{overflow: scroll !important;} iframe {max-width: inherit !important;}
+', 
+', 
+', 
+',  ',  ',  ',  ', O', P', E', N', 
+', 
+', 	', close', 
+', Recent Article in Companies', 
+', 
+', Aurobindo Pharma gets USFDA nod for anti-epileptic drug ', 	', 	Aurobindo Pharma has received final approval from the US health regulator for its Levetiracetam in Sodium Chloride injection used for th... ', »',  ', 
+', 
+', 
+', 
+$(function() {
+$(window).scroll(function(){
+/* when reaching the element with id "addshare" we want to show the slidebox. Let's get the distance from the top to the element */
+var distanceTop = $('#addshare').offset().top - $(window).height();
+if ($(window).scrollTop() > distanceTop)
+{
+if (document.getElementById('topover').style.display != 'block')
+{	$('#slidebox').animate({'right':'0px'},800);
+}
+else
+{
+document.getElementById('topover').style.visibility = 'visible';
+}
+}	else {
+document.getElementById('topover').style.visibility = 'hidden';
+$('#slidebox').stop(true).animate({'right':'-530px'},700);
+}
+});
+$('#slidebox .close').bind('click',function(){
+$('#slidebox').stop(true).animate({'right':'-530px'},10);	document.getElementById('topover').style.display = 'block';
+document.getElementById('topover').style.visibility = 'visible';
+document.getElementById('topover').onclick = function()
+{
+document.getElementById('topover').style.display = 'none';
+$('#slidebox').animate({'right':'0px'},800);
+}
+});
+});
+', 
+', 
+', 
+', 
+Business Line:
+', Home', 
+|
+', News', 
+|
+', Markets', 
+|
+', Companies', 
+|
+', Money & Banking', 
+|
+', Economy', 
+|
+', Info-tech', 
+|
+', Opinion', 
+|
+', Specials', 
+|
+', Portfolio', 
+|
+', Catalyst', 
+|
+', BLink', 
+|
+', 
+This Site:
+', About Us', 
+|
+', Contacts', 
+|
+', Privacy Policy', 
+|
+', Archives', 
+|
+', Subscription', 
+|
+', RSS Feeds', 
+|
+', Site Map', 
+|
+', Brand Quest', 
+|
+', ePaper', 
+|
+', Social', 
+|
+', BL Club', 
+|
+', Mobile', 
+|
+', Group Sites: ', The Hind, 
+|
+', \u0ba4\u0bbf \u0b87\u0ba8\u0bcd\u0ba4\u0bc1', 
+|
+', Business Line', 
+|
+', BL on Campus', 
+|
+', Sportstarlive', 
+|
+', Frontline', 
+|
+', The Hindu Centre', 
+|
+', RoofandFloor', 
+|
+', STEP', 
+|
+', Publications', 
+|
+', eBooks', 
+|
+', Images', 
+|
+', 
+Comments to: ', web.businessline@thehindu.co.in', . Copyright © 2017, ', The Hindu Business Line', .
+', 
+', 
+', u"
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/plusone.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+",  ',  ', 
+', 
+function eaelogger(type,meta){
+var clientDT = new Date().getTime();
+$("#eae").html('<img src="http://www.thehindubusinessline.com/eae-logger/Logger?rt=1&ctxId=856&pubId=29&cat=&objId=5085819&title=DPSC+merges+with+India+Power+Corp&url=news%2c2013-09-02+17%3a19%3a50.0%2chttp%3a%2f%2fwww.thehindubusinessline.com%2fcompanies%2fdpsc-merges-with-india-power-corp%2farticle5085819.ece&amp;type='+ type + '&amp;meta=' + meta + '&amp;clientDT=' + clientDT + '" alt="" width="1" height="1"/>');
+} eaelogger("article", "");
+', 
+', 
+', 
+', 
+', 
+',  ',  ', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="252"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="91";
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',  ', NEVER',  miss any ', latest news! ',  we will have it ',  delivered hot to your inbox!', 
+', 
+', 
+', 
+', SUBSCRIBE', 
+', 
+', 
+', 
+', Please enter your email. Thank You. ', 
+', Newsletter has been successfully subscribed. ', 
+', 
+', 
+', 
+', 
+#nlpopup {display:none;
+position:fixed;
+background-color: rgba(0,0,0,0.5);
+z-index: 10000;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+#nlpopup input.email{width: 528px;}
+#nlpopup .inner{
+align-items: center;
+width: 100%;
+position:absolute;
+top:20%;
+}
+#nlpopup .news{
+border: 7px solid #fff;
+margin: auto;
+width: 687px;
+}
+#nlpopup .close{background: url(http://www.thehindubusinessline.com/template/1-0-1/gfx/close.png) no-repeat 0 0;
+width: 36px;
+height: 36px;
+position: absolute;
+top: -27px;
+right: -27px;
+opacity: 1;
+}
+}
+input.error {
+border: 1px solid red;
+}
+', 
+', 
+nllive = function(){
+if (isCampaignLive("nlpopup",1)){
+$("#nlpopup").show()
+}
+};
+if (isCampaignLive("nlpopup",1)){
+nlpopup(nllive);
+}
+$("#nlpopup .close").click(function() {
+setFrequency("nlpopup",360,0.03);
+$("#nlpopup").hide();
+});
+', 
+', 
+var sec ="Home" ;
+if(window.location.pathname.match(/[\w-]+/i) !== null){
+sec = window.location.pathname.match(/[\w-]{1,20}\//g).toString().replace(/\//g,"");
+}
+$("#nl1 .nl_button").click(
+function() {
+_gaq.push(['_trackEvent', "newsletterForm","sidebar",sec,,true]);
+}
+);
+$("#nlart .nl_button").click(
+function() {
+_gaq.push(['_trackEvent', "newsletterForm","Article-bottom",sec,,true]);
+}
+);
+$("#nlpopup .nl_button").click(
+function() {
+_gaq.push(['_trackEvent', "newsletterForm","popup",sec,,true]);
+}
+);
+', 
+', 
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0029/9791.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+', 	'][ ', 
+', 
+', u"(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N3H9NS');", 
+', 
+', 
+', (function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+', 
+',  ', 
+', 
+', 
+', 
+', Multimedia', 
+', u"Today's Paper", 
+', Topics', 
+', ePaper', 
+', WealthCheck', 
+', 	',  ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="66/56"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14"; ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', SEARCH', 
+', 
+', 
+', 
+', 
+', 	', 
+', 
+', Follow', 
+', 
+', !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");', 
+', 
+', 
+', 
+', u"
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/platform.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+", 
+', 
+lang: en_US
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',  ', Home', 
+', News', 
+', Markets', 
+', Companies', 
+', Money & Banking', 
+', Economy', 
+', Info-tech', 
+', Opinion', 
+', Specials', 
+', Portfolio', 
+', Catalyst', 
+', BLink', 
+', 
+', 
+', 
+', 
+', 
+//this function will clear only the default text of input field
+function clearText(thefield) {
+if (thefield.defaultValue == thefield.value)
+thefield.value = ""
+}
+$(document).ready(function() {
+// get the input field
+$.get('http://www.thehindubusinessline.com/template/1-0-1/javascript/blcategory.xml',
+function parseXML(xml) {
+var results = [];
+$(xml).find('category').each(function() {
+var name = $.trim($(this).find('name').text());
+var sourceid = $.trim($(this).find('sourceid').text());
+results[results.length] = {'result': sourceid, 'value': name
+};
+});
+var input = $('input#categoryFinder');
+input.autocomplete(results, {
+delay:10,
+minChars:2,
+matchSubset:1,
+matchContains:1,
+scroll: false,
+cacheLength:10,
+formatItem: function(data) {
+return $(data).val();
+}
+}).result(function(event, data) {
+var companyUrlName = data.value;
+companyUrlName = companyUrlName.replace(/[^a-zA-Z0-9 ]+/g, "");
+companyUrlName = companyUrlName.replace(/[^a-zA-Z0-9]+/g, "-");
+location.href = 'http://www.thehindubusinessline.com/companies/data/' + companyUrlName + "/quotes/" + $(data).attr('result') + "/";
+//location.href = 'http://bleceweb.thehindu.co.in/companies/?data=true&categoryId='+ $(data).attr('result');
+});
+});
+});
+', 
+', 
+Find Company: ', 
+', 2', 3', a', b', c', d', e', f', g', h', i', j', k', l', m', n', o', p', q', r', s', t', , v', w', x', y', z', 
+', 
+', 
+', 
+',  ', 
+', DPSC merges with India Power Corp', 
+', 
+var addthis_pub = "businessline";
+', 
+', Our Burea, 
+', 
+', 
+', 
+  ·  
+', print', 
+  ·   ', 
+var min=8;
+var max=18;
+var min1=18;
+var max1=24; /* set cookie functions */
+function setCookie (name,value,days) {
+if (days)
+{
+var date = new Date();
+date.setTime(date.getTime()+(days*24*60*60*1000));
+var expires = "; expires="+date.toGMTString();
+}
+else var expires = "";
+document.cookie = name+"="+value+expires+"; path=/";
+}
+function getCookie (name) {
+var nameEQ = name + "=";
+var ca = document.cookie.split(';');
+for(var i=0;i < ca.length;i++)
+{
+var c = ca[i];
+while (c.charAt(0)==' ') c = c.substring(1,c.length);
+if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+}
+return null;
+}
+function increaseFontSize() {
+var temp=document.getElementById('inc').innerHTML
+if(temp=="T-")
+decreaseFontSize();
+else
+{
+var p = document.getElementsByTagName('p');
+for(i=0;i<p.length;i++) {
+if(p[i].style.fontSize) {
+var s = parseInt(p[i].style.fontSize.replace("px",""));
+} else {
+var s = 18;
+}
+if(s!=max) {
+s = 18;
+}
+if(p[i].style.lineHeight) {
+var t = parseInt(p[i].style.lineHeight.replace("px","")); } else {
+var t = 24; }
+if(t!=max1) {
+t = 24; } p[i].style.fontSize = s+"px"
+p[i].style.lineHeight = t+"px"
+}
+document.getElementById('inc').innerHTML="T-";
+}
+// save the font size in a cookie for one day
+setCookie('fontsize', s, 1);
+setCookie('lineheight', t, 1);
+}
+function decreaseFontSize() {
+var p = document.getElementsByTagName('p');
+for(i=0;i<p.length;i++) {
+if(p[i].style.fontSize) {
+var s = parseInt(p[i].style.fontSize.replace("px",""));
+} else {
+var s = 14;
+}
+if(s!=min) {
+s =14;
+}
+if(p[i].style.lineHeight) {
+var t = parseInt(p[i].style.lineHeight.replace("px","")); } else {
+var t = 18; }
+if(t!=min1) {
+t = 18; } p[i].style.lineHeight = t+"px"
+p[i].style.fontSize = s+"px"
+} document.getElementById('inc').innerHTML="T+";
+// save the font size in a cookie for one day
+setCookie('fontsize', s, 1);
+setCookie('lineheight', t, 1);
+}
+window.onload = function() {
+// if the cookie exists, restore the variable
+var fontsize = getCookie('fontsize');
+var lineheight = getCookie('lineheight'); if (fontsize) {
+var p = document.getElementsByTagName('p');
+for(i=0;i<p.length;i++) {
+document.getElementsByTagName('p')[i].style.fontSize = fontsize + 'px' }
+}
+if (lineheight) {
+var p = document.getElementsByTagName('p');
+for(i=0;i<p.length;i++) {
+document.getElementsByTagName('p')[i].style.lineHeight = lineheight + 'px' }
+}
+}
+if(getCookie('fontsize') == "18")
+{
+<!--
+document.write('<a href="#" onclick="javascript:increaseFontSize();" title="Change Text Size" id="inc">T-</a>&nbsp;&nbsp;');
+-->
+}
+else
+{
+<!--
+document.write('<a href="#" onclick="javascript:increaseFontSize();" title="Change Text Size" id="inc">T+</a>&nbsp;&nbsp;');
+-->
+}
+', 
+', 
+', T+',   ·   ', T-', 
+',  ',  ', 
+', 
+function toggle() {
+var ele = document.getElementById("topShare");
+var text = document.getElementById("click");
+if(ele.style.display == "block") {
+ele.style.display = "none";
+text.innerHTML = "Share";
+}
+else {
+ele.style.display = "block";
+text.innerHTML = "Share"; }
+}
+', 
+', 
+',  ', 
+',  ', 
+', Tweet', 
+', 
+', 
+',  lang: en_US', 
+', 
+', 
+', 	', 
+var addthis_config = {
+"data_track_clickback":true, ui_click: true,
+services_compact: 'email, favorites, gmail, hotmail, blogger, instapaper, wordpress, more',
+services_exclude: 'facebook,twitter'
+}
+', 
+', 	', 	', 	', 	', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="641"; var zflag_sid="2"; var zflag_width="640"; var zflag_height="65"; var zflag_sz="33"; ', 
+', 
+', 
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+Kolkata, Sept 2:  
+', 
+', 
+', 
+SREI Group on Monday announced amalgamation of its listed power distribution arm DPSC with group outfit India Power Corporation. The integrated entity will be named as India Power. ', 
+', 
+DPSC Ltd distributes 250 MW electricity in Asansol, West Bengal. This apart, the company was recently awarded with distribution rights for Gaya in Bihar. DPSC shares closed at Rs 15.45, up by 2.66 per cent, on the NSE on Monday.
+', 
+', 
+According to Arun Kedia, Chief Financial Officer, India Power, the company is currently, implementing a 450-MW generation facility entailing an investment of Rs 2,650 crore at Haldia in West Bengal. The company also has electricity distribution rights in Asansol in West Bengal and Gaya in Bihar. The franchise for Gaya was awarded recently. India Power\u2019s current generation capacity includes around 100 MW of renewable energy and 12 MW of thermal power. ', 
+', 
+Following the merger, the new entity will have a revenue of Rs 650 crore as on March 31, 2013, and an asset size of Rs 1,400 crore. ', 
+', 
+India Power, meanwhile, is on the look out for coal assets in Africa for its upcoming power projects. The company is carrying out exploration in South Africa, Botswana and Tanzania. ', 
+', 
+\u201cWe are actively looking for coal assets in Africa. Exploration work in the area has begun,\u201d Hemant Kanoria, Chairman, India Power, told reporters here. He, however, did not reveal details about the expected size of the mine or the investments that are being made by India Power. ', 
+', 
+', pratim.bose@thehindu.co.in ', 
+', 
+', 
+', abhishek.l@thehindu.co.in ', 
+', 
+', 
+(This article was published on September 2, 2013) ', 
+', 
+',  ', 
+', Related', 
+', 
+', NEWS', 
+', SREI Group scouting for projects in power, road sectors',  ', SREI arm\u2019s Haldia project delayed, but no cost push up',  ', 
+', 
+', TOPICS', 
+', 
+company information ', |',  ', 
+restructuring and recapitalisation ', |', 
+', 
+', 	', u"
+ul.cmlinks li{display: inline-block;margin:2px 1px 2px 0;border: solid 1px #bbb;padding: 2px 1px 2px 1px;background-color:#eee; font-family: Arial, sans-serif; font-size:12px; text-align: center;}
+ul.cmlinks li a{font-family: Arial, sans-serif; font-size:12px; text-align: center;}
+.cNameHeading{	background-color: #2899D3; padding: 6px 0 6px 4px; text-transform: none; font-size: 18px; font-weight: bold; color: #fff; margin-bottom: 0; font-family: Georgia, 'Times New Roman', Times, serif;}
+li.cm-qt, li.cm-qr {width:101px;}
+li.cm-ss, li.cm-fr {width:94px;}
+li.cm-bg,li.cm-shp {width:131px;}
+li.cm-bod,li.cm-sb {width:106px;}
+li.cm-bs, li.cm-mf {width:87px;}
+li.cm-pl,li.cm-ns {width:74px;}
+li.cm-bs {padding: 2px;}
+.cNameH3{background-color:#F7F8E3;padding:5px;margin-bottom:0;font-weight: bold;font-family: arial;font-size: 20px;}
+.bseH4{margin-bottom: 0;padding: 3px;color: #fff;font-weight: bold;}
+.bseH4bg{background-color: #548593;}
+.nseH4bg{background-color: #4F799D;}
+.cmSize{float:left; width:318px;}
+.mr-5{margin-right:5px;}
+.tradedDate{padding: 5px 0; background-color: #eee; font-family: arial;}
+.tableMarketData table{border-collapse: collapse;width:100%;font-size:12px}
+.tableMarketData table td{padding: 4px 0 4px 4px;} .tableMarketData table tr:nth-child(odd){font-weight: bold;background-color: #d6dce4;}
+.tableMarketData table tr:nth-child(even){font-size: 14px;height:30px;}
+", 
+', 
+', 
+', Companies',   » 
+', D P S C Limited', 
+', 
+', 
+', Quotes', 
+', Snapshot', 
+', Company Background', 
+', Board of Directors', 
+', Balance Sheet', 
+', Profit & Loss', 
+', Quarterly Results', 
+', Financial Ratios', 
+', Share Holding Pattern', 
+', Score Board', 
+', MF Holdings', 
+', News', 
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+',  ', Get',  more of your ', favourite news ',  delivered to your',  inbox', 
+', 
+', 
+', 
+', SEND MY NEWS', 
+', 
+', 
+', 
+', 
+', Please enter your email. Thank You. ', 
+', Newsletter has been successfully subscribed. ', 
+', 
+', 
+', 	', 
+', 
+', 	', 
+', 
+var url = 'http://dmweb.elasticbeanstalk.com/api/articles/get/';
+DatomataApi.MainSourceUrls = true;
+DatomataApi.CustomCSS = false;
+DatomataApi.NoDatomataBranding = true;
+DatomataApi.TenantId = "S6eeFeRynhIQ5tcDt3yI";
+DatomataApi.Context = "interest";
+DatomataApi.ArticleId = "article5085819.ece";
+DatomataApi.DomControlName = 'recWidget';
+DatomataApi.renderWidget("MORE FROM BUSINESS LINE", 3, 1, false);
+', 
+', 	',  ', 
+', 
+',  ', 
+', 	', Tweet', 
+', 
+', 	', 
+', 
+',  lang: en_US', 
+', 
+', 
+', 	', 
+var addthis_config = {
+"data_track_clickback":true, ui_click: true,
+services_compact: 'email, favorites, gmail, hotmail, blogger, instapaper, wordpress, more',
+services_exclude: 'facebook,twitter'
+}
+', 
+', 	', 	', 	', 
+', 
+', 
+', 
+', u"
+$(document).ready(function(){
+$('#article-carousel .mycarousel').show().jcarousel({scroll: 1,visible: 1});
+});	", 
+', #article-carousel .mycarousel{ display: block; }', 	', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="722"; var zflag_sid="2"; var zflag_width="640"; var zflag_height="250"; var zflag_sz="77"; ', 
+', 
+', 
+', 
+', 
+', 
+', Please Wait while comments are loading...', 
+', u"var VUUKLE_STORIES_TIME = 168; create_vuukle_platform('d1a4a16d-cfaf-4ad2-8f9b-ddf5a1b257d2','5085819','1','companies','DPSC merges with India Power Corp');", 
+', 
+This article is closed for comments.', Please ', Email the Editor',  ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="428"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="81"; ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="173"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="194"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; var zflag_ct ="LAudience:";
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="68/56"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="180"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9";
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="402"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; ', 
+', 
+', 
+', 
+', 
+', VIDEO', 	', 	',  ', 	', 
+', u"Video: The Mystery Behind Mistry's Exit", 
+', 
+', 
+', 
+', more videos', »', 
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', MOST POPULAR', 
+', MOST COMMENTED', 
+', 
+', 
+', 
+', 
+',  Pawah steps down as MD of Harley-Davidson India', 
+',  ', 
+', Tata Motors bets on new cars to drive up sales ', 
+',  ', 
+', IRB biggest beneficiary of Ministry\u2019s arbitration reform', 
+',  ', 
+', Daikin takes pole position in AC sales, garners 15% share of home segment', 
+',  ', 
+', Suzlon bags 105 MW order from Axis Energy Group', 
+',  ', 
+', Tata Sons\u2019 Feb 6 EGM to seal Mistry\u2019s fate', 
+',  ', 
+', Pokarna to supply quartz surfaces to IKEA', 
+',  ', 
+', Tata Sons counters Mistry in reply filed with NCLT', 
+',  ', 
+', Dr Reddy\u2019s helps women get back on the career beat', 
+',  ', 
+', Piramal Enterprises to enter housing finance segment ', 
+',  ',  ', 
+', 
+', $(function(){mostcom("http://vuukle.com/api.asmx/getRecentMostCommentedByHostByTime?bizId=d1a4a16d-cfaf-4ad2-8f9b-ddf5a1b257d2&host=thehindubusinessline.com&tag=companies&hours=360&count=10",10,"");});', 	', 
+', 
+', 
+', 
+', DATA BANK', 	', 
+', 
+Cross Currency Rate', 
+',  ', 
+', 
+', Indian Rupees', 
+', Australian Dollar', 
+', Canadian Dollar', 
+', Danish Kroner', 
+', Euro', 
+', Hong Kong Dollar', 
+', Indonesian Rupiah', 
+', Japanese Yen', 
+', New Zealand Dollar', 
+', Norwegian Kroner', 
+', Pound Sterling', 
+', Singapore Dollar', 
+', South Korean Won', 
+', Swadish Kroner', 
+', Swiss Franc', 
+', Thai Baht', 
+', US Dollar', 
+', Chinese Yuan', 
+', Arab Emirates Dirham', 
+', 
+', 
+', u"
+$(function() {
+$('.crcrrate_select').change(function() {
+document.location = this.value;
+});
+});
+", 
+', 
+', Exchange Rate', 
+', 
+', 
+', Dollar Spot Forward Rate', 
+', 
+', 
+', Open-Ended Mutual Funds', 
+', 
+', 
+', MCX-SX Currency Futures', 
+', 
+', 
+', NSE Currency Futures', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', LATEST NEWS', 
+',  ', 
+', 
+', Aurobindo Pharma gets USFDA nod for anti-epileptic drug ', 
+', 7 min. ago', 
+',  ', 
+', Aurobindo Pharma to buy Portugal\u2019s Generis for Rs 969 cr', 
+', 16 min. ago', 
+',  ', 
+', Apple cuts Tim Cook\u2019s pay as iPhone sales fall ', 
+', 26 min. ago', 
+',  ', 
+', China\u2019s 4G users touch 730 million ', 
+', 47 min. ago', 
+',  ', 
+', NRIs, PIOs urged to take up socially relevant projects', 
+', 1 hr. 7 min. ago', 
+',  ', 
+', More »', 
+', 
+', 
+', 
+', From Business Wire', 
+', 
+', 
+', WNS to release fiscal 2017 third quarter financial and operating results on January 19, 2017', 
+', 
+', 
+', KW Group unveils luxurious high street shopping destinations - "KW Blue Pearl" shopping mall in Karol Bagh, New Delhi and "KW Delhi-6" in Rajnagar Extension, Ghaziabad', 
+', 
+', 
+', u"Kick-start the New Year with Sanyo's 'Blockbuster Deal of 2017'", 
+', 
+', 
+', Indian regional round of the 1st China (Shenzhen) Innovation & Entrepreneurship International Competition launched', 
+', 
+', 
+', Mobmerry launches walk-in cashback vouchers to incentivize in-store shopping', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="252"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="91";
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="404"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; ', 
+', 
+', 
+', 
+', 
+', 
+$(document).ready(function(){
+$("#ad1.right-tout").find("#zzblankad").parent().css({"margin": "0px"})
+//$('.right #lnews').before('<img src="http://www.thehindubusinessline.com/multimedia/archive/02324/budgetpeople_2324802a.jpg" alt="" title=""/>')
+});
+', 
+', article.menu-art .title{height:30px;}
+.twit {height:24px;overflow:hidden;}
+body{overflow: scroll !important;} iframe {max-width: inherit !important;}
+', 
+', 
+', 
+',  ',  ',  ',  ', O', P', E', N', 
+', 
+', 	', close', 
+', Recent Article in Companies', 
+', 
+', Aurobindo Pharma gets USFDA nod for anti-epileptic drug ', 	', 	Aurobindo Pharma has received final approval from the US health regulator for its Levetiracetam in Sodium Chloride injection used for th... ', »',  ', 
+', 
+', 
+', 
+$(function() {
+$(window).scroll(function(){
+/* when reaching the element with id "addshare" we want to show the slidebox. Let's get the distance from the top to the element */
+var distanceTop = $('#addshare').offset().top - $(window).height();
+if ($(window).scrollTop() > distanceTop)
+{
+if (document.getElementById('topover').style.display != 'block')
+{	$('#slidebox').animate({'right':'0px'},800);
+}
+else
+{
+document.getElementById('topover').style.visibility = 'visible';
+}
+}	else {
+document.getElementById('topover').style.visibility = 'hidden';
+$('#slidebox').stop(true).animate({'right':'-530px'},700);
+}
+});
+$('#slidebox .close').bind('click',function(){
+$('#slidebox').stop(true).animate({'right':'-530px'},10);	document.getElementById('topover').style.display = 'block';
+document.getElementById('topover').style.visibility = 'visible';
+document.getElementById('topover').onclick = function()
+{
+document.getElementById('topover').style.display = 'none';
+$('#slidebox').animate({'right':'0px'},800);
+}
+});
+});
+', 
+', 
+', 
+', 
+Business Line:
+', Home', 
+|
+', News', 
+|
+', Markets', 
+|
+', Companies', 
+|
+', Money & Banking', 
+|
+', Economy', 
+|
+', Info-tech', 
+|
+', Opinion', 
+|
+', Specials', 
+|
+', Portfolio', 
+|
+', Catalyst', 
+|
+', BLink', 
+|
+', 
+This Site:
+', About Us', 
+|
+', Contacts', 
+|
+', Privacy Policy', 
+|
+', Archives', 
+|
+', Subscription', 
+|
+', RSS Feeds', 
+|
+', Site Map', 
+|
+', Brand Quest', 
+|
+', ePaper', 
+|
+', Social', 
+|
+', BL Club', 
+|
+', Mobile', 
+|
+', Group Sites: ', The Hind, 
+|
+', \u0ba4\u0bbf \u0b87\u0ba8\u0bcd\u0ba4\u0bc1', 
+|
+', Business Line', 
+|
+', BL on Campus', 
+|
+', Sportstarlive', 
+|
+', Frontline', 
+|
+', The Hindu Centre', 
+|
+', RoofandFloor', 
+|
+', STEP', 
+|
+', Publications', 
+|
+', eBooks', 
+|
+', Images', 
+|
+', 
+Comments to: ', web.businessline@thehindu.co.in', . Copyright © 2017, ', The Hindu Business Line', .
+', 
+', 
+', u"
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/plusone.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+",  ',  ', 
+', 
+function eaelogger(type,meta){
+var clientDT = new Date().getTime();
+$("#eae").html('<img src="http://www.thehindubusinessline.com/eae-logger/Logger?rt=1&ctxId=856&pubId=29&cat=&objId=5085819&title=DPSC+merges+with+India+Power+Corp&url=news%2c2013-09-02+17%3a19%3a50.0%2chttp%3a%2f%2fwww.thehindubusinessline.com%2fcompanies%2fdpsc-merges-with-india-power-corp%2farticle5085819.ece&amp;type='+ type + '&amp;meta=' + meta + '&amp;clientDT=' + clientDT + '" alt="" width="1" height="1"/>');
+} eaelogger("article", "");
+', 
+', 
+', 
+', 
+', 
+',  ',  ', 
+', 
+', 
+', 
+', 
+var zflag_nid="2132"; var zflag_cid="252"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="91";
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',  ', NEVER',  miss any ', latest news! ',  we will have it ',  delivered hot to your inbox!', 
+', 
+', 
+', 
+', SUBSCRIBE', 
+', 
+', 
+', 
+', Please enter your email. Thank You. ', 
+', Newsletter has been successfully subscribed. ', 
+', 
+', 
+', 
+', 
+#nlpopup {display:none;
+position:fixed;
+background-color: rgba(0,0,0,0.5);
+z-index: 10000;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+#nlpopup input.email{width: 528px;}
+#nlpopup .inner{
+align-items: center;
+width: 100%;
+position:absolute;
+top:20%;
+}
+#nlpopup .news{
+border: 7px solid #fff;
+margin: auto;
+width: 687px;
+}
+#nlpopup .close{background: url(http://www.thehindubusinessline.com/template/1-0-1/gfx/close.png) no-repeat 0 0;
+width: 36px;
+height: 36px;
+position: absolute;
+top: -27px;
+right: -27px;
+opacity: 1;
+}
+}
+input.error {
+border: 1px solid red;
+}
+', 
+', 
+nllive = function(){
+if (isCampaignLive("nlpopup",1)){
+$("#nlpopup").show()
+}
+};
+if (isCampaignLive("nlpopup",1)){
+nlpopup(nllive);
+}
+$("#nlpopup .close").click(function() {
+setFrequency("nlpopup",360,0.03);
+$("#nlpopup").hide();
+});
+', 
+', 
+var sec ="Home" ;
+if(window.location.pathname.match(/[\w-]+/i) !== null){
+sec = window.location.pathname.match(/[\w-]{1,20}\//g).toString().replace(/\//g,"");
+}
+$("#nl1 .nl_button").click(
+function() {
+_gaq.push(['_trackEvent', "newsletterForm","sidebar",sec,,true]);
+}
+);
+$("#nlart .nl_button").click(
+function() {
+_gaq.push(['_trackEvent', "newsletterForm","Article-bottom",sec,,true]);
+}
+);
+$("#nlpopup .nl_button").click(
+function() {
+_gaq.push(['_trackEvent', "newsletterForm","popup",sec,,true]);
+}
+);
+', 
+', 
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0029/9791.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+', 	']

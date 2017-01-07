@@ -1,0 +1,4091 @@
+[
+	', 
+		', 
+	',  ', 
+	
+	
+', u"
+$('#resendForgotPasswordId').hide();
+$('#signInId').hide();
+	$(document) .ready(function(){
+		$('#headerSignBtn, #sitemapSignBtn').click(function(){
+			$('#signInId').toggle();
+			$(this) .toggleClass('upArrow');
+			$('#resendForgotPasswordId').hide();
+			$('#resendVerificationId').hide();
+			$('#signFormId').data('validator').resetForm();
+			$('#resendVerificationMailFormId').data('validator').resetForm();
+			$('#forgotPasswordFormId').data('validator').resetForm();
+		});
+		if($('#loginError').val()){
+			$('#signInId').show();
+		}
+		if($('#facebookMappingMessage').val()){
+			$('#signInId').show();
+		}
+		if($('#followCompanyMessage').val()){
+			$('#signInId').show();
+		}
+		$('#forgotPasswordId').click(function(){
+			$('#resendForgotPasswordId').show();
+			$('#forgotPasswordFormId').data('validator').resetForm();
+			$('#errorMessageId').text('');
+			$('#successMessageId').text('');
+			$('#signInId').hide();
+		});
+		$('#verificationId').click(function(){
+			$('#resendVerificationId').show();
+			$('#resendVerificationMailFormId').data('validator').resetForm();
+			$('#signInId').hide();
+		});
+	});
+	
+	$(document).live('keyup', function(event){
+	    if(event.which === 27) {
+	        $('#signInId').hide();
+	        $('#resendForgotPasswordId').hide();
+	        $('#resendVerificationId').hide();
+	    }
+	});
+", 
+
+', u"
+$(document).ready(function(){
+	   if ($('.verificationMessage').html().length > 0) {
+	     $('.verificationMessage') .show();
+	   }
+	   else{
+		   $('.verificationMessage') .hide();
+	   }
+});
+", 
+
+', 
+	', 
+', 
+
+', 
+', 
+	', 
+		', 
+		', 
+		', 
+		', 
+	    ', 
+	    	', 
+	   	', 
+	   	
+	   	', 
+	    ', 
+	      ', 
+	      		', 
+	      			', 
+			      	', Register',   |  
+			      	', Contact Us',   |  
+			      	', Help',   |  
+			      	',                             
+			      	',                            
+			      	', 
+			      	', 
+		      	', 
+		      	
+		      	', 
+			      	', 
+			      		', Sign In',   |  
+			      		
+			      		', 
+			      		', 
+			      			
+
+
+', 
+$(document).ready(function(){
+	$("#signFormId").validate();
+	$("signInBtnId").click(function(){
+		var validForm = $("#signFormId").valid();
+		if(validForm) {
+			$("signFormId").submit();
+			return true;
+		}
+		return false;
+	});
+	
+	$('#signFormId').on('keyup', function(e){
+		var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+		if (keycode == 13){
+			e.preventDefault();
+			$("#signInBtnId").trigger('click');
+		}
+	});
+	
+   	if ($(".thankyouMessage").html().length > 0) {
+    	$('.thankyouMessage') .show();
+  	}else{
+	   $('.thankyouMessage') .hide();
+   	}
+});
+', 
+
+', 
+   ', 
+       ', 
+       	
+		', 
+           ', Login Name', 
+           ', 
+           
+           ', Password', 
+           ', 
+           ', 
+           ', Resend Verification Email',   |  ', Forgot your password?', 
+         	
+    	   ', 
+           ',  
+         	', 
+         	',  
+               ', Are you New User?',    ', Register Now', 
+           ', 
+           
+           ', 
+           ',  Continue without Registration', 
+           ', 
+       ', 
+   ', 
+			      		', 
+			      		', 
+			      			
+
+
+
+', 
+
+$(document).ready(function() {
+	doBindingsForPopUps();
+	$('#forgotPasswordFormId').validate();
+	$("#fogotPasswordSubmitBtn").click(function(e) {
+		$('#errorMessageId').text('');
+		var validationFlag = $('#forgotPasswordFormId').valid();
+		if(validationFlag) {
+			AJAX_POST_FORM('/generatePassword', $("#forgotPasswordFormId").serialize(),'srccontId');
+		}
+		return false;
+	});
+	$('#forgotPasswordFormId').on('keyup', function(e){
+		var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+		if (keycode == 13){
+			e.preventDefault();
+			$("#fogotPasswordSubmitBtn").trigger('click');
+		}
+	});
+});
+', 
+', 
+ ',   
+   	', 
+					        
+    ', 
+    ', 
+					        
+    ', 
+   ', 
+		', Forgot Password', 
+       	', Email', 
+        ', 
+         
+       	',  ', 
+    		', 
+    		', 
+       	',  
+             New User?   |   ', Register Now', 
+         ', 
+   ', 
+',  
+			      		', 
+			      		
+			      		', 
+			      			
+
+
+
+', 
+
+$(document).ready(function() {
+	doBindingsForPopUps();
+	$('#resendVerificationMailFormId').validate();
+	$("#resendVerificationMailSubmitBtn").click(function(e) {
+		$('#errorMessageId').text('');
+		var validationFlag = $('#resendVerificationMailFormId').valid();
+		if(validationFlag) {
+			AJAX_POST_FORM('/resendVerificationMail', $("#resendVerificationMailFormId").serialize(),'srcVerificationMailContId');
+		}
+		return false;
+	});
+	$('#resendVerificationMailFormId').on('keyup', function(e){
+		var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+		if (keycode == 13){
+			e.preventDefault();
+			$("#resendVerificationMailSubmitBtn").trigger('click');
+		}
+	});
+});
+', 
+', 
+ ',   
+   	', 
+					        
+    ', 
+    ', 
+					        
+    ', 
+   ', 
+		', Resend Verification email', 
+       	', Email', 
+        ', 
+       	',  ', 
+    		', 
+    		', 
+       	',  
+             New User?   |   ', Register Now', 
+         ', 
+   ', 
+',  
+			      		', 
+			      		
+			      		', 
+			        ', 
+		      ', 
+		      ', 
+	      ', 
+	    
+			', 
+		   	', 
+		       ', 
+			       	', Home', 
+			       	', Jobs', 
+			       	', Career Advice', 
+			       	', HR Zone', 
+			       	', Events', 
+			       	', Job Fairs', 
+		        ', 
+		    ', 
+	    ', 
+	', 
+', 
+
+',  ', 
+
+', 
+
+', 
+
+', 
+$(function(){
+	$(window).scroll(function () {
+		if ($(window).scrollTop() > 96) {
+            $("#topContainer").css('display', 'block');
+            $("#headerWrapperID").css("position","fixed");
+        }else{
+            $("#topContainer").css('display', 'none');
+            $("#headerWrapperID").css("position","static");
+        }
+	});
+	
+});
+', 
+	
+	', 
+	', 
+		', 	
+		
+
+
+
+
+', 
+	nav#navigation ul li a.jobsActive{
+	color:#000000!important; 
+	background-image:url(/resources/images/nav-hover-bg.jpg)!important;
+	background-repeat:no-repeat; 
+	background-position:center bottom; 
+	}
+', 
+
+', 
+$(document).ready(function(){
+	AJAX_GET_HTML("/savedJobsByCandidate", "savedJobsDiv");
+	AJAX_GET_HTML("/savedSearches", "savedSearchesDiv");
+	if ($(".userMessage").html().length > 0) {
+	  $('.userMessage') .show();
+	}else{
+	 $('.userMessage') .hide();
+	}
+	$("#followCompanyDiv").click(function(){
+		var onVerified = function(response){
+			$.each(response, function(key, value) { 
+				$("#operationmessagefollow").text(value);
+			});
+		};
+		AJAX_GET_JSON($(this).data("url"), onVerified);
+	});
+});
+
+', 
+
+', 
+  ', 
+  	', 
+  		', 
+  		', 
+  		', 
+  		', 
+  		', 
+  			', 
+  			
+
+
+
+', 
+', 
+', 
+$(document).ready(function(){
+	$('#from').attr('readonly','readonly');
+	$('#to').attr('readonly','readonly');
+	$( "#from" ).datepicker({
+		yearRange: "-80:+0",
+		changeYear: true,
+		changeMonth: true,
+		numberOfMonths: 1,
+		showOn: "button",
+		dateFormat: 'dd/mm/yy',
+		buttonImage: "/resources/images/calendar.gif",
+		buttonImageOnly: true,
+		onClose: function( selectedDate ) {
+			$( "#to" ).datepicker( "option", "minDate", selectedDate );
+		}
+	})
+	$( "#from" ).keyup(function(e) {
+	    if(e.keyCode == 8 || e.keyCode == 46) {
+	        $.datepicker._clearDate(this);
+	        $( "#to" ).datepicker( "option",  {
+	            minDate: null,
+	            maxDate: null} );
+	    }
+	});
+	$( "#to" ).datepicker({
+		yearRange: "-80:+0",
+		changeYear: true,
+		changeMonth: true,
+		numberOfMonths: 1,
+		showOn: "button",
+		dateFormat: 'dd/mm/yy',
+		buttonImage: "/resources/images/calendar.gif",
+		buttonImageOnly: true,
+		onClose: function( selectedDate ) {
+			$( "#from" ).datepicker( "option", "maxDate", selectedDate );
+		}
+	})
+	$( "#to" ).keyup(function(e) {
+	    if(e.keyCode == 8 || e.keyCode == 46) {
+	        $.datepicker._clearDate(this);
+	        $( "#from" ).datepicker( "option", {
+	            minDate: null,
+	            maxDate: null} );
+	    }
+	});
+	
+    var setCity = function () { 
+		if($('#hiddenLocId').val() != ''){
+			var selectedLocation = $('#hiddenLocId').val();
+			var select = $('#locationComboId');
+				select.find('option[value="'+selectedLocation+'"]').attr("selected", "selected");
+		}
+		
+		var locationValue = $('.locationSel') .find('select option:selected').text();
+		$('.locationSel') .find('.selectOutput').text(locationValue);
+		
+    };
+	loadLocationsCallback('locationComboId', setCity);
+	
+	$("#errorMessage").hide();
+	$("#imaAdvanceSearchFormId").validate();
+	
+	$('#goButtnId').click(function(event){
+		$("#errorMessage").hide();
+		var expTo = parseInt($("#expToId option:selected").val());
+		var expFrom = parseInt($("#expFromId option:selected").val());
+		var isBlank=true;
+		if($('input:radio:checked').length<1 && $('input:checkbox:checked').length<1 && $('#keyword').val().length<3 && $('#companyName').val().length<3 && 
+				$('#locationComboId option:selected').val() == "" && $('#industryId option:selected').val() == "" && $('#from').val() == "" && $('#to').val() == ""
+				&& $('#functionId option:selected').val() == "" && $('#expFromId option:selected').val() == ""  && $('#expToId option:selected').val() == "") {
+			isBlank=true;
+		} else {
+			isBlank=false;
+		}
+		if(isBlank){
+			$('#errorMessage').html('Please provide any one of the search criteria.');
+		  	$('#errorMessage').show();
+		  	return;
+		} else if(expFrom != "" && expTo != "" && expFrom > expTo) {
+			$('#errorMessage').html('Experience To should be greater than Experience From.');
+		  	$('#errorMessage').show();
+		  	return;
+		} else{
+			$('#errorMessage').hide();
+			var validationResult = $("#imaAdvanceSearchFormId").valid();
+			if(validationResult){
+				var keyword = $('#keyword').val();
+				var location = '';
+				var jobFunction = '';
+				var industry = '';
+				var jobLocationId = $('#locationComboId option:selected').val();
+				var jobFunctionId = $('#functionId option:selected').val();
+				var industryId = $('#industryId option:selected').val();
+				
+				if(keyword == ''){
+					$('#keyWordCompare').val("Vacancy");
+				}else{
+					$('#keyWordCompare').val(keyword);
+				}
+
+				if(jobLocationId == ''){
+					location = '';
+					$('#locationNameCompare').val("India");
+					$('#locationName').val(location);
+					$('#hiddenLocId').val('');
+				}else {
+					location = $('#locationComboId option:selected').text();
+					location = $.trim(location);
+					$('#locationName').val(location);
+					$('#hiddenLocId').val(jobLocationId);
+					$('#locationNameCompare').val(location);
+				}
+				
+				if(jobFunctionId == ''){
+					$('#functionNameCompare').val('');
+				}else{
+					jobFunction = $('#functionId option:selected').text();
+					jobFunction =  $.trim(jobFunction);
+					$('#jobFunctionName').val(jobFunction);
+					$('#functionNameCompare').val(jobFunction);
+				}
+				
+				if(industryId != ''){
+					industry = $('#industryId option:selected').text();
+					industry =  $.trim(industry);
+					$('#industryName').val(industry);
+				}
+				var seoUrl = "";
+				if(keyword != '' && location !='' && jobFunction !=''){
+					seoUrl = "/jobs-"+keyword+"/Careers-"+location+"/Vacancies-"+jobFunction+"/Naukri/India-jobs-search";
+				}else if(keyword != '' && location !=''){
+					seoUrl = "/jobs-"+keyword+"/Careers-"+location+"/Jobs-Vacancies-/Naukri/India-jobs-search";
+				}else if(location != '' && jobFunction !=''){
+					seoUrl = "/jobs-Vacancy/Careers-"+location+"/Vacancies-"+jobFunction+"/Naukri/India-jobs-search";
+				}else if(keyword != '' && jobFunction !=''){
+					seoUrl = "/jobs-"+keyword+"/Careers-India/Vacancies-"+jobFunction+"/Naukri/India-jobs-search";
+				}else if(keyword != ''){
+					seoUrl = "/jobs-"+keyword+"/Careers-India/Jobs-Vacancies-/Naukri/India-jobs-search";
+				}else if(location !=''){
+					seoUrl = "/jobs-Vacancy/Careers-"+location+"/Jobs-Vacancies-/Naukri/India-jobs-search";
+				}else if(jobFunction !=''){
+					seoUrl = "/jobs-Vacancy/Careers-India/Vacancies-"+jobFunction+"/Naukri/India-jobs-search";
+				}else{
+					seoUrl = "/jobs-Vacancy/Careers-India/Jobs-Vacancies-/Naukri/India-jobs-search";
+				}
+				submitFormUsingGet('imaAdvanceSearchFormId',seoUrl);
+			}
+			return false;
+		}
+		return false;
+	});
+	$('#imaAdvanceSearchFormId').on('keyup', function(e){
+		var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+		if (keycode == 13){
+			e.preventDefault();
+			$("#goButtnId").trigger('click');
+		}
+	});
+});
+/**
+ * This function creates a bean in backend in first request. in second request it populates the data
+ * @param formId
+ * @param formUrl
+ */
+function submitFormUsingGet(formId, formUrl){
+	var jQueryFormId = "#" + formId ;
+	AJAX_GET_JSON_DATA("/createjobsearchbean", $("#" + formId ).serialize(), function(data){
+		$.each(data, function(key, value) { 
+			if(key == 'success' && value == 'success'){
+				//now send get request
+				window.location.href = formUrl;
+ 			}   
+		});
+	});
+}
+
+function saveSearch() {
+	var isBlank=true;
+	if($('input:radio:checked').length<1 && $('input:checkbox:checked').length<1 && $('#keyword').val().length<3 && $('#companyName').val().length<3 && 
+			$('#locationComboId option:selected').val() == "" && $('#industryId option:selected').val() == "" && $('#from').val() == "" && $('#to').val() == ""
+			&& $('#functionId option:selected').val() == "" && $('#expFromId option:selected').val() == ""  && $('#expToId option:selected').val() == "") {
+		isBlank=true;
+	} else {
+		isBlank=false;
+	}
+	if(isBlank){
+  		$('#errorMessage').html('Please provide any one of the search criteria to save search');
+	  	$('#errorMessage').show();
+	  	return;
+ 	}
+	$('#errorMessage').html('');
+	openPopUp('/saveSearch','popUpPageConatiner');
+}
+', 
+
+', u"
+	$(document) .ready(function(){
+		var expFromValue = $('.expFrSel') .find('select option:selected').text();
+		$('.expFrSel') .find('.selectOutput').text(expFromValue);
+		var expToValue = $('.expToSel') .find('select option:selected').text();
+		$('.expToSel') .find('.selectOutput').text(expToValue);
+		
+		var industryValue = $('.industrySel') .find('select option:selected').text();
+		$('.industrySel') .find('.selectOutput').text(industryValue);
+		var functionValue = $('.functionSel') .find('select option:selected').text();
+		$('.functionSel') .find('.selectOutput').text(functionValue);
+	});
+", 
+
+', 
+	', 
+	', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		
+		', 
+		', 
+		', 
+		
+		', 
+			', 
+		', 
+
+		', 
+			',  ', 
+			', Select Location', 
+			', 
+				', Select Location', 
+			', 
+		', 
+		
+		', 
+			',  ', 
+			', Select Industry', 
+			', 
+				', Select Industry', 
+				
+					', Accounting/Banking/Financial Services/Stock broking', 
+				
+					', Agriculture/Forestry/Fishing', 
+				
+					', Apparel/Garments/Fashion7', 
+				
+					', Architecture/Interior Design', 
+				
+					', Automobiles', 
+				
+					', Biotechnology/Pharmaceutical/Medicine/Healthcare', 
+				
+					', Call Centres/BPO/ITES', 
+				
+					', Construction/Cement/Metal/Steel/Iron', 
+				
+					', Consulting Services', 
+				
+					', Consumer Durables/FMCG', 
+				
+					', Defence/Security/Law Enforcement', 
+				
+					', Educational/Training', 
+				
+					', Engineering/Projects/Infrastructure/Power/Energy', 
+				
+					', Entertainment/Advertising/Media', 
+				
+					', Export/Import', 
+				
+					', Food Services/Restaurant/Hotel/Hospitality', 
+				
+					', Gems & Jewellery', 
+				
+					', Government Sector', 
+				
+					', Insurance', 
+				
+					', Internet/Dot com/ISP', 
+				
+					', IT-Hardware/Networking', 
+				
+					', IT-Software', 
+				
+					', Law/Legal Firms', 
+				
+					', Logistics/Courier', 
+				
+					', Manufacturing', 
+				
+					', Marine/Shipping', 
+				
+					', NGO/Social Services', 
+				
+					', Others', 
+				
+					', Petrochemicals/Petroleum/Oil and Gas', 
+				
+					', Printing/Packaging', 
+				
+					', Real Estate', 
+				
+					', Recruitment/Placement Agencies', 
+				
+					', Research/Surveyor/MR', 
+				
+					', Retailing/Merchandising', 
+				
+					', Sports/Recreation', 
+				
+					', Telecom', 
+				
+					', Travel/Tourism/Airlines', 
+				
+					', Warehousing', 
+				
+			', 
+		', 		
+
+		', Exp(Years) :', 
+		', 
+			',  ', 
+			', Min', 
+			', 
+				', Min', 
+				
+					', 0', 
+				
+					', 1', 
+				
+					', 2', 
+				
+					', 3', 
+				
+					', 4', 
+				
+					', 5', 
+				
+					', 6', 
+				
+					', 7', 
+				
+					', 8', 
+				
+					', 9', 
+				
+					', 10', 
+				
+					', 11', 
+				
+					', 12', 
+				
+					', 13', 
+				
+					', 14', 
+				
+					', 15', 
+				
+					', 16', 
+				
+					', 17', 
+				
+					', 18', 
+				
+					', 19', 
+				
+					', 20', 
+				
+					', 21', 
+				
+					', 22', 
+				
+					', 23', 
+				
+					', 24', 
+				
+					', 25', 
+				
+					', 26', 
+				
+					', 27', 
+				
+					', 28', 
+				
+					', 29', 
+				
+					', 30', 
+				
+					', 31', 
+				
+					', 32', 
+				
+					', 33', 
+				
+					', 34', 
+				
+					', 35', 
+				
+					', 36', 
+				
+					', 37', 
+				
+					', 38', 
+				
+					', 39', 
+				
+					', 40', 
+				
+					', 41', 
+				
+					', 42', 
+				
+					', 43', 
+				
+					', 44', 
+				
+					', 45', 
+				
+					', 46', 
+				
+					', 47', 
+				
+					', 48', 
+				
+					', 49', 
+				
+					', 50', 
+				
+			', 
+		', 
+		
+		', to', 
+		
+		', 
+			',  ', 
+			', Max', 
+			', 
+				', Max', 
+				
+					', 0', 
+				
+					', 1', 
+				
+					', 2', 
+				
+					', 3', 
+				
+					', 4', 
+				
+					', 5', 
+				
+					', 6', 
+				
+					', 7', 
+				
+					', 8', 
+				
+					', 9', 
+				
+					', 10', 
+				
+					', 11', 
+				
+					', 12', 
+				
+					', 13', 
+				
+					', 14', 
+				
+					', 15', 
+				
+					', 16', 
+				
+					', 17', 
+				
+					', 18', 
+				
+					', 19', 
+				
+					', 20', 
+				
+					', 21', 
+				
+					', 22', 
+				
+					', 23', 
+				
+					', 24', 
+				
+					', 25', 
+				
+					', 26', 
+				
+					', 27', 
+				
+					', 28', 
+				
+					', 29', 
+				
+					', 30', 
+				
+					', 31', 
+				
+					', 32', 
+				
+					', 33', 
+				
+					', 34', 
+				
+					', 35', 
+				
+					', 36', 
+				
+					', 37', 
+				
+					', 38', 
+				
+					', 39', 
+				
+					', 40', 
+				
+					', 41', 
+				
+					', 42', 
+				
+					', 43', 
+				
+					', 44', 
+				
+					', 45', 
+				
+					', 46', 
+				
+					', 47', 
+				
+					', 48', 
+				
+					', 49', 
+				
+					', 50', 
+				
+			', 
+		', 
+		
+		', 
+			',  ', 
+			', Select JobFunction', 
+			', 
+				', Select Job Function', 
+				
+					', Agriculture', 
+				
+					', Aviation', 
+				
+					', Banking & Insurance', 
+				
+					', Corporate Consulting', 
+				
+					', Counsellor', 
+				
+					', Driver & Conductor', 
+				
+					', Engineering, Civil and Architecture', 
+				
+					', Entertainment & Media', 
+				
+					', Fashion', 
+				
+					', Finance & Accounting', 
+				
+					', Healthcare & Medical', 
+				
+					', Hospitality & Tourism', 
+				
+					', Housekeeping Staff', 
+				
+					', Human Resources', 
+				
+					', IT-Hardware/Software', 
+				
+					', ITES/BPO/KPO/Support', 
+				
+					', Journalism & Creative', 
+				
+					', Law,Legal', 
+				
+					', Learning & Library', 
+				
+					', Marine Services', 
+				
+					', Marketing/Advertising', 
+				
+					', Office Administration', 
+				
+					', Others', 
+				
+					', Poultry & Animal Husbandry', 
+				
+					', Printing & Packaging', 
+				
+					', Production and Manufacturing', 
+				
+					', QC / QA  & Testing', 
+				
+					', Real Estate & Housing', 
+				
+					', Retail & Cinema', 
+				
+					', Sales & Business Dev', 
+				
+					', Security/Intelligence', 
+				
+					', Social Services', 
+				
+					', Supply Chain/Logistic', 
+				
+					', Telecom/ISP/Cable TV', 
+				
+					', Trade & Import/Export', 
+				
+					', Warehouse', 
+				
+			', 
+		', 
+		
+		', 
+			', 
+		', 
+		', 
+		
+
+		', 
+		', 
+		
+		', 
+			', 
+			', India', 
+			
+			', 
+			', Global', 
+			
+			', 
+			', Walk In', 
+		', 
+		', 
+			', 
+			', 
+			', 
+		', 
+		', 
+	', 
+', 
+', 
+', 
+
+var company_index=0;
+
+/* Binding Auto completer */
+/* Auto-completer for select job location */
+makeAutoCompleter('companyName','/suggestCompany',company_index);
+
+/**
+ * source_id--the input field id need to make auto completer
+ * add_buton_id-- the add button id
+ * destination_id- the place where selected item will be appended along with hidden fields
+ * url-- the url path to get json data against input character
+ * path_variable-- form field name
+ * var -- to hold selected value
+ */
+function makeAutoCompleter(source_id,purl,index) {
+	is_selected = false;
+	$('#' + source_id).autocomplete(
+			{
+				source : function(request, response) {
+					$.ajax({
+						url :  purl + "?matchString="
+								+ request.term,
+						dataType : "json",
+						success : function(data) {
+							response($.map(data, function(v, i) {
+								v = v.replace('<b>',"").replace('</b>',"");
+								return {
+									label : i,
+									value : v
+								};
+							}));
+						}
+					});
+				},
+				focus : function(event, ui) {
+						$('#'+source_id).val(ui.item.value);
+				},
+				minLength : 3,
+				select : function(event, ui) {
+					$('#'+source_id).val(ui.item.value);
+					index++;
+					return false;
+				}
+			}).data("ui-autocomplete")._renderItem = function(ul, item) {
+		return $("<li>").append("<a>" + item.value + "</a>").appendTo(ul);
+	};
+}
+',  
+
+  		', 
+  		
+  		
+  			', 
+	  			',  ', 
+	 			
+				', 
+					', SNF (India) Pvt Ltd ', SNF (India) Pvt Ltd', 
+					', 
+						', Follow Company', 
+					', 
+					', 
+	  			', 
+	  			', 
+	  		', 
+  		
+  		
+  		
+  		', 
+  		', 
+  			
+
+
+
+
+ 
+
+', 
+', 
+
+', 
+
+
+', 
+	
+
+', 
+			', 
+              ', Narrow By', 
+              ', Filters applied', 
+              ', Clear All', 
+              ', 
+              ', 
+
+              ', 
+			', 
+			
+			', 
+				', 
+					
+						', Date of Posting
+							', 
+								
+									
+								
+									
+								
+									
+								
+									
+								
+							', 
+						', 
+					
+					
+					
+						', Management Level
+							', 
+								
+			         				', Junior - Executive, Assistant(3)', 
+			         				', 
+			         					$('#levelCheckbox1').data("jobids",[90100, 90104, 90107]);
+			         				', 
+								
+							', 
+						', 
+					
+					
+						', Experience
+							', 
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+							', 
+						', 
+					
+					
+					
+					
+						', Company
+							', 
+								
+			         				', SNF (India) Pvt Ltd(3)', 
+			         				', 
+			         					$('#companyCheckbox1').data("jobids",[90100, 90104, 90107]);
+			         				', 
+								
+							', 
+						', 
+					
+					
+						', Industry
+							', 
+								
+			         				', Engineering/Projects/Infrastructure/Power/Energy(3)', 
+			         				', 
+			         					$('#industryCheckbox1').data("jobids",[90100, 90104, 90107]);
+			         				', 
+								
+							', 
+						', 
+					
+					
+						', Job Locations
+							', 
+								
+			         				', Visakhapatnam(3)', 
+			         				', 
+			         					$('#joblocationCheckbox1').data("jobids",[90100, 90104, 90107]);
+			         				', 
+								
+							', 
+						', 
+					
+					
+				', 
+			', 
+			', 
+		', 
+		', 		
+	
+
+
+
+', 
+$(document).ready(function (){
+	var rate;
+	$(".starRating1").each(function() {
+		rate = $(this).data("rating");
+		if(rate=="undefined" || rate == null || rate<1)
+			rate = 1;
+		$('span#'+this.id) .html('<img src="/resources/images/rating'+rate+'.png" /><span style="display:none">'+rate+ '</span>');
+	});
+	$("#jobSearchTable_paginate").click(function (){
+		$(".starRating1").each(function() {
+			rate = $(this).data("rating");
+			if(rate=="undefined" || rate == null || rate<1)
+				rate = 1;
+			$('span#'+this.id) .html('<img src="/resources/images/rating'+rate+'.png" /><span style="display:none">'+rate+ '</span>');
+		});
+	});
+	$("#narrowbyfilters").click(function (){
+		$(".starRating1").each(function() {
+			rate = $(this).data("rating");
+			if(rate=="undefined" || rate == null || rate<1)
+				rate = 1;
+			$('span#'+this.id) .html('<img src="/resources/images/rating'+rate+'.png" /><span style="display:none">'+rate+ '</span>');
+		});
+	});
+	$("#checkAllId").click(function(){
+		$('[name="jobIdCheckBox"]').each(function() {
+			$(this).prop('checked', true);
+		});
+	});
+	$("#uncheckAllId").click(function(){
+		$('[name="jobIdCheckBox"]').each(function() {
+			$(this).prop('checked', false);
+		});
+	});
+	$("#sendJobToFriendId").click(function(){
+		var jobsList = "";
+		var checkedFlag = false;
+		$('[name="jobIdCheckBox"]').each(function() {
+			if($(this).is(":checked")) {
+				jobsList += ($(this).val()+",");
+				checkedFlag = true;
+			}
+		});
+		if(checkedFlag) {
+			jobsList = jobsList.substring(0,jobsList.length-1);
+			openPopUp('/sendJobFriend/'+jobsList,'popUpPageConatiner');
+		} else {
+			alert("Check atleast one job.");
+			return false;
+		}
+	});
+	$("#saveJobsId").click(function(){
+		var jobsList = "";
+		var checkedFlag = false;
+		$('[name="jobIdCheckBox"]').each(function() {
+			if($(this).is(":checked")) {
+				jobsList += ($(this).val()+",");
+				checkedFlag = true;
+			}
+		});
+		if(checkedFlag) {
+			jobsList = jobsList.substring(0,jobsList.length-1);
+			var onVerified = function(response){
+				$.each(response, function(key, value) { 
+					if(key="errorMessage")
+						$("#saveJobsMessageId").prop("class","errorMessage");
+					else
+						$("#saveJobsMessageId").prop("class","successMessage");
+					AJAX_GET_HTML("/savedJobsByCandidate", "savedJobsDiv");
+					$("#saveJobsMessageId").text(value);
+					$('#signInId').toggle();
+				});
+			};
+			AJAX_GET_JSON('/saveJobsList/'+jobsList, onVerified);
+			return false;
+		} else {
+			alert("Check atleast one job.");
+			return false;
+		}
+		return false;
+	});
+	
+});
+function relevanceClickHandler(){
+	$("#relevanceColumn").trigger("click");
+	$(".starRating1").each(function() {
+		rate = $(this).data("rating");
+		if(rate=="undefined" || rate == null || rate<1)
+			rate = 1;
+		$('span#'+this.id) .html('<img src="/resources/images/rating'+rate+'.png" /><span style="display:none">'+rate+ '</span>');
+	});
+}
+function dateClickHandler(){
+	$("#dateColumn").trigger("click");
+	$(".starRating1").each(function() {
+		rate = $(this).data("rating");
+		if(rate=="undefined" || rate == null || rate<1)
+			rate = 1;
+		$('span#'+this.id) .html('<img src="/resources/images/rating'+rate+'.png" /><span style="display:none">'+rate+ '</span>');
+	});
+}
+', 
+', 
+	', Sort by: ', Date', 
+	
+	', 
+	', 
+		', 
+			', 
+				', Id', 
+				', Detail', 
+				', Relevance', 
+				', Date', 
+			', 
+		', 
+		', 
+			
+			', 
+				', 90100', 
+				', 
+					', 
+						', 
+						
+						', 
+							
+								
+									', 
+								
+								
+								
+							
+						', 
+						', 
+							',  
+								', Paper Application Engineer ', 
+								
+							', 
+					             
+							', 
+							', 
+								', Company:',  ', SNF (India) Pvt Ltd ', 
+								', 
+								', Location:',  ', Visakhapatnam', 
+								', 
+								', Date:',  28.10.2009', 
+								', 
+							', 
+					
+							', 
+								
+									
+									
+										Qualification - Graduate in Paper Technology from a reputed university.
+
+Applicant should be a Dynam
+									
+								
+								',  ', View full description', 
+							', 
+					
+							', 
+								', More jobs like this',  | ', All jobs by this advertiser',  | ', All jobs in this advertisement', 
+							', 
+						', 
+						', 
+					', 
+				', 
+				', 
+					', 1', 
+				', 
+				', 2009-10-28 00:00:00.0', 
+			', 
+			
+			', 
+				', 90104', 
+				', 
+					', 
+						', 
+						
+						', 
+							
+								
+									', 
+								
+								
+								
+							
+						', 
+						', 
+							',  
+								', Petroleum Engineer ', 
+								
+							', 
+					             
+							', 
+							', 
+								', Company:',  ', SNF (India) Pvt Ltd ', 
+								', 
+								', Location:',  ', Visakhapatnam', 
+								', 
+								', Date:',  28.10.2009', 
+								', 
+							', 
+					
+							', 
+								
+									
+									
+										Qualification - Graduate in Petroleum Engineering from a reputed University. Applicant should have k
+									
+								
+								',  ', View full description', 
+							', 
+					
+							', 
+								', More jobs like this',  | ', All jobs by this advertiser',  | ', All jobs in this advertisement', 
+							', 
+						', 
+						', 
+					', 
+				', 
+				', 
+					', 1', 
+				', 
+				', 2009-10-28 00:00:00.0', 
+			', 
+			
+			', 
+				', 90107', 
+				', 
+					', 
+						', 
+						
+						', 
+							
+								
+									', 
+								
+								
+								
+							
+						', 
+						', 
+							',  
+								', Textile Sales Engineer ', 
+								
+							', 
+					             
+							', 
+							', 
+								', Company:',  ', SNF (India) Pvt Ltd ', 
+								', 
+								', Location:',  ', Visakhapatnam', 
+								', 
+								', Date:',  28.10.2009', 
+								', 
+							', 
+					
+							', 
+								
+									
+									
+										Qualification Graduate in Textile Engineering from a reputed university. Candidate should identify p
+									
+								
+								',  ', View full description', 
+							', 
+					
+							', 
+								', More jobs like this',  | ', All jobs by this advertiser',  | ', All jobs in this advertisement', 
+							', 
+						', 
+						', 
+					', 
+				', 
+				', 
+					', 1', 
+				', 
+				', 2009-10-28 00:00:00.0', 
+			', 
+			
+		 ', 
+	', 
+	', 
+		', Check All', 
+		', Uncheck All', 
+		', Save Jobs', 
+        ', Send to friend', 
+	', 
+    ', 
+', 
+', 
+', 
+  		', 
+  		
+  	', 
+  ', 
+  
+    
+  ', 
+  ', 
+		
+			
+			
+				
+
+', 
+$(document).ready(function() {
+	loadLocationsName('locationDropdownId');
+	var fileError = '';
+	$("#fileErrorMsgId").html(fileError);
+	$('#fileErrorMsgId').show();
+	$("#populateCVFormId").validate();
+	$('#uploadId').click(function(e){
+		$("#fileErrorMsgId").html('');
+		$('#fileErrorMsgId').hide();
+		var validationResult = $("#populateCVFormId").valid();
+		if(validationResult){
+			$("#populateCVFormId").submit();
+		}
+	});
+	
+	$('#populateCVFormId').on('keyup', function(e){
+		var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+		if (keycode == 13){
+			e.preventDefault();
+			$("#uploadId").trigger('click');
+		}
+	});	
+});
+', 
+', 
+	.fileSizeError {
+		padding-left:20px !important; background-position:2px 2px !important;
+	}
+', 
+', 
+	', Jobs for your profile', 
+', 
+', 
+	', 
+		', Want more relevant results as per your profile? Upload CV.', 
+		', 
+		', 
+		', 
+		    ', 
+		    ', 
+		    ', 
+		    ', 
+		', 
+	
+		', 
+		', 
+			',  ', 
+			', Location', 
+			', 
+				', -Location-', 
+			', 
+		', 
+		
+		
+			', 
+			', 
+			', 
+			', 
+		', 
+		', 
+	', 
+', 
+
+			
+		
+	  	
+
+
+', 
+	', Featured Employer', 
+', 
+
+', 
+	', 
+		', 
+			
+				', 
+					', 
+				', 
+			
+			
+			', State Bank of India', 
+				
+			',  
+			', 
+		', 
+	', 
+', 
+	  	
+			
+			
+				
+
+', 
+
+', 
+	', Popular Searches', 
+', 
+', 
+	', 
+		',  
+        	
+				', Mechanical Engineer', 
+			
+				', Electrical Engineer', 
+			
+				', Teacher', 
+			
+				', Assistant Professor', 
+			
+				', Accounts', 
+			
+				', Networking', 
+			
+				', Finance', 
+			
+				', SAP', 
+			
+				', Civil Engineer', 
+			
+				', SQL', 
+			
+        ', 
+    ', 
+    ', 
+', 
+			
+		
+	  	
+			
+			
+				
+
+
+', 
+', 
+	', Recent Articles', 
+', 
+', 
+	', 
+		', 
+			', Lasting-impressions', 
+			', All-round-engagement', 
+			', Global-responsibilities', 
+			', Five-Big-reasons', 
+		', 
+	', 	
+', 
+			
+		
+			  	
+	  	
+
+', 
+', 
+	', Ascent Jobs on SMS', 
+', 
+
+', 
+	', 
+		', Search and Apply to jobs from your mobile.', 
+			', Click here',  to know more.
+		', 
+	', 
+', 
+	  	', u"
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+", 
+
+', u"
+googletag.cmd.push(function() {
+googletag.defineSlot('/1064661/ItsMyAscent-200x400', [200, 400], 'div-gpt-ad-1394621354852-0').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+", 
+
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1394621354852-0'); });
+", 
+', 
+
+	  	
+  ', 
+  ', 
+  
+', 
+		', 
+		', 
+	', 
+	', 
+	', 		
+		', 
+', (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=365646363535523";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));', 
+', 
+	', More ways to explore Ascent', 
+	', 
+	', 
+	', 
+    ', u"
+		window.___gcfg = {
+        	lang: 'en-US'
+      	};
+		(function() {
+        	var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        	po.src = 'https://apis.google.com/js/plusone.js';
+        	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      	})();
+		
+	", 
+ 
+	', 
+
+	', 
+	', 
+	', 
+		', Jobs by Industry', 
+		', 
+			', 
+				', Education Jobs', 
+				', Engineering Jobs', 
+				', Recruitment Agency Jobs', 
+				', Consultancy Jobs', 
+				', Production & Manufacturing Jobs', 
+				', Healthcare & Medical Jobs', 
+				', Construction Jobs', 
+				', IT Software Jobs', 
+				', Hospitality Jobs', 
+				', BPO Jobs', 
+				', Banking & Finance Jobs', 
+				', Travel & Tourism Jobs', 
+				', Real Estate Jobs', 
+				', Government Naukri', 
+				', Automobile Jobs', 
+				', Media Jobs', 
+				', Chemical Jobs', 
+				', IT Hardware & Networking Jobs', 
+				', Retail Jobs', 
+				', Telecom Jobs', 
+				', Insurance Jobs', 
+			', 
+		', 
+	', 
+	
+	
+	', 
+		', Jobs in India', 
+		', 
+			', 
+				', Jobs in Mumbai', 
+				', Jobs in Chennai', 
+				', Jobs in Delhi', 
+				', Jobs in Kolkata', 
+				', Jobs in Bangalore', 
+				', Jobs in Hyderabad', 
+				', Jobs in Pune', 
+				', Jobs in Ahmedabad', 
+				', Jobs in Noida', 
+				', Jobs in Jaipur', 
+				', Jobs in Mangalore', 
+				', Jobs in Nagpur', 
+				', Jobs in Nasik', 
+				', Jobs in Mysore', 
+				', Jobs in Lucknow', 
+				', Jobs in Cochin', 
+				', Jobs in Goa', 
+				', Jobs in Vadodara', 
+				', Jobs in Ghaziabad', 
+				', Jobs in Surat', 
+				', Jobs in Dehradun', 
+			', 
+		', 
+	', 
+	
+	', 
+		', International Jobs', 
+		', 
+			', 
+				', Jobs in Kuwait', 
+				', Jobs in Oman', 
+				', Jobs in Saudi Arabia', 
+				', Jobs in United Arab Emirates', 
+				', Jobs in Qatar', 
+				', Jobs in USA', 
+				', Jobs in UK', 
+				', Jobs at Other Locations', 
+			', 
+		', 
+		
+		', Career Advice Articles', 
+		', 
+			', 
+				', Corporate Life', 
+				', Global Research', 
+				', Leadership', 
+				', Personal Growth', 
+				', Talent & Careers', 
+				', The Chat Room', 
+			', 
+		', 
+		
+		', HR Zone Articles', 
+		', 
+			', 
+				', Global HR Policies', 
+				', Organisational Efficiency', 
+				', Employee Benefits', 
+				', Careers & Training', 
+				', Work Life Balance', 
+			', 
+		', 
+	', 
+	
+	', 
+		', Jobs by Function', 
+		', 
+			', 
+				', Engineering, Civil and',  Architecture', 
+				', Learning & Library', 
+				', Real Estate & Housing', 
+				', Office Administration', 
+				', Sales & Business Dev', 
+				', IT Hardware and Software', 
+				', Finance & Accounting', 
+				', Healthcare & Medical', 
+				', Production and Manufacturing', 
+				', Marketing,Advertising ', 
+				', Hospitality & Tourism', 
+				', ITES BPO KPO Support ', 
+				', Supply Chain,Logistic', 
+				', QA & Testing', 
+				', Human Resources', 
+				', Law, Legal', 
+				', Journalism & Creative', 
+				', Banking & Insurance', 
+				', Aviation', 
+				', Other Categories', 
+			', 
+		', 
+	', 
+	
+	', 
+		', Jobs In IT', 
+		', 
+			', 
+				', Java Jobs', 
+				', .Net Jobs', 
+				', SAP Jobs', 
+				', Oracle Jobs', 
+				', SQL Jobs', 
+				', DBA Jobs', 
+				', Datacenter Jobs', 
+				', Photoshop Jobs', 
+				', Networking Jobs', 
+				', Windows Jobs', 
+				', Linux Jobs', 
+				', ITIL Jobs', 
+				', ISO Jobs', 
+				', Consulting Jobs', 
+				', Testing Jobs', 
+				', CAD Jobs', 
+				', Visual Basic Jobs', 
+				', PHP Jobs', 
+				', Support Jobs', 
+				', Project Management Jobs', 
+				', Microsoft Jobs', 
+			', 
+		', 
+	', 	
+		
+	', 
+	', 
+	', 
+	
+	', 
+		', Information', 
+		', 
+			', 
+				', FAQ', 
+		        ', About Us', 
+	        	', Contact Us', 
+	        	', Report A Bug', 
+	        	 ', Advertise with Us', 
+			', 
+		', 
+	', 	
+	
+	', 
+		',  ', 
+		', 
+			', 
+				', Feedback', 
+		        ', Privacy Policy', 
+		        ', Terms of Use', 
+	        	', Site Map', 
+			', 
+		', 
+	', 
+	
+	', 
+		', Other Timesgroup Sites', 
+		', 
+			', 
+				', Ascent Matcher', 
+				', Times Of India - ePaper', 
+				', Times Of India', 
+			', 
+		', 
+	', 
+	
+	', 
+		',  ', 
+		', 
+			', 
+				', Mumbai Mirror', 
+				', Bangalore Mirror', 
+				', Ahmedabad Mirror', 
+			', 
+		', 
+	', 
+	
+	', 
+		',  ', 
+		', 
+			', 
+				', Pune Mirror', 
+				', Education Times', 
+			', 
+		', 
+	', 	
+	', 
+	', 
+    ', 
+    	', Jobs by Company Name - ', 
+		', A', 
+		', B', 
+		', C', 
+		', D', 
+		', E', 
+		', F', 
+		', G', 
+		', H', 
+		', I', 
+		', J', 
+		', K', 
+		', L', 
+		', M', 
+		', N', 
+		', O', 
+		', P', 
+		', Q', 
+		', R', 
+		', S', 
+		', T', 
+		', U', 
+		', V', 
+		', W', 
+		', X', 
+		', Y', 
+		', Z', 
+		', [0-9]', 
+    ', 
+    
+    ', 
+    
+    	', 
+		', 
+			
+			', 
+		', 
+		
+		
+    	', 
+    	', 
+    		', 
+		', 
+	    ', 
+	    ', 
+			', 
+			', 
+		', 
+		
+    ', 
+        
+    ', 
+    
+    ', 
+    ', 
+    	', 
+    	', 
+    		', 
+    	', 
+    	', 
+    	
+    	', 
+    		 This site is best viewed in 1024x768 resolution in Internet Explorer 9.0, Firefox 4.0+, Chrome 20.0+', 
+        	Copyright 2008 © Bennett, Coleman & Co. Ltd. All rights reserved.
+    	', 
+    	', 
+    ', 
+', 
+', 
+', 
+    document.write(unescape("%3Cscript src='" + (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js' %3E%3C/script%3E"));
+', 
+', 
+  COMSCORE.beacon({
+    c1:2,
+    c2:6036484,
+    c3:"",
+    c4:"",
+    c5:"",
+    c6:"",
+    c15:""
+  });
+', 
+', 
+  ', 
+', 
+', 
+	', 
+	', 
+	', _cc4140.bcp();', 
+'][
+	', 
+		', 
+	',  ', 
+	
+	
+', u"
+$('#resendForgotPasswordId').hide();
+$('#signInId').hide();
+	$(document) .ready(function(){
+		$('#headerSignBtn, #sitemapSignBtn').click(function(){
+			$('#signInId').toggle();
+			$(this) .toggleClass('upArrow');
+			$('#resendForgotPasswordId').hide();
+			$('#resendVerificationId').hide();
+			$('#signFormId').data('validator').resetForm();
+			$('#resendVerificationMailFormId').data('validator').resetForm();
+			$('#forgotPasswordFormId').data('validator').resetForm();
+		});
+		if($('#loginError').val()){
+			$('#signInId').show();
+		}
+		if($('#facebookMappingMessage').val()){
+			$('#signInId').show();
+		}
+		if($('#followCompanyMessage').val()){
+			$('#signInId').show();
+		}
+		$('#forgotPasswordId').click(function(){
+			$('#resendForgotPasswordId').show();
+			$('#forgotPasswordFormId').data('validator').resetForm();
+			$('#errorMessageId').text('');
+			$('#successMessageId').text('');
+			$('#signInId').hide();
+		});
+		$('#verificationId').click(function(){
+			$('#resendVerificationId').show();
+			$('#resendVerificationMailFormId').data('validator').resetForm();
+			$('#signInId').hide();
+		});
+	});
+	
+	$(document).live('keyup', function(event){
+	    if(event.which === 27) {
+	        $('#signInId').hide();
+	        $('#resendForgotPasswordId').hide();
+	        $('#resendVerificationId').hide();
+	    }
+	});
+", 
+
+', u"
+$(document).ready(function(){
+	   if ($('.verificationMessage').html().length > 0) {
+	     $('.verificationMessage') .show();
+	   }
+	   else{
+		   $('.verificationMessage') .hide();
+	   }
+});
+", 
+
+', 
+	', 
+', 
+
+', 
+', 
+	', 
+		', 
+		', 
+		', 
+		', 
+	    ', 
+	    	', 
+	   	', 
+	   	
+	   	', 
+	    ', 
+	      ', 
+	      		', 
+	      			', 
+			      	', Register',   |  
+			      	', Contact Us',   |  
+			      	', Help',   |  
+			      	',                             
+			      	',                            
+			      	', 
+			      	', 
+		      	', 
+		      	
+		      	', 
+			      	', 
+			      		', Sign In',   |  
+			      		
+			      		', 
+			      		', 
+			      			
+
+
+', 
+$(document).ready(function(){
+	$("#signFormId").validate();
+	$("signInBtnId").click(function(){
+		var validForm = $("#signFormId").valid();
+		if(validForm) {
+			$("signFormId").submit();
+			return true;
+		}
+		return false;
+	});
+	
+	$('#signFormId').on('keyup', function(e){
+		var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+		if (keycode == 13){
+			e.preventDefault();
+			$("#signInBtnId").trigger('click');
+		}
+	});
+	
+   	if ($(".thankyouMessage").html().length > 0) {
+    	$('.thankyouMessage') .show();
+  	}else{
+	   $('.thankyouMessage') .hide();
+   	}
+});
+', 
+
+', 
+   ', 
+       ', 
+       	
+		', 
+           ', Login Name', 
+           ', 
+           
+           ', Password', 
+           ', 
+           ', 
+           ', Resend Verification Email',   |  ', Forgot your password?', 
+         	
+    	   ', 
+           ',  
+         	', 
+         	',  
+               ', Are you New User?',    ', Register Now', 
+           ', 
+           
+           ', 
+           ',  Continue without Registration', 
+           ', 
+       ', 
+   ', 
+			      		', 
+			      		', 
+			      			
+
+
+
+', 
+
+$(document).ready(function() {
+	doBindingsForPopUps();
+	$('#forgotPasswordFormId').validate();
+	$("#fogotPasswordSubmitBtn").click(function(e) {
+		$('#errorMessageId').text('');
+		var validationFlag = $('#forgotPasswordFormId').valid();
+		if(validationFlag) {
+			AJAX_POST_FORM('/generatePassword', $("#forgotPasswordFormId").serialize(),'srccontId');
+		}
+		return false;
+	});
+	$('#forgotPasswordFormId').on('keyup', function(e){
+		var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+		if (keycode == 13){
+			e.preventDefault();
+			$("#fogotPasswordSubmitBtn").trigger('click');
+		}
+	});
+});
+', 
+', 
+ ',   
+   	', 
+					        
+    ', 
+    ', 
+					        
+    ', 
+   ', 
+		', Forgot Password', 
+       	', Email', 
+        ', 
+         
+       	',  ', 
+    		', 
+    		', 
+       	',  
+             New User?   |   ', Register Now', 
+         ', 
+   ', 
+',  
+			      		', 
+			      		
+			      		', 
+			      			
+
+
+
+', 
+
+$(document).ready(function() {
+	doBindingsForPopUps();
+	$('#resendVerificationMailFormId').validate();
+	$("#resendVerificationMailSubmitBtn").click(function(e) {
+		$('#errorMessageId').text('');
+		var validationFlag = $('#resendVerificationMailFormId').valid();
+		if(validationFlag) {
+			AJAX_POST_FORM('/resendVerificationMail', $("#resendVerificationMailFormId").serialize(),'srcVerificationMailContId');
+		}
+		return false;
+	});
+	$('#resendVerificationMailFormId').on('keyup', function(e){
+		var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+		if (keycode == 13){
+			e.preventDefault();
+			$("#resendVerificationMailSubmitBtn").trigger('click');
+		}
+	});
+});
+', 
+', 
+ ',   
+   	', 
+					        
+    ', 
+    ', 
+					        
+    ', 
+   ', 
+		', Resend Verification email', 
+       	', Email', 
+        ', 
+       	',  ', 
+    		', 
+    		', 
+       	',  
+             New User?   |   ', Register Now', 
+         ', 
+   ', 
+',  
+			      		', 
+			      		
+			      		', 
+			        ', 
+		      ', 
+		      ', 
+	      ', 
+	    
+			', 
+		   	', 
+		       ', 
+			       	', Home', 
+			       	', Jobs', 
+			       	', Career Advice', 
+			       	', HR Zone', 
+			       	', Events', 
+			       	', Job Fairs', 
+		        ', 
+		    ', 
+	    ', 
+	', 
+', 
+
+',  ', 
+
+', 
+
+', 
+
+', 
+$(function(){
+	$(window).scroll(function () {
+		if ($(window).scrollTop() > 96) {
+            $("#topContainer").css('display', 'block');
+            $("#headerWrapperID").css("position","fixed");
+        }else{
+            $("#topContainer").css('display', 'none');
+            $("#headerWrapperID").css("position","static");
+        }
+	});
+	
+});
+', 
+	
+	', 
+	', 
+		', 	
+		
+
+
+
+
+', 
+	nav#navigation ul li a.jobsActive{
+	color:#000000!important; 
+	background-image:url(/resources/images/nav-hover-bg.jpg)!important;
+	background-repeat:no-repeat; 
+	background-position:center bottom; 
+	}
+', 
+
+', 
+$(document).ready(function(){
+	AJAX_GET_HTML("/savedJobsByCandidate", "savedJobsDiv");
+	AJAX_GET_HTML("/savedSearches", "savedSearchesDiv");
+	if ($(".userMessage").html().length > 0) {
+	  $('.userMessage') .show();
+	}else{
+	 $('.userMessage') .hide();
+	}
+	$("#followCompanyDiv").click(function(){
+		var onVerified = function(response){
+			$.each(response, function(key, value) { 
+				$("#operationmessagefollow").text(value);
+			});
+		};
+		AJAX_GET_JSON($(this).data("url"), onVerified);
+	});
+});
+
+', 
+
+', 
+  ', 
+  	', 
+  		', 
+  		', 
+  		', 
+  		', 
+  		', 
+  			', 
+  			
+
+
+
+', 
+', 
+', 
+$(document).ready(function(){
+	$('#from').attr('readonly','readonly');
+	$('#to').attr('readonly','readonly');
+	$( "#from" ).datepicker({
+		yearRange: "-80:+0",
+		changeYear: true,
+		changeMonth: true,
+		numberOfMonths: 1,
+		showOn: "button",
+		dateFormat: 'dd/mm/yy',
+		buttonImage: "/resources/images/calendar.gif",
+		buttonImageOnly: true,
+		onClose: function( selectedDate ) {
+			$( "#to" ).datepicker( "option", "minDate", selectedDate );
+		}
+	})
+	$( "#from" ).keyup(function(e) {
+	    if(e.keyCode == 8 || e.keyCode == 46) {
+	        $.datepicker._clearDate(this);
+	        $( "#to" ).datepicker( "option",  {
+	            minDate: null,
+	            maxDate: null} );
+	    }
+	});
+	$( "#to" ).datepicker({
+		yearRange: "-80:+0",
+		changeYear: true,
+		changeMonth: true,
+		numberOfMonths: 1,
+		showOn: "button",
+		dateFormat: 'dd/mm/yy',
+		buttonImage: "/resources/images/calendar.gif",
+		buttonImageOnly: true,
+		onClose: function( selectedDate ) {
+			$( "#from" ).datepicker( "option", "maxDate", selectedDate );
+		}
+	})
+	$( "#to" ).keyup(function(e) {
+	    if(e.keyCode == 8 || e.keyCode == 46) {
+	        $.datepicker._clearDate(this);
+	        $( "#from" ).datepicker( "option", {
+	            minDate: null,
+	            maxDate: null} );
+	    }
+	});
+	
+    var setCity = function () { 
+		if($('#hiddenLocId').val() != ''){
+			var selectedLocation = $('#hiddenLocId').val();
+			var select = $('#locationComboId');
+				select.find('option[value="'+selectedLocation+'"]').attr("selected", "selected");
+		}
+		
+		var locationValue = $('.locationSel') .find('select option:selected').text();
+		$('.locationSel') .find('.selectOutput').text(locationValue);
+		
+    };
+	loadLocationsCallback('locationComboId', setCity);
+	
+	$("#errorMessage").hide();
+	$("#imaAdvanceSearchFormId").validate();
+	
+	$('#goButtnId').click(function(event){
+		$("#errorMessage").hide();
+		var expTo = parseInt($("#expToId option:selected").val());
+		var expFrom = parseInt($("#expFromId option:selected").val());
+		var isBlank=true;
+		if($('input:radio:checked').length<1 && $('input:checkbox:checked').length<1 && $('#keyword').val().length<3 && $('#companyName').val().length<3 && 
+				$('#locationComboId option:selected').val() == "" && $('#industryId option:selected').val() == "" && $('#from').val() == "" && $('#to').val() == ""
+				&& $('#functionId option:selected').val() == "" && $('#expFromId option:selected').val() == ""  && $('#expToId option:selected').val() == "") {
+			isBlank=true;
+		} else {
+			isBlank=false;
+		}
+		if(isBlank){
+			$('#errorMessage').html('Please provide any one of the search criteria.');
+		  	$('#errorMessage').show();
+		  	return;
+		} else if(expFrom != "" && expTo != "" && expFrom > expTo) {
+			$('#errorMessage').html('Experience To should be greater than Experience From.');
+		  	$('#errorMessage').show();
+		  	return;
+		} else{
+			$('#errorMessage').hide();
+			var validationResult = $("#imaAdvanceSearchFormId").valid();
+			if(validationResult){
+				var keyword = $('#keyword').val();
+				var location = '';
+				var jobFunction = '';
+				var industry = '';
+				var jobLocationId = $('#locationComboId option:selected').val();
+				var jobFunctionId = $('#functionId option:selected').val();
+				var industryId = $('#industryId option:selected').val();
+				
+				if(keyword == ''){
+					$('#keyWordCompare').val("Vacancy");
+				}else{
+					$('#keyWordCompare').val(keyword);
+				}
+
+				if(jobLocationId == ''){
+					location = '';
+					$('#locationNameCompare').val("India");
+					$('#locationName').val(location);
+					$('#hiddenLocId').val('');
+				}else {
+					location = $('#locationComboId option:selected').text();
+					location = $.trim(location);
+					$('#locationName').val(location);
+					$('#hiddenLocId').val(jobLocationId);
+					$('#locationNameCompare').val(location);
+				}
+				
+				if(jobFunctionId == ''){
+					$('#functionNameCompare').val('');
+				}else{
+					jobFunction = $('#functionId option:selected').text();
+					jobFunction =  $.trim(jobFunction);
+					$('#jobFunctionName').val(jobFunction);
+					$('#functionNameCompare').val(jobFunction);
+				}
+				
+				if(industryId != ''){
+					industry = $('#industryId option:selected').text();
+					industry =  $.trim(industry);
+					$('#industryName').val(industry);
+				}
+				var seoUrl = "";
+				if(keyword != '' && location !='' && jobFunction !=''){
+					seoUrl = "/jobs-"+keyword+"/Careers-"+location+"/Vacancies-"+jobFunction+"/Naukri/India-jobs-search";
+				}else if(keyword != '' && location !=''){
+					seoUrl = "/jobs-"+keyword+"/Careers-"+location+"/Jobs-Vacancies-/Naukri/India-jobs-search";
+				}else if(location != '' && jobFunction !=''){
+					seoUrl = "/jobs-Vacancy/Careers-"+location+"/Vacancies-"+jobFunction+"/Naukri/India-jobs-search";
+				}else if(keyword != '' && jobFunction !=''){
+					seoUrl = "/jobs-"+keyword+"/Careers-India/Vacancies-"+jobFunction+"/Naukri/India-jobs-search";
+				}else if(keyword != ''){
+					seoUrl = "/jobs-"+keyword+"/Careers-India/Jobs-Vacancies-/Naukri/India-jobs-search";
+				}else if(location !=''){
+					seoUrl = "/jobs-Vacancy/Careers-"+location+"/Jobs-Vacancies-/Naukri/India-jobs-search";
+				}else if(jobFunction !=''){
+					seoUrl = "/jobs-Vacancy/Careers-India/Vacancies-"+jobFunction+"/Naukri/India-jobs-search";
+				}else{
+					seoUrl = "/jobs-Vacancy/Careers-India/Jobs-Vacancies-/Naukri/India-jobs-search";
+				}
+				submitFormUsingGet('imaAdvanceSearchFormId',seoUrl);
+			}
+			return false;
+		}
+		return false;
+	});
+	$('#imaAdvanceSearchFormId').on('keyup', function(e){
+		var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+		if (keycode == 13){
+			e.preventDefault();
+			$("#goButtnId").trigger('click');
+		}
+	});
+});
+/**
+ * This function creates a bean in backend in first request. in second request it populates the data
+ * @param formId
+ * @param formUrl
+ */
+function submitFormUsingGet(formId, formUrl){
+	var jQueryFormId = "#" + formId ;
+	AJAX_GET_JSON_DATA("/createjobsearchbean", $("#" + formId ).serialize(), function(data){
+		$.each(data, function(key, value) { 
+			if(key == 'success' && value == 'success'){
+				//now send get request
+				window.location.href = formUrl;
+ 			}   
+		});
+	});
+}
+
+function saveSearch() {
+	var isBlank=true;
+	if($('input:radio:checked').length<1 && $('input:checkbox:checked').length<1 && $('#keyword').val().length<3 && $('#companyName').val().length<3 && 
+			$('#locationComboId option:selected').val() == "" && $('#industryId option:selected').val() == "" && $('#from').val() == "" && $('#to').val() == ""
+			&& $('#functionId option:selected').val() == "" && $('#expFromId option:selected').val() == ""  && $('#expToId option:selected').val() == "") {
+		isBlank=true;
+	} else {
+		isBlank=false;
+	}
+	if(isBlank){
+  		$('#errorMessage').html('Please provide any one of the search criteria to save search');
+	  	$('#errorMessage').show();
+	  	return;
+ 	}
+	$('#errorMessage').html('');
+	openPopUp('/saveSearch','popUpPageConatiner');
+}
+', 
+
+', u"
+	$(document) .ready(function(){
+		var expFromValue = $('.expFrSel') .find('select option:selected').text();
+		$('.expFrSel') .find('.selectOutput').text(expFromValue);
+		var expToValue = $('.expToSel') .find('select option:selected').text();
+		$('.expToSel') .find('.selectOutput').text(expToValue);
+		
+		var industryValue = $('.industrySel') .find('select option:selected').text();
+		$('.industrySel') .find('.selectOutput').text(industryValue);
+		var functionValue = $('.functionSel') .find('select option:selected').text();
+		$('.functionSel') .find('.selectOutput').text(functionValue);
+	});
+", 
+
+', 
+	', 
+	', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		
+		', 
+		', 
+		', 
+		
+		', 
+			', 
+		', 
+
+		', 
+			',  ', 
+			', Select Location', 
+			', 
+				', Select Location', 
+			', 
+		', 
+		
+		', 
+			',  ', 
+			', Select Industry', 
+			', 
+				', Select Industry', 
+				
+					', Accounting/Banking/Financial Services/Stock broking', 
+				
+					', Agriculture/Forestry/Fishing', 
+				
+					', Apparel/Garments/Fashion7', 
+				
+					', Architecture/Interior Design', 
+				
+					', Automobiles', 
+				
+					', Biotechnology/Pharmaceutical/Medicine/Healthcare', 
+				
+					', Call Centres/BPO/ITES', 
+				
+					', Construction/Cement/Metal/Steel/Iron', 
+				
+					', Consulting Services', 
+				
+					', Consumer Durables/FMCG', 
+				
+					', Defence/Security/Law Enforcement', 
+				
+					', Educational/Training', 
+				
+					', Engineering/Projects/Infrastructure/Power/Energy', 
+				
+					', Entertainment/Advertising/Media', 
+				
+					', Export/Import', 
+				
+					', Food Services/Restaurant/Hotel/Hospitality', 
+				
+					', Gems & Jewellery', 
+				
+					', Government Sector', 
+				
+					', Insurance', 
+				
+					', Internet/Dot com/ISP', 
+				
+					', IT-Hardware/Networking', 
+				
+					', IT-Software', 
+				
+					', Law/Legal Firms', 
+				
+					', Logistics/Courier', 
+				
+					', Manufacturing', 
+				
+					', Marine/Shipping', 
+				
+					', NGO/Social Services', 
+				
+					', Others', 
+				
+					', Petrochemicals/Petroleum/Oil and Gas', 
+				
+					', Printing/Packaging', 
+				
+					', Real Estate', 
+				
+					', Recruitment/Placement Agencies', 
+				
+					', Research/Surveyor/MR', 
+				
+					', Retailing/Merchandising', 
+				
+					', Sports/Recreation', 
+				
+					', Telecom', 
+				
+					', Travel/Tourism/Airlines', 
+				
+					', Warehousing', 
+				
+			', 
+		', 		
+
+		', Exp(Years) :', 
+		', 
+			',  ', 
+			', Min', 
+			', 
+				', Min', 
+				
+					', 0', 
+				
+					', 1', 
+				
+					', 2', 
+				
+					', 3', 
+				
+					', 4', 
+				
+					', 5', 
+				
+					', 6', 
+				
+					', 7', 
+				
+					', 8', 
+				
+					', 9', 
+				
+					', 10', 
+				
+					', 11', 
+				
+					', 12', 
+				
+					', 13', 
+				
+					', 14', 
+				
+					', 15', 
+				
+					', 16', 
+				
+					', 17', 
+				
+					', 18', 
+				
+					', 19', 
+				
+					', 20', 
+				
+					', 21', 
+				
+					', 22', 
+				
+					', 23', 
+				
+					', 24', 
+				
+					', 25', 
+				
+					', 26', 
+				
+					', 27', 
+				
+					', 28', 
+				
+					', 29', 
+				
+					', 30', 
+				
+					', 31', 
+				
+					', 32', 
+				
+					', 33', 
+				
+					', 34', 
+				
+					', 35', 
+				
+					', 36', 
+				
+					', 37', 
+				
+					', 38', 
+				
+					', 39', 
+				
+					', 40', 
+				
+					', 41', 
+				
+					', 42', 
+				
+					', 43', 
+				
+					', 44', 
+				
+					', 45', 
+				
+					', 46', 
+				
+					', 47', 
+				
+					', 48', 
+				
+					', 49', 
+				
+					', 50', 
+				
+			', 
+		', 
+		
+		', to', 
+		
+		', 
+			',  ', 
+			', Max', 
+			', 
+				', Max', 
+				
+					', 0', 
+				
+					', 1', 
+				
+					', 2', 
+				
+					', 3', 
+				
+					', 4', 
+				
+					', 5', 
+				
+					', 6', 
+				
+					', 7', 
+				
+					', 8', 
+				
+					', 9', 
+				
+					', 10', 
+				
+					', 11', 
+				
+					', 12', 
+				
+					', 13', 
+				
+					', 14', 
+				
+					', 15', 
+				
+					', 16', 
+				
+					', 17', 
+				
+					', 18', 
+				
+					', 19', 
+				
+					', 20', 
+				
+					', 21', 
+				
+					', 22', 
+				
+					', 23', 
+				
+					', 24', 
+				
+					', 25', 
+				
+					', 26', 
+				
+					', 27', 
+				
+					', 28', 
+				
+					', 29', 
+				
+					', 30', 
+				
+					', 31', 
+				
+					', 32', 
+				
+					', 33', 
+				
+					', 34', 
+				
+					', 35', 
+				
+					', 36', 
+				
+					', 37', 
+				
+					', 38', 
+				
+					', 39', 
+				
+					', 40', 
+				
+					', 41', 
+				
+					', 42', 
+				
+					', 43', 
+				
+					', 44', 
+				
+					', 45', 
+				
+					', 46', 
+				
+					', 47', 
+				
+					', 48', 
+				
+					', 49', 
+				
+					', 50', 
+				
+			', 
+		', 
+		
+		', 
+			',  ', 
+			', Select JobFunction', 
+			', 
+				', Select Job Function', 
+				
+					', Agriculture', 
+				
+					', Aviation', 
+				
+					', Banking & Insurance', 
+				
+					', Corporate Consulting', 
+				
+					', Counsellor', 
+				
+					', Driver & Conductor', 
+				
+					', Engineering, Civil and Architecture', 
+				
+					', Entertainment & Media', 
+				
+					', Fashion', 
+				
+					', Finance & Accounting', 
+				
+					', Healthcare & Medical', 
+				
+					', Hospitality & Tourism', 
+				
+					', Housekeeping Staff', 
+				
+					', Human Resources', 
+				
+					', IT-Hardware/Software', 
+				
+					', ITES/BPO/KPO/Support', 
+				
+					', Journalism & Creative', 
+				
+					', Law,Legal', 
+				
+					', Learning & Library', 
+				
+					', Marine Services', 
+				
+					', Marketing/Advertising', 
+				
+					', Office Administration', 
+				
+					', Others', 
+				
+					', Poultry & Animal Husbandry', 
+				
+					', Printing & Packaging', 
+				
+					', Production and Manufacturing', 
+				
+					', QC / QA  & Testing', 
+				
+					', Real Estate & Housing', 
+				
+					', Retail & Cinema', 
+				
+					', Sales & Business Dev', 
+				
+					', Security/Intelligence', 
+				
+					', Social Services', 
+				
+					', Supply Chain/Logistic', 
+				
+					', Telecom/ISP/Cable TV', 
+				
+					', Trade & Import/Export', 
+				
+					', Warehouse', 
+				
+			', 
+		', 
+		
+		', 
+			', 
+		', 
+		', 
+		
+
+		', 
+		', 
+		
+		', 
+			', 
+			', India', 
+			
+			', 
+			', Global', 
+			
+			', 
+			', Walk In', 
+		', 
+		', 
+			', 
+			', 
+			', 
+		', 
+		', 
+	', 
+', 
+', 
+', 
+
+var company_index=0;
+
+/* Binding Auto completer */
+/* Auto-completer for select job location */
+makeAutoCompleter('companyName','/suggestCompany',company_index);
+
+/**
+ * source_id--the input field id need to make auto completer
+ * add_buton_id-- the add button id
+ * destination_id- the place where selected item will be appended along with hidden fields
+ * url-- the url path to get json data against input character
+ * path_variable-- form field name
+ * var -- to hold selected value
+ */
+function makeAutoCompleter(source_id,purl,index) {
+	is_selected = false;
+	$('#' + source_id).autocomplete(
+			{
+				source : function(request, response) {
+					$.ajax({
+						url :  purl + "?matchString="
+								+ request.term,
+						dataType : "json",
+						success : function(data) {
+							response($.map(data, function(v, i) {
+								v = v.replace('<b>',"").replace('</b>',"");
+								return {
+									label : i,
+									value : v
+								};
+							}));
+						}
+					});
+				},
+				focus : function(event, ui) {
+						$('#'+source_id).val(ui.item.value);
+				},
+				minLength : 3,
+				select : function(event, ui) {
+					$('#'+source_id).val(ui.item.value);
+					index++;
+					return false;
+				}
+			}).data("ui-autocomplete")._renderItem = function(ul, item) {
+		return $("<li>").append("<a>" + item.value + "</a>").appendTo(ul);
+	};
+}
+',  
+
+  		', 
+  		
+  		
+  			', 
+	  			',  ', 
+	 			
+				', 
+					', SNF (India) Pvt Ltd ', SNF (India) Pvt Ltd', 
+					', 
+						', Follow Company', 
+					', 
+					', 
+	  			', 
+	  			', 
+	  		', 
+  		
+  		
+  		
+  		', 
+  		', 
+  			
+
+
+
+
+ 
+
+', 
+', 
+
+', 
+
+
+', 
+	
+
+', 
+			', 
+              ', Narrow By', 
+              ', Filters applied', 
+              ', Clear All', 
+              ', 
+              ', 
+
+              ', 
+			', 
+			
+			', 
+				', 
+					
+						', Date of Posting
+							', 
+								
+									
+								
+									
+								
+									
+								
+									
+								
+							', 
+						', 
+					
+					
+					
+						', Management Level
+							', 
+								
+			         				', Junior - Executive, Assistant(3)', 
+			         				', 
+			         					$('#levelCheckbox1').data("jobids",[90100, 90104, 90107]);
+			         				', 
+								
+							', 
+						', 
+					
+					
+						', Experience
+							', 
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+							', 
+						', 
+					
+					
+					
+					
+						', Company
+							', 
+								
+			         				', SNF (India) Pvt Ltd(3)', 
+			         				', 
+			         					$('#companyCheckbox1').data("jobids",[90100, 90104, 90107]);
+			         				', 
+								
+							', 
+						', 
+					
+					
+						', Industry
+							', 
+								
+			         				', Engineering/Projects/Infrastructure/Power/Energy(3)', 
+			         				', 
+			         					$('#industryCheckbox1').data("jobids",[90100, 90104, 90107]);
+			         				', 
+								
+							', 
+						', 
+					
+					
+						', Job Locations
+							', 
+								
+			         				', Visakhapatnam(3)', 
+			         				', 
+			         					$('#joblocationCheckbox1').data("jobids",[90100, 90104, 90107]);
+			         				', 
+								
+							', 
+						', 
+					
+					
+				', 
+			', 
+			', 
+		', 
+		', 		
+	
+
+
+
+', 
+$(document).ready(function (){
+	var rate;
+	$(".starRating1").each(function() {
+		rate = $(this).data("rating");
+		if(rate=="undefined" || rate == null || rate<1)
+			rate = 1;
+		$('span#'+this.id) .html('<img src="/resources/images/rating'+rate+'.png" /><span style="display:none">'+rate+ '</span>');
+	});
+	$("#jobSearchTable_paginate").click(function (){
+		$(".starRating1").each(function() {
+			rate = $(this).data("rating");
+			if(rate=="undefined" || rate == null || rate<1)
+				rate = 1;
+			$('span#'+this.id) .html('<img src="/resources/images/rating'+rate+'.png" /><span style="display:none">'+rate+ '</span>');
+		});
+	});
+	$("#narrowbyfilters").click(function (){
+		$(".starRating1").each(function() {
+			rate = $(this).data("rating");
+			if(rate=="undefined" || rate == null || rate<1)
+				rate = 1;
+			$('span#'+this.id) .html('<img src="/resources/images/rating'+rate+'.png" /><span style="display:none">'+rate+ '</span>');
+		});
+	});
+	$("#checkAllId").click(function(){
+		$('[name="jobIdCheckBox"]').each(function() {
+			$(this).prop('checked', true);
+		});
+	});
+	$("#uncheckAllId").click(function(){
+		$('[name="jobIdCheckBox"]').each(function() {
+			$(this).prop('checked', false);
+		});
+	});
+	$("#sendJobToFriendId").click(function(){
+		var jobsList = "";
+		var checkedFlag = false;
+		$('[name="jobIdCheckBox"]').each(function() {
+			if($(this).is(":checked")) {
+				jobsList += ($(this).val()+",");
+				checkedFlag = true;
+			}
+		});
+		if(checkedFlag) {
+			jobsList = jobsList.substring(0,jobsList.length-1);
+			openPopUp('/sendJobFriend/'+jobsList,'popUpPageConatiner');
+		} else {
+			alert("Check atleast one job.");
+			return false;
+		}
+	});
+	$("#saveJobsId").click(function(){
+		var jobsList = "";
+		var checkedFlag = false;
+		$('[name="jobIdCheckBox"]').each(function() {
+			if($(this).is(":checked")) {
+				jobsList += ($(this).val()+",");
+				checkedFlag = true;
+			}
+		});
+		if(checkedFlag) {
+			jobsList = jobsList.substring(0,jobsList.length-1);
+			var onVerified = function(response){
+				$.each(response, function(key, value) { 
+					if(key="errorMessage")
+						$("#saveJobsMessageId").prop("class","errorMessage");
+					else
+						$("#saveJobsMessageId").prop("class","successMessage");
+					AJAX_GET_HTML("/savedJobsByCandidate", "savedJobsDiv");
+					$("#saveJobsMessageId").text(value);
+					$('#signInId').toggle();
+				});
+			};
+			AJAX_GET_JSON('/saveJobsList/'+jobsList, onVerified);
+			return false;
+		} else {
+			alert("Check atleast one job.");
+			return false;
+		}
+		return false;
+	});
+	
+});
+function relevanceClickHandler(){
+	$("#relevanceColumn").trigger("click");
+	$(".starRating1").each(function() {
+		rate = $(this).data("rating");
+		if(rate=="undefined" || rate == null || rate<1)
+			rate = 1;
+		$('span#'+this.id) .html('<img src="/resources/images/rating'+rate+'.png" /><span style="display:none">'+rate+ '</span>');
+	});
+}
+function dateClickHandler(){
+	$("#dateColumn").trigger("click");
+	$(".starRating1").each(function() {
+		rate = $(this).data("rating");
+		if(rate=="undefined" || rate == null || rate<1)
+			rate = 1;
+		$('span#'+this.id) .html('<img src="/resources/images/rating'+rate+'.png" /><span style="display:none">'+rate+ '</span>');
+	});
+}
+', 
+', 
+	', Sort by: ', Date', 
+	
+	', 
+	', 
+		', 
+			', 
+				', Id', 
+				', Detail', 
+				', Relevance', 
+				', Date', 
+			', 
+		', 
+		', 
+			
+			', 
+				', 90100', 
+				', 
+					', 
+						', 
+						
+						', 
+							
+								
+									', 
+								
+								
+								
+							
+						', 
+						', 
+							',  
+								', Paper Application Engineer ', 
+								
+							', 
+					             
+							', 
+							', 
+								', Company:',  ', SNF (India) Pvt Ltd ', 
+								', 
+								', Location:',  ', Visakhapatnam', 
+								', 
+								', Date:',  28.10.2009', 
+								', 
+							', 
+					
+							', 
+								
+									
+									
+										Qualification - Graduate in Paper Technology from a reputed university.
+
+Applicant should be a Dynam
+									
+								
+								',  ', View full description', 
+							', 
+					
+							', 
+								', More jobs like this',  | ', All jobs by this advertiser',  | ', All jobs in this advertisement', 
+							', 
+						', 
+						', 
+					', 
+				', 
+				', 
+					', 1', 
+				', 
+				', 2009-10-28 00:00:00.0', 
+			', 
+			
+			', 
+				', 90104', 
+				', 
+					', 
+						', 
+						
+						', 
+							
+								
+									', 
+								
+								
+								
+							
+						', 
+						', 
+							',  
+								', Petroleum Engineer ', 
+								
+							', 
+					             
+							', 
+							', 
+								', Company:',  ', SNF (India) Pvt Ltd ', 
+								', 
+								', Location:',  ', Visakhapatnam', 
+								', 
+								', Date:',  28.10.2009', 
+								', 
+							', 
+					
+							', 
+								
+									
+									
+										Qualification - Graduate in Petroleum Engineering from a reputed University. Applicant should have k
+									
+								
+								',  ', View full description', 
+							', 
+					
+							', 
+								', More jobs like this',  | ', All jobs by this advertiser',  | ', All jobs in this advertisement', 
+							', 
+						', 
+						', 
+					', 
+				', 
+				', 
+					', 1', 
+				', 
+				', 2009-10-28 00:00:00.0', 
+			', 
+			
+			', 
+				', 90107', 
+				', 
+					', 
+						', 
+						
+						', 
+							
+								
+									', 
+								
+								
+								
+							
+						', 
+						', 
+							',  
+								', Textile Sales Engineer ', 
+								
+							', 
+					             
+							', 
+							', 
+								', Company:',  ', SNF (India) Pvt Ltd ', 
+								', 
+								', Location:',  ', Visakhapatnam', 
+								', 
+								', Date:',  28.10.2009', 
+								', 
+							', 
+					
+							', 
+								
+									
+									
+										Qualification Graduate in Textile Engineering from a reputed university. Candidate should identify p
+									
+								
+								',  ', View full description', 
+							', 
+					
+							', 
+								', More jobs like this',  | ', All jobs by this advertiser',  | ', All jobs in this advertisement', 
+							', 
+						', 
+						', 
+					', 
+				', 
+				', 
+					', 1', 
+				', 
+				', 2009-10-28 00:00:00.0', 
+			', 
+			
+		 ', 
+	', 
+	', 
+		', Check All', 
+		', Uncheck All', 
+		', Save Jobs', 
+        ', Send to friend', 
+	', 
+    ', 
+', 
+', 
+', 
+  		', 
+  		
+  	', 
+  ', 
+  
+    
+  ', 
+  ', 
+		
+			
+			
+				
+
+', 
+$(document).ready(function() {
+	loadLocationsName('locationDropdownId');
+	var fileError = '';
+	$("#fileErrorMsgId").html(fileError);
+	$('#fileErrorMsgId').show();
+	$("#populateCVFormId").validate();
+	$('#uploadId').click(function(e){
+		$("#fileErrorMsgId").html('');
+		$('#fileErrorMsgId').hide();
+		var validationResult = $("#populateCVFormId").valid();
+		if(validationResult){
+			$("#populateCVFormId").submit();
+		}
+	});
+	
+	$('#populateCVFormId').on('keyup', function(e){
+		var keycode = (e.keyCode ? e.keyCode : (e.which ? e.which : e.charCode));
+		if (keycode == 13){
+			e.preventDefault();
+			$("#uploadId").trigger('click');
+		}
+	});	
+});
+', 
+', 
+	.fileSizeError {
+		padding-left:20px !important; background-position:2px 2px !important;
+	}
+', 
+', 
+	', Jobs for your profile', 
+', 
+', 
+	', 
+		', Want more relevant results as per your profile? Upload CV.', 
+		', 
+		', 
+		', 
+		    ', 
+		    ', 
+		    ', 
+		    ', 
+		', 
+	
+		', 
+		', 
+			',  ', 
+			', Location', 
+			', 
+				', -Location-', 
+			', 
+		', 
+		
+		
+			', 
+			', 
+			', 
+			', 
+		', 
+		', 
+	', 
+', 
+
+			
+		
+	  	
+
+
+', 
+	', Featured Employer', 
+', 
+
+', 
+	', 
+		', 
+			
+				', 
+					', 
+				', 
+			
+			
+			', State Bank of India', 
+				
+			',  
+			', 
+		', 
+	', 
+', 
+	  	
+			
+			
+				
+
+', 
+
+', 
+	', Popular Searches', 
+', 
+', 
+	', 
+		',  
+        	
+				', Mechanical Engineer', 
+			
+				', Electrical Engineer', 
+			
+				', Teacher', 
+			
+				', Assistant Professor', 
+			
+				', Accounts', 
+			
+				', Networking', 
+			
+				', Finance', 
+			
+				', SAP', 
+			
+				', Civil Engineer', 
+			
+				', SQL', 
+			
+        ', 
+    ', 
+    ', 
+', 
+			
+		
+	  	
+			
+			
+				
+
+
+', 
+', 
+	', Recent Articles', 
+', 
+', 
+	', 
+		', 
+			', Lasting-impressions', 
+			', All-round-engagement', 
+			', Global-responsibilities', 
+			', Five-Big-reasons', 
+		', 
+	', 	
+', 
+			
+		
+			  	
+	  	
+
+', 
+', 
+	', Ascent Jobs on SMS', 
+', 
+
+', 
+	', 
+		', Search and Apply to jobs from your mobile.', 
+			', Click here',  to know more.
+		', 
+	', 
+', 
+	  	', u"
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+", 
+
+', u"
+googletag.cmd.push(function() {
+googletag.defineSlot('/1064661/ItsMyAscent-200x400', [200, 400], 'div-gpt-ad-1394621354852-0').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+", 
+
+', 
+', 
+', u"
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1394621354852-0'); });
+", 
+', 
+
+	  	
+  ', 
+  ', 
+  
+', 
+		', 
+		', 
+	', 
+	', 
+	', 		
+		', 
+', (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=365646363535523";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));', 
+', 
+	', More ways to explore Ascent', 
+	', 
+	', 
+	', 
+    ', u"
+		window.___gcfg = {
+        	lang: 'en-US'
+      	};
+		(function() {
+        	var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        	po.src = 'https://apis.google.com/js/plusone.js';
+        	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      	})();
+		
+	", 
+ 
+	', 
+
+	', 
+	', 
+	', 
+		', Jobs by Industry', 
+		', 
+			', 
+				', Education Jobs', 
+				', Engineering Jobs', 
+				', Recruitment Agency Jobs', 
+				', Consultancy Jobs', 
+				', Production & Manufacturing Jobs', 
+				', Healthcare & Medical Jobs', 
+				', Construction Jobs', 
+				', IT Software Jobs', 
+				', Hospitality Jobs', 
+				', BPO Jobs', 
+				', Banking & Finance Jobs', 
+				', Travel & Tourism Jobs', 
+				', Real Estate Jobs', 
+				', Government Naukri', 
+				', Automobile Jobs', 
+				', Media Jobs', 
+				', Chemical Jobs', 
+				', IT Hardware & Networking Jobs', 
+				', Retail Jobs', 
+				', Telecom Jobs', 
+				', Insurance Jobs', 
+			', 
+		', 
+	', 
+	
+	
+	', 
+		', Jobs in India', 
+		', 
+			', 
+				', Jobs in Mumbai', 
+				', Jobs in Chennai', 
+				', Jobs in Delhi', 
+				', Jobs in Kolkata', 
+				', Jobs in Bangalore', 
+				', Jobs in Hyderabad', 
+				', Jobs in Pune', 
+				', Jobs in Ahmedabad', 
+				', Jobs in Noida', 
+				', Jobs in Jaipur', 
+				', Jobs in Mangalore', 
+				', Jobs in Nagpur', 
+				', Jobs in Nasik', 
+				', Jobs in Mysore', 
+				', Jobs in Lucknow', 
+				', Jobs in Cochin', 
+				', Jobs in Goa', 
+				', Jobs in Vadodara', 
+				', Jobs in Ghaziabad', 
+				', Jobs in Surat', 
+				', Jobs in Dehradun', 
+			', 
+		', 
+	', 
+	
+	', 
+		', International Jobs', 
+		', 
+			', 
+				', Jobs in Kuwait', 
+				', Jobs in Oman', 
+				', Jobs in Saudi Arabia', 
+				', Jobs in United Arab Emirates', 
+				', Jobs in Qatar', 
+				', Jobs in USA', 
+				', Jobs in UK', 
+				', Jobs at Other Locations', 
+			', 
+		', 
+		
+		', Career Advice Articles', 
+		', 
+			', 
+				', Corporate Life', 
+				', Global Research', 
+				', Leadership', 
+				', Personal Growth', 
+				', Talent & Careers', 
+				', The Chat Room', 
+			', 
+		', 
+		
+		', HR Zone Articles', 
+		', 
+			', 
+				', Global HR Policies', 
+				', Organisational Efficiency', 
+				', Employee Benefits', 
+				', Careers & Training', 
+				', Work Life Balance', 
+			', 
+		', 
+	', 
+	
+	', 
+		', Jobs by Function', 
+		', 
+			', 
+				', Engineering, Civil and',  Architecture', 
+				', Learning & Library', 
+				', Real Estate & Housing', 
+				', Office Administration', 
+				', Sales & Business Dev', 
+				', IT Hardware and Software', 
+				', Finance & Accounting', 
+				', Healthcare & Medical', 
+				', Production and Manufacturing', 
+				', Marketing,Advertising ', 
+				', Hospitality & Tourism', 
+				', ITES BPO KPO Support ', 
+				', Supply Chain,Logistic', 
+				', QA & Testing', 
+				', Human Resources', 
+				', Law, Legal', 
+				', Journalism & Creative', 
+				', Banking & Insurance', 
+				', Aviation', 
+				', Other Categories', 
+			', 
+		', 
+	', 
+	
+	', 
+		', Jobs In IT', 
+		', 
+			', 
+				', Java Jobs', 
+				', .Net Jobs', 
+				', SAP Jobs', 
+				', Oracle Jobs', 
+				', SQL Jobs', 
+				', DBA Jobs', 
+				', Datacenter Jobs', 
+				', Photoshop Jobs', 
+				', Networking Jobs', 
+				', Windows Jobs', 
+				', Linux Jobs', 
+				', ITIL Jobs', 
+				', ISO Jobs', 
+				', Consulting Jobs', 
+				', Testing Jobs', 
+				', CAD Jobs', 
+				', Visual Basic Jobs', 
+				', PHP Jobs', 
+				', Support Jobs', 
+				', Project Management Jobs', 
+				', Microsoft Jobs', 
+			', 
+		', 
+	', 	
+		
+	', 
+	', 
+	', 
+	
+	', 
+		', Information', 
+		', 
+			', 
+				', FAQ', 
+		        ', About Us', 
+	        	', Contact Us', 
+	        	', Report A Bug', 
+	        	 ', Advertise with Us', 
+			', 
+		', 
+	', 	
+	
+	', 
+		',  ', 
+		', 
+			', 
+				', Feedback', 
+		        ', Privacy Policy', 
+		        ', Terms of Use', 
+	        	', Site Map', 
+			', 
+		', 
+	', 
+	
+	', 
+		', Other Timesgroup Sites', 
+		', 
+			', 
+				', Ascent Matcher', 
+				', Times Of India - ePaper', 
+				', Times Of India', 
+			', 
+		', 
+	', 
+	
+	', 
+		',  ', 
+		', 
+			', 
+				', Mumbai Mirror', 
+				', Bangalore Mirror', 
+				', Ahmedabad Mirror', 
+			', 
+		', 
+	', 
+	
+	', 
+		',  ', 
+		', 
+			', 
+				', Pune Mirror', 
+				', Education Times', 
+			', 
+		', 
+	', 	
+	', 
+	', 
+    ', 
+    	', Jobs by Company Name - ', 
+		', A', 
+		', B', 
+		', C', 
+		', D', 
+		', E', 
+		', F', 
+		', G', 
+		', H', 
+		', I', 
+		', J', 
+		', K', 
+		', L', 
+		', M', 
+		', N', 
+		', O', 
+		', P', 
+		', Q', 
+		', R', 
+		', S', 
+		', T', 
+		', U', 
+		', V', 
+		', W', 
+		', X', 
+		', Y', 
+		', Z', 
+		', [0-9]', 
+    ', 
+    
+    ', 
+    
+    	', 
+		', 
+			
+			', 
+		', 
+		
+		
+    	', 
+    	', 
+    		', 
+		', 
+	    ', 
+	    ', 
+			', 
+			', 
+		', 
+		
+    ', 
+        
+    ', 
+    
+    ', 
+    ', 
+    	', 
+    	', 
+    		', 
+    	', 
+    	', 
+    	
+    	', 
+    		 This site is best viewed in 1024x768 resolution in Internet Explorer 9.0, Firefox 4.0+, Chrome 20.0+', 
+        	Copyright 2008 © Bennett, Coleman & Co. Ltd. All rights reserved.
+    	', 
+    	', 
+    ', 
+', 
+', 
+', 
+    document.write(unescape("%3Cscript src='" + (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js' %3E%3C/script%3E"));
+', 
+', 
+  COMSCORE.beacon({
+    c1:2,
+    c2:6036484,
+    c3:"",
+    c4:"",
+    c5:"",
+    c6:"",
+    c15:""
+  });
+', 
+', 
+  ', 
+', 
+', 
+	', 
+	', 
+	', _cc4140.bcp();', 
+']

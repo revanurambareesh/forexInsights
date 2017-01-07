@@ -1,0 +1,905 @@
+[
+    ', 
+body { margin-top: 0; margin-left: 0; margin-right: 0; padding-top: 0; padding-right: 0; padding-left: 0; }
+
+#g_nav { border-bottom:1px solid #ccc; margin-bottom: 9px; }
+
+#g_nav a,
+#g_nav a:visited { color: #00c; }
+
+.navBi { display: -moz-inline-box; display: inline-block; padding: 9px 12px; margin: 0; list-style-type: none; }
+', 
+', 
+', 
+', 
+', 
+#p_nav a.selected { font-weight: bold; text-decoration:none; color: #000 !important; }
+', 
+
+
+', Find Jobs', Find Resumes', Employers / Post Job', 
+', 
+', 
+
+
+#navpromo a,
+#navpromo a:visited {
+color: #f60;
+}
+
+
+#u_nav .login_unconfirmed,
+#u_nav .login_unconfirmed a,
+#u_nav .login_unconfirmed a:visited {
+color: #c00
+}
+
+#u_nav .resume_pending,
+#u_nav .resume_pending a,
+#u_nav .resume_pending a:visited {
+color: #c00
+}
+
+#userOptionsLabel {
+position: relative;
+z-index: 5;
+}
+
+#userOptionsLabel b {
+cursor: pointer;
+text-decoration: underline;
+position: relative;
+z-index: 5;
+}
+
+#userOptionsLabel:active {
+outline: none;
+}
+
+#userOptionsLabel.active {
+padding: 9px 11px;
+margin-bottom: -1px;
+_margin-bottom: 0px;
+border: 1px solid #ccc;
+border-top: 0;
+}
+
+#userOptionsLabel.active .arrowStub {
+border-width: 0 3px 3px;
+_border-width: 0px 3px 4px;
+border-color: transparent;
+top: -2px;
+border-style: dashed dashed solid;
+}
+
+#userOptionsLabel.active .halfPxlFix {
+background: #fff;
+bottom: -3px;
+height: 6px;
+left: 0;
+position: absolute;
+right: 0;
+border: 1px solid #fff;
+}
+
+.arrowStub {
+position: relative;
+border-style: solid dashed dashed;
+border-color: transparent;
+display: -moz-inline-box;
+display: inline-block;
+font-size: 0;
+height: 0;
+line-height: 0;
+width: 0;
+left: 4px;
+border-top-width: 3px;
+border-bottom-width: 0;
+border-right-width: 3px;
+padding-top: 1px;
+top: -1px;
+}
+
+#userOptions {
+z-index: 2;
+visibility: hidden;
+position: absolute;
+right: 0;
+x_right: -1px;
+top: 100%;
+padding: 9px 15px;
+border: 1px solid #ccc;
+background: #fff;
+min-width: 150px;
+_width: 150px;
+text-align: left;
+}
+
+#userOptions.open {
+visibility: visible;
+}
+
+.userOptionItem {
+margin: 6px 0;
+}
+
+.userOptionItem a {
+white-space: nowrap;
+}
+
+.userOptionGroup {
+border-top: 1px solid #e8e8e8;
+margin-top: 12px;
+}
+
+.userNameRepeat {
+color: #a8a8a8;
+padding-right: 48px;
+font-weight: bold;
+}
+
+.userOptionGroupHeader {
+font-weight: bold;
+margin: 6px 0;
+}
+
+', 
+', 
+', u"
+function isUserOptionsOpen() {
+return document.getElementById('userOptions').className === 'open';
+}
+
+function hideUserOptions() {
+destroyKeyboardTrap();
+document.getElementById('userOptions').className = '';
+document.getElementById('userOptionsLabel').className = 'navBi';
+document.getElementById('userOptionsLabel').setAttribute('aria-label', 'open user action drop down men);
+}
+function toggleUserOptions(e) {
+var options = document.getElementById('userOptions');
+var label = document.getElementById('userOptionsLabel');
+if (isUserOptionsOpen()) {
+hideUserOptions();
+if (!e.keyCode) {
+label.blur();
+}
+} else {
+options.className = 'open';
+label.className = 'navBi active navMenuDropDown';
+label.setAttribute('aria-label', 'close user action drop down men);
+document.onclick = function() {
+hideUserOptions();
+document.onclick = function() {
+};
+};
+if (e.keyCode && (e.keyCode == 13 || e.keyCode == 32)) {
+var fL = document.getElementById('userOptions').getElementsByTagName('a')[0];
+if (fL) {
+fL.focus();
+}
+}
+else {
+label.blur();
+}
+createKeyboardTrap(document.getElementById('user_actions'), 'navMenuDropDown', hideUserOptions);
+}
+stopPropagation(e);
+
+}
+
+
+function createKeyboardTrap(containingElement, dropdownLinkClass) {
+var dropdownLinks = containingElement.getElementsByClassName(dropdownLinkClass);
+var numLinks = dropdownLinks.length;
+
+document.onkeydown = function(e) {
+if (e.keyCode === 9) {
+if (e.target === dropdownLinks[0] && e.shiftKey) {
+dropdownLinks[numLinks -1].focus();
+e.preventDefault();
+} else if (e.target === dropdownLinks[numLinks -1] && !e.shiftKey) {
+dropdownLinks[0].focus();
+e.preventDefault()
+}
+} else if (e.keyCode === 27) {
+hideUserOptions();
+}
+}
+}
+
+function destroyKeyboardTrap() {
+document.onkeydown = null;
+}
+
+function stopPropagation(e) {
+var e = e || window.event;
+e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+}
+
+", 
+', u"
+
+function regExpEscape(s) {
+    return String(s).replace(/([-()\[\]{}+?*.$\^|,:#<!\\])/g, '\\$1').
+            replace(/\x08/g, '\\x08');
+}
+
+
+function appendParamsOnce(url, params) {
+    var useParams = params.replace(/^(\?|\&)/, '');
+    if (url.match(new RegExp('[\\?|\\&]' + regExpEscape(useParams))) == null) {
+        return url += (url.indexOf('?') > 0 ? '&' : '?' ) + useParams;
+    }
+    return url;
+}
+
+", 
+', 
+
+', 
+', Upload your resume', 
+', 
+', Sign in', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    #g_nav {
+        position: relative;
+    }
+    #float_logo {
+        background: url("/images/indeed_white.png") no-repeat left center;
+        background-size: 109px 30px;
+        display: inline-block;
+        width: 109px;
+        height: 30px;
+        position: absolute;
+        top: 12px;
+        left: 9px;
+        z-index: 15000;
+    }
+
+    @media (-webkit-min-device-pixel-ratio: 2),
+    (   min--moz-device-pixel-ratio: 2),
+    (     -o-min-device-pixel-ratio: 2/1),
+    (        min-device-pixel-ratio: 2),
+    (                min-resolution: 192dpi),
+    (                min-resolution: 2dppx) {
+        #float_logo {
+            background: url("/images/indeed_white@2x.png") no-repeat left center;
+            background-size: 109px 30px;
+        }
+    }
+
+    
+    #user_actions #userOptionsLabel.active {
+        border: 0;
+        line-height: 58px;
+        padding: 0 11px;
+        margin-bottom: 0;
+    }
+    #user_actions #userOptionsLabel {
+        line-height: 58px;
+        padding: 0 11px;
+    }
+    #g_nav td {
+        text-align: right;
+        height: 58px;
+    }
+
+    
+        #user_actions .navBi a#userOptionsLabel {
+            line-height: initial;
+        }
+    
+    #user_actions #userOptions {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+    
+    #g_nav td:last-child {
+        width: 1%;
+    }
+    
+    div#g_nav {
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+    
+            #g_nav #p_nav a:link,
+            #g_nav #p_nav a:visited,
+            .navBi #navpromo a:link,
+            .navBi #navpromo a:visited,
+            #g_nav #u_nav .navBi a:link,
+            #g_nav #u_nav .navBi a:visited
+            ,#user_actions:not(.loggedin) .navBi #userOptionsLabel
+            {
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+            }
+            #g_nav #p_nav a:hover,
+            .navBi #navpromo a:hover,
+            #g_nav #u_nav .navBi a:hover,
+            #user_actions:not(.loggedin) .navBi a#userOptionsLabel:hover
+            {
+                text-decoration: underline;
+            }
+            
+            #user_actions #userOptionsLabel b {
+                text-decoration: none;
+                color: #ffffff;
+                font-weight: normal;
+            }
+            #user_actions #userOptionsLabel.active b {
+                color: #ffffff;
+            }
+            
+            #g_nav tr {
+                background: #2164f3;
+            }
+            #user_actions #userOptionsLabel.active {
+                background: #1251d7;
+            }
+            #user_actions #userOptionsLabel.active span.halfPxlFix {
+                display: none;
+            }
+            
+            #user_actions #userOptionsLabel .arrowStub  {
+                border-top-color: #ffffff;
+            }
+            #user_actions #userOptionsLabel.active .arrowStub {
+                border-bottom-color: #ffffff;
+            }
+            
+            #g_nav #p_nav a.selected {
+                font-weight: normal;
+                color: rgb(255, 255, 255) !important;
+            }
+        ', 
+', #userOptions {z-index: 10000;}', Holtec International', 16 reviews', About', 16', Reviews', 32', Salaries', Photos', 12', Jobs', Holtec International Employee Reviews', Job Title', (all)', Welder - 3', Engineer - 2', Design Engineer - 1', Designer - 1', Driver - 1', Electrical Designer - 1', Fitter - 1', Operator - 1', Project Engineer - 1', Senior Engineer - 1', Senior Welder - 1', Site Project Manager - 1', Welder/Fitter - 1', Location', (all)', United States - 16',     East Pittsburgh, PA - 1',     Marlton, NJ - 7',     Pittsburgh, PA - 2',     Turtle Creek, PA - 5', See reviews about:', Work-Life Balance', Pay & Benefits', Job Security & Advancement', Management', Culture', Showing all 16 reviews',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Pay is great but a hard place to work', Welder II',  (Former Employee) \u2013  ', Turtle Creek, PA',  \u2013 ', January 4, 2017', Depending on who you are not what you can do you might be treated with respect and have opportunities to advance or you may be discriminated against based on whether the supervisor likes you. Upper management are very difficult to please.  They tell you to stop, think and have a questioning attitude, but if you question anything all you receive is an attitude. If a mistake is made the company never takes responsibility for anything.  Even if its due to mistakes on the prints or improperly labeled materials the workers are always at fault.  You can get blamed for mistakes made by other workers.  Management rules with an iron fist and negative criticism.', Pros', Pay and benefits are very good', Cons', Workers are constantly treated with negetive feedback', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', poor management', Plasma Burn Table Operator',  (Former Employee) \u2013  ', Turtle Creek, PA',  \u2013 ', February 5, 2016', Very unorganized, their paperwork is never right and they like to micro manage. Most of the supervisor have no idea what it takes to get the job done. HR is anything but!', Pros', Good pay', Cons', Management', Was this review helpful?', Yes', - ', 4', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Good place to learn a lot quickly. Very difficult to balance work/family life.', senior engineer',  (Current Employee) \u2013  ', Marlton, NJ',  \u2013 ', April 20, 2015', Management has strong technical ability; however there is not a good management style. Work is not well balanced or monitored.', Was this review helpful?', Yes', - ', 8', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Welder', welder',  (Former Employee) \u2013  ', East Pittsburgh, PA',  \u2013 ', December 24, 2014', u"I have worked at Holtec for sometime and the aupervisors do not work with one another they try and cause drama between the 3 shifts and make us work against instead of as a team the supervisors also really don't know what they are doing they just wing it everyday the rework is unbelievable and don't know how the company makes money there are a lot of welder a that think they know what there are doing there are a couple good guys left that can help.", Pros', Benefits but after the new contract who knows', Was this review helpful?', Yes', - ', 9', No', - ', 2', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Very good, low stress, friendly working environment !', Controls Designer, AutoCAD Electrical',  (Former Employee) \u2013  ', Marlton, NJ',  \u2013 ', July 11, 2014', u"Excellent  day to day working conditions, very friendly very diversified international staff, no language barriers! The one and only problem I had there was, I was their first Electrical Department, they were not ready, logistically, and they had not adopted a set of drafting standards for electrical work! I can't stress how pleasant it was to work there even with the logistical problems!", Pros', Very good, low stress, friendly working environment !', Cons', No established drafting standards, changed like a sheet in a huricane', Was this review helpful?', Yes', - ', 6', No', - ', 6', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', mismanaged', Driver',  (Current Employee) \u2013  ', Turtle Creek, PA',  \u2013 ', June 3, 2014', As a recently hired Employee of Holtec I am very disappointed in the work culture. They have a very poor training program, essentially you are thrown to the wolves to fend for yourself. They have a "figure it out for yourself" attitude. There is very poor communication between those in supervisory positions. Often times I find myself with nothing to do, I ask for guidance and am told to "keep myself busy". Pay rates are certainly higher than minimum wage, but NOT worth the aggravation.', Pros', ???', Cons', Work environment, Management, Training program', Was this review helpful?', Yes', - ', 19', No', - ', 4', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Not a good place to work', Designer',  (Former Employee) \u2013  ', Marlton, NJ',  \u2013 ', March 31, 2014', u"Management expects you to work extra hours to stay on top of you work load.  Problem is the workload is unrealistic so you are always behind unless you work tons of overtime for no additional pay.  On top of that the poor management team doesn't know how to prioritize becaue they want it all done now and therefore many people rush to meet the unrealistic deadlines and then they make a bunch of mistakes that affect the other groups.  Those groups in turn are then expected to stay late and revise everything because they are now going to be late due to all the revisions.  Then people rush again to meet this new deadline and make additional mistakes that cause more issues.", Pros', good healthcare, interesting work', Cons', not a positive work environment, company is disorganized/poor scheduling, poor management, unrealistic deadlines, unrealistic workloads', Was this review helpful?', Yes', - ', 25', No', - ', 4', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Decent company to work for', Site Services Project Manager',  (Current Employee) \u2013  ', Martlon, NJ',  \u2013 ', November 13, 2013', a lot of turnover for a large company.  No overtime, low bonus scales, and a lot of firings.', Was this review helpful?', Yes', - ', 25', No', - ', 6', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Horrible culture', Fitter',  (Current Employee) \u2013  ', Turtle Creek, PA',  \u2013 ', October 3, 2013', u"This company pays well.  That is literally the one good thing about working there.  It seems as if supervisors are selected deliberately on the abrasiveness of their personality, and that people skills are seen as a detriment.  I simply cannot wait to find a suitable replacement for this job.  I would only recommend working here as a stopgap until something better becomes available.  As I read over this review, I began to wonder if I'd been too kind...", Pros', pay, coworkers', Cons', managers, and everything else', Was this review helpful?', Yes', - ', 41', No', - ', 6', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', welding steel', welder',  (Former Employee) \u2013  ', turtle creek pa',  \u2013 ', July 30, 2013', I had fun on my job. if i need help there was someone there to help. i liked what i did there.', Was this review helpful?', Yes', - ', 9', No', - ', 16', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Great place to learn and build your career', Design Engineer',  (Current Employee) \u2013  ', Marlton, NJ',  \u2013 ', May 16, 2013', It is a very flat organization which ends up providing anyone the opportunity to grow and build their career within the organization. You get the opportunity to work in places around the world. I came on 3 years ago and was entrusted with as much responsibility as I was willing to take on. The owners and management of the company expect a lot, but they will provide you with good compensation for your time and efforts. ', Pros', Flat org., high level of responsibilities, growing FAST', Cons', Occasional long hours', Was this review helpful?', Yes', - ', 5', No', - ', 11', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', good benefits and pay!  No supervision at all!', welder',  (Former Employee) \u2013  ', pittsburgh, pa',  \u2013 ', May 9, 2013', Excelent benefits and pay.  Supervisor look down on you.  Supervisors donot work as a team!  To many chiefs!   Upper management will not take any advise from the union workers.  ', Pros', good pay', Cons', supervisor are not experienced at there job', Was this review helpful?', Yes', - ', 31', No', - ', 1', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Challenging and Rewarding Place to Work', Project Engineer ',  (Current Employee) \u2013  ', Marlton',  \u2013 ', May 9, 2013', Holtec is a well run company that has continued to grow over time.  I started 7 years ago and have seen the company develop positively. The work is very challenging and I enjoy what I do and the teams that I interact with at the firm.  You can grow into jobs and advance in the company if you have the desire and the skillset.', Pros', An owner and management that will listen, Not many slackers as the culture does not allow it.', Was this review helpful?', Yes', - ', 7', No', - ', 18', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Productive and fast paced place', Licensing Engineer',  (Current Employee) \u2013  ', Marlton, NJ',  \u2013 ', March 7, 2013', Wearing different hats every day', Be ready to immediately understand a new project and prepare specifications in a short time (within couple of days)', Was this review helpful?', Yes', - ', 7', No', - ', 8', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Interesting work, good salary, so-so benefits.', engineering',  (Former Employee) \u2013  ', Marlton, NJ',  \u2013 ', February 1, 2013', u"Work is varied and interesting. CEO truly has an open door policy and doesn't mind when you tell him he's wrong. Freedom to make decisions and work independently.", Co-workers were wonderful - especially in the design group, purchasing and IT.', Poor communication.', u"Management does not carry through CEO's vision of respect towards others and professional behavior - especially Quality Assurance.", Benefits are iffy. This is the fault of their insurance admin. and not the healthcare provider.I was laid off with no warning and no severence.', Free coffee. Frequent free lunches.', Training and mentoring of new employees is rare, infrequent and inconsistent.', Pros', good pay, interesting work', Cons', management, benefits', Was this review helpful?', Yes', - ', 12', No', - ', 8', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Dedicated and positive work environment', Welder/Fitter',  (Current Employee) \u2013  ', Pittsburgh, PA',  \u2013 ', August 15, 2012', Start at either 7am or on second shift at 3pm. Recieve work orders from upper management. I either work solo or with a partner. One day I may be welding all day or grinding and prep. Management is always on hand to guide or answer simple questions. Co-workers are always in a team mindset. Work together to find best solution to any obstical. The hardest part of job is heat in summer, poor ventilation while welding. Welding and working with team players.', Pros', good pay', Cons', short breaks and no incentives', Was this review helpful?', Yes', - ', 10', No', - ', 13', Report', Review this company', Review this company', Overall rating', 3.1', Based on ', 16',  reviews', 5 stars', 4 stars', 3 stars', 2 stars', 1 star', Ratings by category', Work/Life Balance', 3.1', Compensation/Benefits', 3.7', Job Security/Advancement', 2.7', Management', 2.5', Culture', 2.5', Holtec International Reviews by Job Title', Welder',  (3)', Engineer',  (2)', Design Engineer',  (1)', Designer',  (1)', Driver',  (1)', Holtec International Reviews by Location', Marlton, NJ', Turtle Creek, PA', Pittsburgh, PA', East Pittsburgh, PA', indeed.init('1b5s4ng5n0mtc5i9', '\/\/t.indeed.com\/s\/313acc1\/turnstile-compiled.js', [[1,null],[-1,null],[1,null],[-1,null],[-1,null],[2,null],[1,null],[-1,null],[1,null],[1,null],[1,null],[-1,null],[1,null],[-1,null],[0,null],[0,null],[3,null],[1,null],[1,null],[0,null],[0,null],[1,null],[-1,null],[0,null],[2,null],[-1,null],[1,null],[-1,null],[-1,null],[-1,null],[1,null],[1,null],[1,null],[1,null],[-1,null],[2,null],[-1,null],[1,null],[1,null],[1,null],[1,null],[0,null],[-1,null],[-1,null],[-1,null],[1,null],[-1,"jobclickOriginal"],[-1,null],[-1,null],[1,null],[0,null],[-1,null],[-1,null],[1,null],[1,null],[3,null],[2,null],[0,null],[-1,null],[1,null],[1,null],[1,null],[-1,null],[0,null],[-1,null],[1,null],[1,null],[-1,null],[-1,null],[-1,null],[-1,null],[1,null],[1,null],[0,null],[3,null],[1,null],[0,null],[-1,null],[-1,null],[1,null],[-1,null],[-1,null],[1,null],[4,null],[-1,null],[0,null],[0,null],[-1,null],[-1,null],[-1,null],[1,null],[-1,null],[-1,null],[1,null],[1,null],[-1,null],[-1,[]],[-1,null],[3,null],[3,null],[-1,null],[-1,null],[1,null],[-1,null],[2,null],[0,null],[-1,null],[2,null],[1,null],[3,null],[-1,null],[-1,null],[-1,null],[3,null],[-1,null],[-1,null],[2,null],[-1,null],[-1,null],[1,null],[0,null],[-1,null]]); indeed.pc.init( '1b5s4ng5n0mtc5i9', 'Holtec International', '44a00ef97687fe2b', 'reviews', 'be32d9662e09303dc55792464fbe6de8',false, '', '',false);', u"indeed.reviews.initialize( '1b5s4ng5n0mtc5i9',false,false, '44a00ef97687fe2b', 'iFKXAAKfVfbD6licfXBHykWHxKGj0k59' );", 
+#secondary_nav a,#secondary_nav a:link,#secondary_nav a:visited{text-decoration:none}#secondary_nav a:hover{text-decoration:underline}.comment_bubble a,.comment_bubble a:link,.comment_bubble a:visited{color:#77c}.footer a,.footer a:link,.footer a:visited{color:#77c}.footer .sl:visited{color:#77c}.jsf .sl{color:#77c}.sl,.sl:link,.sl:visited{color:#77c}#cookie-alert .learn-more,#cookie-alert .learn-more :visited{color:#77c}#jobsearch .sl{color:#77c}#secondary_nav a,#secondary_nav a:link,#secondary_nav a:visited{color:#77c}.arrowStub{border-top-color:#666}.carouselInlineAd .cmp-note{color:#6F6F6F}.cmp_header{color:#666}.cmp_meta{color:#666}.comment_bubble{color:#666}.date,.visits{color:#808080}.dd-disabled{color:#666}.dd-disabled .dd-button-arrow{color:#666}.hp_welcome_message{color:#6F6F6F}.inwrap input{border-bottom-color:#aaa;border-\@LINE_END\@-color:#aaa}.ipadPromoCopy{color:#666}.itaText{color:#6F6F6F}.jsf .label{color:#aaa}.location{color:#666}.nps-popover-x-span{color:#666}.popover-x-span{color:#666}.rjl{color:#666}.rsc{color:#aaa}.rsh{color:#6F6F6F}.sjh{color:#666}.sup_grey{color:#aaa}#fromageMsg{color:#666}#jobsearch .label,#jobsearch .label label{color:#aaa}#not-likely-div{color:#808080}#original_radius_result{color:#666}#question-intro-div{color:#808080}#userOptionsLabel.active b{color:#666}#userOptionsLabel.active .arrowStub{border-bottom-color:#666}#very-likely-div{color:#808080}.jasxcolorcontrasttst-blueOnly .comment_bubble a,.jasxcolorcontrasttst-blueOnly .comment_bubble a:link,.jasxcolorcontrasttst-blueOnly .comment_bubble a:visited{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly .footer a,.jasxcolorcontrasttst-blueOnly .footer a:link,.jasxcolorcontrasttst-blueOnly .footer a:visited{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly .footer .sl:visited{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly .jsf .sl{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly .sl,.jasxcolorcontrasttst-blueOnly .sl:link,.jasxcolorcontrasttst-blueOnly .sl:visited{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly #cookie-alert .learn-more,.jasxcolorcontrasttst-blueOnly #cookie-alert .learn-more :visited{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly #jobsearch .sl{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly #secondary_nav a,.jasxcolorcontrasttst-blueOnly #secondary_nav a:link,.jasxcolorcontrasttst-blueOnly #secondary_nav a:visited{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly .arrowStub{border-top-color:#666}.jasxcolorcontrasttst-blueOnly .carouselInlineAd .cmp-note{color:#6F6F6F}.jasxcolorcontrasttst-blueOnly .cmp_header{color:#666}.jasxcolorcontrasttst-blueOnly .cmp_meta{color:#666}.jasxcolorcontrasttst-blueOnly .comment_bubble{color:#666}.jasxcolorcontrasttst-blueOnly .date,.jasxcolorcontrasttst-blueOnly .visits{color:#808080}.jasxcolorcontrasttst-blueOnly .dd-disabled{color:#666}.jasxcolorcontrasttst-blueOnly .dd-disabled .dd-button-arrow{color:#666}.jasxcolorcontrasttst-blueOnly .hp_welcome_message{color:#6F6F6F}.jasxcolorcontrasttst-blueOnly .inwrap input{border-bottom-color:#aaa;border-\@LINE_END\@-color:#aaa}.jasxcolorcontrasttst-blueOnly .ipadPromoCopy{color:#666}.jasxcolorcontrasttst-blueOnly .itaText{color:#6F6F6F}.jasxcolorcontrasttst-blueOnly .jsf .label{color:#aaa}.jasxcolorcontrasttst-blueOnly .location{color:#666}.jasxcolorcontrasttst-blueOnly .nps-popover-x-span{color:#666}.jasxcolorcontrasttst-blueOnly .popover-x-span{color:#666}.jasxcolorcontrasttst-blueOnly .rjl{color:#666}.jasxcolorcontrasttst-blueOnly .rsc{color:#aaa}.jasxcolorcontrasttst-blueOnly .rsh{color:#6F6F6F}.jasxcolorcontrasttst-blueOnly .sjh{color:#666}.jasxcolorcontrasttst-blueOnly .sup_grey{color:#aaa}.jasxcolorcontrasttst-blueOnly #fromageMsg{color:#666}.jasxcolorcontrasttst-blueOnly #jobsearch .label,.jasxcolorcontrasttst-blueOnly #jobsearch .label label{color:#aaa}.jasxcolorcontrasttst-blueOnly #not-likely-div{color:#808080}.jasxcolorcontrasttst-blueOnly #original_radius_result{color:#666}.jasxcolorcontrasttst-blueOnly #question-intro-div{color:#808080}.jasxcolorcontrasttst-blueOnly #userOptionsLabel.active b{color:#666}.jasxcolorcontrasttst-blueOnly #userOptionsLabel.active .arrowStub{border-bottom-color:#666}.jasxcolorcontrasttst-blueOnly #very-likely-div{color:#808080}.jasxcolorcontrasttst-greyOnly .comment_bubble a,.jasxcolorcontrasttst-greyOnly .comment_bubble a:link,.jasxcolorcontrasttst-greyOnly .comment_bubble a:visited{color:#77c}.jasxcolorcontrasttst-greyOnly .footer a,.jasxcolorcontrasttst-greyOnly .footer a:link,.jasxcolorcontrasttst-greyOnly .footer a:visited{color:#77c}.jasxcolorcontrasttst-greyOnly .footer .sl:visited{color:#77c}.jasxcolorcontrasttst-greyOnly .jsf .sl{color:#77c}.jasxcolorcontrasttst-greyOnly .sl,.jasxcolorcontrasttst-greyOnly .sl:link,.jasxcolorcontrasttst-greyOnly .sl:visited{color:#77c}.jasxcolorcontrasttst-greyOnly #cookie-alert .learn-more,.jasxcolorcontrasttst-greyOnly #cookie-alert .learn-more :visited{color:#77c}.jasxcolorcontrasttst-greyOnly #jobsearch .sl{color:#77c}.jasxcolorcontrasttst-greyOnly #secondary_nav a,.jasxcolorcontrasttst-greyOnly #secondary_nav a:link,.jasxcolorcontrasttst-greyOnly #secondary_nav a:visited{color:#77c}.jasxcolorcontrasttst-greyOnly .arrowStub{border-top-color:#666}.jasxcolorcontrasttst-greyOnly .carouselInlineAd .cmp-note{color:#666}.jasxcolorcontrasttst-greyOnly .cmp_header{color:#666}.jasxcolorcontrasttst-greyOnly .cmp_meta{color:#666}.jasxcolorcontrasttst-greyOnly .comment_bubble{color:#666}.jasxcolorcontrasttst-greyOnly .date,.jasxcolorcontrasttst-greyOnly .visits{color:#666}.jasxcolorcontrasttst-greyOnly .dd-disabled{color:#666}.jasxcolorcontrasttst-greyOnly .dd-disabled .dd-button-arrow{color:#666}.jasxcolorcontrasttst-greyOnly .hp_welcome_message{color:#666}.jasxcolorcontrasttst-greyOnly .inwrap input{border-bottom-color:#666;border-\@LINE_END\@-color:#666}.jasxcolorcontrasttst-greyOnly .ipadPromoCopy{color:#666}.jasxcolorcontrasttst-greyOnly .itaText{color:#666}.jasxcolorcontrasttst-greyOnly .jsf .label{color:#666}.jasxcolorcontrasttst-greyOnly .location{color:#666}.jasxcolorcontrasttst-greyOnly .nps-popover-x-span{color:#666}.jasxcolorcontrasttst-greyOnly .popover-x-span{color:#666}.jasxcolorcontrasttst-greyOnly .rjl{color:#666}.jasxcolorcontrasttst-greyOnly .rsc{color:#666}.jasxcolorcontrasttst-greyOnly .rsh{color:#666}.jasxcolorcontrasttst-greyOnly .sjh{color:#666}.jasxcolorcontrasttst-greyOnly .sup_grey{color:#666}.jasxcolorcontrasttst-greyOnly #fromageMsg{color:#666}.jasxcolorcontrasttst-greyOnly #jobsearch .label,.jasxcolorcontrasttst-greyOnly #jobsearch .label label{color:#666}.jasxcolorcontrasttst-greyOnly #not-likely-div{color:#666}.jasxcolorcontrasttst-greyOnly #original_radius_result{color:#666}.jasxcolorcontrasttst-greyOnly #question-intro-div{color:#666}.jasxcolorcontrasttst-greyOnly #userOptionsLabel.active b{color:#666}.jasxcolorcontrasttst-greyOnly #userOptionsLabel.active .arrowStub{border-bottom-color:#666}.jasxcolorcontrasttst-greyOnly #very-likely-div{color:#666}.jasxcolorcontrasttst-greyAndBlue .comment_bubble a,.jasxcolorcontrasttst-greyAndBlue .comment_bubble a:link,.jasxcolorcontrasttst-greyAndBlue .comment_bubble a:visited{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue .footer a,.jasxcolorcontrasttst-greyAndBlue .footer a:link,.jasxcolorcontrasttst-greyAndBlue .footer a:visited{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue .footer .sl:visited{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue .jsf .sl{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue .sl,.jasxcolorcontrasttst-greyAndBlue .sl:link,.jasxcolorcontrasttst-greyAndBlue .sl:visited{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue #cookie-alert .learn-more,.jasxcolorcontrasttst-greyAndBlue #cookie-alert .learn-more :visited{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue #jobsearch .sl{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue #secondary_nav a,.jasxcolorcontrasttst-greyAndBlue #secondary_nav a:link,.jasxcolorcontrasttst-greyAndBlue #secondary_nav a:visited{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue .arrowStub{border-top-color:#666}.jasxcolorcontrasttst-greyAndBlue .carouselInlineAd .cmp-note{color:#666}.jasxcolorcontrasttst-greyAndBlue .cmp_header{color:#666}.jasxcolorcontrasttst-greyAndBlue .cmp_meta{color:#666}.jasxcolorcontrasttst-greyAndBlue .comment_bubble{color:#666}.jasxcolorcontrasttst-greyAndBlue .date,.jasxcolorcontrasttst-greyAndBlue .visits{color:#666}.jasxcolorcontrasttst-greyAndBlue .dd-disabled{color:#666}.jasxcolorcontrasttst-greyAndBlue .dd-disabled .dd-button-arrow{color:#666}.jasxcolorcontrasttst-greyAndBlue .hp_welcome_message{color:#666}.jasxcolorcontrasttst-greyAndBlue .inwrap input{border-bottom-color:#666;border-\@LINE_END\@-color:#666}.jasxcolorcontrasttst-greyAndBlue .ipadPromoCopy{color:#666}.jasxcolorcontrasttst-greyAndBlue .itaText{color:#666}.jasxcolorcontrasttst-greyAndBlue .jsf .label{color:#666}.jasxcolorcontrasttst-greyAndBlue .location{color:#666}.jasxcolorcontrasttst-greyAndBlue .nps-popover-x-span{color:#666}.jasxcolorcontrasttst-greyAndBlue .popover-x-span{color:#666}.jasxcolorcontrasttst-greyAndBlue .rjl{color:#666}.jasxcolorcontrasttst-greyAndBlue .rsc{color:#666}.jasxcolorcontrasttst-greyAndBlue .rsh{color:#666}.jasxcolorcontrasttst-greyAndBlue .sjh{color:#666}.jasxcolorcontrasttst-greyAndBlue .sup_grey{color:#666}.jasxcolorcontrasttst-greyAndBlue #fromageMsg{color:#666}.jasxcolorcontrasttst-greyAndBlue #jobsearch .label,.jasxcolorcontrasttst-greyAndBlue #jobsearch .label label{color:#666}.jasxcolorcontrasttst-greyAndBlue #not-likely-div{color:#666}.jasxcolorcontrasttst-greyAndBlue #original_radius_result{color:#666}.jasxcolorcontrasttst-greyAndBlue #question-intro-div{color:#666}.jasxcolorcontrasttst-greyAndBlue #userOptionsLabel.active b{color:#666}.jasxcolorcontrasttst-greyAndBlue #userOptionsLabel.active .arrowStub{border-bottom-color:#666}.jasxcolorcontrasttst-greyAndBlue #very-likely-div{color:#666}
+', 
+', 
+', 
+', 
+
+', 
+', 
+
+', For India jobs, visit ', Indeed India', Jobs',  - ', Browse Companies',  - ', Salaries',  - ', Trends',  - ', Forums',  - ', u"
+var jobsProductLink = document.getElementById('jobs_product_link');
+document.getElementById('companies_product_link').onclick = function() { window.location = '/Best-Places-to-Work?campaignid=footer'; return false;};", 
+
+', Browse Jobs',  - ', Tools',  - ', API',  - ', About',  - ', Help Center', 
+', 
+#footer-legal {
+margin-top: 10px;
+font-size: 9pt;
+}
+', 
+', 
+', ©2017 Indeed - ', Cookies, Privacy and Terms', 
+', 
+', 
+', 
+', u"
+PENDING_ANALYTICS_VARS = window.PENDING_ANALYTICS_VARS || [];
+PENDING_ANALYTICS_VARS[PENDING_ANALYTICS_VARS.length] = ['_setCustomVar', 1, 'acmeTest', 'true', 3];
+", 
+', u"
+PENDING_ANALYTICS_VARS = window.PENDING_ANALYTICS_VARS || [];
+PENDING_ANALYTICS_VARS[PENDING_ANALYTICS_VARS.length] = ['_setCustomVar', 5, 'loggedIn', 'false', 3];
+", 
+', u"
+        var ga_domains = [];
+        ga_domains.push('indeed.co.in');ga_domains.push('indeed.l);ga_domains.push('indeed.fr');ga_domains.push('indeed.de');ga_domains.push('indeed.com.br');ga_domains.push('indeed.co.uk');ga_domains.push('indeed.hk');ga_domains.push('indeed.fi');ga_domains.push('indeed.pt');ga_domains.push('indeed.jp');ga_domains.push('indeed.com');ga_domains.push('indeed.com.sg');ga_domains.push('indeed.nl');ga_domains.push('indeed.com.pk');ga_domains.push('indeed.cl');ga_domains.push('indeed.es');ga_domains.push('indeed.co.ve');ga_domains.push('indeed.ae');ga_domains.push('indeed.com.mx');ga_domains.push('indeed.com.my');ga_domains.push('indeed.ch');ga_domains.push('indeed.com.co');ga_domains.push('indeed.com.ph');ga_domains.push('indeed.co.za');ga_domains.push('indeed.ie');ga_domains.push('indeed.com.a);ga_domains.push('indeed.ca');ga_domains.push('indeed.com.pe');
+
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        var ga = ga || [];
+        ga('create', 'UA-90780-1', 'auto', {
+            'allowLinker': true
+        });
+        ga('require', 'linkid');
+        ga('require', 'linker');
+        ga('linker:autoLink', ga_domains, false, true);
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+
+        
+        (function () {
+            if (window.PENDING_ANALYTICS_VARS && window.PENDING_ANALYTICS_VARS.length > 0) {
+                for (var i in PENDING_ANALYTICS_VARS) {
+                    ga('set', PENDING_ANALYTICS_VARS[i][2], PENDING_ANALYTICS_VARS[i][3]);
+                }
+            }
+        })();
+    ", 
+', 
+', 
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+            document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '579216298929618');
+    fbq('track', "PageView");', 
+', 
+', 
+', 
+var _comscore = _comscore || [];
+_comscore.push({ c1: "2", c2: "6486505", c4:"www.indeed.com/cmp/Holtec-International/reviews", c15:"1b5s4ng5h4et2csl"});
+(function() { var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true; s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();
+', 
+', 
+', 
+', 
+'][
+    ', 
+body { margin-top: 0; margin-left: 0; margin-right: 0; padding-top: 0; padding-right: 0; padding-left: 0; }
+
+#g_nav { border-bottom:1px solid #ccc; margin-bottom: 9px; }
+
+#g_nav a,
+#g_nav a:visited { color: #00c; }
+
+.navBi { display: -moz-inline-box; display: inline-block; padding: 9px 12px; margin: 0; list-style-type: none; }
+', 
+', 
+', 
+', 
+', 
+#p_nav a.selected { font-weight: bold; text-decoration:none; color: #000 !important; }
+', 
+
+
+', Find Jobs', Find Resumes', Employers / Post Job', 
+', 
+', 
+
+
+#navpromo a,
+#navpromo a:visited {
+color: #f60;
+}
+
+
+#u_nav .login_unconfirmed,
+#u_nav .login_unconfirmed a,
+#u_nav .login_unconfirmed a:visited {
+color: #c00
+}
+
+#u_nav .resume_pending,
+#u_nav .resume_pending a,
+#u_nav .resume_pending a:visited {
+color: #c00
+}
+
+#userOptionsLabel {
+position: relative;
+z-index: 5;
+}
+
+#userOptionsLabel b {
+cursor: pointer;
+text-decoration: underline;
+position: relative;
+z-index: 5;
+}
+
+#userOptionsLabel:active {
+outline: none;
+}
+
+#userOptionsLabel.active {
+padding: 9px 11px;
+margin-bottom: -1px;
+_margin-bottom: 0px;
+border: 1px solid #ccc;
+border-top: 0;
+}
+
+#userOptionsLabel.active .arrowStub {
+border-width: 0 3px 3px;
+_border-width: 0px 3px 4px;
+border-color: transparent;
+top: -2px;
+border-style: dashed dashed solid;
+}
+
+#userOptionsLabel.active .halfPxlFix {
+background: #fff;
+bottom: -3px;
+height: 6px;
+left: 0;
+position: absolute;
+right: 0;
+border: 1px solid #fff;
+}
+
+.arrowStub {
+position: relative;
+border-style: solid dashed dashed;
+border-color: transparent;
+display: -moz-inline-box;
+display: inline-block;
+font-size: 0;
+height: 0;
+line-height: 0;
+width: 0;
+left: 4px;
+border-top-width: 3px;
+border-bottom-width: 0;
+border-right-width: 3px;
+padding-top: 1px;
+top: -1px;
+}
+
+#userOptions {
+z-index: 2;
+visibility: hidden;
+position: absolute;
+right: 0;
+x_right: -1px;
+top: 100%;
+padding: 9px 15px;
+border: 1px solid #ccc;
+background: #fff;
+min-width: 150px;
+_width: 150px;
+text-align: left;
+}
+
+#userOptions.open {
+visibility: visible;
+}
+
+.userOptionItem {
+margin: 6px 0;
+}
+
+.userOptionItem a {
+white-space: nowrap;
+}
+
+.userOptionGroup {
+border-top: 1px solid #e8e8e8;
+margin-top: 12px;
+}
+
+.userNameRepeat {
+color: #a8a8a8;
+padding-right: 48px;
+font-weight: bold;
+}
+
+.userOptionGroupHeader {
+font-weight: bold;
+margin: 6px 0;
+}
+
+', 
+', 
+', u"
+function isUserOptionsOpen() {
+return document.getElementById('userOptions').className === 'open';
+}
+
+function hideUserOptions() {
+destroyKeyboardTrap();
+document.getElementById('userOptions').className = '';
+document.getElementById('userOptionsLabel').className = 'navBi';
+document.getElementById('userOptionsLabel').setAttribute('aria-label', 'open user action drop down men);
+}
+function toggleUserOptions(e) {
+var options = document.getElementById('userOptions');
+var label = document.getElementById('userOptionsLabel');
+if (isUserOptionsOpen()) {
+hideUserOptions();
+if (!e.keyCode) {
+label.blur();
+}
+} else {
+options.className = 'open';
+label.className = 'navBi active navMenuDropDown';
+label.setAttribute('aria-label', 'close user action drop down men);
+document.onclick = function() {
+hideUserOptions();
+document.onclick = function() {
+};
+};
+if (e.keyCode && (e.keyCode == 13 || e.keyCode == 32)) {
+var fL = document.getElementById('userOptions').getElementsByTagName('a')[0];
+if (fL) {
+fL.focus();
+}
+}
+else {
+label.blur();
+}
+createKeyboardTrap(document.getElementById('user_actions'), 'navMenuDropDown', hideUserOptions);
+}
+stopPropagation(e);
+
+}
+
+
+function createKeyboardTrap(containingElement, dropdownLinkClass) {
+var dropdownLinks = containingElement.getElementsByClassName(dropdownLinkClass);
+var numLinks = dropdownLinks.length;
+
+document.onkeydown = function(e) {
+if (e.keyCode === 9) {
+if (e.target === dropdownLinks[0] && e.shiftKey) {
+dropdownLinks[numLinks -1].focus();
+e.preventDefault();
+} else if (e.target === dropdownLinks[numLinks -1] && !e.shiftKey) {
+dropdownLinks[0].focus();
+e.preventDefault()
+}
+} else if (e.keyCode === 27) {
+hideUserOptions();
+}
+}
+}
+
+function destroyKeyboardTrap() {
+document.onkeydown = null;
+}
+
+function stopPropagation(e) {
+var e = e || window.event;
+e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+}
+
+", 
+', u"
+
+function regExpEscape(s) {
+    return String(s).replace(/([-()\[\]{}+?*.$\^|,:#<!\\])/g, '\\$1').
+            replace(/\x08/g, '\\x08');
+}
+
+
+function appendParamsOnce(url, params) {
+    var useParams = params.replace(/^(\?|\&)/, '');
+    if (url.match(new RegExp('[\\?|\\&]' + regExpEscape(useParams))) == null) {
+        return url += (url.indexOf('?') > 0 ? '&' : '?' ) + useParams;
+    }
+    return url;
+}
+
+", 
+', 
+
+', 
+', Upload your resume', 
+', 
+', Sign in', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+    #g_nav {
+        position: relative;
+    }
+    #float_logo {
+        background: url("/images/indeed_white.png") no-repeat left center;
+        background-size: 109px 30px;
+        display: inline-block;
+        width: 109px;
+        height: 30px;
+        position: absolute;
+        top: 12px;
+        left: 9px;
+        z-index: 15000;
+    }
+
+    @media (-webkit-min-device-pixel-ratio: 2),
+    (   min--moz-device-pixel-ratio: 2),
+    (     -o-min-device-pixel-ratio: 2/1),
+    (        min-device-pixel-ratio: 2),
+    (                min-resolution: 192dpi),
+    (                min-resolution: 2dppx) {
+        #float_logo {
+            background: url("/images/indeed_white@2x.png") no-repeat left center;
+            background-size: 109px 30px;
+        }
+    }
+
+    
+    #user_actions #userOptionsLabel.active {
+        border: 0;
+        line-height: 58px;
+        padding: 0 11px;
+        margin-bottom: 0;
+    }
+    #user_actions #userOptionsLabel {
+        line-height: 58px;
+        padding: 0 11px;
+    }
+    #g_nav td {
+        text-align: right;
+        height: 58px;
+    }
+
+    
+        #user_actions .navBi a#userOptionsLabel {
+            line-height: initial;
+        }
+    
+    #user_actions #userOptions {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+    
+    #g_nav td:last-child {
+        width: 1%;
+    }
+    
+    div#g_nav {
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+    
+            #g_nav #p_nav a:link,
+            #g_nav #p_nav a:visited,
+            .navBi #navpromo a:link,
+            .navBi #navpromo a:visited,
+            #g_nav #u_nav .navBi a:link,
+            #g_nav #u_nav .navBi a:visited
+            ,#user_actions:not(.loggedin) .navBi #userOptionsLabel
+            {
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+            }
+            #g_nav #p_nav a:hover,
+            .navBi #navpromo a:hover,
+            #g_nav #u_nav .navBi a:hover,
+            #user_actions:not(.loggedin) .navBi a#userOptionsLabel:hover
+            {
+                text-decoration: underline;
+            }
+            
+            #user_actions #userOptionsLabel b {
+                text-decoration: none;
+                color: #ffffff;
+                font-weight: normal;
+            }
+            #user_actions #userOptionsLabel.active b {
+                color: #ffffff;
+            }
+            
+            #g_nav tr {
+                background: #2164f3;
+            }
+            #user_actions #userOptionsLabel.active {
+                background: #1251d7;
+            }
+            #user_actions #userOptionsLabel.active span.halfPxlFix {
+                display: none;
+            }
+            
+            #user_actions #userOptionsLabel .arrowStub  {
+                border-top-color: #ffffff;
+            }
+            #user_actions #userOptionsLabel.active .arrowStub {
+                border-bottom-color: #ffffff;
+            }
+            
+            #g_nav #p_nav a.selected {
+                font-weight: normal;
+                color: rgb(255, 255, 255) !important;
+            }
+        ', 
+', #userOptions {z-index: 10000;}', Holtec International', 16 reviews', About', 16', Reviews', 32', Salaries', Photos', 12', Jobs', Q&A', Holtec International Employee Reviews', Job Title', (all)', Welder - 3', Engineer - 2', Design Engineer - 1', Designer - 1', Driver - 1', Electrical Designer - 1', Fitter - 1', Operator - 1', Project Engineer - 1', Senior Engineer - 1', Senior Welder - 1', Site Project Manager - 1', Welder/Fitter - 1', Location', (all)', United States - 16',     East Pittsburgh, PA - 1',     Marlton, NJ - 7',     Pittsburgh, PA - 2',     Turtle Creek, PA - 5', See reviews about:', Work-Life Balance', Pay & Benefits', Job Security & Advancement', Management', Culture', Showing all 16 reviews',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Pay is great but a hard place to work', Welder II',  (Former Employee) \u2013  ', Turtle Creek, PA',  \u2013 ', January 4, 2017', Depending on who you are not what you can do you might be treated with respect and have opportunities to advance or you may be discriminated against based on whether the supervisor likes you. Upper management are very difficult to please.  They tell you to stop, think and have a questioning attitude, but if you question anything all you receive is an attitude. If a mistake is made the company never takes responsibility for anything.  Even if its due to mistakes on the prints or improperly labeled materials the workers are always at fault.  You can get blamed for mistakes made by other workers.  Management rules with an iron fist and negative criticism.', Pros', Pay and benefits are very good', Cons', Workers are constantly treated with negetive feedback', Was this review helpful?', Yes', - ', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', poor management', Plasma Burn Table Operator',  (Former Employee) \u2013  ', Turtle Creek, PA',  \u2013 ', February 5, 2016', Very unorganized, their paperwork is never right and they like to micro manage. Most of the supervisor have no idea what it takes to get the job done. HR is anything but!', Pros', Good pay', Cons', Management', Was this review helpful?', Yes', - ', 4', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Good place to learn a lot quickly. Very difficult to balance work/family life.', senior engineer',  (Current Employee) \u2013  ', Marlton, NJ',  \u2013 ', April 20, 2015', Management has strong technical ability; however there is not a good management style. Work is not well balanced or monitored.', Was this review helpful?', Yes', - ', 8', No', - ', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Welder', welder',  (Former Employee) \u2013  ', East Pittsburgh, PA',  \u2013 ', December 24, 2014', u"I have worked at Holtec for sometime and the aupervisors do not work with one another they try and cause drama between the 3 shifts and make us work against instead of as a team the supervisors also really don't know what they are doing they just wing it everyday the rework is unbelievable and don't know how the company makes money there are a lot of welder a that think they know what there are doing there are a couple good guys left that can help.", Pros', Benefits but after the new contract who knows', Was this review helpful?', Yes', - ', 9', No', - ', 2', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Very good, low stress, friendly working environment !', Controls Designer, AutoCAD Electrical',  (Former Employee) \u2013  ', Marlton, NJ',  \u2013 ', July 11, 2014', u"Excellent  day to day working conditions, very friendly very diversified international staff, no language barriers! The one and only problem I had there was, I was their first Electrical Department, they were not ready, logistically, and they had not adopted a set of drafting standards for electrical work! I can't stress how pleasant it was to work there even with the logistical problems!", Pros', Very good, low stress, friendly working environment !', Cons', No established drafting standards, changed like a sheet in a huricane', Was this review helpful?', Yes', - ', 6', No', - ', 6', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', mismanaged', Driver',  (Current Employee) \u2013  ', Turtle Creek, PA',  \u2013 ', June 3, 2014', As a recently hired Employee of Holtec I am very disappointed in the work culture. They have a very poor training program, essentially you are thrown to the wolves to fend for yourself. They have a "figure it out for yourself" attitude. There is very poor communication between those in supervisory positions. Often times I find myself with nothing to do, I ask for guidance and am told to "keep myself busy". Pay rates are certainly higher than minimum wage, but NOT worth the aggravation.', Pros', ???', Cons', Work environment, Management, Training program', Was this review helpful?', Yes', - ', 19', No', - ', 4', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Not a good place to work', Designer',  (Former Employee) \u2013  ', Marlton, NJ',  \u2013 ', March 31, 2014', u"Management expects you to work extra hours to stay on top of you work load.  Problem is the workload is unrealistic so you are always behind unless you work tons of overtime for no additional pay.  On top of that the poor management team doesn't know how to prioritize becaue they want it all done now and therefore many people rush to meet the unrealistic deadlines and then they make a bunch of mistakes that affect the other groups.  Those groups in turn are then expected to stay late and revise everything because they are now going to be late due to all the revisions.  Then people rush again to meet this new deadline and make additional mistakes that cause more issues.", Pros', good healthcare, interesting work', Cons', not a positive work environment, company is disorganized/poor scheduling, poor management, unrealistic deadlines, unrealistic workloads', Was this review helpful?', Yes', - ', 25', No', - ', 4', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Decent company to work for', Site Services Project Manager',  (Current Employee) \u2013  ', Martlon, NJ',  \u2013 ', November 13, 2013', a lot of turnover for a large company.  No overtime, low bonus scales, and a lot of firings.', Was this review helpful?', Yes', - ', 25', No', - ', 6', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Horrible culture', Fitter',  (Current Employee) \u2013  ', Turtle Creek, PA',  \u2013 ', October 3, 2013', u"This company pays well.  That is literally the one good thing about working there.  It seems as if supervisors are selected deliberately on the abrasiveness of their personality, and that people skills are seen as a detriment.  I simply cannot wait to find a suitable replacement for this job.  I would only recommend working here as a stopgap until something better becomes available.  As I read over this review, I began to wonder if I'd been too kind...", Pros', pay, coworkers', Cons', managers, and everything else', Was this review helpful?', Yes', - ', 41', No', - ', 6', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', welding steel', welder',  (Former Employee) \u2013  ', turtle creek pa',  \u2013 ', July 30, 2013', I had fun on my job. if i need help there was someone there to help. i liked what i did there.', Was this review helpful?', Yes', - ', 9', No', - ', 16', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Great place to learn and build your career', Design Engineer',  (Current Employee) \u2013  ', Marlton, NJ',  \u2013 ', May 16, 2013', It is a very flat organization which ends up providing anyone the opportunity to grow and build their career within the organization. You get the opportunity to work in places around the world. I came on 3 years ago and was entrusted with as much responsibility as I was willing to take on. The owners and management of the company expect a lot, but they will provide you with good compensation for your time and efforts. ', Pros', Flat org., high level of responsibilities, growing FAST', Cons', Occasional long hours', Was this review helpful?', Yes', - ', 5', No', - ', 11', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', good benefits and pay!  No supervision at all!', welder',  (Former Employee) \u2013  ', pittsburgh, pa',  \u2013 ', May 9, 2013', Excelent benefits and pay.  Supervisor look down on you.  Supervisors donot work as a team!  To many chiefs!   Upper management will not take any advise from the union workers.  ', Pros', good pay', Cons', supervisor are not experienced at there job', Was this review helpful?', Yes', - ', 31', No', - ', 1', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Challenging and Rewarding Place to Work', Project Engineer ',  (Current Employee) \u2013  ', Marlton',  \u2013 ', May 9, 2013', Holtec is a well run company that has continued to grow over time.  I started 7 years ago and have seen the company develop positively. The work is very challenging and I enjoy what I do and the teams that I interact with at the firm.  You can grow into jobs and advance in the company if you have the desire and the skillset.', Pros', An owner and management that will listen, Not many slackers as the culture does not allow it.', Was this review helpful?', Yes', - ', 7', No', - ', 18', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Productive and fast paced place', Licensing Engineer',  (Current Employee) \u2013  ', Marlton, NJ',  \u2013 ', March 7, 2013', Wearing different hats every day', Be ready to immediately understand a new project and prepare specifications in a short time (within couple of days)', Was this review helpful?', Yes', - ', 7', No', - ', 8', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Interesting work, good salary, so-so benefits.', engineering',  (Former Employee) \u2013  ', Marlton, NJ',  \u2013 ', February 1, 2013', u"Work is varied and interesting. CEO truly has an open door policy and doesn't mind when you tell him he's wrong. Freedom to make decisions and work independently.", Co-workers were wonderful - especially in the design group, purchasing and IT.', Poor communication.', u"Management does not carry through CEO's vision of respect towards others and professional behavior - especially Quality Assurance.", Benefits are iffy. This is the fault of their insurance admin. and not the healthcare provider.I was laid off with no warning and no severence.', Free coffee. Frequent free lunches.', Training and mentoring of new employees is rare, infrequent and inconsistent.', Pros', good pay, interesting work', Cons', management, benefits', Was this review helpful?', Yes', - ', 12', No', - ', 8', Report',  ', Job Work/Life Balance', Compensation/Benefits', Job Security/Advancement', Management', Job Culture', Dedicated and positive work environment', Welder/Fitter',  (Current Employee) \u2013  ', Pittsburgh, PA',  \u2013 ', August 15, 2012', Start at either 7am or on second shift at 3pm. Recieve work orders from upper management. I either work solo or with a partner. One day I may be welding all day or grinding and prep. Management is always on hand to guide or answer simple questions. Co-workers are always in a team mindset. Work together to find best solution to any obstical. The hardest part of job is heat in summer, poor ventilation while welding. Welding and working with team players.', Pros', good pay', Cons', short breaks and no incentives', Was this review helpful?', Yes', - ', 10', No', - ', 13', Report', Review this company', Review this company', Want to know more about working here?', Ask a question about working or interviewing at Holtec International. Our community is ready to answer.', Ask a Question', Overall rating', 3.1', Based on ', 16',  reviews', 5 stars', 4 stars', 3 stars', 2 stars', 1 star', Ratings by category', Work/Life Balance', 3.1', Compensation/Benefits', 3.7', Job Security/Advancement', 2.7', Management', 2.5', Culture', 2.5', Holtec International Reviews by Job Title', Welder',  (3)', Engineer',  (2)', Design Engineer',  (1)', Designer',  (1)', Driver',  (1)', Holtec International Reviews by Location', Marlton, NJ', Turtle Creek, PA', Pittsburgh, PA', East Pittsburgh, PA', indeed.init('1b5s4nhda0kbu4ec', '\/\/t.indeed.com\/s\/313acc1\/turnstile-compiled.js', [[1,null],[-1,null],[1,null],[-1,null],[-1,null],[2,null],[1,null],[-1,null],[1,null],[1,null],[1,null],[-1,null],[1,null],[-1,null],[0,null],[0,null],[3,null],[1,null],[1,null],[0,null],[0,null],[1,null],[-1,null],[0,null],[2,null],[-1,null],[1,null],[-1,null],[-1,null],[-1,null],[1,null],[1,null],[1,null],[1,null],[-1,null],[2,null],[-1,null],[1,null],[1,null],[1,null],[1,null],[0,null],[-1,null],[-1,null],[-1,null],[1,null],[-1,"jobclickOriginal"],[-1,null],[-1,null],[1,null],[0,null],[-1,null],[-1,null],[1,null],[1,null],[3,null],[2,null],[0,null],[-1,null],[1,null],[1,null],[1,null],[-1,null],[0,null],[-1,null],[1,null],[1,null],[-1,null],[-1,null],[-1,null],[-1,null],[1,null],[1,null],[0,null],[3,null],[1,null],[0,null],[-1,null],[-1,null],[1,null],[-1,null],[-1,null],[1,null],[4,null],[-1,null],[0,null],[0,null],[-1,null],[-1,null],[-1,null],[1,null],[-1,null],[-1,null],[1,null],[1,null],[-1,null],[-1,[]],[-1,null],[3,null],[3,null],[-1,null],[-1,null],[1,null],[-1,null],[2,null],[0,null],[-1,null],[2,null],[1,null],[3,null],[-1,null],[-1,null],[-1,null],[3,null],[-1,null],[-1,null],[2,null],[-1,null],[-1,null],[1,null],[0,null],[-1,null]]); indeed.pc.init( '1b5s4nhda0kbu4ec', 'Holtec International', '44a00ef97687fe2b', 'reviews', 'be32d9662e09303dc55792464fbe6de8',false, '', '',false);', u"indeed.reviews.initialize( '1b5s4nhda0kbu4ec',false,false, '44a00ef97687fe2b', 'iFKXAAKfVfbD6licfXBHykWHxKGj0k59' );", 
+#secondary_nav a,#secondary_nav a:link,#secondary_nav a:visited{text-decoration:none}#secondary_nav a:hover{text-decoration:underline}.comment_bubble a,.comment_bubble a:link,.comment_bubble a:visited{color:#77c}.footer a,.footer a:link,.footer a:visited{color:#77c}.footer .sl:visited{color:#77c}.jsf .sl{color:#77c}.sl,.sl:link,.sl:visited{color:#77c}#cookie-alert .learn-more,#cookie-alert .learn-more :visited{color:#77c}#jobsearch .sl{color:#77c}#secondary_nav a,#secondary_nav a:link,#secondary_nav a:visited{color:#77c}.arrowStub{border-top-color:#666}.carouselInlineAd .cmp-note{color:#6F6F6F}.cmp_header{color:#666}.cmp_meta{color:#666}.comment_bubble{color:#666}.date,.visits{color:#808080}.dd-disabled{color:#666}.dd-disabled .dd-button-arrow{color:#666}.hp_welcome_message{color:#6F6F6F}.inwrap input{border-bottom-color:#aaa;border-\@LINE_END\@-color:#aaa}.ipadPromoCopy{color:#666}.itaText{color:#6F6F6F}.jsf .label{color:#aaa}.location{color:#666}.nps-popover-x-span{color:#666}.popover-x-span{color:#666}.rjl{color:#666}.rsc{color:#aaa}.rsh{color:#6F6F6F}.sjh{color:#666}.sup_grey{color:#aaa}#fromageMsg{color:#666}#jobsearch .label,#jobsearch .label label{color:#aaa}#not-likely-div{color:#808080}#original_radius_result{color:#666}#question-intro-div{color:#808080}#userOptionsLabel.active b{color:#666}#userOptionsLabel.active .arrowStub{border-bottom-color:#666}#very-likely-div{color:#808080}.jasxcolorcontrasttst-blueOnly .comment_bubble a,.jasxcolorcontrasttst-blueOnly .comment_bubble a:link,.jasxcolorcontrasttst-blueOnly .comment_bubble a:visited{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly .footer a,.jasxcolorcontrasttst-blueOnly .footer a:link,.jasxcolorcontrasttst-blueOnly .footer a:visited{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly .footer .sl:visited{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly .jsf .sl{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly .sl,.jasxcolorcontrasttst-blueOnly .sl:link,.jasxcolorcontrasttst-blueOnly .sl:visited{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly #cookie-alert .learn-more,.jasxcolorcontrasttst-blueOnly #cookie-alert .learn-more :visited{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly #jobsearch .sl{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly #secondary_nav a,.jasxcolorcontrasttst-blueOnly #secondary_nav a:link,.jasxcolorcontrasttst-blueOnly #secondary_nav a:visited{color:#6D6DC3}.jasxcolorcontrasttst-blueOnly .arrowStub{border-top-color:#666}.jasxcolorcontrasttst-blueOnly .carouselInlineAd .cmp-note{color:#6F6F6F}.jasxcolorcontrasttst-blueOnly .cmp_header{color:#666}.jasxcolorcontrasttst-blueOnly .cmp_meta{color:#666}.jasxcolorcontrasttst-blueOnly .comment_bubble{color:#666}.jasxcolorcontrasttst-blueOnly .date,.jasxcolorcontrasttst-blueOnly .visits{color:#808080}.jasxcolorcontrasttst-blueOnly .dd-disabled{color:#666}.jasxcolorcontrasttst-blueOnly .dd-disabled .dd-button-arrow{color:#666}.jasxcolorcontrasttst-blueOnly .hp_welcome_message{color:#6F6F6F}.jasxcolorcontrasttst-blueOnly .inwrap input{border-bottom-color:#aaa;border-\@LINE_END\@-color:#aaa}.jasxcolorcontrasttst-blueOnly .ipadPromoCopy{color:#666}.jasxcolorcontrasttst-blueOnly .itaText{color:#6F6F6F}.jasxcolorcontrasttst-blueOnly .jsf .label{color:#aaa}.jasxcolorcontrasttst-blueOnly .location{color:#666}.jasxcolorcontrasttst-blueOnly .nps-popover-x-span{color:#666}.jasxcolorcontrasttst-blueOnly .popover-x-span{color:#666}.jasxcolorcontrasttst-blueOnly .rjl{color:#666}.jasxcolorcontrasttst-blueOnly .rsc{color:#aaa}.jasxcolorcontrasttst-blueOnly .rsh{color:#6F6F6F}.jasxcolorcontrasttst-blueOnly .sjh{color:#666}.jasxcolorcontrasttst-blueOnly .sup_grey{color:#aaa}.jasxcolorcontrasttst-blueOnly #fromageMsg{color:#666}.jasxcolorcontrasttst-blueOnly #jobsearch .label,.jasxcolorcontrasttst-blueOnly #jobsearch .label label{color:#aaa}.jasxcolorcontrasttst-blueOnly #not-likely-div{color:#808080}.jasxcolorcontrasttst-blueOnly #original_radius_result{color:#666}.jasxcolorcontrasttst-blueOnly #question-intro-div{color:#808080}.jasxcolorcontrasttst-blueOnly #userOptionsLabel.active b{color:#666}.jasxcolorcontrasttst-blueOnly #userOptionsLabel.active .arrowStub{border-bottom-color:#666}.jasxcolorcontrasttst-blueOnly #very-likely-div{color:#808080}.jasxcolorcontrasttst-greyOnly .comment_bubble a,.jasxcolorcontrasttst-greyOnly .comment_bubble a:link,.jasxcolorcontrasttst-greyOnly .comment_bubble a:visited{color:#77c}.jasxcolorcontrasttst-greyOnly .footer a,.jasxcolorcontrasttst-greyOnly .footer a:link,.jasxcolorcontrasttst-greyOnly .footer a:visited{color:#77c}.jasxcolorcontrasttst-greyOnly .footer .sl:visited{color:#77c}.jasxcolorcontrasttst-greyOnly .jsf .sl{color:#77c}.jasxcolorcontrasttst-greyOnly .sl,.jasxcolorcontrasttst-greyOnly .sl:link,.jasxcolorcontrasttst-greyOnly .sl:visited{color:#77c}.jasxcolorcontrasttst-greyOnly #cookie-alert .learn-more,.jasxcolorcontrasttst-greyOnly #cookie-alert .learn-more :visited{color:#77c}.jasxcolorcontrasttst-greyOnly #jobsearch .sl{color:#77c}.jasxcolorcontrasttst-greyOnly #secondary_nav a,.jasxcolorcontrasttst-greyOnly #secondary_nav a:link,.jasxcolorcontrasttst-greyOnly #secondary_nav a:visited{color:#77c}.jasxcolorcontrasttst-greyOnly .arrowStub{border-top-color:#666}.jasxcolorcontrasttst-greyOnly .carouselInlineAd .cmp-note{color:#666}.jasxcolorcontrasttst-greyOnly .cmp_header{color:#666}.jasxcolorcontrasttst-greyOnly .cmp_meta{color:#666}.jasxcolorcontrasttst-greyOnly .comment_bubble{color:#666}.jasxcolorcontrasttst-greyOnly .date,.jasxcolorcontrasttst-greyOnly .visits{color:#666}.jasxcolorcontrasttst-greyOnly .dd-disabled{color:#666}.jasxcolorcontrasttst-greyOnly .dd-disabled .dd-button-arrow{color:#666}.jasxcolorcontrasttst-greyOnly .hp_welcome_message{color:#666}.jasxcolorcontrasttst-greyOnly .inwrap input{border-bottom-color:#666;border-\@LINE_END\@-color:#666}.jasxcolorcontrasttst-greyOnly .ipadPromoCopy{color:#666}.jasxcolorcontrasttst-greyOnly .itaText{color:#666}.jasxcolorcontrasttst-greyOnly .jsf .label{color:#666}.jasxcolorcontrasttst-greyOnly .location{color:#666}.jasxcolorcontrasttst-greyOnly .nps-popover-x-span{color:#666}.jasxcolorcontrasttst-greyOnly .popover-x-span{color:#666}.jasxcolorcontrasttst-greyOnly .rjl{color:#666}.jasxcolorcontrasttst-greyOnly .rsc{color:#666}.jasxcolorcontrasttst-greyOnly .rsh{color:#666}.jasxcolorcontrasttst-greyOnly .sjh{color:#666}.jasxcolorcontrasttst-greyOnly .sup_grey{color:#666}.jasxcolorcontrasttst-greyOnly #fromageMsg{color:#666}.jasxcolorcontrasttst-greyOnly #jobsearch .label,.jasxcolorcontrasttst-greyOnly #jobsearch .label label{color:#666}.jasxcolorcontrasttst-greyOnly #not-likely-div{color:#666}.jasxcolorcontrasttst-greyOnly #original_radius_result{color:#666}.jasxcolorcontrasttst-greyOnly #question-intro-div{color:#666}.jasxcolorcontrasttst-greyOnly #userOptionsLabel.active b{color:#666}.jasxcolorcontrasttst-greyOnly #userOptionsLabel.active .arrowStub{border-bottom-color:#666}.jasxcolorcontrasttst-greyOnly #very-likely-div{color:#666}.jasxcolorcontrasttst-greyAndBlue .comment_bubble a,.jasxcolorcontrasttst-greyAndBlue .comment_bubble a:link,.jasxcolorcontrasttst-greyAndBlue .comment_bubble a:visited{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue .footer a,.jasxcolorcontrasttst-greyAndBlue .footer a:link,.jasxcolorcontrasttst-greyAndBlue .footer a:visited{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue .footer .sl:visited{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue .jsf .sl{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue .sl,.jasxcolorcontrasttst-greyAndBlue .sl:link,.jasxcolorcontrasttst-greyAndBlue .sl:visited{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue #cookie-alert .learn-more,.jasxcolorcontrasttst-greyAndBlue #cookie-alert .learn-more :visited{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue #jobsearch .sl{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue #secondary_nav a,.jasxcolorcontrasttst-greyAndBlue #secondary_nav a:link,.jasxcolorcontrasttst-greyAndBlue #secondary_nav a:visited{color:#6D6DC3}.jasxcolorcontrasttst-greyAndBlue .arrowStub{border-top-color:#666}.jasxcolorcontrasttst-greyAndBlue .carouselInlineAd .cmp-note{color:#666}.jasxcolorcontrasttst-greyAndBlue .cmp_header{color:#666}.jasxcolorcontrasttst-greyAndBlue .cmp_meta{color:#666}.jasxcolorcontrasttst-greyAndBlue .comment_bubble{color:#666}.jasxcolorcontrasttst-greyAndBlue .date,.jasxcolorcontrasttst-greyAndBlue .visits{color:#666}.jasxcolorcontrasttst-greyAndBlue .dd-disabled{color:#666}.jasxcolorcontrasttst-greyAndBlue .dd-disabled .dd-button-arrow{color:#666}.jasxcolorcontrasttst-greyAndBlue .hp_welcome_message{color:#666}.jasxcolorcontrasttst-greyAndBlue .inwrap input{border-bottom-color:#666;border-\@LINE_END\@-color:#666}.jasxcolorcontrasttst-greyAndBlue .ipadPromoCopy{color:#666}.jasxcolorcontrasttst-greyAndBlue .itaText{color:#666}.jasxcolorcontrasttst-greyAndBlue .jsf .label{color:#666}.jasxcolorcontrasttst-greyAndBlue .location{color:#666}.jasxcolorcontrasttst-greyAndBlue .nps-popover-x-span{color:#666}.jasxcolorcontrasttst-greyAndBlue .popover-x-span{color:#666}.jasxcolorcontrasttst-greyAndBlue .rjl{color:#666}.jasxcolorcontrasttst-greyAndBlue .rsc{color:#666}.jasxcolorcontrasttst-greyAndBlue .rsh{color:#666}.jasxcolorcontrasttst-greyAndBlue .sjh{color:#666}.jasxcolorcontrasttst-greyAndBlue .sup_grey{color:#666}.jasxcolorcontrasttst-greyAndBlue #fromageMsg{color:#666}.jasxcolorcontrasttst-greyAndBlue #jobsearch .label,.jasxcolorcontrasttst-greyAndBlue #jobsearch .label label{color:#666}.jasxcolorcontrasttst-greyAndBlue #not-likely-div{color:#666}.jasxcolorcontrasttst-greyAndBlue #original_radius_result{color:#666}.jasxcolorcontrasttst-greyAndBlue #question-intro-div{color:#666}.jasxcolorcontrasttst-greyAndBlue #userOptionsLabel.active b{color:#666}.jasxcolorcontrasttst-greyAndBlue #userOptionsLabel.active .arrowStub{border-bottom-color:#666}.jasxcolorcontrasttst-greyAndBlue #very-likely-div{color:#666}
+', 
+', 
+', 
+', 
+
+', 
+', 
+
+', For India jobs, visit ', Indeed India', Jobs',  - ', Browse Companies',  - ', Salaries',  - ', Trends',  - ', Forums',  - ', u"
+var jobsProductLink = document.getElementById('jobs_product_link');
+document.getElementById('companies_product_link').onclick = function() { window.location = '/Best-Places-to-Work?campaignid=footer'; return false;};", 
+
+', Browse Jobs',  - ', Tools',  - ', API',  - ', About',  - ', Help Center', 
+', 
+#footer-legal {
+margin-top: 10px;
+font-size: 9pt;
+}
+', 
+', 
+', ©2017 Indeed - ', Cookies, Privacy and Terms', 
+', 
+', 
+', 
+', u"
+PENDING_ANALYTICS_VARS = window.PENDING_ANALYTICS_VARS || [];
+PENDING_ANALYTICS_VARS[PENDING_ANALYTICS_VARS.length] = ['_setCustomVar', 1, 'acmeTest', 'true', 3];
+", 
+', u"
+PENDING_ANALYTICS_VARS = window.PENDING_ANALYTICS_VARS || [];
+PENDING_ANALYTICS_VARS[PENDING_ANALYTICS_VARS.length] = ['_setCustomVar', 5, 'loggedIn', 'false', 3];
+", 
+', u"
+        var ga_domains = [];
+        ga_domains.push('indeed.co.in');ga_domains.push('indeed.l);ga_domains.push('indeed.fr');ga_domains.push('indeed.de');ga_domains.push('indeed.com.br');ga_domains.push('indeed.co.uk');ga_domains.push('indeed.hk');ga_domains.push('indeed.fi');ga_domains.push('indeed.pt');ga_domains.push('indeed.jp');ga_domains.push('indeed.com');ga_domains.push('indeed.com.sg');ga_domains.push('indeed.nl');ga_domains.push('indeed.com.pk');ga_domains.push('indeed.cl');ga_domains.push('indeed.es');ga_domains.push('indeed.co.ve');ga_domains.push('indeed.ae');ga_domains.push('indeed.com.mx');ga_domains.push('indeed.com.my');ga_domains.push('indeed.ch');ga_domains.push('indeed.com.co');ga_domains.push('indeed.com.ph');ga_domains.push('indeed.co.za');ga_domains.push('indeed.ie');ga_domains.push('indeed.com.a);ga_domains.push('indeed.ca');ga_domains.push('indeed.com.pe');
+
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        var ga = ga || [];
+        ga('create', 'UA-90780-1', 'auto', {
+            'allowLinker': true
+        });
+        ga('require', 'linkid');
+        ga('require', 'linker');
+        ga('linker:autoLink', ga_domains, false, true);
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+
+        
+        (function () {
+            if (window.PENDING_ANALYTICS_VARS && window.PENDING_ANALYTICS_VARS.length > 0) {
+                for (var i in PENDING_ANALYTICS_VARS) {
+                    ga('set', PENDING_ANALYTICS_VARS[i][2], PENDING_ANALYTICS_VARS[i][3]);
+                }
+            }
+        })();
+    ", 
+', 
+', 
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+            document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '579216298929618');
+    fbq('track', "PageView");', 
+', 
+', 
+', 
+var _comscore = _comscore || [];
+_comscore.push({ c1: "2", c2: "6486505", c4:"www.indeed.com/cmp/Holtec-International/reviews", c15:"1b5s4ng5h4et2csl"});
+(function() { var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true; s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();
+', 
+', 
+', 
+', 
+']

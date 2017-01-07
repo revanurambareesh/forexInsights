@@ -1,0 +1,4037 @@
+[
+			
+			
+			', 
+			', 
+			  ', 
+			    ', 
+			    ', 
+					', 
+					', u"
+					function googleTranslateElementInit() {
+					  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,fr,hi,zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+					}
+					", 
+					', The Leading Online Job Board for Agriculture, Food, and Biotechnology', 
+				', 
+			    ', 
+			    
+
+', 
+', 
+
+ 
+', 
+  ', 
+  	
+    ',  ', Job Seekers', 
+      ', 
+        ', 
+			
+			', Search Tools', 
+			', 
+				
+				
+				  	', Setup Your Profile', 
+					', Career Search', 
+				    ', Post a Resume', 
+				
+				', Featured Jobs', 
+				', Employer Jobs', 
+				', Recruiter Jobs', 
+				', Internships', 
+				', Jobs by Date', 
+				', Search By Job Title', 
+				', Search By Industry', 
+				', Search All Jobs', 
+			', 
+			
+        ', 
+        ', 
+			
+			', Resources', 
+			', 
+				', Career Profiles', 
+				', Education Directory', 
+				', Elite Talent', 
+				', Career Guide Articles', 
+				', E-Portfolio', 
+				', Infographics', 
+				', Job Seeker App', 
+				', Job Seeker Blog', 
+				', Market Research', 
+				', Newsletter Archives', 
+				', University Partners', 
+			', 
+			
+        ', 
+        ', 
+			
+			', News & Connections', 
+			', 
+				', AgCareers.com News', 
+				', AgCareers.com Statistics', 
+				', Ag Warriors', 
+				', Association Partners', 
+				', Employer Partners', 
+				', Recruiter Partners', 
+			', 
+			
+        ', 
+        ', 
+			
+			', Events', 
+			', 
+				', Career Fairs', 
+				', Webinars/Workshops', 
+			', 
+			
+        ', 
+        
+        ', 
+			',  ', 
+			', 
+				
+				
+				
+				
+			', 
+        ', 
+		
+      ', 
+    ', 
+	
+	
+    ', Employers', 
+      ', 
+        ', 
+			
+			', Job Board Tools', 
+			', 
+				
+				
+					', Setup Account', 
+					
+					', Pricing', 
+				    ', 
+				
+			', 
+			
+        ', 
+        ', 
+			
+			', Products', 
+			', 
+				', Ag & Food Career Guide', 
+				
+				', Ag & Food HR Roundtable', 
+				', Ag Warriors', 
+				
+				', Agribusiness HR Review', 
+				', Compensation Benchmark Review - Salary Data', 
+				', Elite Talent', 
+				', Internship Benchmark Survey', 
+				', Job Board', 
+				', Training & Consulting', 
+			', 
+			
+        ', 
+        ', 
+			
+			', Resources', 
+			', 
+				', AgCareers.com News', 
+				', AgCareers.com Statistics', 
+				', Association Partners', 
+				', Career Profiles', 
+				', Education Directory', 
+				', Employer Blog', 
+				', Employer Partners', 
+				', Infographics', 
+				', Market Research', 
+				', Newsletter Archives', 
+				', Recruiter Partners', 
+				', University Partners', 
+          	', 
+			
+        ', 
+        ', 
+			
+			', Events', 
+			', 
+				', Career Fairs', 
+				', Conferences', 
+				', Webinars/Workshops', 
+			', 
+			
+        ', 
+        ', 
+			',  ', 
+			
+			', 
+				
+				
+				
+				
+			', 
+			
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+', 
+
+			    ', 
+			    ', 
+			    
+			    
+					', Already registered? ', Sign in', 
+				
+', 
+	
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+	
+', 
+				  
+			    ', 
+			    ', 
+			    ', 
+			  ', 
+			', 
+			', 
+			', 
+			', 
+			  ', 
+			  ', 
+			  	
+				  ', 
+				  	', 
+				  		', 
+				  			', 
+				  				
+								
+									', Search from over ', 5702',  jobs!', 
+								
+							', 
+							', 
+								', 
+									', 
+									
+										', 
+										
+										
+		', 
+		function getLocation() {
+		    if (navigator.geolocation) {
+		        navigator.geolocation.getCurrentPosition(getCityFromLatLng, errorHandler);
+		    } else {
+		        $('#error').html("Geolocation is not supported by this browser.");
+		    }
+		}
+		function errorHandler(error) {
+		switch(error.code) {
+		  case error.PERMISSION_DENIED:
+		    alert("In order to use this feature you must allow AgCareers to get your location.");
+		    break;
+		  case error.POSITION_UNAVAILABLE:
+		    alert("Location information is unavailable.");
+		    break;
+		  case error.TIMEOUT:
+		    alert("The request to get user location timed out.");
+		    break;
+		  case error.UNKNOWN_ERROR:
+		    alert("An unknown error occurred.");
+		    break;
+		  }
+		}
+		function getCityFromLatLng(position){
+		  var q;
+		  var lat = position.coords.latitude, lng = position.coords.longitude;
+		  //$("#error").html("Lat:"+ lat + " Lng:" + lng);
+		  $('#btnLocate').attr("src", "/images/loading.gif");
+		  $.ajax(
+		    {
+		      url: "/cfc/geographic.cfc",
+		     dataType: "json",
+		     data: {method:"getCityByLatLng", lat:lat, lng:lng},
+		     success: function( data )
+		     {
+		      $("#location").val(data[0]);
+		      $('#btnLocate').attr("src", "/images/geolocation.png");
+		     },
+		     error: function( error )
+		     {
+		      $("#error").html(error.responseText);
+		      $('#btnLocate').attr("src", "/images/geolocation.png");
+		     }
+		    }
+		  )
+		}
+
+		$(function() {
+		  $( "#location" ).autocomplete({
+		    source: function( request, response ) {
+		      $.ajax({
+		        url: "/cfc/geographic.cfc",
+		        dataType: "json",
+		        data: {
+		          method: "getCities",
+		          location: request.term
+		        },
+		        success: function( data ) {
+		          response( data );
+		        },
+		        error: function( error, strError )
+		        {
+		         //$("#error").html(strError + "<br>" + error.responseText);
+		         $('#btnLocate').attr("src", "/images/geolocation.png");
+		        }
+		      });
+		    },
+		    minLength: 1
+		  });
+		});
+		', 
+		
+		', 
+		', 
+		
+		
+								    
+									', 
+										
+										', 
+											', Industry Type', 
+											
+									     			', Animal Health', 
+									     		
+									     			', Animal Production - Beef', 
+									     		
+									     			', Animal Production - Dairy', 
+									     		
+									     			', Animal Production - Other', 
+									     		
+									     			', Animal Production - Poultry', 
+									     		
+									     			', Animal Production - Swine', 
+									     		
+									     			', Aquaculture, Fishing, Seafood', 
+									     		
+									     			', Chemical, Pesticide and Fertilizer', 
+									     		
+									     			', Commodities and Trading', 
+									     		
+									     			', Communications, Promotion, and Public Relations', 
+									     		
+									     			', Crop Production', 
+									     		
+									     			', Education and Extension', 
+									     		
+									     			', Energy, Biofuels and Alternative Energy', 
+									     		
+									     			', Equipment, Manufacturing and Technical', 
+									     		
+									     			', Feed Nutrition', 
+									     		
+									     			', Finance, Banking, Insurance and Real Estate', 
+									     		
+									     			', Food & Beverage Products and Processing', 
+									     		
+									     			', Government, Policy and Legal', 
+									     		
+									     			', Horticulture, Turf, Viticulture and Ornamental', 
+									     		
+									     			', Input Retail, Cooperative and Related Crop Services', 
+									     		
+									     			', Natural Resources, Environmental, Mining and Forestry', 
+									     		
+									     			', Pest Management', 
+									     		
+									     			', Plant & Soil Sciences, Seed and Biotechnology', 
+									     		
+									     			', Precision Ag', 
+									     		
+									     			', Produce and Produce Related Services', 
+									     		
+										', 
+									', 
+									
+								    ', 
+								    	', 
+								    	
+									', 
+								', 
+							', 
+							', 
+								', 
+								', Advanced Search', 
+							', 
+				  		', 
+				  	', 
+				  ', 
+				  
+			    ', 
+			  ', 
+			  ', 
+			  ', 
+			  ', 
+			    ', 
+			    ', 
+			      ', 
+			        ', 
+			        ', 
+					', 
+			', 
+
+		
+		', 
+			.prevoiusbtn{background:url(/new-skin/creative/assets/backgrounds/bg_prev_arrow.png) no-repeat scroll center center #cfcfcf;border:1px solid #cfcfcf;border-radius:30px;color:#fff;display:inline-block;font-family:"Roboto Condensed",sans-serif;font-size:30px;height:30px;line-height:30px;padding:0;text-align:center;width:30px}
+			.prevoiusbtn1{background:url(/new-skin/creative/assets/backgrounds/bg_prev_arrow.png) no-repeat scroll center center #49b571;border:1px solid #49b571;border-radius:30px;color:#fff;display:inline-block;font-family:"Roboto Condensed",sans-serif;font-size:30px;height:30px;line-height:30px;padding:0;text-align:center;width:30px}
+			.nextbtn{background:url(/new-skin/creative/assets/backgrounds/bg_next_arrow.png) no-repeat scroll center center #49b571;border:1px solid #49b571;border-radius:30px;color:#fff;display:inline-block;font-family:"Roboto Condensed",sans-serif;font-size:30px;height:30px;line-height:30px;padding:0;text-align:center;width:30px}
+			.nextbtn1{background:url(/new-skin/creative/assets/backgrounds/bg_next_arrow.png) no-repeat scroll center center #cfcfcf;border:1px solid #cfcfcf;border-radius:30px;color:#fff;display:inline-block;font-family:"Roboto Condensed",sans-serif;font-size:30px;height:30px;line-height:30px;padding:0;text-align:center;width:30px}
+			.browse_by_arrow_state {background-image: url("/new-skin/creative/assets/images/browse_by_btn.png");background-position: left top;background-repeat: no-repeat;display: block;margin-bottom: 5px;padding-left: 15px;}
+			.browse_by_arrow_state:hover {background-image: url("/new-skin/creative/assets/images/browse_by_hover_btn.png");}
+			.browse_state_content_inner {font-family: Arial,Helvetica,sans-serif;font-size: 12px;font-weight: bold;line-height: 18px;}
+			 h2{font-family: 'Roboto Condensed', sans-serif;font-weight: normal;font-size: 18px;color: #1d9ad6;line-height: 20px;text-decoration: none;	margin: 10px;padding:0px;}
+		', 
+		
+		
+        ', 
+        ', 
+        	
+			
+			', u"ga('send', 'pageview', '/results.cfm?q=&l=');", 
+			
+			
+			
+			', 
+				$(function(){
+					var EmpJobCount = "194";
+					var RecJobCount = "43";
+					$('.Job-Count').html('<div id="results-count-area">Job Search Results<br><span id="results-breakdown" class="JobCount"></span></div>');
+					$(".JobCount").text("Employer Jobs ("+EmpJobCount+")   Recruiter Jobs ("+RecJobCount+")");
+				});
+			', 
+            
+			
+			
+			', 
+			', California Jobs',  
+				', 
+				', 
+					', 
+					', 
+					', 
+					', 
+					', 
+					', 
+					', 
+					', 
+					', 
+					', 
+					', 
+                    ', 
+                    ', 
+                    ', 
+					', 
+					', 
+						', 
+							', Refine Search Results', 
+						', 
+						
+						',  ', Display', 
+							', 
+								', 10
+								', 15
+								', 20
+								', 25
+								', 30
+								', 40
+								', 50
+								', 75
+								', 100
+								', 125
+								', 150
+								', 175
+								', 200
+							', 
+							
+							', Per page by', 
+							', 
+								
+								', Date Posted', 
+								', Date Updated', 
+								', Job Title', 
+								', Company', 
+								', Partnership', 
+							', 
+							
+							', 
+							
+						', 
+						', 
+					', 
+					', 
+					', 
+					', 
+					
+					', 
+					
+						', 
+						', 
+							
+							', Employer Jobs', 
+							
+							', 
+						', 
+						', 
+						
+										', 
+									
+										', 
+											
+											
+											',  ', Harvest Manager',  ', 
+											', 
+												2 days ago  |  Production/Farming - Crop Production - Farm & Ranch Operations/Herdsperson/On Farm', 
+												Watsonville, CA, West United States, USA (0 miles)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												J. Marchini Farms 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', Sales Coordinator',  ', 
+											', 
+												15 days ago  |  Agribusiness - Produce and Produce Related Services - Sales/Retail', 
+												Le Grand, CA, West United States, USA (0 miles)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												J. Marchini Farms 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', FSQA Technician 5',  ', 
+											', 
+												4 hours ago  |  Food/Processing - Food & Beverage Products and Processing - Quality Assurance', 
+												Rancho Cucamonga, CA, West United States, USA (0 miles)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												Tyson Foods 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', Finance Manager',  ', 
+											', 
+												24 days ago  |  Agribusiness - Chemical, Pesticide and Fertilizer - Accounting/Finance/Asset Management', 
+												Walnut Creek, CA, West United States, USA (0 miles)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												Valent USA Corporation 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', Maintenance Technician',  ', 
+											', 
+												30+ days ago  |  Agribusiness - Commodities and Trading - Maintenance/Repair', 
+												Woodland, CA, West United States, USA (0 miles)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												Bunge 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', Apprentice',  ', 
+											', 
+												30+ days ago  |  Agribusiness - Commodities and Trading - Operator/General Laborer', 
+												Woodland, CA, West United States, USA (0 miles)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												Bunge 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', Scientist III, San Diego',  ', 
+											', 
+												30+ days ago  |  Agribusiness - Chemical, Pesticide and Fertilizer - Merchandiser/Trader/Broker', 
+												San Diego, CA, West United States, USA (0 miles)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												BASF - We Create Chemistry 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', Manager /Sr. Team Leader - Fermentation Technologies, San Diego',  ', 
+											', 
+												30+ days ago  |  Agribusiness - Chemical, Pesticide and Fertilizer - Merchandiser/Trader/Broker', 
+												San Diego, CA, West United States, USA (0 miles)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												BASF - We Create Chemistry 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', HR Business Partner - Compensation',  ', 
+											', 
+												9 days ago  |  Agribusiness - Chemical, Pesticide and Fertilizer - Human Resources', 
+												Walnut Creek, CA, West United States, USA (0 miles)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												Valent USA Corporation 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', BioScience Innovation Manager - UC Berkeley',  ', 
+											', 
+												30+ days ago  |  Agribusiness - Chemical, Pesticide and Fertilizer - Researcher/Research & Development', 
+												San Francisco, CA, West United States, USA (0 miles)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												BASF - We Create Chemistry 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+														', 
+						', 
+						
+						', 
+							', 
+								
+								', 
+							', 
+							', 
+								', 
+									
+									', 
+									
+											', Page - 1', 
+										
+											', Page - 2', 
+										
+											', Page - 3', 
+										
+											', Page - 4', 
+										
+											', Page - 5', 
+										
+											', Page - 6', 
+										
+											', Page - 7', 
+										
+											', Page - 8', 
+										
+											', Page - 9', 
+										
+											', Page - 10', 
+										
+											', Page - 11', 
+										
+											', Page - 12', 
+										
+											', Page - 13', 
+										
+											', Page - 14', 
+										
+											', Page - 15', 
+										
+											', Page - 16', 
+										
+											', Page - 17', 
+										
+											', Page - 18', 
+										
+											', Page - 19', 
+										
+											', Page - 20', 
+										
+									', 
+									
+									', 
+									
+											', Page 1', 
+										
+											', Page 2', 
+										
+											', Page 3', 
+										
+											', Page 4', 
+										
+											', Page 5', 
+										
+									', 
+									
+								', 
+								
+							', 
+							', 
+								
+								', 
+							', 
+							', 
+						', 
+					
+					', 
+					', 
+					', 
+					
+					', 
+					
+						
+						', 
+							
+							', Recruiter Jobs', 
+							
+							', 
+						', 
+						', 
+						
+										', 
+									
+										', 
+											
+											',  ', Assistant Manager (KH-6354)',  ', 
+											', 
+												1 day ago  |  Production/Farming - Animal Production - Dairy - Farm & Ranch Operations/Herdsperson/On Farm', 
+												CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													Hansen Agri-PLACEMENT 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Business Development Manager - Agriculture (12373)',  ', 
+											', 
+												4 hours ago  |  Agribusiness - Crop Production - Business Development/Strategic Management', 
+												CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													Ag 1 Source 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Regional Agronomy Sales Rep (12370)',  ', 
+											', 
+												4 hours ago  |  Agribusiness - Equipment, Manufacturing and Technical - Sales/Retail', 
+												CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													Ag 1 Source 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Dairy Division Sales Manager',  ', 
+											', 
+												3 days ago  |  Agribusiness - Animal Production - Dairy - Sales/Retail', 
+												Bakersfield, CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													GPAC 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Logistics Manager',  ', 
+											', 
+												3 days ago  |  Agribusiness - Commodities and Trading - Business Development/Strategic Management', 
+												Fresno, CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													GPAC 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Lead Grower  # 307',  ', 
+											', 
+												4 days ago  |  Production/Farming - Crop Production - Farm & Ranch Operations/Herdsperson/On Farm', 
+												CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													agriCAREERS, INC. 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Dairy Division Sales Manager',  ', 
+											', 
+												4 days ago  |  Agribusiness - Chemical, Pesticide and Fertilizer - Sales/Retail', 
+												Chico, CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													GPAC 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Plant Manager',  ', 
+											', 
+												7 days ago  |  Food/Processing - Food & Beverage Products and Processing - Manufacturing/Production', 
+												Los Angeles, CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													GPAC 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Plant Manager',  ', 
+											', 
+												7 days ago  |  Food/Processing - Food & Beverage Products and Processing - Manufacturing/Production', 
+												oakland, CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													GPAC 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Plant Nutrition Sales Specialist',  ', 
+											', 
+												14 days ago  |  Agribusiness - Plant & Soil Sciences, Seed and Biotechnology - Specialists', 
+												Hilmar, CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													GPAC 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+						', 
+						', 
+						
+						', 
+							', 
+								
+								', 
+							', 
+							', 
+								', 
+									
+									', 
+									
+											', Page - 1', 
+										
+											', Page - 2', 
+										
+											', Page - 3', 
+										
+											', Page - 4', 
+										
+											', Page - 5', 
+										
+											', Page - 6', 
+										
+											', Page - 7', 
+										
+											', Page - 8', 
+										
+											', Page - 9', 
+										
+											', Page - 10', 
+										
+											', Page - 11', 
+										
+											', Page - 12', 
+										
+											', Page - 13', 
+										
+											', Page - 14', 
+										
+											', Page - 15', 
+										
+											', Page - 16', 
+										
+											', Page - 17', 
+										
+											', Page - 18', 
+										
+											', Page - 19', 
+										
+											', Page - 20', 
+										
+									', 
+									
+									', 
+									
+											', Page 1', 
+										
+											', Page 2', 
+										
+											', Page 3', 
+										
+											', Page 4', 
+										
+											', Page 5', 
+										
+									', 
+									
+								', 
+								
+							', 
+							', 
+								
+								', 
+							', 
+							', 
+						', 
+					
+
+
+					', 
+					', 
+
+					', 
+					', 
+					
+	', Browse Jobs in California by City', 
+	
+		', 
+			', 
+		        
+		            ', 
+		                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Anaheim', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Bakersfield', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Burbank', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Castroville', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Central California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Chatsworth', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Commerce', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Costa Mesa', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Cutler', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', East Central California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Eastern California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Escondido', 
+						                ', 
+					                ', 
+				                ', 
+			                
+		                ', 
+		            ', 
+		            
+		            ', 
+		                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Fresno', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Laguna Hills', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Livermore', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Long Beach', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Los Banos', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', McClellan Park', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Merced', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Modesto', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', North Central California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Northeast California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Northern California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Northwest California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+		                ', 
+		            ', 
+		            
+		            ', 
+		                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Ontario', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Oxnard', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Palm Springs', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Palo Alto', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Petaluma', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Pittsburg', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Pleasanton', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Redding', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Riverside', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Sacramento', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Salinas', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', San Bernardino', 
+						                ', 
+					                ', 
+				                ', 
+			                
+		                ', 
+		            ', 
+		            
+		            ', 
+		                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', San Diego', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', San Francisco', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', San Jose', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Santa Fe Springs', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Santa Maria', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Santa Rosa', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', South Central California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', South San Francisco', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Southeast California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Southern California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Southwest California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Temecula', 
+						                ', 
+					                ', 
+				                ', 
+			                
+		                ', 
+		            ', 
+		            
+		            ', 
+		                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Union City', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Upland', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Ventura', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Victorville', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Visalia', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Walnut Creek', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Watsonville', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', West Central California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', West Sacramento', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Western California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Woodland', 
+						                ', 
+					                ', 
+				                ', 
+			                
+		                ', 
+		            ', 
+		            
+		    ', 
+	    ', 
+
+				
+
+			
+			', 
+        	', 
+      ', 
+    ', 
+	
+	
+			', 
+			        ', 
+			      ', 
+			    ', 
+			    ', 
+			    ', 
+			    ', 
+			      ', 
+			        ', 
+			        ', 
+			          ', 
+			          ', 
+			            ', Featured Employers', 
+						
+						
+			            ', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            ', 
+			          ', 
+			        ', 
+			        ', 
+			        ', 
+			        ', 
+			        ', 
+			          ', 
+			          ', 
+			            ', Sign up for our Newsletter', 
+							
+							', 
+								', 
+								
+								', 
+								', 
+								', 
+								', Applicant',    
+								', 
+								', Employer', 
+								
+								', 
+								', 
+								', 
+									', 
+										', Select Country', 
+										
+												', USA', 
+											
+												', Canada', 
+											
+												', Australia', 
+											
+												', Europe', 
+											
+												', New Zealand', 
+											
+												', International/Other', 
+											
+												', Mexico', 
+											
+									', 
+								', 
+								', 
+								
+								', 
+								
+								', 
+							', 
+							
+						', 
+					', 
+			        ', 
+			        ', 
+			        ', 
+			        ', 
+			          	', 
+						', 
+							', University Partners', 
+							', The AgCareers.com University Partners program is designed to showcase and share information about educational advancement opportunities in agriculture for our users. ', 
+							
+							',  ', 
+							
+						', 
+			        ', 
+			        ', 
+			        ', 
+					', 
+					', 
+						
+						
+					', 
+					', 
+					', 
+			      ', 
+			    ', 
+			    ', 
+			    ', 
+				
+			', 
+			
+		
+		', 
+			', 
+			    ', 
+				
+				', 
+					', 
+						
+
+						
+						
+
+						
+						
+						
+						
+					', 
+				', 
+			    ', 
+			    
+
+
+', 
+',  
+	', home',  
+	', About Us',  
+	', Terms of Access',  
+	', Privacy Policy',  
+	', RSS Feeds',  
+	', Contact Us',  
+	',  ', 
+	 
+	',  
+	',  
+	',  
+	',  
+	',  
+	
+	',  
+	
+	', 
+	
+	', 
+	', 
+', 
+', 
+', 
+', 
+  ', 
+  
+  ',  
+  	', Job Seeker Tools', 
+	
+	
+		', Career Search',  
+		', Post a Resume', 
+		', Setup Your Profile', 
+	
+	', Employer Jobs', 
+	', Featured Jobs', 
+	', Internships', 
+	', Jobs by Date', 
+	', Recruiter Jobs', 
+	', Search By Job Title', 
+	', Search By Industry', 
+	', Search All Jobs', 
+	', Blog - Career Cultivation', 
+	', Job Seeker App',  
+  ', 
+  ', 
+  
+  ',  
+  	', Employer Tools', 
+	
+	
+        ', Advertising Rates', 
+		', Blog - Talent Harvest',  
+		', Search Resumes', 
+		', Setup Account', 
+	    ', Post a Job', 
+	
+  ', 
+  ', 
+  
+  ', 
+  	', Products', 
+	', Ag & Food Career Guide', 
+	', Ag & Food HR Roundtable', 
+	', Ag Warriors', 
+	
+	', Agribusiness HR Review', 
+	', Compensation Benchmark Review - Salary Data', 
+	', Internship Benchmark Survey', 
+	', Job Board', 
+	', Training & Consulting', 
+	', Workshops/Webinars', 
+  ', 
+  ', 
+  
+  ', 
+  	', Resources', 
+	', AgCareers.com News', 
+	', AgCareers.com Statistics', 
+	', Association Partners', 
+	', Career Profiles', 
+	', Education Directory', 
+	', Career Guide Articles', 
+	', Employer Partners', 
+	', E-Portfolio', 
+	', Infographics', 
+	', Market Research', 
+	', Newsletter Archives', 
+	', Recruiter Partners', 
+	', University Partners', 
+  ', 
+  ', 
+', 
+', 
+
+			    ', 
+				', 
+				', 
+				', 
+				', 
+					', u"
+					googletag.cmd.push(function() { googletag.display('div-gpt-ad-1374258344282-0'); });
+					", 
+					', 
+				', 
+			    ', 
+			  ', 
+			  ', 
+			  ', 
+			  ', 
+				', 
+					
+					', © 2017 AgCareers.com', 
+					
+					', 
+					', 
+				', 
+			  ', 
+			', 
+			', 
+			
+			
+	      	', 
+		        ', 
+				', 
+			', 
+			
+			', 
+			
+
+			
+
+			', 
+		'][
+			
+			
+	', 
+	
+			', 
+			
+	', 
+	
+			', 
+			', 
+			  ', 
+			    ', 
+			    ', 
+					', 
+					', u"
+					function googleTranslateElementInit() {
+					  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,fr,hi,zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+					}
+					", 
+					', The Leading Online Job Board for Agriculture, Food, and Biotechnology', 
+				', 
+			    ', 
+			    
+
+', 
+', 
+
+ 
+', 
+  ', 
+  	
+    ',  ', Job Seekers', 
+      ', 
+        ', 
+			
+			', Search Tools', 
+			', 
+				
+				
+				  	', Setup Your Profile', 
+					', Career Search', 
+				    ', Post a Resume', 
+				
+				', Featured Jobs', 
+				', Employer Jobs', 
+				', Recruiter Jobs', 
+				', Internships', 
+				', Jobs by Date', 
+				', Search By Job Title', 
+				', Search By Industry', 
+				', Search All Jobs', 
+			', 
+			
+        ', 
+        ', 
+			
+			', Resources', 
+			', 
+				', Career Profiles', 
+				', Education Directory', 
+				', Elite Talent', 
+				', Career Guide Articles', 
+				', E-Portfolio', 
+				', Infographics', 
+				', Job Seeker App', 
+				', Job Seeker Blog', 
+				', Market Research', 
+				', Newsletter Archives', 
+				', University Partners', 
+			', 
+			
+        ', 
+        ', 
+			
+			', News & Connections', 
+			', 
+				', AgCareers.com News', 
+				', AgCareers.com Statistics', 
+				', Ag Warriors', 
+				', Association Partners', 
+				', Employer Partners', 
+				', Recruiter Partners', 
+			', 
+			
+        ', 
+        ', 
+			
+			', Events', 
+			', 
+				', Career Fairs', 
+				', Webinars/Workshops', 
+			', 
+			
+        ', 
+        
+        ', 
+			',  ', 
+			', 
+				
+				
+				
+				
+			', 
+        ', 
+		
+      ', 
+    ', 
+	
+	
+    ', Employers', 
+      ', 
+        ', 
+			
+			', Job Board Tools', 
+			', 
+				
+				
+					', Setup Account', 
+					
+					', Pricing', 
+				    ', 
+				
+			', 
+			
+        ', 
+        ', 
+			
+			', Products', 
+			', 
+				', Ag & Food Career Guide', 
+				
+				', Ag & Food HR Roundtable', 
+				', Ag Warriors', 
+				
+				', Agribusiness HR Review', 
+				', Compensation Benchmark Review - Salary Data', 
+				', Elite Talent', 
+				', Internship Benchmark Survey', 
+				', Job Board', 
+				', Training & Consulting', 
+			', 
+			
+        ', 
+        ', 
+			
+			', Resources', 
+			', 
+				', AgCareers.com News', 
+				', AgCareers.com Statistics', 
+				', Association Partners', 
+				', Career Profiles', 
+				', Education Directory', 
+				', Employer Blog', 
+				', Employer Partners', 
+				', Infographics', 
+				', Market Research', 
+				', Newsletter Archives', 
+				', Recruiter Partners', 
+				', University Partners', 
+          	', 
+			
+        ', 
+        ', 
+			
+			', Events', 
+			', 
+				', Career Fairs', 
+				', Conferences', 
+				', Webinars/Workshops', 
+			', 
+			
+        ', 
+        ', 
+			',  ', 
+			
+			', 
+				
+				
+				
+				
+			', 
+			
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+', 
+
+			    ', 
+			    ', 
+			    
+			    
+					', Already registered? ', Sign in', 
+				
+', 
+	
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+		', 
+	
+', 
+				  
+			    ', 
+			    ', 
+			    ', 
+			  ', 
+			', 
+			', 
+			', 
+			', 
+			  ', 
+			  ', 
+			  	
+				  ', 
+				  	', 
+				  		', 
+				  			', 
+				  				
+								
+									', Search from over ', 5702',  jobs!', 
+								
+							', 
+							', 
+								', 
+									', 
+									
+										', 
+										
+										
+		', 
+		function getLocation() {
+		    if (navigator.geolocation) {
+		        navigator.geolocation.getCurrentPosition(getCityFromLatLng, errorHandler);
+		    } else {
+		        $('#error').html("Geolocation is not supported by this browser.");
+		    }
+		}
+		function errorHandler(error) {
+		switch(error.code) {
+		  case error.PERMISSION_DENIED:
+		    alert("In order to use this feature you must allow AgCareers to get your location.");
+		    break;
+		  case error.POSITION_UNAVAILABLE:
+		    alert("Location information is unavailable.");
+		    break;
+		  case error.TIMEOUT:
+		    alert("The request to get user location timed out.");
+		    break;
+		  case error.UNKNOWN_ERROR:
+		    alert("An unknown error occurred.");
+		    break;
+		  }
+		}
+		function getCityFromLatLng(position){
+		  var q;
+		  var lat = position.coords.latitude, lng = position.coords.longitude;
+		  //$("#error").html("Lat:"+ lat + " Lng:" + lng);
+		  $('#btnLocate').attr("src", "/images/loading.gif");
+		  $.ajax(
+		    {
+		      url: "/cfc/geographic.cfc",
+		     dataType: "json",
+		     data: {method:"getCityByLatLng", lat:lat, lng:lng},
+		     success: function( data )
+		     {
+		      $("#location").val(data[0]);
+		      $('#btnLocate').attr("src", "/images/geolocation.png");
+		     },
+		     error: function( error )
+		     {
+		      $("#error").html(error.responseText);
+		      $('#btnLocate').attr("src", "/images/geolocation.png");
+		     }
+		    }
+		  )
+		}
+
+		$(function() {
+		  $( "#location" ).autocomplete({
+		    source: function( request, response ) {
+		      $.ajax({
+		        url: "/cfc/geographic.cfc",
+		        dataType: "json",
+		        data: {
+		          method: "getCities",
+		          location: request.term
+		        },
+		        success: function( data ) {
+		          response( data );
+		        },
+		        error: function( error, strError )
+		        {
+		         //$("#error").html(strError + "<br>" + error.responseText);
+		         $('#btnLocate').attr("src", "/images/geolocation.png");
+		        }
+		      });
+		    },
+		    minLength: 1
+		  });
+		});
+		', 
+		
+		', 
+		', 
+		
+		
+								    
+									', 
+										
+										', 
+											', Industry Type', 
+											
+									     			', Animal Health', 
+									     		
+									     			', Animal Production - Beef', 
+									     		
+									     			', Animal Production - Dairy', 
+									     		
+									     			', Animal Production - Other', 
+									     		
+									     			', Animal Production - Poultry', 
+									     		
+									     			', Animal Production - Swine', 
+									     		
+									     			', Aquaculture, Fishing, Seafood', 
+									     		
+									     			', Chemical, Pesticide and Fertilizer', 
+									     		
+									     			', Commodities and Trading', 
+									     		
+									     			', Communications, Promotion, and Public Relations', 
+									     		
+									     			', Crop Production', 
+									     		
+									     			', Education and Extension', 
+									     		
+									     			', Energy, Biofuels and Alternative Energy', 
+									     		
+									     			', Equipment, Manufacturing and Technical', 
+									     		
+									     			', Feed Nutrition', 
+									     		
+									     			', Finance, Banking, Insurance and Real Estate', 
+									     		
+									     			', Food & Beverage Products and Processing', 
+									     		
+									     			', Government, Policy and Legal', 
+									     		
+									     			', Horticulture, Turf, Viticulture and Ornamental', 
+									     		
+									     			', Input Retail, Cooperative and Related Crop Services', 
+									     		
+									     			', Natural Resources, Environmental, Mining and Forestry', 
+									     		
+									     			', Pest Management', 
+									     		
+									     			', Plant & Soil Sciences, Seed and Biotechnology', 
+									     		
+									     			', Precision Ag', 
+									     		
+									     			', Produce and Produce Related Services', 
+									     		
+										', 
+									', 
+									
+								    ', 
+								    	', 
+								    	
+									', 
+								', 
+							', 
+							', 
+								', 
+								', Advanced Search', 
+							', 
+				  		', 
+				  	', 
+				  ', 
+				  
+			    ', 
+			  ', 
+			  ', 
+			  ', 
+			  ', 
+			    ', 
+			    ', 
+			      ', 
+			        ', 
+			        ', 
+					', 
+			', 
+
+		
+		', 
+			.prevoiusbtn{background:url(/new-skin/creative/assets/backgrounds/bg_prev_arrow.png) no-repeat scroll center center #cfcfcf;border:1px solid #cfcfcf;border-radius:30px;color:#fff;display:inline-block;font-family:"Roboto Condensed",sans-serif;font-size:30px;height:30px;line-height:30px;padding:0;text-align:center;width:30px}
+			.prevoiusbtn1{background:url(/new-skin/creative/assets/backgrounds/bg_prev_arrow.png) no-repeat scroll center center #49b571;border:1px solid #49b571;border-radius:30px;color:#fff;display:inline-block;font-family:"Roboto Condensed",sans-serif;font-size:30px;height:30px;line-height:30px;padding:0;text-align:center;width:30px}
+			.nextbtn{background:url(/new-skin/creative/assets/backgrounds/bg_next_arrow.png) no-repeat scroll center center #49b571;border:1px solid #49b571;border-radius:30px;color:#fff;display:inline-block;font-family:"Roboto Condensed",sans-serif;font-size:30px;height:30px;line-height:30px;padding:0;text-align:center;width:30px}
+			.nextbtn1{background:url(/new-skin/creative/assets/backgrounds/bg_next_arrow.png) no-repeat scroll center center #cfcfcf;border:1px solid #cfcfcf;border-radius:30px;color:#fff;display:inline-block;font-family:"Roboto Condensed",sans-serif;font-size:30px;height:30px;line-height:30px;padding:0;text-align:center;width:30px}
+			.browse_by_arrow_state {background-image: url("/new-skin/creative/assets/images/browse_by_btn.png");background-position: left top;background-repeat: no-repeat;display: block;margin-bottom: 5px;padding-left: 15px;}
+			.browse_by_arrow_state:hover {background-image: url("/new-skin/creative/assets/images/browse_by_hover_btn.png");}
+			.browse_state_content_inner {font-family: Arial,Helvetica,sans-serif;font-size: 12px;font-weight: bold;line-height: 18px;}
+			 h2{font-family: 'Roboto Condensed', sans-serif;font-weight: normal;font-size: 18px;color: #1d9ad6;line-height: 20px;text-decoration: none;	margin: 10px;padding:0px;}
+		', 
+		
+		
+        ', 
+        ', 
+        	
+			
+			', u"ga('send', 'pageview', '/results.cfm?q=&l=');", 
+			
+			
+			
+			', 
+				$(function(){
+					var EmpJobCount = "194";
+					var RecJobCount = "43";
+					$('.Job-Count').html('<div id="results-count-area">Job Search Results<br><span id="results-breakdown" class="JobCount"></span></div>');
+					$(".JobCount").text("Employer Jobs ("+EmpJobCount+")   Recruiter Jobs ("+RecJobCount+")");
+				});
+			', 
+            
+			
+			
+			', 
+			', California Jobs',  
+				', 
+				', 
+					', 
+					', 
+					', 
+					', 
+					', 
+					', 
+					', 
+					', 
+					', 
+					', 
+					', 
+                    ', 
+                    ', 
+                    ', 
+					', 
+					', 
+						', 
+							', Refine Search Results', 
+						', 
+						
+						',  ', Display', 
+							', 
+								', 10
+								', 15
+								', 20
+								', 25
+								', 30
+								', 40
+								', 50
+								', 75
+								', 100
+								', 125
+								', 150
+								', 175
+								', 200
+							', 
+							
+							', Per page by', 
+							', 
+								
+								', Date Posted', 
+								', Date Updated', 
+								', Job Title', 
+								', Company', 
+								', Partnership', 
+							', 
+							
+							', 
+							
+						', 
+						', 
+					', 
+					', 
+					', 
+					', 
+					
+					', 
+					
+						', 
+						', 
+							
+							', Employer Jobs', 
+							
+							', 
+						', 
+						', 
+						
+										', 
+									
+										', 
+											
+											
+											',  ', Harvest Manager',  ', 
+											', 
+												2 days ago  |  Production/Farming - Crop Production - Farm & Ranch Operations/Herdsperson/On Farm', 
+												Watsonville, CA, West United States, USA (0 km)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												J. Marchini Farms 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', Sales Coordinator',  ', 
+											', 
+												15 days ago  |  Agribusiness - Produce and Produce Related Services - Sales/Retail', 
+												Le Grand, CA, West United States, USA (0 km)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												J. Marchini Farms 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', FSQA Technician 5',  ', 
+											', 
+												4 hours ago  |  Food/Processing - Food & Beverage Products and Processing - Quality Assurance', 
+												Rancho Cucamonga, CA, West United States, USA (0 km)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												Tyson Foods 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', Finance Manager',  ', 
+											', 
+												24 days ago  |  Agribusiness - Chemical, Pesticide and Fertilizer - Accounting/Finance/Asset Management', 
+												Walnut Creek, CA, West United States, USA (0 km)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												Valent USA Corporation 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', Maintenance Technician',  ', 
+											', 
+												30+ days ago  |  Agribusiness - Commodities and Trading - Maintenance/Repair', 
+												Woodland, CA, West United States, USA (0 km)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												Bunge 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', Apprentice',  ', 
+											', 
+												30+ days ago  |  Agribusiness - Commodities and Trading - Operator/General Laborer', 
+												Woodland, CA, West United States, USA (0 km)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												Bunge 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', Scientist III, San Diego',  ', 
+											', 
+												30+ days ago  |  Agribusiness - Chemical, Pesticide and Fertilizer - Merchandiser/Trader/Broker', 
+												San Diego, CA, West United States, USA (0 km)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												BASF - We Create Chemistry 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', Manager /Sr. Team Leader - Fermentation Technologies, San Diego',  ', 
+											', 
+												30+ days ago  |  Agribusiness - Chemical, Pesticide and Fertilizer - Merchandiser/Trader/Broker', 
+												San Diego, CA, West United States, USA (0 km)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												BASF - We Create Chemistry 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', HR Business Partner - Compensation',  ', 
+											', 
+												9 days ago  |  Agribusiness - Chemical, Pesticide and Fertilizer - Human Resources', 
+												Walnut Creek, CA, West United States, USA (0 km)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												Valent USA Corporation 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											
+											',  ', BioScience Innovation Manager - UC Berkeley',  ', 
+											', 
+												30+ days ago  |  Agribusiness - Chemical, Pesticide and Fertilizer - Researcher/Research & Development', 
+												San Francisco, CA, West United States, USA (0 km)
+											', 
+										', 
+										', 
+											', 
+												
+												', 
+												
+												BASF - We Create Chemistry 
+												
+												
+												', 
+												
+											', 
+										', 
+									', 
+														', 
+						', 
+						
+						', 
+							', 
+								
+								', 
+							', 
+							', 
+								', 
+									
+									', 
+									
+											', Page - 1', 
+										
+											', Page - 2', 
+										
+											', Page - 3', 
+										
+											', Page - 4', 
+										
+											', Page - 5', 
+										
+											', Page - 6', 
+										
+											', Page - 7', 
+										
+											', Page - 8', 
+										
+											', Page - 9', 
+										
+											', Page - 10', 
+										
+											', Page - 11', 
+										
+											', Page - 12', 
+										
+											', Page - 13', 
+										
+											', Page - 14', 
+										
+											', Page - 15', 
+										
+											', Page - 16', 
+										
+											', Page - 17', 
+										
+											', Page - 18', 
+										
+											', Page - 19', 
+										
+											', Page - 20', 
+										
+									', 
+									
+									', 
+									
+											', Page 1', 
+										
+											', Page 2', 
+										
+											', Page 3', 
+										
+											', Page 4', 
+										
+											', Page 5', 
+										
+									', 
+									
+								', 
+								
+							', 
+							', 
+								
+								', 
+							', 
+							', 
+						', 
+					
+					', 
+					', 
+					', 
+					
+					', 
+					
+						
+						', 
+							
+							', Recruiter Jobs', 
+							
+							', 
+						', 
+						', 
+						
+										', 
+									
+										', 
+											
+											',  ', Assistant Manager (KH-6354)',  ', 
+											', 
+												1 day ago  |  Production/Farming - Animal Production - Dairy - Farm & Ranch Operations/Herdsperson/On Farm', 
+												CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													Hansen Agri-PLACEMENT 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Business Development Manager - Agriculture (12373)',  ', 
+											', 
+												4 hours ago  |  Agribusiness - Crop Production - Business Development/Strategic Management', 
+												CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													Ag 1 Source 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Regional Agronomy Sales Rep (12370)',  ', 
+											', 
+												4 hours ago  |  Agribusiness - Equipment, Manufacturing and Technical - Sales/Retail', 
+												CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													Ag 1 Source 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Dairy Division Sales Manager',  ', 
+											', 
+												3 days ago  |  Agribusiness - Animal Production - Dairy - Sales/Retail', 
+												Bakersfield, CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													GPAC 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Logistics Manager',  ', 
+											', 
+												3 days ago  |  Agribusiness - Commodities and Trading - Business Development/Strategic Management', 
+												Fresno, CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													GPAC 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Lead Grower  # 307',  ', 
+											', 
+												4 days ago  |  Production/Farming - Crop Production - Farm & Ranch Operations/Herdsperson/On Farm', 
+												CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													agriCAREERS, INC. 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Dairy Division Sales Manager',  ', 
+											', 
+												4 days ago  |  Agribusiness - Chemical, Pesticide and Fertilizer - Sales/Retail', 
+												Chico, CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													GPAC 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Plant Manager',  ', 
+											', 
+												7 days ago  |  Food/Processing - Food & Beverage Products and Processing - Manufacturing/Production', 
+												Los Angeles, CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													GPAC 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Plant Manager',  ', 
+											', 
+												7 days ago  |  Food/Processing - Food & Beverage Products and Processing - Manufacturing/Production', 
+												oakland, CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													GPAC 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+										', 
+									
+										', 
+											
+											',  ', Plant Nutrition Sales Specialist',  ', 
+											', 
+												14 days ago  |  Agribusiness - Plant & Soil Sciences, Seed and Biotechnology - Specialists', 
+												Hilmar, CA, West United States, USA
+											', 
+										', 
+										', 
+											', 
+												
+													', 
+													
+													GPAC 
+													
+													
+													', 
+												
+											', 
+										', 
+									', 
+								
+						', 
+						', 
+						
+						', 
+							', 
+								
+								', 
+							', 
+							', 
+								', 
+									
+									', 
+									
+											', Page - 1', 
+										
+											', Page - 2', 
+										
+											', Page - 3', 
+										
+											', Page - 4', 
+										
+											', Page - 5', 
+										
+											', Page - 6', 
+										
+											', Page - 7', 
+										
+											', Page - 8', 
+										
+											', Page - 9', 
+										
+											', Page - 10', 
+										
+											', Page - 11', 
+										
+											', Page - 12', 
+										
+											', Page - 13', 
+										
+											', Page - 14', 
+										
+											', Page - 15', 
+										
+											', Page - 16', 
+										
+											', Page - 17', 
+										
+											', Page - 18', 
+										
+											', Page - 19', 
+										
+											', Page - 20', 
+										
+									', 
+									
+									', 
+									
+											', Page 1', 
+										
+											', Page 2', 
+										
+											', Page 3', 
+										
+											', Page 4', 
+										
+											', Page 5', 
+										
+									', 
+									
+								', 
+								
+							', 
+							', 
+								
+								', 
+							', 
+							', 
+						', 
+					
+
+
+					', 
+					', 
+
+					', 
+					', 
+					
+	', Browse Jobs in California by City', 
+	
+		', 
+			', 
+		        
+		            ', 
+		                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Anaheim', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Bakersfield', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Burbank', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Castroville', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Central California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Chatsworth', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Commerce', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Costa Mesa', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Cutler', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', East Central California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Eastern California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Escondido', 
+						                ', 
+					                ', 
+				                ', 
+			                
+		                ', 
+		            ', 
+		            
+		            ', 
+		                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Fresno', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Laguna Hills', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Livermore', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Long Beach', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Los Banos', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', McClellan Park', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Merced', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Modesto', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', North Central California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Northeast California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Northern California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Northwest California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+		                ', 
+		            ', 
+		            
+		            ', 
+		                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Ontario', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Oxnard', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Palm Springs', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Palo Alto', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Petaluma', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Pittsburg', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Pleasanton', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Redding', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Riverside', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Sacramento', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Salinas', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', San Bernardino', 
+						                ', 
+					                ', 
+				                ', 
+			                
+		                ', 
+		            ', 
+		            
+		            ', 
+		                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', San Diego', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', San Francisco', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', San Jose', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Santa Fe Springs', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Santa Maria', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Santa Rosa', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', South Central California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', South San Francisco', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Southeast California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Southern California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Southwest California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Temecula', 
+						                ', 
+					                ', 
+				                ', 
+			                
+		                ', 
+		            ', 
+		            
+		            ', 
+		                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Union City', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Upland', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Ventura', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Victorville', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Visalia', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Walnut Creek', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Watsonville', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', West Central California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', West Sacramento', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Western California', 
+						                ', 
+					                ', 
+				                ', 
+			                
+				                ', 
+					                ', 
+						                ', 
+											
+						                    ', Woodland', 
+						                ', 
+					                ', 
+				                ', 
+			                
+		                ', 
+		            ', 
+		            
+		    ', 
+	    ', 
+
+				
+
+			
+			', 
+        	', 
+      ', 
+    ', 
+	
+	
+			', 
+			        ', 
+			      ', 
+			    ', 
+			    ', 
+			    ', 
+			    ', 
+			      ', 
+			        ', 
+			        ', 
+			          ', 
+			          ', 
+			            ', Featured Employers', 
+						
+						
+			            ', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            		', 
+			            	
+			            ', 
+			          ', 
+			        ', 
+			        ', 
+			        ', 
+			        ', 
+			        ', 
+			          ', 
+			          ', 
+			            ', Sign up for our Newsletter', 
+							
+							', 
+								', 
+								
+								', 
+								', 
+								', 
+								', Applicant',    
+								', 
+								', Employer', 
+								
+								', 
+								', 
+								', 
+									', 
+										', Select Country', 
+										
+												', USA', 
+											
+												', Canada', 
+											
+												', Australia', 
+											
+												', Europe', 
+											
+												', New Zealand', 
+											
+												', International/Other', 
+											
+												', Mexico', 
+											
+									', 
+								', 
+								', 
+								
+								', 
+								
+								', 
+							', 
+							
+						', 
+					', 
+			        ', 
+			        ', 
+			        ', 
+			        ', 
+			          	', 
+						', 
+							', University Partners', 
+							', The AgCareers.com University Partners program is designed to showcase and share information about educational advancement opportunities in agriculture for our users. ', 
+							
+							',  ', 
+							
+						', 
+			        ', 
+			        ', 
+			        ', 
+					', 
+					', 
+						
+						
+					', 
+					', 
+					', 
+			      ', 
+			    ', 
+			    ', 
+			    ', 
+				
+			', 
+			
+		
+		', 
+			', 
+			    ', 
+				
+				', 
+					', 
+						
+
+						
+						
+
+						
+						
+						
+						
+					', 
+				', 
+			    ', 
+			    
+
+
+', 
+',  
+	', home',  
+	', About Us',  
+	', Terms of Access',  
+	', Privacy Policy',  
+	', RSS Feeds',  
+	', Contact Us',  
+	',  ', 
+	 
+	',  
+	',  
+	',  
+	',  
+	',  
+	
+	',  
+	
+	', 
+	
+	', 
+	', 
+', 
+', 
+', 
+', 
+  ', 
+  
+  ',  
+  	', Job Seeker Tools', 
+	
+	
+		', Career Search',  
+		', Post a Resume', 
+		', Setup Your Profile', 
+	
+	', Employer Jobs', 
+	', Featured Jobs', 
+	', Internships', 
+	', Jobs by Date', 
+	', Recruiter Jobs', 
+	', Search By Job Title', 
+	', Search By Industry', 
+	', Search All Jobs', 
+	', Blog - Career Cultivation', 
+	', Job Seeker App',  
+  ', 
+  ', 
+  
+  ',  
+  	', Employer Tools', 
+	
+	
+        ', Advertising Rates', 
+		', Blog - Talent Harvest',  
+		', Search Resumes', 
+		', Setup Account', 
+	    ', Post a Job', 
+	
+  ', 
+  ', 
+  
+  ', 
+  	', Products', 
+	', Ag & Food Career Guide', 
+	', Ag & Food HR Roundtable', 
+	', Ag Warriors', 
+	
+	', Agribusiness HR Review', 
+	', Compensation Benchmark Review - Salary Data', 
+	', Internship Benchmark Survey', 
+	', Job Board', 
+	', Training & Consulting', 
+	', Workshops/Webinars', 
+  ', 
+  ', 
+  
+  ', 
+  	', Resources', 
+	', AgCareers.com News', 
+	', AgCareers.com Statistics', 
+	', Association Partners', 
+	', Career Profiles', 
+	', Education Directory', 
+	', Career Guide Articles', 
+	', Employer Partners', 
+	', E-Portfolio', 
+	', Infographics', 
+	', Market Research', 
+	', Newsletter Archives', 
+	', Recruiter Partners', 
+	', University Partners', 
+  ', 
+  ', 
+', 
+', 
+
+			    ', 
+				', 
+				', 
+				', 
+				', 
+					', u"
+					googletag.cmd.push(function() { googletag.display('div-gpt-ad-1374258344282-0'); });
+					", 
+					', 
+				', 
+			    ', 
+			  ', 
+			  ', 
+			  ', 
+			  ', 
+				', 
+					
+					', © 2017 AgCareers.com', 
+					
+					', 
+					', 
+				', 
+			  ', 
+			', 
+			', 
+			
+			
+	      	', 
+		        ', 
+				', 
+			', 
+			
+			', 
+			
+
+			
+
+			', 
+		']

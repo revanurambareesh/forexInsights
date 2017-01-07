@@ -1,0 +1,4271 @@
+[
+    ', 
+/* wrapper-6.0.6 */!function e(t,n,r){function o(a,c){if(!n[a]){if(!t[a]){var s="function"==typeof require&&require;if(!c&&s)return s(a,!0);if(i)return i(a,!0);var d=new Error("Cannot find module '"+a+"'");throw d.code="MODULE_NOT_FOUND",d}var u=n[a]={exports:{}};t[a][0].call(u.exports,function(e){var n=t[a][1][e];return o(n?n:e)},u,u.exports,e,t,n,r)}return n[a].exports}for(var i="function"==typeof require&&require,a=0;a<r.length;a++)o(r[a]);return o}({1:[function(e,t,n){!function(){function t(){o&&console.log.apply(console,arguments)}var n=e(4),r=window.RTCPeerConnection||window.mozRTCPeerConnection||window.webkitRTCPeerConnection;if(!r)return void n.reportEvent("bootstrap.ifw.rtc.absent");n.reportEvent("bootstrap.ifw.rtc.exists"),window.adonisHash=window.location.hash;var o=window.adonisHash.indexOf("adonis-logging")!==-1,i=function(e){var t=function(){e===!0&&console.log.apply(console,arguments)},n=["script","img"];document.addEventListener("load",function(e){t("withinIframe load event",e.target),!e.target||"SCRIPT"!==e.target.nodeName&&"IMG"!==e.target.nodeName||(e.target._loadState="load")},!0),document.addEventListener("error",function(e){t("withinIframe error event",e.target),!e.target||"SCRIPT"!==e.target.nodeName&&"IMG"!==e.target.nodeName||(e.target._loadState="error")},!0),window.addEventListener("message",function(e){if(void 0!==e.data.iframeId){t("message received "+e.data.iframeId);var r=e.data,o=function(e){"loading"!==document.readyState?e():document.addEventListener("DOMContentLoaded",e)},i=function(e){var r={originIframeId:e.iframeId,readyState:document.readyState,requestData:[],cssData:[]},o=e.srcSubstrings;if(void 0!==o)for(var a=document.querySelectorAll(n.join(",")),c=0;c<a.length;c++){var s=a[c];if(s.src){var d=o.some(function(e){return s.src.indexOf(e)!==-1});if(d){if(void 0===s._loadState)return t("Wait for event from "+s.src),s.addEventListener("load",function(){i(e)}),void s.addEventListener("error",function(){i(e)});r.requestData.push({type:s.nodeName,src:s.src,state:s._loadState})}}}var u=e.displayTypes,f=e.cssAttributes;void 0!==u&&void 0!==f&&(a=document.querySelectorAll(u.join(",")),Array.prototype.forEach.call(a,function(e){var t=window.getComputedStyle(e),n={};f.forEach(function(e){n[e]=t.getPropertyValue(e)}),r.cssData.push({type:e.nodeName,id:e.id,"class":e.getAttribute("class"),cssAttributes:n})})),t("send response "+e.iframeId),parent.postMessage(r,"*")};o(function(){i(r)})}})},a=['<script type="text/javascript">(',i.toString(),")(",o.toString(),")<","/script>"].join(""),c=function(e,t,n,r){var o=Object.getOwnPropertyDescriptor(e.prototype,t);Object.defineProperty(e.prototype,t,{get:function(){return n(o.get,this,arguments)},set:function(){return r(o.set,this,arguments)},enumerable:!0})},s=function(e,t,n){return e.apply(t,n)},d=function(e,n,r){try{var o=r[0];if(o.indexOf("html")!==-1){var i=o.split(";"),c=i[1],s=parseInt(c)+a.length;i[1]=s.toString(),o=i.join(";"),o=o.replace("<head>","<head>"+a),r[0]=o}}catch(d){t(d)}return e.apply(n,r)};c(HTMLIFrameElement,"name",s,d);var u=function(e){var t=!1;if(e.src&&0!==e.src.indexOf("javascript:")&&0!==e.src.indexOf("about:blank")){var n=document.createElement("a");n.href=e.src;var r=n.host;r===window.location.host&&(t=!0)}else t=!0;return t},f=function(e,n){if(void 0===n._writeDecorated){n._writeDecorated=!0;var r=n.write;n.write=function(e){try{this._injected||(e.indexOf("<head>")!==-1?(e=e.replace("<head>","<head>"+a),this._injected=!0):e.indexOf("<script")!==-1&&(e=e.replace(/(<script.*?>)/,a+"$1"),this._injected=!0))}catch(n){t(n)}return r.call(this,e)}}},p=function(e,n,r){var o=e.apply(n,r);try{u(n)&&f(n,o)}catch(i){t(i)}return o},l=function(e,t,n){return e.apply(t,n)};c(HTMLIFrameElement,"contentDocument",p,l);var v=function(e,n,r){var o=e.apply(n,r);try{u(n)&&f(n,o.document)}catch(i){t(i)}return o},m=function(e,t,n){return e.apply(t,n)};c(HTMLIFrameElement,"contentWindow",v,m)}()},{4:4}],2:[function(e,t,n){var r=e(3);t.exports=r},{3:3}],3:[function(e,t,n){t.exports={REAL_STUN_HOST:"stun.xpanama.net:3478",TURNSIGNAL_HOST:"ts.p.xpanama.net:7000",STUNGUN_HOST:"sg.p.xpanama.net:3480",SERVER_CANDIDATE:"candidate:827648026 1 udp 2122194687 SERVER_IP SERVER_PORT typ host generation 0",REPORTING_URL:"https://lb.statsevent.com/stats",REPORTING_RATE:.01,LOG_LEVEL:"error",REPORT_ERRORS:!0,MANIFEST_URL:"https://sri.jsintegrity.com/manifest.json",MANIFEST_EXPIRATION_TIME:86400,AD_MARKER:"adonis-marker"}},{}],4:[function(e,t,n){function r(e){var t=new XMLHttpRequest,n=[d.REPORTING_URL,e].join("");t.open("GET",n,!0),t.send()}function o(e){r("/adonis_error?e="+e.toString())}function i(){return null!=window.ADONIS_BOOTSTRAP_STATS?window.ADONIS_BOOTSTRAP_STATS===!0:Math.random()<d.REPORTING_RATE}function a(e,t){if(c(e),i()){var n={website:window.location.hostname,key:e};null!=t&&(n.quantity=t),r(["/adonis_event/?event=",JSON.stringify(n)].join(""))}}function c(e){var t={key:e,time_ms:Math.round(window.performance.now()),website:window.location.hostname};f.push(t)}function s(){u.defineReadOnlyProperty("adonisBootstrapTiming",f)}var d=e(2),u=e(5),f=[];t.exports={reportError:o,reportEvent:a,saveTiming:s,shouldReport:i}},{2:2,5:5}],5:[function(e,t,n){function r(e,t){Object.defineProperty(window,e,{value:t,writable:!1})}function o(e,t){return!t||Number(t)<=e}function i(e){var t=(new Date).getTime()/1e3;return o(t,e)}var a=function(){var e=window.navigator.userAgent.toLowerCase(),t=/(chrome)[ \/]([\w.]+)/.exec(e)||/(firefox)[ \/]([\w.]+)/.exec(e);if(null!==t){var n=t[1],r=t[2],o=parseInt(r.split(".")[0]);if("chrome"===n&&o>=41||"firefox"===n&&o>=37)return!0}return!1},c=function(e){"loading"!==document.readyState?e():document.addEventListener("DOMContentLoaded",e)};t.exports={isSupportedBrowser:a,defineReadOnlyProperty:r,ready:c,isExpired:o,isExpiredNow:i}},{}]},{},[1]);
+',   ', 
+  ', 
+  ', u"(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5V3WHJ');", 
+  ', 
+
+', 
+', 
+        ', 
+    ', 
+        var axel = Math.random()+"";
+        var a = axel * 10000000000000;
+
+        var img = document.createElement("img");
+        img.src = 'http://pubads.g.doubleclick.net/activity;xsp=197334;ord='+ a +'?';
+        img.width = 1;
+        img.height = 1;
+
+        var body = document.getElementsByTagName("body")[0];
+        body.appendChild(img);
+
+    ', 
+    ', 
+    ',     
+
+
+
+
+
+', 
+
+  .page-width
+  {
+    max-width:1170px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+
+  .header a:hover
+  {
+    text-decoration: none !important;
+  }
+
+  .header.meganav
+  {
+    position:fixed;
+    letter-spacing:0.05em;
+    -webkit-text-stroke:0;
+    z-index:105;
+    top:0;
+    width:100%;
+  }
+
+  body
+  {
+    margin-top:54px;
+  }
+
+  .header.meganav .brand
+  {
+    width:220px;
+    height:50px;
+    background:url(http://i.investopedia.com/public/img/logo_white_new.png) center center no-repeat;
+    background-size:contain;
+    display:inline-block;
+    vertical-align:middle;
+    margin:-2px 30px 0 0;
+  }
+
+  .header.meganav .menus
+  {
+    width:calc(100% - 250px);
+    display:inline-block;
+  }
+
+  .header.meganav .primary
+  {
+    width:50%;
+    display:inline-block;
+    border:none;
+    margin:0;
+    text-align:left;
+    vertical-align:middle;
+  }
+
+  .header.meganav .secondary
+  {
+    width:50%;
+    display:inline-block;
+    text-align:right;
+  }
+
+  .header.meganav .menu
+  {
+    display:inline-block;
+    vertical-align:middle;
+    position:static;
+  }
+
+  .header.meganav .menu.nav
+  {
+    box-shadow:none;
+    width:auto;
+    height:auto;
+    transform:none;
+    transition:none;
+    -webkit-transform:none;
+  }
+
+  .header.meganav .menu.open .menu-items
+  {
+    display:block !important;
+  }
+
+  .header.meganav .menu-icon
+  {
+    width:20px;
+    height:9px;
+    padding:22px 26px 22px 18px;
+    margin:0;
+    vertical-align:top;
+    position:relative;
+    background-size:auto 20px;
+    background-position:15px center;
+    background-repeat:no-repeat;
+    display:none;
+    cursor:pointer;
+  }
+
+  .menu.member .menu-icon
+  { background-image:url(http://i.investopedia.com/header_c/icon_user.png); background-size:auto 22px; }
+
+  .menu.search .menu-icon
+  { background-image:url(http://i.investopedia.com/public/fa/img/icon_search_white.png); }
+
+  .menu.nav .menu-icon
+  { background-image:url(http://i.investopedia.com/public/fa/img/icon_menu.png); }
+
+  .menu.newsletters .menu-icon
+  { background-image:url(http://i.investopedia.com/header_c/icon_newsletter.png); }
+
+  .header.meganav .menu-icon:before,
+  .header.meganav .menu-icon:after,
+  .header.meganav .menu-item-title:before,
+  .header.meganav .menu-item-title:after
+  {
+    content:'';
+    border-width:5px;
+    border-style:solid;
+    border-color:#ccc transparent transparent;
+    z-index:1;
+    position:absolute;
+    top:24px;
+    right:9px;
+  }
+
+  .header.meganav .menu-icon:after,
+  .header.meganav .menu-item-title:after,
+  .header.meganav .menu-item-link:after
+  {
+    z-index:2;
+    margin-top:-2px;
+    border-top-color:#333;
+  }
+
+  .header.meganav.tablet .menu-item-title:before,
+  .header.meganav.tablet .menu-item-title:after,
+  .header.meganav.tablet .menu-icon:before,
+  .header.meganav.tablet .menu-icon:after
+  {
+    display:none;
+  }
+
+  .header.meganav .menu-items
+  {
+    margin:0;
+    padding:0;
+    list-style:none;
+    text-align:left;
+    box-sizing:border-box;
+  }
+
+  .header.meganav .menu-items > li
+  {
+    display:inline-block;
+    margin:0;
+    padding:0;
+    text-align:left;
+  }
+
+  .header.meganav .menu-item-title,
+  .header.meganav .menu-item-link,
+  .header.meganav .menu-item{
+    display:block;
+    position:relative;
+    background:none !important;
+  }
+
+  .header.meganav .menu-item-title
+  {
+    padding: 18px 26px 16px 9px;
+  }
+  
+  .header.meganav .menu-item-link 
+  {
+    padding: 18px 9px 16px 9px;  
+  }
+
+  .header.meganav .menu-item{
+    padding:18px 15px 16px 15px;
+  }
+
+  .header.meganav.tablet .menu-item-title,
+  .header.meganav.tablet .menu-item-link
+  {
+    padding:18px 15px 16px 15px;
+  }
+
+  .header.meganav .menu.search
+  {
+    width:calc(100% - 220px);
+  }
+
+  .header.meganav .menu.search .menu-items > li
+  {
+    display:block;
+  }
+
+  .header.meganav .search-box
+  {
+    position:relative;
+    width:auto;
+    display:block;
+    background-color:transparent;
+    max-width: none;
+  }
+
+  .header.meganav .search-box input
+  {
+    border:none;
+    border-radius:2px;
+    font-size:14px;
+    padding:7px 40px 6px 15px;
+    box-sizing:border-box;
+    width:100%;
+    height:30px;
+    outline:none;
+  }
+
+  .header.meganav .search-box button
+  {
+    position:absolute;
+    width:20px;
+    height:20px;
+    background:url(http://i.investopedia.com/public/fa/img/icon_search.png) center center no-repeat;
+    background-size:contain;
+    top:5px;
+    right:10px;
+    border:none;
+    cursor:pointer;
+    padding:0;
+  }
+
+  .header.meganav .menu.member
+  {
+    position:relative;
+  }
+
+  .header.meganav .menu.member .menu-icon
+  {
+    display:inline-block;/* Used for js to detect media queries. */
+    background-position:15px 17px;
+  }
+
+  .header.meganav .menu.member .menu-items
+  {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: none;
+    font-size: 14px;
+    position: absolute;
+    top: 100%;
+    min-width: 180px;
+    background-color:#444;
+    right:0;
+  }
+
+  .header.meganav .menu.member .menu-items > li
+  {
+    display:block;
+  }
+
+  .header.meganav .menu.member .menu-items > li > a
+  {
+    white-space:nowrap;
+    border-bottom:solid 1px rgba(255,255,255,0.2);
+  }
+
+  .header.meganav .menu.member .menu-items > li:last-child > a
+  {
+    border-bottom:none;
+  }
+
+  .header.meganav .menu.member .menu-item-title:before,
+  .header.meganav .menu.member .menu-item-title:after,
+  .header.meganav .menu.member .menu-item-link:before,
+  .header.meganav .menu.member .menu-item-link:after
+  {
+    display:none;
+  }
+
+  .header.meganav .menu.newsletters
+  {
+    margin-top:0;
+    border:none;
+  }
+
+  .header.meganav .menu.newsletters .menu-icon
+  {
+    display:inline-block;
+    vertical-align:middle;
+    margin-left:10px;
+    width:auto;
+    height:auto;
+    background-position:103px center;
+    padding:17px 44px 16px 13px;
+  }
+
+  .header.meganav .menu.newsletters .menu-icon:before,
+  .header.meganav .menu.newsletters .menu-icon:after
+  {
+    display: none;
+  }
+
+  .header.meganav .menu-panel
+  {
+    position:absolute;
+    top:100%;
+    left:0;
+    width:100%;
+    display:none;
+    z-index:100;
+    text-align:left;
+    margin-top:-1px;
+  }
+
+  .header.meganav .menu-panel > .inner
+  {
+    padding:30px;
+  }
+
+  .header.meganav .menu-panel.tools > .inner
+  {
+    padding:40px 30px 60px 30px;
+  }
+
+  .header.meganav .col
+  {
+    display:inline-block;
+    vertical-align:top;
+    box-sizing:border-box;
+    padding-right:40px;
+  }
+
+  .header.meganav .col:last-child
+  {
+    padding-right:0;
+  }
+
+  .header.meganav .col .title
+  {
+    font-size:20px;
+    margin-bottom:10px;
+    display:block;
+    text-transform:none;
+    border:none;
+    background:none !important;
+  }
+
+  .header.meganav .col a.title:after
+  {
+    content:'';
+    background:url(http://i.investopedia.com/header_c/icon_home.png) center right no-repeat;
+    background-size:contain;
+    display:inline-block;
+    margin:0 0 0 10px;
+    width:16px;
+    height:16px;
+  }
+
+  .header.meganav .tod-title
+  {
+    font-size:12px;
+    text-transform:uppercase;
+  }
+
+  .header.meganav .term-title
+  {
+    font-size:36px;
+    line-height:36px;
+  }
+
+  .header.meganav .term-desc
+  {
+    margin-bottom:10px;
+  }
+
+  .header.meganav .term-btn
+  {
+    font-size:10px;
+    padding:6px 10px 4px 10px;
+    line-height:9px;
+    border-radius:3px;
+    display:inline-block;
+    text-transform:uppercase;
+    float:right;
+    background-color:#555;
+  }
+
+  .header.meganav .tool-title
+  {
+    font-size:28px;
+  }
+
+  .header.meganav .tool-title:after
+  {
+    content:'';
+    display:inline-block;
+    width:28px;
+    height:23px;
+    margin-left:10px;
+  }
+
+  .header.meganav .tool-title.fxtrader:after
+  { background:url(http://i.investopedia.com/header_c/icon_fxtrader.png) center right no-repeat; }
+
+  .header.meganav .tool-title.simulator:after
+  { background:url(http://i.investopedia.com/header_c/icon_simulator.png) center right no-repeat; }
+
+  .header.meganav a.article
+  {
+    display:inline-block;
+    vertical-align:top;
+    width:45%;
+    background:none !important;
+  }
+
+  .header.meganav .article:last-child
+  {
+    margin-left:8%;
+  }
+
+  .header.meganav .article img
+  {
+    width:100%;
+    height:86px;
+    display:block;
+  }
+
+  .header.meganav .article-title
+  {
+    font-size:13px;
+    padding:10px 0;
+    display:block;
+  }
+
+  .header.meganav .links
+  {
+    margin:10px 0 0 0;
+    padding:0;
+  }
+
+  .header.meganav .links li
+  {
+    vertical-align:top;
+    box-sizing:border-box;
+    margin:0 0 8px 0;
+    padding:0;
+    display:block;
+  }
+
+  .header.meganav .links li a
+  {
+    border-bottom:solid 1px rgba(255,255,255,0.1) !important;
+    display:block;
+    padding-bottom:2px;
+    transition:border-color 0.2s ease-out;
+    background:none !important;
+    text-align:left;
+  }
+
+  .header.meganav .links.topics
+  {
+    margin-right:-20px;
+  }
+
+  .header.meganav .links.topics li
+  {
+    display:inline-block;
+    padding:4px 12px 4px 4px;
+    width:24%;
+  }
+
+  .header.subchannels
+  {
+    z-index:104;
+    -webkit-text-stroke:0;
+    position:relative;
+  }
+
+  .header.subchannels ul
+  {
+    margin:0;
+    padding:0;
+    list-style:none;
+    letter-spacing:normal;
+  }
+
+  .header.subchannels ul > li
+  {
+    display:inline-block;
+    margin:0;
+    padding:0;
+    border-bottom:solid 2px transparent;
+  }
+
+  .header.subchannels ul > li > a
+  {
+    display:inline-block;
+    padding:9px 8px 6px 8px;
+  }
+
+  .header.subchannels li > a
+  {
+    font-size:14px;
+  }
+
+  .header.subchannels li.separator
+  {
+    margin:0;
+    background-color:transparent;
+  }
+
+  #Footer .icon-newsletter:after
+  {
+    content:'';
+    width:20px;
+    height:20px;
+    background:url(http://i.investopedia.com/header_c/icon_newsletter.png) center center no-repeat;
+    background-size:contain;
+    display:inline-block;
+    vertical-align:middle;
+    margin-left:5px;
+  }
+
+  .header.meganav, #Footer .mid
+  { background:#333; }
+
+  #Footer .btm
+  { background:#2b2b2b; }
+
+  .header.subchannels
+  { background-color:#e4e4e4; }
+
+  .header .menu-panel, .header .menu.open .menu-icon
+  { background-color:#444; }
+
+  .header.subchannels li:hover
+  { background-color:#ccc; }
+
+  .header.subchannels li.separator:hover
+  { background-color:transparent; }
+
+  .header .menu.nav
+  { background-color:transparent; }
+
+  .header.meganav, .header.meganav a, #Footer .flist > li:first-child,
+  #Footer .column-list ul li.first, .header.meganav .primary
+  { color:#fff !important; }
+
+  .header.subchannels a
+  { color:#333 !important; }
+
+  .header .menu-panel .title, .header .menu-panel a,
+  #Footer, #Footer a
+  { color:#ccc !important; }
+
+  #Footer .btm
+  {
+    padding:20px 0;
+  }
+
+  #Footer .flist
+  { border-color:#3c3c3c; }
+
+  #Footer .btm span
+  {
+    margin-right:10px;
+  }
+
+  #Footer .btm span a
+  {
+    padding:0 10px;
+    font-size:13px;
+  }
+
+  .header.subchannels li.selected
+  { border-bottom:solid 2px #444; }
+
+  .header.meganav, .header.meganav a, .header.subchannels li.selected a, .header .menu-panel .col .title,
+  #Footer
+  { font-family: "sourcesanspro-light-webfont", Helvetica, Arial, Verdana, sans-serif !important; }
+
+  .header.subchannels, .header.subchannels li.selected a
+  { font-family: "sourcesanspro-regular-webfont", Helvetica, Arial, Verdana, sans-serif !important; }
+
+  .header.subchannels .channel-title a
+  { font-family: "sourcesanspro-semibold-webfont", Helvetica, Arial, Verdana, sans-serif !important; }
+
+  .hspace { text-align:justify; }
+  .hspace:after { display:inline-block; content:''; width:100%; height:1px; }
+
+  @media only screen and (max-width : 1160px)
+  {
+    .header.meganav .primary
+    {
+      width:75%;
+    }
+
+    .header.meganav .secondary
+    {
+      width:25%;
+    }
+
+    .header.meganav .menu-icon
+    {
+      padding:22px 17px;
+    }
+
+    .header.meganav .menu-icon:before,
+    .header.meganav .menu-icon:after
+    {
+      display:none;
+    }
+
+    .header.meganav .menu.search
+    {
+      width:auto;
+    }
+
+    .header.meganav .menu.search .menu-icon
+    {
+      display:inline-block;
+    }
+
+    .header.meganav .menu.search .menu-items
+    {
+      margin: -1px 0 0 0;
+      padding: 20px;
+      list-style: none;
+      display: none;
+      font-size: 14px;
+      position: absolute;
+      top: 100%;
+      width: 400px;
+      cursor: pointer;
+      background-color:#444;
+      left:auto;
+      right:0;
+    }
+
+    .header.meganav .menu.search .menu-items > li
+    {
+      display:block;
+    }
+
+    .header.meganav .menu.search .menu-item-title:after,
+    .header.meganav .menu.search .menu-item-link:after
+    {
+      border-top-color:#444;
+    }
+
+    .header.meganav .menu.newsletters .icon-txt
+    {
+      display:none;
+    }
+
+    .header.meganav .menu.newsletters .menu-icon
+    {
+      background-position:center 19px;
+      padding:22px;
+      margin:0;
+      height:10px;
+    }
+  }
+
+  @media only screen and (max-width : 960px)
+  {
+    .page-width
+    {
+      padding:0 5px;
+    }
+
+    .header.meganav
+    {
+      background-color:rgba(0,0,0,0.8);
+    }
+
+    .header.meganav .menus
+    {
+      width:calc(100% - 210px);
+      text-align:right;
+    }
+
+    .header.meganav .primary
+    {
+      width:auto;
+    }
+
+    .header.meganav .secondary
+    {
+      width:auto;
+    }
+
+    .header.meganav .brand
+    {
+      width:180px;
+      background-size:auto 25px;
+      background-position:left center;
+    }
+
+    .header.meganav .menu-icon
+    {
+      display:block !important;
+      background-position:center center;
+    }
+
+    .header.meganav .menu.member .menu-icon
+    {
+      background-position:center 18px;
+    }
+
+    .header.meganav .menu.nav .menu-items
+    {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: none;
+      font-size: 14px;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: 100%;
+      cursor: pointer;
+      background-color:#444;
+    }
+
+    .header.meganav .menu-items > li
+    {
+      display:block;
+    }
+
+    .header.meganav .menu.nav .menu-items > li
+    {
+      border-bottom:solid 1px #333;
+    }
+
+    .header.meganav .menu-item-title,
+    .header.meganav .menu-item-link,
+    .header.meganav .menu-item
+    {
+      padding:14px 15px 12px 15px;
+    }
+
+    .header.meganav .menu-item-title:after,
+    .header.meganav .menu-item-link:after
+    {
+      border-top-color:#444;
+    }
+
+    .header.meganav .menu-panel
+    {
+      position:static;
+    }
+
+    .header.meganav .menu-items > li.open .menu-panel
+    {
+      display:block;
+    }
+
+    .header.meganav .menu-items > li.open .menu-item-title:before,
+    .header.meganav .menu-items > li.open .menu-item-title:after,
+    .header.meganav .menu-items > li.open .menu-item-link:before,
+    .header.meganav .menu-items > li.open .menu-item-link:after
+    {
+      border-top-color:transparent;
+      border-bottom-color:#ccc;
+      top:18px;
+    }
+
+    .header.meganav .menu-items > li.open .menu-item-title:after,
+    .header.meganav .menu-items > li.open .menu-item-link:after
+    {
+      margin-top:2px;
+      border-bottom-color:#444;
+    }
+
+    .header.meganav .menu-panel > .inner
+    {
+      padding:10px;
+      background-color:#3e3e3e;
+    }
+
+    .header.meganav .col.new,
+    .header.meganav .col .article,
+    .header.meganav .col.topics > .title,
+    .header.meganav .col.tod .tod-title,
+    .header.meganav .col.tod .tod-term,
+    .header.meganav .col .tool-title:after,
+    .header.meganav .col .tool-desc
+    {
+      display:none;
+    }
+
+    .header.meganav .col.topics
+    {
+      width:auto !important;
+    }
+
+    .header.meganav .col.tod,
+    .header.meganav .col.video,
+    .header.meganav .col.guides
+    {
+      width:49% !important;
+    }
+
+    .header.meganav .col.tod,
+    .header.meganav .col.video
+    {
+      margin-top:10px;
+    }
+
+    .header.meganav .col.video
+    {
+      padding-right:0;
+    }
+
+    .header.meganav .col.guides > .title,
+    .header.meganav .col.tod > .title,
+    .header.meganav .col.video > .title
+    {
+      font-size:14px;
+      border-bottom:solid 1px rgba(255,255,255,0.1) !important;
+      display:block;
+      padding:4px;
+    }
+
+    .header.meganav .col > .title:after
+    {
+      display:none !important;
+    }
+
+    .header.meganav .col.topics .links
+    {
+      margin:0;
+    }
+
+    .header.meganav .col.topics .links li
+    {
+      width:49%;
+    }
+
+    .header.meganav .col.guides .links
+    {
+      display:none;
+    }
+
+    .header.meganav .col .tool-title
+    {
+      font-size:14px;
+      border-bottom:solid 1px rgba(255,255,255, 0.1);
+      padding:4px;
+      transition:border-color 0.2s ease-out;
+    }
+
+    .header.meganav .menu-panel.tools > .inner
+    {
+      padding:20px 10px;
+    }
+
+    .header.subchannels
+    {
+      display:none;
+    }
+
+    .header.meganav a, .header.meganav a.title
+    { color:#fff !important; }
+  }
+
+  @media only screen and (max-width : 740px)
+  {
+    .header.meganav .menu.search .menu-items
+    {
+      left:0;
+      right:auto;
+      width: 100%;
+    }
+
+    .header.meganav .menu-icon
+    {
+      padding:22px 8px;
+    }
+
+  }
+
+  @media only screen and (max-width : 500px)
+  {
+    .header.meganav .menus
+    {
+      width:calc(100% - 190px);
+    }
+
+    .header.meganav .brand
+    {
+      margin-right:10px;
+    }
+
+    .header.meganav a, .header.meganav a.title
+    { color:#fff !important; }
+  }
+
+
+  @media only screen and (max-width : 400px)
+  {
+    .header.meganav .menus
+    {
+      width:calc(100% - 150px);
+    }
+
+    .header.meganav .brand
+    {
+      width:140px;
+      background-size:auto 18px;
+      margin-right:0;
+    }
+  }
+
+  @media only screen and (min-width : 960px)
+  {
+    .header.meganav .menu-items a:hover,
+    .header.meganav .tool-title:hover
+    {
+      border-bottom-color: #fff !important;
+    }
+
+    .header.meganav .menu a:hover {
+      color: #fff !important;
+    }
+
+    .header.meganav .menu.member .menu-items a:hover
+    {
+      border-bottom-color:rgba(255,255,255,0.2) !important;
+    }
+
+    .header.meganav .menu:hover .menu-icon:after,
+    .header.meganav .menu-items > li:hover .menu-item-title:after,
+    .header.meganav .menu-items > li:hover .menu-item-link:after {
+      border-top-color: #444;
+    }
+
+    .header.meganav .tod-term:hover .term-btn {
+      background-color: #397902;
+    }
+
+    .header.meganav .menu.member .menu-items li:hover .menu-item-title,
+    .header.meganav .menu.member .menu-items li:hover .menu-item-link
+    {
+      background-color:#363636 !important;
+    }
+
+    .header.meganav .menu:hover .menu-icon,
+    .header.meganav .menu-items > li:hover .menu-item-title,
+    .header.meganav .menu-items > li:hover .menu-item-link,
+    .header.meganav .menu:hover .menu-item
+    {
+      background-color:#444 !important;
+    }
+
+    .header.meganav .menu.member:hover .menu-items,
+    .header.meganav .menu:hover .menu-items,
+    .header.meganav .menu-items > li:hover .menu-panel
+    {
+      display:block;
+    }
+  }
+  
+  
+', 
+
+          
+
+', 
+  ', 
+    ', 
+    ', 
+  ', 
+', 
+  
+  ', 
+    ', 
+
+      ', 
+
+        ', 
+          ', 
+
+            ', 
+
+            ', 
+              ', 
+                ', Topics', 
+
+                  ', 
+                    ', 
+
+                      ', 
+                        ', u"What's New", 
+                                                    ', 
+                              ', 
+                              ', The Highest-Rating, Best-Selling Online Security Apps', 
+                            ', 
+                                                        ', 
+                              ', 
+                              ', C-Suite Executives Get Even Richer Perks', 
+                            ', 
+                                                  ', 
+                        ', Topics', 
+                        ', 
+                          ', News', 
+                          ', Financial Advisors', 
+                          ', Markets', 
+                          ', Anxiety Index', 
+                          ', Investing', 
+                          ', Managing Wealth', 
+                          ', ETFs', 
+                          ', Politics', 
+                          ', Retirement', 
+                          ', Personal Finance', 
+                          ', Trading', 
+                          ', Financial Planning Guide', 
+                          ', 
+                          ', 
+                          ', Small Business', 
+                          ', Tax Center', 
+                        ', 
+                      ', 
+
+                    ', 
+                  ', 
+              ', 
+                ', Reference', 
+
+                  ', 
+                    ', 
+
+                      ', 
+                                                ', Dictionary', 
+                        ', Term Of The Day', 
+                        ', 
+                          ', Cryptocurrency', 
+                          ', A digital or virtual currency that uses cryptography for security. A cryptocurrency ... ', 
+                          ', Read More »', 
+                        ', 
+                      ', 
+                        ', Latest Videos', 
+                                                  ', 
+                            ', 
+                            ', PAGES: The Rational Optimist', 
+                          ', 
+                                                    ', 
+                            ', 
+                            ', Clarity: My Favorite Term', 
+                          ', 
+                                                ', 
+                        ', Guides', 
+                        ', 
+                          ', Stock Basics', 
+                          ', Economics Basics', 
+                          ', Options Basics', 
+                        ', 
+                      ', 
+                        ', Exam Prep', 
+                        ', 
+                          ', Series 7 Exam', 
+                          ', CFA Level 1', 
+                          ', Series 65 Exam', 
+                        ', 
+                      ', 
+
+                    ', 
+                  ', 
+              ', 
+                ', Simulator', 
+
+                  ', 
+                    ', 
+
+                      ', 
+                        ', 
+                          ', Stock Simulator', 
+                          ', Trade with a starting balance of $100,000 and zero risk!', 
+                        ', 
+                      ', 
+                        ', 
+                          ', FX Trader', 
+                          ', Trade the Forex market risk free using our free Forex trading simulator.', 
+                        ', 
+                      ', 
+
+                    ', 
+                  ', 
+              ', Advisor Insights', 
+              ', 
+            ', 
+          ', 
+        ', 
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                  ', 
+                ', 
+              ', 
+            ', 
+          ', 
+            ', Newsletters', 
+          ', 
+            ', 
+
+            ', 
+              ', 
+                ', Site Log In', 
+              ', 
+              ', 
+                ', Advisor Insights Log In', 
+              ', 
+            ', 
+          ', 
+        ', 
+      ', 
+
+    ', 
+  ', 
+
+  ', 
+', 
+
+  ', 
+
+    // hide tod description if there isn't enough space.
+    $('.menu-panel').css({ display:'block' });
+    if ($('.tod-term').height() > 48) { $('.term-desc').hide(); }
+    $('.menu-panel').removeAttr('style');
+
+    // update user menu
+    var user_menu = '';
+    var user_info = $.parseJSON(decodeURIComponent(getCookie('user_info')).replace(/\+/g, ' '));
+
+    user_menu += '<li><a href="/accounts/manageprofile.aspx" class="menu-item-title">{name} (edit)</a></li>';
+    user_menu += '<li><a href="/accounts/logout.aspx" class="menu-item-title">Sign Out</a></li>';
+
+
+    String.prototype.replaceAll = function (find, replace) {
+      return this.replace(new RegExp(find, 'g'), replace);
+    }
+
+    if (user_info) {
+      user_menu = user_menu.replaceAll('{name}', user_info.name);
+      $('.menu.member .menu-items').html(user_menu);
+      $('#headerNL').attr("href", "/accounts/subscriptions/?id=" + user_info.uid);
+    }
+
+    // handle .header functionality
+    $('.header .menu-icon').on('click', function()
+    {
+      
+      if ($(this).css('display') == 'block') {
+        $('.header .menu.open').not($(this).parent()).removeClass('open');
+        $(this).parent().toggleClass('open');
+      }
+    });
+
+    
+    $('.header .menu.nav .menu-item-title').on('click', function(e)
+    {
+      if ($(this).is('.link')) { return false; }
+      if ($(this).parents('.menu:eq(0)').find('.menu-icon').css('display') == 'block') {
+        e.preventDefault();
+        var this_panel = $(this).parent();
+        $('.header .menu-items > li').not(this_panel).removeClass('open');
+        this_panel.toggleClass('open');
+      }
+    });
+
+    
+    $('.header .men).on('click', function(e)
+    {
+      e.stopPropagation();
+    });
+
+    $('html').on('click', function()
+    {
+      $('.header .men).removeClass('open');
+    });
+  ', 
+
+    ', 
+    var url = window.location.href;
+    if (url.includes("accounts/signup-newsletter-fb")||url.includes("accounts/facebook-coreg")){
+      $( ".menus").hide();
+      $(".subchannels").hide();
+    }
+  ', 
+
+      ', 
+      
+
+', 
+    ', 
+    ', 
+', 
+
+
+
+
+
+', 
+    .ad-leaderboard {
+        position: relative !important;
+        left: 0 !important;
+        margin: 0 auto !important;
+        padding: 18px 20px 18px 20px !important;
+        min-height: 90px !important;
+        text-align: center !important;
+
+        background: #fff;
+    }
+    #Content {
+        position: static !important;
+    }
+', 
+    
+
+', 
+    ', 
+        ', 
+        ', 
+    ', 
+', 
+
+    ', 
+        .move-up{
+            margin-top:-21px !important;
+        }
+
+    ', 
+    ', 
+                ', 
+            ', National Stock Exchange Of India Limited - NSE', 
+                        
+', 
+    ', 
+        ', 
+        
+    ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+        ', 
+      ', 
+    ', 
+    ', 
+      ', 
+        ', 
+          ', 
+        ', 
+      ', 
+    ', 
+    ', 
+      ', 
+        ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+
+', u"
+
+  if (!$('.by-author').length){
+    $('.social-share').css('width', 'inherit');
+  }
+
+  $('body').on('click', '.share-popup', function (e) {
+    e.preventDefault();
+
+    var width = 575,
+      height = 400,
+      left = ($(window).width() - width) / 2,
+      top = ($(window).height() - height) / 2,
+      url = this.href,
+      opts   = 'status=1' +
+        ',width='  + width  +
+        ',height=' + height +
+        ',top='    + top    +
+        ',left='   + left;
+
+    window.open(url, 'share-popup', opts);
+
+    return false;
+  });
+
+
+  function closePopup(popupWindow){
+    popupWindow.close();
+  }
+
+
+", 
+  
+  ', 
+    .layout-title h1, .layout-title .h1 {
+      max-width: calc(100% - 210px);
+      width: 100%;
+      display: inline-block;
+      padding-right: 0 !important;
+    }
+
+    .by-author {
+      max-width: calc(100% - 210px);
+      width: 100%;
+    }
+
+    .layout-body-topbar{
+      display: inline-block;
+    }
+
+    .social-share {
+      display: inline-block;
+      vertical-align: middle;
+      max-width:1130px;
+      width:100%;
+      z-index: 1;
+    }
+
+    .share-button .logo{
+      display:inline-block;
+      position:relative;
+      padding-top: 5px;
+    }
+
+    .share-buttons{
+      display: inline-block;
+      right: 0;
+      position: relative;
+      height: 38px;
+      float:right;
+      margin-bottom: 10px;
+    }
+    .share-buttons-inner a
+    {
+      text-decoration: none !important;
+    }
+
+    .share-button{
+      display: inline-block;
+      padding-top: 6px;
+      padding-bottom: 4px;
+      padding-left:3px;
+      padding-right:3px;
+      min-width:38px;
+      height:38px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .facebook-share-button{
+      background-color: #3b5998;
+    }
+
+    .twitter-tweet-button{
+      background-color: #00aced;
+    }
+
+    .linkedin-share-button{
+      background-color: #0077b5;
+    }
+
+    @media only screen and (max-width: 767px){
+      .share-buttons{
+        display:block;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .layout-body-topbar {
+        display: initial;
+      }
+
+      .by-author{
+        max-width: 100%;
+      }
+
+      .layout-title h1, .layout-title .h1 {
+        max-width: 100%;
+      }
+    }
+
+  ', 
+
+
+', 
+
+
+                        ', 
+', 
+
+
+
+', 
+    ', 
+        ', 
+        ', 
+    ', 
+', 
+
+
+        ', 
+        
+        ', 
+            
+            ', 
+                ', 
+                                                    ', 
+                                            ', 
+                                  ', 
+    ', 
+
+    
+  ', 
+    
+
+  ', 
+        ', 
+                          ', u"What is the 'National Stock Exchange Of India Limited - NSE'", 
+
+      ', u"The National Stock Exchange Of India Limited (NSE) is India's largest ", financial market', . Established in 1992, the NSE has developed into a sophisticated, electronic market, which ranks third in the world for transacted volume. The NSE conducts transactions in the wholesale debt, equity and ', derivative',  markets. ', 
+
+
+      ', 
+        $('.related-carousel-table .list').append('<li class="item next"><a href="#"></a></li>');
+        $('.related-carousel-table .next a').attr('href', $('.related-carousel-table .item:first a').attr('href'));
+      ', 
+
+      
+            ', u"BREAKING DOWN 'National Stock Exchange Of India Limited - NSE'", 
+      
+
+', u"Based in Mumbai, India, the National Stock Exchange is a leader in market technology. The exchange's supports more than 3,000 ", VSAT',  terminals, making the NSE the largest private wide-area network in the country. The National Stock Exchange has been a pioneer for Indian financial markets, being the first electronic ', limit order book',  to trade derivatives and ETFs. ', 
+      
+      ', 
+
+            ', u"
+    dataLayer.push({
+     'event': 'includeLeadGenTable',
+     'leadGenTier' : '1',
+     'leadGenVertical' : 'Broker',
+     'leadGenLayout' : '',
+     'leadGenPage' : 'Term'
+    });
+    ",     ', 
+        ', 
+          #AdSlot_IC-BelowContent { margin-bottom:20px !important; margin-top:20px !important; }
+        ', 
+
+        
+    ', 
+        ', 
+            if (!noDfp || ecLayout || (typeof contentProgram !== "undefined" && contentProgram) ) {
+                // If content has the tag "partner-content-original" do not output a textnote ad unit on the page
+                var articleTags = $("meta[property='article:tag']").attr("content");
+
+                if (articleTags == undefined) {
+                    articleTags = '';
+                }
+
+                // If there's no "partner-content-original" tag output a textnote
+                if ( (articleTags.indexOf('partner-content-original') == -1) || (typeof contentProgram !== "undefined" && contentProgram) ) {
+                    var bcTextNoteDynamicAd = new dynamicAd();
+                    bcTextNoteDynamicAd.domName = "AdSlot_BC-TextNote";
+                    bcTextNoteDynamicAd.slotSize = "";
+                    bcTextNoteDynamicAd.taxSlotName = "BC-Textnote";
+                    bcTextNoteDynamicAd.isFrameExtraction = false;
+                    bcTextNoteDynamicAd.targeting = targetingList;
+                    bcTextNoteDynamicAd.perCentLeadTime = .50;
+                    bcTextNoteDynamicAd.isRenderOnScroll = false;
+                    bcTextNoteDynamicAd.isDefinedOutOfSlot = true;
+                    bcTextNoteDynamicAd.targeting = {Location : "BC-Textnote"};
+                    bcTextNoteDynamicAd.isRecoverable = true;
+                                                    bcTextNoteDynamicAd.renderAd();
+                                    }
+            }
+        ', 
+    ', 
+
+
+
+            ',     ', 
+      ', 
+
+    ', 
+  ',   ', 
+', 
+  ', 
+                ', 
+            ', 
+            ', 
+        ', 
+        ', 
+                ', 
+              
+              
+              ', 
+                                    ',                   ', 
+                      ', 
+                      ', 
+                  ', 
+                  
+
+', 
+        ', Trading Center', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+                        ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+                    ', 
+        ', 
+
+
+
+                                ', 
+
+              ', 
+                  ', 
+                      ', 
+                          ', 
+                                            
+                                            ', 
+                                        
+            
+            
+            ', 
+                
+                    ', u"                                                    Standard And Poor's CNX Nifty                                            ", 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                            ', 
+                                        
+            
+            
+            ', 
+                
+                    ',                                                     Very Small Aperture Terminal - ...                                             ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                            ', 
+                                        
+            
+            
+            ', 
+                
+                    ',                                                     National Commodities And Derivatives ...                                             ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                                ', 
+                                
+            
+            
+            ', 
+                
+                    ',                                                     Over-The-Counter Exchange Of India ...                                             ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                                ', 
+                                
+            
+            
+            ', 
+                
+                    ',                                                     India ETF                                            ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                                ', 
+                                
+            
+            
+            ', 
+                
+                    ',                                                     Bombay Stock Exchange (BSE) .BO                                            ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                                ', 
+                                
+            
+            
+            ', 
+                
+                    ',                                                     Foreign Exchange Dealers Association ...                                             ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                                ', 
+                                
+            
+            
+            ', 
+                
+                    ',                                                     National Stock Exchange                                            ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                                ', 
+                                
+            
+            
+            ', 
+                
+                    ',                                                     Reserve Bank Of India - RBI                                            ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+            ', 
+                      ', 
+                      ', Next',  Up',  ', 
+
+                  ', 
+              ', 
+          ', 
+    ', 
+
+
+', u"
+
+    // Sticky sidebar on Term 1
+    var termsSideBar = $('.layout-side .inner-helper.sticky-container');
+    if( termsSideBar.length ) {
+
+        $(document).bind('scroll', function(){
+
+            var termsDocTop = $(document).scrollTop();
+            var header = $('.header');
+            var infiniteTable = $('#infinite-scroll-container');
+            var initialContent = $('#initial-content');
+
+            var stickAt = termsSideBar.parent().offset().top - infiniteTable.outerHeight() - header.outerHeight();
+            var stopAt = initialContent.offset().top + initialContent.outerHeight() - termsSideBar.outerHeight() - infiniteTable.outerHeight() - header.outerHeight();
+
+            // Start Sticky when you scrolltop reach to the sidebar
+            if( termsDocTop >= stickAt && termsDocTop < stopAt) {
+                termsSideBar.css({
+                    position: 'fixed',
+                    top: header.outerHeight() + infiniteTable.outerHeight(),
+                    bottom: 'auto'
+                });
+            }
+
+            // When reaching at the bottom of initialContent Container,
+            // stick at the bottom of container
+            else if( termsDocTop >= stopAt) {
+                initialContent.css({
+                    position: 'relative'
+                });
+                termsSideBar.css({
+                    position: 'absolute',
+                    top: 'auto',
+                    bottom: '0px'
+                });
+            }
+            else {
+                termsSideBar.css({
+                    position: 'relative',
+                    top: 'auto',
+                    bottom: 'auto'
+                });
+            }
+        });
+
+    }
+
+", 
+
+
+    ', 
+            ', 
+    
+    ', 
+    ', 
+        var infiniteScrollSettings = {
+            page_type : 'term',
+            background_fill_enabled: false,
+            display_channel : false,
+            autoload_padding: 400,
+            ad_definitions : {
+                adSlotRight : {
+                    sizeMapping :
+                    {'desktop' : {"deviceSize" : [1000, 1],
+                        "adSizes" : [[160, 600], [120, 600], [300, 600], [300, 250]]
+                    }
+                    }
+                }
+            },
+            ad_native: {
+                active: true
+            }
+        };
+    ', 
+
+    
+', 
+    infiniteScrollSettings.ad_timeout = 0;
+', 
+
+
+    ', 
+        var items_to_load, autoload_videos;
+         items_to_load = 1;
+         autoplay_videos = true;
+        if (typeof read_more === "undefined") {
+            read_more = 1;
+        }
+        if (typeof is_canceled === "undefined") {
+            is_canceled = false;
+        }
+
+        infiniteScrollSettings.items_to_load = items_to_load;
+        infiniteScrollSettings.read_more = read_more;
+        infiniteScrollSettings.is_canceled = is_canceled;
+        infiniteScrollSettings.autoplay_videos = autoplay_videos;
+
+        var infiniteScroll = $.InfiniteScroll(infiniteScrollSettings);
+    ', 
+
+
+
+', 
+    $('#infinite-scroll-table-container-title').insertBefore('.infinite-scroll-table-container');
+    var scrollTarget = 0;
+    $('#infinite-scroll-container').on('activeChange', function(event, elem){
+        $(window).scroll(function() {
+            if(!$('#infinite-scroll-container').hasClass('hide-small-nav')){
+                if ($(window).scrollTop() > 105) {
+                    $('#infinite-scroll-container').fadeIn("fast");
+                } else {
+                    if(!$('#infinite-scroll-container').hasClass('active')) {
+                        $('#infinite-scroll-container').fadeOut("fast");
+                    }
+                }
+            }else{
+                $('#infinite-scroll-container').css('display', "");
+            }
+        });
+        var article_num = $(elem).index() + 1;
+        var newScrollTarget = 0;
+        if(article_num < 4){
+            newScrollTarget = 0;
+        }else if(article_num >= 4 && article_num < 7){
+            newScrollTarget = 3;
+        }else if(article_num >= 7){
+            newScrollTarget = 6;
+        }
+
+        if(newScrollTarget != scrollTarget){
+            console.log($($(this).find('.item')[newScrollTarget])[0].offsetLeft);
+            $('#infinite-scroll-container .infinite-scroll-table-container .list').stop().animate({
+                scrollLeft:  $($(this).find('.item')[newScrollTarget])[0].offsetLeft
+            }, 1000);
+            scrollTarget = newScrollTarget;
+        }
+    });
+', 
+
+    ', 
+        ', 
+            ', 
+                ', 
+                ', 
+                ', 
+                    ', 
+                    ', 
+    ', 
+
+        ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+
+                    ', 
+                ', 
+        ', 
+
+    ', 
+    ', 
+        ', 
+            ', 
+  ', Enter Symbol ', 
+ ', 
+', 
+', 
+', 
+',         ', 
+    ', 
+',                 ', 
+                ', 
+                    ', Dictionary:', 
+                    ', #', 
+                                            ', a', 
+                                            ', b', 
+                                            ', c', 
+                                            ', d', 
+                                            ', e', 
+                                            ', f', 
+                                            ', g', 
+                                            ', h', 
+                                            ', i', 
+                                            ', j', 
+                                            ', k', 
+                                            ', l', 
+                                            ', m', 
+                                            ', n', 
+                                            ', o', 
+                                            ', p', 
+                                            ', q', 
+                                            ', r', 
+                                            ', s', 
+                                            ', t', 
+                                            ', , 
+                                            ', v', 
+                                            ', w', 
+                                            ', x', 
+                                            ', y', 
+                                            ', z', 
+                                    ', 
+                ', 
+                    ', 
+                        ', 
+                            ', Content Library', 
+                            ', Articles', 
+                            ', Terms', 
+                            ', Videos', 
+                            ', Guides', 
+                            ', Slideshows', 
+                            ', FAQs', 
+                            ', Calculators', 
+                            ', Chart Advisor', 
+                            ', Stock Analysis', 
+                            ', Stock Simulator', 
+                            ', FXtrader', 
+                            ', Exam Prep Quizzer', 
+                            ', Net Worth Calculator', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Connect With Investopedia', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ',     
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+
+                ', 
+                    ', 
+                        ', 
+                            ', Work With Investopedia', 
+                            ', About Us', 
+                            ', Advertise With Us', 
+                            ', Write For Us', 
+                            ', Contact Us', 
+                            ', Careers', 
+                        ', 
+                    ', 
+
+                    ', 
+                        ', 
+                            ', Get Free Newsletters', 
+                            ', Newsletters', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+        ', 
+            ', 
+                ', © 2017, Investopedia, LLC.', 
+                ', 
+                    ', All Rights Reserved', 
+                    ', Terms Of Use', 
+                    ', Privacy Policy', 
+                ', 
+            ', 
+        ', 
+    ', 
+
+
+', 
+    if (user_info) {
+        $('#footerNL').attr("href", "/accounts/subscriptions/?id=" + user_info.uid);
+    }
+', 
+
+', 
+    var pfEnabled = true;
+    var hash = getURLFragment(window.location.href);
+    if (hash != null) {
+        if (typeof hash.startsWith === "function") {
+            if (hash.startsWith("#ec") || hash.startsWith("#ra")) {
+                pfEnabled = false;
+            }
+        }
+    }
+    if (pfEnabled) {
+        var adSlots = ["AdSlot_BF-Right-Multi","AdSlot_AF-Right-Multi","AdSlot_AF-Top-Leaderboard","AdSlot_IC-Rectangle","AdSlot_AF-Left-Multi","AdSlot_BF-Right-Button1","AdSlot_BF-Right-Button2","AdSlot_BF-Right-Button3","AdSlot_BF-Right-Button4"];
+
+        for (var i = 0; i < adSlots.length; i++) {
+            var adSlot = document.getElementById(adSlots[i]);
+            if (adSlot) {
+                adSlot.setAttribute('adonis-marker', '');
+            }
+        }
+    }
+', 
+        ', 
+    
+    
+
+', 
+', 
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "6034722", c4: "http://www.investopedia.com/terms/n/national_stock_exchange.asp" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+', 
+', 
+  ', 
+', 
+', 
+    
+', 
+
+
+	', 
+
+
+
+    ', 
+/* loader-6.0.6 */!function e(n,t,i){function o(a,s){if(!t[a]){if(!n[a]){var c="function"==typeof require&&require;if(!s&&c)return c(a,!0);if(r)return r(a,!0);var l=new Error("Cannot find module '"+a+"'");throw l.code="MODULE_NOT_FOUND",l}var d=t[a]={exports:{}};n[a][0].call(d.exports,function(e){var t=n[a][1][e];return o(t?t:e)},d,d.exports,e,n,t,i)}return t[a].exports}for(var r="function"==typeof require&&require,a=0;a<i.length;a++)o(i[a]);return o}({1:[function(e,n,t){e(23);var i=e(7);i.run()},{23:23,7:7}],2:[function(e,n,t){var i=e(3);n.exports=i},{3:3}],3:[function(e,n,t){n.exports={REAL_STUN_HOST:"stun.xpanama.net:3478",TURNSIGNAL_HOST:"ts.p.xpanama.net:7000",STUNGUN_HOST:"sg.p.xpanama.net:3480",SERVER_CANDIDATE:"candidate:827648026 1 udp 2122194687 SERVER_IP SERVER_PORT typ host generation 0",REPORTING_URL:"https://lb.statsevent.com/stats",REPORTING_RATE:.01,LOG_LEVEL:"error",REPORT_ERRORS:!0,MANIFEST_URL:"https://sri.jsintegrity.com/manifest.json",MANIFEST_EXPIRATION_TIME:86400,AD_MARKER:"adonis-marker"}},{}],4:[function(e,n,t){function i(){if(s.isExpiredNow(localStorage.adonisClientManifestExpiry))return null;var e=null;try{e=JSON.parse(localStorage.adonisClientManifest)}catch(n){}return e}function o(e,n){localStorage.adonisClientManifest=JSON.stringify(e),localStorage.adonisClientManifestExpiry=(new Date).getTime()/1e3+n}function r(e,n){var t=new XMLHttpRequest;t.open("GET",a.MANIFEST_URL+"?v="+e,!0),t.onload=function(){var e={},i=!1;if(200===t.status)try{e=JSON.parse(t.responseText)}catch(o){e={}}else i=!0;n(e,i)},t.onerror=function(){n({},!0)};try{t.send(null)}catch(i){n({},!0)}}var a=e(2),s=e(6);n.exports={cacheAdonisManifest:o,getCachedAdonisManifest:i,fetchAdonisManifest:r}},{2:2,6:6}],5:[function(e,n,t){function i(e){var n=new XMLHttpRequest,t=[l.REPORTING_URL,e].join("");n.open("GET",t,!0),n.send()}function o(e){i("/adonis_error?e="+e.toString())}function r(){return null!=window.ADONIS_BOOTSTRAP_STATS?window.ADONIS_BOOTSTRAP_STATS===!0:Math.random()<l.REPORTING_RATE}function a(e,n){if(s(e),r()){var t={website:window.location.hostname,key:e};null!=n&&(t.quantity=n),i(["/adonis_event/?event=",JSON.stringify(t)].join(""))}}function s(e){var n={key:e,time_ms:Math.round(window.performance.now()),website:window.location.hostname};u.push(n)}function c(){d.defineReadOnlyProperty("adonisBootstrapTiming",u)}var l=e(2),d=e(6),u=[];n.exports={reportError:o,reportEvent:a,saveTiming:c,shouldReport:r}},{2:2,6:6}],6:[function(e,n,t){function i(e,n){Object.defineProperty(window,e,{value:n,writable:!1})}function o(e,n){return!n||Number(n)<=e}function r(e){var n=(new Date).getTime()/1e3;return o(n,e)}var a=function(){var e=window.navigator.userAgent.toLowerCase(),n=/(chrome)[ \/]([\w.]+)/.exec(e)||/(firefox)[ \/]([\w.]+)/.exec(e);if(null!==n){var t=n[1],i=n[2],o=parseInt(i.split(".")[0]);if("chrome"===t&&o>=41||"firefox"===t&&o>=37)return!0}return!1},s=function(e){"loading"!==document.readyState?e():document.addEventListener("DOMContentLoaded",e)};n.exports={isSupportedBrowser:a,defineReadOnlyProperty:i,ready:s,isExpired:o,isExpiredNow:r}},{}],7:[function(e,n,t){function i(e,n){return{host:"assets",path:e,headers:n}}function o(e,n,t){d.reportEvent("bootstrap.runclientscript"),d.saveTiming(),u.defineReadOnlyProperty("adonisConn",n),u.defineReadOnlyProperty("adonisConfig",l);var i=new Blob([e],{type:"text/javascript"}),o=URL.createObjectURL(i),a=p.getCachedAdonisManifest();return a&&a.hasOwnProperty(t)?void r(o,a[t],!1):void p.fetchAdonisManifest(t,function(e,n){p.cacheAdonisManifest(e,f),r(o,e[t],n)})}function r(e,n,t){if(t||n){var i=document.createElement("script");i.src=e,n&&(i.integrity=n),document.head.appendChild(i)}}function a(){}function s(){if(d.reportEvent("bootstrap.pageview"),u.isSupportedBrowser()){if(d.reportEvent("bootstrap.supported"),u.ready(function(){var e=document.querySelectorAll("["+h+"]");d.reportEvent("bootstrap.admarker",e.length)}),l.DEVELOPER_MODE){console.log("Developer mode is enabled. Fetching adonis client from:",l.ADONIS_CLIENT_FETCH_URL),localStorage.adonisClientVersion="6.0.0";var e=document.createElement("script");return e.src=l.ADONIS_CLIENT_FETCH_URL,void document.head.appendChild(e)}var n="undefined"!=typeof Storage;if(n){d.reportEvent("bootstrap.enabled");var t=localStorage.adonisCacheExpiry,r=localStorage.adonisCacheSrc,a=localStorage.adonisClientVersion,s=(new Date).getTime()/1e3;if(!u.isExpired(s,t)&&a&&r)d.reportEvent("bootstrap.cached"),o(r,null,localStorage.adonisClientVersion);else{d.reportEvent("bootstrap.expired");var p=new c(l.SERVER_CANDIDATE,l.REAL_STUN_HOST,l.TURNSIGNAL_HOST,l.STUNGUN_HOST,g);l.PANAMA_CLIENT&&l.PANAMA_CLIENT.SKIP_IP_LEAK_CHECK&&(p.skipIpLeakCheck=l.PANAMA_CLIENT.SKIP_IP_LEAK_CHECK),l.PANAMA_CLIENT&&l.PANAMA_CLIENT.CANDIDATE_WHITELISTED_IP&&(p.candidateWhitelistedIp=l.PANAMA_CLIENT.CANDIDATE_WHITELISTED_IP),p.setLogLevel(l.LOG_LEVEL),p.on("open",function(){d.reportEvent("bootstrap.panama_opened");var e=i("client",{adonis_client_api:"6.0.0"});p.request(e,function(e,n,t){if(d.reportEvent("bootstrap.client_fetched."+t),n){if(n["cache-control"]){var i=Number(n["cache-control"].split("=")[1]),a=s+i;localStorage.adonisCacheExpiry=a}n["adonis-client-version"]&&(localStorage.adonisClientVersion=n["adonis-client-version"])}304===t?o(r,p,localStorage.adonisClientVersion):200===t?(localStorage.adonisCacheSrc=e,o(e,p,localStorage.adonisClientVersion)):g(e)})}),d.reportEvent("bootstrap.panama_opening"),p.open()}}}}var c=e(8),l=e(2),d=e(5),u=e(6),p=e(4),f=l.MANIFEST_EXPIRATION_TIME||0;l.LOG_LEVEL=window.adonisHash.indexOf("adonis-logging")!==-1?"debug":l.LOG_LEVEL;var h=l.AD_MARKER||"adonis-marker";window.adonisConn=void 0,window.adonisConfig=l,window.adonisBootstrapTiming=void 0;var g=l.REPORT_ERRORS?d.reportError:a;n.exports={runClientScript:o,insertScriptTag:r,run:s}},{2:2,4:4,5:5,6:6,8:8}],8:[function(e,n,t){function i(e,n,t,i,o){this.realStunHost=n,this.turnSignalHost=t,this.stunGunHost=i,this.serverCandidate=e,this.nodePeerPort=null,this.nodePeerIp=null,this.localCandidates=[],this.sentDataToTurn=!1,this.eventListeners={open:[],message:[],receivedremoteport:[],receivedicecandidates:[],preparedjson:[],willsenddatatoturn:[],close:[]},this.ips={},this.requests={},this.isOpen=!1,o&&(this.handleError=o),this.timingEvents=[],this.skipIpLeakCheck=!1,this.candidateWhitelistedIp=null}function o(){var e=this,n={iceServers:[{url:"stun:"+this.stunGunHost,urls:["stun:"+this.stunGunHost],username:"test",credential:"test"}]};m.info("Connecting to stungun server : "+this.stunGunHost);var t=this.stunGunPeerConnection=new C(n);t.createDataChannel(""),t.createOffer(function(n){t.setLocalDescription(n,function(){e.addTimingEvent("requestingServerIp",performance.now()-e.estConnectionStart)},function(){})},function(){}),t.onicecandidate=function(n){if(null!==n.candidate){var i=n.candidate.candidate;if(m.debug("onicecandidate: "+i),e.skipIpLeakCheck||e.checkCandidateIpLeak(i),g.isServerReflexive(i)&&!g.isIPv6(i)){t.close();var o=g.matchNodePeerIpAndPort(i);if(null!==o){e.addTimingEvent("serverIpReceived",performance.now()-e.estConnectionStart),e.nodePeerIp=o[1],e.nodePeerPort=o[2],m.info("ip and port to connect on: "+e.nodePeerIp+":"+e.nodePeerPort);var r=e.serverCandidate.replace(/SERVER_PORT/g,e.nodePeerPort);r=r.replace(/SERVER_IP/g,e.nodePeerIp),m.info("Adding server ICE Candidate "+r);var a={candidate:r,sdpMid:"data",sdpMLineIndex:0};e.peerConnection.addIceCandidate(new y(a),h,e.handleError),e.triggerEvent("receivedremoteport"),e.remoteCandidateReceived=!0,d.call(e)}}}}}function r(){var e=this.peerConnection=new C({iceServers:[{url:"stun:"+this.realStunHost,urls:["stun:"+this.realStunHost]}]}),n=this;this.peerConnection.onicecandidate=function(e){if(null!==e.candidate){var t=e.candidate.candidate;m.info("RECEVIED LOCAL CANDIDATE "+t),n.skipIpLeakCheck||n.checkCandidateIpLeak(t);var i=g.isServerReflexive(t);n.candidateWhitelistedIp&&(i=t.indexOf(n.candidateWhitelistedIp)&&!g.isServerReflexive(t)),i&&!g.isIPv6(t)&&(n.addTimingEvent("iceCandidate",performance.now()-n.estConnectionStart),n.localCandidates.push(t),n.localCandidateReceived=!0,d.call(n))}},this.peerConnection.ondatachannel=function(e){n.dataChannel=e.channel,n.turnSignalPeerConnection.close(),m.info("ondatachannel",n.dataChannel.label,n.dataChannel.readyState),n.dataChannel.binaryType="arraybuffer",n.dataChannel.onopen=function(){n.isOpen=!0,m.info("onopen");var e=performance.now(),t=e-n.estConnectionStart;n.addTimingEvent("dataChannelOpen",t);var i={host:"test"};n.request(i,function(){var t=performance.now()-e;n.addTimingEvent("msgRoundTrip",t),clearTimeout(n.connectionTimeout),setTimeout(function(){n.close()},T)}),m.info("TIMING:total "+t),m.info("onopen"),n.triggerEvent("open"),n.messageSendStartTime=performance.now()},n.dataChannel.onmessage=function(e){var t=e.data;m.info("Received response chunk",t),n.triggerEvent("message",t);try{var i=v.handleChunk(t)}catch(o){return void m.error("Failed to process chunked response: ",o)}i&&(m.info("Received complete response. Handling it"),a.call(n,i.id,i.http))},n.dataChannel.onclose=function(){m.info("onClose"),n.triggerEvent("close")},n.dataChannel.onerror=n.handleError},this.peerConnection.onsignalingstatechange=function(){m.info("signaling state change: ",e.iceConnectionState)},this.peerConnection.oniceconnectionstatechange=function(){var t=performance.now();m.info("ice connection state change: ",e.iceConnectionState,"after ",t-n.estConnectionStart,"millis")},this.peerConnection.onicegatheringstatechange=function(){m.info("ice gathering state change: ",e.iceConnectionState)},s.call(this)}function a(e,n){var t=n.headers;t&&t["set-cookie"]&&(document.cookie=t["set-cookie"]);var i=this.requests[e];i(n.body,n.headers,n.status),delete this.requests[e]}function s(){var e={type:"offer",sdp:"v=0\r\no=- 7745999191240241858 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=msid-semantic: WMS\r\nm=application 9 DTLS/SCTP 5000\r\nc=IN IP4 0.0.0.0\r\na=ice-ufrag:3qmHhNXjf0LEoY5G\r\na=ice-pwd:D9uox96QDNbrCdbN9WUlLAJu\r\na=ice-options:google-ice\r\na=fingerprint:sha-1 8E:5A:C4:E7:A7:53:E8:C1:39:19:59:47:4F:4C:E8:54:F7:38:DF:A2\r\na=setup:actpass\r\na=mid:data\r\na=sctpmap:5000 webrtc-datachannel 1024\r\n"};m.info("SETTING HARD CODED offer data : "+e.sdp);var n=new S(e);this.peerConnection.setRemoteDescription(n,c.bind(this),this.handleError),c.bind(this)}function c(){this.peerConnection.createAnswer(l.bind(this),this.handleError),this.iceCandidateStartTime=performance.now()}function l(e){this.answer=e,this.peerConnection.setLocalDescription(new S(e),u.bind(this),this.handleError),this.localDescriptionSet=!0,d.call(this)}function d(){!this.sentDataToTurn&&this.remoteCandidateReceived&&this.localCandidateReceived&&this.localDescriptionSet&&(m.debug("sending data to TURN"),p.call(this),this.sentDataToTurn=!0)}function u(){m.info("Sending answer"),this.addTimingEvent("setLocalDesc",performance.now()-this.estConnectionStart)}function p(){this.triggerEvent("receivedicecandidates");var e=performance.now();m.info("TIMING:ice_candidates "+(e-this.iceCandidateStartTime));var n=/a=ice-ufrag:[ -z]*/,t=/a=ice-pwd:[ -z]*/,i=/a=fingerprint:[A-z0-9\-]* [0-F:]*/,o=/o=-?\S* [0-9]+ [0-9] IN IP4 [0-9\.]+/,r=performance.now();m.info("Before matching regexes"+(r-this.estConnectionStart)),m.info(this.answer.sdp);var a=this.answer.sdp.match(n),s=this.answer.sdp.match(t),c=this.answer.sdp.match(i),l=this.answer.sdp.match(o);m.info("UFRAG:"+a),m.info("PWD:"+s),m.info("FINGERPRINT:"+c),m.info("O=:"+l);var d=[this.localCandidates];d.push(a[0]),d.push(s[0]),d.push(c[0]),d.push(l[0]);var u=new Uint8Array(8);window.crypto.getRandomValues(u);var p=String.fromCharCode.apply(null,u);d.push(p),d.push(this.nodePeerIp),d.push(this.nodePeerPort),this.triggerEvent("preparedjson",d);var h=performance.now();m.info("After matching regexes"+(h-this.estConnectionStart));var g=performance.now();m.info("Before jsonifying candidates"+(g-this.estConnectionStart));var v=JSON.stringify(d),w=performance.now();m.info("After jsonifying candidates"+(w-this.estConnectionStart)),f.call(this,v)}function f(e){this.triggerEvent("willsenddatatoturn",e);var n=performance.now()-this.estConnectionStart;this.addTimingEvent("turnPrep",n),m.debug("Sending data to turn @ "+this.turnSignalHost+" after "+n+" millis");var t={iceServers:[{url:"turn:"+this.turnSignalHost,urls:["turn:"+this.turnSignalHost],username:e,credential:"x"}]};this.turnSignalPeerConnection=new C(t),this.turnSignalPeerConnection.createDataChannel("");var i=this;this.turnSignalPeerConnection.createOffer(function(e){var n=performance.now(),t=n-i.estConnectionStart;i.addTimingEvent("turnSend",t),m.info("Fake offer generated which should trigger TURN request after "+(n-i.estConnectionStart)+" millis"),i.turnSignalPeerConnection.setLocalDescription(e,function(){},function(){})},function(){})}function h(){m.info("Successfully added ICE candidate")}const g=e(21),v=e(22),w=e(17);w.enable();const m=w("panama-client");var C=window.RTCPeerConnection||window.mozRTCPeerConnection||window.webkitRTCPeerConnection,S=window.RTCSessionDescription||window.mozRTCSessionDescription||window.webkitRTCSessionDescription,y=window.RTCIceCandidate||window.mozRTCIceCandidate||window.webkitRTCIceCandidate,E=15e3,T=3e5;i.prototype.handleError=function(){},i.prototype.getTimingEvents=function(){return this.timingEvents},i.prototype.addTimingEvent=function(e,n){var t={name:"t_"+e,timing:n};this.timingEvents.push(t)},i.prototype.open=function(){var e=this;this.connectionTimeout=setTimeout(function(){e.close()},E),this.estConnectionStart=performance.now(),setTimeout(function(){m.debug("v8Lag is : "+(performance.now()-e.estConnectionStart)),e.addTimingEvent("v8Lag",performance.now()-e.estConnectionStart)},1),o.call(this),r.call(this)},i.prototype.send=function(e){m.info("sending message",e),this.dataChannel.send(e)},i.prototype.request=function(e,n){var t=v.buildRequest(e),i=v.buildTerminator(t.id);this.requests[t.id]=n,this.send(JSON.stringify(t)),this.send(JSON.stringify(i))},i.prototype.close=function(){this.dataChannel&&(this.dataChannel.close(),this.dataChannel=null),this.peerConnection&&"closed"!==this.peerConnection.signalingState&&(console.log("Closed PC"),this.peerConnection.close()),this.stunGunPeerConnection&&"closed"!==this.stunGunPeerConnection.signalingState&&(console.log("Closed Stungun PC"),this.stunGunPeerConnection.close()),this.turnSignalPeerConnection&&"closed"!==this.turnSignalPeerConnection.signalingState&&(console.log("Closed Turnsignal PC"),this.turnSignalPeerConnection.close())},i.prototype.on=function(e,n){e in this.eventListeners&&this.eventListeners[e].push(n)},i.prototype.triggerEvent=function(e){if(e in this.eventListeners){var n=Array.prototype.slice.call(arguments,1);this.eventListeners[e].forEach(function(e){e.apply(this,n)})}},i.prototype.setLogLevel=function(e){w.suggest.clear().deny("panama-client",e)},i.prototype.checkCandidateIpLeak=function(e){if(!g.isIPv6(e)&&e.indexOf("typ host")!==-1){var n=g.extractCandidateIp(e);n&&(this.ips[n]=!0,Object.keys(this.ips).length>=2&&(m.info("Multiple private IPs detected. Closing the connection."),this.close()))}},window.PanamaClient=i,n.exports=i},{17:17,21:21,22:22}],9:[function(e,n,t){function i(){this.enabled=!0,this.defaultResult=!0,this.clear()}function o(e,n){return e.n.test?e.n.test(n):e.n==n}var r=e(11),a={debug:1,info:2,warn:3,error:4};r.mixin(i),i.prototype.allow=function(e,n){return this._white.push({n:e,l:a[n]}),this},i.prototype.deny=function(e,n){return this._black.push({n:e,l:a[n]}),this},i.prototype.clear=function(){return this._white=[],this._black=[],this},i.prototype.test=function(e,n){var t,i=Math.max(this._white.length,this._black.length);for(t=0;t<i;t++){if(this._white[t]&&o(this._white[t],e)&&a[n]>=this._white[t].l)return!0;if(this._black[t]&&o(this._black[t],e)&&a[n]<this._black[t].l)return!1}return this.defaultResult},i.prototype.write=function(e,n,t){if(!this.enabled||this.test(e,n))return this.emit("item",e,n,t)},n.exports=i},{11:11}],10:[function(e,n,t){var i=e(11),o=e(9),r=new i,a=Array.prototype.slice;t=n.exports=function(e){var n=function(){return r.write(e,void 0,a.call(arguments)),n};return n.debug=function(){return r.write(e,"debug",a.call(arguments)),n},n.info=function(){return r.write(e,"info",a.call(arguments)),n},n.warn=function(){return r.write(e,"warn",a.call(arguments)),n},n.error=function(){return r.write(e,"error",a.call(arguments)),n},n.log=n.debug,n.suggest=t.suggest,n.format=r.format,n},t.defaultBackend=t.defaultFormatter=null,t.pipe=function(e){return r.pipe(e)},t.end=t.unpipe=t.disable=function(e){return r.unpipe(e)},t.Transform=i,t.Filter=o,t.suggest=new o,t.enable=function(){return t.defaultFormatter?r.pipe(t.suggest).pipe(t.defaultFormatter).pipe(t.defaultBackend):r.pipe(t.suggest).pipe(t.defaultBackend)}},{11:11,9:9}],11:[function(e,n,t){function i(){}var o=e(20);o.mixin(i),i.prototype.write=function(e,n,t){this.emit("item",e,n,t)},i.prototype.end=function(){this.emit("end"),this.removeAllListeners()},i.prototype.pipe=function(e){function n(){e.write.apply(e,Array.prototype.slice.call(arguments))}function t(){!e._isStdio&&e.end()}var i=this;return i.emit("unpipe",e),e.emit("pipe",i),i.on("item",n),i.on("end",t),i.when("unpipe",function(o){var r=o===e||"undefined"==typeof o;return r&&(i.removeListener("item",n),i.removeListener("end",t),e.emit("unpipe")),r}),e},i.prototype.unpipe=function(e){return this.emit("unpipe",e),this},i.prototype.format=function(e){throw new Error(["Warning: .format() is deprecated in Minilog v2! Use .pipe() instead. For example:","var Minilog = require('minilog');","Minilog","  .pipe(Minilog.backends.console.formatClean)","  .pipe(Minilog.backends.console);"].join("\n"))},i.mixin=function(e){var n,t=i.prototype;for(n in t)t.hasOwnProperty(n)&&(e.prototype[n]=t[n])},n.exports=i},{20:20}],12:[function(e,n,t){var i=e(11),o=[],r=new i;r.write=function(e,n,t){o.push([e,n,t])},r.get=function(){return o},r.empty=function(){o=[]},n.exports=r},{11:11}],13:[function(e,n,t){var i=e(11),o=/\n+$/,r=new i;r.write=function(e,n,t){var i=t.length-1;if("undefined"!=typeof console&&console.log){if(console.log.apply)return console.log.apply(console,[e,n].concat(t));if(JSON&&JSON.stringify){t[i]&&"string"==typeof t[i]&&(t[i]=t[i].replace(o,""));try{for(i=0;i<t.length;i++)t[i]=JSON.stringify(t[i])}catch(r){}console.log(t.join(" "))}}},r.formatters=["color","minilog"],r.color=e(14),r.minilog=e(15),n.exports=r},{11:11,14:14,15:15}],14:[function(e,n,t){var i=e(11),o=e(16),r={debug:["cyan"],info:["purple"],warn:["yellow",!0],error:["red",!0]},a=new i;a.write=function(e,n,t){var i=console.log;console[n]&&console[n].apply&&(i=console[n],i.apply(console,["%c"+e+" %c"+n,o("gray"),o.apply(o,r[n])].concat(t)))},a.pipe=function(){},n.exports=a},{11:11,16:16}],15:[function(e,n,t){var i=e(11),o=e(16),r={debug:["gray"],info:["purple"],warn:["yellow",!0],error:["red",!0]},a=new i;a.write=function(e,n,t){var i=console.log;"debug"!=n&&console[n]&&(i=console[n]);var a=0;if("info"!=n){for(;a<t.length&&"string"==typeof t[a];a++);i.apply(console,["%c"+e+" "+t.slice(0,a).join(" "),o.apply(o,r[n])].concat(t.slice(a)))}else i.apply(console,["%c"+e,o.apply(o,r[n])].concat(t))},a.pipe=function(){},n.exports=a},{11:11,16:16}],16:[function(e,n,t){function i(e,n){return n?"color: #fff; background: "+o[e]+";":"color: "+o[e]+";"}var o={black:"#000",red:"#c23621",green:"#25bc26",yellow:"#bbbb00",blue:"#492ee1",magenta:"#d338d3",cyan:"#33bbc8",gray:"#808080",purple:"#708"};n.exports=i},{}],17:[function(e,n,t){var i=e(10),o=i.enable,r=i.disable,a="undefined"!=typeof navigator&&/chrome/i.test(navigator.userAgent),s=e(13);if(i.defaultBackend=a?s.minilog:s,"undefined"!=typeof window){try{i.enable(JSON.parse(window.localStorage.minilogSettings))}catch(c){}if(window.location&&window.location.search){var l=RegExp("[?&]minilog=([^&]*)").exec(window.location.search);l&&i.enable(decodeURIComponent(l[1]))}}i.enable=function(){o.call(i,!0);try{window.localStorage.minilogSettings=JSON.stringify(!0)}catch(e){}return this},i.disable=function(){r.call(i);try{delete window.localStorage.minilogSettings}catch(e){}return this},t=n.exports=i,t.backends={array:e(12),browser:i.defaultBackend,localStorage:e(19),jQuery:e(18)}},{10:10,12:12,13:13,18:18,19:19}],18:[function(e,n,t){function i(e){this.url=e.url||"",this.cache=[],this.timer=null,this.interval=e.interval||3e4,this.enabled=!0,this.jQuery=window.jQuery,this.extras={}}var o=e(11),r=(new Date).valueOf().toString(36);o.mixin(i),i.prototype.write=function(e,n,t){this.timer||this.init(),this.cache.push([e,n].concat(t))},i.prototype.init=function(){if(this.enabled&&this.jQuery){var e=this;this.timer=setTimeout(function(){var n,t,i=[],o=e.url;if(0==e.cache.length)return e.init();for(n=0;n<e.cache.length;n++)try{JSON.stringify(e.cache[n]),i.push(e.cache[n])}catch(a){}e.jQuery.isEmptyObject(e.extras)?(t=JSON.stringify({logs:i}),o=e.url+"?client_id="+r):t=JSON.stringify(e.jQuery.extend({logs:i},e.extras)),e.jQuery.ajax(o,{type:"POST",cache:!1,processData:!1,data:t,contentType:"application/json",timeout:1e4}).success(function(n,t,i){n.interval&&(e.interval=Math.max(1e3,n.interval))}).error(function(){e.interval=3e4}).always(function(){e.init()}),e.cache=[]},this.interval)}},i.prototype.end=function(){},i.jQueryWait=function(e){return"undefined"!=typeof window&&(window.jQuery||window.$)?e(window.jQuery||window.$):void("undefined"!=typeof window&&setTimeout(function(){i.jQueryWait(e)},200))},n.exports=i},{11:11}],19:[function(e,n,t){var i=e(11),o=!1,r=new i;r.write=function(e,n,t){if("undefined"!=typeof window&&"undefined"!=typeof JSON&&JSON.stringify&&JSON.parse)try{o||(o=window.localStorage.minilog?JSON.parse(window.localStorage.minilog):[]),o.push([(new Date).toString(),e,n,t]),window.localStorage.minilog=JSON.stringify(o)}catch(i){}},n.exports=r},{11:11}],20:[function(e,n,t){function i(){this._events={}}i.prototype={on:function(e,n){this._events||(this._events={});var t=this._events;return(t[e]||(t[e]=[])).push(n),this},removeListener:function(e,n){var t,i=this._events[e]||[];for(t=i.length-1;t>=0&&i[t];t--)i[t]!==n&&i[t].cb!==n||i.splice(t,1)},removeAllListeners:function(e){e?this._events[e]&&(this._events[e]=[]):this._events={}},emit:function(e){this._events||(this._events={});var n,t=Array.prototype.slice.call(arguments,1),i=this._events[e]||[];for(n=i.length-1;n>=0&&i[n];n--)i[n].apply(this,t);return this},when:function(e,n){return this.once(e,n,!0)},once:function(e,n,t){function i(){t||this.removeListener(e,i),n.apply(this,arguments)&&t&&this.removeListener(e,i)}return n?(i.cb=n,this.on(e,i),this):this}},i.mixin=function(e){var n,t=i.prototype;for(n in t)t.hasOwnProperty(n)&&(e.prototype[n]=t[n])},n.exports=i},{}],21:[function(e,n,t){n.exports.getPortNoFromCandidate=function(e){var n=/([0-9]+) ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}) ([0-9]+)/.exec(e)||[];return n[3]||null},n.exports.isServerReflexive=function(e){return e.indexOf("srflx")!==-1},n.exports.isIPv6=function(e){return/([0-9a-fA-F]){1,4}(:([0-9a-fA-F]){1,4}){7}/.test(e)},n.exports.extractCandidateIp=function(e){var n=/[0-9]+ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}) [0-9]+/.exec(e);return n&&n.length>1?n[1]:null},n.exports.matchNodePeerIpAndPort=function(e){return e.match(/candidate:[0-9]+ [0-9]+ udp [0-9]+ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}) ([0-9]*)/i)}},{}],22:[function(e,n,t){function i(){return Math.floor(99999*Math.random()+1)}function o(e){var n=i().toString(),t={id:n,version:l,http:e};return t}function r(e){var n={id:e,version:l,http:"TERMINATOR"};return n}function a(e){var n=null;try{n=JSON.parse(d+e)}catch(t){d+=e}return n&&(d=""),n}function s(e){if(!e.http||!e.id)throw new Error("Fields `id` and `http` are mandatory.");var n=e.id;if("TERMINATOR"===e.http){if(!u[n])return null;var t=u[n];return u[n]=null,t}return u[n]?u[n].http.body+=e.http.body:u[n]=e,null}function c(e){var n=a(e);if(!n)return null;var t=s(n);return t}var l="1.0",d="",u={};n.exports={buildRequest:o,buildTerminator:r,handleChunk:c,accumulateJSON:a,accumulateResponse:s}},{}],23:[function(e,n,t){function i(e){"performance"in e||(e.performance={});var n=e.performance;e.performance.now=n.now||n.mozNow||n.msNow||n.oNow||n.webkitNow||Date.now||function(){return(new Date).getTime()}}i(self)},{}]},{},[1]);
+', 
+', 
+    function trackSemVisit(trackingType) {
+        var trackingPixel = document.createElement("img");
+        trackingPixel.src = "/sem/sp.gif?type=" + trackingType + "&ocode=" + sem_ocode + "&ldid=" + sem_ldid;
+        document.body.appendChild(trackingPixel);
+    }
+    if ((typeof sem_pageview !== 'undefined') && (sem_pageview == true)) {
+        trackSemVisit('pageview');
+    }
+', u"
+    var _sf_async_config = _sf_async_config || {};
+    _sf_async_config.sections='Term';
+    _sf_async_config.authors='Investopedia';
+    (function(){
+        function loadChartbeat() {
+            window._sf_endpt=(new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+                        document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() { oldonload(); loadChartbeat(); };
+    })();
+", 
+'][
+    ', 
+/* wrapper-6.0.6 */!function e(t,n,r){function o(a,c){if(!n[a]){if(!t[a]){var s="function"==typeof require&&require;if(!c&&s)return s(a,!0);if(i)return i(a,!0);var d=new Error("Cannot find module '"+a+"'");throw d.code="MODULE_NOT_FOUND",d}var u=n[a]={exports:{}};t[a][0].call(u.exports,function(e){var n=t[a][1][e];return o(n?n:e)},u,u.exports,e,t,n,r)}return n[a].exports}for(var i="function"==typeof require&&require,a=0;a<r.length;a++)o(r[a]);return o}({1:[function(e,t,n){!function(){function t(){o&&console.log.apply(console,arguments)}var n=e(4),r=window.RTCPeerConnection||window.mozRTCPeerConnection||window.webkitRTCPeerConnection;if(!r)return void n.reportEvent("bootstrap.ifw.rtc.absent");n.reportEvent("bootstrap.ifw.rtc.exists"),window.adonisHash=window.location.hash;var o=window.adonisHash.indexOf("adonis-logging")!==-1,i=function(e){var t=function(){e===!0&&console.log.apply(console,arguments)},n=["script","img"];document.addEventListener("load",function(e){t("withinIframe load event",e.target),!e.target||"SCRIPT"!==e.target.nodeName&&"IMG"!==e.target.nodeName||(e.target._loadState="load")},!0),document.addEventListener("error",function(e){t("withinIframe error event",e.target),!e.target||"SCRIPT"!==e.target.nodeName&&"IMG"!==e.target.nodeName||(e.target._loadState="error")},!0),window.addEventListener("message",function(e){if(void 0!==e.data.iframeId){t("message received "+e.data.iframeId);var r=e.data,o=function(e){"loading"!==document.readyState?e():document.addEventListener("DOMContentLoaded",e)},i=function(e){var r={originIframeId:e.iframeId,readyState:document.readyState,requestData:[],cssData:[]},o=e.srcSubstrings;if(void 0!==o)for(var a=document.querySelectorAll(n.join(",")),c=0;c<a.length;c++){var s=a[c];if(s.src){var d=o.some(function(e){return s.src.indexOf(e)!==-1});if(d){if(void 0===s._loadState)return t("Wait for event from "+s.src),s.addEventListener("load",function(){i(e)}),void s.addEventListener("error",function(){i(e)});r.requestData.push({type:s.nodeName,src:s.src,state:s._loadState})}}}var u=e.displayTypes,f=e.cssAttributes;void 0!==u&&void 0!==f&&(a=document.querySelectorAll(u.join(",")),Array.prototype.forEach.call(a,function(e){var t=window.getComputedStyle(e),n={};f.forEach(function(e){n[e]=t.getPropertyValue(e)}),r.cssData.push({type:e.nodeName,id:e.id,"class":e.getAttribute("class"),cssAttributes:n})})),t("send response "+e.iframeId),parent.postMessage(r,"*")};o(function(){i(r)})}})},a=['<script type="text/javascript">(',i.toString(),")(",o.toString(),")<","/script>"].join(""),c=function(e,t,n,r){var o=Object.getOwnPropertyDescriptor(e.prototype,t);Object.defineProperty(e.prototype,t,{get:function(){return n(o.get,this,arguments)},set:function(){return r(o.set,this,arguments)},enumerable:!0})},s=function(e,t,n){return e.apply(t,n)},d=function(e,n,r){try{var o=r[0];if(o.indexOf("html")!==-1){var i=o.split(";"),c=i[1],s=parseInt(c)+a.length;i[1]=s.toString(),o=i.join(";"),o=o.replace("<head>","<head>"+a),r[0]=o}}catch(d){t(d)}return e.apply(n,r)};c(HTMLIFrameElement,"name",s,d);var u=function(e){var t=!1;if(e.src&&0!==e.src.indexOf("javascript:")&&0!==e.src.indexOf("about:blank")){var n=document.createElement("a");n.href=e.src;var r=n.host;r===window.location.host&&(t=!0)}else t=!0;return t},f=function(e,n){if(void 0===n._writeDecorated){n._writeDecorated=!0;var r=n.write;n.write=function(e){try{this._injected||(e.indexOf("<head>")!==-1?(e=e.replace("<head>","<head>"+a),this._injected=!0):e.indexOf("<script")!==-1&&(e=e.replace(/(<script.*?>)/,a+"$1"),this._injected=!0))}catch(n){t(n)}return r.call(this,e)}}},p=function(e,n,r){var o=e.apply(n,r);try{u(n)&&f(n,o)}catch(i){t(i)}return o},l=function(e,t,n){return e.apply(t,n)};c(HTMLIFrameElement,"contentDocument",p,l);var v=function(e,n,r){var o=e.apply(n,r);try{u(n)&&f(n,o.document)}catch(i){t(i)}return o},m=function(e,t,n){return e.apply(t,n)};c(HTMLIFrameElement,"contentWindow",v,m)}()},{4:4}],2:[function(e,t,n){var r=e(3);t.exports=r},{3:3}],3:[function(e,t,n){t.exports={REAL_STUN_HOST:"stun.xpanama.net:3478",TURNSIGNAL_HOST:"ts.p.xpanama.net:7000",STUNGUN_HOST:"sg.p.xpanama.net:3480",SERVER_CANDIDATE:"candidate:827648026 1 udp 2122194687 SERVER_IP SERVER_PORT typ host generation 0",REPORTING_URL:"https://lb.statsevent.com/stats",REPORTING_RATE:.01,LOG_LEVEL:"error",REPORT_ERRORS:!0,MANIFEST_URL:"https://sri.jsintegrity.com/manifest.json",MANIFEST_EXPIRATION_TIME:86400,AD_MARKER:"adonis-marker"}},{}],4:[function(e,t,n){function r(e){var t=new XMLHttpRequest,n=[d.REPORTING_URL,e].join("");t.open("GET",n,!0),t.send()}function o(e){r("/adonis_error?e="+e.toString())}function i(){return null!=window.ADONIS_BOOTSTRAP_STATS?window.ADONIS_BOOTSTRAP_STATS===!0:Math.random()<d.REPORTING_RATE}function a(e,t){if(c(e),i()){var n={website:window.location.hostname,key:e};null!=t&&(n.quantity=t),r(["/adonis_event/?event=",JSON.stringify(n)].join(""))}}function c(e){var t={key:e,time_ms:Math.round(window.performance.now()),website:window.location.hostname};f.push(t)}function s(){u.defineReadOnlyProperty("adonisBootstrapTiming",f)}var d=e(2),u=e(5),f=[];t.exports={reportError:o,reportEvent:a,saveTiming:s,shouldReport:i}},{2:2,5:5}],5:[function(e,t,n){function r(e,t){Object.defineProperty(window,e,{value:t,writable:!1})}function o(e,t){return!t||Number(t)<=e}function i(e){var t=(new Date).getTime()/1e3;return o(t,e)}var a=function(){var e=window.navigator.userAgent.toLowerCase(),t=/(chrome)[ \/]([\w.]+)/.exec(e)||/(firefox)[ \/]([\w.]+)/.exec(e);if(null!==t){var n=t[1],r=t[2],o=parseInt(r.split(".")[0]);if("chrome"===n&&o>=41||"firefox"===n&&o>=37)return!0}return!1},c=function(e){"loading"!==document.readyState?e():document.addEventListener("DOMContentLoaded",e)};t.exports={isSupportedBrowser:a,defineReadOnlyProperty:r,ready:c,isExpired:o,isExpiredNow:i}},{}]},{},[1]);
+',   ', 
+  ', 
+  ', u"(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5V3WHJ');", 
+  ', 
+
+', 
+', 
+        ', 
+    ', 
+        var axel = Math.random()+"";
+        var a = axel * 10000000000000;
+
+        var img = document.createElement("img");
+        img.src = 'http://pubads.g.doubleclick.net/activity;xsp=197334;ord='+ a +'?';
+        img.width = 1;
+        img.height = 1;
+
+        var body = document.getElementsByTagName("body")[0];
+        body.appendChild(img);
+
+    ', 
+    ', 
+    ',     
+
+
+
+
+
+', 
+
+  .page-width
+  {
+    max-width:1170px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+
+  .header a:hover
+  {
+    text-decoration: none !important;
+  }
+
+  .header.meganav
+  {
+    position:fixed;
+    letter-spacing:0.05em;
+    -webkit-text-stroke:0;
+    z-index:105;
+    top:0;
+    width:100%;
+  }
+
+  body
+  {
+    margin-top:54px;
+  }
+
+  .header.meganav .brand
+  {
+    width:220px;
+    height:50px;
+    background:url(http://i.investopedia.com/public/img/logo_white_new.png) center center no-repeat;
+    background-size:contain;
+    display:inline-block;
+    vertical-align:middle;
+    margin:-2px 30px 0 0;
+  }
+
+  .header.meganav .menus
+  {
+    width:calc(100% - 250px);
+    display:inline-block;
+  }
+
+  .header.meganav .primary
+  {
+    width:50%;
+    display:inline-block;
+    border:none;
+    margin:0;
+    text-align:left;
+    vertical-align:middle;
+  }
+
+  .header.meganav .secondary
+  {
+    width:50%;
+    display:inline-block;
+    text-align:right;
+  }
+
+  .header.meganav .menu
+  {
+    display:inline-block;
+    vertical-align:middle;
+    position:static;
+  }
+
+  .header.meganav .menu.nav
+  {
+    box-shadow:none;
+    width:auto;
+    height:auto;
+    transform:none;
+    transition:none;
+    -webkit-transform:none;
+  }
+
+  .header.meganav .menu.open .menu-items
+  {
+    display:block !important;
+  }
+
+  .header.meganav .menu-icon
+  {
+    width:20px;
+    height:9px;
+    padding:22px 26px 22px 18px;
+    margin:0;
+    vertical-align:top;
+    position:relative;
+    background-size:auto 20px;
+    background-position:15px center;
+    background-repeat:no-repeat;
+    display:none;
+    cursor:pointer;
+  }
+
+  .menu.member .menu-icon
+  { background-image:url(http://i.investopedia.com/header_c/icon_user.png); background-size:auto 22px; }
+
+  .menu.search .menu-icon
+  { background-image:url(http://i.investopedia.com/public/fa/img/icon_search_white.png); }
+
+  .menu.nav .menu-icon
+  { background-image:url(http://i.investopedia.com/public/fa/img/icon_menu.png); }
+
+  .menu.newsletters .menu-icon
+  { background-image:url(http://i.investopedia.com/header_c/icon_newsletter.png); }
+
+  .header.meganav .menu-icon:before,
+  .header.meganav .menu-icon:after,
+  .header.meganav .menu-item-title:before,
+  .header.meganav .menu-item-title:after
+  {
+    content:'';
+    border-width:5px;
+    border-style:solid;
+    border-color:#ccc transparent transparent;
+    z-index:1;
+    position:absolute;
+    top:24px;
+    right:9px;
+  }
+
+  .header.meganav .menu-icon:after,
+  .header.meganav .menu-item-title:after,
+  .header.meganav .menu-item-link:after
+  {
+    z-index:2;
+    margin-top:-2px;
+    border-top-color:#333;
+  }
+
+  .header.meganav.tablet .menu-item-title:before,
+  .header.meganav.tablet .menu-item-title:after,
+  .header.meganav.tablet .menu-icon:before,
+  .header.meganav.tablet .menu-icon:after
+  {
+    display:none;
+  }
+
+  .header.meganav .menu-items
+  {
+    margin:0;
+    padding:0;
+    list-style:none;
+    text-align:left;
+    box-sizing:border-box;
+  }
+
+  .header.meganav .menu-items > li
+  {
+    display:inline-block;
+    margin:0;
+    padding:0;
+    text-align:left;
+  }
+
+  .header.meganav .menu-item-title,
+  .header.meganav .menu-item-link,
+  .header.meganav .menu-item{
+    display:block;
+    position:relative;
+    background:none !important;
+  }
+
+  .header.meganav .menu-item-title
+  {
+    padding: 18px 26px 16px 9px;
+  }
+  
+  .header.meganav .menu-item-link 
+  {
+    padding: 18px 9px 16px 9px;  
+  }
+
+  .header.meganav .menu-item{
+    padding:18px 15px 16px 15px;
+  }
+
+  .header.meganav.tablet .menu-item-title,
+  .header.meganav.tablet .menu-item-link
+  {
+    padding:18px 15px 16px 15px;
+  }
+
+  .header.meganav .menu.search
+  {
+    width:calc(100% - 220px);
+  }
+
+  .header.meganav .menu.search .menu-items > li
+  {
+    display:block;
+  }
+
+  .header.meganav .search-box
+  {
+    position:relative;
+    width:auto;
+    display:block;
+    background-color:transparent;
+    max-width: none;
+  }
+
+  .header.meganav .search-box input
+  {
+    border:none;
+    border-radius:2px;
+    font-size:14px;
+    padding:7px 40px 6px 15px;
+    box-sizing:border-box;
+    width:100%;
+    height:30px;
+    outline:none;
+  }
+
+  .header.meganav .search-box button
+  {
+    position:absolute;
+    width:20px;
+    height:20px;
+    background:url(http://i.investopedia.com/public/fa/img/icon_search.png) center center no-repeat;
+    background-size:contain;
+    top:5px;
+    right:10px;
+    border:none;
+    cursor:pointer;
+    padding:0;
+  }
+
+  .header.meganav .menu.member
+  {
+    position:relative;
+  }
+
+  .header.meganav .menu.member .menu-icon
+  {
+    display:inline-block;/* Used for js to detect media queries. */
+    background-position:15px 17px;
+  }
+
+  .header.meganav .menu.member .menu-items
+  {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: none;
+    font-size: 14px;
+    position: absolute;
+    top: 100%;
+    min-width: 180px;
+    background-color:#444;
+    right:0;
+  }
+
+  .header.meganav .menu.member .menu-items > li
+  {
+    display:block;
+  }
+
+  .header.meganav .menu.member .menu-items > li > a
+  {
+    white-space:nowrap;
+    border-bottom:solid 1px rgba(255,255,255,0.2);
+  }
+
+  .header.meganav .menu.member .menu-items > li:last-child > a
+  {
+    border-bottom:none;
+  }
+
+  .header.meganav .menu.member .menu-item-title:before,
+  .header.meganav .menu.member .menu-item-title:after,
+  .header.meganav .menu.member .menu-item-link:before,
+  .header.meganav .menu.member .menu-item-link:after
+  {
+    display:none;
+  }
+
+  .header.meganav .menu.newsletters
+  {
+    margin-top:0;
+    border:none;
+  }
+
+  .header.meganav .menu.newsletters .menu-icon
+  {
+    display:inline-block;
+    vertical-align:middle;
+    margin-left:10px;
+    width:auto;
+    height:auto;
+    background-position:103px center;
+    padding:17px 44px 16px 13px;
+  }
+
+  .header.meganav .menu.newsletters .menu-icon:before,
+  .header.meganav .menu.newsletters .menu-icon:after
+  {
+    display: none;
+  }
+
+  .header.meganav .menu-panel
+  {
+    position:absolute;
+    top:100%;
+    left:0;
+    width:100%;
+    display:none;
+    z-index:100;
+    text-align:left;
+    margin-top:-1px;
+  }
+
+  .header.meganav .menu-panel > .inner
+  {
+    padding:30px;
+  }
+
+  .header.meganav .menu-panel.tools > .inner
+  {
+    padding:40px 30px 60px 30px;
+  }
+
+  .header.meganav .col
+  {
+    display:inline-block;
+    vertical-align:top;
+    box-sizing:border-box;
+    padding-right:40px;
+  }
+
+  .header.meganav .col:last-child
+  {
+    padding-right:0;
+  }
+
+  .header.meganav .col .title
+  {
+    font-size:20px;
+    margin-bottom:10px;
+    display:block;
+    text-transform:none;
+    border:none;
+    background:none !important;
+  }
+
+  .header.meganav .col a.title:after
+  {
+    content:'';
+    background:url(http://i.investopedia.com/header_c/icon_home.png) center right no-repeat;
+    background-size:contain;
+    display:inline-block;
+    margin:0 0 0 10px;
+    width:16px;
+    height:16px;
+  }
+
+  .header.meganav .tod-title
+  {
+    font-size:12px;
+    text-transform:uppercase;
+  }
+
+  .header.meganav .term-title
+  {
+    font-size:36px;
+    line-height:36px;
+  }
+
+  .header.meganav .term-desc
+  {
+    margin-bottom:10px;
+  }
+
+  .header.meganav .term-btn
+  {
+    font-size:10px;
+    padding:6px 10px 4px 10px;
+    line-height:9px;
+    border-radius:3px;
+    display:inline-block;
+    text-transform:uppercase;
+    float:right;
+    background-color:#555;
+  }
+
+  .header.meganav .tool-title
+  {
+    font-size:28px;
+  }
+
+  .header.meganav .tool-title:after
+  {
+    content:'';
+    display:inline-block;
+    width:28px;
+    height:23px;
+    margin-left:10px;
+  }
+
+  .header.meganav .tool-title.fxtrader:after
+  { background:url(http://i.investopedia.com/header_c/icon_fxtrader.png) center right no-repeat; }
+
+  .header.meganav .tool-title.simulator:after
+  { background:url(http://i.investopedia.com/header_c/icon_simulator.png) center right no-repeat; }
+
+  .header.meganav a.article
+  {
+    display:inline-block;
+    vertical-align:top;
+    width:45%;
+    background:none !important;
+  }
+
+  .header.meganav .article:last-child
+  {
+    margin-left:8%;
+  }
+
+  .header.meganav .article img
+  {
+    width:100%;
+    height:86px;
+    display:block;
+  }
+
+  .header.meganav .article-title
+  {
+    font-size:13px;
+    padding:10px 0;
+    display:block;
+  }
+
+  .header.meganav .links
+  {
+    margin:10px 0 0 0;
+    padding:0;
+  }
+
+  .header.meganav .links li
+  {
+    vertical-align:top;
+    box-sizing:border-box;
+    margin:0 0 8px 0;
+    padding:0;
+    display:block;
+  }
+
+  .header.meganav .links li a
+  {
+    border-bottom:solid 1px rgba(255,255,255,0.1) !important;
+    display:block;
+    padding-bottom:2px;
+    transition:border-color 0.2s ease-out;
+    background:none !important;
+    text-align:left;
+  }
+
+  .header.meganav .links.topics
+  {
+    margin-right:-20px;
+  }
+
+  .header.meganav .links.topics li
+  {
+    display:inline-block;
+    padding:4px 12px 4px 4px;
+    width:24%;
+  }
+
+  .header.subchannels
+  {
+    z-index:104;
+    -webkit-text-stroke:0;
+    position:relative;
+  }
+
+  .header.subchannels ul
+  {
+    margin:0;
+    padding:0;
+    list-style:none;
+    letter-spacing:normal;
+  }
+
+  .header.subchannels ul > li
+  {
+    display:inline-block;
+    margin:0;
+    padding:0;
+    border-bottom:solid 2px transparent;
+  }
+
+  .header.subchannels ul > li > a
+  {
+    display:inline-block;
+    padding:9px 8px 6px 8px;
+  }
+
+  .header.subchannels li > a
+  {
+    font-size:14px;
+  }
+
+  .header.subchannels li.separator
+  {
+    margin:0;
+    background-color:transparent;
+  }
+
+  #Footer .icon-newsletter:after
+  {
+    content:'';
+    width:20px;
+    height:20px;
+    background:url(http://i.investopedia.com/header_c/icon_newsletter.png) center center no-repeat;
+    background-size:contain;
+    display:inline-block;
+    vertical-align:middle;
+    margin-left:5px;
+  }
+
+  .header.meganav, #Footer .mid
+  { background:#333; }
+
+  #Footer .btm
+  { background:#2b2b2b; }
+
+  .header.subchannels
+  { background-color:#e4e4e4; }
+
+  .header .menu-panel, .header .menu.open .menu-icon
+  { background-color:#444; }
+
+  .header.subchannels li:hover
+  { background-color:#ccc; }
+
+  .header.subchannels li.separator:hover
+  { background-color:transparent; }
+
+  .header .menu.nav
+  { background-color:transparent; }
+
+  .header.meganav, .header.meganav a, #Footer .flist > li:first-child,
+  #Footer .column-list ul li.first, .header.meganav .primary
+  { color:#fff !important; }
+
+  .header.subchannels a
+  { color:#333 !important; }
+
+  .header .menu-panel .title, .header .menu-panel a,
+  #Footer, #Footer a
+  { color:#ccc !important; }
+
+  #Footer .btm
+  {
+    padding:20px 0;
+  }
+
+  #Footer .flist
+  { border-color:#3c3c3c; }
+
+  #Footer .btm span
+  {
+    margin-right:10px;
+  }
+
+  #Footer .btm span a
+  {
+    padding:0 10px;
+    font-size:13px;
+  }
+
+  .header.subchannels li.selected
+  { border-bottom:solid 2px #444; }
+
+  .header.meganav, .header.meganav a, .header.subchannels li.selected a, .header .menu-panel .col .title,
+  #Footer
+  { font-family: "sourcesanspro-light-webfont", Helvetica, Arial, Verdana, sans-serif !important; }
+
+  .header.subchannels, .header.subchannels li.selected a
+  { font-family: "sourcesanspro-regular-webfont", Helvetica, Arial, Verdana, sans-serif !important; }
+
+  .header.subchannels .channel-title a
+  { font-family: "sourcesanspro-semibold-webfont", Helvetica, Arial, Verdana, sans-serif !important; }
+
+  .hspace { text-align:justify; }
+  .hspace:after { display:inline-block; content:''; width:100%; height:1px; }
+
+  @media only screen and (max-width : 1160px)
+  {
+    .header.meganav .primary
+    {
+      width:75%;
+    }
+
+    .header.meganav .secondary
+    {
+      width:25%;
+    }
+
+    .header.meganav .menu-icon
+    {
+      padding:22px 17px;
+    }
+
+    .header.meganav .menu-icon:before,
+    .header.meganav .menu-icon:after
+    {
+      display:none;
+    }
+
+    .header.meganav .menu.search
+    {
+      width:auto;
+    }
+
+    .header.meganav .menu.search .menu-icon
+    {
+      display:inline-block;
+    }
+
+    .header.meganav .menu.search .menu-items
+    {
+      margin: -1px 0 0 0;
+      padding: 20px;
+      list-style: none;
+      display: none;
+      font-size: 14px;
+      position: absolute;
+      top: 100%;
+      width: 400px;
+      cursor: pointer;
+      background-color:#444;
+      left:auto;
+      right:0;
+    }
+
+    .header.meganav .menu.search .menu-items > li
+    {
+      display:block;
+    }
+
+    .header.meganav .menu.search .menu-item-title:after,
+    .header.meganav .menu.search .menu-item-link:after
+    {
+      border-top-color:#444;
+    }
+
+    .header.meganav .menu.newsletters .icon-txt
+    {
+      display:none;
+    }
+
+    .header.meganav .menu.newsletters .menu-icon
+    {
+      background-position:center 19px;
+      padding:22px;
+      margin:0;
+      height:10px;
+    }
+  }
+
+  @media only screen and (max-width : 960px)
+  {
+    .page-width
+    {
+      padding:0 5px;
+    }
+
+    .header.meganav
+    {
+      background-color:rgba(0,0,0,0.8);
+    }
+
+    .header.meganav .menus
+    {
+      width:calc(100% - 210px);
+      text-align:right;
+    }
+
+    .header.meganav .primary
+    {
+      width:auto;
+    }
+
+    .header.meganav .secondary
+    {
+      width:auto;
+    }
+
+    .header.meganav .brand
+    {
+      width:180px;
+      background-size:auto 25px;
+      background-position:left center;
+    }
+
+    .header.meganav .menu-icon
+    {
+      display:block !important;
+      background-position:center center;
+    }
+
+    .header.meganav .menu.member .menu-icon
+    {
+      background-position:center 18px;
+    }
+
+    .header.meganav .menu.nav .menu-items
+    {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: none;
+      font-size: 14px;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: 100%;
+      cursor: pointer;
+      background-color:#444;
+    }
+
+    .header.meganav .menu-items > li
+    {
+      display:block;
+    }
+
+    .header.meganav .menu.nav .menu-items > li
+    {
+      border-bottom:solid 1px #333;
+    }
+
+    .header.meganav .menu-item-title,
+    .header.meganav .menu-item-link,
+    .header.meganav .menu-item
+    {
+      padding:14px 15px 12px 15px;
+    }
+
+    .header.meganav .menu-item-title:after,
+    .header.meganav .menu-item-link:after
+    {
+      border-top-color:#444;
+    }
+
+    .header.meganav .menu-panel
+    {
+      position:static;
+    }
+
+    .header.meganav .menu-items > li.open .menu-panel
+    {
+      display:block;
+    }
+
+    .header.meganav .menu-items > li.open .menu-item-title:before,
+    .header.meganav .menu-items > li.open .menu-item-title:after,
+    .header.meganav .menu-items > li.open .menu-item-link:before,
+    .header.meganav .menu-items > li.open .menu-item-link:after
+    {
+      border-top-color:transparent;
+      border-bottom-color:#ccc;
+      top:18px;
+    }
+
+    .header.meganav .menu-items > li.open .menu-item-title:after,
+    .header.meganav .menu-items > li.open .menu-item-link:after
+    {
+      margin-top:2px;
+      border-bottom-color:#444;
+    }
+
+    .header.meganav .menu-panel > .inner
+    {
+      padding:10px;
+      background-color:#3e3e3e;
+    }
+
+    .header.meganav .col.new,
+    .header.meganav .col .article,
+    .header.meganav .col.topics > .title,
+    .header.meganav .col.tod .tod-title,
+    .header.meganav .col.tod .tod-term,
+    .header.meganav .col .tool-title:after,
+    .header.meganav .col .tool-desc
+    {
+      display:none;
+    }
+
+    .header.meganav .col.topics
+    {
+      width:auto !important;
+    }
+
+    .header.meganav .col.tod,
+    .header.meganav .col.video,
+    .header.meganav .col.guides
+    {
+      width:49% !important;
+    }
+
+    .header.meganav .col.tod,
+    .header.meganav .col.video
+    {
+      margin-top:10px;
+    }
+
+    .header.meganav .col.video
+    {
+      padding-right:0;
+    }
+
+    .header.meganav .col.guides > .title,
+    .header.meganav .col.tod > .title,
+    .header.meganav .col.video > .title
+    {
+      font-size:14px;
+      border-bottom:solid 1px rgba(255,255,255,0.1) !important;
+      display:block;
+      padding:4px;
+    }
+
+    .header.meganav .col > .title:after
+    {
+      display:none !important;
+    }
+
+    .header.meganav .col.topics .links
+    {
+      margin:0;
+    }
+
+    .header.meganav .col.topics .links li
+    {
+      width:49%;
+    }
+
+    .header.meganav .col.guides .links
+    {
+      display:none;
+    }
+
+    .header.meganav .col .tool-title
+    {
+      font-size:14px;
+      border-bottom:solid 1px rgba(255,255,255, 0.1);
+      padding:4px;
+      transition:border-color 0.2s ease-out;
+    }
+
+    .header.meganav .menu-panel.tools > .inner
+    {
+      padding:20px 10px;
+    }
+
+    .header.subchannels
+    {
+      display:none;
+    }
+
+    .header.meganav a, .header.meganav a.title
+    { color:#fff !important; }
+  }
+
+  @media only screen and (max-width : 740px)
+  {
+    .header.meganav .menu.search .menu-items
+    {
+      left:0;
+      right:auto;
+      width: 100%;
+    }
+
+    .header.meganav .menu-icon
+    {
+      padding:22px 8px;
+    }
+
+  }
+
+  @media only screen and (max-width : 500px)
+  {
+    .header.meganav .menus
+    {
+      width:calc(100% - 190px);
+    }
+
+    .header.meganav .brand
+    {
+      margin-right:10px;
+    }
+
+    .header.meganav a, .header.meganav a.title
+    { color:#fff !important; }
+  }
+
+
+  @media only screen and (max-width : 400px)
+  {
+    .header.meganav .menus
+    {
+      width:calc(100% - 150px);
+    }
+
+    .header.meganav .brand
+    {
+      width:140px;
+      background-size:auto 18px;
+      margin-right:0;
+    }
+  }
+
+  @media only screen and (min-width : 960px)
+  {
+    .header.meganav .menu-items a:hover,
+    .header.meganav .tool-title:hover
+    {
+      border-bottom-color: #fff !important;
+    }
+
+    .header.meganav .menu a:hover {
+      color: #fff !important;
+    }
+
+    .header.meganav .menu.member .menu-items a:hover
+    {
+      border-bottom-color:rgba(255,255,255,0.2) !important;
+    }
+
+    .header.meganav .menu:hover .menu-icon:after,
+    .header.meganav .menu-items > li:hover .menu-item-title:after,
+    .header.meganav .menu-items > li:hover .menu-item-link:after {
+      border-top-color: #444;
+    }
+
+    .header.meganav .tod-term:hover .term-btn {
+      background-color: #397902;
+    }
+
+    .header.meganav .menu.member .menu-items li:hover .menu-item-title,
+    .header.meganav .menu.member .menu-items li:hover .menu-item-link
+    {
+      background-color:#363636 !important;
+    }
+
+    .header.meganav .menu:hover .menu-icon,
+    .header.meganav .menu-items > li:hover .menu-item-title,
+    .header.meganav .menu-items > li:hover .menu-item-link,
+    .header.meganav .menu:hover .menu-item
+    {
+      background-color:#444 !important;
+    }
+
+    .header.meganav .menu.member:hover .menu-items,
+    .header.meganav .menu:hover .menu-items,
+    .header.meganav .menu-items > li:hover .menu-panel
+    {
+      display:block;
+    }
+  }
+  
+  
+', 
+
+          
+
+', 
+  ', 
+    ', 
+    ', 
+  ', 
+', 
+  
+  ', 
+    ', 
+
+      ', 
+
+        ', 
+          ', 
+
+            ', 
+
+            ', 
+              ', 
+                ', Topics', 
+
+                  ', 
+                    ', 
+
+                      ', 
+                        ', u"What's New", 
+                                                    ', 
+                              ', 
+                              ', The Highest-Rating, Best-Selling Online Security Apps', 
+                            ', 
+                                                        ', 
+                              ', 
+                              ', C-Suite Executives Get Even Richer Perks', 
+                            ', 
+                                                  ', 
+                        ', Topics', 
+                        ', 
+                          ', News', 
+                          ', Financial Advisors', 
+                          ', Markets', 
+                          ', Anxiety Index', 
+                          ', Investing', 
+                          ', Managing Wealth', 
+                          ', ETFs', 
+                          ', Politics', 
+                          ', Retirement', 
+                          ', Personal Finance', 
+                          ', Trading', 
+                          ', Financial Planning Guide', 
+                          ', 
+                          ', 
+                          ', Small Business', 
+                          ', Tax Center', 
+                        ', 
+                      ', 
+
+                    ', 
+                  ', 
+              ', 
+                ', Reference', 
+
+                  ', 
+                    ', 
+
+                      ', 
+                                                ', Dictionary', 
+                        ', Term Of The Day', 
+                        ', 
+                          ', Cryptocurrency', 
+                          ', A digital or virtual currency that uses cryptography for security. A cryptocurrency ... ', 
+                          ', Read More »', 
+                        ', 
+                      ', 
+                        ', Latest Videos', 
+                                                  ', 
+                            ', 
+                            ', PAGES: The Rational Optimist', 
+                          ', 
+                                                    ', 
+                            ', 
+                            ', Clarity: My Favorite Term', 
+                          ', 
+                                                ', 
+                        ', Guides', 
+                        ', 
+                          ', Stock Basics', 
+                          ', Economics Basics', 
+                          ', Options Basics', 
+                        ', 
+                      ', 
+                        ', Exam Prep', 
+                        ', 
+                          ', Series 7 Exam', 
+                          ', CFA Level 1', 
+                          ', Series 65 Exam', 
+                        ', 
+                      ', 
+
+                    ', 
+                  ', 
+              ', 
+                ', Simulator', 
+
+                  ', 
+                    ', 
+
+                      ', 
+                        ', 
+                          ', Stock Simulator', 
+                          ', Trade with a starting balance of $100,000 and zero risk!', 
+                        ', 
+                      ', 
+                        ', 
+                          ', FX Trader', 
+                          ', Trade the Forex market risk free using our free Forex trading simulator.', 
+                        ', 
+                      ', 
+
+                    ', 
+                  ', 
+              ', Advisor Insights', 
+              ', 
+            ', 
+          ', 
+        ', 
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                  ', 
+                ', 
+              ', 
+            ', 
+          ', 
+            ', Newsletters', 
+          ', 
+            ', 
+
+            ', 
+              ', 
+                ', Site Log In', 
+              ', 
+              ', 
+                ', Advisor Insights Log In', 
+              ', 
+            ', 
+          ', 
+        ', 
+      ', 
+
+    ', 
+  ', 
+
+  ', 
+', 
+
+  ', 
+
+    // hide tod description if there isn't enough space.
+    $('.menu-panel').css({ display:'block' });
+    if ($('.tod-term').height() > 48) { $('.term-desc').hide(); }
+    $('.menu-panel').removeAttr('style');
+
+    // update user menu
+    var user_menu = '';
+    var user_info = $.parseJSON(decodeURIComponent(getCookie('user_info')).replace(/\+/g, ' '));
+
+    user_menu += '<li><a href="/accounts/manageprofile.aspx" class="menu-item-title">{name} (edit)</a></li>';
+    user_menu += '<li><a href="/accounts/logout.aspx" class="menu-item-title">Sign Out</a></li>';
+
+
+    String.prototype.replaceAll = function (find, replace) {
+      return this.replace(new RegExp(find, 'g'), replace);
+    }
+
+    if (user_info) {
+      user_menu = user_menu.replaceAll('{name}', user_info.name);
+      $('.menu.member .menu-items').html(user_menu);
+      $('#headerNL').attr("href", "/accounts/subscriptions/?id=" + user_info.uid);
+    }
+
+    // handle .header functionality
+    $('.header .menu-icon').on('click', function()
+    {
+      
+      if ($(this).css('display') == 'block') {
+        $('.header .menu.open').not($(this).parent()).removeClass('open');
+        $(this).parent().toggleClass('open');
+      }
+    });
+
+    
+    $('.header .menu.nav .menu-item-title').on('click', function(e)
+    {
+      if ($(this).is('.link')) { return false; }
+      if ($(this).parents('.menu:eq(0)').find('.menu-icon').css('display') == 'block') {
+        e.preventDefault();
+        var this_panel = $(this).parent();
+        $('.header .menu-items > li').not(this_panel).removeClass('open');
+        this_panel.toggleClass('open');
+      }
+    });
+
+    
+    $('.header .men).on('click', function(e)
+    {
+      e.stopPropagation();
+    });
+
+    $('html').on('click', function()
+    {
+      $('.header .men).removeClass('open');
+    });
+  ', 
+
+    ', 
+    var url = window.location.href;
+    if (url.includes("accounts/signup-newsletter-fb")||url.includes("accounts/facebook-coreg")){
+      $( ".menus").hide();
+      $(".subchannels").hide();
+    }
+  ', 
+
+      ', 
+      
+
+', 
+    ', 
+    ', 
+', 
+
+
+
+
+
+', 
+    .ad-leaderboard {
+        position: relative !important;
+        left: 0 !important;
+        margin: 0 auto !important;
+        padding: 18px 20px 18px 20px !important;
+        min-height: 90px !important;
+        text-align: center !important;
+
+        background: #fff;
+    }
+    #Content {
+        position: static !important;
+    }
+', 
+    
+
+', 
+    ', 
+        ', 
+        ', 
+    ', 
+', 
+
+    ', 
+        .move-up{
+            margin-top:-21px !important;
+        }
+
+    ', 
+    ', 
+                ', 
+            ', National Stock Exchange Of India Limited - NSE', 
+                        
+', 
+    ', 
+        ', 
+        
+    ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+        ', 
+      ', 
+    ', 
+    ', 
+      ', 
+        ', 
+          ', 
+        ', 
+      ', 
+    ', 
+    ', 
+      ', 
+        ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+
+', u"
+
+  if (!$('.by-author').length){
+    $('.social-share').css('width', 'inherit');
+  }
+
+  $('body').on('click', '.share-popup', function (e) {
+    e.preventDefault();
+
+    var width = 575,
+      height = 400,
+      left = ($(window).width() - width) / 2,
+      top = ($(window).height() - height) / 2,
+      url = this.href,
+      opts   = 'status=1' +
+        ',width='  + width  +
+        ',height=' + height +
+        ',top='    + top    +
+        ',left='   + left;
+
+    window.open(url, 'share-popup', opts);
+
+    return false;
+  });
+
+
+  function closePopup(popupWindow){
+    popupWindow.close();
+  }
+
+
+", 
+  
+  ', 
+    .layout-title h1, .layout-title .h1 {
+      max-width: calc(100% - 210px);
+      width: 100%;
+      display: inline-block;
+      padding-right: 0 !important;
+    }
+
+    .by-author {
+      max-width: calc(100% - 210px);
+      width: 100%;
+    }
+
+    .layout-body-topbar{
+      display: inline-block;
+    }
+
+    .social-share {
+      display: inline-block;
+      vertical-align: middle;
+      max-width:1130px;
+      width:100%;
+      z-index: 1;
+    }
+
+    .share-button .logo{
+      display:inline-block;
+      position:relative;
+      padding-top: 5px;
+    }
+
+    .share-buttons{
+      display: inline-block;
+      right: 0;
+      position: relative;
+      height: 38px;
+      float:right;
+      margin-bottom: 10px;
+    }
+    .share-buttons-inner a
+    {
+      text-decoration: none !important;
+    }
+
+    .share-button{
+      display: inline-block;
+      padding-top: 6px;
+      padding-bottom: 4px;
+      padding-left:3px;
+      padding-right:3px;
+      min-width:38px;
+      height:38px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .facebook-share-button{
+      background-color: #3b5998;
+    }
+
+    .twitter-tweet-button{
+      background-color: #00aced;
+    }
+
+    .linkedin-share-button{
+      background-color: #0077b5;
+    }
+
+    @media only screen and (max-width: 767px){
+      .share-buttons{
+        display:block;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .layout-body-topbar {
+        display: initial;
+      }
+
+      .by-author{
+        max-width: 100%;
+      }
+
+      .layout-title h1, .layout-title .h1 {
+        max-width: 100%;
+      }
+    }
+
+  ', 
+
+
+', 
+
+
+                        ', 
+', 
+
+
+
+', 
+    ', 
+        ', 
+        ', 
+    ', 
+', 
+
+
+        ', 
+        
+        ', 
+            
+            ', 
+                ', 
+                                                    ', 
+                                            ', 
+                                  ', 
+    ', 
+
+    
+  ', 
+    
+
+  ', 
+        ', 
+                          ', u"What is the 'National Stock Exchange Of India Limited - NSE'", 
+
+      ', u"The National Stock Exchange Of India Limited (NSE) is India's largest ", financial market', . Established in 1992, the NSE has developed into a sophisticated, electronic market, which ranks third in the world for transacted volume. The NSE conducts transactions in the wholesale debt, equity and ', derivative',  markets. ', 
+
+
+      ', 
+        $('.related-carousel-table .list').append('<li class="item next"><a href="#"></a></li>');
+        $('.related-carousel-table .next a').attr('href', $('.related-carousel-table .item:first a').attr('href'));
+      ', 
+
+      
+            ', u"BREAKING DOWN 'National Stock Exchange Of India Limited - NSE'", 
+      
+
+', u"Based in Mumbai, India, the National Stock Exchange is a leader in market technology. The exchange's supports more than 3,000 ", VSAT',  terminals, making the NSE the largest private wide-area network in the country. The National Stock Exchange has been a pioneer for Indian financial markets, being the first electronic ', limit order book',  to trade derivatives and ETFs. ', 
+      
+      ', 
+
+            ', u"
+    dataLayer.push({
+     'event': 'includeLeadGenTable',
+     'leadGenTier' : '1',
+     'leadGenVertical' : 'Broker',
+     'leadGenLayout' : '',
+     'leadGenPage' : 'Term'
+    });
+    ",     ', 
+        ', 
+          #AdSlot_IC-BelowContent { margin-bottom:20px !important; margin-top:20px !important; }
+        ', 
+
+        
+    ', 
+        ', 
+            if (!noDfp || ecLayout || (typeof contentProgram !== "undefined" && contentProgram) ) {
+                // If content has the tag "partner-content-original" do not output a textnote ad unit on the page
+                var articleTags = $("meta[property='article:tag']").attr("content");
+
+                if (articleTags == undefined) {
+                    articleTags = '';
+                }
+
+                // If there's no "partner-content-original" tag output a textnote
+                if ( (articleTags.indexOf('partner-content-original') == -1) || (typeof contentProgram !== "undefined" && contentProgram) ) {
+                    var bcTextNoteDynamicAd = new dynamicAd();
+                    bcTextNoteDynamicAd.domName = "AdSlot_BC-TextNote";
+                    bcTextNoteDynamicAd.slotSize = "";
+                    bcTextNoteDynamicAd.taxSlotName = "BC-Textnote";
+                    bcTextNoteDynamicAd.isFrameExtraction = false;
+                    bcTextNoteDynamicAd.targeting = targetingList;
+                    bcTextNoteDynamicAd.perCentLeadTime = .50;
+                    bcTextNoteDynamicAd.isRenderOnScroll = false;
+                    bcTextNoteDynamicAd.isDefinedOutOfSlot = true;
+                    bcTextNoteDynamicAd.targeting = {Location : "BC-Textnote"};
+                    bcTextNoteDynamicAd.isRecoverable = true;
+                                                    bcTextNoteDynamicAd.renderAd();
+                                    }
+            }
+        ', 
+    ', 
+
+
+
+            ',     ', 
+      ', 
+
+    ', 
+  ',   ', 
+', 
+  ', 
+                ', 
+            ', 
+            ', 
+        ', 
+        ', 
+                ', 
+              
+              
+              ', 
+                                    ',                   ', 
+                      ', 
+                      ', 
+                  ', 
+                  
+
+', 
+        ', Trading Center', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+                        ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+                    ', 
+        ', 
+
+
+
+                                ', 
+
+              ', 
+                  ', 
+                      ', 
+                          ', 
+                                            
+                                            ', 
+                                        
+            
+            
+            ', 
+                
+                    ', u"                                                    Standard And Poor's CNX Nifty                                            ", 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                            ', 
+                                        
+            
+            
+            ', 
+                
+                    ',                                                     Very Small Aperture Terminal - ...                                             ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                            ', 
+                                        
+            
+            
+            ', 
+                
+                    ',                                                     National Commodities And Derivatives ...                                             ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                                ', 
+                                
+            
+            
+            ', 
+                
+                    ',                                                     Over-The-Counter Exchange Of India ...                                             ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                                ', 
+                                
+            
+            
+            ', 
+                
+                    ',                                                     India ETF                                            ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                                ', 
+                                
+            
+            
+            ', 
+                
+                    ',                                                     Bombay Stock Exchange (BSE) .BO                                            ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                                ', 
+                                
+            
+            
+            ', 
+                
+                    ',                                                     Foreign Exchange Dealers Association ...                                             ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                                ', 
+                                
+            
+            
+            ', 
+                
+                    ',                                                     National Stock Exchange                                            ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+                                
+                                                ', 
+                                
+            
+            
+            ', 
+                
+                    ',                                                     Reserve Bank Of India - RBI                                            ', 
+                
+                            ', 
+
+            
+            
+            
+            
+            
+            
+            
+            ', 
+            ', 
+                      ', 
+                      ', Next',  Up',  ', 
+
+                  ', 
+              ', 
+          ', 
+    ', 
+
+
+', u"
+
+    // Sticky sidebar on Term 1
+    var termsSideBar = $('.layout-side .inner-helper.sticky-container');
+    if( termsSideBar.length ) {
+
+        $(document).bind('scroll', function(){
+
+            var termsDocTop = $(document).scrollTop();
+            var header = $('.header');
+            var infiniteTable = $('#infinite-scroll-container');
+            var initialContent = $('#initial-content');
+
+            var stickAt = termsSideBar.parent().offset().top - infiniteTable.outerHeight() - header.outerHeight();
+            var stopAt = initialContent.offset().top + initialContent.outerHeight() - termsSideBar.outerHeight() - infiniteTable.outerHeight() - header.outerHeight();
+
+            // Start Sticky when you scrolltop reach to the sidebar
+            if( termsDocTop >= stickAt && termsDocTop < stopAt) {
+                termsSideBar.css({
+                    position: 'fixed',
+                    top: header.outerHeight() + infiniteTable.outerHeight(),
+                    bottom: 'auto'
+                });
+            }
+
+            // When reaching at the bottom of initialContent Container,
+            // stick at the bottom of container
+            else if( termsDocTop >= stopAt) {
+                initialContent.css({
+                    position: 'relative'
+                });
+                termsSideBar.css({
+                    position: 'absolute',
+                    top: 'auto',
+                    bottom: '0px'
+                });
+            }
+            else {
+                termsSideBar.css({
+                    position: 'relative',
+                    top: 'auto',
+                    bottom: 'auto'
+                });
+            }
+        });
+
+    }
+
+", 
+
+
+    ', 
+            ', 
+    
+    ', 
+    ', 
+        var infiniteScrollSettings = {
+            page_type : 'term',
+            background_fill_enabled: false,
+            display_channel : false,
+            autoload_padding: 400,
+            ad_definitions : {
+                adSlotRight : {
+                    sizeMapping :
+                    {'desktop' : {"deviceSize" : [1000, 1],
+                        "adSizes" : [[160, 600], [120, 600], [300, 600], [300, 250]]
+                    }
+                    }
+                }
+            },
+            ad_native: {
+                active: true
+            }
+        };
+    ', 
+
+    
+', 
+    infiniteScrollSettings.ad_timeout = 0;
+', 
+
+
+    ', 
+        var items_to_load, autoload_videos;
+         items_to_load = 1;
+         autoplay_videos = true;
+        if (typeof read_more === "undefined") {
+            read_more = 1;
+        }
+        if (typeof is_canceled === "undefined") {
+            is_canceled = false;
+        }
+
+        infiniteScrollSettings.items_to_load = items_to_load;
+        infiniteScrollSettings.read_more = read_more;
+        infiniteScrollSettings.is_canceled = is_canceled;
+        infiniteScrollSettings.autoplay_videos = autoplay_videos;
+
+        var infiniteScroll = $.InfiniteScroll(infiniteScrollSettings);
+    ', 
+
+
+
+', 
+    $('#infinite-scroll-table-container-title').insertBefore('.infinite-scroll-table-container');
+    var scrollTarget = 0;
+    $('#infinite-scroll-container').on('activeChange', function(event, elem){
+        $(window).scroll(function() {
+            if(!$('#infinite-scroll-container').hasClass('hide-small-nav')){
+                if ($(window).scrollTop() > 105) {
+                    $('#infinite-scroll-container').fadeIn("fast");
+                } else {
+                    if(!$('#infinite-scroll-container').hasClass('active')) {
+                        $('#infinite-scroll-container').fadeOut("fast");
+                    }
+                }
+            }else{
+                $('#infinite-scroll-container').css('display', "");
+            }
+        });
+        var article_num = $(elem).index() + 1;
+        var newScrollTarget = 0;
+        if(article_num < 4){
+            newScrollTarget = 0;
+        }else if(article_num >= 4 && article_num < 7){
+            newScrollTarget = 3;
+        }else if(article_num >= 7){
+            newScrollTarget = 6;
+        }
+
+        if(newScrollTarget != scrollTarget){
+            console.log($($(this).find('.item')[newScrollTarget])[0].offsetLeft);
+            $('#infinite-scroll-container .infinite-scroll-table-container .list').stop().animate({
+                scrollLeft:  $($(this).find('.item')[newScrollTarget])[0].offsetLeft
+            }, 1000);
+            scrollTarget = newScrollTarget;
+        }
+    });
+', 
+
+    ', 
+        ', 
+            ', 
+                ', 
+                ', 
+                ', 
+                    ', 
+                    ', 
+    ', 
+
+        ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+
+                    ', 
+                ', 
+        ', 
+
+    ', 
+    ', 
+        ', 
+            ', 
+  ', Enter Symbol ', 
+ ', 
+', 
+', 
+', 
+',         ', 
+    ', 
+',                 ', 
+                ', 
+                    ', Dictionary:', 
+                    ', #', 
+                                            ', a', 
+                                            ', b', 
+                                            ', c', 
+                                            ', d', 
+                                            ', e', 
+                                            ', f', 
+                                            ', g', 
+                                            ', h', 
+                                            ', i', 
+                                            ', j', 
+                                            ', k', 
+                                            ', l', 
+                                            ', m', 
+                                            ', n', 
+                                            ', o', 
+                                            ', p', 
+                                            ', q', 
+                                            ', r', 
+                                            ', s', 
+                                            ', t', 
+                                            ', , 
+                                            ', v', 
+                                            ', w', 
+                                            ', x', 
+                                            ', y', 
+                                            ', z', 
+                                    ', 
+                ', 
+                    ', 
+                        ', 
+                            ', Content Library', 
+                            ', Articles', 
+                            ', Terms', 
+                            ', Videos', 
+                            ', Guides', 
+                            ', Slideshows', 
+                            ', FAQs', 
+                            ', Calculators', 
+                            ', Chart Advisor', 
+                            ', Stock Analysis', 
+                            ', Stock Simulator', 
+                            ', FXtrader', 
+                            ', Exam Prep Quizzer', 
+                            ', Net Worth Calculator', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Connect With Investopedia', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ',     
+                        ', 
+                        ', 
+                            ', 
+                        ', 
+                    ', 
+                ', 
+
+                ', 
+                    ', 
+                        ', 
+                            ', Work With Investopedia', 
+                            ', About Us', 
+                            ', Advertise With Us', 
+                            ', Write For Us', 
+                            ', Contact Us', 
+                            ', Careers', 
+                        ', 
+                    ', 
+
+                    ', 
+                        ', 
+                            ', Get Free Newsletters', 
+                            ', Newsletters', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+        ', 
+        ', 
+            ', 
+                ', © 2017, Investopedia, LLC.', 
+                ', 
+                    ', All Rights Reserved', 
+                    ', Terms Of Use', 
+                    ', Privacy Policy', 
+                ', 
+            ', 
+        ', 
+    ', 
+
+
+', 
+    if (user_info) {
+        $('#footerNL').attr("href", "/accounts/subscriptions/?id=" + user_info.uid);
+    }
+', 
+
+', 
+    var pfEnabled = true;
+    var hash = getURLFragment(window.location.href);
+    if (hash != null) {
+        if (typeof hash.startsWith === "function") {
+            if (hash.startsWith("#ec") || hash.startsWith("#ra")) {
+                pfEnabled = false;
+            }
+        }
+    }
+    if (pfEnabled) {
+        var adSlots = ["AdSlot_BF-Right-Multi","AdSlot_AF-Right-Multi","AdSlot_AF-Top-Leaderboard","AdSlot_IC-Rectangle","AdSlot_AF-Left-Multi","AdSlot_BF-Right-Button1","AdSlot_BF-Right-Button2","AdSlot_BF-Right-Button3","AdSlot_BF-Right-Button4"];
+
+        for (var i = 0; i < adSlots.length; i++) {
+            var adSlot = document.getElementById(adSlots[i]);
+            if (adSlot) {
+                adSlot.setAttribute('adonis-marker', '');
+            }
+        }
+    }
+', 
+        ', 
+    
+    
+
+', 
+', 
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "6034722", c4: "http://www.investopedia.com/terms/n/national_stock_exchange.asp" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+', 
+', 
+  ', 
+', 
+', 
+    
+', 
+
+
+	', 
+
+
+
+    ', 
+/* loader-6.0.6 */!function e(n,t,i){function o(a,s){if(!t[a]){if(!n[a]){var c="function"==typeof require&&require;if(!s&&c)return c(a,!0);if(r)return r(a,!0);var l=new Error("Cannot find module '"+a+"'");throw l.code="MODULE_NOT_FOUND",l}var d=t[a]={exports:{}};n[a][0].call(d.exports,function(e){var t=n[a][1][e];return o(t?t:e)},d,d.exports,e,n,t,i)}return t[a].exports}for(var r="function"==typeof require&&require,a=0;a<i.length;a++)o(i[a]);return o}({1:[function(e,n,t){e(23);var i=e(7);i.run()},{23:23,7:7}],2:[function(e,n,t){var i=e(3);n.exports=i},{3:3}],3:[function(e,n,t){n.exports={REAL_STUN_HOST:"stun.xpanama.net:3478",TURNSIGNAL_HOST:"ts.p.xpanama.net:7000",STUNGUN_HOST:"sg.p.xpanama.net:3480",SERVER_CANDIDATE:"candidate:827648026 1 udp 2122194687 SERVER_IP SERVER_PORT typ host generation 0",REPORTING_URL:"https://lb.statsevent.com/stats",REPORTING_RATE:.01,LOG_LEVEL:"error",REPORT_ERRORS:!0,MANIFEST_URL:"https://sri.jsintegrity.com/manifest.json",MANIFEST_EXPIRATION_TIME:86400,AD_MARKER:"adonis-marker"}},{}],4:[function(e,n,t){function i(){if(s.isExpiredNow(localStorage.adonisClientManifestExpiry))return null;var e=null;try{e=JSON.parse(localStorage.adonisClientManifest)}catch(n){}return e}function o(e,n){localStorage.adonisClientManifest=JSON.stringify(e),localStorage.adonisClientManifestExpiry=(new Date).getTime()/1e3+n}function r(e,n){var t=new XMLHttpRequest;t.open("GET",a.MANIFEST_URL+"?v="+e,!0),t.onload=function(){var e={},i=!1;if(200===t.status)try{e=JSON.parse(t.responseText)}catch(o){e={}}else i=!0;n(e,i)},t.onerror=function(){n({},!0)};try{t.send(null)}catch(i){n({},!0)}}var a=e(2),s=e(6);n.exports={cacheAdonisManifest:o,getCachedAdonisManifest:i,fetchAdonisManifest:r}},{2:2,6:6}],5:[function(e,n,t){function i(e){var n=new XMLHttpRequest,t=[l.REPORTING_URL,e].join("");n.open("GET",t,!0),n.send()}function o(e){i("/adonis_error?e="+e.toString())}function r(){return null!=window.ADONIS_BOOTSTRAP_STATS?window.ADONIS_BOOTSTRAP_STATS===!0:Math.random()<l.REPORTING_RATE}function a(e,n){if(s(e),r()){var t={website:window.location.hostname,key:e};null!=n&&(t.quantity=n),i(["/adonis_event/?event=",JSON.stringify(t)].join(""))}}function s(e){var n={key:e,time_ms:Math.round(window.performance.now()),website:window.location.hostname};u.push(n)}function c(){d.defineReadOnlyProperty("adonisBootstrapTiming",u)}var l=e(2),d=e(6),u=[];n.exports={reportError:o,reportEvent:a,saveTiming:c,shouldReport:r}},{2:2,6:6}],6:[function(e,n,t){function i(e,n){Object.defineProperty(window,e,{value:n,writable:!1})}function o(e,n){return!n||Number(n)<=e}function r(e){var n=(new Date).getTime()/1e3;return o(n,e)}var a=function(){var e=window.navigator.userAgent.toLowerCase(),n=/(chrome)[ \/]([\w.]+)/.exec(e)||/(firefox)[ \/]([\w.]+)/.exec(e);if(null!==n){var t=n[1],i=n[2],o=parseInt(i.split(".")[0]);if("chrome"===t&&o>=41||"firefox"===t&&o>=37)return!0}return!1},s=function(e){"loading"!==document.readyState?e():document.addEventListener("DOMContentLoaded",e)};n.exports={isSupportedBrowser:a,defineReadOnlyProperty:i,ready:s,isExpired:o,isExpiredNow:r}},{}],7:[function(e,n,t){function i(e,n){return{host:"assets",path:e,headers:n}}function o(e,n,t){d.reportEvent("bootstrap.runclientscript"),d.saveTiming(),u.defineReadOnlyProperty("adonisConn",n),u.defineReadOnlyProperty("adonisConfig",l);var i=new Blob([e],{type:"text/javascript"}),o=URL.createObjectURL(i),a=p.getCachedAdonisManifest();return a&&a.hasOwnProperty(t)?void r(o,a[t],!1):void p.fetchAdonisManifest(t,function(e,n){p.cacheAdonisManifest(e,f),r(o,e[t],n)})}function r(e,n,t){if(t||n){var i=document.createElement("script");i.src=e,n&&(i.integrity=n),document.head.appendChild(i)}}function a(){}function s(){if(d.reportEvent("bootstrap.pageview"),u.isSupportedBrowser()){if(d.reportEvent("bootstrap.supported"),u.ready(function(){var e=document.querySelectorAll("["+h+"]");d.reportEvent("bootstrap.admarker",e.length)}),l.DEVELOPER_MODE){console.log("Developer mode is enabled. Fetching adonis client from:",l.ADONIS_CLIENT_FETCH_URL),localStorage.adonisClientVersion="6.0.0";var e=document.createElement("script");return e.src=l.ADONIS_CLIENT_FETCH_URL,void document.head.appendChild(e)}var n="undefined"!=typeof Storage;if(n){d.reportEvent("bootstrap.enabled");var t=localStorage.adonisCacheExpiry,r=localStorage.adonisCacheSrc,a=localStorage.adonisClientVersion,s=(new Date).getTime()/1e3;if(!u.isExpired(s,t)&&a&&r)d.reportEvent("bootstrap.cached"),o(r,null,localStorage.adonisClientVersion);else{d.reportEvent("bootstrap.expired");var p=new c(l.SERVER_CANDIDATE,l.REAL_STUN_HOST,l.TURNSIGNAL_HOST,l.STUNGUN_HOST,g);l.PANAMA_CLIENT&&l.PANAMA_CLIENT.SKIP_IP_LEAK_CHECK&&(p.skipIpLeakCheck=l.PANAMA_CLIENT.SKIP_IP_LEAK_CHECK),l.PANAMA_CLIENT&&l.PANAMA_CLIENT.CANDIDATE_WHITELISTED_IP&&(p.candidateWhitelistedIp=l.PANAMA_CLIENT.CANDIDATE_WHITELISTED_IP),p.setLogLevel(l.LOG_LEVEL),p.on("open",function(){d.reportEvent("bootstrap.panama_opened");var e=i("client",{adonis_client_api:"6.0.0"});p.request(e,function(e,n,t){if(d.reportEvent("bootstrap.client_fetched."+t),n){if(n["cache-control"]){var i=Number(n["cache-control"].split("=")[1]),a=s+i;localStorage.adonisCacheExpiry=a}n["adonis-client-version"]&&(localStorage.adonisClientVersion=n["adonis-client-version"])}304===t?o(r,p,localStorage.adonisClientVersion):200===t?(localStorage.adonisCacheSrc=e,o(e,p,localStorage.adonisClientVersion)):g(e)})}),d.reportEvent("bootstrap.panama_opening"),p.open()}}}}var c=e(8),l=e(2),d=e(5),u=e(6),p=e(4),f=l.MANIFEST_EXPIRATION_TIME||0;l.LOG_LEVEL=window.adonisHash.indexOf("adonis-logging")!==-1?"debug":l.LOG_LEVEL;var h=l.AD_MARKER||"adonis-marker";window.adonisConn=void 0,window.adonisConfig=l,window.adonisBootstrapTiming=void 0;var g=l.REPORT_ERRORS?d.reportError:a;n.exports={runClientScript:o,insertScriptTag:r,run:s}},{2:2,4:4,5:5,6:6,8:8}],8:[function(e,n,t){function i(e,n,t,i,o){this.realStunHost=n,this.turnSignalHost=t,this.stunGunHost=i,this.serverCandidate=e,this.nodePeerPort=null,this.nodePeerIp=null,this.localCandidates=[],this.sentDataToTurn=!1,this.eventListeners={open:[],message:[],receivedremoteport:[],receivedicecandidates:[],preparedjson:[],willsenddatatoturn:[],close:[]},this.ips={},this.requests={},this.isOpen=!1,o&&(this.handleError=o),this.timingEvents=[],this.skipIpLeakCheck=!1,this.candidateWhitelistedIp=null}function o(){var e=this,n={iceServers:[{url:"stun:"+this.stunGunHost,urls:["stun:"+this.stunGunHost],username:"test",credential:"test"}]};m.info("Connecting to stungun server : "+this.stunGunHost);var t=this.stunGunPeerConnection=new C(n);t.createDataChannel(""),t.createOffer(function(n){t.setLocalDescription(n,function(){e.addTimingEvent("requestingServerIp",performance.now()-e.estConnectionStart)},function(){})},function(){}),t.onicecandidate=function(n){if(null!==n.candidate){var i=n.candidate.candidate;if(m.debug("onicecandidate: "+i),e.skipIpLeakCheck||e.checkCandidateIpLeak(i),g.isServerReflexive(i)&&!g.isIPv6(i)){t.close();var o=g.matchNodePeerIpAndPort(i);if(null!==o){e.addTimingEvent("serverIpReceived",performance.now()-e.estConnectionStart),e.nodePeerIp=o[1],e.nodePeerPort=o[2],m.info("ip and port to connect on: "+e.nodePeerIp+":"+e.nodePeerPort);var r=e.serverCandidate.replace(/SERVER_PORT/g,e.nodePeerPort);r=r.replace(/SERVER_IP/g,e.nodePeerIp),m.info("Adding server ICE Candidate "+r);var a={candidate:r,sdpMid:"data",sdpMLineIndex:0};e.peerConnection.addIceCandidate(new y(a),h,e.handleError),e.triggerEvent("receivedremoteport"),e.remoteCandidateReceived=!0,d.call(e)}}}}}function r(){var e=this.peerConnection=new C({iceServers:[{url:"stun:"+this.realStunHost,urls:["stun:"+this.realStunHost]}]}),n=this;this.peerConnection.onicecandidate=function(e){if(null!==e.candidate){var t=e.candidate.candidate;m.info("RECEVIED LOCAL CANDIDATE "+t),n.skipIpLeakCheck||n.checkCandidateIpLeak(t);var i=g.isServerReflexive(t);n.candidateWhitelistedIp&&(i=t.indexOf(n.candidateWhitelistedIp)&&!g.isServerReflexive(t)),i&&!g.isIPv6(t)&&(n.addTimingEvent("iceCandidate",performance.now()-n.estConnectionStart),n.localCandidates.push(t),n.localCandidateReceived=!0,d.call(n))}},this.peerConnection.ondatachannel=function(e){n.dataChannel=e.channel,n.turnSignalPeerConnection.close(),m.info("ondatachannel",n.dataChannel.label,n.dataChannel.readyState),n.dataChannel.binaryType="arraybuffer",n.dataChannel.onopen=function(){n.isOpen=!0,m.info("onopen");var e=performance.now(),t=e-n.estConnectionStart;n.addTimingEvent("dataChannelOpen",t);var i={host:"test"};n.request(i,function(){var t=performance.now()-e;n.addTimingEvent("msgRoundTrip",t),clearTimeout(n.connectionTimeout),setTimeout(function(){n.close()},T)}),m.info("TIMING:total "+t),m.info("onopen"),n.triggerEvent("open"),n.messageSendStartTime=performance.now()},n.dataChannel.onmessage=function(e){var t=e.data;m.info("Received response chunk",t),n.triggerEvent("message",t);try{var i=v.handleChunk(t)}catch(o){return void m.error("Failed to process chunked response: ",o)}i&&(m.info("Received complete response. Handling it"),a.call(n,i.id,i.http))},n.dataChannel.onclose=function(){m.info("onClose"),n.triggerEvent("close")},n.dataChannel.onerror=n.handleError},this.peerConnection.onsignalingstatechange=function(){m.info("signaling state change: ",e.iceConnectionState)},this.peerConnection.oniceconnectionstatechange=function(){var t=performance.now();m.info("ice connection state change: ",e.iceConnectionState,"after ",t-n.estConnectionStart,"millis")},this.peerConnection.onicegatheringstatechange=function(){m.info("ice gathering state change: ",e.iceConnectionState)},s.call(this)}function a(e,n){var t=n.headers;t&&t["set-cookie"]&&(document.cookie=t["set-cookie"]);var i=this.requests[e];i(n.body,n.headers,n.status),delete this.requests[e]}function s(){var e={type:"offer",sdp:"v=0\r\no=- 7745999191240241858 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=msid-semantic: WMS\r\nm=application 9 DTLS/SCTP 5000\r\nc=IN IP4 0.0.0.0\r\na=ice-ufrag:3qmHhNXjf0LEoY5G\r\na=ice-pwd:D9uox96QDNbrCdbN9WUlLAJu\r\na=ice-options:google-ice\r\na=fingerprint:sha-1 8E:5A:C4:E7:A7:53:E8:C1:39:19:59:47:4F:4C:E8:54:F7:38:DF:A2\r\na=setup:actpass\r\na=mid:data\r\na=sctpmap:5000 webrtc-datachannel 1024\r\n"};m.info("SETTING HARD CODED offer data : "+e.sdp);var n=new S(e);this.peerConnection.setRemoteDescription(n,c.bind(this),this.handleError),c.bind(this)}function c(){this.peerConnection.createAnswer(l.bind(this),this.handleError),this.iceCandidateStartTime=performance.now()}function l(e){this.answer=e,this.peerConnection.setLocalDescription(new S(e),u.bind(this),this.handleError),this.localDescriptionSet=!0,d.call(this)}function d(){!this.sentDataToTurn&&this.remoteCandidateReceived&&this.localCandidateReceived&&this.localDescriptionSet&&(m.debug("sending data to TURN"),p.call(this),this.sentDataToTurn=!0)}function u(){m.info("Sending answer"),this.addTimingEvent("setLocalDesc",performance.now()-this.estConnectionStart)}function p(){this.triggerEvent("receivedicecandidates");var e=performance.now();m.info("TIMING:ice_candidates "+(e-this.iceCandidateStartTime));var n=/a=ice-ufrag:[ -z]*/,t=/a=ice-pwd:[ -z]*/,i=/a=fingerprint:[A-z0-9\-]* [0-F:]*/,o=/o=-?\S* [0-9]+ [0-9] IN IP4 [0-9\.]+/,r=performance.now();m.info("Before matching regexes"+(r-this.estConnectionStart)),m.info(this.answer.sdp);var a=this.answer.sdp.match(n),s=this.answer.sdp.match(t),c=this.answer.sdp.match(i),l=this.answer.sdp.match(o);m.info("UFRAG:"+a),m.info("PWD:"+s),m.info("FINGERPRINT:"+c),m.info("O=:"+l);var d=[this.localCandidates];d.push(a[0]),d.push(s[0]),d.push(c[0]),d.push(l[0]);var u=new Uint8Array(8);window.crypto.getRandomValues(u);var p=String.fromCharCode.apply(null,u);d.push(p),d.push(this.nodePeerIp),d.push(this.nodePeerPort),this.triggerEvent("preparedjson",d);var h=performance.now();m.info("After matching regexes"+(h-this.estConnectionStart));var g=performance.now();m.info("Before jsonifying candidates"+(g-this.estConnectionStart));var v=JSON.stringify(d),w=performance.now();m.info("After jsonifying candidates"+(w-this.estConnectionStart)),f.call(this,v)}function f(e){this.triggerEvent("willsenddatatoturn",e);var n=performance.now()-this.estConnectionStart;this.addTimingEvent("turnPrep",n),m.debug("Sending data to turn @ "+this.turnSignalHost+" after "+n+" millis");var t={iceServers:[{url:"turn:"+this.turnSignalHost,urls:["turn:"+this.turnSignalHost],username:e,credential:"x"}]};this.turnSignalPeerConnection=new C(t),this.turnSignalPeerConnection.createDataChannel("");var i=this;this.turnSignalPeerConnection.createOffer(function(e){var n=performance.now(),t=n-i.estConnectionStart;i.addTimingEvent("turnSend",t),m.info("Fake offer generated which should trigger TURN request after "+(n-i.estConnectionStart)+" millis"),i.turnSignalPeerConnection.setLocalDescription(e,function(){},function(){})},function(){})}function h(){m.info("Successfully added ICE candidate")}const g=e(21),v=e(22),w=e(17);w.enable();const m=w("panama-client");var C=window.RTCPeerConnection||window.mozRTCPeerConnection||window.webkitRTCPeerConnection,S=window.RTCSessionDescription||window.mozRTCSessionDescription||window.webkitRTCSessionDescription,y=window.RTCIceCandidate||window.mozRTCIceCandidate||window.webkitRTCIceCandidate,E=15e3,T=3e5;i.prototype.handleError=function(){},i.prototype.getTimingEvents=function(){return this.timingEvents},i.prototype.addTimingEvent=function(e,n){var t={name:"t_"+e,timing:n};this.timingEvents.push(t)},i.prototype.open=function(){var e=this;this.connectionTimeout=setTimeout(function(){e.close()},E),this.estConnectionStart=performance.now(),setTimeout(function(){m.debug("v8Lag is : "+(performance.now()-e.estConnectionStart)),e.addTimingEvent("v8Lag",performance.now()-e.estConnectionStart)},1),o.call(this),r.call(this)},i.prototype.send=function(e){m.info("sending message",e),this.dataChannel.send(e)},i.prototype.request=function(e,n){var t=v.buildRequest(e),i=v.buildTerminator(t.id);this.requests[t.id]=n,this.send(JSON.stringify(t)),this.send(JSON.stringify(i))},i.prototype.close=function(){this.dataChannel&&(this.dataChannel.close(),this.dataChannel=null),this.peerConnection&&"closed"!==this.peerConnection.signalingState&&(console.log("Closed PC"),this.peerConnection.close()),this.stunGunPeerConnection&&"closed"!==this.stunGunPeerConnection.signalingState&&(console.log("Closed Stungun PC"),this.stunGunPeerConnection.close()),this.turnSignalPeerConnection&&"closed"!==this.turnSignalPeerConnection.signalingState&&(console.log("Closed Turnsignal PC"),this.turnSignalPeerConnection.close())},i.prototype.on=function(e,n){e in this.eventListeners&&this.eventListeners[e].push(n)},i.prototype.triggerEvent=function(e){if(e in this.eventListeners){var n=Array.prototype.slice.call(arguments,1);this.eventListeners[e].forEach(function(e){e.apply(this,n)})}},i.prototype.setLogLevel=function(e){w.suggest.clear().deny("panama-client",e)},i.prototype.checkCandidateIpLeak=function(e){if(!g.isIPv6(e)&&e.indexOf("typ host")!==-1){var n=g.extractCandidateIp(e);n&&(this.ips[n]=!0,Object.keys(this.ips).length>=2&&(m.info("Multiple private IPs detected. Closing the connection."),this.close()))}},window.PanamaClient=i,n.exports=i},{17:17,21:21,22:22}],9:[function(e,n,t){function i(){this.enabled=!0,this.defaultResult=!0,this.clear()}function o(e,n){return e.n.test?e.n.test(n):e.n==n}var r=e(11),a={debug:1,info:2,warn:3,error:4};r.mixin(i),i.prototype.allow=function(e,n){return this._white.push({n:e,l:a[n]}),this},i.prototype.deny=function(e,n){return this._black.push({n:e,l:a[n]}),this},i.prototype.clear=function(){return this._white=[],this._black=[],this},i.prototype.test=function(e,n){var t,i=Math.max(this._white.length,this._black.length);for(t=0;t<i;t++){if(this._white[t]&&o(this._white[t],e)&&a[n]>=this._white[t].l)return!0;if(this._black[t]&&o(this._black[t],e)&&a[n]<this._black[t].l)return!1}return this.defaultResult},i.prototype.write=function(e,n,t){if(!this.enabled||this.test(e,n))return this.emit("item",e,n,t)},n.exports=i},{11:11}],10:[function(e,n,t){var i=e(11),o=e(9),r=new i,a=Array.prototype.slice;t=n.exports=function(e){var n=function(){return r.write(e,void 0,a.call(arguments)),n};return n.debug=function(){return r.write(e,"debug",a.call(arguments)),n},n.info=function(){return r.write(e,"info",a.call(arguments)),n},n.warn=function(){return r.write(e,"warn",a.call(arguments)),n},n.error=function(){return r.write(e,"error",a.call(arguments)),n},n.log=n.debug,n.suggest=t.suggest,n.format=r.format,n},t.defaultBackend=t.defaultFormatter=null,t.pipe=function(e){return r.pipe(e)},t.end=t.unpipe=t.disable=function(e){return r.unpipe(e)},t.Transform=i,t.Filter=o,t.suggest=new o,t.enable=function(){return t.defaultFormatter?r.pipe(t.suggest).pipe(t.defaultFormatter).pipe(t.defaultBackend):r.pipe(t.suggest).pipe(t.defaultBackend)}},{11:11,9:9}],11:[function(e,n,t){function i(){}var o=e(20);o.mixin(i),i.prototype.write=function(e,n,t){this.emit("item",e,n,t)},i.prototype.end=function(){this.emit("end"),this.removeAllListeners()},i.prototype.pipe=function(e){function n(){e.write.apply(e,Array.prototype.slice.call(arguments))}function t(){!e._isStdio&&e.end()}var i=this;return i.emit("unpipe",e),e.emit("pipe",i),i.on("item",n),i.on("end",t),i.when("unpipe",function(o){var r=o===e||"undefined"==typeof o;return r&&(i.removeListener("item",n),i.removeListener("end",t),e.emit("unpipe")),r}),e},i.prototype.unpipe=function(e){return this.emit("unpipe",e),this},i.prototype.format=function(e){throw new Error(["Warning: .format() is deprecated in Minilog v2! Use .pipe() instead. For example:","var Minilog = require('minilog');","Minilog","  .pipe(Minilog.backends.console.formatClean)","  .pipe(Minilog.backends.console);"].join("\n"))},i.mixin=function(e){var n,t=i.prototype;for(n in t)t.hasOwnProperty(n)&&(e.prototype[n]=t[n])},n.exports=i},{20:20}],12:[function(e,n,t){var i=e(11),o=[],r=new i;r.write=function(e,n,t){o.push([e,n,t])},r.get=function(){return o},r.empty=function(){o=[]},n.exports=r},{11:11}],13:[function(e,n,t){var i=e(11),o=/\n+$/,r=new i;r.write=function(e,n,t){var i=t.length-1;if("undefined"!=typeof console&&console.log){if(console.log.apply)return console.log.apply(console,[e,n].concat(t));if(JSON&&JSON.stringify){t[i]&&"string"==typeof t[i]&&(t[i]=t[i].replace(o,""));try{for(i=0;i<t.length;i++)t[i]=JSON.stringify(t[i])}catch(r){}console.log(t.join(" "))}}},r.formatters=["color","minilog"],r.color=e(14),r.minilog=e(15),n.exports=r},{11:11,14:14,15:15}],14:[function(e,n,t){var i=e(11),o=e(16),r={debug:["cyan"],info:["purple"],warn:["yellow",!0],error:["red",!0]},a=new i;a.write=function(e,n,t){var i=console.log;console[n]&&console[n].apply&&(i=console[n],i.apply(console,["%c"+e+" %c"+n,o("gray"),o.apply(o,r[n])].concat(t)))},a.pipe=function(){},n.exports=a},{11:11,16:16}],15:[function(e,n,t){var i=e(11),o=e(16),r={debug:["gray"],info:["purple"],warn:["yellow",!0],error:["red",!0]},a=new i;a.write=function(e,n,t){var i=console.log;"debug"!=n&&console[n]&&(i=console[n]);var a=0;if("info"!=n){for(;a<t.length&&"string"==typeof t[a];a++);i.apply(console,["%c"+e+" "+t.slice(0,a).join(" "),o.apply(o,r[n])].concat(t.slice(a)))}else i.apply(console,["%c"+e,o.apply(o,r[n])].concat(t))},a.pipe=function(){},n.exports=a},{11:11,16:16}],16:[function(e,n,t){function i(e,n){return n?"color: #fff; background: "+o[e]+";":"color: "+o[e]+";"}var o={black:"#000",red:"#c23621",green:"#25bc26",yellow:"#bbbb00",blue:"#492ee1",magenta:"#d338d3",cyan:"#33bbc8",gray:"#808080",purple:"#708"};n.exports=i},{}],17:[function(e,n,t){var i=e(10),o=i.enable,r=i.disable,a="undefined"!=typeof navigator&&/chrome/i.test(navigator.userAgent),s=e(13);if(i.defaultBackend=a?s.minilog:s,"undefined"!=typeof window){try{i.enable(JSON.parse(window.localStorage.minilogSettings))}catch(c){}if(window.location&&window.location.search){var l=RegExp("[?&]minilog=([^&]*)").exec(window.location.search);l&&i.enable(decodeURIComponent(l[1]))}}i.enable=function(){o.call(i,!0);try{window.localStorage.minilogSettings=JSON.stringify(!0)}catch(e){}return this},i.disable=function(){r.call(i);try{delete window.localStorage.minilogSettings}catch(e){}return this},t=n.exports=i,t.backends={array:e(12),browser:i.defaultBackend,localStorage:e(19),jQuery:e(18)}},{10:10,12:12,13:13,18:18,19:19}],18:[function(e,n,t){function i(e){this.url=e.url||"",this.cache=[],this.timer=null,this.interval=e.interval||3e4,this.enabled=!0,this.jQuery=window.jQuery,this.extras={}}var o=e(11),r=(new Date).valueOf().toString(36);o.mixin(i),i.prototype.write=function(e,n,t){this.timer||this.init(),this.cache.push([e,n].concat(t))},i.prototype.init=function(){if(this.enabled&&this.jQuery){var e=this;this.timer=setTimeout(function(){var n,t,i=[],o=e.url;if(0==e.cache.length)return e.init();for(n=0;n<e.cache.length;n++)try{JSON.stringify(e.cache[n]),i.push(e.cache[n])}catch(a){}e.jQuery.isEmptyObject(e.extras)?(t=JSON.stringify({logs:i}),o=e.url+"?client_id="+r):t=JSON.stringify(e.jQuery.extend({logs:i},e.extras)),e.jQuery.ajax(o,{type:"POST",cache:!1,processData:!1,data:t,contentType:"application/json",timeout:1e4}).success(function(n,t,i){n.interval&&(e.interval=Math.max(1e3,n.interval))}).error(function(){e.interval=3e4}).always(function(){e.init()}),e.cache=[]},this.interval)}},i.prototype.end=function(){},i.jQueryWait=function(e){return"undefined"!=typeof window&&(window.jQuery||window.$)?e(window.jQuery||window.$):void("undefined"!=typeof window&&setTimeout(function(){i.jQueryWait(e)},200))},n.exports=i},{11:11}],19:[function(e,n,t){var i=e(11),o=!1,r=new i;r.write=function(e,n,t){if("undefined"!=typeof window&&"undefined"!=typeof JSON&&JSON.stringify&&JSON.parse)try{o||(o=window.localStorage.minilog?JSON.parse(window.localStorage.minilog):[]),o.push([(new Date).toString(),e,n,t]),window.localStorage.minilog=JSON.stringify(o)}catch(i){}},n.exports=r},{11:11}],20:[function(e,n,t){function i(){this._events={}}i.prototype={on:function(e,n){this._events||(this._events={});var t=this._events;return(t[e]||(t[e]=[])).push(n),this},removeListener:function(e,n){var t,i=this._events[e]||[];for(t=i.length-1;t>=0&&i[t];t--)i[t]!==n&&i[t].cb!==n||i.splice(t,1)},removeAllListeners:function(e){e?this._events[e]&&(this._events[e]=[]):this._events={}},emit:function(e){this._events||(this._events={});var n,t=Array.prototype.slice.call(arguments,1),i=this._events[e]||[];for(n=i.length-1;n>=0&&i[n];n--)i[n].apply(this,t);return this},when:function(e,n){return this.once(e,n,!0)},once:function(e,n,t){function i(){t||this.removeListener(e,i),n.apply(this,arguments)&&t&&this.removeListener(e,i)}return n?(i.cb=n,this.on(e,i),this):this}},i.mixin=function(e){var n,t=i.prototype;for(n in t)t.hasOwnProperty(n)&&(e.prototype[n]=t[n])},n.exports=i},{}],21:[function(e,n,t){n.exports.getPortNoFromCandidate=function(e){var n=/([0-9]+) ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}) ([0-9]+)/.exec(e)||[];return n[3]||null},n.exports.isServerReflexive=function(e){return e.indexOf("srflx")!==-1},n.exports.isIPv6=function(e){return/([0-9a-fA-F]){1,4}(:([0-9a-fA-F]){1,4}){7}/.test(e)},n.exports.extractCandidateIp=function(e){var n=/[0-9]+ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}) [0-9]+/.exec(e);return n&&n.length>1?n[1]:null},n.exports.matchNodePeerIpAndPort=function(e){return e.match(/candidate:[0-9]+ [0-9]+ udp [0-9]+ ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}) ([0-9]*)/i)}},{}],22:[function(e,n,t){function i(){return Math.floor(99999*Math.random()+1)}function o(e){var n=i().toString(),t={id:n,version:l,http:e};return t}function r(e){var n={id:e,version:l,http:"TERMINATOR"};return n}function a(e){var n=null;try{n=JSON.parse(d+e)}catch(t){d+=e}return n&&(d=""),n}function s(e){if(!e.http||!e.id)throw new Error("Fields `id` and `http` are mandatory.");var n=e.id;if("TERMINATOR"===e.http){if(!u[n])return null;var t=u[n];return u[n]=null,t}return u[n]?u[n].http.body+=e.http.body:u[n]=e,null}function c(e){var n=a(e);if(!n)return null;var t=s(n);return t}var l="1.0",d="",u={};n.exports={buildRequest:o,buildTerminator:r,handleChunk:c,accumulateJSON:a,accumulateResponse:s}},{}],23:[function(e,n,t){function i(e){"performance"in e||(e.performance={});var n=e.performance;e.performance.now=n.now||n.mozNow||n.msNow||n.oNow||n.webkitNow||Date.now||function(){return(new Date).getTime()}}i(self)},{}]},{},[1]);
+', 
+', 
+    function trackSemVisit(trackingType) {
+        var trackingPixel = document.createElement("img");
+        trackingPixel.src = "/sem/sp.gif?type=" + trackingType + "&ocode=" + sem_ocode + "&ldid=" + sem_ldid;
+        document.body.appendChild(trackingPixel);
+    }
+    if ((typeof sem_pageview !== 'undefined') && (sem_pageview == true)) {
+        trackSemVisit('pageview');
+    }
+', u"
+    var _sf_async_config = _sf_async_config || {};
+    _sf_async_config.sections='Term';
+    _sf_async_config.authors='Investopedia';
+    (function(){
+        function loadChartbeat() {
+            window._sf_endpt=(new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+                        document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() { oldonload(); loadChartbeat(); };
+    })();
+", 
+']

@@ -1,0 +1,1115 @@
+[
+<!--
+// always-include-ie.js  Copyright 1998-2005 PaperThin, Inc. All rights reserved.
+bName = navigator.appName;
+bVer = parseInt(navigator.appVersion);
+var bCanRollover=0
+if (bName == "Netscape")
+{
+if(bVer >= 3)
+bCanRollover=1;
+}
+else if (bName == "Microsoft Internet Explorer")
+{
+if(bVer >= 4)
+bCanRollover=1;
+}
+function ImageSet(imgID,newTarget)
+{
+if (bCanRollover)
+document[imgID].src=newTarget;
+}
+function clearStatus()
+{
+window.status = "";
+}
+function setStatbar(statbar)
+{
+var strStatbar=unescape(statbar);
+window.status=strStatbar;
+}
+function onLoadComplete()
+{
+if( menus_included == 1 )
+document.onmouseover = document_mouseover;	// defined in menu_ie.js
+}
+function HandleLink(parentID,link,displaylink)
+{
+// links are in one of the following formats:
+// 		cpe_60_0,CP___PAGEID=100
+// 		CPNEWWIN:WindowName^params@CP___
+// 			CPNEWWIN:child^top=110:left=130:ww=140:hh=150:tb=1:loc=1:dir=0:stat=1:mb=1:sb=1:rs=1@CP___PAGEID=3811,Adv-Search-2,1
+// displaylink is the server relative URL or fully qualified URL
+windowname = "";
+windowparams = "";
+// "CPNEWWIN:" & NewWindowName & "^" & params & "@" & linkStruct.LinkURL;
+pos = link.indexOf("CPNEWWIN:");
+if (pos != -1)
+{
+pos1 = link.indexOf ("^");
+windowname = link.substring (pos+9, pos1);
+pos2 = link.indexOf ("@");
+windowparams = link.substring (pos1 + 1, pos2);
+link = link.substring (pos2 + 1, link.length);
+}
+if( displaylink && displaylink != "" )
+{
+if (windowname == "")
+window.location = displaylink;
+else
+{
+windowparams = FormatWindowParams(windowparams);
+window.open (displaylink, windowname, windowparams);
+}
+}
+else
+{
+targetLink = link;
+if (link.indexOf ("CP___") != -1)
+{
+httpPos = -1;
+commaPos = link.indexOf(",");
+if (commaPos != -1)
+{
+targetUrl = link.substr(commaPos + 1);
+if (targetUrl.indexOf("://") != -1 || targetUrl.indexOf("/") == 0)
+{
+httpPos = commaPos + 1;
+}
+}
+if (httpPos != -1)
+{
+targetLink = link.substr(httpPos);
+commaPos = targetLink.indexOf(",");
+if (commaPos != -1)
+targetLink = targetLink.substr(0, commaPos);
+}
+else
+targetLink = jsDlgLoader + "?csModule=utilities/handle-link&thelink=" + link;
+if (windowname == "")
+window.location = targetLink;
+else
+{
+windowparams = FormatWindowParams(windowparams);
+window.open (targetLink, windowname, windowparams);
+}
+}
+else
+{
+//commaPos = link.indexOf(",");
+//if (commaPos != -1)
+//	link = link.substr(0, commaPos);
+if (windowname == "")
+window.location = link;
+else
+{
+windowparams = FormatWindowParams(windowparams);
+window.open (link, windowname, windowparams);
+}
+}
+}
+}
+function doWindowOpen(href,name,params)
+{
+if (params != '')
+window.open (href, name, params);
+else
+window.open (href, name);
+}
+// 	CPNEWWIN:child^top=110:left=130:ww=140:hh=150:tb=1:loc=1:dir=0:stat=1:mb=1:sb=1:rs=1@CP___PAGEID=3811,Adv-Search-2,1
+function FormatWindowParams(windowparams)
+{
+if( windowparams.indexOf(":loc=") != -1 || windowparams.indexOf(":ww=") != -1 || windowparams.indexOf(":hh=") != -1 ||
+windowparams.indexOf(":left=") != -1 || windowparams.indexOf(":top=") != -1 )
+{
+windowparams = substringReplace(windowparams,':left=',',left=');
+windowparams = substringReplace(windowparams,'left=','left=');
+windowparams = substringReplace(windowparams,':ww=',',width=');
+windowparams = substringReplace(windowparams,'ww=','width=');
+windowparams = substringReplace(windowparams,':hh=',',height=');
+windowparams = substringReplace(windowparams,'hh=','height=');
+windowparams = substringReplace(windowparams,':loc=',',location=');
+windowparams = substringReplace(windowparams,'loc=','location=');
+windowparams = substringReplace(windowparams,':dir=',',directories=');
+windowparams = substringReplace(windowparams,'dir=','directories=');
+windowparams = substringReplace(windowparams,':tb=',',toolbar=');
+windowparams = substringReplace(windowparams,'tb=','toolbar=');
+windowparams = substringReplace(windowparams,':stat=',',status=');
+windowparams = substringReplace(windowparams,':mb=',',menubar=');
+windowparams = substringReplace(windowparams,':sb=',',scrollbars=');
+windowparams = substringReplace(windowparams,':rs=',',resizable=');
+}
+return windowparams;
+}
+// -->
+', 
+', 
+', 
+', 
+', 
+', Skip to global NPS navigation', 
+', Skip to main content', 
+', Skip to footer', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', National Park Service Logo', 
+', National Park Service', 
+', 
+', 
+', 
+', 
+', 
+',  ', Search', 
+', 
+', 
+', 
+', 
+', This Site', 
+', All NPS', 
+', 
+', 
+', 
+<div class="GlobalSearch-suggestions">
+<ul>
+{{ _.each(suggestions, function(suggestion) { }}
+<li><a href="{{{ url }}}{{{ suggestion }}}">{{{ suggestion }}}</a></li>
+{{ }) }}
+</ul>
+</div>
+', 
+', 
+', 
+', 
+',  Search
+', 
+', 
+', 
+', 
+', 
+', 
+', Open ', 
+Menu
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+div.ColumnMain #npsNav h2 { display:none }â\u20ac\u2039
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+jQuery(document).ready(function() {
+setTimeout( function() {
+NPS.display.showAdminTools( 0 );
+} ,10);
+});
+', 
+', 
+', 
+#modal-contact-us .modal-body { padding-top:0px; }
+.modal-header {border:none;}
+', 
+', 
+', 
+', 
+', 
+', ×', 
+', Contact Us', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var siteCodeArr = "ANIA,BELA,DENA,GAAR,LACL,WRST,YUCH".split(",");
+for (i = 0; i < siteCodeArr.length; i++) {
+setTimeout(gasFunction(siteCodeArr[i]), 1000);
+function gasFunction(x) {
+gas('send', 'event', 'Shared Content', x, window.location.href, 0, true);
+}
+}
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Series: Alaska Park Science - Volume 13 Issue 2: Mineral and Energy Development', 
+', 
+', 
+', Land Ownership in National Park System Units in Alaska and Possibilities for Mining and Other Developments', 
+', 
+', Aniakchak National Monument & Preserve', , ', Bering Land Bridge National Preserve', , ', Denali National Park & Preserve', , ', Gates Of The Arctic National Park & Preserve', , ', Lake Clark National Park & Preserve', , ', Wrangell - St Elias National Park & Preserve', , ', Yukon - Charley Rivers National Preserve', 
+', 
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', Figure 1. Gold Hill.  Unpatented mining claims in Wrangell-St. Elias National Park and Preserve. ', NPS Photo', 
+', 
+', There are over 54.6 million acres (22.1 million hectares) within the exterior boundaries of National Park System units in Alaska, which is 65 percent of the entire National Park System. Although most of those lands are in federal ownership and are managed by the National Park Service (NPS), there are over two million acres (809,371 hectares) of non-federally owned lands within those units. Passage of the Alaska National Interest Lands Conservation Act (ANILCA) in 1980 created huge new NPS units, greatly expanded three existing units, and included within their boundaries large amounts of non-federal lands. These non-federal lands are in private, state, borough, or municipal ownership. The existence of these non-federal lands creates the possibility of mining and other developments within the boundaries of NPS units in Alaska. ',  ',  When NPS units are created or expanded, whether by legislation or executive action, they are made subject to any valid rights that exist at the time, and they are also generally closed to all forms of appropriation under the land laws of the United States. So, while no new non-federal lands or land interests can be created within the exterior boundaries of the new or expanded units, whatever non-federal lands existed at their creation or expansion continue to exist. This is the case with all the NPS units in Alaska. ', 
+', Native Corporation Lands', 
+', By far the largest amount of non-federal lands within NPS units in Alaska are lands conveyed under the Alaska Native Claims Settlement Act of 1971 (ANCSA). ANCSA preceded ANILCA by nearly 10 years, so that when the new and expanded NPS units were established by ANILCA in 1980, they were made subject to prior land conveyances to ANCSA Native corporations, and to valid selections by those corporations. Lands conveyed to ANCSA Native corporations are private lands, owned by the corporations. Presently there are 1,462,320 acres (591,779 hectares) conveyed to ANCSA corporations in NPS units, where ANCSA corporations own both the surface and subsurface estates. On most of these lands an ANCSA village corporation owns the surface estate, and the respective ANCSA regional corporation owns the underlying subsurface estate. However, in some situations the regional corporation owns both the surface and the subsurface estates. In addition to those lands, ANCSA regional corporations own 269,142 acres (108,917 hectares) of subsurface estate only, where the overlying surface estate is federally owned and managed by the NPS. ',  ',  Ownership of the surface or subsurface estates includes the right to use and develop these lands and the resources they contain. The surface estate includes the vegetation, and the rights to use and develop the surface. The subsurface estate includes all resources below the surface, including oil and gas, metalliferous and other minerals, and sand and gravel. In many situations an ANCSA village corporation selected the surface estate, and the regional corporation simply received the subsurface estate beneath the lands conveyed to the village corporation, without regard for mineral potential. But in other situations ANCSA regional corporations selected lands for their potential for mineral development, and have been conveyed lands with potential for oil and gas or other mineral development, such as within Aniakchak National Monument and Preserve, Gates of the Arctic National Park and Preserve, Lake Clark National Park and Preserve, Wrangell-St. Elias National Park and Preserve, and Bering Land Bridge National Preserve. A small percentage of lands conveyed to ANCSA regional corporations have restrictions on their use and development, to protect cemetery and historic sites (see ANCSA section 14(h)(1)). Although the ANCSA land conveyance process is now nearly complete, there remain 240,200 acres (97,205 hectares) of ANCSA land selections within NPS units in Alaska, and it is estimated that approximately 180,000 more acres (72,843 hectares) will be conveyed to ANCSA corporations from within those selections. ', 
+', 
+', 
+', 
+', 
+', Figure 2. Dan Creek.  Patented mining claims in Wrangell-St. Elias National Park and Preserve. ', NPS Photo', 
+', 
+', Land exchanges and purchases that have occurred in NPS units since 1980 have resulted in the conveyance of some ANCSA corporation surface and subsurface rights to the United States, for management by the NPS. For example, the purchase of a 10,000-acre (4,046-hectare) conservation easement around Tazimina Lake in Lake Clark National Park and Preserve conveyed most of the development rights of the ANCSA village corporation (surface) and regional corporation (subsurface) to the United States, effectively prohibiting most developments, including mining, on those lands. Another example is the Anaktuvuk Pass land exchange in Gates of the Arctic National Park and Preserve, which resulted in the conveyance of most of the development rights of the ANCSA village (surface) and regional corporation (subsurface) to the United States, for management by the NPS. Such purchases and exchanges of specific and limited interests in land (for example, the right to construct buildings or the right to extract minerals) require careful review and understanding of the rights owned by both the ANCSA corporations and by the United States, and careful management by the NPS. ',  ', 
+', State of Alaska Lands', 
+', Lands owned by the State of Alaska are the second largest category of non-federal lands in NPS units. The current estimate of state lands within NPS units in Alaska is 355,331 acres (143,797 hectares). These include uplands owned by the State prior to the creation of the NPS units and valid state selections that have been conveyed to the State after the creations. A sub-category of state lands is lands owned by the University of Alaska, whose purpose is to generate income for the University. The State of Alaska also owns road rights-of-way within NPS units, such as the rights-of-way for the McCarthy and Nebesna roads in Wrangell-St. Elias National Park and Preserve, and the George Parks Highway in Denali National Park and Preserve, as well as rights-of-way for smaller roads in several NPS units. The State and the University of Alaska have programs to sell some of their lands, so state lands can become private lands. ',  ',  The State of Alaska generally owns the beds of navigable waters, such as the Alagnak River, Kukaklek Lake, Nonvianuk Lake, Lake Clark, and the Yukon River. The State also generally owns tidelands. An exception is the tidelands and submerged lands within the offshore boundary of the pre-ANILCA portion of Glacier Bay National Park, which the U.S. Supreme Court determined in 2005 to be owned by the United States and managed as part of that park, because those tidelands and submerged lands were within a pre-statehood withdrawal that precluded them being conveyed to the state. ',  ',  To date there have been few navigability determinations in federal courts. As additional waters are determined navigable, there will be additional documented acres of state lands. NPS regulations apply to all waters and submerged lands within NPS unit boundaries (36 CFR 1.2(a)(3)). ',  ',  The state has a process to classify its lands, and to close its lands to the creation of new state mining claims and other uses, as was done on Moose Creek in the Kantishna area of Denali National Park in the 1990s. (Note: whether Moose Creek in Kantishna is navigable has not been formally adjudicated, and therefore the ownership of the bed of Moose Creek has not been conclusively determined.) ',  ', 
+', Municipal, City, and Borough Lands', 
+', There are 1,535 acres (621 hectares) of such lands in NPS units in Alaska. Most of these lands are within Klondike Gold Rush National Historical Park. The City and Borough of Sitka owns some of the tidelands within the exterior boundary of Sitka National Historical Park. The Lake and Peninsula Borough holds some road rights-of-way in Port Alsworth in Lake Clark National Park and Preserve. ',  ', 
+', Mining Claims', 
+', Federal mining claims are created under the authority of the Mining Law of 1872. Although all the federal lands within the NPS units are now closed to staking mining claims, federal mining claims existed on some of the federal lands that were included in the new and expanded NPS units. There are currently 5,669 acres (2,294 hectares) of patented mining claims and 3,992 acres (1,615 hectares) of unpatented mining claims in NPS units in Alaska. Valid unpatented claims give the claimant only the right to mine, not the right to use those lands for other purposes. Patented claims began as unpatented claims but have had all the rights to the land conveyed by United States patent to the claimant. Patented mining claims can be used for any legal purpose, like other privately owned lands. They can be mined; developed for residential, recreational, or industrial use; subdivided and sold; etc. However, mining on both patented and unpatented federal claims within an NPS unit must comply with the provisions of the Mining in the Parks Act of 1976 and its implementing regulations (36 CFR 9A). Under the 9A regulations, a \u201cmining plan of operation\u201d must be prepared by the claimant and submitted to the NPS for review and approval. Mining plans of operation have been approved for claims within NPS units in Alaska. There is currently one approved mining plan, for a block of patented mining claims in Wrangell-St. Elias National Park and Preserve. If the NPS cannot approve a plan, mining cannot occur, and the claims may be \u201ctaken\u201d by the United States and the claimants owed \u201cjust compensation\u201d under the Fifth Amendment. The 9A regulations apply only to federal mining claims, not to ANCSA corporation lands, other private lands, or state or city lands. ',  ',  NPS environmental impact statements and Records of Decision for Denali National Park and Preserve, Wrangell-St. Elias National Park and Preserve, and Yukon-Charley Rivers National Preserve, completed in 1991, recommended that all mining claims in those units be purchased by the NPS, to avoid unacceptable impacts to resources. Thousands of acres of patented and unpatented claims in the Kantishna area of Denali were purchased by the NPS in the 1990s, and few remain there today. Thousands of acres of patented mining claims have been purchased in Wrangell-St. Elias, but 438 acres (177 hectares) of unpatented claims and 5,257 acres (2,127 hectares) of patented claims remain. There are 3,400 acres (1,375 hectares) of unpatented mining claims and 233 acres (94 hectares) of patented claims in Yukon-Charley Rivers; all the unpatented claims on Coal Creek were donated to the NPS, but no claims have yet been purchased in Yukon-Charley Rivers. The last mining claims in Bering Land Bridge National Preserve were purchased by the NPS in 2009. ',  ', 
+', Native Allotments', 
+', The Alaska Native Allotment Act of 1906 authorized the conveyance of up to 160 acres (64 hectares) of non-mineral lands to individual Alaska Natives, for lands they used as residences, seasonal camps, hunting, fishing, gathering, or other purposes. The Act was repealed in 1971, after which no new applications for Native allotments could be accepted. An exception was made for Native veterans of the Vietnam War, who might have missed the opportunity to apply for an allotment between 1969 and 1971, due to their military service. The Alaska Native Veteran Allotment Act of 1998 allowed for the conveyance of Native allotments to qualifying Alaska Native veterans. Because the Native Allotment Act of 1906 allowed for the conveyance of only \u201cnon-mineral\u201d lands, if the lands applied for were determined by the Bureau of Land Management to contain valuable minerals, either the mineral rights were reserved to the United States in the conveyance document or those lands were not conveyed to the applicant. There are approximately 52,000 acres (21,043 hectares) of Native allotments in NPS units in Alaska. Nearly all of these lands have now been conveyed, although a few are still in pending or approved status. Native allotments are privately owned and are private property. However, most allotments are in a restricted status, whereby the prior approval of the Secretary of the Interior, through the Bureau of Indian Affairs (BIA), must be obtained for any major change to occur in the status of the allotments, such as a lease, issuance of a right-of-way, or sale. BIA also provides counseling and other services to allotment owners. Native allotments can be developed, like any other private property, but mining development is unlikely because the lands should be non-mineral in character, and if there are minerals, they should have been reserved to the United States, not conveyed to the allotment owner. However, if any minerals, including sand and gravel, or oil and gas, were conveyed to the allotment owner, the owner would be able to legally extract them. ',  ', 
+', Other Small, Private Tracts', 
+', Other small, private tracts include homesteads (up to 160 acres (64 hectares)), home sites, trade and manufacturing sites, and mill sites (up to 5 acres (2 hectares) each). These would have been in private ownership, or validly selected, prior to the creation of the NPS unit. There are 19,127 acres (7,740 hectares) of such lands in NPS units in Alaska. These, too, are private lands, and can be developed for any legal purpose. They generally include all property rights\u2014surface, subsurface, minerals, etc. ',  ', 
+', 
+', 
+', 
+', 
+', Figure 3. Former placer gold workings, Humbolt Creek, Bering Land Bridge National Preserve. ', NPS Photo', 
+', 
+', Access to Non-federal Lands across NPS Units in Alaska', 
+', Section 1110(b) of ANILCA provides that the owners of non-federal lands that lie within NPS units in Alaska \u201cshall be given by the Secretary such rights as may be necessary to assure adequate and feasible access\u201d to their lands, and that \u201cSuch rights shall be subject to reasonable regulations . . . to protect the natural and other values.\u201d Implementing regulations (43 CFR 36) were put in place in 1986. Consequently, for example, if the owner of non-federal land in an NPS unit in Alaska applies for a right-of-way for a road or an electrical power line across parklands, and the NPS determines that a road or power line is needed to support the owner\u2019s use of that non-federal land, then the NPS is required to issue a right-of-way permit for the road or power line, even if there are unavoidable impacts to park resources, and even within designated wilderness. To date, over 30 such authorizations have been issued in NPS units in Alaska, although most have been for existing, not new, off-road-vehicle trails, roads, airstrips, or water lines. As non-federal lands in NPS units are developed in the future, for whatever reason, including mineral or energy development, the 1110(b) provision for access has potential for significant changes and impacts to the NPS units. Careful management is needed to fulfill the Congressional mandate to allow needed access to non-federal lands, but also to protect park resources. ',  ',  Other ANILCA provisions address access to non-federal lands for mineral development. ANILCA section 201(4)(b-e) (and 43 CFR 36.13) requires the issuance of a right-of-way across the western (Kobuk River) unit of Gates of the Arctic National Park and Preserve, if an application is filed for access to the Ambler Mining District. It is anticipated that an application for such access will be filed in 2014 by the Alaska Industrial Development and Export Authority (AIDEA). AIDEA is planning the construction of an industrial road to access several large copper deposits. The new road would be over 200 miles (321 kilometers) long, of which 12 to 20 miles (19 to 32 kilometers) would be within the preserve. ANILCA sections 11431(j) and 1419(d) respectively, and 43 CFR 36.13, address oil and gas pipelines in the northern portion of Gates of the Arctic, and access through Yukon-Charley Rivers parks for oil and gas operations on ANCSA corporation lands along the unit\u2019s northern boundary; no such pipelines or access have yet been proposed. ',  ', 
+', NPS Regulation of Non-federal Oil and Gas Development', 
+', There are no oil or gas operations currently in any NPS unit in Alaska, but there is oil and gas potential in some units. The existing NPS regulations on oil and gas operations (36 CFR 9B) apply to all NPS units, including those in Alaska. Under the current regulations, if an oil or gas operation would occur entirely on non-federal lands (such as ANCSA Native corporation lands where the ANCSA corporation owns both the surface and subsurface estates) within an NPS unit, and no federally owned or controlled lands or waters needed to be crossed to get to that operation, the NPS would have no regulatory control on that operation. But if federally owned or controlled lands or waters had to be crossed to access the oil or gas operation on the non-federal lands, then the 9B regulations would apply and the operator would need to submit a Plan of Operations to the NPS for review and approval. Also, if the oil or gas operation were proposed to occur on ANCSA corporation owned subsurface lands, where the United States owns the surface estate (such as in Aniakchak National Monument and Preserve), the 9B regulations would apply and the operator would need to submit a Plan of Operations to the NPS for review and approval. The 9B regulations have been proposed for revision to provide greater protection to park resources and uses. ',  ', 
+', Getting Land Status Information', 
+', The Land Status Web Map is a great tool for NPS staff in the Alaska Region to view land ownership within NPS units in Alaska (Venator et al. in this issue). ',  ',  The Land Status Web Map displays NPS land status data in the NPS units in Alaska without the use of GIS software. Users can pan around or zoom in and out of the map to quickly view land ownership for a particular area, click on a tract to get more detailed information, run searches to quickly locate a feature, or create a map and export it for saving and printing. This system was designed to be simple and easy to use so that NPS employees around the Alaska Region can quickly find answers to land status questions. ',  ',  Another valuable resource for lands information in any NPS unit, and available to any NPS employee, is LandsNet, Land Resources Division. On the site you can get the most recent official acreage listings for each NPS unit and region, copies of deeds, the establishing legislation for each unit, published legal descriptions of the unit\u2019s boundaries, and much more. ',  ',  The Land Resources team of the Alaska Region has responsibility for land status mapping and recordkeeping, as well as a variety of other land management and realty tasks and issues. Contact the team with any questions or to get assistance in these matters.', 
+', 
+', 
+', 
+', 
+', 
+', Series: Alaska Park Science - Volume 13 Issue 2: Mineral and Energy Development', 
+', 
+', Next Chapter: Tracking Mineral and Energy Development  Projects near Alaska Parks through Web Mapping',  ', Previous Chapter: Fire v Ice: Revolutionizing the Thawing Process at Coal Creek', 
+', Series Home', 
+', 
+', 
+',  ',  ', 
+', 
+', Tags: ',  ', Mining',   ', mineral',   ', Development',   ', APS',   ', alaska park science',   ', ANILCA',   ', ANCSA',   ', DENA',   ', BELA',   ', yuch',   ', WRST',   ', ania',   ', GAAR',   ', lacl',   ', Land',   ', ownership',   ', Inholding', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Related Articles', 
+', 
+', 
+', 
+', 
+', 
+', Go!', 
+', 
+', 
+', 
+', 
+', 
+', Tracking Mineral and Energy Development  Projects near Alaska Parks through Web Mapping', 
+', 
+', 
+', u"A Dena'ina Perspective: Respecting E\u0142nena (Land)", 
+', 
+', 
+', Fire Speaks the Land', 
+', 
+', 
+', 
+', 
+', Related People', 
+', 
+', 
+', John B. Etheridge', 
+', 
+', 
+', George Roberts', 
+', 
+', 
+', Thomas Hariot', 
+', 
+', 
+', 
+', 
+', Related Places', 
+', 
+', 
+', Cape Nome Mining District Discovery Sites', 
+', 
+', 
+', Sea Kayaking in Wrangell \u2039 St Elias National Park and Preserve', 
+', 
+', 
+', View Park Historic District', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Search ', 
+', 
+', 
+', This Site', 
+', All NPS', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', National Park Service', 
+', U.S. Department of the Interior', 
+', 
+', 
+', 
+', 
+', National Park Service Logo', 
+', National Park Service Logo', 
+', 
+', 						', 
+', 
+', 
+', 
+', 
+', 
+', Accessibility', 
+', Privacy Policy', 
+', FOIA', 
+', Notices', 
+', Disclaimer', 
+', 
+', 
+', FAQ', 
+', No Fear Act', 
+', Contact Us', 
+', USA.gov', 
+', 
+', 
+', 
+', 
+', 
+', Facebook', 
+', Facebook', 
+', 
+', 
+', Facebook', 
+', 
+', 
+', 
+', 
+', 
+', Youtube', 
+', Youtube', 
+', 
+', 
+', Youtube', 
+', 
+', 
+', 
+', 
+', 
+', Twitter', 
+', Twitter', 
+', 
+', 
+', Twitter', 
+', 
+', 
+', 
+', 
+', 
+', Instagram', 
+', Instagram', 
+', 
+', 
+', Instagram', 
+', 
+', 
+', 
+', 
+', 
+', Flickr', 
+', Flickr', 
+', 
+', 
+', Flickr', 
+', 
+', 
+', 
+', 
+', 
+', iTunes', 
+', iTunes', 
+', 
+', 
+', iTunes', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+// Instructions: please embed this snippet directly into every page in your website template.
+// For optimal performance, this must be embedded directly into the template, not referenced
+// as an external file.
+// Answers Cloud Services Embed Script v1.02
+// DO NOT MODIFY BELOW THIS LINE *****************************************
+;(function (g) {
+var d = document, i, am = d.createElement('script'), h = d.head || d.getElementsByTagName("head")[0],
+aex = {
+"src": "//gateway.answerscloud.com/nps-gov/production/gateway.min.js",
+"type": "text/javascript",
+"async": "true",
+"data-vendor": "acs",
+"data-role": "gateway"
+};
+for (var attr in aex) { am.setAttribute(attr,aex[attr]); }
+h.appendChild(am);
+g['acsReady'] = function () {var aT = '__acsReady__', args = Array.prototype.slice.call(arguments, 0),k = setInterval(function () {if (typeof g[aT] === 'function') {clearInterval(k);for (i = 0; i < args.length; i++) {g[aT].call(g, function(fn) { return function() { setTimeout(fn, 1) };}(args[i]));}}}, 50);};
+})(window);
+// DO NOT MODIFY ABOVE THIS LINE *****************************************
+', 
+', 
+//<![CDATA[
+if (window.location.href.indexOf("www") > -1) {
+var aid = "nps.gov";
+var script = document.createElement('script');
+script.type = "text/javascript";
+script.src = "https://search.usa.gov/javascripts/stats.js";
+document.getElementsByTagName("head")[0].appendChild(script);
+}
+//]]>
+', 
+'][
+<!--
+// always-include-ie.js  Copyright 1998-2005 PaperThin, Inc. All rights reserved.
+bName = navigator.appName;
+bVer = parseInt(navigator.appVersion);
+var bCanRollover=0
+if (bName == "Netscape")
+{
+if(bVer >= 3)
+bCanRollover=1;
+}
+else if (bName == "Microsoft Internet Explorer")
+{
+if(bVer >= 4)
+bCanRollover=1;
+}
+function ImageSet(imgID,newTarget)
+{
+if (bCanRollover)
+document[imgID].src=newTarget;
+}
+function clearStatus()
+{
+window.status = "";
+}
+function setStatbar(statbar)
+{
+var strStatbar=unescape(statbar);
+window.status=strStatbar;
+}
+function onLoadComplete()
+{
+if( menus_included == 1 )
+document.onmouseover = document_mouseover;	// defined in menu_ie.js
+}
+function HandleLink(parentID,link,displaylink)
+{
+// links are in one of the following formats:
+// 		cpe_60_0,CP___PAGEID=100
+// 		CPNEWWIN:WindowName^params@CP___
+// 			CPNEWWIN:child^top=110:left=130:ww=140:hh=150:tb=1:loc=1:dir=0:stat=1:mb=1:sb=1:rs=1@CP___PAGEID=3811,Adv-Search-2,1
+// displaylink is the server relative URL or fully qualified URL
+windowname = "";
+windowparams = "";
+// "CPNEWWIN:" & NewWindowName & "^" & params & "@" & linkStruct.LinkURL;
+pos = link.indexOf("CPNEWWIN:");
+if (pos != -1)
+{
+pos1 = link.indexOf ("^");
+windowname = link.substring (pos+9, pos1);
+pos2 = link.indexOf ("@");
+windowparams = link.substring (pos1 + 1, pos2);
+link = link.substring (pos2 + 1, link.length);
+}
+if( displaylink && displaylink != "" )
+{
+if (windowname == "")
+window.location = displaylink;
+else
+{
+windowparams = FormatWindowParams(windowparams);
+window.open (displaylink, windowname, windowparams);
+}
+}
+else
+{
+targetLink = link;
+if (link.indexOf ("CP___") != -1)
+{
+httpPos = -1;
+commaPos = link.indexOf(",");
+if (commaPos != -1)
+{
+targetUrl = link.substr(commaPos + 1);
+if (targetUrl.indexOf("://") != -1 || targetUrl.indexOf("/") == 0)
+{
+httpPos = commaPos + 1;
+}
+}
+if (httpPos != -1)
+{
+targetLink = link.substr(httpPos);
+commaPos = targetLink.indexOf(",");
+if (commaPos != -1)
+targetLink = targetLink.substr(0, commaPos);
+}
+else
+targetLink = jsDlgLoader + "?csModule=utilities/handle-link&thelink=" + link;
+if (windowname == "")
+window.location = targetLink;
+else
+{
+windowparams = FormatWindowParams(windowparams);
+window.open (targetLink, windowname, windowparams);
+}
+}
+else
+{
+//commaPos = link.indexOf(",");
+//if (commaPos != -1)
+//	link = link.substr(0, commaPos);
+if (windowname == "")
+window.location = link;
+else
+{
+windowparams = FormatWindowParams(windowparams);
+window.open (link, windowname, windowparams);
+}
+}
+}
+}
+function doWindowOpen(href,name,params)
+{
+if (params != '')
+window.open (href, name, params);
+else
+window.open (href, name);
+}
+// 	CPNEWWIN:child^top=110:left=130:ww=140:hh=150:tb=1:loc=1:dir=0:stat=1:mb=1:sb=1:rs=1@CP___PAGEID=3811,Adv-Search-2,1
+function FormatWindowParams(windowparams)
+{
+if( windowparams.indexOf(":loc=") != -1 || windowparams.indexOf(":ww=") != -1 || windowparams.indexOf(":hh=") != -1 ||
+windowparams.indexOf(":left=") != -1 || windowparams.indexOf(":top=") != -1 )
+{
+windowparams = substringReplace(windowparams,':left=',',left=');
+windowparams = substringReplace(windowparams,'left=','left=');
+windowparams = substringReplace(windowparams,':ww=',',width=');
+windowparams = substringReplace(windowparams,'ww=','width=');
+windowparams = substringReplace(windowparams,':hh=',',height=');
+windowparams = substringReplace(windowparams,'hh=','height=');
+windowparams = substringReplace(windowparams,':loc=',',location=');
+windowparams = substringReplace(windowparams,'loc=','location=');
+windowparams = substringReplace(windowparams,':dir=',',directories=');
+windowparams = substringReplace(windowparams,'dir=','directories=');
+windowparams = substringReplace(windowparams,':tb=',',toolbar=');
+windowparams = substringReplace(windowparams,'tb=','toolbar=');
+windowparams = substringReplace(windowparams,':stat=',',status=');
+windowparams = substringReplace(windowparams,':mb=',',menubar=');
+windowparams = substringReplace(windowparams,':sb=',',scrollbars=');
+windowparams = substringReplace(windowparams,':rs=',',resizable=');
+}
+return windowparams;
+}
+// -->
+', 
+', 
+', 
+', 
+', 
+', Skip to global NPS navigation', 
+', Skip to main content', 
+', Skip to footer', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', National Park Service Logo', 
+', National Park Service', 
+', 
+', 
+', 
+', 
+', 
+',  ', Search', 
+', 
+', 
+', 
+', 
+', This Site', 
+', All NPS', 
+', 
+', 
+', 
+<div class="GlobalSearch-suggestions">
+<ul>
+{{ _.each(suggestions, function(suggestion) { }}
+<li><a href="{{{ url }}}{{{ suggestion }}}">{{{ suggestion }}}</a></li>
+{{ }) }}
+</ul>
+</div>
+', 
+', 
+', 
+', 
+',  Search
+', 
+', 
+', 
+', 
+', 
+', 
+', Open ', 
+Menu
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+div.ColumnMain #npsNav h2 { display:none }â\u20ac\u2039
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+jQuery(document).ready(function() {
+setTimeout( function() {
+NPS.display.showAdminTools( 0 );
+} ,10);
+});
+', 
+', 
+', 
+#modal-contact-us .modal-body { padding-top:0px; }
+.modal-header {border:none;}
+', 
+', 
+', 
+', 
+', 
+', ×', 
+', Contact Us', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+var siteCodeArr = "ANIA,BELA,DENA,GAAR,LACL,WRST,YUCH".split(",");
+for (i = 0; i < siteCodeArr.length; i++) {
+setTimeout(gasFunction(siteCodeArr[i]), 1000);
+function gasFunction(x) {
+gas('send', 'event', 'Shared Content', x, window.location.href, 0, true);
+}
+}
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Series: Alaska Park Science - Volume 13 Issue 2: Mineral and Energy Development', 
+', 
+', 
+', Land Ownership in National Park System Units in Alaska and Possibilities for Mining and Other Developments', 
+', 
+', Aniakchak National Monument & Preserve', , ', Bering Land Bridge National Preserve', , ', Denali National Park & Preserve', , ', Gates Of The Arctic National Park & Preserve', , ', Lake Clark National Park & Preserve', , ', Wrangell - St Elias National Park & Preserve', , ', Yukon - Charley Rivers National Preserve', 
+', 
+', 
+',  ', 
+', 
+', 
+', 
+', 
+', 
+', Figure 1. Gold Hill.  Unpatented mining claims in Wrangell-St. Elias National Park and Preserve. ', NPS Photo', 
+', 
+', There are over 54.6 million acres (22.1 million hectares) within the exterior boundaries of National Park System units in Alaska, which is 65 percent of the entire National Park System. Although most of those lands are in federal ownership and are managed by the National Park Service (NPS), there are over two million acres (809,371 hectares) of non-federally owned lands within those units. Passage of the Alaska National Interest Lands Conservation Act (ANILCA) in 1980 created huge new NPS units, greatly expanded three existing units, and included within their boundaries large amounts of non-federal lands. These non-federal lands are in private, state, borough, or municipal ownership. The existence of these non-federal lands creates the possibility of mining and other developments within the boundaries of NPS units in Alaska. ',  ',  When NPS units are created or expanded, whether by legislation or executive action, they are made subject to any valid rights that exist at the time, and they are also generally closed to all forms of appropriation under the land laws of the United States. So, while no new non-federal lands or land interests can be created within the exterior boundaries of the new or expanded units, whatever non-federal lands existed at their creation or expansion continue to exist. This is the case with all the NPS units in Alaska. ', 
+', Native Corporation Lands', 
+', By far the largest amount of non-federal lands within NPS units in Alaska are lands conveyed under the Alaska Native Claims Settlement Act of 1971 (ANCSA). ANCSA preceded ANILCA by nearly 10 years, so that when the new and expanded NPS units were established by ANILCA in 1980, they were made subject to prior land conveyances to ANCSA Native corporations, and to valid selections by those corporations. Lands conveyed to ANCSA Native corporations are private lands, owned by the corporations. Presently there are 1,462,320 acres (591,779 hectares) conveyed to ANCSA corporations in NPS units, where ANCSA corporations own both the surface and subsurface estates. On most of these lands an ANCSA village corporation owns the surface estate, and the respective ANCSA regional corporation owns the underlying subsurface estate. However, in some situations the regional corporation owns both the surface and the subsurface estates. In addition to those lands, ANCSA regional corporations own 269,142 acres (108,917 hectares) of subsurface estate only, where the overlying surface estate is federally owned and managed by the NPS. ',  ',  Ownership of the surface or subsurface estates includes the right to use and develop these lands and the resources they contain. The surface estate includes the vegetation, and the rights to use and develop the surface. The subsurface estate includes all resources below the surface, including oil and gas, metalliferous and other minerals, and sand and gravel. In many situations an ANCSA village corporation selected the surface estate, and the regional corporation simply received the subsurface estate beneath the lands conveyed to the village corporation, without regard for mineral potential. But in other situations ANCSA regional corporations selected lands for their potential for mineral development, and have been conveyed lands with potential for oil and gas or other mineral development, such as within Aniakchak National Monument and Preserve, Gates of the Arctic National Park and Preserve, Lake Clark National Park and Preserve, Wrangell-St. Elias National Park and Preserve, and Bering Land Bridge National Preserve. A small percentage of lands conveyed to ANCSA regional corporations have restrictions on their use and development, to protect cemetery and historic sites (see ANCSA section 14(h)(1)). Although the ANCSA land conveyance process is now nearly complete, there remain 240,200 acres (97,205 hectares) of ANCSA land selections within NPS units in Alaska, and it is estimated that approximately 180,000 more acres (72,843 hectares) will be conveyed to ANCSA corporations from within those selections. ', 
+', 
+', 
+', 
+', 
+', Figure 2. Dan Creek.  Patented mining claims in Wrangell-St. Elias National Park and Preserve. ', NPS Photo', 
+', 
+', Land exchanges and purchases that have occurred in NPS units since 1980 have resulted in the conveyance of some ANCSA corporation surface and subsurface rights to the United States, for management by the NPS. For example, the purchase of a 10,000-acre (4,046-hectare) conservation easement around Tazimina Lake in Lake Clark National Park and Preserve conveyed most of the development rights of the ANCSA village corporation (surface) and regional corporation (subsurface) to the United States, effectively prohibiting most developments, including mining, on those lands. Another example is the Anaktuvuk Pass land exchange in Gates of the Arctic National Park and Preserve, which resulted in the conveyance of most of the development rights of the ANCSA village (surface) and regional corporation (subsurface) to the United States, for management by the NPS. Such purchases and exchanges of specific and limited interests in land (for example, the right to construct buildings or the right to extract minerals) require careful review and understanding of the rights owned by both the ANCSA corporations and by the United States, and careful management by the NPS. ',  ', 
+', State of Alaska Lands', 
+', Lands owned by the State of Alaska are the second largest category of non-federal lands in NPS units. The current estimate of state lands within NPS units in Alaska is 355,331 acres (143,797 hectares). These include uplands owned by the State prior to the creation of the NPS units and valid state selections that have been conveyed to the State after the creations. A sub-category of state lands is lands owned by the University of Alaska, whose purpose is to generate income for the University. The State of Alaska also owns road rights-of-way within NPS units, such as the rights-of-way for the McCarthy and Nebesna roads in Wrangell-St. Elias National Park and Preserve, and the George Parks Highway in Denali National Park and Preserve, as well as rights-of-way for smaller roads in several NPS units. The State and the University of Alaska have programs to sell some of their lands, so state lands can become private lands. ',  ',  The State of Alaska generally owns the beds of navigable waters, such as the Alagnak River, Kukaklek Lake, Nonvianuk Lake, Lake Clark, and the Yukon River. The State also generally owns tidelands. An exception is the tidelands and submerged lands within the offshore boundary of the pre-ANILCA portion of Glacier Bay National Park, which the U.S. Supreme Court determined in 2005 to be owned by the United States and managed as part of that park, because those tidelands and submerged lands were within a pre-statehood withdrawal that precluded them being conveyed to the state. ',  ',  To date there have been few navigability determinations in federal courts. As additional waters are determined navigable, there will be additional documented acres of state lands. NPS regulations apply to all waters and submerged lands within NPS unit boundaries (36 CFR 1.2(a)(3)). ',  ',  The state has a process to classify its lands, and to close its lands to the creation of new state mining claims and other uses, as was done on Moose Creek in the Kantishna area of Denali National Park in the 1990s. (Note: whether Moose Creek in Kantishna is navigable has not been formally adjudicated, and therefore the ownership of the bed of Moose Creek has not been conclusively determined.) ',  ', 
+', Municipal, City, and Borough Lands', 
+', There are 1,535 acres (621 hectares) of such lands in NPS units in Alaska. Most of these lands are within Klondike Gold Rush National Historical Park. The City and Borough of Sitka owns some of the tidelands within the exterior boundary of Sitka National Historical Park. The Lake and Peninsula Borough holds some road rights-of-way in Port Alsworth in Lake Clark National Park and Preserve. ',  ', 
+', Mining Claims', 
+', Federal mining claims are created under the authority of the Mining Law of 1872. Although all the federal lands within the NPS units are now closed to staking mining claims, federal mining claims existed on some of the federal lands that were included in the new and expanded NPS units. There are currently 5,669 acres (2,294 hectares) of patented mining claims and 3,992 acres (1,615 hectares) of unpatented mining claims in NPS units in Alaska. Valid unpatented claims give the claimant only the right to mine, not the right to use those lands for other purposes. Patented claims began as unpatented claims but have had all the rights to the land conveyed by United States patent to the claimant. Patented mining claims can be used for any legal purpose, like other privately owned lands. They can be mined; developed for residential, recreational, or industrial use; subdivided and sold; etc. However, mining on both patented and unpatented federal claims within an NPS unit must comply with the provisions of the Mining in the Parks Act of 1976 and its implementing regulations (36 CFR 9A). Under the 9A regulations, a \u201cmining plan of operation\u201d must be prepared by the claimant and submitted to the NPS for review and approval. Mining plans of operation have been approved for claims within NPS units in Alaska. There is currently one approved mining plan, for a block of patented mining claims in Wrangell-St. Elias National Park and Preserve. If the NPS cannot approve a plan, mining cannot occur, and the claims may be \u201ctaken\u201d by the United States and the claimants owed \u201cjust compensation\u201d under the Fifth Amendment. The 9A regulations apply only to federal mining claims, not to ANCSA corporation lands, other private lands, or state or city lands. ',  ',  NPS environmental impact statements and Records of Decision for Denali National Park and Preserve, Wrangell-St. Elias National Park and Preserve, and Yukon-Charley Rivers National Preserve, completed in 1991, recommended that all mining claims in those units be purchased by the NPS, to avoid unacceptable impacts to resources. Thousands of acres of patented and unpatented claims in the Kantishna area of Denali were purchased by the NPS in the 1990s, and few remain there today. Thousands of acres of patented mining claims have been purchased in Wrangell-St. Elias, but 438 acres (177 hectares) of unpatented claims and 5,257 acres (2,127 hectares) of patented claims remain. There are 3,400 acres (1,375 hectares) of unpatented mining claims and 233 acres (94 hectares) of patented claims in Yukon-Charley Rivers; all the unpatented claims on Coal Creek were donated to the NPS, but no claims have yet been purchased in Yukon-Charley Rivers. The last mining claims in Bering Land Bridge National Preserve were purchased by the NPS in 2009. ',  ', 
+', Native Allotments', 
+', The Alaska Native Allotment Act of 1906 authorized the conveyance of up to 160 acres (64 hectares) of non-mineral lands to individual Alaska Natives, for lands they used as residences, seasonal camps, hunting, fishing, gathering, or other purposes. The Act was repealed in 1971, after which no new applications for Native allotments could be accepted. An exception was made for Native veterans of the Vietnam War, who might have missed the opportunity to apply for an allotment between 1969 and 1971, due to their military service. The Alaska Native Veteran Allotment Act of 1998 allowed for the conveyance of Native allotments to qualifying Alaska Native veterans. Because the Native Allotment Act of 1906 allowed for the conveyance of only \u201cnon-mineral\u201d lands, if the lands applied for were determined by the Bureau of Land Management to contain valuable minerals, either the mineral rights were reserved to the United States in the conveyance document or those lands were not conveyed to the applicant. There are approximately 52,000 acres (21,043 hectares) of Native allotments in NPS units in Alaska. Nearly all of these lands have now been conveyed, although a few are still in pending or approved status. Native allotments are privately owned and are private property. However, most allotments are in a restricted status, whereby the prior approval of the Secretary of the Interior, through the Bureau of Indian Affairs (BIA), must be obtained for any major change to occur in the status of the allotments, such as a lease, issuance of a right-of-way, or sale. BIA also provides counseling and other services to allotment owners. Native allotments can be developed, like any other private property, but mining development is unlikely because the lands should be non-mineral in character, and if there are minerals, they should have been reserved to the United States, not conveyed to the allotment owner. However, if any minerals, including sand and gravel, or oil and gas, were conveyed to the allotment owner, the owner would be able to legally extract them. ',  ', 
+', Other Small, Private Tracts', 
+', Other small, private tracts include homesteads (up to 160 acres (64 hectares)), home sites, trade and manufacturing sites, and mill sites (up to 5 acres (2 hectares) each). These would have been in private ownership, or validly selected, prior to the creation of the NPS unit. There are 19,127 acres (7,740 hectares) of such lands in NPS units in Alaska. These, too, are private lands, and can be developed for any legal purpose. They generally include all property rights\u2014surface, subsurface, minerals, etc. ',  ', 
+', 
+', 
+', 
+', 
+', Figure 3. Former placer gold workings, Humbolt Creek, Bering Land Bridge National Preserve. ', NPS Photo', 
+', 
+', Access to Non-federal Lands across NPS Units in Alaska', 
+', Section 1110(b) of ANILCA provides that the owners of non-federal lands that lie within NPS units in Alaska \u201cshall be given by the Secretary such rights as may be necessary to assure adequate and feasible access\u201d to their lands, and that \u201cSuch rights shall be subject to reasonable regulations . . . to protect the natural and other values.\u201d Implementing regulations (43 CFR 36) were put in place in 1986. Consequently, for example, if the owner of non-federal land in an NPS unit in Alaska applies for a right-of-way for a road or an electrical power line across parklands, and the NPS determines that a road or power line is needed to support the owner\u2019s use of that non-federal land, then the NPS is required to issue a right-of-way permit for the road or power line, even if there are unavoidable impacts to park resources, and even within designated wilderness. To date, over 30 such authorizations have been issued in NPS units in Alaska, although most have been for existing, not new, off-road-vehicle trails, roads, airstrips, or water lines. As non-federal lands in NPS units are developed in the future, for whatever reason, including mineral or energy development, the 1110(b) provision for access has potential for significant changes and impacts to the NPS units. Careful management is needed to fulfill the Congressional mandate to allow needed access to non-federal lands, but also to protect park resources. ',  ',  Other ANILCA provisions address access to non-federal lands for mineral development. ANILCA section 201(4)(b-e) (and 43 CFR 36.13) requires the issuance of a right-of-way across the western (Kobuk River) unit of Gates of the Arctic National Park and Preserve, if an application is filed for access to the Ambler Mining District. It is anticipated that an application for such access will be filed in 2014 by the Alaska Industrial Development and Export Authority (AIDEA). AIDEA is planning the construction of an industrial road to access several large copper deposits. The new road would be over 200 miles (321 kilometers) long, of which 12 to 20 miles (19 to 32 kilometers) would be within the preserve. ANILCA sections 11431(j) and 1419(d) respectively, and 43 CFR 36.13, address oil and gas pipelines in the northern portion of Gates of the Arctic, and access through Yukon-Charley Rivers parks for oil and gas operations on ANCSA corporation lands along the unit\u2019s northern boundary; no such pipelines or access have yet been proposed. ',  ', 
+', NPS Regulation of Non-federal Oil and Gas Development', 
+', There are no oil or gas operations currently in any NPS unit in Alaska, but there is oil and gas potential in some units. The existing NPS regulations on oil and gas operations (36 CFR 9B) apply to all NPS units, including those in Alaska. Under the current regulations, if an oil or gas operation would occur entirely on non-federal lands (such as ANCSA Native corporation lands where the ANCSA corporation owns both the surface and subsurface estates) within an NPS unit, and no federally owned or controlled lands or waters needed to be crossed to get to that operation, the NPS would have no regulatory control on that operation. But if federally owned or controlled lands or waters had to be crossed to access the oil or gas operation on the non-federal lands, then the 9B regulations would apply and the operator would need to submit a Plan of Operations to the NPS for review and approval. Also, if the oil or gas operation were proposed to occur on ANCSA corporation owned subsurface lands, where the United States owns the surface estate (such as in Aniakchak National Monument and Preserve), the 9B regulations would apply and the operator would need to submit a Plan of Operations to the NPS for review and approval. The 9B regulations have been proposed for revision to provide greater protection to park resources and uses. ',  ', 
+', Getting Land Status Information', 
+', The Land Status Web Map is a great tool for NPS staff in the Alaska Region to view land ownership within NPS units in Alaska (Venator et al. in this issue). ',  ',  The Land Status Web Map displays NPS land status data in the NPS units in Alaska without the use of GIS software. Users can pan around or zoom in and out of the map to quickly view land ownership for a particular area, click on a tract to get more detailed information, run searches to quickly locate a feature, or create a map and export it for saving and printing. This system was designed to be simple and easy to use so that NPS employees around the Alaska Region can quickly find answers to land status questions. ',  ',  Another valuable resource for lands information in any NPS unit, and available to any NPS employee, is LandsNet, Land Resources Division. On the site you can get the most recent official acreage listings for each NPS unit and region, copies of deeds, the establishing legislation for each unit, published legal descriptions of the unit\u2019s boundaries, and much more. ',  ',  The Land Resources team of the Alaska Region has responsibility for land status mapping and recordkeeping, as well as a variety of other land management and realty tasks and issues. Contact the team with any questions or to get assistance in these matters.', 
+', 
+', 
+', 
+', 
+', 
+', Series: Alaska Park Science - Volume 13 Issue 2: Mineral and Energy Development', 
+', 
+', Next Chapter: Tracking Mineral and Energy Development  Projects near Alaska Parks through Web Mapping',  ', Previous Chapter: Fire v Ice: Revolutionizing the Thawing Process at Coal Creek', 
+', Series Home', 
+', 
+', 
+',  ',  ', 
+', 
+', Tags: ',  ', Mining',   ', mineral',   ', Development',   ', APS',   ', alaska park science',   ', ANILCA',   ', ANCSA',   ', DENA',   ', BELA',   ', yuch',   ', WRST',   ', ania',   ', GAAR',   ', lacl',   ', Land',   ', ownership',   ', Inholding', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Related Articles', 
+', 
+', 
+', 
+', 
+', 
+', Go!', 
+', 
+', 
+', 
+', 
+', 
+', Tracking Mineral and Energy Development  Projects near Alaska Parks through Web Mapping', 
+', 
+', 
+', u"A Dena'ina Perspective: Respecting E\u0142nena (Land)", 
+', 
+', 
+', Fire Speaks the Land', 
+', 
+', 
+', 
+', 
+', Related People', 
+', 
+', 
+', John B. Etheridge', 
+', 
+', 
+', George Roberts', 
+', 
+', 
+', Thomas Hariot', 
+', 
+', 
+', 
+', 
+', Related Places', 
+', 
+', 
+', Cape Nome Mining District Discovery Sites', 
+', 
+', 
+', Sea Kayaking in Wrangell \u2039 St Elias National Park and Preserve', 
+', 
+', 
+', View Park Historic District', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', Search ', 
+', 
+', 
+', This Site', 
+', All NPS', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', National Park Service', 
+', U.S. Department of the Interior', 
+', 
+', 
+', 
+', 
+', National Park Service Logo', 
+', National Park Service Logo', 
+', 
+', 						', 
+', 
+', 
+', 
+', 
+', 
+', Accessibility', 
+', Privacy Policy', 
+', FOIA', 
+', Notices', 
+', Disclaimer', 
+', 
+', 
+', FAQ', 
+', No Fear Act', 
+', Contact Us', 
+', USA.gov', 
+', 
+', 
+', 
+', 
+', 
+', Facebook', 
+', Facebook', 
+', 
+', 
+', Facebook', 
+', 
+', 
+', 
+', 
+', 
+', Youtube', 
+', Youtube', 
+', 
+', 
+', Youtube', 
+', 
+', 
+', 
+', 
+', 
+', Twitter', 
+', Twitter', 
+', 
+', 
+', Twitter', 
+', 
+', 
+', 
+', 
+', 
+', Instagram', 
+', Instagram', 
+', 
+', 
+', Instagram', 
+', 
+', 
+', 
+', 
+', 
+', Flickr', 
+', Flickr', 
+', 
+', 
+', Flickr', 
+', 
+', 
+', 
+', 
+', 
+', iTunes', 
+', iTunes', 
+', 
+', 
+', iTunes', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+// Instructions: please embed this snippet directly into every page in your website template.
+// For optimal performance, this must be embedded directly into the template, not referenced
+// as an external file.
+// Answers Cloud Services Embed Script v1.02
+// DO NOT MODIFY BELOW THIS LINE *****************************************
+;(function (g) {
+var d = document, i, am = d.createElement('script'), h = d.head || d.getElementsByTagName("head")[0],
+aex = {
+"src": "//gateway.answerscloud.com/nps-gov/production/gateway.min.js",
+"type": "text/javascript",
+"async": "true",
+"data-vendor": "acs",
+"data-role": "gateway"
+};
+for (var attr in aex) { am.setAttribute(attr,aex[attr]); }
+h.appendChild(am);
+g['acsReady'] = function () {var aT = '__acsReady__', args = Array.prototype.slice.call(arguments, 0),k = setInterval(function () {if (typeof g[aT] === 'function') {clearInterval(k);for (i = 0; i < args.length; i++) {g[aT].call(g, function(fn) { return function() { setTimeout(fn, 1) };}(args[i]));}}}, 50);};
+})(window);
+// DO NOT MODIFY ABOVE THIS LINE *****************************************
+', 
+', 
+//<![CDATA[
+if (window.location.href.indexOf("www") > -1) {
+var aid = "nps.gov";
+var script = document.createElement('script');
+script.type = "text/javascript";
+script.src = "https://search.usa.gov/javascripts/stats.js";
+document.getElementsByTagName("head")[0].appendChild(script);
+}
+//]]>
+', 
+']

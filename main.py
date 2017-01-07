@@ -1,22 +1,14 @@
-import csv
 import sys
 
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from UI import FXfrontend
 
-from scraper import scrapeData
-from scraper import getUniversalList
-from scraper.FxSpider.FxSpider.spiders import WebScraper
-
-from model import modelling
+import modules
 
 #### Variables
-dataset = 'data\dataset_axis.csv'  # X, y (path)
-n = 500  # 500 tuples of X(company), y(label) in dataset (constant)
 setting = 2  # 0=scrape, 1=train, 2=insights (modified from UI)
 test_company = ''  # company to get insights for
-
 
 ####
 
@@ -33,26 +25,13 @@ class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
         self.connect(self.threadClass, QtCore.SIGNAL('PROGRESS_BAR'), self.updateProgressBar)
         self.connect(self.threadClass, QtCore.SIGNAL('STATUS_LINE'), self.updateStatusLine)
         self.connect(self.threadClass, QtCore.SIGNAL('SUMMARY'), self.updateStatusSum)
-        self.connect(self.pushButtonTrain, QtCore.SIGNAL("clicked()"), self.runThreadTrain)
 
-    def runThreadTrain(self):
-        global setting
+        self.connect(self.pushButtonTrain, QtCore.SIGNAL("clicked()"), self.runThreadTrainMode)
+        self.connect(self.pushButtonGetData, QtCore.SIGNAL("clicked()"), self.runThreadScrapeMode)
 
-        if self.threadClass.isRunning():
-            quit_msg = "Are you sure you want to stop the running thread?"
-            reply = QtGui.QMessageBox.question(self, 'Message', quit_msg, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
-            if reply == QtGui.QMessageBox.Yes:
-                stat = 'Stopped the thread'
-                self.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
-                self.threadClass.terminate()
-            else:
-                pass
 
-        if (self.threadClass.isRunning()) is False:
-            setting = 1
-            self.threadClass.emit(QtCore.SIGNAL('SUMMARY'), 'Training ML model')
-            self.threadClass.start()
-
+    # Update UI commands
+    # ------------------
     def updateStatusSum(self, val):
         print val
         self.label_status.setText(val)
@@ -64,53 +43,60 @@ class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
         self.label_status_desc.setText(val)
         print val
 
+    # Threading commands
+    # ------------------
 
-def trainModel(UIobject):
-    modelling.trainMLmodel(UIobject)
-    pass
+    def checkStopThreadRunning(self):
+        if self.threadClass.isRunning():
+            quit_msg = "Are you sure you want to stop the running thread?"
+            reply = QtGui.QMessageBox.question(self, 'Warning', quit_msg, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
+            if reply == QtGui.QMessageBox.Yes:
+                stat = 'Stopped the thread'
+                self.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
+                self.threadClass.terminate()
+                return True
+            else:
+                return False
 
+        return True
 
-def getDataFromWeb(UIobject):
-    '''GET DATA'''
+    def runThreadTrainMode(self):
+        global setting
 
-    Query = 'SAMPLE'
-    label = -99
+        if self.checkStopThreadRunning() is False:
+            return
 
-    startIndex = 399  # 1 initially
-    endIndex = 400  # n+1 initially
+        if (self.threadClass.isRunning()) is False:
+            setting = 1
+            self.threadClass.emit(QtCore.SIGNAL('SUMMARY'), 'Training ML model')
+            self.threadClass.start()
 
-    # 25% contrib
-    stat = 'Initiailsing Search engine ...'
-    # UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 0)
-    UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
+    def runThreadScrapeMode(self):
+        global setting
 
-    with open(dataset, 'rb') as f:
-        reader = csv.reader(f)
-        Data_list = list(reader)
+        quit_msg = "Web scraping may take several hours depending on internet speed connection? \nDo you wish to continue?"
+        reply = QtGui.QMessageBox.question(self, 'Warning', quit_msg, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
+        if reply == QtGui.QMessageBox.No:
+            return
 
-    for i in range(startIndex, endIndex):  # range(1,n+2) # 401, 501
-        Query = Data_list[i][0]
-        if Data_list[i][1] == 'Forex':
-            label = 1
-        else:
-            label = 0
+        if self.checkStopThreadRunning() is False:
+            return
 
-        listRes = scrapeData.storeResTxt(Query, label)
+        if (self.threadClass.isRunning()) is False:
+            setting = 0
+            self.threadClass.emit(QtCore.SIGNAL('SUMMARY'), 'Scraping-Web')
+            self.threadClass.start()
 
-        stat = 'Searching ', Query
-        UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), int((float(i) / endIndex) * 25))
-        UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
+    def runThreadInsightMode(self):
+        global setting
 
-    UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), 'Populating Search results ...')
-    univList = getUniversalList.makeListScrape()
+        if self.checkStopThreadRunning() is False:
+            return
 
-    UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), 'Initiazing spider ...')
-
-    WebScraper.startReactor(univList, UIobject)
-
-
-def getInsights(UIobject):
-    pass
+        if (self.threadClass.isRunning()) is False:
+            setting = 2
+            self.threadClass.emit(QtCore.SIGNAL('SUMMARY'), 'Getting Insights')
+            self.threadClass.start()
 
 
 class ThreadClassBkg(QtCore.QThread):
@@ -118,13 +104,15 @@ class ThreadClassBkg(QtCore.QThread):
         super(ThreadClassBkg, self).__init__(parent)
 
     def run(self):
+        global test_company
+
         self.emit(QtCore.SIGNAL('PROGRESS_BAR'), 0)
         if setting == 0:
-            getDataFromWeb(self)
+            modules.getDataFromWeb(self)
         elif setting == 1:
-            trainModel(self)
+            modules.trainModel(self)
         elif setting == 2:
-            getInsights(self)
+            modules.getInsights(test_company,self)
 
 
 if __name__ == "__main__":

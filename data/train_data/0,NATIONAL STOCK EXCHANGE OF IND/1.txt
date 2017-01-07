@@ -1,0 +1,2415 @@
+[
+',  
+	', 
+	',  		
+		', 
+		',  ', 
+		',  
+	', 
+	', 
+	',  
+	', 
+	
+', 
+
+', 
+', 
+
+', 
+', 
+	', 
+    ', 
+	', 
+    
+    ', 
+    ', 
+    	', Market Watch', 
+        ', 
+			', Market Turnover',  ', 
+		', 
+		
+        ', 
+		
+        ', NIFTY 50', 
+		
+
+		', 
+			var indexText='';
+			indexText +='<li class="selected"'+
+			'	<span class="index" >'+
+			'		<a class=anchorColour href="javascript:void(0)" style="display:none" id="indexNameNIFTY 50">--</a>'+
+			'	</span>'+ 
+			'	<span id="imNIFTY 50" style="display:none" class="imPath"></span>'+
+			'	<span id="lastPriceNIFTY 50" class="number">--</span> '+
+			'	<span id="changeNIFTY 50" class="number green">'+
+			'	&nbsp;&nbsp;'+
+			'		--'+
+			'	</span> '+
+			'	<span class="number green" id="pChangeNIFTY 50">--% </span>'+
+			'	<div  class="index_info" style="display:block">'+
+			'		<div id="iframeNIFTY 50"></div>'+
+			'	<div>'+
+				'	<span></span>'+
+			'	</div>'+
+			'</li>';
+
+		', 
+
+
+		', 
+			', 														
+				', document.write(indexText);	', 
+			', 
+		', 
+		', loadNotification(true);', 
+        ', 
+        	', 
+            	', Advances', 
+                ', --', 
+            ', 
+            ', 
+            	', Declines   ', 
+                ', --', 
+            ', 
+             ', 
+            	', Unchanged', 
+                ', --', 
+            ', 
+        ', 
+        ', 
+    ',  ', 
+	', 
+	', 
+	', 
+    ', 
+     ', 
+     
+     ', 
+    ', 
+    	 ', 
+        	', Stock Watch',  | ', 
+            
+            ', Technical charts', 
+            ', 
+            ',  | ', Map of Market', 
+            ', 
+        ', 
+    	', 
+        	', Nifty 50 Gainers/ Losers ',  ', 
+            ', Most active',  ', 
+        ', 
+        ', 
+        
+        ', 
+        ', 
+        ', 
+       
+        ', 
+		   ', 
+		   ', 
+		    ', 
+		   ', 
+            
+
+        ',  ', 
+         ', 
+         
+         
+        ', 
+        ', 
+		', 	', 
+		   ', 
+		    ', 
+		   ', 
+		
+       
+        ',  ', 
+         ',  
+        ', 
+     	 ', 
+      
+     ', 
+
+
+
+        ', 
+         ', 
+    ', 
+    ', 
+    
+    ', 
+    
+    
+    ', 
+     ', 
+    	', Select an index to view more details', 
+        ', 
+        	', Broad Market Indices', 
+           ', Sectoral',  Indices', 
+            ', Other',  Indices', 
+			', Fixed Income',  Indices', 
+        ', 
+        ', 
+          ', 
+            ', Index', 
+            ', Current', 
+            ',  Change', 
+            ', %change', 
+          ', 
+         
+								', 
+								try{
+									var miFlag=false;
+									var miText='';
+									for(var mi=0;mi<MAJOR_INDICES.length;mi++){
+										miText +='<tr '+((mi==1)?'class="active  '+((miFlag)?'alt':'')+'"':((miFlag)?'class="alt"':''))+'> '+
+										'<td>	<span class="index"  >'+
+										'		<a class=anchorColour href="javascript:void(0)" style="color:#000000" id="indexName'+MAJOR_INDICES[mi]+'">--</a>'+										
+										'	</span></td>'+ 
+							
+										'	<td style="text-align:right"><span class="value" style="color:#000000" id="lastPrice'+MAJOR_INDICES[mi]+'">--</span> </td>'+
+										'	<td style="text-align:right"><span class="change" id="change'+MAJOR_INDICES[mi]+'"> '+
+										'		<img src="/common/images/ico_arr_up_grn.gif" width="8" height="4" alt="" />&nbsp;&nbsp;'+
+										'		--'+
+										'	</span> </td>'+
+										'	<td style="text-align:right"><span class="per_change" id="pChange'+MAJOR_INDICES[mi]+'">--% </span>'+
+										'	<div  class="index_info" style="display:none">'+
+									//	'		<img id="image'+MAJOR_INDICES[mi]+'" src="" class="floatleft" alt="" WIDTH="330px" height="215px"/>'+
+										'		<div id="iframe'+MAJOR_INDICES[mi]+'"></div>'+
+										'		<div>'+
+										'				'+((isStockWatchIndex(MAJOR_INDICES[mi]))?'<a class=anchorColour href="'+getStockWatchIndexLink(MAJOR_INDICES[mi])+'" class="stk_watch">Stock Watch</a>':'')+								
+										'			<p></p>'+
+										'			'+((isTwitterIndex(MAJOR_INDICES[mi]))?'<p class="twitter"><span></span> <a class=anchorColour href="'+getTwitterIndicesLink(MAJOR_INDICES[mi])+'" target="_blank"><img src="/common/images/ico_twitter.gif" alt="Twitter" height="21" width="23"/></a></p>':'')+
+										'		</div>'+
+										'	</div></td>'+
+										'</tr>';
+										miFlag=!miFlag;
+									}
+
+									}
+									catch(err){//alert(err.message)
+									};
+
+
+								', 
+							', 
+								', 														
+									', document.write(miText);
+									
+									', 
+								', 
+							', 
+	
+
+						
+
+
+       
+		', 
+
+
+		 
+        ', 
+          ', 
+            ', Index', 
+            ', Current', 
+            ',  Change', 
+            ', %change', 
+          ', 
+				 ', 
+						var siFlag=false;
+						var siText='';
+						for(var si=0;si<SECTORAL_INDICES.length;si++){
+							siText +='<tr class="alt"> '+
+							'	<td><span class="index" ><a class=anchorColour href="javascript:void(0)" style="color:#000000" id="indexName'+SECTORAL_INDICES[si]+'">--</a></span></td>'+ 
+						
+							'	<td style="text-align:right; color:#000000"><span class="value" id="lastPrice'+SECTORAL_INDICES[si]+'">--</span></td> '+
+							'	<td style="text-align:right"><span class="change" id="change'+SECTORAL_INDICES[si]+'"> '+
+							'		<img src="/common/images/ico_arr_up_grn.gif" width="8" height="4" alt="" />&nbsp;&nbsp;'+
+							'		--'+
+							'	</span></td> '+									
+							'	<td style="text-align:right"><span class="per_change" id="pChange'+SECTORAL_INDICES[si]+'">--% </span>'+
+							'	<div  class="index_info" style="display:none">'+
+							//'		<img id="image'+SECTORAL_INDICES[si]+'" src="" class="floatleft" alt="" WIDTH="330px" height="215px"/>'+
+							'		<div  id="iframe'+SECTORAL_INDICES[si]+'"></div>'+
+							'		<div>'+
+							'				'+(isStockWatchIndex(SECTORAL_INDICES[si])?'<a class=anchorColour href="'+getStockWatchIndexLink(SECTORAL_INDICES[si])+'" class="stk_watch"> Stock Watch</a>':'')+
+							'			<p></p>'+
+							'			'+(isTwitterIndex(SECTORAL_INDICES[si])?'<p class="twitter"><span></span> <a class=anchorColour href="'+getTwitterIndicesLink(SECTORAL_INDICES[si])+'" target="_blank"><img src="/common/images/ico_twitter.gif" alt="Twitter"  height="21" width="23"/></a></p>':'')+
+							'		</div>'+
+							'	</div></td>'+
+							'</tr>';
+							siFlag=!siFlag;
+						}
+				', 
+				', 
+					
+					', 														
+						', document.write(siText);	', 
+					', 
+				', 
+
+		', 
+
+		', 
+          ', 
+            ', Index', 
+		    ', Current', 
+            ',  Change', 
+
+            ', %change', 
+          ', 
+
+
+
+								', 
+								try{
+									var miFlag=false;
+									var miText='';
+									for(var mi=0;mi<OTHER_INDICES.length;mi++){
+										miText +='<tr '+((mi==1)?'class="active  '+((miFlag)?'alt':'')+'"':((miFlag)?'class="alt"':''))+'> '+
+										'<td>	<span class="index" >'+
+										'		<a class=anchorColour href="javascript:void(0)" style="color:#000000" id="indexName'+OTHER_INDICES[mi]+'">--</a>'+										
+										'	</span></td>'+ 
+							
+										'	<td style="text-align:right; color:#000000"><span class="value" id="lastPrice'+OTHER_INDICES[mi]+'">--</span> </td>'+
+										'	<td style="text-align:right"><span class="change" id="change'+OTHER_INDICES[mi]+'"> '+
+										'		<img src="/common/images/ico_arr_up_grn.gif" width="8" height="4" alt="" />&nbsp;&nbsp;'+
+										'		--'+
+										'	</span> </td>'+
+										'	<td style="text-align:right"><span class="per_change" id="pChange'+OTHER_INDICES[mi]+'">--% </span>'+
+										'	<div  class="index_info" style="display:none">'+
+									//	'		<img id="image'+MAJOR_INDICES[mi]+'" src="" class="floatleft" alt="" WIDTH="330px" height="215px"/>'+
+										'		<div id="iframe'+OTHER_INDICES[mi]+'"></div>'+
+										'		<div>'+
+										'				'+((isStockWatchIndex(OTHER_INDICES[mi]))?'<a class=anchorColour href="'+getStockWatchIndexLink(OTHER_INDICES[mi])+'" class="stk_watch">Stock Watch</a>':'')+								
+										'			<p></p>'+
+										'			'+((isTwitterIndex(OTHER_INDICES[mi]))?'<p class="twitter"><span></span> <a class=anchorColour href="'+getTwitterIndicesLink(OTHER_INDICES[mi])+'" target="_blank"><img src="/common/images/ico_twitter.gif" alt="Twitter"  height="21" width="23"/></a></p>':'')+
+										'		</div>'+
+										'	</div></td>'+
+										'</tr>';
+										miFlag=!miFlag;
+									}
+
+									}
+									catch(err){//alert(err.message)
+									};
+
+
+								', 
+							', 
+								', 														
+									', document.write(miText);
+									
+									', 
+								', 
+							', 
+	
+
+					
+
+
+       
+		', 
+
+
+
+
+		        ', 
+          ', 
+            ', Index', 
+            ', Current', 
+            ',  Change', 
+            ', %change', 
+          ', 
+         
+								', 
+								try{
+									var fiFlag=false;
+									var fiText='';
+									for(var fi=0;fi<FI_INDICES.length;fi++){
+										fiText +='<tr '+((fi==1)?'class="active  '+((fiFlag)?'alt':'')+'"':((fiFlag)?'class="alt"':''))+'> '+
+										'<td>	<span class="index"  >'+
+										'		<a class=anchorColour href="javascript:void(0)" style="color:#000000" id="indexName'+FI_INDICES[fi]+'">--</a>'+										
+										'	</span></td>'+ 
+							
+										'	<td style="text-align:right"><span class="value" style="color:#000000" id="lastPrice'+FI_INDICES[fi]+'">--</span> </td>'+
+										'	<td style="text-align:right"><span class="change" id="change'+FI_INDICES[fi]+'"> '+
+										'		&nbsp;&nbsp;'+
+										'		--'+
+										'	</span> </td>'+
+										'	<td style="text-align:right"><span class="per_change" id="pChange'+FI_INDICES[fi]+'">--% </span>'+
+										'	<div  class="index_info" style="display:none">'+
+									//	'		<img id="image'+MAJOR_INDICES[mi]+'" src="" class="floatleft" alt="" WIDTH="330px" height="215px"/>'+
+										'		<div id="iframe'+FI_INDICES[fi]+'"></div>'+
+										'		<div>'+
+										'				'+((isStockWatchIndex(FI_INDICES[fi]))?'<a class=anchorColour href="'+getStockWatchIndexLink(FI_INDICES[fi])+'" class="stk_watch">Stock Watch</a>':'')+								
+										'			<p></p>'+
+										'			'+((isTwitterIndex(FI_INDICES[fi]))?'<p class="twitter"><span></span> <a class=anchorColour href="'+getTwitterIndicesLink(FI_INDICES[fi])+'" target="_blank"></a></p>':'')+
+										'		</div>'+
+										'	</div></td>'+
+										'</tr>';
+										fiFlag=fiFlag;
+									}
+
+									}
+									catch(err){/*alert(err.message)*/};
+
+
+								', 
+							', 
+								', 														
+									', document.write(fiText);
+									
+									', 
+								', 
+							', 
+		', 
+
+
+     ',  ', 
+     ', 
+     ', 
+     
+', 
+', 
+
+
+', 
+
+	', 
+    ', 
+        ', 
+    	', 
+           
+        ', 
+        ', 
+        	', 
+                ', 
+        	', 
+            ', 
+        ', 
+        ', 
+      ', 
+    ', 
+        	', 
+                ', Investor', 
+                ', Member', 
+                ', Corporate', 
+                ', Student', 
+                ', Researcher', 
+        	', 
+        ', 
+    ', 
+    ', 
+    ', 
+    
+    ', 
+	', 
+
+	',  ',  ',  "INVESTORS BEWARE" click here |  ', " No need to issue cheques by investors while subscribing to IPO. Just write the bank account number and sign in the application form to authorise your bank to make payment in case of allotment. No worries for refund as the money remains in investor's account". | Prevent unauthorised transactions in your account ---> Update your mobile numbers/email IDs with your stock brokers. Receive information of your transactions directly from Exchange on your mobile/email at the end of the day .......... Investors beware. Do not trade on the basis of SMS tips. Take an informed decision before investing.......... Issued in the interest of Investors ',  ', 
+
+
+
+    ', 
+    
+    	
+        ', 
+        ', 
+            ', 
+                ', Currency Rates ',  ', 
+                ', Interest Rate Future',  ', 
+            ', 
+            ', 
+            ', 
+            	', 
+                	', 
+					
+                    ', 
+                        ', USDINR 1 $ ', -', 
+
+                        ', EURINR 1 €', -', 
+
+                        ', GBPINR 1 \u20a4', -', 
+
+                        ', JPYINR 100 ¥', -', 
+
+                    ', 
+					', 
+
+                    ', 
+					', 
+                    ', View all', 
+                ', 
+                ', 
+                	', 
+						', 
+								', Underlying', 
+								', Price', 
+								', Yield', 
+							', 
+							', 
+								', -', 
+								', -', 
+								', -', 
+							', 
+
+							 ', 
+								', -', 
+								', -', 
+								', -', 
+							', 
+							', 
+								', -', 
+								', -', 
+								', -', 
+							', 
+
+							 ', 
+								', -', 
+								', -', 
+								', -', 
+							', 
+
+							', 
+								Source : Clearcorp Dealing Systems (India) Limited
+							', 
+
+
+							', -', 
+							', 
+						
+                    ', 
+                   ', 
+                ', 
+               
+            ', 
+            
+        ', 
+        ', 
+        ', 
+        
+        
+        ', 
+        ', 
+            ', Product Offerings', 
+            ', 
+            	', Equity', 
+                ', Indices', 
+                ', Sovereign Gold Bonds Scheme',  ', 
+				', Equity Derivatives', 
+                ', SLBS', 
+                
+				', Currency Derivatives', 
+                ', ETF', 
+
+				', 
+				', NSE Bond Futures', 
+                ', Debt', 
+				', 
+
+
+				', New Listing - Equities', 
+				
+				', IPO', |', OFS', |', IPP', |', Rights',  |', Tender Offer',  ', 
+
+			',  
+			', New Fund Offer (MFSS)', 
+			', 
+
+
+
+            ', 
+            ', 
+        ', 
+        ', View all', 
+        ', 
+        ', 
+        
+        ', 
+        ', 
+			 ', Important Links', 
+             ', 
+				 ',  Saral Account Opening form ', 
+					', 
+                ', Find a member', 
+		', 
+                ', 
+				', Register e-Complaint', 
+
+				', Core SGF & Default Waterfall', 
+
+                ', 
+            ', 
+        ', 
+
+		', 
+              	', 
+                	', 
+                    ', 
+                    	', Investor Support', 
+                        ', Toll Free', 
+                        ', 1800 266 0058', 
+                    ', 
+                    ', View Department-wise Contacts', 
+                     ', 
+                ', 
+                
+         ', 
+
+        ', 
+
+		', 
+              ', 
+              ', 
+         
+    ', 
+    
+    ', 
+    	
+        ', 
+        ', 
+            ', 
+                ', Announcements ',  ', 
+                ', NSE News',  ', 
+            ', 
+            ', 
+            ', 
+            	', 
+                	', 
+					', 
+                    ', 
+                    ', 
+					', 
+                    ', View all', 
+                ', 
+                ', 
+                	', 
+						', 
+                        ', 
+                    ', 
+                    ', View all', 
+                ', 
+               
+            ', 
+            
+        ', 
+        
+        ', 
+
+', 
+
+
+         ', 
+         
+', 
+', 
+ ', 
+
+        ', 
+        ', 
+			 ', Quick Links', 
+             ', 
+             ', 
+                ', All Reports ', 
+                ', Verify Trades ', 
+                ', All Forms', 
+                ',  Verify IPO Bid ', 
+				', Verify SGBS Bid', 
+            ', 
+             ', 
+        ', 
+        ', 
+
+		
+
+
+
+', 
+', 
+', 
+', 
+          
+        ',   
+        ', 
+			 ', Trading App', 
+             ', 
+                ', NSE Paathshala', 
+                ', Mobile Application', 
+                ', My NSE', 
+            ', 
+        ', 
+        ',   
+        
+        ',  
+    
+
+
+		', 
+
+		', 
+
+
+
+		', 
+		', 
+
+	   ', 
+
+
+       ', 
+
+        ', 
+
+
+		', 
+		', >>Read More', 
+		', 
+
+		', Statutory Compliance', 
+		
+		', 
+
+
+', 
+
+		', 
+    ', 
+    
+
+       
+    ', 
+    ',  ',  
+    
+    ', 
+          ', 
+            ',  
+              
+              ', 
+              ', 
+                ', 
+                  ', Circulars ',  ', 
+                  ', NSE News',  ', 
+                ', 
+                ', 
+                 ', 
+                  ', 
+              ', 
+					', 
+                      ', 
+                    ', 
+                    ', View all', 
+                  ', 
+                  ', 
+                    ', 
+					 ', 
+                      ', 
+                    ', 
+                    ', View all', 
+                  ', 
+               	 ', 
+              ', 
+              ', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', New Members', 
+                ', 
+                  ', Categories of membership', 
+                  ', Fees, Deposits & Networth Requirements', 
+                  ', Set of documents', 
+                  ', Eligibility Criteria', 
+                  ', Admission Process', 
+                  ', Enablement', 
+                ', 
+                ', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', Product Offerings', 
+                ', 
+', 
+				  ', Equity', 
+                  ', Indices', 
+                  ', Currency Derivatives', 
+                  ', SLBS', 
+                  ', Equity Derivatives', 
+                  ', ETF', 
+				  ', New Listing - ', Equities', |', IPO', |', OFS', |', IPP', 
+                ', 
+                ', 
+              ', 
+              ', View all', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+              	', 
+                	', 
+                    ', 
+                    	', Member Trade Support', 
+                        ', Toll Free', 
+                        ', 1800 266 0053', 
+                    ', 
+                    ', View Department-wise Contacts', 
+                     ', 
+                ', 
+                
+              ', 
+              ', 
+              
+            ', 
+            ', 
+            
+            ',  
+              
+              ', 
+             ', 
+			   ', 
+                ', 
+              ', 
+              ', View all', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', Existing Members', 
+                ', 
+                ', 
+                	', ENIT on ', Member Portal', 
+', 
+                ', 
+                
+                ', 
+				', NSE Knowledge Hub', 
+                  ', Connectivity', 
+                  ', Compliance for Trading Members', 
+                  ', Compliance Calendar', 
+                  ', Members Formats', 
+                ', 
+                ', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', Trade Information', 
+                ', 
+                  ', All Market Reports ', 
+                  ', Corporate Information', 
+                  ', Member disclosures', 
+                  ', 
+                  ', Subscribe for NSE Data Feed', 
+                ', 
+              ', 
+              ', 
+              
+             
+              ', 
+            ', 
+            ', 
+            ', 
+            ', 
+          ', 
+          ', 
+          
+          ', 
+          ', 
+            ',  
+              
+              ', 
+              ', 
+                ', 
+                  ', Announcements',  ', 
+                  ', Corporate Actions',  ', 
+                ', 
+                ', 
+                ', 
+                  ', 
+					', 
+					 ', 
+                      ', 
+                    ', 
+                     ', View all', 
+                  ', 
+                  ', 
+                    ', 
+					 ', 
+                 ', 
+                    ', 
+                    ', View all', 
+                  ', 
+                ', 
+              ', 
+              ', 
+              ', 
+              ',  
+              
+              ', 
+               ', 
+                    ', New Corporates', 
+                    ', Companies that are looking for wider exposure to the market and that have expansion and leveraging plans and plan to plough the market for potential sources of equity funding may approach the Exchange for Listing.', 
+                    ', Read More', 
+               ', 
+              ', 
+              	
+                ', 
+                  ', Listing Criteria', 
+                  ', Listing Process- ', CM', |', MFSS', |', Debt', 
+				  ', Listing Agreement- ', CM', |', Debt', 
+				  ', Listing Fees- ', CM', |', MFSS', |', Debt', 
+                ', 
+                ', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                    ', Listing Across Products', 
+                    ', Companies that are looking for wider exposure to the market and that have expansion and leveraging plans and plan to plough the market for potential sources of equity funding may approach the Exchange for Listing.', 
+                   
+                ',  
+              ', 
+              	
+                ', 
+				 
+                  ', Capital Market', 
+                  ', Mutual Funds', 
+                  ', Retail Debt Market', 
+                  ', Wholesale Debt Market', 
+                ', 
+                ', 
+              ', 
+              ',  
+              
+             
+            ', 
+            ', 
+            
+            ',  
+              
+              ', 
+			', 
+                ', 
+              ', 
+             ', View all', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', Corporate Information', 
+                ',                
+                ', 
+                  ', Financial Results', 
+                  ', Shareholding Pattern', 
+                  ', Corporate Actions', 
+                ', 
+                ', 
+                ', Corporate Information', 
+                ', Trade Information', 
+                ', 
+                ', 
+                  ', Securities Information', 
+                  ', Company Historical Data', 
+                ', 
+                ', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', Quick Links', 
+                ', 
+                   ', Circular issued to listed companies', 
+                  ', Circular related to debt securities', 
+                  ', Compliance Calendar', 
+                  ', Compliance Information', 
+                  ', Further Issues', 
+                ', 
+              ', 
+              ', 
+              
+             
+              ', 
+              ', 
+            ', 
+            ', 
+            ', 
+          ', 
+          ', 
+          
+           ', 
+          ', 
+            ',  
+
+			 ', 
+               ', 
+              ', 
+                ', 
+                  ', Announcements',  ', 
+                  ', NSE News',  ', 
+                ', 
+                ', 
+                ', 
+                  ', 
+                     ', 
+                      ', 
+                    ', 
+                    ', View all', 
+                  ', 
+                  ', 
+                     ', 
+               ', 
+                    ', 
+                    ', View all', 
+                  ', 
+                ', 
+              ', 
+              ', 
+              ', 
+              ', 
+              
+              ', 
+              ', 
+                ', u"NSE Academy's Certifications", 
+                ', 
+                ', 
+                  ', 
+                    ', 
+                      ', 
+                        ', u"NSE Academy's Certification in Financial Markets (NCFM) ", 
+                        ', Management Development Programmes @ NSE ', 
+                        ', 
+						', 
+						', 
+                      ', 
+                    ', 
+                    ', View all', 
+                  ', 
+                ', 
+              ', 
+              ', 
+              ', 
+              
+              
+             
+              
+              ', 
+               ', 
+                    ', Test Details', 
+                    ', 
+                        ', 
+						', Test Centers', 
+		                ', Scheduled Test', 
+				        ', 
+                    ', 
+                    ', 
+               ', 
+               
+               ', 
+
+			   ', 
+              	', 
+                	', 
+                    ', 
+                    	', NCFM Support', 
+                        ', Toll Free', 
+                        ', 1800 22 0051', 
+                    ', 
+                    ', View Department-wise Contacts', 
+                     ', 
+                ', 
+                
+              ', 
+              ',  
+              
+             
+             
+            ', 
+            ', 
+            
+            ',  
+              
+			  ', 
+              ', 
+                ', Register for NCFM Test', 
+				', 
+				', 
+                	', New user  ', login ', 
+                    ', Existing user ', login', 
+                ', 
+
+                ', 
+                 
+                  ', Step by step guide', 
+                  ', Take a Model Test', 
+                   ', 
+				   ', 
+				    ', Registration form for all Module', 
+                   ', 
+				    ', Registration for NSE FinBasics', 
+				   
+                ', 
+                ', 
+              ', 
+              ',  
+
+
+              ', 
+           ', 
+              ', 
+			   ', 
+              ', 
+              ', 
+              
+              
+              
+              ', 
+              ', 
+                ', Learn about Investments', 
+                ', 
+                  ', NSE Paathshala', 
+                  ', Investment Concepts', 
+                  ', Soch Kar Samaj Kar Invest Kar', 
+                ', 
+              ', 
+              ', 
+              
+             
+             
+            ', 
+            ', 
+            ', 
+          ', 
+          ', 
+          
+           ', 
+          ', 
+            ',  
+            
+           		', 
+                ', 
+                    ', NSE Working Papers', 
+                    ', 
+                    ', 
+', 
+                    ', 
+                    ', View all', 
+                ', 
+                ', 
+                ', 
+             	
+                ', 
+                    ', NSE Research Initiatives', 
+                    ', 
+                        ', NSE Centre for Excellence in Corporate Governance (NSE CECG)', 
+                        ', NSE-IIM Bangalore Corporate Governance', 
+                        ', NSE-IFMR Financial Inclusion Research', 
+                        ', Panel Discussions/Seminars', 
+                    ', 
+                ', 
+              
+               ', 
+               ', 
+                    ', Product Offerings', 
+                    ', 
+                        ', 
+						', Equity', 
+		                ', Indices', 
+				        ', Currency Derivatives', 
+						', SLBS', 
+		                ', Equity Derivatives', 
+				        ', ETF', 
+						', New Listing - ', Equities', |', IPO', |', OFS', |', IPP', 
+                    ', 
+                    ', 
+               ', 
+               ', View all', 
+               ', 
+              ',  
+              
+            ', 
+            
+            ', 
+            ',  
+              
+             ', 
+                ', 
+                    ', Student Research Projects', 
+                    ', 
+                   ', 
+               ', 
+                    ', 
+                    ', View all', 
+                ', 
+                ', 
+                ', 
+              
+              ', 
+              ', 
+                ', Information Zone', 
+                ', 
+                  ', Historical Data', 
+                ', 
+                ', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', Publications', 
+                ', 
+                  ', Corporate Governance:',  An Emerging Scenario', 
+                ', 
+              ', 
+              ', 
+              
+             
+              ', 
+               ', 
+            ', 
+            ', 
+            ', 
+          ', 
+          ', 
+    
+      ', 
+    
+', 
+		
+
+
+
+', 
+
+', 
+		', 
+		',  
+	
+	',  
+
+
+
+ 
+
+', 
+	', 
+		
+	', 
+	', 
+', 
+'][
+',  
+	', 
+	',  		
+		', 
+		',  ', 
+		',  
+	', 
+	', 
+	',  
+	', 
+	
+', 
+
+', 
+', 
+
+', 
+', 
+	', 
+    ', 
+	', 
+    
+    ', 
+    ', 
+    	', Market Watch', 
+        ', 
+			', Market Turnover',  ', 
+		', 
+		
+        ', 
+		
+        ', NIFTY 50', 
+		
+
+		', 
+			var indexText='';
+			indexText +='<li class="selected"'+
+			'	<span class="index" >'+
+			'		<a class=anchorColour href="javascript:void(0)" style="display:none" id="indexNameNIFTY 50">--</a>'+
+			'	</span>'+ 
+			'	<span id="imNIFTY 50" style="display:none" class="imPath"></span>'+
+			'	<span id="lastPriceNIFTY 50" class="number">--</span> '+
+			'	<span id="changeNIFTY 50" class="number green">'+
+			'	&nbsp;&nbsp;'+
+			'		--'+
+			'	</span> '+
+			'	<span class="number green" id="pChangeNIFTY 50">--% </span>'+
+			'	<div  class="index_info" style="display:block">'+
+			'		<div id="iframeNIFTY 50"></div>'+
+			'	<div>'+
+				'	<span></span>'+
+			'	</div>'+
+			'</li>';
+
+		', 
+
+
+		', 
+			', 														
+				', document.write(indexText);	', 
+			', 
+		', 
+		', loadNotification(true);', 
+        ', 
+        	', 
+            	', Advances', 
+                ', --', 
+            ', 
+            ', 
+            	', Declines   ', 
+                ', --', 
+            ', 
+             ', 
+            	', Unchanged', 
+                ', --', 
+            ', 
+        ', 
+        ', 
+    ',  ', 
+	', 
+	', 
+	', 
+    ', 
+     ', 
+     
+     ', 
+    ', 
+    	 ', 
+        	', Stock Watch',  | ', 
+            
+            ', Technical charts', 
+            ', 
+            ',  | ', Map of Market', 
+            ', 
+        ', 
+    	', 
+        	', Nifty 50 Gainers/ Losers ',  ', 
+            ', Most active',  ', 
+        ', 
+        ', 
+        
+        ', 
+        ', 
+        ', 
+       
+        ', 
+		   ', 
+		   ', 
+		    ', 
+		   ', 
+            
+
+        ',  ', 
+         ', 
+         
+         
+        ', 
+        ', 
+		', 	', 
+		   ', 
+		    ', 
+		   ', 
+		
+       
+        ',  ', 
+         ',  
+        ', 
+     	 ', 
+      
+     ', 
+
+
+
+        ', 
+         ', 
+    ', 
+    ', 
+    
+    ', 
+    
+    
+    ', 
+     ', 
+    	', Select an index to view more details', 
+        ', 
+        	', Broad Market Indices', 
+           ', Sectoral',  Indices', 
+            ', Other',  Indices', 
+			', Fixed Income',  Indices', 
+        ', 
+        ', 
+          ', 
+            ', Index', 
+            ', Current', 
+            ',  Change', 
+            ', %change', 
+          ', 
+         
+								', 
+								try{
+									var miFlag=false;
+									var miText='';
+									for(var mi=0;mi<MAJOR_INDICES.length;mi++){
+										miText +='<tr '+((mi==1)?'class="active  '+((miFlag)?'alt':'')+'"':((miFlag)?'class="alt"':''))+'> '+
+										'<td>	<span class="index"  >'+
+										'		<a class=anchorColour href="javascript:void(0)" style="color:#000000" id="indexName'+MAJOR_INDICES[mi]+'">--</a>'+										
+										'	</span></td>'+ 
+							
+										'	<td style="text-align:right"><span class="value" style="color:#000000" id="lastPrice'+MAJOR_INDICES[mi]+'">--</span> </td>'+
+										'	<td style="text-align:right"><span class="change" id="change'+MAJOR_INDICES[mi]+'"> '+
+										'		<img src="/common/images/ico_arr_up_grn.gif" width="8" height="4" alt="" />&nbsp;&nbsp;'+
+										'		--'+
+										'	</span> </td>'+
+										'	<td style="text-align:right"><span class="per_change" id="pChange'+MAJOR_INDICES[mi]+'">--% </span>'+
+										'	<div  class="index_info" style="display:none">'+
+									//	'		<img id="image'+MAJOR_INDICES[mi]+'" src="" class="floatleft" alt="" WIDTH="330px" height="215px"/>'+
+										'		<div id="iframe'+MAJOR_INDICES[mi]+'"></div>'+
+										'		<div>'+
+										'				'+((isStockWatchIndex(MAJOR_INDICES[mi]))?'<a class=anchorColour href="'+getStockWatchIndexLink(MAJOR_INDICES[mi])+'" class="stk_watch">Stock Watch</a>':'')+								
+										'			<p></p>'+
+										'			'+((isTwitterIndex(MAJOR_INDICES[mi]))?'<p class="twitter"><span></span> <a class=anchorColour href="'+getTwitterIndicesLink(MAJOR_INDICES[mi])+'" target="_blank"><img src="/common/images/ico_twitter.gif" alt="Twitter" height="21" width="23"/></a></p>':'')+
+										'		</div>'+
+										'	</div></td>'+
+										'</tr>';
+										miFlag=!miFlag;
+									}
+
+									}
+									catch(err){//alert(err.message)
+									};
+
+
+								', 
+							', 
+								', 														
+									', document.write(miText);
+									
+									', 
+								', 
+							', 
+	
+
+						
+
+
+       
+		', 
+
+
+		 
+        ', 
+          ', 
+            ', Index', 
+            ', Current', 
+            ',  Change', 
+            ', %change', 
+          ', 
+				 ', 
+						var siFlag=false;
+						var siText='';
+						for(var si=0;si<SECTORAL_INDICES.length;si++){
+							siText +='<tr class="alt"> '+
+							'	<td><span class="index" ><a class=anchorColour href="javascript:void(0)" style="color:#000000" id="indexName'+SECTORAL_INDICES[si]+'">--</a></span></td>'+ 
+						
+							'	<td style="text-align:right; color:#000000"><span class="value" id="lastPrice'+SECTORAL_INDICES[si]+'">--</span></td> '+
+							'	<td style="text-align:right"><span class="change" id="change'+SECTORAL_INDICES[si]+'"> '+
+							'		<img src="/common/images/ico_arr_up_grn.gif" width="8" height="4" alt="" />&nbsp;&nbsp;'+
+							'		--'+
+							'	</span></td> '+									
+							'	<td style="text-align:right"><span class="per_change" id="pChange'+SECTORAL_INDICES[si]+'">--% </span>'+
+							'	<div  class="index_info" style="display:none">'+
+							//'		<img id="image'+SECTORAL_INDICES[si]+'" src="" class="floatleft" alt="" WIDTH="330px" height="215px"/>'+
+							'		<div  id="iframe'+SECTORAL_INDICES[si]+'"></div>'+
+							'		<div>'+
+							'				'+(isStockWatchIndex(SECTORAL_INDICES[si])?'<a class=anchorColour href="'+getStockWatchIndexLink(SECTORAL_INDICES[si])+'" class="stk_watch"> Stock Watch</a>':'')+
+							'			<p></p>'+
+							'			'+(isTwitterIndex(SECTORAL_INDICES[si])?'<p class="twitter"><span></span> <a class=anchorColour href="'+getTwitterIndicesLink(SECTORAL_INDICES[si])+'" target="_blank"><img src="/common/images/ico_twitter.gif" alt="Twitter"  height="21" width="23"/></a></p>':'')+
+							'		</div>'+
+							'	</div></td>'+
+							'</tr>';
+							siFlag=!siFlag;
+						}
+				', 
+				', 
+					
+					', 														
+						', document.write(siText);	', 
+					', 
+				', 
+
+		', 
+
+		', 
+          ', 
+            ', Index', 
+		    ', Current', 
+            ',  Change', 
+
+            ', %change', 
+          ', 
+
+
+
+								', 
+								try{
+									var miFlag=false;
+									var miText='';
+									for(var mi=0;mi<OTHER_INDICES.length;mi++){
+										miText +='<tr '+((mi==1)?'class="active  '+((miFlag)?'alt':'')+'"':((miFlag)?'class="alt"':''))+'> '+
+										'<td>	<span class="index" >'+
+										'		<a class=anchorColour href="javascript:void(0)" style="color:#000000" id="indexName'+OTHER_INDICES[mi]+'">--</a>'+										
+										'	</span></td>'+ 
+							
+										'	<td style="text-align:right; color:#000000"><span class="value" id="lastPrice'+OTHER_INDICES[mi]+'">--</span> </td>'+
+										'	<td style="text-align:right"><span class="change" id="change'+OTHER_INDICES[mi]+'"> '+
+										'		<img src="/common/images/ico_arr_up_grn.gif" width="8" height="4" alt="" />&nbsp;&nbsp;'+
+										'		--'+
+										'	</span> </td>'+
+										'	<td style="text-align:right"><span class="per_change" id="pChange'+OTHER_INDICES[mi]+'">--% </span>'+
+										'	<div  class="index_info" style="display:none">'+
+									//	'		<img id="image'+MAJOR_INDICES[mi]+'" src="" class="floatleft" alt="" WIDTH="330px" height="215px"/>'+
+										'		<div id="iframe'+OTHER_INDICES[mi]+'"></div>'+
+										'		<div>'+
+										'				'+((isStockWatchIndex(OTHER_INDICES[mi]))?'<a class=anchorColour href="'+getStockWatchIndexLink(OTHER_INDICES[mi])+'" class="stk_watch">Stock Watch</a>':'')+								
+										'			<p></p>'+
+										'			'+((isTwitterIndex(OTHER_INDICES[mi]))?'<p class="twitter"><span></span> <a class=anchorColour href="'+getTwitterIndicesLink(OTHER_INDICES[mi])+'" target="_blank"><img src="/common/images/ico_twitter.gif" alt="Twitter"  height="21" width="23"/></a></p>':'')+
+										'		</div>'+
+										'	</div></td>'+
+										'</tr>';
+										miFlag=!miFlag;
+									}
+
+									}
+									catch(err){//alert(err.message)
+									};
+
+
+								', 
+							', 
+								', 														
+									', document.write(miText);
+									
+									', 
+								', 
+							', 
+	
+
+					
+
+
+       
+		', 
+
+
+
+
+		        ', 
+          ', 
+            ', Index', 
+            ', Current', 
+            ',  Change', 
+            ', %change', 
+          ', 
+         
+								', 
+								try{
+									var fiFlag=false;
+									var fiText='';
+									for(var fi=0;fi<FI_INDICES.length;fi++){
+										fiText +='<tr '+((fi==1)?'class="active  '+((fiFlag)?'alt':'')+'"':((fiFlag)?'class="alt"':''))+'> '+
+										'<td>	<span class="index"  >'+
+										'		<a class=anchorColour href="javascript:void(0)" style="color:#000000" id="indexName'+FI_INDICES[fi]+'">--</a>'+										
+										'	</span></td>'+ 
+							
+										'	<td style="text-align:right"><span class="value" style="color:#000000" id="lastPrice'+FI_INDICES[fi]+'">--</span> </td>'+
+										'	<td style="text-align:right"><span class="change" id="change'+FI_INDICES[fi]+'"> '+
+										'		&nbsp;&nbsp;'+
+										'		--'+
+										'	</span> </td>'+
+										'	<td style="text-align:right"><span class="per_change" id="pChange'+FI_INDICES[fi]+'">--% </span>'+
+										'	<div  class="index_info" style="display:none">'+
+									//	'		<img id="image'+MAJOR_INDICES[mi]+'" src="" class="floatleft" alt="" WIDTH="330px" height="215px"/>'+
+										'		<div id="iframe'+FI_INDICES[fi]+'"></div>'+
+										'		<div>'+
+										'				'+((isStockWatchIndex(FI_INDICES[fi]))?'<a class=anchorColour href="'+getStockWatchIndexLink(FI_INDICES[fi])+'" class="stk_watch">Stock Watch</a>':'')+								
+										'			<p></p>'+
+										'			'+((isTwitterIndex(FI_INDICES[fi]))?'<p class="twitter"><span></span> <a class=anchorColour href="'+getTwitterIndicesLink(FI_INDICES[fi])+'" target="_blank"></a></p>':'')+
+										'		</div>'+
+										'	</div></td>'+
+										'</tr>';
+										fiFlag=fiFlag;
+									}
+
+									}
+									catch(err){/*alert(err.message)*/};
+
+
+								', 
+							', 
+								', 														
+									', document.write(fiText);
+									
+									', 
+								', 
+							', 
+		', 
+
+
+     ',  ', 
+     ', 
+     ', 
+     
+', 
+', 
+
+
+', 
+
+	', 
+    ', 
+        ', 
+    	', 
+           
+        ', 
+        ', 
+        	', 
+                ', 
+        	', 
+            ', 
+        ', 
+        ', 
+      ', 
+    ', 
+        	', 
+                ', Investor', 
+                ', Member', 
+                ', Corporate', 
+                ', Student', 
+                ', Researcher', 
+        	', 
+        ', 
+    ', 
+    ', 
+    ', 
+    
+    ', 
+	', 
+
+	',  ',  ',  "INVESTORS BEWARE" click here |  ', " No need to issue cheques by investors while subscribing to IPO. Just write the bank account number and sign in the application form to authorise your bank to make payment in case of allotment. No worries for refund as the money remains in investor's account". | Prevent unauthorised transactions in your account ---> Update your mobile numbers/email IDs with your stock brokers. Receive information of your transactions directly from Exchange on your mobile/email at the end of the day .......... Investors beware. Do not trade on the basis of SMS tips. Take an informed decision before investing.......... Issued in the interest of Investors ',  ', 
+
+
+
+    ', 
+    
+    	
+        ', 
+        ', 
+            ', 
+                ', Currency Rates ',  ', 
+                ', Interest Rate Future',  ', 
+            ', 
+            ', 
+            ', 
+            	', 
+                	', 
+					
+                    ', 
+                        ', USDINR 1 $ ', -', 
+
+                        ', EURINR 1 €', -', 
+
+                        ', GBPINR 1 \u20a4', -', 
+
+                        ', JPYINR 100 ¥', -', 
+
+                    ', 
+					', 
+
+                    ', 
+					', 
+                    ', View all', 
+                ', 
+                ', 
+                	', 
+						', 
+								', Underlying', 
+								', Price', 
+								', Yield', 
+							', 
+							', 
+								', -', 
+								', -', 
+								', -', 
+							', 
+
+							 ', 
+								', -', 
+								', -', 
+								', -', 
+							', 
+							', 
+								', -', 
+								', -', 
+								', -', 
+							', 
+
+							 ', 
+								', -', 
+								', -', 
+								', -', 
+							', 
+
+							', 
+								Source : Clearcorp Dealing Systems (India) Limited
+							', 
+
+
+							', -', 
+							', 
+						
+                    ', 
+                   ', 
+                ', 
+               
+            ', 
+            
+        ', 
+        ', 
+        ', 
+        
+        
+        ', 
+        ', 
+            ', Product Offerings', 
+            ', 
+            	', Equity', 
+                ', Indices', 
+                ', Sovereign Gold Bonds Scheme',  ', 
+				', Equity Derivatives', 
+                ', SLBS', 
+                
+				', Currency Derivatives', 
+                ', ETF', 
+
+				', 
+				', NSE Bond Futures', 
+                ', Debt', 
+				', 
+
+
+				', New Listing - Equities', 
+				
+				', IPO', |', OFS', |', IPP', |', Rights',  |', Tender Offer',  ', 
+
+			',  
+			', New Fund Offer (MFSS)', 
+			', 
+
+
+
+            ', 
+            ', 
+        ', 
+        ', View all', 
+        ', 
+        ', 
+        
+        ', 
+        ', 
+			 ', Important Links', 
+             ', 
+				 ',  Saral Account Opening form ', 
+					', 
+                ', Find a member', 
+		', 
+                ', 
+				', Register e-Complaint', 
+
+				', Core SGF & Default Waterfall', 
+
+                ', 
+            ', 
+        ', 
+
+		', 
+              	', 
+                	', 
+                    ', 
+                    	', Investor Support', 
+                        ', Toll Free', 
+                        ', 1800 266 0058', 
+                    ', 
+                    ', View Department-wise Contacts', 
+                     ', 
+                ', 
+                
+         ', 
+
+        ', 
+
+		', 
+              ', 
+              ', 
+         
+    ', 
+    
+    ', 
+    	
+        ', 
+        ', 
+            ', 
+                ', Announcements ',  ', 
+                ', NSE News',  ', 
+            ', 
+            ', 
+            ', 
+            	', 
+                	', 
+					', 
+                    ', 
+                    ', 
+					', 
+                    ', View all', 
+                ', 
+                ', 
+                	', 
+						', 
+                        ', 
+                    ', 
+                    ', View all', 
+                ', 
+               
+            ', 
+            
+        ', 
+        
+        ', 
+
+', 
+
+
+         ', 
+         
+', 
+', 
+ ', 
+
+        ', 
+        ', 
+			 ', Quick Links', 
+             ', 
+             ', 
+                ', All Reports ', 
+                ', Verify Trades ', 
+                ', All Forms', 
+                ',  Verify IPO Bid ', 
+				', Verify SGBS Bid', 
+            ', 
+             ', 
+        ', 
+        ', 
+
+		
+
+
+
+', 
+', 
+', 
+', 
+          
+        ',   
+        ', 
+			 ', Trading App', 
+             ', 
+                ', NSE Paathshala', 
+                ', Mobile Application', 
+                ', My NSE', 
+            ', 
+        ', 
+        ',   
+        
+        ',  
+    
+
+
+		', 
+
+		', 
+
+
+
+		', 
+		', 
+
+	   ', 
+
+
+       ', 
+
+        ', 
+
+
+		', 
+		', >>Read More', 
+		', 
+
+		', Statutory Compliance', 
+		
+		', 
+
+
+', 
+
+		', 
+    ', 
+    
+
+       
+    ', 
+    ',  ',  
+    
+    ', 
+          ', 
+            ',  
+              
+              ', 
+              ', 
+                ', 
+                  ', Circulars ',  ', 
+                  ', NSE News',  ', 
+                ', 
+                ', 
+                 ', 
+                  ', 
+              ', 
+					', 
+                      ', 
+                    ', 
+                    ', View all', 
+                  ', 
+                  ', 
+                    ', 
+					 ', 
+                      ', 
+                    ', 
+                    ', View all', 
+                  ', 
+               	 ', 
+              ', 
+              ', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', New Members', 
+                ', 
+                  ', Categories of membership', 
+                  ', Fees, Deposits & Networth Requirements', 
+                  ', Set of documents', 
+                  ', Eligibility Criteria', 
+                  ', Admission Process', 
+                  ', Enablement', 
+                ', 
+                ', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', Product Offerings', 
+                ', 
+', 
+				  ', Equity', 
+                  ', Indices', 
+                  ', Currency Derivatives', 
+                  ', SLBS', 
+                  ', Equity Derivatives', 
+                  ', ETF', 
+				  ', New Listing - ', Equities', |', IPO', |', OFS', |', IPP', 
+                ', 
+                ', 
+              ', 
+              ', View all', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+              	', 
+                	', 
+                    ', 
+                    	', Member Trade Support', 
+                        ', Toll Free', 
+                        ', 1800 266 0053', 
+                    ', 
+                    ', View Department-wise Contacts', 
+                     ', 
+                ', 
+                
+              ', 
+              ', 
+              
+            ', 
+            ', 
+            
+            ',  
+              
+              ', 
+             ', 
+			   ', 
+                ', 
+              ', 
+              ', View all', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', Existing Members', 
+                ', 
+                ', 
+                	', ENIT on ', Member Portal', 
+', 
+                ', 
+                
+                ', 
+				', NSE Knowledge Hub', 
+                  ', Connectivity', 
+                  ', Compliance for Trading Members', 
+                  ', Compliance Calendar', 
+                  ', Members Formats', 
+                ', 
+                ', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', Trade Information', 
+                ', 
+                  ', All Market Reports ', 
+                  ', Corporate Information', 
+                  ', Member disclosures', 
+                  ', 
+                  ', Subscribe for NSE Data Feed', 
+                ', 
+              ', 
+              ', 
+              
+             
+              ', 
+            ', 
+            ', 
+            ', 
+            ', 
+          ', 
+          ', 
+          
+          ', 
+          ', 
+            ',  
+              
+              ', 
+              ', 
+                ', 
+                  ', Announcements',  ', 
+                  ', Corporate Actions',  ', 
+                ', 
+                ', 
+                ', 
+                  ', 
+					', 
+					 ', 
+                      ', 
+                    ', 
+                     ', View all', 
+                  ', 
+                  ', 
+                    ', 
+					 ', 
+                 ', 
+                    ', 
+                    ', View all', 
+                  ', 
+                ', 
+              ', 
+              ', 
+              ', 
+              ',  
+              
+              ', 
+               ', 
+                    ', New Corporates', 
+                    ', Companies that are looking for wider exposure to the market and that have expansion and leveraging plans and plan to plough the market for potential sources of equity funding may approach the Exchange for Listing.', 
+                    ', Read More', 
+               ', 
+              ', 
+              	
+                ', 
+                  ', Listing Criteria', 
+                  ', Listing Process- ', CM', |', MFSS', |', Debt', 
+				  ', Listing Agreement- ', CM', |', Debt', 
+				  ', Listing Fees- ', CM', |', MFSS', |', Debt', 
+                ', 
+                ', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                    ', Listing Across Products', 
+                    ', Companies that are looking for wider exposure to the market and that have expansion and leveraging plans and plan to plough the market for potential sources of equity funding may approach the Exchange for Listing.', 
+                   
+                ',  
+              ', 
+              	
+                ', 
+				 
+                  ', Capital Market', 
+                  ', Mutual Funds', 
+                  ', Retail Debt Market', 
+                  ', Wholesale Debt Market', 
+                ', 
+                ', 
+              ', 
+              ',  
+              
+             
+            ', 
+            ', 
+            
+            ',  
+              
+              ', 
+			', 
+                ', 
+              ', 
+             ', View all', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', Corporate Information', 
+                ',                
+                ', 
+                  ', Financial Results', 
+                  ', Shareholding Pattern', 
+                  ', Corporate Actions', 
+                ', 
+                ', 
+                ', Corporate Information', 
+                ', Trade Information', 
+                ', 
+                ', 
+                  ', Securities Information', 
+                  ', Company Historical Data', 
+                ', 
+                ', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', Quick Links', 
+                ', 
+                   ', Circular issued to listed companies', 
+                  ', Circular related to debt securities', 
+                  ', Compliance Calendar', 
+                  ', Compliance Information', 
+                  ', Further Issues', 
+                ', 
+              ', 
+              ', 
+              
+             
+              ', 
+              ', 
+            ', 
+            ', 
+            ', 
+          ', 
+          ', 
+          
+           ', 
+          ', 
+            ',  
+
+			 ', 
+               ', 
+              ', 
+                ', 
+                  ', Announcements',  ', 
+                  ', NSE News',  ', 
+                ', 
+                ', 
+                ', 
+                  ', 
+                     ', 
+                      ', 
+                    ', 
+                    ', View all', 
+                  ', 
+                  ', 
+                     ', 
+               ', 
+                    ', 
+                    ', View all', 
+                  ', 
+                ', 
+              ', 
+              ', 
+              ', 
+              ', 
+              
+              ', 
+              ', 
+                ', u"NSE Academy's Certifications", 
+                ', 
+                ', 
+                  ', 
+                    ', 
+                      ', 
+                        ', u"NSE Academy's Certification in Financial Markets (NCFM) ", 
+                        ', Management Development Programmes @ NSE ', 
+                        ', 
+						', 
+						', 
+                      ', 
+                    ', 
+                    ', View all', 
+                  ', 
+                ', 
+              ', 
+              ', 
+              ', 
+              
+              
+             
+              
+              ', 
+               ', 
+                    ', Test Details', 
+                    ', 
+                        ', 
+						', Test Centers', 
+		                ', Scheduled Test', 
+				        ', 
+                    ', 
+                    ', 
+               ', 
+               
+               ', 
+
+			   ', 
+              	', 
+                	', 
+                    ', 
+                    	', NCFM Support', 
+                        ', Toll Free', 
+                        ', 1800 22 0051', 
+                    ', 
+                    ', View Department-wise Contacts', 
+                     ', 
+                ', 
+                
+              ', 
+              ',  
+              
+             
+             
+            ', 
+            ', 
+            
+            ',  
+              
+			  ', 
+              ', 
+                ', Register for NCFM Test', 
+				', 
+				', 
+                	', New user  ', login ', 
+                    ', Existing user ', login', 
+                ', 
+
+                ', 
+                 
+                  ', Step by step guide', 
+                  ', Take a Model Test', 
+                   ', 
+				   ', 
+				    ', Registration form for all Module', 
+                   ', 
+				    ', Registration for NSE FinBasics', 
+				   
+                ', 
+                ', 
+              ', 
+              ',  
+
+
+              ', 
+           ', 
+              ', 
+			   ', 
+              ', 
+              ', 
+              
+              
+              
+              ', 
+              ', 
+                ', Learn about Investments', 
+                ', 
+                  ', NSE Paathshala', 
+                  ', Investment Concepts', 
+                  ', Soch Kar Samaj Kar Invest Kar', 
+                ', 
+              ', 
+              ', 
+              
+             
+             
+            ', 
+            ', 
+            ', 
+          ', 
+          ', 
+          
+           ', 
+          ', 
+            ',  
+            
+           		', 
+                ', 
+                    ', NSE Working Papers', 
+                    ', 
+                    ', 
+', 
+                    ', 
+                    ', View all', 
+                ', 
+                ', 
+                ', 
+             	
+                ', 
+                    ', NSE Research Initiatives', 
+                    ', 
+                        ', NSE Centre for Excellence in Corporate Governance (NSE CECG)', 
+                        ', NSE-IIM Bangalore Corporate Governance', 
+                        ', NSE-IFMR Financial Inclusion Research', 
+                        ', Panel Discussions/Seminars', 
+                    ', 
+                ', 
+              
+               ', 
+               ', 
+                    ', Product Offerings', 
+                    ', 
+                        ', 
+						', Equity', 
+		                ', Indices', 
+				        ', Currency Derivatives', 
+						', SLBS', 
+		                ', Equity Derivatives', 
+				        ', ETF', 
+						', New Listing - ', Equities', |', IPO', |', OFS', |', IPP', 
+                    ', 
+                    ', 
+               ', 
+               ', View all', 
+               ', 
+              ',  
+              
+            ', 
+            
+            ', 
+            ',  
+              
+             ', 
+                ', 
+                    ', Student Research Projects', 
+                    ', 
+                   ', 
+               ', 
+                    ', 
+                    ', View all', 
+                ', 
+                ', 
+                ', 
+              
+              ', 
+              ', 
+                ', Information Zone', 
+                ', 
+                  ', Historical Data', 
+                ', 
+                ', 
+              ', 
+              ',  
+              
+              ', 
+              ', 
+                ', Publications', 
+                ', 
+                  ', Corporate Governance:',  An Emerging Scenario', 
+                ', 
+              ', 
+              ', 
+              
+             
+              ', 
+               ', 
+            ', 
+            ', 
+            ', 
+          ', 
+          ', 
+    
+      ', 
+    
+', 
+		
+
+
+
+', 
+
+', 
+		', 
+		',  
+	
+	',  
+
+
+
+ 
+
+', 
+	', 
+		
+	', 
+	', 
+', 
+']

@@ -57,7 +57,7 @@ class MySpider(scrapy.Spider):
 @defer.inlineCallbacks
 def crawl(univList, runner, UIobject):
     i=0
-    init_prog_val = UIobject.progressBar.value()
+    init_prog_val = 25
     #75% contribution
 
     for link2D in univList:

@@ -67,6 +67,9 @@ def keywordPresenceTester(company, keyword):
 
 
 def makeDataSet(UIobject):
+    global X
+    global y
+    
     homeList = os.listdir(os.getcwd() + '\data\\train_data\\')
     keywordFile = 'data\\definitions\\oriList.csv'
     keywordList = []
@@ -110,6 +113,9 @@ def makeDataSet(UIobject):
 
 
 def trainMLmodel(UIobject):
+    global X
+    global y
+    
     makeDataSet(UIobject)
 
     ### 20% contrib

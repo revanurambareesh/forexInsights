@@ -1,0 +1,2133 @@
+[
+ ', 
+     var environment_mic = 'production';
+     var cdn_domain = 'https://d5gdqotkuzdho.cloudfront.net';
+     var ga_code = (environment_mic == 'production') ? 'UA-10819086-1' : 'UA-74831561-1';
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', ga_code, 'auto');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview');
+       var data_json =  {
+        "term": {
+               "form": {
+                   "step1": ["coverage_amount_term", "policy_term"],
+                   "step2": ["desktop_cust_dob", "cust_gender", "smoker", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+	"health": {
+               "form": {
+                   "step1": ["coverage_amount", "plan_type_name"],
+                   "step2": ["cust_dob", "cust_gender", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "car": {
+               "form": {
+                   "step1": ["carinsurancetype"],
+                   "step2": ["veh_man", "veh_model", "veh_variant","veh_year"],
+                   "step3": ["reg_no_field1","reg_no_field2","reg_no_field3","reg_no_field4","first_pur_date", "car_registered_name", "is_ownership_change"],
+                   "step4": ["prev_insurer","policy_expiry_date","exist_policy_claims"],
+                   "step5": ["cust_email"]
+               }
+        },
+        "tw": {
+               "form": {
+                   "step1": ["carinsurancetype"],
+                   "step2": ["veh_man", "veh_model", "veh_variant","veh_year"],
+                   "step3": ["reg_no_field1","reg_no_field2","reg_no_field3","reg_no_field4","first_pur_date", "car_registered_name", "is_ownership_change"],
+                   "step4": ["prev_insurer","policy_expiry_date","exist_policy_claims"],
+                   "step5": ["cust_email"]
+               }
+        },
+        "endowment": {
+               "form": {
+                   "step1": ["coverage_amount_endowment"],
+                   "step2": ["desktop_cust_dob", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "moneyback": {
+               "form": {
+                   "step1": ["coverage_amount_moneyback"],
+                   "step2": ["desktop_cust_dob", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "child": {
+               "form": {
+                   "step1": ["coverage_amount_child"],
+                   "step2": ["desktop_cust_dob", "child_dob","cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "pension": {
+               "form": {
+                   "step1": ["coverage_amount_pension"],
+                   "step2": ["desktop_cust_dob","cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "ulip": {
+               "form": {
+                   "step1": ["coverage_amount_pension"],
+                   "step2": ["desktop_cust_dob","cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "travel": {
+               "form": {
+                   "step1": ["travel_type"],
+                   "step2": ["trip_location"],
+                   "step3": ["trip_start_date", "trip_end_date"],
+                   "step4": ["travel_insurance_type","desktop_cust_dob"],
+		   "step5": ["cust_name","cust_email"]
+               }
+        },
+        "ci": {
+               "form": {
+                   "step1": ["coverage_amount","plan_type","cust_gender","prop_desk_dob"],
+                   "step2": ["spouce_dob","child1_dob","child2_dob","child1_gender","child2_gender"]
+               }
+        },
+        "pa": {
+               "form": {
+                   "step1": ["cust_occupation_name"]
+               }
+        }
+       };
+     
+     ', 
+
+ ', 
+    
+ 
+  
+   function ga_step(category, action, label, value) {
+               if (action == 'form')
+               {
+                   var arr_json = eval('data_json.' + category + '.form.' + label);
+                   var arr_step_status = [];
+                   $.each(arr_json, function (k, v) {
+                       if ($("#" + v).val() == '')
+                       {
+                           arr_step_status.push(false);
+                       }
+                       else {
+                           arr_step_status.push(true);
+                       }
+                   });
+                   if ($.inArray(false, arr_step_status) == -1) {
+                       console.log(category, action, label, value);
+                       ga('send', 'event', {eventCategory: category, eventAction: action, eventLabel: label, eventValue: 0});
+                   }
+               }
+               else
+               {
+		   console.log(category, action, label, value);
+                   if(value == null || value == undefined || value == ''){
+                       value = '0';
+                   }
+                   ga('send', 'event', {eventCategory: category, eventAction: action, eventLabel: label, eventValue: value});
+               }
+
+           }
+ 
+  ', 
+    ', 
+  
+var CONS_INSP_LIST = {
+	    "controller": [
+	                   "controller_car",
+	                   "common"
+	                 //  "controller_two_wheeler"
+	                  // "controller_basicmediclaim"
+	               ],
+	               "action": [
+	                   "index",
+                           "new_index",
+	                 //  "get_car_results",
+	                  // "health_policy",
+	                 //  "BuyNow",
+	                   "return_url_motor",
+	                  // "get_two_wheeler_results"
+	               ]
+	           };
+  ',  
+
+
+', u"
+var clicky_site_ids = clicky_site_ids || [];
+clicky_site_ids.push(154599);
+(function() {
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = '//static.getclicky.com/js';
+  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+})();
+", 
+
+', 
+
+
+ 
+', 
+   /* jQuery( document ).ready(function( $ ) {
+		if($(".msie8").length){
+$(".odometer").addClass("no_odometer").removeClass('odometer');
+			}
+	});*/
+', 
+', 
+   /* Styles specific to this particular page */
+   .scroll-pane {
+   width: 100%;
+   height: 200px;
+   overflow: auto;
+   }
+', 
+', 
+   ', 
+      
+             ', 
+         ', 
+            ', 
+               ', 
+                  ',  
+                  ', 
+                   ',  
+                  ', 
+
+                  ', u"India's 1st IRDAI Approved Insurance Web Aggregator", 
+                  ', 
+                    
+                      ', Get your Policy Analysed', 
+                      ', 
+
+                                      ', 
+               ', 
+            ', 
+         ', 
+      ', 
+              
+       
+      
+      ', 
+         ', 
+            
+            ', 
+               ', 
+                  ', 
+                 
+                  ', 
+                     ', 
+			 
+			 ', Home', 
+			
+                     ', 
+                  
+                     ', Health Insurance', 
+                     ', Car Insurance', 
+                      ', Two-Wheeler Insurance', 
+                         ',  ', Term Insurance', 
+                     ', 
+                        ', Life Insurance',  
+                        ', 
+                        ', 
+                           ',  ', Term Plans',  ', 
+                           ',  ', Endowment Plans',  ', 
+                           
+                         
+                           ',  ', Money Back Plans',  ', 
+                           ',  ', Child Plans',  ', 
+                           ',  ', Pension Plans',  ', 
+                             ',  ', ULIP',  ', 
+                        ', 
+                     ', 
+                     ', 
+                        ', Other Plans',  
+                        ', 
+                        
+                           ',  ', Critical Illness Insurance', 
+                           ',  ', Personal Accident Insurance', 
+                                                ', Travel Insurance', 
+                                                  ', Home Insurance', 
+                                                    ', Corporate Insurance', 
+
+                        ', 
+                     ', 
+                  ', 
+               ', 
+                ', 
+                
+                ', 
+                    ', 
+                      
+                    ', 
+                      ',  Profile', 
+                      ',  Policy', 
+                      ',  Signout', 
+                    ', 
+                  ', 
+            ', 
+           
+            
+         ', 
+      ', 
+   ', 
+', 
+ ', 
+', 
+', 
+', 
+
+', 
+	', 
+	
+
+
+
+		                ', 
+                    var leadSource = "life-insurance/companies/lic-of-india/jeevan-akshay";
+                    var plan_name = "LIC Jeevan Akshay Plan";
+                    
+                ', 
+            	', 
+				', LIC Jeevan Akshay Plan', 
+			', 
+            ', 
+            
+    ', 
+   
+      ', 
+   ', 
+      ', 
+      ', 
+      ', 
+      ', 
+     ', 
+      ', 		
+ ', 
+      ',  ',  ', Views', 
+    ', 
+    
+    ', 
+     ',  ',  ', Views', 
+                
+    ', 
+        ', 
+   ', 
+    
+    ', 
+        ', 
+
+', 
+  ', 
+			', 
+			', 	
+			', 	
+			    ', 
+			    
+			    
+			   
+			    
+				', Read this in Hindi >', 
+
+', LIC Jeevan Akshay 6 Plan Review', 
+
+', LIC Jeevan Akshay VI Policy ', is a ', Single Premium Immediate Annuity Plan', 
+
+', How it works ', u"\u2013 You pay a Single Premium (also called the 'Purchase Price') to purchase an Annuity. LIC will then pay you regular amounts for the rest of your life. You could receive this regular payouts monthly, quarterly, half-yearly or annually. This regular payout amount is called an Annuity. You have 7 options to decide on the type and amount of annuity you want to receive.", 
+
+', 
+', 
+ ', 
+
+', Our take',  ', \u2013 If you have already purchased a Pension Plan (also called Deferred Annuity plan) from LIC you will have to buy an Annuity from LIC itself. As per the current regulations, at Vesting Age you can withdraw a maximum of 1/3 of the accumulated amount and the rest has to be used to purchase an Annuity from the same insurance company. So it is best to decide which of the 7 options best suits you. The details of the 7 Annuity options and the benefits are explained below.', 
+
+', You can of course by an Annuity by investing a lumpsum which you have as savings. You will then be assured of a regular payout as long as you are alive. It works well for those who want a confirmed amount for the rest of their lives and are not necessarily looking at options which may offer them higher returns with an element of un-predictability. For example, there may be a period where Fixed Deposits offer better returns than the Annuity, but then the FD rates may go down also within a year or so.', 
+ ', 
+', 
+', 
+ 
+',    
+', 
+', 
+', 
+', 
+		', Grow your Money & Save Tax!', 
+		', Get the Best Pension Plan', 
+		', 
+                        ', 
+                        ', 
+                         ', 
+			', 
+                        ', 
+			', 
+                        
+                        ', 
+                        ', 
+                        ', 
+
+			', 
+				', 
+				', 
+			', 
+			', 
+				', 
+				', 
+			', 
+			', 
+				', 
+				', 
+			', 
+			', 
+				', 
+				', 
+				', 
+			', 
+	  		', 
+	  		',  
+	  			', 
+	  		', 
+ 			', 	
+		', 
+
+		', 
+            ', Thanks! ', Our representative will get in touch shortly.', 
+        ', 
+', 
+		
+
+', 
+', 
+
+        
+	', 
+', 
+Annuity Options in Jeevan Akshay VI Plan', 
+
+', There are ', 7 Annuity Options',  in this plan.', 
+', 
+We will explain each option with the following example:', 
+
+', One time payment (Purchase Price) = Rs. 5,00,000 (5 lakhs) with the pension starting in Annual mode at the age of 60 years.', 
+ ', 
+', Option 1',  - Annuity for Life:',  where pension is paid till the policyholder is alive. The pension received regularly is uniform and does not change.', 
+', Example:',  The policyholder would receive an annual pension of Rs. 48,750 for the rest of his/her lifetime.', 
+', 
+', Option 2',  - Annuity Guaranteed for Certain Periods:',  where pension is definitely paid for 5/10/15 or 20 years as chosen, whether the policyholder is alive or not during this period. Post this period, pension is paid as long as annuitant is alive. Hence this option will have 4 effective options:
+
+', 
+', Annuity Guaranteed for 5 years ', - ', Example: ', u"The policyholder or the nominee will get Rs. 48,300 surely for 5 years, irrespective of the policyholder's survival for 5 years. In case the policyholder survives for 5 years, he/she would continue to get Rs. 48,300 for the rest of his/her lifetime.", 
+', 
+', Annuity Guaranteed for 10 years ', - ', Example: ', u"The policyholder or the nominee will get Rs. 47,300 surely for 10 years, irrespective of the policyholder's survival for 10 years. In case the policyholder survives for 10 years, he/she would continue to get Rs. 47,300 for the rest of his/her lifetime.", 
+', 
+', Annuity Guaranteed for 15 years ', - ', Example: ', u"The policyholder or the nominee will get Rs. 45,950 surely for 15 years, irrespective of the policyholder's survival for 15 years. In case the policyholder survives for 15 years, he/she would continue to get Rs. 45,950 for the rest of his/her lifetime.", 
+', 
+', Annuity Guaranteed for 20 years ', - ', Example: ', u"The policyholder or the nominee will get Rs. 44,400 surely for 20 years, irrespective of the policyholder's survival for 20 years. In case the policyholder survives for 20 years, he/she would continue to get Rs. 44,400 for the rest of his/her lifetime.", 
+', 
+', Option 3',  - ', Annuity with Return of Purchase Price on Death:',  pension is paid till the policyholder is alive and the \u201cPurchase Price\u201d or the amount initially invested is paid to the nominee as death benefit.', 
+', Example:', u" The policyholder would receive an annual pension of Rs. 37,550 for the rest of his/her lifetime. Post the policyholder's death, the nominee will receive the Purchase Price of Rs. 5,00,000 and policy is terminated.", 
+', 
+', Option 4',  - Increasing Annuity:',  pension is paid till the policyholder is alive at an increasing simple rate of 3% per annum.', 
+', Example:',  The policyholder would receive an annual pension of Rs. 39,650 for the first year. The annual payout will increase by Rs. 1,190 (3% of Rs. 39,650) every year for the rest of his/her lifetime.', 
+', 
+', Option 5',  - Joint Life Last Survivor Annuity with 50% for Spouse:',  pension is paid till the policyholder is alive. On the death of the policyholder, 50% of the pension is payable to spouse for his/her lifetime. All benefits stop on death of the spouse also.', 
+', Example:',  The policyholder would receive an annual pension of Rs. 45,200 for the rest of his/her lifetime. After the death of the policyholder, the spouse will be paid Rs. 22,600 (50% of Rs. 45,200) for the rest of his/her life.', 
+', 
+', Option 6',  - Joint Life Last Survivor Annuity with 100% for Spouse:',  pension is paid till the policyholder is alive. On the death of the life insured, 100% of the pension is payable to spouse for his/her lifetime. All benefits stop on death of the spouse also.', 
+', Example:',  The policyholder would receive an annual pension of Rs. 42,150 for the rest of his/her lifetime. After the death of the policyholder, the spouse will be paid Rs. 42,150 (100% of Rs. 42,150) for the rest of his/her life.', 
+', 
+', Option 7',  - Joint Life Last Survivor with Return of Purchase Price:',  pension is paid till the policyholder is alive. On the death of the policyholder, 100% of the pension is payable to spouse for his/her lifetime. The purchase price is returned on death of the policyholder and the spouse.', 
+', Example:',  The policyholder would receive an annual pension of Rs. 37,050 for the rest of his/her lifetime. After the death of the policyholder, the spouse will be paid Rs. 37,050 (100% of Rs. 37,050) for the rest of his/her life. On death of the spouse, the Purchase Price of Rs. 5,00,000 will also be returned.', 
+ 
+', Once any of the above Options are chosen, it cannot be changed. So please be careful at the very beginning.', 
+ ', 
+
+', 
+', 
+', 
+
+
+
+', 
+				', 
+					', Jeevan Akshay VI Pension Calculator', 
+					', 
+						', Calculate the annuity you will receive in LIC Jeevan Akshay', 
+', 
+    ', 
+						', 
+							', Your one time investment', 
+							', 
+								', 
+', 
+							    ', Rs.',  ', 
+								', 
+								', 
+							', 
+						', 
+						
+						', 
+							', Age at which pension should start?', 
+							', 
+								', 
+', 
+							    ',   ', years', 
+								', 
+							', 
+						', 
+	', 
+						
+						', 
+						    ', Select an Annuity Option', 
+						    ', 
+							', Annuity Option', 
+							', Option 1 - Annuity for Life', 
+							', Option 2 - Annuity Guaranteed for 5 years', 
+							', Option 2 - Annuity Guaranteed for 10 years', 
+							', Option 2 - Annuity Guaranteed for 15 years', 
+							', Option 2 - Annuity Guaranteed for 20 years', 
+							', Option 3 - Annuity with Return of Purchase Price on Death', 
+							', Option 4 - Increasing Annuity', 
+                                                        ', Option 5 - Joint Life Last Survivor Annuity with 50% for Spouse     ', 
+							', Option 6 - Joint Life Last Survivor Annuity with 100% for Spouse     ', 
+							', Option 7 - Joint Life Last Survivor with Return of Purchase Price     ', 
+								
+							', 
+						    ', 
+						', 
+						', 
+							', Calculate', 
+						', 
+		
+
+', 
+						', 
+						   ', 
+						       
+      ', 
+                  ',  
+                 
+		 ',  
+                 
+                  ', u"India's 1st IRDAI Approved Insurance Web Aggregator", 
+               ', 
+							', 
+							', Benefit Illustration', 
+
+							', One time investment (Purchase Price)',  = Rs. ', 5,00,000', /-', 
+							', Age at which Pension starts',  = ', 60',  years', 
+							', Annuity Option',  = ', 
+						    ', Depending on the Mode of Annuity, you will receive pension as follows:', 
+
+', 
+					
+    ', Yearly',  - Rs. ', 23,000', 
+					', Half Yearly',  - Rs. ', 23,000', 
+					', Quarterly',  - Rs. ', 23,000', 
+					', Monthly',  - Rs. ', 23,000', 
+				', 
+						    ', 
+				
+						
+						    ',  ', 
+							
+', 
+						    ', Details of your Annuity Plan:', 
+
+						    ', Purchase Price',  = Rs. ', 5,00,000',  + 3.625% Service Tax = Rs. ', 5,3456',    ', 
+						    ', Age at which Pension starts',  = ', 60',  years', 
+						    ', Annuity Option',  = ', 
+						    ', Depending on the Mode of Annuity, you will receive pension as follows:', 
+
+', 
+					
+    ', Yearly',  - Rs. ', 23,000', 
+					', Half Yearly',  - Rs. ', 23,000', 
+					', Quarterly',  - Rs. ', 23,000', 
+					', Monthly',  - Rs. ', 23,000', 
+				', 
+						    ', 
+				', 
+					', Print this illustration  ', 
+				', 
+						', 
+  ', 
+					', 
+				', 
+				
+				
+			', 	
+
+
+    
+    ', 
+    ', 
+ 
+
+', Our thoughts on the pension rates',  \u2013 If you are older, the payouts are obviously higher as the company would need to pay you for a lesser period of time.', 
+ 
+
+', Now',  Option 3',  can be considered similar to how Fixed Deposits work as the Invested Amount (or Purchase Price) will be returned to the nominee. Depending on your age, you are offered a rate of return between 6.9% to 7.5%. Now this is lower than the rate of return offered on FDs. However the rates on FDs are for periods often less than 5 years. There is no guarantee of always getting better rates on FDs. You may find the rate of FDs going lower also over a period of time. In case you buy an Annuity, these uncertainties are take care of. So it is a good option for those looking for certainty and wanting to lock down the returns which they are expecting for their golden years.', 
+ ', 
+
+', 
+Key Features of LIC Jeevan Akshay VI Plan', 
+
+', 
+	', Premium is paid in a lump-sum', 
+	', Minimum purchase price or premium paid is Rs 100,000 for channels other than online and Rs 150,000 for plans purchased online', 
+	', Annuity may be paid monthly, quarterly, half yearly or yearly intervals depending on how you choose initially', 
+	', Different annuity payment options may either be chosen for a single policyholder or jointly for policyholder and spouse', 
+	', Annuity will be calculated at higher rates for plan purchased online and lump sum premium (or purchase price) of Rs 250,000 or higher', 
+	', No medical examination is required ', 
+	', No upper limit for purchase price or annuity under the plan', 
+', 
+
+', 
+Eligibility conditions and other restrictions in LIC Jeevan Akshay VI plan', 
+', 
+   
+', When will you start getting your pension',     ', 
+
+', Depending the Payment mode selected you will receive your payments are follows:', 
+ 
+
+', 
+	', 
+		', 
+			', Monthly Mode', 
+			', 1 month after purchase of Annuity', 
+		', 
+		', 
+			', Quarterly Mode', 
+			', 3 months after purchase of Annuity', 
+		', 
+		', 
+			', Half Yearly Mode', 
+			', 6 month after purchase of Annuity', 
+		', 
+		', 
+			', Yearly Mode', 
+			', 1 year after purchase of Annuity', 
+		', 
+	', 
+', 
+
+', 
+To elaborate further with an example: If you take any of the 7 Options for receving the pension in ', Monthly mode',  - you will start receiving pension from the next month itself. If you choose to receive the pension in ', Quarterly mode',  - you will start receiving the pension after 3 months. If you choose to receive the pension in ', Half Yearly mode',  - you will start receiving the pension after 6 months. And if If you choose to receive the pension in ', Yearly mode',  - you will start receiving the pension after 1 year. This does not depend at the age on which you have taken Jeevan Akshay plan.', 
+ ', 
+
+', Tax Benefits in LIC Jeevan Akshay VI', 
+
+', The premiums paid by you are exempt from Income tax under Section 80 C. ', 
+', The regular pension received by you is however taxable', .', 
+ ', 
+
+', What happens if\u2026', 
+
+', 
+', You stop paying the premium',  \u2013 This plan is a single premium plan and hence there is no question of stopping further premiums.', 
+', You want to surrender the policy',  \u2013 There is no Surrender Value for this plan and it cannot be paid up.', 
+', You want a loan against your policy',  \u2013 Loan facility is not available under this policy.', 
+ ', 
+', 			    
+			    
+			    
+			    
+			    
+			', 
+			', 
+			', 
+			
+		
+
+
+
+	', 
+     			', 
+     			', 		', 
+
+			', 
+				', 
+					', Leave a Comment', 
+				', 
+			', 
+				', 
+			
+			', 
+        			', 
+						', 
+							', Show Comments', 
+						', 
+					', 
+				', 
+                ', var disqus_shortname = "myinsuranceclub";var disqus_developer = "1";var disqus_identifier = "https://www.myinsuranceclub.com/life-insurance/companies/lic-of-india/jeevan-akshay";var disqus_title = "LIC Jeevan Akshay Plan";var disqus_url = "https://www.myinsuranceclub.com/life-insurance/companies/lic-of-india/jeevan-akshay";var disqus_disable_mobile = "true";
+					var disqus_loaded = false;
+					 window.onscroll = function(e) 
+					 {
+						if ((window.innerHeight + window.scrollY)>= document.body.offsetHeight)
+						{
+							if (!disqus_loaded) 
+								disqus();
+						}
+					 };
+	                function disqus() 
+	                {
+						if (!disqus_loaded) 
+						{
+							/* * * DONOT EDIT BELOW THIS LINE * * */
+							// This is to ensure that Disqus widget is loaded only once
+							disqus_loaded = true;
+							var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+		                    dsq.src = "https://" + disqus_shortname + ".disqus.com/embed.js";
+		                    (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+	                    }
+					}
+                ', 
+                ', Please enable JavaScript to view the ', comments powered by Disqus.', 
+                ', 
+                			', 
+		', 
+
+
+	', 
+', 
+
+ 
+
+  ', 
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+ if(typeof wabtn4fg==="undefined"){wabtn4fg=1;h=document.head||document.getElementsByTagName("head")[0],s=document.createElement("script");s.type="text/javascript";s.src="/assets/js/whatsapp-button.js";h.appendChild(s);}
+}
+else
+{jQuery( document ).ready(function( $ ) {  
+		loadSocial_policy_view();  
+	});
+}
+	', 
+
+', 
+            $(function () {
+                var url = "/life_insurance/Controller_Pensionplan/retirement_form";
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function (data) {
+                        $('.retirement_lp').html(data);
+                        //$(".selectpicker").selectpicker('refresh');
+                    }
+                });
+            });
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', Company Information', 
+                        ', 
+                            ', About Us', 
+                            ', Media', 
+                        ', 
+                    ', 
+                    ', 
+                        ', Connect with Us', 
+                        ', 
+                            ', Contact Us', 
+                            ', Feedback', 
+                            ', Investors', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', Other Links', 
+                        ', 
+                            ', Ask an Expert', 
+                            ', Insurance Articles', 
+                            ', Insurance Guides', 
+                            ', Insurance News', 
+                            ', Life Insurance Companies in India', 
+                            ', General Insurance Companies in India', 
+                            ', Terms of Use', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ',  
+
+                    ', 
+                        ', Quick Links', 
+                        ', 
+                            ', Get your Policy Analysed', 
+                            ', Claim Assistance', 
+                            ', Partner Program', 
+                            ', My Account', 
+                        ', 
+                    ', 
+
+                    ', 
+                        ', Quick Connect', 
+                        ', 
+                            ', Phone: ', 022 61647056', 
+                            ', Email: ', contact@myinsuranceclub.com', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                        ', 
+                        ', Important', : Insurance is the subject matter of solicitation', 
+                        ', © 2009-2017 MyInsuranceClub.com', 
+                    ', 
+
+                    ', 
+  ', 
+  ', 
+
+                    ', 
+                                    ', 
+
+            ', 
+        ', 
+    ', 
+', 
+ ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', 
+             ', Stay Connected!', 
+            ', 
+            ', Latest Product Launches', 
+            
+            ', Resolve Queries', 
+            
+            ', Industry News', 
+            
+            ', Contests & Prizes', 
+          ', 
+          ', 
+            ',  
+', 
+		
+		
+		', 
+		',  ', 
+		', 
+', 
+		', 
+', 
+		', 
+', 
+
+              ', 
+                ', 
+                  ', 
+                    ', 
+                    
+             
+                    
+                      ', 
+                        ', 
+                        ', Like us on Facebook', 
+                      ', 
+                      
+                      ',  ', Follow @myinsuranceclub',  ', 
+                      
+                      ', 
+                        ', Recommend us on G+', 
+                      ', 
+                      
+                      ', 
+                        ', Subscribe to our Youtube Channel', 
+                      ', 
+                      
+                      ',  
+                        ', Follow us on Linkedin', 
+                        
+                        
+                    ', 
+                    
+                    ', 
+                  ', 
+                ', 
+              ', 
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+ 
+
+', 
+var PAGE_DETAILS_JSON = null;
+var CONTENT_TYPE = '';
+var CONTENT_ID = '';
+var USER_DATA; 
+    jQuery( document ).ready(function( $ ) {
+    //Storing Visitor Information Start
+    var page_url = $(location).attr('href');
+    if(page_url.indexOf("/search-form/") > -1){
+        var arr_page = page_url.split("/search-form/");
+        if(arr_page[1] != ""){
+            if(typeof posted_data.length == "undefined"){
+        		posted_data.mailer_id = arr_page[1];
+            }
+        else{
+        	posted_data = {"SID":arr_page[1]};
+            }
+
+        }
+    }  
+    console.log('POSTEDDATA - ',posted_data);   
+    $.ajax({
+        url: '/Pre_Hook_Controller/getsessiondata',
+        method : 'POST',
+        data : posted_data,
+        cache: false                    
+    })
+    .done(function( html ) {
+		  if(html != ""){
+			USER_DATA = JSON.parse(html);
+                console.log(USER_DATA);
+			var referral_url = document.referrer;
+		   if(environment_mic == 'production' && $('.search_page_t').length &&  window.location.href.indexOf('jd') < 0 && referral_url.indexOf('jd') < 0){
+			   if(USER_DATA.country == 'IND'){
+					$('.search_page_h').parent().append('<div style="z-index:999999991;opacity:0.93" id="" class="modal-backdrop fade in" ></div><div class="alert_cmp_sr" style="display: block;"> <strong><span style="color: rgb(255, 104, 73); font-size: 17px;"><i class="fa fa-exclamation-triangle"></i> Important Notice</span></strong> <br><div class="al_msg_cmp"><p><b>Dear Customer,</b> we are temporarily unable to show the comparison as our Web Aggregator License is under renewal at IRDAI. We will continue with the display as soon as our License is renewed.</p><p>While this is disappointing for our clients, we think it is more important to comply with the Regulations governing us.</p><p>Please bear with us for this short period.</p><p><b>Deepak Yohannan<br/>CEO, MyInsuranceClub</b></p></div></div>');
+		   	}
+		   }
+if(USER_DATA.utm_source == "jd"){
+//setTimeout(function(){$("#bottom-bg,#footer,#feature-pannels,.nav-tabs-simple,.accordion,.home_news_content").remove();
+// }, 1000);
+}
+
+    
+			if(typeof USER_DATA.user_input != "undefined"){	
+                        console.log(USER_DATA);
+				fill_session_data(USER_DATA,JS_CTRL_NAME,JS_ACTION_NAME);
+				
+			}
+		  }
+    });
+	 });
+    // 
+    
+    // Increment Page view count for policy     
+    
+', 
+    
+', 
+PAGE_DETAILS_JSON = JSON.parse('{"type":"policy","field_id":"427","count_element_type":"name","count_element_val":"policy_page_view_count"}');
+', 
+ ',      
+     function set_content_viewcount(){
+var article_ids = [] , news_ids = [] ,  guide_ids = [] , t = '';
+    $('*[id*=news_v_cnt_]').each(function() {
+        t  = $(this).attr('id');
+        t = t.replace('news_v_cnt_','');
+        news_ids.push(t);
+    });
+    $('*[id*=article_v_cnt_]').each(function() {
+        t  = $(this).attr('id');
+        t = t.replace('article_v_cnt_','');
+        article_ids.push(t);
+    });
+    
+    $('*[id*=guide_v_cnt_]').each(function() {
+        t  = $(this).attr('id');
+        t = t.replace('guide_v_cnt_','');
+         guide_ids.push(t);
+    });
+    //console.log(article_ids,news_ids,guide_ids);
+    var json_lan = {"en":"Views","hindi":"Views"};
+    var url_d = window.location.pathname.split('/'); 
+     $.each(json_lan, function(k, v) {
+    console.log(k,url_d[1])
+      if(k == url_d[1])
+        {
+            $('.view_txt').html(v);
+        }
+    });
+
+    if(news_ids.length > 0 || article_ids.length > 0 || guide_ids.length > 0){
+        $.ajax({
+            url: '/common/get_view_count',
+            type: 'POST',
+            data:{'article_ids':article_ids,
+                      'news_ids':news_ids,
+                            'guide_ids':guide_ids
+             },
+                    cache: false                    
+        })
+        .done(function(html) {
+            if(html != ""){
+                var data = JSON.parse(html);
+
+                    $.each(data, function(i, item) {
+      var cnt = numberWithCommas(data[i].c_view_cnt);
+      var type_name = data[i].c_type;
+      var type = type_name+'_v_cnt_'+data[i].c_id;
+     // console.log(type);
+            $('#' + type).html(cnt);
+    });
+
+
+                    
+
+                    }
+
+        });
+    }
+}
+  jQuery( document ).ready(function( $ ) {
+    if(PAGE_DETAILS_JSON != null && PAGE_DETAILS_JSON.field_id != null){    	
+        $.ajax({
+            url: '/common/increment_viewcount',
+            type: 'POST',
+            data : PAGE_DETAILS_JSON,
+            cache: false                    
+        })
+        .done(function( html ) {
+            if(html != ""){
+            var ajax_res = JSON.parse(html);
+			var cnt = numberWithCommas(ajax_res.page_view_count);
+			$('['+PAGE_DETAILS_JSON.count_element_type+'='+PAGE_DETAILS_JSON.count_element_val +']').html(cnt);
+            }
+        });
+    }
+
+
+set_content_viewcount();
+
+});  
+  
+
+', 
+
+
+
+ ', 
+jQuery( document ).ready(function( $ ) {
+	/*  $.ajax({
+	        url: '/pre_hook_controller/getsessiondata',
+	        method : 'POST',
+	        data : posted_data,
+	        cache: false                    
+	    })
+	    .done(function( html ) {
+			  if(html != ""){
+				USER_DATA = JSON.parse(html);
+				if(typeof USER_DATA.user_input != "undefined"){	
+					fill_session_data(USER_DATA,JS_CTRL_NAME,JS_ACTION_NAME);
+				}
+			  }
+	    }); */
+
+	setTimeout(function(){ session()} , 2000);//10 seconds
+});
+    function session() {
+        $.ajax({
+            cache: false,
+            url: "/session_update.php?" + new Date().getTime() + Math.random(),
+            method: 'POST',
+            data: {'session_id': '30b607756bc560bb8646d5cfe198dbd4c8bc7e0e'}
+
+        })
+                .done(function (data) {
+                    setTimeout(function () {
+                        session()
+                    }, 7000);//30 seconds
+                });
+    }
+    
+
+    
+
+', 
+
+'][
+ ', 
+     var environment_mic = 'production';
+     var cdn_domain = 'https://d5gdqotkuzdho.cloudfront.net';
+     var ga_code = (environment_mic == 'production') ? 'UA-10819086-1' : 'UA-74831561-1';
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', ga_code, 'auto');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview');
+       var data_json =  {
+        "term": {
+               "form": {
+                   "step1": ["coverage_amount_term", "policy_term"],
+                   "step2": ["desktop_cust_dob", "cust_gender", "smoker", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+	"health": {
+               "form": {
+                   "step1": ["coverage_amount", "plan_type_name"],
+                   "step2": ["cust_dob", "cust_gender", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "car": {
+               "form": {
+                   "step1": ["carinsurancetype"],
+                   "step2": ["veh_man", "veh_model", "veh_variant","veh_year"],
+                   "step3": ["reg_no_field1","reg_no_field2","reg_no_field3","reg_no_field4","first_pur_date", "car_registered_name", "is_ownership_change"],
+                   "step4": ["prev_insurer","policy_expiry_date","exist_policy_claims"],
+                   "step5": ["cust_email"]
+               }
+        },
+        "tw": {
+               "form": {
+                   "step1": ["carinsurancetype"],
+                   "step2": ["veh_man", "veh_model", "veh_variant","veh_year"],
+                   "step3": ["reg_no_field1","reg_no_field2","reg_no_field3","reg_no_field4","first_pur_date", "car_registered_name", "is_ownership_change"],
+                   "step4": ["prev_insurer","policy_expiry_date","exist_policy_claims"],
+                   "step5": ["cust_email"]
+               }
+        },
+        "endowment": {
+               "form": {
+                   "step1": ["coverage_amount_endowment"],
+                   "step2": ["desktop_cust_dob", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "moneyback": {
+               "form": {
+                   "step1": ["coverage_amount_moneyback"],
+                   "step2": ["desktop_cust_dob", "cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "child": {
+               "form": {
+                   "step1": ["coverage_amount_child"],
+                   "step2": ["desktop_cust_dob", "child_dob","cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "pension": {
+               "form": {
+                   "step1": ["coverage_amount_pension"],
+                   "step2": ["desktop_cust_dob","cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "ulip": {
+               "form": {
+                   "step1": ["coverage_amount_pension"],
+                   "step2": ["desktop_cust_dob","cust_city_name"],
+                   "step3": ["cust_name", "cust_mobile", "cust_email"]
+               }
+        },
+        "travel": {
+               "form": {
+                   "step1": ["travel_type"],
+                   "step2": ["trip_location"],
+                   "step3": ["trip_start_date", "trip_end_date"],
+                   "step4": ["travel_insurance_type","desktop_cust_dob"],
+		   "step5": ["cust_name","cust_email"]
+               }
+        },
+        "ci": {
+               "form": {
+                   "step1": ["coverage_amount","plan_type","cust_gender","prop_desk_dob"],
+                   "step2": ["spouce_dob","child1_dob","child2_dob","child1_gender","child2_gender"]
+               }
+        },
+        "pa": {
+               "form": {
+                   "step1": ["cust_occupation_name"]
+               }
+        }
+       };
+     
+     ', 
+
+ ', 
+    
+ 
+  
+   function ga_step(category, action, label, value) {
+               if (action == 'form')
+               {
+                   var arr_json = eval('data_json.' + category + '.form.' + label);
+                   var arr_step_status = [];
+                   $.each(arr_json, function (k, v) {
+                       if ($("#" + v).val() == '')
+                       {
+                           arr_step_status.push(false);
+                       }
+                       else {
+                           arr_step_status.push(true);
+                       }
+                   });
+                   if ($.inArray(false, arr_step_status) == -1) {
+                       console.log(category, action, label, value);
+                       ga('send', 'event', {eventCategory: category, eventAction: action, eventLabel: label, eventValue: 0});
+                   }
+               }
+               else
+               {
+		   console.log(category, action, label, value);
+                   if(value == null || value == undefined || value == ''){
+                       value = '0';
+                   }
+                   ga('send', 'event', {eventCategory: category, eventAction: action, eventLabel: label, eventValue: value});
+               }
+
+           }
+ 
+  ', 
+    ', 
+  
+var CONS_INSP_LIST = {
+	    "controller": [
+	                   "controller_car",
+	                   "common"
+	                 //  "controller_two_wheeler"
+	                  // "controller_basicmediclaim"
+	               ],
+	               "action": [
+	                   "index",
+                           "new_index",
+	                 //  "get_car_results",
+	                  // "health_policy",
+	                 //  "BuyNow",
+	                   "return_url_motor",
+	                  // "get_two_wheeler_results"
+	               ]
+	           };
+  ',  
+
+
+', u"
+var clicky_site_ids = clicky_site_ids || [];
+clicky_site_ids.push(154599);
+(function() {
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = '//static.getclicky.com/js';
+  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+})();
+", 
+
+', 
+
+
+ 
+', 
+   /* jQuery( document ).ready(function( $ ) {
+		if($(".msie8").length){
+$(".odometer").addClass("no_odometer").removeClass('odometer');
+			}
+	});*/
+', 
+', 
+   /* Styles specific to this particular page */
+   .scroll-pane {
+   width: 100%;
+   height: 200px;
+   overflow: auto;
+   }
+', 
+', 
+   ', 
+      
+             ', 
+         ', 
+            ', 
+               ', 
+                  ',  
+                  ', 
+                   ',  
+                  ', 
+
+                  ', u"India's 1st IRDAI Approved Insurance Web Aggregator", 
+                  ', 
+                    
+                      ', Get your Policy Analysed', 
+                      ', 
+
+                                      ', 
+               ', 
+            ', 
+         ', 
+      ', 
+              
+       
+      
+      ', 
+         ', 
+            
+            ', 
+               ', 
+                  ', 
+                 
+                  ', 
+                     ', 
+			 
+			 ', Home', 
+			
+                     ', 
+                  
+                     ', Health Insurance', 
+                     ', Car Insurance', 
+                      ', Two-Wheeler Insurance', 
+                         ',  ', Term Insurance', 
+                     ', 
+                        ', Life Insurance',  
+                        ', 
+                        ', 
+                           ',  ', Term Plans',  ', 
+                           ',  ', Endowment Plans',  ', 
+                           
+                         
+                           ',  ', Money Back Plans',  ', 
+                           ',  ', Child Plans',  ', 
+                           ',  ', Pension Plans',  ', 
+                             ',  ', ULIP',  ', 
+                        ', 
+                     ', 
+                     ', 
+                        ', Other Plans',  
+                        ', 
+                        
+                           ',  ', Critical Illness Insurance', 
+                           ',  ', Personal Accident Insurance', 
+                                                ', Travel Insurance', 
+                                                  ', Home Insurance', 
+                                                    ', Corporate Insurance', 
+
+                        ', 
+                     ', 
+                  ', 
+               ', 
+                ', 
+                
+                ', 
+                    ', 
+                      
+                    ', 
+                      ',  Profile', 
+                      ',  Policy', 
+                      ',  Signout', 
+                    ', 
+                  ', 
+            ', 
+           
+            
+         ', 
+      ', 
+   ', 
+', 
+ ', 
+', 
+', 
+', 
+
+', 
+	', 
+	
+
+
+
+		                ', 
+                    var leadSource = "life-insurance/companies/lic-of-india/jeevan-akshay";
+                    var plan_name = "LIC Jeevan Akshay Plan";
+                    
+                ', 
+            	', 
+				', LIC Jeevan Akshay Plan', 
+			', 
+            ', 
+            
+    ', 
+   
+      ', 
+   ', 
+      ', 
+      ', 
+      ', 
+      ', 
+     ', 
+      ', 		
+ ', 
+      ',  ',  ', Views', 
+    ', 
+    
+    ', 
+     ',  ',  ', Views', 
+                
+    ', 
+        ', 
+   ', 
+    
+    ', 
+        ', 
+
+', 
+  ', 
+			', 
+			', 	
+			', 	
+			    ', 
+			    
+			    
+			   
+			    
+				', Read this in Hindi >', 
+
+', LIC Jeevan Akshay 6 Plan Review', 
+
+', LIC Jeevan Akshay VI Policy ', is a ', Single Premium Immediate Annuity Plan', 
+
+', How it works ', u"\u2013 You pay a Single Premium (also called the 'Purchase Price') to purchase an Annuity. LIC will then pay you regular amounts for the rest of your life. You could receive this regular payouts monthly, quarterly, half-yearly or annually. This regular payout amount is called an Annuity. You have 7 options to decide on the type and amount of annuity you want to receive.", 
+
+', 
+', 
+ ', 
+
+', Our take',  ', \u2013 If you have already purchased a Pension Plan (also called Deferred Annuity plan) from LIC you will have to buy an Annuity from LIC itself. As per the current regulations, at Vesting Age you can withdraw a maximum of 1/3 of the accumulated amount and the rest has to be used to purchase an Annuity from the same insurance company. So it is best to decide which of the 7 options best suits you. The details of the 7 Annuity options and the benefits are explained below.', 
+
+', You can of course by an Annuity by investing a lumpsum which you have as savings. You will then be assured of a regular payout as long as you are alive. It works well for those who want a confirmed amount for the rest of their lives and are not necessarily looking at options which may offer them higher returns with an element of un-predictability. For example, there may be a period where Fixed Deposits offer better returns than the Annuity, but then the FD rates may go down also within a year or so.', 
+ ', 
+', 
+', 
+ 
+',    
+', 
+', 
+', 
+', 
+		', Grow your Money & Save Tax!', 
+		', Get the Best Pension Plan', 
+		', 
+                        ', 
+                        ', 
+                         ', 
+			', 
+                        ', 
+			', 
+                        
+                        ', 
+                        ', 
+                        ', 
+
+			', 
+				', 
+				', 
+			', 
+			', 
+				', 
+				', 
+			', 
+			', 
+				', 
+				', 
+			', 
+			', 
+				', 
+				', 
+				', 
+			', 
+	  		', 
+	  		',  
+	  			', 
+	  		', 
+ 			', 	
+		', 
+
+		', 
+            ', Thanks! ', Our representative will get in touch shortly.', 
+        ', 
+', 
+		
+
+', 
+', 
+
+        
+	', 
+', 
+Annuity Options in Jeevan Akshay VI Plan', 
+
+', There are ', 7 Annuity Options',  in this plan.', 
+', 
+We will explain each option with the following example:', 
+
+', One time payment (Purchase Price) = Rs. 5,00,000 (5 lakhs) with the pension starting in Annual mode at the age of 60 years.', 
+ ', 
+', Option 1',  - Annuity for Life:',  where pension is paid till the policyholder is alive. The pension received regularly is uniform and does not change.', 
+', Example:',  The policyholder would receive an annual pension of Rs. 48,750 for the rest of his/her lifetime.', 
+', 
+', Option 2',  - Annuity Guaranteed for Certain Periods:',  where pension is definitely paid for 5/10/15 or 20 years as chosen, whether the policyholder is alive or not during this period. Post this period, pension is paid as long as annuitant is alive. Hence this option will have 4 effective options:
+
+', 
+', Annuity Guaranteed for 5 years ', - ', Example: ', u"The policyholder or the nominee will get Rs. 48,300 surely for 5 years, irrespective of the policyholder's survival for 5 years. In case the policyholder survives for 5 years, he/she would continue to get Rs. 48,300 for the rest of his/her lifetime.", 
+', 
+', Annuity Guaranteed for 10 years ', - ', Example: ', u"The policyholder or the nominee will get Rs. 47,300 surely for 10 years, irrespective of the policyholder's survival for 10 years. In case the policyholder survives for 10 years, he/she would continue to get Rs. 47,300 for the rest of his/her lifetime.", 
+', 
+', Annuity Guaranteed for 15 years ', - ', Example: ', u"The policyholder or the nominee will get Rs. 45,950 surely for 15 years, irrespective of the policyholder's survival for 15 years. In case the policyholder survives for 15 years, he/she would continue to get Rs. 45,950 for the rest of his/her lifetime.", 
+', 
+', Annuity Guaranteed for 20 years ', - ', Example: ', u"The policyholder or the nominee will get Rs. 44,400 surely for 20 years, irrespective of the policyholder's survival for 20 years. In case the policyholder survives for 20 years, he/she would continue to get Rs. 44,400 for the rest of his/her lifetime.", 
+', 
+', Option 3',  - ', Annuity with Return of Purchase Price on Death:',  pension is paid till the policyholder is alive and the \u201cPurchase Price\u201d or the amount initially invested is paid to the nominee as death benefit.', 
+', Example:', u" The policyholder would receive an annual pension of Rs. 37,550 for the rest of his/her lifetime. Post the policyholder's death, the nominee will receive the Purchase Price of Rs. 5,00,000 and policy is terminated.", 
+', 
+', Option 4',  - Increasing Annuity:',  pension is paid till the policyholder is alive at an increasing simple rate of 3% per annum.', 
+', Example:',  The policyholder would receive an annual pension of Rs. 39,650 for the first year. The annual payout will increase by Rs. 1,190 (3% of Rs. 39,650) every year for the rest of his/her lifetime.', 
+', 
+', Option 5',  - Joint Life Last Survivor Annuity with 50% for Spouse:',  pension is paid till the policyholder is alive. On the death of the policyholder, 50% of the pension is payable to spouse for his/her lifetime. All benefits stop on death of the spouse also.', 
+', Example:',  The policyholder would receive an annual pension of Rs. 45,200 for the rest of his/her lifetime. After the death of the policyholder, the spouse will be paid Rs. 22,600 (50% of Rs. 45,200) for the rest of his/her life.', 
+', 
+', Option 6',  - Joint Life Last Survivor Annuity with 100% for Spouse:',  pension is paid till the policyholder is alive. On the death of the life insured, 100% of the pension is payable to spouse for his/her lifetime. All benefits stop on death of the spouse also.', 
+', Example:',  The policyholder would receive an annual pension of Rs. 42,150 for the rest of his/her lifetime. After the death of the policyholder, the spouse will be paid Rs. 42,150 (100% of Rs. 42,150) for the rest of his/her life.', 
+', 
+', Option 7',  - Joint Life Last Survivor with Return of Purchase Price:',  pension is paid till the policyholder is alive. On the death of the policyholder, 100% of the pension is payable to spouse for his/her lifetime. The purchase price is returned on death of the policyholder and the spouse.', 
+', Example:',  The policyholder would receive an annual pension of Rs. 37,050 for the rest of his/her lifetime. After the death of the policyholder, the spouse will be paid Rs. 37,050 (100% of Rs. 37,050) for the rest of his/her life. On death of the spouse, the Purchase Price of Rs. 5,00,000 will also be returned.', 
+ 
+', Once any of the above Options are chosen, it cannot be changed. So please be careful at the very beginning.', 
+ ', 
+
+', 
+', 
+', 
+
+
+
+', 
+				', 
+					', Jeevan Akshay VI Pension Calculator', 
+					', 
+						', Calculate the annuity you will receive in LIC Jeevan Akshay', 
+', 
+    ', 
+						', 
+							', Your one time investment', 
+							', 
+								', 
+', 
+							    ', Rs.',  ', 
+								', 
+								', 
+							', 
+						', 
+						
+						', 
+							', Age at which pension should start?', 
+							', 
+								', 
+', 
+							    ',   ', years', 
+								', 
+							', 
+						', 
+	', 
+						
+						', 
+						    ', Select an Annuity Option', 
+						    ', 
+							', Annuity Option', 
+							', Option 1 - Annuity for Life', 
+							', Option 2 - Annuity Guaranteed for 5 years', 
+							', Option 2 - Annuity Guaranteed for 10 years', 
+							', Option 2 - Annuity Guaranteed for 15 years', 
+							', Option 2 - Annuity Guaranteed for 20 years', 
+							', Option 3 - Annuity with Return of Purchase Price on Death', 
+							', Option 4 - Increasing Annuity', 
+                                                        ', Option 5 - Joint Life Last Survivor Annuity with 50% for Spouse     ', 
+							', Option 6 - Joint Life Last Survivor Annuity with 100% for Spouse     ', 
+							', Option 7 - Joint Life Last Survivor with Return of Purchase Price     ', 
+								
+							', 
+						    ', 
+						', 
+						', 
+							', Calculate', 
+						', 
+		
+
+', 
+						', 
+						   ', 
+						       
+      ', 
+                  ',  
+                 
+		 ',  
+                 
+                  ', u"India's 1st IRDAI Approved Insurance Web Aggregator", 
+               ', 
+							', 
+							', Benefit Illustration', 
+
+							', One time investment (Purchase Price)',  = Rs. ', 5,00,000', /-', 
+							', Age at which Pension starts',  = ', 60',  years', 
+							', Annuity Option',  = ', 
+						    ', Depending on the Mode of Annuity, you will receive pension as follows:', 
+
+', 
+					
+    ', Yearly',  - Rs. ', 23,000', 
+					', Half Yearly',  - Rs. ', 23,000', 
+					', Quarterly',  - Rs. ', 23,000', 
+					', Monthly',  - Rs. ', 23,000', 
+				', 
+						    ', 
+				
+						
+						    ',  ', 
+							
+', 
+						    ', Details of your Annuity Plan:', 
+
+						    ', Purchase Price',  = Rs. ', 5,00,000',  + 3.625% Service Tax = Rs. ', 5,3456',    ', 
+						    ', Age at which Pension starts',  = ', 60',  years', 
+						    ', Annuity Option',  = ', 
+						    ', Depending on the Mode of Annuity, you will receive pension as follows:', 
+
+', 
+					
+    ', Yearly',  - Rs. ', 23,000', 
+					', Half Yearly',  - Rs. ', 23,000', 
+					', Quarterly',  - Rs. ', 23,000', 
+					', Monthly',  - Rs. ', 23,000', 
+				', 
+						    ', 
+				', 
+					', Print this illustration  ', 
+				', 
+						', 
+  ', 
+					', 
+				', 
+				
+				
+			', 	
+
+
+    
+    ', 
+    ', 
+ 
+
+', Our thoughts on the pension rates',  \u2013 If you are older, the payouts are obviously higher as the company would need to pay you for a lesser period of time.', 
+ 
+
+', Now',  Option 3',  can be considered similar to how Fixed Deposits work as the Invested Amount (or Purchase Price) will be returned to the nominee. Depending on your age, you are offered a rate of return between 6.9% to 7.5%. Now this is lower than the rate of return offered on FDs. However the rates on FDs are for periods often less than 5 years. There is no guarantee of always getting better rates on FDs. You may find the rate of FDs going lower also over a period of time. In case you buy an Annuity, these uncertainties are take care of. So it is a good option for those looking for certainty and wanting to lock down the returns which they are expecting for their golden years.', 
+ ', 
+
+', 
+Key Features of LIC Jeevan Akshay VI Plan', 
+
+', 
+	', Premium is paid in a lump-sum', 
+	', Minimum purchase price or premium paid is Rs 100,000 for channels other than online and Rs 150,000 for plans purchased online', 
+	', Annuity may be paid monthly, quarterly, half yearly or yearly intervals depending on how you choose initially', 
+	', Different annuity payment options may either be chosen for a single policyholder or jointly for policyholder and spouse', 
+	', Annuity will be calculated at higher rates for plan purchased online and lump sum premium (or purchase price) of Rs 250,000 or higher', 
+	', No medical examination is required ', 
+	', No upper limit for purchase price or annuity under the plan', 
+', 
+
+', 
+Eligibility conditions and other restrictions in LIC Jeevan Akshay VI plan', 
+', 
+   
+', When will you start getting your pension',     ', 
+
+', Depending the Payment mode selected you will receive your payments are follows:', 
+ 
+
+', 
+	', 
+		', 
+			', Monthly Mode', 
+			', 1 month after purchase of Annuity', 
+		', 
+		', 
+			', Quarterly Mode', 
+			', 3 months after purchase of Annuity', 
+		', 
+		', 
+			', Half Yearly Mode', 
+			', 6 month after purchase of Annuity', 
+		', 
+		', 
+			', Yearly Mode', 
+			', 1 year after purchase of Annuity', 
+		', 
+	', 
+', 
+
+', 
+To elaborate further with an example: If you take any of the 7 Options for receving the pension in ', Monthly mode',  - you will start receiving pension from the next month itself. If you choose to receive the pension in ', Quarterly mode',  - you will start receiving the pension after 3 months. If you choose to receive the pension in ', Half Yearly mode',  - you will start receiving the pension after 6 months. And if If you choose to receive the pension in ', Yearly mode',  - you will start receiving the pension after 1 year. This does not depend at the age on which you have taken Jeevan Akshay plan.', 
+ ', 
+
+', Tax Benefits in LIC Jeevan Akshay VI', 
+
+', The premiums paid by you are exempt from Income tax under Section 80 C. ', 
+', The regular pension received by you is however taxable', .', 
+ ', 
+
+', What happens if\u2026', 
+
+', 
+', You stop paying the premium',  \u2013 This plan is a single premium plan and hence there is no question of stopping further premiums.', 
+', You want to surrender the policy',  \u2013 There is no Surrender Value for this plan and it cannot be paid up.', 
+', You want a loan against your policy',  \u2013 Loan facility is not available under this policy.', 
+ ', 
+', 			    
+			    
+			    
+			    
+			    
+			', 
+			', 
+			', 
+			
+		
+
+
+
+	', 
+     			', 
+     			', 		', 
+
+			', 
+				', 
+					', Leave a Comment', 
+				', 
+			', 
+				', 
+			
+			', 
+        			', 
+						', 
+							', Show Comments', 
+						', 
+					', 
+				', 
+                ', var disqus_shortname = "myinsuranceclub";var disqus_developer = "1";var disqus_identifier = "https://www.myinsuranceclub.com/life-insurance/companies/lic-of-india/jeevan-akshay";var disqus_title = "LIC Jeevan Akshay Plan";var disqus_url = "https://www.myinsuranceclub.com/life-insurance/companies/lic-of-india/jeevan-akshay";var disqus_disable_mobile = "true";
+					var disqus_loaded = false;
+					 window.onscroll = function(e) 
+					 {
+						if ((window.innerHeight + window.scrollY)>= document.body.offsetHeight)
+						{
+							if (!disqus_loaded) 
+								disqus();
+						}
+					 };
+	                function disqus() 
+	                {
+						if (!disqus_loaded) 
+						{
+							/* * * DONOT EDIT BELOW THIS LINE * * */
+							// This is to ensure that Disqus widget is loaded only once
+							disqus_loaded = true;
+							var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+		                    dsq.src = "https://" + disqus_shortname + ".disqus.com/embed.js";
+		                    (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+	                    }
+					}
+                ', 
+                ', Please enable JavaScript to view the ', comments powered by Disqus.', 
+                ', 
+                			', 
+		', 
+
+
+	', 
+', 
+
+ 
+
+  ', 
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+ if(typeof wabtn4fg==="undefined"){wabtn4fg=1;h=document.head||document.getElementsByTagName("head")[0],s=document.createElement("script");s.type="text/javascript";s.src="/assets/js/whatsapp-button.js";h.appendChild(s);}
+}
+else
+{jQuery( document ).ready(function( $ ) {  
+		loadSocial_policy_view();  
+	});
+}
+	', 
+
+', 
+            $(function () {
+                var url = "/life_insurance/Controller_Pensionplan/retirement_form";
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function (data) {
+                        $('.retirement_lp').html(data);
+                        //$(".selectpicker").selectpicker('refresh');
+                    }
+                });
+            });
+', 
+    ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', Company Information', 
+                        ', 
+                            ', About Us', 
+                            ', Media', 
+                        ', 
+                    ', 
+                    ', 
+                        ', Connect with Us', 
+                        ', 
+                            ', Contact Us', 
+                            ', Feedback', 
+                            ', Investors', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', Other Links', 
+                        ', 
+                            ', Ask an Expert', 
+                            ', Insurance Articles', 
+                            ', Insurance Guides', 
+                            ', Insurance News', 
+                            ', Life Insurance Companies in India', 
+                            ', General Insurance Companies in India', 
+                            ', Terms of Use', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ',  
+
+                    ', 
+                        ', Quick Links', 
+                        ', 
+                            ', Get your Policy Analysed', 
+                            ', Claim Assistance', 
+                            ', Partner Program', 
+                            ', My Account', 
+                        ', 
+                    ', 
+
+                    ', 
+                        ', Quick Connect', 
+                        ', 
+                            ', Phone: ', 022 61647056', 
+                            ', Email: ', contact@myinsuranceclub.com', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                        ', 
+                        ', Important', : Insurance is the subject matter of solicitation', 
+                        ', © 2009-2017 MyInsuranceClub.com', 
+                    ', 
+
+                    ', 
+  ', 
+  ', 
+
+                    ', 
+                                    ', 
+
+            ', 
+        ', 
+    ', 
+', 
+ ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', 
+             ', Stay Connected!', 
+            ', 
+            ', Latest Product Launches', 
+            
+            ', Resolve Queries', 
+            
+            ', Industry News', 
+            
+            ', Contests & Prizes', 
+          ', 
+          ', 
+            ',  
+', 
+		
+		
+		', 
+		',  ', 
+		', 
+', 
+		', 
+', 
+		', 
+', 
+
+              ', 
+                ', 
+                  ', 
+                    ', 
+                    
+             
+                    
+                      ', 
+                        ', 
+                        ', Like us on Facebook', 
+                      ', 
+                      
+                      ',  ', Follow @myinsuranceclub',  ', 
+                      
+                      ', 
+                        ', Recommend us on G+', 
+                      ', 
+                      
+                      ', 
+                        ', Subscribe to our Youtube Channel', 
+                      ', 
+                      
+                      ',  
+                        ', Follow us on Linkedin', 
+                        
+                        
+                    ', 
+                    
+                    ', 
+                  ', 
+                ', 
+              ', 
+            ', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+', 
+ 
+
+', 
+var PAGE_DETAILS_JSON = null;
+var CONTENT_TYPE = '';
+var CONTENT_ID = '';
+var USER_DATA; 
+    jQuery( document ).ready(function( $ ) {
+    //Storing Visitor Information Start
+    var page_url = $(location).attr('href');
+    if(page_url.indexOf("/search-form/") > -1){
+        var arr_page = page_url.split("/search-form/");
+        if(arr_page[1] != ""){
+            if(typeof posted_data.length == "undefined"){
+        		posted_data.mailer_id = arr_page[1];
+            }
+        else{
+        	posted_data = {"SID":arr_page[1]};
+            }
+
+        }
+    }  
+    console.log('POSTEDDATA - ',posted_data);   
+    $.ajax({
+        url: '/Pre_Hook_Controller/getsessiondata',
+        method : 'POST',
+        data : posted_data,
+        cache: false                    
+    })
+    .done(function( html ) {
+		  if(html != ""){
+			USER_DATA = JSON.parse(html);
+                console.log(USER_DATA);
+			var referral_url = document.referrer;
+		   if(environment_mic == 'production' && $('.search_page_t').length &&  window.location.href.indexOf('jd') < 0 && referral_url.indexOf('jd') < 0){
+			   if(USER_DATA.country == 'IND'){
+					$('.search_page_h').parent().append('<div style="z-index:999999991;opacity:0.93" id="" class="modal-backdrop fade in" ></div><div class="alert_cmp_sr" style="display: block;"> <strong><span style="color: rgb(255, 104, 73); font-size: 17px;"><i class="fa fa-exclamation-triangle"></i> Important Notice</span></strong> <br><div class="al_msg_cmp"><p><b>Dear Customer,</b> we are temporarily unable to show the comparison as our Web Aggregator License is under renewal at IRDAI. We will continue with the display as soon as our License is renewed.</p><p>While this is disappointing for our clients, we think it is more important to comply with the Regulations governing us.</p><p>Please bear with us for this short period.</p><p><b>Deepak Yohannan<br/>CEO, MyInsuranceClub</b></p></div></div>');
+		   	}
+		   }
+if(USER_DATA.utm_source == "jd"){
+//setTimeout(function(){$("#bottom-bg,#footer,#feature-pannels,.nav-tabs-simple,.accordion,.home_news_content").remove();
+// }, 1000);
+}
+
+    
+			if(typeof USER_DATA.user_input != "undefined"){	
+                        console.log(USER_DATA);
+				fill_session_data(USER_DATA,JS_CTRL_NAME,JS_ACTION_NAME);
+				
+			}
+		  }
+    });
+	 });
+    // 
+    
+    // Increment Page view count for policy     
+    
+', 
+    
+', 
+PAGE_DETAILS_JSON = JSON.parse('{"type":"policy","field_id":"427","count_element_type":"name","count_element_val":"policy_page_view_count"}');
+', 
+ ',      
+     function set_content_viewcount(){
+var article_ids = [] , news_ids = [] ,  guide_ids = [] , t = '';
+    $('*[id*=news_v_cnt_]').each(function() {
+        t  = $(this).attr('id');
+        t = t.replace('news_v_cnt_','');
+        news_ids.push(t);
+    });
+    $('*[id*=article_v_cnt_]').each(function() {
+        t  = $(this).attr('id');
+        t = t.replace('article_v_cnt_','');
+        article_ids.push(t);
+    });
+    
+    $('*[id*=guide_v_cnt_]').each(function() {
+        t  = $(this).attr('id');
+        t = t.replace('guide_v_cnt_','');
+         guide_ids.push(t);
+    });
+    //console.log(article_ids,news_ids,guide_ids);
+    var json_lan = {"en":"Views","hindi":"Views"};
+    var url_d = window.location.pathname.split('/'); 
+     $.each(json_lan, function(k, v) {
+    console.log(k,url_d[1])
+      if(k == url_d[1])
+        {
+            $('.view_txt').html(v);
+        }
+    });
+
+    if(news_ids.length > 0 || article_ids.length > 0 || guide_ids.length > 0){
+        $.ajax({
+            url: '/common/get_view_count',
+            type: 'POST',
+            data:{'article_ids':article_ids,
+                      'news_ids':news_ids,
+                            'guide_ids':guide_ids
+             },
+                    cache: false                    
+        })
+        .done(function(html) {
+            if(html != ""){
+                var data = JSON.parse(html);
+
+                    $.each(data, function(i, item) {
+      var cnt = numberWithCommas(data[i].c_view_cnt);
+      var type_name = data[i].c_type;
+      var type = type_name+'_v_cnt_'+data[i].c_id;
+     // console.log(type);
+            $('#' + type).html(cnt);
+    });
+
+
+                    
+
+                    }
+
+        });
+    }
+}
+  jQuery( document ).ready(function( $ ) {
+    if(PAGE_DETAILS_JSON != null && PAGE_DETAILS_JSON.field_id != null){    	
+        $.ajax({
+            url: '/common/increment_viewcount',
+            type: 'POST',
+            data : PAGE_DETAILS_JSON,
+            cache: false                    
+        })
+        .done(function( html ) {
+            if(html != ""){
+            var ajax_res = JSON.parse(html);
+			var cnt = numberWithCommas(ajax_res.page_view_count);
+			$('['+PAGE_DETAILS_JSON.count_element_type+'='+PAGE_DETAILS_JSON.count_element_val +']').html(cnt);
+            }
+        });
+    }
+
+
+set_content_viewcount();
+
+});  
+  
+
+', 
+
+
+
+ ', 
+jQuery( document ).ready(function( $ ) {
+	/*  $.ajax({
+	        url: '/pre_hook_controller/getsessiondata',
+	        method : 'POST',
+	        data : posted_data,
+	        cache: false                    
+	    })
+	    .done(function( html ) {
+			  if(html != ""){
+				USER_DATA = JSON.parse(html);
+				if(typeof USER_DATA.user_input != "undefined"){	
+					fill_session_data(USER_DATA,JS_CTRL_NAME,JS_ACTION_NAME);
+				}
+			  }
+	    }); */
+
+	setTimeout(function(){ session()} , 2000);//10 seconds
+});
+    function session() {
+        $.ajax({
+            cache: false,
+            url: "/session_update.php?" + new Date().getTime() + Math.random(),
+            method: 'POST',
+            data: {'session_id': '30b607756bc560bb8646d5cfe198dbd4c8bc7e0e'}
+
+        })
+                .done(function (data) {
+                    setTimeout(function () {
+                        session()
+                    }, 7000);//30 seconds
+                });
+    }
+    
+
+    
+
+', 
+
+']
