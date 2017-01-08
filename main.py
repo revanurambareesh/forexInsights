@@ -2,7 +2,9 @@ import sys
 
 from PyQt4 import QtGui
 from PyQt4 import QtCore
+from PyQt4.QtGui import QMessageBox
 from UI import FXfrontend
+import os
 
 import modules
 
@@ -21,6 +23,14 @@ class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
         self.threadClass = ThreadClassBkg()
         # self.threadClass.start()
 
+        #show last saved results
+        try:
+            print 'Displaying last saved results'
+            with open('res', 'rb') as f:
+                self.textBrowserInsights.setText(f.read())
+        except:
+            print 'Started the program freshly'
+
         # Connections to Signals
         self.connect(self.threadClass, QtCore.SIGNAL('PROGRESS_BAR'), self.updateProgressBar)
         self.connect(self.threadClass, QtCore.SIGNAL('STATUS_LINE'), self.updateStatusLine)
@@ -31,6 +41,16 @@ class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
         self.connect(self.pushButtonTrain, QtCore.SIGNAL("clicked()"), self.runThreadTrainMode)
         self.connect(self.pushButtonGetData, QtCore.SIGNAL("clicked()"), self.runThreadScrapeMode)
         self.connect(self.pushButtonTest, QtCore.SIGNAL("clicked()"), self.runThreadInsightMode)
+        self.connect(self.pushButton_Stop, QtCore.SIGNAL("clicked()"), self.checkStopThreadRunning)
+        self.connect(self.pushButton_about, QtCore.SIGNAL("clicked()"), self.about)
+        self.connect(self.pushButton_stage1, QtCore.SIGNAL("clicked()"), self.designDocument)
+
+
+    def about(self):
+        QMessageBox.about(self, "About Forex Tool","Overview goes here")
+
+    def designDocument(self):
+        QMessageBox.about(self, "Design Document", "This can be found at \STAGE 1 documents\FX Problem.pdf")
 
     # Update UI commands
     # ------------------
@@ -104,6 +124,10 @@ class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
             setting = 2
             test_company = self.lineEditCompany.text()
             self.threadClass.emit(QtCore.SIGNAL('SUMMARY'), 'Getting Insights')
+            try:
+                self.threadClass.terminate()
+            except:
+                pass
             self.threadClass.start()
 
 

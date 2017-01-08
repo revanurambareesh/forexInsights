@@ -1,0 +1,6143 @@
+[
+
+    
+
+    ', 
+         
+    ', 
+
+    
+
+
+    
+
+    
+
+    
+    ', Skip to Content', 
+
+    
+    ', 
+
+        
+
+
+        ', 
+            ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+
+                         
+
+                        ', 
+
+                         
+
+                        ', 
+
+                    ', 
+                ', 
+
+                    
+                    ', 
+                        ', 
+                              
+                            ', 
+                            ', All locations', 
+                             
+                            ', 
+                        ', 
+                    ', 
+
+                    
+                    ', 
+                        ', 
+                        ', 
+                    ', 
+
+
+            ', 
+        ', 
+
+
+        ', 
+            ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                          
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                        ', 
+                              
+                            ', 
+                            ', Change in all locations', 
+                             
+                            ', 
+                        ', 
+                ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+
+
+    ', 
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+
+', 
+
+', 
+', 
+
+
+
+/* MOVED FUNCTION TO BOTTOM */
+function addHtmlAttribute(element, attributeName, attributeValue)
+{
+    var tempVar = "";
+    if (element.hasAttribute(attributeName) == true)
+    {
+       tempVar = element.getAttribute(attributeName);
+    }
+    element.setAttribute(attributeName, attributeValue + tempVar);
+}
+
+    var menuWidth = 200;
+    var menuBarWidth = 600;
+    var ajaxRequestEntid = "";
+    var globalMenuItem;
+    var itemDescrArray = new Array();
+    var itemNameArray = new Array();
+    var itemTypeArray = new Array();
+    var itemUrlArray = new Array();
+    var itemTargetArray = new Array();
+    var itemIconClassArray = new Array();
+    var itemHasItemsArray = new Array();
+    var urlsPerEntidArray = new Array();
+    var descrsPerEntidArray = new Array();
+    var overflowAdjustedDivsArray = new Array();
+    var menuNamesArray = new Array();
+    var navLinkClicked = false;
+    var ua = navigator.userAgent;
+    var isMSIE = ua.indexOf ('MSIE') != -1;
+    var nbIsIE9 = ua.indexOf ('MSIE 9') != -1;
+    var isFirefox = ua.indexOf ('Firefox') != -1;
+    var isMacFirefox = (ua.indexOf ('Macintosh') != -1) && (isFirefox);
+    var nbIsChrome = ua.indexOf ('Chrome') != -1;
+    var previousEntid = "";
+    var previousTime = new Date();
+    var timeOfPageLoad = new Date();
+    var overrideMenuHiding = false;
+    var nbGlobalTopBorderStyle = "";
+    var nbIsWorldUser = false;
+    var nbShowAjaxErrorsToWorldUsers = false;
+    var nbFolderGroupTypeString = "Folder";
+    var nbWebPageGroupTypeString = "Web Page";
+    var nbHomeLinkId = "root-x8725450192892416354--sep--Aura_Elementary_SchoolhomeLink";
+    var nbBreadcrumbStripDropDownMenuFetchDelayMs = 450;
+    var nbHomeAndBreadcrumbDropDownSubmenuFetchDelayMs = 50;
+    var homeLinkElem = document.getElementById('edlHomeLink');
+    if (  (homeLinkElem != null) && (homeLinkElem != undefined)  )
+    {
+        homeLinkElem.id = "root-x8725450192892416354--sep--Aura_Elementary_SchoolhomeLink";
+        homeLinkElem.className = "breadcrumbLink";
+    }
+    
+    var onloadFnName = "nbnNavigationBarOnload";
+    
+    var pageBody = document.body;
+    var func = onloadFnName + "('false')";
+    
+    if (pageBody.attachEvent!=undefined) // attachEvent is a deprecated IE method
+    {
+        pageBody.onload = appendToFunction(pageBody.onload, func);
+    } else {
+        addHtmlAttribute(pageBody, "onload", func +";");
+    }
+
+function appendToFunction(func, str)
+{
+    var nfs = "";
+    if (func != null){
+        var ofs = func.toString();
+        var fcb = ofs.indexOf("{");
+        var lcb = ofs.indexOf("}",fcb+1);
+        var oss = ofs.substring(fcb + 1, lcb);
+        //alert('h3=' + ofs + '||||\n' + oss);
+        nfs = nbStripLeadingSemicolons(oss);
+    }
+	var s = nbStripLeadingSemicolons(nfs + ";" + str);
+    var f = new Function(s);
+    return f;
+}
+function nbStripLeadingSemicolons(s){
+	while (s.substr(0,1) == ';' && s.length>1) {
+    	s = s.substr(1);
+    }
+	return s;
+}
+', 
+
+
+        ', 
+
+    ', 
+
+
+        ', 
+            ', 
+                
+
+                ', 
+
+                    ', 
+
+                    
+                    
+
+
+
+
+
+
+
+
+', 
+', 
+<!--
+
+    var CLICK_OK_BUTTON_DURATION = 60;
+    var CONFIRM_MSG_SECS = 1200 - CLICK_OK_BUTTON_DURATION - 30;
+    var secsTilMsg = CONFIRM_MSG_SECS;
+    function openInfoPopupWindowIfNeeded()
+    {
+        
+
+        return false;
+    }
+  
+    var HAS_DEFAULT_ENTER_KEY  =  false;
+    var DEFAULT_ENTER_KEY_NAME = "";
+    var HAS_PAGE_VALIDATION    =  false;
+    var PAGE_VALIDATION        = "()";
+
+
+
+    function adjustIFrameSize (iframeWindow) {
+
+      if (iframeWindow.document.height) {
+        var iframeElement = parent.document.getElementById (iframeWindow.name);
+        iframeElement.style.height = iframeWindow.document.height + 'px';
+
+        iframeElement.style.width = iframeWindow.document.width + 'px';
+      }
+      else if (document.all) {
+        var iframeElement = parent.document.all[iframeWindow.name];
+        if (iframeWindow.document.compatMode &&
+            iframeWindow.document.compatMode != 'BackCompat')
+        {
+          iframeElement.style.height =
+            iframeWindow.document.documentElement.scrollHeight + 5 + 'px';
+
+          iframeElement.style.width =
+            iframeWindow.document.documentElement.scrollWidth + 5 + 'px';
+        }
+        else {
+          iframeElement.style.height =
+            iframeWindow.document.body.scrollHeight + 5 + 'px';
+          iframeElement.style.width =
+            iframeWindow.document.body.scrollWidth + 5 + 'px';
+        }
+      }
+    }
+
+    
+    function checkStale()
+    {
+        
+        if (document.cookie.search(/pgt=c1483872785910t/i) == null)
+        {
+            document.location.reload();
+        }
+    }
+//-->
+', 
+', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+
+
+
+', 
+
+', 
+ ', 
+', 
+
+', 
+ ', 
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', 
+
+
+', 
+
+
+    $(function(){
+
+    
+
+        hcOnDocumentReady();
+        
+    });//document ready
+
+
+
+
+
+function hcLogin()
+{
+    aefhLogin(false);
+}
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+    ', 
+    ', 
+    ', 
+  ', 
+', 
+
+
+
+', 
+
+', 
+    hcMyEdlineXmlDataJQueryObj = $("#edlMenuXmlData");
+
+    
+        hcMyEdlineBackCompatXmlDataJQueryObj = hcMyEdlineXmlDataJQueryObj;
+    
+
+', 
+
+
+
+
+
+
+
+
+', 
+
+
+    function translateMenuOver(pEvent)
+    {
+        overrideMenuHiding = true;
+        showTranslateMenu(pEvent);
+    }
+
+
+    function translateMenuOut(pEvent)
+    {
+    }
+
+
+    function showTranslateMenu(pEvent)
+    {
+      // Hide the navbar menus if they are open:
+      hdrHideAllDropDownMenus();
+
+      var linkElem = document.getElementById("edlLangLink");
+      var linkElemOffset = $("#edlLangLink").offset();
+      var linkLeftEdge = linkElemOffset.left;
+      var linkBottomEdge = linkElemOffset.top + linkElem.offsetHeight;
+
+      translateMenu.moveTo(linkLeftEdge, linkBottomEdge + 1);
+      translateMenu.show();
+    }
+
+    function switchLang(lang)
+    {
+        if (translationDisabledMessage())
+        {
+            return;
+        }
+
+        submitEvent('language', 'TCNK=headerComponent;language='+lang);
+    }
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Choose How To View This Page', 
+                      ', 
+                        ', 
+                          ', Standard View', 
+                          ', List View', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Want to translate this page?', 
+                      ', 
+                        ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Share This Page', 
+                      ', 
+                        ', 
+                          ', 
+                          ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', 
+                        ', Search', 
+                        ', 
+                          ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                              ', 
+                              ', 
+                                ', 
+                                  ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                              ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', HELP', 
+                  ', 
+                  ', 
+                  ', 
+                    ',  ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', SIGN IN', 
+                  ', 
+                  ', 
+                ', 
+                ', 
+              ', 
+            ', 
+
+
+
+
+
+
+
+
+
+
+  ', 
+    ', 
+    ', 
+  ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+function initForms()
+{
+	var frm = window.document.authenticationEntryFormForHeader;
+	frm.kclq.value = "";
+	frm.ajaxSupported.value = isAjaxSupported();
+}
+
+
+
+function debounceEnterKey(frm, eventNm)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function debounceEnterKeyToEntid(frm, eventNm, entid)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.targetEntid.value = entid;
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function handleSubmitOnEnter(e)
+{
+    
+    if (window.ghKeyPressHandler != null)
+    {
+        if ( typeof(ghKeyPressHandler == "function") )
+        {
+            ghKeyPressHandler(e);
+        }
+    }
+    
+    var keyPressed = '';
+
+    var isMSIE = navigator.userAgent.indexOf('MSIE') != -1;
+
+    if (isMSIE)
+        keyPressed = String.fromCharCode(window.event.keyCode);
+    else
+        keyPressed = String.fromCharCode(e.which);
+
+    if (keyPressed == "\r" || keyPressed == "\n")
+    {
+        
+        var authenticationFormToUse = null;
+
+        if (document.authenticationEntryFormForHeader && !document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryFormForHeader;
+        }
+        else if (!document.authenticationEntryFormForHeader && document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryForm;
+        }
+
+        if (authenticationFormToUse == null)
+        {
+            var headerFieldsFilledIn = 0;
+            if (document.authenticationEntryFormForHeader)
+            {
+                if (typeof(document.authenticationEntryFormForHeader.screenName) != "undefined"
+                    && document.authenticationEntryFormForHeader.screenName.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryFormForHeader.kclq) != "undefined"
+                    && document.authenticationEntryFormForHeader.kclq.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+            }
+
+            var bodyFieldsFilledIn = 0;
+            if (document.authenticationEntryForm)
+            {
+                if (typeof(document.authenticationEntryForm.screenName) != "undefined"
+                    && document.authenticationEntryForm.screenName.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryForm.kclq) != "undefined"
+                    && document.authenticationEntryForm.kclq.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+            }
+
+            if (headerFieldsFilledIn > bodyFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryFormForHeader;
+            }
+
+            if (bodyFieldsFilledIn > headerFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryForm;
+            }
+        }
+
+        // If no form or a search is being performed
+        if ( authenticationFormToUse == null || (typeof searchCtlr !== "undefined" && searchCtlr && document.forms["hcSearchForm"].token.value != '') )
+        {
+            window.document.onkeypress = doNothing;
+        }
+        else
+        {
+            if (authenticationFormToUse.kclq.value == "")
+            {   
+                authenticationFormToUse.kclq.focus();
+            }
+            else
+            {
+                authenticationFormToUse.submitButton.click();
+    
+                window.document.onkeypress = doNothing;
+            }
+        }
+
+
+        return false;
+    }
+
+    return true;
+}
+
+
+    if (window.document.captureEvents != null){
+        window.document.captureEvents(Event.KEYPRESS);
+    }
+    window.document.onkeypress = handleSubmitOnEnter;
+
+
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+
+function aefhCancelLogin()
+{
+    var elem = document.getElementById('edlHeaderControlsLoginPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        aefhRestoreBreadcrumbBorder();
+        elem.style.display = "none";
+    }
+}
+
+
+function aefhSaveAndClearBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        nbGlobalTopBorderStyle = elem.style.borderTop;
+        elem.style.borderTop = "";
+    }
+}
+
+
+function aefhRestoreBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        elem.style.borderTop = nbGlobalTopBorderStyle;
+    }
+}
+
+
+<!--
+function checkBrowserTime()
+{
+    var edlineDateString       = "Sunday, January 8, 2017 4:53AM CST";
+    var edlineTimeInMillis     = 1483872786133;
+    var browserTimeInMillis    = (new Date()).getTime();
+    var timeDifferenceInMillis = (edlineTimeInMillis  - browserTimeInMillis);
+    var timeDifferenceInDays   = timeDifferenceInMillis / 86400000;
+
+    if ((timeDifferenceInDays < -2) || (timeDifferenceInDays > 2))
+    {
+        alert("Your computer clock reads " + (new Date()).toLocaleString() + " \r\nwhich is off by more than 24 hours. Please correct your computer clock.");
+
+    }
+}
+
+
+checkBrowserTime();
+
+//-->
+', 
+
+
+', 
+        ',    
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+
+    ', 
+
+        ', 
+            ', 
+                ', 
+                  ', Screen Name:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                  
+            ', 
+            ', 
+                ', 
+                    ', Click here if you forgot your screen name or password', 
+                ', 
+            ', 
+        ', 
+        
+        ', 
+            ', 
+                ', 
+                  ', Password:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+
+            ', 
+                ',     
+            ', 
+
+            ', 
+                  
+            ', 
+
+            ', 
+                ', 
+                    ', Click here to Sign Up', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+        ', 
+
+        
+', 
+
+
+
+', 
+window.document.cookie="bpcc=tu";
+
+  var frm = window.document.authenticationEntryFormForHeader;
+  frm.bscv.value = window.document.cookie;
+  frm.bscf.value = (window.document.cookie.indexOf("bpcc=tu") >= 0)
+    ? "1" : "0";
+
+
+
+
+try
+{
+  
+  if (frm.screenName.offsetWidth > 0)
+  {
+	  frm.screenName.focus();
+      frm.screenName.select();
+  }
+}
+catch(e)
+{
+
+}                                             
+', 
+
+
+', 
+
+
+
+
+
+', 
+
+
+    
+        
+            
+        
+
+        
+
+', 
+
+', 
+
+    
+
+    if (typeof suTrimLeadingTrailingSpace != "undefined")
+    {
+        var headerAreaQuery = $("#edlHeaderArea");
+
+        if (suTrimLeadingTrailingSpace(headerAreaQuery.html() ).length == 0)
+        {
+            headerAreaQuery.hide();//css("display","none");
+        }
+    }
+
+', 
+
+
+
+
+
+
+
+', 
+    function translationDisabledMessage()
+    {
+
+        return false;
+
+    }
+
+
+
+', 
+
+
+                    
+
+                        ', 
+                            ', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x791706CAA6461884/4":{"renderer":"image","mimeType":"image/png"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Top Name', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc8725450270496397444";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "8725450270496397444",
+            "8725450270496397444",
+            "iFrame_edlElement_8725450270496397444_document",
+            'iFrame_edlElement_8725450270496397444_document',
+            '*',
+            'edlThemeHeaderZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            130,
+            'transparent',
+            false,
+            false,
+            true,
+            false,
+            '909',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    $(document).ready(function() {
+        ghPrepNavMenu("globalTopNavMenu", false,
+                "/images/icons/sets/FamFamFam_Silk/");
+    });
+
+
+    
+
+', 
+
+
+
+
+', 
+
+    
+
+
+
+
+    ', Global Main Navigation', 
+    
+    
+
+    
+
+    ', 
+
+        ', 
+        ', 
+          ', 
+              ', 
+', Students', 
+', |', 
+', Parents', 
+', |', 
+', Staff', 
+', |', 
+', Learning', 
+', |', 
+', Leadership', 
+', |', 
+', About Us', 
+', |', 
+', Employment', 
+', |', 
+', HIB', 
+', 
+
+          ', 
+        ', 
+        ', 
+
+    ', 
+
+
+', 
+
+
+', 
+', 2016-2017 Calendar', 
+', Lunch Portal', 
+', Before and After Care', 
+', Grade Portal', 
+', School Choice', 
+', NJ Parent Link', 
+', Home and School', 
+', Nurse', 
+', PARCC Testing', 
+', Tech Handbook for Parents and Students', 
+', Sixth Grade Parents', 
+', Staff Websites', 
+', Gifted and Talented', 
+', S.T.E.A.M.', 
+', School Programs', 
+', u"Mr. Knauss' Instruments Calendar", 
+', 
+', 
+', OnCourse', 
+', Aesop', 
+', McRel', 
+', Gmail', 
+', School Dude', 
+', Tech Request', 
+', Professional Leave Request', 
+', Teacher Websites', 
+', SAM Central', 
+', Read 180', 
+', Educational College Credit Reimbursement Form', 
+', NWEA - MAP', 
+', 
+', 
+', Directions', 
+', Elk Township', 
+', Delsea Regional', 
+', Weather', 
+', Title I', 
+', User Friendly Budget 2016-2017', 
+', 2017-18ShoolChoice.pdf', 
+', 
+', 
+', u"Principal's Blog", 
+', Superintendent Blog', 
+', Policies', 
+', Board Members', 
+', Minutes', 
+', Electronic Board Meeting', 
+', 
+', 
+', 5512 HIB Policy.pdf', 
+', HIB Report', 
+', Self Assessment Score Report', 
+', 
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x791706CAA36B4724/1":{"renderer":"image","mimeType":"image/jpeg"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Welcome', 
+        
+
+                ', 
+', 
+', 
+', Welcome', 
+', 
+
+
+
+                
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc8725450270448502564";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "8725450270448502564",
+            "8725450270448502564",
+            "iFrame_edlElement_8725450270448502564_document",
+            'iFrame_edlElement_8725450270448502564_document',
+            '285',
+            'edlThemeTopleft231ZoneFrame',
+            5,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            0,
+            'transparent',
+            false,
+            true,
+            false,
+            false,
+            '264',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("8725450270477219122.folder", "");
+    ghPinnedSlideShows["8725450270477219122"] = true;
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+', 
+
+
+
+    
+    ', Main Slideshow', 
+    
+
+            
+
+            
+
+
+
+
+
+
+  ', 
+
+  
+
+  
+
+
+
+
+
+    ', 
+
+    
+
+        .ed-slider-controlbar a {
+            display: block;
+            position: absolute;
+            text-decoration: none;
+            text-indent: -999em;
+            overflow: hidden;
+            background: transparent url('/images/SlideShowControlButtonsSprite16x16.png') no-repeat 0 0;
+            height: 16px;
+            width: 16px;
+        /*	left: 0;*/
+            left: 50%;
+            top: 50%;
+            margin: -8px 0 0 -8px;
+        }
+        /*sprites begin*/
+        /*a.ed-slider-prev {
+            background-position:-10px -10px;
+        }
+
+        a.ed-slider-prev:hover {
+            background-position:-40px -10px;
+        }
+
+        a.ed-slider-prev:active {
+            background-position:-70px -10px;
+        }*/
+
+        a.ed-slider-play {
+            background-position:-10px -100px;
+        }
+
+        a.ed-slider-play.selected {
+            display: none;
+        }
+
+        a.ed-slider-play:hover {
+            background-position:-40px -100px;
+        }
+
+        a.ed-slider-play:active {
+            background-position:-70px -100px;
+        }
+
+        a.ed-slider-pause {
+            background-position:-10px -70px;
+        }
+
+        a.ed-slider-pause.selected {
+            display: none;
+        }
+
+        a.ed-slider-pause:hover {
+            background-position:-40px -70px;
+        }
+
+        a.ed-slider-pause:active {
+            background-position:-70px -70px;
+        }
+
+        /*a.ed-slider-next {
+            background-position:-10px -40px;
+            left: 32px;
+        }
+
+        a.ed-slider-next:hover {
+            background-position:-40px -40px;
+        }
+
+        a.ed-slider-next:active {
+            background-position:-70px -40px;
+        }*/
+
+        a.ed-slider-fullscreen {
+            background-position:-10px -130px;
+        }
+
+        a.ed-slider-fullscreen:hover {
+            background-position:-40px -130px;
+        }
+
+        a.ed-slider-fullscreen:active {
+            background-position:-70px -130px;
+        }
+        /*sprites end*/
+        .ed-slider-prevNext {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat -100% -100%;
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .ed-slider-prevNext a {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 100%;
+            text-indent: -999em;
+            overflow: hidden;
+            outline: none;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next {
+            left: auto;
+            right: 0;
+            width: 80%;
+        }
+
+        .ed-slider-prevNext div {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext span {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat 0 0;
+            display: block;
+            width: 25px;
+            height: 47px;
+            text-indent: -999em;
+            overflow: hidden;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            margin: -23px 0 0;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext a.ed-slider-prev:hover span,
+        a.ed-slider-prev div.hover span {
+            background-position: 0 -60px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next span {
+            background-position: right 0;
+            left: auto;
+            right: 10px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next:hover span,
+        a.ed-slider-next div.hover span {
+            background-position: right -60px;
+        }
+
+        /*caption-controlbar container begin*/
+        ul .ed-slider-image-caption-controlbar-container {
+            display: none;
+        }
+
+        .ed-slider-image-caption-controlbar-container.ext {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 85px;
+            color: #fff;
+            z-index: 10;
+            vertical-align:bottom;
+        }
+
+        .ed-slider-image-caption,
+        .ed-slider-image-caption-summary,
+        .ed-slider-image-caption-title-has-summary,
+        .ed-slider-image-caption-title-no-summary
+        {
+            color: #fff;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption .ed-slider-countinfo,
+        .ed-slider-image-caption-controlbar-container.hasCaption .prevNext,
+        .ed-slider-image-caption-controlbar-container.hasCaption .fullscreen {
+            background-image: none;
+        }
+
+        /*caption-controlbar container end*/
+        /*caption begin*/
+        .ed-slider-image-caption-controlbar-container.hasCaption {
+            width: 100%;
+            min-height: 30px;
+            height: auto;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption  .captionHolder {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+            float: left;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        
+        /*caption end*/
+        
+        /*controlbar begin*/
+        .ed-slider-controlbar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            min-height:31px;
+            width:105px;
+        }
+
+
+        /*.ed-slider-controlbar div{*/
+             /*padding-top:4px;*/
+             /*padding-right:2px;*/
+             /*padding-left:2px;*/
+        /*}*/
+
+        .ed-slider-controlbar .fullscreen, .ed-slider-controlbar .playPause {
+            float: right;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+        }
+
+        .ed-slider-controlbar.hasNoCaption, .ed-slider-controlbar.captionHidden {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+        }
+        
+        .ed-slider-controlbar .ed-slider-countinfo {
+        	float: right;
+            padding: 8px 10px 0 6px;
+            height: 20px;
+            font-weight: bold;
+            font-size: 12px;  
+        }
+
+        /*.ed-slider-controlbar .prevNext {*/
+            /*position: absolute;*/
+            /*right: 20px;*/
+            /*width: 48px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .playPause {*/
+            /*position: absolute;*/
+            /*right: 30px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 11;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .fullscreen {*/
+            /*position: absolute;*/
+            /*right: 4px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+        /*controlbar end*/    
+         .ed-slider-cached-image
+        {
+            display:none;
+        }
+
+        /**********************/
+        /* thumbnail controls */
+        /**********************/
+        .ncWrap {
+            float: left;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        /* round button look */
+        .ncWrap a.prev, .ncWrap a.next {
+            background: transparent url("/images/thumbnailControls.png") no-repeat 0 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -18px;
+            width: 32px;
+            height: 36px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prev { left: 0; margin-left: 5px;}
+        .ncWrap a.prev:hover { background-position: 0 -40px; }
+        .ncWrap a.prev:active { background-position: 0 -80px; }
+
+        .ncWrap a.next { background-position: -40px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.next:hover { background-position: -40px -40px; }
+        .ncWrap a.next:active { background-position: -40px -80px; }
+        /* end round button look */
+
+        /* small round button look */
+        .ncWrap a.prevSmall, .ncWrap a.nextSmall {
+            background: transparent url("/images/thumbnailControls.png") no-repeat -160px 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prevSmall { left: 0; margin-left: 5px;}
+        .ncWrap a.prevSmall:hover { background-position: -160px -40px; }
+        .ncWrap a.prevSmall:active { background-position: -160px -80px; }
+
+        .ncWrap a.nextSmall { background-position: -200px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.nextSmall:hover { background-position: -200px -40px; }
+        .ncWrap a.nextSmall:active { background-position: -200px -80px; }
+        /* end small round button look */
+
+        .carouselContainer {
+            position: relative;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            margin: 0 0 0 30px;
+        }
+
+        .carousel {
+            width: 99999px;/* huge width prior to js set width */
+        }
+
+        .carousel li {
+            float: left;
+            margin: 0 5px;
+            background-color: #fff;
+            border: 1px solid #e3e3e3;
+            opacity: .4;
+            width: auto !important;
+            height: auto !important;
+            position: relative;
+            filter: alpha(opacity = 40);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+            -webkit-transition: all .4s linear;
+            -moz-transition: all .4s linear;
+            -o-transition: all .4s linear;
+            -ms-transition: all .4s linear;
+            transition: all .4s linear;
+        }
+
+        /* ie8 */
+        .ie8 .carousel li img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        }
+
+        .carousel li a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+
+        .carousel li.selected, .carousel li:hover {
+            opacity: 1;
+            filter: alpha(opacity = 100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        /* ie8 */
+        .ie8 .carousel li.selected img, .ie8 .carousel li:hover img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        .carousel li img {
+            position: relative;
+        }
+        /**************************/
+        /* end thumbnail controls */
+        /**************************/
+    ', 
+    ', 
+        .ed-slider-image-caption-title-no-summary-9558202c49 {
+            font-weight:bold;
+            font-size:16px;
+        }
+
+        .ed-slider-image-caption-title-has-summary-9558202c49 {
+            font-weight:bold;
+            font-size:16px;
+            padding-bottom: 2px;
+        }
+
+        .ed-slider-image-caption-summary-9558202c49 {
+            font-weight:bold;
+            font-size:10px;
+        }
+        .ed-slider-image-caption-9558202c49,
+        .ed-slider-image-caption-summary-9558202c49,
+        .ed-slider-image-caption-title-has-summary-9558202c49 ,
+        .ed-slider-image-caption-title-no-summary-9558202c49
+        {
+            color: #fff;
+        }
+
+       #ed-slider-gallery-loading-9558202c49
+       {
+           width:640px;
+           height:359px;
+           position: absolute;
+           z-index: 999;
+       }
+
+       #ed-slider-wrap-9558202c49
+       {
+           overflow:hidden;
+
+           
+           width:640px;
+           height:359px;
+           position:relative;
+           
+
+           font-family:Arial, Helvetica, sans-serif;
+
+
+
+
+       }
+
+        #ed-slider-wrap-9558202c49 .galleryWrap {
+            width: 640px;
+            height: 359px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+
+       #ed-slider-wrap-9558202c49 ul {
+           float: left;
+           width: 640px;
+           height: 359px;
+           overflow: hidden;
+       }
+
+
+       #ed-slider-wrap-9558202c49 ul li
+       {
+           list-style-type:none;
+           overflow: hidden;
+           width: 640px;
+           height: 359px;
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-9558202c49 .group .block {
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-9558202c49 .group .block.imgTransition {
+           background-color: transparent;
+       }
+
+       .ed-slider-image-caption-controlbar-container .captionHolder .ed-slider-image-caption-9558202c49 {
+            float: left;
+            min-height: 15px;
+            padding: 8px 8px 8px 10px;
+            position: relative;
+            width: 524px;
+        }
+
+        #ed-slider-wrap-9558202c49 .ed-slider-prevNext {
+            height: 359px;
+        }
+   ', 
+
+    ', 
+        ', 
+
+    
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                        ', 
+                            
+                            ', 
+                                Aura A
+                            ', 
+                            
+                           
+                        ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                        ', 
+                            
+                            ', 
+                                Aura Squire
+                            ', 
+                            
+                           
+                        ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                        ', 
+                            
+                            ', 
+                                Science Fair
+                            ', 
+                            
+                           
+                        ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+
+        ', 
+        ', 
+            
+            ', 
+               ', 
+            ', 
+            
+        ', 
+    ', 
+', 
+	', 
+    ', 
+
+	', u"
+
+        $(document).ready(function()
+        {
+            fssbOnload('9558202c49',
+                    8000,
+                    'hover',
+                    true,
+                    'fade',
+                    'None',
+                    'small',
+                    false,
+                    'hover',
+                    '8725450270477219122',
+                    'edlElement_8725450270477219122_folderContents',
+                    'edlElement_8725450270477219122_folder',
+                    false
+            );
+		});
+
+	", 
+
+
+
+
+  
+
+  
+
+    ', 
+
+    
+
+', 
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+',   ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Twitter Feed', 
+        
+
+                ', 
+', 
+', 
+', Twitter Feed', 
+', 
+
+
+
+                
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc8725450339321559172";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "8725450339321559172",
+            "8725450339321559172",
+            "iFrame_edlElement_8725450339321559172_document",
+            'iFrame_edlElement_8725450339321559172_document',
+            '*',
+            'edlThemeControlZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            300,
+            '#ffffff',
+            false,
+            false,
+            true,
+            false,
+            '244',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("8725450396282979282.folder", "");
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+', 
+
+
+
+    
+    
+
+            ', This Just In', 
+            
+            ', 
+', 
+', 
+', This Just In...', 
+', 
+
+
+            
+
+
+  ', 
+        
+          
+      
+
+  
+
+
+  
+
+
+    ', 
+
+    
+
+      ', 
+
+      
+
+        ', 
+
+    
+        
+            ',  ', 
+        
+
+          ', 
+            ', 
+
+                
+
+              ', Science Fair', 
+                
+                    ', 
+
+
+            ', February 2, 2016', 
+
+          ', 
+
+
+        ', 
+      ', 
+    
+    
+
+    
+
+
+        ', 
+        
+
+  
+
+  
+
+    ', 
+
+    
+
+', 
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("calendar.box", "");
+
+    
+
+', 
+
+
+', 
+
+
+
+    
+        ', Calendar', 
+        
+        ', 
+', 
+', 
+', Calendar', 
+', 
+
+
+        
+
+    
+
+  ', 
+  
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+    
+
+  ', 
+
+      
+
+  
+   
+
+    ', 
+    
+      ', 01/13/17 Fri', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', AM PRESCHOOL ATTEND', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/13/17 Fri', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', EARLY DISMISSAL', 
+            ', 
+          ', 
+        ', 
+
+
+          ', Pre-School - Dismiss 11:00am, Kindergarten-6th 12:30pm', 
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/13/17 Fri', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', u"TEACHERS' IN-SERVICE", 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/16/17 Mon', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', MARTIN LUTHER KING, JR. DAY - SCHOOL CLOSED', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/23/17 Mon', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', HOME & SCHOOL MTG. - 7:00PM', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+
+      
+    ', 
+
+    
+
+    
+    ', 
+            ', 
+                ', 
+                    
+                        More Events...
+                    
+                ', 
+            ', 
+        ', 
+    
+
+', 
+', 
+
+  
+        
+      
+      
+  ', 
+    
+    
+    
+', 
+    ', 
+  ', 
+', 
+',   ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x791706CAA45C8984/6":{"renderer":"image","mimeType":"image/png"},"0x791706CAA45C8984/5":{"renderer":"image","mimeType":"image/png"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Footer Address', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc8725450270464313732";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "8725450270464313732",
+            "8725450270464313732",
+            "iFrame_edlElement_8725450270464313732_document",
+            'iFrame_edlElement_8725450270464313732_document',
+            '*',
+            'edlThemeBottomsectionZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            60,
+            'transparent',
+            false,
+            false,
+            true,
+            false,
+            '909',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+
+                        ', 
+
+                    
+
+
+    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+    ', 
+
+    ', 
+
+    
+    ', translate monitor', 
+
+    '][
+
+    
+
+    ', 
+         
+    ', 
+
+    
+
+
+    
+
+    
+
+    
+    ', Skip to Content', 
+
+    
+    ', 
+
+        
+
+
+        ', 
+            ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+
+                
+                ', 
+                    ', 
+
+                         
+
+                        ', 
+
+                         
+
+                        ', 
+
+                    ', 
+                ', 
+
+                    
+                    ', 
+                        ', 
+                              
+                            ', 
+                            ', All locations', 
+                             
+                            ', 
+                        ', 
+                    ', 
+
+                    
+                    ', 
+                        ', 
+                        ', 
+                    ', 
+
+
+            ', 
+        ', 
+
+
+        ', 
+            ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                          
+                ', 
+                ', 
+                        ', 
+                ', 
+                ', 
+                        ', 
+                              
+                            ', 
+                            ', Change in all locations', 
+                             
+                            ', 
+                        ', 
+                ', 
+                
+                ', 
+                    ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+
+
+    ', 
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+
+', 
+
+', 
+', 
+
+
+
+/* MOVED FUNCTION TO BOTTOM */
+function addHtmlAttribute(element, attributeName, attributeValue)
+{
+    var tempVar = "";
+    if (element.hasAttribute(attributeName) == true)
+    {
+       tempVar = element.getAttribute(attributeName);
+    }
+    element.setAttribute(attributeName, attributeValue + tempVar);
+}
+
+    var menuWidth = 200;
+    var menuBarWidth = 600;
+    var ajaxRequestEntid = "";
+    var globalMenuItem;
+    var itemDescrArray = new Array();
+    var itemNameArray = new Array();
+    var itemTypeArray = new Array();
+    var itemUrlArray = new Array();
+    var itemTargetArray = new Array();
+    var itemIconClassArray = new Array();
+    var itemHasItemsArray = new Array();
+    var urlsPerEntidArray = new Array();
+    var descrsPerEntidArray = new Array();
+    var overflowAdjustedDivsArray = new Array();
+    var menuNamesArray = new Array();
+    var navLinkClicked = false;
+    var ua = navigator.userAgent;
+    var isMSIE = ua.indexOf ('MSIE') != -1;
+    var nbIsIE9 = ua.indexOf ('MSIE 9') != -1;
+    var isFirefox = ua.indexOf ('Firefox') != -1;
+    var isMacFirefox = (ua.indexOf ('Macintosh') != -1) && (isFirefox);
+    var nbIsChrome = ua.indexOf ('Chrome') != -1;
+    var previousEntid = "";
+    var previousTime = new Date();
+    var timeOfPageLoad = new Date();
+    var overrideMenuHiding = false;
+    var nbGlobalTopBorderStyle = "";
+    var nbIsWorldUser = false;
+    var nbShowAjaxErrorsToWorldUsers = false;
+    var nbFolderGroupTypeString = "Folder";
+    var nbWebPageGroupTypeString = "Web Page";
+    var nbHomeLinkId = "root-x8725450192892416354--sep--Aura_Elementary_SchoolhomeLink";
+    var nbBreadcrumbStripDropDownMenuFetchDelayMs = 450;
+    var nbHomeAndBreadcrumbDropDownSubmenuFetchDelayMs = 50;
+    var homeLinkElem = document.getElementById('edlHomeLink');
+    if (  (homeLinkElem != null) && (homeLinkElem != undefined)  )
+    {
+        homeLinkElem.id = "root-x8725450192892416354--sep--Aura_Elementary_SchoolhomeLink";
+        homeLinkElem.className = "breadcrumbLink";
+    }
+    
+    var onloadFnName = "nbnNavigationBarOnload";
+    
+    var pageBody = document.body;
+    var func = onloadFnName + "('false')";
+    
+    if (pageBody.attachEvent!=undefined) // attachEvent is a deprecated IE method
+    {
+        pageBody.onload = appendToFunction(pageBody.onload, func);
+    } else {
+        addHtmlAttribute(pageBody, "onload", func +";");
+    }
+
+function appendToFunction(func, str)
+{
+    var nfs = "";
+    if (func != null){
+        var ofs = func.toString();
+        var fcb = ofs.indexOf("{");
+        var lcb = ofs.indexOf("}",fcb+1);
+        var oss = ofs.substring(fcb + 1, lcb);
+        //alert('h3=' + ofs + '||||\n' + oss);
+        nfs = nbStripLeadingSemicolons(oss);
+    }
+	var s = nbStripLeadingSemicolons(nfs + ";" + str);
+    var f = new Function(s);
+    return f;
+}
+function nbStripLeadingSemicolons(s){
+	while (s.substr(0,1) == ';' && s.length>1) {
+    	s = s.substr(1);
+    }
+	return s;
+}
+', 
+
+
+        ', 
+
+    ', 
+
+
+        ', 
+            ', 
+                
+
+                ', 
+
+                    ', 
+
+                    
+                    
+
+
+
+
+
+
+
+
+', 
+', 
+<!--
+
+    var CLICK_OK_BUTTON_DURATION = 60;
+    var CONFIRM_MSG_SECS = 1200 - CLICK_OK_BUTTON_DURATION - 30;
+    var secsTilMsg = CONFIRM_MSG_SECS;
+    function openInfoPopupWindowIfNeeded()
+    {
+        
+
+        return false;
+    }
+  
+    var HAS_DEFAULT_ENTER_KEY  =  false;
+    var DEFAULT_ENTER_KEY_NAME = "";
+    var HAS_PAGE_VALIDATION    =  false;
+    var PAGE_VALIDATION        = "()";
+
+
+
+    function adjustIFrameSize (iframeWindow) {
+
+      if (iframeWindow.document.height) {
+        var iframeElement = parent.document.getElementById (iframeWindow.name);
+        iframeElement.style.height = iframeWindow.document.height + 'px';
+
+        iframeElement.style.width = iframeWindow.document.width + 'px';
+      }
+      else if (document.all) {
+        var iframeElement = parent.document.all[iframeWindow.name];
+        if (iframeWindow.document.compatMode &&
+            iframeWindow.document.compatMode != 'BackCompat')
+        {
+          iframeElement.style.height =
+            iframeWindow.document.documentElement.scrollHeight + 5 + 'px';
+
+          iframeElement.style.width =
+            iframeWindow.document.documentElement.scrollWidth + 5 + 'px';
+        }
+        else {
+          iframeElement.style.height =
+            iframeWindow.document.body.scrollHeight + 5 + 'px';
+          iframeElement.style.width =
+            iframeWindow.document.body.scrollWidth + 5 + 'px';
+        }
+      }
+    }
+
+    
+    function checkStale()
+    {
+        
+        if (document.cookie.search(/pgt=c1483872790811t/i) == null)
+        {
+            document.location.reload();
+        }
+    }
+//-->
+', 
+', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+ ', 
+
+
+
+', 
+
+', 
+ ', 
+', 
+
+', 
+ ', 
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ', 
+
+
+', 
+
+
+    $(function(){
+
+    
+
+        hcOnDocumentReady();
+        
+    });//document ready
+
+
+
+
+
+function hcLogin()
+{
+    aefhLogin(false);
+}
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+    ', 
+    ', 
+    ', 
+  ', 
+', 
+
+
+
+', 
+
+', 
+    hcMyEdlineXmlDataJQueryObj = $("#edlMenuXmlData");
+
+    
+        hcMyEdlineBackCompatXmlDataJQueryObj = hcMyEdlineXmlDataJQueryObj;
+    
+
+', 
+
+
+
+
+
+
+
+
+', 
+
+
+    function translateMenuOver(pEvent)
+    {
+        overrideMenuHiding = true;
+        showTranslateMenu(pEvent);
+    }
+
+
+    function translateMenuOut(pEvent)
+    {
+    }
+
+
+    function showTranslateMenu(pEvent)
+    {
+      // Hide the navbar menus if they are open:
+      hdrHideAllDropDownMenus();
+
+      var linkElem = document.getElementById("edlLangLink");
+      var linkElemOffset = $("#edlLangLink").offset();
+      var linkLeftEdge = linkElemOffset.left;
+      var linkBottomEdge = linkElemOffset.top + linkElem.offsetHeight;
+
+      translateMenu.moveTo(linkLeftEdge, linkBottomEdge + 1);
+      translateMenu.show();
+    }
+
+    function switchLang(lang)
+    {
+        if (translationDisabledMessage())
+        {
+            return;
+        }
+
+        submitEvent('language', 'TCNK=headerComponent;language='+lang);
+    }
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ', 
+            ', 
+              ', 
+                ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+                ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Choose How To View This Page', 
+                      ', 
+                        ', 
+                          ', Standard View', 
+                          ', List View', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Want to translate this page?', 
+                      ', 
+                        ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', Share This Page', 
+                      ', 
+                        ', 
+                          ', 
+                          ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', 
+                    ', 
+                      ', 
+                        ', Search', 
+                        ', 
+                          ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                              ', 
+                              ', 
+                                ', 
+                                  ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                                ', 
+                              ', 
+                            ', 
+                            ', 
+                            ', 
+                            ', 
+                          ', 
+                        ', 
+                      ', 
+                    ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', HELP', 
+                  ', 
+                  ', 
+                  ', 
+                    ',  ', 
+                  ', 
+                  ', 
+                  ', 
+                  ', 
+                    ', SIGN IN', 
+                  ', 
+                  ', 
+                ', 
+                ', 
+              ', 
+            ', 
+
+
+
+
+
+
+
+
+
+
+  ', 
+    ', 
+    ', 
+  ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+function initForms()
+{
+	var frm = window.document.authenticationEntryFormForHeader;
+	frm.kclq.value = "";
+	frm.ajaxSupported.value = isAjaxSupported();
+}
+
+
+
+function debounceEnterKey(frm, eventNm)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function debounceEnterKeyToEntid(frm, eventNm, entid)
+{ 
+// This test occassionally failed (some users on Unix) and they told support
+// they could not log in because of this message even though they did not double click.
+//  if (frm.enterClicked.value == true)
+//  {
+//    alert("Please do not double click on buttons.");
+//    return false;
+//  }
+
+  frm.ajaxSupported.value = isAjaxSupported();
+  eventNm.value = "1";
+  frm.targetEntid.value = entid;
+  frm.enterClicked.value = true;
+  frm.submit();
+  return true;
+}
+
+
+function handleSubmitOnEnter(e)
+{
+    
+    if (window.ghKeyPressHandler != null)
+    {
+        if ( typeof(ghKeyPressHandler == "function") )
+        {
+            ghKeyPressHandler(e);
+        }
+    }
+    
+    var keyPressed = '';
+
+    var isMSIE = navigator.userAgent.indexOf('MSIE') != -1;
+
+    if (isMSIE)
+        keyPressed = String.fromCharCode(window.event.keyCode);
+    else
+        keyPressed = String.fromCharCode(e.which);
+
+    if (keyPressed == "\r" || keyPressed == "\n")
+    {
+        
+        var authenticationFormToUse = null;
+
+        if (document.authenticationEntryFormForHeader && !document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryFormForHeader;
+        }
+        else if (!document.authenticationEntryFormForHeader && document.authenticationEntryForm)
+        {
+            authenticationFormToUse = document.authenticationEntryForm;
+        }
+
+        if (authenticationFormToUse == null)
+        {
+            var headerFieldsFilledIn = 0;
+            if (document.authenticationEntryFormForHeader)
+            {
+                if (typeof(document.authenticationEntryFormForHeader.screenName) != "undefined"
+                    && document.authenticationEntryFormForHeader.screenName.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryFormForHeader.kclq) != "undefined"
+                    && document.authenticationEntryFormForHeader.kclq.value.length > 0)
+                {
+                    headerFieldsFilledIn++;
+                }
+            }
+
+            var bodyFieldsFilledIn = 0;
+            if (document.authenticationEntryForm)
+            {
+                if (typeof(document.authenticationEntryForm.screenName) != "undefined"
+                    && document.authenticationEntryForm.screenName.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+                if (typeof(document.authenticationEntryForm.kclq) != "undefined"
+                    && document.authenticationEntryForm.kclq.value.length > 0)
+                {
+                    bodyFieldsFilledIn++;
+                }
+            }
+
+            if (headerFieldsFilledIn > bodyFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryFormForHeader;
+            }
+
+            if (bodyFieldsFilledIn > headerFieldsFilledIn)
+            {
+                authenticationFormToUse = document.authenticationEntryForm;
+            }
+        }
+
+        // If no form or a search is being performed
+        if ( authenticationFormToUse == null || (typeof searchCtlr !== "undefined" && searchCtlr && document.forms["hcSearchForm"].token.value != '') )
+        {
+            window.document.onkeypress = doNothing;
+        }
+        else
+        {
+            if (authenticationFormToUse.kclq.value == "")
+            {   
+                authenticationFormToUse.kclq.focus();
+            }
+            else
+            {
+                authenticationFormToUse.submitButton.click();
+    
+                window.document.onkeypress = doNothing;
+            }
+        }
+
+
+        return false;
+    }
+
+    return true;
+}
+
+
+    if (window.document.captureEvents != null){
+        window.document.captureEvents(Event.KEYPRESS);
+    }
+    window.document.onkeypress = handleSubmitOnEnter;
+
+
+
+function aefhLogin(pIsLoginFieldsVisible)
+{
+    if (pIsLoginFieldsVisible)
+    {
+        var elem = document.getElementById('edlHeaderControlsLoginPane');
+
+        if (  (elem != null) && (elem != undefined)  )
+        {
+        	var frm = document.authenticationEntryFormForHeader;
+            aefhSaveAndClearBreadcrumbBorder();
+            frm.screenName.value = "";
+            frm.kclq.value = "";
+            elem.style.display = "block";
+            frm.screenName.focus();
+        }
+    }
+    else
+    {
+        submitEvent('secureLogin', 'TCNK=authenticationEntryComponent');
+    }
+}
+
+
+function aefhCancelLogin()
+{
+    var elem = document.getElementById('edlHeaderControlsLoginPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        aefhRestoreBreadcrumbBorder();
+        elem.style.display = "none";
+    }
+}
+
+
+function aefhSaveAndClearBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        nbGlobalTopBorderStyle = elem.style.borderTop;
+        elem.style.borderTop = "";
+    }
+}
+
+
+function aefhRestoreBreadcrumbBorder()
+{
+    var elem = $("#ed-navBarContainer").length ? document.getElementById('ed-navBarContainer') : document.getElementById('edlNavBreadcrumbPane');
+    if (  (elem != null) && (elem != undefined)  )
+    {
+        elem.style.borderTop = nbGlobalTopBorderStyle;
+    }
+}
+
+
+<!--
+function checkBrowserTime()
+{
+    var edlineDateString       = "Sunday, January 8, 2017 4:53AM CST";
+    var edlineTimeInMillis     = 1483872790838;
+    var browserTimeInMillis    = (new Date()).getTime();
+    var timeDifferenceInMillis = (edlineTimeInMillis  - browserTimeInMillis);
+    var timeDifferenceInDays   = timeDifferenceInMillis / 86400000;
+
+    if ((timeDifferenceInDays < -2) || (timeDifferenceInDays > 2))
+    {
+        alert("Your computer clock reads " + (new Date()).toLocaleString() + " \r\nwhich is off by more than 24 hours. Please correct your computer clock.");
+
+    }
+}
+
+
+checkBrowserTime();
+
+//-->
+', 
+
+
+', 
+        ',    
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+            ', 
+
+    ', 
+
+        ', 
+            ', 
+                ', 
+                  ', Screen Name:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+            ', 
+                  
+            ', 
+            ', 
+                ', 
+                    ', Click here if you forgot your screen name or password', 
+                ', 
+            ', 
+        ', 
+        
+        ', 
+            ', 
+                ', 
+                  ', Password:', 
+                ', 
+            ', 
+            ', 
+                ', 
+            ', 
+
+            ', 
+                ',     
+            ', 
+
+            ', 
+                  
+            ', 
+
+            ', 
+                ', 
+                    ', Click here to Sign Up', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+        ', 
+
+        
+', 
+
+
+
+', 
+window.document.cookie="bpcc=tu";
+
+  var frm = window.document.authenticationEntryFormForHeader;
+  frm.bscv.value = window.document.cookie;
+  frm.bscf.value = (window.document.cookie.indexOf("bpcc=tu") >= 0)
+    ? "1" : "0";
+
+
+
+
+try
+{
+  
+  if (frm.screenName.offsetWidth > 0)
+  {
+	  frm.screenName.focus();
+      frm.screenName.select();
+  }
+}
+catch(e)
+{
+
+}                                             
+', 
+
+
+', 
+
+
+
+
+
+', 
+
+
+    
+        
+            
+        
+
+        
+
+', 
+
+', 
+
+    
+
+    if (typeof suTrimLeadingTrailingSpace != "undefined")
+    {
+        var headerAreaQuery = $("#edlHeaderArea");
+
+        if (suTrimLeadingTrailingSpace(headerAreaQuery.html() ).length == 0)
+        {
+            headerAreaQuery.hide();//css("display","none");
+        }
+    }
+
+', 
+
+
+
+
+
+
+
+', 
+    function translationDisabledMessage()
+    {
+
+        return false;
+
+    }
+
+
+
+', 
+
+
+                    
+
+                        ', 
+                            ', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x791706CAA6461884/4":{"renderer":"image","mimeType":"image/png"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Top Name', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc8725450270496397444";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "8725450270496397444",
+            "8725450270496397444",
+            "iFrame_edlElement_8725450270496397444_document",
+            'iFrame_edlElement_8725450270496397444_document',
+            '*',
+            'edlThemeHeaderZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            130,
+            'transparent',
+            false,
+            false,
+            true,
+            false,
+            '909',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    $(document).ready(function() {
+        ghPrepNavMenu("globalTopNavMenu", false,
+                "/images/icons/sets/FamFamFam_Silk/");
+    });
+
+
+    
+
+', 
+
+
+
+
+', 
+
+    
+
+
+
+
+    ', Global Main Navigation', 
+    
+    
+
+    
+
+    ', 
+
+        ', 
+        ', 
+          ', 
+              ', 
+', Students', 
+', |', 
+', Parents', 
+', |', 
+', Staff', 
+', |', 
+', Learning', 
+', |', 
+', Leadership', 
+', |', 
+', About Us', 
+', |', 
+', Employment', 
+', |', 
+', HIB', 
+', 
+
+          ', 
+        ', 
+        ', 
+
+    ', 
+
+
+', 
+
+
+', 
+', 2016-2017 Calendar', 
+', Lunch Portal', 
+', Before and After Care', 
+', Grade Portal', 
+', School Choice', 
+', NJ Parent Link', 
+', Home and School', 
+', Nurse', 
+', PARCC Testing', 
+', Tech Handbook for Parents and Students', 
+', Sixth Grade Parents', 
+', Staff Websites', 
+', Gifted and Talented', 
+', S.T.E.A.M.', 
+', School Programs', 
+', u"Mr. Knauss' Instruments Calendar", 
+', 
+', 
+', OnCourse', 
+', Aesop', 
+', McRel', 
+', Gmail', 
+', School Dude', 
+', Tech Request', 
+', Professional Leave Request', 
+', Teacher Websites', 
+', SAM Central', 
+', Read 180', 
+', Educational College Credit Reimbursement Form', 
+', NWEA - MAP', 
+', 
+', 
+', Directions', 
+', Elk Township', 
+', Delsea Regional', 
+', Weather', 
+', Title I', 
+', User Friendly Budget 2016-2017', 
+', 2017-18ShoolChoice.pdf', 
+', 
+', 
+', u"Principal's Blog", 
+', Superintendent Blog', 
+', Policies', 
+', Board Members', 
+', Minutes', 
+', Electronic Board Meeting', 
+', 
+', 
+', 5512 HIB Policy.pdf', 
+', HIB Report', 
+', Self Assessment Score Report', 
+', 
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x791706CAA36B4724/1":{"renderer":"image","mimeType":"image/jpeg"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Welcome', 
+        
+
+                ', 
+', 
+', 
+', Welcome', 
+', 
+
+
+
+                
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc8725450270448502564";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "8725450270448502564",
+            "8725450270448502564",
+            "iFrame_edlElement_8725450270448502564_document",
+            'iFrame_edlElement_8725450270448502564_document',
+            '285',
+            'edlThemeTopleft231ZoneFrame',
+            5,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            0,
+            'transparent',
+            false,
+            true,
+            false,
+            false,
+            '264',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("8725450270477219122.folder", "");
+    ghPinnedSlideShows["8725450270477219122"] = true;
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+', 
+
+
+
+    
+    ', Main Slideshow', 
+    
+
+            
+
+            
+
+
+
+
+
+
+  ', 
+
+  
+
+  
+
+
+
+
+
+    ', 
+
+    
+
+        .ed-slider-controlbar a {
+            display: block;
+            position: absolute;
+            text-decoration: none;
+            text-indent: -999em;
+            overflow: hidden;
+            background: transparent url('/images/SlideShowControlButtonsSprite16x16.png') no-repeat 0 0;
+            height: 16px;
+            width: 16px;
+        /*	left: 0;*/
+            left: 50%;
+            top: 50%;
+            margin: -8px 0 0 -8px;
+        }
+        /*sprites begin*/
+        /*a.ed-slider-prev {
+            background-position:-10px -10px;
+        }
+
+        a.ed-slider-prev:hover {
+            background-position:-40px -10px;
+        }
+
+        a.ed-slider-prev:active {
+            background-position:-70px -10px;
+        }*/
+
+        a.ed-slider-play {
+            background-position:-10px -100px;
+        }
+
+        a.ed-slider-play.selected {
+            display: none;
+        }
+
+        a.ed-slider-play:hover {
+            background-position:-40px -100px;
+        }
+
+        a.ed-slider-play:active {
+            background-position:-70px -100px;
+        }
+
+        a.ed-slider-pause {
+            background-position:-10px -70px;
+        }
+
+        a.ed-slider-pause.selected {
+            display: none;
+        }
+
+        a.ed-slider-pause:hover {
+            background-position:-40px -70px;
+        }
+
+        a.ed-slider-pause:active {
+            background-position:-70px -70px;
+        }
+
+        /*a.ed-slider-next {
+            background-position:-10px -40px;
+            left: 32px;
+        }
+
+        a.ed-slider-next:hover {
+            background-position:-40px -40px;
+        }
+
+        a.ed-slider-next:active {
+            background-position:-70px -40px;
+        }*/
+
+        a.ed-slider-fullscreen {
+            background-position:-10px -130px;
+        }
+
+        a.ed-slider-fullscreen:hover {
+            background-position:-40px -130px;
+        }
+
+        a.ed-slider-fullscreen:active {
+            background-position:-70px -130px;
+        }
+        /*sprites end*/
+        .ed-slider-prevNext {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat -100% -100%;
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .ed-slider-prevNext a {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 100%;
+            text-indent: -999em;
+            overflow: hidden;
+            outline: none;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next {
+            left: auto;
+            right: 0;
+            width: 80%;
+        }
+
+        .ed-slider-prevNext div {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext span {
+            background: transparent url("/images/slideshow_prevNextArrows.png") no-repeat 0 0;
+            display: block;
+            width: 25px;
+            height: 47px;
+            text-indent: -999em;
+            overflow: hidden;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            margin: -23px 0 0;
+            cursor: pointer;
+        }
+
+        .ed-slider-prevNext a.ed-slider-prev:hover span,
+        a.ed-slider-prev div.hover span {
+            background-position: 0 -60px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next span {
+            background-position: right 0;
+            left: auto;
+            right: 10px;
+        }
+
+        .ed-slider-prevNext a.ed-slider-next:hover span,
+        a.ed-slider-next div.hover span {
+            background-position: right -60px;
+        }
+
+        /*caption-controlbar container begin*/
+        ul .ed-slider-image-caption-controlbar-container {
+            display: none;
+        }
+
+        .ed-slider-image-caption-controlbar-container.ext {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 85px;
+            color: #fff;
+            z-index: 10;
+            vertical-align:bottom;
+        }
+
+        .ed-slider-image-caption,
+        .ed-slider-image-caption-summary,
+        .ed-slider-image-caption-title-has-summary,
+        .ed-slider-image-caption-title-no-summary
+        {
+            color: #fff;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption .ed-slider-countinfo,
+        .ed-slider-image-caption-controlbar-container.hasCaption .prevNext,
+        .ed-slider-image-caption-controlbar-container.hasCaption .fullscreen {
+            background-image: none;
+        }
+
+        /*caption-controlbar container end*/
+        /*caption begin*/
+        .ed-slider-image-caption-controlbar-container.hasCaption {
+            width: 100%;
+            min-height: 30px;
+            height: auto;
+        }
+
+        .ed-slider-image-caption-controlbar-container.hasCaption  .captionHolder {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+            float: left;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        
+        /*caption end*/
+        
+        /*controlbar begin*/
+        .ed-slider-controlbar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            min-height:31px;
+            width:105px;
+        }
+
+
+        /*.ed-slider-controlbar div{*/
+             /*padding-top:4px;*/
+             /*padding-right:2px;*/
+             /*padding-left:2px;*/
+        /*}*/
+
+        .ed-slider-controlbar .fullscreen, .ed-slider-controlbar .playPause {
+            float: right;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+        }
+
+        .ed-slider-controlbar.hasNoCaption, .ed-slider-controlbar.captionHidden {
+            background: transparent url("/images/slider-overlay_2x2_51_50pct.png") repeat 0 0;
+        }
+        
+        .ed-slider-controlbar .ed-slider-countinfo {
+        	float: right;
+            padding: 8px 10px 0 6px;
+            height: 20px;
+            font-weight: bold;
+            font-size: 12px;  
+        }
+
+        /*.ed-slider-controlbar .prevNext {*/
+            /*position: absolute;*/
+            /*right: 20px;*/
+            /*width: 48px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .playPause {*/
+            /*position: absolute;*/
+            /*right: 30px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 11;*/
+        /*}*/
+
+        /*.ed-slider-controlbar .fullscreen {*/
+            /*position: absolute;*/
+            /*right: 4px;*/
+            /*width: 16px;*/
+            /*height: 16px;*/
+            /*z-index: 10;*/
+        /*}*/
+        /*controlbar end*/    
+         .ed-slider-cached-image
+        {
+            display:none;
+        }
+
+        /**********************/
+        /* thumbnail controls */
+        /**********************/
+        .ncWrap {
+            float: left;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        /* round button look */
+        .ncWrap a.prev, .ncWrap a.next {
+            background: transparent url("/images/thumbnailControls.png") no-repeat 0 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -18px;
+            width: 32px;
+            height: 36px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prev { left: 0; margin-left: 5px;}
+        .ncWrap a.prev:hover { background-position: 0 -40px; }
+        .ncWrap a.prev:active { background-position: 0 -80px; }
+
+        .ncWrap a.next { background-position: -40px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.next:hover { background-position: -40px -40px; }
+        .ncWrap a.next:active { background-position: -40px -80px; }
+        /* end round button look */
+
+        /* small round button look */
+        .ncWrap a.prevSmall, .ncWrap a.nextSmall {
+            background: transparent url("/images/thumbnailControls.png") no-repeat -160px 0;
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            text-indent: -999em;
+        }
+        .ncWrap a.prevSmall { left: 0; margin-left: 5px;}
+        .ncWrap a.prevSmall:hover { background-position: -160px -40px; }
+        .ncWrap a.prevSmall:active { background-position: -160px -80px; }
+
+        .ncWrap a.nextSmall { background-position: -200px 0; right: 0; margin-right: 5px; }
+        .ncWrap a.nextSmall:hover { background-position: -200px -40px; }
+        .ncWrap a.nextSmall:active { background-position: -200px -80px; }
+        /* end small round button look */
+
+        .carouselContainer {
+            position: relative;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            margin: 0 0 0 30px;
+        }
+
+        .carousel {
+            width: 99999px;/* huge width prior to js set width */
+        }
+
+        .carousel li {
+            float: left;
+            margin: 0 5px;
+            background-color: #fff;
+            border: 1px solid #e3e3e3;
+            opacity: .4;
+            width: auto !important;
+            height: auto !important;
+            position: relative;
+            filter: alpha(opacity = 40);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+            -webkit-transition: all .4s linear;
+            -moz-transition: all .4s linear;
+            -o-transition: all .4s linear;
+            -ms-transition: all .4s linear;
+            transition: all .4s linear;
+        }
+
+        /* ie8 */
+        .ie8 .carousel li img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+        }
+
+        .carousel li a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+
+        .carousel li.selected, .carousel li:hover {
+            opacity: 1;
+            filter: alpha(opacity = 100);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        /* ie8 */
+        .ie8 .carousel li.selected img, .ie8 .carousel li:hover img {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        .carousel li img {
+            position: relative;
+        }
+        /**************************/
+        /* end thumbnail controls */
+        /**************************/
+    ', 
+    ', 
+        .ed-slider-image-caption-title-no-summary-fdf3342964 {
+            font-weight:bold;
+            font-size:16px;
+        }
+
+        .ed-slider-image-caption-title-has-summary-fdf3342964 {
+            font-weight:bold;
+            font-size:16px;
+            padding-bottom: 2px;
+        }
+
+        .ed-slider-image-caption-summary-fdf3342964 {
+            font-weight:bold;
+            font-size:10px;
+        }
+        .ed-slider-image-caption-fdf3342964,
+        .ed-slider-image-caption-summary-fdf3342964,
+        .ed-slider-image-caption-title-has-summary-fdf3342964 ,
+        .ed-slider-image-caption-title-no-summary-fdf3342964
+        {
+            color: #fff;
+        }
+
+       #ed-slider-gallery-loading-fdf3342964
+       {
+           width:640px;
+           height:359px;
+           position: absolute;
+           z-index: 999;
+       }
+
+       #ed-slider-wrap-fdf3342964
+       {
+           overflow:hidden;
+
+           
+           width:640px;
+           height:359px;
+           position:relative;
+           
+
+           font-family:Arial, Helvetica, sans-serif;
+
+
+
+
+       }
+
+        #ed-slider-wrap-fdf3342964 .galleryWrap {
+            width: 640px;
+            height: 359px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+
+       #ed-slider-wrap-fdf3342964 ul {
+           float: left;
+           width: 640px;
+           height: 359px;
+           overflow: hidden;
+       }
+
+
+       #ed-slider-wrap-fdf3342964 ul li
+       {
+           list-style-type:none;
+           overflow: hidden;
+           width: 640px;
+           height: 359px;
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-fdf3342964 .group .block {
+           background-color: transparent;;
+       }
+
+
+       #ed-slider-wrap-fdf3342964 .group .block.imgTransition {
+           background-color: transparent;
+       }
+
+       .ed-slider-image-caption-controlbar-container .captionHolder .ed-slider-image-caption-fdf3342964 {
+            float: left;
+            min-height: 15px;
+            padding: 8px 8px 8px 10px;
+            position: relative;
+            width: 524px;
+        }
+
+        #ed-slider-wrap-fdf3342964 .ed-slider-prevNext {
+            height: 359px;
+        }
+   ', 
+
+    ', 
+        ', 
+
+    
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                        ', 
+                            
+                            ', 
+                                Aura A
+                            ', 
+                            
+                           
+                        ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                        ', 
+                            
+                            ', 
+                                Aura Squire
+                            ', 
+                            
+                           
+                        ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+            ', 
+                ', 
+                    ', 
+
+                        ', 
+
+                    ', 
+                    ', 
+                        
+                    ', 
+                    ', 
+                    
+                        ', 
+                            
+                            ', 
+                                Science Fair
+                            ', 
+                            
+                           
+                        ', 
+                    
+                    ', 
+                ', 
+            ', 
+
+
+        ', 
+        ', 
+            
+            ', 
+               ', 
+            ', 
+            
+        ', 
+    ', 
+', 
+	', 
+    ', 
+
+	', u"
+
+        $(document).ready(function()
+        {
+            fssbOnload('fdf3342964',
+                    8000,
+                    'hover',
+                    true,
+                    'fade',
+                    'None',
+                    'small',
+                    false,
+                    'hover',
+                    '8725450270477219122',
+                    'edlElement_8725450270477219122_folderContents',
+                    'edlElement_8725450270477219122_folder',
+                    false
+            );
+		});
+
+	", 
+
+
+
+
+  
+
+  
+
+    ', 
+
+    
+
+', 
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+',   ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+', 
+  ', 
+    ', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Twitter Feed', 
+        
+
+                ', 
+', 
+', 
+', Twitter Feed', 
+', 
+
+
+
+                
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc8725450339321559172";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "8725450339321559172",
+            "8725450339321559172",
+            "iFrame_edlElement_8725450339321559172_document",
+            'iFrame_edlElement_8725450339321559172_document',
+            '*',
+            'edlThemeControlZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            300,
+            '#ffffff',
+            false,
+            false,
+            true,
+            false,
+            '244',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("8725450396282979282.folder", "");
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+
+    
+    
+    
+
+', 
+
+
+', 
+
+
+
+    
+    
+
+            ', This Just In', 
+            
+            ', 
+', 
+', 
+', This Just In...', 
+', 
+
+
+            
+
+
+  ', 
+        
+          
+      
+
+  
+
+
+  
+
+
+    ', 
+
+    
+
+      ', 
+
+      
+
+        ', 
+
+    
+        
+            ',  ', 
+        
+
+          ', 
+            ', 
+
+                
+
+              ', Science Fair', 
+                
+                    ', 
+
+
+            ', February 2, 2016', 
+
+          ', 
+
+
+        ', 
+      ', 
+    
+    
+
+    
+
+
+        ', 
+        
+
+  
+
+  
+
+    ', 
+
+    
+
+', 
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    ghPotentiallyGiveBoxPermissionForMouseOver("calendar.box", "");
+
+    
+
+', 
+
+
+', 
+
+
+
+    
+        ', Calendar', 
+        
+        ', 
+', 
+', 
+', Calendar', 
+', 
+
+
+        
+
+    
+
+  ', 
+  
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+
+    
+
+  ', 
+
+      
+
+  
+   
+
+    ', 
+    
+      ', 01/13/17 Fri', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', AM PRESCHOOL ATTEND', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/13/17 Fri', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', EARLY DISMISSAL', 
+            ', 
+          ', 
+        ', 
+
+
+          ', Pre-School - Dismiss 11:00am, Kindergarten-6th 12:30pm', 
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/13/17 Fri', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', u"TEACHERS' IN-SERVICE", 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/16/17 Mon', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', MARTIN LUTHER KING, JR. DAY - SCHOOL CLOSED', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+   
+
+    ', 
+    
+      ', 01/23/17 Mon', 
+      ', 
+        ', 
+          ', 
+            ', 
+
+
+
+
+              ', HOME & SCHOOL MTG. - 7:00PM', 
+            ', 
+          ', 
+        ', 
+
+
+
+
+      ', 
+
+        
+
+    ', 
+  
+
+      
+    ', 
+
+    
+
+    
+    ', 
+            ', 
+                ', 
+                    
+                        More Events...
+                    
+                ', 
+            ', 
+        ', 
+    
+
+', 
+', 
+
+  
+        
+      
+      
+  ', 
+    
+    
+    
+', 
+    ', 
+  ', 
+', 
+',   ', 
+', 
+    ', 
+  ', 
+', 
+', 
+  ', 
+    ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+    var docProps = {"0x791706CAA45C8984/6":{"renderer":"image","mimeType":"image/png"},"0x791706CAA45C8984/5":{"renderer":"image","mimeType":"image/png"}};
+    mmAddEmbedInfo(docProps);
+    var isDesignMode = false;
+    var isEditingMode = false;
+    var isHTML5FlowplayerEnabled = true;
+
+    
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+    
+
+    
+    ', 
+        ', Footer Address', 
+        
+
+    ', 
+    
+
+
+    
+    
+
+
+
+
+', 
+    ', IFRAME support required.', 
+', 
+
+
+    
+
+    
+
+', 
+
+    
+
+    var pinnedDocId = "Doc8725450270464313732";
+
+    var ghPinnedDocInfo = new GhPinnedDocInfo(
+            false,
+            pinnedDocId,
+            "8725450270464313732",
+            "8725450270464313732",
+            "iFrame_edlElement_8725450270464313732_document",
+            'iFrame_edlElement_8725450270464313732_document',
+            '*',
+            'edlThemeBottomsectionZoneFrame',
+            0,
+            0,
+            0.0,
+            0.0,
+            false,
+            false,
+            true,
+            false,
+            60,
+            'transparent',
+            false,
+            false,
+            true,
+            false,
+            '909',
+            8,
+            false,
+            false,
+            false
+    );
+
+    ghPinnedDocsToLoad[pinnedDocId] = ghPinnedDocInfo;
+
+', 
+
+
+    
+
+', 
+
+
+
+
+   
+
+
+
+
+
+
+
+
+    ', 
+  ', 
+', 
+    ', 
+  ', 
+', 
+
+                        ', 
+
+                    
+
+
+    ', 
+                ', 
+            ', 
+        ', 
+
+    ', 
+
+    ', 
+
+    ', 
+
+    
+    ', translate monitor', 
+
+    ']

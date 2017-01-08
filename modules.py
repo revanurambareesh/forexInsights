@@ -1,9 +1,10 @@
 import csv
-import sys
+import sys, os
 
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 
+import time
 from scraper import scrapeData
 from scraper import getUniversalList
 from scraper.FxSpider.FxSpider.spiders import WebScraper
@@ -60,6 +61,11 @@ def getDataFromWeb(UIobject):
 
 
 def getInsights(test_company, UIobject):
-    Insights= generateInsights.testCompany(test_company)
-    UIobject.emit(QtCore.SIGNAL('INSIGHTS_READY'), Insights)
+    Insights= generateInsights.testCompany(test_company, UIobject)
+    UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), 'Restarting app .. to restart reactors')
+    #time.sleep(0.5)
+    with open('res', 'w') as f:
+        f.write(Insights)
+    os.execl(sys.executable, sys.executable, *sys.argv)
+    #UIobject.emit(QtCore.SIGNAL('INSIGHTS_READY'), Insights)
     pass

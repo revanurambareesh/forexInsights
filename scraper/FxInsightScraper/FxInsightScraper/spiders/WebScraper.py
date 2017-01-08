@@ -55,15 +55,15 @@ class MySpider(scrapy.Spider):
             yield scrapy.Request(response.urljoin(next_page_url), self.parse)
 
 @defer.inlineCallbacks
-def crawl(univList, runner)#, UIobject):
+def crawl(univList, runner, UIobject):
     i=0
-    #init_prog_val = 25
-    #75% contribution
+    init_prog_val = 15
+    #50% contribution
 
     for link2D in univList:
-        #stat = 'scraping '+ link2D[0][0]
-        #UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), int(init_prog_val+(float(i)/len(univList))*75))
-        #UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
+        stat = 'scraping '+ link2D[0][0]
+        UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), int(init_prog_val+(float(i)/len(univList))*50))
+        UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
         
         print 'link getting scraped is: ', link2D[0][0]
         print 'Filename is: ', link2D[1]
@@ -71,16 +71,16 @@ def crawl(univList, runner)#, UIobject):
 
         i += 1
 
-    #stat = 'Completed Scraping from Web!'
-    #UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 100)
-    #UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
+    stat = 'Completed Scraping from Web'
+    UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 60)
+    UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
     
-    #reactor.stop()
+    reactor.stop()
 
-def startReactor(univList)#, UIobject):
+def startReactor(univList, UIobject):
     configure_logging()
     runner = CrawlerRunner()
-    crawl(univList, runner)#, UIobject)
+    crawl(univList, runner, UIobject)
     if reactor.running is False:
         reactor.run()
 
