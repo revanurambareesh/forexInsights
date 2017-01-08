@@ -25,10 +25,12 @@ class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
         self.connect(self.threadClass, QtCore.SIGNAL('PROGRESS_BAR'), self.updateProgressBar)
         self.connect(self.threadClass, QtCore.SIGNAL('STATUS_LINE'), self.updateStatusLine)
         self.connect(self.threadClass, QtCore.SIGNAL('SUMMARY'), self.updateStatusSum)
+        self.connect(self.threadClass, QtCore.SIGNAL('INSIGHTS_READY'), self.updateInsights)
+
 
         self.connect(self.pushButtonTrain, QtCore.SIGNAL("clicked()"), self.runThreadTrainMode)
         self.connect(self.pushButtonGetData, QtCore.SIGNAL("clicked()"), self.runThreadScrapeMode)
-
+        self.connect(self.pushButtonTest, QtCore.SIGNAL("clicked()"), self.runThreadInsightMode)
 
     # Update UI commands
     # ------------------
@@ -41,6 +43,10 @@ class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
 
     def updateStatusLine(self, val):
         self.label_status_desc.setText(val)
+        print val
+
+    def updateInsights(self, val):
+        self.textBrowserInsights.setText(val)
         print val
 
     # Threading commands
@@ -89,12 +95,14 @@ class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
 
     def runThreadInsightMode(self):
         global setting
+        global test_company
 
         if self.checkStopThreadRunning() is False:
             return
 
         if (self.threadClass.isRunning()) is False:
             setting = 2
+            test_company = self.lineEditCompany.text()
             self.threadClass.emit(QtCore.SIGNAL('SUMMARY'), 'Getting Insights')
             self.threadClass.start()
 

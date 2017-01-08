@@ -5,6 +5,7 @@ import os
 from methods import folderFileInfo
 from sklearn.naive_bayes import GaussianNB
 from sklearn.externals import joblib
+from sklearn.neighbors.nearest_centroid import NearestCentroid
 import datetime
 import time
 from PyQt4 import QtGui
@@ -126,11 +127,14 @@ def trainMLmodel(UIobject):
     DataSetX = np.array(X)
     DataSety = np.array(y)
 
-    print DataSety
-    print DataSetX
+    #print DataSety
+    #print DataSetX
 
     clf = GaussianNB()
     clf.fit(DataSetX, DataSety)
+
+    clf2=NearestCentroid()
+    clf2.fit(DataSetX, DataSety)
 
     stat = 'Backing up previous model ...'
     UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 95)
@@ -138,13 +142,25 @@ def trainMLmodel(UIobject):
 
     if os.path.exists('data\\model\\naiveBayes.pkl'):
         print 'Old model detected .. Safely archiving it at..'
-        print os.getcwd() + "\data\\model\\archive_model\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl'
+        print os.getcwd() + "\data\\model\\archive_model\\nb\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl'
         os.rename(os.getcwd() + "\data\\model\\naiveBayes.pkl",
-                  os.getcwd() + "\data\\model\\archive_model\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
+                  os.getcwd() + "\data\\model\\archive_model\\nb\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
+
+    if os.path.exists('data\\model\\nearestCentroid.pkl'):
+        #print 'Old model detected .. Safely archiving it at..'
+        #print os.getcwd() + "\data\\model\\archive_model\\nc\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl'
+        os.rename(os.getcwd() + "\data\\model\\naiveBayes.pkl",
+                  os.getcwd() + "\data\\model\\archive_model\\nc\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
 
     joblib.dump(clf, 'data\\model\\naiveBayes.pkl')
+    joblib.dump(clf2, 'data\\model\\nearestCentroid.pkl')
 
     print 'Model saved at ', 'data\\model\\naiveBayes.pkl'
+    #print 'Model saved at ', 'data\\model\\nearestCentroid.pkl'
+
+    print 'Accuracy of the NB model is: ', clf.score(DataSetX, DataSety)
+    #print 'Accuracy of the NC model is: ', clf2.score(DataSetX, DataSety)
+
 
     stat = 'Model Trained'
     UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 100)

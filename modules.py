@@ -9,6 +9,7 @@ from scraper import getUniversalList
 from scraper.FxSpider.FxSpider.spiders import WebScraper
 
 from model import modelling
+from insight import generateInsights
 
 dataset = 'data\dataset_axis.csv'      # X, y (path)
 n = 500                                # 500 tuples of X(company), y(label) in dataset (constant)
@@ -59,4 +60,6 @@ def getDataFromWeb(UIobject):
 
 
 def getInsights(test_company, UIobject):
+    Insights= generateInsights.testCompany(test_company)
+    UIobject.emit(QtCore.SIGNAL('INSIGHTS_READY'), Insights)
     pass
