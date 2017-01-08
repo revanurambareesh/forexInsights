@@ -50,12 +50,8 @@ def keywordPresenceTester(company, keyword):
     numOfFiles = folderFileInfo.numOfFiles(company)
     listOfFiles = folderFileInfo.getNonEmptyFiles(company)
 
-    # print company
-    # print keyword[0]
-
     frequency = 0
     for scrapedFile in listOfFiles:
-        # print scrapedFile
         scrapedData = ''
         with open(scrapedFile, 'rb') as f:
             scrapedData = f.read()

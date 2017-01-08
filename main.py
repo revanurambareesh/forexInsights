@@ -47,7 +47,8 @@ class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
 
 
     def about(self):
-        QMessageBox.about(self, "About Forex Tool","Overview goes here")
+        with open('data/About.txt', 'rb') as f:
+            QMessageBox.about(self, "About Forex Tool -Overview",f.read())
 
     def designDocument(self):
         QMessageBox.about(self, "Design Document", "This can be found at \STAGE 1 documents\FX Problem.pdf")
