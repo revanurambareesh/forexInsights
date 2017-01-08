@@ -18,7 +18,7 @@ This document explains logic behind web-scraping, web-searching, training ML mod
 
 #### Stage 2 Prototype Implementation:
 The following diagram depicts, an running instance of the tool. More of such instances are shown in /STAGE 1 Documents/screenshots.
-[This image shows tool generating insights for a company](STAGE 1 Documents/screenshots/Insights/generating insights.png)
+![This image shows tool generating insights for a company](https://github.com/revanurambareesh/forexInsights/blob/master/STAGE%201%20documents/screenshots/Insights/generating%20insights.png)
 
 ## Running the tool
 From command line run,
