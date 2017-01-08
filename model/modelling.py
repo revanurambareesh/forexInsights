@@ -126,6 +126,9 @@ def trainMLmodel(UIobject):
     DataSetX = np.array(X)
     DataSety = np.array(y)
 
+    print DataSety
+    print DataSetX
+
     clf = GaussianNB()
     clf.fit(DataSetX, DataSety)
 
