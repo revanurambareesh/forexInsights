@@ -3,7 +3,7 @@ This repository contains my solution to the FX problem
 This tool scrapes the top popular websites of a company and analyses the data. This data is then converted into dataset after which a machine learning model is trained. Easy intuitive UI is also provided. More Details can be found in design document at STAGE 1 Documents/FX Problem.pdf
 
 #### Stage 1 Design Document:
-This can be found in /STAGE 1 Documents/FX problem.pdf. 
+This can be found in /STAGE 1 Documents/FX_problem.pdf. 
 It contains:  
 * Algorithm
 * Techonologies used
