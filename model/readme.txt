@@ -1,2 +1,0 @@
-- Models are stored in model folder
-- archives are stored periodically with timestamp

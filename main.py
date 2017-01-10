@@ -4,13 +4,15 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from PyQt4.QtGui import QMessageBox
 from UI import FXfrontend
-import os
 
 import modules
+
+__author__ = 'Ambareesh Revanur (@revanurambareesh)'
 
 #### Variables
 setting = 2  # 0=scrape, 1=train, 2=insights (modified from UI)
 test_company = ''  # company to get insights for
+
 
 ####
 
@@ -23,7 +25,7 @@ class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
         self.threadClass = ThreadClassBkg()
         # self.threadClass.start()
 
-        #show last saved results
+        # show last saved results
         try:
             print 'Displaying last saved results'
             with open('res', 'rb') as f:
@@ -37,7 +39,7 @@ class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
         self.connect(self.threadClass, QtCore.SIGNAL('SUMMARY'), self.updateStatusSum)
         self.connect(self.threadClass, QtCore.SIGNAL('INSIGHTS_READY'), self.updateInsights)
 
-
+        # Connections OnClick button
         self.connect(self.pushButtonTrain, QtCore.SIGNAL("clicked()"), self.runThreadTrainMode)
         self.connect(self.pushButtonGetData, QtCore.SIGNAL("clicked()"), self.runThreadScrapeMode)
         self.connect(self.pushButtonTest, QtCore.SIGNAL("clicked()"), self.runThreadInsightMode)
@@ -45,10 +47,9 @@ class MainUiClass(QtGui.QMainWindow, FXfrontend.Ui_Dialog):
         self.connect(self.pushButton_about, QtCore.SIGNAL("clicked()"), self.about)
         self.connect(self.pushButton_stage1, QtCore.SIGNAL("clicked()"), self.designDocument)
 
-
     def about(self):
         with open('data/About.txt', 'rb') as f:
-            QMessageBox.about(self, "About Forex Tool -Overview",f.read())
+            QMessageBox.about(self, "About Forex Tool -Overview", f.read())
 
     def designDocument(self):
         QMessageBox.about(self, "Design Document", "This can be found at \STAGE 1 documents\FX Problem.pdf")
@@ -145,7 +146,7 @@ class ThreadClassBkg(QtCore.QThread):
         elif setting == 1:
             modules.trainModel(self)
         elif setting == 2:
-            modules.getInsights(test_company,self)
+            modules.getInsights(test_company, self)
 
 
 if __name__ == "__main__":

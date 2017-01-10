@@ -1,5 +1,6 @@
 import os
 
+__author__ = 'Ambareesh Revanur (@revanurambareesh)'
 
 def numOfFiles(foldername, parentfolder):
     num = 0

@@ -2,48 +2,23 @@ import numpy as np
 import csv
 import json
 import os
+
 from methods import folderFileInfo
+
 from sklearn.naive_bayes import GaussianNB
 from sklearn.externals import joblib
 from sklearn.neighbors.nearest_centroid import NearestCentroid
+
 import datetime
 import time
+
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 
+__author__ = 'Ambareesh Revanur (@revanurambareesh)'
+
 X = []
 y = []
-
-'''
---Usage--
-
->>> import numpy as np
->>> X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
->>> Y = np.array([1, 1, 1, 2, 2, 2])
->>> from sklearn.naive_bayes import GaussianNB
->>> clf = GaussianNB()
->>> clf.fit(X, Y)
-GaussianNB(priors=None)
->>> print(clf.predict([[-0.8, -1]]))
-[1]
->>> print(clf.predict_log_proba([[0,0],[0,0]]))
-[[-0.69314718 -0.69314718]
- [-0.69314718 -0.69314718]]
->>> print(clf.predict_log_proba([[0,0]]))
-[[-0.69314718 -0.69314718]]
-
-#### STORING THE MODEL
-
->>> from sklearn.externals import joblib
->>> joblib.dump(clf, 'C:\Users\Ambareesh\Desktop\filename.pkl')   #For storing the model
-
->>> clf2 = joblib.load('C:\Users\Ambareesh\Desktop\\filename.pkl') ;
->>> print(clf2.predict_log_proba([[-1,-1]]))
-[[ -1.52299839e-08  -1.79999997e+01]]
->>> print(clf2.predict([[-1,-1]]))
-[1]
-
-'''
 
 
 def keywordPresenceTester(company, keyword):
@@ -66,7 +41,7 @@ def keywordPresenceTester(company, keyword):
 def makeDataSet(UIobject):
     global X
     global y
-    
+
     homeList = os.listdir(os.getcwd() + '\data\\train_data\\')
     keywordFile = 'data\\definitions\\oriList.csv'
     keywordList = []
@@ -80,9 +55,6 @@ def makeDataSet(UIobject):
     for company in homeList:
         print 'count: ', i
         i += 1
-        # i+=1
-        # if i>5:
-        #	break
 
         # X vector for each of the company
         Xvector = []
@@ -93,6 +65,7 @@ def makeDataSet(UIobject):
                 Xvector.append(0)
 
         print 'y=', company, '\nX:', Xvector, '\n'
+
         # label
         yVal = ord(company[0]) - ord('0')
 
@@ -101,7 +74,7 @@ def makeDataSet(UIobject):
         # similarly to read Xvector, Xvector=json.loads('txt_from_json')
 
         ### 80% contrib
-        stat = 'y='+ company
+        stat = 'y=' + company
         UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), int((float(i) / len(homeList)) * 80))
         UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
@@ -112,24 +85,23 @@ def makeDataSet(UIobject):
 def trainMLmodel(UIobject):
     global X
     global y
-    
+
     makeDataSet(UIobject)
 
     ### 20% contrib
     stat = 'Training Model'
-    # UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), int((float(i) / endIndex) * 80))
     UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
     DataSetX = np.array(X)
     DataSety = np.array(y)
 
-    #print DataSety
-    #print DataSetX
+    # print DataSety
+    # print DataSetX
 
     clf = GaussianNB()
     clf.fit(DataSetX, DataSety)
 
-    clf2=NearestCentroid()
+    clf2 = NearestCentroid()
     clf2.fit(DataSetX, DataSety)
 
     stat = 'Backing up previous model ...'
@@ -143,8 +115,8 @@ def trainMLmodel(UIobject):
                   os.getcwd() + "\data\\model\\archive_model\\nb\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
 
     if os.path.exists('data\\model\\nearestCentroid.pkl'):
-        #print 'Old model detected .. Safely archiving it at..'
-        #print os.getcwd() + "\data\\model\\archive_model\\nc\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl'
+        # print 'Old model detected .. Safely archiving it at..'
+        # print os.getcwd() + "\data\\model\\archive_model\\nc\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl'
         os.rename(os.getcwd() + "\data\\model\\naiveBayes.pkl",
                   os.getcwd() + "\data\\model\\archive_model\\nc\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
 
@@ -152,10 +124,10 @@ def trainMLmodel(UIobject):
     joblib.dump(clf2, 'data\\model\\nearestCentroid.pkl')
 
     print 'Model saved at ', 'data\\model\\naiveBayes.pkl'
-    #print 'Model saved at ', 'data\\model\\nearestCentroid.pkl'
+    # print 'Model saved at ', 'data\\model\\nearestCentroid.pkl'
 
     print 'Accuracy of the NB model is: ', clf.score(DataSetX, DataSety)
-    #print 'Accuracy of the NC model is: ', clf2.score(DataSetX, DataSety)
+    # print 'Accuracy of the NC model is: ', clf2.score(DataSetX, DataSety)
 
 
     stat = 'Model Trained'
@@ -164,8 +136,3 @@ def trainMLmodel(UIobject):
 
 
 # print DataSety
-
-if __name__ == '__main__':
-    trainMLmodel()
-    print 'DatasetX:', X
-    print 'Label:', y

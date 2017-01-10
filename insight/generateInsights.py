@@ -1,14 +1,18 @@
 import numpy as np
-import folderFileInfo
 import csv
 import os, sys
 import json
+
+import folderFileInfo
+import nearest_company_pred
+
 from sklearn.externals import joblib
 from sklearn.naive_bayes import GaussianNB
-import nearest_company_pred
 
 from PyQt4 import QtGui
 from PyQt4 import QtCore
+
+__author__ = 'Ambareesh Revanur (@revanurambareesh)'
 
 parent_dir_name=''
 
@@ -44,9 +48,9 @@ def scrapeTestData(query, UIobject):
     listRes = ans[0]
     numOfResults = ans[1]
     print listRes[0]
-    #os.chdir("..")
 
     directory = parent_dir_name + '\data\\test_data\\' + query
+
     # print directory
     if not os.path.exists(directory):
         os.makedirs(str(directory))
@@ -59,13 +63,12 @@ def scrapeTestData(query, UIobject):
     for txtLine in listRes:
         file.write(txtLine)
         file.write('\n')
-    # print 'Path changed to ', os.getcwd()
+
     file.close()
 
     file = open(parent_dir_name + '\data\\test_data\\' + query + '\\popularity.txt', "w")
     file.write(numOfResults)
     file.write('\n')
-    # print 'Path changed to ', os.getcwd()
     file.close()
 
     stat = 'Obtained top searches of the company'
@@ -87,7 +90,6 @@ def scrapeTestData(query, UIobject):
         list2D.append(obtainedLink)
         setfilepath = os.getcwd() + '\data\\test_data\\' + query + '\\web\\' + str(i) + '.txt'
         list2D.append(setfilepath)
-        # print list2D
         UnivList.append(list2D)
         i = i + 1
 
@@ -101,7 +103,6 @@ def scrapeTestData(query, UIobject):
 
 
 def generateFeatureVector(company):
-    #parent_dir_name = os.getcwd()
     keywordFile = parent_dir_name+'\data\\definitions\\oriList.csv'
     keywordList = []
 
@@ -118,20 +119,8 @@ def generateFeatureVector(company):
         else:
             Xvector.append(0)
 
-    # print 'y=', company, '\nX:', Xvector, '\n'
-
-    # label
-
-    # yVal = ord(company[0]) - ord('0')
-
     with open(os.getcwd() + '\data\\test_data\\' + company + '\Xv.json', "w") as jsonF:
         jsonF.write(json.dumps(Xvector))
-
-        # similarly to read Xvector, Xvector=json.loads('txt_from_jso
-        ### 80% contrib
-        # stat = 'y='+ company
-        # UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), int((float(i) / len(homeList)) * 80))
-        # UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
     return Xvector
 
@@ -171,9 +160,8 @@ def createReport(company, numOfResults, Xv):
     list2comp = nearest_company_pred.findSimilarCompanies(Xv)
     result_insight += '\n' + list2comp + '\n'
 
-    # results
-
     result_insight += '\n====POPULARITY on web====\n'
+
     # popular?
     if int(numOfResults) > 30000:
         result_insight += 'This company is popular on Google\n'
@@ -197,7 +185,6 @@ def createReport(company, numOfResults, Xv):
 def testCompany(company, UIobject):
     numOfResults = scrapeTestData(company, UIobject)
     print 'NUM OF Res= ', numOfResults
-    # numOfResults=400
     Xv = generateFeatureVector(company)
     stat = 'Created Dataset'
     UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 75)
@@ -210,13 +197,3 @@ def testCompany(company, UIobject):
 
     return Insights
 
-
-if __name__ == '__main__':
-    company = 'COMMISSIONER MCF RICKSHAWS HAL'
-    ans = testCompany(company)
-    print ans
-# print '=========================\n\n\n\n\n\n'
-# company='COMMISSIONERxcv MCF RICKSHAWS HAL'
-# ans=testCompany(company)
-# print ans
-# print '=========================\n\n\n\n\n'
