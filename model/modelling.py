@@ -117,7 +117,7 @@ def trainMLmodel(UIobject):
     if os.path.exists('data\\model\\nearestCentroid.pkl'):
         # print 'Old model detected .. Safely archiving it at..'
         # print os.getcwd() + "\data\\model\\archive_model\\nc\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl'
-        os.rename(os.getcwd() + "\data\\model\\naiveBayes.pkl",
+        os.rename(os.getcwd() + "\data\\model\\nearestCentroid.pkl",
                   os.getcwd() + "\data\\model\\archive_model\\nc\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
 
     joblib.dump(clf, 'data\\model\\naiveBayes.pkl')
