@@ -10,7 +10,7 @@ This tool scrapes the top popular websites of a company and analyses the data. T
 -----
 
 #### Stage 1 Design Document:
-This can be found in /STAGE 1 Documents/FX_problem.pdf. 
+This can be found in **/STAGE 1 Documents/FX_problem.pdf**. 
 It contains:  
 * Algorithm
 * Techonologies used
