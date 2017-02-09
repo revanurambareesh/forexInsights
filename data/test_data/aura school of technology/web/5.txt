@@ -1,0 +1,16691 @@
+[
+
+', 
+  ', 
+
+    ', u"
+        (function(a,b,c,d){
+            a='//tags.tiqcdn.com/utag/avaya/main/prod/utag.js';
+            b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+            a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+        })();
+    ", 
+     
+              
+        
+       
+    
+
+    
+            
+
+
+	
+	
+		
+	
+
+
+', 
+	
+ ', 
+	                ', 
+	                	', 
+	                		', 
+	                			', 
+	                			', Search', 
+	                		', 
+	                		', 
+	                				', 
+	                              ', 
+	                		', 	                	
+	                	', 
+           ', 
+			// surprizingly trim function is not supported in IE8 and above...
+			if(typeof String.prototype.trim !== 'function') { 
+				String.prototype.trim = function() { return this.replace(/^\s+|\s+$/g, ''); } 
+			}
+			// this function is taken from existing website
+			function validateGoogleSearchBoxForm(t) {
+				var tval = t.q.value.trim();
+				//blank value for individual countries
+				//var qObj=document.getElementById("q");
+				if(tval == "" || tval == "Search") {
+					// second condition if for IE8 & IE9
+					var GlobalLocation = document.URL;
+					var Cala_US = GlobalLocation.indexOf("/cala/en-us");
+					var Cala_BR = GlobalLocation.indexOf("/cala/pt-br");
+					var Cala_MX = GlobalLocation.indexOf("/cala/es-mx");
+					if (Cala_US > 1) {
+						alert("Por favor escriba un termino especifico de busqueda e intente nuevamente.");
+						//document.base.q.focus();
+						return false;
+					} else if (Cala_BR > 1) {
+						alert("Por favor digite um termo especÃ¯Â¿Â½fico e tente novamente.");
+						//qObj.focus();
+						t.q.focus();
+						return false;
+					} else if (Cala_MX > 1) {
+						alert("Por favor escriba un termino especifico de busqueda e intente nuevamente.");
+						//qObj.focus();
+						t.q.focus();
+						return false;
+					} else {
+						alert("Please type a specific search term and try again.");
+						//qObj.focus();
+						t.q.focus();
+						return false;
+					}
+				}
+
+				if(tval.length < 2) {
+					alert("Could not process your search.\n Please enter a search term at least 2 characters long and try again.");
+					t.q.focus();
+					return false;
+				}
+
+				if(tval.length > 200) {
+					alert("The search text yove submitted is too long (more than 250 characters).\n Please shorten your query and try again.");
+					t.q.focus();
+					return false;
+				}
+			}
+			function submitUsingQTopBar(t){
+		    	window.open(t,'_self');
+			}
+			
+			var device="desktop";
+			document.onkeydown = checkKey;
+			var keyevent;  
+			function checkKey(e) {
+			    keyevent = e || window.event;
+			if (keyevent.keyCode=='13')
+				{
+					//submitUsingQTopBar();
+				}
+			}
+    		function xmlhttpPost(t,d) {
+	  			
+	  			
+        		  if (keyevent.keyCode=='38' || keyevent.keyCode=='40')
+        			{
+        		 //do nothing
+        			}
+        		  else{
+        			  device=d; // dynamically assign value
+              		var xmlHttpReq = false;
+        		  
+        		// Mozilla/Safari
+        		if (window.XMLHttpRequest) {
+            		xmlHttpReq = new XMLHttpRequest();
+            		if (xmlHttpReq.overrideMimeType) {
+                		xmlHttpReq.overrideMimeType('text/csv');
+                		// See note below about this line
+            		}
+        			// IE
+        		} else if (window.ActiveXObject) { // IE
+          				try {
+               			xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+       				} catch (e) {
+           				try {
+               				xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+           				} catch (e) {}
+           			}
+       			}
+        		
+       			if (!xmlHttpReq) {
+           			//alert('ERROR AJAX:( Cannot create an XMLHTTP instance');
+           			return false;
+       			}
+       			xmlHttpReq.open('GET', '/search/suggest?site=all_en&client=avaya_frontend&access=p&output=xml_no_dtd&filter=0&format=os&getfields=BusinessNeed.Industry.AvayaKNOVA:SupportGoals.google:lastmodified.BusinessSize.BusinessRole.SiteSection&q='+encodeURI(t.value), true);
+      			xmlHttpReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+       			xmlHttpReq.onreadystatechange = function() { 
+           			callBackFunction(xmlHttpReq); 
+       			};
+       			xmlHttpReq.send();
+        		  }
+        		  }
+    		
+    		function callBackFunction(http_request) {
+        		if (http_request.readyState == 4) {
+            		if (http_request.status == 200) {
+                		var responceString = http_request.responseText;
+						//alert(responceString);
+						var dataStart =  responceString.indexOf('["');
+						var dataEnd =  responceString.indexOf('"]');
+						var searchData=responceString.substring(dataStart + 1,dataEnd + 1);
+						var searchDataArray = searchData.split('","'); // TODO remove the double quotes for first and last array
+						searchDataArray[0] = searchDataArray[0].replace('"',''); 
+						searchDataArray[searchDataArray.length -1] = searchDataArray[searchDataArray.length -1].replace('"','');
+						var  HTMLdata="<ul>";
+						if(device == "desktop") {
+							for (var i = 0; i < searchDataArray.length; i++) {
+								 var qStr= "/en/search-results/?site=all_en&q=";
+								 qStr= qStr+searchDataArray[i];
+						       	 HTMLdata = HTMLdata + '<li><a href="#" onmousedown="submitUsingQTopBar(\''+qStr+'\')">'+searchDataArray[i]+'</a></li>';
+
+							}
+  						} else {
+							for (var i = 0; i < searchDataArray.length; i++) {
+							   	HTMLdata = HTMLdata + '<li><a href="http://www.avaya.com/usa/search-results/?site=all_usa&q='+searchDataArray[i]+'">'+ searchDataArray[i] +'</a></li>';
+							}
+  						}
+						HTMLdata = HTMLdata + "</ul>";
+						document.getElementById("autoCompletetop").innerHTML=HTMLdata;
+		            } else {
+		                //alert(http_request.responseText);
+		                //alert('ERROR: AJAX request status = ' + http_request.status);
+		            }
+        		}
+    		}
+    
+		', 
+	
+	
+	                	', 
+	                		', 
+	                			', 
+	                			', English', 
+	                		', 
+	                		', x', 
+		', 
+			', 
+				', English', Deutsch', Español', Français', Italiano', Português', P\u0443\u0441\u0441\u043a\u0438\u0439', \u4e2d\u6587', \u65e5\u672c\u8a9e', \ud55c\uad6d\uc5b4', 
+			', 
+		', 
+	', 
+	                		', 
+	                	', 
+	                ', 
+	                ', 
+', 
+		', 
+
+
+', Solutions', 
+
+
+', 
+
+
+
+
+
+', Business Solutions', 
+
+
+',  Customer Engagement', Avaya Oceana\u2122 delivers the best customer experience each time, every time.', 
+
+
+',  Team Engagement', Experience simple, contextual, user-defined communications with Avaya Equinox\u2122.', 
+
+
+',  Networking', Innovative solutions for the challenges of cybersecurity, digital transformation, and IoT.', 
+
+
+',  Cloud', Broadest option of cloud solutions that meet the needs of any business. ', 
+
+
+', 
+
+
+
+
+
+', Business Need', 
+
+
+', u"I'm Interested in...", Unified Communications', Mobility', Conferencing', Remote and Home Workers', Messaging', Contact Center Performance', Multi-channel/Omnichannel Experience', Customer Sales and Services', Virtualized Communications Systems', 
+
+
+', Real-time Communications', Avaya Breeze\u2122 Platform', Avaya Snap-ins', Avaya Snapp Store', Avaya Collaboratory', 
+
+
+', 
+
+
+
+
+
+', Business Type', 
+
+
+', Size', < 100 Employees', 100-2,499 Employees', 2,500+ Employees', 
+
+
+', Industry', Banking', Insurance', Healthcare Providers', Higher Education', Hotels and Lodging', K-12 Education', 
+
+
+', U.S. Government Solutions', Federal Civilian Government', Defense and Military', State and Local Government', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Avaya Equinox\u2122 Experience: Communications for How We Really Work ', 
+			', Communications are now handy, easy, and include context.  ', 		
+				Explore Equinox	\u203a		
+			', 
+', 
+
+
+', Products', 
+
+
+', Unified Communications and Collaboration', Communication and Messaging', Platform and Infrastructure', Video and Conferencing', 
+
+
+', Customer Experience Management', Omnichannel Assisted Experience', Omnichannel Automated Experience', Actionable Insights', 
+
+
+', Networking', Innovative solutions for the challenges of cybersecurity, digital transformation, and IoT.', Software-Defined Networking', Ethernet Switches', Access Control', Wireless Networks', Network Management', 
+
+
+', Cloud', Broadest option of cloud solutions that meet the needs of any business.', 
+
+
+', Popular Products', Avaya Aura® Platform', Avaya IP Office\u2122 Platform', Avaya Breeze\u2122 Platform', Avaya Pod Fx\u2122', Avaya Equinox\u2122 Experience', New', Avaya Scopia® Desktop and Mobile Applications', Avaya Oceana\u2122 Solution', New', SDN Fx\u2122 Architecture', Fabric Connect', Phones', 
+
+
+', A-Z', All Products A-Z', All Services A-Z', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Zang is 100% Cloud-Based Communications ', 
+			', Transform your conversations\u2014and your business.  ', 		
+				Explore Zang	\u203a		
+			', 
+', 
+
+
+', Services', 
+
+
+
+
+
+', Professional Services', 
+
+
+', Enablement Services', Deployment and Program Management', 
+
+
+', Optimization Services', Contact Center Optimization', Data Networking Design Services', Network Readiness Assessment', Performance Monitoring and Stress Testing', Security Assurance Services', Solution Architecture Services', 
+
+
+', Innovation Services', Advanced Software Applications', Advisory Services', Customer Engagement Transformation', SIP Transformation Services', Social Media Services', Cloud Transformation Services', 
+
+
+
+
+
+', Enterprise Cloud and Managed Services', 
+
+
+', Enterprise Cloud', Unified Communications Managed Services', Video Managed Services', Contact Center Managed Services', Data Networking Managed Services', 
+
+
+
+
+
+', Support Services', 
+
+
+', Support Advantage', IP Office Support Services', Support for Meridian 1 and Communication Server 1000', 
+
+
+
+
+
+', Avaya Learning Services', 
+
+
+', Training & Education', Credentials & Certifications', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Webinar: Maximize the ROI of your Avaya Support & Maintenance ', 
+			', See how to optimize communications performance.  ', 		
+				Attend now	\u203a		
+			', 
+', 
+
+
+
+
+ ', Case Studies', 
+
+
+', What Customers Are Saying',  ', "Avaya Contact Center Select has really let us take the multiple channels of communication that we have with our users...', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+   
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+		
+
+		
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+       
+
+	', Case Study Quick View:
+
+	
+
+	
+
+	
+
+	 Michael C. Fina
+
+	
+
+        
+
+	', 
+
+	
+
+
+
+        
+
+
+
+
+
+
+
+', 
+
+
+
+	
+
+	
+
+	
+
+	', Topic : ', 
+
+	',  
+
+         	
+
+		
+
+	
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Customer Service', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Multi-channel', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Team Efficiency', 
+
+       
+
+        
+
+		
+
+	', 
+
+	
+
+	
+
+',  
+
+
+
+', 
+
+	
+
+	
+
+					
+
+	
+
+	 
+
+   	
+
+	
+
+	
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	', 
+
+		', 100-2,499 Employees', 
+
+	', 
+
+	
+
+	
+
+	 
+
+	
+
+	
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Customer Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', 
+	Today\u2019s customer relationships are ongoing conversations that unfold across time and channels. Phone, video, email, chat, social: It\u2019s all one integrated omnichannel now. Done right, seamless execution pays off in increased revenue and higher lifetime value of customers. Our customer engagement solutions make it possible. ', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Team Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', Team engagement is the magic that happens when everyone in your workforce is connected effortlessly to the mission, to each other and to customers. When it works you feel it in your culture and on your balance sheet\u2014and your customers feel it most. Barriers disappear. Productivity rises. Our team engagement solutions get you there.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+	
+
+	
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+			
+
+				 
+
+				
+
+			
+
+			
+
+
+
+
+
+
+
+		
+
+', 
+
+	
+
+		
+
+	  	  
+
+	  	 
+
+	  	', 
+
+ 
+
+     
+
+
+
+          
+
+                                  
+
+                                             
+
+                                                 ', 
+
+                                                       ', 
+
+                                                                     
+
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+	  		  
+
+ ', 
+
+		
+
+	  	
+
+		', 
+
+		
+
+		
+
+		', \u201cWe were able to work with Avaya to understand how the communication infrastructure would evolve as the business changed.\u201d', 
+
+', \u2014Michael A. Fina, Chief Operating Officer', 
+
+
+		
+
+		', 
+
+		
+
+', 
+
+
+
+
+
+
+
+	', 
+
+	
+
+        
+
+ ', Retail ',   ', 
+
+ 
+
+
+
+', 
+
+
+
+	
+
+	
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+	  
+
+	
+
+	
+
+	', 
+
+		
+
+		
+
+        
+
+
+
+	', 
+
+	', 
+
+	', 
+
+	
+
+	
+
+	
+
+		
+
+		
+
+		',  Michael C. Fina ', 
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		', For over 80 years, New Yorkers have known Michael C. Fina as a purveyor of luxury retail goods in Midtown Manhattan. However, few realize that it has grown far beyond its humble beginnings over the years, and now provides comprehensive corporate recognition and incentive programs to Fortune 500 companies worldwide.', 
+
+
+		
+
+		
+
+		
+
+		
+
+		', 
+
+			',  Benefits ', 
+
+			', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Increased Productivity', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Improved Customer Service', 
+
+					', 
+
+				', 
+
+				
+
+			', 
+
+		', 
+
+		
+
+		
+
+		
+
+		', 
+
+					
+
+  				', View Full Case Study', 
+
+				
+
+				
+
+  				
+
+  					
+
+  					
+
+  					
+
+					
+
+	  		        
+
+	  				', Download PDF Case Study',  
+
+				
+
+				
+
+				
+
+			
+
+			
+
+		', 
+
+	
+
+	', 	
+
+', 											
+
+', 		
+
+													
+
+
+
+', Michael A. Fina, Michael C. Fina',  ', \u201cInformation sharing is so ingrained into the concept of Smart Cities and we needed a reliable, secure way to manage the...', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+   
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+		
+
+		
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+       
+
+	', Case Study Quick View:
+
+	
+
+	
+
+	
+
+	 Town of Shawinigan
+
+	
+
+        
+
+	', 
+
+	
+
+
+
+        
+
+
+
+
+
+
+
+', 
+
+
+
+	
+
+	
+
+	
+
+	', Topic : ', 
+
+	',  
+
+         	
+
+		
+
+	
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Network Security', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Team Efficiency', 
+
+       
+
+        
+
+		
+
+	', 
+
+	
+
+	
+
+',  
+
+
+
+', 
+
+	
+
+	
+
+					
+
+	
+
+	 
+
+   	
+
+	
+
+	
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	', 
+
+		', 100-2,499 Employees', 
+
+	', 
+
+	
+
+	
+
+	 
+
+	
+
+	
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Networking', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', 
+	Build a path to the future. Avaya\u2019s advanced fabric networking technology takes SDN networking and cloud services to the next level. Reduce network outages, enjoy quicker access to information, and easily integrate new communications channels and applications. If you wish, do it all with your existing infrastructure.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Team Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', Team engagement is the magic that happens when everyone in your workforce is connected effortlessly to the mission, to each other and to customers. When it works you feel it in your culture and on your balance sheet\u2014and your customers feel it most. Barriers disappear. Productivity rises. Our team engagement solutions get you there.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+	
+
+	
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+			
+
+				 
+
+				
+
+			
+
+			
+
+
+
+
+
+
+
+		
+
+', 
+
+	
+
+		
+
+	  	  
+
+	  	 
+
+	  	', 
+
+ 
+
+     
+
+
+
+          
+
+	                      ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+	  		  
+
+ ', 
+
+		
+
+	  	
+
+		', 
+
+		
+
+		
+
+		', "The Avaya solution facilitates the introduction of innovative technologies and new services."', 
+
+', -Lyne Vallières, Director of the Office of Information Technology', 
+
+
+		
+
+		', 
+
+		
+
+', 
+
+
+
+
+
+
+
+	', 
+
+	
+
+        
+
+ ', Government ',   ', 
+
+ 
+
+
+
+', 
+
+
+
+	
+
+	
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+	  
+
+	
+
+	
+
+	', 
+
+		
+
+		
+
+        
+
+
+
+	', 
+
+	', 
+
+	', 
+
+	
+
+	
+
+	
+
+		
+
+		
+
+		',  Town of Shawinigan ', 
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		', Avaya Fabric Connect equips Quebec town with infrastructure to meet all of its future needs', 
+
+', As one of the first towns in North America to produce hydroelectricity, Shawinigan has built its economy around large resource-based industries such as aluminum, pulp and paper production and electrochemistry. Over the past few decades, however, these large employers have left the region, causing job losses and an exodus of young graduates from the area.', 
+
+
+		
+
+		
+
+		
+
+		
+
+		', 
+
+			',  Benefits ', 
+
+			', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Increased Productivity', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Reduce Cost', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Network Scalability', 
+
+					', 
+
+				', 
+
+				
+
+			', 
+
+		', 
+
+		
+
+		
+
+		
+
+		', 
+
+					
+
+  				', View Full Case Study', 
+
+				
+
+				
+
+  				
+
+  					
+
+  					
+
+  					
+
+					
+
+	  		        
+
+	  				', Download PDF Case Study',  
+
+				
+
+				
+
+				
+
+			
+
+			
+
+		', 
+
+	
+
+	', 	
+
+', 											
+
+', 		
+
+													
+
+
+
+', Lyne Vallières, Town of Shawinigan',  ', "Parents and staff love Avaya Scopia. Mothers are able to see their baby on their preferred devices\u2014laptops, tablets,...', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+   
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+		
+
+		
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+       
+
+	', Case Study Quick View:
+
+	
+
+	
+
+	
+
+	 Geneva University Hospitals
+
+	
+
+        
+
+	', 
+
+	
+
+
+
+        
+
+
+
+
+
+
+
+', 
+
+
+
+	
+
+	
+
+	
+
+	', Topic : ', 
+
+	',  
+
+         	
+
+		
+
+	
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Team Efficiency', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Video Collaboration', 
+
+       
+
+        
+
+		
+
+	', 
+
+	
+
+	
+
+',  
+
+
+
+', 
+
+	
+
+	
+
+					
+
+	
+
+	 
+
+   	
+
+	
+
+	
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	', 
+
+		', 2500+ Employees', 
+
+	', 
+
+	
+
+	
+
+	 
+
+	
+
+	
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Customer Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', 
+	Today\u2019s customer relationships are ongoing conversations that unfold across time and channels. Phone, video, email, chat, social: It\u2019s all one integrated omnichannel now. Done right, seamless execution pays off in increased revenue and higher lifetime value of customers. Our customer engagement solutions make it possible. ', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Team Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', Team engagement is the magic that happens when everyone in your workforce is connected effortlessly to the mission, to each other and to customers. When it works you feel it in your culture and on your balance sheet\u2014and your customers feel it most. Barriers disappear. Productivity rises. Our team engagement solutions get you there.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+	
+
+	
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+			
+
+				 
+
+				
+
+			
+
+			
+
+
+
+
+
+
+
+		
+
+', 
+
+	
+
+		
+
+	  	  
+
+	  	 
+
+	  	', 
+
+ 
+
+     
+
+
+
+          
+
+	                      ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+	  		  
+
+ ', 
+
+		
+
+	  	
+
+		', 
+
+		
+
+		
+
+		', "Scopia provided peace of mind and a virtual way to connect and bond when being at the bedside was not an option for parents who had other children at home."', 
+
+', \u2014Yann Levy-Jamet, Application Advisor, HUG', 
+
+
+		
+
+		', 
+
+		
+
+', 
+
+
+
+
+
+
+
+	', 
+
+	
+
+        
+
+ ', Healthcare ',   ', 
+
+ 
+
+
+
+', 
+
+
+
+	
+
+	
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+	  
+
+	
+
+	
+
+	', 
+
+		
+
+		
+
+        
+
+
+
+	', 
+
+	', 
+
+	', 
+
+	
+
+	
+
+	
+
+		
+
+		
+
+		',  Geneva University Hospitals ', 
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		', The first few days after birth are crucial for mothers and their newborns. Immediate visual and physical connections between a mother and her baby create a fundamental attachment that positively impacts the emotional and physical recovery of both mother and infant after the stress of labor.', 
+
+', For some parents, the birth of their child does not play out as they had imagined it would. Families\u2014already overwhelmed with a variety of emotions\u2014are left with a sense of longing and worry in those situations where their \u2018bundles-of-joy\u2019 are whisked immediately away after delivery to intensive care units.', 
+
+',  ', 
+
+
+		
+
+		
+
+		
+
+		
+
+		', 
+
+			',  Benefits ', 
+
+			', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Increased Productivity', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Enhanced Collaboration', 
+
+					', 
+
+				', 
+
+				
+
+			', 
+
+		', 
+
+		
+
+		
+
+		
+
+		', 
+
+					
+
+  				', View Full Case Study', 
+
+				
+
+				
+
+  				
+
+  					
+
+  					
+
+  					
+
+					
+
+	  		        
+
+	  				', Download PDF Case Study',  
+
+				
+
+				
+
+				
+
+			
+
+			
+
+		', 
+
+	
+
+	', 	
+
+', 											
+
+', 		
+
+													
+
+
+
+', Yann Levy-Jamet, Geneva University Hospitals', View All Testimonials >', 
+
+
+', Featured Case Studies', Mossberg', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+   
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+		
+
+		
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+       
+
+	', Case Study Quick View:
+
+	
+
+	
+
+	
+
+	 O.F. Mossberg & Sons
+
+	
+
+        
+
+	', 
+
+	
+
+
+
+        
+
+
+
+
+
+
+
+', 
+
+
+
+	
+
+	
+
+	
+
+	', Topic : ', 
+
+	',  
+
+         	
+
+		
+
+	
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Customer Service', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Team Efficiency', 
+
+       
+
+        
+
+		
+
+	', 
+
+	
+
+	
+
+',  
+
+
+
+', 
+
+	
+
+	
+
+					
+
+	
+
+	 
+
+   	
+
+	
+
+	
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	', 
+
+		', 100-2,499 Employees', 
+
+	', 
+
+	
+
+	
+
+	 
+
+	
+
+	
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Customer Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', 
+	Today\u2019s customer relationships are ongoing conversations that unfold across time and channels. Phone, video, email, chat, social: It\u2019s all one integrated omnichannel now. Done right, seamless execution pays off in increased revenue and higher lifetime value of customers. Our customer engagement solutions make it possible. ', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Team Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', Team engagement is the magic that happens when everyone in your workforce is connected effortlessly to the mission, to each other and to customers. When it works you feel it in your culture and on your balance sheet\u2014and your customers feel it most. Barriers disappear. Productivity rises. Our team engagement solutions get you there.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+	
+
+	
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+			
+
+				 
+
+				
+
+			
+
+			
+
+
+
+
+
+
+
+		
+
+', 
+
+	
+
+		
+
+	  	  
+
+	  	 
+
+	  	', 
+
+ 
+
+     
+
+
+
+          
+
+	                      ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+	  		  
+
+ ', 
+
+		
+
+	  	
+
+		', 
+
+		
+
+		
+
+		', "Avaya has been an extension of the Mossberg', 
+team and family."', 
+
+', -Wes Beighley, CIO', 
+
+
+		
+
+		', 
+
+		
+
+', 
+
+
+
+
+
+
+
+	', 
+
+	
+
+        
+
+ ', Retail ',   ', 
+
+ 
+
+
+
+', 
+
+
+
+	
+
+	
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+	  
+
+	
+
+	
+
+	', 
+
+		
+
+		
+
+        
+
+
+
+	', 
+
+	', 
+
+	', 
+
+	
+
+	
+
+	
+
+		
+
+		
+
+		',  O.F. Mossberg & Sons ', 
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		', With privacy being a key concern, but capturing data being important for good customer service, Mossberg picks Avaya.', 
+
+', For the last 98 years, O.F. Mossberg & Sons, the oldest family-owned firearms manufacturer in the United States, has grown into a household name. But a crush of demand had overwhelmed its communications system, and the company needed something new.', 
+
+
+		
+
+		
+
+		
+
+		
+
+		', 
+
+			',  Benefits ', 
+
+			', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Improved Customer Service', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Increased Productivity', 
+
+					', 
+
+				', 
+
+				
+
+			', 
+
+		', 
+
+		
+
+		
+
+		
+
+		', 
+
+					
+
+  				', View Full Case Study', 
+
+				
+
+				
+
+  				
+
+  					
+
+  					
+
+  					
+
+					
+
+	  		        
+
+	  				', Download PDF Case Study',  
+
+				
+
+				
+
+				
+
+			
+
+			
+
+		', 
+
+	
+
+	', 	
+
+', 											
+
+', 		
+
+													
+
+
+
+', With privacy being a key concern, but capturing data being important for good customer...', Kenton County School District ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+   
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+		
+
+		
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+       
+
+	', Case Study Quick View:
+
+	
+
+	
+
+	
+
+	 Kenton County School District
+
+	
+
+        
+
+	', 
+
+	
+
+
+
+        
+
+
+
+
+
+
+
+', 
+
+
+
+	
+
+	
+
+	
+
+	', Topic : ', 
+
+	',  
+
+         	
+
+		
+
+	
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Bring your Own Device (BYOD)', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Team Efficiency', 
+
+       
+
+        
+
+		
+
+	', 
+
+	
+
+	
+
+',  
+
+
+
+', 
+
+	
+
+	
+
+					
+
+	
+
+	 
+
+   	
+
+	
+
+	
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	', 
+
+		', 100-2,499 Employees', 
+
+	', 
+
+	
+
+	
+
+	 
+
+	
+
+	
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Team Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', Team engagement is the magic that happens when everyone in your workforce is connected effortlessly to the mission, to each other and to customers. When it works you feel it in your culture and on your balance sheet\u2014and your customers feel it most. Barriers disappear. Productivity rises. Our team engagement solutions get you there.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+	
+
+	
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+			
+
+				 
+
+				
+
+			
+
+			
+
+
+
+
+
+
+
+		
+
+', 
+
+	
+
+		
+
+	  	  
+
+	  	 
+
+	  	', 
+
+ 
+
+     
+
+
+
+          
+
+	                      ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+	  		  
+
+ ', 
+
+		
+
+	  	
+
+		', 
+
+		
+
+		
+
+		', u"\u201cAvaya's responsive service is one of the main reasons that our Wi-Fi network is reaching its goals.\u201d", 
+
+', \u2014Chris Setters, District Technology Coordinator, Kenton County School District', 
+
+
+		
+
+		', 
+
+		
+
+', 
+
+
+
+
+
+
+
+	', 
+
+	
+
+        
+
+ ', Education K-12 ',   ', 
+
+ 
+
+
+
+', 
+
+
+
+	
+
+	
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+	  
+
+	
+
+	
+
+	', 
+
+		
+
+		
+
+        
+
+
+
+	', 
+
+	', 
+
+	', 
+
+	
+
+	
+
+	
+
+		
+
+		
+
+		',  Kenton County School District ', 
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		', Avaya Wi-Fi Enables District\u2019s Vision of a Device in Every Child\u2019s Hand', 
+
+', The Kenton County School District, which encompasses greater Cincinnati and rural parts of Northern Kentucky, is a long-time innovator in using technology to augment K-12 classroom environments. Its Bring Your Own Device (BYOD) initiative is connecting students at all grade levels with Internet-based resources to support and enhance learning.', 
+
+
+		
+
+		
+
+		
+
+		
+
+		', 
+
+			',  Benefits ', 
+
+			', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Increased Productivity', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Network Scalability', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Reduce Cost', 
+
+					', 
+
+				', 
+
+				
+
+			', 
+
+		', 
+
+		
+
+		
+
+		
+
+		', 
+
+					
+
+  				', View Full Case Study', 
+
+				
+
+				
+
+  				
+
+  					
+
+  					
+
+  					
+
+					
+
+	  		        
+
+	  				', Download PDF Case Study',  
+
+				
+
+				
+
+				
+
+			
+
+			
+
+		', 
+
+	
+
+	', 	
+
+', 											
+
+', 		
+
+													
+
+
+
+', Avaya Wi-Fi Enables District\u2019s Vision of a Device in Every Child\u2019s...', Hospital Internacional de Colombia', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+   
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+		
+
+		
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+       
+
+	', Case Study Quick View:
+
+	
+
+	
+
+	
+
+	 Colombian Cardiovascular Foundation
+
+	
+
+        
+
+	', 
+
+	
+
+
+
+        
+
+
+
+
+
+
+
+', 
+
+
+
+	
+
+	
+
+	
+
+	', Topic : ', 
+
+	',  
+
+         	
+
+		
+
+	
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Multisite - Branches', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Network Security', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Team Efficiency', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Telemedicine', 
+
+       
+
+        
+
+		
+
+	', 
+
+	
+
+	
+
+',  
+
+
+
+', 
+
+	
+
+	
+
+					
+
+	
+
+	 
+
+   	
+
+	
+
+	
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	', 
+
+		', 100-2,499 Employees', 
+
+	', 
+
+	
+
+	
+
+	 
+
+	
+
+	
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Networking', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', 
+	Build a path to the future. Avaya\u2019s advanced fabric networking technology takes SDN networking and cloud services to the next level. Reduce network outages, enjoy quicker access to information, and easily integrate new communications channels and applications. If you wish, do it all with your existing infrastructure.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Services', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Team Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', Team engagement is the magic that happens when everyone in your workforce is connected effortlessly to the mission, to each other and to customers. When it works you feel it in your culture and on your balance sheet\u2014and your customers feel it most. Barriers disappear. Productivity rises. Our team engagement solutions get you there.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+	
+
+	
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+			
+
+				 
+
+				
+
+			
+
+			
+
+
+
+
+
+
+
+		
+
+', 
+
+	
+
+		
+
+	  	  
+
+	  	 
+
+	  	', 
+
+ 
+
+     
+
+
+
+          
+
+	                      ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+	  		  
+
+ ', 
+
+		
+
+	  	
+
+		', 
+
+		
+
+		
+
+		', \u201cIt is amazing that a robust, reliable solution can be obtained at such an affordable price from Avaya."', 
+
+', \u2014 Sergio A. Otero Nariño, Telecoms Engineer', 
+
+
+		
+
+		', 
+
+		
+
+', 
+
+
+
+
+
+
+
+	', 
+
+	
+
+        
+
+ ', Healthcare ',   ', 
+
+ 
+
+
+
+', 
+
+
+
+	
+
+	
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+	  
+
+	
+
+	
+
+	', 
+
+		
+
+		
+
+        
+
+
+
+	', 
+
+	', 
+
+	', 
+
+	
+
+	
+
+	
+
+		
+
+		
+
+		',  Colombian Cardiovascular Foundation ', 
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		', With the objective of installing cutting edge equipment and systems, Hospital Internacional de Colombia (HIC) deployed an Avaya Networking solution which allows it to offer excellent hospital services and maintain its position among the top five health institutions in Latin America.', 
+
+',  ', 
+
+
+		
+
+		
+
+		
+
+		
+
+		', 
+
+			',  Benefits ', 
+
+			', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Increased Productivity', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Enhanced Collaboration', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Network Scalability', 
+
+					', 
+
+				', 
+
+				
+
+			', 
+
+		', 
+
+		
+
+		
+
+		
+
+		', 
+
+					
+
+  				', View Full Case Study', 
+
+				
+
+				
+
+  				
+
+  					
+
+  					
+
+  					
+
+					
+
+	  		        
+
+	  				', Download PDF Case Study',  
+
+				
+
+				
+
+				
+
+			
+
+			
+
+		', 
+
+	
+
+	', 	
+
+', 											
+
+', 		
+
+													
+
+
+
+', With the objective of installing cutting edge equipment and systems, Hospital...', View All Case Studies >', 
+
+
+',  ', By Solution Area',  Customer Engagement',  Networking',  Team Engagement',  ', By Business Size', 1-99 Employees', 100-2,499 Employees', 2500+ Employees', 
+
+
+', By Industry',  ', Education - Higher',  ', Education K-12',  ', Energy & Utilities',  ', Finance',  ', General Services',  ', Government',  ', Healthcare',  ', Hospitality',  ', Insurance',  ', Leisure & Entertainment',  ', Professional Services',  ', Technology',  ', Transportation',  ', Other', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Customer Engagement in the Digital Age  ', 
+			', Plantronics and Avaya combine capabilities to deliver seamless engagement.  ', 		
+				Play video	\u203a		
+			', 
+', 
+
+
+', Support', 
+
+
+
+
+
+', Support By Product', 
+
+
+', Product-specific Support', Documents', Downloads', Forums', 
+
+
+
+
+
+', My Information', 
+
+
+', SSO login Profile', u"Explore Accounts / Sold-to's", Sold-to Lookup Tool', Show my Company Administrators', 
+
+
+
+
+
+', Diagnostics & Tools', 
+
+
+', Diagnostics & Tools Lookup', Global Registration Tool', PLDS', 
+
+
+
+
+
+', Service / Parts Request', 
+
+
+', Service Requests', Create Service Request', Manage Service Requests', 
+
+
+', Parts Requests', Support Agreement / Registered Parts Replacement', Heritage Nortel Voice RMA', Provisioning DOA', Logistics / Shipping Claims', EMEA LFS Hardware Return', Non-Registered Warranty Parts', 
+
+
+', Distributor', Distributor Claim Upload', Stock Rotation Request', 
+
+
+
+
+
+', Help', 
+
+
+', Videos And Articles', Contact Avaya Support', Forums', Avaya Learning Center', ITSS Help', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Avaya Professional Services ', 
+			', Get the most out of your communications technology and applications.  ', 		
+				Learn more	\u203a		
+			', 
+', 
+
+
+', Partners', 
+
+
+
+
+',  ', Customers', 
+
+
+', Avaya Edge\u2120 Partners', Trust Avaya Edge Partners to recommend and deliver Avaya\u2019s business communications solutions.  Our valued partners are focused on your satisfaction and are knowledgeable about Avaya\u2019s innovative products and services.', 
+
+
+', Why DevConnect Technology Partners', Technology Partners offer solutions that have proven interoperability through formal compliance testing with one or more products in the Avaya Portfolio.', 
+
+
+
+
+',  ', Find a Partner', 
+
+
+',  ', Find a Channel Partner', Let us help you find a channel partner with proven expertise to solve your business communication challenges.', 
+
+
+', Find a Technology Partner', Let us help you find a DevConnect technology partner with compliance tested solution for your Avaya Product or Solution.', 
+
+
+
+
+',  ', Prospective Channel Partners', 
+
+
+', Avaya Edge Overview', 
+
+
+', Why Avaya', 
+
+
+', About The Program', 
+
+
+', Become a Partner', 
+
+
+', Already a Partner? ', 
+
+
+
+
+',  ', Avaya Technology Alliances', 
+
+
+', Overview', 
+
+
+', Technology Alliance List', 
+
+
+
+
+',  ', Consultants', 
+
+
+', Consultant Relations Program', 
+
+
+', Become a Member ', 
+
+
+', Member Login ', 
+
+
+
+
+',  ', Developers', 
+
+
+', Avaya DevConnect Overview ', 
+
+
+', Become a Member ', 
+
+
+', Member Login ', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Become an Avaya Edge Partner ', 
+			', Get the resources and support you need to grow your business.  ', 		
+				Apply now	\u203a		
+			', 
+', 
+
+
+', About', 
+
+
+', Company Overview', Leadership', Our Culture', Avaya Transformation', Corporate Responsibility ', History', Investor Relations ', Avaya Strength ', 
+
+
+', Doing Business With Us', Our Customers', Partners', IAUG - International Avaya Users Group', Programs and Promotions ', Supplier Information', Sponsorships ', Branding Guidelines', Executive Briefing Center ', 
+
+
+', News and Events', Newsroom ', Industry Recognition', Events', Webinars', Avaya Connected Blog ', Avaya TV ', 
+
+
+', Perspectives', Executive Thought Leadership ', Customer Engagement', Team Engagement', Networking', Cloud', Services ', Solutions ', Developers ', New Rules of Engagement ', 
+
+
+', Contacts', U.S. Federal Government Sales ', U.S. Sales ', More Contacts ', Report a Concern ', Support ', Worldwide Directory ', 
+
+
+', Careers', Our Company ', Global Opportunities ', University Full-Time Hiring and Internships ', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Find What\u2019s Next in Communications at Avaya Engage 2017 ', 
+			', Meet Avaya experts, demo what\u2019s new, and plan your path to a fully digital experience. February 12-15, Las Vegas, NV.  ', 		
+				Register now	\u203a		
+			', 
+', 
+
+
+
+
+
+
+	
+	
+
+	
+	
+	', 
+	$(document).ready(function(){
+		var presentVal='null';
+		$('li[data-locale]').each(function() {
+			if(presentVal===$(this).attr('data-locale')){
+				$(this).attr("class","selected "+$(this).attr('class'));
+				var liTag=$(this);
+				$(this).children().each(function(){
+					liTag.html($(this).html());
+				});
+			}
+		});
+	});
+	', 
+
+
+
+    
+    ', 
+            
+                    
+                        
+                        
+                    
+
+		
+		
+		
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+	
+				
+
+		
+	
+
+	 ', 
+	 ', 
+	', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		
+		
+		
+		
+
+', 
+
+
+
+
+
+
+
+	
+
+
+	
+
+
+
+
+
+      
+      
+      
+      
+', 
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+      
+      
+      
+      
+
+
+
+    
+
+', Products', Customer Experience Management', Omnichannel Assisted Experience', Avaya Aura® Contact Center', 
+	', 
+	
+	
+		
+
+
+
+
+
+
+
+
+', Buy It',  Call Us', U.S. or Canada: ', 1-866-GO-AVAYA', All Other Locations: ', 1-908-953-6000', Email us ', >', Find A Partner ', >', 
+				function socialshare(s_url, ch){
+				var title1 = document.title;
+				if(ch=="fb" || ch=="vine")
+				{
+				page_url = s_url+"u="+document.URL+"&t="+title1.replace(" ","+");
+				} else if(ch=="tweet"){
+				page_url = s_url+title1.replace(" ","+")+"+"+"\n"+document.URL;
+				} else {
+				page_url = s_url+"url="+document.URL+"&title="+title1.replace(" ","+");
+				}
+				window.open(page_url,"_blank");
+				}
+		 	', 
+			', 
+			', 
+			', 
+			', 
+			
+			
+			', 
+				function validateEmail(email) {
+					var re = /\S+@\S+\.\S+/;
+					return re.test(email);
+				}
+				function sendMail() {
+					var check=true;
+					var message="";
+					if(document.getElementById("your_name").value==""){
+						document.getElementById("your_name_label").style.color="red";
+						check=false;
+					}
+					else
+						document.getElementById("your_name_label").removeAttribute("style");
+
+					if(!validateEmail(document.getElementById("your_email").value)){
+						document.getElementById("your_email_label").style.color="red";
+						check=false;
+					}
+					else
+						document.getElementById("your_email_label").removeAttribute("style");
+
+					if(!validateEmail(document.getElementById("your_colleagues_email").value)){
+						document.getElementById("your_colleagues_email_label").style.color="red";
+						check=false;
+					}
+					else
+						document.getElementById("your_colleagues_email_label").removeAttribute("style");
+
+					if(document.getElementById("your_colleagues_name").value==""){
+						document.getElementById("your_colleagues_name_label").style.color="red";
+						check=false;
+					}
+					else
+						document.getElementById("your_colleagues_name_label").removeAttribute("style");
+
+					if(document.getElementById("email_message").value==""){
+						message=" ";
+					}
+
+					if(check){
+						var name=document.getElementById("your_name").value;
+						var collegueEmail=document.getElementById("your_colleagues_email").value;
+						var pageUrl=document.URL;
+						message=document.getElementById("email_message").value;
+						document.getElementById("your_name").value="";
+						document.getElementById("your_email").value="";
+						document.getElementById("email_message").value="";
+						document.getElementById("your_colleagues_email").value="";
+						document.getElementById("your_colleagues_name").value="";
+						var url='/cs/Satellite?pagename=Avaya%2FShare%2FEmail';
+						url = url + '&pageUrl='+encodeURIComponent(pageUrl)+'&collegueEmail='+encodeURIComponent(collegueEmail)+'&name='+encodeURIComponent(name)+'&message='+encodeURIComponent(message);
+						var xmlhttp;
+						if (window.XMLHttpRequest) {
+							// code for IE7+, Firefox, Chrome, Opera, Safari
+							xmlhttp=new XMLHttpRequest();
+						} else {
+							// code for IE6, IE5
+							xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						xmlhttp.onreadystatechange=function(){
+							if (xmlhttp.readyState==4 && xmlhttp.status==200){
+							} else if (xmlhttp.readyState==4 && xmlhttp.status!=200){
+								document.getElementById("emailpopup").setAttribute("class", "email-popup");
+							}
+						}
+						xmlhttp.open("GET",url,true);
+						document.getElementById("emailpopup").setAttribute("class", "email-popup");
+						document.getElementById("emailsuccess").setAttribute("class", "email-popup on");
+						document.getElementById("emailsuccess").style.display="block";
+						xmlhttp.send();
+					}
+				}
+				function hideemailpopup() {
+					document.getElementById("emailsuccess").setAttribute("class", "email-popup");
+					document.getElementById("emailsuccess").style.display="none";
+				}
+				function clearAllValues(){
+					document.getElementById("your_name_label").removeAttribute("style");
+					document.getElementById("your_email_label").removeAttribute("style");
+					document.getElementById("your_colleagues_name_label").removeAttribute("style");
+					document.getElementById("your_colleagues_email_label").removeAttribute("style");
+					document.getElementById("your_name").value="";
+					document.getElementById("your_email").value="";
+					document.getElementById("email_message").value="";
+					document.getElementById("your_colleagues_email").value="";
+					document.getElementById("your_colleagues_name").value="";
+				}
+				style="color: red;"
+			', 
+
+			
+			
+
+			', 
+				', X', 
+				', Email this page to a Colleague', 
+				', Your name', 
+				', Your email', 
+				', u"Your colleague's name", 
+				', u"Your colleague's email", 
+				', Message (optional)', 
+				', 
+				', Read our Privacy Statement', 
+			', 
+			', 
+				', Thank You.', 
+				', A message has been sent', 
+				', 
+			', 
+			', 
+		', 
+		', 
+ 		
+		
+		
+ 		
+ 			
+ 		
+ 		
+ 			
+ 				
+				
+ 					
+ 					
+ 				
+ 				
+				
+					
+			
+			
+ 					
+ 							
+							
+ 							', 
+							
+ 							
+							
+ 							
+ 							', 
+                                                        
+ 							
+ 							
+ 							
+							
+							
+							
+								
+                                                                  
+ 									
+									
+										
+											
+											', Chat', 
+									
+								
+							
+                                         					
+							', 
+						', 
+			
+			
+		
+                 
+                                       ', 
+						', 
+							', SHARE', 
+							', 
+								', 
+									', 
+									', 
+									', 
+									', 
+								', 
+							', 
+						', 
+					', 
+		', 
+	', 
+	', 
+	', 
+                
+                ', 
+
+
+', 
+             ', u"
+		var recomendedSegment = 'recomendedSegment'+'.'+'en_US';
+		var cookieLife= parseInt('180');
+		var segmentName_locale = 'Customer Engagement'+'~'+'en_US';
+		var segmentName = 'Customer Engagement';
+		var count = parseInt('3');	
+		var dummy=$.cookie;
+		if(null==$.cookie(segmentName_locale)){
+			$.cookie(segmentName_locale, 1,{expires:cookieLife,path:'/'});
+		}else{
+			$.cookie(segmentName_locale,parseInt($.cookie(segmentName_locale))+1 ,{expires:cookieLife,path:'/'});
+			if(count==$.cookie(segmentName_locale)){
+				$.cookie(segmentName_locale, 0,{expires:cookieLife,path:'/'});
+				$.cookie(recomendedSegment, decodeURIComponent(segmentName),{expires:cookieLife,path:'/'});
+			}
+		}
+	", Avaya Aura® Contact Center', 
+	All-in-One Omnichannel Contact Center Solution', 
+', 
+
+', Overview', Case Studies', Documents and Videos', Licensing ', Product Support ', 
+
+
+', 
+             ', u"
+		var recomendedSegment = 'recomendedSegment'+'.'+'en_US';
+		var cookieLife= parseInt('180');
+		var segmentName_locale = 'Customer Engagement'+'~'+'en_US';
+		var segmentName = 'Customer Engagement';
+		var count = parseInt('3');	
+		var dummy=$.cookie;
+		if(null==$.cookie(segmentName_locale)){
+			$.cookie(segmentName_locale, 1,{expires:cookieLife,path:'/'});
+		}else{
+			$.cookie(segmentName_locale,parseInt($.cookie(segmentName_locale))+1 ,{expires:cookieLife,path:'/'});
+			if(count==$.cookie(segmentName_locale)){
+				$.cookie(segmentName_locale, 0,{expires:cookieLife,path:'/'});
+				$.cookie(recomendedSegment, decodeURIComponent(segmentName),{expires:cookieLife,path:'/'});
+			}
+		}
+	", Go Beyond Phone Calls\u2014Let Customers Reach You Via Text, IM, Email, or Chat', 
+	', 
+		', Connect with your customers on their terms.',  Manage all of your contacts\u2014for email, chat, SMS, IM, and social media\u2014the same way you manage your inbound and outbound voice interactions.', 
+	', 
+		', Leverage this complete, omnichannel contact center solution to match callers with the most appropriate resources every time they contact you.',  Your agents gain call context, both real-time and historical. Your customers receive a differentiated experience.', 
+	', 
+		', Reduce your expenses by using lower-cost channels.', 
+	', 
+		', Consistently deliver a unified, seamless, and highly personalized experience',  that builds your brand and customer engagement loyalty.', 
+	', 
+		', Review our infographic',  to see how ', Customer Experience IS the Battleground',  now\u2014and why it\u2019s imperative to keep pace with your customers\u2019 expectations.', 
+', 
+', 
+', A Single Interface for Managing All Customer Interactions', Reduce call volume and improve efficiency when you expand customer interactions to lower cost channels like chat and SMS/text\u2014all managed through a single agent desktop interface.', 
+', u"Support Customers' Channel Preferences", Did you know that 82% of consumers say they prefer that organizations always offer multiple channels to communicate and serve their needs? Now you can meet such customer expectations.', 
+', Provide a Seamless Customer Experience Across Channels', 68% of consumers say they expect the information they give an organization in one place to be available in another. Now you can personalize your customers\u2019 experiences by sharing details like customer history and screen pop data across contact channels.', 
+', Customer Story',  ', \u201cWe\u2019re connecting to more customers, have exceeded our',  right party contact target and, more importantly, our',  agent productivity.\u201d ', 
+',  Read the Case Study \u203a',  Productivity',  Performance',  Business Integration',  Agent Management',  Customer Experience', 
+
+
+
+	', Help Your Agents Be More Productive', u"Configure an agent's desktop to manage up to six different interaction types simultaneously using a single desktop interface. An agent can accept an email or SMS interaction, for example, while working on a web chat interaction. The agent desktop provides your agents with the pertinent customer data and historical interaction data across all of the supported channels. So your agents will have what they need at their fingertips to provide your customers with the best possible experience.", 
+', 
+
+
+
+	', Manage Your Contact Center Performance', Managing the performance of your contact center just got easier. Use the on-board reporting module that includes more than 120 predefined real-time and historical reports, as well as a Report Creation Wizard for creating customized reports. Manage agent performance and monitor statistics that are important to maintaining service levels. Your supervisors and managers will have quick access to real-time performance information so they can adapt immediately to situations, helping to ensure an optimized customer experience.', 
+', 
+
+
+
+	', Break Down the Silos Between Your Contact Center and Business', Integrate your contact center processes and applications with your business processes and applications to help streamline and automate functions that were previously manual. Use the Web Services APIs to adapt integration across your contact center and business. Insert contact center functions, such as immediate or scheduled callback and automatic routing of tasks, into processes that improve customer experience.', 
+', 
+
+
+
+	', Deploy and Manage with Ease', Simplify your day-to-day management using a single interface for system setup, configuring agents, assigning skill sets, performance reporting, and managing contact flows. Because it\u2019s easy to use, the interface helps you better manage your agents and their skills, as well as quickly adapt to market changes that can impact your business.', 
+', 
+
+
+
+	', u"Manage Your Customers' Experience with a Graphical Workflow", u"Most of us have experienced telephone customer service options that are confusing and frustrating, and many times we simply give up. Understanding how your customers are being served and which options are available to them is critical to managing the customer experience. Get a clear view of customer contact flows\u2014both self-service and agent-assisted\u2014with the graphical workflow management tool Avaya Aura® Orchestration Designer. It's easy to build, modify, and improve customer contact flows with the drag-and-drop interface.", 
+', 
+
+
+',  ', Southwark Council Cuts Wait Times in Half', Benefits: ', Improved Customer Service, Reduce Cost, Increased Productivity', Topic: ', Customer Service', Read the Full Case Study \u203a', View All Success Stories > ', 
+
+
+
+
+',  ', White Paper',  ', 
+
+
+
+
+
+',  ', White Paper',  ', 
+	Go Omnichannel: Provide a Personalized Experience for Each Customer', 
+',  Download now >', 
+
+
+
+
+
+',  ', Executive Guide',  ', 7 Things You Didn\u2019t Know Were Possible with Self Service and Automation', 
+',  Download now >', 
+', 
+
+
+', Customers Who Viewed This Also Viewed', Solutions',  
+			
+	        
+	      
+   			 ', Customer Experience',  
+			
+	        
+	      
+   			 ', Topline Growth',  
+			
+	        
+	      
+   			 ', Contact Center Efficiency', Products',  
+				
+		        
+		   
+	   			 ', Avaya Aura® Experience Portal',  
+				
+		        
+		   
+	   			 ', Control Manager ',  
+				
+		        
+		   
+	   			 ', Avaya Aura® Workforce Optimization', Services',  
+				
+		        
+		      
+	   			 ', Contact Center Optimization',  
+				
+		        
+		      
+	   			 ', Contact Center Managed Services', 
+
+
+ 
+
+
+', Connect With Avaya', Follow Us', 
+                                        ', 
+                                    
+                                        ', 
+                                    
+                                        ', 
+                                    
+                                        ', 
+                                    
+                                        ', 
+                                    
+                                        ', 
+                                    ', 
+
+
+',  ', Sign Up for Our Newsletter', 
+
+
+',  ', Email Us', 
+
+
+',  ', Find a Partner', 
+
+
+',  ', Chat with Representative', 
+
+
+', U.S. & Canada', (866) GO-AVAYA', 
+
+
+', Worldwide', (908) 953-6000', Tweets by Avaya', 
+    ', 
+        
+               
+        ', 
+        
+        
+                
+                     
+            ', 
+
+
+
+
+', 
+
+', 
+	$(document).ready(function() {
+		$.chatWindowOpened = false;
+		$.ChatLink = function( url ){
+			if (!$.chatWindowOpened){
+				$.chatWindowOpened = true;
+				var left = (screen.width/2) - 250;
+				var top = (screen.height/2) - 220;
+				var h = 469;
+				
+					
+					
+				
+				var currenttime = eval("9");
+				var weekday = "Thu";
+				if( ( weekday!="Sat" && weekday!="Sun") && ( currenttime>=8 && currenttime <=19 )) {
+					var destination = url ? url : "http://www.avaya.com/Chat/clickToChat.php";
+				} else {
+					var destination = "/en/clicktochat";
+				}
+				window.open( destination, 'chatWindow', 'personalbar=0,menubar=0,location=0,status=1,toolbar=0,width=435,height=' + h + ',left=' + left + 'top=' + top);
+				setTimeout(function(){$.chatWindowOpened = false;}, 1000);
+			}
+		}
+	});
+', 
+',  ', More Avaya', Events', Corporate Responsibility', Newsroom', Perspectives', Executive Briefing Center', Authentic Avaya', Programs and Promotions', Contacts', Careers', Info for', Developers', Investors', Media', Analysts', 
+                ', 
+                ', Support', Support Home', Contact Support', My SSO Profile', Open a New Service Request', Support by Product', Downloads', Global Product Registration Tool', Support Forums', Biller Direct', Avaya Learning Center', 
+                ',  ', Avaya Connected Blog',  ', Avaya TV', 
+                ', 
+            ', 
+
+            ', 
+                ',  ', 
+
+', 
+', 
+	', Sitemap', 
+	', Terms of Use', 
+	', Privacy', 
+	', Cookies', 
+	', © 2017 Avaya Inc.', 
+', 
+
+', Avaya Inc., 4655 Great America Parkway, Santa Clara, CA 95054-1233 USA', 
+', 
+
+', 
+',  
+  ',  ',  
+  ',  ',  
+  ',  ',  
+  ',  ',  
+  ',  ',  
+  ', 
+', 
+', 
+
+',  ', 
+
+            ', 
+        ', 
+
+    
+', 
+
+', 
+', 
+
+', 
+        ', 
+    ', 
+        
+        function isMobile() {
+            if(/Android|webOS|iPhone|iPad|iPod|pocket|psp|kindle|avantgo|blazer|midori|Tablet|Palm|maemo|plucker|phone|BlackBerry|symbian|IEMobile|mobile|ZuneWP7|Windows Phone|Opera Mini/i.test(navigator.userAgent)) {
+                return true;
+            }
+        }
+        var isMobile = {
+            Android: function() {
+                return navigator.userAgent.match(/Android/i);
+            },
+            BlackBerry: function() {
+                return navigator.userAgent.match(/BlackBerry/i);
+            },
+            iOS: function() {
+                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+            },
+            Opera: function() {
+                return navigator.userAgent.match(/Opera Mini/i);
+            },
+            Windows: function() {
+                return navigator.userAgent.match(/IEMobile/i);
+            },
+            any: function() {
+                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+            }
+        };
+        
+        $(document).ready(function() {
+            $('#reactivechat').on('show', function (e) {
+                if($("#surveymodal:visible").length>0  || $("#video-modal:visible").length>0) {
+                   if (!data) return e.preventDefault() // stops modal from being shown
+                }
+            });   // check before populating reactive chat whether any modal windows are opened or not
+
+            $('#surveymodal').on('show', function (e) {
+               if($("#reactivechat:visible").length>0  || $("#video-modal:visible").length>0) {
+                       if (!data) return e.preventDefault() // stops modal from being shown
+               }
+            });   // check before populating survey whether any modal windows are opened or not
+        });
+        $(document).mouseup(function (e) {
+
+            var $searchcontainer = $('.predictive');
+            if (!$searchcontainer.is(e.target) && $searchcontainer.has(e.target).length === 0) {
+                $searchcontainer.fadeOut();
+            }
+        });
+    ', 
+    
+    ', 
+    
+    ', 
+    
+    
+        
+        
+    
+    
+    
+    
+                
+
+
+
+
+', 
+
+', 
+	$(document).ready(function() {
+		if(document.documentElement.clientWidth > 980 && !isMobile.any()) { 
+			$('#chatnothankyo).on('click',function(e){
+				$('#reactivechat').modal('hide');
+				$.cookie('$.Avaya.ChatModal.seen',1,30,'','',''); 
+			});    
+			if( $("#surveymodal:visible").length==0 && $("#video-modal:visible").length == 0 ) {
+				 
+					
+					
+				
+				var currenttime = "9";
+				var weekday = "Thu";
+				if(( weekday!="Sat" && weekday!="Sun") && ( currenttime>=8 && currenttime <=18 )) { // 8 to 7PM
+					setTimeout(function(){$("#reactivechat").modal('show')}, 45*1000);
+				} 
+			}
+		}
+	}); 
+', 
+
+
+                
+
+                ', 
+                    ', 
+                    ', 
+                        ', 
+                        ', 
+                        ', Can we help you find out more about Avaya Aura® Contact Center? An Avaya representative is available now.', 
+                        ', 
+                            ', No thanks', 
+                            
+                            ', Chat with us', 
+                        ', 
+                        ', Powered by Avaya Aura® Contact Center', 
+                    ', 
+                ', 
+
+                
+    
+
+    
+    ', 
+
+    ', 
+    ', 
+        ', 
+            ', x', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+    ', 
+	    ', 
+	        ', 
+	            ', 
+	                ', X', 
+	            ', 
+	            ', 
+	        ', 
+	    ', 
+	', 
+	', 
+	    ', 
+	     	', 
+	        	', 
+	            	', X', 
+	            ', 
+	            ', 
+	        ', 
+	    ', 
+	', 
+    ', 
+        ', 
+            ', 
+                ', X', 
+            ', 
+            ', 
+                
+                    
+                    
+                
+            ', 
+        ', 
+    ', 
+    '][
+
+', 
+  ', 
+
+    ', u"
+        (function(a,b,c,d){
+            a='//tags.tiqcdn.com/utag/avaya/main/prod/utag.js';
+            b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+            a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+        })();
+    ", 
+     
+              
+        
+       
+    
+
+    
+            
+
+
+	
+	
+		
+	
+
+
+', 
+	
+ ', 
+	                ', 
+	                	', 
+	                		', 
+	                			', 
+	                			', Search', 
+	                		', 
+	                		', 
+	                				', 
+	                              ', 
+	                		', 	                	
+	                	', 
+           ', 
+			// surprizingly trim function is not supported in IE8 and above...
+			if(typeof String.prototype.trim !== 'function') { 
+				String.prototype.trim = function() { return this.replace(/^\s+|\s+$/g, ''); } 
+			}
+			// this function is taken from existing website
+			function validateGoogleSearchBoxForm(t) {
+				var tval = t.q.value.trim();
+				//blank value for individual countries
+				//var qObj=document.getElementById("q");
+				if(tval == "" || tval == "Search") {
+					// second condition if for IE8 & IE9
+					var GlobalLocation = document.URL;
+					var Cala_US = GlobalLocation.indexOf("/cala/en-us");
+					var Cala_BR = GlobalLocation.indexOf("/cala/pt-br");
+					var Cala_MX = GlobalLocation.indexOf("/cala/es-mx");
+					if (Cala_US > 1) {
+						alert("Por favor escriba un termino especifico de busqueda e intente nuevamente.");
+						//document.base.q.focus();
+						return false;
+					} else if (Cala_BR > 1) {
+						alert("Por favor digite um termo especÃ¯Â¿Â½fico e tente novamente.");
+						//qObj.focus();
+						t.q.focus();
+						return false;
+					} else if (Cala_MX > 1) {
+						alert("Por favor escriba un termino especifico de busqueda e intente nuevamente.");
+						//qObj.focus();
+						t.q.focus();
+						return false;
+					} else {
+						alert("Please type a specific search term and try again.");
+						//qObj.focus();
+						t.q.focus();
+						return false;
+					}
+				}
+
+				if(tval.length < 2) {
+					alert("Could not process your search.\n Please enter a search term at least 2 characters long and try again.");
+					t.q.focus();
+					return false;
+				}
+
+				if(tval.length > 200) {
+					alert("The search text yove submitted is too long (more than 250 characters).\n Please shorten your query and try again.");
+					t.q.focus();
+					return false;
+				}
+			}
+			function submitUsingQTopBar(t){
+		    	window.open(t,'_self');
+			}
+			
+			var device="desktop";
+			document.onkeydown = checkKey;
+			var keyevent;  
+			function checkKey(e) {
+			    keyevent = e || window.event;
+			if (keyevent.keyCode=='13')
+				{
+					//submitUsingQTopBar();
+				}
+			}
+    		function xmlhttpPost(t,d) {
+	  			
+	  			
+        		  if (keyevent.keyCode=='38' || keyevent.keyCode=='40')
+        			{
+        		 //do nothing
+        			}
+        		  else{
+        			  device=d; // dynamically assign value
+              		var xmlHttpReq = false;
+        		  
+        		// Mozilla/Safari
+        		if (window.XMLHttpRequest) {
+            		xmlHttpReq = new XMLHttpRequest();
+            		if (xmlHttpReq.overrideMimeType) {
+                		xmlHttpReq.overrideMimeType('text/csv');
+                		// See note below about this line
+            		}
+        			// IE
+        		} else if (window.ActiveXObject) { // IE
+          				try {
+               			xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+       				} catch (e) {
+           				try {
+               				xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+           				} catch (e) {}
+           			}
+       			}
+        		
+       			if (!xmlHttpReq) {
+           			//alert('ERROR AJAX:( Cannot create an XMLHTTP instance');
+           			return false;
+       			}
+       			xmlHttpReq.open('GET', '/search/suggest?site=all_en&client=avaya_frontend&access=p&output=xml_no_dtd&filter=0&format=os&getfields=BusinessNeed.Industry.AvayaKNOVA:SupportGoals.google:lastmodified.BusinessSize.BusinessRole.SiteSection&q='+encodeURI(t.value), true);
+      			xmlHttpReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+       			xmlHttpReq.onreadystatechange = function() { 
+           			callBackFunction(xmlHttpReq); 
+       			};
+       			xmlHttpReq.send();
+        		  }
+        		  }
+    		
+    		function callBackFunction(http_request) {
+        		if (http_request.readyState == 4) {
+            		if (http_request.status == 200) {
+                		var responceString = http_request.responseText;
+						//alert(responceString);
+						var dataStart =  responceString.indexOf('["');
+						var dataEnd =  responceString.indexOf('"]');
+						var searchData=responceString.substring(dataStart + 1,dataEnd + 1);
+						var searchDataArray = searchData.split('","'); // TODO remove the double quotes for first and last array
+						searchDataArray[0] = searchDataArray[0].replace('"',''); 
+						searchDataArray[searchDataArray.length -1] = searchDataArray[searchDataArray.length -1].replace('"','');
+						var  HTMLdata="<ul>";
+						if(device == "desktop") {
+							for (var i = 0; i < searchDataArray.length; i++) {
+								 var qStr= "/en/search-results/?site=all_en&q=";
+								 qStr= qStr+searchDataArray[i];
+						       	 HTMLdata = HTMLdata + '<li><a href="#" onmousedown="submitUsingQTopBar(\''+qStr+'\')">'+searchDataArray[i]+'</a></li>';
+
+							}
+  						} else {
+							for (var i = 0; i < searchDataArray.length; i++) {
+							   	HTMLdata = HTMLdata + '<li><a href="http://www.avaya.com/usa/search-results/?site=all_usa&q='+searchDataArray[i]+'">'+ searchDataArray[i] +'</a></li>';
+							}
+  						}
+						HTMLdata = HTMLdata + "</ul>";
+						document.getElementById("autoCompletetop").innerHTML=HTMLdata;
+		            } else {
+		                //alert(http_request.responseText);
+		                //alert('ERROR: AJAX request status = ' + http_request.status);
+		            }
+        		}
+    		}
+    
+		', 
+	
+	
+	                	', 
+	                		', 
+	                			', 
+	                			', English', 
+	                		', 
+	                		', x', 
+		', 
+			', 
+				', English', Deutsch', Español', Français', Italiano', Português', P\u0443\u0441\u0441\u043a\u0438\u0439', \u4e2d\u6587', \u65e5\u672c\u8a9e', \ud55c\uad6d\uc5b4', 
+			', 
+		', 
+	', 
+	                		', 
+	                	', 
+	                ', 
+	                ', 
+', 
+		', 
+
+
+', Solutions', 
+
+
+', 
+
+
+
+
+
+', Business Solutions', 
+
+
+',  Customer Engagement', Avaya Oceana\u2122 delivers the best customer experience each time, every time.', 
+
+
+',  Team Engagement', Experience simple, contextual, user-defined communications with Avaya Equinox\u2122.', 
+
+
+',  Networking', Innovative solutions for the challenges of cybersecurity, digital transformation, and IoT.', 
+
+
+',  Cloud', Broadest option of cloud solutions that meet the needs of any business. ', 
+
+
+', 
+
+
+
+
+
+', Business Need', 
+
+
+', u"I'm Interested in...", Unified Communications', Mobility', Conferencing', Remote and Home Workers', Messaging', Contact Center Performance', Multi-channel/Omnichannel Experience', Customer Sales and Services', Virtualized Communications Systems', 
+
+
+', Real-time Communications', Avaya Breeze\u2122 Platform', Avaya Snap-ins', Avaya Snapp Store', Avaya Collaboratory', 
+
+
+', 
+
+
+
+
+
+', Business Type', 
+
+
+', Size', < 100 Employees', 100-2,499 Employees', 2,500+ Employees', 
+
+
+', Industry', Banking', Insurance', Healthcare Providers', Higher Education', Hotels and Lodging', K-12 Education', 
+
+
+', U.S. Government Solutions', Federal Civilian Government', Defense and Military', State and Local Government', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Avaya Equinox\u2122 Experience: Communications for How We Really Work ', 
+			', Communications are now handy, easy, and include context.  ', 		
+				Explore Equinox	\u203a		
+			', 
+', 
+
+
+', Products', 
+
+
+', Unified Communications and Collaboration', Communication and Messaging', Platform and Infrastructure', Video and Conferencing', 
+
+
+', Customer Experience Management', Omnichannel Assisted Experience', Omnichannel Automated Experience', Actionable Insights', 
+
+
+', Networking', Innovative solutions for the challenges of cybersecurity, digital transformation, and IoT.', Software-Defined Networking', Ethernet Switches', Access Control', Wireless Networks', Network Management', 
+
+
+', Cloud', Broadest option of cloud solutions that meet the needs of any business.', 
+
+
+', Popular Products', Avaya Aura® Platform', Avaya IP Office\u2122 Platform', Avaya Breeze\u2122 Platform', Avaya Pod Fx\u2122', Avaya Equinox\u2122 Experience', New', Avaya Scopia® Desktop and Mobile Applications', Avaya Oceana\u2122 Solution', New', SDN Fx\u2122 Architecture', Fabric Connect', Phones', 
+
+
+', A-Z', All Products A-Z', All Services A-Z', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Zang is 100% Cloud-Based Communications ', 
+			', Transform your conversations\u2014and your business.  ', 		
+				Explore Zang	\u203a		
+			', 
+', 
+
+
+', Services', 
+
+
+
+
+
+', Professional Services', 
+
+
+', Enablement Services', Deployment and Program Management', 
+
+
+', Optimization Services', Contact Center Optimization', Data Networking Design Services', Network Readiness Assessment', Performance Monitoring and Stress Testing', Security Assurance Services', Solution Architecture Services', 
+
+
+', Innovation Services', Advanced Software Applications', Advisory Services', Customer Engagement Transformation', SIP Transformation Services', Social Media Services', Cloud Transformation Services', 
+
+
+
+
+
+', Enterprise Cloud and Managed Services', 
+
+
+', Enterprise Cloud', Unified Communications Managed Services', Video Managed Services', Contact Center Managed Services', Data Networking Managed Services', 
+
+
+
+
+
+', Support Services', 
+
+
+', Support Advantage', IP Office Support Services', Support for Meridian 1 and Communication Server 1000', 
+
+
+
+
+
+', Avaya Learning Services', 
+
+
+', Training & Education', Credentials & Certifications', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Webinar: Maximize the ROI of your Avaya Support & Maintenance ', 
+			', See how to optimize communications performance.  ', 		
+				Attend now	\u203a		
+			', 
+', 
+
+
+
+
+ ', Case Studies', 
+
+
+', What Customers Are Saying',  ', "Avaya Contact Center Select has really let us take the multiple channels of communication that we have with our users...', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+   
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+		
+
+		
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+       
+
+	', Case Study Quick View:
+
+	
+
+	
+
+	
+
+	 Michael C. Fina
+
+	
+
+        
+
+	', 
+
+	
+
+
+
+        
+
+
+
+
+
+
+
+', 
+
+
+
+	
+
+	
+
+	
+
+	', Topic : ', 
+
+	',  
+
+         	
+
+		
+
+	
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Customer Service', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Multi-channel', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Team Efficiency', 
+
+       
+
+        
+
+		
+
+	', 
+
+	
+
+	
+
+',  
+
+
+
+', 
+
+	
+
+	
+
+					
+
+	
+
+	 
+
+   	
+
+	
+
+	
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	', 
+
+		', 100-2,499 Employees', 
+
+	', 
+
+	
+
+	
+
+	 
+
+	
+
+	
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Customer Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', 
+	Today\u2019s customer relationships are ongoing conversations that unfold across time and channels. Phone, video, email, chat, social: It\u2019s all one integrated omnichannel now. Done right, seamless execution pays off in increased revenue and higher lifetime value of customers. Our customer engagement solutions make it possible. ', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Team Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', Team engagement is the magic that happens when everyone in your workforce is connected effortlessly to the mission, to each other and to customers. When it works you feel it in your culture and on your balance sheet\u2014and your customers feel it most. Barriers disappear. Productivity rises. Our team engagement solutions get you there.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+	
+
+	
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+			
+
+				 
+
+				
+
+			
+
+			
+
+
+
+
+
+
+
+		
+
+', 
+
+	
+
+		
+
+	  	  
+
+	  	 
+
+	  	', 
+
+ 
+
+     
+
+
+
+          
+
+                                  
+
+                                             
+
+                                                 ', 
+
+                                                       ', 
+
+                                                                     
+
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+	  		  
+
+ ', 
+
+		
+
+	  	
+
+		', 
+
+		
+
+		
+
+		', \u201cWe were able to work with Avaya to understand how the communication infrastructure would evolve as the business changed.\u201d', 
+
+', \u2014Michael A. Fina, Chief Operating Officer', 
+
+
+		
+
+		', 
+
+		
+
+', 
+
+
+
+
+
+
+
+	', 
+
+	
+
+        
+
+ ', Retail ',   ', 
+
+ 
+
+
+
+', 
+
+
+
+	
+
+	
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+	  
+
+	
+
+	
+
+	', 
+
+		
+
+		
+
+        
+
+
+
+	', 
+
+	', 
+
+	', 
+
+	
+
+	
+
+	
+
+		
+
+		
+
+		',  Michael C. Fina ', 
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		', For over 80 years, New Yorkers have known Michael C. Fina as a purveyor of luxury retail goods in Midtown Manhattan. However, few realize that it has grown far beyond its humble beginnings over the years, and now provides comprehensive corporate recognition and incentive programs to Fortune 500 companies worldwide.', 
+
+
+		
+
+		
+
+		
+
+		
+
+		', 
+
+			',  Benefits ', 
+
+			', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Increased Productivity', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Improved Customer Service', 
+
+					', 
+
+				', 
+
+				
+
+			', 
+
+		', 
+
+		
+
+		
+
+		
+
+		', 
+
+					
+
+  				', View Full Case Study', 
+
+				
+
+				
+
+  				
+
+  					
+
+  					
+
+  					
+
+					
+
+	  		        
+
+	  				', Download PDF Case Study',  
+
+				
+
+				
+
+				
+
+			
+
+			
+
+		', 
+
+	
+
+	', 	
+
+', 											
+
+', 		
+
+													
+
+
+
+', Michael A. Fina, Michael C. Fina',  ', \u201cInformation sharing is so ingrained into the concept of Smart Cities and we needed a reliable, secure way to manage the...', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+   
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+		
+
+		
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+       
+
+	', Case Study Quick View:
+
+	
+
+	
+
+	
+
+	 Town of Shawinigan
+
+	
+
+        
+
+	', 
+
+	
+
+
+
+        
+
+
+
+
+
+
+
+', 
+
+
+
+	
+
+	
+
+	
+
+	', Topic : ', 
+
+	',  
+
+         	
+
+		
+
+	
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Network Security', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Team Efficiency', 
+
+       
+
+        
+
+		
+
+	', 
+
+	
+
+	
+
+',  
+
+
+
+', 
+
+	
+
+	
+
+					
+
+	
+
+	 
+
+   	
+
+	
+
+	
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	', 
+
+		', 100-2,499 Employees', 
+
+	', 
+
+	
+
+	
+
+	 
+
+	
+
+	
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Networking', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', 
+	Build a path to the future. Avaya\u2019s advanced fabric networking technology takes SDN networking and cloud services to the next level. Reduce network outages, enjoy quicker access to information, and easily integrate new communications channels and applications. If you wish, do it all with your existing infrastructure.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Team Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', Team engagement is the magic that happens when everyone in your workforce is connected effortlessly to the mission, to each other and to customers. When it works you feel it in your culture and on your balance sheet\u2014and your customers feel it most. Barriers disappear. Productivity rises. Our team engagement solutions get you there.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+	
+
+	
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+			
+
+				 
+
+				
+
+			
+
+			
+
+
+
+
+
+
+
+		
+
+', 
+
+	
+
+		
+
+	  	  
+
+	  	 
+
+	  	', 
+
+ 
+
+     
+
+
+
+          
+
+	                      ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+	  		  
+
+ ', 
+
+		
+
+	  	
+
+		', 
+
+		
+
+		
+
+		', "The Avaya solution facilitates the introduction of innovative technologies and new services."', 
+
+', -Lyne Vallières, Director of the Office of Information Technology', 
+
+
+		
+
+		', 
+
+		
+
+', 
+
+
+
+
+
+
+
+	', 
+
+	
+
+        
+
+ ', Government ',   ', 
+
+ 
+
+
+
+', 
+
+
+
+	
+
+	
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+	  
+
+	
+
+	
+
+	', 
+
+		
+
+		
+
+        
+
+
+
+	', 
+
+	', 
+
+	', 
+
+	
+
+	
+
+	
+
+		
+
+		
+
+		',  Town of Shawinigan ', 
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		', Avaya Fabric Connect equips Quebec town with infrastructure to meet all of its future needs', 
+
+', As one of the first towns in North America to produce hydroelectricity, Shawinigan has built its economy around large resource-based industries such as aluminum, pulp and paper production and electrochemistry. Over the past few decades, however, these large employers have left the region, causing job losses and an exodus of young graduates from the area.', 
+
+
+		
+
+		
+
+		
+
+		
+
+		', 
+
+			',  Benefits ', 
+
+			', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Increased Productivity', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Reduce Cost', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Network Scalability', 
+
+					', 
+
+				', 
+
+				
+
+			', 
+
+		', 
+
+		
+
+		
+
+		
+
+		', 
+
+					
+
+  				', View Full Case Study', 
+
+				
+
+				
+
+  				
+
+  					
+
+  					
+
+  					
+
+					
+
+	  		        
+
+	  				', Download PDF Case Study',  
+
+				
+
+				
+
+				
+
+			
+
+			
+
+		', 
+
+	
+
+	', 	
+
+', 											
+
+', 		
+
+													
+
+
+
+', Lyne Vallières, Town of Shawinigan',  ', "Parents and staff love Avaya Scopia. Mothers are able to see their baby on their preferred devices\u2014laptops, tablets,...', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+   
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+		
+
+		
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+       
+
+	', Case Study Quick View:
+
+	
+
+	
+
+	
+
+	 Geneva University Hospitals
+
+	
+
+        
+
+	', 
+
+	
+
+
+
+        
+
+
+
+
+
+
+
+', 
+
+
+
+	
+
+	
+
+	
+
+	', Topic : ', 
+
+	',  
+
+         	
+
+		
+
+	
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Team Efficiency', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Video Collaboration', 
+
+       
+
+        
+
+		
+
+	', 
+
+	
+
+	
+
+',  
+
+
+
+', 
+
+	
+
+	
+
+					
+
+	
+
+	 
+
+   	
+
+	
+
+	
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	', 
+
+		', 2500+ Employees', 
+
+	', 
+
+	
+
+	
+
+	 
+
+	
+
+	
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Customer Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', 
+	Today\u2019s customer relationships are ongoing conversations that unfold across time and channels. Phone, video, email, chat, social: It\u2019s all one integrated omnichannel now. Done right, seamless execution pays off in increased revenue and higher lifetime value of customers. Our customer engagement solutions make it possible. ', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Team Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', Team engagement is the magic that happens when everyone in your workforce is connected effortlessly to the mission, to each other and to customers. When it works you feel it in your culture and on your balance sheet\u2014and your customers feel it most. Barriers disappear. Productivity rises. Our team engagement solutions get you there.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+	
+
+	
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+			
+
+				 
+
+				
+
+			
+
+			
+
+
+
+
+
+
+
+		
+
+', 
+
+	
+
+		
+
+	  	  
+
+	  	 
+
+	  	', 
+
+ 
+
+     
+
+
+
+          
+
+	                      ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+	  		  
+
+ ', 
+
+		
+
+	  	
+
+		', 
+
+		
+
+		
+
+		', "Scopia provided peace of mind and a virtual way to connect and bond when being at the bedside was not an option for parents who had other children at home."', 
+
+', \u2014Yann Levy-Jamet, Application Advisor, HUG', 
+
+
+		
+
+		', 
+
+		
+
+', 
+
+
+
+
+
+
+
+	', 
+
+	
+
+        
+
+ ', Healthcare ',   ', 
+
+ 
+
+
+
+', 
+
+
+
+	
+
+	
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+	  
+
+	
+
+	
+
+	', 
+
+		
+
+		
+
+        
+
+
+
+	', 
+
+	', 
+
+	', 
+
+	
+
+	
+
+	
+
+		
+
+		
+
+		',  Geneva University Hospitals ', 
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		', The first few days after birth are crucial for mothers and their newborns. Immediate visual and physical connections between a mother and her baby create a fundamental attachment that positively impacts the emotional and physical recovery of both mother and infant after the stress of labor.', 
+
+', For some parents, the birth of their child does not play out as they had imagined it would. Families\u2014already overwhelmed with a variety of emotions\u2014are left with a sense of longing and worry in those situations where their \u2018bundles-of-joy\u2019 are whisked immediately away after delivery to intensive care units.', 
+
+',  ', 
+
+
+		
+
+		
+
+		
+
+		
+
+		', 
+
+			',  Benefits ', 
+
+			', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Increased Productivity', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Enhanced Collaboration', 
+
+					', 
+
+				', 
+
+				
+
+			', 
+
+		', 
+
+		
+
+		
+
+		
+
+		', 
+
+					
+
+  				', View Full Case Study', 
+
+				
+
+				
+
+  				
+
+  					
+
+  					
+
+  					
+
+					
+
+	  		        
+
+	  				', Download PDF Case Study',  
+
+				
+
+				
+
+				
+
+			
+
+			
+
+		', 
+
+	
+
+	', 	
+
+', 											
+
+', 		
+
+													
+
+
+
+', Yann Levy-Jamet, Geneva University Hospitals', View All Testimonials >', 
+
+
+', Featured Case Studies', Mossberg', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+   
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+		
+
+		
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+       
+
+	', Case Study Quick View:
+
+	
+
+	
+
+	
+
+	 O.F. Mossberg & Sons
+
+	
+
+        
+
+	', 
+
+	
+
+
+
+        
+
+
+
+
+
+
+
+', 
+
+
+
+	
+
+	
+
+	
+
+	', Topic : ', 
+
+	',  
+
+         	
+
+		
+
+	
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Customer Service', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Team Efficiency', 
+
+       
+
+        
+
+		
+
+	', 
+
+	
+
+	
+
+',  
+
+
+
+', 
+
+	
+
+	
+
+					
+
+	
+
+	 
+
+   	
+
+	
+
+	
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	', 
+
+		', 100-2,499 Employees', 
+
+	', 
+
+	
+
+	
+
+	 
+
+	
+
+	
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Customer Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', 
+	Today\u2019s customer relationships are ongoing conversations that unfold across time and channels. Phone, video, email, chat, social: It\u2019s all one integrated omnichannel now. Done right, seamless execution pays off in increased revenue and higher lifetime value of customers. Our customer engagement solutions make it possible. ', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Team Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', Team engagement is the magic that happens when everyone in your workforce is connected effortlessly to the mission, to each other and to customers. When it works you feel it in your culture and on your balance sheet\u2014and your customers feel it most. Barriers disappear. Productivity rises. Our team engagement solutions get you there.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+	
+
+	
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+			
+
+				 
+
+				
+
+			
+
+			
+
+
+
+
+
+
+
+		
+
+', 
+
+	
+
+		
+
+	  	  
+
+	  	 
+
+	  	', 
+
+ 
+
+     
+
+
+
+          
+
+	                      ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+	  		  
+
+ ', 
+
+		
+
+	  	
+
+		', 
+
+		
+
+		
+
+		', "Avaya has been an extension of the Mossberg', 
+team and family."', 
+
+', -Wes Beighley, CIO', 
+
+
+		
+
+		', 
+
+		
+
+', 
+
+
+
+
+
+
+
+	', 
+
+	
+
+        
+
+ ', Retail ',   ', 
+
+ 
+
+
+
+', 
+
+
+
+	
+
+	
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+	  
+
+	
+
+	
+
+	', 
+
+		
+
+		
+
+        
+
+
+
+	', 
+
+	', 
+
+	', 
+
+	
+
+	
+
+	
+
+		
+
+		
+
+		',  O.F. Mossberg & Sons ', 
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		', With privacy being a key concern, but capturing data being important for good customer service, Mossberg picks Avaya.', 
+
+', For the last 98 years, O.F. Mossberg & Sons, the oldest family-owned firearms manufacturer in the United States, has grown into a household name. But a crush of demand had overwhelmed its communications system, and the company needed something new.', 
+
+
+		
+
+		
+
+		
+
+		
+
+		', 
+
+			',  Benefits ', 
+
+			', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Improved Customer Service', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Increased Productivity', 
+
+					', 
+
+				', 
+
+				
+
+			', 
+
+		', 
+
+		
+
+		
+
+		
+
+		', 
+
+					
+
+  				', View Full Case Study', 
+
+				
+
+				
+
+  				
+
+  					
+
+  					
+
+  					
+
+					
+
+	  		        
+
+	  				', Download PDF Case Study',  
+
+				
+
+				
+
+				
+
+			
+
+			
+
+		', 
+
+	
+
+	', 	
+
+', 											
+
+', 		
+
+													
+
+
+
+', With privacy being a key concern, but capturing data being important for good customer...', Kenton County School District ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+   
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+		
+
+		
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+       
+
+	', Case Study Quick View:
+
+	
+
+	
+
+	
+
+	 Kenton County School District
+
+	
+
+        
+
+	', 
+
+	
+
+
+
+        
+
+
+
+
+
+
+
+', 
+
+
+
+	
+
+	
+
+	
+
+	', Topic : ', 
+
+	',  
+
+         	
+
+		
+
+	
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Bring your Own Device (BYOD)', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Team Efficiency', 
+
+       
+
+        
+
+		
+
+	', 
+
+	
+
+	
+
+',  
+
+
+
+', 
+
+	
+
+	
+
+					
+
+	
+
+	 
+
+   	
+
+	
+
+	
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	', 
+
+		', 100-2,499 Employees', 
+
+	', 
+
+	
+
+	
+
+	 
+
+	
+
+	
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Team Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', Team engagement is the magic that happens when everyone in your workforce is connected effortlessly to the mission, to each other and to customers. When it works you feel it in your culture and on your balance sheet\u2014and your customers feel it most. Barriers disappear. Productivity rises. Our team engagement solutions get you there.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+	
+
+	
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+			
+
+				 
+
+				
+
+			
+
+			
+
+
+
+
+
+
+
+		
+
+', 
+
+	
+
+		
+
+	  	  
+
+	  	 
+
+	  	', 
+
+ 
+
+     
+
+
+
+          
+
+	                      ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+	  		  
+
+ ', 
+
+		
+
+	  	
+
+		', 
+
+		
+
+		
+
+		', u"\u201cAvaya's responsive service is one of the main reasons that our Wi-Fi network is reaching its goals.\u201d", 
+
+', \u2014Chris Setters, District Technology Coordinator, Kenton County School District', 
+
+
+		
+
+		', 
+
+		
+
+', 
+
+
+
+
+
+
+
+	', 
+
+	
+
+        
+
+ ', Education K-12 ',   ', 
+
+ 
+
+
+
+', 
+
+
+
+	
+
+	
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+	  
+
+	
+
+	
+
+	', 
+
+		
+
+		
+
+        
+
+
+
+	', 
+
+	', 
+
+	', 
+
+	
+
+	
+
+	
+
+		
+
+		
+
+		',  Kenton County School District ', 
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		', Avaya Wi-Fi Enables District\u2019s Vision of a Device in Every Child\u2019s Hand', 
+
+', The Kenton County School District, which encompasses greater Cincinnati and rural parts of Northern Kentucky, is a long-time innovator in using technology to augment K-12 classroom environments. Its Bring Your Own Device (BYOD) initiative is connecting students at all grade levels with Internet-based resources to support and enhance learning.', 
+
+
+		
+
+		
+
+		
+
+		
+
+		', 
+
+			',  Benefits ', 
+
+			', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Increased Productivity', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Network Scalability', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Reduce Cost', 
+
+					', 
+
+				', 
+
+				
+
+			', 
+
+		', 
+
+		
+
+		
+
+		
+
+		', 
+
+					
+
+  				', View Full Case Study', 
+
+				
+
+				
+
+  				
+
+  					
+
+  					
+
+  					
+
+					
+
+	  		        
+
+	  				', Download PDF Case Study',  
+
+				
+
+				
+
+				
+
+			
+
+			
+
+		', 
+
+	
+
+	', 	
+
+', 											
+
+', 		
+
+													
+
+
+
+', Avaya Wi-Fi Enables District\u2019s Vision of a Device in Every Child\u2019s...', Hospital Internacional de Colombia', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+ 
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+	
+
+	
+
+	
+
+            
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+   
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+', 
+
+
+
+', 
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+		
+
+		
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+
+		
+
+	
+
+	
+
+       
+
+	', Case Study Quick View:
+
+	
+
+	
+
+	
+
+	 Colombian Cardiovascular Foundation
+
+	
+
+        
+
+	', 
+
+	
+
+
+
+        
+
+
+
+
+
+
+
+', 
+
+
+
+	
+
+	
+
+	
+
+	', Topic : ', 
+
+	',  
+
+         	
+
+		
+
+	
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Multisite - Branches', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Network Security', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Team Efficiency', , 
+
+       
+
+        
+
+		
+
+	        
+
+   	    
+
+        
+
+	    
+
+          
+
+    	        
+
+    	        
+
+    	        
+
+  		
+
+		
+
+                
+
+                ', Telemedicine', 
+
+       
+
+        
+
+		
+
+	', 
+
+	
+
+	
+
+',  
+
+
+
+', 
+
+	
+
+	
+
+					
+
+	
+
+	 
+
+   	
+
+	
+
+	
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	', 
+
+		', 100-2,499 Employees', 
+
+	', 
+
+	
+
+	
+
+	 
+
+	
+
+	
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Networking', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', 
+	Build a path to the future. Avaya\u2019s advanced fabric networking technology takes SDN networking and cloud services to the next level. Reduce network outages, enjoy quicker access to information, and easily integrate new communications channels and applications. If you wish, do it all with your existing infrastructure.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Services', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+						
+
+		
+
+						
+
+		 
+
+			
+
+			
+
+			
+
+		
+
+		
+
+		
+
+             
+
+             
+
+             
+
+         
+
+         
+
+         
+
+         
+
+            
+
+            
+
+         
+
+         
+
+         
+
+            
+
+         
+
+         
+
+           	
+
+            
+
+         
+
+         
+
+         
+
+           
+
+         
+
+         
+
+         
+
+         
+
+		
+
+		', 
+
+			', 
+
+				',  ',  ', 
+
+				', 
+
+					', 
+
+						', 
+
+                    		', 
+
+                    	', 
+
+						', Team Engagement', 
+
+					', 
+
+				
+
+					', 
+
+						
+
+						
+
+										
+
+						
+
+						',  ', Team engagement is the magic that happens when everyone in your workforce is connected effortlessly to the mission, to each other and to customers. When it works you feel it in your culture and on your balance sheet\u2014and your customers feel it most. Barriers disappear. Productivity rises. Our team engagement solutions get you there.', 
+ 
+
+						
+
+						
+
+						
+
+						
+
+						
+
+					', 
+
+				', 
+
+			', 
+
+		', 
+
+	
+
+	
+
+	
+
+', 
+
+
+
+
+
+
+
+
+
+
+
+			
+
+				 
+
+				
+
+			
+
+			
+
+
+
+
+
+
+
+		
+
+', 
+
+	
+
+		
+
+	  	  
+
+	  	 
+
+	  	', 
+
+ 
+
+     
+
+
+
+          
+
+	                      ', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+	  		  
+
+ ', 
+
+		
+
+	  	
+
+		', 
+
+		
+
+		
+
+		', \u201cIt is amazing that a robust, reliable solution can be obtained at such an affordable price from Avaya."', 
+
+', \u2014 Sergio A. Otero Nariño, Telecoms Engineer', 
+
+
+		
+
+		', 
+
+		
+
+', 
+
+
+
+
+
+
+
+	', 
+
+	
+
+        
+
+ ', Healthcare ',   ', 
+
+ 
+
+
+
+', 
+
+
+
+	
+
+	
+
+
+
+	
+
+
+
+	 
+
+		
+
+		
+
+		
+
+	
+
+
+
+	
+
+		
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+	 	
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+
+
+	  
+
+	
+
+	
+
+	', 
+
+		
+
+		
+
+        
+
+
+
+	', 
+
+	', 
+
+	', 
+
+	
+
+	
+
+	
+
+		
+
+		
+
+		',  Colombian Cardiovascular Foundation ', 
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		', With the objective of installing cutting edge equipment and systems, Hospital Internacional de Colombia (HIC) deployed an Avaya Networking solution which allows it to offer excellent hospital services and maintain its position among the top five health institutions in Latin America.', 
+
+',  ', 
+
+
+		
+
+		
+
+		
+
+		
+
+		', 
+
+			',  Benefits ', 
+
+			', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Increased Productivity', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Enhanced Collaboration', 
+
+					', 
+
+				', 
+
+				
+
+				
+
+				
+
+				
+
+				 
+
+					
+
+					
+
+					
+
+		        
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				
+
+					
+
+					
+
+				
+
+				
+
+				
+
+				
+
+				', 
+
+					
+
+					', 
+
+						', 
+
+					', 
+
+					
+
+					', 
+
+						', Network Scalability', 
+
+					', 
+
+				', 
+
+				
+
+			', 
+
+		', 
+
+		
+
+		
+
+		
+
+		', 
+
+					
+
+  				', View Full Case Study', 
+
+				
+
+				
+
+  				
+
+  					
+
+  					
+
+  					
+
+					
+
+	  		        
+
+	  				', Download PDF Case Study',  
+
+				
+
+				
+
+				
+
+			
+
+			
+
+		', 
+
+	
+
+	', 	
+
+', 											
+
+', 		
+
+													
+
+
+
+', With the objective of installing cutting edge equipment and systems, Hospital...', View All Case Studies >', 
+
+
+',  ', By Solution Area',  Customer Engagement',  Networking',  Team Engagement',  ', By Business Size', 1-99 Employees', 100-2,499 Employees', 2500+ Employees', 
+
+
+', By Industry',  ', Education - Higher',  ', Education K-12',  ', Energy & Utilities',  ', Finance',  ', General Services',  ', Government',  ', Healthcare',  ', Hospitality',  ', Insurance',  ', Leisure & Entertainment',  ', Professional Services',  ', Technology',  ', Transportation',  ', Other', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Customer Engagement in the Digital Age  ', 
+			', Plantronics and Avaya combine capabilities to deliver seamless engagement.  ', 		
+				Play video	\u203a		
+			', 
+', 
+
+
+', Support', 
+
+
+
+
+
+', Support By Product', 
+
+
+', Product-specific Support', Documents', Downloads', Forums', 
+
+
+
+
+
+', My Information', 
+
+
+', SSO login Profile', u"Explore Accounts / Sold-to's", Sold-to Lookup Tool', Show my Company Administrators', 
+
+
+
+
+
+', Diagnostics & Tools', 
+
+
+', Diagnostics & Tools Lookup', Global Registration Tool', PLDS', 
+
+
+
+
+
+', Service / Parts Request', 
+
+
+', Service Requests', Create Service Request', Manage Service Requests', 
+
+
+', Parts Requests', Support Agreement / Registered Parts Replacement', Heritage Nortel Voice RMA', Provisioning DOA', Logistics / Shipping Claims', EMEA LFS Hardware Return', Non-Registered Warranty Parts', 
+
+
+', Distributor', Distributor Claim Upload', Stock Rotation Request', 
+
+
+
+
+
+', Help', 
+
+
+', Videos And Articles', Contact Avaya Support', Forums', Avaya Learning Center', ITSS Help', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Avaya Professional Services ', 
+			', Get the most out of your communications technology and applications.  ', 		
+				Learn more	\u203a		
+			', 
+', 
+
+
+', Partners', 
+
+
+
+
+',  ', Customers', 
+
+
+', Avaya Edge\u2120 Partners', Trust Avaya Edge Partners to recommend and deliver Avaya\u2019s business communications solutions.  Our valued partners are focused on your satisfaction and are knowledgeable about Avaya\u2019s innovative products and services.', 
+
+
+', Why DevConnect Technology Partners', Technology Partners offer solutions that have proven interoperability through formal compliance testing with one or more products in the Avaya Portfolio.', 
+
+
+
+
+',  ', Find a Partner', 
+
+
+',  ', Find a Channel Partner', Let us help you find a channel partner with proven expertise to solve your business communication challenges.', 
+
+
+', Find a Technology Partner', Let us help you find a DevConnect technology partner with compliance tested solution for your Avaya Product or Solution.', 
+
+
+
+
+',  ', Prospective Channel Partners', 
+
+
+', Avaya Edge Overview', 
+
+
+', Why Avaya', 
+
+
+', About The Program', 
+
+
+', Become a Partner', 
+
+
+', Already a Partner? ', 
+
+
+
+
+',  ', Avaya Technology Alliances', 
+
+
+', Overview', 
+
+
+', Technology Alliance List', 
+
+
+
+
+',  ', Consultants', 
+
+
+', Consultant Relations Program', 
+
+
+', Become a Member ', 
+
+
+', Member Login ', 
+
+
+
+
+',  ', Developers', 
+
+
+', Avaya DevConnect Overview ', 
+
+
+', Become a Member ', 
+
+
+', Member Login ', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Become an Avaya Edge Partner ', 
+			', Get the resources and support you need to grow your business.  ', 		
+				Apply now	\u203a		
+			', 
+', 
+
+
+', About', 
+
+
+', Company Overview', Leadership', Our Culture', Avaya Transformation', Corporate Responsibility ', History', Investor Relations ', Avaya Strength ', 
+
+
+', Doing Business With Us', Our Customers', Partners', IAUG - International Avaya Users Group', Programs and Promotions ', Supplier Information', Sponsorships ', Branding Guidelines', Executive Briefing Center ', 
+
+
+', News and Events', Newsroom ', Industry Recognition', Events', Webinars', Avaya Connected Blog ', Avaya TV ', 
+
+
+', Perspectives', Executive Thought Leadership ', Customer Engagement', Team Engagement', Networking', Cloud', Services ', Solutions ', Developers ', New Rules of Engagement ', 
+
+
+', Contacts', U.S. Federal Government Sales ', U.S. Sales ', More Contacts ', Report a Concern ', Support ', Worldwide Directory ', 
+
+
+', Careers', Our Company ', Global Opportunities ', University Full-Time Hiring and Internships ', 
+
+		
+	
+		
+		
+		
+		
+		
+		
+		
+	  ', 
+	
+		
+		
+		 
+			
+			
+		 
+				
+				
+				
+			', Find What\u2019s Next in Communications at Avaya Engage 2017 ', 
+			', Meet Avaya experts, demo what\u2019s new, and plan your path to a fully digital experience. February 12-15, Las Vegas, NV.  ', 		
+				Register now	\u203a		
+			', 
+', 
+
+
+
+
+
+
+	
+	
+
+	
+	
+	', 
+	$(document).ready(function(){
+		var presentVal='null';
+		$('li[data-locale]').each(function() {
+			if(presentVal===$(this).attr('data-locale')){
+				$(this).attr("class","selected "+$(this).attr('class'));
+				var liTag=$(this);
+				$(this).children().each(function(){
+					liTag.html($(this).html());
+				});
+			}
+		});
+	});
+	', 
+
+
+
+    
+    ', 
+            
+                    
+                        
+                        
+                    
+
+		
+		
+		
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+	
+				
+
+		
+	
+
+	 ', 
+	 ', 
+	', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		
+		
+		
+		
+
+', 
+
+
+
+
+
+
+
+	
+
+
+	
+
+
+
+
+
+      
+      
+      
+      
+', 
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+      
+      
+      
+      
+
+
+
+    
+
+', Products', Customer Experience Management', Omnichannel Assisted Experience', Avaya Aura® Contact Center', 
+	', 
+	
+	
+		
+
+
+
+
+
+
+
+
+', Buy It',  Call Us', U.S. or Canada: ', 1-866-GO-AVAYA', All Other Locations: ', 1-908-953-6000', Email us ', >', Find A Partner ', >', 
+				function socialshare(s_url, ch){
+				var title1 = document.title;
+				if(ch=="fb" || ch=="vine")
+				{
+				page_url = s_url+"u="+document.URL+"&t="+title1.replace(" ","+");
+				} else if(ch=="tweet"){
+				page_url = s_url+title1.replace(" ","+")+"+"+"\n"+document.URL;
+				} else {
+				page_url = s_url+"url="+document.URL+"&title="+title1.replace(" ","+");
+				}
+				window.open(page_url,"_blank");
+				}
+		 	', 
+			', 
+			', 
+			', 
+			', 
+			
+			
+			', 
+				function validateEmail(email) {
+					var re = /\S+@\S+\.\S+/;
+					return re.test(email);
+				}
+				function sendMail() {
+					var check=true;
+					var message="";
+					if(document.getElementById("your_name").value==""){
+						document.getElementById("your_name_label").style.color="red";
+						check=false;
+					}
+					else
+						document.getElementById("your_name_label").removeAttribute("style");
+
+					if(!validateEmail(document.getElementById("your_email").value)){
+						document.getElementById("your_email_label").style.color="red";
+						check=false;
+					}
+					else
+						document.getElementById("your_email_label").removeAttribute("style");
+
+					if(!validateEmail(document.getElementById("your_colleagues_email").value)){
+						document.getElementById("your_colleagues_email_label").style.color="red";
+						check=false;
+					}
+					else
+						document.getElementById("your_colleagues_email_label").removeAttribute("style");
+
+					if(document.getElementById("your_colleagues_name").value==""){
+						document.getElementById("your_colleagues_name_label").style.color="red";
+						check=false;
+					}
+					else
+						document.getElementById("your_colleagues_name_label").removeAttribute("style");
+
+					if(document.getElementById("email_message").value==""){
+						message=" ";
+					}
+
+					if(check){
+						var name=document.getElementById("your_name").value;
+						var collegueEmail=document.getElementById("your_colleagues_email").value;
+						var pageUrl=document.URL;
+						message=document.getElementById("email_message").value;
+						document.getElementById("your_name").value="";
+						document.getElementById("your_email").value="";
+						document.getElementById("email_message").value="";
+						document.getElementById("your_colleagues_email").value="";
+						document.getElementById("your_colleagues_name").value="";
+						var url='/cs/Satellite?pagename=Avaya%2FShare%2FEmail';
+						url = url + '&pageUrl='+encodeURIComponent(pageUrl)+'&collegueEmail='+encodeURIComponent(collegueEmail)+'&name='+encodeURIComponent(name)+'&message='+encodeURIComponent(message);
+						var xmlhttp;
+						if (window.XMLHttpRequest) {
+							// code for IE7+, Firefox, Chrome, Opera, Safari
+							xmlhttp=new XMLHttpRequest();
+						} else {
+							// code for IE6, IE5
+							xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						xmlhttp.onreadystatechange=function(){
+							if (xmlhttp.readyState==4 && xmlhttp.status==200){
+							} else if (xmlhttp.readyState==4 && xmlhttp.status!=200){
+								document.getElementById("emailpopup").setAttribute("class", "email-popup");
+							}
+						}
+						xmlhttp.open("GET",url,true);
+						document.getElementById("emailpopup").setAttribute("class", "email-popup");
+						document.getElementById("emailsuccess").setAttribute("class", "email-popup on");
+						document.getElementById("emailsuccess").style.display="block";
+						xmlhttp.send();
+					}
+				}
+				function hideemailpopup() {
+					document.getElementById("emailsuccess").setAttribute("class", "email-popup");
+					document.getElementById("emailsuccess").style.display="none";
+				}
+				function clearAllValues(){
+					document.getElementById("your_name_label").removeAttribute("style");
+					document.getElementById("your_email_label").removeAttribute("style");
+					document.getElementById("your_colleagues_name_label").removeAttribute("style");
+					document.getElementById("your_colleagues_email_label").removeAttribute("style");
+					document.getElementById("your_name").value="";
+					document.getElementById("your_email").value="";
+					document.getElementById("email_message").value="";
+					document.getElementById("your_colleagues_email").value="";
+					document.getElementById("your_colleagues_name").value="";
+				}
+				style="color: red;"
+			', 
+
+			
+			
+
+			', 
+				', X', 
+				', Email this page to a Colleague', 
+				', Your name', 
+				', Your email', 
+				', u"Your colleague's name", 
+				', u"Your colleague's email", 
+				', Message (optional)', 
+				', 
+				', Read our Privacy Statement', 
+			', 
+			', 
+				', Thank You.', 
+				', A message has been sent', 
+				', 
+			', 
+			', 
+		', 
+		', 
+ 		
+		
+		
+ 		
+ 			
+ 		
+ 		
+ 			
+ 				
+				
+ 					
+ 					
+ 				
+ 				
+				
+					
+			
+			
+ 					
+ 							
+							
+ 							', 
+							
+ 							
+							
+ 							
+ 							', 
+                                                        
+ 							
+ 							
+ 							
+							
+							
+							
+								
+                                                                  
+ 									
+									
+										
+											
+											', Chat', 
+									
+								
+							
+                                         					
+							', 
+						', 
+			
+			
+		
+                 
+                                       ', 
+						', 
+							', SHARE', 
+							', 
+								', 
+									', 
+									', 
+									', 
+									', 
+								', 
+							', 
+						', 
+					', 
+		', 
+	', 
+	', 
+	', 
+                
+                ', 
+
+
+', 
+             ', u"
+		var recomendedSegment = 'recomendedSegment'+'.'+'en_US';
+		var cookieLife= parseInt('180');
+		var segmentName_locale = 'Customer Engagement'+'~'+'en_US';
+		var segmentName = 'Customer Engagement';
+		var count = parseInt('3');	
+		var dummy=$.cookie;
+		if(null==$.cookie(segmentName_locale)){
+			$.cookie(segmentName_locale, 1,{expires:cookieLife,path:'/'});
+		}else{
+			$.cookie(segmentName_locale,parseInt($.cookie(segmentName_locale))+1 ,{expires:cookieLife,path:'/'});
+			if(count==$.cookie(segmentName_locale)){
+				$.cookie(segmentName_locale, 0,{expires:cookieLife,path:'/'});
+				$.cookie(recomendedSegment, decodeURIComponent(segmentName),{expires:cookieLife,path:'/'});
+			}
+		}
+	", Avaya Aura® Contact Center', 
+	All-in-One Omnichannel Contact Center Solution', 
+', 
+
+', Overview', Case Studies', Documents and Videos', Licensing ', Product Support ', 
+
+
+', 
+             ', u"
+		var recomendedSegment = 'recomendedSegment'+'.'+'en_US';
+		var cookieLife= parseInt('180');
+		var segmentName_locale = 'Customer Engagement'+'~'+'en_US';
+		var segmentName = 'Customer Engagement';
+		var count = parseInt('3');	
+		var dummy=$.cookie;
+		if(null==$.cookie(segmentName_locale)){
+			$.cookie(segmentName_locale, 1,{expires:cookieLife,path:'/'});
+		}else{
+			$.cookie(segmentName_locale,parseInt($.cookie(segmentName_locale))+1 ,{expires:cookieLife,path:'/'});
+			if(count==$.cookie(segmentName_locale)){
+				$.cookie(segmentName_locale, 0,{expires:cookieLife,path:'/'});
+				$.cookie(recomendedSegment, decodeURIComponent(segmentName),{expires:cookieLife,path:'/'});
+			}
+		}
+	", Go Beyond Phone Calls\u2014Let Customers Reach You Via Text, IM, Email, or Chat', 
+	', 
+		', Connect with your customers on their terms.',  Manage all of your contacts\u2014for email, chat, SMS, IM, and social media\u2014the same way you manage your inbound and outbound voice interactions.', 
+	', 
+		', Leverage this complete, omnichannel contact center solution to match callers with the most appropriate resources every time they contact you.',  Your agents gain call context, both real-time and historical. Your customers receive a differentiated experience.', 
+	', 
+		', Reduce your expenses by using lower-cost channels.', 
+	', 
+		', Consistently deliver a unified, seamless, and highly personalized experience',  that builds your brand and customer engagement loyalty.', 
+	', 
+		', Review our infographic',  to see how ', Customer Experience IS the Battleground',  now\u2014and why it\u2019s imperative to keep pace with your customers\u2019 expectations.', 
+', 
+', 
+', A Single Interface for Managing All Customer Interactions', Reduce call volume and improve efficiency when you expand customer interactions to lower cost channels like chat and SMS/text\u2014all managed through a single agent desktop interface.', 
+', u"Support Customers' Channel Preferences", Did you know that 82% of consumers say they prefer that organizations always offer multiple channels to communicate and serve their needs? Now you can meet such customer expectations.', 
+', Provide a Seamless Customer Experience Across Channels', 68% of consumers say they expect the information they give an organization in one place to be available in another. Now you can personalize your customers\u2019 experiences by sharing details like customer history and screen pop data across contact channels.', 
+', Customer Story',  ', \u201cWe\u2019re connecting to more customers, have exceeded our',  right party contact target and, more importantly, our',  agent productivity.\u201d ', 
+',  Read the Case Study \u203a',  Productivity',  Performance',  Business Integration',  Agent Management',  Customer Experience', 
+
+
+
+	', Help Your Agents Be More Productive', u"Configure an agent's desktop to manage up to six different interaction types simultaneously using a single desktop interface. An agent can accept an email or SMS interaction, for example, while working on a web chat interaction. The agent desktop provides your agents with the pertinent customer data and historical interaction data across all of the supported channels. So your agents will have what they need at their fingertips to provide your customers with the best possible experience.", 
+', 
+
+
+
+	', Manage Your Contact Center Performance', Managing the performance of your contact center just got easier. Use the on-board reporting module that includes more than 120 predefined real-time and historical reports, as well as a Report Creation Wizard for creating customized reports. Manage agent performance and monitor statistics that are important to maintaining service levels. Your supervisors and managers will have quick access to real-time performance information so they can adapt immediately to situations, helping to ensure an optimized customer experience.', 
+', 
+
+
+
+	', Break Down the Silos Between Your Contact Center and Business', Integrate your contact center processes and applications with your business processes and applications to help streamline and automate functions that were previously manual. Use the Web Services APIs to adapt integration across your contact center and business. Insert contact center functions, such as immediate or scheduled callback and automatic routing of tasks, into processes that improve customer experience.', 
+', 
+
+
+
+	', Deploy and Manage with Ease', Simplify your day-to-day management using a single interface for system setup, configuring agents, assigning skill sets, performance reporting, and managing contact flows. Because it\u2019s easy to use, the interface helps you better manage your agents and their skills, as well as quickly adapt to market changes that can impact your business.', 
+', 
+
+
+
+	', u"Manage Your Customers' Experience with a Graphical Workflow", u"Most of us have experienced telephone customer service options that are confusing and frustrating, and many times we simply give up. Understanding how your customers are being served and which options are available to them is critical to managing the customer experience. Get a clear view of customer contact flows\u2014both self-service and agent-assisted\u2014with the graphical workflow management tool Avaya Aura® Orchestration Designer. It's easy to build, modify, and improve customer contact flows with the drag-and-drop interface.", 
+', 
+
+
+',  ', Southwark Council Cuts Wait Times in Half', Benefits: ', Improved Customer Service, Reduce Cost, Increased Productivity', Topic: ', Customer Service', Read the Full Case Study \u203a', View All Success Stories > ', 
+
+
+
+
+',  ', White Paper',  ', 
+
+
+
+
+
+',  ', White Paper',  ', 
+	Go Omnichannel: Provide a Personalized Experience for Each Customer', 
+',  Download now >', 
+
+
+
+
+
+',  ', Executive Guide',  ', 7 Things You Didn\u2019t Know Were Possible with Self Service and Automation', 
+',  Download now >', 
+', 
+
+
+', Customers Who Viewed This Also Viewed', Solutions',  
+			
+	        
+	      
+   			 ', Customer Experience',  
+			
+	        
+	      
+   			 ', Topline Growth',  
+			
+	        
+	      
+   			 ', Contact Center Efficiency', Products',  
+				
+		        
+		   
+	   			 ', Avaya Aura® Experience Portal',  
+				
+		        
+		   
+	   			 ', Control Manager ',  
+				
+		        
+		   
+	   			 ', Avaya Aura® Workforce Optimization', Services',  
+				
+		        
+		      
+	   			 ', Contact Center Optimization',  
+				
+		        
+		      
+	   			 ', Contact Center Managed Services', 
+
+
+ 
+
+
+', Connect With Avaya', Follow Us', 
+                                        ', 
+                                    
+                                        ', 
+                                    
+                                        ', 
+                                    
+                                        ', 
+                                    
+                                        ', 
+                                    
+                                        ', 
+                                    ', 
+
+
+',  ', Sign Up for Our Newsletter', 
+
+
+',  ', Email Us', 
+
+
+',  ', Find a Partner', 
+
+
+',  ', Chat with Representative', 
+
+
+', U.S. & Canada', (866) GO-AVAYA', 
+
+
+', Worldwide', (908) 953-6000', Tweets by Avaya', 
+    ', 
+        
+               
+        ', 
+        
+        
+                
+                     
+            ', 
+
+
+
+
+', 
+
+', 
+	$(document).ready(function() {
+		$.chatWindowOpened = false;
+		$.ChatLink = function( url ){
+			if (!$.chatWindowOpened){
+				$.chatWindowOpened = true;
+				var left = (screen.width/2) - 250;
+				var top = (screen.height/2) - 220;
+				var h = 469;
+				
+					
+					
+				
+				var currenttime = eval("9");
+				var weekday = "Thu";
+				if( ( weekday!="Sat" && weekday!="Sun") && ( currenttime>=8 && currenttime <=19 )) {
+					var destination = url ? url : "http://www.avaya.com/Chat/clickToChat.php";
+				} else {
+					var destination = "/en/clicktochat";
+				}
+				window.open( destination, 'chatWindow', 'personalbar=0,menubar=0,location=0,status=1,toolbar=0,width=435,height=' + h + ',left=' + left + 'top=' + top);
+				setTimeout(function(){$.chatWindowOpened = false;}, 1000);
+			}
+		}
+	});
+', 
+',  ', More Avaya', Events', Corporate Responsibility', Newsroom', Perspectives', Executive Briefing Center', Authentic Avaya', Programs and Promotions', Contacts', Careers', Info for', Developers', Investors', Media', Analysts', 
+                ', 
+                ', Support', Support Home', Contact Support', My SSO Profile', Open a New Service Request', Support by Product', Downloads', Global Product Registration Tool', Support Forums', Biller Direct', Avaya Learning Center', 
+                ',  ', Avaya Connected Blog',  ', Avaya TV', 
+                ', 
+            ', 
+
+            ', 
+                ',  ', 
+
+', 
+', 
+	', Sitemap', 
+	', Terms of Use', 
+	', Privacy', 
+	', Cookies', 
+	', © 2017 Avaya Inc.', 
+', 
+
+', Avaya Inc., 4655 Great America Parkway, Santa Clara, CA 95054-1233 USA', 
+', 
+
+', 
+',  
+  ',  ',  
+  ',  ',  
+  ',  ',  
+  ',  ',  
+  ',  ',  
+  ', 
+', 
+', 
+
+',  ', 
+
+            ', 
+        ', 
+
+    
+', 
+
+', 
+', 
+
+', 
+        ', 
+    ', 
+        
+        function isMobile() {
+            if(/Android|webOS|iPhone|iPad|iPod|pocket|psp|kindle|avantgo|blazer|midori|Tablet|Palm|maemo|plucker|phone|BlackBerry|symbian|IEMobile|mobile|ZuneWP7|Windows Phone|Opera Mini/i.test(navigator.userAgent)) {
+                return true;
+            }
+        }
+        var isMobile = {
+            Android: function() {
+                return navigator.userAgent.match(/Android/i);
+            },
+            BlackBerry: function() {
+                return navigator.userAgent.match(/BlackBerry/i);
+            },
+            iOS: function() {
+                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+            },
+            Opera: function() {
+                return navigator.userAgent.match(/Opera Mini/i);
+            },
+            Windows: function() {
+                return navigator.userAgent.match(/IEMobile/i);
+            },
+            any: function() {
+                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+            }
+        };
+        
+        $(document).ready(function() {
+            $('#reactivechat').on('show', function (e) {
+                if($("#surveymodal:visible").length>0  || $("#video-modal:visible").length>0) {
+                   if (!data) return e.preventDefault() // stops modal from being shown
+                }
+            });   // check before populating reactive chat whether any modal windows are opened or not
+
+            $('#surveymodal').on('show', function (e) {
+               if($("#reactivechat:visible").length>0  || $("#video-modal:visible").length>0) {
+                       if (!data) return e.preventDefault() // stops modal from being shown
+               }
+            });   // check before populating survey whether any modal windows are opened or not
+        });
+        $(document).mouseup(function (e) {
+
+            var $searchcontainer = $('.predictive');
+            if (!$searchcontainer.is(e.target) && $searchcontainer.has(e.target).length === 0) {
+                $searchcontainer.fadeOut();
+            }
+        });
+    ', 
+    
+    ', 
+    
+    ', 
+    
+    
+        
+        
+    
+    
+    
+    
+                
+
+
+
+
+', 
+
+', 
+	$(document).ready(function() {
+		if(document.documentElement.clientWidth > 980 && !isMobile.any()) { 
+			$('#chatnothankyo).on('click',function(e){
+				$('#reactivechat').modal('hide');
+				$.cookie('$.Avaya.ChatModal.seen',1,30,'','',''); 
+			});    
+			if( $("#surveymodal:visible").length==0 && $("#video-modal:visible").length == 0 ) {
+				 
+					
+					
+				
+				var currenttime = "9";
+				var weekday = "Thu";
+				if(( weekday!="Sat" && weekday!="Sun") && ( currenttime>=8 && currenttime <=18 )) { // 8 to 7PM
+					setTimeout(function(){$("#reactivechat").modal('show')}, 45*1000);
+				} 
+			}
+		}
+	}); 
+', 
+
+
+                
+
+                ', 
+                    ', 
+                    ', 
+                        ', 
+                        ', 
+                        ', Can we help you find out more about Avaya Aura® Contact Center? An Avaya representative is available now.', 
+                        ', 
+                            ', No thanks', 
+                            
+                            ', Chat with us', 
+                        ', 
+                        ', Powered by Avaya Aura® Contact Center', 
+                    ', 
+                ', 
+
+                
+    
+
+    
+    ', 
+
+    ', 
+    ', 
+        ', 
+            ', x', 
+            ', 
+        ', 
+        ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+    ', 
+    ', 
+	    ', 
+	        ', 
+	            ', 
+	                ', X', 
+	            ', 
+	            ', 
+	        ', 
+	    ', 
+	', 
+	', 
+	    ', 
+	     	', 
+	        	', 
+	            	', X', 
+	            ', 
+	            ', 
+	        ', 
+	    ', 
+	', 
+    ', 
+        ', 
+            ', 
+                ', X', 
+            ', 
+            ', 
+                
+                    
+                    
+                
+            ', 
+        ', 
+    ', 
+    ']
