@@ -1,6 +1,7 @@
 # Forex Insights
 
 ##### Modifications are being made.... Kindly keep in touch with me...
+*Old code is archived [here](https://github.com/revanurambareesh/forexInsightsQtUI)*
 
 This repository contains my solution to the FX problem
 This tool scrapes the top popular websites of a company and analyses the data. This data is then converted into dataset after which a machine learning model is trained. Easy intuitive UI is also provided. More Details can be found in design document at STAGE 1 Documents/FX Problem.pdf
@@ -21,11 +22,8 @@ It contains:
 
 This document explains logic behind web-scraping, web-searching, training ML model, using trained model, generating insights, code snippet analysis, folder structure and NLP algorithm behind creating a dataset.
 
-#### Stage 2 Prototype Implementation:
-The following diagram depicts, an running instance of the tool. More of such instances are shown in /STAGE 1 Documents/screenshots.  
-
-![This image shows tool generating insights for a company](https://github.com/revanurambareesh/forexInsights/blob/master/STAGE%201%20document/screenshots/Insights/generating%20insights.png)
-
+#### Mentoring phase Implementation:
+This is being updated shortly...
 
 ## Overview of this approach
 This project aims to support forex business using data available on public web domain using NLP, web-scraping and ML. A set of most frequently appearing keywords in what defines the term 'Forex' are used as feature set. The dataset is generated for each of the entry given in excel sheet (mentioned in problem statement) using web search APIs, and each of the obtained links is scraped for data within specified HTML tags. The presence of the keyword in the data after processing for its presence in majority of the links crawled by search engine (see design document) is considered as y = 1 or positive case. Once the dataset is ready, Naïve Bayes model is trained. This model is used to predict the probability to determine a potential FX customer. An intuitive GUI is also provided for this project. 
