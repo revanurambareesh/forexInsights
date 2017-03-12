@@ -1,0 +1,605 @@
+ 
+        Forex trading | CFD trading | FOREX.com UK
+    
+    var aTradingManager;
+    var GAIN_ExtOnReadyFired = false;
+    var GAIN_TradingManagerReady = false;
+    var PageInitialized = false;
+    var InitFunctionList = [];
+    function tryInitialization(){if (GAIN_ExtOnReadyFired && GAIN_TradingManagerReady){if (!PageInitialized){PageInitialized = true;for (var i =0; i < InitFunctionList.length ;i++){try{InitFunctionList[i]();}catch(e){};};};};};  
+    function TradingManagerReady(){GAIN_TradingManagerReady = true;tryInitialization();ctl00_TradingManagerJS_ShowDock()};
+    function TradingMangerLogout(){;}
+    function TradingManagerNetworkFailure(){;}
+    function TradingManagerTimeoutAlert(){;}
+    function ctl00_TradingManagerJS_ShowDock()
+    {
+        
+    }
+    Ext.onReady(function() {aTradingManager = new GAIN.TradingManager({},{AccountSettings:{url:'/uk/UIService.asmx/GetAccountSettings',refreshInterval:200000,status:{requesting:false,dataReady:false,init:false,repeatable:false,dataInit:false,enabled:false}},Deals:{url:'/uk/UIService.asmx/GetProductDeals',refreshInterval:30000,status:{requesting:false,dataReady:false,init:false,repeatable:false,dataInit:false,enabled:false}},Margin:{url:'/uk/UIService.asmx/GetMargins',refreshInterval:30000,status:{requesting:false,dataReady:false,init:false,repeatable:false,dataInit:false,enabled:false}},Orders:{url:'/uk/UIService.asmx/GetOrders',refreshInterval:30000,status:{requesting:false,dataReady:false,init:false,repeatable:false,dataInit:false,enabled:false}},Positions:{url:'/uk/UIService.asmx/GetPositions',refreshInterval:30000,status:{requesting:false,dataReady:false,init:false,repeatable:false,dataInit:false,enabled:false}},ProductSettings:{url:'/uk/UIService.asmx/GetProductSettings2',refreshInterval:200000,status:{requesting:false,dataReady:false,init:false,repeatable:false,dataInit:false,enabled:true}},Rates:{url:'/uk/UIService.asmx/GetUserRates5',refreshInterval:5000,status:{requesting:false,dataReady:false,init:false,repeatable:true,dataInit:false,enabled:true}},LoginStatus:false});aTradingManager.addListener('Initialized',TradingManagerReady);aTradingManager.addListener('Logout',TradingMangerLogout);aTradingManager.addListener('NetworkFailure', TradingManagerNetworkFailure);aTradingManager.addListener('TimeoutAlert',TradingManagerTimeoutAlert);GAIN_ExtOnReadyFired = true;tryInitialization();});
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+  '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]); 
+  _gaq.push(['_setAccount', 'UA-39228270-1']);
+  _gaq.push(['_setDomainName', 'forex.com']);  
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  _gaq.push(['_trackEvent', 'Optimizely_data', 'event', '', undefined, true]);    
+if (typeof(lpUnit)=='undefined')	
+var lpUnit='acquire-uk';
+if (typeof(lpLanguage)=='undefined')	
+var lpLanguage='english';
+function _uGC(l,n,s) {
+if (!l || l=="" || !n || n=="" || !s || s=="") return "-";
+var i,i2,i3,c="-";
+i=l.indexOf(n);
+i3=n.indexOf("=")+1;
+if (i > -1) {
+i2=l.indexOf(s,i); if (i2 < 0) { i2=l.length; }
+c=l.substring((i+i3),i2);
+}
+return c;
+}
+        var globalLeadId; var globalCookieId; var globalEventName;
+        if ('False' == 'False') {
+            var dataLayer = [{ 'idCookie': globalCookieId, 'idLead': globalLeadId, 'event': globalEventName}];
+        }
+    
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WFNP');
+function fireTrackingEvent(obj){dataLayer.push(obj);}
+function fireTrade()
+{	
+	fireTrackingEvent({'action':'Launch','label':'TRADE Live','event':'tradingPlatforms'});	
+	window.open('https://trade.forex.com','_blank');
+}
+(function(){
+	function getCookie(e){var t=e+"=";var n=document.cookie.split(";");for(var r=0;r<n.length;r++){var i=n[r].trim();if(i.indexOf(t)==0)return i.substring(t.length,i.length)}return null}
+	function qs(e){e=e.replace(/[\[]/,"\\[").replace(/[\]]/,"\\]");var t=new RegExp("[\\?&]"+e+"=([^&#]*)"),n=t.exec(location.search);return n==null?"":decodeURIComponent(n[1].replace(/\+/g," "))}
+	if(getCookie("GFTWelcome")==null && qs("gft")=="1"){
+		document.writeln('<div id="GFTConfig"><!--ukenglish--></div>');
+		document.writeln('<script src="//www.forex.com/GFTWelcome/gftwelcome.js?v=' + Math.random() + '"></' + 'script>');
+	}
+	else if(getCookie("360Welcome")==null && qs("gft")=="2"){
+		document.writeln('<div id="GFTConfig"><!--ukenglish--></div>');
+		document.writeln('<script src="//www.forex.com/GFTWelcome/360welcome.js?v=' + Math.random() + '"></' + 'script>');
+	}
+	else if(getCookie("ARWelcome")==null && qs("ar")=="1"){
+		document.writeln('<div id="GFTConfig"><!--ukarabic--></div>');
+		document.writeln('<script src="//www.forex.com/GFTWelcome/arwelcome.js?v=' + Math.random() + '"></' + 'script>');
+	}	
+})();
+Select
+Practice
+Live
+Open an account
+Account Login
+        Secure Login
+    
+LOGIN
+TRADE
+LOGIN 
+FOREXTrader PRO
+LOGIN 
+MyAccount
+   
+    runtimeVersion = "2.0.0";
+    directLink = "http://download.efxnow.com/ForexTraderPro/ForexTraderPro.application";
+       
+    function Initialize() {
+        if (HasRuntimeVersion(runtimeVersion) && document.getElementById("fxtrader") != null) {
+            document.getElementById("fxtrader").href = directLink;
+        }        
+   }
+   
+    function FxTraderLogin() {
+        if (document.getElementById("fxtrader") != null) {
+            document.getElementById("fxtrader").href = 'login.html?type=java';
+        }
+        if (document.getElementById("fxtraderimg") != null) {
+            document.getElementById("fxtraderimg").href = 'login.html?type=java';
+        }        
+    }
+    function MyAccountLogin() {
+        if (document.getElementById("myacountbtn") != null) {
+            document.getElementById("myacountbtn").href = 'http://www.forex.com/uk/myaccount.html';
+        }
+        if (document.getElementById("myaccountimg") != null) {
+            document.getElementById("myaccountimg").href = 'http://www.forex.com/uk/myaccount.html';
+        } 
+    }  
+      
+    // determine install/download link.
+    function HasRuntimeVersion(v) {
+        var va = GetVersion(v);
+        var i;
+        var a = navigator.userAgent.match(/\.NET CLR [0-9.]+/g);
+        if (a != null)
+            for (i = 0; i < a.length; ++i) {           
+            if (CompareVersions(va, GetVersion(a[i])) <= 0)
+                return true;
+        }
+        return false;
+    }
+    function GetVersion(v) {
+        var a = v.match(/([0-9]+)\.([0-9]+)\.([0-9]+)/i);
+        return a.slice(1);
+    }
+    
+    function CompareVersions(v1, v2) {
+        for (i = 0; i < v1.length; ++i) {
+            var n1 = new Number(v1[i]);
+            var n2 = new Number(v2[i]);
+            if (n1 < n2)
+                return -1;
+            if (n1 > n2)
+                return 1;
+        }
+        return 0;
+    }
+    
+    Initialize();
+ Live Chat 
+                        ENG
+                        
+    function doSearch(ctrl) {
+        if (preventSearch()) {
+            if (event.keyCode == 13) {
+//                $(document).ready(function() {
+//                    $("#ctl00_UtilityNavBase_LoginView1_Search1_header_search_button").click();
+//                });
+            }
+        }
+    }
+    function preventSearch() {
+        var sId = 'uk';
+        var xCtrl;
+        if (sId == 'de' || sId == 'ar' || sId == 'cn' || sId == 'ru')
+            xCtrl = Ext.get("ctl00_UtilityNavBase_LoginView1_Search1_" + sId + "_header_search_field").dom;
+        else
+            xCtrl = Ext.get("ctl00_UtilityNavBase_LoginView1_Search1_header_search_field").dom;
+        if (xCtrl.value.length > 0)
+            return true;
+        else
+            return false;
+    }
+    function stopRKey(evt) {
+        var evt = (evt) ? evt : ((event) ? event : null);
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if ((evt.keyCode == 13) && (node.type == "text")) { return false; }
+    }
+    document.onkeypress = stopRKey;
+    
+    function selectLang(val){
+        languageTrack(val);
+    }
+    function reloadAccountsHomeBase(obj) {
+        reloadAccountsDD(obj, "ctl00_UtilityNavBase_LoginView1_accountsSection");
+    }
+    function updateNickNameHomeBase(nickName) {
+        var obj = $("ctl00_UtilityNavBase_LoginView1_accountsSection");
+        if (obj.getChildren().length > 0) {
+            obj = obj.getChildren()[0].options;
+            obj[obj.selectedIndex].text = nickName;
+        }
+        else
+            obj.set({ 'html': nickName });
+    }
+    
+    function openLoginPanel(obj) {
+        if ('uk' == 'de') {
+            window.location = '/uk/login.html';
+        }
+        else if('uk' == 'us'){
+            window.location = '/login.html';
+        }
+        else if('uk' == 'ar' ||
+                'uk' == 'ru' ||
+                'uk' == 'cn'){
+             if('False' == 'True'){
+                accountLoginPanel.show(obj);
+                }
+             else{
+                window.location = '/uk/login.html';
+             }
+        }        
+        else {        
+            accountLoginPanel.show(obj);
+        }
+    }
+    
+    function AutomateDemoSignUp(userName, password, indicatorSignUp, accountTypeIndex, leadId, returnUrl, cookieId, selectedTab) {
+        Ext.get('LoginControlAccountType').dom.selectedIndex = accountTypeIndex;
+        Ext.get('LoginControlUserName').dom.value = userName;
+     
+        Ext.get('LoginControlPassword').dom.value = password;
+        Ext.get('LoginControlReturnUrl').dom.value = returnUrl;
+        Ext.get('LoginControlIndicatorSignUp').dom.value = indicatorSignUp;
+        Ext.get('LoginControlLeadId').dom.value = leadId;
+        Ext.get('LoginControlCookieId').dom.value = cookieId;
+        
+        writeEntity();
+	    var theForm = document.forms['aspnetForm'];
+	    if (!theForm) { theForm = document.aspnetForm; }
+	    if (accountTypeIndex == 0)
+		    theForm.action = '';
+	    else if (accountTypeIndex == 1)
+	        theForm.action = 'https://practice.forex.com/uk/LoginController.aspx';
+	    else
+	        theForm.action = 'https://secure.forex.com/uk/LoginController.aspx';
+        if (theForm.action)
+            theForm.action += '?type=' + selectedTab;
+        Ext.get('LoginControlIsLoginRequest').dom.value = "true";
+        theForm.submit();
+    }
+Why Us
+Reasons to choose FOREX.com  
+Global Market Leader
+Pricing & Execution Advantage
+Professional Trading Technology
+Financial Strength and Security
+It's your world. Trade it. 
+Range of Markets
+ 
+Markets Overview
+Forex
+Index CFDs
+Commodity CFDs
+It's your world. Trade it. 
+Trading Platforms
+FOREXTrader PRO  
+Overview
+FOREXTrader Live Spreads
+FOREXTrader Execution
+Tools & Analysis
+Mobile
+MetaTrader  
+Overview
+MetaTrader 4 Live Spreads
+EA Hosting
+Tools & Analysis
+Mobile
+  
+GTX - Forex ECN
+API Trading
+COMPARE TRADING PLATFORMS
+It's your world. Trade it. 
+Market Analysis
+Tools & analysis  
+Overview
+FOREXTrader Tools & Analysis
+MetaTrader Tools & Analysis
+Comprehensive research  
+Research Overview
+Live Market Updates
+Weekly Insights
+Pivot Points
+Market Outlook 2015
+Meet Our Research Team
+Interactive analysis  
+Live Trading Sessions
+Market Strategists
+Economic Calendar
+Charts
+It's your world. Trade it. 
+FOREX Education
+ 
+Learning Centre
+Video Tutorials
+Webinars
+Online Courses
+Online Guides
+It's your world. Trade it. 
+Support
+ 
+Contact Us
+Trading Handbooks
+Trading Hours & Holidays
+Funds Protection
+ 
+Premium Account
+FOREXTrader PRO Login
+MyAccount Login
+It's your world. Trade it. 
+Close 
+Select 1 to 6 currency pairs you wish to see above 
+GBP/USD
+        function initQuickPairs() {
+		var quick_pairs = new QuickPairs(6,null,'ctl00_newNavBar_QuickPairsNav1_PairsNavTable');
+	    }
+InitFunctionList.push(initQuickPairs);
+	    
+	function userQuickPairSave(selectedPairs)
+	{
+	    
+	}
+ 
+Trade with a global market leader
+Trade with confidence and a reliable trusted broker with a proven record of stability and strength.
+open an account try a demo account Losses can exceed your deposits
+ 
+Try forex trading risk-free with a free demo account
+Full access to platform & tools Real time streaming quotes 50k of virtual money 
+open a demo account Losses can exceed your deposits 
+ 
+Exclusive benefits for active traders
+premium account
+Enjoy up to 15% reduced pricing on major currencies Earn up to 2% interest on account balances Work with a dedicated Relationship Manager to support your needs 
+Learn more  
+// <![CDATA[
+writeOLS('gcuk','Premium');
+// ]]>
+open an account try a demo account Losses can exceed your deposits 
+Please note that foreign exchange and CFD trading involves significant risk of loss. 
+Reasons to choose FOREX.com
+Strength You Can Depend On
+Trade confidently with a provider you can trust. FOREX.com is well capitalised with a proven record of financial strength and stability to better protect our clients.
+Maximum Value & Reliability
+Improve you trading potential with transparent, reliable pricing and superior trade executions. Were proud to say that were the only firm that proves it to you, with our Execution Scorecard.
+Sophisticated Trading Platforms
+Master the currency markets with our FOREXTrader platform and FOREX.coms mobile apps, or trade on the popular MetaTrader trading platform.
+Tailored Education & Training
+Build your confidence and improve your trading strategies with our free video tutorials, online guides& forex trading courses.
+Professional Guidance & Support
+Stay informed with exclusive access to market insights and actionable trade ideas from our award-winning research team delivered to you throughout the day.
+Dedicated Customer Support
+Were always here to answer questions, resolve issues and ensure you get the most out of your account. Our experienced support team is available via phone, chat or email.
+Current Rates & Spreads
+View all spreads
+var abcd =0;
+    Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+    InitFunctionList.push(function() {
+        if(window.ctl00_ContentPlaceHolder1_tailoredRepeater2_ctl00_ctl00_ctl00_ctl01_registered==undefined){
+            window.ctl00_ContentPlaceHolder1_tailoredRepeater2_ctl00_ctl00_ctl00_ctl01_registered = true;
+            ctl00_ContentPlaceHolder1_tailoredRepeater2_ctl00_ctl00_ctl00_ctl01_currentRates = [{Product:"GBP/USD",Bid:-1,Offer:-1,Spread:0,BidRise:-1,OfferRise:-1},{Product:"EUR/USD",Bid:-1,Offer:-1,Spread:0,BidRise:-1,OfferRise:-1},{Product:"USD/JPY",Bid:-1,Offer:-1,Spread:0,BidRise:-1,OfferRise:-1},{Product:"XAU/USD",Bid:-1,Offer:-1,Spread:0,BidRise:-1,OfferRise:-1},{Product:"BCO/USD",Bid:-1,Offer:-1,Spread:0,BidRise:-1,OfferRise:-1}];
+            function renderRatesGrid(){
+                var xT = new Ext.XTemplate(
+                '<table class="table table-striped">',
+                '<tr><th>Pair</th><th>Bid</th><th>Ask</th><th>Spread</th></tr>',
+                '<tpl for=".">',
+                    '<tpl if="Bid &gt; -1">',
+                        '<tr>',
+                            '<td class="pc">{values.AliasName}</td>',
+                            '<td><label class="{values.BidClass}">{values.Bid}</label></td>',
+                            '<td><label class="{values.OfferClass}">{values.Offer}</label></td>',
+                            '<td>{values.Spread}</td>',
+                        '</tr>',
+                    '</tpl>',
+                '</tpl>',
+                '</table>');
+                if(aTradingManager.ProductSettingObject.data.items.length>0){
+                    $.each(ctl00_ContentPlaceHolder1_tailoredRepeater2_ctl00_ctl00_ctl00_ctl01_currentRates, function(a,b) {
+                        var RateObj = aTradingManager.RateObject.data.get(this.Product);
+                        if(RateObj){
+                            var prdStng = aTradingManager.ProductSettingObject.data.get(RateObj.Product);
+                            if(prdStng){
+                                this.AliasName = prdStng.AliasName;
+                                this.Spread = ((parseFloat(RateObj.Offer) - parseFloat(RateObj.Bid)) * Math.pow(10, (prdStng.IDecimals -(prdStng.IDecimals % 2)))).toFixed(1);                             
+                                this.BidClass = 'label';
+                                this.OfferClass = 'label';
+                                if(this.Bid>-1){
+                                    if(RateObj.Bid==this.Bid){
+                                        this.BidClass = 'label';
+                                    }
+                                    else if(RateObj.Bid>this.Bid){
+                                        this.BidClass = 'label label-success';
+                                    }
+                                    else{
+                                        this.BidClass = 'label label-important';
+                                    }
+                                    if(RateObj.Offer==this.Offer){
+                                        this.OfferClass = 'label';
+                                    }
+                                    else if(RateObj.Offer>this.Offer){
+                                        this.OfferClass = 'label label-success';
+                                    }
+                                    else{
+                                        this.OfferClass = 'label label-important';
+                                    }
+                                }
+                                this.Bid = RateObj.Bid;
+                                this.Offer = RateObj.Offer;
+                                ctl00_ContentPlaceHolder1_tailoredRepeater2_ctl00_ctl00_ctl00_ctl01_currentRates[a] = this;
+                            }
+                        }
+                    });
+                    xT.overwrite(Ext.get('divRates'), ctl00_ContentPlaceHolder1_tailoredRepeater2_ctl00_ctl00_ctl00_ctl01_currentRates);
+                }
+            }
+aTradingManager.addListener('RatesUpdated',function(){ renderRatesGrid(); });
+aTradingManager.addListener('ProductSettingUpdated',function(){ renderRatesGrid(); });
+        }
+    });
+    
+    
+            
+    function filterRates(fList){
+        var newList = [];
+        for(var i=0;i<fList.length;i++) {       
+           newList.push(aTradingManager.RateObject.data.get(fList[i]));
+        }
+        return newList;
+    }
+    function DisplayRates(rates) {
+        try {
+            //rateDataSource = rates;
+            rateDataSource = filterRates(strFilter);
+                        
+            var rate_rec =
+                {
+                    fields: [ { name: 'Product', type: 'string'},{ name: 'Bid', type: 'string'},{ name: 'Offer', type: 'string'},{ name: 'ChangeInPoints', type: 'string'},{ name: 'High', type: 'string'},{ name: 'Low', type: 'string'}]
+                };
+            var dStore = new Ext.data.SimpleStore(rate_rec);
+            dStore.loadData(rateDataSource);
+            
+                var al = Ext.get('divRates');
+                al.dom.innerHTML = '';
+                xT.overwrite(al, dStore.getRange(0, 500));
+                
+        }
+        catch (e) {
+            alert('error' + e);
+        }
+    }
+Market Analysis
+Could EUR/USD head to 1.10 despite Fed hike?March 10, 2017 01:44:32 PM ET
+Dollar falls, gold bounces after jobs beat  focus shifts to pace of Fed hikesMarch 10, 2017 10:52:58 AM ET
+EUR/CHF: Forgotten FX pair may come back to lifeMarch 10, 2017 07:53:48 AM ET
+WHY US?
+Global Market Leader
+Pricing & Execution
+Trading Technology
+Financial Strength & Security
+FOREX & CFDs
+Forex
+Index CFDs
+Commoditiy CFDs
+PLATFORMS
+FOREXTrader PRO
+MetaTrader 4
+GTX - Forex ECN
+MARKET ANALYSIS
+Tools & Analysis
+Research
+Live Trading Sessions
+Economic Calendar
+Market Strategists 
+GAIN CAPITAL
+About GAIN Capital
+Partner Services
+Investor Relations
+Press Releases
+Affiliates
+INTERNATIONAL
+Australia
+Canada
+Hong Kong
+Japan
+U.S.
+img.mcfc
+ {
+ width:68px;
+ height:82px;
+ background:url(/uk/resources/images/home/footer-sprite.png) 0 0;
+ }
+ 
+.text {float:none !important; margin-top: 30px;}
+ 
+.mcfclogo {width: 400px;visibility:hidden;}
+.mcfclogo img {float:left;}
+.mcfclogo p {margin-left: 100px; text-align:left; color: #37597B; font-size: 14px;}
+ 
+#social{position:relative; width: 170px}
+#social li{margin:0;padding:0;list-style:none;position:absolute;}
+#social li, #social a{height:34px;display:block;}
+#taglinetext{left: -105px; top: 7px}
+#twitter{left:0px; width:35px;}
+#twitter{background:url('/uk/resources/images/home/footer-sprite.png') -88px -5px;}
+#twitter a:hover{background: url('/uk/resources/images/home/footer-sprite.png') -88px -46px;}
+#facebook{left:43px; width:35px;}
+#facebook{background:url('/uk/resources/images/home/footer-sprite.png') -132px -5px;}
+#facebook a:hover{background: url('/uk/resources/images/home/footer-sprite.png') -132px -46px;}
+#youtube{left:86px;width:35px;}
+#youtube{background:url('/uk/resources/images/home/footer-sprite.png') -176px -5px;}
+#youtube a:hover{background: url('/uk/resources/images/home/footer-sprite.png') -176px -46px;}
+#rss{left:129px;width:35px;}
+#rss{background:url('/uk/resources/images/home/footer-sprite.png') -220px -5px;}
+#rss a:hover{background: url('/uk/resources/images/home/footer-sprite.png') -220px -46px;}
+.tagline {    
+    width: 985px !important;
+	padding-bottom: 10px;
+}
+Follow us on: 
+Our services include products that are traded on margin and carry a risk that you can lose more than your initial deposit. The products may not be suitable for everyone - please ensure you fully understand the risks involved.
+FOREX.com is a trading name of GAIN Capital UK Limited and is authorised and regulated by the Financial Conduct Authority. FCA No. 113942.This website uses cookies to provide you with the very best experience and to know you better. By visiting our website with your browser set to allow cookies, you consent to our use of cookies as described in our Privacy Policy.FOREX.com products and services is not intended for Belgium residents.
+ 2016 FOREX.com
+Risk WarningCustomer AgreementPrivacy PolicyConflicts PolicyOrder Execution PolicySite Map
+1102
+<!--
+#awards_round_box  {
+display:none;
+}
+#new_to_forex {
+    display:none;
+}
+#awards_round_box .content {
+    width: 618px;
+}
+#newToForexTopSection .content, #newToForexBottomSection .content {
+    width: 590px;
+}
+#newToForexTopSection, #newToForexBottomSection {
+    margin-bottom: 12px;
+}
+#new_to_forex .content {
+    width: 618px;
+    background:none;
+}
+.side_rail {
+    width: 312px;
+}
+.content_rail {
+    padding-left: 8px;
+    width: 649px;
+}
+#content_area {
+    margin-top: 8px;
+}
+#market_summary_pod .charts_content {
+    border-bottom: 1px solid #CACACA;
+}
+.side_pod {
+    margin-top: -5px;
+}
+.title_bar.dark {
+    background: url("resources/images/common/title-bar-dark-home.png") no-repeat scroll 0 0 transparent;
+}
+.title_bar .corner.tl {
+    display:none
+}
+.title_bar .corner.tr {
+    display:none
+}
+.title_bar .float_wrapper {
+    margin-top: 0;
+}
+.content_rail h2 {
+    display:none;
+}
+-->
+  lpAddVars('page','Section','Home');  
+ 
+function initPage() {                
+				if(document.forms["aspnetForm"].elements["sfGoogleGUID"] != null)
+                                { 
+                                 var myVar=setTimeout(function(){setGA()},15000);
+								 function setGA()
+									{
+									var a = _uGC(document.cookie, '__utma=', ';');									
+									var id = a.split(".");
+						
+									_gaq.push(['_setCustomVar',5,'VisitorID',id[1],1]);
+									document.forms["aspnetForm"].elements["sfGoogleGUID"].value = id[1];
+									} 
+								}
+				
+} 
+if (window.addEventListener)  
+window.addEventListener("load", initPage(), false); 
+else if (window.attachEvent) 
+window.attachEvent("onload", initPage); 
+document.writeln('<div id="FCAConfig"><!--ukenglish--></div>');
+if(window.location.href.indexOf("land-") > -1) {
+	document.writeln('<script src=//www.forex.com/resources/js2/fcaconfig-land.js?v=' + Math.random() + '"></' + 'script>');	
+    }
+else
+{
+	document.writeln('<script src=//www.forex.com/resources/js2/fcaconfig.js?v=' + Math.random() + '"></' + 'script>');
+}
+_cc3120.bcp();

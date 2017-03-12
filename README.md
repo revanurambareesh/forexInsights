@@ -1,11 +1,12 @@
 # Forex Insights
+
+##### Modifications are being made.... Kindly keep in touch with me...
+
 This repository contains my solution to the FX problem
 This tool scrapes the top popular websites of a company and analyses the data. This data is then converted into dataset after which a machine learning model is trained. Easy intuitive UI is also provided. More Details can be found in design document at STAGE 1 Documents/FX Problem.pdf
 
-## Demo of running tool  
-[**Video Link - Click Here!**](https://ambareesh-r.wistia.com/medias/e9ijxgi9zp)
 
-*Note*: As discussed in questionnaire webinar on 02/Feb/17, a demo video has been uploaded. I am located in Bangalore and I can demonstrate it physically as well. 
+*Note*: I am located in Bangalore and I can demonstrate it physically as well. 
 
 -----
 
@@ -33,7 +34,10 @@ Insights like probability that a company will opt for Forex, its similarity with
 
 ### Running the tool
 From command line run,
-> python main.py
+It is recommended to use virtual environment in python.
+> pip install -r requirements.txt
+
+> python manager.py runserver
 
 ## Data Scraped
 Data scraped from web is about **450MB**. Since Data is uploaded here, the repository is large and is downloadable as [zip file](https://github.com/revanurambareesh/forexInsights/archive/master.zip) of about 90MB.

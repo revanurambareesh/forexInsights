@@ -1,0 +1,1751 @@
+[	
+	
+	', 
+		
+		', 
+				
+
+			', 
+			', {}', 	
+				', 	
+							
+					', 
+	', 
+	', 
+', 
+', 
+', 
+	', 
+	
+	
+	
+
+	', 
+		', Z7_3PH42302J8UB00AIIUBFMA0084', 
+
+		
+
+	', 
+	
+', 
+	', 
+		', 
+			
+			', 
+				
+				', 
+					
+					', 
+					
+					', 
+					', 
+						', 
+							', 
+						', 
+					', 
+				', 
+			', 
+		', 
+	', 
+	
+	',  ', 
+	', 
+		', 
+			', 
+		', 
+		
+
+
+
+
+
+
+	
+	
+',  if(typeof dojo=='undefined') {
+  document.writeln("<scr"+"ipt src='/wps/portal_dojo/v1.4.3/dojo/dojo.js' ></scr"+"ipt>");
+} ', 
+', u"dojo.require('ibm.portal.xml.xpath'); dojo.require('ibm.portal.xml.xslt');", 
+', u"dojo.require('ibm.portal.portlet.portlet');", 
+', if(typeof(ibmPortalConfig) == "undefined") {ibmPortalConfig = {contentHandlerURI: "/wps/contenthandler/rBanking/!ut/p/digest!jMV8NrLQnlGuX_JzZD8sQw/nm/oid:wps.portal.root"};} else if(!ibmPortalConfig["contentHandlerURI"]) {ibmPortalConfig["contentHandlerURI"] = "/wps/contenthandler/rBanking/!ut/p/digest!jMV8NrLQnlGuX_JzZD8sQw/nm/oid:wps.portal.root";} ', /wps/contenthandler/rBanking/!ut/p/digest!jMV8NrLQnlGuX_JzZD8sQw/pm/oid:--portletwindowid--@oid:Z6_3PH42302J8UB00AIIUBFMA0003', 
+', 
+', /wps/contenthandler/rBanking/!ut/p/digest!jMV8NrLQnlGuX_JzZD8sQw/um/secure/currentuser/profile?expandRefs=true', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+ ',  
+', 
+			
+', 
+
+', 
+', u"
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-23547664-11', 'auto');
+  ga('send', 'pageview', '/rib/retail-banking/login');
+", 
+', 
+
+
+
+', 
+(function() {
+    var link = document.createElement('link');
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    link.href = '/wps/RetailApplications/css/images/favicon.ico';
+    document.getElementsByTagName('head')[0].appendChild(link);
+}());
+var errorMsg;
+errorMsg='null';
+var debitcardTab='null';
+			function validatenewPassword()
+		{
+				//$("#loginId").focus();	
+				
+				var oldLogin=$("#loginId").val();
+				var newLoginPwd=$("#newPassword").val();
+				var debitCardNo=$("#FORM_DEBIT_CARDNO").val();
+					var deb_pinno=$("#deb_pinno").val();
+				 if ( $("#userIdOption").hasClass('active') ) {
+				if(oldLogin==null || oldLogin=="" || newLoginPwd==null || newLoginPwd=="")
+					{
+					
+					if(oldLogin==null || oldLogin=="")
+							{					
+							hideValiadtionMsg("newPassword");
+							$("#loginId").focus();
+							
+							showValiadtionMsg("loginId","Please enter the Login Id");
+							$("#loginId").addClass('form-field-error-highlight');
+							$("#newPassword").removeClass('form-field-error-highlight');
+							return false;
+						}
+					if(newLoginPwd==null || newLoginPwd=="")
+						{	
+						    hideValiadtionMsg("loginId");
+							$("#newPassword").focus();
+							showValiadtionMsg("newPassword","Please enter the Password");	
+							$("#loginId").removeClass('form-field-error-highlight');
+							$("#newPassword").addClass('form-field-error-highlight');
+							return false;
+						}
+					}
+					}
+					 if ( $("#debitCardOption").hasClass('active') ) {
+					if(debitCardNo==null || debitCardNo=="" || deb_pinno==null || deb_pinno=="" || debitCardNo.length!=19 ||  deb_pinno.length!=4)
+					{
+					
+					if(debitCardNo==null || debitCardNo==""  || debitCardNo.length!=19)
+							{					
+							hideValiadtionMsg("deb_pinno");
+							
+							$("#FORM_DEBIT_CARDNO").focus();
+							
+							showValiadtionMsg("FORM_DEBIT_CARDNO","Please enter 16 digit Debit Card Number");
+							$("#FORM_DEBIT_CARDNO").addClass('form-field-error-highlight');
+							$("#deb_pinno").removeClass('form-field-error-highlight');
+							return false;
+							}
+					
+					 if(deb_pinno==null || deb_pinno=="" || deb_pinno.length!=4)
+						{	
+						    hideValiadtionMsg("FORM_DEBIT_CARDNO");
+							
+							$("#deb_pinno").focus();
+							showValiadtionMsg("deb_pinno","Please enter 4 digit Pin Number");	
+							$("#loginId").removeClass('form-field-error-highlight');
+							$("#deb_pinno").addClass('form-field-error-highlight');
+							return false;
+						}
+						
+					}
+					}
+		 }
+			
+			function showValiadtionMsg(fieldId,validationMsg,labelId){
+				var errorBox=$("#"+fieldId).next();
+				if($("#"+fieldId).next().hasClass('error-text')){
+				}else{
+								$("#"+fieldId).after('<div class="error-text">'+validationMsg+'</div>');
+								//$("#FORM_USERINFO_LOGIN_ID").parents('.col-field').prev().find('label').addClass('error-label');
+								if(labelId!=undefined)
+								{
+								$("#"+labelId).addClass('error-label');
+								}
+								else{
+								$("label[for='"+fieldId+"']").addClass('error-label');
+								}
+								
+				                $(".error-box").show();   
+				                $(".error-box #validationDiv").html('<span>Please correct the highlighted fields below</span>');				
+				       }
+					   return false;
+				}
+
+				function hideValiadtionMsg(fieldId,labelId){
+
+								$("#"+fieldId).next().remove();
+								//$("#FORM_USERINFO_LOGIN_ID").parents('.col-field').prev().find('label').addClass('error-label');
+								
+								if(labelId)
+								{
+								$("#"+labelId).removeClass('error-label');
+								}
+								else{
+								$("label[for='"+fieldId+"']").removeClass('error-label');
+								}
+				                $(".error-box").hide();   
+
+				}
+ function JumpToIt(form) {
+    var newPage = form.demoVideo.options[form.demoVideo.selectedIndex].value
+    if (newPage != "3months") {
+       // window.location.href=newPage
+        window.open(newPage,'_blank');
+    }
+}
+
+function validateFormRetailLogin()
+		{
+
+document.getElementById('newPassword').autocomplete = 'off';
+var user =document.getElementById('loginId').value;
+var pwd=document.getElementById('newPassword').value;
+var debitCardNo=document.getElementById("FORM_DEBIT_CARDNO").value;
+var deb_pinno=document.getElementById("deb_pinno").value;
+var bUrl=document.getElementById('JS_ENCRYPT_KEY_Public').value;
+ 
+if ( $("#userIdOption").hasClass('active') ) {
+	encryptRetLogin(user,pwd,bUrl);
+}
+ if ( $("#debitCardOption").hasClass('active') ) {
+  $('#LoginOption').val('CARD');
+	encryptDebitCardLogin(debitCardNo,deb_pinno,bUrl);
+}
+	document.getElementById('FORM_DEBIT_CARDNO').value= "";
+	document.getElementById('loginId').value= "";
+						 formSubmit();
+        }
+		
+	function formSubmit()
+	 {
+	
+	 document.loginForm.submit();
+	 return true;
+	 }
+function isNumberKey(evt){
+if($("#Proceed2" ).prop( "disabled", true ))
+{
+$( "#Proceed2" ).prop( "disabled", false );
+}
+      var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+function moveOnMax(field,nextFieldID){
+  if(field.value.length >= field.maxLength){
+    document.getElementById(nextFieldID).focus();
+  }
+}
+ ', 
+
+
+', 
+
+', 
+', 
+', 
+', 
+', 
+', 
+
+
+
+', 
+
+		
+			
+			', 
+', 
+        ', 
+       
+        ', 
+            ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                    ', Secured Login', 
+                  ', 
+                    ', 
+				        ', 
+					', 
+					', 
+					 ', 
+						', 
+                            ', 
+                                ', Customer Id',                                 
+                                ', Debit Card No.', 
+                            ', 
+                            ', or', 
+                        ', 
+						 ', 
+                            ', 
+                                ', 
+									', 
+							', 
+                            ', 
+                                ', Login Id', 
+                                ', 
+                                    ', 
+                                    ', 
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Password', 
+                                        ', 
+											', 
+											', 
+										', 
+                                    ', 
+                                ', 
+                                ', 
+                                        ', 
+					     ', Use Virtual Keyboard', 
+								', 
+							', 
+							', 
+							', 
+                                ', 
+                                        ', Card No.', 
+                                        ', 
+                                            ', 
+											   ', 
+										', 
+                                    ', 
+                             ', 
+							', 
+								', 
+									', PIN No.', 
+									', 
+										', 
+										', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                                                      
+                            ', 
+									', 
+									', 
+									', Use Virtual Keypad',   
+										', 
+										', 
+									', 
+								', 
+							', 
+						', 
+					', 
+                   ', 
+					',  
+			                    ', 
+			                        ', 
+			                            ', 
+			                                ', Forgot
+												Password?', 
+			                            ', 
+			                            ', 
+			                               ', Trouble
+												signing in?', 
+			                            ', 
+			                            ', 
+			                               ', Enable Login ID?', 
+			                            ', 
+			                            ', 
+			                                ', First Time User? Register', 
+			                            ', 
+			                        ', 
+			                    ', 
+            ', 
+			', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', View ', Demos', 
+                        ', 
+                        ', 
+                            ', Security ', Awareness', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            
+                            ', 
+                                ', 
+                                ', 
+                            ', 
+                            
+                            ', 
+                                ', 
+                                ', 
+                            ', 
+                             ', 
+                                ', 
+                                ', 
+                            ', 
+                          
+                        ', 
+                        ', 
+                    ', 
+                    ', 
+                        ', Security Awareness', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        Axis Bank does not send requests for Internet Banking Login ID, Password, Credit/ Debit card numbers, Bank account numbers or other sensitive financial information by email. In case of any queries or clarifications, ', Click here',  to inform us about the message and related details.
+                                    ', 
+                                ', 
+                                ', 
+                                    ', 
+                                        In case of any suspicious activity on your mobile number, you are requested to change your Internet Banking Login ID and Transaction Password.', 
+                                ', 
+                                ', 
+                                    ', 
+                                        It is important to use up-to-date Anti-virus software and a personal firewall. Axis Bank uses a combination of Secure Socket Layer (SSL) protocol and passwords to protect your information. ', Know More', 
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                    ', 
+                    
+                ', 
+                
+            ', 
+            
+        ', 
+     ', 
+      
+      ', 
+            ', 
+                ', 
+                	', 
+                        ', 
+                            ', Bill Pay', 
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', 
+                            ', Easy Pay', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Credit Cards', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Home Loans', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Book Locker', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Personal Loans', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Instant Recharges', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', prev', 
+                        ', next', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', Bill Pay', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Pay bills without stepping out of your home or office', 
+                            ', 
+                            ', 
+                                ', Features and Benefits', 
+                                ', 
+                                    ', Access to all major utility billers', 
+                                    ', Pay your bills in easy steps', 
+                                    ', Fast, Convenient and Hassle Free', 
+                                ', 
+                            ', 
+                            ', pay Now', 
+                        ', 
+                    ', 
+                    
+                    
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', An end to end solution for all your payments', 
+                            ', 
+                            ', 
+                                ', 
+                                    ', Easypay online is an end to end solution for payments required by entities to be made through Axis Bank. ', 
+                                    ', Avoid queues and save time by using EasyPay to make payments for educational institutions, e-tenders, housing, insurance and others.', 
+                                    ', It gives the facility to make payments through one of the many options like cash, cheque, credit/debit cards and net banking. ', 
+                                ', 
+                            ', 
+                            ', pay Now', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Get the freedom to spend', 
+                                ', Whether its movies, shopping, dining out, travelling or simply enjoying life to the fullest; we are sure you will find a Credit Card that best suits you.', 
+                                ', Also, enjoy exciting offers and get rewarded with eDGE Loyalty Rewards and redeem them for over 500 fabulous rewards, spread across multiple categories.', 
+                            ', 
+                            ', Apply Now', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Buy your dream home', 
+                                ', Axis Bank offers affordable and flexible housing loans that can turn your dream of owning a home into reality.', 
+                                ', u"If rising real estate prices have pushed the house you coveted beyond your budget, Axis Bank'€™s unmatched home loans will put it within reach. The attractive interest rates and minimal processing fees make our home finance products a first choice for savvy buyers.", 
+                            ', 
+                            ', Apply Now', 
+                            ', 
+                        ', 
+                    ', 
+                    
+                    ', 
+                    
+                    ', 
+                        ', 
+                            ', 
+					
+                        ', 
+                        ', 
+                            ', 
+                                ', Your desired locker at your preferred branch', 
+                                ', Located at select branches in cities all over the country, our lockers ensure the safe keeping of your valuables.', 
+                            ', 
+                            ', 
+                                ', Advantages', 
+                                ', 
+                                    ', Wide Availability: Locker facility available in 2000+ branches', 
+                                    ', Lockers available in various sizes', 
+                                    ', Direct debits for locker rentals from your account rid you of the hassles in writing out cheques', 
+                                    ', Competitive rentals', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Enjoy hassle free booking of lockers through Internet Banking - Login Now!', 
+                            ', 
+                        ', 
+                    ', 
+                    
+                    
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Fulfill your aspirations', 
+                                ', u"Be it a dream vacation, child's education, home renovation or wedding in your family, you can instantly fulfill your aspirations with Axis Bank Personal Loans.", 
+                            ', 
+                            ', 
+                                ', Features and Benefits', 
+                                ', 
+                                    ', Loans available for salaried individuals from ', 50,000 to ', 15,00,000', 
+                                    ',  Repayment tenures from 12 to 60 months with best in class interest rate', 
+                                    ',  Simple procedure, minimal documentation and quick approval', 
+                                ', 
+                            ', 
+                            ', Apply Now', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Recharge using your Axis Bank Account instantly', 
+                            ', 
+                            ', 
+                                ', 
+                                    ', Enjoy the convenience of adding a talktime whenever you need it', 
+                                    ', Pay your DTH Bill or recharge your data card instantly', 
+                                    ', Fast, Convenient and Hassle Free', 
+                                ', 
+                            ', 
+                            ', recharge Now', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+', 
+
+', 
+', 
+', 					
+', 
+', 
+
+', 	
+', 
+	
+	', 
+		//edit this message to say what you want
+		var message = "Right click is disabled";
+
+		function clickIE() {
+			if (document.all) {
+				alert(message);
+				return false;
+			}
+		}
+		function clickNS(e) {
+			if (document.layers || (document.getElementById && !document.all)) {
+				if (e.which == 2 || e.which == 3) {
+					alert(message);
+					return false;
+				}
+			}
+		}
+		if (document.layers) {
+			document.captureEvents(Event.MOUSEDOWN);
+			document.onmousedown = clickNS;
+		} else {
+			document.onmouseup = clickNS;
+			document.oncontextmenu = clickIE;
+		}
+
+		document.oncontextmenu = new Function("return false")
+	// -->
+
+
+ function UnCryptMailto( s )
+    {
+        var n = 0;
+        var r = "";
+        for( var i = 0; i < s.length; i++)
+        {
+            n = s.charCodeAt( i );
+            if( n >= 8364 )
+            {
+                n = 128;
+            }
+            r += String.fromCharCode( n - 1 );
+        }
+        return r;
+    }
+
+    function linkTo_UnCryptMailto( s )
+    {
+        location.href=UnCryptMailto( s );
+    }
+
+	', 
+
+', 
+// Using jQuery
+$(function(){                                               
+	       // alert("Password is :"+document.getElementById('newPassword'));
+			var pw = document.getElementById('newPassword');
+			if (pw != null)
+			{
+			pw.value = '';
+			}
+			else
+			{}
+});
+
+function format(input, format, sep) {
+    var output = "";
+    var idx = 0;
+    for (var i = 0; i < format.length && idx < input.length; i++) {
+        output += input.substr(idx, format[i]);
+        if (idx + format[i] < input.length) output += sep;
+        idx += format[i];
+    }
+
+    output += input.substr(idx);
+
+    return output;
+}
+	
+
+	processKeyUp = function(event)
+	{
+		processKeyEvent("onkeyup", event);
+	};
+
+document.getElementById("FORM_DEBIT_CARDNO").onkeyup=processKeyUp;
+
+processKeyEvent = function(eventType, event)
+	{
+	
+	 var field=document.getElementById("FORM_DEBIT_CARDNO");
+  if(field.value.length >= field.maxLength){
+    document.getElementById("deb_pinno").focus();
+ }
+		// MSIE hack
+		if (window.event)
+		{
+			event = window.event;
+		}
+		var text1 = event.keyCode;
+
+		if(text1!=8 && text1!=46 ){
+			 var foo = document.getElementById("FORM_DEBIT_CARDNO").value.replace(/-/g, ""); 
+			if (foo.length > 0) {
+				foo = format(foo, [4, 4, 4], "-");
+			}
+			document.getElementById("FORM_DEBIT_CARDNO").value=foo;
+		}
+	};
+	
+	
+
+
+
+ 
+
+', 
+
+', 
+
+
+
+
+
+		
+		
+		
+         
+		
+', 
+	', 
+ 
+', ', 
+			
+					', 
+				', 
+			', 
+		', 
+		
+		', 
+			
+				
+', 
+function disclaimerFn()
+	{
+		if(window.showModalDialog)
+		{
+		window.showModalDialog("http://www.axisbank.com/disclaimer.aspx","name","dialogWidth:1000px;dialogHeight:550px");
+		} 
+		else
+		{
+		window.open('http://www.axisbank.com/disclaimer.aspx','name','height=555,width=1000,toolbar=no,directories=no,status=no,continued from previous linemenubar=no,scrollbars=no,resizable=no ,modal=yes');
+		}
+	}
+	function privacyfn()
+	{
+		if(window.showModalDialog)
+		{
+		window.showModalDialog("https://www.axisbank.com/privacypolicy/privacy-policy.aspx","name","dialogWidth:1000px;dialogHeight:550px");
+		} 
+		else
+		{
+		window.open('https://www.axisbank.com/privacypolicy/privacy-policy.aspx','name','height=555,width=1000,toolbar=no,directories=no,status=no,continued from previous linemenubar=no,scrollbars=no,resizable=no ,modal=yes');
+		}
+	}
+		
+', 
+
+', 
+	 ', 
+	(function(){
+	var dom,doc,where,iframe = document.createElement('iframe');
+	iframe.src = "javascript:false";
+	(iframe.frameElement || iframe).style.cssText = "width: 0; height: 0; border: 0";
+	var where = document.getElementsByTagName('script')[0];
+	where.parentNode.insertBefore(iframe, where);
+
+	try {
+	doc = iframe.contentWindow.document;
+	} catch(e) {
+	dom = document.domain;
+	iframe.src="javascript:var d=document.open();d.domain='"+dom+"';void(0);";
+	doc = iframe.contentWindow.document;
+	}
+	doc.open()._l = function() {
+	var js = this.createElement("script");
+	if(dom) this.domain = dom;
+	js.id = "boomr-if-as";
+	js.src = '/ABLoginThemeDynamic/themes/html/dynamicSpots/axis/scripts/boomerang-min3.4.2.js';
+
+	this.body.appendChild(js);
+	};
+	doc.write('<body onload="document._l();">');
+	doc.close();
+	})();
+	', 		
+', 
+
+
+', 
+	', 
+		', 
+			Copyright© 2017 Axis Bank, India | ', Disclaimer',  | ', Privacy Policy', 
+		', 
+	', 
+	
+	
+	', 
+					Log out
+				', 
+				
+			
+', 
+', 
+			
+		', 
+		
+	', 
+		
+'][	
+	
+	', 
+		
+		', 
+				
+
+			', 
+			', {}', 	
+				', 	
+							
+					', 
+	', 
+	', 
+', 
+', 
+', 
+	', 
+	
+	
+	
+
+	', 
+		', Z7_3PH42302J8UB00AIIUBFMA0084', 
+
+		
+
+	', 
+	
+', 
+	', 
+		', 
+			
+			', 
+				
+				', 
+					
+					', 
+					
+					', 
+					', 
+						', 
+							', 
+						', 
+					', 
+				', 
+			', 
+		', 
+	', 
+	
+	',  ', 
+	', 
+		', 
+			', 
+		', 
+		
+
+
+
+
+
+
+	
+	
+',  if(typeof dojo=='undefined') {
+  document.writeln("<scr"+"ipt src='/wps/portal_dojo/v1.4.3/dojo/dojo.js' ></scr"+"ipt>");
+} ', 
+', u"dojo.require('ibm.portal.xml.xpath'); dojo.require('ibm.portal.xml.xslt');", 
+', u"dojo.require('ibm.portal.portlet.portlet');", 
+', if(typeof(ibmPortalConfig) == "undefined") {ibmPortalConfig = {contentHandlerURI: "/wps/contenthandler/rBanking/!ut/p/digest!jMV8NrLQnlGuX_JzZD8sQw/nm/oid:wps.portal.root"};} else if(!ibmPortalConfig["contentHandlerURI"]) {ibmPortalConfig["contentHandlerURI"] = "/wps/contenthandler/rBanking/!ut/p/digest!jMV8NrLQnlGuX_JzZD8sQw/nm/oid:wps.portal.root";} ', /wps/contenthandler/rBanking/!ut/p/digest!jMV8NrLQnlGuX_JzZD8sQw/pm/oid:--portletwindowid--@oid:Z6_3PH42302J8UB00AIIUBFMA0003', 
+', 
+', /wps/contenthandler/rBanking/!ut/p/digest!jMV8NrLQnlGuX_JzZD8sQw/um/secure/currentuser/profile?expandRefs=true', 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+', 
+', 
+ ',  
+', 
+			
+', 
+
+', 
+', u"
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-23547664-11', 'auto');
+  ga('send', 'pageview', '/rib/retail-banking/login');
+", 
+', 
+
+
+
+', 
+(function() {
+    var link = document.createElement('link');
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    link.href = '/wps/RetailApplications/css/images/favicon.ico';
+    document.getElementsByTagName('head')[0].appendChild(link);
+}());
+var errorMsg;
+errorMsg='null';
+var debitcardTab='null';
+			function validatenewPassword()
+		{
+				//$("#loginId").focus();	
+				
+				var oldLogin=$("#loginId").val();
+				var newLoginPwd=$("#newPassword").val();
+				var debitCardNo=$("#FORM_DEBIT_CARDNO").val();
+					var deb_pinno=$("#deb_pinno").val();
+				 if ( $("#userIdOption").hasClass('active') ) {
+				if(oldLogin==null || oldLogin=="" || newLoginPwd==null || newLoginPwd=="")
+					{
+					
+					if(oldLogin==null || oldLogin=="")
+							{					
+							hideValiadtionMsg("newPassword");
+							$("#loginId").focus();
+							
+							showValiadtionMsg("loginId","Please enter the Login Id");
+							$("#loginId").addClass('form-field-error-highlight');
+							$("#newPassword").removeClass('form-field-error-highlight');
+							return false;
+						}
+					if(newLoginPwd==null || newLoginPwd=="")
+						{	
+						    hideValiadtionMsg("loginId");
+							$("#newPassword").focus();
+							showValiadtionMsg("newPassword","Please enter the Password");	
+							$("#loginId").removeClass('form-field-error-highlight');
+							$("#newPassword").addClass('form-field-error-highlight');
+							return false;
+						}
+					}
+					}
+					 if ( $("#debitCardOption").hasClass('active') ) {
+					if(debitCardNo==null || debitCardNo=="" || deb_pinno==null || deb_pinno=="" || debitCardNo.length!=19 ||  deb_pinno.length!=4)
+					{
+					
+					if(debitCardNo==null || debitCardNo==""  || debitCardNo.length!=19)
+							{					
+							hideValiadtionMsg("deb_pinno");
+							
+							$("#FORM_DEBIT_CARDNO").focus();
+							
+							showValiadtionMsg("FORM_DEBIT_CARDNO","Please enter 16 digit Debit Card Number");
+							$("#FORM_DEBIT_CARDNO").addClass('form-field-error-highlight');
+							$("#deb_pinno").removeClass('form-field-error-highlight');
+							return false;
+							}
+					
+					 if(deb_pinno==null || deb_pinno=="" || deb_pinno.length!=4)
+						{	
+						    hideValiadtionMsg("FORM_DEBIT_CARDNO");
+							
+							$("#deb_pinno").focus();
+							showValiadtionMsg("deb_pinno","Please enter 4 digit Pin Number");	
+							$("#loginId").removeClass('form-field-error-highlight');
+							$("#deb_pinno").addClass('form-field-error-highlight');
+							return false;
+						}
+						
+					}
+					}
+		 }
+			
+			function showValiadtionMsg(fieldId,validationMsg,labelId){
+				var errorBox=$("#"+fieldId).next();
+				if($("#"+fieldId).next().hasClass('error-text')){
+				}else{
+								$("#"+fieldId).after('<div class="error-text">'+validationMsg+'</div>');
+								//$("#FORM_USERINFO_LOGIN_ID").parents('.col-field').prev().find('label').addClass('error-label');
+								if(labelId!=undefined)
+								{
+								$("#"+labelId).addClass('error-label');
+								}
+								else{
+								$("label[for='"+fieldId+"']").addClass('error-label');
+								}
+								
+				                $(".error-box").show();   
+				                $(".error-box #validationDiv").html('<span>Please correct the highlighted fields below</span>');				
+				       }
+					   return false;
+				}
+
+				function hideValiadtionMsg(fieldId,labelId){
+
+								$("#"+fieldId).next().remove();
+								//$("#FORM_USERINFO_LOGIN_ID").parents('.col-field').prev().find('label').addClass('error-label');
+								
+								if(labelId)
+								{
+								$("#"+labelId).removeClass('error-label');
+								}
+								else{
+								$("label[for='"+fieldId+"']").removeClass('error-label');
+								}
+				                $(".error-box").hide();   
+
+				}
+ function JumpToIt(form) {
+    var newPage = form.demoVideo.options[form.demoVideo.selectedIndex].value
+    if (newPage != "3months") {
+       // window.location.href=newPage
+        window.open(newPage,'_blank');
+    }
+}
+
+function validateFormRetailLogin()
+		{
+
+document.getElementById('newPassword').autocomplete = 'off';
+var user =document.getElementById('loginId').value;
+var pwd=document.getElementById('newPassword').value;
+var debitCardNo=document.getElementById("FORM_DEBIT_CARDNO").value;
+var deb_pinno=document.getElementById("deb_pinno").value;
+var bUrl=document.getElementById('JS_ENCRYPT_KEY_Public').value;
+ 
+if ( $("#userIdOption").hasClass('active') ) {
+	encryptRetLogin(user,pwd,bUrl);
+}
+ if ( $("#debitCardOption").hasClass('active') ) {
+  $('#LoginOption').val('CARD');
+	encryptDebitCardLogin(debitCardNo,deb_pinno,bUrl);
+}
+	document.getElementById('FORM_DEBIT_CARDNO').value= "";
+	document.getElementById('loginId').value= "";
+						 formSubmit();
+        }
+		
+	function formSubmit()
+	 {
+	
+	 document.loginForm.submit();
+	 return true;
+	 }
+function isNumberKey(evt){
+if($("#Proceed2" ).prop( "disabled", true ))
+{
+$( "#Proceed2" ).prop( "disabled", false );
+}
+      var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+function moveOnMax(field,nextFieldID){
+  if(field.value.length >= field.maxLength){
+    document.getElementById(nextFieldID).focus();
+  }
+}
+ ', 
+
+
+', 
+
+', 
+', 
+', 
+', 
+', 
+', 
+
+
+
+', 
+
+		
+			
+			', 
+', 
+        ', 
+       
+        ', 
+            ', 
+                ', 
+                    ', 
+                    ', 
+                ', 
+                ', 
+                    ', Secured Login', 
+                  ', 
+                    ', 
+				        ', 
+					', 
+					', 
+					 ', 
+						', 
+                            ', 
+                                ', Customer Id',                                 
+                                ', Debit Card No.', 
+                            ', 
+                            ', or', 
+                        ', 
+						 ', 
+                            ', 
+                                ', 
+									', 
+							', 
+                            ', 
+                                ', Login Id', 
+                                ', 
+                                    ', 
+                                    ', 
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Password', 
+                                        ', 
+											', 
+											', 
+										', 
+                                    ', 
+                                ', 
+                                ', 
+                                        ', 
+					     ', Use Virtual Keyboard', 
+								', 
+							', 
+							', 
+							', 
+                                ', 
+                                        ', Card No.', 
+                                        ', 
+                                            ', 
+											   ', 
+										', 
+                                    ', 
+                             ', 
+							', 
+								', 
+									', PIN No.', 
+									', 
+										', 
+										', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                                                      
+                            ', 
+									', 
+									', 
+									', Use Virtual Keypad',   
+										', 
+										', 
+									', 
+								', 
+							', 
+						', 
+					', 
+                   ', 
+					',  
+			                    ', 
+			                        ', 
+			                            ', 
+			                                ', Forgot
+												Password?', 
+			                            ', 
+			                            ', 
+			                               ', Trouble
+												signing in?', 
+			                            ', 
+			                            ', 
+			                               ', Enable Login ID?', 
+			                            ', 
+			                            ', 
+			                                ', First Time User? Register', 
+			                            ', 
+			                        ', 
+			                    ', 
+            ', 
+			', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', View ', Demos', 
+                        ', 
+                        ', 
+                            ', Security ', Awareness', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', 
+                            
+                            ', 
+                                ', 
+                                ', 
+                            ', 
+                            
+                            ', 
+                                ', 
+                                ', 
+                            ', 
+                             ', 
+                                ', 
+                                ', 
+                            ', 
+                          
+                        ', 
+                        ', 
+                    ', 
+                    ', 
+                        ', Security Awareness', 
+                        ', 
+                            ', 
+                                ', 
+                                    ', 
+                                        Axis Bank does not send requests for Internet Banking Login ID, Password, Credit/ Debit card numbers, Bank account numbers or other sensitive financial information by email. In case of any queries or clarifications, ', Click here',  to inform us about the message and related details.
+                                    ', 
+                                ', 
+                                ', 
+                                    ', 
+                                        In case of any suspicious activity on your mobile number, you are requested to change your Internet Banking Login ID and Transaction Password.', 
+                                ', 
+                                ', 
+                                    ', 
+                                        It is important to use up-to-date Anti-virus software and a personal firewall. Axis Bank uses a combination of Secure Socket Layer (SSL) protocol and passwords to protect your information. ', Know More', 
+                                    ', 
+                                ', 
+                            ', 
+                        ', 
+                        ', 
+                    ', 
+                    
+                ', 
+                
+            ', 
+            
+        ', 
+     ', 
+      
+      ', 
+            ', 
+                ', 
+                	', 
+                        ', 
+                            ', Bill Pay', 
+                        ', 
+                    ', 
+                    
+                    ', 
+                        ', 
+                            ', Easy Pay', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Credit Cards', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Home Loans', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Book Locker', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Personal Loans', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', Instant Recharges', 
+                        ', 
+                    ', 
+                ', 
+                ', 
+                    ', 
+                        ', prev', 
+                        ', next', 
+                    ', 
+                ', 
+            ', 
+            ', 
+                ', Bill Pay', 
+            ', 
+            ', 
+                ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Pay bills without stepping out of your home or office', 
+                            ', 
+                            ', 
+                                ', Features and Benefits', 
+                                ', 
+                                    ', Access to all major utility billers', 
+                                    ', Pay your bills in easy steps', 
+                                    ', Fast, Convenient and Hassle Free', 
+                                ', 
+                            ', 
+                            ', pay Now', 
+                        ', 
+                    ', 
+                    
+                    
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', An end to end solution for all your payments', 
+                            ', 
+                            ', 
+                                ', 
+                                    ', Easypay online is an end to end solution for payments required by entities to be made through Axis Bank. ', 
+                                    ', Avoid queues and save time by using EasyPay to make payments for educational institutions, e-tenders, housing, insurance and others.', 
+                                    ', It gives the facility to make payments through one of the many options like cash, cheque, credit/debit cards and net banking. ', 
+                                ', 
+                            ', 
+                            ', pay Now', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Get the freedom to spend', 
+                                ', Whether its movies, shopping, dining out, travelling or simply enjoying life to the fullest; we are sure you will find a Credit Card that best suits you.', 
+                                ', Also, enjoy exciting offers and get rewarded with eDGE Loyalty Rewards and redeem them for over 500 fabulous rewards, spread across multiple categories.', 
+                            ', 
+                            ', Apply Now', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Buy your dream home', 
+                                ', Axis Bank offers affordable and flexible housing loans that can turn your dream of owning a home into reality.', 
+                                ', u"If rising real estate prices have pushed the house you coveted beyond your budget, Axis Bank'€™s unmatched home loans will put it within reach. The attractive interest rates and minimal processing fees make our home finance products a first choice for savvy buyers.", 
+                            ', 
+                            ', Apply Now', 
+                            ', 
+                        ', 
+                    ', 
+                    
+                    ', 
+                    
+                    ', 
+                        ', 
+                            ', 
+					
+                        ', 
+                        ', 
+                            ', 
+                                ', Your desired locker at your preferred branch', 
+                                ', Located at select branches in cities all over the country, our lockers ensure the safe keeping of your valuables.', 
+                            ', 
+                            ', 
+                                ', Advantages', 
+                                ', 
+                                    ', Wide Availability: Locker facility available in 2000+ branches', 
+                                    ', Lockers available in various sizes', 
+                                    ', Direct debits for locker rentals from your account rid you of the hassles in writing out cheques', 
+                                    ', Competitive rentals', 
+                                ', 
+                            ', 
+                            ', 
+                                ', Enjoy hassle free booking of lockers through Internet Banking - Login Now!', 
+                            ', 
+                        ', 
+                    ', 
+                    
+                    
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Fulfill your aspirations', 
+                                ', u"Be it a dream vacation, child's education, home renovation or wedding in your family, you can instantly fulfill your aspirations with Axis Bank Personal Loans.", 
+                            ', 
+                            ', 
+                                ', Features and Benefits', 
+                                ', 
+                                    ', Loans available for salaried individuals from ', 50,000 to ', 15,00,000', 
+                                    ',  Repayment tenures from 12 to 60 months with best in class interest rate', 
+                                    ',  Simple procedure, minimal documentation and quick approval', 
+                                ', 
+                            ', 
+                            ', Apply Now', 
+                        ', 
+                    ', 
+                    ', 
+                        ', 
+                            ', 
+                        ', 
+                        ', 
+                            ', 
+                                ', Recharge using your Axis Bank Account instantly', 
+                            ', 
+                            ', 
+                                ', 
+                                    ', Enjoy the convenience of adding a talktime whenever you need it', 
+                                    ', Pay your DTH Bill or recharge your data card instantly', 
+                                    ', Fast, Convenient and Hassle Free', 
+                                ', 
+                            ', 
+                            ', recharge Now', 
+                        ', 
+                    ', 
+                ', 
+            ', 
+        ', 
+', 
+
+', 
+', 
+', 					
+', 
+', 
+
+', 	
+', 
+	
+	', 
+		//edit this message to say what you want
+		var message = "Right click is disabled";
+
+		function clickIE() {
+			if (document.all) {
+				alert(message);
+				return false;
+			}
+		}
+		function clickNS(e) {
+			if (document.layers || (document.getElementById && !document.all)) {
+				if (e.which == 2 || e.which == 3) {
+					alert(message);
+					return false;
+				}
+			}
+		}
+		if (document.layers) {
+			document.captureEvents(Event.MOUSEDOWN);
+			document.onmousedown = clickNS;
+		} else {
+			document.onmouseup = clickNS;
+			document.oncontextmenu = clickIE;
+		}
+
+		document.oncontextmenu = new Function("return false")
+	// -->
+
+
+ function UnCryptMailto( s )
+    {
+        var n = 0;
+        var r = "";
+        for( var i = 0; i < s.length; i++)
+        {
+            n = s.charCodeAt( i );
+            if( n >= 8364 )
+            {
+                n = 128;
+            }
+            r += String.fromCharCode( n - 1 );
+        }
+        return r;
+    }
+
+    function linkTo_UnCryptMailto( s )
+    {
+        location.href=UnCryptMailto( s );
+    }
+
+	', 
+
+', 
+// Using jQuery
+$(function(){                                               
+	       // alert("Password is :"+document.getElementById('newPassword'));
+			var pw = document.getElementById('newPassword');
+			if (pw != null)
+			{
+			pw.value = '';
+			}
+			else
+			{}
+});
+
+function format(input, format, sep) {
+    var output = "";
+    var idx = 0;
+    for (var i = 0; i < format.length && idx < input.length; i++) {
+        output += input.substr(idx, format[i]);
+        if (idx + format[i] < input.length) output += sep;
+        idx += format[i];
+    }
+
+    output += input.substr(idx);
+
+    return output;
+}
+	
+
+	processKeyUp = function(event)
+	{
+		processKeyEvent("onkeyup", event);
+	};
+
+document.getElementById("FORM_DEBIT_CARDNO").onkeyup=processKeyUp;
+
+processKeyEvent = function(eventType, event)
+	{
+	
+	 var field=document.getElementById("FORM_DEBIT_CARDNO");
+  if(field.value.length >= field.maxLength){
+    document.getElementById("deb_pinno").focus();
+ }
+		// MSIE hack
+		if (window.event)
+		{
+			event = window.event;
+		}
+		var text1 = event.keyCode;
+
+		if(text1!=8 && text1!=46 ){
+			 var foo = document.getElementById("FORM_DEBIT_CARDNO").value.replace(/-/g, ""); 
+			if (foo.length > 0) {
+				foo = format(foo, [4, 4, 4], "-");
+			}
+			document.getElementById("FORM_DEBIT_CARDNO").value=foo;
+		}
+	};
+	
+	
+
+
+
+ 
+
+', 
+
+', 
+
+
+
+
+
+		
+		
+		
+         
+		
+', 
+	', 
+ 
+', ', 
+			
+					', 
+				', 
+			', 
+		', 
+		
+		', 
+			
+				
+', 
+function disclaimerFn()
+	{
+		if(window.showModalDialog)
+		{
+		window.showModalDialog("http://www.axisbank.com/disclaimer.aspx","name","dialogWidth:1000px;dialogHeight:550px");
+		} 
+		else
+		{
+		window.open('http://www.axisbank.com/disclaimer.aspx','name','height=555,width=1000,toolbar=no,directories=no,status=no,continued from previous linemenubar=no,scrollbars=no,resizable=no ,modal=yes');
+		}
+	}
+	function privacyfn()
+	{
+		if(window.showModalDialog)
+		{
+		window.showModalDialog("https://www.axisbank.com/privacypolicy/privacy-policy.aspx","name","dialogWidth:1000px;dialogHeight:550px");
+		} 
+		else
+		{
+		window.open('https://www.axisbank.com/privacypolicy/privacy-policy.aspx','name','height=555,width=1000,toolbar=no,directories=no,status=no,continued from previous linemenubar=no,scrollbars=no,resizable=no ,modal=yes');
+		}
+	}
+		
+', 
+
+', 
+	 ', 
+	(function(){
+	var dom,doc,where,iframe = document.createElement('iframe');
+	iframe.src = "javascript:false";
+	(iframe.frameElement || iframe).style.cssText = "width: 0; height: 0; border: 0";
+	var where = document.getElementsByTagName('script')[0];
+	where.parentNode.insertBefore(iframe, where);
+
+	try {
+	doc = iframe.contentWindow.document;
+	} catch(e) {
+	dom = document.domain;
+	iframe.src="javascript:var d=document.open();d.domain='"+dom+"';void(0);";
+	doc = iframe.contentWindow.document;
+	}
+	doc.open()._l = function() {
+	var js = this.createElement("script");
+	if(dom) this.domain = dom;
+	js.id = "boomr-if-as";
+	js.src = '/ABLoginThemeDynamic/themes/html/dynamicSpots/axis/scripts/boomerang-min3.4.2.js';
+
+	this.body.appendChild(js);
+	};
+	doc.write('<body onload="document._l();">');
+	doc.close();
+	})();
+	', 		
+', 
+
+
+', 
+	', 
+		', 
+			Copyright© 2017 Axis Bank, India | ', Disclaimer',  | ', Privacy Policy', 
+		', 
+	', 
+	
+	
+	', 
+					Log out
+				', 
+				
+			
+', 
+', 
+			
+		', 
+		
+	', 
+		
+']

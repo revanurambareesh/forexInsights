@@ -1,0 +1,1014 @@
+[
+', 
+
+
+
+', 
+', 
+
+
+', 
+var corporateId = '';
+var userId = '';
+
+/*window.onload=AttachButtonEvents;
+
+ function AttachButtonEvents(){
+
+       
+	document.getElementById("preloader").style.visibility='hidden';
+	
+	var el;
+	 
+	if("N" == "Y"){
+
+	    
+		f= document.forms;
+		
+		for(i=0;i<f.length;i++){
+			elem =f[i].elements;
+			if(i== f.length-1){
+			aElm = f[i].getElementsByTagName('a');
+
+			for(x=0;x<aElm.length;x++){
+				aElement = aElm.item(x)
+				var targetType = aElement.target;
+				var str = aElement.innerHTML.toLowerCase().split(' ');
+				
+				if(str[0] != '<img')
+				if( targetType == null || (targetType != 'newwindow' && targetType != '_blank'))
+				aElement.onclick = function(){displayPreloader();}
+			}
+			}
+		for(j=0;j<elem.length;j++){
+
+
+		    
+			f[i].style.visibility='visible';
+			f[i].style.display ='block';
+			el= elem[j];
+			if(el.type.toLowerCase() == "submit" || el.type.toLowerCase() == "button"){
+				if(((el.name.substring(el.name.lastIndexOf(".")+1,el.name.length)).toLowerCase() != "save") && ((el.name.substring(el.name.lastIndexOf(".")+1,el.name.length)).toLowerCase()!="print"))
+				{
+				if(((el.value.toLowerCase()).search("save") == -1) && ((el.value.toLowerCase()).search("print") == -1)){
+				AddEvent(el);
+				}
+				}
+			}
+		}
+		}
+
+	}
+} 
+
+
+function AddEvent(el){
+         
+	
+	if (el.addEventListener) {
+	    
+		el.addEventListener('click',function(){
+			processEvt(el);
+		},false);
+	} else if (el.attachEvent) { // IE
+	
+		el.attachEvent('onclick',function(){
+		
+		      processEvt(el);
+		});
+	}
+  }
+
+function displayPreloader(){	
+	
+	var frm = document.forms;
+	for(var n=0;n<frm.length;n++){
+		frm[n].style.visibility='hidden';
+		frm[n].style.display ='none';
+	}
+	
+	//document.getElementById("preloader").style.visibility='visible';
+	document.getElementById("preloader").style.visibility='hidden';
+}
+
+
+function processEvt(thisObj){
+
+    
+	hidforms = document.forms;
+	//document.getElementById("preloader").style.visibility='visible';
+	document.getElementById("preloader").style.visibility='hidden';
+		var fieldNames="";
+
+	for(m=0;m<hidforms.length;m++){
+	
+		hidforms[m].style.visibility='hidden';
+		hidforms[m].style.display ='none';
+		
+	}
+	var strToEncrypt="";
+	
+	appendchld(thisObj.form);
+	
+	var elem = thisObj.form.elements;
+
+	encryptFlgElm = document.getElementById("pageToken");
+	
+	encryptFlgElm.setAttribute('value','N');
+	
+	if(elem.length>0){
+		for(var eln=0; eln<elem.length; eln++){
+		    
+			var elemName = elem[eln].name;
+			
+			var e = elem[eln];
+
+			if(e.type=='text' || e.type=='textarea' || e.type=='password' || e.type=='hidden'){
+			
+				var initialValue = e.value;
+				if(!initialValue==""){
+					var encryptedRC4Val = rc4Encrypt("0.899632918787259", initialValue);
+					
+					var encryptedBase64Val=encode64(encryptedRC4Val);
+					e.value = encryptedBase64Val;
+	                                fieldNames=fieldNames+elem[eln].name+'~';
+
+				}
+
+			}
+			if(e.type=='select-one' || e.type=='select-multiple')
+			{
+			    var encryptDone = false;
+				for(var j=0;j<e.options.length;j++)
+				{
+					if(e.options[j].selected)
+					{
+					
+					        var selectedValue = e.options[j].value;
+					        var initialValue = selectedValue;
+
+					        if(selectedValue =='')
+					        {
+					        initialValue = e.options[j].text;
+					        }
+					       encryptDone = true;
+						var encryptedRC4Val = rc4Encrypt("0.899632918787259", initialValue);
+						var encryptedBase64Val=encode64(encryptedRC4Val);
+						selectedItem = e.options[j];
+						if( selectedValue == '')
+						{
+						selectedItem.text = encryptedBase64Val;
+						}
+						else
+						{
+						selectedItem.value = encryptedBase64Val;
+						}
+					  }
+					}
+					if(encryptDone)
+					fieldNames=fieldNames+elem[eln].name+'~';
+			}
+			if((e.type=='radio')||(e.type=='checkbox'))
+			{
+			
+				if(e.checked)
+				{	
+				
+					var initialValue = e.value;
+
+					var encryptedRC4Val = rc4Encrypt("0.899632918787259", initialValue);
+					var encryptedBase64Val=encode64(encryptedRC4Val);
+					e.value = encryptedBase64Val;
+					 fieldNames=fieldNames+elem[eln].name+'~';
+				}
+			}
+
+
+
+		}
+	}
+		
+		encryptFlgElm.setAttribute('value',fieldNames+'Y');   	
+
+}
+
+function appendchld(formObj)
+{
+	
+    	
+ 	isIE=false;
+ 	if ( navigator.appName.indexOf('Microsoft') != -1 ) {
+	 	isIE=true;
+ 	}
+ 	if(isIE) {
+ 	
+ 		 		
+ 	 	hiddenToken = document.createElement('<input type="hidden" name="pageToken" id="pageToken" >');
+	 	formObj.appendChild(hiddenToken);
+	        
+ 	}
+ 	else{
+		hiddenToken = document.createElement('input');		
+		hiddenToken.setAttribute('type','HIDDEN');
+		hiddenToken.setAttribute('name','pageToken');
+		hiddenToken.setAttribute('id','pageToken');
+		
+		formObj.appendChild(hiddenToken);
+ 	}
+ 	
+}*/
+	   
+', 
+
+', 
+(function(){
+var dom,doc,where,iframe = document.createElement('iframe');
+iframe.src = "javascript:false";
+(iframe.frameElement || iframe).style.cssText = "width: 0; height: 0; border: 0";
+var where = document.getElementsByTagName('script')[0];
+where.parentNode.insertBefore(iframe, where);
+
+try {
+doc = iframe.contentWindow.document;
+} catch(e) {
+dom = document.domain;
+iframe.src="javascript:var d=document.open();d.domain='"+dom+"';void(0);";
+doc = iframe.contentWindow.document;
+}
+doc.open()._l = function() {
+var js = this.createElement("script");
+if(dom) this.domain = dom;
+js.id = "boomr-if-as";
+js.src = '/BankAwayRetail/web/L001/javascripts/boomerang.min.js';
+this.body.appendChild(js);
+};
+doc.write('<body onload="document._l();">');
+doc.close();
+})();
+', 
+
+ 
+', 
+	<!--
+    window.history.forward()
+	//-->
+', 
+
+
+', 
+
+    if (top != self) top.location.replace.location(location);
+', 
+
+', 
+', 
+', Please Enable Java Script through : Tools > Internet Options > Security Settings > Custom Level.', 
+', 
+
+
+  ', 
+   function getInternetExplorerVersion()
+   // Returns the version of Windows Internet Explorer or a -1
+   // (indicating the use of another browser).
+   {
+      var rv = -1; // Return value assumes failure.
+      if (navigator.appName == 'Microsoft Internet Explorer')
+      {
+         var ua = navigator.userAgent;
+         var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+         if (re.exec(ua) != null)
+            rv = parseFloat( RegExp.$1 );
+      }
+      return rv;
+   }
+ 
+  function checkIEVersion()
+    {
+       var msg = "Yore not using Windows Internet Explorer.";
+       var ver = getInternetExplorerVersion();
+       return ver;
+   }
+   
+//document.oncontextmenu= function(){ return false; }
+var isOpera=(navigator.userAgent.indexOf("Opera")!=-1)?true:false;
+var isMac=(navigator.userAgent.indexOf("Mac")!=-1);
+var isIE=checkIEVersion();
+
+function checkApplet(){
+	
+	if(isIE== 7.0 || isIE==8.0 || isIE==6.0 || isIE==9.0){
+		var oVDiv1=document.getElementById("divApplet");
+		if(oVDiv1 != null){			
+			document.getElementById("isAllowed").value='true';
+			return;
+		}	
+		var appletName = document.getElementById("FinEcEcApplet");
+		appletName = ""+appletName;
+		if(appletName.indexOf("object") != -1){		
+			document.getElementById("isAllowed").value='true';
+		}
+	}
+	else if(isIE==9.0)
+	{
+	}
+	else{
+		if(!navigator.javaEnabled()){			
+			document.getElementById("isAllowed").value='true';
+		}
+	}
+	
+	return;
+}
+function encryptValues(){
+	var isAppletDisabled = document.getElementById("isAllowed").value;
+	for(j=0;document.forms[j] != null;j++){
+
+	    if (isIE) {
+
+
+	        // Added for the call id - 345150 - BOC
+	        try { //Added for the call id - 345150 - EOC		
+	            newHidden = document.createElement("<INPUT TYPE='HIDDEN' NAME='isEncrypted' VALUE = 'N'>");
+	            // Added for the call id - 345150 - BOC
+	        }
+			catch(error)
+			{
+	            newHidden = document.createElement('input');
+	            newHidden.setAttribute('type', 'HIDDEN');
+	            newHidden.setAttribute('name', 'isEncrypted');
+	            newHidden.setAttribute('VALUE', 'N');
+	        } // Added for the call id - 345150 - EOC
+
+} else {
+        
+			newHidden = document.createElement('input');
+			newHidden.setAttribute('type','HIDDEN');
+			newHidden.setAttribute('name','isEncrypted');
+			newHidden.setAttribute('VALUE','N');
+		}
+		document.forms[j].appendChild(newHidden);
+		for(i=0; document.forms[j].elements[i] != null ; i++){
+			if(document.forms[j].elements[i].type == "password"){				
+				if(document.forms[j].elements[i].value != ""){					
+					var initialValue = document.forms[j].elements[i].value
+					
+					var randomkey = '0.433306348505168hsembkzz3jmrnde0pbhfodbg'; 
+					document.forms[j].elements[i].value = encode64(rc4Encrypt(randomkey,initialValue));
+				
+					
+					if(initialValue != document.forms[j].elements[i].value){
+						document.forms[j].isEncrypted.value="Y";
+					}					
+				}
+				else{
+					document.forms[j].isEncrypted.value="Y";
+				}
+			}			
+		}	
+	}
+	j--;
+	var oButton=document.getElementById("button1");
+	if(isIE) {
+		str="<INPUT TYPE='HIDDEN' NAME="+oButton.name+" VALUE = 'Y'>";
+		// Added for the call id - 345150
+		try { // Added for the call id - 345150 - EOC
+		    newHidden = document.createElement(str);
+		    // Added for the call id - 345150 - BOC
+		}
+		catch(error)
+		{
+		    newHidden = document.createElement('input');
+		    newHidden.setAttribute('type', 'HIDDEN');
+		    newHidden.setAttribute('name', oButton.name);
+		    newHidden.setAttribute('VALUE', 'Y');
+		} // Added for the call id - 345150 - EOC
+	} else {
+		newHidden = document.createElement('input');
+		newHidden.setAttribute('type','HIDDEN');
+		newHidden.setAttribute('name',oButton.name);
+		newHidden.setAttribute('VALUE','Y');
+	}
+	document.forms[j].appendChild(newHidden);
+	//document.forms[j].submit();	
+}
+var mHexKey="29304E87583278923487A64389764380763087426708234658764320F8764387645678023467843678657678243678934208346543763426342087364764378623487165321780324643278643287634807347867463247864326D43204376743286743290874784C3260409A876";
+function rc4Encrypt(key, pt) {	
+	key = key + mHexKey ;
+    s = new Array();
+    for (var i=0; i<256; i++) {
+    	s[i] = i;
+    }
+    var j = 0;
+    var x;
+    for (i=0; i<256; i++) {
+	    j = (j + s[i] + key.charCodeAt(i % key.length)) % 256;
+	    x = s[i];
+	    s[i] = s[j];
+	    s[j] = x;
+    }
+    i = 0;
+    j = 0;
+    var ct = '';
+    for (var y=0; y<pt.length; y++) {
+	    i = (i + 1) % 256;
+	    j = (j + s[i]) % 256;
+	    x = s[i];
+	    s[i] = s[j];
+	    s[j] = x;
+	    ct += String.fromCharCode(pt.charCodeAt(y) ^ s[(s[i] + s[j]) % 256]);
+    }
+    
+    return ct;
+}
+var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+function encode64(input) {
+   var output = "";
+   var chr1, chr2, chr3;
+   var enc1, enc2, enc3, enc4;
+   var i = 0;	
+   do {
+      chr1 = input.charCodeAt(i++);
+      chr2 = input.charCodeAt(i++);
+      chr3 = input.charCodeAt(i++);
+
+      enc1 = chr1 >> 2;
+      enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+      enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+      enc4 = chr3 & 63;
+
+      if (isNaN(chr2)) {
+         enc3 = enc4 = 64;
+      } else if (isNaN(chr3)) {
+         enc4 = 64;
+      }
+
+      output = output + keyStr.charAt(enc1) + keyStr.charAt(enc2) + 
+         keyStr.charAt(enc3) + keyStr.charAt(enc4);
+   } while (i < input.length); 
+   
+   return output;
+}
+', 
+', 
+
+', 
+', 
+', 
+', 
+', 
+', 
+ 
+', 
+  function initRBAWidget()
+  { 
+    var opts = {
+	  'applet' : {
+        'attrs' : {'type':'application/x-java-applet;version=1.2',
+                   'pluginspage':'http://java.com/en/download/index.jsp',
+                   'classid':'clsid:8AD9C840-044E-11D1-B3E9-00805F499D93',
+                   'codebase':'http://java.com/en/download/index.jsp',
+                   'code':'com.ezmcom.client.applet.EzDeviceInfoApplet',
+                   'archive':'/BankAwayRetail/web/L001/retail/jsp/ezidentity/token/arch/token/EzDeviceInfo.jar',
+                   'id':'deviceInfo',
+                   'name':'deviceInfo',
+                   'width':'0',
+                   'height':'0',
+                   'scriptable':'true',
+                   'mayscript':'true'},
+        'params' : {},
+        'minver' : '1.5', // the minimum version to run the JRE, if not set, the default is JRE 1.1
+        'jreAutoInstall' : 'false', // force the JRE to not auto install
+        'renderDiv' : 'divApplet' // render the applet at a specific DIV, this is optional
+      },
+      'widget' : {
+		'mode' : '2', // 0=OFF, 1=Applet, 2=Cookie, defaults to 1
+        'modalbox' : {'grayout' : { 'enable' : 'true', 'opts' : null },
+                      'contentDiv' : 'divWait'},
+        'forminput' : {'deviceInput' : 'deviceid', // the device input identifier
+                       'logicalInput' : 'logicalid'}, // the logical input identifier
+        'funccfg' : {'evalrisk' : {'retries' : '10', // the maximum no. of attempt retries (to support slower PC's, we may need to increase this) - OPTIONAL defaults to 60
+                                   'timeout' : '1000'}} // the milliseconds after each attempt - OPTIONAL defaults to 1000
+      }
+    };
+    EzRBAWidget.configure(opts);
+  }
+  
+  var submitForm = false;
+  function evaluateRBA(bRBAEvaluateResult)
+  {
+	//alert("enter evaluateRBA");
+    if(bRBAEvaluateResult)
+    {
+	  setTimeout(function()
+      {
+        //alert("Version: "+EzRBAWidget.getVersion());
+        //alert("Evaluate result: "+bRBAEvaluateResult);
+        //alert(document.getElementById('deviceid').value);
+        //alert(document.getElementById('logicalid').value);
+        //alert(EzRBAWidget.getEvaluateRetries()+" out of "+EzRBAWidget.getMaxEvaluateRetries());
+	    EzRBAWidget.grayOut(false);
+	  }, 1500);
+    }
+    else
+    {
+	  setTimeout(function()
+      {
+        //alert("Version: "+EzRBAWidget.getVersion());
+        //alert("Failed to get RBA device or logical information");
+	    //alert(EzRBAWidget.getEvaluateRetries()+" out of "+EzRBAWidget.getMaxEvaluateRetries());
+	    EzRBAWidget.grayOut(false);
+	  }, 1500);
+    }
+	
+	EzRBAWidget.grayOut(false); // we're done -- so let's close the gray out screen to show that our call is done
+	submitForm = false;
+
+	encryptValues();
+	document.getElementById("button1").disabled= true;
+	//alert("evaluateRBA exit");
+  }
+', 
+', 
+
+', 
+var isOpera=(navigator.userAgent.indexOf("Opera")!=-1)?true:false;
+var isMac=(navigator.userAgent.indexOf("Mac")!=-1);
+var isIE=checkIEVersion();
+
+function EnterSubmit(e)
+
+ {
+
+    var key;
+    if (window.event) {
+
+        key = window.event.keyCode;
+
+
+    }
+
+    else {
+        key = e.which
+    }
+    if (key == 13) {
+
+        var btn = document.getElementById('button1');
+
+        if (btn != null) {
+
+
+            btn.click();
+        }
+    }
+
+}
+
+
+function login(){		
+   // alert("start login()");
+    //27FEB2014: START MODIFIED BY EZMCOM FOR RBAA
+	//encryptValues();
+	//document.getElementById("button1").disabled= true;
+	//if(!submitForm) {
+      //    EzRBAWidget.evaluate(evaluateRBA);
+	//}
+	//alert("end login().submitForm["+submitForm+"]");
+	//return submitForm;
+    //27FEB2014: END MODIFIED BY EZMCOM FOR RBAA
+    getMigrationStatus();
+}
+function login_WithoutEncrypt(){
+	document.getElementById("button1").disabled= true;
+	var oButton=document.getElementById("button1");
+	if(isIE) {
+		str="<INPUT TYPE='HIDDEN' NAME="+oButton.name+" VALUE = 'Y'>";
+		newHidden=document.createElement(str);
+	}else {
+		newHidden = document.createElement('input');
+		newHidden.setAttribute('type','HIDDEN');
+		newHidden.setAttribute('name',oButton.name);
+		newHidden.setAttribute('VALUE','Y');
+	}
+	document.CorpSignOn.appendChild(newHidden);
+	if(isIE){
+		newHidden=document.createElement("<INPUT TYPE='HIDDEN' NAME='isEncrypted' VALUE = 'N'>");
+	} else {
+		newHidden = document.createElement('input');
+		newHidden.setAttribute('type','HIDDEN');
+		newHidden.setAttribute('name','isEncrypted');
+		newHidden.setAttribute('VALUE','N');
+	}
+	document.CorpSignOn.appendChild(newHidden);
+	document.CorpSignOn.submit();
+}
+
+// pravin_220126 fix for EB68104 ticket 234480 done. Start
+function checkEnter(e){
+	var characterCode
+	if(e && e.which){
+		e = e
+		characterCode = e.which
+	}
+	else{
+		e = event
+		characterCode = e.keyCode
+	}	 
+	if(characterCode == 13){
+		login();
+		return false
+	}
+	return true
+}
+function checkEnter_WithOutEncrypt(e){
+	var characterCode
+	if(e && e.which){
+		e = e
+		characterCode = e.which
+	}
+	else{
+		e = event
+		characterCode = e.keyCode
+	}	 
+	if(characterCode == 13){
+		login_WithoutEncrypt();
+		return false
+	}
+	return true
+}
+// pravin_220126 fix for EB68104 ticket 234480 done. End
+', 
+
+
+
+', 
+
+',  
+
+', 
+
+', For any queries/complaints/suggestions please write to us at corporate.ib@axisbank.com or call us at 022-62175100 (9:30 AM to 6:30 PM,Mon-Sat on working days).', 
+
+', 
+
+', 
+
+ ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+  ', 
+  ', 
+    ', 
+    ', Migration is in progress, Please try after some time', 
+  	', 
+  ', 
+  ', 
+    ', 
+      ', 
+        ', 
+          ', 
+            ', 
+              ', 
+                ', 
+              ', 
+              ', 
+                ', Corporate Banking Login
+                ', 
+                  ', 
+                  ', 
+                    ', 
+                  ', 
+                  ', 
+                    ', 
+                      ', 
+                        ', Corporate ID', 
+                          ', 
+							', 
+                          
+                          ', 
+                          	
+							',  							
+					   		
+                          ', 
+                      ', 
+					  
+					  ', 
+                        ',   Login ID', 
+                          ', 
+							', 
+                          
+                          ', 
+                           		
+							',  							
+				
+                          ', 
+                      ', 
+
+                      ', 
+
+                        ', Password', 
+                      
+                          ', 
+                          ', 
+                            ', 
+                        	',  
+                          ', 
+                      ',  
+                      ', 
+					 ', 	', 
+					 ', 	', 
+					 
+					 ',  ', 
+					   ', New User/ Forgot password?', Instantly Generate/Change Password', 
+					 
+					 
+					  ', 
+                      ', 
+                      ', 
+                       ', 
+                        ', 
+                       ', 
+                        ', 
+						', 
+                         
+                         
+                        
+                      
+                    ', 
+                  ', 
+                  ', 
+                    ', 
+                  ', 
+                ', 
+              ', 
+              ', 
+                ', 
+              ', 
+            ', 
+            ', 
+          ', 
+        ', 
+      ',  
+      ', 
+          ',  
+              ', 
+      ', 
+        ', 
+          ', 
+            ', 
+              ', 
+					 ', 
+						
+						', 
+						  
+						  ', 
+							', 								
+								', 
+																
+							', 
+						  ', 
+						  ', 
+						', 
+						', 
+
+						', 
+							',   Useful Links', 
+							', 
+								', Complete list of FAQs', 
+								', Internet Banking Terms and Conditions', 
+							   ', 
+							  ', 
+						', 
+					', 
+			', 
+
+           ', 
+            ', 
+            ', 
+			', 
+			', 
+			', 
+			', 
+
+			', 
+			', 
+          ', 
+        ', 
+      ', 
+      ', 
+        ', 
+          ', 
+            ', Information to Internet Banking users', 
+              ', Axis Bank does not send requests for Internet Banking Login ID, Password, Credit/Debit card numbers, Bank account numbers, or other sensitive financial information by e-mail. If you do receive a message of this type that appears to be from Axis Bank, or related to an Axis Bank product or service, please do not respond. Send a copy of the message and any related details to ', function rot13(input){return input.replace(/[a-zA-Z]/g,function(ch){return String.fromCharCode((ch<="Z"?90:122)>=(ch=ch.charCodeAt(0)+13)?ch:ch-26)})}document.write(rot13("Pbecbengr.vo@nkvfonax.pbz"));', 
+			  ', 
+              
+		',  ', 
+              ', 
+              ', 
+            ', Safe Banking Practices', 
+              ', 
+                ', It is important to use up-to-date Anti-virus software and a personal firewall.', 
+                ', Axis Bank uses a combination of Secure Socket Layer (SSL) protocol and passwords to protect your information..', 
+              ', 
+              ', 
+              ',  ', 
+              ', Know More >>', 
+          ', 
+        ', 
+      ', 
+    ', 
+  ', 
+  ', 
+    ', 
+        ', 
+          ', 
+        ', 
+        ', 
+          ', Copyright© 2007 to 2012 - Axis Bank. All rights reserved. ', 
+          ', Privacy Policy', 
+          ', Best viewed in Internet Explorer 6.0 and above.', 
+        ', 
+        
+        ', 
+          
+  ', 
+', 
+	 ', 
+', 
+			', 
+            ', 
+            ', 
+            ', 
+            ', 
+', 
+  .box
+  {
+    width: 300px;
+    margin: 0px 0px 20px;
+    padding: 5px 20px 20px;
+    border: 1px solid #d8d8d8;
+    background: #f9f9f9;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -moz-box-shadow: inset 0 0 0 1px #fff;
+    -webkit-box-shadow: inset 0 0 0 1px #fff;
+    box-shadow: inset 0 0 0 1px #fff;
+  }
+', 
+', 
+', 
+  ', Please wait a moment...', 
+', 
+', initRBAWidget();', 
+', 
+
+', 
+', 
+   ', 
+	', 
+ ', 
+		', 
+	  
+', 
+', 
+
+
+', 
+
+', 
+
+', 
+', 
+', 
+', 
+', 
+
+', 
+
+', 
+	  ', 
+  	  ', 
+  	 ', 
+  	', 
+							', 
+						', 
+			
+			', 
+            ', 
+  	', 
+  	', 
+  				  
+  				', 
+  				
+  				
+  	
+  	', 
+  		', 
+  
+  			', 
+  
+  	', 
+    ', 
+    
+    ', 
+      ', 
+   ', 
+  
+  ', 
+  //initset()
+  ', 
+  			
+
+
+
+
+
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+', 
+ 
+
+
+
+
+', 
+
+
+', 
+	function noBack(){window.history.forward();}
+	noBack();
+	window.onload=noBack;
+	window.onpageshow=function(evt){if(evt.persisted)noBack()}
+	window.onunload=function(){void(0)}
+', 
+'][
+', 
+', 
+', 
+', 
+     ', 
+          ', 
+           
+             An error has occured, sorry for the inconvenience. Please login again.
+           
+          ', 
+          
+        ', 
+
+
+
+
+', 
+', 
+', Possible causes for the error :', 
+', 
+', 
+', Your session has expired due to long inactive period.
+', 
+', 
+', You have double clicked on any of the buttons.
+', 
+', 
+', iConnect has encountered an exception.
+', 
+
+', 
+', Please follow the below steps :', 
+', 
+', 
+', We recommend you to clear your cookies and temporary internet files from your browser.
+', 
+', 
+', Open a fresh browser to login again.
+', 
+', 
+', If you were in the middle of a transaction, please check the status before reinitiating a new transaction.
+', 
+', 
+ 
+', 
+', 
+In case the error persists, please mail on Corporate.IB@axisbank.com
+', 
+
+
+', 
+
+
+', 
+', 
+', 
+', 6', 
+
+']

@@ -1,0 +1,18 @@
+{% extends "forex/header.html" %}
+
+{% block content1 %}
+<p>Some form will come here</p>
+<form action="forex" method="post">
+	{% csrf_token %}
+    <input id="companyName" class="form-control" type="text" name="your_name" value="{{ enter_val }}"> 
+    <input type="submit" class="btn btn-default" style="position: absolute; left: -9999px" value="Search">
+</form>
+{% endblock %}
+
+{% block content2 %} 
+{% for c in content %}
+
+<p> {{c|linebreaks}} <p>
+{% endfor %} 
+{% endblock %}
+

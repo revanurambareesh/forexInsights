@@ -1,0 +1,467 @@
+           
+// Gloal FF settings object
+var FF = {
+timezone : '-4'.replace('+', ''), 
+dst : '1',
+weekstart : '1',
+format : '12',
+userid: 0,
+npd_api_endpoint: 'https://api.forexfactory.com/npd-api/api.php',
+mda_api_endpoint: 'https://api.forexfactory.com/mda-api/mda.php/',
+explorer_api_endpoint: 'https://api.forexfactory.com/explorer-api/api.php/',
+perms: {
+can_control_panel: false
+},
+max_emojis: 100,
+assets: 'https://cdn-assets.forexfactory.net/nfs',
+editorHeight: 252
+};
+   var compositeRatesBrokerInfos = {"FXP":{"comment":"FxPro spreads are obtained in real-time from a live, *commission-incurring, MT4-based account. Tighter spreads are available on cTrader and MT5 platforms. ","star":true},"FOR":{"comment":"FOREX.com spreads are obtained in real-time from a live MT4-based account.  Tighter spreads are available on FOREXTrader platforms.","star":false},"FCM":{"comment":"FXCM spreads are obtained in real-time from a live, *commission-incurring \"Standard\" account.\n\n<a href=\"http:\/\/www.fxcm.com\/accounts\/account-types\/\" target=\"_blank\">Account Types<\/a>","star":true},"ATV":{"comment":"ActivTrades spreads are obtained in real-time from a standard live account.\n\n<a href=\"http:\/\/www.activtrades.com\/platform-comparison\" target=\"_blank\">Account Types<\/a>","star":false},"ESY":{"comment":"easyMarkets spreads are obtained in real-time from a standard live account.","star":false},"FBO":{"comment":"FIBO Group spreads are obtained in real-time from a live \"MT4 NDD No Commission\" account.  Tighter spreads are available on commission-incurring \"MT5 NDD\" accounts.\n\n<a href=\"http:\/\/www.fibogroup.eu\/products\/account-types\" target=\"_blank\">Account Types<\/a>","star":false},"TNK":{"comment":"ThinkMarkets spreads are obtained in real-time from a live \"Standard\" account.  Tighter spreads are available on \"Premium\" and \"VIP\" accounts.\n\n<a href=\"http:\/\/www.thinkmarkets.com\/en\/trading-platforms\/account-types\/\" target=\"_blank\">Account Types<\/a>","star":false},"ODA":{"comment":"OANDA spreads are obtained in real-time from a standard live account.","star":false},"XEM":{"comment":"XM spreads are obtained in real-time from a live \"Micro\" account. Tighter spreads are available on commission-incurring \"XM Zero\" accounts.\n\n<a href=\"http:\/\/www.xm.com\/account-types\" target=\"_blank\">Account Types<\/a>","star":false},"OCT":{"comment":"OctaFX's spreads are obtained in real-time from a live \"Micro\" account. \n\n<a href=\"http:\/\/www.octafx.co.uk\/accounts-comparison\/\" target=\"_blank\">Account Types<\/a>","star":false},"IGM":{"comment":"IG Markets spreads are obtained in real-time from a live \"MT4\" account. Tighter spreads are available on \"IG Markets\" and \"L2 Dealer\" platforms.","star":false},"TML":{"comment":"Tickmill spreads are obtained in real-time from a live, *commission-incurring \"ECN Pro\" account.  Tighter spreads are available on \"VIP\" accounts.\n\n<a href=\"http:\/\/tickmill.com\/accounts\/overview\/\" target=\"_blank\">Account Types<\/a>","star":true},"AET":{"comment":"AETOS spreads are obtained in real-time from a live \"Premium\" account, which *requires a $20,000 minimum deposit.\n\n<a href=\"http:\/\/www.aetoscg.com\/uk\/trading-accounts\" target=\"_blank\">Account Types<\/a>","star":true},"VPO":{"comment":"Vipro Markets spreads are obtained in real-time from a live, *commission-incurring \"ECN Pro\" account.\n\n<a href=\"http:\/\/www.vipromarkets.com\/trading-conditions\/account-types\/overview-account\/\" target=\"_blank\">Account Types<\/a>","star":true},"CSP":{"comment":"Core Spreads spreads are obtained in real-time from a live, *commission-incurring \"Core\" account.","star":true}};   if (typeof document.deferredScripts !== 'undefined') { document.deferredScripts.add({id: 'cga-16', name: 'cga', src: 'https://cdn-assets.forexfactory.net/clientscript/combine/js.cache.prod.cga.2af2531ce14db17e28110dd6a5ab9444.js?_v=1487104053', rules: ''}); } flexDatePicker.setGmtOffset(-4);
+flexDatePicker.setWeekStart(1 - 1);
+window.flexCallbacks = window.flexCallbacks || {};
+window.flexCallbacks['init'] = window.flexCallbacks['init'] || {};
+window.flexCallbacks['update'] = window.flexCallbacks['update'] || {};
+window.flexCallbacks['init'].calendar = {
+callback: flexCalendarInstances.register,
+scope: flexCalendarInstances
+};
+window.flexCallbacks['update'].calendar = {
+callback: flexCalendarInstances.update,
+scope: flexCalendarInstances
+};
+YAHOO.util.Event.onDOMReady(function()
+{
+FFTooltipGen.register_list();
+});
+user_timezone = '-4'.replace('+', '');
+user_dst = '1';
+user_startofweek = '1';
+user_format = '12'; var brokerNames = {"FXP":"FxPro","FOR":"FOREX.com","FCM":"FXCM","ATV":"ActivTrades","ESY":"easyMarkets","FBO":"FIBO Group","TNK":"ThinkMarkets","ODA":"OANDA","XEM":"XM","OCT":"OctaFX","IGM":"IG Markets","TML":"Tickmill","AET":"AETOS","VPO":"Vipro Markets","CSP":"Core Spreads"};  if (typeof document.deferredScripts !== 'undefined') { document.deferredScripts.add({id: 'mda_cga-32', name: 'mda_cga', src: 'https://cdn-assets.forexfactory.net/clientscript/combine/js.cache.prod.mda_cga.97da67c4a006033aa067773a7ea0551a.js?_v=1487104148', rules: ''}); } 
+var image_max_dimension = parseInt('625');
+ISC = new image_size_containment(image_max_dimension, image_max_dimension);
+if (typeof flexOptionsDisable == 'undefined'){flexOptionsDisable = {};}
+if (typeof flexOptionsVisible == 'undefined'){flexOptionsVisible = {};}
+Market_Session_Tool = new _Market_Session_Tool;
+Market_Session_Tool.init_update();
+vbulletin_rb_rate = parseInt("2000");
+var SESSIONURL = '';
+var SECURITYTOKEN = "guest";
+var IMGDIR_MISC = "https://cdn-assets.forexfactory.net/images/misc";
+var RESOURCES = "https://cdn-resources.forexfactory.net";
+var COOKIE_DOMAIN = "www.forexfactory.com";
+ 
+var loadFooterAd = true;
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+ 
+AdDetect = new AdDetect;
+AdDetect.setAdSlot('div-gpt-ad-1330711464564-0', 160, 600, 'left');
+if (loadFooterAd)
+{
+AdDetect.setAdSlot('div-gpt-ad-1330711464564-2', 970, 250, 'bottom');
+};
+googletag.cmd.push(function()
+{
+var resizeTimer;
+if (FF.isMobile())
+{ // remove sidebar ad slot
+$('.sidebar__panel--adbit').remove();
+// adblock detector
+AdDetect.setAdSlot('gpt_mv_inline_banner', 320, 250, 'left');
+AdDetect.setAdSlotMonitor("gpt_mv_inline_banner", true);
+AdDetect.monitor();
+// setup inlinead ad
+window.inlineAd = googletag.defineSlot('/1014366/fpb_120x600', [[320, 250], [300, 250]], 'gpt_mv_inline_banner')
+.addService(googletag.pubads().setTargeting("key", "branding"));
+}
+else
+{
+$('.pagearrange__layout-inlinead').remove(); // remove inline ad
+// setup side ad
+window.sideAd = googletag.defineSlot('/1014366/fpb_120x600', [[120, 600], [160, 600]], 'div-gpt-ad-1330711464564-0')
+.addService(googletag.pubads().setTargeting("key", "branding"));
+}
+if (loadFooterAd)
+{
+if (FF.isMobile())
+{
+var footerAdSizes= [[970, 1], [728, 210], [728, 90], [720, 300], [336, 280], [970, 250], [970, 90], [970, 300], [970, 250], [970, 480], [400, 400], [600, 425], [640, 480], [928, 120]];
+var footerAdMap = googletag.sizeMapping().addSize([0, 0], [[1,1],[320,680],[300,600],[320,500],[300,500],[320,320],[320,480],[320,100],[320,800]]).addSize([768, 1], footerAdSizes).build();
+window.footerAd = googletag.defineSlot('/1014366/branding_footer', footerAdSizes, 'div-gpt-ad-1330711464564-2')
+.defineSizeMapping(footerAdMap)
+.addService(googletag.pubads().setTargeting("key", "branding"));
+}
+else
+{
+window.footerAd = googletag.defineSlot('/1014366/branding_footer', [[970, 1], [728, 210], [728, 90], [720, 300], [970, 250], [970, 90], [970, 300], [970, 250], [970, 480], [400, 400], [600, 425], [640, 480], [928, 120]], 'div-gpt-ad-1330711464564-2').addService(googletag.pubads().setTargeting("key", "branding"));
+};
+};
+googletag.pubads().enableSingleRequest();
+googletag.pubads().addEventListener('slotRenderEnded', function(e)
+{
+AdDetect.renderEnded(e.isEmpty);
+});
+googletag.enableServices();
+});
+  <!--
+var SESSIONURL = '';
+var IMGDIR_MISC = 'https://cdn-assets.forexfactory.net/images/misc';
+var vb_disable_ajax = parseInt('0', 10);
+var vb_collapse_timeout = parseInt('200');
+-->  Forex Factory           Forex Factory                     Home
+       Forums
+       Trades
+       News
+       Calendar
+       Market
+       Brokers
+      Login 
+User/Email:
+Password:Remember 12:05pm Search          Menu         Forums
+    Trades
+    News
+    Calendar
+    Market
+    Brokers
+      Login
+    12:05pm
+     Search     
+onHeaderComplete.execute();
+    Online Now  4,058 Traders 463 Members 24 High Impact 52 w/ Trade Explorers 19 w/ Posted Systems   
+$(window).load(function() {
+try {
+googletag.cmd.push(function(){ googletag.display('div-gpt-ad-1330711464564-0'); });
+AdDetect.setAdSlotMonitor("div-gpt-ad-1330711464564-0", true);
+AdDetect.monitor();
+} catch (e) {
+}
+});
+var fprLinks = {"fxp":"FxPro","for":"FOREX.com","fcm":"FXCM","atv":"ActivTrades","esy":"easyMarkets","fbo":"FIBO Group","tnk":"ThinkMarkets","oda":"OANDA","xem":"XM","oct":"OctaFX","igm":"IG Markets","tml":"Tickmill","aet":"AETOS","vpo":"Vipro Markets","csp":"Core Spreads"};
+  Forex Broker Activity  Real-Time Spreads Broker Guide Updates      <!--
+onContentStart.execute();
+-->                        Scanner   Settings About Live As of 4:00pm Mar 10             Scanner Settings
+         Block Name:          Rows Displayed:    12345 Metrics
+     Columns Displayed:    345678 Instruments
+     Show Pippettes:    NoYes                  Default Settings       This application requires websocket support. Please feature upgrade to a modern browser.        Bid    Bid   Ask   Bid | Ask   Broker Bid | Ask   Midpoint   Chart   Pip Change   Percent Change   High | Low   Pip Spread   Average Spread   Broker Pip Spread        Last 5 MinutesLast 10 MinutesLast 15 MinutesLast 20 MinutesLast 25 MinutesLast 30 MinutesLast 60 MinutesLast 2 HoursLast 3 HoursLast 4 HoursLast 5 HoursLast 6 HoursLast 12 HoursLast 24 HoursLast 48 Hours CandleOHLCLineLine (dotted)Area       Chart: Last 6 hr    Bid   Ask   Bid | Ask   Broker Bid | Ask   Midpoint   Chart   Pip Change   Percent Change   High | Low   Pip Spread   Average Spread   Broker Pip Spread        Last 5 MinutesLast 10 MinutesLast 15 MinutesLast 20 MinutesLast 25 MinutesLast 30 MinutesLast 60 MinutesLast 2 HoursLast 3 HoursLast 4 HoursLast 5 HoursLast 6 HoursLast 12 HoursLast 24 HoursLast 48 Hours CandleOHLCLineLine (dotted)Area       Pip/Tick Chg: 6 hr    Bid   Ask   Bid | Ask   Broker Bid | Ask   Midpoint   Chart   Pip Change   Percent Change   High | Low   Pip Spread   Average Spread   Broker Pip Spread        Last 5 MinutesLast 10 MinutesLast 15 MinutesLast 20 MinutesLast 25 MinutesLast 30 MinutesLast 60 MinutesLast 2 HoursLast 3 HoursLast 4 HoursLast 5 HoursLast 6 HoursLast 12 HoursLast 24 HoursLast 48 Hours CandleOHLCLineLine (dotted)Area       % Chg: 6 hr    Bid   Ask   Bid | Ask   Broker Bid | Ask   Midpoint   Chart   Pip Change   Percent Change   High | Low   Pip Spread   Average Spread   Broker Pip Spread        Last 5 MinutesLast 10 MinutesLast 15 MinutesLast 20 MinutesLast 25 MinutesLast 30 MinutesLast 60 MinutesLast 2 HoursLast 3 HoursLast 4 HoursLast 5 HoursLast 6 HoursLast 12 HoursLast 24 HoursLast 48 Hours CandleOHLCLineLine (dotted)Area       Bid | Ask:     Bid   Ask   Bid | Ask   Broker Bid | Ask   Midpoint   Chart   Pip Change   Percent Change   High | Low   Pip Spread   Average Spread   Broker Pip Spread        Last 5 MinutesLast 10 MinutesLast 15 MinutesLast 20 MinutesLast 25 MinutesLast 30 MinutesLast 60 MinutesLast 2 HoursLast 3 HoursLast 4 HoursLast 5 HoursLast 6 HoursLast 12 HoursLast 24 HoursLast 48 Hours CandleOHLCLineLine (dotted)Area         EUR/USD       GBP/USD       USD/JPY       USD/CHF       USD/CAD       AUD/USD       NZD/USD       GBP/JPY                                                                                                                            < Today: Mar 12 >  Filter Up Next           Date Range
+      Begin Date       End Date (none)  (none)         Last Week This Week Next Week   Last Month This Month Next Month      Default View TodayTomorrowYesterdayThis Week                      Calendar Filter
+       
+Expected Impact
+(all, none)
+                                   
+Event Types
+(all, none)
+      Growth    Inflation    Employment    Central Bank    Bonds      Housing    Consumer Surveys    Business Surveys    Speeches    Misc          
+Currencies
+(all, none)
+      AUD    CAD    CHF    CNY    EUR      GBP    JPY    NZD    USD             Saving                Date 12:05pm Currency Impact  Detail Actual Forecast Previous Graph    12:05pm  Actual     SunMar 12   SunMar 12 3:00am CAD         Daylight Saving Time Shift               No Data Series  Details          USD         Daylight Saving Time Shift               No Data Series  Details         5:45pm NZD         FPI m/m      2.8%         Actual Forecast Previous2.8%  Details   Graph         7:50pm JPY         Core Machinery Orders m/m     0.0% 6.7%         Actual Forecast0.0% Previous6.7%  Details   Graph          JPY         PPI y/y     1.0% 0.5%         Actual Forecast1.0% Previous0.5%  Details   Graph           More            
+$(window).load(function()
+{
+if (FF.isMobile())
+{
+googletag.cmd.push(function()
+{
+googletag.display('gpt_mv_inline_banner');
+});
+}
+});
+                 All Forums / Last Replied             Forum Block Settings
+     Show Forum         All Forums         Interactive Trading         Trading Systems         Trading Discussion         Platform Tech         Broker Discussion         Trading Journals         Rookie Talk         Commodities and Stocks       Grayed forums are not included when sorted by 'Last Replied.'      Display Format        Threads       Replies          
+Text preview
+     Display Items 1234567891011121314151617181920      Sort By        Latest       Hottest       Last Replied       Most Replied       Most Viewed       Latest Liked       Most Liked      Sort Period        Last 12 Hours       Last 24 Hours       Last 48 Hours       Last 7 Days       Last 30 Days                          Forum Block Filter
+      Impact Hurdle        Off        Only show replies from members ranked at least:  Low ImpactMedium ImpactHigh Impact          Subscriptions        Off       Only show posts from members you are subscribed to     
+You must be a member to have member subscriptions (join now).
+        Saving                 My first FX martingale attempt  
+Started by
+  sbc  |57 replies | Last reply < 1 min ago     Murrey Math and Quantum Method  
+Started by
+  vgyuszko  |425 replies | Last reply 5 min ago     USD/JPY Discussion  
+Started by
+  pfernandez  |64,503 replies | Last reply 12 min ago     EURUSD  
+Started by
+  snprr  |1,095,915 replies | Last reply 14 min ago     CCFp weekly signals (set and forget basket trading)  
+Started by
+  Forexpinbar  |1,356 replies | Last reply 14 min ago       More                     All Forums / Hottest Threads            Forum Block Settings
+     Show Forum         All Forums         Interactive Trading         Trading Systems         Trading Discussion         Platform Tech         Broker Discussion         Trading Journals         Rookie Talk         Commodities and Stocks       Grayed forums are not included when sorted by 'Hottest.'      Display Format        Threads       Replies          
+Text preview
+     Display Items 1234567891011121314151617181920      Sort By        Latest       Hottest       Last Replied       Most Replied       Most Viewed       Latest Liked       Most Liked      Sort Period        Last 12 Hours       Last 24 Hours       Last 48 Hours       Last 7 Days       Last 30 Days                          Forum Block Filter
+      Impact Hurdle        Off        Only show replies from members ranked at least:  Low ImpactMedium ImpactHigh Impact          Subscriptions        Off       Only show posts from members you are subscribed to     
+You must be a member to have member subscriptions (join now).
+        Saving                 CCFp weekly signals (set and forget basket trading)  
+Started by
+  Forexpinbar  |1,356 replies | Last reply 14 min ago     How big is your account and how profitable are you? A poll  
+Started by
+  BenScoobert  |5 replies | Last reply 19 min ago     Murrey Math and Quantum Method  
+Started by
+  vgyuszko  |425 replies | Last reply 5 min ago     Moving Average Crosses on Multiple Pairs at the same time.  
+Started by
+  procrude  |6 replies | Last reply 25 min ago     TDI Trading... Ideas welcome!  
+Started by
+  reteid2222  |8 replies | Last reply 3 hr ago       More                     All Forums / Most Liked  12H            Forum Block Settings
+     Show Forum         All Forums         Interactive Trading         Trading Systems         Trading Discussion         Platform Tech         Broker Discussion         Trading Journals         Rookie Talk         Commodities and Stocks       Grayed forums are not included when sorted by '.'      Display Format        Threads       Replies          
+Text preview
+     Display Items 1234567891011121314151617181920      Sort By        Latest       Hottest       Last Replied       Most Replied       Most Viewed       Latest Liked       Most Liked      Sort Period        Last 12 Hours       Last 24 Hours       Last 48 Hours       Last 7 Days       Last 30 Days                          Forum Block Filter
+      Impact Hurdle        Off        Only show replies from members ranked at least:  Low ImpactMedium ImpactHigh Impact          Subscriptions        Off       Only show posts from members you are subscribed to     
+You must be a member to have member subscriptions (join now).
+        Saving                     emmanuel7788   | Replied 3 hr ago 
+{quote} Hi Maz, the new version will be tested next week when market opens. this new version will be cleaner, crispier and easier to use on your learning and ...
+ 
+Thread: Trading Made Simple         emmanuel7788   | Replied 3 hr ago 
+{quote} Just completed new version of the Weekly and daily background candles which shows on lower TF charts like H4 and H1. Will wait till market opens and see if ...
+ 
+Thread: Trading Made Simple         emmanuel7788   | Replied 11 hr ago 
+{quote} First of all, this pair is very narrow range. Its weekly ATR is less than 100 pips. It not worth spending time trading this if you are looking for pips and ...
+ 
+Thread: Trading Made Simple         Davit   | Replied 1 hr 10 min ago 
+Good morning guys Funny I have been reading article after article about stellar US economy and possible "overheating" term used by the Feds a lot. Looking at US ...
+ 
+Thread: Pivot Trading with TDI         chester123   | Replied 3 hr ago 
+Hi guys, so just a follow up of the Friday price analysis discussion. If anyone wants to fully understand I think its essential to go back to one of the previous ...
+ 
+Thread: The Really Useless Thread       More                   
+if (typeof flexTradesActivityInstances != 'undefined')
+{
+flexTradesActivityInstances.is_market_closed = false;
+window.flexCallbacks = window.flexCallbacks || {};
+window.flexCallbacks['init'] = window.flexCallbacks['init'] || {};
+window.flexCallbacks['init'].trade_activity = {
+callback: flexTradesActivityInstances.register,
+scope: flexTradesActivityInstances
+};
+}
+   Trade Feed / Live Accounts  Filter Stream           Trade Feed Settings
+     Trade Type        All Trades       Entries       Exits       Winning Exits       Losing Exits       Brokerage Account Type        Live Accounts       Demo Accounts     Trade feed excludes Explorers that are set to private or traded by a commercial member.                     Trade Feed Filters
+      Impact Hurdle        Off        Only show trades from members ranked at least:  Low ImpactMedium ImpactHigh Impact          Subscriptions        Off       Only show trades from members you are subscribed to     
+You must be a member to have member subscriptions (join now).
+      
+Currency Pairs
+(all, none, majors)
+          
+AUD/CAD
+       
+AUD/CHF
+       
+AUD/JPY
+       
+AUD/NZD
+       
+AUD/SGD
+       
+AUD/USD
+         
+CAD/CHF
+       
+CAD/JPY
+         
+CHF/JPY
+       
+CHF/NOK
+           
+EUR/AUD
+       
+EUR/CAD
+       
+EUR/CHF
+       
+EUR/GBP
+       
+EUR/JPY
+       
+EUR/MXN
+       
+EUR/NOK
+       
+EUR/NZD
+       
+EUR/PLN
+       
+EUR/SEK
+       
+EUR/SGD
+       
+EUR/TRY
+       
+EUR/USD
+       
+EUR/ZAR
+           
+GBP/AUD
+       
+GBP/CAD
+       
+GBP/CHF
+       
+GBP/JPY
+       
+GBP/NZD
+       
+GBP/SGD
+       
+GBP/USD
+         
+NZD/CAD
+       
+NZD/CHF
+       
+NZD/JPY
+       
+NZD/SGD
+       
+NZD/USD
+           
+USD/CAD
+       
+USD/CHF
+       
+USD/CNH
+       
+USD/DKK
+       
+USD/HKD
+       
+USD/JPY
+       
+USD/MXN
+       
+USD/NOK
+       
+USD/RUB
+       
+USD/SEK
+       
+USD/SGD
+       
+USD/TRY
+       
+USD/ZAR
+           
+SGD/JPY
+       
+ZAR/JPY
+         
+Non-Forex
+       
+AUDHKD
+       
+AUDSEK
+       
+BTCEUR
+       
+BTCUSD
+       
+CADNOK
+       
+CADSGD
+       
+CHFHKD
+       
+CHFMXN
+       
+CHFSGD
+       
+CHFZAR
+       
+DKKPLN
+       
+DKKSGD
+       
+EURCZK
+       
+EURHUF
+       
+GBPDKK
+       
+GBPHUF
+       
+GBPNOK
+       
+GBPPLN
+       
+GBPSEK
+       
+NOKJPY
+       
+NOKSEK
+       
+PLNDKK
+       
+PLNJPY
+       
+SEKJPY
+       
+SGDCHF
+       
+SGDHKD
+       
+TRYDKK
+       
+TRYJPY
+       
+USDHUF
+       
+USDILS
+       
+USDRON
+       
+USDTHB
+              Saving                Trade Trader Return Pips      EUR/USD SELL 1.0671 Opened Short | 41 hr ago    lawlex   0.0%MTM   0MTM    EUR/GBP SELL 0.8767 Closed Long | 41 hr ago    lawlex   -0.9%   -8    EUR/GBP BUY 0.8767 Opened Long | 41 hr ago    lawlex   0.0%MTM   0MTM    EUR/USD BUY 1.0671 Closed Short | 41 hr ago    lawlex   -0.5%   -6    NZD/USD BUY ~0.6928 Scaled In | ~41 hr ago  Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928Opened Long at 0.6928 Showing 15; remainder omitted.     Benevolent    0.0%MTM0.0%MTM0.0%MTM0.0%MTM0.0%MTM0.0%MTM0.0%MTM0.0%MTM0.0%MTM0.0%MTM0.0%MTM0.0%MTM0.0%MTM0.0%MTM0.0%MTM   -0.1%MTM    -12MTM-12MTM-12MTM-12MTM-12MTM-12MTM-12MTM-12MTM-12MTM-12MTM-12MTM-12MTM-12MTM-12MTM-12MTM   -12MTM        More                       All News / Latest Stories            News Block Settings
+     Show Category        All News       Breaking News       Fundamental Analysis       Technical Analysis       Entertainment News       Forex Industry News       Educational News         Display Format        Stories       Large Stories       Comments          
+Text preview
+     Display Items 1234567891011121314151617181920      Sort By        Latest       Hottest       Last Commented       Most Commented       Most Viewed      Sort Period        Last 12 Hours       Last 24 Hours       Last 48 Hours       Last 7 Days       Last 30 Days                          News Block Filter
+      Impact Hurdle        Off        Only show comments from members ranked at least:  Low ImpactMedium ImpactHigh Impact          Subscriptions        Off       Only show comments from members you are subscribed to     
+You must be a member to have member subscriptions (join now).
+        Saving                        Trump economic adviser: Fed doing 'good job,' respects independence  From reuters.com | 4 min ago            China vows zero tolerance for faked data  From reuters.com | 4 hr ago | 3 comments            Twitter execs insist Trump isnt helping their growth  From nypost.com | 5 hr ago            EUR/USD Weekly Forecast March 13-17  From economiccalendar.com | 11 hr ago            UK government must make plans for possibility of no Brexit deal: lawmakers  From reuters.com | 11 hr ago | 9 comments            Trump's Firing of Manhattan Prosecutor Shows Escalating Battle  From bloomberg.com | 14 hr ago | 1 comment            Market Doubts of Three Fed Hikes This Year Caps Dollar  From marctomarket.com | 23 hr ago | 9 comments       More                     All News / Hottest Stories            News Block Settings
+     Show Category        All News       Breaking News       Fundamental Analysis       Technical Analysis       Entertainment News       Forex Industry News       Educational News         Display Format        Stories       Large Stories       Comments          
+Text preview
+     Display Items 1234567891011121314151617181920      Sort By        Latest       Hottest       Last Commented       Most Commented       Most Viewed      Sort Period        Last 12 Hours       Last 24 Hours       Last 48 Hours       Last 7 Days       Last 30 Days                          News Block Filter
+      Impact Hurdle        Off        Only show comments from members ranked at least:  Low ImpactMedium ImpactHigh Impact          Subscriptions        Off       Only show comments from members you are subscribed to     
+You must be a member to have member subscriptions (join now).
+        Saving                        EUR/USD Weekly Forecast March 13-17   From economiccalendar.com | 11 hr ago  EUR/USD posted a second week of gains despite a strong US jobs report that provided confirmation that the Fed will raise rates in the ...           UK government must make plans for possibility of no Brexit deal: lawmakers   From reuters.com | 11 hr ago | 9 comments  It would be a serious dereliction of duty if the British government failed to plan for the possibility of not reaching an exit deal with the ...           Twitter execs insist Trump isnt helping their growth   From nypost.com | 5 hr ago  Twitter Chief Executive Jack Dorsey bought $7 million worth of his companys shares on Feb. 14. His Valentines Day bet on the stock has so ...                    All News / Most Commented  24H            News Block Settings
+     Show Category        All News       Breaking News       Fundamental Analysis       Technical Analysis       Entertainment News       Forex Industry News       Educational News         Display Format        Stories       Large Stories       Comments          
+Text preview
+     Display Items 1234567891011121314151617181920      Sort By        Latest       Hottest       Last Commented       Most Commented       Most Viewed      Sort Period        Last 12 Hours       Last 24 Hours       Last 48 Hours       Last 7 Days       Last 30 Days                          News Block Filter
+      Impact Hurdle        Off        Only show comments from members ranked at least:  Low ImpactMedium ImpactHigh Impact          Subscriptions        Off       Only show comments from members you are subscribed to     
+You must be a member to have member subscriptions (join now).
+        Saving                        UK government must make plans for possibility of no Brexit deal: lawmakers   From reuters.com | 11 hr ago | 9 comments  It would be a serious dereliction of duty if the British government failed to plan for the possibility of not reaching an exit deal with the ...           Market Doubts of Three Fed Hikes This Year Caps Dollar   From marctomarket.com | 23 hr ago | 9 comments  Bringing forward expectations of a Fed hike from May-June to March was worth something for the dollar, but to get more now, the market may ...           China vows zero tolerance for faked data  From reuters.com | 4 hr ago | 3 comments  China's top statistician said on Sunday anyone caught falsifying economic data would face zero tolerance and be punished under the law. There has long been ...      More                    
+window.flexCallbacks = window.flexCallbacks || {};
+window.flexCallbacks['init'] = window.flexCallbacks['init'] || {};
+window.flexCallbacks['init'].trades_positions = {
+callback: flexPositionInstances.register,
+scope: flexPositionInstances
+};
+   Positions / Live Accounts            Positions Settings
+     Meter Type        Traders       Lots       Traders and Lots                                 Saving                Instrument  Long Traders Long Lots Long Traders/Lots   Short Traders Short Lots Short Traders/Lots  Detail          EUR/USD         38% 276 Traders 459 Traders 62%              30% 182.4 Lots 430.1 Lots 70%      Open      EUR/USD Position Detail      Exit Detail View         GBP/USD         66% 312 Traders 163 Traders 34%              74% 163.8 Lots 56.9 Lots 26%      Open      GBP/USD Position Detail      Exit Detail View         USD/JPY         47% 197 Traders 226 Traders 53%              48% 129.8 Lots 143.0 Lots 52%      Open      USD/JPY Position Detail      Exit Detail View       Expand                      Sessions  Live              6pm8pm10pm12am2am4am6am8am10am12pm2pm4pm                                 Sydney 3:05am local        Tokyo 1:05am local        London 4:05pm local        New York 12:05pm local                 <!--
+var ffSettings_explorersettings = new FFSettings(true, 'explorersettings', '');
+var ffSettings_homespreads = new FFSettings(true, 'homespreads', '');
+onBodyComplete.execute();
+vBulletin_init();
+-->    Top of Page Default Page    
+$(window).load(function() {
+try
+{
+googletag.cmd.push(function() {
+googletag.display('div-gpt-ad-1330711464564-2');
+});
+AdDetect.setAdSlotMonitor("div-gpt-ad-1330711464564-2", true);
+AdDetect.monitor();
+}
+catch (err){}
+});
+         2017 Forex Factory, Inc. / Terms of Service  Forex Factory is a registered trademark.     Connect  Facebook Twitter RSS    About  Website Company Careers Media Kit Blog Contact    Products  Forums Trades Calendar News Market Brokers Trade Explorer    Website  Homepage Search Members User Guide Report a Bug         
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-3311429-1', 'forexfactory.com');
+ga('require', 'displayfeatures');
+ga('send', 'pageview');
+  
