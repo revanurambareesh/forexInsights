@@ -1,4 +1,5 @@
 import numpy as np
+import scipy.io
 import csv
 import json
 import os
@@ -26,7 +27,7 @@ def keywordPresenceTester(company, keyword):
     numOfFiles = folderFileInfo.numOfFiles(company)
     listOfFiles = folderFileInfo.getNonEmptyFiles(company)
 
-    frequency = 0
+    frequency = 0.0
     for scrapedFile in listOfFiles:
         scrapedData = ''
         with open(scrapedFile, 'rb') as f:
@@ -42,10 +43,10 @@ def keywordPresenceTester(company, keyword):
     #else:
     #    return False
 
-    if frequency < 2: return 1
-    if frequency > 5: return 5
+    if frequency < 2.0: return (1.0-3.0)/2.0
+    if frequency > 5.0: return (5.0-3.0)/2.0
 
-    return frequency
+    return (frequency-3.0)/2.0
 
 
 def makeDataSet():#UIobject):
@@ -82,8 +83,8 @@ def makeDataSet():#UIobject):
         yVal = ord(company[0]) - ord('0')
         #if yVal == 0: yVal=-1
 
-        #with open(os.getcwd() + '/forex/data/model/dataset_X-y/' + company + '.json', "w") as jsonF:
-        #    jsonF.write(json.dumps(Xvector))
+        with open(os.getcwd() + '/forex/data/model/dataset_X-y/' + company + '.json', "w") as jsonF:
+            jsonF.write(json.dumps(Xvector))
         # similarly to read Xvector, Xvector=json.loads('txt_from_json')
 
         ### 80% contrib
@@ -111,8 +112,10 @@ def trainMLmodel():#UIobject):
     DataSetX = np.array(X)
     DataSety = np.array(y)
 
-    print DataSety
-    print DataSetX
+    #print DataSety
+    #print DataSetX
+
+    scipy.io.savemat('forex/data/model/dataset_X-y/Xy.mat', dict(x=DataSetX, y=DataSety))
 
 
 
@@ -120,7 +123,7 @@ def trainMLmodel():#UIobject):
     #UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 95)
     #UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
-
+    '''
     clf = BernoulliNB()
     clf.fit(DataSetX, DataSety)
 
@@ -144,15 +147,22 @@ def trainMLmodel():#UIobject):
                   os.getcwd() + "/forex/data/model/archive_model/nc/model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
 
     print 'Accuracy of the NC model is: ', clf2.score(DataSetX, DataSety)    
-
-    clfSVMgm = OneClassSVM()
-    clfSVMgm.fit(DataSetX, DataSety) 
+'''
+    clfSVMgm = OneClassSVM(nu=0.1, kernel="rbf", gamma=0.1)
+    clfSVMgm.fit(DataSetX)#, DataSety) 
 
     if os.path.exists('forex/data/model/oneClassSVM.pkl'):
     	os.rename(os.getcwd() + "/forex/data/model/oneClassSVM.pkl",
                   os.getcwd() + "/forex/data/model/archive_model/svm1/model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
 
     joblib.dump(clfSVMgm, 'forex/data/model/oneClassSVM.pkl')
+
+    clfSVMgm = joblib.load('forex/data/model/oneClassSVM.pkl')
+    print clfSVMgm.predict(DataSetX)
+    
+    print '1 predict 499:', clfSVMgm.predict([DataSetX[499]])
+    print '-1 predict 496:', clfSVMgm.predict([DataSetX[496]])
+    print '1 predict 497:', clfSVMgm.predict([DataSetX[497]])
 
     #clfElEgm = EllipticEnvelope()
     #clfElEgm.fit(DataSetX, DataSety)
@@ -164,7 +174,7 @@ def trainMLmodel():#UIobject):
     #          os.getcwd() + "/forex/data/model/archive_model/ellip/model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
 
     #joblib.dump(clfElEgm, 'forex/data/model/Elliptic.pkl')
-
+    '''
     clfIsoForestgm = IsolationForest()
     clfIsoForestgm.fit(DataSetX)#, DataSety)
 
@@ -178,18 +188,13 @@ def trainMLmodel():#UIobject):
 
     print 'Model saved at ', 'forex/data/model/naiveBayes.pkl'
     # print 'Model saved at ', 'data\\model\\nearestCentroid.pkl'
+    '''
 
-    
+    #print 'Accuracy of the SVM model is: ', clfSVMgm.score(DataSetX, DataSety)
 
-    #print clf.predict(DataSetX)
-    
-    
+    #print 'Accuracy of the EE model is: ', clfElEgm.score(DataSetX, DataSety)
 
-    print 'Accuracy of the SVM model is: ', clfSVMgm.score(DataSetX, DataSety)
-
-    print 'Accuracy of the EE model is: ', clfElEgm.score(DataSetX, DataSety)
-
-    print 'Accuracy of the Iso_forest model is: ', clfIsoForestgm.score(DataSetX, DataSety)
+    #print 'Accuracy of the Iso_forest model is: ', clfIsoForestgm.score(DataSetX, DataSety)
 
     stat = 'Model Trained'
     #UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 100)

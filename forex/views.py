@@ -13,7 +13,7 @@ def index(request):
 			#data_list.append(request.POST[key])
 		company = request.POST.get('your_name', '')
 		if(company!=textbox_val):				
-			data_list.append(company)
+			#data_list.append(company)
 			print 'The requested company is '+ company
 
 			res = getInsights(company)
@@ -26,6 +26,7 @@ def index(request):
 
 		if(company==textbox_val):
 			print 'Found invalid string for company.. Ignoring this input'
+			data_list.append('Enter the company and Hit enter')
 
 			#just before redering the page
 		#textbox_val=company #bug fixed

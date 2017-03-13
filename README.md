@@ -1,6 +1,8 @@
 # Forex Insights
 
 ##### Modifications are being made.... Kindly keep in touch with me...
+Pending: New machine learning models and dateset
+
 *Old code is archived [here](https://github.com/revanurambareesh/forexInsightsQtUI)*
 
 This repository contains my solution to the FX problem
