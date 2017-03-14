@@ -1,23 +1,35 @@
-{% extends "forex/header.html" %}
+		{% extends "forex/header.html" %}
 
-{% block content0 %}
-<p>(Testing) Upload the document </p>
-<input type="submit" class="btn btn-default" value="Upload">
-{% endblock %}
+		{% block content0 %}
+		<script type="text/javascript">
+			document.getElementById("file").onchange = function() {
+	    document.getElementById("uploadForm").submit();
+	};		
+		</script>
+		<h4>Upload the list</h4>
+		<p>Upload the list with newlines separating each of them example: <br />XYZ <br />ABC<br/></p>
 
-{% block content1 %}
-<p></p>
-<form action="forex" method="post">
-	{% csrf_token %}
-    <input id="companyName" class="form-control" type="text" name="your_name" value="{{ enter_val }}" onclick='javascript: this.value = ""'> 
-    <input type="submit" class="btn btn-default" style="position: absolute; left: -9999px" value="Search">
-</form>
-{% endblock %}
+		  <form method="POST" action="forex" enctype="multipart/form-data" id="uploadForm">
+		  {% csrf_token %}
+	<strong>Upload file:</strong> 
+	<input type="file"  class="btn btn-strong" name="file"/>
+	<!--input type="submit" name="submit" value="Upload" /-->
+	</form>
+		{% endblock %}
 
-{% block content2 %} 
-{% for c in content %}
+		{% block content1 %}
+		<p></p>
+		<form action="forex" method="post">
+			{% csrf_token %}
+		    <input id="companyName" class="form-control" type="text" name="your_name" value="{{ enter_val }}" onclick='javascript: this.value = ""'> 
+		    <input type="submit" class="btn btn-default" style="position: absolute; left: -9999px" value="Search">
+		</form>
+		{% endblock %}
 
-<p> {{c|linebreaks}} <p>
-{% endfor %} 
-{% endblock %}
+		{% block content2 %} 
+		{% for c in content %}
+
+		<p> {{c|linebreaks}} <p>
+		{% endfor %} 
+		{% endblock %}
 
