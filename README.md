@@ -1,7 +1,10 @@
 # Forex Insights
 
+Status: Lot of code movement is taking place..
+
 ##### Modifications are being made.... Kindly keep in touch with me...
 Pending: New machine learning models and dateset
+https://business-forex-insights.herokuapp.com/
 
 *Old code is archived [here](https://github.com/revanurambareesh/forexInsightsQtUI)*
 
@@ -26,6 +29,8 @@ This document explains logic behind web-scraping, web-searching, training ML mod
 
 #### Mentoring phase Implementation:
 This is being updated shortly...
+
+https://business-forex-insights.herokuapp.com/
 
 ## Overview of this approach
 This project aims to support forex business using data available on public web domain using NLP, web-scraping and ML. A set of most frequently appearing keywords in what defines the term 'Forex' are used as feature set. The dataset is generated for each of the entry given in excel sheet (mentioned in problem statement) using web search APIs, and each of the obtained links is scraped for data within specified HTML tags. The presence of the keyword in the data after processing for its presence in majority of the links crawled by search engine (see design document) is considered as y = 1 or positive case. Once the dataset is ready, Naïve Bayes model is trained. This model is used to predict the probability to determine a potential FX customer. An intuitive GUI is also provided for this project. 
