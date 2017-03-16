@@ -35,9 +35,9 @@ def index(request):
 
             if row == '': continue
 
-            #res += getInsights(row) + '\n'
-            res += 'HIHI'
-            time.sleep(1)
+            res += getInsights(row) + '\n'
+            #res += 'HI\nHI\nHI\nHI\nHI\nHI\nHI\nHI\nHI\n'
+            #time.sleep(1)
 
             print 'Successfully obtained results'
 
@@ -69,9 +69,9 @@ def index(request):
             # data_list.append(company)
             print 'The requested company is ' + company
 
-            #res = getInsights(company)
-            res='HIHI'
-            time.sleep(3)
+            res = getInsights(company)
+            #res='HI\nHI\nHI\nHI\nHI\nHI\nHI\nHI\nHI\n'
+            #time.sleep(3)
 
             print 'Successfully obtained results'
 
