@@ -1,34 +1,93 @@
-		{% extends "forex/header.html" %}
+        {% extends "forex/header.html" %}
 
-		{% block content0 %}
-		<script type="text/javascript">
-			document.getElementById("file").onchange = function() {
-	    document.getElementById("uploadForm").submit();
-	};		
-		</script>
-		<h4>Upload the list</h4>
-		<p>Upload the list with newlines separating each of them example: <br />XYZ <br />ABC<br/></p>
+        {% block content0 %}
 
-		  <form method="POST" action="forex" enctype="multipart/form-data" id="uploadForm">
-		  {% csrf_token %}
-	<input type="file"  class="btn btn-strong" name="file" id="file"/>
-	<input type="submit" name="submit" class="btn btn-strong" value="Upload" >
-	</form>
-		{% endblock %}
+        <style>
+        body{
 
-		{% block content1 %}
-		<p></p>
-		<form action="forex" method="post">
-			{% csrf_token %}
-		    <input id="companyName" class="form-control" type="text" name="your_name" value="{{ enter_val }}" onclick='javascript: this.value = ""'> 
-		    <input type="submit" class="btn btn-default" style="position: absolute; left: -9999px" value="Search">
-		</form>
-		{% endblock %}
+               background-image:url(/static/lyelbkg.jpg);
 
-		{% block content2 %} 
-		{% for c in content %}
+   background-repeat:no-repeat;
 
-		<p> {{c|linebreaks}} <p>
-		{% endfor %} 
-		{% endblock %}
+   background-size:cover;
+        }
+
+            div#loading {
+                width: 200px;
+                height: 200px;
+                display: none;
+                background: url(/static/squares.svg) no-repeat;
+                cursor: wait;
+                }
+         </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+<!--
+function upload() {
+                var val = $('#filer').val("");
+                $('#filer').trigger("click");
+                var uploadWait = setInterval(function() {
+                    var val = $('#filer').val();
+                    if (val !== null) {
+                            $('#ok').trigger("click");
+                            window.clearInterval(uploadWait);
+                    }
+                }, 1);
+}
+-->
+
+function clickSubmit(){
+document.getElementById('ok').click();
+}
+        </script>
+
+        <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();
+        }
+// ]]>
+        </script>
+
+        <p><center>
+        <div id="loading" align="center"></div>
+            </center>
+        </p>
+
+        {% endblock %}
+
+
+        {% block content1 %}
+        <p></p>
+
+        <form action="forex" method="post" >
+            {% csrf_token %}
+            <input id="companyName" class="form-control" type="text" name="your_name" value="{{ enter_val }}" onclick='javascript: this.value = ""' autocomplete="off">
+            <input type="submit" class="btn btn-default" style="position: absolute; left: -9999px" value="Search" onclick="loading();">
+        </form>
+
+        <p align="center">OR</p>
+        <div align="center">
+
+        <form method="POST" action="forex" enctype="multipart/form-data" align="center" >
+          {% csrf_token %}
+    <input type="file"  name="file" id="filer" onchange="clickSubmit();" style="color:transparent;width: 90px;" value="Upload">
+    <input type="submit" name="submit" value="Submit" id="ok" style="display:None" onclick="loading();">
+    </form>
+
+        </div>
+
+        <!--button class="btn" onclick="upload()" align="center">Upload a file</button-->
+
+        {% endblock %}
+
+
+        {% block content2 %}
+        <div id="content">
+        {% for c in content %}
+
+        <p> {{c|linebreaks}} <p>
+        {% endfor %}
+            </div>
+        {% endblock %}
 

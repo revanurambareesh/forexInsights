@@ -32,7 +32,7 @@ def keywordPresenceTester(company, keyword):
         scrapedData = ''
         with open(scrapedFile, 'rb') as f:
             scrapedData = f.read()
-        if keyword[0] in scrapedData:
+        if keyword[0] in scrapedData.lower():
             frequency += 1
 
     #if numOfFiles == 0:
