@@ -78,7 +78,7 @@ def crawl(univList):#, UIobject):
         count =3 
         while count > 0:
             try:
-                ans= urllib2.urlopen(link2D[0][0]).read()#HTML response
+                ans= urllib2.urlopen(link2D[0][0], timeout=8).read()#HTML response
                 soup=BeautifulSoup.BeautifulSoup(ans)
                 ans=soup.get_text()
                 #sleep(3)

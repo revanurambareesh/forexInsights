@@ -42,6 +42,7 @@ To run the server on the localhost, it is recommended to use virtual environment
 Django and scrapy framework is needed to be installed.
 
 > pip install -r requirements.txt
+
 > python manager.py runserver 128.0.0.1:8000
 
 ## Data Scraped
