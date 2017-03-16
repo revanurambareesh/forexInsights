@@ -3,16 +3,21 @@
 Status: Lot of code movement is taking place..
 
 ##### Modifications are being made.... Kindly keep in touch with me...
-Pending: New machine learning models and dateset
-https://business-forex-insights.herokuapp.com/
+[Deployment Link: UI](https://business-forex-insights.herokuapp.com/)
 
 *Old code is archived [here](https://github.com/revanurambareesh/forexInsightsQtUI)*
 
-This repository contains my solution to the FX problem
-This tool scrapes the top popular websites of a company and analyses the data. This data is then converted into dataset after which a machine learning model is trained. Easy intuitive UI is also provided. More Details can be found in design document at STAGE 1 Documents/FX Problem.pdf
+## Mentoring
+
+* Ensured right web links are scraped.
+* Dataset does not assume 0 for non-forex anymore. Hence, *unsupervised learning*
+* Using Scrapy and Beautiful Soup for scraping, Django for web server.
+* Changed ML algorithm from supervised to unsupervised
+* UI is now Web-based
+* Training set consists of about 8000 companies, Cross Validation set consists of about 2000 companies and test set consists of about 2000 companies.
 
 
-*Note*: I am located in Bangalore and I can demonstrate it physically as well. 
+As discussed, I am located in Bangalore and I can demonstrate it physically (after competition) as well. 
 
 -----
 
@@ -32,20 +37,15 @@ This is being updated shortly...
 
 https://business-forex-insights.herokuapp.com/
 
-## Overview of this approach
-This project aims to support forex business using data available on public web domain using NLP, web-scraping and ML. A set of most frequently appearing keywords in what defines the term 'Forex' are used as feature set. The dataset is generated for each of the entry given in excel sheet (mentioned in problem statement) using web search APIs, and each of the obtained links is scraped for data within specified HTML tags. The presence of the keyword in the data after processing for its presence in majority of the links crawled by search engine (see design document) is considered as y = 1 or positive case. Once the dataset is ready, Naïve Bayes model is trained. This model is used to predict the probability to determine a potential FX customer. An intuitive GUI is also provided for this project. 
-
-Insights like probability that a company will opt for Forex, its similarity with known companies (from training set) and also how popular this company is on web. Complete project is developed in Python 2.7. Both Stage1 and Stage2 submissions are made available at github.com/revanurambareesh/forexInsights. Stage 1 design document elaborates on the algorithm, technologies used, UI, scraper, and NLP model.
-
 ### Running the tool
-From command line run,
-It is recommended to use virtual environment in python.
-> pip install -r requirements.txt
+To run the server on the localhost, it is recommended to use virtual environment in python.
+Django and scrapy framework is needed to be installed.
 
-> python manager.py runserver
+> pip install -r requirements.txt
+> python manager.py runserver 128.0.0.1:8000
 
 ## Data Scraped
-Data scraped from web is about **450MB**. Since Data is uploaded here, the repository is large and is downloadable as [zip file](https://github.com/revanurambareesh/forexInsights/archive/master.zip) of about 90MB.
+Data scraped from web is more than **1GB**. Since Data is uploaded here, the repository is large and is downloadable as [zip file](https://github.com/revanurambareesh/forexInsights/archive/master.zip).
 All the data has been collected from public domain websites after *obeying* ROBOTS.TXT.
 
 ##### Author: **Ambareesh Revanur**  ([more](https://in.linkedin.com/in/ambareeshr))
