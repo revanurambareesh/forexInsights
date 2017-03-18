@@ -43,7 +43,7 @@ def keywordPresenceTester(company, keyword):
 
 
 
-def scrapeTestData(query):#, UIobject):
+def scrapeTestData(query):
     global parent_dir_name
     parent_dir_name = os.getcwd()
     sys.path.append(parent_dir_name + '/forex/scraper/googlecse')
@@ -77,8 +77,6 @@ def scrapeTestData(query):#, UIobject):
     file.close()
 
     stat = 'Obtained top searches of the company'
-    #UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 15)
-    #UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
     UnivList = []
 
@@ -101,7 +99,7 @@ def scrapeTestData(query):#, UIobject):
     print os.getcwd()
     sys.path.append(parent_dir_name + '/forex/scraper/FxInsightScraper/FxInsightScraper/spiders')
     import WebScraper
-    WebScraper.startReactor(UnivList)#, UIobject)
+    WebScraper.startReactor(UnivList)
 
     sys.path.append(parent_dir_name)
     return numOfResults
@@ -109,8 +107,6 @@ def scrapeTestData(query):#, UIobject):
 
 def generateFeatureVector(company):
     #global parent_dir_name
-    #print 'Verification: ',parent_dir_name #???
-    #parent_dir_name = '/home/ra/Desktop/mysite' #???
     keywordFile = parent_dir_name+'/forex/data/definitions/oriList.csv'
     keywordList = []
 
@@ -174,6 +170,7 @@ def createReport(company, numOfResults, Xv):
     
     result_insight += '\n====POPULARITY on web====\n'
     '''
+
     # popular?
     if int(numOfResults) > 30000:
         result_insight += 'This company is popular on Google\n'
@@ -194,19 +191,15 @@ def createReport(company, numOfResults, Xv):
 
 # pass
 
-def testCompany(company):#, UIobject): #???
-    numOfResults = scrapeTestData(company)#, UIobject) #???
+def testCompany(company):
+    numOfResults = scrapeTestData(company)
     #numOfResults=200 #???
     print 'NUM OF Res= ', numOfResults
     Xv = generateFeatureVector(company)
     stat = 'Created Dataset'
-    #UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 75)
-    #UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
     #stat = 'Insights are ready.. Restarting Reactor..'
     Insights = createReport(company, numOfResults, Xv)
-    #UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 90)
-    #UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
     return Insights
 

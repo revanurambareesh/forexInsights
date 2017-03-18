@@ -14,14 +14,14 @@ from sklearn.svm import OneClassSVM
 from sklearn.covariance import EllipticEnvelope
 from sklearn.ensemble import IsolationForest
 
-import datetime
 import time
 
 __author__ = 'Ambareesh Revanur (@revanurambareesh)'
 
 X = []
-y = []  #unused
-zeroCount=0
+y = []  # unused
+zeroCount = 0
+
 
 def keywordPresenceTester(company, keyword):
     numOfFiles = folderFileInfo.numOfFiles(company)
@@ -29,28 +29,20 @@ def keywordPresenceTester(company, keyword):
 
     frequency = 0.0
     for scrapedFile in listOfFiles:
-        scrapedData = ''
+        # scrapedData = ''
         with open(scrapedFile, 'rb') as f:
             scrapedData = f.read()
         if keyword[0] in scrapedData.lower():
             frequency += 1
         if frequency > 5.0: break
 
-    #if numOfFiles == 0:
-    #	print 'File does not seem to exist...', company
+    if frequency < 2.0: return (1.0 - 3.0) / 2.0
+    if frequency > 5.0: return (5.0 - 3.0) / 2.0
 
-    #if 15 * frequency >= numOfFiles:
-    #    return True
-    #else:
-    #    return False
-
-    if frequency < 2.0: return (1.0-3.0)/2.0
-    if frequency > 5.0: return (5.0-3.0)/2.0
-
-    return (frequency-3.0)/2.0
+    return (frequency - 3.0) / 2.0
 
 
-def makeDataSet():#UIobject):
+def makeDataSet():
     global X
     global y
     global zeroCount
@@ -72,160 +64,61 @@ def makeDataSet():#UIobject):
         # X vector for each of the company
         Xvector = []
         for key in keywordList:
-            #if keywordPresenceTester(company, key) == True:
-            #	#print 'hi'
-            #    Xvector.append(1)
-            #else:
-            #    Xvector.append(0)
             Xvector.append(keywordPresenceTester(company, key))
-            
-        if sum(Xvector) != -100:
-            #print company
-            zeroCount+=1
 
-        print 'Feature generated for ',  company[2:], '\n'#, Xvector, '\n'
+        if sum(Xvector) != -100:
+            # print company
+            zeroCount += 1
+
+        print 'Feature generated for ', company[2:], '\n'  # , Xvector, '\n'
 
         # label
-        yVal = ord(company[0]) - ord('0')  #unused
-        #if yVal == 0: yVal=-1
+        yVal = ord(company[0]) - ord('0')  # unused
 
         with open(os.getcwd() + '/forex/data/model/dataset_X-y/' + company + '.json', "w") as jsonF:
             jsonF.write(json.dumps(Xvector))
         # similarly to read Xvector, Xvector=json.loads('txt_from_json')
 
-        ### 80% contrib
         stat = 'y=' + company
-        #UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), int((float(i) / len(homeList)) * 80))
-        #UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
         X.append(Xvector)
-        y.append(yVal)      #unused
+        y.append(yVal)  # unused
 
 
-def trainMLmodel():#UIobject):
+def trainMLmodel():
     global X
     global y
     global zeroCount
 
-    #print 'HIHI'
-    #sleep(4)
-
-    makeDataSet()#UIobject)
+    makeDataSet()
 
     ### 20% contrib
     stat = 'Training Model'
-    #UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
     DataSetX = np.array(X)
-    DataSety = np.array(y)      #unused
-
-    #print DataSety
-    #print DataSetX
+    DataSety = np.array(y)  # unused
 
     scipy.io.savemat('forex/data/model/dataset_X-y/Xy.mat', dict(X=DataSetX, y=DataSety))
 
-
-
     stat = 'Backing up previous model ...'
-    #UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 95)
-    #UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
-
-    '''
-    clf = BernoulliNB()
-    clf.fit(DataSetX, DataSety)
-
-    if os.path.exists('forex/data/model/naiveBayes.pkl'):
-        print 'Old model detected .. Safely archiving it at..'
-        print os.getcwd() + "/forex/data/model/archive_model/nb/model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl'
-        os.rename(os.getcwd() + "/forex/data/model/naiveBayes.pkl",
-                  os.getcwd() + "/forex/data/model/archive_model/nb/model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
-
-    print 'Accuracy of the NB model is: ', clf.score(DataSetX, DataSety)
-
-    joblib.dump(clf, 'forex/data/model/naiveBayes.pkl')
-
-    clf2 = NearestCentroid()
-    clf2.fit(DataSetX, DataSety)        
-
-    if os.path.exists('forex/data/model/nearestCentroid.pkl'):
-        # print 'Old model detected .. Safely archiving it at..'
-        # print os.getcwd() + "\data\\model\\archive_model\\nc\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl'
-        os.rename(os.getcwd() + "/forex/data/model/nearestCentroid.pkl",
-                  os.getcwd() + "/forex/data/model/archive_model/nc/model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
-
-    print 'Accuracy of the NC model is: ', clf2.score(DataSetX, DataSety)    
-'''
-
-
-
-
-
-
 
     clfSVMgm = OneClassSVM(nu=0.1, kernel="rbf", gamma=0.1)
-    clfSVMgm.fit(DataSetX)#, DataSety) 
+    clfSVMgm.fit(DataSetX)
 
     if os.path.exists('forex/data/model/oneClassSVM.pkl'):
-    	os.rename(os.getcwd() + "/forex/data/model/oneClassSVM.pkl",
+        os.rename(os.getcwd() + "/forex/data/model/oneClassSVM.pkl",
                   os.getcwd() + "/forex/data/model/archive_model/svm1/model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
 
     joblib.dump(clfSVMgm, 'forex/data/model/oneClassSVM.pkl')
 
-    #clfSVMgm = joblib.load('forex/data/model/oneClassSVM.pkl')
-    #print clfSVMgm.predict(DataSetX)
+    # clfSVMgm = joblib.load('forex/data/model/oneClassSVM.pkl')
+    # print clfSVMgm.predict(DataSetX)
 
     print 'Rightly predicted:', int(sum(clfSVMgm.predict(DataSetX)))
-    #print 'Non 0 data:' , zeroCount
-
-
-
-    #
-    #print '1 predict 499:', clfSVMgm.predict([DataSetX[499]])
-    #print '-1 predict 496:', clfSVMgm.predict([DataSetX[496]])
-    #print '1 predict 497:', clfSVMgm.predict([DataSetX[497]])
-
-
-
-
-
-
-
-    #clfElEgm = EllipticEnvelope()
-    #clfElEgm.fit(DataSetX, DataSety)
-
-    #if os.path.exists('forex/data/model/Elliptic.pkl'):
-    ## print 'Old model detected .. Safely archiving it at..'
-    ## print os.getcwd() + "\data\\model\\archive_model\\nc\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl'
-    #	os.rename(os.getcwd() + "/forex/data/model/Elliptic.pkl",
-    #          os.getcwd() + "/forex/data/model/archive_model/ellip/model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
-
-    #joblib.dump(clfElEgm, 'forex/data/model/Elliptic.pkl')
-    '''
-    clfIsoForestgm = IsolationForest()
-    clfIsoForestgm.fit(DataSetX)#, DataSety)
-
-    if os.path.exists('forex/data/model/Isolation.pkl'):
-    # print 'Old model detected .. Safely archiving it at..'
-    # print os.getcwd() + "\data\\model\\archive_model\\nc\\model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl'
-    	os.rename(os.getcwd() + "/forex/data/model/Isolation.pkl",
-              os.getcwd() + "/forex/data/model/archive_model/isol/model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
-
-    joblib.dump(clfIsoForestgm, 'forex/data/model/Isolation.pkl')
-
-    print 'Model saved at ', 'forex/data/model/naiveBayes.pkl'
-    # print 'Model saved at ', 'data\\model\\nearestCentroid.pkl'
-    '''
-
-    #print 'Accuracy of the SVM model is: ', clfSVMgm.score(DataSetX, DataSety)
-
-    #print 'Accuracy of the EE model is: ', clfElEgm.score(DataSetX, DataSety)
-
-    #print 'Accuracy of the Iso_forest model is: ', clfIsoForestgm.score(DataSetX, DataSety)
+    # print 'Non 0 data:' , zeroCount
 
     stat = 'Model Trained'
-    #UIobject.emit(QtCore.SIGNAL('PROGRESS_BAR'), 100)
-    #UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
 
 if __name__ == '__main__':
-	trainMLmodel()
+    trainMLmodel()
