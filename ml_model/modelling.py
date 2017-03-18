@@ -20,8 +20,8 @@ import time
 __author__ = 'Ambareesh Revanur (@revanurambareesh)'
 
 X = []
-y = []
-
+y = []  #unused
+zeroCount=0
 
 def keywordPresenceTester(company, keyword):
     numOfFiles = folderFileInfo.numOfFiles(company)
@@ -34,6 +34,7 @@ def keywordPresenceTester(company, keyword):
             scrapedData = f.read()
         if keyword[0] in scrapedData.lower():
             frequency += 1
+        if frequency > 5.0: break
 
     #if numOfFiles == 0:
     #	print 'File does not seem to exist...', company
@@ -52,6 +53,7 @@ def keywordPresenceTester(company, keyword):
 def makeDataSet():#UIobject):
     global X
     global y
+    global zeroCount
 
     homeList = os.listdir(os.getcwd() + '/forex/data/train_data/')
     keywordFile = 'forex/data/definitions/oriList.csv'
@@ -76,11 +78,15 @@ def makeDataSet():#UIobject):
             #else:
             #    Xvector.append(0)
             Xvector.append(keywordPresenceTester(company, key))
+            
+        if sum(Xvector) != -100:
+            #print company
+            zeroCount+=1
 
-        print 'y=', company, '\nX:', Xvector, '\n'
+        print 'Feature generated for ',  company[2:], '\n'#, Xvector, '\n'
 
         # label
-        yVal = ord(company[0]) - ord('0')
+        yVal = ord(company[0]) - ord('0')  #unused
         #if yVal == 0: yVal=-1
 
         with open(os.getcwd() + '/forex/data/model/dataset_X-y/' + company + '.json', "w") as jsonF:
@@ -93,14 +99,15 @@ def makeDataSet():#UIobject):
         #UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
         X.append(Xvector)
-        y.append(yVal)
+        y.append(yVal)      #unused
 
 
 def trainMLmodel():#UIobject):
     global X
     global y
+    global zeroCount
 
-    print 'HIHI'
+    #print 'HIHI'
     #sleep(4)
 
     makeDataSet()#UIobject)
@@ -110,12 +117,12 @@ def trainMLmodel():#UIobject):
     #UIobject.emit(QtCore.SIGNAL('STATUS_LINE'), stat)
 
     DataSetX = np.array(X)
-    DataSety = np.array(y)
+    DataSety = np.array(y)      #unused
 
     #print DataSety
     #print DataSetX
 
-    scipy.io.savemat('forex/data/model/dataset_X-y/Xy.mat', dict(x=DataSetX, y=DataSety))
+    scipy.io.savemat('forex/data/model/dataset_X-y/Xy.mat', dict(X=DataSetX, y=DataSety))
 
 
 
@@ -148,6 +155,13 @@ def trainMLmodel():#UIobject):
 
     print 'Accuracy of the NC model is: ', clf2.score(DataSetX, DataSety)    
 '''
+
+
+
+
+
+
+
     clfSVMgm = OneClassSVM(nu=0.1, kernel="rbf", gamma=0.1)
     clfSVMgm.fit(DataSetX)#, DataSety) 
 
@@ -157,12 +171,24 @@ def trainMLmodel():#UIobject):
 
     joblib.dump(clfSVMgm, 'forex/data/model/oneClassSVM.pkl')
 
-    clfSVMgm = joblib.load('forex/data/model/oneClassSVM.pkl')
-    print clfSVMgm.predict(DataSetX)
-    
-    print '1 predict 499:', clfSVMgm.predict([DataSetX[499]])
-    print '-1 predict 496:', clfSVMgm.predict([DataSetX[496]])
-    print '1 predict 497:', clfSVMgm.predict([DataSetX[497]])
+    #clfSVMgm = joblib.load('forex/data/model/oneClassSVM.pkl')
+    #print clfSVMgm.predict(DataSetX)
+
+    print 'Rightly predicted:', int(sum(clfSVMgm.predict(DataSetX)))
+    #print 'Non 0 data:' , zeroCount
+
+
+
+    #
+    #print '1 predict 499:', clfSVMgm.predict([DataSetX[499]])
+    #print '-1 predict 496:', clfSVMgm.predict([DataSetX[496]])
+    #print '1 predict 497:', clfSVMgm.predict([DataSetX[497]])
+
+
+
+
+
+
 
     #clfElEgm = EllipticEnvelope()
     #clfElEgm.fit(DataSetX, DataSety)

@@ -1,0 +1,1 @@
+Kindly note that training data is not uploaded on git. However a sample of how the data may look like is present in data/sample_train_data

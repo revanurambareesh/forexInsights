@@ -8,8 +8,8 @@ __author__ = 'revanurambareesh'
 
 def rakeUP():
 	
-	outputFile = 'oriList.csv'
-	inputFile = 'ScrapedData.txt'
+	outputFile = 'orilist3.csv'
+	inputFile = 'wordlist.txt'
 
 	rake_object = rake.Rake("rake/SmartStoplist.txt", 5, 1, 3)
 	sample_file = open(inputFile, 'r')

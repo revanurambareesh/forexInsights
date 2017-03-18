@@ -14,15 +14,14 @@ Status: Lot of code movement is taking place..
 * Using Scrapy and Beautiful Soup for scraping, Django for web server.
 * Changed ML algorithm from supervised to unsupervised
 * UI is now Web-based
-* Training set consists of about 8000 companies, Cross Validation set consists of about 2000 companies and test set consists of about 2000 companies.
+* Training set consists of about 6000 companies, Cross Validation set consists of about 1000 companies and test set consists of about 1000 companies. Out of 50000 companies, info relevant to the project are considered.
 
-
-As discussed, I am located in Bangalore and I can demonstrate it physically (after competition) as well. 
+As discussed, I am located in Bangalore and I can demonstrate it physically as well.
 
 -----
 
 #### Stage 1 Design Document:
-This can be found in **/STAGE 1 Documents/FX_problem.pdf**. 
+(Old document) This can be found in **/STAGE 1 Documents/FX_problem.pdf**.
 It contains:  
 * Algorithm
 * Techonologies used
@@ -46,7 +45,9 @@ Django and scrapy framework is needed to be installed.
 > python manager.py runserver 128.0.0.1:8000
 
 ## Data Scraped
-Data scraped from web is more than **1GB**. Since Data is uploaded here, the repository is large and is downloadable as [zip file](https://github.com/revanurambareesh/forexInsights/archive/master.zip).
+
+Data scraped from web is more than **1GB**. To save upload time scraped data is **not** uploaded here.
+Kindly check out *.gitignore* file more details.
 All the data has been collected from public domain websites after *obeying* ROBOTS.TXT.
 
 ##### Author: **Ambareesh Revanur**  ([more](https://in.linkedin.com/in/ambareeshr))
