@@ -84,6 +84,7 @@ def testMLmodel():
     stat = 'Testing Model'
 
     DataSetX = np.array(X)
+    scipy.io.savemat('forex/data/model/testset_X-y/Xy.mat', dict(X=DataSetX))
 
     stat = 'Backing up previous model ...'
     clfSVMgm = joblib.load('forex/data/model/oneClassSVM.pkl')

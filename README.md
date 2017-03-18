@@ -4,6 +4,11 @@ Status: Deployed with --Model-> About 90% Accuracy on training set and about 70%
 
 [Deployment: Click here!](https://business-forex-insights.herokuapp.com/)
 
+![New Model](https://github.com/revanurambareesh/forexInsights/blob/master/Stage%201%20documents/diagrams/twoDplot.png)
+The figure above shows the demonstration of *new* model generated. The plot is drawn for some random set of training and test samples after the application of dimension reduction to the graph (using Principle component analysis) and is then scaled for clarity. 
+
+
+
 *Old code is archived [here](https://github.com/revanurambareesh/forexInsightsQtUI)*
 
 ## Mentoring
