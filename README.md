@@ -1,15 +1,11 @@
 # Forex Insights
-
-Status: Deployed with --Model-> About 90% Accuracy on training set and about 70% Accuracy on test set. 
-
+ 
 [Deployment: Click here!](https://business-forex-insights.herokuapp.com/)
 
 ![New Model](https://github.com/revanurambareesh/forexInsights/blob/master/Stage%201%20documents/diagrams/twoDplot.png)
-The figure above shows the demonstration of *new* model generated. The plot is drawn for some random set of training and test samples after the application of dimension reduction to the graph (using Principle component analysis) and is then scaled for clarity. 
 
-
-
-*Old code is archived [here](https://github.com/revanurambareesh/forexInsightsQtUI)*
+The figure above shows the demonstration of *new* model generated. The plot is drawn for some random set of training and test samples after the application of dimension reduction to the graph (using Principle component analysis) and is then scaled for clarity.
+About 90% Accuracy on training set and about 70% Accuracy on test set.
 
 ## Mentoring
 
@@ -22,10 +18,11 @@ The figure above shows the demonstration of *new* model generated. The plot is d
 
 As discussed, I am located in Bangalore and I can demonstrate it physically as well.
 
+*Old code is archived [here](https://github.com/revanurambareesh/forexInsightsQtUI)*
 -----
 
 #### Stage 1 Design Document:
-(Old document) This can be found in **/STAGE 1 Documents/FX_problem.pdf**.
+(Old document) This can be found in /STAGE 1 Documents/FX_problem.pdf.
 It contains:  
 * Algorithm
 * Techonologies used
@@ -36,9 +33,9 @@ It contains:
 This document explains logic behind web-scraping, web-searching, training ML model, using trained model, generating insights, code snippet analysis, folder structure and NLP algorithm behind creating a dataset.
 
 #### Mentoring phase Implementation:
-This is being updated shortly...
+![HTML UI](https://github.com/revanurambareesh/forexInsights/blob/master/Stage%201%20documents/demo/demo.png)
 
-https://business-forex-insights.herokuapp.com/
+[Click here to visit](https://business-forex-insights.herokuapp.com/)
 
 ### Running the tool
 To run the server on the localhost, it is recommended to use virtual environment in python.
