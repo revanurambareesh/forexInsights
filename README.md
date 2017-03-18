@@ -47,7 +47,7 @@ Django and scrapy framework is needed to be installed.
 ## Data Scraped
 
 Data scraped from web is more than **1GB**. To save upload time scraped data is **not** uploaded here.
-Kindly check out *.gitignore* file more details.
+Kindly check out *.gitignore* for file more details.
 All the data has been collected from public domain websites after *obeying* ROBOTS.TXT.
 
 ##### Author: **Ambareesh Revanur**  ([more](https://in.linkedin.com/in/ambareeshr))
