@@ -19,6 +19,7 @@ About 90% Accuracy on training set and about 70% Accuracy on test set.
 As discussed, I am located in Bangalore and I can demonstrate it physically as well.
 
 *Old code is archived [here](https://github.com/revanurambareesh/forexInsightsQtUI)*
+
 -----
 
 #### Stage 1 Design Document:
@@ -34,6 +35,9 @@ This document explains logic behind web-scraping, web-searching, training ML mod
 
 #### Mentoring phase Implementation:
 ![HTML UI](https://github.com/revanurambareesh/forexInsights/blob/master/Stage%201%20documents/demo/demo.png)
+
+Runs best on the latest version on Mozilla Firefox. The company name should be entered into the above textbox and return key (Enter key) must be hit.
+Batch of companies can be upload in a .csv format with the company name in each line. However the number of searches are limited to 100 per day.
 
 [Click here to visit](https://business-forex-insights.herokuapp.com/)
 
