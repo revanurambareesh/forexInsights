@@ -1,9 +1,8 @@
 # Forex Insights
 
-Status: Lot of code movement is taking place..
+Status: Deployed with --Model-> About 90% Accuracy on training set and about 70% Accuracy on test set. 
 
-##### Modifications are being made.... Kindly keep in touch with me...
-[Deployment Link: UI](https://business-forex-insights.herokuapp.com/)
+[Deployment: Click here!](https://business-forex-insights.herokuapp.com/)
 
 *Old code is archived [here](https://github.com/revanurambareesh/forexInsightsQtUI)*
 

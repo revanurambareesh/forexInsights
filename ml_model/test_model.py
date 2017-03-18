@@ -23,8 +23,8 @@ count = 0
 
 
 def keywordPresenceTester(company, keyword):
-    numOfFiles = folderFileInfo.numOfFiles(company)
-    listOfFiles = folderFileInfo.getNonEmptyFiles(company)
+    numOfFiles = folderFileInfo.numOfFilesTestSet(company)
+    listOfFiles = folderFileInfo.getNonEmptyFilesTestSet(company)
 
     frequency = 0.0
     for scrapedFile in listOfFiles:
@@ -47,7 +47,7 @@ def makeDataSet():
     global X
     global count
 
-    homeList = os.listdir(os.getcwd() + '/forex/data/train_data/')
+    homeList = os.listdir(os.getcwd() + '/forex/data/testset/')
     keywordFile = 'forex/data/definitions/oriList.csv'
     keywordList = []
 
@@ -66,11 +66,8 @@ def makeDataSet():
         for key in keywordList:
             Xvector.append(keywordPresenceTester(company, key))
 
-        print 'Feature values generated for ', company[2:], '\n'  # , Xvector, '\n'
-
-        # label
-
-        with open(os.getcwd() + '/forex/data/model/dataset_X-y/' + company + '.json', "w") as jsonF:
+        print 'Feature values generated for ', company[2:], '\n'
+        with open(os.getcwd() + '/forex/data/model/testset_X-y/' + company + '.json', "w") as jsonF:
             jsonF.write(json.dumps(Xvector))
 
         X.append(Xvector)
@@ -78,32 +75,18 @@ def makeDataSet():
     count = i
 
 
-def trainMLmodel():
+def testMLmodel():
     global X
     global count
 
     makeDataSet()
 
-    ### 20% contrib
-    stat = 'Training Model'
+    stat = 'Testing Model'
 
     DataSetX = np.array(X)
 
-    scipy.io.savemat('forex/data/model/dataset_X-y/Xy.mat', dict(X=DataSetX))
-
     stat = 'Backing up previous model ...'
-
-    clfSVMgm = OneClassSVM(nu=0.1, kernel="rbf", gamma=0.1)
-    clfSVMgm.fit(DataSetX)
-
-    if os.path.exists('forex/data/model/oneClassSVM.pkl'):
-        os.rename(os.getcwd() + "/forex/data/model/oneClassSVM.pkl",
-                  os.getcwd() + "/forex/data/model/archive_model/svm1/model_" + time.strftime("%Y%m%d%H%M%S") + '.pkl')
-
-    joblib.dump(clfSVMgm, 'forex/data/model/oneClassSVM.pkl')
-
-    # clfSVMgm = joblib.load('forex/data/model/oneClassSVM.pkl')
-    # print clfSVMgm.predict(DataSetX)
+    clfSVMgm = joblib.load('forex/data/model/oneClassSVM.pkl')
 
     num=0
     predictions = clfSVMgm.predict(DataSetX)
@@ -111,9 +94,9 @@ def trainMLmodel():
         if i == 1.0:
             num+=1
 
-    print 'Rightly predicted (Forex with bank):', num
-    print 'Accuracy of the model: ', (1.0 * num) / count
-    stat = 'Model Trained'
+    print 'Rightly predicted: ', num
+    print 'Test Accuracy of the model: ', (1.0 * num) / count
+    stat = 'Model Tested'
 
 if __name__ == '__main__':
-    trainMLmodel()
+    testMLmodel()

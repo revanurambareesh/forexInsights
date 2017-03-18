@@ -18,28 +18,20 @@ def keywordPresenceTester(company, keyword):
     numOfFiles = folderFileInfo.numOfFiles(company, parent_dir_name)
     listOfFiles = folderFileInfo.getNonEmptyFiles(company, parent_dir_name)
 
-    # print company
-    # print keyword[0]
-
     frequency = 0.0
     for scrapedFile in listOfFiles:
-        # print scrapedFile
         scrapedData = ''
         with open(scrapedFile, 'rb') as f:
             scrapedData = f.read()
         if keyword[0] in scrapedData:
             frequency += 1
-    '''
 
-    if 10 * frequency >= numOfFiles:
-        return True
-    else:
-        return False
-    '''
-    if frequency < 2.0: return (1.0-3.0)/2.0
-    if frequency > 5.0: return (5.0-3.0)/2.0
+    if frequency == 0.0: return -1
+    if frequency == 1.0: return -0.5
+    if frequency == 2.0: return 0.0
+    if frequency > 5.0: return 1
 
-    return (frequency-3.0)/2.0
+    return (frequency - 3.0) / 2.0
 
 
 
@@ -105,8 +97,8 @@ def scrapeTestData(query):
     return numOfResults
 
 
+
 def generateFeatureVector(company):
-    #global parent_dir_name
     keywordFile = parent_dir_name+'/forex/data/definitions/oriList.csv'
     keywordList = []
 
@@ -118,10 +110,6 @@ def generateFeatureVector(company):
 
     Xvector = []
     for key in keywordList:
-        #if keywordPresenceTester(company, key):
-        #    Xvector.append(1)
-        #else:
-        #    Xvector.append(0)
         Xvector.append(keywordPresenceTester(company, key))
 
     with open(os.getcwd() + '/forex/data/test_data/' + company + '/Xv.json', "w") as jsonF:
@@ -130,46 +118,21 @@ def generateFeatureVector(company):
     return Xvector
 
 
+
 def createReport(company, numOfResults, Xv):
     result_insight = ''
     result_insight += company
     result_insight += '\n'
-
     clf = joblib.load('forex/data/model/oneClassSVM.pkl')
     # likely or not
     ans = clf.predict(np.array([Xv]))
     print 'Ans: ', ans
     print 'Vector:' , Xv
+
     if ans[0] == -1.0:
         result_insight += 'This company is not likely to opt for Forex.\n\n'
     else:
         result_insight += 'This company is likely to opt for Forex.\n\n'
-
-    '''
-    result_insight += '====MODEL Results====\n'
-
-    # chance of about
-    probClass = clf.predict_proba(np.array([Xv]))
-    logPrbClass = clf.predict_log_proba(np.array([Xv]))
-
-    result_insight += 'Model* predicts that the company has chance of about ' + str(
-        (probClass[0][1]) / (probClass[0][0] + probClass[0][1])) + ' of being Forex\n'
-
-    # log prob class1/2
-    result_insight += '\nprobability of opting to Forex class is = ' + str(probClass[0][1])
-    result_insight += '\nprobability of not opting to Forex class is = ' + str(probClass[0][0]) + '\n'
-
-    result_insight += '\nlog-probability of opting to Forex class is = ' + str(logPrbClass[0][1])
-    result_insight += '\nlog-probability of not opting to Forex class is = ' + str(logPrbClass[0][0]) + '\n'
-    
-    result_insight += '\n====COMPANY analysis====\n'
-    result_insight += 'Based on web search and web scarping results, this company is similar to following companies\n(in order of similarity)\n'
-
-    list2comp = nearest_company_pred.findSimilarCompanies(Xv)
-    result_insight += '\n' + list2comp + '\n'
-    
-    result_insight += '\n====POPULARITY on web====\n'
-    '''
 
     # popular?
     if int(numOfResults) > 30000:
@@ -178,18 +141,15 @@ def createReport(company, numOfResults, Xv):
         result_insight += 'This company is not very popular on Google\n'
 
     result_insight += 'Number of search results Google found **: ' + str(numOfResults) + '\n\n\n'
-
     result_insight += '----FOOTNOTES----\n** If a company has more than 30,000 results, it is defined \'popular\'\n'
     result_insight += 'More popular the company is, more data can be collected to determine its class.\n\n'
     result_insight += 'This prediction was made using Support Vector Machines'
 
     with open(os.getcwd() + '/forex/data/test_data/' + company + '/Insights.txt', "w") as insight:
         insight.write(result_insight)
-
     return result_insight
 
 
-# pass
 
 def testCompany(company):
     numOfResults = scrapeTestData(company)
