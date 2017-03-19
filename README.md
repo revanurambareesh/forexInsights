@@ -4,26 +4,28 @@
 
 ![New Model](https://github.com/revanurambareesh/forexInsights/blob/master/Stage%201%20documents/diagrams/twoDplot.png)
 
-The figure above shows the demonstration of *new* model generated. The plot is drawn for some random set of training and test samples after the application of dimension reduction to the graph (using Principle component analysis) and is then scaled for clarity.
-About 90% Accuracy on training set and about 70% Accuracy on test set.
+The figure above shows the demonstration of *new* generative model generated. The plot is drawn for some random set of training and test samples after the application of dimension reduction to the graph (using Principle component analysis) and is then scaled for clarity.
+About 90% Accuracy on training set and about 80% Accuracy on test set.
 
 ## Mentoring
 
+* Web application has been built.
 * Ensured right web links are scraped.
+* To reduce over-fitting number of features are reduced.
 * Dataset does not assume 0 for non-forex anymore. Hence, *unsupervised learning*
 * Using Scrapy and Beautiful Soup for scraping, Django for web server.
 * Changed ML algorithm from supervised to unsupervised
-* UI is now Web-based
 * Training set consists of about 6000 companies, Cross Validation set consists of about 1000 companies and test set consists of about 1000 companies. Out of 50000 companies, info relevant to the project are considered.
-
+* No hard bound value for predict if the company id likely to opt for forex. (Previously there was a value 0.5). Now the value is determined by the algorithm based on the statistics of the training data.
+* Tested on both Windows and Linux Platforms 
 As discussed, I am located in Bangalore and I can demonstrate it physically as well.
 
 *Old code is archived [here](https://github.com/revanurambareesh/forexInsightsQtUI)*
 
 -----
 
-#### Stage 1 Design Document:
-(Old document) This can be found in /STAGE 1 Documents/FX_problem.pdf.
+### Design Document:
+
 It contains:  
 * Algorithm
 * Techonologies used

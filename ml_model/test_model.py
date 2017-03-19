@@ -57,16 +57,19 @@ def makeDataSet():
 
     i = 0
 
-    for company in homeList:
+    for company in homeList:       
+        # X vector for each of the company
+        if company[0]=='0': continue #for true value of accuracy
+
         print 'count: ', i
         i += 1
-
-        # X vector for each of the company
+        
+        print 'Feature values generated for ', company[2:], '\n'
         Xvector = []
         for key in keywordList:
             Xvector.append(keywordPresenceTester(company, key))
 
-        print 'Feature values generated for ', company[2:], '\n'
+        
         with open(os.getcwd() + '/forex/data/model/testset_X-y/' + company + '.json', "w") as jsonF:
             jsonF.write(json.dumps(Xvector))
 
