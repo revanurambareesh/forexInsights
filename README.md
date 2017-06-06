@@ -4,23 +4,21 @@
 
 ![New Model](https://github.com/revanurambareesh/forexInsights/blob/master/Stage%201%20documents/diagrams/twoDplot.png)
 
-The figure above shows the demonstration of *new* generative model generated. The plot is drawn for some random set of training and test samples after the application of dimension reduction to the graph (using Principle component analysis) and is then scaled for clarity.
+The figure above shows the demonstration of generative model generated. The plot is drawn for some random set of training and test samples after the application of dimension reduction to the graph (using Principle component analysis) and is then scaled for clarity.
 
 About 90% Accuracy on training set and about 80% Accuracy on test set.
 
-## Mentoring
+## New Features added
 
 * Web application has been built.
 * Ensured right web links are scraped.
 * To reduce over-fitting number of features are reduced.
-* Dataset does not assume 0 for non-forex anymore. Hence, *unsupervised learning*
 * Using Scrapy and Beautiful Soup for scraping, Django for web server.
 * Changed ML algorithm from supervised to unsupervised
 * Training set consists of about 6000 companies, Cross Validation set consists of about 1000 companies and test set consists of about 1000 companies. Out of 50000 companies, info relevant to the project are considered.
 * No hard bound value for predicting if the company is likely to opt for forex. (Previously there was a value 0.5). Now the value is determined by the algorithm based on the statistics of the training data.
 * Tested on Linux Platforms as well. The app is deployed on to the cloud which is aware of linux environment and hence linux.
 
-As discussed, I am located in Bangalore and I can demonstrate it physically as well.
 
 *Old code is archived [here](https://github.com/revanurambareesh/forexInsightsQtUI)*
 
@@ -37,11 +35,8 @@ It contains:
 
 This document explains logic behind web-scraping, web-searching, training ML model, using trained model, generating insights, code snippet analysis, folder structure and NLP algorithm behind creating a dataset.
 
-#### Mentoring phase Implementation:
+#### Implementation:
 ![HTML UI](https://github.com/revanurambareesh/forexInsights/blob/master/Stage%201%20documents/demo/demo.png)
-
-Runs best on the latest version on Mozilla Firefox. The company name should be entered into the above textbox and return key (Enter key) must be hit.
-Batch of companies can be upload in a .csv format with the company name in each line. However the number of searches are limited to 100 per day.
 
 [Click here to visit](https://business-forex-insights.herokuapp.com/)
 
@@ -55,7 +50,6 @@ Django and scrapy framework is needed to be installed.
 
 ## Data Scraped
 
-Data scraped from web is more than **1GB**. To save upload time scraped data is **not** uploaded here.
 Kindly check out *.gitignore* file for more details.
 All the data has been collected from public domain websites after *obeying* ROBOTS.TXT.
 
